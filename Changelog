@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-05 21:11:53 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-14
+
+    Summary:
+      update TODO (fix #172 tables bXX05)
+    Revision:
+      culture--luis--0.6--patch-14
+
+
+    modified files:
+     Changelog Form.py TODO ui/Form_report_csv.xml
+
+
 2006-01-05 20:55:36 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-13
 
     Summary:

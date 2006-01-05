@@ -1177,8 +1177,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
     report_csv__label__ = u'Export'
     def report_csv(self):
         """ Call downloadCSV """
+        namespace = self.get_namespace()
         handler = ui.get_handler('culture/Form_report_csv.xml')
-        return handler.stl() 
+        return handler.stl(namespace) 
 
 
     #downloadCSV__access__ = Handler.is_admin

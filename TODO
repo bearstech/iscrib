@@ -5,12 +5,8 @@ Bugs TODO
   Presser la touche Entrée dans un formulaire provoque non seulement
   l'enregistrement mais aussi l'impression de la page.  
 
-172: BM et BDP : Export impossible Les tables bm05 et bdp05 n'ont pas 
-  été créées
-
 176: BM/BDP : export CSV Autoriser l'export seulement lorsque le 
   formulaire est terminé
-
 
 lot3 TODO
 =========
@@ -51,6 +47,10 @@ F2.
 
 Bug Done
 ==========
+
+172: BM et BDP : Export impossible Les tables bm05 et bdp05 n'ont pas 
+  été créées
+   Done -> culture--luis--0.6--patch-2 to culture--luis--0.6--patch-9
 
 174: BM/BDP : champs décimaux : plantage si on tape de l'alphanumérique 
   (virgule par exmple)
