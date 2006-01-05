@@ -1,10 +1,6 @@
 Bugs TODO
 ==========
 
-154: Mauvais fonctionnement de la touche Entrée
-  Presser la touche Entrée dans un formulaire provoque non seulement
-  l'enregistrement mais aussi l'impression de la page.  
-
 lot3 TODO
 =========
 
@@ -57,6 +53,11 @@ Bug Done
   formulaire est terminé
   Done -> culture--luis--0.6--patch-14 and patch-15 (use is_complete not
           is_finished)
+
+154: Mauvais fonctionnement de la touche Entrée
+  Presser la touche Entrée dans un formulaire provoque non seulement
+  l'enregistrement mais aussi l'impression de la page.  
+  Done -> culture--luis--0.6--patch-16
 
 lot3 Done
 =========

@@ -2,6 +2,28 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-05 21:38:01 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-16
+
+    Summary:
+      fix #154: Mauvais fonctionnement de la touche Entrée for BM and BDP
+    Revision:
+      culture--luis--0.6--patch-16
+
+
+    modified files:
+     Changelog TODO ui/FormBDP_report0.xml ui/FormBDP_report1.xml
+     ui/FormBDP_report2.xml ui/FormBDP_report3.xml
+     ui/FormBDP_report4.xml ui/FormBDP_report5.xml
+     ui/FormBDP_report6.xml ui/FormBDP_report7.xml
+     ui/FormBDP_report8.xml ui/FormBDP_report9.xml
+     ui/FormBM_report1.xml ui/FormBM_report10.xml
+     ui/FormBM_report11.xml ui/FormBM_report2.xml
+     ui/FormBM_report3.xml ui/FormBM_report4.xml
+     ui/FormBM_report5.xml ui/FormBM_report6.xml
+     ui/FormBM_report7.xml ui/FormBM_report8.xml
+     ui/FormBM_report9.xml
+
+
 2006-01-05 21:16:49 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-15
 
     Summary:

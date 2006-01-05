@@ -5,10 +5,12 @@
 <form action=";report" method="post" name="form">
  
   <div align="right">
-    <input stl:if="not printable" type="image"  
-           src="../../ui/culture/images/imprimer.gif" 
-           style="border:0;text-color:gray" alt="Imprimer" name="Imprimer"
-           onclick="window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600') ;return 0;" >Imprimer cette page</input>
+
+  <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
+     name="Imprimer" href="#"
+     onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
+     <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+   
    
     <stl:block if="not printable">
       <input type="submit" value="Enregistrer" 
