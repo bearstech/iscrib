@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" 
+      xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+   <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" 
+          http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" 
+          rel="stylesheet"></link>
+  </head>
+<body id="body">
+
+<h2> IDENTITE</h2>
+
+<dl class="description">
+  <dt>
+    <ul>
+      <li>Toutes les zones du bloc identitaire qui réclament du texte doivent
+      être remplies en majuscules, sauf les zones de <b>courriels </b>et de
+      <b>sites Web</b> qui peuvent répondre à une typographie spécifique.</li> 
+
+      <li><u>Régie intercommunale</u> : préciser la liste des communes
+      participantes pour permettre de prendre en compte l'ensemble de la
+      population (voir onglet EPCI. La bibliothèque doit être en mesure de
+      présenter un rapport annuel unique additionnant l'activité de toutes les
+      bibliothèques du réseau dès lors que la gestion de celles-ci a été
+      transférée à l’EPCI, ces dernières ne faisant pas de rapport. Dans le cas
+      d’une compétence culturelle partagée (ex : gestion intercommunale par la
+      bibliothèque centrale : gestion municipale pour les bibliothèques du
+      réseau), le préciser dans la rubrique EPCI.  </li>
+    </ul>
+  </dt>
+</dl>
+
+<br/>
+
+<h3> Sommaire</h3>
+<ol>
+  <li><a href=";help0">Identité                                </a></li>
+  <li><a href=";help1">A-Finances                              </a></li>
+  <li><a href=";help2">B-Locaux                                </a></li>
+  <li><a href=";help3">C-Personnel                             </a></li>
+  <li><a href=";help4">D-Collections                           </a></li>
+  <li><a href=";help5">E-Acquisitions                          </a></li>
+  <li><a href=";help6">F-Coopération et réseau                 </a></li>
+  <li><a href=";help7">G-Activités                             </a></li>
+  <li><a href=";help8">H-Services                              </a></li>
+  <li><a href=";help9">I-Animations, publications et formation </a></li>
+</ol>
+</body>
+</html>
+

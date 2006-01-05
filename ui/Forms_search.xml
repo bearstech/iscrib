@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://xml.itools.org/namespaces/stl">
+
+<form action=";search_form" method="get">
+  <table class="form">
+    <tr>
+      <th colspan="2" class="title">Recherche</th>
+    </tr>
+    <tr> 
+      <th>Nom de la ville 
+          <br/>(exemple "saint")</th>
+      <td>
+        <input type="text" id="search_name" name="search_name" size="30"
+               stl:attributes="value search_name"/>
+      </td>
+    </tr>
+    <tr> 
+      <th>Département (exemple : 02)<br/> 
+	      <!--i style="font-size:8px;">Seul 01 et 02 sont en base</i-->
+      </th>
+      <td>
+        <select name="search_dep" id="search_dep">
+          <option value="">--- Tous les départements ---</option>
+          <option stl:repeat="dep departements"
+                  stl:content="dep/name"
+                  stl:attributes="value dep/value; selected dep/selected"/>
+        </select>
+        <!--input type="text" name="search_dep" size="4"
+               stl:attributes="value search_dep"/--><br/>
+      </td>
+    </tr>
+    <tr> 
+      <th>Code_ua <br/> 
+      </th>
+      <td>
+        <input type="text" name="search_code" size="6"
+               stl:attributes="value search_code"/><br/>
+      </td>
+    </tr>
+     <tr> 
+      <th>Etat du formulaire<br/> 
+      </th>
+      <td>
+        <!--input type="text" name="search_state" size="7"
+               stl:attributes="value search_state"/--><br/>
+        <select name="search_state" id="search_state">
+          <option value=""></option>
+          <option stl:repeat="state states"
+                  stl:content="state/name"
+                  stl:attributes="value state/value; selected state/selected"/>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td class="submit"><input type="submit" value="Rechercher" /></td>
+    </tr>
+  </table>
+</form>
+
+
+<hr />
+
+<table class="form">
+  <tr stl:if="not table/objects">
+    <td colspan="4">
+      <em>No objects found.</em>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr stl:if="too_long_answer">
+    <td colspan="4">
+      <em stl:content="too_long_answer"/>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <div class="batchcontrol" stl:if="batch/total">
+    <stl:inline if="batch/control" content="batch/control" />
+    <a stl:if="batch/previous" stl:attributes="href batch/previous">&lt;&lt;</a>
+    <a stl:if="batch/next" stl:attributes="href batch/next">&gt;&gt;</a>
+  </div>
+
+  <stl:block if="table/objects">
+    <tr>
+      <th style="border-bottom: 1px dotted black; text-align: center">
+        Code <!--stl:inline content="table/sortcontrol(oid)" /-->
+      </th>
+      <th align="left"
+          style="border-bottom: 1px dotted black; text-align: center">
+        Ville <stl:inline content="table/sortcontrol(title)" />
+      </th>
+      <th align="left"
+          style="border-bottom: 1px dotted black; text-align: center">
+        Date <stl:inline content="table/sortcontrol(date)" />
+      </th>
+      <th align="left"
+          style="border-bottom: 1px dotted black; text-align: center">
+        Etat <stl:inline content="table/sortcontrol(state)" />
+      </th>
+    </tr>
+    <tr stl:repeat="object table/objects">
+      <td style="text-align: right">
+        <a stl:attributes="href object/url" stl:content="object/name" />
+      </td>
+      <td>
+        <a stl:attributes="href object/url" stl:content="object/title" />
+      </td>
+      <td stl:content="object/date" />
+      <td stl:content="object/state" />
+    </tr>
+  </stl:block>
+</table>
+
+</stl:block>

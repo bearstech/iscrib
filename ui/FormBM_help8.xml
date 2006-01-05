@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+   <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+
+  </head>
+<body id="body">
+
+<p align="right"><a href=";help0">Sommaire</a></p>
+<h2>SERVICES OFFERTS PAR LA BIBLIOTHEQUE</h2>
+
+
+<h4>Services aux usagers (H.1/2) </h4>
+<dl class="description">
+<dt>
+<ul>
+<li><u>Services pour les handicapés</u> (H15): sur les infrastructures (rampes d'accès ; ouverture automatique ; bornes auditives , tactiles ) ; sur les collections (documents adaptés, par exemple, livre en braille ou visionneuse).</li>
+<li><u>Prêt Inter Bibliothèques</u> (H16 à H20): ne pas compter les échanges à l'intérieur d'un réseau intercommunal ou avec la BDP.</li>
+</ul>
+</dt>
+</dl>
+
+<h4>Services à distance (H.3)</h4>
+<dl class="description">
+<dt>
+<ul>
+<li><u>La bibliothèque a-t-elle un site Web ? </u>(H31):  répondez par l'affirmative alors même que le site, s'il n'est pas dédié exclusivement à la bibliothèque, ne contient que quelques pages la concernant.</li>
+<li><u>Les sessions internet </u>(H38): c'est à dire l'accès d'un usager à internet par le biais d'une station de travail, et une connexion effectuée à une base de données ou à un catalogue interrogeable  en ligne par le public. 
+On intégrera dans ces sessions les visites virtuelles, c'est à dire les recherches faites par un usager anonyme sur le site Web de la bibliothèque.
+On pourra se référer sur cette question au rapport technique de l'ISO (International Standard Organization), indicateurs de performance pour les services électroniques des bibliothèques, consultable à l'AFNOR.
+H40 : on entend par procédés techniques adaptés le respect des normes internationales d'accessibilité des sites (www.accessiweb.org).
+</li>
+
+</ul>
+</dt>
+</dl>
+
+<h4>Services aux collectivités (H.4/5) </h4>
+<dl class="description">
+<dt>Cette rubrique concerne les établissements qui sont dépositaires de prêts de longue durée. Elle ne concerne pas les établissements ou les classes qui viennent chercher des documents à la bibliothèque pour une durée normale et qui sont recensés à la rubrique Inscrits (ligne G31 et G32).
+<ul>
+<li><u>Dépôts dans les collectivités desservies</u> : on ne compte pas les classes, mais les écoles, et uniquement s'il s'agit de prêts de longue durée.</li>
+<li><u>Nombre de documents déposés</u> : les documents comptabilisés dans cette rubrique ne devraient pas être comptabilisés avec les prêts.</li>
+<li><u>Hôpitaux </u>(H56): hôpitaux, centres de soins (cliniques, dispensaires, etc.)</li>
+</ul>
+
+</dt>
+</dl>
+
+</body>
+</html>
+

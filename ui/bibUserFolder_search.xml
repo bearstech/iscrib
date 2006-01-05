@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://xml.itools.org/namespaces/stl">
+
+<form action=";search_form" method="get">
+  <table class="form">
+    <tr>
+      <th colspan="2" class="title">Search</th>
+    </tr>
+    <tr>
+      <td colspan="2" class="title">
+        <stl:block repeat="bib bib_types">
+          <stl:block if="bib/checked">
+            <b stl:content="bib/name"/> 
+            <input type="radio" name="search_bib"
+                   checked="checked" onchange="updateSearchField(this.value)"
+                   stl:attributes="value bib/value"/> 
+          </stl:block>
+          <stl:block if="not bib/checked">
+            <b stl:content="bib/name"/> 
+            <input type="radio" name="search_bib"
+                   onchange="updateSearchField(this.value)"
+                   stl:attributes="value bib/value"/> 
+          </stl:block>
+        </stl:block>
+      </td>
+    </tr>
+    <tr> 
+      <th>Nom de la ville, pour une BM 
+          <br/>(exemple "saint")</th>
+      <td>
+        <stl:block if="is_BM">
+          <input type="text" id="search_name" name="search_name" size="30"
+                 stl:attributes="value search_name"/>
+        </stl:block>
+        <stl:block if="not is_BM">
+          <input type="text" id="search_name" name="search_name" size="30"
+                 disabled="disabled" style="background: #eee"
+                 stl:attributes="value search_name"/>
+        </stl:block>
+      </td>
+    </tr>
+    <tr> 
+      <th>Departement (exemple : 02)<br/> 
+      </th>
+      <td>
+        <select name="search_dep" id="search_dep">
+          <option stl:repeat="dep departements"
+                  stl:content="dep/name"
+                  stl:attributes="value dep/value; selected dep/selected"/>
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <th>Annee (exemple : 2004)</th>
+      <td>
+        <input type="text" name="search_year" size="4"
+               stl:attributes="value search_year"/>
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td class="submit"><input type="submit" value="Search" /></td>
+    </tr>
+  </table>
+</form>
+
+Adninistrateurs :
+<ul>
+  <stl:block repeat="user admins">
+    <li><a stl:attributes="href user/url" stl:content="user/name"/></li>
+  </stl:block>
+</ul>
+
+<hr />
+
+<table class="form">
+  <tr stl:if="not table/objects">
+    <td colspan="4">
+      <em>No objects found.</em>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr stl:if="too_long_answer">
+    <td colspan="4">
+      <em stl:content="too_long_answer"/>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <div class="batchcontrol" stl:if="batch/total">
+    <stl:inline if="batch/control" content="batch/control" />
+    <a stl:if="batch/previous" stl:attributes="href batch/previous">&lt;&lt;</a>
+    <a stl:if="batch/next" stl:attributes="href batch/next">&gt;&gt;</a>
+  </div>
+  <stl:block if="table/objects">
+    <tr>
+      <th></th>
+      <th style="border-bottom: 1px dotted black; text-align: center">
+        Name <stl:inline content="table/sortcontrol(oid)" />
+      </th>
+      <th align="left"
+          style="border-bottom: 1px dotted black; text-align: center">
+        Ville/Departement <stl:inline content="table/sortcontrol(title)" />
+      </th>
+    </tr>
+    <tr stl:repeat="object table/objects">
+      <td>
+        <img src="icon16" border="0" 
+             stl:attributes="src object/icon; alt object/type" />
+      </td>
+      <td>
+        <stl:block repeat="x object/path">
+          <a href="#" stl:attributes="href x/url"
+             stl:content="x/name">Object Name</a>
+          <stl:inline if="not repeat/x/end" >/</stl:inline>
+        </stl:block>
+      </td>
+      <td stl:content="object/title" />
+    </tr>
+  </stl:block>
+</table>
+
+</stl:block>

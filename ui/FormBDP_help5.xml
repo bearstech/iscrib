@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+
+  </head>
+  <body id="body">
+<p align="right"><a href=";help_menu">Sommaire</a></p>
+<h2> ACQUISITIONS - ELIMINATIONS </h2>
+<h4> Acquisitions</h4>
+<dl class="description">
+<dt>Une acquisition comprend la s&eacute;lection d&eacute;lib&eacute;r&eacute;e d'un document, l'obtention des droits d'acc&egrave;s et son inclusion dans le catalogue.</dt>
+<dt>C&eacute;d&eacute;roms : compter les c&eacute;d&eacute;roms et autres disques optiques num&eacute;riques multim&eacute;dias, textes, documents de r&eacute;f&eacute;rences, &agrave; l'exception des c&eacute;d&eacute;roms de p&eacute;riodiques qui seront compt&eacute;s avec les p&eacute;riodiques et des CD audio, CD vid&eacute;o, DVD audio et/ou super audio CD et DVD qui seront compt&eacute;s avec les phonogrammes ou les vid&eacute;ogrammes.</dt>
+</dl>
+
+<h4> D&eacute;penses d'acquisition (E8/9)</h4>
+<dl class="description">
+<dt>Bases de donn&eacute;es&nbsp;: compter le co&ucirc;t des abonnements &agrave; des serveurs de bases de donn&eacute;es (co&ucirc;t annuel ou forfait), hors les p&eacute;riodiques en ligne.</dt>
+</dl>
+</body>
+</html>

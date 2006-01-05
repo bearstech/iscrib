@@ -1,0 +1,1325 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<div xmlns="http://www.w3.org/1999/xhtml" 
+     xmlns:stl="http://xml.itools.org/namespaces/stl"
+     id="formBiblio">
+<form action=";report" method="post">
+
+  <div align="right">
+    <input stl:if="not printable" type="image"  
+           src="../../ui/culture/images/imprimer.gif" 
+           style="border:0;text-color:gray" alt="Imprimer" name="Imprimer"
+           onclick="window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600') ;return 0;" >Imprimer cette page</input>
+   
+    <stl:block if="not printable">
+      <input type="submit" value="Enregistrer" 
+             style="background-color:rgb(145,191,255); border:0"
+             stl:if="is_allowed_to_edit"></input>
+    </stl:block>
+  </div>
+
+<h1>E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE(cf. notice explicative)
+    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
+      onclick="window.open(';help5', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+</h1>
+<h2>E. 1 / 2 NOMBRE DE DOCUMENTS ACHETÉS  (hors périodiques)</h2>
+<table width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">BDP X</th>
+    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">Total Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Livres adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE11X"
+              type="text" name="fieldE11X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE11Y"
+              type="text" name="fieldE11Y"
+              value="" size="8" style="text-align:right"></input>
+              
+    </td>
+    <td>
+       <input stl:attributes="value fieldE11Z"
+              type="text" name="fieldE11Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E11">E11</b></td>
+  </tr>
+
+  <tr>
+    <th>Livres enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE12X"
+              type="text" name="fieldE12X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE12Y"
+              type="text" name="fieldE12Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE12Z"
+              type="text" name="fieldE12Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E12">E12</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des livres (E11+E12)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE13X"
+              type="text" name="fieldE13X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE13Y"
+              type="text" name="fieldE13Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE13Z"
+              type="text" name="fieldE13Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E13">E13</b></td>
+  </tr>
+
+  <tr>
+    <th>Phonogrammes adultes (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE14X"
+              type="text" name="fieldE14X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE14Y"
+              type="text" name="fieldE14Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE14Z"
+              type="text" name="fieldE14Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E14">E14</b></td>
+  </tr>
+
+  <tr>
+    <th>Phonogrammes enfants (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE15X"
+              type="text" name="fieldE15X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE15Y"
+              type="text" name="fieldE15Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE15Z"
+              type="text" name="fieldE15Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E15">E15</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des phonogrammes (E14 + E15)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE16X"
+              type="text" name="fieldE16X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE16Y"
+              type="text" name="fieldE16Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE16Z"
+              type="text" name="fieldE16Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E16">E16</b></td>
+  </tr>
+
+  <tr>
+    <th>Vidéogrammes adultes (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE17X"
+              type="text" name="fieldE17X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE17Y"
+              type="text" name="fieldE17Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE17Z"
+              type="text" name="fieldE17Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E17">E17</b></td>
+  </tr>
+
+  <tr>
+    <th>Vidéogrammes enfants (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE18X"
+              type="text" name="fieldE18X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE18Y"
+              type="text" name="fieldE18Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE18Z"
+              type="text" name="fieldE18Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E18">E18</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des vidéogrammes (E17 + E18)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE19X"
+              type="text" name="fieldE19X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE19Y"
+              type="text" name="fieldE19Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE19Z"
+              type="text" name="fieldE19Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E19">E19</b></td>
+  </tr>
+
+  <tr>
+    <th>Cédéroms adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE20X"
+              type="text" name="fieldE20X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE20Y"
+              type="text" name="fieldE20Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE20Z"
+              type="text" name="fieldE20Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E20">E20</b></td>
+  </tr>
+
+  <tr>
+    <th>Cédéroms enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE21X"
+              type="text" name="fieldE21X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE21Y"
+              type="text" name="fieldE21Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE21Z"
+              type="text" name="fieldE21Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E21">E21</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des cédéroms (E20 + E21)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE22X"
+              type="text" name="fieldE22X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE22Y"
+              type="text" name="fieldE22Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE22Z"
+              type="text" name="fieldE22Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E22">E22</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres documents</th> 
+    <td>
+       <input stl:attributes="value fieldE23X"
+              type="text" name="fieldE23X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE23Y"
+              type="text" name="fieldE23Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE23Z"
+              type="text" name="fieldE23Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E23">E23</b></td>
+  </tr>
+</table>
+<h2>E. 3 / 4  NOMBRE DE DOCUMENTS ENTRÉS PAR DONS, LEGS   (hors périodiques )</h2>
+<table  width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">BDP X</th>
+    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">Total Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Livres adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE31X"
+              type="text" name="fieldE31X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE31Y"
+              type="text" name="fieldE31Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE31Z"
+              type="text" name="fieldE31Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E31">E31</b></td>
+  </tr>
+
+  <tr>
+    <th>Livres enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE32X"
+              type="text" name="fieldE32X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE32Y"
+              type="text" name="fieldE32Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE32Z"
+              type="text" name="fieldE32Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E32">E32</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des livres (E31+E32)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE33X"
+              type="text" name="fieldE33X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE33Y"
+              type="text" name="fieldE33Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE33Z"
+              type="text" name="fieldE33Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E33">E33</b></td>
+  </tr>
+
+  <tr>
+    <th>Phonogrammes adultes (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE34X"
+              type="text" name="fieldE34X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE34Y"
+              type="text" name="fieldE34Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE34Z"
+              type="text" name="fieldE34Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E34">E34</b></td>
+  </tr>
+
+  <tr>
+    <th>Phonogrammes enfants (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE35X"
+              type="text" name="fieldE35X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE35Y"
+              type="text" name="fieldE35Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE35Z"
+              type="text" name="fieldE35Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E35">E35</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des phonogrammes</b></th> 
+    <td>
+       <input stl:attributes="value fieldE36X"
+              type="text" name="fieldE36X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE36Y"
+              type="text" name="fieldE36Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE36Z"
+              type="text" name="fieldE36Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E36">E36</b></td>
+  </tr>
+
+  <tr>
+    <th>Vidéogrammes adultes (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE37X"
+              type="text" name="fieldE37X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE37Y"
+              type="text" name="fieldE37Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE37Z"
+              type="text" name="fieldE37Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E37">E37</b></td>
+  </tr>
+
+  <tr>
+    <th>Vidéogrammes enfants (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE38X"
+              type="text" name="fieldE38X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE38Y"
+              type="text" name="fieldE38Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE38Z"
+              type="text" name="fieldE38Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E38">E38</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des vidéogrammes</b></th> 
+    <td>
+       <input stl:attributes="value fieldE39X"
+              type="text" name="fieldE39X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE39Y"
+              type="text" name="fieldE39Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE39Z"
+              type="text" name="fieldE39Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E39">E39</b></td>
+  </tr>
+
+  <tr>
+    <th>Cédéroms adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE40X"
+              type="text" name="fieldE40X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE40Y"
+              type="text" name="fieldE40Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE40Z"
+              type="text" name="fieldE40Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E40">E40</b></td>
+  </tr>
+
+  <tr>
+    <th>Cédéroms enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE41X"
+              type="text" name="fieldE41X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE41Y"
+              type="text" name="fieldE41Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE41Z"
+              type="text" name="fieldE41Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E41">E41</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des cédéroms</b></th> 
+    <td>
+       <input stl:attributes="value fieldE42X"
+              type="text" name="fieldE42X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE42Y"
+              type="text" name="fieldE42Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE42Z"
+              type="text" name="fieldE42Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E42">E42</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres documents</th> 
+    <td>
+       <input stl:attributes="value fieldE43X"
+              type="text" name="fieldE43X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE43Y"
+              type="text" name="fieldE43Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE43Z"
+              type="text" name="fieldE43Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E43">E43</b></td>
+  </tr>
+</table>
+  <p style = "page-break-after:always "></p>
+<h2>E. 5 / 6  NOMBRE DE DOCUMENTS RETIRÉS DE L'INVENTAIRE (hors périodiques et documents patrimoniaux)</h2>
+<table  width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">BDP X</th>
+    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">Total Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Livres adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE51X"
+              type="text" name="fieldE51X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE51Y"
+              type="text" name="fieldE51Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE51Z"
+              type="text" name="fieldE51Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E51">E51</b></td>
+  </tr>
+
+  <tr>
+    <th>Livres enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE52X"
+              type="text" name="fieldE52X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE52Y"
+              type="text" name="fieldE52Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE52Z"
+              type="text" name="fieldE52Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E52">E52</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des livres (E51+E52)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE53X"
+              type="text" name="fieldE53X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE53Y"
+              type="text" name="fieldE53Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE53Z"
+              type="text" name="fieldE53Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E53">E53</b></td>
+  </tr>
+
+  <tr>
+    <th>Phonogrammes adultes (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE54X"
+              type="text" name="fieldE54X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE54Y"
+              type="text" name="fieldE54Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE54Z"
+              type="text" name="fieldE54Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E54">E54</b></td>
+  </tr>
+
+  <tr>
+    <th>Phonogrammes enfants (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE55X"
+              type="text" name="fieldE55X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE55Y"
+              type="text" name="fieldE55Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE55Z"
+              type="text" name="fieldE55Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E55">E55</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des phonogrammes (E54 + E55)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE56X"
+              type="text" name="fieldE56X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE56Y"
+              type="text" name="fieldE56Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE56Z"
+              type="text" name="fieldE56Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E56">E56</b></td>
+  </tr>
+
+  <tr>
+    <th>Vidéogrammes adultes (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE57X"
+              type="text" name="fieldE57X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE57Y"
+              type="text" name="fieldE57Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE57Z"
+              type="text" name="fieldE57Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E57">E57</b></td>
+  </tr>
+
+  <tr>
+    <th>Vidéogrammes enfants (tous supports)</th> 
+    <td>
+       <input stl:attributes="value fieldE58X"
+              type="text" name="fieldE58X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE58Y"
+              type="text" name="fieldE58Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE58Z"
+              type="text" name="fieldE58Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E58">E58</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des vidéogrammes (E57 + E58)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE59X"
+              type="text" name="fieldE59X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE59Y"
+              type="text" name="fieldE59Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE59Z"
+              type="text" name="fieldE59Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E59">E59</b></td>
+  </tr>
+
+  <tr>
+    <th>Cédéroms adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE60X"
+              type="text" name="fieldE60X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE60Y"
+              type="text" name="fieldE60Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE60Z"
+              type="text" name="fieldE60Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E60">E60</b></td>
+  </tr>
+
+  <tr>
+    <th>Cédéroms enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE61X"
+              type="text" name="fieldE61X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE61Y"
+              type="text" name="fieldE61Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE61Z"
+              type="text" name="fieldE61Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E61">E61</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des cédéroms (E60 + E61)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE62X"
+              type="text" name="fieldE62X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE62Y"
+              type="text" name="fieldE62Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE62Z"
+              type="text" name="fieldE62Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E62">E62</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres documents</th> 
+    <td>
+       <input stl:attributes="value fieldE63X"
+              type="text" name="fieldE63X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE63Y"
+              type="text" name="fieldE63Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE63Z"
+              type="text" name="fieldE63Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E63">E63</b></td>
+  </tr>
+</table>
+<h2>E. 7  NOMBRE DE PÉRIODIQUES ACQUIS (ACHÂTS, DONS, LEGS?)</h2>
+<table  width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">BDP X</th>
+    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">Total Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Nombre d'abonnements en cours ( payants et gratuits, support imprimé ou microforme)</th> 
+    <td>
+       <input stl:attributes="value fieldE71X"
+              type="text" name="fieldE71X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE71Y"
+              type="text" name="fieldE71Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE71Z"
+              type="text" name="fieldE71Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E71">E71</b></td>
+  </tr>
+
+  <tr>
+    <th>Nombre de fascicules</th> 
+    <td>
+       <input stl:attributes="value fieldE72X"
+              type="text" name="fieldE72X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE72Y"
+              type="text" name="fieldE72Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE72Z"
+              type="text" name="fieldE72Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E72">E72</b></td>
+  </tr>
+
+  <tr>
+    <th>Nombre d'abonnements en cours sur cédéroms ou en ligne</th> 
+    <td>
+       <input stl:attributes="value fieldE73X"
+              type="text" name="fieldE73X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE73Y"
+              type="text" name="fieldE73Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE73Z"
+              type="text" name="fieldE73Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E73">E73</b></td>
+  </tr>
+</table>
+<h2>E. 8  NOMBRE DE PÉRIODIQUES RETIRÉS DE L'INVENTAIREE.</h2>
+<table  width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">BDP X</th>
+    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">Total Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Nombre d'abonnements supprimés</th> 
+    <td>
+       <input stl:attributes="value fieldE81X"
+              type="text" name="fieldE81X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE81Y"
+              type="text" name="fieldE81Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE81Z"
+              type="text" name="fieldE81Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E81">E81</b></td>
+  </tr>
+
+  <tr>
+    <th>Nombre de fascicules retirés</th> 
+    <td>
+       <input stl:attributes="value fieldE82X"
+              type="text" name="fieldE82X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE82Y"
+              type="text" name="fieldE82Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE82Z"
+              type="text" name="fieldE82Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E82">E82</b></td>
+  </tr>
+</table>
+  <p style = "page-break-after:always "></p>
+<h2>E. 8 / 9  DÉPENSES D'ACQUISITION(en euros, sans  décimale)</h2>
+<table  width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">BDP X</th>
+    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">Total Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Livres adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE83X"
+              type="text" name="fieldE83X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE83Y"
+              type="text" name="fieldE83Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE83Z"
+              type="text" name="fieldE83Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E83">E83</b></td>
+  </tr>
+
+  <tr>
+    <th>Livres enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE84X"
+              type="text" name="fieldE84X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE84Y"
+              type="text" name="fieldE84Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE84Z"
+              type="text" name="fieldE84Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E84">E84</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des livres (E83 + E84 )</b></th> 
+    <td>
+       <input stl:attributes="value fieldE85X"
+              type="text" name="fieldE85X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE85Y"
+              type="text" name="fieldE85Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE85Z"
+              type="text" name="fieldE85Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E85">E85</b></td>
+  </tr>
+
+  <tr>
+    <th>Phonogrammes adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE86X"
+              type="text" name="fieldE86X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE86Y"
+              type="text" name="fieldE86Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE86Z"
+              type="text" name="fieldE86Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E86">E86</b></td>
+  </tr>
+
+  <tr>
+    <th>Phonogrammes enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE87X"
+              type="text" name="fieldE87X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE87Y"
+              type="text" name="fieldE87Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE87Z"
+              type="text" name="fieldE87Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E87">E87</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des phonogrammes (E86 + E87)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE88X"
+              type="text" name="fieldE88X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE88Y"
+              type="text" name="fieldE88Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE88Z"
+              type="text" name="fieldE88Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E88">E88</b></td>
+  </tr>
+
+  <tr>
+    <th>Vidéogrammes adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE89X"
+              type="text" name="fieldE89X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE89Y"
+              type="text" name="fieldE89Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE89Z"
+              type="text" name="fieldE89Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E89">E89</b></td>
+  </tr>
+
+  <tr>
+    <th>Vidéogrammes enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE90X"
+              type="text" name="fieldE90X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE90Y"
+              type="text" name="fieldE90Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE90Z"
+              type="text" name="fieldE90Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E90">E90</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des vidéogrammes (E89 + E90)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE91X"
+              type="text" name="fieldE91X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE91Y"
+              type="text" name="fieldE91Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE91Z"
+              type="text" name="fieldE91Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E91">E91</b></td>
+  </tr>
+
+  <tr>
+    <th>Cédéroms adultes</th> 
+    <td>
+       <input stl:attributes="value fieldE92X"
+              type="text" name="fieldE92X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE92Y"
+              type="text" name="fieldE92Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE92Z"
+              type="text" name="fieldE92Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E92">E92</b></td>
+  </tr>
+
+  <tr>
+    <th>Cédéroms enfants</th> 
+    <td>
+       <input stl:attributes="value fieldE93X"
+              type="text" name="fieldE93X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE93Y"
+              type="text" name="fieldE93Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE93Z"
+              type="text" name="fieldE93Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E93">E93</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL des cédéroms (E92 + E93)</b></th> 
+    <td>
+       <input stl:attributes="value fieldE94X"
+              type="text" name="fieldE94X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE94Y"
+              type="text" name="fieldE94Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE94Z"
+              type="text" name="fieldE94Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E94">E94</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres documents</th> 
+    <td>
+       <input stl:attributes="value fieldE95X"
+              type="text" name="fieldE95X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE95Y"
+              type="text" name="fieldE95Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE95Z"
+              type="text" name="fieldE95Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E95">E95</b></td>
+  </tr>
+
+  <tr>
+    <th>Périodiques imprimés</th> 
+    <td>
+       <input stl:attributes="value fieldE96X"
+              type="text" name="fieldE96X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE96Y"
+              type="text" name="fieldE96Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE96Z"
+              type="text" name="fieldE96Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E96">E96</b></td>
+  </tr>
+
+  <tr>
+    <th>Périodiques sur cédéroms ou en ligne</th> 
+    <td>
+       <input stl:attributes="value fieldE97X"
+              type="text" name="fieldE97X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE97Y"
+              type="text" name="fieldE97Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE97Z"
+              type="text" name="fieldE97Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E97">E97</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL</b></th> 
+    <td>
+       <input stl:attributes="value fieldE98X"
+              type="text" name="fieldE98X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE98Y"
+              type="text" name="fieldE98Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE98Z"
+              type="text" name="fieldE98Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E98">E98</b></td>
+  </tr>
+</table>
+</form>
+<p style = "page-break-after:always "></p>   
+</div>

@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<div xmlns="http://www.w3.org/1999/xhtml" 
+     xmlns:stl="http://xml.itools.org/namespaces/stl"
+     id="formBiblio">
+<form action=";report" method="post" name="form">
+ 
+  <div align="right">
+    <input stl:if="not printable" type="image"  
+           src="../../ui/culture/images/imprimer.gif" 
+           style="border:0;text-color:gray" alt="Imprimer" name="Imprimer"
+           onclick="window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600') ;return 0;" >Imprimer cette page</input>
+   
+    <stl:block if="not printable">
+      <input type="submit" value="Enregistrer" 
+             style="background-color:rgb(145,191,255); border:0"
+             stl:if="is_allowed_to_edit"></input>
+    </stl:block>
+  </div>
+<h1>G-  RÉSEAU SPÉCIFIQUE (cf. notice explicative)
+    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
+      onclick="window.open(';help7', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+</h1>
+<h2>G.1 / 2 DÉPÔTS DANS LES COLLECTIVITÉS (Public spécifique)</h2>
+<table width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="7%"/>
+    <col width="7%"/>
+    <col width="7%"/>
+    <col width="7%"/>
+    <col width="7%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">Nb de collectivités V</th>
+    <th style="text-align: center">Nb de documents déposés dans l'année W</th>
+    <th style="text-align: center">Nb de documents X</th>
+    <th style="text-align: center">Nb d'inscrits Y</th>
+    <th style="text-align: center">Nb de prêts</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Ecoles</th> 
+    <td>
+       <input stl:attributes="value fieldG11V"
+              type="text" name="fieldG11V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG11W"
+              type="text" name="fieldG11W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG11X"
+              type="text" name="fieldG11X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG11Y"
+              type="text" name="fieldG11Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG11Z"
+              type="text" name="fieldG11Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G11">G11</b></td>
+  </tr>
+
+  <tr>
+    <th>Collèges</th> 
+    <td>
+       <input stl:attributes="value fieldG12V"
+              type="text" name="fieldG12V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG12W"
+              type="text" name="fieldG12W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG12X"
+              type="text" name="fieldG12X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG12Y"
+              type="text" name="fieldG12Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG12Z"
+              type="text" name="fieldG12Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G12">G12</b></td>
+  </tr>
+
+  <tr>
+    <th>Lycées</th> 
+    <td>
+       <input stl:attributes="value fieldG13V"
+              type="text" name="fieldG13V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG13W"
+              type="text" name="fieldG13W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG13X"
+              type="text" name="fieldG13X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG13Y"
+              type="text" name="fieldG13Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG13Z"
+              type="text" name="fieldG13Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G13">G13</b></td>
+  </tr>
+
+  <tr>
+    <th>Prisons</th> 
+    <td>
+       <input stl:attributes="value fieldG14V"
+              type="text" name="fieldG14V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG14W"
+              type="text" name="fieldG14W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG14X"
+              type="text" name="fieldG14X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG14Y"
+              type="text" name="fieldG14Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG14Z"
+              type="text" name="fieldG14Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G14">G14</b></td>
+  </tr>
+
+  <tr>
+    <th>Hôpitaux</th> 
+    <td>
+       <input stl:attributes="value fieldG15V"
+              type="text" name="fieldG15V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG15W"
+              type="text" name="fieldG15W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG15X"
+              type="text" name="fieldG15X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG15Y"
+              type="text" name="fieldG15Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG15Z"
+              type="text" name="fieldG15Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G15">G15</b></td>
+  </tr>
+
+  <tr>
+    <th>Maisons de retraite</th> 
+    <td>
+       <input stl:attributes="value fieldG16V"
+              type="text" name="fieldG16V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG16W"
+              type="text" name="fieldG16W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG16X"
+              type="text" name="fieldG16X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG16Y"
+              type="text" name="fieldG16Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG16Z"
+              type="text" name="fieldG16Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G16">G16</b></td>
+  </tr>
+
+  <tr>
+    <th>Comité d'entreprise</th> 
+    <td>
+       <input stl:attributes="value fieldG17V"
+              type="text" name="fieldG17V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG17W"
+              type="text" name="fieldG17W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG17X"
+              type="text" name="fieldG17X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG17Y"
+              type="text" name="fieldG17Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG17Z"
+              type="text" name="fieldG17Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G17">G17</b></td>
+  </tr>
+
+  <tr>
+    <th>Petite enfance (crèche, PMI)</th> 
+    <td>
+       <input stl:attributes="value fieldG18V"
+              type="text" name="fieldG18V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG18W"
+              type="text" name="fieldG18W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG18X"
+              type="text" name="fieldG18X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG18Y"
+              type="text" name="fieldG18Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG18Z"
+              type="text" name="fieldG18Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G18">G18</b></td>
+  </tr>
+
+  <tr>
+    <th>Centres sociaux, foyers ruraux</th> 
+    <td>
+       <input stl:attributes="value fieldG19V"
+              type="text" name="fieldG19V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG19W"
+              type="text" name="fieldG19W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG19X"
+              type="text" name="fieldG19X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG19Y"
+              type="text" name="fieldG19Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG19Z"
+              type="text" name="fieldG19Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G19">G19</b></td>
+  </tr>
+
+  <tr>
+    <th>Centres de vacances et de loisirs</th> 
+    <td>
+       <input stl:attributes="value fieldG20V"
+              type="text" name="fieldG20V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG20W"
+              type="text" name="fieldG20W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG20X"
+              type="text" name="fieldG20X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG20Y"
+              type="text" name="fieldG20Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG20Z"
+              type="text" name="fieldG20Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G20">G20</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres</th> 
+    <td>
+       <input stl:attributes="value fieldG21V"
+              type="text" name="fieldG21V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG21W"
+              type="text" name="fieldG21W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG21X"
+              type="text" name="fieldG21X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG21Y"
+              type="text" name="fieldG21Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG21Z"
+              type="text" name="fieldG21Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G21">G21</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL (G11 à G21)</b></th> 
+    <td>
+       <input stl:attributes="value fieldG22V"
+              type="text" name="fieldG22V"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG22W"
+              type="text" name="fieldG22W"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG22X"
+              type="text" name="fieldG22X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG22Y"
+              type="text" name="fieldG22Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG22Z"
+              type="text" name="fieldG22Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G22">G22</b></td>
+  </tr>
+</table>
+<h2>G. 3 / 4 PRÊT DIRECT (Public spécifique)</h2>
+<table width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="12%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">Nb de lieux de stationnement X</th>
+    <th style="text-align: center">Nb d'inscrits Y</th>
+    <th style="text-align: center">Nb de prêts Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Ecoles</th> 
+    <td>
+       <input stl:attributes="value fieldG31X"
+              type="text" name="fieldG31X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG31Y"
+              type="text" name="fieldG31Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG31Z"
+              type="text" name="fieldG31Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G31">G31</b></td>
+  </tr>
+
+  <tr>
+    <th>Collèges</th> 
+    <td>
+       <input stl:attributes="value fieldG32X"
+              type="text" name="fieldG32X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG32Y"
+              type="text" name="fieldG32Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG32Z"
+              type="text" name="fieldG32Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G32">G32</b></td>
+  </tr>
+
+  <tr>
+    <th>Lycées</th> 
+    <td>
+       <input stl:attributes="value fieldG33X"
+              type="text" name="fieldG33X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG33Y"
+              type="text" name="fieldG33Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG33Z"
+              type="text" name="fieldG33Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G33">G33</b></td>
+  </tr>
+
+  <tr>
+    <th>Prisons</th> 
+    <td>
+       <input stl:attributes="value fieldG34X"
+              type="text" name="fieldG34X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG34Y"
+              type="text" name="fieldG34Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG34Z"
+              type="text" name="fieldG34Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G34">G34</b></td>
+  </tr>
+
+  <tr>
+    <th>Hôpitaux</th> 
+    <td>
+       <input stl:attributes="value fieldG35X"
+              type="text" name="fieldG35X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG35Y"
+              type="text" name="fieldG35Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG35Z"
+              type="text" name="fieldG35Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G35">G35</b></td>
+  </tr>
+
+  <tr>
+    <th>Maisons de retraite</th> 
+    <td>
+       <input stl:attributes="value fieldG36X"
+              type="text" name="fieldG36X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG36Y"
+              type="text" name="fieldG36Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG36Z"
+              type="text" name="fieldG36Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G36">G36</b></td>
+  </tr>
+
+  <tr>
+    <th>Comité d'entreprise</th> 
+    <td>
+       <input stl:attributes="value fieldG37X"
+              type="text" name="fieldG37X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG37Y"
+              type="text" name="fieldG37Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG37Z"
+              type="text" name="fieldG37Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G37">G37</b></td>
+  </tr>
+
+  <tr>
+    <th>Petite enfance (crèche, PMI)</th> 
+    <td>
+       <input stl:attributes="value fieldG38X"
+              type="text" name="fieldG38X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG38Y"
+              type="text" name="fieldG38Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG38Z"
+              type="text" name="fieldG38Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G38">G38</b></td>
+  </tr>
+
+  <tr>
+    <th>Centres sociaux, foyers ruraux</th> 
+    <td>
+       <input stl:attributes="value fieldG39X"
+              type="text" name="fieldG39X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG39Y"
+              type="text" name="fieldG39Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG39Z"
+              type="text" name="fieldG39Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G39">G39</b></td>
+  </tr>
+
+  <tr>
+    <th>Centres de vacances et de loisirs</th> 
+    <td>
+       <input stl:attributes="value fieldG40X"
+              type="text" name="fieldG40X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG40Y"
+              type="text" name="fieldG40Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG40Z"
+              type="text" name="fieldG40Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G40">G40</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres</th> 
+    <td>
+       <input stl:attributes="value fieldG41X"
+              type="text" name="fieldG41X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG41Y"
+              type="text" name="fieldG41Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG41Z"
+              type="text" name="fieldG41Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G41">G41</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL (G31 à G41)</b></th> 
+    <td>
+       <input stl:attributes="value fieldG42X"
+              type="text" name="fieldG42X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG42Y"
+              type="text" name="fieldG42Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldG42Z"
+              type="text" name="fieldG42Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _G42">G42</b></td>
+  </tr>
+</table>
+</form>
+ <p style = "page-break-after:always "></p>
+</div>

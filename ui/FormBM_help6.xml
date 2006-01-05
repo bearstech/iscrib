@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+   <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+
+  </head>
+<body id="body">
+
+
+<p align="right"><a href=";help0">Sommaire</a></p>
+<h2>COOPERATION ET RESEAU </h2>
+
+
+<h4>Coopération, réseau </h4>
+<dl class="description">
+<dt><ul>
+<li><u>La bibliothèque appartient-elle au réseau de la BDP ? </u> (F11): on entend par réseau la jouissance de services de prêts, de formations ou de catalogues communs que celle-ci soit directement le fait de la BDP ou qu'elle soit exercée par une bibliothèque-relai du réseau BDP.
+</li>
+<li><u>La bibliothèque appartient-elle à un autre réseau documentaire ?</u> (F12) : par exemple,  participation à un pôle de conservation partagée (OCLC, CCFr, SUDOC, CERL (Consortium European Research Libraries),... )</li>
+<li><u>Actions de coopération </u> (F14): agence régionale de coopération, centre régional du livre, associations...</li>
+</ul>
+</dt>
+</dl> 
+
+</body>
+</html>
+

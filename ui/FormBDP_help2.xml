@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+  </head>
+  <body id="body">
+<p align="right"><a href=";help_menu">Sommaire</a></p>
+<h2> LOCAUX - VEHICULES - EQUIPEMENT INFORMATIQUE </h2>
+
+<h4> Locaux </h4>
+<dl class="description">
+<dt>Afin d'unifier le calcul des surfaces, il a &eacute;t&eacute; d&eacute;cid&eacute; de retenir la SHON (surface hors oeuvre nette) utilis&eacute;e dans les documents administratifs ; toutefois, les biblioth&egrave;ques incluses dans des b&acirc;timents comportant d'autres services, veilleront &agrave; n'indiquer que les surfaces concernant la seule biblioth&egrave;que.</dt>
+</dl>
+
+
+<h4> Equipement informatique</h4>
+<dl class="description">
+<dt><u>Postes informatiques </u>: pour les postes informatiques publics inclure les postes de consultation du catalogue et tous les autres destin&eacute;s au public (logith&egrave;que, laboratoire de langue, etc.)</dt>
+<dt>Quand un  poste avec ou sans acc&egrave;s internet est &agrave; la fois &agrave; destination professionnelle et publique choisir «&nbsp;poste informatique public avec/sans acc&egrave;s internet&nbsp;»</dt>
+</dl>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml"><!--pre stl:content="debug"/-->
+  
+  <p stl:if="batch/total">Formulaire(s): <stl:block content="batch/control" stl:if="batch/control"></stl:block>
+    
+  <a stl:if="batch/previous" stl:attributes="href batch/previous">&lt;&lt;</a> <a stl:if="batch/next" stl:attributes="href batch/next">>></a> </p>
+  <p stl:if="not table/objects">
+    
+  <em>Ce répertoire est vide. </em></p>
+  <table stl:if="table/objects">
+    <tr>
+      <th align="left" style="border-bottom: 1px dotted black">
+        <p style="display: inline">code </p>
+        <stl:block content="table/sortcontrol(dep)"></stl:block>
+      </th>
+      <th align="left" style="border-bottom: 1px dotted black">
+        <p style="display: inline">Département </p>
+        <stl:block content="table/sortcontrol(title)"></stl:block>
+      </th>
+      <th align="left" style="border-bottom: 1px dotted black">
+        <p style="display: inline">Etat </p>
+        <stl:block content="table/sortcontrol(state)"></stl:block>
+      </th>
+      <th align="left" style="border-bottom: 1px dotted black">
+        <p style="display: inline">Date </p>
+        <stl:block content="table/sortcontrol(mtime)"></stl:block>
+      </th>
+    </tr>
+    <tr stl:repeat="object table/objects">
+      <td>
+        <stl:block content="object/dep"></stl:block>
+      </td>
+      <td>
+        <a stl:content="object/title" stl:attributes="href object/url"></a></td>
+      <td>
+        <stl:block content="object/state"></stl:block>
+      </td>
+      <td>
+        <stl:block content="object/mtime"></stl:block>
+      </td>
+    </tr>
+  </table>
+</stl:block>

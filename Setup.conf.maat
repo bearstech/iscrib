@@ -1,0 +1,14 @@
+## Sql configuration
+SqlHost = localhost
+SqlDatabase = scrib
+SqlUser = scrib
+SqlPasswd = Scrib-2005*
+
+## Mail configuration
+# SMTPServer=cyr2.culture.fr
+# SMTPServer=smtp.wanadoo.fr
+SMTPServer=localhost
+#SMTPServer = smtp.wanadoo.fr
+MailResponsableBM = pantin@maat.culture.fr
+MailResponsableBDP = pantin@maat.culture.gouv.fr
+

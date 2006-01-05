@@ -1,0 +1,113 @@
+# translation of fr.po to 
+# translation of fr.po to
+# Belmar-Letelier <luis@in-girum.net>, 2003.
+# J. David Ibáñez <jdavid@itaapy.com>, 2003, 2004.
+msgid ""
+msgstr ""
+"Project-Id-Version: fr\n"
+"POT-Creation-Date: 2005-01-05 13:01+CET\n"
+"PO-Revision-Date: 2004-11-21 23:58+0100\n"
+"Last-Translator: Luis Belmar Letelier <luis@itaapy.com>\n"
+"Language-Team:  <zh@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ui/template.xhtml.en:0
+msgid ""
+"/ <a stl:if=\"x/url\" stl:content=\"x/name\" stl:attributes=\"href x/url\"></"
+"a>"
+msgstr ""
+"/ <a stl:if=\"x/url\" stl:content=\"x/name\" stl:attributes=\"href x/url\"></"
+"a>"
+
+#: ui/Folder_browse_list.xml.en:0
+msgid ""
+"<stl:inline content=\"batch/control\" if=\"batch/control\"></stl:inline> <a "
+"stl:if=\"batch/previous\" stl:attributes=\"href batch/previous\">&lt;&lt;</"
+"a> <a stl:if=\"batch/next\" stl:attributes=\"href batch/next\">>></a>"
+msgstr ""
+"<stl:inline content=\"batch/control\" if=\"batch/control\"></stl:inline> <a "
+"stl:if=\"batch/previous\" stl:attributes=\"href batch/previous\">&lt;&lt;</"
+"a> <a stl:if=\"batch/next\" stl:attributes=\"href batch/next\">>></a>"
+
+#: ui/Folder_browse_list.xml.en:0
+msgid "Date <stl:inline content=\"table/sortcontrol(mtime)\"></stl:inline>"
+msgstr "Date <stl:inline content=\"table/sortcontrol(mtime)\"></stl:inline>"
+
+#: ui/template.xhtml.en:0
+msgid "Message!"
+msgstr "Message!"
+
+#: ui/Folder_browse_list.xml.en:0
+msgid "Remove"
+msgstr "Effacer"
+
+#: ui/Folder_browse_list.xml.en:0
+msgid "Rename.."
+msgstr "Renommer"
+
+#: ui/Folder_browse_list.xml.en:0
+msgid "Size"
+msgstr "Taille"
+
+#: ui/template.xhtml.en:0
+msgid "The title"
+msgstr "culture"
+
+#: ui/Folder_browse_list.xml.en:0
+msgid "This folder is empty."
+msgstr "Ce répertoire est vide."
+
+#: ui/Folder_browse_list.xml.en:0
+msgid "Title <stl:inline content=\"table/sortcontrol(title)\"></stl:inline>"
+msgstr "Titre <stl:inline content=\"table/sortcontrol(title)\"></stl:inline>"
+
+#: ui/Folder_browse_list.xml.en:0
+msgid "Type"
+msgstr "Type"
+
+#: ui/template.xhtml.en:0
+msgid "not logged in"
+msgstr "non authentifié"
+
+#: ui/template.xhtml.en:0
+msgid "|"
+msgstr ""
+
+#: ui/template.xhtml.en:0
+msgid "» <a stl:attributes=\"href join_url\">Join</a>"
+msgstr "» <a stl:attributes=\"href join_url\">Devenir membre</a>"
+
+#: ui/template.xhtml.en:0
+msgid "» <a stl:attributes=\"href login_url\">Login</a>"
+msgstr "» <a stl:attributes=\"href login_url\">Connexion</a>"
+
+#: ui/template.xhtml.en:0
+msgid "» <a stl:attributes=\"href user/home\">Home</a>"
+msgstr "» <a stl:attributes=\"href user/home\">Mon profil</a>"
+
+#: ui/template.xhtml.en:0
+msgid "» <a stl:attributes=\"href user/logout\">Log out</a>"
+msgstr "» <a stl:attributes=\"href user/logout\">Déconnexion</a>"
+
+#~ msgid ""
+#~ "<a stl:if=\"batch/previous\" stl:attributes=\"href batch/previous\">&lt;"
+#~ "&lt;</a> <a stl:if=\"batch/next\" stl:attributes=\"href batch/next\">>></"
+#~ "a>"
+#~ msgstr ""
+#~ "<a stl:if=\"batch/previous\" stl:attributes=\"href batch/previous\">&lt;"
+#~ "&lt;</a> <a stl:if=\"batch/next\" stl:attributes=\"href batch/next\">>></"
+#~ "a>"
+
+#~ msgid "Date"
+#~ msgstr "Date"
+
+#~ msgid "Department"
+#~ msgstr "Département"
+
+#~ msgid "Form(s) :"
+#~ msgstr "Formulaire(s):"
+
+#~ msgid "State"
+#~ msgstr "Etat"

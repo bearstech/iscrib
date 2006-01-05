@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+   <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+
+  </head>
+  <body id="body">
+
+
+<p align="right"><a href=";help_menu">Sommaire</a></p>
+<h2> SERVICES</h2>
+<dl class="description">
+<dt>Cette nouvelle rubrique prend en compte des donn&eacute;es plus qualitatives, chaque partie commence par une question «&nbsp;en oui/non&nbsp;», les questions suivantes ne vous concernent que si vous avez r&eacute;pondu «&nbsp;oui&nbsp;» &agrave; la premi&egrave;re. </dt>
+</dl>
+
+<h4>H1. Services &agrave; distance</h4>
+<dl class="description">
+<dt>Les services &eacute;lectroniques de biblioth&egrave;que comprennent le catalogue interrogeable en ligne par le public, le site Web de la biblioth&egrave;que, la collection &eacute;lectronique, la fourniture de documents &eacute;lectroniques, un service de r&eacute;f&eacute;rence &eacute;lectronique, la formation des usagers aux services &eacute;lectroniques et l'acc&egrave;s &agrave; Internet propos&eacute; par la biblioth&egrave;que.</dt>
+<dt>Une session est une connexion effective &agrave; une base de donn&eacute;es ou au catalogue interrogeable en ligne par le public.<br/>
+</dt>
+<dt><ul><i>
+<li>Note 1:  une session est un cycle d'activit&eacute;s qui d&eacute;bute lorsque l'usager se connecte &agrave; une base de donn&eacute;es ou au catalogue interrogeable en ligne, et qui se termine de fa&ccedil;on explicite (en quittant la base de donn&eacute;es par d&eacute;connexion ou en utilisant la fonction quitter) ou implicite (mise en veille apr&egrave;s une p&eacute;riode d&eacute;termin&eacute;e de non utilisation). Le d&eacute;lai moyen de mise en veille est de 30 minutes.
+</li>
+<li>Note 2: les sessions sur le site Web de la biblioth&egrave;que sont comptabilis&eacute;es comme visites virtuelles.
+</li>
+<li>Note 3: il convient d'exclure les connexions &agrave; une page d'accueil
+</li>
+</i>
+</ul>
+</dt>
+</dl>
+
+<h4>H3. et H4. Aides et conseils de la BDP aux collectivit&eacute;s&nbsp;</h4>
+<dl class="description">
+<dt>Il s'agit &agrave; la fois des subventions des d&eacute;partements pour les biblioth&egrave;ques du r&eacute;seaux et des acquisitions de la BDP pour &eacute;quiper les biblioth&egrave;ques du r&eacute;seau.
+</dt>
+<dt>cochez les cases correspondant aux aides que vous apportez, si le formulaire omet une activit&eacute; que vous exercez couramment, dites le en annexe de mani&egrave;re &agrave; am&eacute;liorer le questionnaire.
+</dt>
+</dl>
+
+</body>
+</html>

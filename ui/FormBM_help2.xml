@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+   <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+
+  </head>
+<body id="body">
+
+
+<p align="right"><a href=";help0">Sommaire</a></p>
+<h2>LOCAUX - VEHICULES - INFORMATIQUE </h2>
+
+<h4>LOCAUX  (B.1) </h4>
+<dl class="description">
+<dt>Afin d'unifier le calcul des surfaces, il a été décidé de retenir la SHON (surface hors oeuvre nette) utilisée dans les documents administratifs ; toutefois, les bibliothèques incluses dans des bâtiments comportant d'autres services, veilleront à n'indiquer que les surfaces concernant la seule bibliothèque.</dt>
+</dl>
+
+<h4>VEHICULES (B.2)</h4>
+<dl class="description">
+<dt>Ne mentionner ni le nombre de documents empruntés à la BDP ni le nombre de documents prêtés 
+</dt>
+</dl>
+
+<h4>EQUIPEMENT INFORMATIQUE (B.3/4)</h4>
+<dl class="description">
+<dt><ul>
+<li><u> Postes informatiques </u> (B37 et B38): pour les postes informatiques publics inclure les postes de consultation du catalogue et tous les autres destinés au public (logithèque, laboratoire de langue, etc.) ; quand un  poste avec ou sans accès internet est à la fois à destination professionnelle et publique choisir « poste informatique public avec/sans accès internet »</li>
+<li><u> Accès public à internet </u> (B40, B41 et B42): cocher la case correspondante </li>
+<li><u>Notices importées </u>(B33) : l'utilisation de notices provisoires à seule fin d'acquisition n'est pas considérée comme une importation de notices.
+ </li>
+<li><u>Logiciels adaptés </u>(B46) : principalement les logiciels de synthèse vocale.
+ </li>
+
+</ul>
+</dt>
+</dl>
+
+</body>
+</html>
+

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<div xmlns="http://www.w3.org/1999/xhtml" 
+     xmlns:stl="http://xml.itools.org/namespaces/stl"
+     id="formBiblio">
+<form action=";report" method="post" name="form">
+ 
+  <div align="right">
+    <input stl:if="not printable" type="image"  
+           src="../../ui/culture/images/imprimer.gif" 
+           style="border:0;text-color:gray" alt="Imprimer" name="Imprimer"
+           onclick="window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600') ;return 0;" >Imprimer cette page</input>
+   
+    <stl:block if="not printable">
+      <input type="submit" value="Enregistrer" 
+             style="background-color:rgb(145,191,255); border:0"
+             stl:if="is_allowed_to_edit"></input>
+    </stl:block>
+  </div>
+<h1>I- ANIMATIONS, PUBLICATIONS ET FORMATION
+   <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
+      onclick="window.open(';help9', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+</h1>
+<h2> I.1/2 ANIMATIONS</h2>
+
+<table width="100%">
+  <colgroup>
+    <col width="38%"/>
+    <col width="38%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th rowspan="2">La bibliothèque organise-t-elle  régulièrement des animations dans l'année (heures du conte, club de lecteurs) ?</th>
+    <th>à destination des enfants</th> 
+    <td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI11" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI11" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldI11"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI11_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _I11">I11</b></td>
+  </tr>
+
+  <tr>
+    <th>à destination des adultes</th> 
+    <td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI12" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI12" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldI12"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI12_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _I12">I12</b></td>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="76%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th >La bibliothèque a-t-elle organisé ou co-organisé dans l'année des manifestations culturelles ?</th> 
+    <td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input onclick="switch_on(['fieldI14','fieldI15','fieldI16','fieldI17','fieldI18','fieldI19','fieldI20','fieldI21'])"  type="radio"  name="fieldI13" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI13" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldI14','fieldI15','fieldI16','fieldI17','fieldI18','fieldI19','fieldI20','fieldI21'])"  type="radio" name="fieldI13"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI13_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _I13">I13</b></td>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="38%"/>
+    <col width="38%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+     <th rowspan="8">si oui, combien ?</th>
+     <th>Fête/salon du livre</th> 
+    <td>
+       <div stl:if="not fieldI13" id="display_fieldI14"           style="visibility:hidden">         <input stl:if="not fieldI13"
+             type="text" name="fieldI14"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI13" id="display_fieldI14">         <input stl:if="fieldI13" stl:attributes="value fieldI14"
+             type="text" name="fieldI14"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I14">I14</b></td>
+  </tr>
+
+  <tr>
+    <th>Expositions</th> 
+    <td>
+       <div stl:if="not fieldI13" id="display_fieldI15"           style="visibility:hidden">         <input stl:if="not fieldI13"
+             type="text" name="fieldI15"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI13" id="display_fieldI15">         <input stl:if="fieldI13" stl:attributes="value fieldI15"
+             type="text" name="fieldI15"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I15">I15</b></td>
+  </tr>
+
+  <tr>
+    <th>Conférences</th> 
+    <td>
+       <div stl:if="not fieldI13" id="display_fieldI16"           style="visibility:hidden">         <input stl:if="not fieldI13"
+             type="text" name="fieldI16"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI13" id="display_fieldI16">         <input stl:if="fieldI13" stl:attributes="value fieldI16"
+             type="text" name="fieldI16"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I16">I16</b></td>
+  </tr>
+
+  <tr>
+    <th>Rencontres d'auteurs/lectures</th> 
+    <td>
+       <div stl:if="not fieldI13" id="display_fieldI17"           style="visibility:hidden">         <input stl:if="not fieldI13"
+             type="text" name="fieldI17"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI13" id="display_fieldI17">         <input stl:if="fieldI13" stl:attributes="value fieldI17"
+             type="text" name="fieldI17"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I17">I17</b></td>
+  </tr>
+
+  <tr>
+    <th>Ateliers d'écriture</th> 
+    <td>
+       <div stl:if="not fieldI13" id="display_fieldI18"           style="visibility:hidden">         <input stl:if="not fieldI13"
+             type="text" name="fieldI18"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI13" id="display_fieldI18">         <input stl:if="fieldI13" stl:attributes="value fieldI18"
+             type="text" name="fieldI18"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I18">I18</b></td>
+  </tr>
+
+  <tr>
+    <th>Spectacles</th> 
+    <td>
+       <div stl:if="not fieldI13" id="display_fieldI19"           style="visibility:hidden">         <input stl:if="not fieldI13"
+             type="text" name="fieldI19"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI13" id="display_fieldI19">         <input stl:if="fieldI13" stl:attributes="value fieldI19"
+             type="text" name="fieldI19"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I19">I19</b></td>
+  </tr>
+
+  <tr>
+    <th>Concerts</th> 
+    <td>
+       <div stl:if="not fieldI13" id="display_fieldI20"           style="visibility:hidden">         <input stl:if="not fieldI13"
+             type="text" name="fieldI20"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI13" id="display_fieldI20">         <input stl:if="fieldI13" stl:attributes="value fieldI20"
+             type="text" name="fieldI20"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I20">I20</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres </th> 
+    <td>
+       <div stl:if="not fieldI13" id="display_fieldI21"           style="visibility:hidden">         <input stl:if="not fieldI13"
+             type="text" name="fieldI21"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI13" id="display_fieldI21">         <input stl:if="fieldI13" stl:attributes="value fieldI21"
+             type="text" name="fieldI21"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I21">I21</b></td>
+  </tr>
+</table>
+<h2>I.3 PUBLICATIONS</h2>
+<table width="100%">
+  <colgroup>
+    <col width="38%"/>
+    <col width="38%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th rowspan="4">La bibliothèque édite-t-elle les documents suivants :</th> 
+    <th> Bulletin d'information </th>
+    <td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI31" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI31" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldI31"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI31_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _I31">I31</b></td>
+  </tr>
+
+  <tr>
+    <th>Bibliographies sélectives</th> 
+    <td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI32" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI32" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldI32"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI32_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _I32">I32</b></td>
+  </tr>
+
+  <tr>
+    <th>Catalogue d'exposition</th> 
+    <td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI33" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI33" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldI33"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI33_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _I33">I33</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres</th> 
+    <td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI34" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI34" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldI34"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI34_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _I34">I34</b></td>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="76%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th>La bibliothèque a-t-elle édité des documents dans l'année ? </th> 
+    <td>
+      <table><tr style="padding: 0px; text-align: left"><td>        <input onclick="switch_on(['fieldI36','fieldI37','fieldI38','fieldI39'])"  type="radio"  name="fieldI35" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI35" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldI36','fieldI37','fieldI38','fieldI39'])"  type="radio" name="fieldI35"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldI35_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _I35">I35</b></td>
+  </tr>
+</table>
+
+<table width="100%">
+  <colgroup>
+    <col width="38%"/>
+    <col width="38%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th rowspan="4">si oui, préciser combien de titres ou de fascicules </th>
+    <th>Bulletin d'information</th> 
+    <td>
+       <div stl:if="not fieldI35" id="display_fieldI36"           style="visibility:hidden">         <input stl:if="not fieldI35"
+             type="text" name="fieldI36"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI35" id="display_fieldI36">         <input stl:if="fieldI35" stl:attributes="value fieldI36"
+             type="text" name="fieldI36"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I36">I36</b></td>
+  </tr>
+
+  <tr>
+    <th>Bibliographies sélectives</th> 
+    <td>
+       <div stl:if="not fieldI35" id="display_fieldI37"           style="visibility:hidden">         <input stl:if="not fieldI35"
+             type="text" name="fieldI37"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI35" id="display_fieldI37">         <input stl:if="fieldI35" stl:attributes="value fieldI37"
+             type="text" name="fieldI37"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I37">I37</b></td>
+  </tr>
+
+  <tr>
+    <th>Catalogue d'exposition</th> 
+    <td>
+       <div stl:if="not fieldI35" id="display_fieldI38"           style="visibility:hidden">         <input stl:if="not fieldI35"
+             type="text" name="fieldI38"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI35" id="display_fieldI38">         <input stl:if="fieldI35" stl:attributes="value fieldI38"
+             type="text" name="fieldI38"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I38">I38</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres</th> 
+    <td>
+       <div stl:if="not fieldI35" id="display_fieldI39"           style="visibility:hidden">         <input stl:if="not fieldI35"
+             type="text" name="fieldI39"
+             value="" size="8" style="text-align: right"></input></div>
+       <div stl:if="fieldI35" id="display_fieldI39">         <input stl:if="fieldI35" stl:attributes="value fieldI39"
+             type="text" name="fieldI39"
+             value="" size="8" style="text-align: right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I39">I39</b></td>
+  </tr>
+</table>
+<h2>I.4 FORMATIONS DISPENSÉES PAR LA BIBLIOTHÈQUE</h2>
+<table width="100%">
+  <colgroup>
+    <col width="77%"/>
+    <col width="18%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th>Nombre d'heures de cours assurées par le personnel (ENSSIB, CRFCB, ABF, CNFPT, BDP, )</th> 
+    <td>
+       <input stl:attributes="value fieldI41"
+              type="text" name="fieldI41"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td><b stl:attributes="class _I41">I41</b></td>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="18%"/>
+    <col width="18%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th>ACCUEIL DE STAGIAIRES</th>
+    <th style="text-align: center">NB DE STAGIAIRES  Y</th>
+    <th style="text-align: center">NB DE JOURNÉES CONSACRÉES  À L'ACCUEIL  Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Corps et cadres d'emploi des métiers des bibliothèques, de la documentation ou des archives</th> 
+    <td>
+       <input stl:attributes="value fieldI42Y"
+              type="text" name="fieldI42Y"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldI42Z"
+              type="text" name="fieldI42Z"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td><b stl:attributes="class _I42">I42</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres</th> 
+    <td>
+       <input stl:attributes="value fieldI43Y"
+              type="text" name="fieldI43Y"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldI43Z"
+              type="text" name="fieldI43Z"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td><b stl:attributes="class _I43">I43</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL</b></th> 
+    <td>
+       <input stl:attributes="value fieldI44Y"
+              type="text" name="fieldI44Y"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldI44Z"
+              type="text" name="fieldI44Z"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td><b stl:attributes="class _I44">I44</b></td>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="18%"/>
+    <col width="18%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  
+    <th>FORMATIONS ORGANISÉES PAR LA BIBLIOTHÈQUE</th>
+    <th style="text-align: center">NB DE PARTICIPANTS  Y</th>
+    <th style="text-align: center">NB DE JOURNÉES DE FORMATION Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>Professionnels</th> 
+    <td>
+       <input stl:attributes="value fieldI45Y"
+              type="text" name="fieldI45Y"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldI45Z"
+              type="text" name="fieldI45Z"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td><b stl:attributes="class _I45">I45</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres</th> 
+    <td>
+       <input stl:attributes="value fieldI46Y"
+              type="text" name="fieldI46Y"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldI46Z"
+              type="text" name="fieldI46Z"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td><b stl:attributes="class _I46">I46</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL</b></th> 
+    <td>
+       <input stl:attributes="value fieldI47Y"
+              type="text" name="fieldI47Y"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldI47Z"
+              type="text" name="fieldI47Z"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td><b stl:attributes="class _I47">I47</b></td>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="59%"/>
+    <col width="18%"/>
+    <col width="18%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+  <td></td>
+    <th style="text-align: center">NB DE JOURNEES D'ETUDE  Y</th>
+    <th style="text-align: center">NB DE PARTICIPANTS  Z</th>
+  <td></td>
+  </tr>
+  <tr>
+    <th>JOURNEES D'ETUDE, RENCONTRES PROFESSIONNELLES</th> 
+    <td>
+       <input stl:attributes="value fieldI48Y"
+              type="text" name="fieldI48Y"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldI48Z"
+              type="text" name="fieldI48Z"
+              value="" size="8" style="text-align: right"></input>
+    </td>
+    <td><b stl:attributes="class _I48">I48</b></td>
+  </tr>
+</table>
+</form>
+<p style = "page-break-after:always "></p>
+</div>

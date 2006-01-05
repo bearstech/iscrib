@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://xml.itools.org/namespaces/stl">
+
+<div class="batchcontrol" stl:if="batch/total">
+  <stl:inline if="batch/control" content="batch/control" />
+  <a stl:if="batch/previous" stl:attributes="href batch/previous">&lt;&lt;</a>
+  <a stl:if="batch/next" stl:attributes="href batch/next">&gt;&gt;</a>
+</div>
+
+<form action="." method="post">
+  <table class="form">
+    <tr stl:if="not table/objects">
+      <td></td>
+      <td></td>
+      <td colspan="4">
+        <em>This folder is empty.</em>
+      </td>
+    </tr>
+
+    <stl:block if="table/objects">
+      <tr class="header">
+        <th></th>
+        <th></th>
+        <th>
+          Title <stl:inline content="table/sortcontrol(title)" />
+        </th>
+        <th>Type</th>
+        <th>
+          Date <stl:inline content="table/sortcontrol(mtime)" />
+        </th>
+        <th>Size</th>
+      </tr>
+      <tr stl:repeat="object table/objects">
+        <td>
+          <input class="checkbox" type="checkbox" name="ids:utf8:ustring:list"
+                 stl:if="object/checkbox"
+                 stl:attributes="value object/name" />
+        </td>
+        <td>
+          <a stl:attributes="href object/url">
+            <img stl:attributes="src object/icon; title object/format"
+                 border="0" />
+          </a>
+        </td>
+        <td>
+          <a stl:attributes="href object/url" stl:content="object/title" />
+        </td>
+        <td stl:content="object/format" nowrap="physical" />
+        <td stl:content="object/mtime" nowrap="physical" />
+        <td stl:content="object/size" nowrap="physical" />
+      </tr>
+    </stl:block>
+    <tr>
+      <td></td>
+      <td colspan="7" class="submit">
+        <stl:block if="table/objects">
+          <input type="submit" name=";remove:method" value="Remove"
+                 onClick="return confirmation();"  /> 
+          <input type="submit" name=";rename_form:method" value="Rename.."/>
+        </stl:block>
+      </td>
+    </tr>
+    <tr>
+      <td><img src=";px" height="1" width="10"/></td>
+      <td><img src=";px" height="1" width="16" /></td>
+      <td><img src=";px" height="1" width="133" /></td>
+      <td><img src=";px" height="1" width="70" /></td>
+      <td><img src=";px" height="1" width="90" /></td>
+      <td><img src=";px" height="1" width="40" /></td>
+    </tr>
+  </table>
+</form>
+
+
+</stl:block>

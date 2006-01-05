@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:stl="http://xml.itools.org/namespaces/stl"
+     id="formBiblio">
+
+<form action=";report" method="post">
+
+  <div align="right">
+    <input stl:if="not printable" type="image"  
+           src="../../ui/culture/images/imprimer.gif" 
+           style="border:0;text-color:gray" alt="Imprimer" name="Imprimer"
+           onclick="window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600') ;return 0;" >Imprimer cette page</input>
+   
+    <stl:block if="not printable">
+      <input type="submit" value="Enregistrer" 
+             style="background-color:rgb(145,191,255); border:0"
+             stl:if="is_allowed_to_edit"></input>
+    </stl:block>
+  </div>
+
+<a stl:if="is_vide" 
+   style="color:white;background-color:red; border: 1px solid red; " 
+   alt="Aide"
+   href=";help">Veuillez consulter l'aide</a>
+<h1>IDENTITE
+  <a stl:if="not printable" href="#" 
+     style="color:white;background-color:red; border: 1px solid red; " 
+     alt="Aide"
+     onclick="window.open(';help_menu', 'xxx', 'toolbar=no,   location=no,
+     status=no, menubar=no, scrollbars=yes, width=440, height=540');return
+     0;">?</a> </h1>
+
+
+ <table>
+    <tr> 
+        <th colspan="2">Code</th> 
+        <td ><input stl:attributes="value code_ua" size="10" type="text" name="code_ua" value="" readonly="yes"></input></td>
+     </tr> 
+      <tr>    
+        <th colspan="2">Nom </th>
+        <td colspan="3"><input stl:attributes="value field1" size="60" type="text" name="field1" value=""></input></td>
+        <td sdval="1" sdnum="1036;">1</td>
+      </tr> 
+     <tr>    
+        <th colspan="2"> </th>
+        <td colspan="3"><input stl:attributes="value field2" size="60" type="text" name="field2" value=""></input></td>
+        <td sdval="1" sdnum="1036;">2</td>
+     </tr> 
+     <tr>    
+        <th colspan="2">Adresse</th>
+        <td colspan="3"><input stl:attributes="value field3" size="60" type="text" name="field3" value=""></input></td>
+        <td sdval="1" sdnum="1036;">3</td>
+     </tr> 
+     <tr>    
+        <th colspan="2" style="text-align: right">Code postal / Ville </th>
+        <td><input stl:attributes="value field4" size="5" type="text" name="field4" value="" style="text-align: right"></input></td>
+        <td> 4 </td>
+        <td><input stl:attributes="value field5" size="45" type="text" name="field5" value=""></input></td>
+        <td sdval="1" sdnum="1036;">5</td>           
+      </tr>
+     <tr>  
+        <th colspan="2" style="text-align: right">Cedex </th>                 
+        <td colspan="3" ><input stl:attributes="value field6" type="text" size="8" name="field6" value=""></input></td>
+        <td sdval="1" sdnum="1036;">6</td>
+     </tr> 
+     <tr></tr>
+     <tr>    
+        <th colspan="2">Nom et Prénom du Directeur</th>
+        <td colspan="3"><input stl:attributes="value field7" size="60" type="text" name="field7" value=""></input></td>
+        <td sdval="1" sdnum="1036;">7</td>
+     </tr>
+     <tr>
+        <th colspan="2">Statut et grade du Directeur</th>
+        <td colspan="3"><input stl:attributes="value field8" size="60" type="text" name="field8" value=""></input></td>
+        <td sdval="2" sdnum="1036;">8</td>
+     </tr>
+     <tr></tr>
+      <tr>
+        <th colspan="2">Téléphone</th>
+        <td colspan="3"><input stl:attributes="value field9" size="15" type="text" name="field9" value=""></input> </td>
+        <td sdval="3" sdnum="1036;">9</td>
+      </tr>
+      <tr>
+        <th colspan="2">Télécopie</th>
+        <td colspan="3"><input stl:attributes="value field10" size="15" type="text" name="field10" value=""></input> </td>
+        <td sdval="4" sdnum="1036;">10</td>
+      </tr>
+      <tr>
+        <th colspan="2">Courriel</th>
+        <td colspan="3"><input stl:attributes="value field11" size="60" type="text" name="field11" value=""></input> </td>
+        <td sdval="5" sdnum="1036;">11</td>
+      </tr>
+      <tr>
+        <th colspan="2">Site Web</th>
+        <td colspan="3"><input stl:attributes="value field12" size="60" type="text" name="field12" value=""></input> </td>
+        <td sdval="6" sdnum="1036;">12</td>
+      </tr>
+      
+    </table>
+ </form>
+ <p style = "page-break-after:always "></p>
+</div>

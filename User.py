@@ -1,0 +1,398 @@
+# -*- coding: ISO-8859-1 -*-
+# Import from python
+import base64, sha, urllib
+from time import time
+
+# Import from itools
+from itools.catalog.Analysers import Text as itoolsAnalyserText
+from itools.resources import base
+from itools.zope import get_context
+from itools.catalog import Query
+from itools import uri
+
+# Import from ikaaro
+from Products.ikaaro.User import User as ikaaroUser
+from Products.ikaaro.Group import Group as ikaaroGroup
+from Products.ikaaro.UserFolder import UserFolder as ikaaroUserFolder
+from Products.ikaaro import ui
+from Products.ikaaro.utils import _, N_, UserError, comeback
+from Products.ikaaro.utils import get_parameters, Table
+
+# Import from Culture
+from utils import get_deps, get_BMs
+from Handler import Handler
+
+
+
+class bibGroup(Handler, ikaaroGroup):
+
+    is_allowed_to_view = Handler.is_admin
+    edit_metadata_form__access__ = Handler.is_admin
+    edit_metadata__access__ = Handler.is_admin
+    browse_thumbnails__access__ = False
+    browse_list__access__ = Handler.is_admin
+    add_users_form__access__ = False
+
+
+    def get_views(self):
+        views = ikaaroGroup.get_views(self)
+        return views + ['create_add_users_form']
+
+
+    #######################################################################
+    # Users / Add
+    create_add_users_form__access__ = Handler.is_admin
+    create_add_users_form__label__ = u'Ajouter un administrateur Scrib'
+    def create_add_users_form(self):
+        context = get_context()
+        root = context.root
+        namespace = {}
+        usernames = self.get_usernames()
+        
+        # Users
+        users = root.get_handler('users')
+
+        handler = ui.get_handler('culture/bibGroup_create_add_users.xml')
+        return handler.stl(namespace)
+
+
+    create_add_users__access__ = Handler.is_admin
+    def create_add_users(self, username, password, password2, groups=[], **kw):
+        context = get_context()
+        root = context.root
+        namespace = {}
+
+        # Check the values
+        if not username:
+            raise UserError, _('The username is wrong, please try again.')
+        if self.has_handler(username):
+            raise UserError, \
+                  _('There is another user with the username "%s", '
+                    'please try again') % username
+        if not password or password != password2:
+            raise UserError, _('The password is wrong, please try again.')
+
+        # add the user
+        users = root.get_handler('users')
+        users.set_user(username, password)
+
+        # Add user in groups
+        admin_group = root.get_handler('admins')
+        admin_group.set_user(username)
+
+        message = _('User added')
+        comeback('browse_users', message)
+
+
+ikaaroGroup.register_handler_class(bibGroup)
+
+
+
+class bibUser(Handler, ikaaroUser):
+    class_id = 'bibUser'
+
+    def is_BM(self):
+        """ patern is BMxxx"""
+        return self.name.startswith('BM')
+
+
+    def is_BDP(self):
+        """ patern is BDPxx"""
+        return self.name.startswith('BDP')
+
+
+    def is_not_BDP_or_BM(self):
+        return not self.is_BDP and not self.is_BM
+
+
+    def get_department_name(self):
+        name = self.name
+        dep = self.dep
+        dep_name = get_deps().get(dep)
+        if dep_name:
+            dep_name = dep_name.get('name') 
+        return dep_name
+
+
+    def get_department(self):
+        name = self.name
+        dep = ''
+        if self.is_BDP():
+           dep = name.split('BDP')[-1]
+        elif self.is_BM():
+           code = self.get_BM_code()
+           if code:
+               dep = get_BMs()[code].get('dep', '')
+        return dep
+    # dep is an index for the Catalog
+    dep = property(get_department, None, None, None)
+
+
+    def get_BM_code(self):
+        """ patern is BMxxx"""
+        name = self.name
+        if self.is_BM():
+           return name.split('BM')[-1]
+        else:
+            return None
+
+
+    def user_town(self):
+        title = ''
+        if self.is_BM():
+            code = self.get_BM_code()
+            if code:
+                title = get_BMs()[code].get('name', '')
+        return title 
+
+
+    def get_year(self):
+        name = self.name
+        if self.is_BDP():
+           # XXX just for 2005 ;)
+           return '2005'
+        elif self.is_BM():
+           return '2005'
+        return None
+    # year is an index for the Catalog
+    year = property(get_year, None, None, None)
+
+
+    #######################################################################
+    # User interface
+    #######################################################################
+    def get_views(self):
+        root = self.get_root()
+        if self.name in root.get_handler('admins').get_usernames():
+            return ['edit_password_form']
+        elif self.name == 'VoirSCRIB':
+            return ['edit_password_form']
+        return ['home', 'edit_password_form']
+
+
+    def get_subviews(self, name):
+        return []
+
+
+    #######################################################################
+    # Home
+    home__access__ = True 
+    home__label__ = N_('Home')
+    def home(self):
+        namespace = {}
+        root = self.get_root()
+        name = self.name
+        department, code = '', ''
+
+        year = self.get_year()
+        if self.is_BM():
+            code = self.get_BM_code()
+            report = root.get_handler('BM%s/%s' % (year, code))
+        elif self.is_BDP():
+            department = self.get_department()
+            report = root.get_handler('BDP%s/%s' % (year, department))
+
+        namespace['report_url'] = '%s/;%s' % (self.get_pathto(report),
+                                              report.get_firstview())
+
+        # The year
+        namespace['year'] = year
+        # The department or the BM Code
+        departments = get_deps()
+        namespace['dep'] = ''
+        if department:
+            dep_name = departments[department].get('name', '')
+            namespace['dep'] = dep_name 
+        elif code:
+            namespace['dep'] = get_BMs()[code].get('name', '')
+
+        handler = ui.get_handler('culture/User_home.xml')
+        return handler.stl(namespace)
+
+
+    #######################################################################
+    # Password
+    edit_password_form__label__ = N_('Change password')
+
+
+ikaaroUser.register_handler_class(bibUser)
+
+
+
+class bibUserFolder(Handler, ikaaroUserFolder):
+
+    is_allowed_to_view = Handler.is_admin
+    browse_thumbnails__access__ = Handler.is_admin
+    edit_metadata_form__access__ = Handler.is_admin
+
+
+    #######################################################################
+    # Search
+    def get_views(self):
+        views = ikaaroUserFolder.get_views(self)
+        if 'browse_thumbnails' in views:
+            views.remove('browse_thumbnails')
+        if 'new_user_form' in views:
+            views.remove('new_user_form')
+        if 'search_form' in views:
+            views.remove('search_form')
+        views.insert(0, 'search_form')
+        return views 
+
+
+    search_form__access__ = Handler.is_admin
+    search_form__label__ = N_(u'Search')
+    def search_form(self):
+        context = get_context()
+        root = context.root
+        namespace = {}
+        admin_names = root.get_handler('admins').usernames
+        admins = []
+        for admin_name in admin_names:
+            dic = {} 
+            user = root.get_handler('users').get_handler(admin_name)
+            dic['name'] = user.get_property('title') or user.name
+            dic['url'] = str(self.get_pathto(user))
+            admins.append(dic)
+        namespace['admins'] = admins
+        tablename = 'search'
+
+        # Search parameters
+        parameters = get_parameters(tablename, name='', year='', dep='', 
+                                    bib='BM')
+
+        name = parameters['name'].strip().lower()
+        year = parameters['year'].strip().lower()
+        dep = parameters['dep'].strip().lower()
+        name = unicode(name, 'utf8')
+        year = unicode(year, 'utf8')
+        dep= unicode(dep, 'utf8')
+        namespace['search_year'] = year 
+
+        # make possible the search in 'bellegarde-sur-valserine'
+        # by the Complex search on 'bellegarde', 'sur', 'valserine'
+        names = [t[0] for t in itoolsAnalyserText(name)]
+        if names: 
+            q_name =  Query.Simple('user_town', names[0])
+            for subname in names:
+                q_name2 = Query.Simple('user_town', subname)
+                q_name = Query.Complex(q_name, 'and', q_name2)
+        namespace['search_name'] = name
+
+        # departements
+        namespace['search_dep'] = dep 
+        departements = [] 
+        for dep_key, dep_dic in get_deps().items():
+            dep_name = dep_dic['name'].capitalize()
+            departements.append({'name': '%s (%s)' % (dep_name, dep_key), 
+                                 'value': dep_key, 
+                                 'selected': dep_key == dep})
+        departements = [(d['value'], d) for d in departements] 
+        departements.sort()
+        departements = [d[-1] for d in departements] 
+        namespace['departements'] = departements
+
+        bib = parameters['bib']
+        bib_types = [{'name': x, 'value': x, 'checked': x==bib} 
+                     for x in ['BM', 'BDP']] 
+        namespace['bib_types'] = bib_types
+
+        is_BDP, is_BM = False, False
+        if bib == 'BM': is_BM = True 
+        namespace['is_BM'] = is_BM
+        if bib == 'BDP': is_BDP = True 
+        
+        # Search
+        if year: q_year = Query.Simple('year', year)
+        if dep: q_dep = Query.Simple('dep', dep)
+        if name: q_name = Query.Simple('user_town', name)
+
+        # independent of the form : q_bibUser, q_type_form
+        q_bibUser = Query.Simple('format', bibUser.class_id)
+        if is_BM: 
+            q_type_form = Query.Simple('is_BM', is_BM) 
+        if is_BDP: 
+            q_type_form = Query.Simple('is_BDP', is_BDP) 
+
+
+        query, objects = None, []
+        if name or dep or year:
+            query = q_type_form 
+            query = Query.Complex(query, 'and', q_bibUser)
+        if year: 
+            query = Query.Complex(query, 'and', q_year)
+        if name: 
+            query = Query.Complex(query, 'and', q_name)
+        if dep: 
+            query = Query.Complex(query, 'and', q_dep)
+
+        namespace['too_long_answer'] = '' 
+        msg = u'Il y a %s réponses, les 100 premières sont présentées.'\
+              u'Veuillez restreindre votre recherche.'
+
+        # Search
+        if query:
+##            t = time()
+            catalog = root.get_handler('.catalog')
+##            t_loadC = time() - t; print 't_loadC', t_loadC
+
+            documents = catalog.search(query)
+            documents = list(documents)
+##            t_search = time() - t; print 't_search', t_search
+
+            answer_len = len(documents)
+            if answer_len > 100:
+                namespace['too_long_answer'] = msg % answer_len
+            too_long_answer = msg % answer_len
+            # Get the real objects
+            objects = [ root.get_handler(x.abspath) for x in documents[:100] ]
+##            t_h = time() - t; print 't_h', t_h
+
+        # Build objects namespace, add the path to the object from the
+        # current folder.
+        aux = []
+        root = self.get_root()
+        for handler in objects:
+            resource = handler.resource
+            path_to_handler = self.get_pathto(handler)
+            node = self
+            path = []
+            for name in path_to_handler:
+                node = node.get_handler(name)
+                path.append({'name': node.name,
+                             'url': '%s/;%s' % (self.get_pathto(node),
+                                                node.get_firstview())})
+
+            if isinstance(resource, base.File):
+                summary = _('%d bytes') % resource.get_size()
+            elif isinstance(resource, base.Folder):
+                nresources = len([ x for x in resource.get_resource_names()
+                                   if not x.startswith('.') ])
+                summary = str(nresources)
+
+            mtime = resource.get_mtime()
+            path_to_icon = handler.get_path_to_icon(16)
+            # XXX hugly
+            path_to_icon = uri.Path(str(path_to_handler) + '/').resolve(path_to_icon)
+            aux.append({'oid': path_to_handler,
+                        'icon': path_to_icon,
+                        'type': resource.get_mimetype(),
+                        'date': mtime.strftime('%Y-%m-%d %H:%M'),
+                        'title': (handler.user_town() or 
+                                  handler.get_department_name()),
+                        'content_summary': summary,
+                        'path': path})
+        objects = aux
+
+        # The table
+        path = context.path
+        table = Table(path.get_pathtoroot(), tablename, objects, sortby='oid',
+                      sortorder='up', batchstart='0', batchsize='50')
+        namespace['table'] = table
+        namespace['batch'] = table.batch_control()
+
+        handler = ui.get_handler('culture/bibUserFolder_search.xml')
+        return handler.stl(namespace)
+
+
+ikaaroUserFolder.register_handler_class(bibUserFolder)

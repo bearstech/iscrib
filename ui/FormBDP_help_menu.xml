@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" 
+      xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" 
+          http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" 
+          rel="stylesheet"></link>
+  </head>
+  <body id="body">
+
+<h2>Sommaire de l'aide BDP</h2>
+
+<ol>
+  <li><a href=";help1">A-Finances           </a></li>
+  <li><a href=";help2">B-Locaux             </a></li>
+  <li><a href=";help3">C-Personnel          </a></li>
+  <li><a href=";help4">D-Collections        </a></li>
+  <li><a href=";help5">E-Acquisitions       </a></li>
+  <li><a href=";help6">F-Réseau tous public </a></li>
+  <li><a href=";help7">G-Réseau spécifique  </a></li>
+  <li><a href=";help8">H-Services           </a></li>
+  <li><a href=";help9">I-Action Culturelle  </a></li>
+</ol>
+
+</body>
+</html>

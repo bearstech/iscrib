@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<div xmlns="http://www.w3.org/1999/xhtml" 
+     xmlns:stl="http://xml.itools.org/namespaces/stl"
+     id="formBiblio">
+<form action=";report" method="post" name="form">
+ 
+  <div align="right">
+    <input stl:if="not printable" type="image"  
+           src="../../ui/culture/images/imprimer.gif" 
+           style="border:0;text-color:gray" alt="Imprimer" name="Imprimer"
+           onclick="window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600') ;return 0;" >Imprimer cette page</input>
+   
+    <stl:block if="not printable">
+      <input type="submit" value="Enregistrer" 
+             style="background-color:rgb(145,191,255); border:0"
+             stl:if="is_allowed_to_edit"></input>
+    </stl:block>
+  </div>
+<h1>F- COOPÉRATION ET RÉSEAU
+   <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
+      onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+</h1>
+<table width="100%">
+  <colgroup>
+    <col width="38%"/>
+    <col width="38%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th colspan="2">La bibliothèque appartient-elle au réseau de la BDP ?</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldF11" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF11" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF11"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF11_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F11">F11</b></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">La bibliothèque appartient-elle à un autre réseau documentaire ?</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldF13'])"  type="radio"  name="fieldF12" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF12" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldF13'])"  type="radio" name="fieldF12"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF12_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F12">F12</b></td>
+  </tr>
+
+  <tr>
+    <th>si oui, lesquels :</th> 
+    <td colspan="2">
+       <div stl:if="not fieldF12" id="display_fieldF13"           style="visibility:hidden">         <input stl:if="not fieldF12"
+             type="text" name="fieldF13"
+             value="" size="90"></input></div>
+       <div stl:if="fieldF12" id="display_fieldF13"> <input stl:if="fieldF12" stl:attributes="value fieldF13"
+             type="text" name="fieldF13"
+             value="" size="90"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _F13">F13</b></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">La bibliothèque participe-t-elle à des actions de coopération ?</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldF15'])"  type="radio"  name="fieldF14" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF14" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldF15'])"  type="radio" name="fieldF14"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF14_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F14">F14</b></td>
+  </tr>
+
+  <tr>
+    <th>si oui, préciser lesquelles :</th> 
+    <td colspan="2">
+       <div stl:if="not fieldF14" id="display_fieldF15"           style="visibility:hidden">         <input stl:if="not fieldF14"
+             type="text" name="fieldF15"
+             value="" size="90"></input></div>
+       <div stl:if="fieldF14" id="display_fieldF15">         <input stl:if="fieldF14" stl:attributes="value fieldF15"
+             type="text" name="fieldF15"
+             value="" size="90"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _F15">F15</b></td>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="76%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th>La bibliothèque a-t-elle mené des actions internationales ?</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldF17','fieldF18','fieldF19','fieldF20'])"  type="radio"  name="fieldF16" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF16" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldF17','fieldF18','fieldF19','fieldF20'])"  type="radio" name="fieldF16"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF16_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F16">F16</b></td>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="38%"/>
+    <col width="38%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th rowspan="4">Si oui, cocher les cases correspondantes :</th>
+    <th>Accueils / échanges de professionnels, écrivains</th> 
+    <td>
+      <table stl:if="fieldF16" id="display_fieldF17" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF17"                      value="1" style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldF17" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF17"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF17_not" />Non      </td>      </tr></table>      <table stl:if="not fieldF16" id="display_fieldF17" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF17"                      value="1" style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldF17" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF17"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF17_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F17">F17</b></td>
+  </tr>
+
+  <tr>
+    <th>Voyages d'étude, expertises à l'étranger</th> 
+    <td>
+      <table stl:if="fieldF16" id="display_fieldF18" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF18"                      value="1" style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldF18" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF18"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF18_not" />Non      </td>      </tr></table>      <table stl:if="not fieldF16" id="display_fieldF18" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF18"                      value="1" style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldF18" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF18"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF18_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F18">F18</b></td>
+  </tr>
+
+  <tr>
+    <th>Dons de livres</th> 
+    <td>
+      <table stl:if="fieldF16" id="display_fieldF19" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF19"                      value="1" style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldF19" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF19"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF19_not" />Non      </td>      </tr></table>      <table stl:if="not fieldF16" id="display_fieldF19" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF19"                      value="1" style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldF19" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF19"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF19_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F19">F19</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres actions de coopération</th> 
+    <td>
+      <table stl:if="fieldF16" id="display_fieldF20" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF20"                      value="1" style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldF20" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF20"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF20_not" />Non      </td>      </tr></table>      <table stl:if="not fieldF16" id="display_fieldF20" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF20"                      value="1" style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldF20" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF20"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF20_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F20">F20</b></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>Si la bibliothèque entretient des partenariats avec des structures publiques ou privées (associations...) oeuvrant dans le domaine du handicap,préciser les domaines d'intervention : </th>
+  </tr>
+</table>
+<table width="100%">
+  <colgroup>
+    <col width="38%"/>
+    <col width="38%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th rowspan="3"> cocher les cases correspondantes </th>
+    <th>Accueil de bénévoles dans la bibliothèque</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldF21" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF21" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF21"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF21_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F21">F21</b></td>
+  </tr>
+
+  <tr>
+    <th>Dépôt de livres dans les locaux du partenaire</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldF22" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF22" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF22"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF22_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F22">F22</b></td>
+  </tr>
+
+  <tr>
+    <th>Autres</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldF23" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF23" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF23"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldF23_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _F23">F23</b></td>
+  </tr>
+</table>
+</form>
+<p style = "page-break-after:always "></p>
+</div>

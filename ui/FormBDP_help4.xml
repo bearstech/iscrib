@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+
+  </head>
+  <body id="body">
+<p align="right"><a href=";help_menu">Sommaire</a></p>
+<h2>COLLECTIONS</h2>
+
+<h4> Rubriques D11 &agrave; D32 </h4>
+<dl class="description">
+<dt>La distinction adultes/enfants concerne l'ensemble des supports &agrave; l'exception de «&nbsp;autres documents&nbsp;» et «&nbsp;bases de donn&eacute;es&nbsp;», si le d&eacute;tail n'est pas effectu&eacute;, &eacute;crire «&nbsp;NC&nbsp;» en D11/D12, D14/D15, D17/D18,D20/D21) et noter le total par support. </dt>
+<dt>Pour les p&eacute;riodiques compter le nombre de titres e le nombre d'unit&eacute;s mat&eacute;rielles (unit&eacute; mat&eacute;rielle ex&nbsp;.&nbsp;: 6 fascicules reli&eacute;s en 1 volume comptent pour une unit&eacute;).</dt>
+</dl>
+
+<h4> Phonogrammes - vid&eacute;ogrammes - c&eacute;d&eacute;roms </h4> 
+<dl class="description">
+<dt><ul>
+<li>
+  <u>Nombre de phonogrammes </u> = tous documents sonores quel que soit le support.</li>
+<li><u>Nombre de vid&eacute;ogrammes </u> = vid&eacute;os et DVD.</li>
+<li><u>Nombre de c&eacute;d&eacute;roms et disques optiques num&eacute;riques</u>  : compter les unit&eacute;s mat&eacute;rielles de pr&eacute;sentation. Exemple&nbsp;: 1 bo&icirc;tier de 2 CD = 1 phonogramme. </li>
+</ul>
+</dt>
+</dl>
+<h4>Bases de donn&eacute;es </h4>
+<dl class="description">
+<dt>Exclure la base de donn&eacute;es informatis&eacute;e de la biblioth&egrave;que. Les bases de donn&eacute;es soumises &agrave; licence sont comptabilis&eacute;es &agrave; l'unit&eacute;. Ces bases de donn&eacute;es peuvent &ecirc;tre bibliographiques (collection de r&eacute;f&eacute;rences bibliographiques ou de texte (collection de textes originaux). On comptabilisera les bases de donn&eacute;es qui contiennent une information descriptive ou des donn&eacute;es num&eacute;riques, par exemple les annuaires, encyclop&eacute;die, dictionnaires, tableaux statistiques et donn&eacute;es chiffr&eacute;es. On comptabilisera &eacute;galement les catalogues de biblioth&egrave;ques acquis comme base de donn&eacute;es.</dt>
+</dl>
+
+</body>
+</html> 

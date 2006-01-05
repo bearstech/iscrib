@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+   <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+
+  </head>
+<body id="body">
+
+<p align="right"><a href=";help0">Sommaire</a></p>
+<h2>ACTIVITES DE LA BIBLIOTHEQUE</h2>
+
+
+<h4>Ouverture à tous les publics (G.1)</h4>
+<dl class="description">
+<dt>Quand les sections de la bibliothèque centrale ont des horaires différents, indiquer le nombre de jours et le nombre d'heures de la section la plus ouverte.</dt>
+<dt>
+<ul>
+<li><u>Jours d'ouverture</u> (G11): cocher les jours d'ouverture de la centrale, quel que soit le nombre d'heures d'ouverture dans la journée</li>
+<li><u>Nombre d'heures d'ouverture par semaine </u>(G12): horaire le plus étendu en période ordinaire.</li>
+</ul>
+</dt>
+</dl>
+
+<h4>Inscrits et Emprunteurs (G.2/3)</h4>
+<dl class="description">
+<dt><b>ATTENTION ! l'emprunteur est distinct de l'inscrit : on peut être inscrit sans être emprunteur mais pas l'inverse </b>
+<ul>
+<li><u>Un inscrit actif </u> est un usager inscrit (norme ISO 2789 " Statistiques internationales des bibliothèques ", juillet 2003).</li>
+<li><u>Un emprunteur actif </u> est un usager inscrit ayant  emprunté au moins un document dans l'année civile. </li>
+</ul>
+</dt>
+<dt>
+<ul>
+<li><u>Enfants </u>: à titre indicatif, moins de 15 ans.</li>
+<li><u>Collectivités</u> : compter dans cette rubrique les collectivités inscrites qui viennent à la bibliothèque pour emprunter des documents pour une durée normale, et qui n'ont pu être comptabilisées  ni dans les inscrits adultes, ni dans les inscrits enfants. Leurs prêts sont normalement comptabilisés avec les PRETS AUX USAGERS aux lignes G41 à G47.
+Compter ainsi : 1 carte d'inscription pour 1 classe = 1 inscrit Collectivités.</li>
+<li><u>Nombre total d'entrées dans l'année </u>: un entrée est l'action pour un usager, c'est à dire un bénéficiaire des services de la bibliothèque, de pénétrer dans les locaux de celle-ci.</li>
+</ul>
+</dt>
+</dl>
+
+
+</body>
+</html>
+

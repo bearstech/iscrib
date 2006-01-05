@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://xml.itools.org/namespaces/stl">
+
+<form name="loginform" action=";login" method="post">
+  <input type="hidden" name="referer" value=""
+         stl:if="referer" stl:attributes="value referer" />
+  <table class="form">
+    <tr>
+      <th colspan="2" class="title">Authentification</th>
+    </tr>
+    <tr>
+      <th>Nom</th>
+      <td>
+        <input type="text" name="username" stl:attributes="value username" />
+      </td>
+    </tr>
+    <tr>
+      <th>Mot de passe</th>
+      <td><input type="password" name="password" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="submit"><input type="submit" value="OK" /></td>
+    </tr>
+  </table>
+</form>
+
+<pre>
+Pour que la connexion s'établisse correctement, il faut que le navigateur accepte les "cookies". 
+
+Assurez-vous que ses paramètres sont corrects:
+
+- Sur Mozilla-Firefox (RECOMMANDE): 
+  Outils/Options - Vie Privée - cookies - Cocher "Autoriser les cookies"
+  
+- Sur Internet Explorer : 
+  Outils/Options Internet - Onglet Confidentialité - Bouton "Avancé " puis Accepter tous les cookies.
+
+</pre>
+<script language="javascript">
+  <stl:inline if="not username">document.loginform.username.focus();</stl:inline>
+  <stl:inline if="username">document.loginform.password.focus();</stl:inline>
+</script>
+
+</stl:block>

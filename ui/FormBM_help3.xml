@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+   <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+
+  </head>
+<body id="body">
+
+<p align="right"><a href=";help0">Sommaire</a></p>
+<h2>PERSONNEL AU 31 DECEMBRE 2005</h2>
+
+Ne pas compter les personnes en arrêt de longue durée.
+
+<h4>NOMBRE D'EMPLOIS EN EQUIVALENT TEMPS PLEIN </h4>
+<dl class="description">
+<dt>Exemples</dt>
+<dt><ul>
+<li> 1 personne travaille à temps partiel à 80 % = 0.8 emploi </li>
+<li> 1 personne travaille à temps partiel à 50 % = 0.5 emploi</li>
+<li> 1 personne travaille 22 h /semaine dans un établissement où un temps plein = 35h : 22 / 35 = 0.62 emploi </li>
+</ul>
+</dt>
+
+<dt><br/>Hypothèse d'un effectif composé de :</dt>
+</dl>
+<table width="50%">
+<tr>
+<td>3 agents à temps plein</td><td>3   emplois</td>
+</tr>
+<tr>
+<td>2 agents à 80 %</td><td>1.6 emploi</td>
+</tr>
+<tr>
+<td>3 agents à 22 h</td><td>1.86 emploi</td>
+</tr>
+<tr>
+<td>____________</td><td>___________</td>
+</tr>
+<tr>
+<td>8 agents</td><td>6,46 emplois</td>
+</tr>
+</table>
+<dl class="description">
+<dt>N.B. : 1 personne travaillant à 50% depuis le 1er juillet 2005 , compter 0.25 emploi</dt>
+</dl>
+
+
+<h4>Autres personnels rémunérés (C.3)</h4>
+<dl class="description">
+<dt>Ce sont les agents non-titulaires travaillant sous le régime d'un contrat.Les emplois-jeunes (C.E.J.) sont comptabilisés avec les C.E.S., C.E.C., vacataires, auxiliaires.</dt>
+</dl>
+
+<h4>Personnels ou bénévoles qualifiés (C41)</h4>
+<dl class="description">
+<dt>Ce sont les personnes ayant suivi des formations (exemple : ABF, BDP,etc.) ou ayant des diplômes professionnels en documentation </dt>
+</dl>
+
+<h4>Formation initiale d'application (F.I.A.) (C.5)</h4>
+<dl class="description">
+<dt>rappel : la F.I.A. est composée d'une période de F.A.T. (formation avant titularisation) pendant un an, l'année de stage, puis d'une période de F.A.E. (formation d'adaptation à l'emploi) étalée sur deux ou trois ans.</dt>
+</dl>
+
+
+</body>
+</html>
+

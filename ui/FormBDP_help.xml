@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<div xmlns="http://www.w3.org/1999/xhtml" 
+     xmlns:stl="http://xml.itools.org/namespaces/stl"
+     id="formBiblio">
+  <h4> AIDE </h4>
+  <p> Pour éviter toute erreur de saisie informatique, toutes les cases
+  doivent être remplies : lorsque vous ne comptabilisez pas une donnée
+  demandée, indiquez NC (non comptabilisé) indiquer 0 seulement lorsque la
+  donnée est égale à 0.  </p>
+</div>

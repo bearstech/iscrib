@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<div xmlns="http://www.w3.org/1999/xhtml" 
+     xmlns:stl="http://xml.itools.org/namespaces/stl"
+     id="formBiblio">
+<form action=";report" method="post">
+
+  <div align="right">
+    <input stl:if="not printable" type="image"  
+           src="../../ui/culture/images/imprimer.gif" 
+           style="border:0;text-color:gray" alt="Imprimer" name="Imprimer"
+           onclick="window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600') ;return 0;" >Imprimer cette page</input>
+   
+    <stl:block if="not printable">
+      <input type="submit" value="Enregistrer" 
+             style="background-color:rgb(145,191,255); border:0"
+             stl:if="is_allowed_to_edit"></input>
+    </stl:block>
+  </div>
+
+<h1>Annexes</h1>
+
+
+<table width="100%" frame="border">
+  <tr>
+    <th>01-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ1T"
+        type="text" name="fieldJ1T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ1Z"
+        type="text" name="fieldJ1Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ1U"
+        type="text" name="fieldJ1U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ1V"
+        type="text" name="fieldJ1V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ1Y"
+        type="text" name="fieldJ1Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ1W"
+        type="text" name="fieldJ1W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ1X"
+        type="text" name="fieldJ1X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J1">J1</b></td>
+  </tr>
+</table>
+
+<p></p>
+
+<table  width="100%" frame="border">
+  <tr>
+    <th>02-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ2T"
+        type="text" name="fieldJ2T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ2Z"
+        type="text" name="fieldJ2Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ2U"
+        type="text" name="fieldJ2U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ2V"
+        type="text" name="fieldJ2V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ2Y"
+        type="text" name="fieldJ2Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ2W"
+        type="text" name="fieldJ2W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ2X"
+        type="text" name="fieldJ2X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J2">J2</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>03-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ3T"
+        type="text" name="fieldJ3T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ3Z"
+        type="text" name="fieldJ3Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ3U"
+        type="text" name="fieldJ3U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ3V"
+        type="text" name="fieldJ3V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ3Y"
+        type="text" name="fieldJ3Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ3W"
+        type="text" name="fieldJ3W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ3X"
+        type="text" name="fieldJ3X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J3">J3</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>04-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ4T"
+        type="text" name="fieldJ4T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ4Z"
+        type="text" name="fieldJ4Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ4U"
+        type="text" name="fieldJ4U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ4V"
+        type="text" name="fieldJ4V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ4Y"
+        type="text" name="fieldJ4Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ4W"
+        type="text" name="fieldJ4W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ4X"
+        type="text" name="fieldJ4X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J4">J4</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table   width="100%" frame="border">
+  <tr>
+    <th>05-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ5T"
+        type="text" name="fieldJ5T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ5Z"
+        type="text" name="fieldJ5Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ5U"
+        type="text" name="fieldJ5U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ5V"
+        type="text" name="fieldJ5V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ5Y"
+        type="text" name="fieldJ5Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ5W"
+        type="text" name="fieldJ5W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ5X"
+        type="text" name="fieldJ5X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J5">J5</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>06-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ6T"
+        type="text" name="fieldJ6T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ6Z"
+        type="text" name="fieldJ6Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ6U"
+        type="text" name="fieldJ6U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ6V"
+        type="text" name="fieldJ6V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ6Y"
+        type="text" name="fieldJ6Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ6W"
+        type="text" name="fieldJ6W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ6X"
+        type="text" name="fieldJ6X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J6">J6</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>07-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ7T"
+        type="text" name="fieldJ7T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ7Z"
+        type="text" name="fieldJ7Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ7U"
+        type="text" name="fieldJ7U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ7V"
+        type="text" name="fieldJ7V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ7Y"
+        type="text" name="fieldJ7Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ7W"
+        type="text" name="fieldJ7W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ7X"
+        type="text" name="fieldJ7X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J7">J7</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>08-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ8T"
+        type="text" name="fieldJ8T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ8Z"
+        type="text" name="fieldJ8Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ8U"
+        type="text" name="fieldJ8U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ8V"
+        type="text" name="fieldJ8V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ8Y"
+        type="text" name="fieldJ8Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ8W"
+        type="text" name="fieldJ8W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ8X"
+        type="text" name="fieldJ8X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J8">J8</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>09-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ9T"
+        type="text" name="fieldJ9T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ9Z"
+        type="text" name="fieldJ9Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ9U"
+        type="text" name="fieldJ9U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ9V"
+        type="text" name="fieldJ9V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ9Y"
+        type="text" name="fieldJ9Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ9W"
+        type="text" name="fieldJ9W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ9X"
+        type="text" name="fieldJ9X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J9">J9</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>10-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ10T"
+        type="text" name="fieldJ10T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ10Z"
+        type="text" name="fieldJ10Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ10U"
+        type="text" name="fieldJ10U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ10V"
+        type="text" name="fieldJ10V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ10Y"
+        type="text" name="fieldJ10Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ10W"
+        type="text" name="fieldJ10W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ10X"
+        type="text" name="fieldJ10X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J10">J10</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>11-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ11T"
+        type="text" name="fieldJ11T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ11Z"
+        type="text" name="fieldJ11Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ11U"
+        type="text" name="fieldJ11U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ11V"
+        type="text" name="fieldJ11V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ11Y"
+        type="text" name="fieldJ11Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ11W"
+        type="text" name="fieldJ11W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ11X"
+        type="text" name="fieldJ11X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J11">J11</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>12-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ12T"
+        type="text" name="fieldJ12T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ12Z"
+        type="text" name="fieldJ12Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ12U"
+        type="text" name="fieldJ12U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ12V"
+        type="text" name="fieldJ12V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ12Y"
+        type="text" name="fieldJ12Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ12W"
+        type="text" name="fieldJ12W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ12X"
+        type="text" name="fieldJ12X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J12">J12</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>13-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ13T"
+        type="text" name="fieldJ13T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ13Z"
+        type="text" name="fieldJ13Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ13U"
+        type="text" name="fieldJ13U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ13V"
+        type="text" name="fieldJ13V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ13Y"
+        type="text" name="fieldJ13Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ13W"
+        type="text" name="fieldJ13W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ13X"
+        type="text" name="fieldJ13X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J13">J13</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>14-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ14T"
+        type="text" name="fieldJ14T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ14Z"
+        type="text" name="fieldJ14Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ14U"
+        type="text" name="fieldJ14U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ14V"
+        type="text" name="fieldJ14V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ14Y"
+        type="text" name="fieldJ14Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ14W"
+        type="text" name="fieldJ14W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ14X"
+        type="text" name="fieldJ14X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J14">J14</b></td>
+  </tr>
+</table>
+
+<p></p>
+<table  width="100%" frame="border">
+  <tr>
+    <th>15-</th>
+    <th style="text-align: left">NOM</th>
+    <td><input stl:attributes="value fieldJ15T"
+        type="text" name="fieldJ15T"
+        value="" size="68"></input> </td>
+    <th style="text-align: left">COURRIEL</th>
+    <td><input stl:attributes="value fieldJ15Z"
+        type="text" name="fieldJ15Z"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">ADRESSE</th>
+    <td colspan ="4"><input stl:attributes="value fieldJ15U"
+        type="text" name="fieldJ15U"
+        value="" size="68"></input></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <th style="text-align: left">CP</th>
+    <td><input stl:attributes="value fieldJ15V"
+        type="text" name="fieldJ15V"
+        value="" size="25"></input></td>
+    <th style="text-align: left">TÉLÉCOPIE</th>
+    <td><input stl:attributes="value fieldJ15Y"
+        type="text" name="fieldJ15Y"
+        value="" size="25"></input></td>
+    <td></td>
+  </tr>
+  <tr>  
+    <td></td>
+    <th style="text-align: left">VILLE</th>
+    <td><input stl:attributes="value fieldJ15W"
+        type="text" name="fieldJ15W"
+        value="" size="68"></input></td>
+    <th style="text-align: left">TÉLÉPHONE</th>
+    <td><input stl:attributes="value fieldJ15X"
+        type="text" name="fieldJ15X"
+        value="" size="25"></input></td>
+    <td><b stl:attributes="class _J15">J15</b></td>
+  </tr>
+</table>
+
+</form>
+ <p style = "page-break-after:always "></p>
+</div>

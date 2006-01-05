@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN"
+    "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl"
+      xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Aide</title>
+    <meta content="text/html; charset=iso-8859-1"
+    http-equiv="Content-Type"></meta>
+    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+  </head>
+  <body id="body">
+    <p align="right"><a href=";help_menu">Sommaire</a></p>
+    <h2>RESEAU TOUS PUBLICS</h2>
+    <h4>Cette rubrique reprend la typologie ADBDP</h4>
+    <table border="1" width="100%">
+      <tr>
+        <td width="16%" valign="middle" rowspan="2">Cat&#233;gories
+        ADBDP</td>
+        <td width="61%" valign="middle" colspan="3">
+        Biblioth&#232;ques</td>
+        <td width="12%" valign="middle" rowspan="2">Points
+        lecture</td>
+        <td width="11%" valign="middle" rowspan="2">
+        D&#233;p&#244;ts</td>
+      </tr>
+      <tr>
+        <td width="26%" valign="middle">Niveau 1</td>
+        <td width="18%" valign="middle">Niveau 2</td>
+        <td width="17%" valign="middle">Niveau 3</td>
+      </tr>
+      <tr>
+        <td width="16%" valign="middle">Rapport DLL</td>
+        <td width="44%" valign="middle" colspan="2">
+        Biblioth&#232;ques municipales</td>
+        <td width="17%" valign="middle">Relais</td>
+        <td width="23%" colspan="2">Antennes</td>
+      </tr>
+      <tr>
+        <td width="16%" valign="middle">Cr&#233;dits d'acquisition
+        tous documents</td>
+        <td width="26%" valign="middle">2 / hb</td>
+        <td width="18%" valign="middle">1 / hb</td>
+        <td width="17%" valign="middle">0,50 / hb</td>
+        <td width="12%" valign="middle" rowspan="5">Deux ou trois
+        crit&#232;res du niveau 3 sont respect&#233;s</td>
+        <td width="11%" valign="middle" rowspan="5">Moins de deux
+        crit&#232;res du niveau 3 sont respect&#233;s</td>
+      </tr>
+      <tr>
+        <td width="16%" valign="middle">Horaires d'ouverture</td>
+        <td width="26%" valign="middle">12 h / semaine</td>
+        <td width="18%" valign="middle">8 h / semaine</td>
+        <td width="17%" valign="middle">4 h / semaine</td>
+      </tr>
+      <tr>
+        <td width="16%" valign="middle">Personnel</td>
+        <td width="26%" valign="middle">1 agt cat. B fil. cult. / 5
+        000 hb
+        <BR />1 salari&#233; qualifi&#233; / 2 000 hb</td>
+        <td width="18%" valign="middle">1 salari&#233;
+        qualifi&#233;</td>
+        <td width="17%" valign="middle">B&#233;n&#233;voles
+        qualifi&#233;s</td>
+      </tr>
+      <tr>
+        <td width="16%" valign="middle" rowspan="2">Surface</td>
+        <td width="61%" valign="middle" colspan="3">Local
+        r&#233;serv&#233; &#224; usage de biblioth&#232;que</td>
+      </tr>
+      <tr>
+        <td width="26%" valign="middle">0,07 m
+        <SUP>2</SUP>/ hb &gt;100 m
+        <SUP>2</SUP></td>
+        <td width="18%" valign="middle">0,04 m
+        <SUP>2</SUP>/ hb 50 m
+        <SUP>2</SUP></td>
+        <td width="17%" valign="middle">25 m
+        <SUP>2</SUP></td>
+      </tr>
+    </table>
+
+
+
+    <h4>F1/2. Desserte r&#233;seau tous publics</h4>
+    <dl class="description">
+      <dt>Colonne Y (POPULATION DESSERVIE) : Indiquer la population
+      desservie par les biblioth&#232;ques, d&#233;p&#244;ts et
+      arr&#234;ts bibliobus du r&#233;seau de la BDP. Prendre en
+      compte la population de la commune (ou du regroupement de
+      communes) o&#249; se situe le point, mais pas celle des
+      communes avoisinantes.</dt>
+    </dl>
+    <h4>F3. D&#233;p&#244;ts de la BDP</h4>
+    <dl class="description">
+      <dt>colonne Y (NOMBRE DE DOCUMENTS DEPOSES DANS LANNEE).
+      Exemple : la BDP d&#233;pose une premi&#232;re fois 2 000
+      documents. Au deuxi&#232;me passage, elle ne renouvelle que 1
+      000 documents. Le total des d&#233;p&#244;ts est 3 000
+      documents.</dt>
+    </dl>
+    <h4>F4. Biblioth&#232;ques ayant fourni des statistiques</h4>
+    <dl class="description">
+      <dt>Un point sera retenu sil indique ses collections, ses 
+      acquisitions, ses d&#233;penses dacquisition , son volume de
+      pr&#234;ts, son nombre de lecteurs et son personnel, pour
+      permettre un traitement des donn&#233;es sur des
+      r&#233;sultats homog&#232;nes.</dt>
+    </dl>
+    <h4>F5/6. Activit&#233;s du r&#233;seau tous publics</h4>
+    <dl class="description">
+      <dt>colonne W (BDP ET / OU ANNEXES ouvertes &#232; tous les
+      publics) : &#232; remplir uniquement lorsque louverture est
+      tous publics. Exemple : la BDP ouverte &#232; lensemble des
+      habitants de la commune o&#249; elle se trouve.</dt>
+    </dl>
+  </body>
+</html>

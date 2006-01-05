@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl">
+  <h4>Le code des contrôles</h4>
+  <pre stl:content="controles"/>
+</stl:block>
