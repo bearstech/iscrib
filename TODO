@@ -5,9 +5,6 @@ Bugs TODO
   Presser la touche Entrée dans un formulaire provoque non seulement
   l'enregistrement mais aussi l'impression de la page.  
 
-176: BM/BDP : export CSV Autoriser l'export seulement lorsque le 
-  formulaire est terminé
-
 lot3 TODO
 =========
 
@@ -56,6 +53,10 @@ Bug Done
   (virgule par exmple)
   Done -> culture--luis--0.6--patch-13
 
+176: BM/BDP : export CSV Autoriser l'export seulement lorsque le 
+  formulaire est terminé
+  Done -> culture--luis--0.6--patch-14 and patch-15 (use is_complete not
+          is_finished)
 
 lot3 Done
 =========
