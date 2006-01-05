@@ -1,8 +1,11 @@
-Bugs TODO
-==========
+Bugs (lot 3) TODO
+===================
 
-lot3 TODO
-=========
+Features (lot 3) TODO
+=======================
+
+F8. 
+  improve fill_report_form so he make the corect sums
 
 F6.
   Quand l'utilisateur envoie son formulaire, il doit recevoir un accusé de
@@ -38,8 +41,11 @@ F2.
   caractéristique dans la description des champs. 
   >luis> donner la liste des champs obligatoire/non obligatoir
 
-Bug Done
-==========
+
+
+
+Bugs (lot 3) Fixed
+===================
 
 172: BM et BDP : Export impossible Les tables bm05 et bdp05 n'ont pas 
   été créées
@@ -64,8 +70,9 @@ Bug Done
   sous Excel
   Done -> culture--luis--0.6--patch-18
 
-lot3 Done
-=========
+
+Features (lot2) Done
+====================
 
 E9. 
   Calage à droite des rubriques numériques ( ? ?  ?) à droitre les num
@@ -82,8 +89,11 @@ E4.
   l'utilisateur doit être renvoyé automatiquement sur le bon onglet.
   Done -> culture--luis--0.5--patch-82
 
-BUG lot2 Done
-===============
+
+
+
+BUGs (lot2) Fixed
+==================
 
 166  onglet G-Ac tivités Remplacer TOTAL USAGERS INSCRITS et/ou
   EMPRUNTEURS (G20 + G25) par TOTAL USAGERS INSCRITS et/ou EMPRUNTEURS
@@ -144,8 +154,8 @@ BUG lot2 Done
   Impossible de se connecter en tant que USER : BMxxx, BDPyy
   Done -> culture--luis--0.5--patch-98 
 
-DONE Issues culture--luis--0.5
-=================================
+Features DONE culture--luis--0.5
+==================================
 
 E6. Mise à jour des modifications du ministère sur le code (application
   des patch 1 à 4) 
@@ -197,7 +207,3 @@ EG4. Quand on clique sur un contrôle (ou éventuellement sur sa tête
 
 F7. nouveau login/passwd pour les BM et BDP voir README
   Done -> culture--luis--0.5--patch-98 
-
-
-
-

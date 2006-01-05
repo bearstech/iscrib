@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-05 22:13:49 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-19
+
+    Summary:
+      update the TODO (add F8 fill_report_form)
+    Revision:
+      culture--luis--0.6--patch-19
+
+
+    modified files:
+     Changelog TODO
+
+
 2006-01-05 21:58:46 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-18
 
     Summary:
