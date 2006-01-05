@@ -5,6 +5,16 @@ Bugs TODO
   Presser la touche Entrée dans un formulaire provoque non seulement
   l'enregistrement mais aussi l'impression de la page.  
 
+174: BM/BDP : champs décimaux : plantage si on tape de l'alphanumérique 
+  (virgule par exmple)
+
+172: BM et BDP : Export impossible Les tables bm05 et bdp05 n'ont pas 
+  été créées
+
+176: BM/BDP : export CSV Autoriser l'export seulement lorsque le 
+  formulaire est terminé
+
+
 lot3 TODO
 =========
 
@@ -42,6 +52,8 @@ F2.
   caractéristique dans la description des champs. 
   >luis> donner la liste des champs obligatoire/non obligatoir
 
+Bug Done
+==========
 
 
 lot3 Done
@@ -179,111 +191,5 @@ F7. nouveau login/passwd pour les BM et BDP voir README
   Done -> culture--luis--0.5--patch-98 
 
 
-TODO Issues culture--luis--0.5
-=================================
 
-Maintenance SCRIB : 2er lot Évolutions fonctionnelles [6 jours]
-All Done
-
-
-Ergonomie générale [5 jours]
------------------------------
-All Done
-
-
-
-Annexe 1
-~~~~~~~~~~
-
-L'onglet EPCI devra se présenter comme dans la page FormBM_report11.xml jointe
-(Hors CSS) Les rubriques sont toutes préremplies au moyen de la table MySQL
-EPCI_UA. 
-
-Le lien entre la table BM et la tables EPCI_UA est faite par le champ code_UA
- 
-Seule la colonne Z des lignes K4, K5, ... est modifiable.
-#luis: pour les lignes K1 K2 éditable ou pas ?
-
-K1 = contenu du champ nom_epci de la table EPCI_UA 
-K2 = contenu du champ pop_epci de la table EPCI_UA 
-K3 = contenu du champ type_epci de la table EPCI_UA
-#luis: pas de K3 dans la table sql ni dans report11.xml seulement dans schemat
-
-Le nombre de communes participantes est variable (actuellement le maximum est
-44, potentiellement 128) 
-#luis: seulement 14 communes de K17-K31 
-
-
-K17W = contenu du champ INSEE de la table EPCI_UA 
-K17X= contenu du champ NOM_COM de la table EPCI_UA 
-K17Y = contenu du champ POPULA de la table EPCI_UA 
-K17Z = contenu du champ STATUT de la table EPCI_UA 
-
-La colonne Z est modifiable au moyen d'une liste déroulante dont les valeurs
-possibles sont: 
-
-Commune dans un EPCI sans compétence bibliothèque
-Commune dans EPCI - bibliothèque non transférée
-Commune dans EPCI avec compétence biblio
-Ville-centre  d'un EPCI avec compétence biblio
-Commune dans syndicat intercommunal
-Autre
-
-Problèmes
-~~~~~~~~~~~
-
-#luis: type (IO.Boolean, True) pour la colonne Y ??
-#luis: K3 à K16 dans schematBM ?
-#luis: K3 de type checkbox ?
-
-
-Bugs culture--main--0.2
-========================
-#01 sort by Etat and Dep failed http://culture.petitbar/BDP2004/;browse_list
-
-see http://in-girum.net:/manta/
-
-Fixed culture--main--0.2
-=========================
-
-see http://in-girum.net:/manta/
-
-Bugs culture--main--0.1
-========================
-
-Fixed culture--main--0.1
-=====
-
-#01 Traduction form http://___/users/;browse_thumbnails?content_batchstart=20
-#04 remove Galerie d'images for users /users/;browse_thumbnails Fixed in ikaaro
-#02 Login/logout/join in template.xhtml
-#03 CSS in all browse_list http://doubs.culture.petitbar/users/;browse_list
-#05 one user see all users. He should see only ... himself [dav] ___/users
-#06 Breadcrumb : user21_2003 should not be able to go to the root
-#07 Mysql connexion with first form and export 
-#08 when user21_2003 change this passwd he can't come back to his form 
-#09 browse_list : clean up everywhere "Langue" and remove/translate state
-#10 add a "try execpt for no sql and no SMTP server"
-#11 as admin we need to be able to do the pending -> private transition 
-#13 traduction : http://culturebiblio.itaapy.com/users/;browse_list
-#14 add metadata tabs for users [dav]
-#15 popup help
-#16 total dans le  gérer le cas de NC, laiser le champs editable 
-#17 si form Terminé et que l'user se log voir le form sans les input submit 
-#18 virer la boite d'info pour un bandau gauche super petit
-#19 as admin /users/user21_2003/;home give an error
-#20 différencier les champs dont le type est faux des champs non renseigné.
-#21 translation of workflow states private, pending, public -> terminé, in list
-#22 "mon_profil" point vers un mauvais lien
-#23 empecher "terminier"  si "liste des controle"=non Termier
-#24 sur potlatch si on clique sur terminer sa mouline "except Mail error"
-#25 "Liste des alertes" Surface moyenne d'un bâtiment : (B11Z/B12Z) marche pas
-#26 http://___/2003/;browse_list trie par date donne une erreur 
-#27 8bits caractere brack the report0 
-#28 improving #20 by adding wrong values in messages
-#29 fix browse_list batch
-#31 admin form 09 contrôles à NON. On peut exporter dans la base MySQL 
-#33 traduction en admin /users/;browse_list et users/admin/;edit_password_form 
-#30 deux enregistrement en moins d'un seconde font un erreur (versioned file)
-#32 form_list batché les caractères "<" sont remplacés par "&lt;" 
 
