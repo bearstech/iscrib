@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-05 18:42:46 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-9
+
+    Summary:
+      improve the "make fill_tables" script so now we deal with tables one by one
+    Revision:
+      culture--luis--0.6--patch-9
+
+
+    modified files:
+     Changelog gen/FillSql.py
+
+
 2006-01-05 18:26:36 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-8
 
     Summary:

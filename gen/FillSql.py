@@ -10,10 +10,20 @@ class Fill_tables:
         self.cmd_line = str
 
     def fill(self):
-        for name in os.listdir('./input_data/'):
+        for i, name in enumerate(os.listdir('./input_data/')):
             if name.endswith('.sql'):
-                res = os.system(self.cmd_line % name)
-                print './input_data/%s' % name, not res and 'OK' or 'Echec'
+                if i == 1:
+                    print ("   ###!  print Filling a table will "
+                           "overwrite existing data if any\n")
+                anwser = 'Do you want to fill/overwrite %(name)s table ? [y/N]'
+                anwser = raw_input(anwser % {'name':name} )
+                anwser = anwser.strip() or 'non'
+                if anwser.lower().startswith('y'):
+                    res = os.system(self.cmd_line % name)
+                    print './input_data/%s' % name, not res and 'OK' or 'Echec'
+                else: 
+                    print '    nothing done for %s' % name
+
 
 class Create_scrib:
     def __init__(self):
