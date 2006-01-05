@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-05 21:41:41 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-17
+
+    Summary:
+      add #177 to the TODO
+    Revision:
+      culture--luis--0.6--patch-17
+
+
+    modified files:
+     Changelog TODO
+
+
 2006-01-05 21:38:01 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-16
 
     Summary:
