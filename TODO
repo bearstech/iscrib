@@ -1,10 +1,6 @@
 Bugs TODO
 ==========
 
-177
-  BM/BDP : export CSV sous IE guillements supplémentaires -> mauvaise lecutre
-  sous Excel
-
 lot3 TODO
 =========
 
@@ -62,6 +58,11 @@ Bug Done
   Presser la touche Entrée dans un formulaire provoque non seulement
   l'enregistrement mais aussi l'impression de la page.  
   Done -> culture--luis--0.6--patch-16
+
+177
+  BM/BDP : export CSV sous IE guillements supplémentaires -> mauvaise lecutre
+  sous Excel
+  Done -> culture--luis--0.6--patch-18
 
 lot3 Done
 =========

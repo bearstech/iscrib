@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <stl:block xmlns:stl="http://xml.itools.org/namespaces/stl">
   <h4>Interface d'export </h4>
-  <p stl:if="is_complete">Votre rapport est terminé, vous pouvez <a href=";downloadCSV">exporter</a>
+  <p stl:if="is_finished">Votre rapport est terminé, vous pouvez <a href=";downloadCSV">exporter</a>
     en CSV le formulaire</p> 
-  <p stl:if="not is_complete">Votre rapport n'est pas encore terminé</p>
+  <p stl:if="not is_finished">Votre rapport n'est pas encore terminé</p>
 </stl:block>

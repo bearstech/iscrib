@@ -1187,8 +1187,11 @@ class Form(Handler, ikaaroText, WorkflowAware):
     def downloadCSV(self):
         schema = get_schema()
         response = get_context().response
-        response.set_header('Content-type','text/plain')
-        response.set_header('Content-Disposition', 'inline;filename=file.csv')
+
+        response.set_header('Content-Type', 'text/comma-separated-values')
+        #response.set_header('Content-Disposition', 'inline;filename=file.csv')
+        response.set_header('Content-Disposition',
+                                     'attachment; filename="file.csv"')
 
         namespace = self.get_namespace()
         # construct the csv
