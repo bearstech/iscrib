@@ -11,6 +11,8 @@ lot3 TODO
 F6.
   Quand l'utilisateur envoie son formulaire, il doit recevoir un accusé de
   réception.
+  "Votre rapport annuel a bien été reçu par votre correspondant à la DLL. Nous
+   vous remercions de votre envoi.  Cordialement. "
   >luis> du system ?
 
 E6. 
