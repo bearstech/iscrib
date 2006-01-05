@@ -65,10 +65,8 @@ def checkBib(bib_type='BM', max=30, schema=None):
                 'Form%s_report%s.xml' % (bib_type, i))
       try:
           accu += open('ui/%s' % FormBib[0]).read()
-          print 'in try', FormBib[0]
       except:
           accu += open('ui/%s' % FormBib[1]).read()
-          print 'in except', FormBib[1]
     lines = accu.split('\n') 
 
     xmlBib = []

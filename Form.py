@@ -22,6 +22,7 @@ from time import time
 import datetime
 import socket
 import smtplib
+import decimal 
 
 # Import from itools
 from itools import get_abspath
@@ -1070,7 +1071,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
                     # use unicode instead
                     try:
                         value = type.decode(value)
-                    except (ValueError, UnicodeEncodeError):
+                    except (ValueError, UnicodeEncodeError,
+                            decimal.InvalidOperation):
                         badT_missing.append('badT_%s' % keyNumber)
                         badT.append(u'%s: <b>%s</b>'
                                     % (keyNumber, unicode(value, 'UTF-8')))

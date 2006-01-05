@@ -5,9 +5,6 @@ Bugs TODO
   Presser la touche Entrée dans un formulaire provoque non seulement
   l'enregistrement mais aussi l'impression de la page.  
 
-174: BM/BDP : champs décimaux : plantage si on tape de l'alphanumérique 
-  (virgule par exmple)
-
 172: BM et BDP : Export impossible Les tables bm05 et bdp05 n'ont pas 
   été créées
 
@@ -54,6 +51,10 @@ F2.
 
 Bug Done
 ==========
+
+174: BM/BDP : champs décimaux : plantage si on tape de l'alphanumérique 
+  (virgule par exmple)
+  Done -> culture--luis--0.6--patch-13
 
 
 lot3 Done

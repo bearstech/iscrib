@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-05 20:55:36 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-13
+
+    Summary:
+      fix #174 champs décimaux : plantage si alphanum
+    Revision:
+      culture--luis--0.6--patch-13
+
+
+    modified files:
+     Changelog Form.py TODO schema.py
+
+
 2006-01-05 20:42:45 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-12
 
     Summary:
