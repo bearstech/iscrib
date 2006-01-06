@@ -32,7 +32,7 @@ A2.
   blancs , entraîne une erreur au moment de l'export.  Doit-on
   généraliser ce problème en introduisant une notion de longueur de
   champ pour les champs-texte ?
-  >luis> Faire simplement fonctionner l'export ?
+  >luis> Faire simplement fonctionner l'export ? voir A2bis
 
 F2.  
   Gérer la notion de champ obligatoire/non obligatoire en ajoutant cette
@@ -71,6 +71,10 @@ Bugs (lot 3) Fixed
 
 Features (lot2) Done
 ====================
+
+A2bis.
+  Faire fonctionner l'export 
+  Done -> culture--luis--0.6--patch-22
 
 F8. 
   improve fill_report_form so he make the correct sums

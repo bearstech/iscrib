@@ -869,7 +869,10 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 elif field_type == Checkboxes:
                     # get the value from checkboxes
                     value = "'%s'" % get_checkbox_value(key, value)
-
+                elif field_type == Decimal:
+                    value = "'%s'" % str(value)
+                elif field_type == EPCI_Statut:
+                    value = [x['id'] for x in value if x['is_selected']][0]
                 values.append(value)
                 
         query = "insert into %s (%s) values (%s)" % (table, ','.join(keys),
