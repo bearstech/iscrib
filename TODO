@@ -10,10 +10,6 @@ E6.
   texte long.  Pas de stockage en base. 
   >luis> la bonne façon serait de créer la notion stockage/pas_stockage 
 
-E7. 
-  Récupérer les informations de l'onglet « Annexe » saisies l'année
-  précédente 
-
 A1 
   bug #166 Recherche par ville des BM : le système de troncature est
   imparfait 
@@ -62,6 +58,10 @@ Bugs (lot 3) Fixed
 
 Features (lot2) Done
 ====================
+
+E7. 
+  Récupérer les informations de l'onglet « Annexe » saisies l'année
+  précédente 
 
 F6bis 
   Ajouter un logger pour les envois de mail. 

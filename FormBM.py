@@ -115,6 +115,24 @@ class FormBM(Form):
                 new[k] = v 
         return new 
 
+    def bm_annexes(self, code_ua):
+        try: 
+            connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost, 
+                                         user=SqlUser, passwd=SqlPasswd,
+                                         cursorclass=DictCursor)
+        except MySQLdb.OperationalError:
+            raise UserError, u"La connexion à MySql ne s'est pas faite" 
+
+        cursor = connection.cursor()
+        cursor.execute("select * from annexes04  where code_ua = %s", 
+                       (code_ua,))
+        res = cursor.fetchall()
+        res = [self.none2str(d) for d in res]
+        if not res: 
+            return {}
+        else:
+            return res[0]
+
 
     def ua_epci(self, code_ua):
         try: 

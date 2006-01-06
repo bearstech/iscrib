@@ -209,7 +209,7 @@ class Culture(bibFolder, Root):
         bib_municipals = [b[-1] for b in bib_municipals]
         form = FormBM()
         i = 0
-        #for bib in bib_municipals[:10]: 
+        #for bib in bib_municipals[:200]: 
         for bib in bib_municipals: 
             name, dep, code = (bib['name'], bib['dep'], bib['code'])
             # Add report

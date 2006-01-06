@@ -18,7 +18,7 @@
 
 DROP TABLE IF EXISTS `annexes04`;
 CREATE TABLE `annexes04` (
-  `Code_UA` decimal(11,0) default NULL,
+  `code_ua` double default NULL,
   `J10T` varchar(100) default NULL,
   `J10U` varchar(100) default NULL,
   `J10V` varchar(100) default NULL,

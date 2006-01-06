@@ -372,6 +372,17 @@ class Form(Handler, ikaaroText, WorkflowAware):
         if not namespace['field12']:
             namespace['field12'] = unicode(champs_adr[15], 'ISO-8859-1')
  
+        # autofill Annexes
+        if context.handler.is_BM():
+            bm_annexes = self.bm_annexes(code_ua)
+            for k, v in bm_annexes.items():
+                key = 'field%s' % k
+                if not k.startswith('J'):
+                    pass
+                elif not namespace[key]:
+                    value = unicode(str(v), 'ISO-8859-1')
+                    namespace[key] = value
+       
         # autofill BM epci
         if context.handler.is_BM():
             ua_epci = self.ua_epci(code_ua)
