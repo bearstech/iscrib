@@ -685,7 +685,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
             if value in ('', None):
                 # Empties
                 Empties.append(key)
-            is_mandatory = field_type is not IO.Unicode
+            is_mandatory = (field_type is not IO.Unicode) and \
+                            (field_type is not EPCI_Statut)
             dependence_id = dependencies.get(key)
             if dependence_id is not None:
                 dependence_value = namespace.get(dependence_id, False)

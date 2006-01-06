@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-06 14:33:36 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-29
+
+    Summary:
+      try to fix the bug about mandatoy EPCI_Statut
+    Revision:
+      culture--luis--0.6--patch-29
+
+
+    modified files:
+     Changelog Form.py
+
+
 2006-01-06 14:21:52 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-28
 
     Summary:
