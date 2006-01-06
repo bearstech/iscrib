@@ -560,7 +560,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                         sum_of_not_NC += real_val 
 
                     if sum_of_not_NC:
-                        fail = not ( x1 > sum_of_not_NC )
+                        fail = ( x1 <= sum_of_not_NC ) and (str(x1) != 'NC')
                     else:
                         fail = not ( x1 == 'NC')
 
