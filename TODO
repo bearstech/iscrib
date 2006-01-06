@@ -4,8 +4,6 @@ Bugs (lot 3) TODO
 Features (lot 3) TODO
 =======================
 
-F8. 
-  improve fill_report_form so he make the corect sums
 
 F6.
   Quand l'utilisateur envoie son formulaire, il doit recevoir un accusé de
@@ -73,6 +71,10 @@ Bugs (lot 3) Fixed
 
 Features (lot2) Done
 ====================
+
+F8. 
+  improve fill_report_form so he make the correct sums
+  Done -> culture--luis--0.6--patch-20
 
 E9. 
   Calage à droite des rubriques numériques ( ? ?  ?) à droitre les num

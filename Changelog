@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-06 02:22:17 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-20
+
+    Summary:
+      implement F8 : improve fill_report_form so he make the correct sums
+    Revision:
+      culture--luis--0.6--patch-20
+
+
+    modified files:
+     Changelog Form.py TODO
+
+
 2006-01-05 22:13:49 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-19
 
     Summary:

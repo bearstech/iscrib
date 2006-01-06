@@ -951,40 +951,37 @@ class Form(Handler, ikaaroText, WorkflowAware):
            if field_type is IO.String:
                if ns[key]:
                    value = ns[key]
-               else:
-                   # put '0.5' for fields C*X and C*T (exists only in BDP)
-                   is_decimal = key[len('field'):].startswith('C') \
-                                and ( key.endswith('X') or key.endswith('T') )
-                   if is_decimal:
-                       value = '0.5'
-                   else:
-                       value = 'coucou'
            elif field_type is EPCI_Statut:
                value = '4' 
            elif field_type is IO.Unicode:
                if ns[key]:
                    value = ns[key]
                else:
+                   # do not fill annexes
                    if not keyNumber.startswith('J'):
                        value = u'coué'
                    else:
                        value = u''
            elif field_type is CultureTypes.Integer:
-               if keyNumber[-1] in ['X', 'Y']:
-                   value = Integer(3) 
-               elif keyNumber.endswith('Z'):
-                   value = Integer(6) 
+               if is_sum:
+                   value = Integer(len(is_sum) * 5)
+                   e_list = ['E74X', 'E46Z', 'E67Z', 'E71Z', 'E74Y', 'E74Z']
+                   g_list = ['G25Y', 'G26Y', 'G26Z']
+                   if key in ['field' + x for x in e_list + g_list]:
+                       value = Integer('NC')
                else:
                    value = Integer(5) 
+           elif field_type is Decimal:
+               value = decimal.Decimal('3.14')
+               if is_sum:
+                   value = value * decimal.Decimal(len(is_sum))
+                   value = Decimal(value)
+               else:
+                   value = Decimal(value)
            elif field_type is Checkboxes:
                value = '##1' 
            elif field_type is IO.Boolean:
                value = True 
-           elif field_type is Decimal:
-               if is_sum:
-                   pass
-               else: 
-                   value = '3.14' 
            else: 
                value = '0' 
 
