@@ -746,7 +746,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         else:
             to_addr = MailResponsableBM
             subject = 'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
-            body = u'La Bibliothèque %s (%s), du deparement %s, a terminé' \
+            body = u'La Bibliothèque %s (%s), du département %s, a terminé' \
                    u' son formulaire.'
             body = body % (self.name, self.get_title(), dep)
         message = message_pattern % {'to_addr': to_addr,
@@ -756,13 +756,11 @@ class Form(Handler, ikaaroText, WorkflowAware):
 
         succsess_mgs = (u'Terminé, un e-mail est envoyé à votre correspondant ' 
                         u'DLL.')
-        comeback_msg = self.send_email(self, SMTPServer=None, 
-                                       from_addr=from_addr, to_addr=to_addr, 
+        comeback_msg = self.send_email(SMTPServer=SMTPServer, 
+                                       from_addr=from_addr, 
+                                       to_addr=to_addr, 
                                        message=message,
                                        succsess_mgs=succsess_mgs)
-
-        
-
         message = message.encode('ISO-8859-1')
         comeback('controles_form', comeback_msg)
 
@@ -777,6 +775,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             msg = u'La connexion au serveur de mail a échoué.'
         else:
             try:
+                message = message.encode('latin1')
                 mail.sendmail(from_addr, to_addr, message)
             except smtplib.SMTPRecipientsRefused:
                 msg = u'La connexion au serveur de mail a échoué.'
@@ -786,7 +785,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                        u"Le message n'as pas été envoyé") % from_addr
             else:
                 msg = succsess_mgs
-            mail.quit()
+            #mail.quit()
         return msg
 
 
