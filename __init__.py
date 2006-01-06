@@ -15,6 +15,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from the Standard Library
+import logging
+import logging.config
+
 # Import from itools
 from itools import get_abspath
 from itools.handlers import get_handler
@@ -48,4 +52,11 @@ if python_cmd:
 if not python_cmd:
     python_cmd = 'python'
 open('%s/where_is_python.txt' % gen_path, 'w').write(python_cmd)
+
+
+#############################################################################
+# Logging facilities
+#############################################################################
+filename = get_abspath(globals(), 'logging.conf')
+logging.config.fileConfig(filename)
 

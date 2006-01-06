@@ -5,13 +5,6 @@ Features (lot 3) TODO
 =======================
 
 
-F6.
-  Quand l'utilisateur envoie son formulaire, il doit recevoir un accusé de
-  réception.
-  "Votre rapport annuel a bien été reçu par votre correspondant à la DLL. Nous
-   vous remercions de votre envoi.  Cordialement. "
-  >luis> du system ?
-
 E6. 
   Ajout d'un onglet « Commentaire libre » permettant de saisir un
   texte long.  Pas de stockage en base. 
@@ -38,7 +31,6 @@ F2.
   Gérer la notion de champ obligatoire/non obligatoire en ajoutant cette
   caractéristique dans la description des champs. 
   >luis> donner la liste des champs obligatoire/non obligatoir
-
 
 
 
@@ -71,6 +63,17 @@ Bugs (lot 3) Fixed
 
 Features (lot2) Done
 ====================
+
+F6bis 
+  Ajouter un logger pour les envois de mail. 
+  Done -> culture--luis--0.6--patch-23
+
+F6.
+  Quand l'utilisateur envoie son formulaire, il doit recevoir un accusé de
+  réception.
+  "Votre rapport annuel a bien été reçu par votre correspondant à la DLL. Nous
+   vous remercions de votre envoi.  Cordialement. "
+  Done -> culture--luis--0.6--patch-23
 
 A2bis.
   Faire fonctionner l'export 

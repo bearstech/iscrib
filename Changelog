@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-06 05:45:47 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-23
+
+    Summary:
+      implement F6 recipe by mail and F6bis logger
+    Revision:
+      culture--luis--0.6--patch-23
+
+
+    modified files:
+     Changelog Form.py Setup.conf TODO __init__.py
+
+
 2006-01-06 03:42:58 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-22
 
     Summary:

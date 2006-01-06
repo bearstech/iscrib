@@ -19,6 +19,7 @@
 from pprint import pformat, pprint
 from copy import deepcopy
 from time import time
+import logging 
 import datetime
 import socket
 import smtplib
@@ -58,7 +59,10 @@ SqlPasswd = setup.sql.SqlPasswd
 
 def get_checkbox_value(key, value):
 
+    #len_choice = 2
     #if key == "G11":
+    if key == "CV":
+        len_choice = 15 
     if key == "CZ":
         len_choice = 16 
     elif key == "G11":
@@ -69,6 +73,8 @@ def get_checkbox_value(key, value):
         len_choice = 2
     elif key == '14':
         len_choice = 4
+    else:
+        print 345, key, value
      
         
     new_values = choices = [ 'N' for item in range(len_choice)]
@@ -727,8 +733,10 @@ class Form(Handler, ikaaroText, WorkflowAware):
     def pending2submitted(self):
         # Change state
         self.set_property('state', 'pending')
-        root = get_context().root
+        context = get_context()
+        root, user, request = context.root, context.user, context.request
         root.reindex_handler(self)
+
         # Build email
         namespace = self.get_namespace()
         message_pattern = u'To: %(to_addr)s\n' \
@@ -738,31 +746,73 @@ class Form(Handler, ikaaroText, WorkflowAware):
                           u'%(body)s\n'
 
         dep = self.get_dep()
-        from_addr = namespace['field11']
+        report_email = namespace['field11']
         if self.is_BDP():
             to_addr = MailResponsableBDP
-            subject = 'SCRIB-BDP : %s' % dep
+            subject = u'SCRIB-BDP : %s' % dep
             body = u'La Bibliothèque %s a terminé son formulaire.' % self.name
         else:
-            to_addr = MailResponsableBM
-            subject = 'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
+            to_addr = unicode(MailResponsableBM, 'utf8')
+            subject = u'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
+            subject = u'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
             body = u'La Bibliothèque %s (%s), du département %s, a terminé' \
                    u' son formulaire.'
             body = body % (self.name, self.get_title(), dep)
+
         message = message_pattern % {'to_addr': to_addr,
-                                     'from_addr': from_addr,
+                                     'from_addr': report_email,
                                      'subject': subject,
                                      'body': body}
 
         succsess_mgs = (u'Terminé, un e-mail est envoyé à votre correspondant ' 
                         u'DLL.')
         comeback_msg = self.send_email(SMTPServer=SMTPServer, 
-                                       from_addr=from_addr, 
+                                       from_addr=report_email, 
                                        to_addr=to_addr, 
                                        message=message,
                                        succsess_mgs=succsess_mgs)
-        message = message.encode('ISO-8859-1')
+
+        self.scrib_log(event='email sent', content=comeback_msg)
+
+        # recipe
+        r_subject = u'Accusé de réception, DLL'
+        r_body = (u"Votre rapport annuel a bien été reçu par votre "
+                  u"correspondant à la DLL. \n\nNous vous remercions "
+                  u"de votre envoi.  Cordialement.")
+        r_message = message_pattern % {'to_addr': report_email,
+                                       'from_addr': to_addr,
+                                       'subject': r_subject,
+                                       'body': r_body}
+        trash = self.send_email(SMTPServer=SMTPServer, 
+                                from_addr=to_addr, 
+                                to_addr=report_email, 
+                                message=r_message,
+                                succsess_mgs="")
+        
+        self.scrib_log(event='recipe sent', content=r_message)
+
         comeback('controles_form', comeback_msg)
+
+
+    def scrib_log(self, event=None, content=None):
+        context = get_context()
+        root, user, request = context.root, context.user, context.request
+        # Event Log 
+        event = '\n' \
+                '[Scrib event]\n' \
+                'date   : %(date)s\n' \
+                'uri    : %(uri)s\n' \
+                'referrer: %(referrer)s\n' \
+                'user   : %(user)s\n' \
+                'event : %(event)s\n' \
+                '\n'
+        event = event % {'date': str(datetime.datetime.now()),
+                         'uri': str(request.uri),
+                         'referrer': str(request.referer),
+                         'user': user and user.name or None, 
+                         'event': ('email sent '
+                                   '\n########\n%s\n#########') % content}
+        logging.getLogger().info(event)
 
 
     def send_email(self, SMTPServer=None, from_addr=None, 
@@ -884,7 +934,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         root = get_context().root
         root.reindex_handler(self)
         
-        comeback('controles_form', u'La base de donnés a été exporté')
+        comeback('controles_form', u'Le rapport a été exporté')
 
 
     get_dependencies__access__ = 1
