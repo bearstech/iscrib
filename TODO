@@ -47,8 +47,7 @@ Bugs (lot 3) Fixed
 
 176: BM/BDP : export CSV Autoriser l'export seulement lorsque le 
   formulaire est terminé
-  Done -> culture--luis--0.6--patch-14 and patch-15 (use is_complete not
-          is_finished)
+  Done -> culture--luis--0.6--patch-14 and patch-15 and patch-24
 
 154: Mauvais fonctionnement de la touche Entrée
   Presser la touche Entrée dans un formulaire provoque non seulement
