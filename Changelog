@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-06 15:28:04 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-30
+
+    Summary:
+      implement E6 Commentaire libre
+    Revision:
+      culture--luis--0.6--patch-30
+
+
+    new files:
+     ui/.arch-ids/Form_comments.xml.id ui/Form_comments.xml
+
+    modified files:
+     Changelog Form.py FormBDP.py FormBM.py TODO schemaBDP.py
+     schemaBM.py
+
+
 2006-01-06 14:33:36 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-29
 
     Summary:

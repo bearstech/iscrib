@@ -53,7 +53,7 @@ class FormBDP(Form):
         reports = ['report_form0', 'report_form1', 'report_form2', 
                    'report_form3', 'report_form4', 'report_form5',
                    'report_form6', 'report_form7', 'report_form8',
-                   'report_form9']
+                   'report_form9', 'comments']
         
         if name in reports:
             return reports

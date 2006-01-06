@@ -1246,6 +1246,15 @@ class Form(Handler, ikaaroText, WorkflowAware):
         handler = ui.get_handler('culture/Form_report_csv.xml')
         return handler.stl(namespace) 
 
+    comments__access__ = is_allowed_to_view
+    comments__label__ = u'Rapport Bibliothèques'
+    comments__sublabel__ = u'Commentaires'
+    def comments(self, view=None, **kw):
+        return self.get_ns_and_h('Form_comments.xml', 
+                                 'FormBM_report0_autogen.xml',
+                                 view)
+
+
 
     #downloadCSV__access__ = Handler.is_admin
     downloadCSV__access__ = True

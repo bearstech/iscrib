@@ -555,8 +555,9 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
           'fieldI33Z' : (Integer, None),
           'fieldI34Y' : (Integer, None), 
           'fieldI34Z' : (Integer, None, 
-                         {'sum': ('fieldI32Z', 'fieldI33Z')})
-          }
+                         {'sum': ('fieldI32Z', 'fieldI33Z')}),
+          ## comments form
+          'fieldL20': (IO.Unicode, ''),}
 
 ##############################################################################
 # Alerts

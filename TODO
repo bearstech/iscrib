@@ -4,12 +4,6 @@ Bugs (lot 3) TODO
 Features (lot 3) TODO
 =======================
 
-
-E6. 
-  Ajout d'un onglet « Commentaire libre » permettant de saisir un
-  texte long.  Pas de stockage en base. 
-  >luis> la bonne façon serait de créer la notion stockage/pas_stockage 
-
 A1 
   bug #166 Recherche par ville des BM : le système de troncature est
   imparfait 
@@ -27,7 +21,6 @@ F2.
   Gérer la notion de champ obligatoire/non obligatoire en ajoutant cette
   caractéristique dans la description des champs. 
   >luis> donner la liste des champs obligatoire/non obligatoir
-
 
 
 Bugs (lot 3) Fixed
@@ -58,6 +51,12 @@ Bugs (lot 3) Fixed
 
 Features (lot2) Done
 ====================
+
+E6. 
+  Ajout d'un onglet « Commentaire libre » permettant de saisir un
+  texte long.  Pas de stockage en base. 
+  >luis> la bonne façon serait de créer la notion stockage/pas_stockage 
+  Done -> culture--luis--0.6--patch-30
 
 E7. 
   Récupérer les informations de l'onglet « Annexe » saisies l'année

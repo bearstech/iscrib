@@ -17,7 +17,7 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
           'field9': (IO.Unicode, ''), 'field10': (IO.Unicode, ''),
           'field11': (IO.Unicode, ''),'field12': (IO.Unicode, ''),
           'field13': (Checkboxes, ''), 'field14': (Checkboxes, ''),
-          'field15': (IO.Unicode, ''),
+          'field15': (IO.Unicode, ''), 
           ## A.1 DÉPENSES PROPRES A LA BIBLIOTHÈQUE
           'fieldA11': (Integer, None), 'fieldA12': (Integer, None),
           'fieldA13': (Integer, None), 'fieldA14': (Integer, None),
@@ -694,7 +694,8 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
           'fieldK31X' :(IO.Unicode, ''),
           'fieldK31Y' :(IO.Unicode, None),
           'fieldK31Z' :(EPCI_Statut, ''),
-          }
+          ## comments form
+          'fieldL20': (IO.Unicode, ''),}
 
 
 ##############################################################################
