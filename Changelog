@@ -2,6 +2,24 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-06 05:56:23 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-25
+
+    Summary:
+      add log folder and logging.conf
+    Revision:
+      culture--luis--0.6--patch-25
+
+
+    new files:
+     .arch-ids/logging.conf.id log/.arch-ids/=id logging.conf
+
+    modified files:
+     Changelog
+
+    new directories:
+     log log/.arch-ids
+
+
 2006-01-06 05:54:46 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-24
 
     Summary:
