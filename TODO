@@ -8,7 +8,7 @@ A1
   bug #166 Recherche par ville des BM : le système de troncature est
   imparfait 
   
-A2.
+A2. (not a bug)
   Il n'y a pas de contrôle sur la longueur des champs si bien que
   l'export dans la base ADRESSE en particulier peut ne pas
   fonctionner. Par exemple un numéro de téléphone saisi avec des
@@ -16,8 +16,9 @@ A2.
   généraliser ce problème en introduisant une notion de longueur de
   champ pour les champs-texte ?
   >luis> Faire simplement fonctionner l'export ? voir A2bis
+  >luis> Unicode(widget=checkbox, export_to_sql=True, sql_type=Decimal_sql)
 
-F2.  
+F2. (voir pour peleas) 
   Gérer la notion de champ obligatoire/non obligatoire en ajoutant cette
   caractéristique dans la description des champs. 
   >luis> donner la liste des champs obligatoire/non obligatoir
