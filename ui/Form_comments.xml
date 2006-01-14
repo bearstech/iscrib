@@ -13,10 +13,11 @@
   <h1>Commentaires</h1>
 
   <h3> Si vous souhaitez apporter des précisions au renseignement 
-      de ce rapport, inscrivez ci-dessous les éléments commplémentaires
+      de ce rapport, inscrivez ci-dessous les éléments complémentaires
       d'appréciation.</h3> 
 
-  <textarea cols="46" rows="7"  
+    
+    <textarea cols="46" rows="20"  
             stl:attributes="value fieldL20" type="text" name="fieldL20"
             value="" size="8" stl:content="fieldL20"></textarea>
 

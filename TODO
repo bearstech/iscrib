@@ -27,6 +27,9 @@ F2. (voir pour peleas)
 Bugs (lot 3) Fixed
 ===================
 
+180: BM : onglet Commentaires : faute orthographe, pas assez de lignes
+   Done -> culture--luis--0.6--patch-33
+
 172: BM et BDP : Export impossible Les tables bm05 et bdp05 n'ont pas 
   été créées
    Done -> culture--luis--0.6--patch-2 to culture--luis--0.6--patch-9
