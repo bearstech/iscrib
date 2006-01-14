@@ -1,7 +1,6 @@
 Bugs (lot 3) TODO
 ===================
 201: BM : table MYSQL ua_epci erronée 
-206: appliquer patch-alp-04-07 et FormBM_help11.xml
 
 179: Export CSV broken BM2005/2/;downloadCSV KeyError: 'fieldL20'
 200: BM : Export MYSQL impossible
@@ -46,6 +45,9 @@ F2. (voir pour peleas)
 
 Bugs (lot 3) Fixed
 ===================
+
+206: appliquer patch-alp-04-07 et FormBM_help11.xml
+   Done -> culture--luis--0.6--patch-36 -- patch-38
 
 180: BM : onglet Commentaires : faute orthographe, pas assez de lignes
    Done -> culture--luis--0.6--patch-33
