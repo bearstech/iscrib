@@ -21,16 +21,9 @@
       <li>Toutes les zones du bloc identitaire qui réclament du texte doivent
       être remplies en majuscules, sauf les zones de <b>courriels </b>et de
       <b>sites Web</b> qui peuvent répondre à une typographie spécifique.</li> 
+      <li><u>Rattachement administratif</u> : indiquez <i>Commune</i> si la bibliothèque est municipale ou <i>Groupement de communes </i> si la gestion a été transférée à un groupement de communes et dans ce cas reportez-vous à l'onglet EPCI.
+	      La bibliothèque doit être en mesure de présenter un rapport annuel unique additionnant l'activité de toutes les bibliothèques du réseau dès lors que la gestion de celle-ci a été transférée à l'EPCI.</li>
 
-      <li><u>Régie intercommunale</u> : préciser la liste des communes
-      participantes pour permettre de prendre en compte l'ensemble de la
-      population (voir onglet EPCI. La bibliothèque doit être en mesure de
-      présenter un rapport annuel unique additionnant l'activité de toutes les
-      bibliothèques du réseau dès lors que la gestion de celles-ci a été
-      transférée à l’EPCI, ces dernières ne faisant pas de rapport. Dans le cas
-      d’une compétence culturelle partagée (ex : gestion intercommunale par la
-      bibliothèque centrale : gestion municipale pour les bibliothèques du
-      réseau), le préciser dans la rubrique EPCI.  </li>
     </ul>
   </dt>
 </dl>
@@ -40,6 +33,7 @@
 <h3> Sommaire</h3>
 <ol>
   <li><a href=";help0">Identité                                </a></li>
+  <li><a href=";help11">EPCI                                   </a></li>
   <li><a href=";help1">A-Finances                              </a></li>
   <li><a href=";help2">B-Locaux                                </a></li>
   <li><a href=";help3">C-Personnel                             </a></li>

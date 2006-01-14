@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-14 23:38:28 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-36
+
+    Summary:
+      application du patch-alp-04 FormBM_help0.xml
+    Revision:
+      culture--luis--0.6--patch-36
+
+
+    modified files:
+     Changelog TODO ui/FormBM_help0.xml
+
+
 2006-01-14 23:22:10 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-35
 
     Summary:

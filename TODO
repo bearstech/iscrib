@@ -1,8 +1,9 @@
 Bugs (lot 3) TODO
 ===================
-179: Export CSV broken BM2005/2/;downloadCSV KeyError: 'fieldL20'
 201: BM : table MYSQL ua_epci erronée 
 206: appliquer patch-alp-04-07 et FormBM_help11.xml
+
+179: Export CSV broken BM2005/2/;downloadCSV KeyError: 'fieldL20'
 200: BM : Export MYSQL impossible
  [iKaaro Error]
   date : 2006-01-13 10:18:54.284026
