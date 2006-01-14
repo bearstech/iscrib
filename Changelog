@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-14 23:48:58 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-37
+
+    Summary:
+      application des patch-alp- 05 07 et ajout de FormBM_help11.xml
+    Revision:
+      culture--luis--0.6--patch-37
+
+
+    new files:
+     ui/.arch-ids/FormBM_help11.xml.id ui/FormBM_help11.xml
+
+    modified files:
+     Changelog FormBM.py ui/FormBM_report11.xml
+
+
 2006-01-14 23:38:28 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-36
 
     Summary:

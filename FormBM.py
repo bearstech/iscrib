@@ -367,5 +367,12 @@ class FormBM(Form):
         handler = ui.get_handler('culture/FormBM_help9.xml')
         return handler.to_unicode()
 
+    help11__access__ = True 
+    def help11(self):
+        context = get_context()
+        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
+        handler = ui.get_handler('culture/FormBM_help11.xml')
+        return handler.to_unicode()
+
 
 Form.register_handler_class(FormBM)
