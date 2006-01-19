@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-19 15:21:52 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-39
+
+    Summary:
+      new ua_epci.sql file
+    Revision:
+      culture--luis--0.6--patch-39
+
+
+    modified files:
+     Changelog TODO input_data/ua_epci.sql
+
+
 2006-01-14 23:56:58 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-38
 
     Summary:
