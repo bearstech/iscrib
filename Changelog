@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-20 08:13:41 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-42
+
+    Summary:
+      reindent FormBM_report2.xml
+    Revision:
+      culture--luis--0.6--patch-42
+
+
+    modified files:
+     Changelog ui/FormBM_report2.xml
+
+
 2006-01-20 08:03:08 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-41
 
     Summary:

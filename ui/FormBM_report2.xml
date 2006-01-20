@@ -384,20 +384,38 @@
   <tr>
     <th>Appareils de grossissement</th> 
     <td>
-      <table stl:if="fieldB43" id="display_fieldB44" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB44"                      value="1" style="font-size: 8pt;  border:0px"
-                     stl:attributes="checked fieldB44" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB44"                value="0"
- style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB44_not" />Non      </td>      </tr></table>      <table stl:if="not fieldB43" id="display_fieldB44" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB44"                      value="1" style="font-size: 8pt;  border:0px"
-                     stl:attributes="checked fieldB44" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB44"                value="0"
- style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB44_not" />Non      </td>      </tr></table>    </td>
+      <table stl:if="fieldB43" id="display_fieldB44" >
+        <tr style="padding: 10px; text-align: left">
+          <td>  
+            <input type="radio" name="fieldB44" value="1" 
+                   style="font-size: 8pt;  border:0px" 
+                   stl:attributes="checked fieldB44" />Oui</td>
+          <td style="border-left: 1px solid black;text-align: right">
+            <input type="radio" name="fieldB44" value="0" 
+                   style="font-size: 8pt;border:0px" 
+                   stl:attributes="checked fieldB44_not" />Non</td>
+        </tr>
+      </table>      
+      <table stl:if="not fieldB43" id="display_fieldB44" 
+             style="visibility:hidden">
+        <tr style="padding: 10px; text-align: left">
+          <td><input type="radio" name="fieldB44" value="1" 
+                     style="font-size: 8pt;  border:0px"
+                     stl:attributes="checked fieldB44" />Oui</td>
+          <td style="border-left: 1px solid black;text-align: right">
+            <input  type="radio" name="fieldB44" value="0" 
+                    style="font-size: 8pt;  border:0px"
+                    stl:attributes="checked fieldB44_not" />Non</td>
+        </tr>
+      </table>
+    </td>
     <td><b stl:attributes="class _B44">B44</b></td>
   </tr>
 
   <tr>
     <th>Règles tactiles</th> 
     <td>
-      <table stl:if="fieldB43" id="display_fieldB45" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB45"                      value="1" style="font-size: 8pt;  border:0px"
+      <table stl:if="fieldB43" id="display_fieldB45" > <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB45"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldB45" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB45"                value="0"
  style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldB45_not" />Non      </td>      </tr></table>      <table stl:if="not fieldB43" id="display_fieldB45" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB45"                      value="1" style="font-size: 8pt;  border:0px"
