@@ -1278,10 +1278,14 @@ class Form(Handler, ikaaroText, WorkflowAware):
         csv = [u'"Chapitre du formulaire","rubrique","valeur"']
         for name in names:
             #value = namespace[name]
-            value = self.fields[name]
+            value = self.fields.get(name, '')
             if schema[name][0] is EPCI_Statut:
-                value = [x['label'] for x in EPCI_Statut.get_namespace(value) 
-                         if x['id'] == value][0]
+                label = [x['label'] for x in EPCI_Statut.get_namespace(value) 
+                           if x['id'] == value]
+                if label:
+                    value = label[0]
+                else: 
+                    value = ''
             name = name[len('field'):]
             chap = name[0]
             csv.append('"%s","%s","%s"' % (chap, name, value))

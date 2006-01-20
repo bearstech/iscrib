@@ -1,9 +1,6 @@
 Bugs (lot 3) TODO
 ===================
 
-179: Export CSV broken BM2005/2/;downloadCSV KeyError: 'fieldL20'
-
-
 Features (lot 3) TODO
 =======================
 
@@ -29,6 +26,9 @@ F2. (voir pour peleas)
 
 Bugs (lot 3) Fixed
 ===================
+
+179: Export CSV broken BM2005/2/;downloadCSV KeyError: 'fieldL20'
+   Done -> culture--luis--0.6--patch-36--patch-43
 
 200: BM : Export MYSQL impossible
    Done -> culture--luis--0.6--patch-36--patch-40
