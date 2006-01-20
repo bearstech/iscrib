@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--luis@itaapy.com--private/culture--luis--0.6
 #
 
+2006-01-20 07:59:19 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-40
+
+    Summary:
+      fix bug #200 export need (mysql -u scrib -pScrib-2005* scrib <  input_data/fill_bm05.sql)
+    Revision:
+      culture--luis--0.6--patch-40
+
+
+    modified files:
+     Changelog Form.py input_data/fill_bm05.sql
+
+
 2006-01-19 15:21:52 GMT	Luis Belmar Letelier <luis@itaapy.com>	patch-39
 
     Summary:

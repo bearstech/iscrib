@@ -934,7 +934,11 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 elif field_type == Decimal:
                     value = "'%s'" % str(value)
                 elif field_type == EPCI_Statut:
-                    value = [x['id'] for x in value if x['is_selected']][0]
+                    ids = [x['id'] for x in value if x['is_selected']]
+                    if ids:
+                        value = ids[0]
+                    else:
+                        value = '0'
                 values.append(value)
                 
         query = "insert into %s (%s) values (%s)" % (table, ','.join(keys),

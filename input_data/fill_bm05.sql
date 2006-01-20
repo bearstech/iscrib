@@ -620,5 +620,6 @@ CREATE TABLE `bm05` (
   `K6` varchar(100) default '' ,
   `K7` varchar(100) default '' ,
   `K8` varchar(100) default '' ,
-  `K9` varchar(100) default '' 
+  `K9` varchar(100) default '' ,
+  `L20` varchar(100) default '' 
 );
