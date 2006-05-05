@@ -843,9 +843,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
             except smtplib.SMTPRecipientsRefused:
                 msg = u'La connexion au serveur de mail a échoué.'
             except UnicodeEncodeError:
-                msg = (u"L'adresse email (%s) comporte des catactères "
+                msg = (u"L'adresse email (%s) comporte des caractères "
                        u"non conformes. "
-                       u"Le message n'as pas été envoyé") % from_addr
+                       u"Le message n'a pas été envoyé") % from_addr
             else:
                 msg = succsess_mgs
             #mail.quit()
