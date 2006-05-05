@@ -3,14 +3,12 @@
 
 <h1>Etat du formulaire : <em stl:content="state" /></h1>
 
-<!--p>
-  Sur <b stl:content="total"/> rubriques :
-  <b stl:content="total_mendatories"/> obligatoire(s) remplie(s),
-  <b stl:content="total_bad"/> sont encore vides.
-  (dont <b stl:content="total_optionals"/> rubrique(s) optionnelle(s)) 
-</p-->
+<p>
+  Il y a encore <b stl:content="mandatory_Empties"/>  rubrique(s) obligatoire(s) non renseignée(s) 
+</p>
 
-<table class="summary" cellspacing="0" cellpadding="0">
+
+<!--table class="summary" cellspacing="0" cellpadding="0">
   <tr>
     <th> Nombre Total de rubriques </th>
     <th> Rubriques obligatoires remplies </th>
@@ -23,19 +21,22 @@
     <td> <b stl:content="optional_nonEmpties"/> </td>
     <td> <b stl:content="mandatory_Empties"/> </td>
   </tr>
-</table>
+</table-->
 
 <stl:block if="not is_complete">
-  <blockquote>
+<stl:block if="not is_finished">
+    <p > La<a href="#controles">  liste des contrôles </a> et la<a href="#vides"> liste des rubriques non remplies </a> doivent être vides pour pouvoir envoyer le formulaire</p>
+   <blockquote>
     <form action=";pending2submitted" method="post">
       <input style="color: gray;" value="Envoyer le formulaire" type="submit" 
              disabled="True"/>
     </form>
   </blockquote>
+</stl:block> 
 </stl:block>
 
 <stl:block if="is_complete">
-  <p> Le formulaire est complet, tous les contrôles sont à OUI. Vous pouvez
+   <p> Le formulaire est complet, tous les contrôles sont à OUI. Vous pouvez
     envoyer le formulaire.  Pour l'envoyer à l'administrateur cliquez sur le
     bouton ci-dessous : </p> 
   <blockquote> 
@@ -43,12 +44,13 @@
       <input type="submit" value="Envoyer le formulaire" />
     </form>
   </blockquote>
+
 </stl:block>
 
 
 <stl:block if="is_finished">
   <p>
-  Le formulaire est terminé, vous pouvez l'exporter dans la base de donnés
+  Le formulaire est terminé, vous pouvez l'exporter dans la base de données
   MySQL en cliquant le bouton ci-dessus :
   </p>
   <blockquote>
@@ -69,10 +71,9 @@
 </table>
 
 
-<h2>Liste des contrôles</h2>
+<h2 id="controles">Liste des contrôles</h2>
 <p>
-Tous les contrôles doivent être à OUI pour que l'on puisse envoyer le
-formulaire
+La liste des contrôles doit être vide  pour que l'on puisse envoyer le formulaire
 </p>
 <table>
   <tr valign="top">
@@ -82,9 +83,10 @@ formulaire
         <tr style="background-color: rgb(202,220,255); text-align:center" >
           <td colspan="4">
             <a style="text-decoration: underline" 
-               stl:attributes="href res1/section_url" 
-               stl:content="res1/section_title"/>
-          </td>
+               stl:attributes="href res1/section_url">
+             Retour chapitre <b stl:content="res1/section_title"/>
+            </a> 
+      </td>
         </tr>
         <tr stl:repeat="control res1/lines">
           <td class="idCheck" stl:content="control/num"/>
@@ -104,8 +106,9 @@ formulaire
         <tr style="background-color: rgb(202,220,255); text-align:center" >
           <td colspan="4">
             <a style="text-decoration: underline" 
-               stl:attributes="href res2/section_url" 
-               stl:content="res2/section_title"/>
+               stl:attributes="href res2/section_url" >
+             Retour chapitre <b stl:content="res2/section_title"/>
+            </a> 
           </td>
         </tr>
         <tr stl:repeat="control res2/lines">
@@ -127,9 +130,9 @@ formulaire
 
 
 
-<h2>Liste des rubriques contenant des champs non remplis</h2>
+<h2 id="vides">Liste des rubriques non remplies</h2>
 
-<table class="summary" cellspacing="0" cellpadding="0">
+<!--table class="summary" cellspacing="0" cellpadding="0">
   <tr>
     <th> Nombre Total de rubriques </th>
     <th> Rubriques obligatoires remplies </th>
@@ -142,27 +145,27 @@ formulaire
     <td> <b stl:content="optional_nonEmpties"/> </td>
     <td> <b stl:content="mandatory_Empties"/> </td>
   </tr>
-</table>
+</table-->
 
 <br/>
-<table>
+<table border="0">
   <tr valign="top">
     <td>
 
-      <table class="Check" cellspacing="0" cellpadding="0">
+      <table  class="Check" cellspacing="0" cellpadding="0">
         <tr stl:repeat="champ restype0">
           <td class="idCheck" stl:content="champ/chp"/>
-          <td class="textCheck" stl:content="champ/type"/>
+          <!--td class="textCheck" stl:content="champ/type"/-->
         </tr>
       </table>
 
     </td> 
     <td>
  
-      <table class="Check" cellspacing="0" cellpadding="0">
+      <table  class="Check" cellspacing="0" cellpadding="0">
         <tr stl:repeat="champ restype1">
           <td class="idCheck" stl:content="champ/chp"/>
-          <td class="textCheck" stl:content="champ/type"/>
+          <!--td class="textCheck" stl:content="champ/type"/-->
         </tr>
       </table>
 
@@ -170,23 +173,24 @@ formulaire
     </td>
     <td>
 
-      <table class="Check" cellspacing="0" cellpadding="0">
+      <table  class="Check" cellspacing="0" cellpadding="0">
         <tr stl:repeat="champ restype2">
           <td class="idCheck" stl:content="champ/chp"/>
-          <td class="textCheck" stl:content="champ/type"/>
+          <!--td class="textCheck" stl:content="champ/type"/-->
         </tr>
       </table>
 
     </td> 
     <td>
  
-      <table class="Check" cellspacing="0" cellpadding="0">
+      <table  class="Check" cellspacing="0" cellpadding="0">
         <tr stl:repeat="champ restype3">
           <td class="idCheck" stl:content="champ/chp"/>
-          <td class="textCheck" stl:content="champ/type"/>
+          <!--td class="textCheck" stl:content="champ/type"/-->
         </tr>
       </table>
 
+       
 
     </td>
   </tr>
