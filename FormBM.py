@@ -102,7 +102,7 @@ class FormBM(Form):
 
     def base_lect(self, insee):
         chaineSQL = "select * from adresse where "\
-                    "insee is not null and code_ua='%s'" % insee
+                    "insee is not null and code_bib='%s'" % insee
         return get_adresse(chaineSQL)
 
 
