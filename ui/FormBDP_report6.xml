@@ -4,24 +4,34 @@
      id="formBiblio">
 <form action=";report" method="post" name="form">
  
-  <div align="right">
-
+<table width="100%">
+  <tr>
+  <td align="left">
+  
+  <a stl:if="not printable" href="#" style="color:red " alt="Aide"
+      onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">? Consulter l'aide sur cette page</a>
+      </td>
+  <td align="right">
   <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
      name="Imprimer" href="#"
      onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
      <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+   
    
     <stl:block if="not printable">
       <input type="submit" value="Enregistrer" 
              style="background-color:rgb(145,191,255); border:0"
              stl:if="is_allowed_to_edit"></input>
     </stl:block>
-  </div>
+  </td>  
+  </tr>
+  </table>
+ 
 <h1>F-  RÉSEAU TOUS PUBLICS
-    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
-      onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+    <!--a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
+      onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a-->
 </h1>
-<h2>F.1 / 2 DESSERTE DU RÉSEAU TOUS PUBLICS (cf. notice explicative)</h2>
+<h2>F.1 / 2 DESSERTE DU RÉSEAU TOUS PUBLICS </h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -33,7 +43,7 @@
   <tr>
   <td></td>
     <th style="text-align: center">Nombre de points W</th>
-    <th style="text-align: center">Nombre de commune X</th>
+    <th style="text-align: center">Nombre de communes X</th>
     <th style="text-align: center">Population desservie Y</th>
   <td></td>
   </tr>
@@ -211,7 +221,7 @@
    </colgroup>
   <tr>
   <td></td>
-    <th style="text-align: center">Nombre de commune X</th>
+    <th style="text-align: center">Nombre de communes X</th>
     <th style="text-align: center">Population desservie Y</th>
   <td></td>
   </tr>
@@ -254,7 +264,7 @@
    </colgroup>
   <tr>
   <td></td>
-    <th style="text-align: center">Nombre de commune X</th>
+    <th style="text-align: center">Nombre de communes X</th>
     <th style="text-align: center">Population desservie Y</th>
   <td></td>
   </tr>
@@ -284,7 +294,7 @@
   <tr>
   <td></td>
     <th style="text-align: center">Nombre de documents déposés dans l'année Y</th>
-    <th style="text-align: center">Nombre de documents en dépôt au 31.12. Z</th>
+    <th style="text-align: center">Nombre de documents en dépôt au 31.12.05 Z</th>
   <td></td>
   </tr>
   <tr>
@@ -808,7 +818,7 @@
   </tr>
 
   <tr>
-    <th>TOTAL (F61+F62)</th> 
+    <th><b>TOTAL (F61+F62)</b></th> 
     <td>
        <input stl:attributes="value fieldF63W"
               type="text" name="fieldF63W"
@@ -982,6 +992,13 @@
     <td><b stl:attributes="class _F69">F69</b></td>
   </tr>
 </table>
-</form>
- <p style = "page-break-after:always "></p>
+<div>
+    <p></p>
+    <p>(1)nb de prêts aux lecteurs finaux </p>
+      
+   
 </div>
+</form>
+  <p style = "page-break-after:always "></p>
+</div>
+
