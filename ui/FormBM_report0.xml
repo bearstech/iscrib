@@ -57,7 +57,7 @@
 
 
 <a stl:if="is_vide" 
-   style="color:white;background-color:red; border: 1px solid red; " 
+   style="color:white;background-color:red; border: 1px solid red; font-size:20px"
    alt="Aide"
    href=";help">Veuillez consulter l'aide</a>
 
