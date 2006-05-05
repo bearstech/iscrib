@@ -3,8 +3,15 @@
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
 <form action=";report" method="post">
- 
-  <div align="right">
+
+  <table width="100%">
+  <tr>
+  <td align="left">
+  
+  <a stl:if="not printable" href="#" style="color:red " alt="Aide"
+      onclick="window.open(';help3', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">? Consulter l'aide sur cette page</a>
+      </td>
+  <td align="right">
   <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
      name="Imprimer" href="#"
      onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
@@ -16,39 +23,41 @@
              style="background-color:rgb(145,191,255); border:0"
              stl:if="is_allowed_to_edit"></input>
     </stl:block>
-  </div>
+  </td>  
+  </tr>
+  </table>
 
  <h1>C - PERSONNEL EN POSTE AU 31 DÉCEMBRE 2005
-    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
-      onclick="window.open(';help3', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+    
 </h1>
 <h2>C.1 FONCTION PUBLIQUE : FILIÈRE CULTURELLE</h2>
-<table >
+<table width="100%">
   <colgroup>
-    <col width="60%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
+    <col width="36%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
     <col width="6%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
     <col width="5%"/>
    </colgroup>
   <tr>
     <td></td>
     <th colspan="4" style="text-align: center">BDP</th>
     <th colspan="4" style="text-align: center">RESEAU PUBLIC</th>
+    <td></td>
   </tr>
   <tr>
     <td></td>
     <th style="text-align: center">Nb de personnes</th>
-    <th style="text-align: center">Nb d'emplois d'ETP (1)</th>
+    <th style="text-align: center">Nb d'emplois d'ETP (1) (ex: 2.5)</th>
     <th style="text-align: center">Nb de personnes ayant suivi une formation dans l'année</th>
     <th style="text-align: center">Responsable de la bibliothèque ?(2)</th>
     <th style="text-align: center">Nb de personnes</th>
-    <th style="text-align: center">Nb d'emplois d'ETP (1)</th>
+    <th style="text-align: center">Nb d'emplois d'ETP (1) (ex: 2.5)</th>
     <th style="text-align: center">Nb de personnes ayant suivi une formation dans l'année</th>
     <th style="text-align: center">Nb de responsables par statut</th>
     <td></td>
@@ -70,17 +79,17 @@
     <td>
        <input stl:attributes="value fieldC11S"
               type="text" name="fieldC11S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC11T"
               type="text" name="fieldC11T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC11U"
               type="text" name="fieldC11U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_1" />
@@ -88,22 +97,22 @@
     <td>
        <input stl:attributes="value fieldC11W"
               type="text" name="fieldC11W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC11X"
               type="text" name="fieldC11X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC11Y"
               type="text" name="fieldC11Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC11Z"
               type="text" name="fieldC11Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C11">C11</b></td>
   </tr>
@@ -113,17 +122,17 @@
     <td>
        <input stl:attributes="value fieldC12S"
               type="text" name="fieldC12S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC12T"
               type="text" name="fieldC12T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC12U"
               type="text" name="fieldC12U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_2" />
@@ -131,22 +140,22 @@
     <td>
        <input stl:attributes="value fieldC12W"
               type="text" name="fieldC12W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC12X"
               type="text" name="fieldC12X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC12Y"
               type="text" name="fieldC12Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC12Z"
               type="text" name="fieldC12Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C12">C12</b></td>
   </tr>
@@ -156,17 +165,17 @@
     <td>
        <input stl:attributes="value fieldC13S"
               type="text" name="fieldC13S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC13T"
               type="text" name="fieldC13T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC13U"
               type="text" name="fieldC13U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_3" />
@@ -174,22 +183,22 @@
     <td>
        <input stl:attributes="value fieldC13W"
               type="text" name="fieldC13W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC13X"
               type="text" name="fieldC13X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC13Y"
               type="text" name="fieldC13Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC13Z"
               type="text" name="fieldC13Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C13">C13</b></td>
   </tr>
@@ -199,17 +208,17 @@
     <td>
        <input stl:attributes="value fieldC14S"
               type="text" name="fieldC14S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC14T"
               type="text" name="fieldC14T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC14U"
               type="text" name="fieldC14U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_4" />
@@ -217,22 +226,22 @@
     <td>
        <input stl:attributes="value fieldC14W"
               type="text" name="fieldC14W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC14X"
               type="text" name="fieldC14X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC14Y"
               type="text" name="fieldC14Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC14Z"
               type="text" name="fieldC14Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C14">C14</b></td>
   </tr>
@@ -242,17 +251,17 @@
     <td>
        <input stl:attributes="value fieldC15S"
               type="text" name="fieldC15S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC15T"
               type="text" name="fieldC15T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC15U"
               type="text" name="fieldC15U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_5" />
@@ -260,22 +269,22 @@
     <td>
        <input stl:attributes="value fieldC15W"
               type="text" name="fieldC15W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC15X"
               type="text" name="fieldC15X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC15Y"
               type="text" name="fieldC15Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC15Z"
               type="text" name="fieldC15Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C15">C15</b></td>
   </tr>
@@ -285,17 +294,17 @@
     <td>
        <input stl:attributes="value fieldC16S"
               type="text" name="fieldC16S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC16T"
               type="text" name="fieldC16T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC16U"
               type="text" name="fieldC16U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_6" />
@@ -303,22 +312,22 @@
     <td>
        <input stl:attributes="value fieldC16W"
               type="text" name="fieldC16W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC16X"
               type="text" name="fieldC16X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC16Y"
               type="text" name="fieldC16Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC16Z"
               type="text" name="fieldC16Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C16">C16</b></td>
   </tr>
@@ -326,18 +335,18 @@
 
 <h2>C.2 FONCTION PUBLIQUE : AUTRE FILIÈRE</h2>
 
-<table >
+<table width="100%">
   <colgroup>
-    <col width="42%"/>
-    <col width="6%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="6%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
+    <col width="27%"/>
+    <col width="7%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
     <col width="5%"/>
    </colgroup>
   
@@ -347,17 +356,17 @@
     <td>
        <input stl:attributes="value fieldC21S"
               type="text" name="fieldC21S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC21T"
               type="text" name="fieldC21T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC21U"
               type="text" name="fieldC21U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_7" />
@@ -365,22 +374,22 @@
     <td>
        <input stl:attributes="value fieldC21W"
               type="text" name="fieldC21W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC21X"
               type="text" name="fieldC21X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC21Y"
               type="text" name="fieldC21Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC21Z"
               type="text" name="fieldC21Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C21">C21</b></td>
   </tr>
@@ -390,17 +399,17 @@
     <td>
        <input stl:attributes="value fieldC22S"
               type="text" name="fieldC22S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC22T"
               type="text" name="fieldC22T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC22U"
               type="text" name="fieldC22U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_8" />
@@ -408,22 +417,22 @@
     <td>
        <input stl:attributes="value fieldC22W"
               type="text" name="fieldC22W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC22X"
               type="text" name="fieldC22X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC22Y"
               type="text" name="fieldC22Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC22Z"
               type="text" name="fieldC22Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C22">C22</b></td>
   </tr>
@@ -433,17 +442,17 @@
     <td>
        <input stl:attributes="value fieldC23S"
               type="text" name="fieldC23S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC23T"
               type="text" name="fieldC23T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC23U"
               type="text" name="fieldC23U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_9" />
@@ -451,22 +460,22 @@
     <td>
        <input stl:attributes="value fieldC23W"
               type="text" name="fieldC23W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC23X"
               type="text" name="fieldC23X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC23Y"
               type="text" name="fieldC23Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC23Z"
               type="text" name="fieldC23Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C23">C23</b></td>
   </tr>
@@ -475,14 +484,15 @@
 <h2>C.3 AUTRES PERSONNELS REMUNERÉS</h2>
 <table width="100%">
   <colgroup>
-    <col width="49%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="6%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
+   <col width="34%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
     <col width="5%"/>
    </colgroup>
   
@@ -491,17 +501,17 @@
     <td>
        <input stl:attributes="value fieldC31S"
               type="text" name="fieldC31S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC31T"
               type="text" name="fieldC31T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC31U"
               type="text" name="fieldC31U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_10" />
@@ -509,22 +519,22 @@
     <td>
        <input stl:attributes="value fieldC31W"
               type="text" name="fieldC31W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC31X"
               type="text" name="fieldC31X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC31Y"
               type="text" name="fieldC31Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC31Z"
               type="text" name="fieldC31Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C31">C31</b></td>
   </tr>
@@ -534,17 +544,17 @@
     <td>
        <input stl:attributes="value fieldC32S"
               type="text" name="fieldC32S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC32T"
               type="text" name="fieldC32T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC32U"
               type="text" name="fieldC32U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_11" />
@@ -552,22 +562,22 @@
     <td>
        <input stl:attributes="value fieldC32W"
               type="text" name="fieldC32W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC32X"
               type="text" name="fieldC32X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC32Y"
               type="text" name="fieldC32Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC32Z"
               type="text" name="fieldC32Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C32">C32</b></td>
   </tr>
@@ -577,17 +587,17 @@
     <td>
        <input stl:attributes="value fieldC33S"
               type="text" name="fieldC33S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC33T"
               type="text" name="fieldC33T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC33U"
               type="text" name="fieldC33U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_12" />
@@ -595,22 +605,22 @@
     <td>
        <input stl:attributes="value fieldC33W"
               type="text" name="fieldC33W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC33X"
               type="text" name="fieldC33X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC33Y"
               type="text" name="fieldC33Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC33Z"
               type="text" name="fieldC33Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C33">C33</b></td>
   </tr>
@@ -620,17 +630,17 @@
     <td>
        <input stl:attributes="value fieldC34S"
               type="text" name="fieldC34S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC34T"
               type="text" name="fieldC34T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC34U"
               type="text" name="fieldC34U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_13" />
@@ -638,22 +648,22 @@
     <td>
        <input stl:attributes="value fieldC34W"
               type="text" name="fieldC34W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC34X"
               type="text" name="fieldC34X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC34Y"
               type="text" name="fieldC34Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC34Z"
               type="text" name="fieldC34Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C34">C34</b></td>
   </tr>
@@ -661,176 +671,165 @@
 
 
 <h2>C.4 BÉNÉVOLES</h2>
-<table width="100%">
+<table width="100%" >
   <colgroup>
-    <col width="49%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="6%"/>
-    <col width="4%"/>
-    <col width="4%"/>
-    <col width="4%"/>
+   <col width="34%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
     <col width="5%"/>
    </colgroup>
  
   <tr>
     <th>Bénévoles qualifiés (3)</th> 
-    <td>
+    <td >
        <input stl:attributes="value fieldC41S"
               type="text" name="fieldC41S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
-    <td>
-       <!--input stl:attributes="value fieldC41T"
-              type="text" name="fieldC41T"
-              value="" size="8"></input-->
+    <td >
     </td>
     <td>
        <input stl:attributes="value fieldC41U"
               type="text" name="fieldC41U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_14" />
     </td>   
-    <td>
+    <td >
        <input stl:attributes="value fieldC41W"
               type="text" name="fieldC41W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
-       <!--input stl:attributes="value fieldC41X"
-              type="text" name="fieldC41X"
-              value="" size="8"></input-->
     </td>
     <td>
        <input stl:attributes="value fieldC41Y"
               type="text" name="fieldC41Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC41Z"
               type="text" name="fieldC41Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C41">C41</b></td>
   </tr>
 
   <tr>
     <th>Bénévoles non formés</th> 
-    <td>
+    <td >
        <input stl:attributes="value fieldC42S"
               type="text" name="fieldC42S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
-    <td>
-       <!--input stl:attributes="value fieldC42T"
-              type="text" name="fieldC42T"
-              value="" size="8"></input-->
-    </td>
-    <td>
-       <!--input stl:attributes="value fieldC42U"
-              type="text" name="fieldC42U"
-              value="" size="8"></input-->
-    </td>
+    <td></td>
+    <td></td>   
     <td style="padding: 0px; text-align: center"> 
            <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_15" />
     </td>   
-    <td>
+    <td >
        <input stl:attributes="value fieldC42W"
               type="text" name="fieldC42W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
-    <td>
-       <!--input stl:attributes="value fieldC42X"
-              type="text" name="fieldC42X"
-              value="" size="8"></input-->
-    </td>
-    <td>
-       <!--input stl:attributes="value fieldC42Y"
-              type="text" name="fieldC42Y"
-              value="" size="8"></input-->
-    </td>
+    <td></td>
+    <td></td>
     <td>
        <input stl:attributes="value fieldC42Z"
               type="text" name="fieldC42Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C42">C42</b></td>
   </tr>
+  </table>
+  
+<h2>TOTAL PERSONNEL EN POSTE</h2>
+<table width="100%" >
+  <colgroup>
+    <col width="34%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="9%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="8%"/>
+    <col width="5%"/>
+   </colgroup>
   <tr>
-    <td colspan="10"><br/></td>
-  </tr>
-  <tr>
-    <th>TOTAL (C11 à C42)</th> 
+    <th><b>TOTAL (C11 à C42)</b> </th> 
     <td>
        <input stl:attributes="value fieldC43S"
               type="text" name="fieldC43S"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC43T"
               type="text" name="fieldC43T"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC43U"
               type="text" name="fieldC43U"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
-    <td>
-      <!--table><tr style="padding: 10px; text-align: left"><td>        <input type="radio" name="fieldC43V"                      value="1" style="font-size: 8pt"
-                     stl:attributes="checked fieldC43V" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input type="radio" name="fieldC43V"                value="0"
- style="font-size: 8pt"
-               stl:attributes="checked fieldC43V_not" />Non      </td>
-</tr></table-->    </td>
+    <td></td>
     <td>
        <input stl:attributes="value fieldC43W"
               type="text" name="fieldC43W"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC43X"
               type="text" name="fieldC43X"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC43Y"
               type="text" name="fieldC43Y"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td>
        <input stl:attributes="value fieldC43Z"
               type="text" name="fieldC43Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C43">C43</b></td>
   </tr>
 </table>
 
 
-<h2>C.5 NOMBRE TOTAL DE PERSONNES AYANT SUIVI UNE FIA (formation initiale d'application) </h2>
+<!--h2>C.5 NOMBRE TOTAL DE PERSONNES AYANT SUIVI UNE FIA (formation initiale d'application) </h2-->
 <table width="100%">
   <colgroup>
     <col width="91%"/>
-    <col width="4%"/>
+    <col width="8%"/>
     <col width="5%"/>
    </colgroup>
   
+ <tr rowspan="10"><br/></tr> 
+  
   <tr>
-    <th>DANS L'ANNÉE :</th> 
+    <th>NOMBRE TOTAL DE PERSONNES AYANT SUIVI UNE FIA (formation initiale d'application)</th> 
     <td>
        <input stl:attributes="value fieldC51Z"
               type="text" name="fieldC51Z"
-              value="" size="8"></input>
+              value="" size="8" style="text-align: right"></input>
     </td>
     <td><b stl:attributes="class _C51">C51</b></td>
   </tr>
 </table>
 <div>
     <p></p>
-    <p>(1)ETP : Equivalent temps plein.</p>
+    <p>(1)ETP : Equivalent temps plein (Exemle : 2.5) </p>
     <p>(2)cocher la case correspondante</p>
     <p>(3)PERSONNELS OU BENEVOLES QUALIFIES : personnes ayant suivi des formations (exemple : ABF, BDP, etc)</p>    
    
