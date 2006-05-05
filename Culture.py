@@ -49,7 +49,7 @@ from Handler import Handler
 class Culture(bibFolder, Root):
 
     class_id = 'Culture'
-    class_version = '20051020'
+    class_version = '20060505'
 
 
     _catalog_fields = Root._catalog_fields \
@@ -337,3 +337,8 @@ class Culture(bibFolder, Root):
                         metadata = Metadata(resource.get_resource(resource_name))
                         self.update_metadata(metadata)
                 
+
+    def update_20060505(self):
+        users = self.get_handler('users')
+        users.set_handler('VoirSCRIB', bibUser(password='BMBDP'))
+        users.save()
