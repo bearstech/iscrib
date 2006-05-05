@@ -556,7 +556,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
                         sum_of_not_NC = Integer(0)
                     elif key_type is Decimal:
                         sum_of_not_NC = Decimal(0)
-                    for real_val in [x for x in right_values if not x=='NC']:
+                    for real_val in [x for x in right_values
+                            if x not in ['NC', None]]:
                         sum_of_not_NC += real_val 
 
                     if sum_of_not_NC:
