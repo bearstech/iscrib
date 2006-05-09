@@ -1073,6 +1073,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         new_referer = deepcopy(referer)
 
         dependencies = self.get_dependencies()
+        sums = self.get_sums()
 
         notR = [] # list of empty field
         badT = [] # list of field of bad type
@@ -1102,6 +1103,10 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 # dependancies.keys() == ['A13', 'A12']
                 dependance = dependencies.get(key) # None if no dep
 
+                #########################################
+                # Field as the sum of other fields
+                sum = key in sums
+
                 ## Objectif : we set empty = True or False
                 ## Set value to '' if dep field is False    
                 # True : no dep AND no value AND no String/Unicode AND 
@@ -1119,7 +1124,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                         else:
                             if value:
                                 value = ''
-                    else:
+                    elif not sum:
                         empty = not str(value)
                         
                 if key in ['fieldK%sY' % i for i in range(17, 31)]:
