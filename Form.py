@@ -371,6 +371,15 @@ class Form(Handler, ikaaroText, WorkflowAware):
         # WWW
         if not namespace['field12']:
             namespace['field12'] = unicode(champs_adr[15], 'ISO-8859-1')
+        # INTERCOM
+        if not namespace['field13']:
+            namespace['field13'] = unicode(champs_adr[21], 'ISO-8859-1')
+        # GESTION
+        if not namespace['field14']:
+            namespace['field14'] = unicode(champs_adr[22], 'ISO-8859-1')
+        # GESTION_AUTRE
+        if not namespace['field15']:
+            namespace['field15'] = unicode(champs_adr[23], 'ISO-8859-1')
  
         # autofill Annexes
         if context.handler.is_BM():
@@ -861,8 +870,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
         query = ('update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
                  'voie="%(field3)s",cpbiblio="%(field4)s",ville="%(field5)s",'
                  'cedexb="%(field6)s",directeu="%(field7)s",tele="%(field9)s",'
-                 'fax="%(field10)s",mel="%(field11)s",www="%(field12)s" '
-                 'where code_ua=%(code_ua)s')
+                 'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
+                 'intercom="%(field13)s",gestion="%(field14)s",'
+                 'gestion_autre="%(field15)s" where code_ua=%(code_ua)s')
 
         for key, value in namespace.items():
             value = namespace[key]
