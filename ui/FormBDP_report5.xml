@@ -4,8 +4,14 @@
      id="formBiblio">
 <form action=";report" method="post">
 
-  <div align="right">
-
+<table width="100%">
+  <tr>
+  <td align="left">
+  
+  <a stl:if="not printable" href="#" style="color:red " alt="Aide"
+      onclick="window.open(';help5', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">? Consulter l'aide sur cette page</a>
+      </td>
+  <td align="right">
   <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
      name="Imprimer" href="#"
      onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
@@ -17,11 +23,14 @@
              style="background-color:rgb(145,191,255); border:0"
              stl:if="is_allowed_to_edit"></input>
     </stl:block>
-  </div>
+  </td>  
+  </tr>
+  </table>
 
-<h1>E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE(cf. notice explicative)
-    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
-      onclick="window.open(';help5', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+  
+<h1>E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE
+    <!--a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
+      onclick="window.open(';help5', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a-->
 </h1>
 <h2>E. 1 / 2 NOMBRE DE DOCUMENTS ACHETÉS  (hors périodiques)</h2>
 <table width="100%">
@@ -853,7 +862,7 @@
     <td><b stl:attributes="class _E63">E63</b></td>
   </tr>
 </table>
-<h2>E. 7  NOMBRE DE PÉRIODIQUES ACQUIS (ACHÂTS, DONS, LEGS?)</h2>
+<h2>E. 7  NOMBRE DE PÉRIODIQUES ACQUIS (ACHATS, DONS, LEGS)</h2>
 <table  width="100%">
   <colgroup>
     <col width="59%"/>
@@ -929,7 +938,7 @@
     <td><b stl:attributes="class _E73">E73</b></td>
   </tr>
 </table>
-<h2>E. 8  NOMBRE DE PÉRIODIQUES RETIRÉS DE L'INVENTAIREE.</h2>
+<h2>E. 8  NOMBRE DE PÉRIODIQUES RETIRÉS DE L'INVENTAIRE.</h2>
 <table  width="100%">
   <colgroup>
     <col width="59%"/>
@@ -986,7 +995,7 @@
   </tr>
 </table>
   <p style = "page-break-after:always "></p>
-<h2>E. 8 / 9  DÉPENSES D'ACQUISITION(en euros, sans  décimale)</h2>
+<h2>E. 8 / 9  DÉPENSES D'ACQUISITION (en euros, sans  décimale)</h2>
 <table  width="100%">
   <colgroup>
     <col width="59%"/>
@@ -1303,7 +1312,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL</b></th> 
+    <th><b>TOTAL (E85+E88+E91+E94)</b></th> 
     <td>
        <input stl:attributes="value fieldE98X"
               type="text" name="fieldE98X"

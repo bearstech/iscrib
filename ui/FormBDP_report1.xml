@@ -4,21 +4,30 @@
      id="formBiblio">
 <form action=";report" method="post" name="form">
  
-  <div align="right">
+ <table width="100%">
+  <tr>
+  <td align="left">
+  
+  <a stl:if="not printable" href="#" style="color:red " alt="Aide"
+      onclick="window.open(';help1', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">? Consulter l'aide sur cette page</a>
+      </td>
+  <td align="right">
   <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
      name="Imprimer" href="#"
      onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
      <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+   
    
     <stl:block if="not printable">
       <input type="submit" value="Enregistrer" 
              style="background-color:rgb(145,191,255); border:0"
              stl:if="is_allowed_to_edit"></input>
     </stl:block>
-  </div>
+  </td>  
+  </tr>
+  </table>
 <h1>A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales)
-    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
-      onclick="window.open(';help1', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+    
 </h1>
 <h2>A.1 DÉPENSES PROPRES A LA BDP</h2>
 <table width="100%">
