@@ -63,17 +63,25 @@ class FormBM(Form):
         namespace = Form.get_namespace(self)
         dept = self.name
         champs_adr = self.base_lect(dept)
-        print "champs_adr", champs_adr
 
         # INTERCOM
         if not namespace['field13']:
-            namespace['field13'] = unicode(champs_adr.get(21, ''), 'ISO-8859-1')
+            try:
+                namespace['field13'] = unicode(champs_adr[21], 'ISO-8859-1')
+            except IndexError:
+                namespace['field13'] = u""
         # GESTION
         if not namespace['field14']:
-            namespace['field14'] = unicode(champs_adr.get(22, ''), 'ISO-8859-1')
+            try:
+                namespace['field14'] = unicode(champs_adr[22], 'ISO-8859-1')
+            except IndexError:
+                namespace['field13'] = u""
         # GESTION_AUTRE
         if not namespace['field15']:
-            namespace['field15'] = unicode(champs_adr.get(23, ''), 'ISO-8859-1')
+            try:
+                namespace['field15'] = unicode(champs_adr[23], 'ISO-8859-1')
+            except IndexError:
+                namespace['field13'] = u""
 
         return namespace
 
