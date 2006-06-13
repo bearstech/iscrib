@@ -14,5 +14,6 @@ clean:
 	@find ./ -name "*.aux" -exec rm -f {} \;
 	@rm -f *.bak
 	@rm -f *.latex
+	@rm -f *.latex.orig
 	@rm -f *.toc
 
