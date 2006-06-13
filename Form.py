@@ -371,15 +371,6 @@ class Form(Handler, ikaaroText, WorkflowAware):
         # WWW
         if not namespace['field12']:
             namespace['field12'] = unicode(champs_adr[15], 'ISO-8859-1')
-        # INTERCOM
-        if not namespace['field13']:
-            namespace['field13'] = unicode(champs_adr[21], 'ISO-8859-1')
-        # GESTION
-        if not namespace['field14']:
-            namespace['field14'] = unicode(champs_adr[22], 'ISO-8859-1')
-        # GESTION_AUTRE
-        if not namespace['field15']:
-            namespace['field15'] = unicode(champs_adr[23], 'ISO-8859-1')
  
         # autofill Annexes
         if context.handler.is_BM():

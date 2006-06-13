@@ -59,6 +59,25 @@ class FormBM(Form):
         return u''.join(result)
 
 
+    def get_namespace(self):
+        namespace = Form.get_namespace(self)
+        dept = self.name
+        champs_adr = self.base_lect(dept)
+        print "champs_adr", champs_adr
+
+        # INTERCOM
+        if not namespace['field13']:
+            namespace['field13'] = unicode(champs_adr.get(21, ''), 'ISO-8859-1')
+        # GESTION
+        if not namespace['field14']:
+            namespace['field14'] = unicode(champs_adr.get(22, ''), 'ISO-8859-1')
+        # GESTION_AUTRE
+        if not namespace['field15']:
+            namespace['field15'] = unicode(champs_adr.get(23, ''), 'ISO-8859-1')
+
+        return namespace
+
+
     def get_subviews(self, name):
         reports = ['report_form0', 'report_form10', 'report_form11',
         'report_form1', 'report_form2', 'report_form3', 'report_form4',
