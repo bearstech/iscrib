@@ -2,6 +2,8 @@
 
 # Import from Python 
 from pprint import pprint, pformat
+import re
+import sets
 
 ##############################################################################
 # Controles 

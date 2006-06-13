@@ -19,6 +19,7 @@ from itools.zope import get_context
 # Import from iKaaro
 from Products.ikaaro import ui
 from Products.ikaaro.Text import Text as ikaaroText
+from Products.ikaaro.utils import UserError
 
 SqlHost = setup.sql.SqlHost
 SqlDatabase = setup.sql.SqlDatabase
