@@ -1,8 +1,8 @@
 all: doc
 
 doc:
-	#rest2latex README > README.latex 
-	rest2latex --use-latex-toc --use-latex-docinfo --language=fr README > README.latex
+	#rst2latex README > README.latex 
+	rst2latex --use-latex-toc --use-latex-docinfo --language=fr README > README.latex
 	patch < README.latex.patch
 	pdflatex README.latex 
 	pdflatex README.latex 
