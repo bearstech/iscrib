@@ -27,10 +27,7 @@ CREATE TABLE `adresse` (
   `ville` varchar(44) default NULL,
   `stdir` varchar(40) default NULL,
   `type` double default NULL
-  `intercom` char(1) default NULL,
-  `gestion` char(1) default NULL,
-  `gestion_autre` varchar(50) default NULL,
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 #
 # Contenu de la table `adresse`
