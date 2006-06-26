@@ -1143,25 +1143,25 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 # fill badT_missing and badT  lists
                 if empty:
                     notR.append(keyNumber)
+
+                # Encode and store
+                field_def = schema[key]
+                type = field_def[0]
+                default = field_def[1]
+                # check for forbiden caracters, 8bits like "é" 
+                # use unicode instead
+                try:
+                    value = type.decode(value)
+                except (ValueError, UnicodeEncodeError,
+                        decimal.InvalidOperation):
+                    badT_missing.append('badT_%s' % keyNumber)
+                    badT.append(u'%s: <b>%s</b>'
+                                % (keyNumber, unicode(value, 'UTF-8')))
+                    # we need the field and it's value in the
+                    #query even if the type is wrong
+                    badT_values[keyNumber + ':utf8:ustring'] = value
                 else:
-                    # Encode and store
-                    field_def = schema[key]
-                    type = field_def[0]
-                    default = field_def[1]
-                    # check for forbiden caracters, 8bits like "é" 
-                    # use unicode instead
-                    try:
-                        value = type.decode(value)
-                    except (ValueError, UnicodeEncodeError,
-                            decimal.InvalidOperation):
-                        badT_missing.append('badT_%s' % keyNumber)
-                        badT.append(u'%s: <b>%s</b>'
-                                    % (keyNumber, unicode(value, 'UTF-8')))
-                        # we need the field and it's value in the
-                        #query even if the type is wrong
-                        badT_values[keyNumber + ':utf8:ustring'] = value
-                    else:
-                        self.fields[key] = value
+                    self.fields[key] = value
 
         new_referer, msg = self.make_msg(new_referer=new_referer, notR=notR, 
                                          badT=badT, badT_missing=badT_missing,
