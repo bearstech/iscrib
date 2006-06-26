@@ -717,12 +717,14 @@ alertes = [('A', u"E61Z/E11Z = prix moyen d'un livre", 'E61Z / E11Z' ),
            ('B', u"E62Z/E12Z = prix moyen d'un phonogramme", 'E62Z / E12Z' ),
            ('C', u"E63Z/E13Z = prix moyen d'un vidéogramme", 'E63Z/E13Z' ),
            ('D', u"E64Z/E14Z = prix moyen d'un cédérom", 'E64Z/E14Z' ),
-	         ('E', (u"E73Z/E46X = prix moyen d'un document patrimonial"),
+	       ('E', u"E73Z/E46X = prix moyen d'un document patrimonial",
                   'E73Z/E46X' ),
            ('F', u"E68Z/E51Z = prix moyen d'un périodique imprimé", 
                  'int(E68Z)/int(E51Z)' ),
            ('G', u"E74Z - 5% <= A12+A24 <= E74Z + 5% = variation à +/- 5 % des dépenses documentaires", 
                  'int(E74Z) * 0.95 < A12+A24 < int(E74Z) * 1.05' ),
+           ('H', u"A11/C43X = coût moyen d'un agent pour votre bibliothèque ", 
+                 'int(A11)/float(C43X)' )
             ]
 
 ##############################################################################
