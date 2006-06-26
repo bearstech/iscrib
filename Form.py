@@ -372,13 +372,13 @@ class Form(Handler, ikaaroText, WorkflowAware):
         if not namespace['field12']:
             namespace['field12'] = unicode(champs_adr[15], 'ISO-8859-1')
         # INTERCOM
-        if not namespace.get('field13'):
+        if not namespace['field13']:
             namespace['field13'] = unicode(champs_adr[21], 'ISO-8859-1')
         # GESTION
-        if not namespace.get('field14'):
+        if not namespace['field14']:
             namespace['field14'] = unicode(champs_adr[22], 'ISO-8859-1')
         # GESTION_AUTRE
-        if not namespace.get('field15'):
+        if namespace.get('field15') is None:
             namespace['field15'] = unicode(champs_adr[23], 'ISO-8859-1')
  
         # autofill Annexes
@@ -863,7 +863,6 @@ class Form(Handler, ikaaroText, WorkflowAware):
 
     submitted2exported__access__ = Handler.is_admin
     def submitted2exported(self):
-        print "kikoo"
         cursor = get_cursor()
         namespace = self.get_namespace()
         schema = get_schema()
