@@ -372,10 +372,10 @@ class Form(Handler, ikaaroText, WorkflowAware):
         if not namespace['field12']:
             namespace['field12'] = unicode(champs_adr[15], 'ISO-8859-1')
         # INTERCOM
-        if not namespace['field13']:
+        if namespace.get('field13') is None:
             namespace['field13'] = unicode(champs_adr[21], 'ISO-8859-1')
         # GESTION
-        if not namespace['field14']:
+        if namespace.get('field14') is None:
             namespace['field14'] = unicode(champs_adr[22], 'ISO-8859-1')
         # GESTION_AUTRE
         if namespace.get('field15') is None:
