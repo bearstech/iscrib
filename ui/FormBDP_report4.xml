@@ -267,7 +267,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des cédéroms (D20 = D21)</b></th> 
+    <th><b>TOTAL des cédéroms (D20 + D21)</b></th> 
     <td>
        <input stl:attributes="value fieldD22X"
               type="text" name="fieldD22X"

@@ -1312,7 +1312,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (E85+E88+E91+E94)</b></th> 
+    <th><b>TOTAL (E85+E88+E91+E94+E95+E96+E97) </b></th> 
     <td>
        <input stl:attributes="value fieldE98X"
               type="text" name="fieldE98X"
