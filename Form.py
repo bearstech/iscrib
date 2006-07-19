@@ -1,4 +1,4 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com> 
 #
 # This program is free software; you can redistribute it and/or
@@ -120,20 +120,20 @@ def get_cursor():
         connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost, 
                                      user=SqlUser, passwd=SqlPasswd)
     except MySQLdb.OperationalError: 
-        raise UserError, u"La connexion à MySql ne s'est pas faite" 
+        raise UserError, u"La connexion Ã  MySql ne s'est pas faite" 
     return connection.cursor()
 
 
 
 def get_adresse(query):
-    """ Accès base adresse"""
+    """ AccÃ¨s base adresse"""
     try: 
         connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost, 
                                      user=SqlUser, passwd=SqlPasswd)
    #     connection = MySQLdb.connect(db='scrib', host='localhost', 
    #                              user='scrib' ,passwd='Scrib-2005*')
     except MySQLdb.OperationalError:
-        raise UserError, u"La connexion à MySql ne s'est pas faite" 
+        raise UserError, u"La connexion Ã  MySql ne s'est pas faite" 
     cursor = connection.cursor()
     cursor.execute(query)
     res = cursor.fetchall()
@@ -149,7 +149,7 @@ def get_adresse(query):
         cursor.close()
         connection.close()
     else:
-        raise UserError, u"La bibliothèque n'existe pas dans la base SQL"
+        raise UserError, u"La bibliothÃ¨que n'existe pas dans la base SQL"
         
     return adresse or ''
 
@@ -330,7 +330,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         namespace['is_complete'] = state == 'private' and is_ready
         namespace['is_finished'] = (state == 'pending' and self.is_admin())
 
-        # Récupération des champs de la base ADRESSE
+        # RÃ©cupÃ©ration des champs de la base ADRESSE
         dept = self.name
         champs_adr = self.base_lect(dept)
         code_ua = int(champs_adr[17])
@@ -457,9 +457,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
             else:
                 state = u'En cours'
         elif state == 'pending':
-            state = u'Terminé'
+            state = u'TerminÃ©'
         elif state == 'public':
-            state = u'Exporté'
+            state = u'ExportÃ©'
         return state 
 
     state = property(get_form_state, None, None, None)
@@ -468,7 +468,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
     #######################################################################
     # Control report
     controles_form__access__ = is_allowed_to_view
-    controles_form__label__ = u'Contrôle de la saisie'
+    controles_form__label__ = u'ContrÃ´le de la saisie'
     def controles_form(self):
         schema = get_schema()
         controles = get_controles()
@@ -479,7 +479,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         state = self.get_form_state()
         
         #############################################################
-        # Vérification des champs renseignés
+        # VÃ©rification des champs renseignÃ©s
         restype = []
         j = 0
         for name in schema:
@@ -500,7 +500,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 j += 1
                 restype.append({'chp': name[len('field'):],
                                 'num': j,
-                                'type': u'Non renseigné',
+                                'type': u'Non renseignÃ©',
                                 })
                     
         restype_for_sort = [(x['type'], x['chp'], x) for x in restype]
@@ -553,9 +553,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
                     empty = True
                     fail = False
             else:
-                # Si plusieurs termes de la somme sont égaux à NC, alors le
-                # total doit être strictement supérieur à la somme des termes
-                # différents de NC
+                # Si plusieurs termes de la somme sont Ã©gaux Ã  NC, alors le
+                # total doit Ãªtre strictement supÃ©rieur Ã  la somme des termes
+                # diffÃ©rents de NC
                 if not 'NC' in right_values:
                     pass
                 elif right_values.count('NC') > 1:
@@ -574,8 +574,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
                     else:
                         fail = not ( x1 == 'NC')
 
-                # Si un seul des termes de la somme est égal à NC, alors le
-                # total doit être égal à NC
+                # Si un seul des termes de la somme est Ã©gal Ã  NC, alors le
+                # total doit Ãªtre Ã©gal Ã  NC
                 elif right_values.count('NC') == 1:
                     fail = not (x1 == 'NC') 
 
@@ -772,12 +772,12 @@ class Form(Handler, ikaaroText, WorkflowAware):
         if self.is_BDP():
             to_addr = MailResponsableBDP
             subject = u'SCRIB-BDP : %s' % dep
-            body = u'La Bibliothèque %s a terminé son formulaire.' % self.name
+            body = u'La BibliothÃ¨que %s a terminÃ© son formulaire.' % self.name
         else:
             to_addr = unicode(MailResponsableBM, 'utf8')
             subject = u'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
             subject = u'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
-            body = u'La Bibliothèque %s (%s), du département %s, a terminé' \
+            body = u'La BibliothÃ¨que %s (%s), du dÃ©partement %s, a terminÃ©' \
                    u' son formulaire.'
             body = body % (self.name, self.get_title(), dep)
 
@@ -786,7 +786,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                                      'subject': subject,
                                      'body': body}
 
-        succsess_mgs = (u'Terminé, un e-mail est envoyé à votre correspondant ' 
+        succsess_mgs = (u'TerminÃ©, un e-mail est envoyÃ© Ã  votre correspondant ' 
                         u'DLL.')
         comeback_msg = self.send_email(SMTPServer=SMTPServer, 
                                        from_addr=report_email, 
@@ -797,9 +797,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
         self.scrib_log(event='email sent', content=comeback_msg)
 
         # recipe
-        r_subject = u'Accusé de réception, DLL'
-        r_body = (u"Votre rapport annuel a bien été reçu par votre "
-                  u"correspondant à la DLL. \n\nNous vous remercions "
+        r_subject = u'AccusÃ© de rÃ©ception, DLL'
+        r_body = (u"Votre rapport annuel a bien Ã©tÃ© reÃ§u par votre "
+                  u"correspondant Ã  la DLL. \n\nNous vous remercions "
                   u"de votre envoi.  Cordialement.")
         r_message = message_pattern % {'to_addr': report_email,
                                        'from_addr': to_addr,
@@ -844,17 +844,17 @@ class Form(Handler, ikaaroText, WorkflowAware):
         try:
             mail = smtplib.SMTP(SMTPServer)
         except socket.error:
-            msg = u'La connexion au serveur de mail a échoué.'
+            msg = u'La connexion au serveur de mail a Ã©chouÃ©.'
         else:
             try:
                 message = message.encode('latin1')
                 mail.sendmail(from_addr, to_addr, message)
             except smtplib.SMTPRecipientsRefused:
-                msg = u'La connexion au serveur de mail a échoué.'
+                msg = u'La connexion au serveur de mail a Ã©chouÃ©.'
             except UnicodeEncodeError:
-                msg = (u"L'adresse email (%s) comporte des caractères "
+                msg = (u"L'adresse email (%s) comporte des caractÃ¨res "
                        u"non conformes. "
-                       u"Le message n'a pas été envoyé") % from_addr
+                       u"Le message n'a pas Ã©tÃ© envoyÃ©") % from_addr
             else:
                 msg = succsess_mgs
             #mail.quit()
@@ -875,7 +875,6 @@ class Form(Handler, ikaaroText, WorkflowAware):
                  'gestion_autre="%(field15)s" where code_ua=%(code_ua)s')
 
         for key, value in namespace.items():
-            value = namespace[key]
             field_def = schema.get(key)
             if field_def is not None:
                 ftype = field_def[0]
@@ -907,8 +906,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
             cursor.execute(query)
         except MySQLdb.OperationalError, message:
             comeback('controles_form', 
-                     u'Un problème est survenu durant la connexion'
-                     u' à la base de donnée %s' % message)
+                     u'Un problÃ¨me est survenu durant la connexion'
+                     u' Ã  la base de donnÃ©e %s' % message)
             return
         
         cursor.execute('commit')
@@ -931,6 +930,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 if value in ('', None, 'NC'):
                     value = "Null"
                 elif field_type is IO.Unicode:
+                    value = value.replace(u"â‚¬", u"eur")
+                    value = value.encode('latin1', 'replace')
                     value = "'%s'" % value.replace("'", "\\'")
                 elif field_type is Integer:
                     value = str(value)
@@ -961,7 +962,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         root = get_context().root
         root.reindex_handler(self)
         
-        comeback('controles_form', u'Le rapport a été exporté')
+        comeback('controles_form', u'Le rapport a Ã©tÃ© exportÃ©')
 
 
     get_dependencies__access__ = 1
@@ -1038,7 +1039,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                else:
                    # do not fill annexes
                    if not keyNumber.startswith('J'):
-                       value = u'coué'
+                       value = u'couÃ©'
                    else:
                        value = u''
            elif field_type is CultureTypes.Integer:
@@ -1148,7 +1149,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 field_def = schema[key]
                 type = field_def[0]
                 default = field_def[1]
-                # check for forbiden caracters, 8bits like "é" 
+                # check for forbiden caracters, 8bits like "Ã©" 
                 # use unicode instead
                 try:
                     value = type.decode(value)
@@ -1177,7 +1178,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             notR = [unicode(x, 'UTF-8') for x in notR]
 
             msg_notR = (u"Les rubriques suivantes ne sont pas "
-                        u"renseignées : %s") %  ', '.join(notR)
+                        u"renseignÃ©es : %s") %  ', '.join(notR)
             # convert to string so No Pb with messages for comeback
             msg_notR = msg_notR.encode('UTF-8')
 
@@ -1197,7 +1198,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             new_referer.query.update(dic)
                     
         if not (badT or notR):
-            msg = u"Formulaire enregistré."
+            msg = u"Formulaire enregistrÃ©."
         elif badT and not notR:
             msg = msg_badT 
         elif notR and not badT:
@@ -1261,13 +1262,13 @@ class Form(Handler, ikaaroText, WorkflowAware):
         namespace = self.get_namespace()
         is_finished = namespace['is_finished']
         is_complete = namespace['is_complete']
-        is_exported = self.state == u'Exporté'
+        is_exported = self.state == u'ExportÃ©'
         namespace['show'] = is_finished or is_complete or is_exported
         handler = ui.get_handler('culture/Form_report_csv.xml')
         return handler.stl(namespace) 
 
     comments__access__ = is_allowed_to_view
-    comments__label__ = u'Rapport Bibliothèques'
+    comments__label__ = u'Rapport BibliothÃ¨ques'
     comments__sublabel__ = u'Commentaires'
     def comments(self, view=None, **kw):
         return self.get_ns_and_h('Form_comments.xml', 
