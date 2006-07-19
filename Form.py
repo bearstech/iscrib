@@ -879,7 +879,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
             if field_def is not None:
                 ftype = field_def[0]
                 if ftype is IO.Unicode:
-                    value = value.encode('latin1')
+                    if isinstance(value, unicode):
+                        value = value.replace(u"€", u"eur")
+                        value = value.encode('latin1')
                     namespace[key] = value
                 
         query = query % namespace
@@ -930,8 +932,6 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 if value in ('', None, 'NC'):
                     value = "Null"
                 elif field_type is IO.Unicode:
-                    value = value.replace(u"€", u"eur")
-                    value = value.encode('latin1', 'replace')
                     value = "'%s'" % value.replace("'", "\\'")
                 elif field_type is Integer:
                     value = str(value)
