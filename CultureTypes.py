@@ -63,10 +63,14 @@ class Decimal(object):
 
 
     def __int__(self):
-        return self.value
+        if self.value == 'NC':
+            return 'NC'
+        return int(self.value)
 
 
     def __float__(self):
+        if self.value == 'NC':
+            return 'NC'
         return float(self.value)
 
 
@@ -133,6 +137,8 @@ class Integer(object):
 
 
     def __float__(self):
+        if self.value == 'NC':
+            return 'NC'
         return float(self.value)
 
 
