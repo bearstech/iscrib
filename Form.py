@@ -263,6 +263,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
             if value is None:
                 # is the value is not in request, take it in fields 
                 value = self.fields.get(name, default)
+            if type is IO.Unicode:
+                if value is not None:
+                    value = value.replace(u'"', u'&quot;')
             namespace[name] = value
             # If name is 'fieldA23', add 'A23'
             if name.startswith('field'):
@@ -879,8 +882,11 @@ class Form(Handler, ikaaroText, WorkflowAware):
             if field_def is not None:
                 ftype = field_def[0]
                 if ftype is IO.Unicode:
-                    if isinstance(value, unicode):
+                    if value is not None:
                         value = value.replace(u"€", u"eur")
+                        value = value.replace(u'"', u'\\"')
+                        value = value.replace(u"&quot;", u'\\"')
+                        value = value.replace(u"'", u"\\'")
                         value = value.encode('latin1')
                     namespace[key] = value
                 
@@ -932,7 +938,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 if value in ('', None, 'NC'):
                     value = "Null"
                 elif field_type is IO.Unicode:
-                    value = "'%s'" % value.replace("'", "\\'")
+                    value = "'%s'" % value
                 elif field_type is Integer:
                     value = str(value)
                 elif field_type == IO.Boolean:
