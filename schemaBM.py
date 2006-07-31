@@ -1,23 +1,20 @@
 # -*- coding: ISO-8859-1 -*-
 
-# Import from Python 
-from pprint import pprint, pformat
-
 # Import from itools
-from itools.handlers import IO
+from itools.types import Unicode, Boolean
 
 # Import from Culture 
 from CultureTypes import Checkboxes, Integer, Decimal, EPCI_Statut
 from schema import sum2controle, checkBib
 
-schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
-          'field3': (IO.Unicode, ''), 'field4': (IO.Unicode, ''),
-          'field5': (IO.Unicode, ''), 'field6': (IO.Unicode, ''),
-          'field7': (IO.Unicode, ''), 'field8': (IO.Unicode, ''),
-          'field9': (IO.Unicode, ''), 'field10': (IO.Unicode, ''),
-          'field11': (IO.Unicode, ''),'field12': (IO.Unicode, ''),
+schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
+          'field3': (Unicode, ''), 'field4': (Unicode, ''),
+          'field5': (Unicode, ''), 'field6': (Unicode, ''),
+          'field7': (Unicode, ''), 'field8': (Unicode, ''),
+          'field9': (Unicode, ''), 'field10': (Unicode, ''),
+          'field11': (Unicode, ''),'field12': (Unicode, ''),
           'field13': (Checkboxes, ''), 'field14': (Checkboxes, ''),
-          'field15': (IO.Unicode, ''), 
+          'field15': (Unicode, ''), 
           ## A.1 DÉPENSES PROPRES A LA BIBLIOTHÈQUE
           'fieldA11': (Integer, None), 'fieldA12': (Integer, None),
           'fieldA13': (Integer, None), 'fieldA14': (Integer, None),
@@ -40,32 +37,32 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
           'fieldB12Z': (Integer, None, {'sum':('fieldB12X', 'fieldB12Y')}), 
           'fieldB13X': (Integer, None), 'fieldB13Y': (Integer, None),
           'fieldB13Z': (Integer, None, {'sum':('fieldB13X', 'fieldB13Y')}), 
-          'fieldB14': (IO.Boolean, None),
+          'fieldB14': (Boolean, None),
           'fieldB15': (Integer, None),
           #
           'fieldB21': (Integer, None), 'fieldB22': (Integer, None),
           'fieldB23': (Integer, None),
           #
-          'fieldB31': (IO.Boolean, '', {'depend_field' : ('fieldB32',) }),
-          'fieldB32': (IO.Unicode, ''),
-          'fieldB33': (IO.Boolean, '', {'depend_field' : ('fieldB34',) }),
+          'fieldB31': (Boolean, '', {'depend_field' : ('fieldB32',) }),
+          'fieldB32': (Unicode, ''),
+          'fieldB33': (Boolean, '', {'depend_field' : ('fieldB34',) }),
           'fieldB34': (Integer, None),
-          'fieldB35': (IO.Boolean, '', {'depend_field' : ('fieldB36',) }),
+          'fieldB35': (Boolean, '', {'depend_field' : ('fieldB36',) }),
           'fieldB36': (Integer, ''),
           'fieldB37X': (Integer, None), 'fieldB37Y': (Integer, None), 
           'fieldB38X': (Integer, None), 'fieldB38Y': (Integer, None), 
           'fieldB39X': (Integer, None, {'sum' : ('fieldB37X', 'fieldB38X',)}),
           'fieldB39Y': (Integer, None, {'sum' : ('fieldB37Y', 'fieldB38Y',)}),
-          'fieldB40': (IO.Boolean, '', 
+          'fieldB40': (Boolean, '', 
                        {'depend_field' : ('fieldB41','fieldB42') }),
           #
-          'fieldB41': (IO.Boolean, ''), 'fieldB42': (IO.Boolean, ''),
-          'fieldB43': (IO.Boolean, '', 
+          'fieldB41': (Boolean, ''), 'fieldB42': (Boolean, ''),
+          'fieldB43': (Boolean, '', 
                        {'depend_field' : ('fieldB44','fieldB45', 
                                           'fieldB46', 'fieldB47') }),
-          'fieldB44': (IO.Boolean, ''),
-          'fieldB45': (IO.Boolean, ''), 'fieldB46': (IO.Boolean, ''),
-          'fieldB47': (IO.Unicode, ''),
+          'fieldB44': (Boolean, ''),
+          'fieldB45': (Boolean, ''), 'fieldB46': (Boolean, ''),
+          'fieldB47': (Unicode, ''),
           # C  PERSONNEL EN POSTE AU 31 DECEMBRE 2003
           'fieldC11W': (Integer, None), 
           'fieldC11X': (Decimal, None),
@@ -323,19 +320,19 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
           'fieldE74Z': (Integer, None, {'sum': ('fieldE74X', 'fieldE74Y')}),
           # F- 6 COOPÉRATION ET RÉSEAU 
           #
-          'fieldF11': (IO.Boolean, ''),
-          'fieldF12': (IO.Boolean, '', {'depend_field' : ('fieldF13',),}),
-          'fieldF13': (IO.Unicode, ''),
-          'fieldF14': (IO.Boolean, '', {'depend_field' : ('fieldF15',),}),
-          'fieldF15': (IO.Unicode, ''),
-          'fieldF16': (IO.Boolean, '', {'depend_field' : 
+          'fieldF11': (Boolean, ''),
+          'fieldF12': (Boolean, '', {'depend_field' : ('fieldF13',),}),
+          'fieldF13': (Unicode, ''),
+          'fieldF14': (Boolean, '', {'depend_field' : ('fieldF15',),}),
+          'fieldF15': (Unicode, ''),
+          'fieldF16': (Boolean, '', {'depend_field' : 
                                             ('fieldF17', 'fieldF18', 
                                              'fieldF19', 'fieldF20',)}), 
-          'fieldF17': (IO.Boolean, ''), 'fieldF18': (IO.Boolean, ''), 
-          'fieldF19': (IO.Boolean, ''), 'fieldF20': (IO.Boolean, ''), 
+          'fieldF17': (Boolean, ''), 'fieldF18': (Boolean, ''), 
+          'fieldF19': (Boolean, ''), 'fieldF20': (Boolean, ''), 
           
-          'fieldF21': (IO.Boolean, ''),
-          'fieldF22': (IO.Boolean, ''), 'fieldF23': (IO.Boolean, ''),
+          'fieldF21': (Boolean, ''),
+          'fieldF22': (Boolean, ''), 'fieldF23': (Boolean, ''),
           
           # G-  ACTIVITÉS DE LA BIBLIOTHÈQUE
           #
@@ -417,32 +414,32 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
           'fieldG51': (Integer, None, {'sum': ('fieldG49', 'fieldG50')}), 
           # H- SERVICES OFFERTS PAR LA BIBLIOTHÈQUE 
           #
-          'fieldH11': (IO.Boolean, ''), 'fieldH12': (IO.Boolean, ''),
-          'fieldH13': (IO.Boolean, ''), 'fieldH14': (IO.Boolean, ''),
-          'fieldH15': (IO.Boolean, ''),
-          'fieldH16': (IO.Boolean, '', {'depend_field' : ('fieldH17',
+          'fieldH11': (Boolean, ''), 'fieldH12': (Boolean, ''),
+          'fieldH13': (Boolean, ''), 'fieldH14': (Boolean, ''),
+          'fieldH15': (Boolean, ''),
+          'fieldH16': (Boolean, '', {'depend_field' : ('fieldH17',
                                                               'fieldH18',
                                                               'fieldH19',
                                                               'fieldH20',)}),
           'fieldH17': (Integer, None), 'fieldH18': (Integer, None),
           'fieldH19': (Integer, None), 'fieldH20': (Integer, None),
-          'fieldH21': (IO.Unicode, None),
+          'fieldH21': (Unicode, None),
           #
-          'fieldH31': (IO.Boolean, '', 
+          'fieldH31': (Boolean, '', 
                        {'depend_field' : ('fieldH32', 'fieldH33', 'fieldH34',
                                           'fieldH35', 'fieldH36', 'fieldH37')}),
           #
           #
-          'fieldH32': (IO.Boolean, ''),
-          'fieldH33': (IO.Boolean, ''), 'fieldH34': (IO.Boolean, ''),
-          'fieldH35': (IO.Boolean, ''), 'fieldH36': (IO.Boolean, ''),
-          'fieldH37': (IO.Boolean, ''),
+          'fieldH32': (Boolean, ''),
+          'fieldH33': (Boolean, ''), 'fieldH34': (Boolean, ''),
+          'fieldH35': (Boolean, ''), 'fieldH36': (Boolean, ''),
+          'fieldH37': (Boolean, ''),
           
           'fieldH38X': (Integer, None), 'fieldH38Y': (Integer, None),
           'fieldH38Z': (Integer, None, {'sum': ('fieldH38X', 'fieldH38Y')}),
-          'fieldH39' : (IO.Boolean, None),
-          'fieldH41' : (IO.Boolean, None, {'depend_field' : ('fieldH42',)}),
-          'fieldH42': (IO.Unicode, None), 
+          'fieldH39' : (Boolean, None),
+          'fieldH41' : (Boolean, None, {'depend_field' : ('fieldH42',)}),
+          'fieldH42': (Unicode, None), 
           #
           'fieldH52Y': (Integer, None), 'fieldH52Z': (Integer, None),
           'fieldH53Y': (Integer, None), 'fieldH53Z': (Integer, None),
@@ -471,8 +468,8 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
                                                 )}), 
           # I-  ANIMATIONS, PUBLICATIONS ET FORMATION
           #
-          'fieldI11': (IO.Boolean, ''), 'fieldI12': (IO.Boolean, ''),
-          'fieldI13': (IO.Boolean, '', 
+          'fieldI11': (Boolean, ''), 'fieldI12': (Boolean, ''),
+          'fieldI13': (Boolean, '', 
                        {'depend_field' : ('fieldI14', 'fieldI15', 'fieldI16', 
                         'fieldI17', 'fieldI18', 'fieldI19', 'fieldI20', 
                         'fieldI21')}), 
@@ -482,12 +479,12 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
           'fieldI19': (Integer, None), 'fieldI20': (Integer, None),
           'fieldI21': (Integer, None),
           #
-          'fieldI31': (IO.Boolean, None),
-          'fieldI32': (IO.Boolean, None),
-          'fieldI33': (IO.Boolean, None), 
-          'fieldI34': (IO.Boolean, None),
+          'fieldI31': (Boolean, None),
+          'fieldI32': (Boolean, None),
+          'fieldI33': (Boolean, None), 
+          'fieldI34': (Boolean, None),
           #
-          'fieldI35': (IO.Boolean, '', 
+          'fieldI35': (Boolean, '', 
                        {'depend_field' : ('fieldI36', 'fieldI37',
                                           'fieldI38', 'fieldI39')}),
           'fieldI36': (Integer, None), 'fieldI37': (Integer, None), 
@@ -507,195 +504,195 @@ schema = {'field1': (IO.Unicode, ''), 'field2': (IO.Unicode, ''),
           'fieldI48Y': (Integer, None), 'fieldI48Z': (Integer, None),
           # J- Annex 
           #
-          'fieldJ1T' :(IO.Unicode, ''), 'fieldJ1U' :(IO.Unicode, ''),
-          'fieldJ1V' :(IO.Unicode, ''), 'fieldJ1W' :(IO.Unicode, ''),
-          'fieldJ1X' :(IO.Unicode, ''), 'fieldJ1Y' :(IO.Unicode, ''), 
-          'fieldJ1Z' :(IO.Unicode, ''),
+          'fieldJ1T' :(Unicode, ''), 'fieldJ1U' :(Unicode, ''),
+          'fieldJ1V' :(Unicode, ''), 'fieldJ1W' :(Unicode, ''),
+          'fieldJ1X' :(Unicode, ''), 'fieldJ1Y' :(Unicode, ''), 
+          'fieldJ1Z' :(Unicode, ''),
           #
           #
-          'fieldJ2T' :(IO.Unicode, ''), 'fieldJ2U' :(IO.Unicode, ''),
-          'fieldJ2V' :(IO.Unicode, ''), 'fieldJ2W' :(IO.Unicode, ''),
-          'fieldJ2X' :(IO.Unicode, ''), 'fieldJ2Y' :(IO.Unicode, ''), 
-          'fieldJ2Z' :(IO.Unicode, ''),
+          'fieldJ2T' :(Unicode, ''), 'fieldJ2U' :(Unicode, ''),
+          'fieldJ2V' :(Unicode, ''), 'fieldJ2W' :(Unicode, ''),
+          'fieldJ2X' :(Unicode, ''), 'fieldJ2Y' :(Unicode, ''), 
+          'fieldJ2Z' :(Unicode, ''),
           #
           #
-          'fieldJ3T' :(IO.Unicode, ''), 'fieldJ3U' :(IO.Unicode, ''),
-          'fieldJ3V' :(IO.Unicode, ''), 'fieldJ3W' :(IO.Unicode, ''),
-          'fieldJ3X' :(IO.Unicode, ''), 'fieldJ3Y' :(IO.Unicode, ''), 
-          'fieldJ3Z' :(IO.Unicode, ''),
+          'fieldJ3T' :(Unicode, ''), 'fieldJ3U' :(Unicode, ''),
+          'fieldJ3V' :(Unicode, ''), 'fieldJ3W' :(Unicode, ''),
+          'fieldJ3X' :(Unicode, ''), 'fieldJ3Y' :(Unicode, ''), 
+          'fieldJ3Z' :(Unicode, ''),
           #
           #
-          'fieldJ4T' :(IO.Unicode, ''), 'fieldJ4U' :(IO.Unicode, ''),
-          'fieldJ4V' :(IO.Unicode, ''), 'fieldJ4W' :(IO.Unicode, ''),
-          'fieldJ4X' :(IO.Unicode, ''), 'fieldJ4Y' :(IO.Unicode, ''), 
-          'fieldJ4Z' :(IO.Unicode, ''),
+          'fieldJ4T' :(Unicode, ''), 'fieldJ4U' :(Unicode, ''),
+          'fieldJ4V' :(Unicode, ''), 'fieldJ4W' :(Unicode, ''),
+          'fieldJ4X' :(Unicode, ''), 'fieldJ4Y' :(Unicode, ''), 
+          'fieldJ4Z' :(Unicode, ''),
           #
           #
-          'fieldJ5T' :(IO.Unicode, ''), 'fieldJ5U' :(IO.Unicode, ''),
-          'fieldJ5V' :(IO.Unicode, ''), 'fieldJ5W' :(IO.Unicode, ''),
-          'fieldJ5X' :(IO.Unicode, ''), 'fieldJ5Y' :(IO.Unicode, ''), 
-          'fieldJ5Z' :(IO.Unicode, ''),
+          'fieldJ5T' :(Unicode, ''), 'fieldJ5U' :(Unicode, ''),
+          'fieldJ5V' :(Unicode, ''), 'fieldJ5W' :(Unicode, ''),
+          'fieldJ5X' :(Unicode, ''), 'fieldJ5Y' :(Unicode, ''), 
+          'fieldJ5Z' :(Unicode, ''),
           #
           #
-          'fieldJ6T' :(IO.Unicode, ''), 'fieldJ6U' :(IO.Unicode, ''),
-          'fieldJ6V' :(IO.Unicode, ''), 'fieldJ6W' :(IO.Unicode, ''),
-          'fieldJ6X' :(IO.Unicode, ''), 'fieldJ6Y' :(IO.Unicode, ''), 
-          'fieldJ6Z' :(IO.Unicode, ''),
+          'fieldJ6T' :(Unicode, ''), 'fieldJ6U' :(Unicode, ''),
+          'fieldJ6V' :(Unicode, ''), 'fieldJ6W' :(Unicode, ''),
+          'fieldJ6X' :(Unicode, ''), 'fieldJ6Y' :(Unicode, ''), 
+          'fieldJ6Z' :(Unicode, ''),
           #
           #
-          'fieldJ7T' :(IO.Unicode, ''), 'fieldJ7U' :(IO.Unicode, ''),
-          'fieldJ7V' :(IO.Unicode, ''), 'fieldJ7W' :(IO.Unicode, ''),
-          'fieldJ7X' :(IO.Unicode, ''), 'fieldJ7Y' :(IO.Unicode, ''), 
-          'fieldJ7Z' :(IO.Unicode, ''),
+          'fieldJ7T' :(Unicode, ''), 'fieldJ7U' :(Unicode, ''),
+          'fieldJ7V' :(Unicode, ''), 'fieldJ7W' :(Unicode, ''),
+          'fieldJ7X' :(Unicode, ''), 'fieldJ7Y' :(Unicode, ''), 
+          'fieldJ7Z' :(Unicode, ''),
           #
           #
-          'fieldJ8T' :(IO.Unicode, ''), 'fieldJ8U' :(IO.Unicode, ''),
-          'fieldJ8V' :(IO.Unicode, ''), 'fieldJ8W' :(IO.Unicode, ''),
-          'fieldJ8X' :(IO.Unicode, ''), 'fieldJ8Y' :(IO.Unicode, ''), 
-          'fieldJ8Z' :(IO.Unicode, ''),
+          'fieldJ8T' :(Unicode, ''), 'fieldJ8U' :(Unicode, ''),
+          'fieldJ8V' :(Unicode, ''), 'fieldJ8W' :(Unicode, ''),
+          'fieldJ8X' :(Unicode, ''), 'fieldJ8Y' :(Unicode, ''), 
+          'fieldJ8Z' :(Unicode, ''),
           #
           #
-          'fieldJ9T' :(IO.Unicode, ''), 'fieldJ9U' :(IO.Unicode, ''),
-          'fieldJ9V' :(IO.Unicode, ''), 'fieldJ9W' :(IO.Unicode, ''),
-          'fieldJ9X' :(IO.Unicode, ''), 'fieldJ9Y' :(IO.Unicode, ''), 
-          'fieldJ9Z' :(IO.Unicode, ''),
+          'fieldJ9T' :(Unicode, ''), 'fieldJ9U' :(Unicode, ''),
+          'fieldJ9V' :(Unicode, ''), 'fieldJ9W' :(Unicode, ''),
+          'fieldJ9X' :(Unicode, ''), 'fieldJ9Y' :(Unicode, ''), 
+          'fieldJ9Z' :(Unicode, ''),
           #
           #
-          'fieldJ10T' :(IO.Unicode, ''), 'fieldJ10U' :(IO.Unicode, ''),
-          'fieldJ10V' :(IO.Unicode, ''), 'fieldJ10W' :(IO.Unicode, ''),
-          'fieldJ10X' :(IO.Unicode, ''), 'fieldJ10Y' :(IO.Unicode, ''), 
-          'fieldJ10Z' :(IO.Unicode, ''),
+          'fieldJ10T' :(Unicode, ''), 'fieldJ10U' :(Unicode, ''),
+          'fieldJ10V' :(Unicode, ''), 'fieldJ10W' :(Unicode, ''),
+          'fieldJ10X' :(Unicode, ''), 'fieldJ10Y' :(Unicode, ''), 
+          'fieldJ10Z' :(Unicode, ''),
           #
           #
-          'fieldJ11T' :(IO.Unicode, ''), 'fieldJ11U' :(IO.Unicode, ''),
-          'fieldJ11V' :(IO.Unicode, ''), 'fieldJ11W' :(IO.Unicode, ''),
-          'fieldJ11X' :(IO.Unicode, ''), 'fieldJ11Y' :(IO.Unicode, ''), 
-          'fieldJ11Z' :(IO.Unicode, ''),
+          'fieldJ11T' :(Unicode, ''), 'fieldJ11U' :(Unicode, ''),
+          'fieldJ11V' :(Unicode, ''), 'fieldJ11W' :(Unicode, ''),
+          'fieldJ11X' :(Unicode, ''), 'fieldJ11Y' :(Unicode, ''), 
+          'fieldJ11Z' :(Unicode, ''),
           #
           #
-          'fieldJ12T' :(IO.Unicode, ''), 'fieldJ12U' :(IO.Unicode, ''),
-          'fieldJ12V' :(IO.Unicode, ''), 'fieldJ12W' :(IO.Unicode, ''),
-          'fieldJ12X' :(IO.Unicode, ''), 'fieldJ12Y' :(IO.Unicode, ''), 
-          'fieldJ12Z' :(IO.Unicode, ''),
+          'fieldJ12T' :(Unicode, ''), 'fieldJ12U' :(Unicode, ''),
+          'fieldJ12V' :(Unicode, ''), 'fieldJ12W' :(Unicode, ''),
+          'fieldJ12X' :(Unicode, ''), 'fieldJ12Y' :(Unicode, ''), 
+          'fieldJ12Z' :(Unicode, ''),
           #
           #
-          'fieldJ13T' :(IO.Unicode, ''), 'fieldJ13U' :(IO.Unicode, ''),
-          'fieldJ13V' :(IO.Unicode, ''), 'fieldJ13W' :(IO.Unicode, ''),
-          'fieldJ13X' :(IO.Unicode, ''), 'fieldJ13Y' :(IO.Unicode, ''), 
-          'fieldJ13Z' :(IO.Unicode, ''),
+          'fieldJ13T' :(Unicode, ''), 'fieldJ13U' :(Unicode, ''),
+          'fieldJ13V' :(Unicode, ''), 'fieldJ13W' :(Unicode, ''),
+          'fieldJ13X' :(Unicode, ''), 'fieldJ13Y' :(Unicode, ''), 
+          'fieldJ13Z' :(Unicode, ''),
           #
-          'fieldJ14T' :(IO.Unicode, ''), 'fieldJ14U' :(IO.Unicode, ''),
-          'fieldJ14V' :(IO.Unicode, ''), 'fieldJ14W' :(IO.Unicode, ''),
-          'fieldJ14X' :(IO.Unicode, ''), 'fieldJ14Y' :(IO.Unicode, ''), 
-          'fieldJ14Z' :(IO.Unicode, ''),
+          'fieldJ14T' :(Unicode, ''), 'fieldJ14U' :(Unicode, ''),
+          'fieldJ14V' :(Unicode, ''), 'fieldJ14W' :(Unicode, ''),
+          'fieldJ14X' :(Unicode, ''), 'fieldJ14Y' :(Unicode, ''), 
+          'fieldJ14Z' :(Unicode, ''),
           #
           #
-          'fieldJ15T' :(IO.Unicode, ''), 'fieldJ15U' :(IO.Unicode, ''),
-          'fieldJ15V' :(IO.Unicode, ''), 'fieldJ15W' :(IO.Unicode, ''),
-          'fieldJ15X' :(IO.Unicode, ''), 'fieldJ15Y' :(IO.Unicode, ''), 
-          'fieldJ15Z' :(IO.Unicode, ''),
+          'fieldJ15T' :(Unicode, ''), 'fieldJ15U' :(Unicode, ''),
+          'fieldJ15V' :(Unicode, ''), 'fieldJ15W' :(Unicode, ''),
+          'fieldJ15X' :(Unicode, ''), 'fieldJ15Y' :(Unicode, ''), 
+          'fieldJ15Z' :(Unicode, ''),
           #
           # K- EPCI
-          'fieldK1': (IO.Unicode, ''), 'fieldK2': (IO.Unicode, None),
+          'fieldK1': (Unicode, ''), 'fieldK2': (Unicode, None),
           'fieldK3': (Checkboxes, '1'), 
-          'fieldK6': (IO.Unicode, ''),
-          'fieldK7': (IO.Unicode, ''), 'fieldK8': (IO.Unicode, ''),
-          'fieldK9': (IO.Unicode, ''), 'fieldK10': (IO.Unicode, ''),
-          'fieldK11': (IO.Unicode, ''), 'fieldK12': (IO.Unicode, ''),
-          'fieldK13': (IO.Unicode, ''), 'fieldK14': (IO.Unicode, ''),
-          'fieldK15': (IO.Unicode, ''), 'fieldK16': (IO.Unicode, ''),
+          'fieldK6': (Unicode, ''),
+          'fieldK7': (Unicode, ''), 'fieldK8': (Unicode, ''),
+          'fieldK9': (Unicode, ''), 'fieldK10': (Unicode, ''),
+          'fieldK11': (Unicode, ''), 'fieldK12': (Unicode, ''),
+          'fieldK13': (Unicode, ''), 'fieldK14': (Unicode, ''),
+          'fieldK15': (Unicode, ''), 'fieldK16': (Unicode, ''),
           #
           #
-          'fieldK17W' :(IO.Unicode, None),
-          'fieldK17X' :(IO.Unicode, ''),
-          'fieldK17Y' :(IO.Unicode, None),
+          'fieldK17W' :(Unicode, None),
+          'fieldK17X' :(Unicode, ''),
+          'fieldK17Y' :(Unicode, None),
           'fieldK17Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK18W' :(IO.Unicode, None),
-          'fieldK18X' :(IO.Unicode, ''),
-          'fieldK18Y' :(IO.Unicode, None),
+          'fieldK18W' :(Unicode, None),
+          'fieldK18X' :(Unicode, ''),
+          'fieldK18Y' :(Unicode, None),
           'fieldK18Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK19W' :(IO.Unicode, None),
-          'fieldK19X' :(IO.Unicode, ''),
-          'fieldK19Y' :(IO.Unicode, None),
+          'fieldK19W' :(Unicode, None),
+          'fieldK19X' :(Unicode, ''),
+          'fieldK19Y' :(Unicode, None),
           'fieldK19Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK20W' :(IO.Unicode, None),
-          'fieldK20X' :(IO.Unicode, ''),
-          'fieldK20Y' :(IO.Unicode, None),
+          'fieldK20W' :(Unicode, None),
+          'fieldK20X' :(Unicode, ''),
+          'fieldK20Y' :(Unicode, None),
           'fieldK20Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK21W' :(IO.Unicode, None),
-          'fieldK21X' :(IO.Unicode, ''),
-          'fieldK21Y' :(IO.Unicode, None),
+          'fieldK21W' :(Unicode, None),
+          'fieldK21X' :(Unicode, ''),
+          'fieldK21Y' :(Unicode, None),
           'fieldK21Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK22W' :(IO.Unicode, None),
-          'fieldK22X' :(IO.Unicode, ''),
-          'fieldK22Y' :(IO.Unicode, None),
+          'fieldK22W' :(Unicode, None),
+          'fieldK22X' :(Unicode, ''),
+          'fieldK22Y' :(Unicode, None),
           'fieldK22Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK23W' :(IO.Unicode, None),
-          'fieldK23X' :(IO.Unicode, ''),
+          'fieldK23W' :(Unicode, None),
+          'fieldK23X' :(Unicode, ''),
           'fieldK23Z' :(EPCI_Statut, None),
-          'fieldK23Y' :(IO.Unicode, ''),
+          'fieldK23Y' :(Unicode, ''),
           #
           #
-          'fieldK24W' :(IO.Unicode, None),
-          'fieldK24X' :(IO.Unicode, ''),
-          'fieldK24Y' :(IO.Unicode, None),
+          'fieldK24W' :(Unicode, None),
+          'fieldK24X' :(Unicode, ''),
+          'fieldK24Y' :(Unicode, None),
           'fieldK24Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK25W' :(IO.Unicode, None),
-          'fieldK25X' :(IO.Unicode, ''),
-          'fieldK25Y' :(IO.Unicode, None),
+          'fieldK25W' :(Unicode, None),
+          'fieldK25X' :(Unicode, ''),
+          'fieldK25Y' :(Unicode, None),
           'fieldK25Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK26W' :(IO.Unicode, None),
-          'fieldK26X' :(IO.Unicode, ''),
-          'fieldK26Y' :(IO.Unicode, None),
+          'fieldK26W' :(Unicode, None),
+          'fieldK26X' :(Unicode, ''),
+          'fieldK26Y' :(Unicode, None),
           'fieldK26Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK27W' :(IO.Unicode, None),
-          'fieldK27X' :(IO.Unicode, ''),
-          'fieldK27Y' :(IO.Unicode, None),
+          'fieldK27W' :(Unicode, None),
+          'fieldK27X' :(Unicode, ''),
+          'fieldK27Y' :(Unicode, None),
           'fieldK27Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK28W' :(IO.Unicode, None),
-          'fieldK28X' :(IO.Unicode, ''),
-          'fieldK28Y' :(IO.Unicode, None),
+          'fieldK28W' :(Unicode, None),
+          'fieldK28X' :(Unicode, ''),
+          'fieldK28Y' :(Unicode, None),
           'fieldK28Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK29W' :(IO.Unicode, None),
-          'fieldK29X' :(IO.Unicode, ''),
-          'fieldK29Y' :(IO.Unicode, None),
+          'fieldK29W' :(Unicode, None),
+          'fieldK29X' :(Unicode, ''),
+          'fieldK29Y' :(Unicode, None),
           'fieldK29Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK30W' :(IO.Unicode, None),
-          'fieldK30X' :(IO.Unicode, ''),
-          'fieldK30Y' :(IO.Unicode, None),
+          'fieldK30W' :(Unicode, None),
+          'fieldK30X' :(Unicode, ''),
+          'fieldK30Y' :(Unicode, None),
           'fieldK30Z' :(EPCI_Statut, ''),
           #
           #
-          'fieldK31W' :(IO.Unicode, None),
-          'fieldK31X' :(IO.Unicode, ''),
-          'fieldK31Y' :(IO.Unicode, None),
+          'fieldK31W' :(Unicode, None),
+          'fieldK31X' :(Unicode, ''),
+          'fieldK31Y' :(Unicode, None),
           'fieldK31Z' :(EPCI_Statut, ''),
           ## comments form
-          'fieldL20': (IO.Unicode, ''),}
+          'fieldL20': (Unicode, ''),}
 
 
 ##############################################################################

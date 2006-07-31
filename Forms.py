@@ -15,21 +15,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from the Standard Library
-from pprint import pformat, pprint
-from time import time
-
 # Import from itools
 from itools.catalog.Analysers import Text as itoolsAnalyserText
 from itools.zope import get_context
 from itools.catalog import Query
-from itools.resources import base
-from itools import uri
 
 # Import from iKaaro
-from Products.ikaaro import ui
-from Products.ikaaro.utils import _, N_, UserError, comeback, get_parameters, \
-                                  Table
+from Products.ikaaro.utils import get_parameters
+from Products.ikaaro.widgets import Table
 
 # Import from Culture
 from Folder import bibFolder
@@ -43,8 +36,8 @@ from Handler import Handler
 class Forms(bibFolder):
 
     class_id = 'Forms'
-    class_title = N_(u'Forms')
-    class_description = N_(u'...')
+    class_title = u'Forms'
+    class_description = u'...'
     class_icon48 = 'culture/images/form48.png'
 
 
@@ -85,12 +78,12 @@ class Forms(bibFolder):
         context = get_context()
         context.session['browse'] = 'list'
         namespace = self.browse_namespace(16)
-        handler = ui.get_handler('culture/Forms_browse_list.xml')
+        handler = self.get_handler('/ui/culture/Forms_browse_list.xml')
         return handler.stl(namespace)
 
 
     search_form__access__ = Handler.is_admin_or_consultant
-    search_form__label__ = N_(u'Search')
+    search_form__label__ = u'Search'
     def search_form(self):
         context = get_context()
         tablename = 'search'
@@ -165,7 +158,7 @@ class Forms(bibFolder):
                 query = Query.Complex(query, 'and', q_code)
             # The state
             if state_code:
-                q_state = Query.Simple('state', state)
+                q_state = Query.Simple('form_state', state)
                 query = Query.Complex(query, 'and', q_state)
 
             # Search
@@ -190,7 +183,7 @@ class Forms(bibFolder):
                 objects.append({'name': document.name,
                                 'url': '%s/;report_form0' % document.name,
                                 'title': document.title,
-                                'state': document.state,
+                                'state': document.form_state,
                                 'date': mtime.strftime('%Y-%m-%d %H:%M')})
         else:
             objects = []
@@ -203,7 +196,7 @@ class Forms(bibFolder):
         namespace['table'] = table
         namespace['batch'] = table.batch_control()
 
-        handler = ui.get_handler('culture/Forms_search.xml')
+        handler = self.get_handler('/ui/culture/Forms_search.xml')
         return handler.stl(namespace)
 
 bibFolder.register_handler_class(Forms)

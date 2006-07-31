@@ -1,9 +1,5 @@
 # -*- coding: ISO-8859-1 -*-
 
-# Import from python 
-from pprint import pprint
-import os
-
 # Import from itools
 from itools import get_abspath
 

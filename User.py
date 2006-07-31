@@ -1,7 +1,4 @@
 # -*- coding: ISO-8859-1 -*-
-# Import from python
-import base64, sha, urllib
-from time import time
 
 # Import from itools
 from itools.catalog.Analysers import Text as itoolsAnalyserText
@@ -14,9 +11,9 @@ from itools import uri
 from Products.ikaaro.User import User as ikaaroUser
 from Products.ikaaro.Group import Group as ikaaroGroup
 from Products.ikaaro.UserFolder import UserFolder as ikaaroUserFolder
-from Products.ikaaro import ui
-from Products.ikaaro.utils import _, N_, UserError, comeback
-from Products.ikaaro.utils import get_parameters, Table
+from Products.ikaaro.utils import comeback, get_parameters
+from Products.ikaaro.widgets import Table
+from Products.ikaaro.exceptions import UserError
 
 # Import from Culture
 from utils import get_deps, get_BMs
@@ -52,7 +49,7 @@ class bibGroup(Handler, ikaaroGroup):
         # Users
         users = root.get_handler('users')
 
-        handler = ui.get_handler('culture/bibGroup_create_add_users.xml')
+        handler = self.get_handler('/ui/culture/bibGroup_create_add_users.xml')
         return handler.stl(namespace)
 
 
@@ -64,13 +61,13 @@ class bibGroup(Handler, ikaaroGroup):
 
         # Check the values
         if not username:
-            raise UserError, _('The username is wrong, please try again.')
+            raise UserError, self.gettext('The username is wrong, please try again.')
         if self.has_handler(username):
             raise UserError, \
-                  _('There is another user with the username "%s", '
+                  self.gettext('There is another user with the username "%s", '
                     'please try again') % username
         if not password or password != password2:
-            raise UserError, _('The password is wrong, please try again.')
+            raise UserError, self.gettext('The password is wrong, please try again.')
 
         # add the user
         users = root.get_handler('users')
@@ -80,7 +77,7 @@ class bibGroup(Handler, ikaaroGroup):
         admin_group = root.get_handler('admins')
         admin_group.set_user(username)
 
-        message = _('User added')
+        message = self.gettext('User added')
         comeback('browse_users', message)
 
 
@@ -177,7 +174,7 @@ class bibUser(Handler, ikaaroUser):
     #######################################################################
     # Home
     home__access__ = True 
-    home__label__ = N_('Home')
+    home__label__ = u'Home'
     def home(self):
         namespace = {}
         root = self.get_root()
@@ -206,13 +203,13 @@ class bibUser(Handler, ikaaroUser):
         elif code:
             namespace['dep'] = get_BMs()[code].get('name', '')
 
-        handler = ui.get_handler('culture/User_home.xml')
+        handler = self.get_handler('/ui/culture/User_home.xml')
         return handler.stl(namespace)
 
 
     #######################################################################
     # Password
-    edit_password_form__label__ = N_('Change password')
+    edit_password_form__label__ = u'Change password'
 
 
 ikaaroUser.register_handler_class(bibUser)
@@ -241,7 +238,7 @@ class bibUserFolder(Handler, ikaaroUserFolder):
 
 
     search_form__access__ = Handler.is_admin
-    search_form__label__ = N_(u'Search')
+    search_form__label__ = u'Search'
     def search_form(self):
         context = get_context()
         root = context.root
@@ -364,7 +361,7 @@ class bibUserFolder(Handler, ikaaroUserFolder):
                                                 node.get_firstview())})
 
             if isinstance(resource, base.File):
-                summary = _('%d bytes') % resource.get_size()
+                summary = self.gettext('%d bytes') % resource.get_size()
             elif isinstance(resource, base.Folder):
                 nresources = len([ x for x in resource.get_resource_names()
                                    if not x.startswith('.') ])
@@ -391,7 +388,7 @@ class bibUserFolder(Handler, ikaaroUserFolder):
         namespace['table'] = table
         namespace['batch'] = table.batch_control()
 
-        handler = ui.get_handler('culture/bibUserFolder_search.xml')
+        handler = self.get_handler('/ui/culture/bibUserFolder_search.xml')
         return handler.stl(namespace)
 
 

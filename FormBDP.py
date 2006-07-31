@@ -1,17 +1,13 @@
 # -*- coding: ISO-8859-1 -*-
-# Import from the Standard Library
-from pprint import pformat, pprint
 
 # Import from itools
 from itools.zope import get_context
 
 # Import from iKaaro
-from Products.ikaaro import ui
-from Products.ikaaro.Text import Text as ikaaroText
+from Products.ikaaro.text import Text as ikaaroText
 
 # Import from Culture
 from schemaBDP import schema
-from Folder import bibFolder
 from Form import get_adresse, Form
 from utils import get_deps
 
@@ -23,9 +19,9 @@ class FormBDP(Form):
 
     ######################################################################
     # Parsing
-    def _load(self, resource):
-        data = resource.get_data()
-        self.fields = {}
+    def _load_state(self, resource):
+        data = resource.read()
+        self.state.fields = {}
         for line in data.splitlines():
             line = line.strip()
             if ':' in line:
@@ -35,12 +31,12 @@ class FormBDP(Form):
                     field_def = schema[key]
                     type = field_def[0]
                     default = field_def[1]
-                    self.fields[key] = type.decode(value)
+                    self.state.fields[key] = type.decode(value)
 
 
     def to_unicode(self, encoding='UTF-8'):
         result = []
-        for key, value in self.fields.items():
+        for key, value in self.state.fields.items():
             new_value = schema[key][0].encode(value)
             if not isinstance(new_value, unicode):
                  new_value = unicode(new_value, 'UTF-8') 
@@ -70,16 +66,19 @@ class FormBDP(Form):
 
     def get_year(self):
         return self.parent.name.split('BDP')[-1]
+    # XXX For indexing
     year = property(get_year, None, None, None)
 
 
     def get_dep(self):
         return self.name
+    # XXX For indexing
     dep = property(get_dep, None, None, None)
 
 
     def user_town(self):
         return get_deps()[self.name].get('name', '')
+    # XXX For indexing
     user_town = property(user_town, None, None, None)
 
 
@@ -105,7 +104,7 @@ class FormBDP(Form):
         forms = reduce(lambda x,y: x+y, forms)
         namespace['body'] = forms 
 
-        handler = ui.get_handler('culture/printable_template.xhtml')
+        handler = self.get_handler('/ui/culture/printable_template.xhtml')
         return handler.stl(namespace)
 
 
@@ -205,7 +204,7 @@ class FormBDP(Form):
     def help_menu(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help_menu.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help_menu.xml')
         return handler.to_unicode()
 
 
@@ -213,7 +212,7 @@ class FormBDP(Form):
     def help1(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help1.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help1.xml')
         return handler.to_unicode()
 
 
@@ -221,7 +220,7 @@ class FormBDP(Form):
     def help2(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help2.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help2.xml')
         return handler.to_unicode()
 
 
@@ -229,7 +228,7 @@ class FormBDP(Form):
     def help3(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help3.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help3.xml')
         return handler.to_unicode()
 
 
@@ -237,7 +236,7 @@ class FormBDP(Form):
     def help4(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help4.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help4.xml')
         return handler.to_unicode()
 
 
@@ -245,7 +244,7 @@ class FormBDP(Form):
     def help5(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help5.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help5.xml')
         return handler.to_unicode()
 
 
@@ -253,7 +252,7 @@ class FormBDP(Form):
     def help6(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help6.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help6.xml')
         return handler.to_unicode()
 
 
@@ -261,7 +260,7 @@ class FormBDP(Form):
     def help7(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help7.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help7.xml')
         return handler.to_unicode()
 
 
@@ -269,7 +268,7 @@ class FormBDP(Form):
     def help8(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help8.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help8.xml')
         return handler.to_unicode()
 
 
@@ -277,7 +276,7 @@ class FormBDP(Form):
     def help9(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBDP_help9.xml')
+        handler = self.get_handler('/ui/culture/FormBDP_help9.xml')
         return handler.to_unicode()
 
 

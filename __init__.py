@@ -21,10 +21,9 @@ import logging.config
 
 # Import from itools
 from itools import get_abspath
-from itools.handlers import get_handler
 
 # Import from iKaaro
-from Products.ikaaro import ui
+from Products.ikaaro.skins import register_skin
 
 # Import from Culture
 from Culture import Culture
@@ -36,7 +35,7 @@ def initialize(context):
 
 # Register interface
 path = get_abspath(globals(), 'ui')
-ui.register_skin('culture', path)
+register_skin('culture', path)
 
 # Found the python used by Zope for generate xml
 import os 

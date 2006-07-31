@@ -1,7 +1,7 @@
 # -*- coding: ISO-8859-1 -*-
 
 # Import from Python 
-from pprint import pprint, pformat
+from pprint import pprint
 import re
 import sets
 

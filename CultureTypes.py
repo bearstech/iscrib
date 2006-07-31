@@ -4,10 +4,10 @@
 from decimal import Decimal as pythonDecimal
 
 # Import from itools
-from itools.handlers import IO
+from itools.types import String
 
 
-class Enumerate(IO.String):
+class Enumerate(String):
 
     def get_namespace(cls, value):
         options = cls.get_options()
@@ -41,7 +41,7 @@ class EPCI_Statut(Enumerate):
 # Schema
 ##############################################################################
 
-class Checkboxes(IO.String):
+class Checkboxes(String):
     pass 
 
 

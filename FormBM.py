@@ -1,8 +1,5 @@
 # -*- coding: ISO-8859-1 -*-
 
-# Import from the Standard Library
-from pprint import pformat, pprint
-
 # Import from mysql
 import MySQLdb
 from MySQLdb.cursors import DictCursor
@@ -17,9 +14,8 @@ from Form import get_adresse, Form
 from itools.zope import get_context
 
 # Import from iKaaro
-from Products.ikaaro import ui
-from Products.ikaaro.Text import Text as ikaaroText
-from Products.ikaaro.utils import UserError
+from Products.ikaaro.text import Text as ikaaroText
+from Products.ikaaro.exceptions import UserError
 
 SqlHost = setup.sql.SqlHost
 SqlDatabase = setup.sql.SqlDatabase
@@ -33,9 +29,9 @@ class FormBM(Form):
 
     ######################################################################
     # Parsing
-    def _load(self, resource):
-        data = resource.get_data()
-        self.fields = {}
+    def _load_state(self, resource):
+        data = resource.read()
+        self.state.fields = {}
         for line in data.splitlines():
             line = line.strip()
             if ':' in line:
@@ -45,12 +41,12 @@ class FormBM(Form):
                     field_def = schema[key]
                     type = field_def[0]
                     default = field_def[1]
-                    self.fields[key] = type.decode(value)
+                    self.state.fields[key] = type.decode(value)
 
 
     def to_unicode(self, encoding='UTF-8'):
         result = []
-        for key, value in self.fields.items():
+        for key, value in self.state.fields.items():
             new_value = schema[key][0].encode(value)
             if not isinstance(new_value, unicode):
                  new_value = unicode(new_value, 'UTF-8')
@@ -81,11 +77,13 @@ class FormBM(Form):
     def get_year(self):
         forms = self.parent
         return forms.name.split('BM')[-1]
+    # XXX For indexing
     year = property(get_year, None, None, None)
 
 
     def user_town(self):
         return get_BMs()[self.name].get('name', '')
+    # XXX For indexing
     user_town = property(user_town, None, None, None)
 
 
@@ -174,7 +172,7 @@ class FormBM(Form):
         forms = reduce(lambda x,y: x+y, forms)
         namespace['body'] = forms 
 
-        handler = ui.get_handler('culture/printable_template.xhtml')
+        handler = self.get_handler('/ui/culture/printable_template.xhtml')
         return handler.stl(namespace)
 
 
@@ -294,14 +292,14 @@ class FormBM(Form):
     def help0(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help0.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help0.xml')
         return handler.to_unicode()
     
     help1__access__ = True 
     def help1(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help1.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help1.xml')
         return handler.to_unicode()
 
 
@@ -309,7 +307,7 @@ class FormBM(Form):
     def help2(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help2.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help2.xml')
         return handler.to_unicode()
 
 
@@ -317,7 +315,7 @@ class FormBM(Form):
     def help3(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help3.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help3.xml')
         return handler.to_unicode()
 
 
@@ -325,7 +323,7 @@ class FormBM(Form):
     def help4(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help4.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help4.xml')
         return handler.to_unicode()
 
 
@@ -333,7 +331,7 @@ class FormBM(Form):
     def help5(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help5.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help5.xml')
         return handler.to_unicode()
 
 
@@ -341,7 +339,7 @@ class FormBM(Form):
     def help6(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help6.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help6.xml')
         return handler.to_unicode()
 
 
@@ -349,7 +347,7 @@ class FormBM(Form):
     def help7(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help7.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help7.xml')
         return handler.to_unicode()
 
 
@@ -357,7 +355,7 @@ class FormBM(Form):
     def help8(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help8.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help8.xml')
         return handler.to_unicode()
 
 
@@ -365,14 +363,14 @@ class FormBM(Form):
     def help9(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help9.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help9.xml')
         return handler.to_unicode()
 
     help11__access__ = True 
     def help11(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/FormBM_help11.xml')
+        handler = self.get_handler('/ui/culture/FormBM_help11.xml')
         return handler.to_unicode()
 
 

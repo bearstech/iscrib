@@ -38,5 +38,3 @@ class Handler(ikaaroHandler):
         if user is None:
             return False
         return self.is_admin() or self.is_consultant()
-
-

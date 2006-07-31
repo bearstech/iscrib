@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
-from pprint import pformat, pprint
+from pprint import pformat
 from copy import deepcopy
 from time import time
 import logging 
@@ -26,19 +26,17 @@ import smtplib
 import decimal 
 
 # Import from itools
-from itools import get_abspath
-from itools.handlers import IO
+from itools.types import Unicode, Boolean, String
 from itools.zope import get_context
-from itools.catalog import Query
 
 # Import from mysql
 import MySQLdb
 
 # Import from iKaaro
-from Products.ikaaro import ui
-from Products.ikaaro.Text import Text as ikaaroText
+from Products.ikaaro.text import Text as ikaaroText
 from Products.ikaaro.WorkflowAware import WorkflowAware
-from Products.ikaaro.utils import UserError, comeback
+from Products.ikaaro.exceptions import UserError
+from Products.ikaaro.utils import comeback
 
 # Import from Culture
 import CultureTypes
@@ -168,9 +166,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
         namespace = self.get_namespace()
 
         try: 
-            handler = ui.get_handler('culture/%s' % autogen_xml)
+            handler = self.get_handler('/ui/culture/%s' % autogen_xml)
         except LookupError:
-            handler = ui.get_handler('culture/%s' % xml)
+            handler = self.get_handler('/ui/culture/%s' % xml)
 
         if view == 'printable':
             namespace['printable'] = True
@@ -178,7 +176,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             context.response.set_header('Content-Type', 
                                         'text/html; charset=UTF-8')
             namespace['body'] = unicode(handler.stl(namespace))
-            handler = ui.get_handler('culture/printable_template.xhtml')
+            handler = self.get_handler('/ui/culture/printable_template.xhtml')
         elif view == 'print_all':
             namespace['printable'] = True
 
@@ -193,7 +191,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
   
     def set_metadata(self, meta):
         self.set_changed()
-        self.fields.update(meta)
+        self.state.fields.update(meta)
    
 
     def is_allowed_to_view(self):
@@ -262,8 +260,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
             value = context.request.get(key)
             if value is None:
                 # is the value is not in request, take it in fields 
-                value = self.fields.get(name, default)
-            if type is IO.Unicode:
+                value = self.state.fields.get(name, default)
+            if type is Unicode:
                 if value is not None:
                     value = value.replace(u'"', u'&quot;')
             namespace[name] = value
@@ -271,7 +269,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             if name.startswith('field'):
                 namespace[key] = value
             # Booleans
-            if type is IO.Boolean:
+            if type is Boolean:
                 if namespace[name] is False:
                     namespace['%s_not' % name] = True
                 else:
@@ -312,7 +310,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
 
         # State
         state = self.get_property('state')
-        namespace['is_vide'] = self.get_form_state() == 'Vide'
+        namespace['is_vide'] = self.form_state == u'Vide'
 
         (All_fields, All_mandatorie, All_optional, optional_nonEmpties,
          mandatory_nonEmpties, Empties) = self.get_sets(namespace)
@@ -404,7 +402,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                     pass
                 # Make the select options
                 elif k.endswith('Z'):
-                    kz = self.fields.get(key, '0')
+                    kz = self.state.fields.get(key, '0')
                     if kz != '0':
                         namespace[key] = EPCI_Statut.get_namespace(kz)
                     else: 
@@ -455,7 +453,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         # State
         state = self.get_property('state')
         if state == 'private':
-            if len(self.fields) == 0:
+            if len(self.state.fields) == 0:
                 state = u'Vide'
             else:
                 state = u'En cours'
@@ -463,9 +461,10 @@ class Form(Handler, ikaaroText, WorkflowAware):
             state = u'Terminé'
         elif state == 'public':
             state = u'Exporté'
+
         return state 
 
-    state = property(get_form_state, None, None, None)
+    form_state = property(get_form_state, None, None, None)
 
 
     #######################################################################
@@ -490,8 +489,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
             stype = field_def[0]
             default = field_def[1]
             empty = False
-            if stype is not IO.String and \
-                   stype is not IO.Unicode:
+            if stype is not String and \
+                   stype is not Unicode:
                 if namespace[name] in ('', None):
                     dependance = dependencies.get(name)
                     if dependance is not None:
@@ -668,7 +667,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         namespace['total'] = len(schema)
         namespace['is_admin'] = self.is_admin()
 
-        handler = ui.get_handler('culture/Form_controles.xml')
+        handler = self.get_handler('/ui/culture/Form_controles.xml')
         return handler.stl(namespace) 
 
 
@@ -698,7 +697,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             if value in ('', None):
                 # Empties
                 Empties.append(key)
-            is_mandatory = (field_type is not IO.Unicode) and \
+            is_mandatory = (field_type is not Unicode) and \
                             (field_type is not EPCI_Statut)
             dependence_id = dependencies.get(key)
             if dependence_id is not None:
@@ -735,7 +734,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             if value in ('', None):
                 empties.append(key)
             # XXX check if Checkbox and Decimal and ... are needed here
-            if field_type is not IO.Unicode:
+            if field_type is not Unicode:
                 if value not in ('', None):
                     mendatories.append(key)
             else:
@@ -881,7 +880,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             field_def = schema.get(key)
             if field_def is not None:
                 ftype = field_def[0]
-                if ftype is IO.Unicode:
+                if ftype is Unicode:
                     if value is not None:
                         value = value.replace(u"€", u"eur")
                         value = value.replace(u'"', u'\\"')
@@ -937,11 +936,11 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 keys.append(key)
                 if value in ('', None, 'NC'):
                     value = "Null"
-                elif field_type is IO.Unicode:
+                elif field_type is Unicode:
                     value = "'%s'" % value
                 elif field_type is Integer:
                     value = str(value)
-                elif field_type == IO.Boolean:
+                elif field_type == Boolean:
                     if value:
                         value = "'O'"
                     else:
@@ -1009,7 +1008,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
     fill_report_form__access__ = True
     fill_report_form__label__ = u'Auto remplissage'
     def fill_report_form(self):
-        handler = ui.get_handler('culture/Form_fill_report.xml')
+        handler = self.get_handler('/ui/culture/Form_fill_report.xml')
         return handler.to_unicode()
 
 
@@ -1034,12 +1033,12 @@ class Form(Handler, ikaaroText, WorkflowAware):
            if len(schema[key]) == 3:
                is_sum = schema[key][2].get('sum', False)
            keyNumber = key[len('field'):]
-           if field_type is IO.String:
+           if field_type is String:
                if ns[key]:
                    value = ns[key]
            elif field_type is EPCI_Statut:
                value = '4' 
-           elif field_type is IO.Unicode:
+           elif field_type is Unicode:
                if ns[key]:
                    value = ns[key]
                else:
@@ -1066,12 +1065,12 @@ class Form(Handler, ikaaroText, WorkflowAware):
                    value = Decimal(value)
            elif field_type is Checkboxes:
                value = '##1' 
-           elif field_type is IO.Boolean:
+           elif field_type is Boolean:
                value = True 
            else: 
                value = '0' 
 
-           self.fields[key] = value
+           self.state.fields[key] = value
            t = time() - t0
 
         root = context.root
@@ -1129,8 +1128,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 # True : no dep AND no value AND no String/Unicode AND 
                 # False :  
                 empty = False
-                if field_type is not IO.String and \
-                       field_type is not IO.Unicode:
+                if field_type is not String and \
+                       field_type is not Unicode:
                     if dependance is not None :
                         # here we know if they are a dependancies
                         # and 
@@ -1168,7 +1167,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                     #query even if the type is wrong
                     badT_values[keyNumber + ':utf8:ustring'] = value
                 else:
-                    self.fields[key] = value
+                    self.state.fields[key] = value
 
         new_referer, msg = self.make_msg(new_referer=new_referer, notR=notR, 
                                          badT=badT, badT_missing=badT_missing,
@@ -1246,7 +1245,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
     help__access__ = True
     help__label__ = u'Aide'
     def help(self):
-        handler = ui.get_handler('culture/Form_help.xml')
+        handler = self.get_handler('/ui/culture/Form_help.xml')
         return handler.to_unicode()
 
 
@@ -1254,7 +1253,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
     def help2(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = ui.get_handler('culture/Form_help2.xhtml')
+        handler = self.get_handler('/ui/culture/Form_help2.xhtml')
         return handler.to_unicode()
 
 
@@ -1268,9 +1267,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
         namespace = self.get_namespace()
         is_finished = namespace['is_finished']
         is_complete = namespace['is_complete']
-        is_exported = self.state == u'Exporté'
+        is_exported = self.get_form_state() == u'Exporté'
         namespace['show'] = is_finished or is_complete or is_exported
-        handler = ui.get_handler('culture/Form_report_csv.xml')
+        handler = self.get_handler('/ui/culture/Form_report_csv.xml')
         return handler.stl(namespace) 
 
     comments__access__ = is_allowed_to_view
@@ -1301,7 +1300,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         csv = [u'"Chapitre du formulaire","rubrique","valeur"']
         for name in names:
             #value = namespace[name]
-            value = self.fields.get(name, '')
+            value = self.state.fields.get(name, '')
             if schema[name][0] is EPCI_Statut:
                 label = [x['label'] for x in EPCI_Statut.get_namespace(value) 
                            if x['id'] == value]

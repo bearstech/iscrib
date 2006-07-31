@@ -20,20 +20,15 @@ import datetime
 from time import time
 
 # Import from itools
-from itools import get_abspath
 from itools.resources import base
-from itools.handlers import IO
+from itools.types import Unicode, String, DateTime
 from itools.zope import get_context
 from itools.catalog.Catalog import Catalog
 
 # Import from iKaaro
 from Products.ikaaro.Root import Root
-from Products.ikaaro.Root import Settings
-from Products.ikaaro.Folder import Folder
-from Products.ikaaro.UserFolder import UserFolder
 from Products.ikaaro.Metadata import Metadata, Record
-from Products.ikaaro import ui
-from Products.ikaaro.utils import comeback, N_
+from Products.ikaaro.utils import comeback
 
 # Import from culture
 from FormBM import FormBM
@@ -49,7 +44,7 @@ from Handler import Handler
 class Culture(bibFolder, Root):
 
     class_id = 'Culture'
-    class_version = '20060505'
+    class_version = '20060728'
 
 
     _catalog_fields = Root._catalog_fields \
@@ -58,36 +53,25 @@ class Culture(bibFolder, Root):
                          ('year', 'keyword', True, False),
                          ('is_BDP', 'bool', True, False),
                          ('is_BM', 'bool', True, False),
-                         ('state', 'keyword', True, True),
+                         ('form_state', 'keyword', True, True),
                          ('code', 'keyword', True, False)]
 
 
     login_form__access__ = True
-    login_form__label__ = N_('Login')
+    login_form__label__ = u'Login'
     def login_form(self):
         request = get_context().request
         namespace = {'referer': request.form.get('referer', ''),
                      'username': request.form.get('username', '')}
 
-        handler = ui.get_handler('culture/SiteRoot_login.xml')
+        handler = self.get_handler('/ui/culture/SiteRoot_login.xml')
         return handler.stl(namespace)
 
 
     def get_skeleton(self, username=None, password=None):
-        skeleton = []
-        for name, handler in Root.get_skeleton(self, username, password):
-            if name == 'reviewers':
-                # Skip reviewers
-                continue
-            elif name == '.settings':
-                handler = Settings(languages=['fr'])
-                # Fix language
-                handler.languages = ['fr']
-            skeleton.append((name, handler))
-        # The catalog must be added first, so everything else is indexed
-        # (<index name>, <type>, <indexed>, <stored>)
-        catalog = Catalog(fields=self._catalog_fields)
-        skeleton.append(('.catalog', catalog))
+        skeleton = Root.get_skeleton(self, username, password)
+        # Skip reviewers
+        del skeleton['reviewers']
         return skeleton
 
 
@@ -112,6 +96,22 @@ class Culture(bibFolder, Root):
     #########################################################################
     def get_skin_name(self):
         return 'culture'
+
+
+    def get_skin(self):
+        return self.get_handler('ui/culture')
+
+
+    def get_themes(self):
+        return ['culture']
+
+
+    def get_available_languages(self):
+        return ['fr']
+
+
+    def get_default_language(self):
+        return 'fr'
 
 
     def get_views(self):
@@ -183,7 +183,7 @@ class Culture(bibFolder, Root):
                 years[i]['is_selected'] = True
                 break
         namespace['BMyears'] = years
-        handler = ui.get_handler('culture/Culture_new_reports.xml')
+        handler = self.get_handler('/ui/culture/Culture_new_reports.xml')
         return handler.stl(namespace)
 
 
@@ -267,7 +267,7 @@ class Culture(bibFolder, Root):
     help__access__ = True
     help__label__ = u'Aide'
     def help(self):
-        handler = ui.get_handler('culture/Form_help.xml')
+        handler = self.get_handler('/ui/culture/Form_help.xml')
         return handler.to_unicode()
 
 
@@ -276,11 +276,11 @@ class Culture(bibFolder, Root):
     #########################################################################
     def update_metadata(self, metadata):
         # Update metadata
-        trans = {(None, 'title'): (('dc', 'title'), IO.Unicode),
-                 (None, 'description'): (('dc', 'description'), IO.Unicode),
-                 (None, 'language'): (('dc', 'language'), IO.String),
-                 (None, 'user_theme'): (('ikaaro', 'user_theme'), IO.String),
-                 (None, 'date'): (('dc', 'date'), IO.DateTime),
+        trans = {(None, 'title'): (('dc', 'title'), Unicode),
+                 (None, 'description'): (('dc', 'description'), Unicode),
+                 (None, 'language'): (('dc', 'language'), String),
+                 (None, 'user_theme'): (('ikaaro', 'user_theme'), String),
+                 (None, 'date'): (('dc', 'date'), DateTime),
                  (None, 'wf_transition'): (('ikaaro', 'wf_transition'), Record)
                  }
 
@@ -342,3 +342,7 @@ class Culture(bibFolder, Root):
         users = self.get_handler('users')
         users.set_handler('VoirSCRIB', bibUser(password='BMBDP'))
         users.save()
+
+
+    def update_20060728(self):
+        Root.update_20050509(self)
