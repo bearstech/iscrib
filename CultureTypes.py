@@ -4,7 +4,7 @@
 from decimal import Decimal as pythonDecimal
 
 # Import from itools
-from itools.types import String
+from itools.datatypes import String
 
 
 class Enumerate(String):

@@ -1,7 +1,7 @@
 # -*- coding: ISO-8859-1 -*-
 
 # Import from itools
-from itools.zope import get_context
+from itools.web import get_context
 
 # Import from iKaaro
 from Products.ikaaro.text import Text as ikaaroText

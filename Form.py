@@ -26,8 +26,8 @@ import smtplib
 import decimal 
 
 # Import from itools
-from itools.types import Unicode, Boolean, String
-from itools.zope import get_context
+from itools.datatypes import Unicode, Boolean, String
+from itools.web import get_context
 
 # Import from mysql
 import MySQLdb

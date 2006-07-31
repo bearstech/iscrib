@@ -1,7 +1,7 @@
 # -*- coding: ISO-8859-1 -*-
 
 # Import from itools
-from itools.types import Unicode, Boolean
+from itools.datatypes import Unicode, Boolean
 
 # Import from Culture 
 from CultureTypes import Checkboxes, Integer, Decimal, EPCI_Statut

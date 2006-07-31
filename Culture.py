@@ -21,8 +21,8 @@ from time import time
 
 # Import from itools
 from itools.resources import base
-from itools.types import Unicode, String, DateTime
-from itools.zope import get_context
+from itools.datatypes import Unicode, String, DateTime
+from itools.web import get_context
 from itools.catalog.Catalog import Catalog
 
 # Import from iKaaro

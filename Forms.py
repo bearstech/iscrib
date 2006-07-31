@@ -17,7 +17,7 @@
 
 # Import from itools
 from itools.catalog.Analysers import Text as itoolsAnalyserText
-from itools.zope import get_context
+from itools.web import get_context
 from itools.catalog import Query
 
 # Import from iKaaro
