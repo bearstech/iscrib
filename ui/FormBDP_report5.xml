@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -28,11 +28,11 @@
   </table>
 
   
-<h1>E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE
+<h1>E- ACQUISITIONS ET Ã‰LIMINATIONS DE L'ANNÃ‰E
     <!--a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help5', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a-->
 </h1>
-<h2>E. 1 / 2 NOMBRE DE DOCUMENTS ACHETÉS  (hors périodiques)</h2>
+<h2>E. 1 / 2 NOMBRE DE DOCUMENTS ACHETÃ‰S  (hors pÃ©riodiques)</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -44,7 +44,7 @@
   <tr>
   <td></td>
     <th style="text-align: center">BDP X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
@@ -170,7 +170,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes adultes (tous supports)</th> 
+    <th>VidÃ©ogrammes adultes (tous supports)</th> 
     <td>
        <input stl:attributes="value fieldE17X"
               type="text" name="fieldE17X"
@@ -190,7 +190,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes enfants (tous supports)</th> 
+    <th>VidÃ©ogrammes enfants (tous supports)</th> 
     <td>
        <input stl:attributes="value fieldE18X"
               type="text" name="fieldE18X"
@@ -210,7 +210,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des vidéogrammes (E17 + E18)</b></th> 
+    <th><b>TOTAL des vidÃ©ogrammes (E17 + E18)</b></th> 
     <td>
        <input stl:attributes="value fieldE19X"
               type="text" name="fieldE19X"
@@ -230,7 +230,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms adultes</th> 
+    <th>CÃ©dÃ©roms adultes</th> 
     <td>
        <input stl:attributes="value fieldE20X"
               type="text" name="fieldE20X"
@@ -250,7 +250,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms enfants</th> 
+    <th>CÃ©dÃ©roms enfants</th> 
     <td>
        <input stl:attributes="value fieldE21X"
               type="text" name="fieldE21X"
@@ -270,7 +270,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des cédéroms (E20 + E21)</b></th> 
+    <th><b>TOTAL des cÃ©dÃ©roms (E20 + E21)</b></th> 
     <td>
        <input stl:attributes="value fieldE22X"
               type="text" name="fieldE22X"
@@ -309,7 +309,7 @@
     <td><b stl:attributes="class _E23">E23</b></td>
   </tr>
 </table>
-<h2>E. 3 / 4  NOMBRE DE DOCUMENTS ENTRÉS PAR DONS, LEGS   (hors périodiques )</h2>
+<h2>E. 3 / 4  NOMBRE DE DOCUMENTS ENTRÃ‰S PAR DONS, LEGS   (hors pÃ©riodiques )</h2>
 <table  width="100%">
   <colgroup>
     <col width="59%"/>
@@ -321,7 +321,7 @@
   <tr>
   <td></td>
     <th style="text-align: center">BDP X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
@@ -446,7 +446,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes adultes (tous supports)</th> 
+    <th>VidÃ©ogrammes adultes (tous supports)</th> 
     <td>
        <input stl:attributes="value fieldE37X"
               type="text" name="fieldE37X"
@@ -466,7 +466,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes enfants (tous supports)</th> 
+    <th>VidÃ©ogrammes enfants (tous supports)</th> 
     <td>
        <input stl:attributes="value fieldE38X"
               type="text" name="fieldE38X"
@@ -486,7 +486,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des vidéogrammes</b></th> 
+    <th><b>TOTAL des vidÃ©ogrammes</b></th> 
     <td>
        <input stl:attributes="value fieldE39X"
               type="text" name="fieldE39X"
@@ -506,7 +506,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms adultes</th> 
+    <th>CÃ©dÃ©roms adultes</th> 
     <td>
        <input stl:attributes="value fieldE40X"
               type="text" name="fieldE40X"
@@ -526,7 +526,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms enfants</th> 
+    <th>CÃ©dÃ©roms enfants</th> 
     <td>
        <input stl:attributes="value fieldE41X"
               type="text" name="fieldE41X"
@@ -546,7 +546,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des cédéroms</b></th> 
+    <th><b>TOTAL des cÃ©dÃ©roms</b></th> 
     <td>
        <input stl:attributes="value fieldE42X"
               type="text" name="fieldE42X"
@@ -586,7 +586,7 @@
   </tr>
 </table>
   <p style = "page-break-after:always "></p>
-<h2>E. 5 / 6  NOMBRE DE DOCUMENTS RETIRÉS DE L'INVENTAIRE (hors périodiques et documents patrimoniaux)</h2>
+<h2>E. 5 / 6  NOMBRE DE DOCUMENTS RETIRÃ‰S DE L'INVENTAIRE (hors pÃ©riodiques et documents patrimoniaux)</h2>
 <table  width="100%">
   <colgroup>
     <col width="59%"/>
@@ -598,7 +598,7 @@
   <tr>
   <td></td>
     <th style="text-align: center">BDP X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
@@ -723,7 +723,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes adultes (tous supports)</th> 
+    <th>VidÃ©ogrammes adultes (tous supports)</th> 
     <td>
        <input stl:attributes="value fieldE57X"
               type="text" name="fieldE57X"
@@ -743,7 +743,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes enfants (tous supports)</th> 
+    <th>VidÃ©ogrammes enfants (tous supports)</th> 
     <td>
        <input stl:attributes="value fieldE58X"
               type="text" name="fieldE58X"
@@ -763,7 +763,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des vidéogrammes (E57 + E58)</b></th> 
+    <th><b>TOTAL des vidÃ©ogrammes (E57 + E58)</b></th> 
     <td>
        <input stl:attributes="value fieldE59X"
               type="text" name="fieldE59X"
@@ -783,7 +783,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms adultes</th> 
+    <th>CÃ©dÃ©roms adultes</th> 
     <td>
        <input stl:attributes="value fieldE60X"
               type="text" name="fieldE60X"
@@ -803,7 +803,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms enfants</th> 
+    <th>CÃ©dÃ©roms enfants</th> 
     <td>
        <input stl:attributes="value fieldE61X"
               type="text" name="fieldE61X"
@@ -823,7 +823,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des cédéroms (E60 + E61)</b></th> 
+    <th><b>TOTAL des cÃ©dÃ©roms (E60 + E61)</b></th> 
     <td>
        <input stl:attributes="value fieldE62X"
               type="text" name="fieldE62X"
@@ -862,7 +862,7 @@
     <td><b stl:attributes="class _E63">E63</b></td>
   </tr>
 </table>
-<h2>E. 7  NOMBRE DE PÉRIODIQUES ACQUIS (ACHATS, DONS, LEGS)</h2>
+<h2>E. 7  NOMBRE DE PÃ‰RIODIQUES ACQUIS (ACHATS, DONS, LEGS)</h2>
 <table  width="100%">
   <colgroup>
     <col width="59%"/>
@@ -874,12 +874,12 @@
   <tr>
   <td></td>
     <th style="text-align: center">BDP X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
   <tr>
-    <th>Nombre d'abonnements en cours ( payants et gratuits, support imprimé ou microforme)</th> 
+    <th>Nombre d'abonnements en cours ( payants et gratuits, support imprimÃ© ou microforme)</th> 
     <td>
        <input stl:attributes="value fieldE71X"
               type="text" name="fieldE71X"
@@ -919,7 +919,7 @@
   </tr>
 
   <tr>
-    <th>Nombre d'abonnements en cours sur cédéroms ou en ligne</th> 
+    <th>Nombre d'abonnements en cours sur cÃ©dÃ©roms ou en ligne</th> 
     <td>
        <input stl:attributes="value fieldE73X"
               type="text" name="fieldE73X"
@@ -938,7 +938,7 @@
     <td><b stl:attributes="class _E73">E73</b></td>
   </tr>
 </table>
-<h2>E. 8  NOMBRE DE PÉRIODIQUES RETIRÉS DE L'INVENTAIRE.</h2>
+<h2>E. 8  NOMBRE DE PÃ‰RIODIQUES RETIRÃ‰S DE L'INVENTAIRE.</h2>
 <table  width="100%">
   <colgroup>
     <col width="59%"/>
@@ -950,12 +950,12 @@
   <tr>
   <td></td>
     <th style="text-align: center">BDP X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
   <tr>
-    <th>Nombre d'abonnements supprimés</th> 
+    <th>Nombre d'abonnements supprimÃ©s</th> 
     <td>
        <input stl:attributes="value fieldE81X"
               type="text" name="fieldE81X"
@@ -975,7 +975,7 @@
   </tr>
 
   <tr>
-    <th>Nombre de fascicules retirés</th> 
+    <th>Nombre de fascicules retirÃ©s</th> 
     <td>
        <input stl:attributes="value fieldE82X"
               type="text" name="fieldE82X"
@@ -995,7 +995,7 @@
   </tr>
 </table>
   <p style = "page-break-after:always "></p>
-<h2>E. 8 / 9  DÉPENSES D'ACQUISITION (en euros, sans  décimale)</h2>
+<h2>E. 8 / 9  DÃ‰PENSES D'ACQUISITION (en euros, sans  dÃ©cimale)</h2>
 <table  width="100%">
   <colgroup>
     <col width="59%"/>
@@ -1007,7 +1007,7 @@
   <tr>
   <td></td>
     <th style="text-align: center">BDP X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
@@ -1132,7 +1132,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes adultes</th> 
+    <th>VidÃ©ogrammes adultes</th> 
     <td>
        <input stl:attributes="value fieldE89X"
               type="text" name="fieldE89X"
@@ -1152,7 +1152,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes enfants</th> 
+    <th>VidÃ©ogrammes enfants</th> 
     <td>
        <input stl:attributes="value fieldE90X"
               type="text" name="fieldE90X"
@@ -1172,7 +1172,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des vidéogrammes (E89 + E90)</b></th> 
+    <th><b>TOTAL des vidÃ©ogrammes (E89 + E90)</b></th> 
     <td>
        <input stl:attributes="value fieldE91X"
               type="text" name="fieldE91X"
@@ -1192,7 +1192,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms adultes</th> 
+    <th>CÃ©dÃ©roms adultes</th> 
     <td>
        <input stl:attributes="value fieldE92X"
               type="text" name="fieldE92X"
@@ -1212,7 +1212,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms enfants</th> 
+    <th>CÃ©dÃ©roms enfants</th> 
     <td>
        <input stl:attributes="value fieldE93X"
               type="text" name="fieldE93X"
@@ -1232,7 +1232,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL des cédéroms (E92 + E93)</b></th> 
+    <th><b>TOTAL des cÃ©dÃ©roms (E92 + E93)</b></th> 
     <td>
        <input stl:attributes="value fieldE94X"
               type="text" name="fieldE94X"
@@ -1272,7 +1272,7 @@
   </tr>
 
   <tr>
-    <th>Périodiques imprimés</th> 
+    <th>PÃ©riodiques imprimÃ©s</th> 
     <td>
        <input stl:attributes="value fieldE96X"
               type="text" name="fieldE96X"
@@ -1292,7 +1292,7 @@
   </tr>
 
   <tr>
-    <th>Périodiques sur cédéroms ou en ligne</th> 
+    <th>PÃ©riodiques sur cÃ©dÃ©roms ou en ligne</th> 
     <td>
        <input stl:attributes="value fieldE97X"
               type="text" name="fieldE97X"

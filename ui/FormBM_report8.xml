@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -19,7 +19,7 @@
     </stl:block>
   </div>
 
- <h1> H- SERVICES OFFERTS PAR LA BIBLIOTHÈQUE
+ <h1> H- SERVICES OFFERTS PAR LA BIBLIOTHÃˆQUE
    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help8', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
 </h1>
@@ -31,7 +31,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th >La bibliothèque organise-t-elle des actions de formation pour les usagers ?</th> 
+    <th >La bibliothÃ¨que organise-t-elle des actions de formation pour les usagers ?</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldH11" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldH11" />Oui      </td>
@@ -50,7 +50,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th rowspan="10">La bibliothèque offre-t-elle ces services ?</th>
+    <th rowspan="10">La bibliothÃ¨que offre-t-elle ces services ?</th>
     <th colspan="2"> Guide du lecteur</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldH12" value="1" style="font-size: 8pt;  border:0px"
@@ -62,7 +62,7 @@
   </tr>
 
   <tr>
-    <th colspan="2" >Réservation</th> 
+    <th colspan="2" >RÃ©servation</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldH13" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldH13" />Oui      </td>
@@ -73,7 +73,7 @@
   </tr>
 
   <tr>
-    <th colspan="2">Portage à domicile</th> 
+    <th colspan="2">Portage Ã  domicile</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldH14" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldH14" />Oui      </td>
@@ -84,7 +84,7 @@
   </tr>
 
   <tr>
-    <th colspan="2">Services pour les personnes handicapées</th> 
+    <th colspan="2">Services pour les personnes handicapÃ©es</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldH15" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldH15" />Oui      </td>
@@ -95,7 +95,7 @@
   </tr>
 
   <tr>
-    <th colspan="2">Prêt inter-bibliothèques</th> 
+    <th colspan="2">PrÃªt inter-bibliothÃ¨ques</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input onclick="switch_on(['fieldH17','fieldH18','fieldH19','fieldH20'])"  type="radio"  name="fieldH16" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldH16" />Oui      </td>
@@ -107,7 +107,7 @@
      
   <tr>
     <th rowspan="4" style="text-align:center">Si oui</th>
-    <th >Nombre de demandes reçues</th> 
+    <th >Nombre de demandes reÃ§ues</th> 
     <td>
        <div stl:if="not fieldH16" id="display_fieldH17"           style="visibility:hidden">         <input stl:if="not fieldH16"
              type="text" name="fieldH17"
@@ -120,7 +120,7 @@
   </tr>
 
   <tr>
-    <th >Nombre de demandes reçues satisfaites</th> 
+    <th >Nombre de demandes reÃ§ues satisfaites</th> 
     <td>
        <div stl:if="not fieldH16" id="display_fieldH18"           style="visibility:hidden">         <input stl:if="not fieldH16"
              type="text" name="fieldH18"
@@ -133,7 +133,7 @@
   </tr>
 
   <tr>
-    <th >Nombre de demandes émises</th> 
+    <th >Nombre de demandes Ã©mises</th> 
     <td>
        <div stl:if="not fieldH16" id="display_fieldH19"           style="visibility:hidden">         <input stl:if="not fieldH16"
              type="text" name="fieldH19"
@@ -146,7 +146,7 @@
   </tr>
 
   <tr>
-    <th >Nombres de demandes émises satisfaites</th> 
+    <th >Nombres de demandes Ã©mises satisfaites</th> 
     <td>
        <div stl:if="not fieldH16" id="display_fieldH20"           style="visibility:hidden">         <input stl:if="not fieldH16"
              type="text" name="fieldH20"
@@ -160,7 +160,7 @@
 
   
   <tr>
-    <th >Autres (préciser)</th> 
+    <th >Autres (prÃ©ciser)</th> 
     <td colspan="2">
        <input stl:attributes="value fieldH21"
               type="text" name="fieldH21"
@@ -169,7 +169,7 @@
     <td><b stl:attributes="class _H21">H21</b></td>
   </tr>
 </table>
-<h2>H. 3 SERVICES À DISTANCE</h2>
+<h2>H. 3 SERVICES Ã€ DISTANCE</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -177,7 +177,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque a-t-elle un site web ?</th> 
+    <th>La bibliothÃ¨que a-t-elle un site web ?</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left">
         <td><input onclick="switch_on(['fieldH32','fieldH33','fieldH34','fieldH35','fieldH36','fieldH37'])"  type="radio"  name="fieldH31" value="1" style="font-size: 8pt;  border:0px"
@@ -189,7 +189,7 @@
   </tr>
 
   <tr>
-    <th>Ce site donne-t-il accès au catalogue de la bibliothèque ?</th> 
+    <th>Ce site donne-t-il accÃ¨s au catalogue de la bibliothÃ¨que ?</th> 
     <td>
       <table stl:if="fieldH31" id="display_fieldH32" >
         <tr style="padding:0px;  text-align: left">
@@ -226,7 +226,7 @@
   </tr>
 
   <tr>
-    <th>Réservation en ligne</th> 
+    <th>RÃ©servation en ligne</th> 
     <td>
       <table stl:if="fieldH31" id="display_fieldH34" >        <tr style="padding:0px;  text-align: left"><td>        <input  type="radio" name="fieldH34"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldH34" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldH34"                value="0"
@@ -252,7 +252,7 @@
   </tr>
 
   <tr>
-    <th>Consultation des fonds numérisés</th> 
+    <th>Consultation des fonds numÃ©risÃ©s</th> 
     <td>
       <table stl:if="fieldH31" id="display_fieldH36" >        <tr style="padding:0px;  text-align: left"><td>        <input  type="radio" name="fieldH36"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldH36" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldH36"                value="0"
@@ -319,7 +319,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Le site de la bibliothèque est-il accessible aux déficients visuels par des procédés techniques adaptés ?</th> 
+    <th>Le site de la bibliothÃ¨que est-il accessible aux dÃ©ficients visuels par des procÃ©dÃ©s techniques adaptÃ©s ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldH39" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldH39" />Oui      </td>
@@ -330,7 +330,7 @@
   </tr>
 </table>
 <p style = "page-break-after:always "></p>
-<h2>H. 4/5 SERVICES AUX COLLECTIVITÉS</h2>
+<h2>H. 4/5 SERVICES AUX COLLECTIVITÃ‰S</h2>
 <table width="100%">
   <colgroup>
     <col width="36%"/>
@@ -339,7 +339,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th colspan="2">La bibliothèque organise-t-elle des actions de formation pour les collectivités ?</th> 
+    <th colspan="2">La bibliothÃ¨que organise-t-elle des actions de formation pour les collectivitÃ©s ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldH42'])"  type="radio"  name="fieldH41" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldH41" />Oui      </td>
@@ -350,7 +350,7 @@
   </tr>
 
   <tr>
-    <th>Si oui, préciser : ( multimédia, formation des enseignants)</th> 
+    <th>Si oui, prÃ©ciser : ( multimÃ©dia, formation des enseignants)</th> 
     <td colspan="2">
        <div stl:if="not fieldH41" id="display_fieldH42"           style="visibility:hidden">         <input stl:if="not fieldH41"
              type="text" name="fieldH42"
@@ -371,9 +371,9 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>DÉPÔT DANS LES COLLECTIVITÉS DESSERVIES</th>
-    <th style="text-align: center">NB DE COLLECTIVITÉS Y</th>
-    <th style="text-align: center">NB DOC DÉPOSÉS  Z</th>
+    <th>DÃ‰PÃ”T DANS LES COLLECTIVITÃ‰S DESSERVIES</th>
+    <th style="text-align: center">NB DE COLLECTIVITÃ‰S Y</th>
+    <th style="text-align: center">NB DOC DÃ‰POSÃ‰S  Z</th>
   <td></td>
   </tr>
   <tr>
@@ -392,7 +392,7 @@
   </tr>
 
   <tr>
-    <th>Collèges</th> 
+    <th>CollÃ¨ges</th> 
     <td>
        <input stl:attributes="value fieldH53Y"
               type="text" name="fieldH53Y"
@@ -407,7 +407,7 @@
   </tr>
 
   <tr>
-    <th>Lycées</th> 
+    <th>LycÃ©es</th> 
     <td>
        <input stl:attributes="value fieldH54Y"
               type="text" name="fieldH54Y"
@@ -437,7 +437,7 @@
   </tr>
 
   <tr>
-    <th>Hôpitaux</th> 
+    <th>HÃ´pitaux</th> 
     <td>
        <input stl:attributes="value fieldH56Y"
               type="text" name="fieldH56Y"
@@ -467,7 +467,7 @@
   </tr>
 
   <tr>
-    <th>Comité d'entreprise</th> 
+    <th>ComitÃ© d'entreprise</th> 
     <td>
        <input stl:attributes="value fieldH58Y"
               type="text" name="fieldH58Y"
@@ -482,7 +482,7 @@
   </tr>
 
   <tr>
-    <th>Petite enfance (crèche, PMI)</th> 
+    <th>Petite enfance (crÃ¨che, PMI)</th> 
     <td>
        <input stl:attributes="value fieldH59Y"
               type="text" name="fieldH59Y"
@@ -542,7 +542,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (H52 à H62)</b></th> 
+    <th><b>TOTAL (H52 Ã  H62)</b></th> 
     <td>
        <input stl:attributes="value fieldH63Y"
               type="text" name="fieldH63Y"

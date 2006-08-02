@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head>
    <title>Aide</title>
-    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
     <link href="../../ui/culture/main.css" type="text/css"
           rel="stylesheet"></link>
   </head>
@@ -15,69 +15,69 @@
 <p align="right"><a href=";help0">Sommaire</a></p>
 <h2>COLLECTIONS </h2>
 
-Il s'agit du nombre de documents entrés dans les collections de la bibliothèque. Ne pas inclure les documents déposés par les bibliothèques départementales de prêt.
-Pour les unités matérielles composées d'un assemblage de documents aux supports différents (enregistrement sonore + livre), il faut déterminer l'élément principal et le verser au compte de l'un ou l'autre support. En revanche, pour les livres simplement accompagnés de matériels sonores conçus comme des " bonus " (cassettes audio, disques compacts audio, cédéroms), c'est le livre qui prime lorsqu'il peut être vendu sans accompagnement sonore. Ces documents avec matériel d'accompagnement sonore ne sont donc pas à compter avec les phonogrammes.
+Il s'agit du nombre de documents entrÃ©s dans les collections de la bibliothÃ¨que. Ne pas inclure les documents dÃ©posÃ©s par les bibliothÃ¨ques dÃ©partementales de prÃªt.
+Pour les unitÃ©s matÃ©rielles composÃ©es d'un assemblage de documents aux supports diffÃ©rents (enregistrement sonore + livre), il faut dÃ©terminer l'Ã©lÃ©ment principal et le verser au compte de l'un ou l'autre support. En revanche, pour les livres simplement accompagnÃ©s de matÃ©riels sonores conÃ§us comme des " bonus " (cassettes audio, disques compacts audio, cÃ©dÃ©roms), c'est le livre qui prime lorsqu'il peut Ãªtre vendu sans accompagnement sonore. Ces documents avec matÃ©riel d'accompagnement sonore ne sont donc pas Ã  compter avec les phonogrammes.
 
 <dl class="description">
-<dt>NOMBRE DE DOCUMENTS : <b>ATTENTION ! </b>depuis 2004, et contrairement aux rapports des années passées il doit être procédé au décompte différencié des périodiques (D4)  et des livres (D1/2) dans les collections d'imprimés.
+<dt>NOMBRE DE DOCUMENTS : <b>ATTENTION ! </b>depuis 2004, et contrairement aux rapports des annÃ©es passÃ©es il doit Ãªtre procÃ©dÃ© au dÃ©compte diffÃ©renciÃ© des pÃ©riodiques (D4)  et des livres (D1/2) dans les collections d'imprimÃ©s.
 </dt>
 </dl>
 
 <h4>Phonogrammes (D17)  </h4>
 <dl class="description">
-<dt>les livres cassettes et les méthodes de langue peuvent être comptés dans les phonogrammes ainsi que les DVD Audio et/ou Super Audio CD</dt>
+<dt>les livres cassettes et les mÃ©thodes de langue peuvent Ãªtre comptÃ©s dans les phonogrammes ainsi que les DVD Audio et/ou Super Audio CD</dt>
 </dl>
 
-<h4>Cédéroms (D18)  </h4>
+<h4>CÃ©dÃ©roms (D18)  </h4>
 <dl class="description">
-<dt>inclut tous les disques optiques numériques excepté les CD audio qui font partie des phonogrammes,  les CD vidéo et DVD qui font partie des vidéogrammes.</dt>
-<dt>Compter les unités matérielles, par unité de présentation. L'unité de présentation peut être un boîtier contenant plusieurs disques.</dt>
+<dt>inclut tous les disques optiques numÃ©riques exceptÃ© les CD audio qui font partie des phonogrammes,  les CD vidÃ©o et DVD qui font partie des vidÃ©ogrammes.</dt>
+<dt>Compter les unitÃ©s matÃ©rielles, par unitÃ© de prÃ©sentation. L'unitÃ© de prÃ©sentation peut Ãªtre un boÃ®tier contenant plusieurs disques.</dt>
 </dl>
 
 <h4>Partitions (D20) </h4>
 <dl class="description">
-<dt>il convient de compter les documents de musique imprimée reliés en tant qu'unités matérielles, et d'inclure dans le comptage les documents non reliés comme si ils étaient reliés. Selon les cas, il y a lieu de compter les boîtes ou les chemises contenant des unités distinctes.</dt>
+<dt>il convient de compter les documents de musique imprimÃ©e reliÃ©s en tant qu'unitÃ©s matÃ©rielles, et d'inclure dans le comptage les documents non reliÃ©s comme si ils Ã©taient reliÃ©s. Selon les cas, il y a lieu de compter les boÃ®tes ou les chemises contenant des unitÃ©s distinctes.</dt>
 </dl>
 
 <h4>Documents graphiques (hors cartes et plans) (D21) </h4>
 <dl class="description">
-<dt>les estampes, les reproductions artistiques, les affiches, les esquisses, les dessins techniques, les photos, les microformes, cartes postales et diapositives sont incluses dans les documents graphiques. Sont exclus les documents graphiques sous forme de recueil, en microforme ou sous forme audiovisuelle ou électronique. Les documents graphiques sous forme audiovisuelle sont à classer dans les cédéroms ou dans les vidéogrammes.</dt>
+<dt>les estampes, les reproductions artistiques, les affiches, les esquisses, les dessins techniques, les photos, les microformes, cartes postales et diapositives sont incluses dans les documents graphiques. Sont exclus les documents graphiques sous forme de recueil, en microforme ou sous forme audiovisuelle ou Ã©lectronique. Les documents graphiques sous forme audiovisuelle sont Ã  classer dans les cÃ©dÃ©roms ou dans les vidÃ©ogrammes.</dt>
 </dl>
 
 <h4>Autres (D22) </h4>
 <dl class="description">
-<dt>document ou objet non électronique autre qu'un livre, une publication en série, un manuscrit, un document de musique imprimée, une microforme, un document cartographique, un document audiovisuel, un document graphique, un brevet. Cela inclut les documents tels que les dioramas et autres documents en trois dimensions, les jeux, les jouets, etc. Les documents en braille sont comptabilisés en tant que documents imprimés.</dt>
-<dt>Il convient de compter par unités de manutention. Là où les pièces sont normalement rangées, mises en circulation et utilisées par séries, boîtes ou chemises, c'est l'unité de manutention qui sera comptée, par exemple boîtes d'étiquettes, chemises ou albums de timbres, albums de photos, etc. </dt>
-<dt>On doit normalement compter les pièces cataloguées séparément comme des unités distinctes.</dt>
+<dt>document ou objet non Ã©lectronique autre qu'un livre, une publication en sÃ©rie, un manuscrit, un document de musique imprimÃ©e, une microforme, un document cartographique, un document audiovisuel, un document graphique, un brevet. Cela inclut les documents tels que les dioramas et autres documents en trois dimensions, les jeux, les jouets, etc. Les documents en braille sont comptabilisÃ©s en tant que documents imprimÃ©s.</dt>
+<dt>Il convient de compter par unitÃ©s de manutention. LÃ  oÃ¹ les piÃ¨ces sont normalement rangÃ©es, mises en circulation et utilisÃ©es par sÃ©ries, boÃ®tes ou chemises, c'est l'unitÃ© de manutention qui sera comptÃ©e, par exemple boÃ®tes d'Ã©tiquettes, chemises ou albums de timbres, albums de photos, etc. </dt>
+<dt>On doit normalement compter les piÃ¨ces cataloguÃ©es sÃ©parÃ©ment comme des unitÃ©s distinctes.</dt>
 </dl>
 
-<h4>Documents numériques (D23) </h4>
+<h4>Documents numÃ©riques (D23) </h4>
 <dl class="description">
-<dt> (anciennement : " documents stockés sur ordinateur local ") unité documentaire qui a été numérisée par la bibliothèque ou acquise sous forme numérique. Cela comprend les livres électroniques, les brevets électroniques, les documents audiovisuels en réseau et tout autre document numérique, par exemple les rapports, les documents cartographiques et musicaux, etc. Les bases de données et les  périodiques électroniques sont exclus.
+<dt> (anciennement : " documents stockÃ©s sur ordinateur local ") unitÃ© documentaire qui a Ã©tÃ© numÃ©risÃ©e par la bibliothÃ¨que ou acquise sous forme numÃ©rique. Cela comprend les livres Ã©lectroniques, les brevets Ã©lectroniques, les documents audiovisuels en rÃ©seau et tout autre document numÃ©rique, par exemple les rapports, les documents cartographiques et musicaux, etc. Les bases de donnÃ©es et les  pÃ©riodiques Ã©lectroniques sont exclus.
 </dt>
-<dt>Mode de comptage : à défaut du nombre de notices, on comptera le nombre de vues.</dt>
+<dt>Mode de comptage : Ã  dÃ©faut du nombre de notices, on comptera le nombre de vues.</dt>
 </dl>
 
 
-<h4>Bases de données (D24)</h4>
+<h4>Bases de donnÃ©es (D24)</h4>
 <dl class="description">
-<dt>exclure la base informatisée de la bibliothèque. Les bases de données soumises à licence sont comptabilisées à l'unité. Ces bases de données peuvent être bibliographiques (collection de références bibliographiques) ou de texte intégral (collection de textes originaux). On comptabilisera les bases de données qui contiennent une information descriptive ou des données numériques, par exemple les annuaires, encyclopédies, dictionnaires, tableaux statistiques et données chiffrées. On comptabilisera également les catalogues de bibliothèques acquis comme base de données.
+<dt>exclure la base informatisÃ©e de la bibliothÃ¨que. Les bases de donnÃ©es soumises Ã  licence sont comptabilisÃ©es Ã  l'unitÃ©. Ces bases de donnÃ©es peuvent Ãªtre bibliographiques (collection de rÃ©fÃ©rences bibliographiques) ou de texte intÃ©gral (collection de textes originaux). On comptabilisera les bases de donnÃ©es qui contiennent une information descriptive ou des donnÃ©es numÃ©riques, par exemple les annuaires, encyclopÃ©dies, dictionnaires, tableaux statistiques et donnÃ©es chiffrÃ©es. On comptabilisera Ã©galement les catalogues de bibliothÃ¨ques acquis comme base de donnÃ©es.
 </dt>
-<dt>Pour information, <u>les documents multimédias</u> sont comptabilisés en fonction de leurs principales caractéristiques ou objectifs, par exemple, en tant que base de données, périodique électronique ou document numérique.
+<dt>Pour information, <u>les documents multimÃ©dias</u> sont comptabilisÃ©s en fonction de leurs principales caractÃ©ristiques ou objectifs, par exemple, en tant que base de donnÃ©es, pÃ©riodique Ã©lectronique ou document numÃ©rique.
 </dt>
 </dl>
 
 <h4>Documents patrimoniaux (D.3)  </h4>
 <dl class="description">
-<dt>documents anciens (19ème siècle compris), rares ou précieux, soumis à des conditions particulières de conservation. A défaut d'un chiffre précis pour les imprimés, compter 30 volumes / mètre linéaire. Pour compter les périodiques (D4), procéder comme pour les non-patrimoniaux. Pour les manuscrits on favorisera un comptage par cotes.
+<dt>documents anciens (19Ã¨me siÃ¨cle compris), rares ou prÃ©cieux, soumis Ã  des conditions particuliÃ¨res de conservation. A dÃ©faut d'un chiffre prÃ©cis pour les imprimÃ©s, compter 30 volumes / mÃ¨tre linÃ©aire. Pour compter les pÃ©riodiques (D4), procÃ©der comme pour les non-patrimoniaux. Pour les manuscrits on favorisera un comptage par cotes.
 </dt>
 </dl>
 
-<h4>Périodiques (D.4)  </h4>
+<h4>PÃ©riodiques (D.4)  </h4>
 <dl class="description">
-<dt> pour les périodiques reliés, compter en nombre d'unités matérielles, exemple : 6 fascicules reliés en 1 volume comptent pour 1 unité.</dt>
-<dt>Les périodiques non reliés seront comptés comme s'ils étaient reliés. </dt>
-<dt>En général, les numéros d'une année forment une unité matérielle. On comptera un volume de publication à feuillets mobiles comme une unité matérielle.</dt>
+<dt> pour les pÃ©riodiques reliÃ©s, compter en nombre d'unitÃ©s matÃ©rielles, exemple : 6 fascicules reliÃ©s en 1 volume comptent pour 1 unitÃ©.</dt>
+<dt>Les pÃ©riodiques non reliÃ©s seront comptÃ©s comme s'ils Ã©taient reliÃ©s. </dt>
+<dt>En gÃ©nÃ©ral, les numÃ©ros d'une annÃ©e forment une unitÃ© matÃ©rielle. On comptera un volume de publication Ã  feuillets mobiles comme une unitÃ© matÃ©rielle.</dt>
 </dl>
 
 

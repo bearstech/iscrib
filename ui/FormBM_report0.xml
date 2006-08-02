@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -23,13 +23,13 @@
               <p></p>
               <p class="adresse">Direction du livre et de la lecture</p>
               <p></p>
-              <p class="adresse">Bureau des bibliothèques territoriales</p>
-              <p class="adresse">182, rue Saint Honoré</p>
+              <p class="adresse">Bureau des bibliothÃ¨ques territoriales</p>
+              <p class="adresse">182, rue Saint HonorÃ©</p>
               <p class="adresse">75033 PARIS CEDEX 01</p>
             </div> 
          </td>
          <td style="text-align: center;font-weight: bold; font-size:16px"> 
-            RAPPORT ANNUEL 2005 <br/> des bibliothèques municipales 
+            RAPPORT ANNUEL 2005 <br/> des bibliothÃ¨ques municipales 
          </td>
      </tr>   
      </table>
@@ -108,7 +108,7 @@
      </tr> 
      <tr></tr>
      <tr>    
-        <th >Nom et Prénom du Directeur</th>
+        <th >Nom et PrÃ©nom du Directeur</th>
         <td colspan="2"><input stl:attributes="value field7" size="60" type="text" name="field7" value=""></input></td>
         <td sdval="1" sdnum="1036;">7</td>
      </tr>
@@ -119,12 +119,12 @@
      </tr>
      <tr></tr>
       <tr>
-        <th >Téléphone</th>
+        <th >TÃ©lÃ©phone</th>
         <td colspan="2"><input stl:attributes="value field9" size="10" maxlength="10" type="text" name="field9" value=""></input> </td>
         <td sdval="3" sdnum="1036;">9</td>
       </tr>
       <tr>
-        <th >Télécopie</th>
+        <th >TÃ©lÃ©copie</th>
         <td colspan="2"><input stl:attributes="value field10" size="10" maxlength="10" type="text" name="field10" value=""></input> </td>
         <td sdval="4" sdnum="1036;">10</td>
       </tr>
@@ -152,11 +152,11 @@
       <tr>
         <th >Mode de gestion</th>
         <td colspan="2">
-	  <input stl:attributes="checked field14_1" type="radio" style="border:0px " name="field14" value="1" />Régie directe<span style="line-height:0pt" ><br /></span>
-	  <input stl:attributes="checked field14_2" type="radio" style="border:0px " name="field14" value="2" /> Etablissement public de coopération culturelle<span style="line-height:0pt" ><br /></span>
+	  <input stl:attributes="checked field14_1" type="radio" style="border:0px " name="field14" value="1" />RÃ©gie directe<span style="line-height:0pt" ><br /></span>
+	  <input stl:attributes="checked field14_2" type="radio" style="border:0px " name="field14" value="2" /> Etablissement public de coopÃ©ration culturelle<span style="line-height:0pt" ><br /></span>
 	  <input stl:attributes="checked field14_3" type="radio" style="border:0px" name="field14" value="3" /> Association<span style="line-height:0pt" ><br /></span>
 	  <input stl:attributes="checked field14_4" type="radio" style="border:0px" name="field14" value="4" /> Autre ,
-	  préciser : <input type="text" stl:attributes="value field15" name="field15" size="44"/>             
+	  prÃ©ciser : <input type="text" stl:attributes="value field15" name="field15" size="44"/>             
 	</td>
         <td sdval="6" sdnum="1036;">14</td>
     </tr>

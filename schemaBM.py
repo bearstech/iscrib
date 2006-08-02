@@ -1,4 +1,20 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
+# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
+# Copyright (C) 2006 HervÃ© Cauwelier <herve@itaapy.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
 from itools.datatypes import Unicode, Boolean
@@ -15,7 +31,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'field11': (Unicode, ''),'field12': (Unicode, ''),
           'field13': (Checkboxes, ''), 'field14': (Checkboxes, ''),
           'field15': (Unicode, ''), 
-          ## A.1 DÉPENSES PROPRES A LA BIBLIOTHÈQUE
+          ## A.1 DÃ‰PENSES PROPRES A LA BIBLIOTHÃˆQUE
           'fieldA11': (Integer, None), 'fieldA12': (Integer, None),
           'fieldA13': (Integer, None), 'fieldA14': (Integer, None),
           'fieldA15': (Integer, None), 
@@ -30,7 +46,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           #
           'fieldA31': (Integer, None), 'fieldA32': (Integer, None),
           'fieldA33': (Integer, None), 'fieldA34': (Integer, None),
-          ## B  LOCAUX - VÉHICULES - ÉQUIPEMENT INFORMATIQUE 
+          ## B  LOCAUX - VÃ‰HICULES - Ã‰QUIPEMENT INFORMATIQUE 
           'fieldB11X': (Integer, None), 'fieldB11Y': (Integer, None),
           'fieldB11Z': (Integer, None, {'sum':('fieldB11X', 'fieldB11Y')}), 
           'fieldB12X': (Integer, None), 'fieldB12Y': (Integer, None), 
@@ -184,7 +200,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'fieldD43': (Integer, None), 'fieldD44': (Integer, None),
           #'fieldD45': (Integer, None), 'fieldD46': (Integer, None),
           #'fieldD47': (Integer, None), 
-          # E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE
+          # E- ACQUISITIONS ET Ã‰LIMINATIONS DE L'ANNÃ‰E
           #
           'fieldE11X': (Integer, None), 'fieldE11Y': (Integer, None), 
           'fieldE11Z': (Integer, None, {'sum': ('fieldE11X', 'fieldE11Y')}),
@@ -318,7 +334,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
                                                 'fieldE72Y', 'fieldE73Y', 
                                                 )}), 
           'fieldE74Z': (Integer, None, {'sum': ('fieldE74X', 'fieldE74Y')}),
-          # F- 6 COOPÉRATION ET RÉSEAU 
+          # F- 6 COOPÃ‰RATION ET RÃ‰SEAU 
           #
           'fieldF11': (Boolean, ''),
           'fieldF12': (Boolean, '', {'depend_field' : ('fieldF13',),}),
@@ -334,7 +350,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'fieldF21': (Boolean, ''),
           'fieldF22': (Boolean, ''), 'fieldF23': (Boolean, ''),
           
-          # G-  ACTIVITÉS DE LA BIBLIOTHÈQUE
+          # G-  ACTIVITÃ‰S DE LA BIBLIOTHÃˆQUE
           #
           'fieldG11': (Checkboxes, ''),
           'fieldG12H': (Integer, ''), 'fieldG12M': (Integer, ''), 
@@ -412,7 +428,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'fieldG50': (Integer, None), 
           'fieldG51': (Integer, None),
           'fieldG51': (Integer, None, {'sum': ('fieldG49', 'fieldG50')}), 
-          # H- SERVICES OFFERTS PAR LA BIBLIOTHÈQUE 
+          # H- SERVICES OFFERTS PAR LA BIBLIOTHÃˆQUE 
           #
           'fieldH11': (Boolean, ''), 'fieldH12': (Boolean, ''),
           'fieldH13': (Boolean, ''), 'fieldH14': (Boolean, ''),
@@ -701,26 +717,26 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
 alertes_txt = """
 E61Z/E11Z = prix moyen d'un livre
 E62Z/E12Z = prix moyen d'un phonogramme
-E63Z/E13Z = prix moyen d'un vidéogramme
-E64Z/E14Z = prix moyen d'un cédérom
+E63Z/E13Z = prix moyen d'un vidÃ©ogramme
+E64Z/E14Z = prix moyen d'un cÃ©dÃ©rom
 E73Z/E46X = prix moyen d'un document patrimonial
-E69Z/E51Z = prix moyen d'un périodique imprimé
+E69Z/E51Z = prix moyen d'un pÃ©riodique imprimÃ©
 E74Z - 5% <= A12+A24 <= E74Z + 5 %
-A11/C43X = coût moyen d'un emploi
+A11/C43X = coÃ»t moyen d'un emploi
 """
 
 # for key, text, expression in alertes:
 alertes = [('A', u"E61Z/E11Z = prix moyen d'un livre", 'E61Z / E11Z' ),
            ('B', u"E62Z/E12Z = prix moyen d'un phonogramme", 'E62Z / E12Z' ),
-           ('C', u"E63Z/E13Z = prix moyen d'un vidéogramme", 'E63Z/E13Z' ),
-           ('D', u"E64Z/E14Z = prix moyen d'un cédérom", 'E64Z/E14Z' ),
+           ('C', u"E63Z/E13Z = prix moyen d'un vidÃ©ogramme", 'E63Z/E13Z' ),
+           ('D', u"E64Z/E14Z = prix moyen d'un cÃ©dÃ©rom", 'E64Z/E14Z' ),
 	       ('E', u"E73Z/E46X = prix moyen d'un document patrimonial",
                   'E73Z/E46X' ),
-           ('F', u"E68Z/E51Z = prix moyen d'un périodique imprimé", 
+           ('F', u"E68Z/E51Z = prix moyen d'un pÃ©riodique imprimÃ©", 
                  'int(E68Z)/int(E51Z)' ),
-           ('G', u"E74Z - 5% <= A12+A24 <= E74Z + 5% = variation à +/- 5 % des dépenses documentaires", 
+           ('G', u"E74Z - 5% <= A12+A24 <= E74Z + 5% = variation Ã  +/- 5 % des dÃ©penses documentaires", 
                  'int(E74Z) * 0.95 < A12+A24 < int(E74Z) * 1.05' ),
-           ('H', u"A11/C43X = coût moyen d'un agent pour votre bibliothèque ", 
+           ('H', u"A11/C43X = coÃ»t moyen d'un agent pour votre bibliothÃ¨que ", 
                  'int(A11)/float(C43X)' )
             ]
 

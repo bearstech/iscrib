@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -48,7 +48,7 @@
     <td><input stl:attributes="value fieldJ1V"
         type="text" name="fieldJ1V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ1Y"
         type="text" name="fieldJ1Y"
         value="" size="25"></input></td>
@@ -60,7 +60,7 @@
     <td><input stl:attributes="value fieldJ1W"
         type="text" name="fieldJ1W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ1X"
         type="text" name="fieldJ1X"
         value="" size="25"></input></td>
@@ -97,7 +97,7 @@
     <td><input stl:attributes="value fieldJ2V"
         type="text" name="fieldJ2V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ2Y"
         type="text" name="fieldJ2Y"
         value="" size="25"></input></td>
@@ -109,7 +109,7 @@
     <td><input stl:attributes="value fieldJ2W"
         type="text" name="fieldJ2W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ2X"
         type="text" name="fieldJ2X"
         value="" size="25"></input></td>
@@ -145,7 +145,7 @@
     <td><input stl:attributes="value fieldJ3V"
         type="text" name="fieldJ3V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ3Y"
         type="text" name="fieldJ3Y"
         value="" size="25"></input></td>
@@ -157,7 +157,7 @@
     <td><input stl:attributes="value fieldJ3W"
         type="text" name="fieldJ3W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ3X"
         type="text" name="fieldJ3X"
         value="" size="25"></input></td>
@@ -193,7 +193,7 @@
     <td><input stl:attributes="value fieldJ4V"
         type="text" name="fieldJ4V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ4Y"
         type="text" name="fieldJ4Y"
         value="" size="25"></input></td>
@@ -205,7 +205,7 @@
     <td><input stl:attributes="value fieldJ4W"
         type="text" name="fieldJ4W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ4X"
         type="text" name="fieldJ4X"
         value="" size="25"></input></td>
@@ -241,7 +241,7 @@
     <td><input stl:attributes="value fieldJ5V"
         type="text" name="fieldJ5V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ5Y"
         type="text" name="fieldJ5Y"
         value="" size="25"></input></td>
@@ -253,7 +253,7 @@
     <td><input stl:attributes="value fieldJ5W"
         type="text" name="fieldJ5W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ5X"
         type="text" name="fieldJ5X"
         value="" size="25"></input></td>
@@ -289,7 +289,7 @@
     <td><input stl:attributes="value fieldJ6V"
         type="text" name="fieldJ6V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ6Y"
         type="text" name="fieldJ6Y"
         value="" size="25"></input></td>
@@ -301,7 +301,7 @@
     <td><input stl:attributes="value fieldJ6W"
         type="text" name="fieldJ6W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ6X"
         type="text" name="fieldJ6X"
         value="" size="25"></input></td>
@@ -337,7 +337,7 @@
     <td><input stl:attributes="value fieldJ7V"
         type="text" name="fieldJ7V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ7Y"
         type="text" name="fieldJ7Y"
         value="" size="25"></input></td>
@@ -349,7 +349,7 @@
     <td><input stl:attributes="value fieldJ7W"
         type="text" name="fieldJ7W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ7X"
         type="text" name="fieldJ7X"
         value="" size="25"></input></td>
@@ -385,7 +385,7 @@
     <td><input stl:attributes="value fieldJ8V"
         type="text" name="fieldJ8V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ8Y"
         type="text" name="fieldJ8Y"
         value="" size="25"></input></td>
@@ -397,7 +397,7 @@
     <td><input stl:attributes="value fieldJ8W"
         type="text" name="fieldJ8W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ8X"
         type="text" name="fieldJ8X"
         value="" size="25"></input></td>
@@ -433,7 +433,7 @@
     <td><input stl:attributes="value fieldJ9V"
         type="text" name="fieldJ9V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ9Y"
         type="text" name="fieldJ9Y"
         value="" size="25"></input></td>
@@ -445,7 +445,7 @@
     <td><input stl:attributes="value fieldJ9W"
         type="text" name="fieldJ9W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ9X"
         type="text" name="fieldJ9X"
         value="" size="25"></input></td>
@@ -481,7 +481,7 @@
     <td><input stl:attributes="value fieldJ10V"
         type="text" name="fieldJ10V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ10Y"
         type="text" name="fieldJ10Y"
         value="" size="25"></input></td>
@@ -493,7 +493,7 @@
     <td><input stl:attributes="value fieldJ10W"
         type="text" name="fieldJ10W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ10X"
         type="text" name="fieldJ10X"
         value="" size="25"></input></td>
@@ -529,7 +529,7 @@
     <td><input stl:attributes="value fieldJ11V"
         type="text" name="fieldJ11V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ11Y"
         type="text" name="fieldJ11Y"
         value="" size="25"></input></td>
@@ -541,7 +541,7 @@
     <td><input stl:attributes="value fieldJ11W"
         type="text" name="fieldJ11W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ11X"
         type="text" name="fieldJ11X"
         value="" size="25"></input></td>
@@ -577,7 +577,7 @@
     <td><input stl:attributes="value fieldJ12V"
         type="text" name="fieldJ12V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ12Y"
         type="text" name="fieldJ12Y"
         value="" size="25"></input></td>
@@ -589,7 +589,7 @@
     <td><input stl:attributes="value fieldJ12W"
         type="text" name="fieldJ12W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ12X"
         type="text" name="fieldJ12X"
         value="" size="25"></input></td>
@@ -625,7 +625,7 @@
     <td><input stl:attributes="value fieldJ13V"
         type="text" name="fieldJ13V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ13Y"
         type="text" name="fieldJ13Y"
         value="" size="25"></input></td>
@@ -637,7 +637,7 @@
     <td><input stl:attributes="value fieldJ13W"
         type="text" name="fieldJ13W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ13X"
         type="text" name="fieldJ13X"
         value="" size="25"></input></td>
@@ -673,7 +673,7 @@
     <td><input stl:attributes="value fieldJ14V"
         type="text" name="fieldJ14V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ14Y"
         type="text" name="fieldJ14Y"
         value="" size="25"></input></td>
@@ -685,7 +685,7 @@
     <td><input stl:attributes="value fieldJ14W"
         type="text" name="fieldJ14W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ14X"
         type="text" name="fieldJ14X"
         value="" size="25"></input></td>
@@ -721,7 +721,7 @@
     <td><input stl:attributes="value fieldJ15V"
         type="text" name="fieldJ15V"
         value="" size="25"></input></td>
-    <th style="text-align: left">TÉLÉCOPIE</th>
+    <th style="text-align: left">TÃ‰LÃ‰COPIE</th>
     <td><input stl:attributes="value fieldJ15Y"
         type="text" name="fieldJ15Y"
         value="" size="25"></input></td>
@@ -733,7 +733,7 @@
     <td><input stl:attributes="value fieldJ15W"
         type="text" name="fieldJ15W"
         value="" size="68"></input></td>
-    <th style="text-align: left">TÉLÉPHONE</th>
+    <th style="text-align: left">TÃ‰LÃ‰PHONE</th>
     <td><input stl:attributes="value fieldJ15X"
         type="text" name="fieldJ15X"
         value="" size="25"></input></td>

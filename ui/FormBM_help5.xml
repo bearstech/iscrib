@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head>
    <title>Aide</title>
-    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
     <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
 
   </head>
@@ -16,34 +16,34 @@
 <h2>ACQUISITIONS ET ELIMINATIONS DE L'ANNEE </h2>
 
 
-<h4>Phonogrammes et vidéogrammes (E12 et E13) </h4>
+<h4>Phonogrammes et vidÃ©ogrammes (E12 et E13) </h4>
 <dl class="description">
-<dt> Compter les unités matérielles par unité de présentation.</dt>
+<dt> Compter les unitÃ©s matÃ©rielles par unitÃ© de prÃ©sentation.</dt>
 </dl>
 
-<h4>Cédéroms (E14) </h4>
+<h4>CÃ©dÃ©roms (E14) </h4>
 <dl class="description">
-<dt>N'inclut ni les CD audio qui font partie des phonogrammes ni les CD vidéo et DVD qui font partie des vidéogrammes, ni les cédéroms de périodiques. Inclut tous les autres disques optiques numériques multimédias ou texte.</dt>
-<dt> Pour les cédéroms multimédias, compter les unités matérielles par unité de présentation.</dt>
+<dt>N'inclut ni les CD audio qui font partie des phonogrammes ni les CD vidÃ©o et DVD qui font partie des vidÃ©ogrammes, ni les cÃ©dÃ©roms de pÃ©riodiques. Inclut tous les autres disques optiques numÃ©riques multimÃ©dias ou texte.</dt>
+<dt> Pour les cÃ©dÃ©roms multimÃ©dias, compter les unitÃ©s matÃ©rielles par unitÃ© de prÃ©sentation.</dt>
 </dl>
 
-<h4>Périodiques acquis (E.5) </h4>
+<h4>PÃ©riodiques acquis (E.5) </h4>
 <dl class="description">
 <dt><ul>
-<li>Les périodiques reçus dans le cadre du dépôt légal imprimeur sont à intégrer dans les abonnements. Compter les abonnements professionnels dans les abonnements en cours pour adultes.</li>
-<li>Les périodiques sur cédérom déjà inclus dans les cédéroms aux lignes E14, E24 et E35, sont reprécisés ici, par titre, afin de permettre un bilan des périodiques.</li>
-<li>Les abonnements à des cédéroms de bases de données ou à des services en ligne tels que ELECTRE, BN-OPALE... ne sont pas comptabilisés avec les périodiques.</li>
-<li>Les périodiques électroniques en ligne : compter les titres pour lesquels la bibliothèque a acquis des droits d'accès, à l'exclusion des liens avec d'autres sites ou des titres gratuits. Les différents titres regroupés sous un même serveur peuvent être comptés ici.</li>
+<li>Les pÃ©riodiques reÃ§us dans le cadre du dÃ©pÃ´t lÃ©gal imprimeur sont Ã  intÃ©grer dans les abonnements. Compter les abonnements professionnels dans les abonnements en cours pour adultes.</li>
+<li>Les pÃ©riodiques sur cÃ©dÃ©rom dÃ©jÃ  inclus dans les cÃ©dÃ©roms aux lignes E14, E24 et E35, sont reprÃ©cisÃ©s ici, par titre, afin de permettre un bilan des pÃ©riodiques.</li>
+<li>Les abonnements Ã  des cÃ©dÃ©roms de bases de donnÃ©es ou Ã  des services en ligne tels que ELECTRE, BN-OPALE... ne sont pas comptabilisÃ©s avec les pÃ©riodiques.</li>
+<li>Les pÃ©riodiques Ã©lectroniques en ligne : compter les titres pour lesquels la bibliothÃ¨que a acquis des droits d'accÃ¨s, Ã  l'exclusion des liens avec d'autres sites ou des titres gratuits. Les diffÃ©rents titres regroupÃ©s sous un mÃªme serveur peuvent Ãªtre comptÃ©s ici.</li>
 </ul>
 </dt>
 </dl>
 
-<h4>Dépenses d'acquisition (E.6/7) </h4>
+<h4>DÃ©penses d'acquisition (E.6/7) </h4>
 <dl class="description">
-<dt>Une acquisition comprend la sélection délibérée d'un document, l'obtention des droits d'accès et son inclusion dans le catalogue.</dt>
+<dt>Une acquisition comprend la sÃ©lection dÃ©libÃ©rÃ©e d'un document, l'obtention des droits d'accÃ¨s et son inclusion dans le catalogue.</dt>
 <dt><ul>
-<li><u>Cédéroms</u> (E64): compter les cédéroms et autres disques optiques numériques multimédias, textes, documents de références, à l'exception des cédéroms de périodiques qui seront comptés avec les périodiques et des CD audio, CD vidéo, DVD audio et/ou super audio CD et DVD qui seront comptés avec les phonogrammes ou les vidéogrammes.</li>
-<li><u>Autres documents </u>(E65) : pour les bases de données, compter le coût des abonnements à des serveurs de bases de données (coût annuel ou forfait) et celui des abonnements à des périodiques électroniques en ligne.
+<li><u>CÃ©dÃ©roms</u> (E64): compter les cÃ©dÃ©roms et autres disques optiques numÃ©riques multimÃ©dias, textes, documents de rÃ©fÃ©rences, Ã  l'exception des cÃ©dÃ©roms de pÃ©riodiques qui seront comptÃ©s avec les pÃ©riodiques et des CD audio, CD vidÃ©o, DVD audio et/ou super audio CD et DVD qui seront comptÃ©s avec les phonogrammes ou les vidÃ©ogrammes.</li>
+<li><u>Autres documents </u>(E65) : pour les bases de donnÃ©es, compter le coÃ»t des abonnements Ã  des serveurs de bases de donnÃ©es (coÃ»t annuel ou forfait) et celui des abonnements Ã  des pÃ©riodiques Ã©lectroniques en ligne.
 </li>
 
 </ul>

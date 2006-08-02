@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
-  <h4>Identité</h4>
+  <h4>IdentitÃ©</h4>
 
   <dl class="description">
-    <dt>Toutes les zones du bloc identitaire qui réclament du texte doivent
-    être remplies en majuscules, sauf les <b>courriels</b> et les noms de
-    <b>sites Web</b> qui peuvent répondre à une typographie spécifique.  </dt> 
+    <dt>Toutes les zones du bloc identitaire qui rÃ©clament du texte doivent
+    Ãªtre remplies en majuscules, sauf les <b>courriels</b> et les noms de
+    <b>sites Web</b> qui peuvent rÃ©pondre Ã  une typographie spÃ©cifique.  </dt> 
   </dl>
 
-  <h4>Régie intercommunale </h4>
+  <h4>RÃ©gie intercommunale </h4>
   <dl class="description">
-    <dt> Préciser la liste des communes participantes pour permettre de prendre
-    en compte l'ensemble de la population (voir onglet EPCI). La bibliothèque
-    doit être en mesure de présenter un rapport annuel unique additionnant
-    l'activité de toutes les bibliothèques du réseau dès lors que la gestion de
-    celles-ci a été transférée à l'EPCI, ces dernières ne faisant pas de
+    <dt> PrÃ©ciser la liste des communes participantes pour permettre de prendre
+    en compte l'ensemble de la population (voir onglet EPCI). La bibliothÃ¨que
+    doit Ãªtre en mesure de prÃ©senter un rapport annuel unique additionnant
+    l'activitÃ© de toutes les bibliothÃ¨ques du rÃ©seau dÃ¨s lors que la gestion de
+    celles-ci a Ã©tÃ© transfÃ©rÃ©e Ã  l'EPCI, ces derniÃ¨res ne faisant pas de
     rapport.  </dt> 
   </dl>
 
   <h4>Desserte par la BDP  </h4>
   <dl class="description">
-    <dt>On entend par desserte  la jouissance de services de prêts ou autres (
+    <dt>On entend par desserte  la jouissance de services de prÃªts ou autres (
     formations, catalogue commun...) que celle-ci soit directement le fait de la
-    BDP ou qu'elle soit exercée par une bibliothèque-relais du réseau BDP </dt>
+    BDP ou qu'elle soit exercÃ©e par une bibliothÃ¨que-relais du rÃ©seau BDP </dt>
   </dl>
 
 </div>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -18,7 +18,7 @@
              stl:if="is_allowed_to_edit"></input>
     </stl:block>
   </div>
-<h1>B- LOCAUX - VÉHICULES - ÉQUIPEMENT INFORMATIQUE ET INFORMATISATION 
+<h1>B- LOCAUX - VÃ‰HICULES - Ã‰QUIPEMENT INFORMATIQUE ET INFORMATISATION 
    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help2', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
 </h1>
@@ -39,7 +39,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Surface en m² horsoeuvre nette SHON (services publics et intérieurs confondus)</th> 
+    <th>Surface en mÂ² horsoeuvre nette SHON (services publics et intÃ©rieurs confondus)</th> 
     <td>
        <input stl:attributes="value fieldB11X"
               type="text" name="fieldB11X"
@@ -59,7 +59,7 @@
   </tr>
 
   <tr>
-    <th>Nombre de bâtiments</th> 
+    <th>Nombre de bÃ¢timents</th> 
     <td>
        <input stl:attributes="value fieldB12X"
               type="text" name="fieldB12X"
@@ -79,7 +79,7 @@
   </tr>
 
   <tr>
-    <th>Nombre de places assises (hors auditorium et cafétéria)</th> 
+    <th>Nombre de places assises (hors auditorium et cafÃ©tÃ©ria)</th> 
     <td>
        <input stl:attributes="value fieldB13X"
               type="text" name="fieldB13X"
@@ -105,7 +105,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque possède-t-elle un espace spécifique pour l'accueil des personnes handicapées ?</th> 
+    <th>La bibliothÃ¨que possÃ¨de-t-elle un espace spÃ©cifique pour l'accueil des personnes handicapÃ©es ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldB14" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldB14" />Oui      </td>
@@ -116,7 +116,7 @@
   </tr>
 
   <tr>
-    <th>Nombre de places assises dans cet espace spécifique</th> 
+    <th>Nombre de places assises dans cet espace spÃ©cifique</th> 
     <td>
        <input stl:attributes="value fieldB15"
               type="text" name="fieldB15"
@@ -125,7 +125,7 @@
     <td><b stl:attributes="class _B15">B15</b></td>
   </tr>
 </table>
-<h2>B. 2 VÉHICULES</h2>
+<h2>B. 2 VÃ‰HICULES</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -133,7 +133,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Nombre total de bus : bibliobus ou médiabus (musibus, artobus, etc.)</th> 
+    <th>Nombre total de bus : bibliobus ou mÃ©diabus (musibus, artobus, etc.)</th> 
     <td>
        <input stl:attributes="value fieldB21"
               type="text" name="fieldB21"
@@ -143,7 +143,7 @@
   </tr>
 
   <tr>
-    <th>Dont nombre de bus faisant du prêt direct</th> 
+    <th>Dont nombre de bus faisant du prÃªt direct</th> 
     <td>
        <input stl:attributes="value fieldB22"
               type="text" name="fieldB22"
@@ -153,7 +153,7 @@
   </tr>
 
   <tr>
-    <th>Autres véhicules (fourgonnettes, voitures légères)</th> 
+    <th>Autres vÃ©hicules (fourgonnettes, voitures lÃ©gÃ¨res)</th> 
     <td>
        <input stl:attributes="value fieldB23"
               type="text" name="fieldB23"
@@ -162,7 +162,7 @@
     <td><b stl:attributes="class _B23">B23</b></td>
   </tr>
 </table>
-<h2>B.3/4 ÉQUIPEMENT INFORMATIQUE ET INFORMATISATION</h2>
+<h2>B.3/4 Ã‰QUIPEMENT INFORMATIQUE ET INFORMATISATION</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -170,7 +170,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque est-t-elle équipée d'un logiciel de gestion de  catalogue ?</th> 
+    <th>La bibliothÃ¨que est-t-elle Ã©quipÃ©e d'un logiciel de gestion de  catalogue ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB32'])"  type="radio"  name="fieldB31" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldB31" />Oui      </td>
@@ -181,7 +181,7 @@
   </tr>
 
   <tr>
-    <th>Si oui, préciser lequel :</th> 
+    <th>Si oui, prÃ©ciser lequel :</th> 
     <td>
        <div stl:if="not fieldB31" id="display_fieldB32"           style="visibility:hidden">         <input stl:if="not fieldB31"
              type="text" name="fieldB32"
@@ -194,7 +194,7 @@
   </tr>
 
   <tr>
-    <th>Dans l'année, la bibliothèque a-t-elle importé des notices pour alimenter  catalogue ?</th> 
+    <th>Dans l'annÃ©e, la bibliothÃ¨que a-t-elle importÃ© des notices pour alimenter  catalogue ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB34'])"  type="radio"  name="fieldB33" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldB33" />Oui      </td>
@@ -218,7 +218,7 @@
   </tr>
 
   <tr>
-    <th>Si la bibliothèque possède des documents patrimoniaux, leur catalogue est- au moins en partie informatisé ?</th> 
+    <th>Si la bibliothÃ¨que possÃ¨de des documents patrimoniaux, leur catalogue est- au moins en partie informatisÃ© ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB36'])"  type="radio"  name="fieldB35" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldB35" />Oui      </td>
@@ -255,7 +255,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Nombre de postes informatiques sans accès internet</th> 
+    <th>Nombre de postes informatiques sans accÃ¨s internet</th> 
     <td>
        <input stl:attributes="value fieldB37X"
               type="text" name="fieldB37X"
@@ -270,7 +270,7 @@
   </tr>
 
   <tr>
-    <th>Nombre de postes informatique avec accès internet</th> 
+    <th>Nombre de postes informatique avec accÃ¨s internet</th> 
     <td>
        <input stl:attributes="value fieldB38X"
               type="text" name="fieldB38X"
@@ -306,7 +306,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Possédez-vous un accès public à internet ?</th> 
+    <th>PossÃ©dez-vous un accÃ¨s public Ã  internet ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB41','fieldB42'])"  type="radio"  name="fieldB40" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldB40" />Oui      </td>
@@ -318,7 +318,7 @@
 </table>
 <table>
   <tr>
-    <th>Si oui, l'accès public à internet est-il :</th>
+    <th>Si oui, l'accÃ¨s public Ã  internet est-il :</th>
   </tr>
 </table>
 <table width="100%">
@@ -328,7 +328,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Entièrement gratuit ?</th> 
+    <th>EntiÃ¨rement gratuit ?</th> 
     <td>
       <table stl:if="fieldB40" id="display_fieldB41" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB41"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldB41" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB41"                value="0"
@@ -341,7 +341,7 @@
   </tr>
 
   <tr>
-    <th>Payant, même partiellement ?</th> 
+    <th>Payant, mÃªme partiellement ?</th> 
     <td>
       <table stl:if="fieldB40" id="display_fieldB42" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB42"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldB42" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB42"                value="0"
@@ -360,7 +360,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque a-t-elle des équipements informatiques spécifiques pour les personnes handicapées ?</th> 
+    <th>La bibliothÃ¨que a-t-elle des Ã©quipements informatiques spÃ©cifiques pour les personnes handicapÃ©es ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB44','fieldB45','fieldB46','fieldB47'])"  type="radio"  name="fieldB43" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldB43" />Oui      </td>
@@ -413,7 +413,7 @@
   </tr>
 
   <tr>
-    <th>Règles tactiles</th> 
+    <th>RÃ¨gles tactiles</th> 
     <td>
       <table stl:if="fieldB43" id="display_fieldB45" > <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB45"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldB45" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB45"                value="0"
@@ -426,7 +426,7 @@
   </tr>
 
   <tr>
-    <th>Logiciels adaptés</th> 
+    <th>Logiciels adaptÃ©s</th> 
     <td>
       <table stl:if="fieldB43" id="display_fieldB46" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldB46"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldB46" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB46"                value="0"
@@ -439,7 +439,7 @@
   </tr>
 
   <tr>
-    <th>Autres, préciser :</th> 
+    <th>Autres, prÃ©ciser :</th> 
     <td>
        <div stl:if="not fieldB43" id="display_fieldB47"           style="visibility:hidden">         <input stl:if="not fieldB43"
              type="text" name="fieldB47"

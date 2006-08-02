@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -19,11 +19,11 @@
     </stl:block>
   </div>
 
- <h1>G- ACTIVITÉS DE LA BIBLIOTHÈQUE
+ <h1>G- ACTIVITÃ‰S DE LA BIBLIOTHÃˆQUE
    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help7', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
 </h1>
-<h2>G.1 OUVERTURE À TOUS LES PUBLICS(hors accueils de publics spécifiques et de classes)</h2>
+<h2>G.1 OUVERTURE Ã€ TOUS LES PUBLICS(hors accueils de publics spÃ©cifiques et de classes)</h2>
 <table width="100%">
 <colgroup>
     <col width="45%"/>
@@ -81,7 +81,7 @@
   </tr>
 
   <tr>
-    <th>Nombre d'heures d'ouverture dans l'année</th> 
+    <th>Nombre d'heures d'ouverture dans l'annÃ©e</th> 
     <td>
        <input stl:attributes="value fieldG13H"
               type="text" name="fieldG13H"
@@ -114,7 +114,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Age non déclaré</th> 
+    <th>Age non dÃ©clarÃ©</th> 
     <td>
        <input stl:attributes="value fieldG20W"
               type="text" name="fieldG20W"
@@ -292,7 +292,7 @@
   </tr>
 
   <tr>
-    <th >Préciser combien d'entre eux résident dans la commune (ou dans les communes du groupement si la bibliothèque est intercommunale)</th> 
+    <th >PrÃ©ciser combien d'entre eux rÃ©sident dans la commune (ou dans les communes du groupement si la bibliothÃ¨que est intercommunale)</th> 
     <td>
        <input stl:attributes="value fieldG27Y"
               type="text" name="fieldG27Y"
@@ -316,7 +316,7 @@
    </colgroup>
   
   <tr>
-    <th>Nombre d'entrées dans la bibliothèque centrale </th> 
+    <th>Nombre d'entrÃ©es dans la bibliothÃ¨que centrale </th> 
     <td>
        <input stl:attributes="value fieldG28"
               type="text" name="fieldG28"
@@ -326,8 +326,8 @@
   </tr>
 
   <tr>
-    <th>Nombre d'entrées dans les bibliothèques annexes ou autres bibliothèques
-        du réseau</th> 
+    <th>Nombre d'entrÃ©es dans les bibliothÃ¨ques annexes ou autres bibliothÃ¨ques
+        du rÃ©seau</th> 
     <td>
        <input stl:attributes="value fieldG29"
               type="text" name="fieldG29"
@@ -337,7 +337,7 @@
   </tr>
 
   <tr>
-    <th> Nombre total d'entrées dans l'année (bibliothèque centrale et 
+    <th> Nombre total d'entrÃ©es dans l'annÃ©e (bibliothÃ¨que centrale et 
          annexes) </th> 
     <td>
        <input stl:attributes="value fieldG30"
@@ -356,7 +356,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Nombre de collectivités utilisatrices : </th> 
+    <th>Nombre de collectivitÃ©s utilisatrices : </th> 
     <td>
        <input stl:attributes="value fieldG31"
               type="text" name="fieldG31"
@@ -376,7 +376,7 @@
   </tr>
 
   <tr>
-    <th>Préciser combien d'entre elles sont situées dans la commune (ou le groupement de communes si la bibliothèque est intercommunale)</th> 
+    <th>PrÃ©ciser combien d'entre elles sont situÃ©es dans la commune (ou le groupement de communes si la bibliothÃ¨que est intercommunale)</th> 
     <td>
        <input stl:attributes="value fieldG33"
               type="text" name="fieldG33"
@@ -385,7 +385,7 @@
     <td><b stl:attributes="class _G33">G33</b></td>
   </tr>
 </table>
-<h2>G. 4/5 NOMBRE DE PRÊTS ET COMMUNICATIONS EFFECTUÉS  DANS L'ANNÉE</h2>
+<h2>G. 4/5 NOMBRE DE PRÃŠTS ET COMMUNICATIONS EFFECTUÃ‰S  DANS L'ANNÃ‰E</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -403,7 +403,7 @@
   <td></td>
   </tr>
   <tr>
-    <th >Prêts de livres</th> 
+    <th >PrÃªts de livres</th> 
     <td>
        <input stl:attributes="value fieldG41X"
               type="text" name="fieldG41X"
@@ -423,7 +423,7 @@
   </tr>
 
   <tr>
-    <th >Prêts de périodiques</th> 
+    <th >PrÃªts de pÃ©riodiques</th> 
     <td>
        <input stl:attributes="value fieldG42X"
               type="text" name="fieldG42X"
@@ -443,7 +443,7 @@
   </tr>
 
   <tr>
-    <th >Prêts de phonogrammes</th> 
+    <th >PrÃªts de phonogrammes</th> 
     <td>
        <input stl:attributes="value fieldG43X"
               type="text" name="fieldG43X"
@@ -463,7 +463,7 @@
   </tr>
 
   <tr>
-    <th >Prêts de vidéogrammes</th> 
+    <th >PrÃªts de vidÃ©ogrammes</th> 
     <td>
        <input stl:attributes="value fieldG44X"
               type="text" name="fieldG44X"
@@ -483,7 +483,7 @@
   </tr>
 
   <tr>
-    <th>Prêts de cédéroms</th> 
+    <th>PrÃªts de cÃ©dÃ©roms</th> 
     <td>
        <input stl:attributes="value fieldG45X"
               type="text" name="fieldG45X"
@@ -503,7 +503,7 @@
   </tr>
 
   <tr>
-    <th >Prêts d'autres documents</th> 
+    <th >PrÃªts d'autres documents</th> 
     <td>
        <input stl:attributes="value fieldG47X"
               type="text" name="fieldG47X"
@@ -523,7 +523,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL DES PRÊTS (G41 à G47)</b></th> 
+    <th><b>TOTAL DES PRÃŠTS (G41 Ã  G47)</b></th> 
     <td>
        <input stl:attributes="value fieldG48X"
               type="text" name="fieldG48X"
@@ -573,7 +573,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (G49 à G50)</b></th> 
+    <th><b>TOTAL (G49 Ã  G50)</b></th> 
     <td>
        <input stl:attributes="value fieldG51"
               type="text" name="fieldG51"

@@ -1,4 +1,20 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
+# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
+# Copyright (C) 2006 Herv√© Cauwelier <herve@itaapy.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
 from itools.datatypes import Unicode, Boolean
@@ -665,31 +681,31 @@ A11 / C43X  = salaire moyen
 F46X / F18X*100| = % desserte
 E83X / E13X = prix moyen d'un livre
 E86X / E16X  = prix moyen d'un phonogramme
-E89X / E19X = prix moyen d'un vidÈogramme
-E92X / E22X = prix moyen d'un cÈdÈrom
+E89X / E19X = prix moyen d'un vid√©ogramme
+E92X / E22X = prix moyen d'un c√©d√©rom
 E96X -10% <= A12 <= E96X + 10%
-H11 si rÈponse =oui,  signaler si le champ 5 (site WEB) est non rempli
-Si F17W = 0, signaler si F69X est diffÈrent de 0
+H11 si r√©ponse =oui,  signaler si le champ 5 (site WEB) est non rempli
+Si F17W = 0, signaler si F69X est diff√©rent de 0
 
 A11 / C43X        = salaire moyen
 F46X / F18X*100   = % desserte
 
 E85X / E13X       = prix moyen d'un livre
 E88X / E16X        = prix moyen d'un phonogramme
-E91X / E19X        = prix moyen d'un vidÈogramme
-E94X / E22X       = prix moyen d'un cÈdÈrom
+E91X / E19X        = prix moyen d'un vid√©ogramme
+E94X / E22X       = prix moyen d'un c√©d√©rom
 E98X -10% <= A12 <= E98X + 10%
 
-H11 si rÈponse =oui,  signaler si le champ 5 (site WEB) est non rempli
-Si F17W = 0, signaler si F69X est diffÈrent de 0
+H11 si r√©ponse =oui,  signaler si le champ 5 (site WEB) est non rempli
+Si F17W = 0, signaler si F69X est diff√©rent de 0
 """
 
 alertes = [
 ('B', u"F46X / F18X*100| = % desserte               " ,"float(F46X) / int(F18X) * 100" ),
 ('C', u"E85X / E13X = prix moyen d'un livre         " ,"E85X / E13X    " ),
 ('D', u"E88X / E16X  = prix moyen d'un phonogramme  " ,"E88X / E16X    " ),
-('E', u"E91X / E19X = prix moyen d'un vidÈogramme   " ,"E91X / E19X    " ),
-('F', u"E94X / E22X = prix moyen d'un cÈdÈrom       " ,"E94X / E22X    " ),
+('E', u"E91X / E19X = prix moyen d'un vid√©ogramme   " ,"E91X / E19X    " ),
+('F', u"E94X / E22X = prix moyen d'un c√©d√©rom       " ,"E94X / E22X    " ),
 ('G1', u"E98X - 10%" , 'int(E98X) * 0.9'),
 ('G2', u"A12"        , 'A12'       ),
 ('G3', u"E98X +10 %.", 'int(E98X) * 1.1'),

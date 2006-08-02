@@ -1,4 +1,20 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
+# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
+# Copyright (C) 2006 Herv√© Cauwelier <herve@itaapy.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
 from itools.catalog.Analysers import Text as itoolsAnalyserText
@@ -6,6 +22,7 @@ from itools.resources import base
 from itools.web import get_context
 from itools.catalog import Query
 from itools import uri
+from itools.xml.stl import stl
 
 # Import from ikaaro
 from Products.ikaaro.User import User as ikaaroUser
@@ -50,7 +67,7 @@ class bibGroup(Handler, ikaaroGroup):
         users = root.get_handler('users')
 
         handler = self.get_handler('/ui/culture/bibGroup_create_add_users.xml')
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 
     create_add_users__access__ = Handler.is_admin
@@ -78,7 +95,7 @@ class bibGroup(Handler, ikaaroGroup):
         admin_group.set_user(username)
 
         message = self.gettext('User added')
-        comeback('browse_users', message)
+        comeback(message, 'browse_users')
 
 
 ikaaroGroup.register_handler_class(bibGroup)
@@ -87,6 +104,17 @@ ikaaroGroup.register_handler_class(bibGroup)
 
 class bibUser(Handler, ikaaroUser):
     class_id = 'bibUser'
+
+    def get_catalog_indexes(self):
+        document = Handler.get_catalog_indexes(self)
+        document['user_town'] = self.get_user_town()
+        document['dep'] = self.get_department()
+        document['year'] = self.get_year()
+        document['is_BDP'] = self.is_BDP()
+        document['is_BM'] = self.is_BM()
+
+        return document
+
 
     def is_BM(self):
         """ patern is BMxxx"""
@@ -104,7 +132,7 @@ class bibUser(Handler, ikaaroUser):
 
     def get_department_name(self):
         name = self.name
-        dep = self.dep
+        dep = self.get_department()
         dep_name = get_deps().get(dep)
         if dep_name:
             dep_name = dep_name.get('name') 
@@ -121,8 +149,6 @@ class bibUser(Handler, ikaaroUser):
            if code:
                dep = get_BMs()[code].get('dep', '')
         return dep
-    # dep is an index for the Catalog
-    dep = property(get_department, None, None, None)
 
 
     def get_BM_code(self):
@@ -134,7 +160,7 @@ class bibUser(Handler, ikaaroUser):
             return None
 
 
-    def user_town(self):
+    def get_user_town(self):
         title = ''
         if self.is_BM():
             code = self.get_BM_code()
@@ -151,8 +177,6 @@ class bibUser(Handler, ikaaroUser):
         elif self.is_BM():
            return '2005'
         return None
-    # year is an index for the Catalog
-    year = property(get_year, None, None, None)
 
 
     #######################################################################
@@ -204,7 +228,7 @@ class bibUser(Handler, ikaaroUser):
             namespace['dep'] = get_BMs()[code].get('name', '')
 
         handler = self.get_handler('/ui/culture/User_home.xml')
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 
     #######################################################################
@@ -243,7 +267,7 @@ class bibUserFolder(Handler, ikaaroUserFolder):
         context = get_context()
         root = context.root
         namespace = {}
-        admin_names = root.get_handler('admins').usernames
+        admin_names = root.get_handler('admins').get_usernames()
         admins = []
         for admin_name in admin_names:
             dic = {} 
@@ -270,10 +294,10 @@ class bibUserFolder(Handler, ikaaroUserFolder):
         # by the Complex search on 'bellegarde', 'sur', 'valserine'
         names = [t[0] for t in itoolsAnalyserText(name)]
         if names: 
-            q_name =  Query.Simple('user_town', names[0])
+            q_name =  Query.Equal('user_town', names[0])
             for subname in names:
-                q_name2 = Query.Simple('user_town', subname)
-                q_name = Query.Complex(q_name, 'and', q_name2)
+                q_name2 = Query.Equal('user_town', subname)
+                q_name = Query.And(q_name, q_name2)
         namespace['search_name'] = name
 
         # departements
@@ -295,36 +319,38 @@ class bibUserFolder(Handler, ikaaroUserFolder):
         namespace['bib_types'] = bib_types
 
         is_BDP, is_BM = False, False
-        if bib == 'BM': is_BM = True 
+        if bib == 'BM':
+            is_BM = True
         namespace['is_BM'] = is_BM
-        if bib == 'BDP': is_BDP = True 
+        if bib == 'BDP':
+            is_BDP = True
         
         # Search
-        if year: q_year = Query.Simple('year', year)
-        if dep: q_dep = Query.Simple('dep', dep)
-        if name: q_name = Query.Simple('user_town', name)
+        if year: q_year = Query.Equal('year', year)
+        if dep: q_dep = Query.Equal('dep', dep)
+        if name: q_name = Query.Equal('user_town', name)
 
         # independent of the form : q_bibUser, q_type_form
-        q_bibUser = Query.Simple('format', bibUser.class_id)
+        q_bibUser = Query.Equal('format', bibUser.class_id)
         if is_BM: 
-            q_type_form = Query.Simple('is_BM', is_BM) 
+            q_type_form = Query.Equal('is_BM', str(int(is_BM)))
         if is_BDP: 
-            q_type_form = Query.Simple('is_BDP', is_BDP) 
+            q_type_form = Query.Equal('is_BDP', str(int(is_BDP)))
 
 
         query, objects = None, []
         if name or dep or year:
             query = q_type_form 
-            query = Query.Complex(query, 'and', q_bibUser)
+            query = Query.And(query, q_bibUser)
         if year: 
-            query = Query.Complex(query, 'and', q_year)
+            query = Query.And(query, q_year)
         if name: 
-            query = Query.Complex(query, 'and', q_name)
+            query = Query.And(query, q_name)
         if dep: 
-            query = Query.Complex(query, 'and', q_dep)
+            query = Query.And(query, q_dep)
 
         namespace['too_long_answer'] = '' 
-        msg = u'Il y a %s rÈponses, les 100 premiËres sont prÈsentÈes.'\
+        msg = u'Il y a %s r√©ponses, les 100 premi√®res sont pr√©sent√©es.'\
               u'Veuillez restreindre votre recherche.'
 
         # Search
@@ -375,7 +401,7 @@ class bibUserFolder(Handler, ikaaroUserFolder):
                         'icon': path_to_icon,
                         'type': resource.get_mimetype(),
                         'date': mtime.strftime('%Y-%m-%d %H:%M'),
-                        'title': (handler.user_town() or 
+                        'title': (handler.get_user_town() or 
                                   handler.get_department_name()),
                         'content_summary': summary,
                         'path': path})
@@ -389,7 +415,7 @@ class bibUserFolder(Handler, ikaaroUserFolder):
         namespace['batch'] = table.batch_control()
 
         handler = self.get_handler('/ui/culture/bibUserFolder_search.xml')
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 
 ikaaroUserFolder.register_handler_class(bibUserFolder)

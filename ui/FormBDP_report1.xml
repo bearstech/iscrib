@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -26,10 +26,10 @@
   </td>  
   </tr>
   </table>
-<h1>A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales)
+<h1>A- Ã‰LÃ‰MENTS FINANCIERS ( en euros, sans dÃ©cimales)
     
 </h1>
-<h2>A.1 DÉPENSES PROPRES A LA BDP</h2>
+<h2>A.1 DÃ‰PENSES PROPRES A LA BDP</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -57,7 +57,7 @@
   </tr>
 
   <tr>
-    <th>Pour la reliure et l'équipement des documents</th> 
+    <th>Pour la reliure et l'Ã©quipement des documents</th> 
     <td>
        <input stl:attributes="value fieldA13"
               type="text" name="fieldA13"
@@ -77,7 +77,7 @@
   </tr>
 
   <tr>
-    <th>Pour l'animation (communication, impression, défraiement)</th> 
+    <th>Pour l'animation (communication, impression, dÃ©fraiement)</th> 
     <td>
        <input stl:attributes="value fieldA15"
               type="text" name="fieldA15"
@@ -97,7 +97,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (A11à A16)</b></th> 
+    <th><b>TOTAL (A11Ã  A16)</b></th> 
     <td>
        <input stl:attributes="value fieldA17"
               type="text" name="fieldA17"
@@ -106,8 +106,8 @@
     <td><b stl:attributes="class _A17">A17</b></td>
   </tr>
 </table>
-<h2>A.2 DÉPENSES D'INVESTISSEMENT POUR LA BDP (hors documents)
-                    : construction, équipement, informatisation</h2>
+<h2>A.2 DÃ‰PENSES D'INVESTISSEMENT POUR LA BDP (hors documents)
+                    : construction, Ã©quipement, informatisation</h2>
 <table  width="100%">
   <colgroup>
     <col width="76%"/>
@@ -115,7 +115,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Pour les bâtiments de la BDP, centrale et annexes (construction, agrandissement, rénovation)</th> 
+    <th>Pour les bÃ¢timents de la BDP, centrale et annexes (construction, agrandissement, rÃ©novation)</th> 
     <td>
        <input stl:attributes="value fieldA21"
               type="text" name="fieldA21"
@@ -125,7 +125,7 @@
   </tr>
 
   <tr>
-    <th>Pour le mobilier et le matériel (y compris achat de véhicules)</th> 
+    <th>Pour le mobilier et le matÃ©riel (y compris achat de vÃ©hicules)</th> 
     <td>
        <input stl:attributes="value fieldA22"
               type="text" name="fieldA22"
@@ -135,7 +135,7 @@
   </tr>
 
   <tr>
-    <th>Pour l'informatique (logiciel et matériel)</th> 
+    <th>Pour l'informatique (logiciel et matÃ©riel)</th> 
     <td>
        <input stl:attributes="value fieldA23"
               type="text" name="fieldA23"
@@ -145,7 +145,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (A21à A23)</b></th> 
+    <th><b>TOTAL (A21Ã  A23)</b></th> 
     <td>
        <input stl:attributes="value fieldA24"
               type="text" name="fieldA24"
@@ -154,7 +154,7 @@
     <td><b stl:attributes="class _A24">A24</b></td>
   </tr>
 </table>
-<h2>A.3 RECETTES PROPRES A LA BIBLIOTHÈQUE</h2>
+<h2>A.3 RECETTES PROPRES A LA BIBLIOTHÃˆQUE</h2>
 <table  width="100%">
   <colgroup>
     <col width="76%"/>
@@ -162,7 +162,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Montant total des droits d'inscription (prêts directs, cotisations des communes) perçus dans l'année sur budget départemental (hors association)</th> 
+    <th>Montant total des droits d'inscription (prÃªts directs, cotisations des communes) perÃ§us dans l'annÃ©e sur budget dÃ©partemental (hors association)</th> 
     <td>
        <input stl:attributes="value fieldA31"
               type="text" name="fieldA31"

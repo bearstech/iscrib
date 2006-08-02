@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -15,29 +15,29 @@
 
 <b>Bonjour,
 <br/><br/>
-Comme chaque année vous avez à remplir le questionnaire national d'activité de votre bibliothèque. A partir de cette année plusieurs changements apparaissent : sur le contenu et sur les modalités de son remplissage.
-Merci de prendre connaissance des éléments d'information suivants, propres nous l'espérons, à bien vous guider.
+Comme chaque annÃ©e vous avez Ã  remplir le questionnaire national d'activitÃ© de votre bibliothÃ¨que. A partir de cette annÃ©e plusieurs changements apparaissent : sur le contenu et sur les modalitÃ©s de son remplissage.
+Merci de prendre connaissance des Ã©lÃ©ments d'information suivants, propres nous l'espÃ©rons, Ã  bien vous guider.
 </b>
 <br/>
-<h3>Philosophie générale</h3>
+<h3>Philosophie gÃ©nÃ©rale</h3>
 
 <dl class="description">
-<dt>Cette application permet de remplir votre rapport annuel par l'intermédiaire d'un formulaire. Pour plus de commodité, celui-ci a été séquencé en différents chapitres (Identité, Finances, Locaux,...) auxquels vous pouvez accéder au moyen d'onglets. Il s'agit donc de remplir l'ensemble des rubriques de chaque onglet et d'activer un certain nombre de contrôles et d'alertes permettant de vérifier les erreurs et les incohérences éventuelles de votre saisie. Quand celles-ci sont toutes levées, vous pouvez alors envoyer votre rapport à la Direction du livre et de la lecture qui le validera définitivement.  </dt>
+<dt>Cette application permet de remplir votre rapport annuel par l'intermÃ©diaire d'un formulaire. Pour plus de commoditÃ©, celui-ci a Ã©tÃ© sÃ©quencÃ© en diffÃ©rents chapitres (IdentitÃ©, Finances, Locaux,...) auxquels vous pouvez accÃ©der au moyen d'onglets. Il s'agit donc de remplir l'ensemble des rubriques de chaque onglet et d'activer un certain nombre de contrÃ´les et d'alertes permettant de vÃ©rifier les erreurs et les incohÃ©rences Ã©ventuelles de votre saisie. Quand celles-ci sont toutes levÃ©es, vous pouvez alors envoyer votre rapport Ã  la Direction du livre et de la lecture qui le validera dÃ©finitivement.  </dt>
 </dl>
 
-<h3>Comment procéder ?</h3>
-<h4>Accéder successivement à tous les onglets.</h4>
+<h3>Comment procÃ©der ?</h3>
+<h4>AccÃ©der successivement Ã  tous les onglets.</h4>
 <dl class="description">
-<dt><font  color="#800000">Remarque importante : vous n'êtes pas obligé de remplir tout le rapport en une seule fois. Dans la mesure où vous avez enregistré la saisie de chaque onglet, vous retrouverez lors d'une session ultérieure le formulaire tel que l'avez laissé.</font></dt>
+<dt><font  color="#800000">Remarque importante : vous n'Ãªtes pas obligÃ© de remplir tout le rapport en une seule fois. Dans la mesure oÃ¹ vous avez enregistrÃ© la saisie de chaque onglet, vous retrouverez lors d'une session ultÃ©rieure le formulaire tel que l'avez laissÃ©.</font></dt>
 </dl>
 <h4>Sur chaque onglet, </h4>
 <dl class="description">
 <dt><ul>
-<li>Remplir toutes les cases (excepté sur l'onglet Identité). Quand la rubrique est de type numérique, indiquer <b>NC</b> (non comptabilisé) en majuscule  lorsqu'une donnée n'est pas connue, indiquer <b>0 </b>lorsque la donnée est égale à 0.</li>
-<li>Cliquer sur le bouton  Enregistrer ou sur la touche « Entrée » de votre clavier pour sauvegarder la saisie de l'onglet en cours. <font  color="#800000">Attention : avant de passer à l'onglet suivant n'oubliez pas d'enregistrer, à défaut toutes les informations de l'onglet seront perdues.</font></li>
-<li>En haut de votre page apparaît éventuellement  la liste des rubriques mal ou non renseignées. Les numéros des rubriques mises en cause sont encadrées. </li>
-<li>Corriger jusqu'à ce que le message « <font  color="#800000">Formulaire Enregistré</font> » apparaisse.</li>
-<li>Vous pouvez alors cliquer sur l'onglet  Contrôle de la saisie  qui vous indique onglet par onglet si les contrôles effectués sont corrects. </li>
+<li>Remplir toutes les cases (exceptÃ© sur l'onglet IdentitÃ©). Quand la rubrique est de type numÃ©rique, indiquer <b>NC</b> (non comptabilisÃ©) en majuscule  lorsqu'une donnÃ©e n'est pas connue, indiquer <b>0 </b>lorsque la donnÃ©e est Ã©gale Ã  0.</li>
+<li>Cliquer sur le bouton  Enregistrer ou sur la touche Â« EntrÃ©e Â» de votre clavier pour sauvegarder la saisie de l'onglet en cours. <font  color="#800000">Attention : avant de passer Ã  l'onglet suivant n'oubliez pas d'enregistrer, Ã  dÃ©faut toutes les informations de l'onglet seront perdues.</font></li>
+<li>En haut de votre page apparaÃ®t Ã©ventuellement  la liste des rubriques mal ou non renseignÃ©es. Les numÃ©ros des rubriques mises en cause sont encadrÃ©es. </li>
+<li>Corriger jusqu'Ã  ce que le message Â« <font  color="#800000">Formulaire EnregistrÃ©</font> Â» apparaisse.</li>
+<li>Vous pouvez alors cliquer sur l'onglet  ContrÃ´le de la saisie  qui vous indique onglet par onglet si les contrÃ´les effectuÃ©s sont corrects. </li>
 </ul>
 </dt>
 </dl>
@@ -45,30 +45,30 @@ Merci de prendre connaissance des éléments d'information suivants, propres nous 
 <h4>Quand l'ensemble des onglets est rempli,</h4>
 <dl class="description">
 <dt><ul>
-<li>Cliquer sur l'onglet Contrôle de la saisie </li>
-<li>Détecter les contrôles qui sont à <font  color="#800000">NON </font> et procéder aux corrections voulues. Par exemple, si dans la liste des contrôles vous avez 
+<li>Cliquer sur l'onglet ContrÃ´le de la saisie </li>
+<li>DÃ©tecter les contrÃ´les qui sont Ã  <font  color="#800000">NON </font> et procÃ©der aux corrections voulues. Par exemple, si dans la liste des contrÃ´les vous avez 
 <table border="1">
 <tr>
 <td>A16 [5] == A11 + A12 + A13 + A14 + A15 [25] </td>
 <td><font  color="#800000">NON</font> </td>
 </tr>
 </table>
-cela signifie que la rubrique A16 contient le chiffre <b>5</b> et que la somme calculée correspondante est <b>25.</b>
+cela signifie que la rubrique A16 contient le chiffre <b>5</b> et que la somme calculÃ©e correspondante est <b>25.</b>
 </li>
-<li>Vérifier que les calculs faits dans la liste des alertes donnent des résultats vraisemblables. Par exemple, si l'alerte E83X/E13X = prix moyen d'un livre donne 1000, c'est qu'il y a vraisemblablement une erreur sur le nombre de livres achetés (E13X) soit sur le montant des achats de livres (E83X)</li>
-<li>Vérifier que la liste des valeurs incorrectes est vide.</li>
-<li>Quand tous les contrôles sont à <font  color="#0000ff">OUI</font> cliquer alors sur le bouton "Envoyer le formulaire"</li>
-<li>La Direction du livre et de la lecture est alors informée par mél que vous avez terminé et validé votre rapport.</li>
+<li>VÃ©rifier que les calculs faits dans la liste des alertes donnent des rÃ©sultats vraisemblables. Par exemple, si l'alerte E83X/E13X = prix moyen d'un livre donne 1000, c'est qu'il y a vraisemblablement une erreur sur le nombre de livres achetÃ©s (E13X) soit sur le montant des achats de livres (E83X)</li>
+<li>VÃ©rifier que la liste des valeurs incorrectes est vide.</li>
+<li>Quand tous les contrÃ´les sont Ã  <font  color="#0000ff">OUI</font> cliquer alors sur le bouton "Envoyer le formulaire"</li>
+<li>La Direction du livre et de la lecture est alors informÃ©e par mÃ©l que vous avez terminÃ© et validÃ© votre rapport.</li>
 </ul></dt>
 </dl>
 <h4> Imprimer votre rapport </h4>
 <dl class="description">
-<dt> Vous pouvez soir imprimer chaque chapitre de votre rapport en cliquant sur le bouton "Imprimer" présent sur l'onglet correspondant,
+<dt> Vous pouvez soir imprimer chaque chapitre de votre rapport en cliquant sur le bouton "Imprimer" prÃ©sent sur l'onglet correspondant,
 soit cliquer sur l'onglet Impression du formulaire pour imprimer l'ensemble du rapport</dt>
 <dt> Quelques conseils : </dt>
 <dt><ul>
-<li> Sous Firefox/Mozilla : avant d'imprimer cocher l'option "Imprimer le fond de page" et "Adapter à la taille de la page" dans "Mise en page" </li>
-<li> Sous Internet Explorer : avant d'imprimer, paramétrer votre navigateur : Outils, Options Internet, Onglet Avancé, cocher Imprimer les couleurs et les images d'arriere-plan. Réduire les marges. </li> 
+<li> Sous Firefox/Mozilla : avant d'imprimer cocher l'option "Imprimer le fond de page" et "Adapter Ã  la taille de la page" dans "Mise en page" </li>
+<li> Sous Internet Explorer : avant d'imprimer, paramÃ©trer votre navigateur : Outils, Options Internet, Onglet AvancÃ©, cocher Imprimer les couleurs et les images d'arriere-plan. RÃ©duire les marges. </li> 
 </ul>
 </dt>
 </dl>

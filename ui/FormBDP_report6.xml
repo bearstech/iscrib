@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -27,11 +27,11 @@
   </tr>
   </table>
  
-<h1>F-  RÉSEAU TOUS PUBLICS
+<h1>F-  RÃ‰SEAU TOUS PUBLICS
     <!--a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a-->
 </h1>
-<h2>F.1 / 2 DESSERTE DU RÉSEAU TOUS PUBLICS </h2>
+<h2>F.1 / 2 DESSERTE DU RÃ‰SEAU TOUS PUBLICS </h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -48,7 +48,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Bibliothèques municipales niveau 1</th> 
+    <th>BibliothÃ¨ques municipales niveau 1</th> 
     <td>
        <input stl:attributes="value fieldF11W"
               type="text" name="fieldF11W"
@@ -68,7 +68,7 @@
   </tr>
 
   <tr>
-    <th>Bibliothèques municipales niveau 2</th> 
+    <th>BibliothÃ¨ques municipales niveau 2</th> 
     <td>
        <input stl:attributes="value fieldF12W"
               type="text" name="fieldF12W"
@@ -88,7 +88,7 @@
   </tr>
 
   <tr>
-    <th>Bibliothèques relais niveau 3</th> 
+    <th>BibliothÃ¨ques relais niveau 3</th> 
     <td>
        <input stl:attributes="value fieldF13W"
               type="text" name="fieldF13W"
@@ -128,7 +128,7 @@
   </tr>
 
   <tr>
-    <th>Autres dépôts tous publics</th> 
+    <th>Autres dÃ©pÃ´ts tous publics</th> 
     <td>
        <input stl:attributes="value fieldF15W"
               type="text" name="fieldF15W"
@@ -148,7 +148,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (F11 à F15)</b></th> 
+    <th><b>TOTAL (F11 Ã  F15)</b></th> 
     <td>
        <input stl:attributes="value fieldF16W"
               type="text" name="fieldF16W"
@@ -168,7 +168,7 @@
   </tr>
 
   <tr>
-    <th>Arrêts bibliobus-médiabus prêt direct</th> 
+    <th>ArrÃªts bibliobus-mÃ©diabus prÃªt direct</th> 
     <td>
        <input stl:attributes="value fieldF17W"
               type="text" name="fieldF17W"
@@ -269,7 +269,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>communes desservies par plusieurs modes de desserte (ex BM + prêt direct)</th> 
+    <th>communes desservies par plusieurs modes de desserte (ex BM + prÃªt direct)</th> 
     <td>
        <input stl:attributes="value fieldF21X"
               type="text" name="fieldF21X"
@@ -283,7 +283,7 @@
     <td><b stl:attributes="class _F21">F21</b></td>
   </tr>
 </table>
-<h2>F. 3 DÉPÔTS DE LA BDP</h2>
+<h2>F. 3 DÃ‰PÃ”TS DE LA BDP</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -293,12 +293,12 @@
    </colgroup>
   <tr>
   <td></td>
-    <th style="text-align: center">Nombre de documents déposés dans l'année Y</th>
-    <th style="text-align: center">Nombre de documents en dépôt au 31.12.05 Z</th>
+    <th style="text-align: center">Nombre de documents dÃ©posÃ©s dans l'annÃ©e Y</th>
+    <th style="text-align: center">Nombre de documents en dÃ©pÃ´t au 31.12.05 Z</th>
   <td></td>
   </tr>
   <tr>
-    <th>Imprimés adultes</th> 
+    <th>ImprimÃ©s adultes</th> 
     <td>
        <input stl:attributes="value fieldF31Y"
               type="text" name="fieldF31Y"
@@ -313,7 +313,7 @@
   </tr>
 
   <tr>
-    <th>Imprimés enfants</th> 
+    <th>ImprimÃ©s enfants</th> 
     <td>
        <input stl:attributes="value fieldF32Y"
               type="text" name="fieldF32Y"
@@ -358,7 +358,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes</th> 
+    <th>VidÃ©ogrammes</th> 
     <td>
        <input stl:attributes="value fieldF35Y"
               type="text" name="fieldF35Y"
@@ -373,7 +373,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms</th> 
+    <th>CÃ©dÃ©roms</th> 
     <td>
        <input stl:attributes="value fieldF36Y"
               type="text" name="fieldF36Y"
@@ -403,7 +403,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (F33 à F37 )</b></th> 
+    <th><b>TOTAL (F33 Ã  F37 )</b></th> 
     <td>
        <input stl:attributes="value fieldF38Y"
               type="text" name="fieldF38Y"
@@ -417,7 +417,7 @@
     <td><b stl:attributes="class _F38">F38</b></td>
   </tr>
 </table>
-<h2>F. 4 BIBLIOTHÈQUES AYANT FOURNI DES STATISTIQUES</h2>
+<h2>F. 4 BIBLIOTHÃˆQUES AYANT FOURNI DES STATISTIQUES</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -434,7 +434,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Bibliothèques niveau 1</th> 
+    <th>BibliothÃ¨ques niveau 1</th> 
     <td>
        <input stl:attributes="value fieldF41W"
               type="text" name="fieldF41W"
@@ -454,7 +454,7 @@
   </tr>
 
   <tr>
-    <th>Bibliothèques niveau 2</th> 
+    <th>BibliothÃ¨ques niveau 2</th> 
     <td>
        <input stl:attributes="value fieldF42W"
               type="text" name="fieldF42W"
@@ -474,7 +474,7 @@
   </tr>
 
   <tr>
-    <th>Bibliothèques-relais niveau 3</th> 
+    <th>BibliothÃ¨ques-relais niveau 3</th> 
     <td>
        <input stl:attributes="value fieldF43W"
               type="text" name="fieldF43W"
@@ -514,7 +514,7 @@
   </tr>
 
   <tr>
-    <th>Dépôts tous publics</th> 
+    <th>DÃ©pÃ´ts tous publics</th> 
     <td>
        <input stl:attributes="value fieldF45W"
               type="text" name="fieldF45W"
@@ -534,7 +534,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (F41 à F45  )</b></th> 
+    <th><b>TOTAL (F41 Ã  F45  )</b></th> 
     <td>
        <input stl:attributes="value fieldF46W"
               type="text" name="fieldF46W"
@@ -554,7 +554,7 @@
   </tr>
 </table>
 <p style = "page-break-after:always "></p>
-<h2>F. 5 ACTIVITÉS DU RÉSEAU TOUS PUBLICS : INSCRITS</h2>
+<h2>F. 5 ACTIVITÃ‰S DU RÃ‰SEAU TOUS PUBLICS : INSCRITS</h2>
 <table>
   <tr>
     <th>Nombre d'inscrits enfants</th>
@@ -571,9 +571,9 @@
    </colgroup>
   <tr>
   <td></td>
-    <th style="text-align: center">BDP/Annexes ouvertes à tous publics W</th>
-    <th style="text-align: center">Bibliobus de prêts direct X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">BDP/Annexes ouvertes Ã  tous publics W</th>
+    <th style="text-align: center">Bibliobus de prÃªts direct X</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
@@ -618,9 +618,9 @@
    </colgroup>
   <tr>
   <td></td>
-    <th style="text-align: center">BDP/Annexes ouvertes à tous publics W</th>
-    <th style="text-align: center">Bibliobus de prêts direct X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">BDP/Annexes ouvertes Ã  tous publics W</th>
+    <th style="text-align: center">Bibliobus de prÃªts direct X</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
@@ -749,7 +749,7 @@
     <td><b stl:attributes="class _F56">F56</b></td>
   </tr>
 </table>
-<h2>F. 6 ACTIVITÉS DU RÉSEAU TOUS PUBLICS : NOMBRE DE PRÊTS (1)</h2>
+<h2>F. 6 ACTIVITÃ‰S DU RÃ‰SEAU TOUS PUBLICS : NOMBRE DE PRÃŠTS (1)</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -761,14 +761,14 @@
    </colgroup>
   <tr>
   <td></td>
-    <th style="text-align: center">BDP/Annexes ouvertes à tous publics W</th>
-    <th style="text-align: center">Bibliobus de prêts direct X</th>
-    <th style="text-align: center">Réseau public Y</th>
+    <th style="text-align: center">BDP/Annexes ouvertes Ã  tous publics W</th>
+    <th style="text-align: center">Bibliobus de prÃªts direct X</th>
+    <th style="text-align: center">RÃ©seau public Y</th>
     <th style="text-align: center">Total Z</th>
   <td></td>
   </tr>
   <tr>
-    <th>Prêts de livres adultes</th> 
+    <th>PrÃªts de livres adultes</th> 
     <td>
        <input stl:attributes="value fieldF61W"
               type="text" name="fieldF61W"
@@ -793,7 +793,7 @@
   </tr>
 
   <tr>
-    <th>Prêts de livres enfants</th> 
+    <th>PrÃªts de livres enfants</th> 
     <td>
        <input stl:attributes="value fieldF62W"
               type="text" name="fieldF62W"
@@ -843,7 +843,7 @@
   </tr>
 
   <tr>
-    <th>Prêts de périodiques</th> 
+    <th>PrÃªts de pÃ©riodiques</th> 
     <td>
        <input stl:attributes="value fieldF64W"
               type="text" name="fieldF64W"
@@ -868,7 +868,7 @@
   </tr>
 
   <tr>
-    <th>Prêts de phonogrammes</th> 
+    <th>PrÃªts de phonogrammes</th> 
     <td>
        <input stl:attributes="value fieldF65W"
               type="text" name="fieldF65W"
@@ -893,7 +893,7 @@
   </tr>
 
   <tr>
-    <th>Prêts de vidéogrammes</th> 
+    <th>PrÃªts de vidÃ©ogrammes</th> 
     <td>
        <input stl:attributes="value fieldF66W"
               type="text" name="fieldF66W"
@@ -918,7 +918,7 @@
   </tr>
 
   <tr>
-    <th>Prêts de disques optiques numériques</th> 
+    <th>PrÃªts de disques optiques numÃ©riques</th> 
     <td>
        <input stl:attributes="value fieldF67W"
               type="text" name="fieldF67W"
@@ -943,7 +943,7 @@
   </tr>
 
   <tr>
-    <th>Prêts d'autres documents</th> 
+    <th>PrÃªts d'autres documents</th> 
     <td>
        <input stl:attributes="value fieldF68W"
               type="text" name="fieldF68W"
@@ -968,7 +968,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL DES PRÊTS (F63 à F68)</b></th> 
+    <th><b>TOTAL DES PRÃŠTS (F63 Ã  F68)</b></th> 
     <td>
        <input stl:attributes="value fieldF69W"
               type="text" name="fieldF69W"
@@ -994,7 +994,7 @@
 </table>
 <div>
     <p></p>
-    <p>(1)nb de prêts aux lecteurs finaux </p>
+    <p>(1)nb de prÃªts aux lecteurs finaux </p>
       
    
 </div>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -17,8 +17,8 @@
     </stl:block>
 
   </div>
-  <h1>FICHE DE RENSEIGNEMENTS concernant les Etablissements Publics de Coopération Intercommunale (EPCI) ayant compétence en matière de lecture
-	  publique intégrale ou partagée
+  <h1>FICHE DE RENSEIGNEMENTS concernant les Etablissements Publics de CoopÃ©ration Intercommunale (EPCI) ayant compÃ©tence en matiÃ¨re de lecture
+	  publique intÃ©grale ou partagÃ©e
    
    <a stl:if="not printable" href="#" 
 	      style="color:white;background-color:red; border: 1px solid red; " 
@@ -31,7 +31,7 @@
     <!-- col width="30%"/> <col width="55%"/> <col width="5%"/-->
   </colgroup>
   <tr>
-    <th>Intitulé de l'EPCI :</th> 
+    <th>IntitulÃ© de l'EPCI :</th> 
     <td>
        <input stl:attributes="value fieldK1"
               type="text" name="fieldK1"
@@ -54,7 +54,7 @@
 <table>
   <br/><br/>	
   <tr>
-	  <th>Liste des communes de l'EPCI dont la bibliothèque a été transférée:</th>
+	  <th>Liste des communes de l'EPCI dont la bibliothÃ¨que a Ã©tÃ© transfÃ©rÃ©e:</th>
   </tr>
 </table>
 <table>

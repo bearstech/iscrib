@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head>
    <title>Aide</title>
-    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
     <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
 
   </head>
@@ -15,7 +15,7 @@
 <p align="right"><a href=";help_menu">Sommaire</a></p>
 <h2> SERVICES</h2>
 <dl class="description">
-<dt>Chaque partie commence par une question «&nbsp;en oui/non&nbsp;», les questions suivantes ne vous concernent que si vous avez r&eacute;pondu «&nbsp;oui&nbsp;» &agrave; la premi&egrave;re. </dt>
+<dt>Chaque partie commence par une question Â«&nbsp;en oui/non&nbsp;Â», les questions suivantes ne vous concernent que si vous avez r&eacute;pondu Â«&nbsp;oui&nbsp;Â» &agrave; la premi&egrave;re. </dt>
 </dl>
 
 <h4>H1. Services &agrave; distance</h4>

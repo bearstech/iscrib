@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -12,9 +12,9 @@
   </div>
   <h1>Commentaires</h1>
 
-  <h3> Si vous souhaitez apporter des précisions au renseignement 
-      de ce rapport, inscrivez ci-dessous les éléments complémentaires
-      d'appréciation.</h3> 
+  <h3> Si vous souhaitez apporter des prÃ©cisions au renseignement 
+      de ce rapport, inscrivez ci-dessous les Ã©lÃ©ments complÃ©mentaires
+      d'apprÃ©ciation.</h3> 
 
     
     <textarea cols="46" rows="20"  

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head>
    <title>Aide</title>
-    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
     <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
 
   </head>
@@ -19,34 +19,34 @@
 <dl class="description">
 <dt>
 <ul>
-<li><u>Services pour les handicapés</u> (H15): sur les infrastructures (rampes d'accès ; ouverture automatique ; bornes auditives , tactiles ) ; sur les collections (documents adaptés, par exemple, livre en braille ou visionneuse).</li>
-<li><u>Prêt Inter Bibliothèques</u> (H16 à H20): ne pas compter les échanges à l'intérieur d'un réseau intercommunal ou avec la BDP.</li>
+<li><u>Services pour les handicapÃ©s</u> (H15): sur les infrastructures (rampes d'accÃ¨s ; ouverture automatique ; bornes auditives , tactiles ) ; sur les collections (documents adaptÃ©s, par exemple, livre en braille ou visionneuse).</li>
+<li><u>PrÃªt Inter BibliothÃ¨ques</u> (H16 Ã  H20): ne pas compter les Ã©changes Ã  l'intÃ©rieur d'un rÃ©seau intercommunal ou avec la BDP.</li>
 </ul>
 </dt>
 </dl>
 
-<h4>Services à distance (H.3)</h4>
+<h4>Services Ã  distance (H.3)</h4>
 <dl class="description">
 <dt>
 <ul>
-<li><u>La bibliothèque a-t-elle un site Web ? </u>(H31):  répondez par l'affirmative alors même que le site, s'il n'est pas dédié exclusivement à la bibliothèque, ne contient que quelques pages la concernant.</li>
-<li><u>Les sessions internet </u>(H38): c'est à dire l'accès d'un usager à internet par le biais d'une station de travail, et une connexion effectuée à une base de données ou à un catalogue interrogeable  en ligne par le public. 
-On intégrera dans ces sessions les visites virtuelles, c'est à dire les recherches faites par un usager anonyme sur le site Web de la bibliothèque.
-On pourra se référer sur cette question au rapport technique de l'ISO (International Standard Organization), indicateurs de performance pour les services électroniques des bibliothèques, consultable à l'AFNOR.
-H40 : on entend par procédés techniques adaptés le respect des normes internationales d'accessibilité des sites (www.accessiweb.org).
+<li><u>La bibliothÃ¨que a-t-elle un site Web ? </u>(H31):  rÃ©pondez par l'affirmative alors mÃªme que le site, s'il n'est pas dÃ©diÃ© exclusivement Ã  la bibliothÃ¨que, ne contient que quelques pages la concernant.</li>
+<li><u>Les sessions internet </u>(H38): c'est Ã  dire l'accÃ¨s d'un usager Ã  internet par le biais d'une station de travail, et une connexion effectuÃ©e Ã  une base de donnÃ©es ou Ã  un catalogue interrogeable  en ligne par le public. 
+On intÃ©grera dans ces sessions les visites virtuelles, c'est Ã  dire les recherches faites par un usager anonyme sur le site Web de la bibliothÃ¨que.
+On pourra se rÃ©fÃ©rer sur cette question au rapport technique de l'ISO (International Standard Organization), indicateurs de performance pour les services Ã©lectroniques des bibliothÃ¨ques, consultable Ã  l'AFNOR.
+H40 : on entend par procÃ©dÃ©s techniques adaptÃ©s le respect des normes internationales d'accessibilitÃ© des sites (www.accessiweb.org).
 </li>
 
 </ul>
 </dt>
 </dl>
 
-<h4>Services aux collectivités (H.4/5) </h4>
+<h4>Services aux collectivitÃ©s (H.4/5) </h4>
 <dl class="description">
-<dt>Cette rubrique concerne les établissements qui sont dépositaires de prêts de longue durée. Elle ne concerne pas les établissements ou les classes qui viennent chercher des documents à la bibliothèque pour une durée normale et qui sont recensés à la rubrique Inscrits (ligne G31 et G32).
+<dt>Cette rubrique concerne les Ã©tablissements qui sont dÃ©positaires de prÃªts de longue durÃ©e. Elle ne concerne pas les Ã©tablissements ou les classes qui viennent chercher des documents Ã  la bibliothÃ¨que pour une durÃ©e normale et qui sont recensÃ©s Ã  la rubrique Inscrits (ligne G31 et G32).
 <ul>
-<li><u>Dépôts dans les collectivités desservies</u> : on ne compte pas les classes, mais les écoles, et uniquement s'il s'agit de prêts de longue durée.</li>
-<li><u>Nombre de documents déposés</u> : les documents comptabilisés dans cette rubrique ne devraient pas être comptabilisés avec les prêts.</li>
-<li><u>Hôpitaux </u>(H56): hôpitaux, centres de soins (cliniques, dispensaires, etc.)</li>
+<li><u>DÃ©pÃ´ts dans les collectivitÃ©s desservies</u> : on ne compte pas les classes, mais les Ã©coles, et uniquement s'il s'agit de prÃªts de longue durÃ©e.</li>
+<li><u>Nombre de documents dÃ©posÃ©s</u> : les documents comptabilisÃ©s dans cette rubrique ne devraient pas Ãªtre comptabilisÃ©s avec les prÃªts.</li>
+<li><u>HÃ´pitaux </u>(H56): hÃ´pitaux, centres de soins (cliniques, dispensaires, etc.)</li>
 </ul>
 
 </dt>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -25,10 +25,10 @@
 </h1>
 <table>
   <tr>
-    <th>COLLECTIONS : nombre de documents (en nombre d'unités) appartenant à la bibliothèque</th>
+    <th>COLLECTIONS : nombre de documents (en nombre d'unitÃ©s) appartenant Ã  la bibliothÃ¨que</th>
   </tr>
 </table>
-<h2>D. 1/ 2  LIVRES ET AUTRES DOCUMENTS (hors patrimoine et périodiques)</h2>
+<h2>D. 1/ 2  LIVRES ET AUTRES DOCUMENTS (hors patrimoine et pÃ©riodiques)</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -45,7 +45,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Nombre de livres en libre accès pour le prêt</th> 
+    <th>Nombre de livres en libre accÃ¨s pour le prÃªt</th> 
     <td>
        <input stl:attributes="value fieldD11X"
               type="text" name="fieldD11X"
@@ -65,7 +65,7 @@
   </tr>
 
   <tr>
-    <th>Nombre de livres en libre accès réservés a la consultation sur place</th> 
+    <th>Nombre de livres en libre accÃ¨s rÃ©servÃ©s a la consultation sur place</th> 
     <td>
        <input stl:attributes="value fieldD12X"
               type="text" name="fieldD12X"
@@ -85,7 +85,7 @@
   </tr>
 
   <tr>
-    <th>Nombre total de livres en libre accès  (D11+D12)</th> 
+    <th>Nombre total de livres en libre accÃ¨s  (D11+D12)</th> 
     <td>
        <input stl:attributes="value fieldD13X"
               type="text" name="fieldD13X"
@@ -145,7 +145,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes</th> 
+    <th>VidÃ©ogrammes</th> 
     <td>
        <input stl:attributes="value fieldD16X"
               type="text" name="fieldD16X"
@@ -185,7 +185,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms sauf périodiques</th> 
+    <th>CÃ©dÃ©roms sauf pÃ©riodiques</th> 
     <td>
        <input stl:attributes="value fieldD18X"
               type="text" name="fieldD18X"
@@ -251,7 +251,7 @@
   </tr>
 
   <tr>
-    <th>Documents numériques</th> 
+    <th>Documents numÃ©riques</th> 
     <td>
        <input stl:attributes="value fieldD23"
               type="text" name="fieldD23"
@@ -261,7 +261,7 @@
   </tr>
 
   <tr>
-    <th>Bases de données</th> 
+    <th>Bases de donnÃ©es</th> 
     <td>
        <input stl:attributes="value fieldD24"
               type="text" name="fieldD24"
@@ -286,7 +286,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés,...)</th> 
+    <th>Dont documents adaptÃ©s aux personnes handicapÃ©es (braille, livres en gros caractÃ¨res, livres parlÃ©s,...)</th> 
     <td>
        <input stl:attributes="value fieldD25X"
               type="text" name="fieldD25X"
@@ -305,7 +305,7 @@
     <td><b stl:attributes="class _D25">D25</b></td>
   </tr>
 </table>
-<h2>D.3 DOCUMENTS PATRIMONIAUX (hors périodiques)</h2>
+<h2>D.3 DOCUMENTS PATRIMONIAUX (hors pÃ©riodiques)</h2>
 <table width="100%">
   <colgroup>
     <col width="83%"/>
@@ -313,7 +313,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Livres imprimés</th> 
+    <th>Livres imprimÃ©s</th> 
     <td>
        <input stl:attributes="value fieldD31"
               type="text" name="fieldD31"
@@ -343,7 +343,7 @@
   </tr>
 
   <tr>
-    <th>Documents numériques</th> 
+    <th>Documents numÃ©riques</th> 
     <td>
        <input stl:attributes="value fieldD34"
               type="text" name="fieldD34"
@@ -353,7 +353,7 @@
   </tr>
 
   <tr>
-    <th>Bases de données</th> 
+    <th>Bases de donnÃ©es</th> 
     <td>
        <input stl:attributes="value fieldD35"
               type="text" name="fieldD35"
@@ -373,7 +373,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (D31 à D36)</b></th> 
+    <th><b>TOTAL (D31 Ã  D36)</b></th> 
     <td>
        <input stl:attributes="value fieldD37"
               type="text" name="fieldD37"
@@ -382,7 +382,7 @@
     <td><b stl:attributes="class _D37">D37</b></td>
   </tr>
 </table>
-<h2>D.4 PÉRIODIQUES</h2>
+<h2>D.4 PÃ‰RIODIQUES</h2>
 <table width="100%">
   <colgroup>
     <col width="83%"/>
@@ -390,7 +390,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Nombre de titres de périodiques conservés (titres morts ou courants) imprimés</th> 
+    <th>Nombre de titres de pÃ©riodiques conservÃ©s (titres morts ou courants) imprimÃ©s</th> 
     <td>
        <input stl:attributes="value fieldD41"
               type="text" name="fieldD41"
@@ -400,7 +400,7 @@
   </tr>
 
   <tr>
-    <th>Dont nombre de périodiques patrimoniaux</th> 
+    <th>Dont nombre de pÃ©riodiques patrimoniaux</th> 
     <td>
        <input stl:attributes="value fieldD42"
               type="text" name="fieldD42"
@@ -410,7 +410,7 @@
   </tr>
 
   <tr>
-    <th>Nombre de titres de périodiques conservés (titres morts ou courants) sur Cédéroms ou en ligne</th> 
+    <th>Nombre de titres de pÃ©riodiques conservÃ©s (titres morts ou courants) sur CÃ©dÃ©roms ou en ligne</th> 
     <td>
        <input stl:attributes="value fieldD43"
               type="text" name="fieldD43"
@@ -420,7 +420,7 @@
   </tr>
 
   <tr>
-    <th>Nombre total de titres de périodiques conservés ou non conservés</th> 
+    <th>Nombre total de titres de pÃ©riodiques conservÃ©s ou non conservÃ©s</th> 
     <td>
        <input stl:attributes="value fieldD44"
               type="text" name="fieldD44"

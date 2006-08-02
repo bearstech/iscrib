@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -32,8 +32,8 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th rowspan="2">La bibliothèque organise-t-elle  régulièrement des animations dans l'année (heures du conte, club de lecteurs) ?</th>
-    <th>à destination des enfants</th> 
+    <th rowspan="2">La bibliothÃ¨que organise-t-elle  rÃ©guliÃ¨rement des animations dans l'annÃ©e (heures du conte, club de lecteurs) ?</th>
+    <th>Ã  destination des enfants</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI11" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldI11" />Oui      </td>
@@ -44,7 +44,7 @@
   </tr>
 
   <tr>
-    <th>à destination des adultes</th> 
+    <th>Ã  destination des adultes</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI12" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldI12" />Oui      </td>
@@ -61,7 +61,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th >La bibliothèque a-t-elle organisé ou co-organisé dans l'année des manifestations culturelles ?</th> 
+    <th >La bibliothÃ¨que a-t-elle organisÃ© ou co-organisÃ© dans l'annÃ©e des manifestations culturelles ?</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input onclick="switch_on(['fieldI14','fieldI15','fieldI16','fieldI17','fieldI18','fieldI19','fieldI20','fieldI21'])"  type="radio"  name="fieldI13" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldI13" />Oui      </td>
@@ -80,7 +80,7 @@
    </colgroup>
   <tr>
      <th rowspan="8">si oui, combien ?</th>
-     <th>Fête/salon du livre</th> 
+     <th>FÃªte/salon du livre</th> 
     <td>
        <div stl:if="not fieldI13" id="display_fieldI14"           style="visibility:hidden">         <input stl:if="not fieldI13"
              type="text" name="fieldI14"
@@ -106,7 +106,7 @@
   </tr>
 
   <tr>
-    <th>Conférences</th> 
+    <th>ConfÃ©rences</th> 
     <td>
        <div stl:if="not fieldI13" id="display_fieldI16"           style="visibility:hidden">         <input stl:if="not fieldI13"
              type="text" name="fieldI16"
@@ -132,7 +132,7 @@
   </tr>
 
   <tr>
-    <th>Ateliers d'écriture</th> 
+    <th>Ateliers d'Ã©criture</th> 
     <td>
        <div stl:if="not fieldI13" id="display_fieldI18"           style="visibility:hidden">         <input stl:if="not fieldI13"
              type="text" name="fieldI18"
@@ -192,7 +192,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th rowspan="4">La bibliothèque édite-t-elle les documents suivants :</th> 
+    <th rowspan="4">La bibliothÃ¨que Ã©dite-t-elle les documents suivants :</th> 
     <th> Bulletin d'information </th>
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI31" value="1" style="font-size: 8pt;  border:0px"
@@ -204,7 +204,7 @@
   </tr>
 
   <tr>
-    <th>Bibliographies sélectives</th> 
+    <th>Bibliographies sÃ©lectives</th> 
     <td>
       <table><tr style="padding:0px;  text-align: left"><td>        <input  type="radio"  name="fieldI32" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldI32" />Oui      </td>
@@ -243,7 +243,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque a-t-elle édité des documents dans l'année ? </th> 
+    <th>La bibliothÃ¨que a-t-elle Ã©ditÃ© des documents dans l'annÃ©e ? </th> 
     <td>
       <table><tr style="padding: 0px; text-align: left"><td>        <input onclick="switch_on(['fieldI36','fieldI37','fieldI38','fieldI39'])"  type="radio"  name="fieldI35" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldI35" />Oui      </td>
@@ -262,7 +262,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th rowspan="4">si oui, préciser combien de titres ou de fascicules </th>
+    <th rowspan="4">si oui, prÃ©ciser combien de titres ou de fascicules </th>
     <th>Bulletin d'information</th> 
     <td>
        <div stl:if="not fieldI35" id="display_fieldI36"           style="visibility:hidden">         <input stl:if="not fieldI35"
@@ -276,7 +276,7 @@
   </tr>
 
   <tr>
-    <th>Bibliographies sélectives</th> 
+    <th>Bibliographies sÃ©lectives</th> 
     <td>
        <div stl:if="not fieldI35" id="display_fieldI37"           style="visibility:hidden">         <input stl:if="not fieldI35"
              type="text" name="fieldI37"
@@ -314,7 +314,7 @@
     <td><b stl:attributes="class _I39">I39</b></td>
   </tr>
 </table>
-<h2>I.4 FORMATIONS DISPENSÉES PAR LA BIBLIOTHÈQUE</h2>
+<h2>I.4 FORMATIONS DISPENSÃ‰ES PAR LA BIBLIOTHÃˆQUE</h2>
 <table width="100%">
   <colgroup>
     <col width="77%"/>
@@ -322,7 +322,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Nombre d'heures de cours assurées par le personnel (ENSSIB, CRFCB, ABF, CNFPT, BDP, )</th> 
+    <th>Nombre d'heures de cours assurÃ©es par le personnel (ENSSIB, CRFCB, ABF, CNFPT, BDP, )</th> 
     <td>
        <input stl:attributes="value fieldI41"
               type="text" name="fieldI41"
@@ -341,11 +341,11 @@
   <tr>
     <th>ACCUEIL DE STAGIAIRES</th>
     <th style="text-align: center">NB DE STAGIAIRES  Y</th>
-    <th style="text-align: center">NB DE JOURNÉES CONSACRÉES  À L'ACCUEIL  Z</th>
+    <th style="text-align: center">NB DE JOURNÃ‰ES CONSACRÃ‰ES  Ã€ L'ACCUEIL  Z</th>
   <td></td>
   </tr>
   <tr>
-    <th>Corps et cadres d'emploi des métiers des bibliothèques, de la documentation ou des archives</th> 
+    <th>Corps et cadres d'emploi des mÃ©tiers des bibliothÃ¨ques, de la documentation ou des archives</th> 
     <td>
        <input stl:attributes="value fieldI42Y"
               type="text" name="fieldI42Y"
@@ -398,9 +398,9 @@
    </colgroup>
   <tr>
   
-    <th>FORMATIONS ORGANISÉES PAR LA BIBLIOTHÈQUE</th>
+    <th>FORMATIONS ORGANISÃ‰ES PAR LA BIBLIOTHÃˆQUE</th>
     <th style="text-align: center">NB DE PARTICIPANTS  Y</th>
-    <th style="text-align: center">NB DE JOURNÉES DE FORMATION Z</th>
+    <th style="text-align: center">NB DE JOURNÃ‰ES DE FORMATION Z</th>
   <td></td>
   </tr>
   <tr>

@@ -1,4 +1,20 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
+# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
+# Copyright (C) 2006 Herv√© Cauwelier <herve@itaapy.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from mysql
 import MySQLdb
@@ -12,6 +28,7 @@ from Form import get_adresse, Form
 
 # Import from itools
 from itools.web import get_context
+from itools.xml.stl import stl
 
 # Import from iKaaro
 from Products.ikaaro.text import Text as ikaaroText
@@ -26,6 +43,13 @@ SqlPasswd = setup.sql.SqlPasswd
 class FormBM(Form):
     class_id = 'Form_BM'
     class_icon48 = 'culture/images/form48.png'
+
+    def get_catalog_indexes(self):
+        document = Form.get_catalog_indexes(self)
+        document['code'] = self.get_code()
+
+        return document
+
 
     ######################################################################
     # Parsing
@@ -44,15 +68,15 @@ class FormBM(Form):
                     self.state.fields[key] = type.decode(value)
 
 
-    def to_unicode(self, encoding='UTF-8'):
+    def to_str(self, encoding='UTF-8'):
         result = []
         for key, value in self.state.fields.items():
             new_value = schema[key][0].encode(value)
-            if not isinstance(new_value, unicode):
-                 new_value = unicode(new_value, 'UTF-8')
+            if isinstance(new_value, unicode):
+                 new_value = new_value.encode('UTF-8')
             line = '%s:%s\n' % (key, new_value) 
             result.append(line)
-        return u''.join(result)
+        return ''.join(result)
 
 
     def get_subviews(self, name):
@@ -77,26 +101,20 @@ class FormBM(Form):
     def get_year(self):
         forms = self.parent
         return forms.name.split('BM')[-1]
-    # XXX For indexing
-    year = property(get_year, None, None, None)
 
 
-    def user_town(self):
+    def get_user_town(self):
         return get_BMs()[self.name].get('name', '')
-    # XXX For indexing
-    user_town = property(user_town, None, None, None)
 
 
     get_dep__access__ = True
     def get_dep(self):
         # get department number for BMs
         return get_BMs()[self.name].get('dep', '')
-    dep = property(get_dep, None, None, None)
 
 
     def get_code(self):
         return self.name 
-    code = property(get_code, None, None, None)
 
 
     def base_lect(self, insee):
@@ -120,7 +138,7 @@ class FormBM(Form):
                                          user=SqlUser, passwd=SqlPasswd,
                                          cursorclass=DictCursor)
         except MySQLdb.OperationalError:
-            raise UserError, u"La connexion ‡ MySql ne s'est pas faite" 
+            raise UserError, u"La connexion √† MySql ne s'est pas faite" 
 
         cursor = connection.cursor()
         cursor.execute("select * from annexes04  where code_ua = %s", 
@@ -139,7 +157,7 @@ class FormBM(Form):
                                          user=SqlUser, passwd=SqlPasswd,
                                          cursorclass=DictCursor)
         except MySQLdb.OperationalError:
-            raise UserError, u"La connexion ‡ MySql ne s'est pas faite" 
+            raise UserError, u"La connexion √† MySql ne s'est pas faite" 
 
         cursor = connection.cursor()
         cursor.execute("select * from ua_epci where code_ua = %s", 
@@ -173,13 +191,13 @@ class FormBM(Form):
         namespace['body'] = forms 
 
         handler = self.get_handler('/ui/culture/printable_template.xhtml')
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 
 
     report_form0__access__ = Form.is_allowed_to_view
-    report_form0__label__ = u'Rapport BibliothËques'
-    report_form0__sublabel__ = u'IdentitÈ'
+    report_form0__label__ = u'Rapport Biblioth√®ques'
+    report_form0__sublabel__ = u'Identit√©'
     def report_form0(self, view=None, **kw):
         return self.get_ns_and_h('FormBM_report0.xml', 
                                  'FormBM_report0_autogen.xml',
@@ -232,7 +250,7 @@ class FormBM(Form):
 
     report_form6__access__ = Form.is_allowed_to_view
     report_form6__label__ = u'Rapport BM'
-    report_form6__sublabel__ = u'F-CoopÈration et rÈseau'
+    report_form6__sublabel__ = u'F-Coop√©ration et r√©seau'
     def report_form6(self, view=None, **kw):
         return self.get_ns_and_h('FormBM_report6.xml', 
                                  'FormBM_report6_autogen.xml',
@@ -241,7 +259,7 @@ class FormBM(Form):
 
     report_form7__access__ = Form.is_allowed_to_view
     report_form7__label__ = u'Rapport BM'
-    report_form7__sublabel__ = u'G-ActivitÈs'
+    report_form7__sublabel__ = u'G-Activit√©s'
     def report_form7(self, view=None, **kw):
         return self.get_ns_and_h('FormBM_report7.xml', 
                                  'FormBM_report7_autogen.xml',
@@ -293,14 +311,14 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help0.xml')
-        return handler.to_unicode()
+        return handler.to_str()
     
     help1__access__ = True 
     def help1(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help1.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help2__access__ = True 
@@ -308,7 +326,7 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help2.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help3__access__ = True 
@@ -316,7 +334,7 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help3.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help4__access__ = True 
@@ -324,7 +342,7 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help4.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help5__access__ = True 
@@ -332,7 +350,7 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help5.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help6__access__ = True 
@@ -340,7 +358,7 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help6.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help7__access__ = True 
@@ -348,7 +366,7 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help7.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help8__access__ = True 
@@ -356,7 +374,7 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help8.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help9__access__ = True 
@@ -364,14 +382,14 @@ class FormBM(Form):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help9.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
     help11__access__ = True 
     def help11(self):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help11.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
 Form.register_handler_class(FormBM)

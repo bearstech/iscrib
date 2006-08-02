@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com> 
+# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -28,6 +29,7 @@ import decimal
 # Import from itools
 from itools.datatypes import Unicode, Boolean, String
 from itools.web import get_context
+from itools.xml.stl import stl
 
 # Import from mysql
 import MySQLdb
@@ -158,6 +160,18 @@ class Form(Handler, ikaaroText, WorkflowAware):
     class_icon48 = 'culture/images/form48.png'
 
 
+    def get_catalog_indexes(self):
+        document = Handler.get_catalog_indexes(self)
+        document['user_town'] = self.get_user_town()
+        document['dep'] = self.get_dep()
+        document['year'] = self.get_year()
+        document['is_BDP'] = self.is_BDP()
+        document['is_BM'] = self.is_BM()
+        document['form_state'] = self.get_form_state()
+
+        return document
+
+
     def get_ns_and_h(self, xml, autogen_xml, view):
         """
         autogen_xml = 'FormXX_report1_autogen.xml'
@@ -175,7 +189,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
             context = get_context()
             context.response.set_header('Content-Type', 
                                         'text/html; charset=UTF-8')
-            namespace['body'] = unicode(handler.stl(namespace))
+            namespace['body'] = stl(handler, namespace)
             handler = self.get_handler('/ui/culture/printable_template.xhtml')
         elif view == 'print_all':
             namespace['printable'] = True
@@ -183,7 +197,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         namespace['submit_button'] = namespace['is_allowed_to_edit'] \
                                      and not namespace['printable']
 
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 
     ######################################################################
@@ -254,10 +268,10 @@ class Form(Handler, ikaaroText, WorkflowAware):
             field_def = schema[name]
             type = field_def[0]
             default = field_def[1]
-            value = context.request.get(name)
+            value = context.request.get_parameter(name)
             key = name[len('field'):]
             # take the value in request first
-            value = context.request.get(key)
+            value = context.request.get_parameter(key)
             if value is None:
                 # is the value is not in request, take it in fields 
                 value = self.state.fields.get(name, default)
@@ -310,7 +324,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
 
         # State
         state = self.get_property('state')
-        namespace['is_vide'] = self.form_state == u'Vide'
+        namespace['is_vide'] = self.get_form_state() == u'Vide'
 
         (All_fields, All_mandatorie, All_optional, optional_nonEmpties,
          mandatory_nonEmpties, Empties) = self.get_sets(namespace)
@@ -463,8 +477,6 @@ class Form(Handler, ikaaroText, WorkflowAware):
             state = u'Exporté'
 
         return state 
-
-    form_state = property(get_form_state, None, None, None)
 
 
     #######################################################################
@@ -668,7 +680,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         namespace['is_admin'] = self.is_admin()
 
         handler = self.get_handler('/ui/culture/Form_controles.xml')
-        return handler.stl(namespace) 
+        return stl(handler, namespace) 
 
 
     def get_sets(self, namespace):
@@ -815,7 +827,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         
         self.scrib_log(event='recipe sent', content=r_message)
 
-        comeback('controles_form', comeback_msg)
+        comeback(comeback_msg, 'controles_form')
 
 
     def scrib_log(self, event=None, content=None):
@@ -832,7 +844,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 '\n'
         event = event % {'date': str(datetime.datetime.now()),
                          'uri': str(request.uri),
-                         'referrer': str(request.referer),
+                         'referrer': str(request.referrer),
                          'user': user and user.name or None, 
                          'event': ('email sent '
                                    '\n########\n%s\n#########') % content}
@@ -912,9 +924,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
         try:
             cursor.execute(query)
         except MySQLdb.OperationalError, message:
-            comeback('controles_form', 
-                     u'Un problème est survenu durant la connexion'
-                     u' à la base de donnée %s' % message)
+            message = u'Un problème est survenu durant la connexion'\
+                    u' à la base de donnée %s' % message
+            comeback(message, 'controles_form')
             return
         
         cursor.execute('commit')
@@ -967,7 +979,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         root = get_context().root
         root.reindex_handler(self)
         
-        comeback('controles_form', u'Le rapport a été exporté')
+        comeback(u'Le rapport a été exporté', 'controles_form')
 
 
     get_dependencies__access__ = 1
@@ -1009,7 +1021,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
     fill_report_form__label__ = u'Auto remplissage'
     def fill_report_form(self):
         handler = self.get_handler('/ui/culture/Form_fill_report.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     fill_report__access__ = is_allowed_to_edit
@@ -1019,7 +1031,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         self.set_changed()
         
         request = context.request
-        form, referer = request.form, request.referer
+        form, referer = request.form, request.referrer
         new_referer = deepcopy(referer)
 
         i = 0
@@ -1075,8 +1087,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
 
         root = context.root
         root.reindex_handler(self)
-        comeback('controles_form',
-                 u'Rapport auto remplis en %.2f secondes' % t)
+        message = u'Rapport auto remplis en %.2f secondes' % t
+        comeback(message, 'controles_form')
 
 
     report__access__ = is_allowed_to_edit
@@ -1084,7 +1096,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         schema, context = get_schema(), get_context()
         self.set_changed()
         request = context.request
-        form, referer = request.form, request.referer
+        form, referer = request.form, request.referrer
         #pprint(form)
         new_referer = deepcopy(referer)
 
@@ -1172,7 +1184,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         new_referer, msg = self.make_msg(new_referer=new_referer, notR=notR, 
                                          badT=badT, badT_missing=badT_missing,
                                          badT_values=badT_values)
-        comeback(new_referer, msg)
+        comeback(msg, new_referer)
 
 
     def make_msg(self, new_referer, notR, badT, badT_missing, badT_values):
@@ -1183,11 +1195,9 @@ class Form(Handler, ikaaroText, WorkflowAware):
             notR = [unicode(x, 'UTF-8') for x in notR]
 
             msg_notR = (u"Les rubriques suivantes ne sont pas "
-                        u"renseignées : %s") %  ', '.join(notR)
-            # convert to string so No Pb with messages for comeback
-            msg_notR = msg_notR.encode('UTF-8')
+                        u"renseignées : %s") % u', '.join(notR)
 
-            dic = {}.fromkeys(notR_missing, 1)
+            dic = {}.fromkeys(notR_missing, '1')
             new_referer.query.clear()
             new_referer.query.update(dic)
         if badT:
@@ -1195,10 +1205,8 @@ class Form(Handler, ikaaroText, WorkflowAware):
             # convert to unicode so we can join them
             msg_badT = (u"Le type des rubriques suivantes n'est pas"
                         u" correct : %s" ) % u', '.join(badT)
-            # convert to string so No Pb with messages for comeback
-            msg_badT = msg_badT.encode('UTF-8')
 
-            dic = {}.fromkeys(badT_missing, 1)
+            dic = {}.fromkeys(badT_missing, '1')
             new_referer.query.update(badT_values)
             new_referer.query.update(dic)
                     
@@ -1209,7 +1217,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         elif notR and not badT:
             msg = msg_notR
         else:
-            msg = '<br/>'.join([msg_notR,  msg_badT])
+            msg = u'<br/>'.join([msg_notR,  msg_badT])
 
         return new_referer, msg
 
@@ -1246,7 +1254,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
     help__label__ = u'Aide'
     def help(self):
         handler = self.get_handler('/ui/culture/Form_help.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     help2__access__ = True 
@@ -1254,7 +1262,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         context = get_context()
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/Form_help2.xhtml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     #######################################################################
@@ -1270,7 +1278,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         is_exported = self.get_form_state() == u'Exporté'
         namespace['show'] = is_finished or is_complete or is_exported
         handler = self.get_handler('/ui/culture/Form_report_csv.xml')
-        return handler.stl(namespace) 
+        return stl(handler, namespace) 
 
     comments__access__ = is_allowed_to_view
     comments__label__ = u'Rapport Bibliothèques'

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -18,11 +18,11 @@
              stl:if="is_allowed_to_edit"></input>
     </stl:block>
   </div>
-<h1>E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE
+<h1>E- ACQUISITIONS ET Ã‰LIMINATIONS DE L'ANNÃ‰E
    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help5', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
 </h1>
-<h2>E. 1 NOMBRE DE DOCUMENTS ACHETÉS  (hors périodiques et documents patrimoniaux)</h2>
+<h2>E. 1 NOMBRE DE DOCUMENTS ACHETÃ‰S  (hors pÃ©riodiques et documents patrimoniaux)</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -79,7 +79,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes</th> 
+    <th>VidÃ©ogrammes</th> 
     <td>
        <input stl:attributes="value fieldE13X"
               type="text" name="fieldE13X"
@@ -99,7 +99,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms</th> 
+    <th>CÃ©dÃ©roms</th> 
     <td>
        <input stl:attributes="value fieldE14X"
               type="text" name="fieldE14X"
@@ -139,7 +139,7 @@
   </tr>
 
   <tr>
-    <th>Documents numériques</th> 
+    <th>Documents numÃ©riques</th> 
     <td>
        <input stl:attributes="value fieldE16X"
               type="text" name="fieldE16X"
@@ -159,7 +159,7 @@
   </tr>
 
   <tr>
-    <th>Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)</th> 
+    <th>Dont documents adaptÃ©s aux personnes handicapÃ©es (braille, livres en gros caractÃ¨res, livres parlÃ©s...)</th> 
     <td>
        <input stl:attributes="value fieldE17X"
               type="text" name="fieldE17X"
@@ -178,7 +178,7 @@
     <td><b stl:attributes="class _E17">E17</b></td>
   </tr>
 </table>
-<h2>E. 2 NOMBRE DE DOCUMENTS ENTRÉS PAR DONS, LEGS OU DÉPÔT LEGAL (hors périodiques et documents patrimoniaux )</h2>
+<h2>E. 2 NOMBRE DE DOCUMENTS ENTRÃ‰S PAR DONS, LEGS OU DÃ‰PÃ”T LEGAL (hors pÃ©riodiques et documents patrimoniaux )</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -235,7 +235,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes</th> 
+    <th>VidÃ©ogrammes</th> 
     <td>
        <input stl:attributes="value fieldE23X"
               type="text" name="fieldE23X"
@@ -255,7 +255,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms</th> 
+    <th>CÃ©dÃ©roms</th> 
     <td>
        <input stl:attributes="value fieldE24X"
               type="text" name="fieldE24X"
@@ -295,7 +295,7 @@
   </tr>
 
   <tr>
-    <th>Documents numériques</th> 
+    <th>Documents numÃ©riques</th> 
     <td>
        <input stl:attributes="value fieldE26X"
               type="text" name="fieldE26X"
@@ -315,7 +315,7 @@
   </tr>
 
   <tr>
-    <th>dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)</th> 
+    <th>dont documents adaptÃ©s aux personnes handicapÃ©es (braille, livres en gros caractÃ¨res, livres parlÃ©s...)</th> 
     <td>
        <input stl:attributes="value fieldE27X"
               type="text" name="fieldE27X"
@@ -334,7 +334,7 @@
     <td><b stl:attributes="class _E27">E27</b></td>
   </tr>
 </table>
-<h2>E. 3 NOMBRE DE DOCUMENTS RETIRÉS DE L'INVENTAIRE (hors documents patrimoniaux)</h2>
+<h2>E. 3 NOMBRE DE DOCUMENTS RETIRÃ‰S DE L'INVENTAIRE (hors documents patrimoniaux)</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -371,7 +371,7 @@
   </tr>
 
   <tr>
-    <th>Périodiques (unités matérielles)</th> 
+    <th>PÃ©riodiques (unitÃ©s matÃ©rielles)</th> 
     <td>
        <input stl:attributes="value fieldE32X"
               type="text" name="fieldE32X"
@@ -411,7 +411,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes</th> 
+    <th>VidÃ©ogrammes</th> 
     <td>
        <input stl:attributes="value fieldE34X"
               type="text" name="fieldE34X"
@@ -431,7 +431,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms</th> 
+    <th>CÃ©dÃ©roms</th> 
     <td>
        <input stl:attributes="value fieldE35X"
               type="text" name="fieldE35X"
@@ -471,7 +471,7 @@
   </tr>
 
   <tr>
-    <th>Documents numériques</th> 
+    <th>Documents numÃ©riques</th> 
     <td>
        <input stl:attributes="value fieldE37X"
               type="text" name="fieldE37X"
@@ -491,7 +491,7 @@
   </tr>
 
   <tr>
-    <th>Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)</th> 
+    <th>Dont documents adaptÃ©s aux personnes handicapÃ©es (braille, livres en gros caractÃ¨res, livres parlÃ©s...)</th> 
     <td>
        <input stl:attributes="value fieldE38X"
               type="text" name="fieldE38X"
@@ -528,7 +528,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Livres imprimés</th> 
+    <th>Livres imprimÃ©s</th> 
     <td>
        <input stl:attributes="value fieldE41X"
               type="text" name="fieldE41X"
@@ -548,7 +548,7 @@
   </tr>
 
   <tr>
-    <th>Périodiques</th> 
+    <th>PÃ©riodiques</th> 
     <td>
        <input stl:attributes="value fieldE42X"
               type="text" name="fieldE42X"
@@ -628,7 +628,7 @@
   </tr>
 
   <tr>
-    <th>TOTAL (E41 à  E45)</th> 
+    <th>TOTAL (E41 Ã   E45)</th> 
     <td>
        <input stl:attributes="value fieldE46X"
               type="text" name="fieldE46X"
@@ -647,7 +647,7 @@
     <td><b stl:attributes="class _E46">E46</b></td>
   </tr>
 </table>
-<h2>E. 5  NOMBRE DE PÉRIODIQUES ACQUIS(ACHÂTS, DONS, LEGS)</h2>
+<h2>E. 5  NOMBRE DE PÃ‰RIODIQUES ACQUIS(ACHÃ‚TS, DONS, LEGS)</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -664,7 +664,7 @@
   <td></td>
   </tr>
   <tr>
-    <th>Nombre d'abonnements en cours (payants et gratuits, support imprimé ou microforme)</th> 
+    <th>Nombre d'abonnements en cours (payants et gratuits, support imprimÃ© ou microforme)</th> 
     <td>
        <input stl:attributes="value fieldE51X"
               type="text" name="fieldE51X"
@@ -684,7 +684,7 @@
   </tr>
 
   <tr>
-    <th>Nombre d'abonnements en cours sur cédéroms</th> 
+    <th>Nombre d'abonnements en cours sur cÃ©dÃ©roms</th> 
     <td>
        <input stl:attributes="value fieldE52X"
               type="text" name="fieldE52X"
@@ -723,7 +723,7 @@
     <td><b stl:attributes="class _E53">E53</b></td>
   </tr>
 </table>
-<h2> E. 6/7 DÉPENSES D'ACQUISITION (en euros, sans  décimale)</h2>
+<h2> E. 6/7 DÃ‰PENSES D'ACQUISITION (en euros, sans  dÃ©cimale)</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -780,7 +780,7 @@
   </tr>
 
   <tr>
-    <th>Vidéogrammes</th> 
+    <th>VidÃ©ogrammes</th> 
     <td>
        <input stl:attributes="value fieldE63X"
               type="text" name="fieldE63X"
@@ -800,7 +800,7 @@
   </tr>
 
   <tr>
-    <th>Cédéroms</th> 
+    <th>CÃ©dÃ©roms</th> 
     <td>
        <input stl:attributes="value fieldE64X"
               type="text" name="fieldE64X"
@@ -840,7 +840,7 @@
   </tr>
 
   <tr>
-    <th>dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)</th> 
+    <th>dont documents adaptÃ©s aux personnes handicapÃ©es (braille, livres en gros caractÃ¨res, livres parlÃ©s...)</th> 
     <td>
        <input stl:attributes="value fieldE66X"
               type="text" name="fieldE66X"
@@ -860,7 +860,7 @@
   </tr>
 
   <tr>
-    <th>SOUS-TOTAL (E61 à E65)</th> 
+    <th>SOUS-TOTAL (E61 Ã  E65)</th> 
     <td>
        <input stl:attributes="value fieldE67X"
               type="text" name="fieldE67X"
@@ -880,7 +880,7 @@
   </tr>
 
   <tr>
-    <th>Périodiques imprimés</th> 
+    <th>PÃ©riodiques imprimÃ©s</th> 
     <td>
        <input stl:attributes="value fieldE68X"
               type="text" name="fieldE68X"
@@ -900,7 +900,7 @@
   </tr>
 
   <tr>
-    <th>Périodiques sur cédéroms</th> 
+    <th>PÃ©riodiques sur cÃ©dÃ©roms</th> 
     <td>
        <input stl:attributes="value fieldE69X"
               type="text" name="fieldE69X"
@@ -920,7 +920,7 @@
   </tr>
 
   <tr>
-    <th>Périodiques en ligne</th> 
+    <th>PÃ©riodiques en ligne</th> 
     <td>
        <input stl:attributes="value fieldE70X"
               type="text" name="fieldE70X"
@@ -940,7 +940,7 @@
   </tr>
 
   <tr>
-    <th>SOUS-TOTAL (E68 à E70)</th> 
+    <th>SOUS-TOTAL (E68 Ã  E70)</th> 
     <td>
        <input stl:attributes="value fieldE71X"
               type="text" name="fieldE71X"
@@ -960,7 +960,7 @@
   </tr>
 
   <tr>
-    <th>Documents numériques</th> 
+    <th>Documents numÃ©riques</th> 
     <td>
        <input stl:attributes="value fieldE72X"
               type="text" name="fieldE72X"

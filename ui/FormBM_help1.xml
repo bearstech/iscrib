@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head>
    <title>Aide</title>
-    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></meta>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
     <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
 
   </head>
@@ -13,33 +13,33 @@
 
 <p align="right"><a href=";help0">Sommaire</a></p>
 <h2> ELEMENTS FINANCIERS</h2>
-<h4>Dépenses de fonctionnement propres à la bibliothèque (A.1)</h4>
+<h4>DÃ©penses de fonctionnement propres Ã  la bibliothÃ¨que (A.1)</h4>
 <dl class="description">
 <dt><ul>
-<li><u>Pour le personnel (salaires et charges) </u> (A11): intégrer tout le personnel de la bibliothèque, y compris le personnel de service. Ne pas compter les salaires des conservateurs d'Etat dans les bibliothèques municipales classées, qui seront ajoutés par le ministère. Ne pas déduire les remboursements de l'Etat des emplois subventionnés (C.E.S., C.E.J...). Ne pas compter les salaires des personnels en arrêt de longue durée.</li>
-<li><u>Pour les acquisitions de tous les documents</u> (A12): Considérer le budget dépensé (non seulement voté),  ainsi que toute subvention dépensée (crédits du CNL inclus). Inclure les droits d'accès à des documents électroniques en ligne. Inclure les documents achetés sur un budget d'investissement. </li>
-<li><u> Pour l'animation</u> (A15): mais aussi, location d'exposition, contrats de fournitures de service. Pour les animations à financeurs multiples dégager les dépenses propres à la bibliothèque</li>
+<li><u>Pour le personnel (salaires et charges) </u> (A11): intÃ©grer tout le personnel de la bibliothÃ¨que, y compris le personnel de service. Ne pas compter les salaires des conservateurs d'Etat dans les bibliothÃ¨ques municipales classÃ©es, qui seront ajoutÃ©s par le ministÃ¨re. Ne pas dÃ©duire les remboursements de l'Etat des emplois subventionnÃ©s (C.E.S., C.E.J...). Ne pas compter les salaires des personnels en arrÃªt de longue durÃ©e.</li>
+<li><u>Pour les acquisitions de tous les documents</u> (A12): ConsidÃ©rer le budget dÃ©pensÃ© (non seulement votÃ©),  ainsi que toute subvention dÃ©pensÃ©e (crÃ©dits du CNL inclus). Inclure les droits d'accÃ¨s Ã  des documents Ã©lectroniques en ligne. Inclure les documents achetÃ©s sur un budget d'investissement. </li>
+<li><u> Pour l'animation</u> (A15): mais aussi, location d'exposition, contrats de fournitures de service. Pour les animations Ã  financeurs multiples dÃ©gager les dÃ©penses propres Ã  la bibliothÃ¨que</li>
 </ul>
 </dt>
 </dl>
 
-<h4>Dépenses d'investissement propres à la bibliothèque (A.2)</h4>
+<h4>DÃ©penses d'investissement propres Ã  la bibliothÃ¨que (A.2)</h4>
 <dl class="description">
 <dt><ul>
-<li><u> Pour le bâtiment </u>(A21): inclure les dépenses des bureaux d'étude ou toutes prestations intellectuelles afférentes</li>
-<li><u>Pour les acquisitions de tous documents</u> (A24) : ceci concerne les dépenses d'acquisitions documentaires relevant soit de la constitution initiale d'un fonds, soit de la nature patrimoniale des documents.
+<li><u> Pour le bÃ¢timent </u>(A21): inclure les dÃ©penses des bureaux d'Ã©tude ou toutes prestations intellectuelles affÃ©rentes</li>
+<li><u>Pour les acquisitions de tous documents</u> (A24) : ceci concerne les dÃ©penses d'acquisitions documentaires relevant soit de la constitution initiale d'un fonds, soit de la nature patrimoniale des documents.
 
 </li></ul></dt>
 </dl>
 
-<h4>Recettes propres à la bibliothèque (A.3)</h4>
+<h4>Recettes propres Ã  la bibliothÃ¨que (A.3)</h4>
 <dl class="description">
 <dt><ul>
 <li><u> Montant total des droits d'inscription </u> (A31): ne pas porter  les autres recettes
 </li>
-<li><u>Subventions </u> (A32 et A33) : pour le fonctionnement et l'investissement, aides du Centre national du Livre, première et deuxième parts du concours particulier de la dotation générale de décentralisation en faveur des bibliothèques municipales, subventions des autres collectivités locales, ...
+<li><u>Subventions </u> (A32 et A33) : pour le fonctionnement et l'investissement, aides du Centre national du Livre, premiÃ¨re et deuxiÃ¨me parts du concours particulier de la dotation gÃ©nÃ©rale de dÃ©centralisation en faveur des bibliothÃ¨ques municipales, subventions des autres collectivitÃ©s locales, ...
 </li>
-<li><u> Autres</u> (A34): consultations internet payantes, ventes de produits, pénalités de retard, remboursements ...</li>
+<li><u> Autres</u> (A34): consultations internet payantes, ventes de produits, pÃ©nalitÃ©s de retard, remboursements ...</li>
 </ul>
 </dt>
 </dl>

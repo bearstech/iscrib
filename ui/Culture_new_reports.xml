@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <stl:block xmlns:stl="http://xml.itools.org/namespaces/stl"
            xmlns="http://www.w3.org/1999/xhtml">
 
 <h2>Attention ! </h2> 
-<h3> La création d'une nouvelle série pour une nouvelle année est une opération
-     réservée aux équipes techniques de la DSI.</h3> 
+<h3> La crÃ©ation d'une nouvelle sÃ©rie pour une nouvelle annÃ©e est une opÃ©ration
+     rÃ©servÃ©e aux Ã©quipes techniques de la DSI.</h3> 
 
 <table>
   <tr>
@@ -15,7 +15,7 @@
             <th colspan="2" class="title">Nouveaux rapports BDP</th>
           </tr>
           <tr>
-            <th align="right">Année</th>
+            <th align="right">AnnÃ©e</th>
             <td>
               <select name="year">
                 <option stl:repeat="x years" stl:content="x/value"
@@ -39,7 +39,7 @@
             <th colspan="2" class="title">Nouveaux rapports BM</th>
           </tr>
           <tr>
-            <th align="right">Année</th>
+            <th align="right">AnnÃ©e</th>
             <td>
               <select name="year">
                 <option stl:repeat="x BMyears" stl:content="x/value"
@@ -60,10 +60,10 @@
 </table>
 
 
-<a id="tip_title" onmouseout="hide_tip()" onmouseover="show_tip()">Détails</a>
+<a id="tip_title" onmouseout="hide_tip()" onmouseover="show_tip()">DÃ©tails</a>
 <div id="tip_body">
   <p>
-  Les répertoires sont utilisés pour classer des documents. To add a folder
+  Les rÃ©pertoires sont utilisÃ©s pour classer des documents. To add a folder
   enter its name and click the <tt>Add</tt> button.
   </p>
 </div>

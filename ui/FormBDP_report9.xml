@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -39,7 +39,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La BDP a-t-elle (co-) organisé des manifestations culturelles dans l'année ?</th> 
+    <th>La BDP a-t-elle (co-) organisÃ© des manifestations culturelles dans l'annÃ©e ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldI12','fieldI13','fieldI14','fieldI15','fieldI16','fieldI17','fieldI18','fieldI19','fieldI20'])"  type="radio"  name="fieldI11" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldI11" />Oui      </td>
@@ -61,7 +61,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Fête/salon du livre</th> 
+    <th>FÃªte/salon du livre</th> 
     <td>
        <div stl:if="not fieldI11" id="display_fieldI12"           style="visibility:hidden">         <input stl:if="not fieldI11"
              type="text" name="fieldI12"
@@ -87,7 +87,7 @@
   </tr>
 
   <tr>
-    <th>Conférences</th> 
+    <th>ConfÃ©rences</th> 
     <td>
        <div stl:if="not fieldI11" id="display_fieldI14"           style="visibility:hidden">         <input stl:if="not fieldI11"
              type="text" name="fieldI14"
@@ -113,7 +113,7 @@
   </tr>
 
   <tr>
-    <th>Ateliers d'écriture</th> 
+    <th>Ateliers d'Ã©criture</th> 
     <td>
        <div stl:if="not fieldI11" id="display_fieldI16"           style="visibility:hidden">         <input stl:if="not fieldI11"
              type="text" name="fieldI16"
@@ -185,7 +185,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La BDP a-t-elle publié des documents dans l'année ?</th> 
+    <th>La BDP a-t-elle publiÃ© des documents dans l'annÃ©e ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldI22','fieldI23','fieldI24','fieldI25','fieldI26','fieldI27','fieldI28'])"  type="radio"  name="fieldI21" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldI21" />Oui      </td>
@@ -197,7 +197,7 @@
 </table>
 <table>
   <tr>
-    <th>si oui, préciser combien de titres ou de fascicules :</th>
+    <th>si oui, prÃ©ciser combien de titres ou de fascicules :</th>
   </tr>
 </table>
 <table width="100%">
@@ -220,7 +220,7 @@
   </tr>
 
   <tr>
-    <th>Guide du dépositaire</th> 
+    <th>Guide du dÃ©positaire</th> 
     <td>
        <div stl:if="not fieldI21" id="display_fieldI23"           style="visibility:hidden">         <input stl:if="not fieldI21"
              type="text" name="fieldI23"
@@ -233,7 +233,7 @@
   </tr>
 
   <tr>
-    <th>Annuaire des bibliothèques</th> 
+    <th>Annuaire des bibliothÃ¨ques</th> 
     <td>
        <div stl:if="not fieldI21" id="display_fieldI24"           style="visibility:hidden">         <input stl:if="not fieldI21"
              type="text" name="fieldI24"
@@ -259,7 +259,7 @@
   </tr>
 
   <tr>
-    <th>Catalogue des expositions et valises thématiques</th> 
+    <th>Catalogue des expositions et valises thÃ©matiques</th> 
     <td>
        <div stl:if="not fieldI21" id="display_fieldI26"           style="visibility:hidden">         <input stl:if="not fieldI21"
              type="text" name="fieldI26"
@@ -272,7 +272,7 @@
   </tr>
 
   <tr>
-    <th>Bibliographies sélectives</th> 
+    <th>Bibliographies sÃ©lectives</th> 
     <td>
        <div stl:if="not fieldI21" id="display_fieldI27"           style="visibility:hidden">         <input stl:if="not fieldI21"
              type="text" name="fieldI27"
@@ -297,7 +297,7 @@
     <td><b stl:attributes="class _I28">I28</b></td>
   </tr>
 </table>
-<h2>I.3 FORMATIONS HORS RÉSEAU</h2>
+<h2>I.3 FORMATIONS HORS RÃ‰SEAU</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -305,7 +305,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Nombre d'heures de cours assurées par le personnel  (ENSSIB, CRFCB, ABF, CNFPT, BDP, ...)</th> 
+    <th>Nombre d'heures de cours assurÃ©es par le personnel  (ENSSIB, CRFCB, ABF, CNFPT, BDP, ...)</th> 
     <td>
        <input stl:attributes="value fieldI31"
               type="text" name="fieldI31"

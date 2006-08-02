@@ -1,5 +1,6 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
+# Copyright (C) 2006 Herv√© Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -23,7 +24,7 @@ from time import time
 from itools.resources import base
 from itools.datatypes import Unicode, String, DateTime
 from itools.web import get_context
-from itools.catalog.Catalog import Catalog
+from itools.xml.stl import stl
 
 # Import from iKaaro
 from Products.ikaaro.Root import Root
@@ -44,7 +45,7 @@ from Handler import Handler
 class Culture(bibFolder, Root):
 
     class_id = 'Culture'
-    class_version = '20060728'
+    class_version = '20060802'
 
 
     _catalog_fields = Root._catalog_fields \
@@ -65,7 +66,7 @@ class Culture(bibFolder, Root):
                      'username': request.form.get('username', '')}
 
         handler = self.get_handler('/ui/culture/SiteRoot_login.xml')
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 
     def get_skeleton(self, username=None, password=None):
@@ -141,17 +142,16 @@ class Culture(bibFolder, Root):
         Root.login(self, username, password, referer)
         context = get_context()
         user = context.user
-        response = context.response
         if user.is_admin() or user.name == 'VoirSCRIB':
-            response.redirect(';%s' % self.get_firstview())
+            context.redirect(';%s' % self.get_firstview())
         elif user.is_BM():
             path = 'BM%s/%s' % (user.get_year(), user.get_BM_code())
             report = self.get_handler(path)
-            response.redirect('%s/;%s' % (path, report.get_firstview()))
+            context.redirect('%s/;%s' % (path, report.get_firstview()))
         else:
             path = 'BDP%s/%s' % (user.get_year(), user.get_department())
             report = self.get_handler(path)
-            response.redirect('%s/;%s' % (path, report.get_firstview()))
+            context.redirect('%s/;%s' % (path, report.get_firstview()))
 
 
     #########################################################################
@@ -184,7 +184,7 @@ class Culture(bibFolder, Root):
                 break
         namespace['BMyears'] = years
         handler = self.get_handler('/ui/culture/Culture_new_reports.xml')
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 
     new_BM_reports__access__ = Handler.is_admin
@@ -228,14 +228,13 @@ class Culture(bibFolder, Root):
         report_m = int(time() -t); print 'users and reperts set ', report_m 
         secondes = int(time() - t)
         minutes = secondes / 60 
-        message = u"Les rapports des BM pour l'annÈe %(year)s ont ÈtÈ " \
-                  u"ajoutÈs, ainsi que les utilisateurs associÈs : " \
+        message = u"Les rapports des BM pour l'ann√©e %(year)s ont √©t√© " \
+                  u"ajout√©s, ainsi que les utilisateurs associ√©s : " \
                   u"BMxxx:BMxxx, BMyy:BMyy, etc. " \
-                  u"En %(temp)s %(unite)s" 
-        comeback('browse_thumbnails', 
-                 message % {'year': year, 
-                            'temp': minutes or secondes,
-                            'unite': minutes and 'minutes' or 'secondes' })
+                  u"En %(temp)s %(unite)s"
+        message = message % {'year': year, 'temp': minutes or secondes,
+                'unite': minutes and 'minutes' or 'secondes' }
+        comeback(message, 'browse_thumbnails')
 
 
     new_BDP_reports__access__ = Handler.is_admin
@@ -256,10 +255,10 @@ class Culture(bibFolder, Root):
                 password = 'BDP%s' % name
                 users.set_handler(username, bibUser(password=password))
 
-        message = u"Les rapports des BDP pour l'annÈe %s ont ÈtÈ ajoutÈs. " \
-                  u"Et aussi ses utilisateurs associÈs (BDP01:BDP01, " \
-                  u"BDP02:BDP02, etc.)."
-        comeback('browse_thumbnails', message % (year,))
+        message = u"Les rapports des BDP pour l'ann√©e %s ont √©t√© ajout√©s. " \
+                  u"Et aussi ses utilisateurs associ√©s (BDP01:BDP01, " \
+                  u"BDP02:BDP02, etc.)." % year
+        comeback(message, 'browse_thumbnails')
 
 
     #########################################################################
@@ -268,7 +267,7 @@ class Culture(bibFolder, Root):
     help__label__ = u'Aide'
     def help(self):
         handler = self.get_handler('/ui/culture/Form_help.xml')
-        return handler.to_unicode()
+        return handler.to_str()
 
 
     #########################################################################
@@ -323,6 +322,26 @@ class Culture(bibFolder, Root):
             metadata.save()
 
 
+    def update_20050509(self):
+        # Move settings to metadata
+        settings = self.get_handler('.settings')
+        if settings.state.join is True:
+            self.set_property('ikaaro:website_is_open', True)
+        self.set_property('ikaaro:website_languages',
+                          tuple(settings.state.languages))
+        self.metadata.save_state()
+
+        self.resource.del_resource('.settings')
+
+
+    def update_20050728(self):
+        resource = self.resource
+        object = resource._get_object().aq_base
+        delattr(object, '__before_publishing_traverse__')
+        delattr(object, '__browser_default__')
+        resource.get_transaction().commit()
+
+
     def update_20051020(self):
         root = self.resource
         for resource in root.get_resources():
@@ -338,6 +357,28 @@ class Culture(bibFolder, Root):
                         self.update_metadata(metadata)
                 
 
+    def update_20051025(self):
+        """Folders now wear the 'folder' format in their metadata."""
+        from Folder import Folder
+
+        reindex_handler = self.reindex_handler
+        for handler, context in self.traverse2():
+            name = handler.name
+            abspath = handler.abspath
+            if name.startswith('.'):
+                context.skip = True
+            elif abspath == '/ui':
+                context.skip = True
+            elif handler is self:
+                pass
+            elif isinstance(handler, Folder):
+                format = handler.get_property('format')
+                if format == '':
+                    print abspath
+                    handler.set_property('format', Folder.class_id)
+                    reindex_handler(handler)
+
+
     def update_20060505(self):
         users = self.get_handler('users')
         users.set_handler('VoirSCRIB', bibUser(password='BMBDP'))
@@ -345,4 +386,25 @@ class Culture(bibFolder, Root):
 
 
     def update_20060728(self):
-        Root.update_20050509(self)
+        self.update_20050509()
+
+
+    def update_20060801(self):
+        self.update_20050728()
+        self.update_20051025()
+
+
+    def update_20060802(self):
+
+
+    xexport__access__ = True
+    def xexport(self):
+        tmp_path = tempfile.mkdtemp()
+        tmp_folder = get_resource(tmp_path)
+
+        root_resource = self.resource
+        for name in root_resource.get_resource_names():
+            resource = root_resource.get_resource(name)
+            tmp_folder.set_resource(name, resource)
+
+        return 'Exported: %s' % tmp_path

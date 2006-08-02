@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -29,7 +29,7 @@
 <a stl:if="is_vide" 
    style="color:white;background-color:red; border: 1px solid red; " 
    alt="Aide"
-   href=";help">Veuillez consulter l'aide générale</a>
+   href=";help">Veuillez consulter l'aide gÃ©nÃ©rale</a>
 <h1>IDENTITE </h1>
 
 
@@ -67,7 +67,7 @@
      </tr> 
      <tr></tr>
      <tr>    
-        <th colspan="2">Nom et Prénom du Directeur</th>
+        <th colspan="2">Nom et PrÃ©nom du Directeur</th>
         <td colspan="3"><input stl:attributes="value field7" size="60" type="text" name="field7" value=""></input></td>
         <td sdval="1" sdnum="1036;">7</td>
      </tr>
@@ -78,12 +78,12 @@
      </tr>
      <tr></tr>
       <tr>
-        <th colspan="2">Téléphone</th>
+        <th colspan="2">TÃ©lÃ©phone</th>
         <td colspan="3"><input stl:attributes="value field9" size="15" type="text" name="field9" value=""></input> </td>
         <td sdval="3" sdnum="1036;">9</td>
       </tr>
       <tr>
-        <th colspan="2">Télécopie</th>
+        <th colspan="2">TÃ©lÃ©copie</th>
         <td colspan="3"><input stl:attributes="value field10" size="15" type="text" name="field10" value=""></input> </td>
         <td sdval="4" sdnum="1036;">10</td>
       </tr>

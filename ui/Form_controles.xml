@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <stl:block xmlns:stl="http://xml.itools.org/namespaces/stl">
 
 <h1>Etat du formulaire : <em stl:content="state" /></h1>
 
 <p>
-  Il y a encore <b stl:content="mandatory_Empties"/>  rubrique(s) obligatoire(s) non renseignée(s) 
+  Il y a encore <b stl:content="mandatory_Empties"/>  rubrique(s) obligatoire(s) non renseignÃ©e(s) 
 </p>
 
 
@@ -25,7 +25,7 @@
 
 <stl:block if="not is_complete">
 <stl:block if="not is_finished">
-    <p > La<a href="#controles">  liste des contrôles </a> et la<a href="#vides"> liste des rubriques non remplies </a> doivent être vides pour pouvoir envoyer le formulaire</p>
+    <p > La<a href="#controles">  liste des contrÃ´les </a> et la<a href="#vides"> liste des rubriques non remplies </a> doivent Ãªtre vides pour pouvoir envoyer le formulaire</p>
    <blockquote>
     <form action=";pending2submitted" method="post">
       <input style="color: gray;" value="Envoyer le formulaire" type="submit" 
@@ -36,8 +36,8 @@
 </stl:block>
 
 <stl:block if="is_complete">
-   <p> Le formulaire est complet, tous les contrôles sont à OUI. Vous pouvez
-    envoyer le formulaire.  Pour l'envoyer à l'administrateur cliquez sur le
+   <p> Le formulaire est complet, tous les contrÃ´les sont Ã  OUI. Vous pouvez
+    envoyer le formulaire.  Pour l'envoyer Ã  l'administrateur cliquez sur le
     bouton ci-dessous : </p> 
   <blockquote> 
     <form action=";pending2submitted" method="post">
@@ -50,7 +50,7 @@
 
 <stl:block if="is_finished">
   <p>
-  Le formulaire est terminé, vous pouvez l'exporter dans la base de données
+  Le formulaire est terminÃ©, vous pouvez l'exporter dans la base de donnÃ©es
   MySQL en cliquant le bouton ci-dessus :
   </p>
   <blockquote>
@@ -61,7 +61,7 @@
 </stl:block>
 
 
-<h2>Pour information, en l'état actuel du remplissage</h2>
+<h2>Pour information, en l'Ã©tat actuel du remplissage</h2>
 <table class="Check" cellspacing="0" cellpadding="0">
   <tr stl:repeat="alert resalt">
     <td  class="idCheck" stl:content="alert/idalt"/>
@@ -71,9 +71,9 @@
 </table>
 
 
-<h2 id="controles">Liste des contrôles</h2>
+<h2 id="controles">Liste des contrÃ´les</h2>
 <p>
-La liste des contrôles doit être vide  pour que l'on puisse envoyer le formulaire
+La liste des contrÃ´les doit Ãªtre vide  pour que l'on puisse envoyer le formulaire
 </p>
 <table>
   <tr valign="top">

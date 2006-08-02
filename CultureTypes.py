@@ -1,4 +1,20 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
+# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
+# Copyright (C) 2006 Herv√© Cauwelier <herve@itaapy.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from python
 from decimal import Decimal as pythonDecimal
@@ -23,13 +39,13 @@ class EPCI_Statut(Enumerate):
     def get_options(cls):
         return [{'id': '0', 'label': ""},
                 {'id': '1', 
-                 'label': u"Commune dans un EPCI sans compÈtence bibliothËque"},
+                 'label': u"Commune dans un EPCI sans comp√©tence biblioth√®que"},
                 {'id': '2', 
-                 'label': u"Commune dans EPCI - bibliothËque non transfÈrÈe"},
+                 'label': u"Commune dans EPCI - biblioth√®que non transf√©r√©e"},
                 {'id': '3', 
-                 'label': u"Commune dans EPCI avec compÈtence biblio"},
+                 'label': u"Commune dans EPCI avec comp√©tence biblio"},
                 {'id': '4', 
-                 'label': u"Ville-centre  d'un EPCI avec compÈtence biblio"},
+                 'label': u"Ville-centre  d'un EPCI avec comp√©tence biblio"},
                 {'id': '5', 
                  'label': u"Commune dans syndicat intercommunal"},
                 {'id': '6', 'label': "Autre"},

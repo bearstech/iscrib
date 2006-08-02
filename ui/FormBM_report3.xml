@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -23,7 +23,7 @@
       onclick="window.open(';help3', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
 </h1>
 <!--h2>CADRES D' EMPLOIS</h2-->
-<h2>C.1 FONCTION PUBLIQUE : FILIÈRE CULTURELLE</h2>
+<h2>C.1 FONCTION PUBLIQUE : FILIÃˆRE CULTURELLE</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -96,7 +96,7 @@
      <td><b stl:attributes="class _C12">C12</b></td>
   </tr>
   <tr>
-    <th>Bibliothécaires</th> 
+    <th>BibliothÃ©caires</th> 
     <td>
        <input stl:attributes="value fieldC13W"
               type="text" name="fieldC13W"
@@ -118,7 +118,7 @@
      <td><b stl:attributes="class _C13">C13</b></td>
   </tr>
   <tr>
-    <th>Assistants qualifiés de conservation</th> 
+    <th>Assistants qualifiÃ©s de conservation</th> 
     <td>
        <input stl:attributes="value fieldC14W"
               type="text" name="fieldC14W"
@@ -162,7 +162,7 @@
      <td><b stl:attributes="class _C15">C15</b></td>
   </tr>
   <tr>
-    <th>Agents qualifiés du patrimoine</th> 
+    <th>Agents qualifiÃ©s du patrimoine</th> 
     <td>
        <input stl:attributes="value fieldC16W"
               type="text" name="fieldC16W"
@@ -206,7 +206,7 @@
     <td><b stl:attributes="class _C17">C17</b></td>
   </tr>
 </table>
-<h2>C.2 FONCTION PUBLIQUE : AUTRES FILIÈRES  (administrative, technique, sociale...)</h2>
+<h2>C.2 FONCTION PUBLIQUE : AUTRES FILIÃˆRES  (administrative, technique, sociale...)</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -233,7 +233,7 @@
     <td></td>
   </tr-->
   <tr>
-    <th>Personnels d'autres filières  Cat. A</th> 
+    <th>Personnels d'autres filiÃ¨res  Cat. A</th> 
     <td>
        <input stl:attributes="value fieldC21W"
               type="text" name="fieldC21W"
@@ -256,7 +256,7 @@
   </tr>
 
   <tr>
-    <th>Personnels d'autres filières  Cat. B</th> 
+    <th>Personnels d'autres filiÃ¨res  Cat. B</th> 
     <td>
        <input stl:attributes="value fieldC22W"
               type="text" name="fieldC22W"
@@ -279,7 +279,7 @@
   </tr>
 
   <tr>
-    <th>Personnels d'autres filières  Cat. C</th> 
+    <th>Personnels d'autres filiÃ¨res  Cat. C</th> 
     <td>
        <input stl:attributes="value fieldC23W"
               type="text" name="fieldC23W"
@@ -301,7 +301,7 @@
     <td><b stl:attributes="class _C23">C23</b></td>
   </tr>
 </table>
-<h2>C.3 AUTRES PERSONNELS REMUNÉRÉS</h2>
+<h2>C.3 AUTRES PERSONNELS REMUNÃ‰RÃ‰S</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -328,7 +328,7 @@
     <td></td>
   </tr-->
     <tr>
-    <th>Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) qualifiés </th> 
+    <th>Agents non titulaires/emplois non aidÃ©s par l'Etat (contractuels, vacataires...) qualifiÃ©s </th> 
     <td>
        <input stl:attributes="value fieldC31W"
               type="text" name="fieldC31W"
@@ -351,7 +351,7 @@
   </tr>
 
   <tr>
-    <th>Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) non qualifiés </th> 
+    <th>Agents non titulaires/emplois non aidÃ©s par l'Etat (contractuels, vacataires...) non qualifiÃ©s </th> 
     <td>
        <input stl:attributes="value fieldC32W"
               type="text" name="fieldC32W"
@@ -371,7 +371,7 @@
   </tr>
 
   <tr>
-    <th>Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.E.J,...) qualifiés</th> 
+    <th>Agents non titulaires/ emplois aidÃ©s par l'Etat ( C.E.S., C.E.C., C.E.J,...) qualifiÃ©s</th> 
     <td>
        <input stl:attributes="value fieldC33W"
               type="text" name="fieldC33W"
@@ -394,7 +394,7 @@
   </tr>
 
   <tr>
-    <th>Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.E.J,...) non qualifiés</th> 
+    <th>Agents non titulaires/ emplois aidÃ©s par l'Etat ( C.E.S., C.E.C., C.E.J,...) non qualifiÃ©s</th> 
     <td>
        <input stl:attributes="value fieldC34W"
               type="text" name="fieldC34W"
@@ -413,7 +413,7 @@
     <td><b stl:attributes="class _C34">C34</b></td>
   </tr>
 </table>
-<h2>C.4 BÉNÉVOLES</h2>
+<h2>C.4 BÃ‰NÃ‰VOLES</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -440,7 +440,7 @@
     <td></td>
   </tr-->
   <tr>
-    <th>Bénévoles qualifiés (exemple : ABF, BDP, etc)</th> 
+    <th>BÃ©nÃ©voles qualifiÃ©s (exemple : ABF, BDP, etc)</th> 
     <td>
        <input stl:attributes="value fieldC41W"
               type="text" name="fieldC41W"
@@ -460,7 +460,7 @@
   </tr>
 
   <tr>
-    <th>Bénévoles non formés</th> 
+    <th>BÃ©nÃ©voles non formÃ©s</th> 
     <td>
        <input stl:attributes="value fieldC42W"
               type="text" name="fieldC42W"
@@ -482,7 +482,7 @@
     <td colspan="6"><br/></td>
   </tr>
   <tr>
-    <th><b>TOTAL (C11 à C42)</b></th> 
+    <th><b>TOTAL (C11 Ã  C42)</b></th> 
     <td>
        <input stl:attributes="value fieldC43W"
               type="text" name="fieldC43W"
@@ -511,7 +511,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>DANS L'ANNÉE :</th> 
+    <th>DANS L'ANNÃ‰E :</th> 
     <td>
        <input stl:attributes="value fieldC51"
               type="text" name="fieldC51"

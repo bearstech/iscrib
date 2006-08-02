@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -18,7 +18,7 @@
              stl:if="is_allowed_to_edit"></input>
     </stl:block>
   </div>
-<h1>F- COOPÉRATION ET RÉSEAU
+<h1>F- COOPÃ‰RATION ET RÃ‰SEAU
    <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
 </h1>
@@ -30,7 +30,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th colspan="2">La bibliothèque appartient-elle au réseau de la BDP ?</th> 
+    <th colspan="2">La bibliothÃ¨que appartient-elle au rÃ©seau de la BDP ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldF11" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldF11" />Oui      </td>
@@ -41,7 +41,7 @@
   </tr>
 
   <tr>
-    <th colspan="2">La bibliothèque appartient-elle à un autre réseau documentaire ?</th> 
+    <th colspan="2">La bibliothÃ¨que appartient-elle Ã  un autre rÃ©seau documentaire ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldF13'])"  type="radio"  name="fieldF12" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldF12" />Oui      </td>
@@ -65,7 +65,7 @@
   </tr>
 
   <tr>
-    <th colspan="2">La bibliothèque participe-t-elle à des actions de coopération ?</th> 
+    <th colspan="2">La bibliothÃ¨que participe-t-elle Ã  des actions de coopÃ©ration ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldF15'])"  type="radio"  name="fieldF14" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldF14" />Oui      </td>
@@ -76,7 +76,7 @@
   </tr>
 
   <tr>
-    <th>si oui, préciser lesquelles :</th> 
+    <th>si oui, prÃ©ciser lesquelles :</th> 
     <td colspan="2">
        <div stl:if="not fieldF14" id="display_fieldF15"           style="visibility:hidden">         <input stl:if="not fieldF14"
              type="text" name="fieldF15"
@@ -95,7 +95,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque a-t-elle mené des actions internationales ?</th> 
+    <th>La bibliothÃ¨que a-t-elle menÃ© des actions internationales ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldF17','fieldF18','fieldF19','fieldF20'])"  type="radio"  name="fieldF16" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldF16" />Oui      </td>
@@ -114,7 +114,7 @@
    </colgroup>
   <tr>
     <th rowspan="4">Si oui, cocher les cases correspondantes :</th>
-    <th>Accueils / échanges de professionnels, écrivains</th> 
+    <th>Accueils / Ã©changes de professionnels, Ã©crivains</th> 
     <td>
       <table stl:if="fieldF16" id="display_fieldF17" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF17"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldF17" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF17"                value="0"
@@ -127,7 +127,7 @@
   </tr>
 
   <tr>
-    <th>Voyages d'étude, expertises à l'étranger</th> 
+    <th>Voyages d'Ã©tude, expertises Ã  l'Ã©tranger</th> 
     <td>
       <table stl:if="fieldF16" id="display_fieldF18" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF18"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldF18" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF18"                value="0"
@@ -153,7 +153,7 @@
   </tr>
 
   <tr>
-    <th>Autres actions de coopération</th> 
+    <th>Autres actions de coopÃ©ration</th> 
     <td>
       <table stl:if="fieldF16" id="display_fieldF20" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldF20"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldF20" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldF20"                value="0"
@@ -167,7 +167,7 @@
 </table>
 <table>
   <tr>
-    <th>Si la bibliothèque entretient des partenariats avec des structures publiques ou privées (associations...) oeuvrant dans le domaine du handicap,préciser les domaines d'intervention : </th>
+    <th>Si la bibliothÃ¨que entretient des partenariats avec des structures publiques ou privÃ©es (associations...) oeuvrant dans le domaine du handicap,prÃ©ciser les domaines d'intervention : </th>
   </tr>
 </table>
 <table width="100%">
@@ -179,7 +179,7 @@
    </colgroup>
   <tr>
     <th rowspan="3"> cocher les cases correspondantes </th>
-    <th>Accueil de bénévoles dans la bibliothèque</th> 
+    <th>Accueil de bÃ©nÃ©voles dans la bibliothÃ¨que</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldF21" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldF21" />Oui      </td>
@@ -190,7 +190,7 @@
   </tr>
 
   <tr>
-    <th>Dépôt de livres dans les locaux du partenaire</th> 
+    <th>DÃ©pÃ´t de livres dans les locaux du partenaire</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldF22" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldF22" />Oui      </td>

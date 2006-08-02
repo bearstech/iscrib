@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -18,11 +18,11 @@
             stl:if="is_allowed_to_edit"></input>
    </stl:block>
   </div>
-<h1>A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales)
+<h1>A- Ã‰LÃ‰MENTS FINANCIERS ( en euros, sans dÃ©cimales)
   <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help1', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
 </h1>
-<h2>A.1 DEPENSES DE FONCTIONNEMENT PROPRES A LA BIBLIOTHÈQUE</h2>
+<h2>A.1 DEPENSES DE FONCTIONNEMENT PROPRES A LA BIBLIOTHÃˆQUE</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -50,7 +50,7 @@
   </tr>
 
   <tr>
-    <th>Pour la reliure et l'équipement des documents</th> 
+    <th>Pour la reliure et l'Ã©quipement des documents</th> 
     <td>
        <input stl:attributes="value fieldA13"
               type="text" name="fieldA13"
@@ -70,7 +70,7 @@
   </tr>
 
   <tr>
-    <th>Pour l'animation (communication, impression, défraiement)</th> 
+    <th>Pour l'animation (communication, impression, dÃ©fraiement)</th> 
     <td>
        <input stl:attributes="value fieldA15"
               type="text" name="fieldA15"
@@ -80,7 +80,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (A11 à A15)</b></th> 
+    <th><b>TOTAL (A11 Ã  A15)</b></th> 
     <td>
        <input stl:attributes="value fieldA16"
               type="text" name="fieldA16"
@@ -89,7 +89,7 @@
     <td><b stl:attributes="class _A16">A16</b></td>
   </tr>
 </table>
-<h2>A.2 DEPENSES D'INVESTISSEMENT PROPRES A LA BIBLIOTHÈQUE</h2>
+<h2>A.2 DEPENSES D'INVESTISSEMENT PROPRES A LA BIBLIOTHÃˆQUE</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -97,7 +97,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Pour le bâtiment (construction, agrandissement, rénovation)</th> 
+    <th>Pour le bÃ¢timent (construction, agrandissement, rÃ©novation)</th> 
     <td>
        <input stl:attributes="value fieldA21"
               type="text" name="fieldA21"
@@ -107,7 +107,7 @@
   </tr>
 
   <tr>
-    <th>Pour le mobilier et le matériel (y compris achat de véhicules)</th> 
+    <th>Pour le mobilier et le matÃ©riel (y compris achat de vÃ©hicules)</th> 
     <td>
        <input stl:attributes="value fieldA22"
               type="text" name="fieldA22"
@@ -117,7 +117,7 @@
   </tr>
 
   <tr>
-    <th>Pour l'informatique (logiciel et matériel)</th> 
+    <th>Pour l'informatique (logiciel et matÃ©riel)</th> 
     <td>
        <input stl:attributes="value fieldA23"
               type="text" name="fieldA23"
@@ -137,7 +137,7 @@
   </tr>
 
   <tr>
-    <th><b>TOTAL (A21 à A24)</b></th> 
+    <th><b>TOTAL (A21 Ã  A24)</b></th> 
     <td>
        <input stl:attributes="value fieldA25"
               type="text" name="fieldA25"
@@ -146,7 +146,7 @@
     <td><b stl:attributes="class _A25">A25</b></td>
   </tr>
 </table>
-<h2>A.3 RECETTES PROPRES A LA BIBLIOTHÈQUE</h2>
+<h2>A.3 RECETTES PROPRES A LA BIBLIOTHÃˆQUE</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -154,7 +154,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Montant total des droits d'inscription perçus dans l'année</th> 
+    <th>Montant total des droits d'inscription perÃ§us dans l'annÃ©e</th> 
     <td>
        <input stl:attributes="value fieldA31"
               type="text" name="fieldA31"

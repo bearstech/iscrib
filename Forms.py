@@ -1,5 +1,6 @@
-# -*- coding: ISO-8859-1 -*-
+# -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com> 
+# Copyright (C) 2006 Herv√© Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,6 +20,7 @@
 from itools.catalog.Analysers import Text as itoolsAnalyserText
 from itools.web import get_context
 from itools.catalog import Query
+from itools.xml.stl import stl
 
 # Import from iKaaro
 from Products.ikaaro.utils import get_parameters
@@ -69,8 +71,8 @@ class Forms(bibFolder):
     def _browse_namespace(self, object):
         handler = self.get_handler(object.get('name'))
         object['state'] = handler.get_form_state()
-        object['title'] = handler.user_town
-        object['dep'] = handler.dep
+        object['title'] = handler.get_user_town()
+        object['dep'] = handler.get_dep()
 
 
     browse_list__access__ = Handler.is_admin_or_consultant
@@ -79,7 +81,7 @@ class Forms(bibFolder):
         context.session['browse'] = 'list'
         namespace = self.browse_namespace(16)
         handler = self.get_handler('/ui/culture/Forms_browse_list.xml')
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 
     search_form__access__ = Handler.is_admin_or_consultant
@@ -91,8 +93,8 @@ class Forms(bibFolder):
         # Get the search parameters
         parameters = get_parameters(tablename, name='', dep='', code='',
                                     state='')
-        states_dic = {'1': u'Vide', '2': u'En cours', '3':u'TerminÈ',
-                      '4': u'ExportÈ'}
+        states_dic = {'1': u'Vide', '2': u'En cours', '3':u'Termin√©',
+                      '4': u'Export√©'}
 
         name = parameters['name'].strip().lower()
         dep = parameters['dep'].strip()
@@ -137,29 +139,29 @@ class Forms(bibFolder):
             # Build the query
             # The format (BM or BDP)
             if self.is_BM():
-                query = Query.Simple('format', FormBM.class_id)
+                query = Query.Equal('format', FormBM.class_id)
             else:
-                query = Query.Simple('format', FormBDP.class_id)
+                query = Query.Equal('format', FormBDP.class_id)
             # The year
             year = self.get_year()
-            q_year = Query.Simple('year', year)
-            query = Query.Complex(query, 'and', q_year)
+            q_year = Query.Equal('year', year)
+            query = Query.And(query, q_year)
             # The name of the town
             for word, pos in itoolsAnalyserText(name):
-                q_name = Query.Simple('user_town', word)
-                query = Query.Complex(query, 'and', q_name)
+                q_name = Query.Equal('user_town', word)
+                query = Query.And(query, q_name)
             # The department
             if dep:
-                q_dep = Query.Simple('dep', dep)
-                query = Query.Complex(query, 'and', q_dep)
+                q_dep = Query.Equal('dep', dep)
+                query = Query.And(query, q_dep)
             # The code UA
             if code:
-                q_code = Query.Simple('code', code)
-                query = Query.Complex(query, 'and', q_code)
+                q_code = Query.Equal('code', code)
+                query = Query.And(query, q_code)
             # The state
             if state_code:
-                q_state = Query.Simple('form_state', state)
-                query = Query.Complex(query, 'and', q_state)
+                q_state = Query.Equal('form_state', state)
+                query = Query.And(query, q_state)
 
             # Search
             root = context.root
@@ -169,7 +171,7 @@ class Forms(bibFolder):
             documents = list(documents)
             answer_len = len(documents)
             if answer_len > 100:
-                msg = u'Il y a %s rÈponses, les 100 premiËres sont prÈsentÈes.'\
+                msg = u'Il y a %s r√©ponses, les 100 premi√®res sont pr√©sent√©es.'\
                       u'Veuillez restreindre votre recherche.'
                 namespace['too_long_answer'] = msg % answer_len
 
@@ -183,7 +185,7 @@ class Forms(bibFolder):
                 objects.append({'name': document.name,
                                 'url': '%s/;report_form0' % document.name,
                                 'title': document.title,
-                                'state': document.form_state,
+                                'state': document.get_form_state(),
                                 'date': mtime.strftime('%Y-%m-%d %H:%M')})
         else:
             objects = []
@@ -197,6 +199,6 @@ class Forms(bibFolder):
         namespace['batch'] = table.batch_control()
 
         handler = self.get_handler('/ui/culture/Forms_search.xml')
-        return handler.stl(namespace)
+        return stl(handler, namespace)
 
 bibFolder.register_handler_class(Forms)
