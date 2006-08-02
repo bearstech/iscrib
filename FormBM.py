@@ -21,23 +21,23 @@ import MySQLdb
 from MySQLdb.cursors import DictCursor
 
 # Import from Culture
-from setup import setup
+from scrib import config
 from schemaBM import schema
 from utils import get_BMs
 from Form import get_adresse, Form
 
 # Import from itools
 from itools.web import get_context
-from itools.xml.stl import stl
+from itools.stl import stl
 
 # Import from itools.cms
 from itools.cms.text import Text as iText
 from itools.cms.exceptions import UserError
 
-SqlHost = setup.sql.SqlHost
-SqlDatabase = setup.sql.SqlDatabase
-SqlUser = setup.sql.SqlUser
-SqlPasswd = setup.sql.SqlPasswd
+SqlHost = config.SqlHost
+SqlDatabase = config.SqlDatabase
+SqlUser = config.SqlUser
+SqlPasswd = config.SqlPasswd
 
 
 class FormBM(Form):

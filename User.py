@@ -22,7 +22,7 @@ from itools.resources import base
 from itools.web import get_context
 from itools.catalog import Query
 from itools import uri
-from itools.xml.stl import stl
+from itools.stl import stl
 
 # Import from itools.cms
 from itools.cms.User import User as iUser

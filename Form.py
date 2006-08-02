@@ -29,7 +29,7 @@ import decimal
 # Import from itools
 from itools.datatypes import Unicode, Boolean, String
 from itools.web import get_context
-from itools.xml.stl import stl
+from itools.stl import stl
 
 # Import from mysql
 import MySQLdb
@@ -43,18 +43,18 @@ from itools.cms.utils import comeback
 # Import from Culture
 import CultureTypes
 from CultureTypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from setup import setup
+from scrib import config
 from Handler import Handler
 
 
-SMTPServer = setup.mail.SMTPServer
-MailResponsableBM = setup.mail.MailResponsableBM
-MailResponsableBDP = setup.mail.MailResponsableBDP
+SMTPServer = config.SMTPServer
+MailResponsableBM = config.MailResponsableBM
+MailResponsableBDP = config.MailResponsableBDP
 
-SqlHost = setup.sql.SqlHost
-SqlDatabase = setup.sql.SqlDatabase
-SqlUser = setup.sql.SqlUser
-SqlPasswd = setup.sql.SqlPasswd
+SqlHost = config.SqlHost
+SqlDatabase = config.SqlDatabase
+SqlUser = config.SqlUser
+SqlPasswd = config.SqlPasswd
 
 
 def get_checkbox_value(key, value):

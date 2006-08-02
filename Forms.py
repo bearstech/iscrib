@@ -20,7 +20,7 @@
 from itools.catalog.Analysers import Text as itoolsAnalyserText
 from itools.web import get_context
 from itools.catalog import Query
-from itools.xml.stl import stl
+from itools.stl import stl
 
 # Import from itools.cms
 from itools.cms.utils import get_parameters

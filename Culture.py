@@ -25,7 +25,7 @@ import tempfile
 from itools.resources import base, get_resource
 from itools.datatypes import Unicode, String, DateTime
 from itools.web import get_context
-from itools.xml.stl import stl
+from itools.stl import stl
 from itools.handlers.transactions import get_transaction
 
 # Import from itools.cms

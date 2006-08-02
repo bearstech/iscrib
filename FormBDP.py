@@ -18,7 +18,7 @@
 
 # Import from itools
 from itools.web import get_context
-from itools.xml.stl import stl
+from itools.stl import stl
 
 # Import from itools.cms
 from itools.cms.text import Text as iText

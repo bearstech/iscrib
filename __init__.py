@@ -17,11 +17,10 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
-import logging
-import logging.config
+import os
 
 # Import from itools
-from itools import get_abspath
+from itools import get_abspath, get_version
 
 # Import from itools.cms
 from itools.cms.skins import register_skin
@@ -30,29 +29,28 @@ from itools.cms.skins import register_skin
 from Culture import Root
 
 
+class Configuration(object):
+    pass
+
+
+# Read the configuration 
+path = get_abspath(globals(), 'Setup.conf')
+config = Configuration()
+
+for line in open(path, 'r').readlines():
+    key, value = line.split('=')
+    key = key.strip()
+    if not key:
+        raise ValueError, 'One line has no left value' 
+    value = value.strip()
+    if not value:
+        raise ValueError, "No value for the key '%s' in Setup.conf file" % key
+    setattr(config, key, value)
+
+
 # Register interface
 path = get_abspath(globals(), 'ui')
 register_skin('culture', path)
 
-### Found the python used by Zope for generate xml
-##import os 
-##gen_path = get_abspath(globals(), 'input_data')
-##proces, python_line, python_cmd = [], '', ''
-##proces = os.popen('ps auxwww | grep python').read().split('\n')
-##pid = os.getpid()
-##python_line = [l for l in proces if l.count(str(pid))]
-##if python_line:
-##    python_cmd = python_line[0].split(':')[-1]
-##if python_cmd:
-##    python_cmd = python_cmd.split()[1]
-##if not python_cmd:
-##    python_cmd = 'python'
-##open('%s/where_is_python.txt' % gen_path, 'w').write(python_cmd)
 
-
-#############################################################################
-# Logging facilities
-#############################################################################
-filename = get_abspath(globals(), 'logging.conf')
-logging.config.fileConfig(filename)
-
+__version__ = get_version(globals())
