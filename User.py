@@ -24,13 +24,13 @@ from itools.catalog import Query
 from itools import uri
 from itools.xml.stl import stl
 
-# Import from ikaaro
-from Products.ikaaro.User import User as ikaaroUser
-from Products.ikaaro.Group import Group as ikaaroGroup
-from Products.ikaaro.UserFolder import UserFolder as ikaaroUserFolder
-from Products.ikaaro.utils import comeback, get_parameters
-from Products.ikaaro.widgets import Table
-from Products.ikaaro.exceptions import UserError
+# Import from itools.cms
+from itools.cms.User import User as iUser
+from itools.cms.Group import Group as iGroup
+from itools.cms.UserFolder import UserFolder as iUserFolder
+from itools.cms.utils import comeback, get_parameters
+from itools.cms.widgets import Table
+from itools.cms.exceptions import UserError
 
 # Import from Culture
 from utils import get_deps, get_BMs
@@ -38,24 +38,24 @@ from Handler import Handler
 
 
 
-class bibGroup(Handler, ikaaroGroup):
+class bibGroup(Handler, iGroup):
 
     is_allowed_to_view = Handler.is_admin
-    edit_metadata_form__access__ = Handler.is_admin
-    edit_metadata__access__ = Handler.is_admin
+    edit_metadata_form__access__ = 'is_admin'
+    edit_metadata__access__ = 'is_admin'
     browse_thumbnails__access__ = False
-    browse_list__access__ = Handler.is_admin
+    browse_list__access__ = 'is_admin'
     add_users_form__access__ = False
 
 
     def get_views(self):
-        views = ikaaroGroup.get_views(self)
+        views = iGroup.get_views(self)
         return views + ['create_add_users_form']
 
 
     #######################################################################
     # Users / Add
-    create_add_users_form__access__ = Handler.is_admin
+    create_add_users_form__access__ = 'is_admin'
     create_add_users_form__label__ = u'Ajouter un administrateur Scrib'
     def create_add_users_form(self):
         context = get_context()
@@ -70,7 +70,7 @@ class bibGroup(Handler, ikaaroGroup):
         return stl(handler, namespace)
 
 
-    create_add_users__access__ = Handler.is_admin
+    create_add_users__access__ = 'is_admin'
     def create_add_users(self, username, password, password2, groups=[], **kw):
         context = get_context()
         root = context.root
@@ -98,11 +98,11 @@ class bibGroup(Handler, ikaaroGroup):
         comeback(message, 'browse_users')
 
 
-ikaaroGroup.register_handler_class(bibGroup)
+iGroup.register_handler_class(bibGroup)
 
 
 
-class bibUser(Handler, ikaaroUser):
+class bibUser(Handler, iUser):
     class_id = 'bibUser'
 
     def get_catalog_indexes(self):
@@ -236,21 +236,21 @@ class bibUser(Handler, ikaaroUser):
     edit_password_form__label__ = u'Change password'
 
 
-ikaaroUser.register_handler_class(bibUser)
+iUser.register_handler_class(bibUser)
 
 
 
-class bibUserFolder(Handler, ikaaroUserFolder):
+class bibUserFolder(Handler, iUserFolder):
 
     is_allowed_to_view = Handler.is_admin
-    browse_thumbnails__access__ = Handler.is_admin
-    edit_metadata_form__access__ = Handler.is_admin
+    browse_thumbnails__access__ = 'is_admin'
+    edit_metadata_form__access__ = 'is_admin'
 
 
     #######################################################################
     # Search
     def get_views(self):
-        views = ikaaroUserFolder.get_views(self)
+        views = iUserFolder.get_views(self)
         if 'browse_thumbnails' in views:
             views.remove('browse_thumbnails')
         if 'new_user_form' in views:
@@ -261,7 +261,7 @@ class bibUserFolder(Handler, ikaaroUserFolder):
         return views 
 
 
-    search_form__access__ = Handler.is_admin
+    search_form__access__ = 'is_admin'
     search_form__label__ = u'Search'
     def search_form(self):
         context = get_context()
@@ -418,4 +418,4 @@ class bibUserFolder(Handler, ikaaroUserFolder):
         return stl(handler, namespace)
 
 
-ikaaroUserFolder.register_handler_class(bibUserFolder)
+iUserFolder.register_handler_class(bibUserFolder)

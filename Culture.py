@@ -19,17 +19,19 @@
 # Import from the Standard Library
 import datetime
 from time import time
+import tempfile
 
 # Import from itools
-from itools.resources import base
+from itools.resources import base, get_resource
 from itools.datatypes import Unicode, String, DateTime
 from itools.web import get_context
 from itools.xml.stl import stl
+from itools.handlers.transactions import get_transaction
 
-# Import from iKaaro
-from Products.ikaaro.Root import Root
-from Products.ikaaro.Metadata import Metadata, Record
-from Products.ikaaro.utils import comeback
+# Import from itools.cms
+from itools.cms.Root import Root as iRoot
+from itools.cms.Metadata import Metadata, Record
+from itools.cms.utils import comeback
 
 # Import from culture
 from FormBM import FormBM
@@ -38,17 +40,15 @@ from Forms import Forms
 from User import bibUser
 from Folder import bibFolder
 from utils import get_deps, get_BMs
-from Handler import Handler
 
 
-
-class Culture(bibFolder, Root):
+class Root(bibFolder, iRoot):
 
     class_id = 'Culture'
     class_version = '20060802'
 
 
-    _catalog_fields = Root._catalog_fields \
+    _catalog_fields = iRoot._catalog_fields \
                       + [('user_town', 'text', True, False),
                          ('dep', 'keyword', True, False),
                          ('year', 'keyword', True, False),
@@ -70,13 +70,13 @@ class Culture(bibFolder, Root):
 
 
     def get_skeleton(self, username=None, password=None):
-        skeleton = Root.get_skeleton(self, username, password)
+        skeleton = iRoot.get_skeleton(self, username, password)
         # Skip reviewers
         del skeleton['reviewers']
         return skeleton
 
 
-    _get_handler = Root._get_handler
+    _get_handler = iRoot._get_handler
 
 
     def before_traverse(self):
@@ -89,7 +89,7 @@ class Culture(bibFolder, Root):
     #########################################################################
     # Security declarations
     #########################################################################
-    browse_list__access__ = Handler.is_admin
+    browse_list__access__ = 'is_admin'
 
 
     #########################################################################
@@ -139,7 +139,7 @@ class Culture(bibFolder, Root):
     #########################################################################
     # Login
     def login(self, username, password, referer=None, **kw):
-        Root.login(self, username, password, referer)
+        iRoot.login(self, username, password, referer)
         context = get_context()
         user = context.user
         if user.is_admin() or user.name == 'VoirSCRIB':
@@ -156,7 +156,7 @@ class Culture(bibFolder, Root):
 
     #########################################################################
     # New reports
-    new_reports_form__access__ = Handler.is_admin
+    new_reports_form__access__ = 'is_admin'
     new_reports_form__label__ = u'Ajouter'
     def new_reports_form(self):
         namespace = {}
@@ -187,7 +187,7 @@ class Culture(bibFolder, Root):
         return stl(handler, namespace)
 
 
-    new_BM_reports__access__ = Handler.is_admin
+    new_BM_reports__access__ = 'is_admin'
     def new_BM_reports(self, year, **kw):
         """ """
         # Add reports container
@@ -220,7 +220,7 @@ class Culture(bibFolder, Root):
             password = 'BM%s' % code
             users.set_handler(username, bibUser(password=password))
             if i % 200 == 0:
-                get_transaction().commit(1)
+                get_transaction().commit()
                 print "#200", '%s/%s' % (i, BMs_len), dep, code, username
             else:
                 print '%s/%s' % (i, BMs_len), dep, code, username
@@ -237,7 +237,7 @@ class Culture(bibFolder, Root):
         comeback(message, 'browse_thumbnails')
 
 
-    new_BDP_reports__access__ = Handler.is_admin
+    new_BDP_reports__access__ = 'is_admin'
     def new_BDP_reports(self, year, **kw):
         """ patern for BDP users is BDPxx_Year"""
         # Add reports container
@@ -357,28 +357,6 @@ class Culture(bibFolder, Root):
                         self.update_metadata(metadata)
                 
 
-    def update_20051025(self):
-        """Folders now wear the 'folder' format in their metadata."""
-        from Folder import Folder
-
-        reindex_handler = self.reindex_handler
-        for handler, context in self.traverse2():
-            name = handler.name
-            abspath = handler.abspath
-            if name.startswith('.'):
-                context.skip = True
-            elif abspath == '/ui':
-                context.skip = True
-            elif handler is self:
-                pass
-            elif isinstance(handler, Folder):
-                format = handler.get_property('format')
-                if format == '':
-                    print abspath
-                    handler.set_property('format', Folder.class_id)
-                    reindex_handler(handler)
-
-
     def update_20060505(self):
         users = self.get_handler('users')
         users.set_handler('VoirSCRIB', bibUser(password='BMBDP'))
@@ -391,10 +369,11 @@ class Culture(bibFolder, Root):
 
     def update_20060801(self):
         self.update_20050728()
-        self.update_20051025()
+        iRoot.update_20051025(self)
 
 
     def update_20060802(self):
+        iRoot.update_20060205(self)
 
 
     xexport__access__ = True
@@ -408,3 +387,6 @@ class Culture(bibFolder, Root):
             tmp_folder.set_resource(name, resource)
 
         return 'Exported: %s' % tmp_path
+
+
+iRoot.register_handler_class(Root)

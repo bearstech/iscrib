@@ -34,11 +34,11 @@ from itools.xml.stl import stl
 # Import from mysql
 import MySQLdb
 
-# Import from iKaaro
-from Products.ikaaro.text import Text as ikaaroText
-from Products.ikaaro.WorkflowAware import WorkflowAware
-from Products.ikaaro.exceptions import UserError
-from Products.ikaaro.utils import comeback
+# Import from itools.cms
+from itools.cms.text import Text as iText
+from itools.cms.WorkflowAware import WorkflowAware
+from itools.cms.exceptions import UserError
+from itools.cms.utils import comeback
 
 # Import from Culture
 import CultureTypes
@@ -154,7 +154,7 @@ def get_adresse(query):
     return adresse or ''
 
 
-class Form(Handler, ikaaroText, WorkflowAware):
+class Form(Handler, iText, WorkflowAware):
 
     class_id = 'Form'
     class_icon48 = 'culture/images/form48.png'
@@ -462,7 +462,6 @@ class Form(Handler, ikaaroText, WorkflowAware):
                 'help']
 
 
-    #get_form_state__access__ = is_allowed_to_view
     def get_form_state(self):
         # State
         state = self.get_property('state')
@@ -481,7 +480,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
 
     #######################################################################
     # Control report
-    controles_form__access__ = is_allowed_to_view
+    controles_form__access__ = 'is_allowed_to_view'
     controles_form__label__ = u'Contrôle de la saisie'
     def controles_form(self):
         schema = get_schema()
@@ -765,7 +764,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         return (res0, res1, res2, res3)
 
 
-    pending2submitted__access__ = is_allowed_to_edit
+    pending2submitted__access__ = 'is_allowed_to_edit'
     def pending2submitted(self):
         # Change state
         self.set_property('state', 'pending')
@@ -875,7 +874,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         return msg
 
 
-    submitted2exported__access__ = Handler.is_admin
+    submitted2exported__access__ = 'is_admin'
     def submitted2exported(self):
         cursor = get_cursor()
         namespace = self.get_namespace()
@@ -982,7 +981,6 @@ class Form(Handler, ikaaroText, WorkflowAware):
         comeback(u'Le rapport a été exporté', 'controles_form')
 
 
-    get_dependencies__access__ = 1
     def get_dependencies(self):
         """
         {'fieldB32': 'fieldB31',
@@ -1004,7 +1002,6 @@ class Form(Handler, ikaaroText, WorkflowAware):
         return dependencies
 
 
-    get_sum__access__ = 1
     def get_sums(self):
         schema = get_schema()
         sums = {}
@@ -1024,7 +1021,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         return handler.to_str()
 
 
-    fill_report__access__ = is_allowed_to_edit
+    fill_report__access__ = 'is_allowed_to_edit'
     def fill_report(self):
         schema = get_schema()
         context = get_context()
@@ -1091,7 +1088,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         comeback(message, 'controles_form')
 
 
-    report__access__ = is_allowed_to_edit
+    report__access__ = 'is_allowed_to_edit'
     def report(self):
         schema, context = get_schema(), get_context()
         self.set_changed()
@@ -1280,7 +1277,7 @@ class Form(Handler, ikaaroText, WorkflowAware):
         handler = self.get_handler('/ui/culture/Form_report_csv.xml')
         return stl(handler, namespace) 
 
-    comments__access__ = is_allowed_to_view
+    comments__access__ = 'is_allowed_to_view'
     comments__label__ = u'Rapport Bibliothèques'
     comments__sublabel__ = u'Commentaires'
     def comments(self, view=None, **kw):
@@ -1323,4 +1320,4 @@ class Form(Handler, ikaaroText, WorkflowAware):
 
 
 #XXX do we need to register FormBM and Form ?
-ikaaroText.register_handler_class(Form)
+iText.register_handler_class(Form)

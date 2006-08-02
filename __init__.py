@@ -23,35 +23,31 @@ import logging.config
 # Import from itools
 from itools import get_abspath
 
-# Import from iKaaro
-from Products.ikaaro.skins import register_skin
+# Import from itools.cms
+from itools.cms.skins import register_skin
 
-# Import from Culture
-from Culture import Culture
-
-
-def initialize(context):
-    Culture.register_in_zope(context)
+# Import from scrib
+from Culture import Root
 
 
 # Register interface
 path = get_abspath(globals(), 'ui')
 register_skin('culture', path)
 
-# Found the python used by Zope for generate xml
-import os 
-gen_path = get_abspath(globals(), 'input_data')
-proces, python_line, python_cmd = [], '', ''
-proces = os.popen('ps auxwww | grep python').read().split('\n')
-pid = os.getpid()
-python_line = [l for l in proces if l.count(str(pid))]
-if python_line:
-    python_cmd = python_line[0].split(':')[-1]
-if python_cmd:
-    python_cmd = python_cmd.split()[1]
-if not python_cmd:
-    python_cmd = 'python'
-open('%s/where_is_python.txt' % gen_path, 'w').write(python_cmd)
+### Found the python used by Zope for generate xml
+##import os 
+##gen_path = get_abspath(globals(), 'input_data')
+##proces, python_line, python_cmd = [], '', ''
+##proces = os.popen('ps auxwww | grep python').read().split('\n')
+##pid = os.getpid()
+##python_line = [l for l in proces if l.count(str(pid))]
+##if python_line:
+##    python_cmd = python_line[0].split(':')[-1]
+##if python_cmd:
+##    python_cmd = python_cmd.split()[1]
+##if not python_cmd:
+##    python_cmd = 'python'
+##open('%s/where_is_python.txt' % gen_path, 'w').write(python_cmd)
 
 
 #############################################################################

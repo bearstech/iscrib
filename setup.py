@@ -78,3 +78,6 @@ setup = Bunch(mail=mail_struct, sql=sql_struct)
 #check
 sql, mail = setup.sql, setup.mail
 
+
+if __name__ == '__main__':
+    setup(globals())

@@ -22,9 +22,9 @@ from itools.web import get_context
 from itools.catalog import Query
 from itools.xml.stl import stl
 
-# Import from iKaaro
-from Products.ikaaro.utils import get_parameters
-from Products.ikaaro.widgets import Table
+# Import from itools.cms
+from itools.cms.utils import get_parameters
+from itools.cms.widgets import Table
 
 # Import from Culture
 from Folder import bibFolder
@@ -75,7 +75,7 @@ class Forms(bibFolder):
         object['dep'] = handler.get_dep()
 
 
-    browse_list__access__ = Handler.is_admin_or_consultant
+    browse_list__access__ = 'is_admin_or_consultant'
     def browse_list(self):
         context = get_context()
         context.session['browse'] = 'list'
@@ -84,7 +84,7 @@ class Forms(bibFolder):
         return stl(handler, namespace)
 
 
-    search_form__access__ = Handler.is_admin_or_consultant
+    search_form__access__ = 'is_admin_or_consultant'
     search_form__label__ = u'Search'
     def search_form(self):
         context = get_context()

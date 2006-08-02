@@ -19,11 +19,11 @@
 # Import from itools
 from itools.web import get_context
 
-# Import from ikaaro
-from Products.ikaaro.Handler import Handler as ikaaroHandler
+# Import from itools.cms
+from itools.cms.Handler import Handler as iHandler
 
 
-class Handler(ikaaroHandler):
+class Handler(iHandler):
 
     #########################################################################
     # Security
