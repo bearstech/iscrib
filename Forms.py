@@ -31,7 +31,6 @@ from Folder import bibFolder
 from FormBM import FormBM
 from FormBDP import FormBDP
 from utils import get_deps
-from Handler import Handler
 
 
 

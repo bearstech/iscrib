@@ -19,18 +19,14 @@
 # Import from the Standard Library
 import datetime
 from time import time
-import tempfile
 
 # Import from itools
-from itools.resources import base, get_resource
-from itools.datatypes import Unicode, String, DateTime
 from itools.web import get_context
 from itools.stl import stl
 from itools.handlers.transactions import get_transaction
 
 # Import from itools.cms
 from itools.cms.root import Root as iRoot
-from itools.cms.metadata import Metadata, Record
 from itools.cms.utils import comeback
 
 # Import from culture
@@ -273,89 +269,19 @@ class Root(bibFolder, iRoot):
     #########################################################################
     # Upgrade
     #########################################################################
-    def update_metadata(self, metadata):
-        # Update metadata
-        trans = {(None, 'title'): (('dc', 'title'), Unicode),
-                 (None, 'description'): (('dc', 'description'), Unicode),
-                 (None, 'language'): (('dc', 'language'), String),
-                 (None, 'user_theme'): (('ikaaro', 'user_theme'), String),
-                 (None, 'date'): (('dc', 'date'), DateTime),
-                 (None, 'wf_transition'): (('ikaaro', 'wf_transition'), Record)
-                 }
-
-        properties = metadata.properties
-
-        has_changed = False
-        for key in properties:
-            if key in trans:
-                new_key, type = trans[key]
-                metadata.prefixes.add(new_key[0])
-                value = properties[key]
-                # Transform property
-                if isinstance(value, dict):
-                    properties[new_key] = {}
-                    for language, value in value.items():
-                        value = type.decode(value)
-                        properties[new_key][language] = value
-                elif isinstance(value, list):
-                    properties[new_key] = []
-                    for value in value:
-                        properties[new_key].append({})
-                        for key2, value2 in value.items():
-                            if key2 in trans:
-                                new_key2, type2 = trans[key2]
-                                metadata.prefixes.add(new_key2[0])
-                                value2 = type2.decode(value2)
-                                properties[new_key][-1][new_key2] = value2
-                            else:
-                                properties[new_key][-1][key2] = value2
-                else:
-                    value = type.decode(value)
-                    properties[new_key] = value
-
-
-                # Remove old propertye
-                del properties[key]
-                has_changed = True
-
-        if has_changed:
-            metadata.save()
-
-
     def update_20050509(self):
+        from itools.handlers.KeyValue import KeyValue
+
         # Move settings to metadata
-        settings = self.get_handler('.settings')
+        settings = self.resource.get_resource('.settings')
+        settings = KeyValue(settings)
         if settings.state.join is True:
             self.set_property('ikaaro:website_is_open', True)
-        self.set_property('ikaaro:website_languages',
-                          tuple(settings.state.languages))
+        self.set_property('ikaaro:website_languages', settings.state.languages)
         self.metadata.save_state()
 
         self.resource.del_resource('.settings')
 
-
-    def update_20050728(self):
-        resource = self.resource
-        object = resource._get_object().aq_base
-        delattr(object, '__before_publishing_traverse__')
-        delattr(object, '__browser_default__')
-        resource.get_transaction().commit()
-
-
-    def update_20051020(self):
-        root = self.resource
-        for resource in root.get_resources():
-            if resource.name.endswith('.metadata'):
-                print resource.name
-                metadata = Metadata(resource)
-                self.update_metadata(metadata)
-            elif isinstance(resource, base.Folder):
-                for resource_name in resource.get_resource_names():
-                    if resource_name.endswith('.metadata'):
-                        print '%s/%s' % (resource.name, resource_name)
-                        metadata = Metadata(resource.get_resource(resource_name))
-                        self.update_metadata(metadata)
-                
 
     def update_20060505(self):
         users = self.get_handler('users')
@@ -363,30 +289,12 @@ class Root(bibFolder, iRoot):
         users.save()
 
 
-    def update_20060728(self):
+    def update_2060728(self):
         self.update_20050509()
-
-
-    def update_20060801(self):
-        self.update_20050728()
-        iRoot.update_20051025(self)
 
 
     def update_20060802(self):
         iRoot.update_20060205(self)
-
-
-    xexport__access__ = True
-    def xexport(self):
-        tmp_path = tempfile.mkdtemp()
-        tmp_folder = get_resource(tmp_path)
-
-        root_resource = self.resource
-        for name in root_resource.get_resource_names():
-            resource = root_resource.get_resource(name)
-            tmp_folder.set_resource(name, resource)
-
-        return 'Exported: %s' % tmp_path
 
 
 iRoot.register_handler_class(Root)
