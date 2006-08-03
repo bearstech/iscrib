@@ -41,7 +41,7 @@ from utils import get_deps, get_BMs
 class Root(bibFolder, iRoot):
 
     class_id = 'Culture'
-    class_version = '20060802'
+    class_version = '20060803'
 
 
     _catalog_fields = iRoot._catalog_fields \
@@ -289,12 +289,19 @@ class Root(bibFolder, iRoot):
         users.save()
 
 
-    def update_2060728(self):
+    def update_20060728(self):
         self.update_20050509()
 
 
     def update_20060802(self):
         iRoot.update_20060205(self)
+
+
+    def update_20060803(self):
+        from itools.cms.Group import Group
+
+        self.del_handler('reviewers')
+        self.set_handler('reviewers', Group(users=['admin']))
 
 
 iRoot.register_handler_class(Root)
