@@ -29,8 +29,8 @@ from itools.stl import stl
 from itools.handlers.transactions import get_transaction
 
 # Import from itools.cms
-from itools.cms.Root import Root as iRoot
-from itools.cms.Metadata import Metadata, Record
+from itools.cms.root import Root as iRoot
+from itools.cms.metadata import Metadata, Record
 from itools.cms.utils import comeback
 
 # Import from culture
@@ -138,8 +138,8 @@ class Root(bibFolder, iRoot):
 
     #########################################################################
     # Login
-    def login(self, username, password, referer=None, **kw):
-        iRoot.login(self, username, password, referer)
+    def login(self, **kw):
+        iRoot.login(self, **kw)
         context = get_context()
         user = context.user
         if user.is_admin() or user.name == 'VoirSCRIB':
@@ -234,7 +234,7 @@ class Root(bibFolder, iRoot):
                   u"En %(temp)s %(unite)s"
         message = message % {'year': year, 'temp': minutes or secondes,
                 'unite': minutes and 'minutes' or 'secondes' }
-        comeback(message, 'browse_thumbnails')
+        comeback(message, ';browse_thumbnails')
 
 
     new_BDP_reports__access__ = 'is_admin'
@@ -258,7 +258,7 @@ class Root(bibFolder, iRoot):
         message = u"Les rapports des BDP pour l'année %s ont été ajoutés. " \
                   u"Et aussi ses utilisateurs associés (BDP01:BDP01, " \
                   u"BDP02:BDP02, etc.)." % year
-        comeback(message, 'browse_thumbnails')
+        comeback(message, ';browse_thumbnails')
 
 
     #########################################################################

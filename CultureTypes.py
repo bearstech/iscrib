@@ -25,17 +25,18 @@ from itools.datatypes import String
 
 class Enumerate(String):
 
+    @classmethod
     def get_namespace(cls, value):
         options = cls.get_options()
         for option in options:
             option['is_selected'] = option['id'] == value
         return options
-    get_namespace = classmethod(get_namespace)
 
 
 
 class EPCI_Statut(Enumerate):
 
+    @classmethod
     def get_options(cls):
         return [{'id': '0', 'label': ""},
                 {'id': '1', 
@@ -50,7 +51,6 @@ class EPCI_Statut(Enumerate):
                  'label': u"Commune dans syndicat intercommunal"},
                 {'id': '6', 'label': "Autre"},
                 ]
-    get_options = classmethod(get_options)
 
 
 ##############################################################################
@@ -114,19 +114,19 @@ class Decimal(object):
         return cmp(self.value, x)
 
 
+    @classmethod
     def encode(cls, value):
         if value is None:
             return ''
         return str(value)
-    encode = classmethod(encode)
 
 
+    @classmethod
     def decode(cls, value):
         value = value.strip()
         if not value:
             return None
         return Decimal(value)
-    decode = classmethod(decode)
 
 
 
@@ -182,16 +182,16 @@ class Integer(object):
         return cmp(self.value, x)
 
 
+    @classmethod
     def encode(cls, value):
         if value is None:
             return ''
         return str(value.value)
-    encode = classmethod(encode)
 
 
+    @classmethod
     def decode(cls, value):
         value = value.strip()
         if not value:
             return None
         return Integer(value)
-    decode = classmethod(decode)

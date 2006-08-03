@@ -26,21 +26,22 @@ import socket
 import smtplib
 import decimal 
 
-# Import from itools
-from itools.datatypes import Unicode, Boolean, String
-from itools.web import get_context
-from itools.stl import stl
-
 # Import from mysql
 import MySQLdb
 
+# Import from itools
+from itools.datatypes import Unicode, Boolean, String
+from itools.web import get_context
+from itools.web.exceptions import UserError
+from itools.stl import stl
+from itools.csv import CSV
+
 # Import from itools.cms
 from itools.cms.text import Text as iText
-from itools.cms.WorkflowAware import WorkflowAware
-from itools.cms.exceptions import UserError
+from itools.cms.workflow import WorkflowAware
 from itools.cms.utils import comeback
 
-# Import from Culture
+# Import from scrib
 import CultureTypes
 from CultureTypes import Checkboxes, Integer, EPCI_Statut, Decimal
 from scrib import config
@@ -160,6 +161,17 @@ class Form(Handler, iText, WorkflowAware):
     class_icon48 = 'culture/images/form48.png'
 
 
+    # XXX deactivate archives
+    def add_to_archive(self):
+        pass
+
+    def commit_revision(self):
+        pass
+
+    history_form__access__ = False
+    copy_to_present__access__ = False
+
+
     def get_catalog_indexes(self):
         document = Handler.get_catalog_indexes(self)
         document['user_town'] = self.get_user_town()
@@ -275,9 +287,6 @@ class Form(Handler, iText, WorkflowAware):
             if value is None:
                 # is the value is not in request, take it in fields 
                 value = self.state.fields.get(name, default)
-            if type is Unicode:
-                if value is not None:
-                    value = value.replace(u'"', u'&quot;')
             namespace[name] = value
             # If name is 'fieldA23', add 'A23'
             if name.startswith('field'):
@@ -787,7 +796,7 @@ class Form(Handler, iText, WorkflowAware):
             subject = u'SCRIB-BDP : %s' % dep
             body = u'La Bibliothèque %s a terminé son formulaire.' % self.name
         else:
-            to_addr = unicode(MailResponsableBM, 'utf8')
+            to_addr = unicode(MailResponsableBM, 'UTF-8')
             subject = u'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
             subject = u'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
             body = u'La Bibliothèque %s (%s), du département %s, a terminé' \
@@ -826,7 +835,7 @@ class Form(Handler, iText, WorkflowAware):
         
         self.scrib_log(event='recipe sent', content=r_message)
 
-        comeback(comeback_msg, 'controles_form')
+        comeback(comeback_msg, ';controles_form')
 
 
     def scrib_log(self, event=None, content=None):
@@ -880,12 +889,12 @@ class Form(Handler, iText, WorkflowAware):
         namespace = self.get_namespace()
         schema = get_schema()
         # Update dans la base ADRESSE
-        query = ('update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
-                 'voie="%(field3)s",cpbiblio="%(field4)s",ville="%(field5)s",'
-                 'cedexb="%(field6)s",directeu="%(field7)s",tele="%(field9)s",'
-                 'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
-                 'intercom="%(field13)s",gestion="%(field14)s",'
-                 'gestion_autre="%(field15)s" where code_ua=%(code_ua)s')
+        query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
+                 u'voie="%(field3)s",cpbiblio="%(field4)s",ville="%(field5)s",'
+                 u'cedexb="%(field6)s",directeu="%(field7)s",tele="%(field9)s",'
+                 u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
+                 u'intercom="%(field13)s",gestion="%(field14)s",'
+                 u'gestion_autre="%(field15)s" where code_ua=%(code_ua)s')
 
         for key, value in namespace.items():
             field_def = schema.get(key)
@@ -897,12 +906,11 @@ class Form(Handler, iText, WorkflowAware):
                         value = value.replace(u'"', u'\\"')
                         value = value.replace(u"&quot;", u'\\"')
                         value = value.replace(u"'", u"\\'")
-                        value = value.encode('latin1')
                     namespace[key] = value
                 
         query = query % namespace
-        #print "adress update ", query
         
+        # XXX charset?
         cursor.execute(query)
         cursor.execute('commit')
 
@@ -925,7 +933,7 @@ class Form(Handler, iText, WorkflowAware):
         except MySQLdb.OperationalError, message:
             message = u'Un problème est survenu durant la connexion'\
                     u' à la base de donnée %s' % message
-            comeback(message, 'controles_form')
+            comeback(message, ';controles_form')
             return
         
         cursor.execute('commit')
@@ -978,7 +986,8 @@ class Form(Handler, iText, WorkflowAware):
         root = get_context().root
         root.reindex_handler(self)
         
-        comeback(u'Le rapport a été exporté', 'controles_form')
+        message = u'Le rapport a été exporté'
+        comeback(message, ';controles_form')
 
 
     def get_dependencies(self):
@@ -1085,7 +1094,7 @@ class Form(Handler, iText, WorkflowAware):
         root = context.root
         root.reindex_handler(self)
         message = u'Rapport auto remplis en %.2f secondes' % t
-        comeback(message, 'controles_form')
+        comeback(message, ';controles_form')
 
 
     report__access__ = 'is_allowed_to_edit'
@@ -1174,7 +1183,7 @@ class Form(Handler, iText, WorkflowAware):
                                 % (keyNumber, unicode(value, 'UTF-8')))
                     # we need the field and it's value in the
                     #query even if the type is wrong
-                    badT_values[keyNumber + ':utf8:ustring'] = value
+                    badT_values[keyNumber] = value
                 else:
                     self.state.fields[key] = value
 
@@ -1277,6 +1286,7 @@ class Form(Handler, iText, WorkflowAware):
         handler = self.get_handler('/ui/culture/Form_report_csv.xml')
         return stl(handler, namespace) 
 
+
     comments__access__ = 'is_allowed_to_view'
     comments__label__ = u'Rapport Bibliothèques'
     comments__sublabel__ = u'Commentaires'
@@ -1286,25 +1296,24 @@ class Form(Handler, iText, WorkflowAware):
                                  view)
 
 
-
     #downloadCSV__access__ = Handler.is_admin
     downloadCSV__access__ = True
     def downloadCSV(self):
         schema = get_schema()
-        response = get_context().response
+        context = get_context()
+        response = context.response
 
         response.set_header('Content-Type', 'text/comma-separated-values')
-        #response.set_header('Content-Disposition', 'inline;filename=file.csv')
         response.set_header('Content-Disposition',
-                                     'attachment; filename="file.csv"')
+                'attachment; filename="scrib.csv"')
 
         namespace = self.get_namespace()
         # construct the csv
         names = schema.keys()
         names.sort()
-        csv = [u'"Chapitre du formulaire","rubrique","valeur"']
+        csv = CSV()
+        csv.add_row([u"Chapitre du formulaire", u"rubrique", u"valeur"])
         for name in names:
-            #value = namespace[name]
             value = self.state.fields.get(name, '')
             if schema[name][0] is EPCI_Statut:
                 label = [x['label'] for x in EPCI_Statut.get_namespace(value) 
@@ -1315,8 +1324,18 @@ class Form(Handler, iText, WorkflowAware):
                     value = ''
             name = name[len('field'):]
             chap = name[0]
-            csv.append('"%s","%s","%s"' % (chap, name, value))
-        return '\n'.join(csv)
+            if value is None:
+                value = u"NULL"
+            elif isinstance(value, unicode):
+                value = value.replace(u"€", u"eur")
+            elif isinstance(value, str):
+                value = unicode(value, 'UTF-8')
+            else:
+                # CultureTypes
+                value = unicode(value.__class__.encode(value), 'UTF-8')
+            csv.add_row([chap, name, value])
+
+        return csv.to_str('latin1')
 
 
 #XXX do we need to register FormBM and Form ?

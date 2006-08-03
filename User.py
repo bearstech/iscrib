@@ -17,20 +17,19 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.catalog.Analysers import Text as itoolsAnalyserText
+from itools import uri
 from itools.resources import base
 from itools.web import get_context
-from itools.catalog import Query
-from itools import uri
+from itools.web.exceptions import UserError
 from itools.stl import stl
+from itools.catalog.analysers import Text as TextAnalyser
+from itools.catalog import queries
 
 # Import from itools.cms
-from itools.cms.User import User as iUser
+from itools.cms.users import User as iUser, UserFolder as iUserFolder
 from itools.cms.Group import Group as iGroup
-from itools.cms.UserFolder import UserFolder as iUserFolder
 from itools.cms.utils import comeback, get_parameters
 from itools.cms.widgets import Table
-from itools.cms.exceptions import UserError
 
 # Import from Culture
 from utils import get_deps, get_BMs
@@ -95,7 +94,7 @@ class bibGroup(Handler, iGroup):
         admin_group.set_user(username)
 
         message = self.gettext('User added')
-        comeback(message, 'browse_users')
+        comeback(message, ';browse_users')
 
 
 iGroup.register_handler_class(bibGroup)
@@ -292,12 +291,12 @@ class bibUserFolder(Handler, iUserFolder):
 
         # make possible the search in 'bellegarde-sur-valserine'
         # by the Complex search on 'bellegarde', 'sur', 'valserine'
-        names = [t[0] for t in itoolsAnalyserText(name)]
+        names = [t[0] for t in TextAnalyser(name)]
         if names: 
-            q_name =  Query.Equal('user_town', names[0])
+            q_name =  queries.Equal('user_town', names[0])
             for subname in names:
-                q_name2 = Query.Equal('user_town', subname)
-                q_name = Query.And(q_name, q_name2)
+                q_name2 = queries.Equal('user_town', subname)
+                q_name = queries.And(q_name, q_name2)
         namespace['search_name'] = name
 
         # departements
@@ -326,28 +325,28 @@ class bibUserFolder(Handler, iUserFolder):
             is_BDP = True
         
         # Search
-        if year: q_year = Query.Equal('year', year)
-        if dep: q_dep = Query.Equal('dep', dep)
-        if name: q_name = Query.Equal('user_town', name)
+        if year: q_year = queries.Equal('year', year)
+        if dep: q_dep = queries.Equal('dep', dep)
+        if name: q_name = queries.Equal('user_town', name)
 
         # independent of the form : q_bibUser, q_type_form
-        q_bibUser = Query.Equal('format', bibUser.class_id)
+        q_bibUser = queries.Equal('format', bibUser.class_id)
         if is_BM: 
-            q_type_form = Query.Equal('is_BM', str(int(is_BM)))
+            q_type_form = queries.Equal('is_BM', str(int(is_BM)))
         if is_BDP: 
-            q_type_form = Query.Equal('is_BDP', str(int(is_BDP)))
+            q_type_form = queries.Equal('is_BDP', str(int(is_BDP)))
 
 
         query, objects = None, []
         if name or dep or year:
             query = q_type_form 
-            query = Query.And(query, q_bibUser)
+            query = queries.And(query, q_bibUser)
         if year: 
-            query = Query.And(query, q_year)
+            query = queries.And(query, q_year)
         if name: 
-            query = Query.And(query, q_name)
+            query = queries.And(query, q_name)
         if dep: 
-            query = Query.And(query, q_dep)
+            query = queries.And(query, q_dep)
 
         namespace['too_long_answer'] = '' 
         msg = u'Il y a %s réponses, les 100 premières sont présentées.'\

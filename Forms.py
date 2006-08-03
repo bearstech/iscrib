@@ -17,9 +17,9 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.catalog.Analysers import Text as itoolsAnalyserText
+from itools.catalog.analysers import Text as TextAnalyser
 from itools.web import get_context
-from itools.catalog import Query
+from itools.catalog import queries
 from itools.stl import stl
 
 # Import from itools.cms
@@ -68,17 +68,16 @@ class Forms(bibFolder):
 
     #########################################################################
     # Browse
-    def _browse_namespace(self, object):
-        handler = self.get_handler(object.get('name'))
-        object['state'] = handler.get_form_state()
-        object['title'] = handler.get_user_town()
-        object['dep'] = handler.get_dep()
+    def _browse_namespace(self, line, object):
+        line['state'] = object.get_form_state()
+        line['title'] = object.get_user_town()
+        line['dep'] = object.get_dep()
 
 
     browse_list__access__ = 'is_admin_or_consultant'
     def browse_list(self):
         context = get_context()
-        context.session['browse'] = 'list'
+        context.set_cookie('browse', 'list')
         namespace = self.browse_namespace(16)
         handler = self.get_handler('/ui/culture/Forms_browse_list.xml')
         return stl(handler, namespace)
@@ -93,7 +92,7 @@ class Forms(bibFolder):
         # Get the search parameters
         parameters = get_parameters(tablename, name='', dep='', code='',
                                     state='')
-        states_dic = {'1': u'Vide', '2': u'En cours', '3':u'Terminé',
+        states_dic = {'1': u'Vide', '2': u'En cours', '3': u'Terminé',
                       '4': u'Exporté'}
 
         name = parameters['name'].strip().lower()
@@ -139,29 +138,29 @@ class Forms(bibFolder):
             # Build the query
             # The format (BM or BDP)
             if self.is_BM():
-                query = Query.Equal('format', FormBM.class_id)
+                query = queries.Equal('format', FormBM.class_id)
             else:
-                query = Query.Equal('format', FormBDP.class_id)
+                query = queries.Equal('format', FormBDP.class_id)
             # The year
             year = self.get_year()
-            q_year = Query.Equal('year', year)
-            query = Query.And(query, q_year)
+            q_year = queries.Equal('year', year)
+            query = queries.And(query, q_year)
             # The name of the town
-            for word, pos in itoolsAnalyserText(name):
-                q_name = Query.Equal('user_town', word)
-                query = Query.And(query, q_name)
+            for word, pos in TextAnalyser(name):
+                q_name = queries.Equal('user_town', word)
+                query = queries.And(query, q_name)
             # The department
             if dep:
-                q_dep = Query.Equal('dep', dep)
-                query = Query.And(query, q_dep)
+                q_dep = queries.Equal('dep', dep)
+                query = queries.And(query, q_dep)
             # The code UA
             if code:
-                q_code = Query.Equal('code', code)
-                query = Query.And(query, q_code)
+                q_code = queries.Equal('code', code)
+                query = queries.And(query, q_code)
             # The state
             if state_code:
-                q_state = Query.Equal('form_state', state)
-                query = Query.And(query, q_state)
+                q_state = queries.Equal('form_state', state)
+                query = queries.And(query, q_state)
 
             # Search
             root = context.root
@@ -185,7 +184,7 @@ class Forms(bibFolder):
                 objects.append({'name': document.name,
                                 'url': '%s/;report_form0' % document.name,
                                 'title': document.title,
-                                'state': document.get_form_state(),
+                                'state': document.form_state,
                                 'date': mtime.strftime('%Y-%m-%d %H:%M')})
         else:
             objects = []

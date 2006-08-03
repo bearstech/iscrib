@@ -83,25 +83,25 @@
             <table border="0" id="users">
               <tr>
                 <td><img border="0" src="images/user.png" /></td>
-                <td> <p><stl:block if="user" content="user/title" />
-                        <em stl:if="not user">non authentifi&eacute;</em></p>
+                <td> <p><stl:block if="user/info" content="user/info/title" />
+                        <em stl:if="not user/info">non authentifi&eacute;</em></p>
                 </td>
               </tr>
               <tr>
                 <td></td>
                 <td>
-                  <stl:block if="not user">
-                    <p style="margin: 1px" stl:if="joinisopen">
-                      &raquo; <a stl:attributes="href join_url">Join</a></p>
+                  <stl:block if="not user/info">
+                    <p style="margin: 1px" stl:if="user/joinisopen">
+                      &raquo; <a stl:attributes="href user/join_url">Join</a></p>
                     <p style="margin: 1px">
-                      &raquo; <a stl:attributes="href login_url">Login</a></p>
+                      &raquo; <a stl:attributes="href user/login_url">Login</a></p>
                   </stl:block>
-                  <stl:block if="user">
+                  <stl:block if="user/info">
                     <div style="margin: 1px">
-                      &raquo; <a stl:attributes="href user/home">Home</a>
+                      &raquo; <a stl:attributes="href user/info/home">Home</a>
                     </div>
                     <div style="margin: 1px"> &raquo; 
-                      <a stl:attributes="href user/logout">Log&nbsp;out</a>
+                      <a stl:attributes="href user/info/logout">Log&nbsp;out</a>
                     </div>
                   </stl:block>
                 </td>

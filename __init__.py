@@ -18,6 +18,7 @@
 
 # Import from the Standard Library
 import os
+from os import path
 
 # Import from itools
 from itools import get_abspath, get_version
@@ -25,20 +26,20 @@ from itools import get_abspath, get_version
 # Import from itools.cms
 from itools.cms.skins import register_skin
 
-# Import from scrib
-from Culture import Root
-
 
 class Configuration(object):
     pass
 
 
 # Read the configuration 
-path = get_abspath(globals(), 'Setup.conf')
+config_path = path.join(os.getcwd(), 'setup.conf')
 config = Configuration()
 
-for line in open(path, 'r').readlines():
-    key, value = line.split('=')
+for line in open(config_path, 'r').readlines():
+    line = line.strip()
+    if not line or line.startswith('#'):
+        continue
+    key, value = line.split('=', 1)
     key = key.strip()
     if not key:
         raise ValueError, 'One line has no left value' 
@@ -52,5 +53,8 @@ for line in open(path, 'r').readlines():
 path = get_abspath(globals(), 'ui')
 register_skin('culture', path)
 
+
+# Register Root
+from Culture import Root
 
 __version__ = get_version(globals())
