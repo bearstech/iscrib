@@ -1314,10 +1314,9 @@ class Form(Handler, iText, WorkflowAware):
         csv = CSV()
         csv.add_row([u"Chapitre du formulaire", u"rubrique", u"valeur"])
         for name in names:
-            value = self.state.fields.get(name, '')
+            value = namespace.get(name, '')
             if schema[name][0] is EPCI_Statut:
-                label = [x['label'] for x in EPCI_Statut.get_namespace(value) 
-                           if x['id'] == value]
+                label = [x['label'] for x in value if x['is_selected']]
                 if label:
                     value = label[0]
                 else: 
