@@ -149,6 +149,8 @@ class Integer(object):
 
 
     def __int__(self):
+        if self.value == 'NC':
+            return 'NC'
         return self.value
 
 
