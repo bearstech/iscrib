@@ -20,11 +20,11 @@
 from pprint import pformat
 from copy import deepcopy
 from time import time
-import logging 
+import logging
 import datetime
 import socket
 import smtplib
-import decimal 
+import decimal
 
 # Import from mysql
 import MySQLdb
@@ -1325,10 +1325,14 @@ class Form(Handler, iText, WorkflowAware):
             chap = name[0]
             if value is None:
                 value = u"NULL"
+            elif isinstance(value, bool):
+                value = unicode(int(value))
+            elif isinstance(value, (int, long, float, decimal.Decimal)):
+                value = unicode(str(value))
+            elif isinstance(value, str):
+                value = unicode(str(value), 'UTF-8')
             elif isinstance(value, unicode):
                 value = value.replace(u"€", u"eur")
-            elif isinstance(value, str):
-                value = unicode(value, 'UTF-8')
             else:
                 # CultureTypes
                 value = unicode(value.__class__.encode(value), 'UTF-8')
