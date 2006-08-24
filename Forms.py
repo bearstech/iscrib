@@ -55,6 +55,11 @@ class Forms(bibFolder):
     def get_subviews(self, view):
         return []
 
+
+    def get_browse_view(self):
+        return 'browse_list'
+
+
     def is_BM(self):
         return self.name.count('BM') and True
 
