@@ -65,13 +65,6 @@ class Root(bibFolder, iRoot):
         return stl(handler, namespace)
 
 
-    def get_skeleton(self, username=None, password=None):
-        skeleton = iRoot.get_skeleton(self, username, password)
-        # Skip reviewers
-        del skeleton['reviewers']
-        return skeleton
-
-
     _get_handler = iRoot._get_handler
 
 
