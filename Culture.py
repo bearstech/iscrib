@@ -202,12 +202,15 @@ class Root(bibFolder, iRoot):
         for bib in bib_municipals: 
             name, dep, code = (bib['name'], bib['dep'], bib['code'])
             # Add report
-            reports.set_handler(code, form, title=name)
+            reports.set_handler(code, form, **{'dc:title': name})
             # Add user
             #username = 'user%s_%s' % (code, year)
-            username = 'BM%s' % (code,)
-            password = 'BM%s' % code
-            users.set_handler(username, bibUser(password=password))
+            username = 'BM%s' % code
+            if not users.has_handler(username):
+                users.set_handler(username, bibUser())
+                user = user.get_handler(username)
+                user.set_password('BM%s' % code)
+                del user
             if i % 200 == 0:
                 get_transaction().commit()
                 print "#200", '%s/%s' % (i, BMs_len), dep, code, username
@@ -235,14 +238,18 @@ class Root(bibFolder, iRoot):
         # Add reports and users, one per department
         reports = self.get_handler(name)
         users = self.get_handler('users')
-        for name, title in get_deps().items():
+        form = FormBDP()
+        for name, dic in get_deps().items():
+            title = dic['name']
             # Add report
-            reports.set_handler(name, FormBDP(), title=title)
+            reports.set_handler(name, form, **{'dc:title': title})
             # Add user
-            username = 'BDP%s' % (name,)
+            username = 'BDP%s' % name
             if not users.has_handler(username):
-                password = 'BDP%s' % name
-                users.set_handler(username, bibUser(password=password))
+                users.set_handler(username, bibUser())
+                user = user.get_handler(username)
+                user.set_password('BDP%s' % name)
+                del user
 
         message = u"Les rapports des BDP pour l'année %s ont été ajoutés. " \
                   u"Et aussi ses utilisateurs associés (BDP01:BDP01, " \
