@@ -19,6 +19,7 @@
 # Import from the Standard Library
 import os
 from os import path
+import sys
 
 # Import from itools
 from itools import get_abspath, get_version
@@ -32,10 +33,15 @@ class Configuration(object):
 
 
 # Read the configuration 
-config_path = path.join(os.getcwd(), 'setup.conf')
+config_path = path.join(os.getcwd(), 'Setup.conf')
+try:
+    config_file = open(config_path, 'r')
+except IOError:
+    print "copiez le fichier 'Setup.conf' (pas 'setup.conf') du répertoire scrib ici."
+    sys.exit(1)
 config = Configuration()
 
-for line in open(config_path, 'r').readlines():
+for line in config_file.readlines():
     line = line.strip()
     if not line or line.startswith('#'):
         continue
@@ -48,6 +54,7 @@ for line in open(config_path, 'r').readlines():
         raise ValueError, "No value for the key '%s' in Setup.conf file" % key
     setattr(config, key, value)
 
+config_file.close()
 
 # Register interface
 path = get_abspath(globals(), 'ui')
