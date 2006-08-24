@@ -98,7 +98,7 @@
       </th>
       <th align="left"
           style="border-bottom: 1px dotted black; text-align: center">
-        Etat <stl:inline content="table/sortcontrol(state)" />
+        Etat <stl:inline content="table/sortcontrol(form_state)" />
       </th>
     </tr>
     <tr stl:repeat="object table/objects">
@@ -109,7 +109,7 @@
         <a stl:attributes="href object/url" stl:content="object/title" />
       </td>
       <td stl:content="object/date" />
-      <td stl:content="object/state" />
+      <td stl:content="object/form_state" />
     </tr>
   </stl:block>
 </table>
