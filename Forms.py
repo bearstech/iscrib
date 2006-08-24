@@ -73,7 +73,7 @@ class Forms(bibFolder):
     #########################################################################
     # Browse
     def _browse_namespace(self, line, object):
-        line['state'] = object.get_form_state()
+        line['form_state'] = object.get_form_state()
         line['title'] = object.get_user_town()
         line['dep'] = object.get_dep()
 
@@ -188,7 +188,7 @@ class Forms(bibFolder):
                 objects.append({'name': document.name,
                                 'url': '%s/;report_form0' % document.name,
                                 'title': document.title,
-                                'state': document.form_state,
+                                'form_state': document.form_state,
                                 'date': mtime.strftime('%Y-%m-%d %H:%M')})
         else:
             objects = []

@@ -23,7 +23,7 @@
       </th>
       <th align="left" style="border-bottom: 1px dotted black">
         <p style="display: inline">Etat </p>
-        <stl:block content="table/sortcontrol(state)"></stl:block>
+        <stl:block content="table/sortcontrol(form_state)"></stl:block>
       </th>
       <th align="left" style="border-bottom: 1px dotted black">
         <p style="display: inline">Date </p>
@@ -37,7 +37,7 @@
       <td>
         <a stl:content="object/title" stl:attributes="href object/url"></a></td>
       <td>
-        <stl:block content="object/state"></stl:block>
+        <stl:block content="object/form_state"></stl:block>
       </td>
       <td>
         <stl:block content="object/mtime"></stl:block>

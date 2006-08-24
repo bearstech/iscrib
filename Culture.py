@@ -46,7 +46,7 @@ class Root(bibFolder, iRoot):
 
     _catalog_fields = iRoot._catalog_fields \
                       + [('user_town', 'text', True, False),
-                         ('dep', 'keyword', True, False),
+                         ('dep', 'keyword', True, True),
                          ('year', 'keyword', True, False),
                          ('is_BDP', 'bool', True, False),
                          ('is_BM', 'bool', True, False),
