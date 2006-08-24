@@ -208,7 +208,7 @@ class Root(bibFolder, iRoot):
             username = 'BM%s' % code
             if not users.has_handler(username):
                 users.set_handler(username, bibUser())
-                user = user.get_handler(username)
+                user = users.get_handler(username)
                 user.set_password('BM%s' % code)
                 del user
             if i % 200 == 0:
@@ -247,7 +247,7 @@ class Root(bibFolder, iRoot):
             username = 'BDP%s' % name
             if not users.has_handler(username):
                 users.set_handler(username, bibUser())
-                user = user.get_handler(username)
+                user = users.get_handler(username)
                 user.set_password('BDP%s' % name)
                 del user
 
