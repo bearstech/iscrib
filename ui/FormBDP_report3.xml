@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <div xmlns="http://www.w3.org/1999/xhtml" 
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
@@ -27,10 +27,10 @@
   </tr>
   </table>
 
- <h1>C - PERSONNEL EN POSTE AU 31 DÃ‰CEMBRE 2005
+ <h1>C - PERSONNEL EN POSTE AU 31 DÉCEMBRE 2005
     
 </h1>
-<h2>C.1 FONCTION PUBLIQUE : FILIÃˆRE CULTURELLE</h2>
+<h2>C.1 FONCTION PUBLIQUE : FILIÈRE CULTURELLE</h2>
 <table width="100%">
   <colgroup>
     <col width="36%"/>
@@ -54,11 +54,11 @@
     <td></td>
     <th style="text-align: center">Nb de personnes</th>
     <th style="text-align: center">Nb d'emplois d'ETP (1) (ex: 2.5)</th>
-    <th style="text-align: center">Nb de personnes ayant suivi une formation dans l'annÃ©e</th>
-    <th style="text-align: center">Responsable de la bibliothÃ¨que ?(2)</th>
+    <th style="text-align: center">Nb de personnes ayant suivi une formation dans l'année</th>
+    <th style="text-align: center">Responsable de la bibliothèque ?(2)</th>
     <th style="text-align: center">Nb de personnes</th>
     <th style="text-align: center">Nb d'emplois d'ETP (1) (ex: 2.5)</th>
-    <th style="text-align: center">Nb de personnes ayant suivi une formation dans l'annÃ©e</th>
+    <th style="text-align: center">Nb de personnes ayant suivi une formation dans l'année</th>
     <th style="text-align: center">Nb de responsables par statut</th>
     <td></td>
   </tr>
@@ -118,7 +118,7 @@
   </tr>
 
   <tr>
-    <th>BibliothÃ©caires</th> 
+    <th>Bibliothécaires</th> 
     <td>
        <input stl:attributes="value fieldC12S"
               type="text" name="fieldC12S"
@@ -135,7 +135,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_2" />
+           <input  type="radio"  name="fieldCV" value="2" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_2" />
     </td>   
     <td>
        <input stl:attributes="value fieldC12W"
@@ -161,7 +161,7 @@
   </tr>
 
   <tr>
-    <th>Assistants qualifiÃ©s de conservation</th> 
+    <th>Assistants qualifiés de conservation</th> 
     <td>
        <input stl:attributes="value fieldC13S"
               type="text" name="fieldC13S"
@@ -178,7 +178,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_3" />
+           <input  type="radio"  name="fieldCV" value="3" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_3" />
     </td>   
     <td>
        <input stl:attributes="value fieldC13W"
@@ -221,7 +221,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_4" />
+           <input  type="radio"  name="fieldCV" value="4" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_4" />
     </td>   
     <td>
        <input stl:attributes="value fieldC14W"
@@ -247,7 +247,7 @@
   </tr>
 
   <tr>
-    <th>Agents qualifiÃ©s du patrimoine</th> 
+    <th>Agents qualifiés du patrimoine</th> 
     <td>
        <input stl:attributes="value fieldC15S"
               type="text" name="fieldC15S"
@@ -264,7 +264,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_5" />
+           <input  type="radio"  name="fieldCV" value="5" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_5" />
     </td>   
     <td>
        <input stl:attributes="value fieldC15W"
@@ -307,7 +307,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_6" />
+           <input  type="radio"  name="fieldCV" value="6" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_6" />
     </td>   
     <td>
        <input stl:attributes="value fieldC16W"
@@ -333,7 +333,7 @@
   </tr>
 </table>
 
-<h2>C.2 FONCTION PUBLIQUE : AUTRE FILIÃˆRE</h2>
+<h2>C.2 FONCTION PUBLIQUE : AUTRE FILIÈRE</h2>
 
 <table width="100%">
   <colgroup>
@@ -351,7 +351,7 @@
    </colgroup>
   
   <tr>
-    <th rowspan="3">Personnels d'autres filiÃ¨res (administrative, technique, sociale...)</th> 
+    <th rowspan="3">Personnels d'autres filières (administrative, technique, sociale...)</th> 
     <th>Cat. A</th> 
     <td>
        <input stl:attributes="value fieldC21S"
@@ -369,7 +369,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_7" />
+           <input  type="radio"  name="fieldCV" value="7" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_7" />
     </td>   
     <td>
        <input stl:attributes="value fieldC21W"
@@ -412,7 +412,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_8" />
+           <input  type="radio"  name="fieldCV" value="8" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_8" />
     </td>   
     <td>
        <input stl:attributes="value fieldC22W"
@@ -455,7 +455,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_9" />
+           <input  type="radio"  name="fieldCV" value="9" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_9" />
     </td>   
     <td>
        <input stl:attributes="value fieldC23W"
@@ -481,7 +481,7 @@
   </tr>
 </table>
 
-<h2>C.3 AUTRES PERSONNELS REMUNERÃ‰S</h2>
+<h2>C.3 AUTRES PERSONNELS REMUNERÉS</h2>
 <table width="100%">
   <colgroup>
    <col width="34%"/>
@@ -497,7 +497,7 @@
    </colgroup>
   
   <tr>
-    <th>Agents non titulaires/emplois non aidÃ©s par l'Etat (contractuels,vacataires...)</th> 
+    <th>Agents non titulaires/emplois non aidés par l'Etat (contractuels,vacataires...)</th> 
     <td>
        <input stl:attributes="value fieldC31S"
               type="text" name="fieldC31S"
@@ -514,7 +514,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_10" />
+           <input  type="radio"  name="fieldCV" value="10" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_10" />
     </td>   
     <td>
        <input stl:attributes="value fieldC31W"
@@ -540,7 +540,7 @@
   </tr>
 
   <tr>
-    <th>dont personnels qualifiÃ©s (3)</th> 
+    <th>dont personnels qualifiés (3)</th> 
     <td>
        <input stl:attributes="value fieldC32S"
               type="text" name="fieldC32S"
@@ -557,7 +557,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_11" />
+           <input  type="radio"  name="fieldCV" value="11" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_11" />
     </td>   
     <td>
        <input stl:attributes="value fieldC32W"
@@ -583,7 +583,7 @@
   </tr>
 
   <tr>
-    <th>Agents non titulaires/ emplois aidÃ©s par l'Etat ( C.E.S., C.E.C., C.EJ...)</th> 
+    <th>Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.EJ...)</th> 
     <td>
        <input stl:attributes="value fieldC33S"
               type="text" name="fieldC33S"
@@ -600,7 +600,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_12" />
+           <input  type="radio"  name="fieldCV" value="12" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_12" />
     </td>   
     <td>
        <input stl:attributes="value fieldC33W"
@@ -626,7 +626,7 @@
   </tr>
 
   <tr>
-    <th>dont personnels qualifiÃ©s</th> 
+    <th>dont personnels qualifiés</th> 
     <td>
        <input stl:attributes="value fieldC34S"
               type="text" name="fieldC34S"
@@ -643,7 +643,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_13" />
+           <input  type="radio"  name="fieldCV" value="13" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_13" />
     </td>   
     <td>
        <input stl:attributes="value fieldC34W"
@@ -670,7 +670,7 @@
 </table>
 
 
-<h2>C.4 BÃ‰NÃ‰VOLES</h2>
+<h2>C.4 BÉNÉVOLES</h2>
 <table width="100%" >
   <colgroup>
    <col width="34%"/>
@@ -686,7 +686,7 @@
    </colgroup>
  
   <tr>
-    <th>BÃ©nÃ©voles qualifiÃ©s (3)</th> 
+    <th>Bénévoles qualifiés (3)</th> 
     <td >
        <input stl:attributes="value fieldC41S"
               type="text" name="fieldC41S"
@@ -700,7 +700,7 @@
               value="" size="8" style="text-align: right"></input>
     </td>
     <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_14" />
+           <input  type="radio"  name="fieldCV" value="14" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_14" />
     </td>   
     <td >
        <input stl:attributes="value fieldC41W"
@@ -723,7 +723,7 @@
   </tr>
 
   <tr>
-    <th>BÃ©nÃ©voles non formÃ©s</th> 
+    <th>Bénévoles non formés</th> 
     <td >
        <input stl:attributes="value fieldC42S"
               type="text" name="fieldC42S"
@@ -732,7 +732,7 @@
     <td></td>
     <td></td>   
     <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCV" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_15" />
+           <input  type="radio"  name="fieldCV" value="15" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCV_15" />
     </td>   
     <td >
        <input stl:attributes="value fieldC42W"
@@ -765,7 +765,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th><b>TOTAL (C11 Ã  C42)</b> </th> 
+    <th><b>TOTAL (C11 à C42)</b> </th> 
     <td>
        <input stl:attributes="value fieldC43S"
               type="text" name="fieldC43S"
