@@ -172,17 +172,17 @@ class Forms(bibFolder):
             documents = catalog.search(query)
             # Get the real objects (never more than 100)
             documents = list(documents)
-            answer_len = len(documents)
-            if answer_len > 100:
-                msg = u'Il y a %s réponses, les 100 premières sont présentées.'\
-                      u'Veuillez restreindre votre recherche.'
-                namespace['too_long_answer'] = msg % answer_len
+            #answer_len = len(documents)
+            #if answer_len > 100:
+            #    msg = u'Il y a %s réponses, les 100 premières sont présentées.'\
+            #          u'Veuillez restreindre votre recherche.'
+            #    namespace['too_long_answer'] = msg % answer_len
 
             # Build objects namespace, add the path to the object from the
             # current folder.
             objects = []
             get_resource = root.resource.get_resource
-            for document in documents[:100]:
+            for document in documents:
                 # XXX Use document.mtime_microsecond instead?
                 mtime = get_resource(document.abspath).get_mtime()
                 objects.append({'name': document.name,
