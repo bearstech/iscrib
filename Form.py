@@ -904,7 +904,7 @@ class Form(Handler, iText, WorkflowAware):
                  u'cedexb="%(field6)s",directeu="%(field7)s",tele="%(field9)s",'
                  u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
                  u'intercom="%(field13)s",gestion="%(field14)s",'
-                 u'gestion_autre="%(field15)s" where code_ua=%(code_ua)s')
+                 u'gestion_autre="%(field15)s" where code_bib=%(code_ua)s')
 
         for key, value in namespace.items():
             field_def = schema.get(key)
