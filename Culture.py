@@ -42,6 +42,7 @@ class Root(bibFolder, iRoot):
 
     class_id = 'Culture'
     class_version = '20060802'
+    class_title = u"SCRIB"
 
 
     _catalog_fields = iRoot._catalog_fields \
