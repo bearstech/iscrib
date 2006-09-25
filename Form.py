@@ -38,7 +38,7 @@ from itools.csv import CSV
 
 # Import from itools.cms
 from itools.cms.text import Text as iText
-from itools.cms.workflow import WorkflowAware
+from itools.cms.workflow import WorkflowAware, workflow
 from itools.cms.utils import comeback
 
 # Import from scrib
@@ -56,6 +56,10 @@ SqlHost = config.SqlHost
 SqlDatabase = config.SqlDatabase
 SqlUser = config.SqlUser
 SqlPasswd = config.SqlPasswd
+
+
+workflow.add_state('modified', title=u"Modifié",
+        description=u"Modifié après export.")
 
 
 def get_checkbox_value(key, value):
@@ -159,6 +163,7 @@ class Form(Handler, iText, WorkflowAware):
 
     class_id = 'Form'
     class_icon48 = 'culture/images/form48.png'
+    workflow = workflow
 
 
     # XXX deactivate archives
@@ -483,6 +488,8 @@ class Form(Handler, iText, WorkflowAware):
             state = u'Terminé'
         elif state == 'public':
             state = u'Exporté'
+        elif state == 'modified':
+            state = u'Modifié après export'
 
         return state 
 
@@ -658,6 +665,9 @@ class Form(Handler, iText, WorkflowAware):
         namespace['is_finished'] =  is_finished and not ControlesFailed
         #disable control for testing
         #namespace['is_finished'] = True
+
+        is_exported = self.get_form_state() in (u'Exporté', u'Modifié après export')
+        namespace['is_exportable'] = is_finished or is_exported
 
         #############################################################
         # Alerts
@@ -985,6 +995,7 @@ class Form(Handler, iText, WorkflowAware):
 
         root = get_context().root
         root.reindex_handler(self)
+        self.set_changed()
         
         message = u'Le rapport a été exporté'
         comeback(message, ';controles_form')
@@ -1186,6 +1197,10 @@ class Form(Handler, iText, WorkflowAware):
                     badT_values[keyNumber] = value
                 else:
                     self.state.fields[key] = value
+
+        form_state = self.get_form_state()
+        if form_state == u'Exporté':
+            self.set_property('state', 'modified')
 
         new_referer, msg = self.make_msg(new_referer=new_referer, notR=notR, 
                                          badT=badT, badT_missing=badT_missing,
