@@ -22,6 +22,7 @@ from time import time
 
 # Import from itools
 from itools.web import get_context
+from itools.web.exceptions import UserError
 from itools.stl import stl
 from itools.handlers.transactions import get_transaction
 
@@ -111,7 +112,7 @@ class Root(bibFolder, iRoot):
             return ['login_form', 'help']
 
         if user.is_admin():
-            return ['browse_thumbnails', 'new_reports_form',
+            return ['browse_thumbnails', 'new_reports_form', 'export_form',
                     'edit_metadata_form', 'help', 'catalog_form']
 
         if user.name == 'VoirSCRIB':
@@ -265,6 +266,111 @@ class Root(bibFolder, iRoot):
     def help(self):
         handler = self.get_handler('/ui/culture/Form_help.xml')
         return handler.to_str()
+
+
+    #########################################################################
+    # Export
+    export_form__access__ = 'is_admin'
+    export_form__label__ = u"Exporter"
+    def export_form(self):
+        handler = self.get_handler('/ui/culture/Culture_export.xml')
+
+        return handler.to_str()
+
+
+    export__access__ = 'is_admin'
+    def export(self):
+        from Form import get_cursor
+        context = get_context()
+
+        def quote_sql(result_set):
+            for result in result_set:
+                if result is None:
+                    yield 'NULL'
+                elif isinstance(result, str):
+                    if "'" in result:
+                        result = result.replace("'", "\\'")
+                    yield "'%s'" % result
+                else:
+                    yield str(result)
+
+
+        def get_values(resultset):
+            if not resultset:
+                raise UserError, u"La bibliothèque n'existe pas dans la base SQL"
+
+            for line in resultset:
+                yield ','.join(tuple(quote_sql(line)))
+
+
+        def export_bib(container, cursor, ouput):
+            names = [name for name in container.get_handler_names()
+                    if name.isdigit() and (
+                        container.get_handler('.%s.metadata' % name).get_property('state') == 'public')]
+
+            # adresse
+            keys = ','.join(names)
+            if container.is_BM():
+                query = "select * from adresse where insee is not null and code_bib in (%s)" % keys
+            else:
+                query = "select * from adresse where type='3' and code_ua is not null and dept in (%s)" % keys
+            cursor.execute(query)
+            for values in get_values(cursor.fetchall()):
+                output.append('INSERT INTO adresse VALUES (%s);' % values)
+
+            output.append('')
+
+            # codes ua
+            if container.is_BM():
+                query = "select code_ua from adresse where insee is not null and code_bib in (%s)" % keys
+            else:
+                query = "select code_ua from adresse where type='3' and code_ua is not null and dept in (%s)" % keys
+            cursor.execute(query)
+            codes_ua = ','.join(tuple(get_values(cursor.fetchall())))
+
+            # (bm|bdp)05
+            table_name = '%s%s' % (container.is_BM() and 'bm' or 'bdp', container.get_year()[-2:])
+            query = "select * from %s where Code_UA in (%s)" % (table_name, codes_ua) 
+            cursor.execute(query)
+            for values in get_values(cursor.fetchall()):
+                output.append('INSERT INTO %s VALUES (%s);' % (table_name, values))
+
+            output.append('')
+
+            if container.is_BM():
+                # annexes04
+                query = "select * from annexes04 where code_ua in (%s)" % codes_ua
+                cursor.execute(query)
+                for values in get_values(cursor.fetchall()):
+                    output.append('INSERT INTO annexes04 values (%s);' % values)
+
+                output.append('')
+
+                # ua_epci
+                query = "select * from ua_epci where code_ua in (%s)" % codes_ua
+                cursor.execute(query)
+                for values in get_values(cursor.fetchall()):
+                    output.append('INSERT INTO ua_epci values (%s);' % values)
+
+
+        output = [u'-- Généré le %s'.encode('latin1') % datetime.datetime.now(), '']
+        cursor = get_cursor()
+
+        output.append('-- BM2005')
+        output.append('')
+        BM2005 = self.get_handler('BM2005')
+        export_bib(BM2005, cursor, output)
+
+        output.append('')
+        output.append('-- BDP2005')
+        output.append('')
+        BDP2005 = self.get_handler('BDP2005')
+        export_bib(BDP2005, cursor, output)
+
+        context.response.set_header('Content-Type', 
+                                    'text/plain; charset=ISO-8859-1')
+
+        return '\n'.join(output)
 
 
     #########################################################################
