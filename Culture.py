@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
-import datetime
+from datetime import datetime, date
 from time import time
 
 # Import from itools
@@ -124,6 +124,8 @@ class Root(bibFolder, iRoot):
     def get_subviews(self, name):
         if name in ['browse_thumbnails', 'browse_list']:
             return ['browse_thumbnails', 'browse_list']
+        elif name in ['new_reports_form', 'new_bm_form']:
+            return ['new_reports_form', 'new_bm_form']
         return []
 
 
@@ -149,9 +151,10 @@ class Root(bibFolder, iRoot):
     # New reports
     new_reports_form__access__ = 'is_admin'
     new_reports_form__label__ = u'Ajouter'
+    new_reports_form__sublabel__ = u'Rapport'
     def new_reports_form(self):
         namespace = {}
-        today = datetime.date.today()
+        today = date.today()
         ### BDP form
         years = [ {'value': x, 
                    'is_disabled': self.has_handler('BDP'+str(x)),
@@ -353,7 +356,7 @@ class Root(bibFolder, iRoot):
                     output.append('INSERT INTO ua_epci values (%s);' % values)
 
 
-        output = [u'-- Généré le %s'.encode('latin1') % datetime.datetime.now(), '']
+        output = [u'-- Généré le %s'.encode('latin1') % datetime.now(), '']
         cursor = get_cursor()
 
         output.append('-- BM2005')
@@ -371,6 +374,48 @@ class Root(bibFolder, iRoot):
                                     'text/plain; charset=ISO-8859-1')
 
         return '\n'.join(output)
+
+
+    #########################################################################
+    # New User
+    new_bm_form__access__ = 'is_admin'
+    new_bm_form__sublabel__ = u"Nouvelle BM"
+    def new_bm_form(self):
+        handler = self.get_handler('/ui/culture/Culture_new_bm.xml')
+
+        return handler.to_str()
+
+
+    new_bm__access__ = 'is_admin'
+    def new_bm(self, code_bib, **kw):
+        code_bib = int(code_bib)
+        users = self.get_handler('users')
+        bm2005 = self.get_handler('BM2005')
+        bms = get_BMs()
+
+        name = unicode(code_bib)
+        if name not in bms:
+            raise UserError, (u"Le fichier 'input_data/init_BM.txt' "
+                    u"doit d'abord être mis à jour et installé.")
+
+        # Add report
+        ville = bms[name]['name']
+        if not bm2005.has_handler(name):
+            bm2005.set_handler(name, FormBM(), **{'dc:title': ville})
+
+        # Add user
+        username = 'BM%s' % code_bib
+        if not users.has_handler(username):
+            users.set_handler(username, bibUser())
+            user = users.get_handler(username)
+            user.set_password(username)
+
+        message = (u"Formulaire et utilisateur ajoutés : "
+                u"code_bib=%s ville=%s dept=%s code_insee=%s login=%s password=%s")
+        message = message % (code_bib, ville, bms[name]['dep'],
+                bms[name]['id'], username, username)
+
+        comeback(message, ';new_bm_form')
 
 
     #########################################################################

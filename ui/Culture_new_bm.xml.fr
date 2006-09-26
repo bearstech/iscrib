@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+  "-//W3C//DTD XHTML 1.0 Strict//EN">
+<div xmlns="http://www.w3.org/1999/xhtml">
+
+  <h2>Nouvelle bibliothèque municipale</h2>
+
+  <form method="post" action=";new_bm">
+    <table border="0" cellpadding="2" cellspacing="2">
+      <tr>
+        <th>code_bib</th>
+        <td><input name="code_bib" type="text" /></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input class="button_ok" type="submit" value="Ajouter" />
+        </td>
+      </tr>
+    </table>
+  </form>
+
+</div>
