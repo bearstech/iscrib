@@ -97,7 +97,7 @@ class Forms(bibFolder):
         parameters = get_parameters(tablename, name='', dep='', code='',
                                     state='')
         states_dic = {'1': u'Vide', '2': u'En cours', '3': u'Terminé',
-                      '4': u'Exporté'}
+                '4': u'Exporté', '5': u'Modifié après export'}
 
         name = parameters['name'].strip().lower()
         dep = parameters['dep'].strip()
