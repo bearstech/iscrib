@@ -90,6 +90,12 @@ class FormBM(Form):
         return iText.get_subviews(self, name)
 
 
+    def get_schema(self):
+        from schemaBM import schema
+
+        return schema
+
+
     def is_BDP(self):
         return False
 

@@ -92,14 +92,6 @@ def get_checkbox_value(key, value):
     value = ','.join(new_values)
     return value
 
-def get_schema():
-    context = get_context()
-    if context.handler.is_BDP():
-        from schemaBDP import schema
-    if context.handler.is_BM():
-        from schemaBM import schema
-    return schema
-
 
 def get_alertes():
     context = get_context()
@@ -219,7 +211,10 @@ class Form(Handler, iText, WorkflowAware):
 
     ######################################################################
     # API
+    def get_schema(self):
+        raise NotImplementedError
   
+
     def set_metadata(self, meta):
         self.set_changed()
         self.state.fields.update(meta)
@@ -275,7 +270,8 @@ class Form(Handler, iText, WorkflowAware):
     # Namespaces
     def get_namespace(self):
         context = get_context()
-        schema = get_schema()
+        request = context.request
+        schema = self.get_schema()
 
         namespace = {}
         # Permissions
@@ -285,10 +281,10 @@ class Form(Handler, iText, WorkflowAware):
             field_def = schema[name]
             type = field_def[0]
             default = field_def[1]
-            value = context.request.get_parameter(name)
+            value = request.get_parameter(name)
             key = name[len('field'):]
             # take the value in request first
-            value = context.request.get_parameter(key)
+            value = request.get_parameter(key)
             if value is None:
                 # is the value is not in request, take it in fields 
                 value = self.state.fields.get(name, default)
@@ -324,7 +320,7 @@ class Form(Handler, iText, WorkflowAware):
 
             # Missing
             namespace[field_name] = None 
-            form = context.request.form
+            form = request.form
             # we have  _B13 in the namespace but _B13XYZ in the form 
             # so we make form_keys who remove X from _B13X 
             form_keys = form.keys()
@@ -411,7 +407,7 @@ class Form(Handler, iText, WorkflowAware):
             namespace['field15'] = unicode(champs_adr[23], 'ISO-8859-1')
  
         # autofill Annexes
-        if context.handler.is_BM():
+        if self.is_BM():
             bm_annexes = self.bm_annexes(code_ua)
             for k, v in bm_annexes.items():
                 key = 'field%s' % k
@@ -422,7 +418,7 @@ class Form(Handler, iText, WorkflowAware):
                     namespace[key] = value
        
         # autofill BM epci
-        if context.handler.is_BM():
+        if self.is_BM():
             ua_epci = self.ua_epci(code_ua)
             for k, v in ua_epci.items():
                 key = 'field%s' % k
@@ -499,7 +495,7 @@ class Form(Handler, iText, WorkflowAware):
     controles_form__access__ = 'is_allowed_to_view'
     controles_form__label__ = u'Contrôle de la saisie'
     def controles_form(self):
-        schema = get_schema()
+        schema = self.get_schema()
         controles = get_controles()
         alertes = get_alertes()
         namespace = self.get_namespace()
@@ -716,7 +712,7 @@ class Form(Handler, iText, WorkflowAware):
         All_fields, All_mandatorie, All_optional = [], [], []
         optional_nonEmpties, mandatory_nonEmpties, Empties = [], [], []
 
-        schema = get_schema()
+        schema = self.get_schema()
         dependencies = self.get_dependencies()
         # All_fields
         All_fields = schema.keys()
@@ -754,7 +750,7 @@ class Form(Handler, iText, WorkflowAware):
         mendatories = []
         optionals = []
         empties = []
-        schema = get_schema()
+        schema = self.get_schema()
         dependencies = self.get_dependencies()
         
         for key in schema.keys():
@@ -893,11 +889,62 @@ class Form(Handler, iText, WorkflowAware):
         return msg
 
 
+    def get_export_query(self, namespace):
+        schema = self.get_schema()
+        code_ua = namespace['code_ua']
+        dept = self.get_dep()
+        year = self.parent.name[-4:]
+        btype = self.is_BM() and 'bm' or 'bdp'
+        table = '%s%s' % (btype ,year[-2:])
+
+        values = ["'%s'" % item for item in [code_ua, dept, year]]
+        names = schema.keys()
+        names.sort()
+
+        for name in names:
+            field_def = schema[name]
+            field_type = field_def[0]
+            default = field_def[1]
+            value = namespace[name]
+            key = name.split('field')[-1]
+            chap = key[0]
+            
+            if not chap.isdigit():
+                if value in ('', None, 'NC'):
+                    value = "null"
+                elif field_type is Unicode:
+                    value = "'%s'" % value
+                elif field_type is Integer:
+                    value = str(value)
+                elif field_type == Boolean:
+                    if value:
+                        value = "'O'"
+                    else:
+                        value = "'N'"
+                elif field_type == Checkboxes:
+                    # get the value from checkboxes
+                    value = "'%s'" % get_checkbox_value(key, value)
+                elif field_type == Decimal:
+                    value = "'%s'" % str(value)
+                elif field_type == EPCI_Statut:
+                    ids = [x['id'] for x in value if x['is_selected']]
+                    if ids:
+                        value = ids[0]
+                    else:
+                        value = '0'
+                values.append(value)
+                
+        values = ','.join(values)
+        query = "insert into %s values (%s)" % (table, values)
+
+        return query
+
+
     submitted2exported__access__ = 'is_admin'
     def submitted2exported(self):
         cursor = get_cursor()
         namespace = self.get_namespace()
-        schema = get_schema()
+        schema = self.get_schema()
         # Update dans la base ADRESSE
         query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
                  u'voie="%(field3)s",cpbiblio="%(field4)s",ville="%(field5)s",'
@@ -947,48 +994,9 @@ class Form(Handler, iText, WorkflowAware):
             return
         
         cursor.execute('commit')
-        # Add into the database
-        values = ["'%s'" % item for item in [ code_ua, dept, year]]
-        names = schema.keys()
-        names.sort()
-        keys = ['Code_UA', 'dept', 'exer']
 
-        for name in names:
-            field_def = schema[name]
-            field_type = field_def[0]
-            default = field_def[1]
-            value = namespace[name]
-            key = name.split('field')[-1]
-            chap = key[0]
-            
-            if not chap.isdigit():
-                keys.append(key)
-                if value in ('', None, 'NC'):
-                    value = "Null"
-                elif field_type is Unicode:
-                    value = "'%s'" % value
-                elif field_type is Integer:
-                    value = str(value)
-                elif field_type == Boolean:
-                    if value:
-                        value = "'O'"
-                    else:
-                        value = "'N'"
-                elif field_type == Checkboxes:
-                    # get the value from checkboxes
-                    value = "'%s'" % get_checkbox_value(key, value)
-                elif field_type == Decimal:
-                    value = "'%s'" % str(value)
-                elif field_type == EPCI_Statut:
-                    ids = [x['id'] for x in value if x['is_selected']]
-                    if ids:
-                        value = ids[0]
-                    else:
-                        value = '0'
-                values.append(value)
-                
-        query = "insert into %s (%s) values (%s)" % (table, ','.join(keys),
-                                                     ','.join(values))
+        # Add into the database
+        query = self.get_export_query(namespace)
         cursor.execute(query)
         cursor.execute('commit') 
         self.set_property('state', 'public')
@@ -1009,7 +1017,7 @@ class Form(Handler, iText, WorkflowAware):
          'fieldB41': 'fieldB40',
          'fieldB42': 'fieldB40',     
         """
-        schema = get_schema()
+        schema = self.get_schema()
         dependencies = {}
         for field_id in schema.keys():
             field_def = schema[field_id]
@@ -1023,7 +1031,7 @@ class Form(Handler, iText, WorkflowAware):
 
 
     def get_sums(self):
-        schema = get_schema()
+        schema = self.get_schema()
         sums = {}
         for field_id in schema.keys():
             field_def = schema[field_id]
@@ -1043,7 +1051,7 @@ class Form(Handler, iText, WorkflowAware):
 
     fill_report__access__ = 'is_allowed_to_edit'
     def fill_report(self):
-        schema = get_schema()
+        schema = self.get_schema()
         context = get_context()
         self.set_changed()
         
@@ -1110,7 +1118,7 @@ class Form(Handler, iText, WorkflowAware):
 
     report__access__ = 'is_allowed_to_edit'
     def report(self):
-        schema, context = get_schema(), get_context()
+        schema, context = self.get_schema(), get_context()
         self.set_changed()
         request = context.request
         form, referer = request.form, request.referrer
@@ -1314,7 +1322,7 @@ class Form(Handler, iText, WorkflowAware):
     #downloadCSV__access__ = Handler.is_admin
     downloadCSV__access__ = True
     def downloadCSV(self):
-        schema = get_schema()
+        schema = self.get_schema()
         context = get_context()
         response = context.response
 

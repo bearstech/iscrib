@@ -283,8 +283,8 @@ class Root(bibFolder, iRoot):
 
     export__access__ = 'is_admin'
     def export(self):
+        from itools.datatypes import Unicode
         from Form import get_cursor
-        context = get_context()
 
         def quote_sql(result_set):
             for result in result_set:
@@ -319,61 +319,55 @@ class Root(bibFolder, iRoot):
                 query = "select * from adresse where type='3' and code_ua is not null and dept in (%s)" % keys
             cursor.execute(query)
             for values in get_values(cursor.fetchall()):
-                output.append('INSERT INTO adresse VALUES (%s);' % values)
+                output.write('INSERT INTO adresse VALUES (%s);\n' % values)
 
-            output.append('')
-
-            # codes ua
-            if container.is_BM():
-                query = "select code_ua from adresse where insee is not null and code_bib in (%s)" % keys
-            else:
-                query = "select code_ua from adresse where type='3' and code_ua is not null and dept in (%s)" % keys
-            cursor.execute(query)
-            codes_ua = ','.join(tuple(get_values(cursor.fetchall())))
+            output.write('\n')
 
             # (bm|bdp)05
-            table_name = '%s%s' % (container.is_BM() and 'bm' or 'bdp', container.get_year()[-2:])
-            query = "select * from %s where Code_UA in (%s)" % (table_name, codes_ua) 
-            cursor.execute(query)
-            for values in get_values(cursor.fetchall()):
-                output.append('INSERT INTO %s VALUES (%s);' % (table_name, values))
+            for name in names:
+                handler = container.get_handler(name)
+                schema = handler.get_schema()
+                namespace = handler.get_namespace()
+                # XXX copy/paste
+                for key, value in namespace.items():
+                    field_def = schema.get(key)
+                    if field_def is not None:
+                        ftype = field_def[0]
+                        if ftype is Unicode:
+                            if value is not None:
+                                value = value.replace(u"€", u"eur")
+                                value = value.replace(u'"', u'\\"')
+                                value = value.replace(u"&quot;", u'\\"')
+                                value = value.replace(u"'", u"\\'")
+                            namespace[key] = value
+                # XXX end
+                query = handler.get_export_query(namespace)
+                output.write(query.encode('latin1') + '\n')
+                del namespace
+                del handler
 
-            output.append('')
-
-            if container.is_BM():
-                # annexes04
-                query = "select * from annexes04 where code_ua in (%s)" % codes_ua
-                cursor.execute(query)
-                for values in get_values(cursor.fetchall()):
-                    output.append('INSERT INTO annexes04 values (%s);' % values)
-
-                output.append('')
-
-                # ua_epci
-                query = "select * from ua_epci where code_ua in (%s)" % codes_ua
-                cursor.execute(query)
-                for values in get_values(cursor.fetchall()):
-                    output.append('INSERT INTO ua_epci values (%s);' % values)
+            output.write('\n')
 
 
-        output = [u'-- Généré le %s'.encode('latin1') % datetime.now(), '']
+        output = open('/tmp/exportscrib.sql', 'w')
+        output.write(u'-- Généré le %s\n'.encode('latin1') % datetime.now())
+        output.write('\n')
         cursor = get_cursor()
 
-        output.append('-- BM2005')
-        output.append('')
+        output.write('-- BM2005\n')
+        output.write('\n')
         BM2005 = self.get_handler('BM2005')
         export_bib(BM2005, cursor, output)
 
-        output.append('')
-        output.append('-- BDP2005')
-        output.append('')
+        output.write('\n')
+        output.write('-- BDP2005\n')
+        output.write('\n')
         BDP2005 = self.get_handler('BDP2005')
         export_bib(BDP2005, cursor, output)
 
-        context.response.set_header('Content-Type', 
-                                    'text/plain; charset=ISO-8859-1')
+        output.close()
 
-        return '\n'.join(output)
+        comeback(u"Fichier exporté dans /tmp/exportscrib.sql")
 
 
     #########################################################################
