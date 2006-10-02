@@ -382,31 +382,36 @@ class Root(bibFolder, iRoot):
 
     new_bm__access__ = 'is_admin'
     def new_bm(self, code_bib, **kw):
-        code_bib = int(code_bib)
+        bms = get_BMs()
+        codes = []
+        
+        for code in code_bib.split():
+            if code not in bms:
+                raise UserError, (u"Le code_bib %s n'est pas "
+                        u"dans le fichier input_data/init_BM.txt installé." % repr(code))
+            codes.append(int(code))
+
         users = self.get_handler('users')
         bm2005 = self.get_handler('BM2005')
-        bms = get_BMs()
 
-        name = unicode(code_bib)
-        if name not in bms:
-            raise UserError, (u"Le fichier 'input_data/init_BM.txt' "
-                    u"doit d'abord être mis à jour et installé.")
+        for code in codes:
+            name = unicode(code)
 
-        # Add report
-        ville = bms[name]['name']
-        if not bm2005.has_handler(name):
-            bm2005.set_handler(name, FormBM(), **{'dc:title': ville})
+            # Add report
+            ville = bms[name]['name']
+            if not bm2005.has_handler(name):
+                bm2005.set_handler(name, FormBM(), **{'dc:title': ville})
 
-        # Add user
-        username = 'BM%s' % code_bib
-        if not users.has_handler(username):
-            users.set_handler(username, bibUser())
-            user = users.get_handler(username)
-            user.set_password(username)
+            # Add user
+            username = 'BM%s' % code
+            if not users.has_handler(username):
+                users.set_handler(username, bibUser())
+                user = users.get_handler(username)
+                user.set_password(username)
 
         message = (u"Formulaire et utilisateur ajoutés : "
                 u"code_bib=%s ville=%s dept=%s code_insee=%s login=%s password=%s")
-        message = message % (code_bib, ville, bms[name]['dep'],
+        message = message % (code, ville, bms[name]['dep'],
                 bms[name]['id'], username, username)
 
         comeback(message, ';new_bm_form')
