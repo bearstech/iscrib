@@ -283,42 +283,40 @@ class Root(bibFolder, iRoot):
 
     export__access__ = 'is_admin'
     def export(self):
+        import os
+        import os.path
         from itools.datatypes import Unicode
         from Form import get_cursor
 
-        def quote_sql(result_set):
-            for result in result_set:
-                if result is None:
-                    yield 'NULL'
-                elif isinstance(result, str):
-                    if "'" in result:
-                        result = result.replace("'", "\\'")
-                    yield "'%s'" % result
-                else:
-                    yield str(result)
-
-
-        def get_values(resultset):
-            if not resultset:
-                raise UserError, u"La bibliothèque n'existe pas dans la base SQL"
-
-            for line in resultset:
-                yield ','.join(tuple(quote_sql(line)))
-
-
-        def export_bib(container, cursor, ouput):
+        def export_bib(container, ouput):
+            cursor = get_cursor()
             names = [name for name in container.get_handler_names()
                     if name.isdigit() and (
                         container.get_handler('.%s.metadata' % name).get_property('state') == 'public')]
 
             # adresse
-            keys = ','.join(names)
+            keys = ', '.join(names)
             if container.is_BM():
                 query = "select * from adresse where insee is not null and code_bib in (%s)" % keys
             else:
                 query = "select * from adresse where type='3' and code_ua is not null and dept in (%s)" % keys
             cursor.execute(query)
-            for values in get_values(cursor.fetchall()):
+            resultset = cursor.fetchall()
+            if not resultset:
+                raise UserError, u"""La requête "%s" a échoué""" % query
+
+            for result in resultset:
+                values = []
+                for value in result:
+                    if value is None:
+                        values.append('NULL')
+                    elif isinstance(value, str):
+                        if "'" in value:
+                            value = value.replace("'", "\\'")
+                        values.append("'%s'" % value)
+                    else:
+                        values.append(str(value))
+                values = ','.join(values)
                 output.write('INSERT INTO adresse VALUES (%s);\n' % values)
 
             output.write('\n')
@@ -349,25 +347,25 @@ class Root(bibFolder, iRoot):
             output.write('\n')
 
 
-        output = open('/tmp/exportscrib.sql', 'w')
+        output_path = os.path.join(os.getcwd(), 'exportscrib.sql')
+        output = open(output_path, 'w')
         output.write(u'-- Généré le %s\n'.encode('latin1') % datetime.now())
         output.write('\n')
-        cursor = get_cursor()
 
         output.write('-- BM2005\n')
         output.write('\n')
         BM2005 = self.get_handler('BM2005')
-        export_bib(BM2005, cursor, output)
+        export_bib(BM2005, output)
 
         output.write('\n')
         output.write('-- BDP2005\n')
         output.write('\n')
         BDP2005 = self.get_handler('BDP2005')
-        export_bib(BDP2005, cursor, output)
+        export_bib(BDP2005, output)
 
         output.close()
 
-        comeback(u"Fichier exporté dans /tmp/exportscrib.sql")
+        comeback(u"Fichier exporté dans '%s'" % output_path)
 
 
     #########################################################################
