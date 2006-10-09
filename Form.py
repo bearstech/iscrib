@@ -899,6 +899,7 @@ class Form(Handler, iText, WorkflowAware):
         values = ["'%s'" % item for item in [code_ua, dept, year]]
         names = schema.keys()
         names.sort()
+        keys = ['Code_UA', 'dept', 'exer']
 
         for name in names:
             field_def = schema[name]
@@ -909,6 +910,7 @@ class Form(Handler, iText, WorkflowAware):
             chap = key[0]
             
             if not chap.isdigit():
+                keys.append(key)
                 if value in ('', None, 'NC'):
                     value = "null"
                 elif field_type is Unicode:
@@ -933,8 +935,9 @@ class Form(Handler, iText, WorkflowAware):
                         value = '0'
                 values.append(value)
                 
+        keys = ','.join(keys)
         values = ','.join(values)
-        query = "insert into %s values (%s)" % (table, values)
+        query = "insert into %s (%s) values (%s)" % (table, keys, values)
 
         return query
 
