@@ -38,6 +38,7 @@ SqlHost = config.SqlHost
 SqlDatabase = config.SqlDatabase
 SqlUser = config.SqlUser
 SqlPasswd = config.SqlPasswd
+SqlPort = config.SqlPort
 
 
 class FormBM(Form):
@@ -140,8 +141,9 @@ class FormBM(Form):
 
     def bm_annexes(self, code_ua):
         try: 
-            connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost, 
-                                         user=SqlUser, passwd=SqlPasswd,
+            connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
+                                         port=int(SqlPort), user=SqlUser,
+                                         passwd=SqlPasswd,
                                          cursorclass=DictCursor)
         except MySQLdb.OperationalError:
             raise UserError, u"La connexion à MySql ne s'est pas faite" 
@@ -159,8 +161,9 @@ class FormBM(Form):
 
     def ua_epci(self, code_ua):
         try: 
-            connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost, 
-                                         user=SqlUser, passwd=SqlPasswd,
+            connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
+                                         port=int(SqlPort), user=SqlUser,
+                                         passwd=SqlPasswd,
                                          cursorclass=DictCursor)
         except MySQLdb.OperationalError:
             raise UserError, u"La connexion à MySql ne s'est pas faite" 

@@ -56,6 +56,7 @@ SqlHost = config.SqlHost
 SqlDatabase = config.SqlDatabase
 SqlUser = config.SqlUser
 SqlPasswd = config.SqlPasswd
+SqlPort = config.SqlPort
 
 
 workflow.add_state('modified', title=u"Modifié",
@@ -114,8 +115,9 @@ def get_controles():
 
 def get_cursor():
     try: 
-        connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost, 
-                                     user=SqlUser, passwd=SqlPasswd)
+        connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
+                                     port=int(SqlPort), user=SqlUser,
+                                     passwd=SqlPasswd)
     except MySQLdb.OperationalError: 
         raise UserError, u"La connexion à MySql ne s'est pas faite" 
     return connection.cursor()
@@ -125,8 +127,9 @@ def get_cursor():
 def get_adresse(query):
     """ Accès base adresse"""
     try: 
-        connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost, 
-                                     user=SqlUser, passwd=SqlPasswd)
+        connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
+                                     port=int(SqlPort), user=SqlUser,
+                                     passwd=SqlPasswd)
    #     connection = MySQLdb.connect(db='scrib', host='localhost', 
    #                              user='scrib' ,passwd='Scrib-2005*')
     except MySQLdb.OperationalError:
