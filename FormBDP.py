@@ -100,7 +100,7 @@ class FormBDP(Form):
 
 
     def base_lect(self, dept):
-        chaineSQL = "select * from adresse where type='3' and  " \
+        chaineSQL = "select * from adresse where type_adr='3' and  " \
                     "code_ua is not null and dept='%s'" % dept
         return get_adresse(chaineSQL)
 

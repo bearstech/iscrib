@@ -211,10 +211,6 @@ class Form(Handler, iText, WorkflowAware):
 
     ######################################################################
     # API
-    def get_schema(self):
-        raise NotImplementedError
-  
-
     def set_metadata(self, meta):
         self.set_changed()
         self.state.fields.update(meta)
