@@ -937,7 +937,7 @@ class Form(Handler, iText, WorkflowAware):
                 
         keys = ','.join(keys)
         values = ','.join(values)
-        query = "insert into %s (%s) values (%s)" % (table, keys, values)
+        query = "INSERT INTO %s (%s) VALUES (%s);" % (table, keys, values)
 
         return query
 
