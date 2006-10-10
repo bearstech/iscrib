@@ -352,6 +352,13 @@ class Root(bibFolder, iRoot):
         output.write(u'-- Généré le %s\n'.encode('latin1') % datetime.now())
         output.write('\n')
 
+        output.write(u'-- Réinitialisation'.encode('latin1'))
+        output.write('\n')
+        output.write('DELETE FROM adresse;\n')
+        output.write('DELETE FROM bm05;\n')
+        output.write('DELETE FROM bdp05;\n')
+        output.write('\n')
+
         output.write('-- BM2005\n')
         output.write('\n')
         BM2005 = self.get_handler('BM2005')
