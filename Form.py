@@ -261,8 +261,8 @@ class Form(Handler, iText, WorkflowAware):
         if user.is_BDP():
             if user.get_department() != self.name:
                 return False
-        # Check the state
-        return self.get_state() == 'private'
+        # Only if 'private' -> 'Vide', 'En cours'
+        return self.get_workflow_state() == 'private'
 
 
     #######################################################################
