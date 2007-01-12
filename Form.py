@@ -366,8 +366,21 @@ class Form(Handler, iText, WorkflowAware):
         if not namespace['field2']:
             namespace['field2'] = unicode(champs_adr[7], 'ISO-8859-1')
         # VOIE
-        if not namespace['field3']:
-            namespace['field3'] = unicode(champs_adr[9], 'ISO-8859-1')
+        #if not namespace['field3']:
+        #    namespace['field3'] = unicode(champs_adr[9], 'ISO-8859-1')
+        # COMPLEMENT ADRESSE
+        if not namespace['field30']:
+            namespace['field30'] = unicode(champs_adr[9], 'ISO-8859-1')
+        # Numéro VOIE
+        if not namespace['field31']:
+            namespace['field31'] = unicode(champs_adr[24], 'ISO-8859-1')
+        # type de VOIE
+        if not namespace['field32']:
+            namespace['field32'] = unicode(champs_adr[25], 'ISO-8859-1')
+        # NOM VOIE
+        if not namespace['field33']:
+            namespace['field33'] = unicode(champs_adr[26], 'ISO-8859-1')
+        
         # CPBIBLIO
         if not namespace['field4']:
             namespace['field4'] = unicode(champs_adr[11], 'ISO-8859-1')
