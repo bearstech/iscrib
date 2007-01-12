@@ -25,9 +25,9 @@ from schema import sum2controle, checkBib
 
 
 schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
-          'field30': (Unicode, ''), 'field31': (Unicode, ''),
-          'field32': (Unicode, ''), 'field33': (Unicode, ''),
-          'field4': (Unicode, ''),
+          'field3': (Unicode, ''), 'field30': (Unicode, ''),
+          'field31': (Unicode, ''), 'field32': (Unicode, ''),
+          'field33': (Unicode, ''), 'field4': (Unicode, ''),
           'field5': (Unicode, ''), 'field6': (Unicode, ''),
           'field7': (Unicode, ''), 'field8': (Unicode, ''),
           'field9': (Unicode, ''), 'field10': (Unicode, ''),
