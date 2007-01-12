@@ -363,15 +363,18 @@
               value="" size="8" style="text-align: right"></input>
     </td>
     <td>
+       <input stl:attributes="value fieldC32Y"
+              type="text" name="fieldC32Y"
+              value="" size="8" style="text-align: right"></input>
     </td>
-   <td style="padding:0px;  text-align: center"> 
+    <td style="padding:0px;  text-align: center"> 
            <input  type="radio"  name="fieldCZ" value="12" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_12" />
     </td>
     <td><b stl:attributes="class _C32">C32</b></td>
   </tr>
 
   <tr>
-    <th>Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.E.J,...) qualifiés</th> 
+    <th>Agents non titulaires/ emplois aidés par l'Etat (Contrat d'accompagnement dans l'emploi, Contrat d'avenir,...) qualifiés</th> 
     <td>
        <input stl:attributes="value fieldC33W"
               type="text" name="fieldC33W"
@@ -394,7 +397,7 @@
   </tr>
 
   <tr>
-    <th>Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.E.J,...) non qualifiés</th> 
+    <th>Agents non titulaires/ emplois aidés par l'Etat (Contrat d'accompagnement dans l'emploi, Contrat d'avenir,...) qualifiés non qualifiés</th> 
     <td>
        <input stl:attributes="value fieldC34W"
               type="text" name="fieldC34W"
@@ -406,7 +409,11 @@
               value="" size="8" style="text-align: right"></input>
     </td>
     <td>
+       <input stl:attributes="value fieldC34Y"
+              type="text" name="fieldC34Y"
+              value="" size="8" style="text-align: right"></input>
     </td>
+    
     <td style="padding:0px;  text-align: center"> 
            <input  type="radio"  name="fieldCZ" value="14" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_14" />
     </td>

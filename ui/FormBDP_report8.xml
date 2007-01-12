@@ -123,7 +123,7 @@
   </tr>
 
   <tr>
-    <th>Autres (préciser)</th> 
+    <th>Autres</th> 
     <td>
       <table stl:if="fieldH11" id="display_fieldH16" >        <tr style="padding: 10px; text-align: left"><td>        <input  type="radio" name="fieldH16"                      value="1" style="font-size: 8pt;  border:0px"
                      stl:attributes="checked fieldH16" />Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldH16"                value="0"
@@ -141,6 +141,21 @@
     <col width="19%"/>
     <col width="5%"/>
    </colgroup>
+  
+   <tr>
+    <th>Si autres, préciser</th> 
+    <td>
+       <div stl:if="not fieldH16" id="display_fieldH19"           style="visibility:hidden">         <input stl:if="not fieldH16"
+             type="text" name="fieldH19"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH16" id="display_fieldH19">         <input stl:if="fieldH16" stl:attributes="value fieldH19"
+             type="text" name="fieldH19"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _H19">H19</b></td>
+  </tr> 
+   
+   
   <tr>
     <th>Nb de sessions/an (à distance)</th> 
     <td>
@@ -293,9 +308,57 @@
                stl:attributes="checked fieldH29_not" />Non      </td>      </tr></table>    </td>
     <td><b stl:attributes="class _H29">H29</b></td>
   </tr>
+  
+   <tr>
+    <th>Si autres, préciser</th> 
+    <td>
+       <div stl:if="not fieldH27" id="display_fieldH30"           style="visibility:hidden">         <input stl:if="not fieldH27"
+             type="text" name="fieldH30"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH27" id="display_fieldH30">         <input stl:if="fieldH27" stl:attributes="value fieldH30"
+             type="text" name="fieldH30"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _H30">H30</b></td>
+  </tr> 
+  
 </table>
 <p style = "page-break-after:always "></p>   
 <h2>H. 3 SUBVENTIONS DÉPARTEMENTALES AUX COLLECTIVITÉS DANS L'ANNÉE</h2>
+<table width="100%">
+  <colgroup>
+    <col width="76%"/>
+    <col width="19%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th>Un plan départemental de développement de la lecture publique a-t-il été mis en place ?</th> 
+    <td>
+      <table><tr style="padding: 0px; text-align: left"><td>
+              <input onclick="switch_on(['fieldH76'])"  type="radio"  name="fieldH75" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldH75" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldH76'])"  type="radio" name="fieldH75"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldH75_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _H75">H75</b></td>
+  </tr>  
+  <tr>
+    <th>Si oui, en quelle année ?</th> 
+    <td>
+       <div stl:if="not fieldH75" id="display_fieldH76"           style="visibility:hidden">         <input stl:if="not fieldH75"
+             type="text" name="fieldH76"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH75" id="display_fieldH76">         <input stl:if="fieldH75" stl:attributes="value fieldH76"
+             type="text" name="fieldH76"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _H76">H76</b></td>
+  </tr> 
+    
+ 
+</table>      
+
+
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -506,6 +569,96 @@
     <th style="text-align: center">Montant des aides versées Z</th>
   <td></td>
   </tr>
+  
+  <tr>
+    <th>Dépôt de matériels dans le sbibliothèques du réseau : Mobilier</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldH77V" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldH77V" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldH77V"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldH77V_not" />Non      </td>      </tr></table>    </td>
+    <td>
+       <div stl:if="not fieldH77V" id="display_fieldH77W"           style="visibility:hidden">         <input stl:if="not fieldH77V"
+             type="text" name="fieldH77W"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH77V" id="display_fieldH77W">         <input stl:if="fieldH77V" stl:attributes="value fieldH77W"
+             type="text" name="fieldH77W"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td>
+       <div stl:if="not fieldH77V" id="display_fieldH77X"           style="visibility:hidden">         <input stl:if="not fieldH77V"
+             type="text" name="fieldH77X"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH77V" id="display_fieldH77X">         <input stl:if="fieldH77V" stl:attributes="value fieldH77X"
+             type="text" name="fieldH77X"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td>
+       <div stl:if="not fieldH77V" id="display_fieldH77Y"           style="visibility:hidden">         <input stl:if="not fieldH77V"
+             type="text" name="fieldH77Y"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH77V" id="display_fieldH77Y">         <input stl:if="fieldH77V" stl:attributes="value fieldH77Y"
+             type="text" name="fieldH77Y"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td>
+       <div stl:if="not fieldH77V" id="display_fieldH77Z"           style="visibility:hidden">         <input stl:if="not fieldH77V"
+             type="text" name="fieldH77Z"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH77V" id="display_fieldH77Z">         <input stl:if="fieldH77V" stl:attributes="value fieldH77Z"
+             type="text" name="fieldH77Z"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _H77">H77</b></td>
+  </tr>
+
+  <tr>
+    <th>Dépôt de matériels dans le sbibliothèques du réseau : Informatique</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldH78V" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldH78V" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldH78V"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldH78V_not" />Non      </td>      </tr></table>    </td>
+    <td>
+       <div stl:if="not fieldH78V" id="display_fieldH78W"           style="visibility:hidden">         <input stl:if="not fieldH78V"
+             type="text" name="fieldH78W"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH78V" id="display_fieldH78W">         <input stl:if="fieldH78V" stl:attributes="value fieldH78W"
+             type="text" name="fieldH78W"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td>
+       <div stl:if="not fieldH78V" id="display_fieldH78X"           style="visibility:hidden">         <input stl:if="not fieldH78V"
+             type="text" name="fieldH78X"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH78V" id="display_fieldH78X">         <input stl:if="fieldH78V" stl:attributes="value fieldH78X"
+             type="text" name="fieldH78X"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td>
+       <div stl:if="not fieldH78V" id="display_fieldH78Y"           style="visibility:hidden">         <input stl:if="not fieldH78V"
+             type="text" name="fieldH78Y"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH78V" id="display_fieldH78Y">         <input stl:if="fieldH78V" stl:attributes="value fieldH78Y"
+             type="text" name="fieldH78Y"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td>
+       <div stl:if="not fieldH78V" id="display_fieldH78Z"           style="visibility:hidden">         <input stl:if="not fieldH78V"
+             type="text" name="fieldH78Z"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH78V" id="display_fieldH78Z">         <input stl:if="fieldH78V" stl:attributes="value fieldH78Z"
+             type="text" name="fieldH78Z"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _H78">H78</b></td>
+  </tr>
+  
+  
+  
+  
   <tr>
     <th>Acquisition de documents : Imprimés</th> 
     <td>
@@ -915,7 +1068,7 @@
   </tr>
 
   <tr>
-    <th>Acquisition de documents : Multmedia</th> 
+    <th>Acquisition de documents : Multimedia</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldH47X" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldH47X" />Oui      </td>
@@ -956,6 +1109,35 @@
     <th style="text-align: center">Nombre de communes aidées sup. à 10000h Z</th>
   <td></td>
   </tr>
+  
+  <tr>
+    <th>Conservation de collections</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldH79X" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldH79X" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldH79X"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldH79X_not" />Non      </td>      </tr></table>    </td>
+    <td>
+       <div stl:if="not fieldH79X" id="display_fieldH79Y"           style="visibility:hidden">         <input stl:if="not fieldH79X"
+             type="text" name="fieldH79Y"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH79X" id="display_fieldH79Y">         <input stl:if="fieldH79X" stl:attributes="value fieldH79Y"
+             type="text" name="fieldH79Y"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td>
+       <div stl:if="not fieldH79X" id="display_fieldH79Z"           style="visibility:hidden">         <input stl:if="not fieldH79X"
+             type="text" name="fieldH79Z"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldH79X" id="display_fieldH79Z">         <input stl:if="fieldH79X" stl:attributes="value fieldH79Z"
+             type="text" name="fieldH79Z"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _H79">H79</b></td>
+  </tr>
+  
+  
   <tr>
     <th>Animation</th> 
     <td>

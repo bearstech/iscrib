@@ -918,7 +918,7 @@
   </tr>
 
   <tr>
-    <th>Prêts de disques optiques numériques</th> 
+    <th>Prêts de cédéroms</th> 
     <td>
        <input stl:attributes="value fieldF67W"
               type="text" name="fieldF67W"

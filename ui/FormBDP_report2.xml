@@ -104,6 +104,18 @@
     </td>
     <td><b stl:attributes="class _B13">B13</b></td>
   </tr>
+  
+   <tr>
+    <th colspan="2">Les bâtiments ouverts à tous publics font-ils office de bibliothèques municipales ?**</th> 
+    <td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB15'])"  type="radio"  name="fieldB15" value="1" style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldB15" />Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldB15'])"  type="radio" name="fieldB15"                value="0"
+ style="font-size: 8pt;  border:0px"
+               stl:attributes="checked fieldB15_not" />Non      </td>      </tr></table>    </td>
+    <td><b stl:attributes="class _B15">B15</b></td>
+  </tr>
+  
 </table>
 <table width="100%">
   <colgroup>
@@ -294,10 +306,26 @@
     </td>
     <td><b stl:attributes="class _B38">B38</b></td>
   </tr>
+  
+  <tr>
+    <th>Les bâtiments de la BDP sont-ils ouverts à tous publics ?</th> 
+    <td>
+       <input stl:attributes="value fieldB39X"
+              type="text" name="fieldB39X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldB39Y"
+              type="text" name="fieldB39Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _B39">B39</b></td>
+  </tr>
+  
 </table>
 <table>
   <tr>
-    <th>Dans les bâtiments ouverts tous publics, l'accès public à internet est-il ?</th>
+    <th>Si oui, l'accès public à internet est-il ?</th>
   </tr>
 </table>
 <table width="100%">
@@ -328,6 +356,13 @@
     <td><b stl:attributes="class _B40">B40</b></td>
   </tr>
 </table>
-</form>
- <p style = "page-break-after:always "></p>
+
+<div>
+    <p></p>
+    <p>**si oui, veuillez indiquer dans la partie "Commentaires" le mode d'administration de l'annexe : bâtiment départemental ou municipal; la situation administratif des agents; l'organisation générale du lieu. </p>
+ 
 </div>
+<p style = "page-break-after:always "></p>   
+</form>
+</div>
+

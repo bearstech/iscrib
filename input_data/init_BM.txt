@@ -155,7 +155,6 @@
 169;Cagnes-sur-Mer;06;06027
 170;Cannes;06;06029
 171;Le Cannet;06;06030
-172;Cap-d'Ail;06;06032
 173;Carros;06;06033
 174;Châteauneuf-Grasse;06;06038
 175;Contes;06;06048
@@ -963,7 +962,6 @@
 1038;Ivry-la-Bataille;27;27355
 1039;Louviers;27;27375
 1040;Nonancourt;27;27438
-1041;Pacy-sur-Eure;27;27448
 1042;Perriers-sur-Andelle;27;27453
 1043;Pîtres;27;27458
 1044;Pont-Audemer;27;27467
@@ -1323,6 +1321,7 @@
 1420;Servian;34;34300
 1421;Sète;34;34301
 1422;Soubès;34;34304
+1423;Saint-Aunès;34;34240
 1424;Saint-Brès;34;34244
 1425;Saint-Chinian;34;34245
 1426;Saint-Christol;34;34246
@@ -3396,7 +3395,7 @@
 3636;Prahecq;79;79216
 3637;Secondigny;79;79311
 3638;Souvigné;79;79319
-3639; ;79;79237
+3639;Saint-Aubin-de-Baubigné;79;79237
 3640;Saint-Hilaire-la-Palud;79;79257
 3641;Saint-Loup-Lamairé;79;79268
 3642;Saint-Maixent-l'Ecole;79;79270
@@ -4104,6 +4103,7 @@
 4394;Saint-André;974;97409
 4395;Saint-Benoît;974;97410
 4396;Saint-Denis;974;97411
+4398;Saint-Denis;974;97411
 4399;Saint-Joseph;974;97412
 4400;Saint-Leu;974;97413
 4401;Saint-Louis;974;97414
@@ -4117,6 +4117,7 @@
 4410;Les Trois-Bassins;974;97423
 4411;Saint-Pierre;975;97502
 4412;Miquelon-Langlade;975;97501
+4413;Koungou;985;98510
 4415;Pamandzi;985;98515
 4416;Sada;985;98516
 4417;Papeete;987;98735
@@ -4125,8 +4126,8 @@
 4422;Hellemmes-Lille;59;59298
 4425;La Turbie;06;06150
 4426;Strasbourg;67;67482
-4427;Marne la Vallée;77;77
-4428;Marne la Vallée;77; 
+4427;Marne la Vallée;77;77111
+4428;Marne la Vallée;77;77468
 4432;Saint-Hilaire-de-Chaléons;44;44164
 4433;Saint-Jean-des-Baisants;50;50492
 4435;Beauvois-en-Cambrésis;59;59063
@@ -4213,3 +4214,4 @@
 4534;Roquecor;82;82151
 4535;Montbrehain;02;02500
 4536;Montmartin-sur-Mer;50;50349
+4539;Méricourt;62;62570

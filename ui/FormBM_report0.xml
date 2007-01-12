@@ -29,7 +29,7 @@
             </div> 
          </td>
          <td style="text-align: center;font-weight: bold; font-size:16px"> 
-            RAPPORT ANNUEL 2005 <br/> des bibliothèques municipales 
+            RAPPORT ANNUEL 2006 <br/> des bibliothèques municipales 
          </td>
      </tr>   
      </table>
@@ -71,10 +71,11 @@
 
  <table width="100%" >
   <colgroup>
-    <col width="28%"/>
+    <col width="20%"/>
+    <col width="7%"/>
+    <col width="7%"/>
+    <col width="56%"/>
     <col width="10%"/>
-    <col width="48%"/>
-    <col width="15%"/>
    </colgroup>
      <tr> 
         <th >Code</th> 
@@ -82,67 +83,74 @@
      </tr> 
       <tr>    
         <th >Nom </th>
-        <td colspan="2"><input stl:attributes="value field1" size="60" type="text" name="field1" value=""></input></td>
+        <td colspan="3"><input stl:attributes="value field1" size="60" type="text" name="field1" value=""></input></td>
         <td sdval="1" sdnum="1036;">1</td>
       </tr> 
      <tr>    
         <th > </th>
-        <td colspan="2"><input stl:attributes="value field2" size="60" type="text" name="field2" value=""></input></td>
+        <td colspan="3"><input stl:attributes="value field2" size="60" type="text" name="field2" value=""></input></td>
         <td sdval="1" sdnum="1036;">2</td>
      </tr> 
      <tr>    
-        <th >Adresse</th>
-        <td colspan="2"><input stl:attributes="value field3" size="60" type="text" name="field3" value=""></input></td>
+        <th >Complément d'adresse</th>
+       <td colspan="3"><input stl:attributes="value field3" size="60" type="text" name="field3" value=""></input></td>
         <td sdval="1" sdnum="1036;">3</td>
+     </tr> 
+     <tr>    
+        <th >N°/Type voie/Nom voie</th>
+        <td ><input stl:attributes="value field30" size="5" type="text" name="field30" value=""></input>30</td>
+        <td ><input stl:attributes="value field31" size="5" type="text" name="field31" value=""></input>31</td>
+        <td ><input stl:attributes="value field32" size="35" type="text" name="field32" value=""></input></td>
+        <td sdval="1" sdnum="1036;">32</td>
      </tr> 
      <tr>    
         <th  style="text-align: right">Code postal / Ville </th>
         <td><input stl:attributes="value field4" size="5" maxlength="5" type="text" name="field4" value="" style="text-align: right"></input> 4 </td>
-        <td ><input stl:attributes="value field5" size="44" type="text" name="field5" value=""></input></td>
+        <td colspan="2"><input stl:attributes="value field5" size="48" type="text" name="field5" value=""></input></td>
         <td sdval="1" sdnum="1036;">5</td>           
       </tr>
      <tr>  
         <th  style="text-align: right">Cedex </th>                 
-        <td colspan="2" ><input stl:attributes="value field6" type="text" size="8" name="field6" value=""></input></td>
+        <td colspan="3" ><input stl:attributes="value field6" type="text" size="8" name="field6" value=""></input></td>
         <td sdval="1" sdnum="1036;">6</td>
      </tr> 
      <tr></tr>
      <tr>    
         <th >Nom et Prénom du Directeur</th>
-        <td colspan="2"><input stl:attributes="value field7" size="60" type="text" name="field7" value=""></input></td>
+        <td colspan="3"><input stl:attributes="value field7" size="60" type="text" name="field7" value=""></input></td>
         <td sdval="1" sdnum="1036;">7</td>
      </tr>
      <tr>
         <th >Statut et Grade du Directeur</th>
-        <td colspan="2"><input stl:attributes="value field8" size="60" type="text" name="field8" value=""></input></td>
+        <td colspan="3"><input stl:attributes="value field8" size="60" type="text" name="field8" value=""></input></td>
         <td sdval="2" sdnum="1036;">8</td>
      </tr>
      <tr></tr>
       <tr>
         <th >Téléphone</th>
-        <td colspan="2"><input stl:attributes="value field9" size="10" maxlength="10" type="text" name="field9" value=""></input> </td>
+        <td colspan="3"><input stl:attributes="value field9" size="10" maxlength="10" type="text" name="field9" value=""></input> </td>
         <td sdval="3" sdnum="1036;">9</td>
       </tr>
       <tr>
         <th >Télécopie</th>
-        <td colspan="2"><input stl:attributes="value field10" size="10" maxlength="10" type="text" name="field10" value=""></input> </td>
+        <td colspan="3"><input stl:attributes="value field10" size="10" maxlength="10" type="text" name="field10" value=""></input> </td>
         <td sdval="4" sdnum="1036;">10</td>
       </tr>
       <tr>
         <th>Courriel</th>
-        <td colspan="2"><input stl:attributes="value field11" size="60" type="text" name="field11" value=""></input> </td>
+        <td colspan="3"><input stl:attributes="value field11" size="60" type="text" name="field11" value=""></input> </td>
         <td sdval="5" sdnum="1036;">11</td>
       </tr>
       <tr>
         <th >Site Web</th>
-        <td colspan="2"><input stl:attributes="value field12" size="60" type="text" name="field12" value=""></input> </td>
+        <td colspan="3"><input stl:attributes="value field12" size="60" type="text" name="field12" value=""></input> </td>
         <td sdval="6" sdnum="1036;">12</td>
       </tr>
       
       <tr></tr>
       <tr>
         <th >Rattachement administratif</th>
-        <td colspan="2">
+        <td colspan="3">
 	  <input stl:attributes="checked field13_1" type="radio" style="border:0px" name="field13" value="1" /> Commune <span style="line-height:0pt" ><br/></span>
 	  <input stl:attributes="checked field13_2" type="radio" style="border:0px"  name="field13" value="2" /> Groupement de communes * 
 	  
@@ -151,7 +159,7 @@
       </tr>
       <tr>
         <th >Mode de gestion</th>
-        <td colspan="2">
+        <td colspan="3">
 	  <input stl:attributes="checked field14_1" type="radio" style="border:0px " name="field14" value="1" />Régie directe<span style="line-height:0pt" ><br /></span>
 	  <input stl:attributes="checked field14_2" type="radio" style="border:0px " name="field14" value="2" /> Etablissement public de coopération culturelle<span style="line-height:0pt" ><br /></span>
 	  <input stl:attributes="checked field14_3" type="radio" style="border:0px" name="field14" value="3" /> Association<span style="line-height:0pt" ><br /></span>

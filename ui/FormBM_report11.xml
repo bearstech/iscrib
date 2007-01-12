@@ -11,9 +11,9 @@
      onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
      <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
    
-      <input type="submit" value="Enregistrer" 
+      <!--input type="submit" value="Enregistrer" 
              style="background-color:rgb(145,191,255); border:0"
-             stl:if="is_allowed_to_edit"></input>
+             stl:if="is_allowed_to_edit"></input-->
     </stl:block>
 
   </div>

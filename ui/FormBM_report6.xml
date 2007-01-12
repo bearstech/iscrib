@@ -95,7 +95,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque a-t-elle mené des actions internationales ?</th> 
+    <th>La bibliothèque a-t-elle mené en 2006 des actions internationales ?</th> 
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldF17','fieldF18','fieldF19','fieldF20'])"  type="radio"  name="fieldF16" value="1" style="font-size: 8pt;  border:0px"
                stl:attributes="checked fieldF16" />Oui      </td>

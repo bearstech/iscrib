@@ -308,6 +308,28 @@
     </td>
     <td><b stl:attributes="class _E23">E23</b></td>
   </tr>
+  
+   <tr>
+    <th>Dont documents destinés aux personnels handicapées (livres parlés, braille...)</th> 
+    <td>
+       <input stl:attributes="value fieldE24X"
+              type="text" name="fieldE24X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE24Y"
+              type="text" name="fieldE24Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE24Z"
+              type="text" name="fieldE24Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E24">E24</b></td>
+  </tr>
+  
+  
 </table>
 <h2>E. 3 / 4  NOMBRE DE DOCUMENTS ENTRÉS PAR DONS, LEGS   (hors périodiques )</h2>
 <table  width="100%">
@@ -584,6 +606,27 @@
     </td>
     <td><b stl:attributes="class _E43">E43</b></td>
   </tr>
+  
+  <tr>
+    <th>Dont documents destinés aux personnes handicapées (livres parlés, braille...)</th> 
+    <td>
+       <input stl:attributes="value fieldE44X"
+              type="text" name="fieldE44X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE44Y"
+              type="text" name="fieldE44Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE44Z"
+              type="text" name="fieldE44Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E44">E44</b></td>
+  </tr>
+  
 </table>
   <p style = "page-break-after:always "></p>
 <h2>E. 5 / 6  NOMBRE DE DOCUMENTS RETIRÉS DE L'INVENTAIRE (hors périodiques et documents patrimoniaux)</h2>
@@ -861,6 +904,27 @@
     </td>
     <td><b stl:attributes="class _E63">E63</b></td>
   </tr>
+  
+  <tr>
+    <th>Dont documents destinés aux personnes handicapés (livres parlés, braille...)</th> 
+    <td>
+       <input stl:attributes="value fieldE64X"
+              type="text" name="fieldE64X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE64Y"
+              type="text" name="fieldE64Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE64Z"
+              type="text" name="fieldE64Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E64">E64</b></td>
+  </tr>
+  
 </table>
 <h2>E. 7  NOMBRE DE PÉRIODIQUES ACQUIS (ACHATS, DONS, LEGS)</h2>
 <table  width="100%">
@@ -1311,6 +1375,26 @@
     <td><b stl:attributes="class _E97">E97</b></td>
   </tr>
 
+  <tr>
+    <th>Dont documents destinés aux personnes handicapés (livres parlés, braille...)</th> 
+    <td>
+       <input stl:attributes="value fieldE99X"
+              type="text" name="fieldE99X"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE99Y"
+              type="text" name="fieldE99Y"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td>
+       <input stl:attributes="value fieldE99Z"
+              type="text" name="fieldE99Z"
+              value="" size="8" style="text-align:right"></input>
+    </td>
+    <td><b stl:attributes="class _E99">E99</b></td>
+  </tr>
+  
   <tr>
     <th><b>TOTAL (E85+E88+E91+E94+E95+E96+E97) </b></th> 
     <td>

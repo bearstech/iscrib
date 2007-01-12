@@ -2,103 +2,152 @@
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:stl="http://xml.itools.org/namespaces/stl"
      id="formBiblio">
-
+  <!--p style = "page-break-after:always "></p-->   
+  <table width="100%">
+     <colgroup>
+      <col width="10%"/>
+      <col width="30%"/>
+      <col width="50%"/>  
+     </colgroup>   
+     <tr>
+         <td width="68px" style="vertical-align: middle;" >
+             <img src="../../ui/culture/images/logo-mcc.gif"></img>  
+         </td>
+         <td></td>
+         <td  style="text-align: center; font-size:16px">
+           <i><b>EVALUATION</b></i><br/> BIBLIOTHEQUES TERRITORIALES</td>
+     </tr>
+     <tr>    
+         <td colspan="2" style="vertical-align: middle; padding: 0px;"> 
+            <div class="adresses2">
+              <p></p>
+              <p class="adresse">Direction du livre et de la lecture</p>
+              <p></p>
+              <p class="adresse">Bureau des bibliothèques territoriales</p>
+              <p class="adresse">182, rue Saint Honoré</p>
+              <p class="adresse">75033 PARIS CEDEX 01</p>
+            </div> 
+         </td>
+         <td style="text-align: center;font-weight: bold; font-size:16px"> 
+            RAPPORT ANNUEL 2006 <br/> des bibliothèques départementales de prêt 
+         </td>
+     </tr>   
+     </table>
+     
+     
 <form action=";report" method="post">
 
-  <table width="100%">
-  <tr>
-  <td align="left">
+  <div align="right">
   
-  </td>
-  <td align="right">
   <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
      name="Imprimer" href="#"
      onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
      <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
    
-   
-    <stl:block if="not printable">
-      <input type="submit" value="Enregistrer" 
-             style="background-color:rgb(145,191,255); border:0"
-             stl:if="is_allowed_to_edit"></input>
-    </stl:block>
-  </td>  
-  </tr>
-  </table>
+   <stl:block if="not printable">
+     <input type="submit" value="Enregistrer" 
+            style="background-color:rgb(145,191,255); border:0"
+            stl:if="is_allowed_to_edit"></input>
+   </stl:block>
+  </div>
+
+  
+
+<br/>
+
 
 <a stl:if="is_vide" 
+   style="color:white;background-color:red; border: 1px solid red; font-size:20px"
+   alt="Aide"
+   href=";help">Veuillez consulter l'aide</a>
+
+<h1>IDENTITE
+<a stl:if="not printable" href="#" 
    style="color:white;background-color:red; border: 1px solid red; " 
    alt="Aide"
-   href=";help">Veuillez consulter l'aide générale</a>
-<h1>IDENTITE </h1>
+   onclick="window.open(';help0', 'xxx', 'toolbar=no,   location=no, status=no,
+   menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+</h1>
 
-
- <table>
-    <tr> 
-        <th colspan="2">Code</th> 
-        <td ><input stl:attributes="value code_ua" size="10" type="text" name="code_ua" value="" readonly="yes"></input></td>
+ <table width="100%" >
+  <colgroup>
+    <col width="20%"/>
+    <col width="7%"/>
+    <col width="7%"/>
+    <col width="56%"/>
+    <col width="10%"/>
+   </colgroup>
+     <tr> 
+        <th >Code</th> 
+        <td ><input stl:attributes="value code_ua" size="5" type="text" name="code_ua" value="" readonly="yes"></input></td>
      </tr> 
       <tr>    
-        <th colspan="2">Nom </th>
+        <th >Nom </th>
         <td colspan="3"><input stl:attributes="value field1" size="60" type="text" name="field1" value=""></input></td>
         <td sdval="1" sdnum="1036;">1</td>
       </tr> 
      <tr>    
-        <th colspan="2"> </th>
+        <th > </th>
         <td colspan="3"><input stl:attributes="value field2" size="60" type="text" name="field2" value=""></input></td>
         <td sdval="1" sdnum="1036;">2</td>
      </tr> 
      <tr>    
-        <th colspan="2">Adresse</th>
-        <td colspan="3"><input stl:attributes="value field3" size="60" type="text" name="field3" value=""></input></td>
+        <th >Complément d'adresse</th>
+       <td colspan="3"><input stl:attributes="value field3" size="60" type="text" name="field3" value=""></input></td>
         <td sdval="1" sdnum="1036;">3</td>
      </tr> 
      <tr>    
-        <th colspan="2" style="text-align: right">Code postal / Ville </th>
-        <td><input stl:attributes="value field4" size="5" type="text" name="field4" value="" style="text-align: right"></input></td>
-        <td> 4 </td>
-        <td><input stl:attributes="value field5" size="45" type="text" name="field5" value=""></input></td>
+        <th >N°/Type voie/Nom voie</th>
+        <td ><input stl:attributes="value field30" size="5" type="text" name="field30" value=""></input>30</td>
+        <td ><input stl:attributes="value field31" size="5" type="text" name="field31" value=""></input>31</td>
+        <td ><input stl:attributes="value field32" size="35" type="text" name="field32" value=""></input></td>
+        <td sdval="1" sdnum="1036;">32</td>
+     </tr> 
+     <tr>    
+        <th  style="text-align: right">Code postal / Ville </th>
+        <td><input stl:attributes="value field4" size="5" maxlength="5" type="text" name="field4" value="" style="text-align: right"></input> 4 </td>
+        <td colspan="2"><input stl:attributes="value field5" size="48" type="text" name="field5" value=""></input></td>
         <td sdval="1" sdnum="1036;">5</td>           
       </tr>
      <tr>  
-        <th colspan="2" style="text-align: right">Cedex </th>                 
+        <th  style="text-align: right">Cedex </th>                 
         <td colspan="3" ><input stl:attributes="value field6" type="text" size="8" name="field6" value=""></input></td>
         <td sdval="1" sdnum="1036;">6</td>
      </tr> 
      <tr></tr>
      <tr>    
-        <th colspan="2">Nom et Prénom du Directeur</th>
+        <th >Nom et Prénom du Directeur</th>
         <td colspan="3"><input stl:attributes="value field7" size="60" type="text" name="field7" value=""></input></td>
         <td sdval="1" sdnum="1036;">7</td>
      </tr>
      <tr>
-        <th colspan="2">Statut et grade du Directeur</th>
+        <th >Statut et Grade du Directeur</th>
         <td colspan="3"><input stl:attributes="value field8" size="60" type="text" name="field8" value=""></input></td>
         <td sdval="2" sdnum="1036;">8</td>
      </tr>
      <tr></tr>
       <tr>
-        <th colspan="2">Téléphone</th>
-        <td colspan="3"><input stl:attributes="value field9" size="15" type="text" name="field9" value=""></input> </td>
+        <th >Téléphone</th>
+        <td colspan="3"><input stl:attributes="value field9" size="10" maxlength="10" type="text" name="field9" value=""></input> </td>
         <td sdval="3" sdnum="1036;">9</td>
       </tr>
       <tr>
-        <th colspan="2">Télécopie</th>
-        <td colspan="3"><input stl:attributes="value field10" size="15" type="text" name="field10" value=""></input> </td>
+        <th >Télécopie</th>
+        <td colspan="3"><input stl:attributes="value field10" size="10" maxlength="10" type="text" name="field10" value=""></input> </td>
         <td sdval="4" sdnum="1036;">10</td>
       </tr>
       <tr>
-        <th colspan="2">Courriel</th>
+        <th>Courriel</th>
         <td colspan="3"><input stl:attributes="value field11" size="60" type="text" name="field11" value=""></input> </td>
         <td sdval="5" sdnum="1036;">11</td>
       </tr>
       <tr>
-        <th colspan="2">Site Web</th>
+        <th >Site Web</th>
         <td colspan="3"><input stl:attributes="value field12" size="60" type="text" name="field12" value=""></input> </td>
         <td sdval="6" sdnum="1036;">12</td>
       </tr>
       
     </table>
  </form>
- <p style = "page-break-after:always "></p>
+ <p style = "page-break-after:always "></p>   
 </div>

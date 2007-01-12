@@ -163,7 +163,20 @@
        </div>    </td>
     <td><b stl:attributes="class _I19">I19</b></td>
   </tr>
-
+  
+  <tr>
+    <th>Projections</th> 
+    <td>
+       <div stl:if="not fieldI11" id="display_fieldI29"           style="visibility:hidden">         <input stl:if="not fieldI11"
+             type="text" name="fieldI29"
+             value="" size="8" style="text-align:right"></input></div>
+       <div stl:if="fieldI11" id="display_fieldI29">         <input stl:if="fieldI11" stl:attributes="value fieldI29"
+             type="text" name="fieldI29"
+             value="" size="8" style="text-align:right"></input>
+       </div>    </td>
+    <td><b stl:attributes="class _I29">I29</b></td>
+  </tr>
+  
   <tr>
     <th>Autres</th> 
     <td>
