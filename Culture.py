@@ -19,6 +19,7 @@
 # Import from the Standard Library
 from datetime import datetime, date
 from time import time
+from operator import itemgetter
 
 # Import from itools
 from itools.web import get_context
@@ -195,17 +196,15 @@ class Root(bibFolder, iRoot):
         users = self.get_handler('users')
         report_c = int(time() -t); print 'get users, deep copy', report_c 
 
-        BMs_len =  len(get_BMs())
-        bib_municipals = get_BMs().items()
+        BMs = get_BMs()
+        BMs_len =  len(BMs)
+        bib_municipals = BMs.items()
         # so we sort by integers values
-        bib_municipals = [(int(k), v) for k, v in bib_municipals]
-        bib_municipals.sort()
-        bib_municipals = [b[-1] for b in bib_municipals]
+        bib_municipals.sort(key=itemgetter(0))
         form = FormBM()
         i = 0
-        #for bib in bib_municipals[:200]: 
-        for bib in bib_municipals: 
-            name, dep, code = (bib['name'], bib['dep'], bib['code'])
+        for code, bib in bib_municipals: 
+            name, dep = bib['name'], bib['dep']
             # Add report
             reports.set_handler(code, form, **{'dc:title': name})
             # Add user

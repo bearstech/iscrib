@@ -144,9 +144,14 @@ class bibUser(Handler, iUser):
         if self.is_BDP():
            dep = name.split('BDP')[-1]
         elif self.is_BM():
-           code = self.get_BM_code()
-           if code:
-               dep = get_BMs()[code].get('dep', '')
+            code = self.get_BM_code()
+            if code:
+                # Cf. #2617
+                bib = get_BMs().get(code)
+                if bib:
+                    dep = bib.get('dep', '')
+                else:
+                    print "bib", code, "n'existe pas"
         return dep
 
 
@@ -164,7 +169,12 @@ class bibUser(Handler, iUser):
         if self.is_BM():
             code = self.get_BM_code()
             if code:
-                title = get_BMs()[code].get('name', '')
+                # Cf. #2617
+                bib = get_BMs().get(code)
+                if bib:
+                    title = bib.get('name', '')
+                else:
+                    print "bib", code, "n'existe pas"
         return title 
 
 
@@ -224,7 +234,9 @@ class bibUser(Handler, iUser):
             dep_name = departments[department].get('name', '')
             namespace['dep'] = dep_name 
         elif code:
-            namespace['dep'] = get_BMs()[code].get('name', '')
+            bib = get_BMs().get(code)
+            if bib:
+                namespace['dep'] = bib.get('name', '')
 
         handler = self.get_handler('/ui/culture/User_home.xml')
         return stl(handler, namespace)

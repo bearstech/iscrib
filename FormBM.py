@@ -111,13 +111,21 @@ class FormBM(Form):
 
 
     def get_user_town(self):
-        return get_BMs()[self.name].get('name', '')
+        title = ''
+        bib = get_BMs().get(self.name)
+        if bib:
+            title = bib.get('name', '')
+        return title
 
 
     get_dep__access__ = True
     def get_dep(self):
         # get department number for BMs
-        return get_BMs()[self.name].get('dep', '')
+        dep = ''
+        bib = get_BMs().get(self.name)
+        if bib:
+            dep = bib.get('dep', '')
+        return dep
 
 
     def get_code(self):
