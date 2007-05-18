@@ -160,14 +160,29 @@
       <tr>
         <th >Mode de gestion</th>
         <td colspan="3">
-	  <input stl:attributes="checked field14_1" type="radio" style="border:0px " name="field14" value="1" />Régie directe<span style="line-height:0pt" ><br /></span>
-	  <input stl:attributes="checked field14_2" type="radio" style="border:0px " name="field14" value="2" /> Etablissement public de coopération culturelle<span style="line-height:0pt" ><br /></span>
-	  <input stl:attributes="checked field14_3" type="radio" style="border:0px" name="field14" value="3" /> Association<span style="line-height:0pt" ><br /></span>
-	  <input stl:attributes="checked field14_4" type="radio" style="border:0px" name="field14" value="4" /> Autre ,
-	  préciser : <input type="text" stl:attributes="value field15" name="field15" size="44"/>             
-	</td>
+          <input stl:attributes="checked field14_1" type="radio"
+            style="border:0px " name="field14" value="1" />Régie directe<span
+            style="line-height:0pt" ><br /></span>
+          <input stl:attributes="checked field14_2" type="radio"
+            style="border:0px " name="field14" value="2" />Etablissement public
+            de coopération culturelle<span style="line-height:0pt" ><br /></span>
+          <input stl:attributes="checked field14_3" type="radio"
+            style="border:0px" name="field14" value="3" /> Association<span
+            style="line-height:0pt" ><br /></span>
+          <input stl:attributes="checked field14_4" type="radio"
+            style="border:0px" name="field14" value="4" /> Autre, préciser :
+          <input type="text" stl:attributes="value field15" name="field15"
+            size="44"/>
+        </td>
         <td sdval="6" sdnum="1036;">14</td>
-    </tr>
+      </tr>
+      <tr>
+        <th>Population concernée</th>
+        <td colspan="3">
+          <input stl:attributes="value fieldK0" type="text" name="fieldK0" value="" readonly="yes" size="8"> habitants</input>
+        </td>
+        <td sdval="6" sdnum="1036;">K0</td>
+      </tr>
     </table>
     * merci de consulter l'onglet EPCI
  </form>

@@ -614,7 +614,8 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'fieldJ15Z' :(Unicode, ''),
           #
           # K- EPCI
-          'fieldK1': (Unicode, ''), 'fieldK2': (Unicode, None),
+          'fieldK0': (Integer, None),
+          'fieldK1': (Unicode, ''), 'fieldK2': (Unicode,''),
           'fieldK3': (Checkboxes, '1'), 
           'fieldK6': (Unicode, ''),
           'fieldK7': (Unicode, ''), 'fieldK8': (Unicode, ''),
@@ -728,6 +729,7 @@ E73Z/E46X = prix moyen d'un document patrimonial
 E69Z/E51Z = prix moyen d'un périodique imprimé
 E74Z - 5% <= A12+A24 <= E74Z + 5 %
 A11/C43X = coût moyen d'un emploi
+G26Y/POPULATION*100 = %inscrits
 """
 
 # for key, text, expression in alertes:
@@ -742,8 +744,11 @@ alertes = [('A', u"E61Z/E11Z = prix moyen d'un livre", 'E61Z / E11Z' ),
            ('G', u"E74Z - 5% <= A12+A24 <= E74Z + 5% = variation à +/- 5 % des dépenses documentaires", 
                  'int(E74Z) * 0.95 < A12+A24 < int(E74Z) * 1.05' ),
            ('H', u"A11/C43X = coût moyen d'un agent pour votre bibliothèque ", 
-                 'int(A11)/float(C43X)' )
-            ]
+                 'int(A11)/float(C43X)' ),
+           ('I', u"G26Y*100/Population concernée = %inscrits",'float(G26Y)*100/float(K0)' ),
+           ('J', u"G26Z*100/Population concernée = %inscrits emprunteurs",'float(G26Z)*100/float(K0)' ),
+           ('K', u"Commentaire", "L20==''")
+           ]
 
 ##############################################################################
 # Controles 

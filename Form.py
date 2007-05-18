@@ -685,7 +685,7 @@ class Form(Handler, iText, WorkflowAware):
                  'textalt': text}
             try:
                 result = eval(expression, namespace)
-                if key != 'G':
+                if key != 'G' and key != 'K':
                     d['resultat'] = "%.2f" % result
                 else:
                     trans = { True: 'Oui', False: 'Non' }
@@ -1195,6 +1195,8 @@ class Form(Handler, iText, WorkflowAware):
                     elif not sum:
                         empty = not str(value)
                         
+                #if key in ['fieldK%s' % i for i in range(2, 2)]:
+                #    empty = False
                 if key in ['fieldK%sY' % i for i in range(17, 31)]:
                     empty = False
                 #########################################
