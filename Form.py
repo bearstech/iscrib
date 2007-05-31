@@ -978,6 +978,7 @@ class Form(Handler, iText, WorkflowAware):
                         value = value.replace(u'"', u'\\"')
                         value = value.replace(u"&quot;", u'\\"')
                         value = value.replace(u"'", u"\\'")
+                        value = value.replace(u"\u2019", u"\\'")
                     namespace[key] = value
                 
         query = query % namespace
