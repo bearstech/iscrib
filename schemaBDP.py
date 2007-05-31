@@ -678,7 +678,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'fieldI14' : (Integer, None), 'fieldI15' : (Integer, None),
           'fieldI16' : (Integer, None), 'fieldI17' : (Integer, None),
           'fieldI18' : (Integer, None), 'fieldI19' : (Integer, None),
-          'fieldI20' : (Integer, None),
+          'fieldI20' : (Integer, None), 'fieldI29' : (Integer, None),
           #
           'fieldI21' : (Boolean, '', {'depend_field' : ('fieldI22', 'fieldI23',
                                                            'fieldI24', 'fieldI25',
