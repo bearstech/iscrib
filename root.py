@@ -305,7 +305,7 @@ class Root(BaseRoot):
             resultset = cursor.fetchall()
             if not resultset:
                 context.commit = False
-                return context.come_back(u'La requête "${query}" a échoué',
+                return context.come_back(u'La requête "$query" a échoué',
                         query=query)
 
             for result in resultset:
@@ -375,7 +375,7 @@ class Root(BaseRoot):
 
         output.close()
 
-        return context.come_back(u"Fichier exporté dans '${output_path}'",
+        return context.come_back(u"Fichier exporté dans '$output_path'",
                 output_path=output_path)
 
 
@@ -396,7 +396,7 @@ class Root(BaseRoot):
         
         for code in code_bib.split():
             if code not in bms:
-                return context.come_back(u"Le code_bib ${code} n'est pas "
+                return context.come_back(u"Le code_bib $code n'est pas "
                         u"dans le fichier input_data/init_BM.txt installé.",
                         code=repr(code))
             codes.append(int(code))
