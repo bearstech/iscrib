@@ -200,50 +200,6 @@ class Form(BaseText):
         self.state.fields.update(meta)
    
 
-    def is_allowed_to_view(self, user, object):
-        # Anonymous
-        if user is None:
-            return False
-        # Admin
-        if self.is_admin():
-            return True
-        # VoirSCRIB
-        if user.name == 'VoirSCRIB':
-            return True
-        # Check the year
-        if user.get_year() != self.parent.get_year():
-            return False
-        # Check the department
-        if user.is_BM():
-            if user.get_BM_code() != self.name:
-                return False
-        if user.is_BDP():
-            if user.get_department() != self.name:
-                return False
-        return True
-
-
-    def is_allowed_to_edit(self, user, object):
-        # Admin
-        if self.is_admin():
-            return True
-        # Anonymous
-        if user is None:
-            return False
-        # Check the year
-        if user.get_year() != self.parent.get_year():
-            return False
-        # Check the department
-        if user.is_BM():
-            if user.get_BM_code() != self.name:
-                return False
-        if user.is_BDP():
-            if user.get_department() != self.name:
-                return False
-        # Only if 'private' -> 'Vide', 'En cours'
-        return self.get_workflow_state() == 'private'
-
-
     #######################################################################
     # Namespaces
     def get_namespace(self, context):
@@ -251,7 +207,10 @@ class Form(BaseText):
 
         namespace = {}
         # Permissions
-        namespace['is_allowed_to_edit'] = self.is_allowed_to_edit()
+        user = context.user
+        ac = self.get_access_control()
+        namespace['is_allowed_to_edit'] = ac.is_allowed_to_edit_form(user,
+                self)
         # Fields
         for name in schema:
             field_def = schema[name]
@@ -478,7 +437,7 @@ class Form(BaseText):
 
     #######################################################################
     # Control report
-    controles_form__access__ = 'is_allowed_to_view'
+    controles_form__access__ = 'is_allowed_to_view_form'
     controles_form__label__ = u'Contrôle de la saisie'
     def controles_form(self, context):
         schema = self.get_schema()
@@ -765,7 +724,7 @@ class Form(BaseText):
         return (res0, res1, res2, res3)
 
 
-    pending2submitted__access__ = 'is_allowed_to_edit'
+    pending2submitted__access__ = 'is_allowed_to_edit_form'
     def pending2submitted(self, context):
         # Change state
         self.set_property('state', 'pending')
@@ -1017,7 +976,7 @@ class Form(BaseText):
         return handler.to_str()
 
 
-    fill_report__access__ = 'is_allowed_to_edit'
+    fill_report__access__ = 'is_allowed_to_edit_form'
     def fill_report(self, context):
         schema = self.get_schema()
         self.set_changed()
@@ -1079,7 +1038,7 @@ class Form(BaseText):
         return context.come_back(message, goto=';controles_form')
 
 
-    report__access__ = 'is_allowed_to_edit'
+    report__access__ = 'is_allowed_to_edit_form'
     def report(self, context):
         schema = self.get_schema()
         self.set_changed()
@@ -1215,33 +1174,8 @@ class Form(BaseText):
 
 
     #######################################################################
-    # Workflow
-    def is_allowed_to_trans(self, name):
-        context = get_context()
-        root, user = context.root, context.user
-
-        if user is None:
-            return False
-
-        namespace = self.get_namespace()
-        is_admin = user.name in root.get_handler('admins').get_usernames()
-
-        if is_admin:
-            if name in ['request', 'accept', 'publish']:
-                return namespace['is_ready']
-            else:
-                return True
-        else:
-            if name in ['request']:
-                return namespace['is_ready']
-            elif name in ['unrequest']:
-                return True
-            else:
-                return False
-
-
-    #######################################################################
     # Help
+    #######################################################################
     help__access__ = True
     help__label__ = u'Aide'
     def help(self, context):
@@ -1272,7 +1206,7 @@ class Form(BaseText):
         return stl(handler, namespace) 
 
 
-    comments__access__ = 'is_allowed_to_view'
+    comments__access__ = 'is_allowed_to_view_form'
     comments__label__ = u'Rapport Bibliothèques'
     comments__sublabel__ = u'Commentaires'
     def comments(self, context, view=None):

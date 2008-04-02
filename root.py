@@ -81,6 +81,9 @@ class Root(BaseRoot):
     #########################################################################
     # Security
     #########################################################################
+    browse_list__access__ = 'is_admin'
+
+
     def is_consultant(self, user, object):
         if user is None:
             return False
@@ -93,7 +96,72 @@ class Root(BaseRoot):
         return self.is_admin() or self.is_consultant()
 
 
-    browse_list__access__ = 'is_admin'
+    def is_allowed_to_view_form(self, user, object):
+        # Anonymous
+        if user is None:
+            return False
+        # Admin
+        if self.is_admin():
+            return True
+        # VoirSCRIB
+        if user.name == 'VoirSCRIB':
+            return True
+        # Check the year
+        if user.get_year() != object.parent.get_year():
+            return False
+        # Check the department
+        if user.is_BM():
+            if user.get_BM_code() != object.name:
+                return False
+        elif user.is_BDP():
+            if user.get_department() != object.name:
+                return False
+        return True
+
+
+    def is_allowed_to_edit_form(self, user, object):
+        # Admin
+        if self.is_admin():
+            return True
+        # Anonymous
+        if user is None:
+            return False
+        # Check the year
+        if user.get_year() != object.parent.get_year():
+            return False
+        # Check the department
+        if user.is_BM():
+            if user.get_BM_code() != object.name:
+                return False
+        elif user.is_BDP():
+            if user.get_department() != object.name:
+                return False
+        # Only if 'private' -> 'Vide', 'En cours'
+        return object.get_workflow_state() == 'private'
+
+
+    def is_allowed_to_trans(self, user, object, name):
+        if user is None:
+            return False
+
+        context = get_context()
+        root = context.root
+
+        namespace = self.get_namespace()
+        is_admin = self.is_admin(user, object)
+
+        if is_admin:
+            if name in ['request', 'accept', 'publish']:
+                return namespace['is_ready']
+            else:
+                return True
+        else:
+            if name in ['request']:
+                return namespace['is_ready']
+            elif name in ['unrequest']:
+                return True
+            else:
+                return False
 
 
     #########################################################################
