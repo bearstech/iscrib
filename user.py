@@ -21,9 +21,10 @@ from itools import uri
 from itools.web import get_context
 from itools.stl import stl
 from itools.catalog import TextField, EqQuery, AndQuery
-from itools.handlers import File as FileHandler, Folder as FolderHandler
 
 # Import from ikaaro
+from ikaaro.file import File
+from ikaaro.folder import Folder
 from ikaaro.users import User as BaseUser, UserFolder as BaseUserFolder
 from ikaaro.utils import get_parameters
 from ikaaro.registry import register_object_class
@@ -124,8 +125,9 @@ class bibUser(BaseUser):
     # User interface
     #######################################################################
     def get_views(self):
-        root = self.get_root()
-        if self.name in root.get_handler('admins').get_usernames():
+        context = get_context()
+        root = context.root
+        if root.has_user_role(self.name, 'admins'):
             return ['edit_password_form']
         elif self.name == 'VoirSCRIB':
             return ['edit_password_form']
@@ -149,10 +151,10 @@ class bibUser(BaseUser):
         year = self.get_year()
         if self.is_BM():
             code = self.get_BM_code()
-            report = root.get_handler('BM%s/%s' % (year, code))
+            report = root.get_object('BM%s/%s' % (year, code))
         elif self.is_BDP():
             department = self.get_department()
-            report = root.get_handler('BDP%s/%s' % (year, department))
+            report = root.get_object('BDP%s/%s' % (year, department))
 
         namespace['report_url'] = '%s/;%s' % (self.get_pathto(report),
                                               report.get_firstview())
@@ -170,8 +172,8 @@ class bibUser(BaseUser):
             if bib:
                 namespace['dep'] = bib.get('name', '')
 
-        handler = self.get_handler('/ui/culture/User_home.xml')
-        return stl(handler, namespace)
+        template = self.get_object('/ui/culture/User_home.xml')
+        return stl(template, namespace)
 
 
     #######################################################################
@@ -206,15 +208,15 @@ class bibUserFolder(BaseUserFolder):
 
     search_form__access__ = 'is_admin'
     search_form__label__ = u'Search'
-    def search_form(self):
-        context = get_context()
+    def search_form(self, context):
         root = context.root
         namespace = {}
-        admin_names = root.get_handler('admins').get_usernames()
+        admin_names = root.get_members_classified_by_role()['admins']
         admins = []
+        user_folder = root.get_object('users')
         for admin_name in admin_names:
             dic = {} 
-            user = root.get_handler('users').get_handler(admin_name)
+            user = user_folder.get_object(admin_name)
             dic['name'] = user.get_property('title') or user.name
             dic['url'] = str(self.get_pathto(user))
             admins.append(dic)
@@ -317,32 +319,30 @@ class bibUserFolder(BaseUserFolder):
         # Build objects namespace, add the path to the object from the
         # current folder.
         aux = []
-        root = self.get_root()
-        for handler in objects:
-            resource = handler.resource
-            path_to_handler = self.get_pathto(handler)
+        for object in objects:
+            path_to_object = self.get_pathto(object)
             node = self
             path = []
-            for name in path_to_handler:
+            for name in path_to_object:
                 node = node.get_handler(name)
                 path.append({'name': node.name,
                              'url': '%s/;%s' % (self.get_pathto(node),
                                                 node.get_firstview())})
 
-            if isinstance(resource, FileHandler):
-                summary = self.gettext('%d bytes') % resource.get_size()
-            elif isinstance(resource, FolderHandler):
-                nresources = len([ x for x in resource.get_resource_names()
-                                   if not x.startswith('.') ])
-                summary = str(nresources)
+            if isinstance(object, File):
+                summary = self.gettext(u'%d bytes') % vfs.get_size(object.uri)
+            elif isinstance(object, Folder):
+                nobjects = len([ x for x in object.get_names()
+                                   if not x.endswith('.metadata') ])
+                summary = str(nobjects)
 
-            mtime = resource.get_mtime()
+            mtime = object.get_mtime()
             path_to_icon = handler.get_path_to_icon(16)
-            # XXX hugly
+            # XXX ugly
             path_to_icon = uri.Path(str(path_to_handler) + '/').resolve(path_to_icon)
             aux.append({'oid': path_to_handler,
                         'icon': path_to_icon,
-                        'type': resource.get_mimetype(),
+                        'type': object.handler.get_mimetype(),
                         'date': mtime.strftime('%Y-%m-%d %H:%M'),
                         'title': (handler.get_user_town() or 
                                   handler.get_department_name()),

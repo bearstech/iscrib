@@ -435,32 +435,7 @@ class Root(BaseRoot):
     #########################################################################
     # Upgrade
     #########################################################################
-    def update_20050509(self):
-        from itools.handlers.KeyValue import KeyValue
 
-        # Move settings to metadata
-        settings = self.resource.get_resource('.settings')
-        settings = KeyValue(settings)
-        if settings.state.join is True:
-            self.set_property('ikaaro:website_is_open', True)
-        self.set_property('ikaaro:website_languages', settings.state.languages)
-        self.metadata.save_state()
-
-        self.resource.del_resource('.settings')
-
-
-    def update_20060505(self):
-        users = self.get_handler('users')
-        users.set_handler('VoirSCRIB', bibUser(password='BMBDP'))
-        users.save()
-
-
-    def update_20060728(self):
-        self.update_20050509()
-
-
-    def update_20060802(self):
-        BaseRoot.update_20060205(self)
 
 
 register_object_class(Root)

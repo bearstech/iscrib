@@ -54,8 +54,8 @@ class FormBM(Form):
 
     ######################################################################
     # Parsing
-    def _load_state(self, resource):
-        data = resource.read()
+    def _load_state_from_file(self, file):
+        data = file.read()
         self.state.fields = {}
         for line in data.splitlines():
             line = line.strip()
