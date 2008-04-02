@@ -32,19 +32,17 @@ import MySQLdb
 # Import from itools
 from itools.datatypes import Unicode, Boolean, String
 from itools.web import get_context
-from itools.web.exceptions import UserError
 from itools.stl import stl
-from itools.csv import CSV
+from itools.csv import CSVFile
 
 # Import from ikaaro
 from ikaaro.text import Text as BaseText
 from ikaaro.workflow import WorkflowAware, workflow
-from ikaaro.utils import comeback
+from ikaaro.registry import register_object_class
 
 # Import from scrib
 from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
 from scrib import config
-from handler import Handler
 
 
 SMTPServer = config.SMTPServer
@@ -112,48 +110,43 @@ def get_controles():
         from schema_bm import controles 
     return controles 
 
-def get_cursor():
-    try: 
-        connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
-                                     port=int(SqlPort), user=SqlUser,
-                                     passwd=SqlPasswd)
-    except MySQLdb.OperationalError: 
-        raise UserError, u"La connexion à MySql ne s'est pas faite" 
+
+MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
+MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL"
+
+
+def get_cursor(**kw):
+    connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
+                                 port=int(SqlPort), user=SqlUser,
+                                 passwd=SqlPasswd, **kw)
     return connection.cursor()
 
 
 
 def get_adresse(query):
     """ Accès base adresse"""
-    try: 
-        connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
-                                     port=int(SqlPort), user=SqlUser,
-                                     passwd=SqlPasswd)
-   #     connection = MySQLdb.connect(db='scrib', host='localhost', 
-   #                              user='scrib' ,passwd='Scrib-2005*')
-    except MySQLdb.OperationalError:
-        raise UserError, u"La connexion à MySql ne s'est pas faite" 
-    cursor = connection.cursor()
+    cursor = get_cursor()
     cursor.execute(query)
     res = cursor.fetchall()
     
-    if len(res):
-        res = res[0]
-        adresse = []
-        for val in res:
-            if str(val) == 'None':
-                adresse.append('')
-            else:
-                adresse.append(val)
-        cursor.close()
-        connection.close()
-    else:
-        raise UserError, u"La bibliothèque n'existe pas dans la base SQL"
-        
+    if not len(res):
+        raise ValueError, MSG_NO_ADRESSE
+
+    res = res[0]
+    adresse = []
+    for val in res:
+        if str(val) == 'None':
+            adresse.append('')
+        else:
+            adresse.append(val)
+    cursor.close()
+    connection.close()
+
     return adresse or ''
 
 
-class Form(Handler, BaseText, WorkflowAware):
+
+class Form(BaseText):
 
     class_id = 'Form'
     class_icon48 = 'culture/images/form48.png'
@@ -172,7 +165,7 @@ class Form(Handler, BaseText, WorkflowAware):
 
 
     def get_catalog_indexes(self):
-        document = Handler.get_catalog_indexes(self)
+        document = BaseText.get_catalog_indexes(self)
         document['user_town'] = self.get_user_town()
         document['dep'] = self.get_dep()
         document['year'] = self.get_year()
@@ -852,7 +845,7 @@ class Form(Handler, BaseText, WorkflowAware):
         
         self.scrib_log(event='recipe sent', content=r_message)
 
-        comeback(comeback_msg, ';controles_form')
+        return context.come_back(comeback_msg, goto=';controles_form')
 
 
     def scrib_log(self, event=None, content=None):
@@ -956,7 +949,10 @@ class Form(Handler, BaseText, WorkflowAware):
 
     submitted2exported__access__ = 'is_admin'
     def submitted2exported(self):
-        cursor = get_cursor()
+        try:
+            cursor = get_cursor()
+        except MySQLdb.OperationalError: 
+            return context.come_back(MSG_NO_MYSQL)
         namespace = self.get_namespace()
         schema = self.get_schema()
         # Update dans la base ADRESSE
@@ -1005,8 +1001,7 @@ class Form(Handler, BaseText, WorkflowAware):
         except MySQLdb.OperationalError, message:
             message = u'Un problème est survenu durant la connexion'\
                     u' à la base de donnée %s' % message
-            comeback(message, ';controles_form')
-            return
+            return context.come_back(message, goto=';controles_form')
         
         cursor.execute('commit')
 
@@ -1021,7 +1016,7 @@ class Form(Handler, BaseText, WorkflowAware):
         self.set_changed()
         
         message = u'Le rapport a été exporté'
-        comeback(message, ';controles_form')
+        return context.come_back(message, goto=';controles_form')
 
 
     def get_dependencies(self):
@@ -1128,7 +1123,7 @@ class Form(Handler, BaseText, WorkflowAware):
         root = context.root
         root.reindex_handler(self)
         message = u'Rapport auto remplis en %.2f secondes' % t
-        comeback(message, ';controles_form')
+        return context.come_back(message, goto=';controles_form')
 
 
     report__access__ = 'is_allowed_to_edit'
@@ -1229,7 +1224,7 @@ class Form(Handler, BaseText, WorkflowAware):
         new_referer, msg = self.make_msg(new_referer=new_referer, notR=notR, 
                                          badT=badT, badT_missing=badT_missing,
                                          badT_values=badT_values)
-        comeback(msg, new_referer)
+        return context.come_back(msg, goto=new_referer)
 
 
     def make_msg(self, new_referer, notR, badT, badT_missing, badT_values):
@@ -1312,7 +1307,7 @@ class Form(Handler, BaseText, WorkflowAware):
 
     #######################################################################
     # Export
-    #report_csv__access__ = Handler.is_admin
+    #report_csv__access__ = BaseText.is_admin
     report_csv__access__ = True
     report_csv__label__ = u'Export'
     def report_csv(self):
@@ -1335,7 +1330,7 @@ class Form(Handler, BaseText, WorkflowAware):
                                  view)
 
 
-    #downloadCSV__access__ = Handler.is_admin
+    #downloadCSV__access__ = BaseText.is_admin
     downloadCSV__access__ = True
     def downloadCSV(self):
         schema = self.get_schema()
@@ -1350,7 +1345,7 @@ class Form(Handler, BaseText, WorkflowAware):
         # construct the csv
         names = schema.keys()
         names.sort()
-        csv = CSV()
+        csv = CSVFile()
         csv.add_row([u"Chapitre du formulaire", u"rubrique", u"valeur"])
         for name in names:
             value = namespace.get(name, '')
@@ -1381,4 +1376,4 @@ class Form(Handler, BaseText, WorkflowAware):
 
 
 #XXX do we need to register FormBM and Form ?
-BaseText.register_handler_class(Form)
+register_object_class(Form)

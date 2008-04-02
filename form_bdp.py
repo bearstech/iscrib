@@ -22,6 +22,7 @@ from itools.stl import stl
 
 # Import from ikaaro
 from ikaaro.text import Text as BaseText
+from ikaaro.registry import register_object_class
 
 # Import from scrib
 from schema_bdp import schema
@@ -297,4 +298,4 @@ class FormBDP(Form):
         return handler.to_str()
 
 
-Form.register_handler_class(FormBDP)
+register_object_class(FormBDP)

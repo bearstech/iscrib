@@ -22,11 +22,11 @@ from MySQLdb.cursors import DictCursor
 
 # Import from itools
 from itools.web import get_context
-from itools.web.exceptions import UserError
 from itools.stl import stl
 
 # Import from ikaaro
 from ikaaro.text import Text as BaseText
+from ikaaro.registry import register_object_class
 
 # Import from scrib
 from scrib import config
@@ -147,16 +147,9 @@ class FormBM(Form):
                 new[k] = v 
         return new 
 
-    def bm_annexes(self, code_ua):
-        try: 
-            connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
-                                         port=int(SqlPort), user=SqlUser,
-                                         passwd=SqlPasswd,
-                                         cursorclass=DictCursor)
-        except MySQLdb.OperationalError:
-            raise UserError, u"La connexion à MySql ne s'est pas faite" 
 
-        cursor = connection.cursor()
+    def bm_annexes(self, code_ua):
+        cursor = get_cursor(cursorclass=DictCursor)
         cursor.execute("select * from annexes04  where code_ua = %s", 
                        (code_ua,))
         res = cursor.fetchall()
@@ -168,15 +161,7 @@ class FormBM(Form):
 
 
     def ua_epci(self, code_ua):
-        try: 
-            connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
-                                         port=int(SqlPort), user=SqlUser,
-                                         passwd=SqlPasswd,
-                                         cursorclass=DictCursor)
-        except MySQLdb.OperationalError:
-            raise UserError, u"La connexion à MySql ne s'est pas faite" 
-
-        cursor = connection.cursor()
+        cursor = get_cursor(cursorclass=DictCursor)
         cursor.execute("select * from ua_epci where code_ua = %s", 
                        (code_ua,))
         res = cursor.fetchall()
@@ -409,4 +394,4 @@ class FormBM(Form):
         return handler.to_str()
 
 
-Form.register_handler_class(FormBM)
+register_object_class(FormBM)

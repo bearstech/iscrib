@@ -18,94 +18,26 @@
 
 # Import from itools
 from itools import uri
-from itools.resources import base
 from itools.web import get_context
-from itools.web.exceptions import UserError
 from itools.stl import stl
-from itools.catalog.analysers import Text as TextAnalyser
-from itools.catalog import queries
+from itools.catalog import TextField, EqQuery, AndQuery
+from itools.handlers import File as FileHandler, Folder as FolderHandler
 
 # Import from ikaaro
-from ikaaro.users import User as iUser, UserFolder as iUserFolder
-from ikaaro.group import Group as BaseGroup
-from ikaaro.utils import comeback, get_parameters
-from ikaaro.widgets import Table
+from ikaaro.users import User as BaseUser, UserFolder as BaseUserFolder
+from ikaaro.utils import get_parameters
+from ikaaro.registry import register_object_class
 
 # Import from scrib
 from utils import get_deps, get_BMs
-from handler import Handler
 
 
 
-class bibGroup(Handler, BaseGroup):
-
-    is_allowed_to_view = Handler.is_admin
-    edit_metadata_form__access__ = 'is_admin'
-    edit_metadata__access__ = 'is_admin'
-    browse_thumbnails__access__ = False
-    browse_list__access__ = 'is_admin'
-    add_users_form__access__ = False
-
-
-    def get_views(self):
-        views = BaseGroup.get_views(self)
-        return views + ['create_add_users_form']
-
-
-    #######################################################################
-    # Users / Add
-    create_add_users_form__access__ = 'is_admin'
-    create_add_users_form__label__ = u'Ajouter un administrateur Scrib'
-    def create_add_users_form(self):
-        context = get_context()
-        root = context.root
-        namespace = {}
-        usernames = self.get_usernames()
-        
-        # Users
-        users = root.get_handler('users')
-
-        handler = self.get_handler('/ui/culture/bibGroup_create_add_users.xml')
-        return stl(handler, namespace)
-
-
-    create_add_users__access__ = 'is_admin'
-    def create_add_users(self, username, password, password2, groups=[], **kw):
-        context = get_context()
-        root = context.root
-        namespace = {}
-
-        # Check the values
-        if not username:
-            raise UserError, self.gettext('The username is wrong, please try again.')
-        if self.has_handler(username):
-            raise UserError, \
-                  self.gettext('There is another user with the username "%s", '
-                    'please try again') % username
-        if not password or password != password2:
-            raise UserError, self.gettext('The password is wrong, please try again.')
-
-        # add the user
-        users = root.get_handler('users')
-        users.set_user(username, password)
-
-        # Add user in groups
-        admin_group = root.get_handler('admins')
-        admin_group.set_user(username)
-
-        message = self.gettext('User added')
-        comeback(message, ';browse_users')
-
-
-BaseGroup.register_handler_class(bibGroup)
-
-
-
-class bibUser(Handler, iUser):
+class bibUser(BaseUser):
     class_id = 'bibUser'
 
     def get_catalog_indexes(self):
-        document = Handler.get_catalog_indexes(self)
+        document = BaseUser.get_catalog_indexes(self)
         document['user_town'] = self.get_user_town()
         document['dep'] = self.get_department()
         document['year'] = self.get_year()
@@ -247,13 +179,13 @@ class bibUser(Handler, iUser):
     edit_password_form__label__ = u'Change password'
 
 
-iUser.register_handler_class(bibUser)
+register_object_class(bibUser)
 
 
 
-class bibUserFolder(Handler, iUserFolder):
+class bibUserFolder(BaseUserFolder):
 
-    is_allowed_to_view = Handler.is_admin
+    is_allowed_to_view = BaseUserFolder.is_admin
     browse_thumbnails__access__ = 'is_admin'
     edit_metadata_form__access__ = 'is_admin'
 
@@ -261,7 +193,7 @@ class bibUserFolder(Handler, iUserFolder):
     #######################################################################
     # Search
     def get_views(self):
-        views = iUserFolder.get_views(self)
+        views = BaseUserFolder.get_views(self)
         if 'browse_thumbnails' in views:
             views.remove('browse_thumbnails')
         if 'new_user_form' in views:
@@ -303,12 +235,12 @@ class bibUserFolder(Handler, iUserFolder):
 
         # make possible the search in 'bellegarde-sur-valserine'
         # by the Complex search on 'bellegarde', 'sur', 'valserine'
-        names = [t[0] for t in TextAnalyser(name)]
+        names = [t[0] for t in TextField.split(name)]
         if names: 
-            q_name =  queries.Equal('user_town', names[0])
+            q_name =  EqQuery('user_town', names[0])
             for subname in names:
-                q_name2 = queries.Equal('user_town', subname)
-                q_name = queries.And(q_name, q_name2)
+                q_name2 = EqQuery('user_town', subname)
+                q_name = AndQuery(q_name, q_name2)
         namespace['search_name'] = name
 
         # departements
@@ -337,28 +269,28 @@ class bibUserFolder(Handler, iUserFolder):
             is_BDP = True
         
         # Search
-        if year: q_year = queries.Equal('year', year)
-        if dep: q_dep = queries.Equal('dep', dep)
-        if name: q_name = queries.Equal('user_town', name)
+        if year: q_year = EqQuery('year', year)
+        if dep: q_dep = EqQuery('dep', dep)
+        if name: q_name = EqQuery('user_town', name)
 
         # independent of the form : q_bibUser, q_type_form
-        q_bibUser = queries.Equal('format', bibUser.class_id)
+        q_bibUser = EqQuery('format', bibUser.class_id)
         if is_BM: 
-            q_type_form = queries.Equal('is_BM', str(int(is_BM)))
+            q_type_form = EqQuery('is_BM', str(int(is_BM)))
         if is_BDP: 
-            q_type_form = queries.Equal('is_BDP', str(int(is_BDP)))
+            q_type_form = EqQuery('is_BDP', str(int(is_BDP)))
 
 
         query, objects = None, []
         if name or dep or year:
             query = q_type_form 
-            query = queries.And(query, q_bibUser)
+            query = AndQuery(query, q_bibUser)
         if year: 
-            query = queries.And(query, q_year)
+            query = AndQuery(query, q_year)
         if name: 
-            query = queries.And(query, q_name)
+            query = AndQuery(query, q_name)
         if dep: 
-            query = queries.And(query, q_dep)
+            query = AndQuery(query, q_dep)
 
         namespace['too_long_answer'] = '' 
         msg = u'Il y a %s réponses, les 100 premières sont présentées.'\
@@ -397,9 +329,9 @@ class bibUserFolder(Handler, iUserFolder):
                              'url': '%s/;%s' % (self.get_pathto(node),
                                                 node.get_firstview())})
 
-            if isinstance(resource, base.File):
+            if isinstance(resource, FileHandler):
                 summary = self.gettext('%d bytes') % resource.get_size()
-            elif isinstance(resource, base.Folder):
+            elif isinstance(resource, FolderHandler):
                 nresources = len([ x for x in resource.get_resource_names()
                                    if not x.startswith('.') ])
                 summary = str(nresources)
@@ -420,13 +352,12 @@ class bibUserFolder(Handler, iUserFolder):
 
         # The table
         path = context.path
-        table = Table(path.get_pathtoroot(), tablename, objects, sortby='oid',
+        table = table(path.get_pathtoroot(), tablename, objects, sortby='oid',
                       sortorder='up', batchstart='0', batchsize='50')
         namespace['table'] = table
-        namespace['batch'] = table.batch_control()
 
         handler = self.get_handler('/ui/culture/bibUserFolder_search.xml')
         return stl(handler, namespace)
 
 
-iUserFolder.register_handler_class(bibUserFolder)
+register_object_class(bibUserFolder)

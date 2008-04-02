@@ -17,24 +17,24 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.catalog.analysers import Text as TextAnalyser
+from itools.catalog import TextField
 from itools.web import get_context
 from itools.catalog import queries
 from itools.stl import stl
 
 # Import from ikaaro
 from ikaaro.utils import get_parameters
-from ikaaro.widgets import Table
+from ikaaro.registry import register_object_class
+from ikaaro.folder import Folder
 
 # Import from scrib
-from folder import bibFolder
 from form_bm import FormBM
 from form_bdp import FormBDP
 from utils import get_deps
 
 
 
-class Forms(bibFolder):
+class Forms(Folder):
 
     class_id = 'Forms'
     class_title = u'Forms'
@@ -150,7 +150,7 @@ class Forms(bibFolder):
             q_year = queries.Equal('year', year)
             query = queries.And(query, q_year)
             # The name of the town
-            for word, pos in TextAnalyser(name):
+            for word, pos in TextField.split(name):
                 q_name = queries.Equal('user_town', word)
                 query = queries.And(query, q_name)
             # The department
@@ -195,13 +195,12 @@ class Forms(bibFolder):
 
         # The table
         path = context.path
-        table = Table(path.get_pathtoroot(), tablename, objects,
+        table = table(path.get_pathtoroot(), tablename, objects,
                       sortby='title', sortorder='up', batchstart='0',
                       batchsize='50')
         namespace['table'] = table
-        namespace['batch'] = table.batch_control()
 
         handler = self.get_handler('/ui/culture/Forms_search.xml')
         return stl(handler, namespace)
 
-bibFolder.register_handler_class(Forms)
+register_object_class(Forms)

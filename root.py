@@ -25,24 +25,21 @@ from operator import itemgetter
 
 # Import from itools
 from itools.web import get_context
-from itools.web.exceptions import UserError
 from itools.stl import stl
-from itools.handlers.transactions import get_transaction
 
 # Import from ikaaro
 from ikaaro.root import Root as BaseRoot
-from ikaaro.utils import comeback
+from ikaaro.registry import register_object_class
 
 # Import from scrib
 from form_bm import FormBM
 from form_bdp import FormBDP
 from forms import Forms
 from user import bibUser
-from folder import bibFolder
 from utils import get_deps, get_BMs
 
 
-class Root(bibFolder, BaseRoot):
+class Root(BaseRoot):
 
     class_id = 'Culture'
     class_version = '20060802'
@@ -81,8 +78,22 @@ class Root(bibFolder, BaseRoot):
 
 
     #########################################################################
-    # Security declarations
+    # Security
     #########################################################################
+    def is_consultant(self):
+        user = get_context().user
+        if user is None:
+            return False
+        return user.name == 'VoirSCRIB'
+
+
+    def is_admin_or_consultant(self):
+        user = get_context().user
+        if user is None:
+            return False
+        return self.is_admin() or self.is_consultant()
+
+
     browse_list__access__ = 'is_admin'
 
 
@@ -217,11 +228,7 @@ class Root(bibFolder, BaseRoot):
                 user = users.get_handler(username)
                 user.set_password('BM%s' % code)
                 del user
-            if i % 200 == 0:
-                get_transaction().commit()
-                print "#200", '%s/%s' % (i, BMs_len), dep, code, username
-            else:
-                print '%s/%s' % (i, BMs_len), dep, code, username
+            print '%s/%s' % (i, BMs_len), dep, code, username
             i += 1
         report_m = int(time() -t); print 'users and reperts set ', report_m 
         secondes = int(time() - t)
@@ -232,7 +239,7 @@ class Root(bibFolder, BaseRoot):
                   u"En %(temp)s %(unite)s"
         message = message % {'year': year, 'temp': minutes or secondes,
                 'unite': minutes and 'minutes' or 'secondes' }
-        comeback(message, ';browse_thumbnails')
+        return context.come_back(message, goto=';browse_thumbnails')
 
 
     new_BDP_reports__access__ = 'is_admin'
@@ -260,7 +267,7 @@ class Root(bibFolder, BaseRoot):
         message = u"Les rapports des BDP pour l'année %s ont été ajoutés. " \
                   u"Et aussi ses utilisateurs associés (BDP01:BDP01, " \
                   u"BDP02:BDP02, etc.)." % year
-        comeback(message, ';browse_thumbnails')
+        return context.come_back(message, goto=';browse_thumbnails')
 
 
     #########################################################################
@@ -302,7 +309,9 @@ class Root(bibFolder, BaseRoot):
             cursor.execute(query)
             resultset = cursor.fetchall()
             if not resultset:
-                raise UserError, u"""La requête "%s" a échoué""" % query
+                context.commit = False
+                return context.come_back(u'La requête "${query}" a échoué',
+                        query=query)
 
             for result in resultset:
                 values = []
@@ -371,7 +380,8 @@ class Root(bibFolder, BaseRoot):
 
         output.close()
 
-        comeback(u"Fichier exporté dans '%s'" % output_path)
+        return context.come_back(u"Fichier exporté dans '${output_path}'",
+                output_path=output_path)
 
 
     #########################################################################
@@ -391,8 +401,9 @@ class Root(bibFolder, BaseRoot):
         
         for code in code_bib.split():
             if code not in bms:
-                raise UserError, (u"Le code_bib %s n'est pas "
-                        u"dans le fichier input_data/init_BM.txt installé." % repr(code))
+                return context.come_back(u"Le code_bib ${code} n'est pas "
+                        u"dans le fichier input_data/init_BM.txt installé.",
+                        code=repr(code))
             codes.append(int(code))
 
         users = self.get_handler('users')
@@ -418,7 +429,7 @@ class Root(bibFolder, BaseRoot):
         message = message % (code, ville, bms[name]['dep'],
                 bms[name]['id'], username, username)
 
-        comeback(message, ';new_bm_form')
+        return context.come_back(message, goto=';new_bm_form')
 
 
     #########################################################################
@@ -452,4 +463,4 @@ class Root(bibFolder, BaseRoot):
         BaseRoot.update_20060205(self)
 
 
-BaseRoot.register_handler_class(Root)
+register_object_class(Root)
