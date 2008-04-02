@@ -300,20 +300,14 @@ class bibUserFolder(BaseUserFolder):
 
         # Search
         if query:
-##            t = time()
-            catalog = root.get_handler('.catalog')
-##            t_loadC = time() - t; print 't_loadC', t_loadC
-
-            documents = catalog.search(query)
-            documents = list(documents)
-##            t_search = time() - t; print 't_search', t_search
-
-            answer_len = len(documents)
+            results = root.catalog.search(query)
+            answer_len = results.get_n_documents()
             if answer_len > 100:
                 namespace['too_long_answer'] = msg % answer_len
             too_long_answer = msg % answer_len
             # Get the real objects
-            objects = [ root.get_handler(x.abspath) for x in documents[:100] ]
+            documents = results.get_documents(size=100)
+            objects = [ root.get_handler(x.abspath) for x in documents ]
 ##            t_h = time() - t; print 't_h', t_h
 
         # Build objects namespace, add the path to the object from the

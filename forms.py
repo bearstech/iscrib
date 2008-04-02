@@ -165,21 +165,12 @@ class Forms(Folder):
 
             # Search
             root = context.root
-            catalog = root.get_handler('.catalog')
-            documents = catalog.search(query)
-            # Get the real objects (never more than 100)
-            documents = list(documents)
-            #answer_len = len(documents)
-            #if answer_len > 100:
-            #    msg = u'Il y a %s réponses, les 100 premières sont présentées.'\
-            #          u'Veuillez restreindre votre recherche.'
-            #    namespace['too_long_answer'] = msg % answer_len
-
+            results = root.catalog.search(query)
             # Build objects namespace, add the path to the object from the
             # current folder.
             objects = []
             get_object = root.get_object
-            for document in documents:
+            for document in results.get_documents():
                 # XXX Use document.mtime_microsecond instead?
                 mtime = get_object(document.abspath).get_mtime()
                 objects.append({'name': document.name,
