@@ -24,6 +24,7 @@ from time import time
 from operator import itemgetter
 
 # Import from itools
+from itools import uri
 from itools.datatypes import Unicode
 from itools.web import get_context
 from itools.stl import stl
@@ -145,15 +146,15 @@ class Root(BaseRoot):
         if user is None:
             return goto
         if user.is_admin() or user.name == 'VoirSCRIB':
-            context.redirect(';%s' % self.get_firstview())
+            return uri.get_reference(';%s' % self.get_firstview())
         elif user.is_BM():
             path = 'BM%s/%s' % (user.get_year(), user.get_BM_code())
             report = self.get_handler(path)
-            context.redirect('%s/;%s' % (path, report.get_firstview()))
+            return uri.get_reference('%s/;%s' % (path, report.get_firstview()))
         else:
             path = 'BDP%s/%s' % (user.get_year(), user.get_department())
             report = self.get_handler(path)
-            context.redirect('%s/;%s' % (path, report.get_firstview()))
+            return uri.get_reference('%s/;%s' % (path, report.get_firstview()))
 
 
     #########################################################################
