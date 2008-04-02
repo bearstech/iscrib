@@ -58,7 +58,7 @@ config_file.close()
 
 # Register interface
 path = get_abspath(globals(), 'ui')
-register_skin('culture', path)
+register_skin('scrib', path)
 
 
 # Register Root

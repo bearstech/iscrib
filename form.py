@@ -148,6 +148,8 @@ class Form(BaseText):
 
     class_id = 'Form'
     class_icon48 = 'culture/images/form48.png'
+    class_views = ['report_form0', 'controles_form', 'report_csv',
+                   'print_form', 'help']
     workflow = workflow
 
 
@@ -454,8 +456,6 @@ class Form(BaseText):
     ######################################################################
     # User interface
     def get_views(self):
-        return ['report_form0', 'controles_form', 'report_csv', 'print_form', 
-                'help']
 
 
     def get_form_state(self):
