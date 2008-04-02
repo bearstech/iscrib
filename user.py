@@ -25,19 +25,19 @@ from itools.stl import stl
 from itools.catalog.analysers import Text as TextAnalyser
 from itools.catalog import queries
 
-# Import from itools.cms
-from itools.cms.users import User as iUser, UserFolder as iUserFolder
-from itools.cms.Group import Group as iGroup
-from itools.cms.utils import comeback, get_parameters
-from itools.cms.widgets import Table
+# Import from ikaaro
+from ikaaro.users import User as iUser, UserFolder as iUserFolder
+from ikaaro.group import Group as BaseGroup
+from ikaaro.utils import comeback, get_parameters
+from ikaaro.widgets import Table
 
-# Import from Culture
+# Import from scrib
 from utils import get_deps, get_BMs
-from Handler import Handler
+from handler import Handler
 
 
 
-class bibGroup(Handler, iGroup):
+class bibGroup(Handler, BaseGroup):
 
     is_allowed_to_view = Handler.is_admin
     edit_metadata_form__access__ = 'is_admin'
@@ -48,7 +48,7 @@ class bibGroup(Handler, iGroup):
 
 
     def get_views(self):
-        views = iGroup.get_views(self)
+        views = BaseGroup.get_views(self)
         return views + ['create_add_users_form']
 
 
@@ -97,7 +97,7 @@ class bibGroup(Handler, iGroup):
         comeback(message, ';browse_users')
 
 
-iGroup.register_handler_class(bibGroup)
+BaseGroup.register_handler_class(bibGroup)
 
 
 

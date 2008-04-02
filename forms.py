@@ -22,14 +22,14 @@ from itools.web import get_context
 from itools.catalog import queries
 from itools.stl import stl
 
-# Import from itools.cms
-from itools.cms.utils import get_parameters
-from itools.cms.widgets import Table
+# Import from ikaaro
+from ikaaro.utils import get_parameters
+from ikaaro.widgets import Table
 
-# Import from Culture
-from Folder import bibFolder
-from FormBM import FormBM
-from FormBDP import FormBDP
+# Import from scrib
+from folder import bibFolder
+from form_bm import FormBM
+from form_bdp import FormBDP
 from utils import get_deps
 
 

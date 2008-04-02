@@ -8,7 +8,7 @@ from itools import get_abspath
 from itools.handlers import get_handler
 from itools.handlers import IO
 
-# Import from Culture
+# Import from scrib
 
 print_save = """
    <div align="right">

@@ -16,12 +16,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from itools.cms
-from itools.cms.Folder import Folder as iFolder
+# Import from ikaaro
+from ikaaro.folder import Folder as BaseFolder
 
 # Import from culture
-from Handler import Handler
+from handler import Handler
 
 
-class bibFolder(Handler, iFolder):
+class bibFolder(Handler, BaseFolder):
     pass

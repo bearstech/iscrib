@@ -17,6 +17,8 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
+from os import getcwd
+from os.path import join
 from datetime import datetime, date
 from time import time
 from operator import itemgetter
@@ -27,27 +29,27 @@ from itools.web.exceptions import UserError
 from itools.stl import stl
 from itools.handlers.transactions import get_transaction
 
-# Import from itools.cms
-from itools.cms.root import Root as iRoot
-from itools.cms.utils import comeback
+# Import from ikaaro
+from ikaaro.root import Root as BaseRoot
+from ikaaro.utils import comeback
 
-# Import from culture
-from FormBM import FormBM
-from FormBDP import FormBDP
-from Forms import Forms
-from User import bibUser
-from Folder import bibFolder
+# Import from scrib
+from form_bm import FormBM
+from form_bdp import FormBDP
+from forms import Forms
+from user import bibUser
+from folder import bibFolder
 from utils import get_deps, get_BMs
 
 
-class Root(bibFolder, iRoot):
+class Root(bibFolder, BaseRoot):
 
     class_id = 'Culture'
     class_version = '20060802'
     class_title = u"SCRIB"
 
 
-    _catalog_fields = iRoot._catalog_fields \
+    _catalog_fields = BaseRoot._catalog_fields \
                       + [('user_town', 'text', True, False),
                          ('dep', 'keyword', True, True),
                          ('year', 'keyword', True, False),
@@ -68,7 +70,7 @@ class Root(bibFolder, iRoot):
         return stl(handler, namespace)
 
 
-    _get_handler = iRoot._get_handler
+    _get_handler = BaseRoot._get_handler
 
 
     def before_traverse(self):
@@ -133,7 +135,7 @@ class Root(bibFolder, iRoot):
     #########################################################################
     # Login
     def login(self, **kw):
-        iRoot.login(self, **kw)
+        BaseRoot.login(self, **kw)
         context = get_context()
         user = context.user
         if user.is_admin() or user.name == 'VoirSCRIB':
@@ -282,8 +284,6 @@ class Root(bibFolder, iRoot):
 
     export__access__ = 'is_admin'
     def export(self):
-        import os
-        import os.path
         from itools.datatypes import Unicode
         from Form import get_cursor
 
@@ -346,7 +346,7 @@ class Root(bibFolder, iRoot):
             output.write('\n')
 
 
-        output_path = os.path.join(os.getcwd(), 'exportscrib.sql')
+        output_path = join(getcwd(), 'exportscrib.sql')
         output = open(output_path, 'w')
         output.write(u'-- Généré le %s\n'.encode('latin1') % datetime.now())
         output.write('\n')
@@ -449,7 +449,7 @@ class Root(bibFolder, iRoot):
 
 
     def update_20060802(self):
-        iRoot.update_20060205(self)
+        BaseRoot.update_20060205(self)
 
 
-iRoot.register_handler_class(Root)
+BaseRoot.register_handler_class(Root)

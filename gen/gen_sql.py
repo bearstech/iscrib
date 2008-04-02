@@ -3,12 +3,12 @@
 import os
 
 # import from itools 
-from itools.handlers.IO import String, Boolean, Unicode
+from itools.datatypes import String, Boolean, Unicode
 
-# import from culture
-from CultureTypes import Checkboxes, Integer
-from schemaBM import schema as schemaBM
-from schemaBDP import schema as schemaBDP
+# import from scrib
+from datatypes import Checkboxes, Integer
+from schema_bm import schema as schemaBM
+from schema_bdp import schema as schemaBDP
 from setup import setup
 sql = setup.sql
 

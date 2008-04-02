@@ -2,7 +2,7 @@
 # Import from python
 from pprint import pprint
 
-# Import from Culture
+# Import from scrib
 #from schema import schema
 from GenFormsTemplates import GenForms
 

@@ -24,7 +24,7 @@ import logging
 import datetime
 import socket
 import smtplib
-import decimal
+from decimal import Decimal as dec, InvalidOperation
 
 # Import from mysql
 import MySQLdb
@@ -36,16 +36,15 @@ from itools.web.exceptions import UserError
 from itools.stl import stl
 from itools.csv import CSV
 
-# Import from itools.cms
-from itools.cms.text import Text as iText
-from itools.cms.workflow import WorkflowAware, workflow
-from itools.cms.utils import comeback
+# Import from ikaaro
+from ikaaro.text import Text as BaseText
+from ikaaro.workflow import WorkflowAware, workflow
+from ikaaro.utils import comeback
 
 # Import from scrib
-import CultureTypes
-from CultureTypes import Checkboxes, Integer, EPCI_Statut, Decimal
+from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
 from scrib import config
-from Handler import Handler
+from handler import Handler
 
 
 SMTPServer = config.SMTPServer
@@ -98,9 +97,9 @@ def get_alertes():
     context = get_context()
     handler = context.handler
     if context.handler.is_BDP():
-        from schemaBDP import alertes
+        from schema_bdp import alertes
     if context.handler.is_BM():
-        from schemaBM import alertes 
+        from schema_bm import alertes 
     return alertes
 
 
@@ -108,9 +107,9 @@ def get_controles():
     context = get_context()
     handler = context.handler
     if context.handler.is_BDP():
-        from schemaBDP import controles 
+        from schema_bdp import controles 
     if context.handler.is_BM():
-        from schemaBM import controles 
+        from schema_bm import controles 
     return controles 
 
 def get_cursor():
@@ -154,7 +153,7 @@ def get_adresse(query):
     return adresse or ''
 
 
-class Form(Handler, iText, WorkflowAware):
+class Form(Handler, BaseText, WorkflowAware):
 
     class_id = 'Form'
     class_icon48 = 'culture/images/form48.png'
@@ -1100,7 +1099,7 @@ class Form(Handler, iText, WorkflowAware):
                        value = u'coué'
                    else:
                        value = u''
-           elif field_type is CultureTypes.Integer:
+           elif field_type is Integer:
                if is_sum:
                    value = Integer(len(is_sum) * 5)
                    e_list = ['E74X', 'E46Z', 'E67Z', 'E71Z', 'E74Y', 'E74Z']
@@ -1110,9 +1109,9 @@ class Form(Handler, iText, WorkflowAware):
                else:
                    value = Integer(5) 
            elif field_type is Decimal:
-               value = decimal.Decimal('3.14')
+               value = dec('3.14')
                if is_sum:
-                   value = value * decimal.Decimal(len(is_sum))
+                   value = value * dec(len(is_sum))
                    value = Decimal(value)
                else:
                    value = Decimal(value)
@@ -1213,8 +1212,7 @@ class Form(Handler, iText, WorkflowAware):
                 # use unicode instead
                 try:
                     value = type.decode(value)
-                except (ValueError, UnicodeEncodeError,
-                        decimal.InvalidOperation):
+                except (ValueError, UnicodeEncodeError, InvalidOperation):
                     badT_missing.append('badT_%s' % keyNumber)
                     badT.append(u'%s: <b>%s</b>'
                                 % (keyNumber, unicode(value, 'UTF-8')))
@@ -1368,14 +1366,14 @@ class Form(Handler, iText, WorkflowAware):
                 value = u"NULL"
             elif isinstance(value, bool):
                 value = unicode(int(value))
-            elif isinstance(value, (int, long, float, decimal.Decimal)):
+            elif isinstance(value, (int, long, float, dec)):
                 value = unicode(str(value))
             elif isinstance(value, str):
                 value = unicode(str(value), 'UTF-8')
             elif isinstance(value, unicode):
                 value = value.replace(u"€", u"eur")
             else:
-                # CultureTypes
+                # Culture Types
                 value = unicode(value.__class__.encode(value), 'UTF-8')
             csv.add_row([chap, name, value])
 
@@ -1383,4 +1381,4 @@ class Form(Handler, iText, WorkflowAware):
 
 
 #XXX do we need to register FormBM and Form ?
-iText.register_handler_class(Form)
+BaseText.register_handler_class(Form)

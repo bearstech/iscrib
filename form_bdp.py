@@ -20,12 +20,12 @@
 from itools.web import get_context
 from itools.stl import stl
 
-# Import from itools.cms
-from itools.cms.text import Text as iText
+# Import from ikaaro
+from ikaaro.text import Text as BaseText
 
-# Import from Culture
-from schemaBDP import schema
-from Form import get_adresse, Form
+# Import from scrib
+from schema_bdp import schema
+from form import get_adresse, Form
 from utils import get_deps
 
 
@@ -70,7 +70,7 @@ class FormBDP(Form):
         
         if name in reports:
             return reports
-        return iText.get_subviews(self, name)
+        return BaseText.get_subviews(self, name)
 
 
     def get_schema(self):

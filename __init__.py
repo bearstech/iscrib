@@ -24,8 +24,8 @@ import sys
 # Import from itools
 from itools import get_abspath, get_version
 
-# Import from itools.cms
-from itools.cms.skins import register_skin
+# Import from ikaaro
+from ikaaro.skins import register_skin
 
 
 class Configuration(object):
@@ -62,6 +62,6 @@ register_skin('culture', path)
 
 
 # Register Root
-from Culture import Root
+from root import Root
 
 __version__ = get_version(globals())

@@ -20,19 +20,19 @@
 import MySQLdb
 from MySQLdb.cursors import DictCursor
 
-# Import from Culture
-from scrib import config
-from schemaBM import schema
-from utils import get_BMs
-from Form import get_adresse, Form
-
 # Import from itools
 from itools.web import get_context
 from itools.web.exceptions import UserError
 from itools.stl import stl
 
-# Import from itools.cms
-from itools.cms.text import Text as iText
+# Import from ikaaro
+from ikaaro.text import Text as BaseText
+
+# Import from scrib
+from scrib import config
+from schema_bm import schema
+from utils import get_BMs
+from form import get_adresse, Form
 
 SqlHost = config.SqlHost
 SqlDatabase = config.SqlDatabase
@@ -88,7 +88,7 @@ class FormBM(Form):
 
         if name in reports:
             return reports
-        return iText.get_subviews(self, name)
+        return BaseText.get_subviews(self, name)
 
 
     def get_schema(self):

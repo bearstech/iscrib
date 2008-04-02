@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from python
-from decimal import Decimal as pythonDecimal
+from decimal import Decimal as dec
 
 # Import from itools
 from itools.datatypes import String
@@ -70,7 +70,7 @@ class Decimal(object):
         elif isinstance(value, Decimal):
             pass
         else:
-            value = pythonDecimal(value)
+            value = dec(value)
         self.value = value
 
 

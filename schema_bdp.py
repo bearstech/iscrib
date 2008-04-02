@@ -19,8 +19,8 @@
 # Import from itools
 from itools.datatypes import Unicode, Boolean
 
-# Import from Culture 
-from CultureTypes import Checkboxes, Integer, Decimal
+# Import from scrib 
+from datatypes import Checkboxes, Integer, Decimal
 from schema import sum2controle, checkBib
 
 
