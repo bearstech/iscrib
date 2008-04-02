@@ -33,7 +33,7 @@
       </tr>
       <tr stl:repeat="object table/objects">
         <td>
-          <input class="checkbox" type="checkbox" name="ids:list"
+          <input class="checkbox" type="checkbox" name="ids"
                  stl:if="object/checkbox"
                  stl:attributes="value object/name" />
         </td>
