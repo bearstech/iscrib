@@ -21,7 +21,6 @@ import MySQLdb
 from MySQLdb.cursors import DictCursor
 
 # Import from itools
-from itools.web import get_context
 from itools.stl import stl
 
 # Import from ikaaro
@@ -119,7 +118,7 @@ class FormBM(Form):
 
 
     get_dep__access__ = True
-    def get_dep(self):
+    def get_dep(self, context):
         # get department number for BMs
         dep = ''
         bib = get_BMs().get(self.name)
@@ -176,8 +175,7 @@ class FormBM(Form):
     # Edit report
     print_form__access__ = 'is_allowed_to_view'
     print_form__label__ = u'Impression du rapport '
-    def print_form(self):
-        context = get_context()
+    def print_form(self, context):
         context.response.set_header('Content-Type', 
                                     'text/html; charset=UTF-8')
         namespace = self.get_namespace()
@@ -200,7 +198,7 @@ class FormBM(Form):
     report_form0__access__ = 'is_allowed_to_view'
     report_form0__label__ = u'Rapport Bibliothèques'
     report_form0__sublabel__ = u'Identité'
-    def report_form0(self, view=None, **kw):
+    def report_form0(self, context, view=None):
         return self.get_ns_and_h('FormBM_report0.xml', 
                                  'FormBM_report0_autogen.xml',
                                  view)
@@ -209,7 +207,7 @@ class FormBM(Form):
     report_form1__access__ = 'is_allowed_to_view'
     report_form1__label__ = u'Rapport BM'
     report_form1__sublabel__ = u'A-Finances'
-    def report_form1(self, view=None, **kw):
+    def report_form1(self, context, view=None):
         return self.get_ns_and_h('FormBM_report1.xml', 
                                  'FormBM_report1_autogen.xml',
                                  view)
@@ -217,7 +215,7 @@ class FormBM(Form):
     report_form2__access__ = 'is_allowed_to_view'
     report_form2__label__ = u'Rapport BM'
     report_form2__sublabel__ = u'B-Locaux'
-    def report_form2(self, view=None, **kw):
+    def report_form2(self, context, view=None):
         return self.get_ns_and_h('FormBM_report2.xml', 
                                  'FormBM_report2_autogen.xml',
                                  view)
@@ -226,7 +224,7 @@ class FormBM(Form):
     report_form3__access__ = 'is_allowed_to_view'
     report_form3__label__ = u'Rapport BM'
     report_form3__sublabel__ = u'C-Personnel'
-    def report_form3(self, view=None, **kw):
+    def report_form3(self, context, view=None):
         return self.get_ns_and_h('FormBM_report3.xml', 
                                  'FormBM_report3_autogen.xml',
                                  view)
@@ -235,7 +233,7 @@ class FormBM(Form):
     report_form4__access__ = 'is_allowed_to_view'
     report_form4__label__ = u'Rapport BM'
     report_form4__sublabel__ = u'D-Collections'
-    def report_form4(self, view=None, **kw):
+    def report_form4(self, context, view=None):
         return self.get_ns_and_h('FormBM_report4.xml', 
                                  'FormBM_report4_autogen.xml',
                                  view)
@@ -244,7 +242,7 @@ class FormBM(Form):
     report_form5__access__ = 'is_allowed_to_view'
     report_form5__label__ = u'Rapport BM'
     report_form5__sublabel__ = u'E-Acquisitions'
-    def report_form5(self, view=None, **kw):
+    def report_form5(self, context, view=None):
         return self.get_ns_and_h('FormBM_report5.xml', 
                                  'FormBM_report5_autogen.xml',
                                  view)
@@ -253,7 +251,7 @@ class FormBM(Form):
     report_form6__access__ = 'is_allowed_to_view'
     report_form6__label__ = u'Rapport BM'
     report_form6__sublabel__ = u'F-Coopération et réseau'
-    def report_form6(self, view=None, **kw):
+    def report_form6(self, context, view=None):
         return self.get_ns_and_h('FormBM_report6.xml', 
                                  'FormBM_report6_autogen.xml',
                                  view)
@@ -262,7 +260,7 @@ class FormBM(Form):
     report_form7__access__ = 'is_allowed_to_view'
     report_form7__label__ = u'Rapport BM'
     report_form7__sublabel__ = u'G-Activités'
-    def report_form7(self, view=None, **kw):
+    def report_form7(self, context, view=None):
         return self.get_ns_and_h('FormBM_report7.xml', 
                                  'FormBM_report7_autogen.xml',
                                  view)
@@ -271,7 +269,7 @@ class FormBM(Form):
     report_form8__access__ = 'is_allowed_to_view'
     report_form8__label__ = u'Rapport BM'
     report_form8__sublabel__ = u'H-Services'
-    def report_form8(self, view=None, **kw):
+    def report_form8(self, context, view=None):
         return self.get_ns_and_h('FormBM_report8.xml', 
                                  'FormBM_report8_autogen.xml',
                                  view)
@@ -280,7 +278,7 @@ class FormBM(Form):
     report_form9__access__ = 'is_allowed_to_view'
     report_form9__label__ = u'Rapport BM'
     report_form9__sublabel__ = u'I-Animations, publications et formation'
-    def report_form9(self, view=None, **kw):
+    def report_form9(self, context, view=None):
         return self.get_ns_and_h('FormBM_report9.xml', 
                                  'FormBM_report9_autogen.xml',
                                  view)
@@ -289,7 +287,7 @@ class FormBM(Form):
     report_form10__access__ = 'is_allowed_to_view'
     report_form10__label__ = u'Rapport BM'
     report_form10__sublabel__ = (u'Annexes').capitalize()
-    def report_form10(self, view=None, **kw):
+    def report_form10(self, context, view=None):
         return self.get_ns_and_h('FormBM_report10.xml', 
                                  'FormBM_report10_autogen.xml',
                                  view)
@@ -298,7 +296,7 @@ class FormBM(Form):
     report_form11__access__ = 'is_allowed_to_view'
     report_form11__label__ = u'Rapport BM'
     report_form11__sublabel__ = (u'EPCI')
-    def report_form11(self, view=None, **kw):
+    def report_form11(self, context, view=None):
         code_ua = self.get_code()
         return self.get_ns_and_h('FormBM_report11.xml', 
                                  'FormBM_report11_autogen.xml',
@@ -309,86 +307,75 @@ class FormBM(Form):
     # Help
     
     help0__access__ = True 
-    def help0(self):
-        context = get_context()
+    def help0(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help0.xml')
         return handler.to_str()
     
     help1__access__ = True 
-    def help1(self):
-        context = get_context()
+    def help1(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help1.xml')
         return handler.to_str()
 
 
     help2__access__ = True 
-    def help2(self):
-        context = get_context()
+    def help2(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help2.xml')
         return handler.to_str()
 
 
     help3__access__ = True 
-    def help3(self):
-        context = get_context()
+    def help3(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help3.xml')
         return handler.to_str()
 
 
     help4__access__ = True 
-    def help4(self):
-        context = get_context()
+    def help4(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help4.xml')
         return handler.to_str()
 
 
     help5__access__ = True 
-    def help5(self):
-        context = get_context()
+    def help5(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help5.xml')
         return handler.to_str()
 
 
     help6__access__ = True 
-    def help6(self):
-        context = get_context()
+    def help6(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help6.xml')
         return handler.to_str()
 
 
     help7__access__ = True 
-    def help7(self):
-        context = get_context()
+    def help7(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help7.xml')
         return handler.to_str()
 
 
     help8__access__ = True 
-    def help8(self):
-        context = get_context()
+    def help8(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help8.xml')
         return handler.to_str()
 
 
     help9__access__ = True 
-    def help9(self):
-        context = get_context()
+    def help9(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help9.xml')
         return handler.to_str()
 
     help11__access__ = True 
-    def help11(self):
-        context = get_context()
+    def help11(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBM_help11.xml')
         return handler.to_str()

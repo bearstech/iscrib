@@ -37,7 +37,7 @@ from itools.csv import CSVFile
 
 # Import from ikaaro
 from ikaaro.text import Text as BaseText
-from ikaaro.workflow import WorkflowAware, workflow
+from ikaaro.workflow import workflow
 from ikaaro.registry import register_object_class
 
 # Import from scrib
@@ -91,8 +91,7 @@ def get_checkbox_value(key, value):
     return value
 
 
-def get_alertes():
-    context = get_context()
+def get_alertes(context):
     handler = context.handler
     if context.handler.is_BDP():
         from schema_bdp import alertes
@@ -101,8 +100,7 @@ def get_alertes():
     return alertes
 
 
-def get_controles():
-    context = get_context()
+def get_controles(context):
     handler = context.handler
     if context.handler.is_BDP():
         from schema_bdp import controles 
@@ -153,17 +151,6 @@ class Form(BaseText):
     workflow = workflow
 
 
-    # XXX deactivate archives
-    def add_to_archive(self):
-        pass
-
-    def commit_revision(self):
-        pass
-
-    history_form__access__ = False
-    copy_to_present__access__ = False
-
-
     def get_catalog_indexes(self):
         document = BaseText.get_catalog_indexes(self)
         document['user_town'] = self.get_user_town()
@@ -211,8 +198,7 @@ class Form(BaseText):
         self.state.fields.update(meta)
    
 
-    def is_allowed_to_view(self):
-        user = get_context().user
+    def is_allowed_to_view(self, user, object):
         # Anonymous
         if user is None:
             return False
@@ -235,8 +221,7 @@ class Form(BaseText):
         return True
 
 
-    def is_allowed_to_edit(self):
-        user = get_context().user
+    def is_allowed_to_edit(self, user, object):
         # Admin
         if self.is_admin():
             return True
@@ -259,9 +244,7 @@ class Form(BaseText):
 
     #######################################################################
     # Namespaces
-    def get_namespace(self):
-        context = get_context()
-        request = context.request
+    def get_namespace(self, context):
         schema = self.get_schema()
 
         namespace = {}
@@ -272,12 +255,12 @@ class Form(BaseText):
             field_def = schema[name]
             type = field_def[0]
             default = field_def[1]
-            value = request.get_parameter(name)
+            value = context.get_form_value(name)
             key = name[len('field'):]
             # take the value in request first
-            value = request.get_parameter(key)
+            value = context.get_form_value(key)
             if value is None:
-                # is the value is not in request, take it in fields 
+                # is the value is not in query string, take it in fields 
                 value = self.state.fields.get(name, default)
             namespace[name] = value
             # If name is 'fieldA23', add 'A23'
@@ -311,10 +294,9 @@ class Form(BaseText):
 
             # Missing
             namespace[field_name] = None 
-            form = request.form
             # we have  _B13 in the namespace but _B13XYZ in the form 
             # so we make form_keys who remove X from _B13X 
-            form_keys = form.keys()
+            form_keys = context.get_form_keys()
             form_keysXYZ = [k for k in form_keys if not k[-1].isdigit()]
             form_keysXYZ = [k[:-1] for k in form_keys]
             form_keys = form_keys + form_keysXYZ
@@ -498,7 +480,7 @@ class Form(BaseText):
     # Control report
     controles_form__access__ = 'is_allowed_to_view'
     controles_form__label__ = u'Contrôle de la saisie'
-    def controles_form(self):
+    def controles_form(self, context):
         schema = self.get_schema()
         controles = get_controles()
         alertes = get_alertes()
@@ -784,11 +766,11 @@ class Form(BaseText):
 
 
     pending2submitted__access__ = 'is_allowed_to_edit'
-    def pending2submitted(self):
+    def pending2submitted(self, context):
         # Change state
         self.set_property('state', 'pending')
-        context = get_context()
-        root, user, request = context.root, context.user, context.request
+        root = context.root
+        user = context.user
         root.reindex_handler(self)
 
         # Build email
@@ -848,9 +830,9 @@ class Form(BaseText):
         return context.come_back(comeback_msg, goto=';controles_form')
 
 
-    def scrib_log(self, event=None, content=None):
-        context = get_context()
-        root, user, request = context.root, context.user, context.request
+    def scrib_log(self, context, event=None, content=None):
+        root = context.root
+        user = context.user
         # Event Log 
         event = '\n' \
                 '[Scrib event]\n' \
@@ -861,36 +843,12 @@ class Form(BaseText):
                 'event : %(event)s\n' \
                 '\n'
         event = event % {'date': str(datetime.datetime.now()),
-                         'uri': str(request.uri),
-                         'referrer': str(request.referrer),
+                         'uri': str(context.uri),
+                         'referrer': str(context.referrer),
                          'user': user and user.name or None, 
                          'event': ('email sent '
                                    '\n########\n%s\n#########') % content}
         logging.getLogger().info(event)
-
-
-    def send_email(self, SMTPServer=None, from_addr=None, 
-                   to_addr=None, message=None, 
-                   succsess_mgs=None):
-        # Send email
-        try:
-            mail = smtplib.SMTP(SMTPServer)
-        except socket.error:
-            msg = u'La connexion au serveur de mail a échoué.'
-        else:
-            try:
-                message = message.encode('latin1')
-                mail.sendmail(from_addr, to_addr, message)
-            except smtplib.SMTPRecipientsRefused:
-                msg = u'La connexion au serveur de mail a échoué.'
-            except UnicodeEncodeError:
-                msg = (u"L'adresse email (%s) comporte des caractères "
-                       u"non conformes. "
-                       u"Le message n'a pas été envoyé") % from_addr
-            else:
-                msg = succsess_mgs
-            #mail.quit()
-        return msg
 
 
     def get_export_query(self, namespace):
@@ -948,7 +906,7 @@ class Form(BaseText):
 
 
     submitted2exported__access__ = 'is_admin'
-    def submitted2exported(self):
+    def submitted2exported(self, context):
         try:
             cursor = get_cursor()
         except MySQLdb.OperationalError: 
@@ -1011,7 +969,7 @@ class Form(BaseText):
         cursor.execute('commit') 
         self.set_property('state', 'public')
 
-        root = get_context().root
+        root = context.root
         root.reindex_handler(self)
         self.set_changed()
         
@@ -1054,21 +1012,16 @@ class Form(BaseText):
 
     fill_report_form__access__ = True
     fill_report_form__label__ = u'Auto remplissage'
-    def fill_report_form(self):
+    def fill_report_form(self, context):
         handler = self.get_handler('/ui/culture/Form_fill_report.xml')
         return handler.to_str()
 
 
     fill_report__access__ = 'is_allowed_to_edit'
-    def fill_report(self):
+    def fill_report(self, context):
         schema = self.get_schema()
-        context = get_context()
         self.set_changed()
         
-        request = context.request
-        form, referer = request.form, request.referrer
-        new_referer = deepcopy(referer)
-
         i = 0
         t0 = time()
         ns = self.get_namespace()
@@ -1127,12 +1080,10 @@ class Form(BaseText):
 
 
     report__access__ = 'is_allowed_to_edit'
-    def report(self):
-        schema, context = self.get_schema(), get_context()
+    def report(self, context):
+        schema = self.get_schema()
         self.set_changed()
-        request = context.request
-        form, referer = request.form, request.referrer
-        #pprint(form)
+        referer = context.referrer
         new_referer = deepcopy(referer)
 
         dependencies = self.get_dependencies()
@@ -1143,8 +1094,9 @@ class Form(BaseText):
         badT_missing = [] # list of field to highlight (badT_missing)
         badT_values = {} # a dict of field : value to put into namespace
         
-        for key, value in form.items():
+        for key in context.get_form_keys():
             if key in schema:
+                value = context.get_form_value(key)
                 #########################################
                 # Take the value from the form 
                 field_type = schema[key][0]
@@ -1180,7 +1132,7 @@ class Form(BaseText):
                     if dependance is not None :
                         # here we know if they are a dependancies
                         # and 
-                        if form.get(dependance, '0') == '1':
+                        if context.get_form_value(dependance, '0') == '1':
                             if not value:
                                 empty = True
                         # clean value if dependance False
@@ -1292,14 +1244,13 @@ class Form(BaseText):
     # Help
     help__access__ = True
     help__label__ = u'Aide'
-    def help(self):
+    def help(self, context):
         handler = self.get_handler('/ui/culture/Form_help.xml')
         return handler.to_str()
 
 
     help2__access__ = True 
-    def help2(self):
-        context = get_context()
+    def help2(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/Form_help2.xhtml')
         return handler.to_str()
@@ -1310,7 +1261,7 @@ class Form(BaseText):
     #report_csv__access__ = BaseText.is_admin
     report_csv__access__ = True
     report_csv__label__ = u'Export'
-    def report_csv(self):
+    def report_csv(self, context):
         """ Call downloadCSV """
         namespace = self.get_namespace()
         is_finished = namespace['is_finished']
@@ -1324,17 +1275,16 @@ class Form(BaseText):
     comments__access__ = 'is_allowed_to_view'
     comments__label__ = u'Rapport Bibliothèques'
     comments__sublabel__ = u'Commentaires'
-    def comments(self, view=None, **kw):
+    def comments(self, context, view=None):
         return self.get_ns_and_h('Form_comments.xml', 
                                  'FormBM_report0_autogen.xml',
                                  view)
 
 
-    #downloadCSV__access__ = BaseText.is_admin
+    #downloadCSV__access__ = 'is_admin'
     downloadCSV__access__ = True
-    def downloadCSV(self):
+    def downloadCSV(self, context):
         schema = self.get_schema()
-        context = get_context()
         response = context.response
 
         response.set_header('Content-Type', 'text/comma-separated-values')

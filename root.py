@@ -24,6 +24,7 @@ from time import time
 from operator import itemgetter
 
 # Import from itools
+from itools.datatypes import Unicode
 from itools.web import get_context
 from itools.stl import stl
 
@@ -32,6 +33,7 @@ from ikaaro.root import Root as BaseRoot
 from ikaaro.registry import register_object_class
 
 # Import from scrib
+from Form import get_cursor
 from form_bm import FormBM
 from form_bdp import FormBDP
 from forms import Forms
@@ -57,11 +59,9 @@ class Root(BaseRoot):
 
 
     login_form__access__ = True
-    login_form__label__ = u'Login'
-    def login_form(self):
-        request = get_context().request
-        namespace = {'referer': request.form.get('referer', ''),
-                     'username': request.form.get('username', '')}
+    def login_form(self, context):
+        namespace = {'referer': context.get_form_value('referer', default=''),
+                     'username': context.get_form_value('username', default='')}
 
         handler = self.get_handler('/ui/culture/SiteRoot_login.xml')
         return stl(handler, namespace)
@@ -70,9 +70,9 @@ class Root(BaseRoot):
     _get_handler = BaseRoot._get_handler
 
 
-    def before_traverse(self):
+    def before_traverse(self, context):
+        BaseRoot.before_traverse(self, context)
         # Set french as default language, whatever the browser config is
-        context = get_context()
         accept = context.request.accept_language
         accept.set('fr', 1.5)
 
@@ -80,15 +80,13 @@ class Root(BaseRoot):
     #########################################################################
     # Security
     #########################################################################
-    def is_consultant(self):
-        user = get_context().user
+    def is_consultant(self, user, object):
         if user is None:
             return False
         return user.name == 'VoirSCRIB'
 
 
-    def is_admin_or_consultant(self):
-        user = get_context().user
+    def is_admin_or_consultant(self, user, object):
         if user is None:
             return False
         return self.is_admin() or self.is_consultant()
@@ -101,15 +99,11 @@ class Root(BaseRoot):
     # User interface
     #########################################################################
     def get_skin_name(self):
-        return 'culture'
+        return 'scrib'
 
 
     def get_skin(self):
-        return self.get_handler('ui/culture')
-
-
-    def get_themes(self):
-        return ['culture']
+        return self.get_handler('ui/scrib')
 
 
     def get_available_languages(self):
@@ -145,10 +139,11 @@ class Root(BaseRoot):
 
     #########################################################################
     # Login
-    def login(self, **kw):
-        BaseRoot.login(self, **kw)
-        context = get_context()
+    def login(self, context):
+        goto = BaseRoot.login(self, context)
         user = context.user
+        if user is None:
+            return goto
         if user.is_admin() or user.name == 'VoirSCRIB':
             context.redirect(';%s' % self.get_firstview())
         elif user.is_BM():
@@ -166,7 +161,7 @@ class Root(BaseRoot):
     new_reports_form__access__ = 'is_admin'
     new_reports_form__label__ = u'Ajouter'
     new_reports_form__sublabel__ = u'Rapport'
-    def new_reports_form(self):
+    def new_reports_form(self, context):
         namespace = {}
         today = date.today()
         ### BDP form
@@ -196,9 +191,10 @@ class Root(BaseRoot):
 
 
     new_BM_reports__access__ = 'is_admin'
-    def new_BM_reports(self, year, **kw):
+    def new_BM_reports(self, context):
         """ """
         # Add reports container
+        year = context.get_form_value('year')
         report_name = 'BM' + str(year)
         # Add reports and users, one per department
         reports = Forms()
@@ -243,9 +239,10 @@ class Root(BaseRoot):
 
 
     new_BDP_reports__access__ = 'is_admin'
-    def new_BDP_reports(self, year, **kw):
+    def new_BDP_reports(self, context):
         """ patern for BDP users is BDPxx_Year"""
         # Add reports container
+        year = context.get_form_value('year')
         name = 'BDP' + str(year)
         self.set_handler(name, Forms())
         # Add reports and users, one per department
@@ -274,7 +271,7 @@ class Root(BaseRoot):
     # Help
     help__access__ = True
     help__label__ = u'Aide'
-    def help(self):
+    def help(self, context):
         handler = self.get_handler('/ui/culture/Form_help.xml')
         return handler.to_str()
 
@@ -283,16 +280,13 @@ class Root(BaseRoot):
     # Export
     export_form__access__ = 'is_admin'
     export_form__label__ = u"Exporter"
-    def export_form(self):
+    def export_form(self, context):
         handler = self.get_handler('/ui/culture/Culture_export.xml')
-
         return handler.to_str()
 
 
     export__access__ = 'is_admin'
-    def export(self):
-        from itools.datatypes import Unicode
-        from Form import get_cursor
+    def export(self, context):
 
         def export_bib(container, ouput):
             cursor = get_cursor()
@@ -388,14 +382,14 @@ class Root(BaseRoot):
     # New User
     new_bm_form__access__ = 'is_admin'
     new_bm_form__sublabel__ = u"Nouvelle BM"
-    def new_bm_form(self):
+    def new_bm_form(self, context):
         handler = self.get_handler('/ui/culture/Culture_new_bm.xml')
-
         return handler.to_str()
 
 
     new_bm__access__ = 'is_admin'
-    def new_bm(self, code_bib, **kw):
+    def new_bm(self, context):
+        code_bib = context.get_form_value('code_bib')
         bms = get_BMs()
         codes = []
         

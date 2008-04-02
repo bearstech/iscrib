@@ -18,7 +18,6 @@
 
 # Import from itools
 from itools.catalog import TextField
-from itools.web import get_context
 from itools.catalog import queries
 from itools.stl import stl
 
@@ -79,8 +78,7 @@ class Forms(Folder):
 
 
     browse_list__access__ = 'is_admin_or_consultant'
-    def browse_list(self):
-        context = get_context()
+    def browse_list(self, context):
         context.set_cookie('browse', 'list')
         namespace = self.browse_namespace(16)
         handler = self.get_handler('/ui/culture/Forms_browse_list.xml')
@@ -89,8 +87,7 @@ class Forms(Folder):
 
     search_form__access__ = 'is_admin_or_consultant'
     search_form__label__ = u'Search'
-    def search_form(self):
-        context = get_context()
+    def search_form(self, context):
         tablename = 'search'
 
         # Get the search parameters

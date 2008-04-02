@@ -59,7 +59,7 @@ class bibUser(BaseUser):
 
 
     def is_not_BDP_or_BM(self):
-        return not self.is_BDP and not self.is_BM
+        return not self.is_BDP() and not self.is_BM()
 
 
     def get_department_name(self):
@@ -142,7 +142,7 @@ class bibUser(BaseUser):
     # Home
     home__access__ = True 
     home__label__ = u'Home'
-    def home(self):
+    def home(self, context):
         namespace = {}
         root = self.get_root()
         name = self.name
