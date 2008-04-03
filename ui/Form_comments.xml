@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" 
-     xmlns:stl="http://xml.itools.org/namespaces/stl"
-     id="formBiblio">
-<form action=";report" method="post" name="form">
+<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<form method="post" name="form" action=";report">
   <div align="right">
     <stl:block if="not printable">
-      <input type="submit" value="Enregistrer" 
-             style="background-color:rgb(145,191,255); border:0"
-             stl:if="is_allowed_to_edit"></input>
+      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
     </stl:block>
   </div>
   <h1>Commentaires</h1>
 
-  <h3> Si vous souhaitez apporter des précisions au renseignement 
+  <h3> Si vous souhaitez apporter des précisions au renseignement
       de ce rapport, inscrivez ci-dessous les éléments complémentaires
-      d'appréciation.</h3> 
+      d'appréciation.</h3>
 
-    
-    <textarea cols="46" rows="20"  
-            stl:attributes="value fieldL20" type="text" name="fieldL20"
-            value="" size="8" stl:content="fieldL20"></textarea>
+
+    <textarea value="${fieldL20}" cols="46" name="fieldL20" size="8" type="text" rows="20">${fieldL20}</textarea>
 
 </form>
-<p style = "page-break-after:always "></p>
+<p style="page-break-after:always "></p>
 </div>

@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stl:block xmlns="http://www.w3.org/1999/xhtml"
-           xmlns:stl="http://xml.itools.org/namespaces/stl">
-<form name="addform" action=";create_add_users" method="post">
+<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<form name="addform" method="post" action=";create_add_users">
   <table class="form" border="0">
     <tr>
-      <th colspan="2" class="title">Ajouter un administrateur</th>
-        
+      <th class="title" colspan="2">Ajouter un administrateur</th>
+
     </tr>
     <tr>
       <th align="right">
-       Login 
+       Login
       </th>
       <td>
-        <input type="text" name="username" />
-      </td>
-    </tr>
-    <tr>
-      <th align="right">
-        Mot de passe
-      </th>
-      <td>
-        <input type="password" name="password" />
+        <input name="username" type="text"/>
       </td>
     </tr>
     <tr>
@@ -28,17 +19,25 @@
         Mot de passe
       </th>
       <td>
-        <input type="password" name="password2" />
+        <input name="password" type="password"/>
       </td>
     </tr>
     <tr>
-      <td colspan="2" class="submit">
-        <input type="submit" value="Ajouter" />
+      <th align="right">
+        Mot de passe
+      </th>
+      <td>
+        <input name="password2" type="password"/>
       </td>
     </tr>
     <tr>
-       <td><img src=";px" height="1" width="10" /></td>
-       <td><img src=";px" height="1" width="300" /></td>
+      <td class="submit" colspan="2">
+        <input type="submit" value="Ajouter"/>
+      </td>
+    </tr>
+    <tr>
+       <td><img width="10" height="1" src=";px"/></td>
+       <td><img width="300" height="1" src=";px"/></td>
     </tr>
     </table>
   </form>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
    <title>Aide</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
-    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+    
+    <link type="text/css" rel="stylesheet" href="../../ui/culture/main.css"/>
 
   </head>
 <body id="body">
@@ -30,7 +29,7 @@
 <dt>
 <ul>
 <li><u>La bibliothèque a-t-elle un site Web ? </u>(H31):  répondez par l'affirmative alors même que le site, s'il n'est pas dédié exclusivement à la bibliothèque, ne contient que quelques pages la concernant.</li>
-<li><u>Les sessions internet </u>(H38): c'est à dire l'accès d'un usager à internet par le biais d'une station de travail, et une connexion effectuée à une base de données ou à un catalogue interrogeable  en ligne par le public. 
+<li><u>Les sessions internet </u>(H38): c'est à dire l'accès d'un usager à internet par le biais d'une station de travail, et une connexion effectuée à une base de données ou à un catalogue interrogeable  en ligne par le public.
 On intégrera dans ces sessions les visites virtuelles, c'est à dire les recherches faites par un usager anonyme sur le site Web de la bibliothèque.
 On pourra se référer sur cette question au rapport technique de l'ISO (International Standard Organization), indicateurs de performance pour les services électroniques des bibliothèques, consultable à l'AFNOR.
 H40 : on entend par procédés techniques adaptés le respect des normes internationales d'accessibilité des sites (www.accessiweb.org).

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stl:block xmlns="http://www.w3.org/1999/xhtml"
-           xmlns:stl="http://xml.itools.org/namespaces/stl">
+<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <h4>Interface d'export </h4>
   <p stl:if="show">Votre rapport est terminé, vous pouvez <a href=";downloadCSV">exporter</a>
-    en CSV le formulaire</p> 
+    en CSV le formulaire</p>
   <p stl:if="not show">Votre rapport n'est pas encore terminé</p>
 </stl:block>

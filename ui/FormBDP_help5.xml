@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <title>Aide</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
-    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+    
+    <link type="text/css" rel="stylesheet" href="../../ui/culture/main.css"/>
 
   </head>
   <body id="body">
@@ -14,13 +13,13 @@
 <h2> ACQUISITIONS - ELIMINATIONS </h2>
 <h4> Acquisitions</h4>
 <dl class="description">
-<dt>Une acquisition comprend la s&eacute;lection d&eacute;lib&eacute;r&eacute;e d'un document, l'obtention des droits d'acc&egrave;s et son inclusion dans le catalogue.</dt>
-<dt>C&eacute;d&eacute;roms : compter les c&eacute;d&eacute;roms et autres disques optiques num&eacute;riques multim&eacute;dias, textes, documents de r&eacute;f&eacute;rences, &agrave; l'exception des c&eacute;d&eacute;roms de p&eacute;riodiques qui seront compt&eacute;s avec les p&eacute;riodiques et des CD audio, CD vid&eacute;o, DVD audio et/ou super audio CD et DVD qui seront compt&eacute;s avec les phonogrammes ou les vid&eacute;ogrammes.</dt>
+<dt>Une acquisition comprend la sélection délibérée d'un document, l'obtention des droits d'accès et son inclusion dans le catalogue.</dt>
+<dt>Cédéroms : compter les cédéroms et autres disques optiques numériques multimédias, textes, documents de références, à l'exception des cédéroms de périodiques qui seront comptés avec les périodiques et des CD audio, CD vidéo, DVD audio et/ou super audio CD et DVD qui seront comptés avec les phonogrammes ou les vidéogrammes.</dt>
 </dl>
 
-<h4> D&eacute;penses d'acquisition (E8/9)</h4>
+<h4> Dépenses d'acquisition (E8/9)</h4>
 <dl class="description">
-<dt>Bases de donn&eacute;es&nbsp;: compter le co&ucirc;t des abonnements &agrave; des serveurs de bases de donn&eacute;es (co&ucirc;t annuel ou forfait), hors les p&eacute;riodiques en ligne.</dt>
+<dt>Bases de données : compter le coût des abonnements à des serveurs de bases de données (coût annuel ou forfait), hors les périodiques en ligne.</dt>
 </dl>
 </body>
 </html>

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" 
-     xmlns:stl="http://xml.itools.org/namespaces/stl"
-     id="formBiblio">
+<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <h4>Identité</h4>
 
   <dl class="description">
     <dt>Toutes les zones du bloc identitaire qui réclament du texte doivent
     être remplies en majuscules, sauf les <b>courriels</b> et les noms de
-    <b>sites Web</b> qui peuvent répondre à une typographie spécifique.  </dt> 
+    <b>sites Web</b> qui peuvent répondre à une typographie spécifique.  </dt>
   </dl>
 
   <h4>Régie intercommunale </h4>
@@ -17,7 +15,7 @@
     doit être en mesure de présenter un rapport annuel unique additionnant
     l'activité de toutes les bibliothèques du réseau dès lors que la gestion de
     celles-ci a été transférée à l'EPCI, ces dernières ne faisant pas de
-    rapport.  </dt> 
+    rapport.  </dt>
   </dl>
 
   <h4>Desserte par la BDP  </h4>

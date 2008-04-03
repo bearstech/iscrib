@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" 
-     xmlns:stl="http://xml.itools.org/namespaces/stl"
-     id="formBiblio">
+<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <h4> AIDE </h4>
   <p> Pour éviter toute erreur de saisie informatique, toutes les cases
   doivent être remplies : lorsque vous ne comptabilisez pas une donnée

@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" 
-     xmlns:stl="http://xml.itools.org/namespaces/stl"
-     id="formBiblio">
-<form action=";report" method="post" name="form">
+<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<form method="post" name="form" action=";report">
   <div align="right">
 
-  <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
-     name="Imprimer" href="#"
-     onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
-   
-   
+  <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
+     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+
+
     <stl:block if="not printable">
-      <input type="submit" value="Enregistrer" 
-             style="background-color:rgb(145,191,255); border:0"
-             stl:if="is_allowed_to_edit"></input>
+      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
     </stl:block>
   </div>
 
  <h1>C-  PERSONNEL EN POSTE AU 31 DECEMBRE 2005
-  <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
-      onclick="window.open(';help3', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+  <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help3', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">?</a>
 </h1>
 <!--h2>CADRES D' EMPLOIS</h2-->
 <h2>C.1 FONCTION PUBLIQUE : FILIÈRE CULTURELLE</h2>
@@ -50,160 +43,118 @@
     <td></td>
   </tr>
   <tr>
-    <th>Conservateurs d'Etat</th> 
+    <th>Conservateurs d'Etat</th>
     <td>
-       <input stl:attributes="value fieldC11W"
-              type="text" name="fieldC11W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC11W}" name="fieldC11W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC11X"
-              type="text" name="fieldC11X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC11X}" name="fieldC11X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC11Y"
-              type="text" name="fieldC11Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC11Y}" name="fieldC11Y" size="8" type="text"/>
     </td>
-    <td style="padding: 0px; text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="1" style="font-size: 8pt; border:0px" stl:attributes="checked fieldCZ_1" />
+    <td style="padding: 0px; text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt; border:0px" checked="${fieldCZ_1}" value="1" type="radio"/>
     </td>
-           
-    <td><b stl:attributes="class _C11">C11</b></td>
+
+    <td><b class="${_C11}">C11</b></td>
   </tr>
 
   <tr>
-    <th>Conservateurs territoriaux</th> 
+    <th>Conservateurs territoriaux</th>
     <td>
-       <input stl:attributes="value fieldC12W"
-              type="text" name="fieldC12W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC12W}" name="fieldC12W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC12X"
-              type="text" name="fieldC12X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC12X}" name="fieldC12X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC12Y"
-              type="text" name="fieldC12Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC12Y}" name="fieldC12Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="2" style="font-size: 8pt;border:0px" stl:attributes="checked fieldCZ_2" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;border:0px" checked="${fieldCZ_2}" value="2" type="radio"/>
     </td>
-     <td><b stl:attributes="class _C12">C12</b></td>
+     <td><b class="${_C12}">C12</b></td>
   </tr>
   <tr>
-    <th>Bibliothécaires</th> 
+    <th>Bibliothécaires</th>
     <td>
-       <input stl:attributes="value fieldC13W"
-              type="text" name="fieldC13W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC13W}" name="fieldC13W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC13X"
-              type="text" name="fieldC13X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC13X}" name="fieldC13X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC13Y"
-              type="text" name="fieldC13Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC13Y}" name="fieldC13Y" size="8" type="text"/>
     </td>
-   <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="3" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_3" />
+   <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_3}" value="3" type="radio"/>
     </td>
-     <td><b stl:attributes="class _C13">C13</b></td>
+     <td><b class="${_C13}">C13</b></td>
   </tr>
   <tr>
-    <th>Assistants qualifiés de conservation</th> 
+    <th>Assistants qualifiés de conservation</th>
     <td>
-       <input stl:attributes="value fieldC14W"
-              type="text" name="fieldC14W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC14W}" name="fieldC14W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC14X"
-              type="text" name="fieldC14X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC14X}" name="fieldC14X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC14Y"
-              type="text" name="fieldC14Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC14Y}" name="fieldC14Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="4" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_4" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_4}" value="4" type="radio"/>
     </td>
-   <td><b stl:attributes="class _C14">C14</b></td>
+   <td><b class="${_C14}">C14</b></td>
   </tr>
   <tr>
-    <th>Assistants de conservation</th> 
+    <th>Assistants de conservation</th>
     <td>
-       <input stl:attributes="value fieldC15W"
-              type="text" name="fieldC15W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC15W}" name="fieldC15W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC15X"
-              type="text" name="fieldC15X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC15X}" name="fieldC15X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC15Y"
-              type="text" name="fieldC15Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC15Y}" name="fieldC15Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="5" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_5" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_5}" value="5" type="radio"/>
     </td>
-     <td><b stl:attributes="class _C15">C15</b></td>
+     <td><b class="${_C15}">C15</b></td>
   </tr>
   <tr>
-    <th>Agents qualifiés du patrimoine</th> 
+    <th>Agents qualifiés du patrimoine</th>
     <td>
-       <input stl:attributes="value fieldC16W"
-              type="text" name="fieldC16W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC16W}" name="fieldC16W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC16X"
-              type="text" name="fieldC16X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC16X}" name="fieldC16X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC16Y"
-              type="text" name="fieldC16Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC16Y}" name="fieldC16Y" size="8" type="text"/>
     </td>
-   <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="6" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_6" />
+   <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_6}" value="6" type="radio"/>
     </td>
-     <td><b stl:attributes="class _C16">C16</b></td>
+     <td><b class="${_C16}">C16</b></td>
   </tr>
   <tr>
-    <th>Agents du patrimoine</th> 
+    <th>Agents du patrimoine</th>
     <td>
-       <input stl:attributes="value fieldC17W"
-              type="text" name="fieldC17W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC17W}" name="fieldC17W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC17X"
-              type="text" name="fieldC17X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC17X}" name="fieldC17X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC17Y"
-              type="text" name="fieldC17Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC17Y}" name="fieldC17Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="7" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_7" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_7}" value="7" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C17">C17</b></td>
+    <td><b class="${_C17}">C17</b></td>
   </tr>
 </table>
 <h2>C.2 FONCTION PUBLIQUE : AUTRES FILIÈRES  (administrative, technique, sociale...)</h2>
@@ -233,72 +184,54 @@
     <td></td>
   </tr-->
   <tr>
-    <th>Personnels d'autres filières  Cat. A</th> 
+    <th>Personnels d'autres filières  Cat. A</th>
     <td>
-       <input stl:attributes="value fieldC21W"
-              type="text" name="fieldC21W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC21W}" name="fieldC21W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC21X"
-              type="text" name="fieldC21X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC21X}" name="fieldC21X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC21Y"
-              type="text" name="fieldC21Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC21Y}" name="fieldC21Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="8" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_8" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_8}" value="8" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C21">C21</b></td>
+    <td><b class="${_C21}">C21</b></td>
   </tr>
 
   <tr>
-    <th>Personnels d'autres filières  Cat. B</th> 
+    <th>Personnels d'autres filières  Cat. B</th>
     <td>
-       <input stl:attributes="value fieldC22W"
-              type="text" name="fieldC22W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC22W}" name="fieldC22W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC22X"
-              type="text" name="fieldC22X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC22X}" name="fieldC22X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC22Y"
-              type="text" name="fieldC22Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC22Y}" name="fieldC22Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="9" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_9" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_9}" value="9" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C22">C22</b></td>
+    <td><b class="${_C22}">C22</b></td>
   </tr>
 
   <tr>
-    <th>Personnels d'autres filières  Cat. C</th> 
+    <th>Personnels d'autres filières  Cat. C</th>
     <td>
-       <input stl:attributes="value fieldC23W"
-              type="text" name="fieldC23W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC23W}" name="fieldC23W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC23X"
-              type="text" name="fieldC23X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC23X}" name="fieldC23X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC23Y"
-              type="text" name="fieldC23Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC23Y}" name="fieldC23Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="10" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_10" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_10}" value="10" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C23">C23</b></td>
+    <td><b class="${_C23}">C23</b></td>
   </tr>
 </table>
 <h2>C.3 AUTRES PERSONNELS REMUNÉRÉS</h2>
@@ -328,96 +261,72 @@
     <td></td>
   </tr-->
     <tr>
-    <th>Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) qualifiés </th> 
+    <th>Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) qualifiés </th>
     <td>
-       <input stl:attributes="value fieldC31W"
-              type="text" name="fieldC31W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC31W}" name="fieldC31W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC31X"
-              type="text" name="fieldC31X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC31X}" name="fieldC31X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC31Y"
-              type="text" name="fieldC31Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC31Y}" name="fieldC31Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="11" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_11" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_11}" value="11" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C31">C31</b></td>
+    <td><b class="${_C31}">C31</b></td>
   </tr>
 
   <tr>
-    <th>Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) non qualifiés </th> 
+    <th>Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) non qualifiés </th>
     <td>
-       <input stl:attributes="value fieldC32W"
-              type="text" name="fieldC32W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC32W}" name="fieldC32W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC32X"
-              type="text" name="fieldC32X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC32X}" name="fieldC32X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC32Y"
-              type="text" name="fieldC32Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC32Y}" name="fieldC32Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="12" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_12" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_12}" value="12" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C32">C32</b></td>
+    <td><b class="${_C32}">C32</b></td>
   </tr>
 
   <tr>
-    <th>Agents non titulaires/ emplois aidés par l'Etat (Contrat d'accompagnement dans l'emploi, Contrat d'avenir,...) qualifiés</th> 
+    <th>Agents non titulaires/ emplois aidés par l'Etat (Contrat d'accompagnement dans l'emploi, Contrat d'avenir,...) qualifiés</th>
     <td>
-       <input stl:attributes="value fieldC33W"
-              type="text" name="fieldC33W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC33W}" name="fieldC33W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC33X"
-              type="text" name="fieldC33X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC33X}" name="fieldC33X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC33Y"
-              type="text" name="fieldC33Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC33Y}" name="fieldC33Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="13" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_13" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_13}" value="13" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C33">C33</b></td>
+    <td><b class="${_C33}">C33</b></td>
   </tr>
 
   <tr>
-    <th>Agents non titulaires/ emplois aidés par l'Etat (Contrat d'accompagnement dans l'emploi, Contrat d'avenir,...) qualifiés non qualifiés</th> 
+    <th>Agents non titulaires/ emplois aidés par l'Etat (Contrat d'accompagnement dans l'emploi, Contrat d'avenir,...) qualifiés non qualifiés</th>
     <td>
-       <input stl:attributes="value fieldC34W"
-              type="text" name="fieldC34W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC34W}" name="fieldC34W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC34X"
-              type="text" name="fieldC34X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC34X}" name="fieldC34X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC34Y"
-              type="text" name="fieldC34Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC34Y}" name="fieldC34Y" size="8" type="text"/>
     </td>
-    
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="14" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_14" />
+
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_14}" value="14" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C34">C34</b></td>
+    <td><b class="${_C34}">C34</b></td>
   </tr>
 </table>
 <h2>C.4 BÉNÉVOLES</h2>
@@ -447,67 +356,53 @@
     <td></td>
   </tr-->
   <tr>
-    <th>Bénévoles qualifiés (exemple : ABF, BDP, etc)</th> 
+    <th>Bénévoles qualifiés (exemple : ABF, BDP, etc)</th>
     <td>
-       <input stl:attributes="value fieldC41W"
-              type="text" name="fieldC41W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC41W}" name="fieldC41W" size="8" type="text"/>
     </td>
     <td>
     </td>
     <td>
-       <input stl:attributes="value fieldC41Y"
-              type="text" name="fieldC41Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC41Y}" name="fieldC41Y" size="8" type="text"/>
     </td>
-    <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="15" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_15" />
+    <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_15}" value="15" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C41">C41</b></td>
+    <td><b class="${_C41}">C41</b></td>
   </tr>
 
   <tr>
-    <th>Bénévoles non formés</th> 
+    <th>Bénévoles non formés</th>
     <td>
-       <input stl:attributes="value fieldC42W"
-              type="text" name="fieldC42W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC42W}" name="fieldC42W" size="8" type="text"/>
     </td>
     <td>
     </td>
     <td>
-       <input stl:attributes="value fieldC42Y"
-              type="text" name="fieldC42Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC42Y}" name="fieldC42Y" size="8" type="text"/>
     </td>
-   <td style="padding:0px;  text-align: center"> 
-           <input  type="radio"  name="fieldCZ" value="16" style="font-size: 8pt;  border:0px" stl:attributes="checked fieldCZ_16" />
+   <td style="padding:0px;  text-align: center">
+           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_16}" value="16" type="radio"/>
     </td>
-    <td><b stl:attributes="class _C42">C42</b></td>
+    <td><b class="${_C42}">C42</b></td>
   </tr>
   <tr>
     <td colspan="6"><br/></td>
   </tr>
   <tr>
-    <th><b>TOTAL (C11 à C42)</b></th> 
+    <th><b>TOTAL (C11 à C42)</b></th>
     <td>
-       <input stl:attributes="value fieldC43W"
-              type="text" name="fieldC43W"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC43W}" name="fieldC43W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC43X"
-              type="text" name="fieldC43X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC43X}" name="fieldC43X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldC43Y"
-              type="text" name="fieldC43Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC43Y}" name="fieldC43Y" size="8" type="text"/>
     </td>
     <td>
     </td>
-    <td><b stl:attributes="class _C43">C43</b></td>
+    <td><b class="${_C43}">C43</b></td>
   </tr>
 </table>
 <h2>C.5 NOMBRE TOTAL DE PERSONNES AYANT SUIVI UNE FIA (formation initiale d'application)</h2>
@@ -518,15 +413,13 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>DANS L'ANNÉE :</th> 
+    <th>DANS L'ANNÉE :</th>
     <td>
-       <input stl:attributes="value fieldC51"
-              type="text" name="fieldC51"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldC51}" name="fieldC51" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _C51">C51</b></td>
+    <td><b class="${_C51}">C51</b></td>
   </tr>
 </table>
 </form>
- <p style = "page-break-after:always "></p>
+ <p style="page-break-after:always "></p>
 </div>

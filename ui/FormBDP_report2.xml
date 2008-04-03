@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" 
-     xmlns:stl="http://xml.itools.org/namespaces/stl"
-     id="formBiblio">
-<form action=";report" method="post" name="form">
- 
+<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<form method="post" name="form" action=";report">
+
   <table width="100%">
   <tr>
   <td align="left">
-  
-  <a stl:if="not printable" href="#" style="color:red " alt="Aide"
-      onclick="window.open(';help2', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">? Consulter l'aide sur cette page</a>
+
+  <a stl:if="not printable" style="color:red " onclick="window.open(';help2', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">? Consulter l'aide sur cette page</a>
       </td>
   <td align="right">
-  <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
-     name="Imprimer" href="#"
-     onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
-   
-   
+  <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
+     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+
+
     <stl:block if="not printable">
-      <input type="submit" value="Enregistrer" 
-             style="background-color:rgb(145,191,255); border:0"
-             stl:if="is_allowed_to_edit"></input>
+      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
     </stl:block>
-  </td>  
+  </td>
   </tr>
   </table>
 <h1>B  LOCAUX - VÉHICULES - ÉQUIPEMENT INFORMATIQUE
@@ -46,76 +39,55 @@
   <td></td>
   </tr>
   <tr>
-    <th>Surface de la BDP (services publics et intérieurs confondus)</th> 
+    <th>Surface de la BDP (services publics et intérieurs confondus)</th>
     <td>
-       <input stl:attributes="value fieldB11X"
-              type="text" name="fieldB11X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldB11X}" name="fieldB11X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB11Y"
-              type="text" name="fieldB11Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldB11Y}" name="fieldB11Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB11Z"
-              type="text" name="fieldB11Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB11Z}" name="fieldB11Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B11">B11</b></td>
+    <td><b class="${_B11}">B11</b></td>
   </tr>
 
   <tr>
-    <th>Nombre de bâtiments de la BDP ouverts à tous publics</th> 
+    <th>Nombre de bâtiments de la BDP ouverts à tous publics</th>
     <td>
-       <input stl:attributes="value fieldB12X"
-              type="text" name="fieldB12X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB12X}" name="fieldB12X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB12Y"
-              type="text" name="fieldB12Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB12Y}" name="fieldB12Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB12Z"
-              type="text" name="fieldB12Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB12Z}" name="fieldB12Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B12">B12</b></td>
+    <td><b class="${_B12}">B12</b></td>
   </tr>
 
   <tr>
-    <th>Nombre de m² ouverts à tous publics</th> 
+    <th>Nombre de m² ouverts à tous publics</th>
     <td>
-       <input stl:attributes="value fieldB13X"
-              type="text" name="fieldB13X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB13X}" name="fieldB13X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB13Y"
-              type="text" name="fieldB13Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB13Y}" name="fieldB13Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB13Z"
-              type="text" name="fieldB13Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB13Z}" name="fieldB13Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B13">B13</b></td>
+    <td><b class="${_B13}">B13</b></td>
   </tr>
-  
+
    <tr>
-    <th colspan="2">Les bâtiments ouverts à tous publics font-ils office de bibliothèques municipales ?**</th> 
+    <th colspan="2">Les bâtiments ouverts à tous publics font-ils office de bibliothèques municipales ?**</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB15'])"  type="radio"  name="fieldB15" value="1" style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB15" />Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldB15'])"  type="radio" name="fieldB15"                value="0"
- style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB15_not" />Non      </td>      </tr></table>    </td>
-    <td><b stl:attributes="class _B15">B15</b></td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldB15" checked="${fieldB15}" type="radio" onclick="switch_on(['fieldB15'])"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldB15" checked="${fieldB15_not}" type="radio" onclick="switch_off(['fieldB15'])"/>Non      </td>      </tr></table>    </td>
+    <td><b class="${_B15}">B15</b></td>
   </tr>
-  
+
 </table>
 <table width="100%">
   <colgroup>
@@ -129,13 +101,11 @@
   <td></td>
   </tr>
   <tr>
-    <th>Surface totale des bibliothèques du réseau tous publics</th> 
+    <th>Surface totale des bibliothèques du réseau tous publics</th>
     <td>
-       <input stl:attributes="value fieldB14Z"
-              type="text" name="fieldB14Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB14Z}" name="fieldB14Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B14">B14</b></td>
+    <td><b class="${_B14}">B14</b></td>
   </tr>
 </table>
 <h2>B. 2 VÉHICULES DE LA BDP</h2>
@@ -146,33 +116,27 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Nombre total de bus : bibliobus ou médiabus (musibus, artobus, etc.)</th> 
+    <th>Nombre total de bus : bibliobus ou médiabus (musibus, artobus, etc.)</th>
     <td>
-       <input stl:attributes="value fieldB21"
-              type="text" name="fieldB21"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB21}" name="fieldB21" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B21">B21</b></td>
+    <td><b class="${_B21}">B21</b></td>
   </tr>
 
   <tr>
-    <th>Dont nombre de bus faisant du prêt direct</th> 
+    <th>Dont nombre de bus faisant du prêt direct</th>
     <td>
-       <input stl:attributes="value fieldB22"
-              type="text" name="fieldB22"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB22}" name="fieldB22" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B22">B22</b></td>
+    <td><b class="${_B22}">B22</b></td>
   </tr>
 
   <tr>
-    <th>Autres véhicules (fourgonnettes, voitures légères)</th> 
+    <th>Autres véhicules (fourgonnettes, voitures légères)</th>
     <td>
-       <input stl:attributes="value fieldB23"
-              type="text" name="fieldB23"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB23}" name="fieldB23" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B23">B23</b></td>
+    <td><b class="${_B23}">B23</b></td>
   </tr>
 </table>
 <h2>B.3 ÉQUIPEMENT INFORMATIQUE (BDP et annexes)</h2>
@@ -183,65 +147,47 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La BDP est-t-elle équipée d'un logiciel de gestion ?</th> 
+    <th>La BDP est-t-elle équipée d'un logiciel de gestion ?</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB32'])"  type="radio"  name="fieldB31" value="1" style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB31" />Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldB32'])"  type="radio" name="fieldB31"                value="0"
- style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB31_not" />Non      </td>      </tr></table>    </td>
-    <td><b stl:attributes="class _B31">B31</b></td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldB31" checked="${fieldB31}" type="radio" onclick="switch_on(['fieldB32'])"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldB31" checked="${fieldB31_not}" type="radio" onclick="switch_off(['fieldB32'])"/>Non      </td>      </tr></table>    </td>
+    <td><b class="${_B31}">B31</b></td>
   </tr>
 
   <tr>
-    <th>Si oui, préciser lequel:</th> 
+    <th>Si oui, préciser lequel:</th>
     <td>
-       <div stl:if="not fieldB31" id="display_fieldB32"           style="visibility:hidden">         <input stl:if="not fieldB31"
-             type="text" name="fieldB32"
-             value="" size="40"></input></div>
-       <div stl:if="fieldB31" id="display_fieldB32">         <input stl:if="fieldB31" stl:attributes="value fieldB32"
-             type="text" name="fieldB32"
-             value="" size="40"></input>
+       <div stl:if="not fieldB31" id="display_fieldB32" style="visibility:hidden">         <input stl:if="not fieldB31" name="fieldB32" size="40" type="text" value=""/></div>
+       <div stl:if="fieldB31" id="display_fieldB32">         <input value="${fieldB32}" stl:if="fieldB31" name="fieldB32" size="40" type="text"/>
        </div>    </td>
-    <td><b stl:attributes="class _B32">B32</b></td>
+    <td><b class="${_B32}">B32</b></td>
   </tr>
 
   <tr>
-    <th>La BDP constitue-t-elle son catalogue à partir de notices importée</th> 
+    <th>La BDP constitue-t-elle son catalogue à partir de notices importée</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input onclick="switch_on(['fieldB34','fieldB35'])"  type="radio"  name="fieldB33" value="1" style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB33" />Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input onclick="switch_off(['fieldB34','fieldB35'])"  type="radio" name="fieldB33"                value="0"
- style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB33_not" />Non      </td>      </tr></table>    </td>
-    <td><b stl:attributes="class _B33">B33</b></td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldB33" checked="${fieldB33}" type="radio" onclick="switch_on(['fieldB34','fieldB35'])"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldB33" checked="${fieldB33_not}" type="radio" onclick="switch_off(['fieldB34','fieldB35'])"/>Non      </td>      </tr></table>    </td>
+    <td><b class="${_B33}">B33</b></td>
   </tr>
 
   <tr>
-    <th>Si oui, quelle est la proportion des notices importées dans votre catalogue ? (en %)</th> 
+    <th>Si oui, quelle est la proportion des notices importées dans votre catalogue ? (en %)</th>
     <td>
-       <div stl:if="not fieldB33" id="display_fieldB34"           style="visibility:hidden">         <input stl:if="not fieldB33"
-             type="text" name="fieldB34"
-             value="" size="8" style="text-align:right"></input></div>
-       <div stl:if="fieldB33" id="display_fieldB34">         <input stl:if="fieldB33" stl:attributes="value fieldB34"
-             type="text" name="fieldB34"
-             value="" size="8" style="text-align:right"></input>
+       <div stl:if="not fieldB33" id="display_fieldB34" style="visibility:hidden">         <input style="text-align:right" value="" stl:if="not fieldB33" name="fieldB34" size="8" type="text"/></div>
+       <div stl:if="fieldB33" id="display_fieldB34">         <input style="text-align:right" value="${fieldB34}" stl:if="fieldB33" name="fieldB34" size="8" type="text"/>
        </div>    </td>
-    <td><b stl:attributes="class _B34">B34</b></td>
+    <td><b class="${_B34}">B34</b></td>
   </tr>
 
   <tr>
-    <th>préciser les sources :</th> 
+    <th>préciser les sources :</th>
     <td>
-       <div stl:if="not fieldB33" id="display_fieldB35"           style="visibility:hidden">         <input stl:if="not fieldB33"
-             type="text" name="fieldB35"
-             value="" size="40"></input></div>
-       <div stl:if="fieldB33" id="display_fieldB35">         <input stl:if="fieldB33" stl:attributes="value fieldB35"
-             type="text" name="fieldB35"
-             value="" size="40
-             "></input>
+       <div stl:if="not fieldB33" id="display_fieldB35" style="visibility:hidden">         <input stl:if="not fieldB33" name="fieldB35" size="40" type="text" value=""/></div>
+       <div stl:if="fieldB33" id="display_fieldB35">         <input value="${fieldB35}" stl:if="fieldB33" name="fieldB35" size="40
+             " type="text"/>
        </div>    </td>
-    <td><b stl:attributes="class _B35">B35</b></td>
+    <td><b class="${_B35}">B35</b></td>
   </tr>
 </table>
 <table>
@@ -263,65 +209,49 @@
   <td></td>
   </tr>
   <tr>
-    <th>Sans accès internet</th> 
+    <th>Sans accès internet</th>
     <td>
-       <input stl:attributes="value fieldB36X"
-              type="text" name="fieldB36X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB36X}" name="fieldB36X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB36Y"
-              type="text" name="fieldB36Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB36Y}" name="fieldB36Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B36">B36</b></td>
+    <td><b class="${_B36}">B36</b></td>
   </tr>
 
   <tr>
-    <th>Avec accès internet</th> 
+    <th>Avec accès internet</th>
     <td>
-       <input stl:attributes="value fieldB37X"
-              type="text" name="fieldB37X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB37X}" name="fieldB37X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB37Y"
-              type="text" name="fieldB37Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB37Y}" name="fieldB37Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B37">B37</b></td>
+    <td><b class="${_B37}">B37</b></td>
   </tr>
 
   <tr>
-    <th>Total</th> 
+    <th>Total</th>
     <td>
-       <input stl:attributes="value fieldB38X"
-              type="text" name="fieldB38X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB38X}" name="fieldB38X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB38Y"
-              type="text" name="fieldB38Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB38Y}" name="fieldB38Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B38">B38</b></td>
+    <td><b class="${_B38}">B38</b></td>
   </tr>
-  
+
   <tr>
-    <th>Les bâtiments de la BDP sont-ils ouverts à tous publics ?</th> 
+    <th>Les bâtiments de la BDP sont-ils ouverts à tous publics ?</th>
     <td>
-       <input stl:attributes="value fieldB39X"
-              type="text" name="fieldB39X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB39X}" name="fieldB39X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldB39Y"
-              type="text" name="fieldB39Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldB39Y}" name="fieldB39Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _B39">B39</b></td>
+    <td><b class="${_B39}">B39</b></td>
   </tr>
-  
+
 </table>
 <table>
   <tr>
@@ -335,34 +265,28 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Entièrement gratuit</th> 
+    <th>Entièrement gratuit</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldB39" value="1" style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB39" />Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB39"                value="0"
- style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB39_not" />Non      </td>      </tr></table>    </td>
-    <td><b stl:attributes="class _B39">B39</b></td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39}" value="1" type="radio"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+    <td><b class="${_B39}">B39</b></td>
   </tr>
 
   <tr>
-    <th>Payant, même partiellement</th> 
+    <th>Payant, même partiellement</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input  type="radio"  name="fieldB40" value="1" style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB40" />Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input  type="radio" name="fieldB40"                value="0"
- style="font-size: 8pt;  border:0px"
-               stl:attributes="checked fieldB40_not" />Non      </td>      </tr></table>    </td>
-    <td><b stl:attributes="class _B40">B40</b></td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40}" value="1" type="radio"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+    <td><b class="${_B40}">B40</b></td>
   </tr>
 </table>
 
 <div>
     <p></p>
     <p>**si oui, veuillez indiquer dans la partie "Commentaires" le mode d'administration de l'annexe : bâtiment départemental ou municipal; la situation administratif des agents; l'organisation générale du lieu. </p>
- 
+
 </div>
-<p style = "page-break-after:always "></p>   
+<p style="page-break-after:always "></p>
 </form>
 </div>
 

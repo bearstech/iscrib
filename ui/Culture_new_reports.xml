@@ -1,56 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl"
-           xmlns="http://www.w3.org/1999/xhtml">
+<stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
 
-<h2>Attention ! </h2> 
+<h2>Attention ! </h2>
 <h3> La création d'une nouvelle série pour une nouvelle année est une opération
-     réservée aux équipes techniques de la DSI.</h3> 
+     réservée aux équipes techniques de la DSI.</h3>
 
 <table>
   <tr>
     <td>
-      <form action=";new_BDP_reports" name="new_folder" method="post">
+      <form name="new_folder" method="post" action=";new_BDP_reports">
         <table class="form">
           <tr>
-            <th colspan="2" class="title">Nouveaux rapports BDP</th>
+            <th class="title" colspan="2">Nouveaux rapports BDP</th>
           </tr>
           <tr>
             <th align="right">Année</th>
             <td>
               <select name="year">
-                <option stl:repeat="x years" stl:content="x/value"
-                        stl:attributes="value x/value; selected x/is_selected;
-                                        disabled x/is_disabled" />
+                <option stl:repeat="x years" value="${x/value}" disabled="${x/is_disabled}" selected="${x/is_selected}">${x/value}</option>
               </select>
             </td>
           </tr>
           <tr>
             <td></td>
-            <td class="submit"><input type="submit" value="Ajouter"></input>
+            <td class="submit"><input type="submit" value="Ajouter"/>
             </td>
           </tr>
         </table>
       </form>
     </td>
     <td>
-      <form action=";new_BM_reports" name="new_folder" method="post">
+      <form name="new_folder" method="post" action=";new_BM_reports">
         <table class="form">
           <tr>
-            <th colspan="2" class="title">Nouveaux rapports BM</th>
+            <th class="title" colspan="2">Nouveaux rapports BM</th>
           </tr>
           <tr>
             <th align="right">Année</th>
             <td>
               <select name="year">
-                <option stl:repeat="x BMyears" stl:content="x/value"
-                        stl:attributes="value x/value; selected x/is_selected;
-                                        disabled x/is_disabled" />
+                <option stl:repeat="x BMyears" value="${x/value}" disabled="${x/is_disabled}" selected="${x/is_selected}">${x/value}</option>
               </select>
             </td>
           </tr>
           <tr>
             <td></td>
-            <td class="submit"><input type="submit" value="Ajouter"></input>
+            <td class="submit"><input type="submit" value="Ajouter"/>
             </td>
           </tr>
         </table>
@@ -60,7 +55,7 @@
 </table>
 
 
-<a id="tip_title" onmouseout="hide_tip()" onmouseover="show_tip()">Détails</a>
+<a id="tip_title" onmouseover="show_tip()" onmouseout="hide_tip()">Détails</a>
 <div id="tip_body">
   <p>
   Les répertoires sont utilisés pour classer des documents. To add a folder

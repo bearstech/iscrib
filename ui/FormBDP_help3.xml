@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <title>Aide</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
-    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+    
+    <link type="text/css" rel="stylesheet" href="../../ui/culture/main.css"/>
 
   </head>
   <body id="body">
@@ -16,15 +15,15 @@
 <h3>Attention respect de la ponctuation : le marquage de la décimale se note par un point (exemple : 2.5)</h3>
 
 <dl class="description">
-<dt>Ne pas mettre d'accolades entre les diff&eacute;rentes rubriques, elles ne peuvent &ecirc;tre prises en compte &agrave; la saisie informatique.<br/> Ex&nbsp;:vous savez que dans votre r&eacute;seau travaillent 67 agents de cat&eacute;gorie C , mais vous ignorez le cadre d'emploi de chacun, vous &eacute;crivez NC dans chaque rubrique (C15, C16, C23) et vous comptabilisez les 67 dans le total ligne C43.</dt>
+<dt>Ne pas mettre d'accolades entre les différentes rubriques, elles ne peuvent être prises en compte à la saisie informatique.<br/> Ex :vous savez que dans votre réseau travaillent 67 agents de catégorie C , mais vous ignorez le cadre d'emploi de chacun, vous écrivez NC dans chaque rubrique (C15, C16, C23) et vous comptabilisez les 67 dans le total ligne C43.</dt>
 </dl>
 <h4> FIA </h4>
 <dl class="description">
-<dt>FIA = formation initiale d'application, noter le nombre d'agents concern&eacute;s.</dt>
-<dt> Deux colonnes ont &eacute;t&eacute; ajout&eacute;es aux documents pr&eacute;c&eacute;dents, il s'agit du statut du responsable de la biblioth&egrave;que&nbsp;: </dt>
+<dt>FIA = formation initiale d'application, noter le nombre d'agents concernés.</dt>
+<dt> Deux colonnes ont été ajoutées aux documents précédents, il s'agit du statut du responsable de la bibliothèque : </dt>
 <dt> <ul>
 <li>cochez la case pour la partie BDP,</li>
-<li>donnez le nombre pour la partie r&eacute;seau.</li>
+<li>donnez le nombre pour la partie réseau.</li>
 </ul>
 </dt>
 

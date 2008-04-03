@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" 
-     xmlns:stl="http://xml.itools.org/namespaces/stl"
-     id="formBiblio">
-<form action=";report" method="post" name="form">
- 
+<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<form method="post" name="form" action=";report">
+
   <div align="right">
 
-  <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
-     name="Imprimer" href="#"
-     onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
-   
-   
+  <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
+     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+
+
     <stl:block if="not printable">
-      <input type="submit" value="Enregistrer" 
-             style="background-color:rgb(145,191,255); border:0"
-             stl:if="is_allowed_to_edit"></input>
+      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
     </stl:block>
   </div>
 
 <h1>D- COLLECTIONS au 31 DECEMBRE 2005
-   <a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
-      onclick="window.open(';help4', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a>
+   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help4', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">?</a>
 </h1>
 <table>
   <tr>
@@ -45,163 +38,115 @@
   <td></td>
   </tr>
   <tr>
-    <th>Nombre de livres en libre accès pour le prêt</th> 
+    <th>Nombre de livres en libre accès pour le prêt</th>
     <td>
-       <input stl:attributes="value fieldD11X"
-              type="text" name="fieldD11X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD11X}" name="fieldD11X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD11Y"
-              type="text" name="fieldD11Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD11Y}" name="fieldD11Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD11Z"
-              type="text" name="fieldD11Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD11Z}" name="fieldD11Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D11">D11</b></td>
+    <td><b class="${_D11}">D11</b></td>
   </tr>
 
   <tr>
-    <th>Nombre de livres en libre accès réservés a la consultation sur place</th> 
+    <th>Nombre de livres en libre accès réservés a la consultation sur place</th>
     <td>
-       <input stl:attributes="value fieldD12X"
-              type="text" name="fieldD12X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD12X}" name="fieldD12X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD12Y"
-              type="text" name="fieldD12Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD12Y}" name="fieldD12Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD12Z"
-              type="text" name="fieldD12Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD12Z}" name="fieldD12Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D12">D12</b></td>
+    <td><b class="${_D12}">D12</b></td>
   </tr>
 
   <tr>
-    <th>Nombre total de livres en libre accès  (D11+D12)</th> 
+    <th>Nombre total de livres en libre accès  (D11+D12)</th>
     <td>
-       <input stl:attributes="value fieldD13X"
-              type="text" name="fieldD13X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD13X}" name="fieldD13X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD13Y"
-              type="text" name="fieldD13Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD13Y}" name="fieldD13Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD13Z"
-              type="text" name="fieldD13Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD13Z}" name="fieldD13Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D13">D13</b></td>
+    <td><b class="${_D13}">D13</b></td>
   </tr>
 
   <tr>
-    <th>Livres non patrimoniaux en magasin</th> 
+    <th>Livres non patrimoniaux en magasin</th>
     <td>
-       <input stl:attributes="value fieldD14X"
-              type="text" name="fieldD14X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD14X}" name="fieldD14X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD14Y"
-              type="text" name="fieldD14Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD14Y}" name="fieldD14Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD14Z"
-              type="text" name="fieldD14Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD14Z}" name="fieldD14Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D14">D14</b></td>
+    <td><b class="${_D14}">D14</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL  (D13 + D14)</b></th> 
+    <th><b>TOTAL  (D13 + D14)</b></th>
     <td>
-       <input stl:attributes="value fieldD15X"
-              type="text" name="fieldD15X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD15X}" name="fieldD15X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD15Y"
-              type="text" name="fieldD15Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD15Y}" name="fieldD15Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD15Z"
-              type="text" name="fieldD15Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD15Z}" name="fieldD15Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D15">D15</b></td>
+    <td><b class="${_D15}">D15</b></td>
   </tr>
 
   <tr>
-    <th>Vidéogrammes</th> 
+    <th>Vidéogrammes</th>
     <td>
-       <input stl:attributes="value fieldD16X"
-              type="text" name="fieldD16X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD16X}" name="fieldD16X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD16Y"
-              type="text" name="fieldD16Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD16Y}" name="fieldD16Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD16Z"
-              type="text" name="fieldD16Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD16Z}" name="fieldD16Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D16">D16</b></td>
+    <td><b class="${_D16}">D16</b></td>
   </tr>
 
   <tr>
-    <th>Phonogrammes</th> 
+    <th>Phonogrammes</th>
     <td>
-       <input stl:attributes="value fieldD17X"
-              type="text" name="fieldD17X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD17X}" name="fieldD17X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD17Y"
-              type="text" name="fieldD17Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD17Y}" name="fieldD17Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD17Z"
-              type="text" name="fieldD17Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD17Z}" name="fieldD17Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D17">D17</b></td>
+    <td><b class="${_D17}">D17</b></td>
   </tr>
 
   <tr>
-    <th>Cédéroms sauf périodiques</th> 
+    <th>Cédéroms sauf périodiques</th>
     <td>
-       <input stl:attributes="value fieldD18X"
-              type="text" name="fieldD18X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD18X}" name="fieldD18X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD18Y"
-              type="text" name="fieldD18Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD18Y}" name="fieldD18Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD18Z"
-              type="text" name="fieldD18Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD18Z}" name="fieldD18Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D18">D18</b></td>
+    <td><b class="${_D18}">D18</b></td>
   </tr>
 </table>
 <table width="100%">
@@ -211,63 +156,51 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Cartes et plans</th> 
+    <th>Cartes et plans</th>
     <td>
-       <input stl:attributes="value fieldD19"
-              type="text" name="fieldD19"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD19}" name="fieldD19" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D19">D19</b></td>
+    <td><b class="${_D19}">D19</b></td>
   </tr>
 
   <tr>
-    <th>Partitions</th> 
+    <th>Partitions</th>
     <td>
-       <input stl:attributes="value fieldD20"
-              type="text" name="fieldD20"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD20}" name="fieldD20" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D20">D20</b></td>
+    <td><b class="${_D20}">D20</b></td>
   </tr>
 
   <tr>
-    <th>Documents graphiques</th> 
+    <th>Documents graphiques</th>
     <td>
-       <input stl:attributes="value fieldD21"
-              type="text" name="fieldD21"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD21}" name="fieldD21" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D21">D21</b></td>
+    <td><b class="${_D21}">D21</b></td>
   </tr>
 
   <tr>
-    <th>Autres</th> 
+    <th>Autres</th>
     <td>
-       <input stl:attributes="value fieldD22"
-              type="text" name="fieldD22"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD22}" name="fieldD22" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D22">D22</b></td>
+    <td><b class="${_D22}">D22</b></td>
   </tr>
 
   <tr>
-    <th>Documents numériques</th> 
+    <th>Documents numériques</th>
     <td>
-       <input stl:attributes="value fieldD23"
-              type="text" name="fieldD23"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD23}" name="fieldD23" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D23">D23</b></td>
+    <td><b class="${_D23}">D23</b></td>
   </tr>
 
   <tr>
-    <th>Bases de données</th> 
+    <th>Bases de données</th>
     <td>
-       <input stl:attributes="value fieldD24"
-              type="text" name="fieldD24"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD24}" name="fieldD24" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D24">D24</b></td>
+    <td><b class="${_D24}">D24</b></td>
   </tr>
 </table>
 <table width="100%">
@@ -286,23 +219,17 @@
   <td></td>
   </tr>
   <tr>
-    <th>Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés,...)</th> 
+    <th>Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés,...)</th>
     <td>
-       <input stl:attributes="value fieldD25X"
-              type="text" name="fieldD25X"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD25X}" name="fieldD25X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD25Y"
-              type="text" name="fieldD25Y"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD25Y}" name="fieldD25Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldD25Z"
-              type="text" name="fieldD25Z"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD25Z}" name="fieldD25Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D25">D25</b></td>
+    <td><b class="${_D25}">D25</b></td>
   </tr>
 </table>
 <h2>D.3 DOCUMENTS PATRIMONIAUX (hors périodiques)</h2>
@@ -313,73 +240,59 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Livres imprimés</th> 
+    <th>Livres imprimés</th>
     <td>
-       <input stl:attributes="value fieldD31"
-              type="text" name="fieldD31"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD31}" name="fieldD31" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D31">D31</b></td>
+    <td><b class="${_D31}">D31</b></td>
   </tr>
 
   <tr>
-    <th>Manuscrits</th> 
+    <th>Manuscrits</th>
     <td>
-       <input stl:attributes="value fieldD32"
-              type="text" name="fieldD32"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD32}" name="fieldD32" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D32">D32</b></td>
+    <td><b class="${_D32}">D32</b></td>
   </tr>
 
   <tr>
-    <th>Documents graphiques, cartes et plans</th> 
+    <th>Documents graphiques, cartes et plans</th>
     <td>
-       <input stl:attributes="value fieldD33"
-              type="text" name="fieldD33"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD33}" name="fieldD33" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D33">D33</b></td>
+    <td><b class="${_D33}">D33</b></td>
   </tr>
 
   <tr>
-    <th>Documents numériques</th> 
+    <th>Documents numériques</th>
     <td>
-       <input stl:attributes="value fieldD34"
-              type="text" name="fieldD34"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD34}" name="fieldD34" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D34">D34</b></td>
+    <td><b class="${_D34}">D34</b></td>
   </tr>
 
   <tr>
-    <th>Bases de données</th> 
+    <th>Bases de données</th>
     <td>
-       <input stl:attributes="value fieldD35"
-              type="text" name="fieldD35"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD35}" name="fieldD35" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D35">D35</b></td>
+    <td><b class="${_D35}">D35</b></td>
   </tr>
 
   <tr>
-    <th>Autres : monnaies, etc.</th> 
+    <th>Autres : monnaies, etc.</th>
     <td>
-       <input stl:attributes="value fieldD36"
-              type="text" name="fieldD36"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD36}" name="fieldD36" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D36">D36</b></td>
+    <td><b class="${_D36}">D36</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (D31 à D36)</b></th> 
+    <th><b>TOTAL (D31 à D36)</b></th>
     <td>
-       <input stl:attributes="value fieldD37"
-              type="text" name="fieldD37"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD37}" name="fieldD37" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D37">D37</b></td>
+    <td><b class="${_D37}">D37</b></td>
   </tr>
 </table>
 <h2>D.4 PÉRIODIQUES</h2>
@@ -390,45 +303,37 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Nombre de titres de périodiques conservés (titres morts ou courants) imprimés</th> 
+    <th>Nombre de titres de périodiques conservés (titres morts ou courants) imprimés</th>
     <td>
-       <input stl:attributes="value fieldD41"
-              type="text" name="fieldD41"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD41}" name="fieldD41" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D41">D41</b></td>
+    <td><b class="${_D41}">D41</b></td>
   </tr>
 
   <tr>
-    <th>Dont nombre de périodiques patrimoniaux</th> 
+    <th>Dont nombre de périodiques patrimoniaux</th>
     <td>
-       <input stl:attributes="value fieldD42"
-              type="text" name="fieldD42"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD42}" name="fieldD42" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D42">D42</b></td>
+    <td><b class="${_D42}">D42</b></td>
   </tr>
 
   <tr>
-    <th>Nombre de titres de périodiques conservés (titres morts ou courants) sur Cédéroms ou en ligne</th> 
+    <th>Nombre de titres de périodiques conservés (titres morts ou courants) sur Cédéroms ou en ligne</th>
     <td>
-       <input stl:attributes="value fieldD43"
-              type="text" name="fieldD43"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD43}" name="fieldD43" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D43">D43</b></td>
+    <td><b class="${_D43}">D43</b></td>
   </tr>
 
   <tr>
-    <th>Nombre total de titres de périodiques conservés ou non conservés</th> 
+    <th>Nombre total de titres de périodiques conservés ou non conservés</th>
     <td>
-       <input stl:attributes="value fieldD44"
-              type="text" name="fieldD44"
-              value="" size="8" style="text-align: right"></input>
+       <input style="text-align: right" value="${fieldD44}" name="fieldD44" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _D44">D44</b></td>
+    <td><b class="${_D44}">D44</b></td>
   </tr>
 </table>
 </form>
- <p style = "page-break-after:always "></p>
+ <p style="page-break-after:always "></p>
 </div>

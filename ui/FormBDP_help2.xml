@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <title>Aide</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
-    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+    
+    <link type="text/css" rel="stylesheet" href="../../ui/culture/main.css"/>
   </head>
   <body id="body">
 <p align="right"><a href=";help_menu">Sommaire</a></p>
@@ -14,14 +13,14 @@
 
 <h4> Locaux </h4>
 <dl class="description">
-<dt>Afin d'unifier le calcul des surfaces, il a &eacute;t&eacute; d&eacute;cid&eacute; de retenir la SHON (surface hors oeuvre nette) utilis&eacute;e dans les documents administratifs ; toutefois, les biblioth&egrave;ques incluses dans des b&acirc;timents comportant d'autres services, veilleront &agrave; n'indiquer que les surfaces concernant la seule biblioth&egrave;que.</dt>
+<dt>Afin d'unifier le calcul des surfaces, il a été décidé de retenir la SHON (surface hors oeuvre nette) utilisée dans les documents administratifs ; toutefois, les bibliothèques incluses dans des bâtiments comportant d'autres services, veilleront à n'indiquer que les surfaces concernant la seule bibliothèque.</dt>
 </dl>
 
 
 <h4> Equipement informatique</h4>
 <dl class="description">
-<dt><u>Postes informatiques </u>: pour les postes informatiques publics inclure les postes de consultation du catalogue et tous les autres destin&eacute;s au public (logith&egrave;que, laboratoire de langue, etc.)</dt>
-<dt>Quand un  poste avec ou sans acc&egrave;s internet est &agrave; la fois &agrave; destination professionnelle et publique choisir «&nbsp;poste informatique public avec/sans acc&egrave;s internet&nbsp;»</dt>
+<dt><u>Postes informatiques </u>: pour les postes informatiques publics inclure les postes de consultation du catalogue et tous les autres destinés au public (logithèque, laboratoire de langue, etc.)</dt>
+<dt>Quand un  poste avec ou sans accès internet est à la fois à destination professionnelle et publique choisir « poste informatique public avec/sans accès internet »</dt>
 </dl>
 </body>
 </html>

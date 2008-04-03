@@ -1,66 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stl:block xmlns="http://www.w3.org/1999/xhtml"
-           xmlns:stl="http://xml.itools.org/namespaces/stl">
+<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
 
-<form action=";search_form" method="get">
+<form method="get" action=";search_form">
   <table class="form">
     <tr>
-      <th colspan="2" class="title">Recherche</th>
+      <th class="title" colspan="2">Recherche</th>
     </tr>
-    <tr> 
-      <th>Nom de la ville 
+    <tr>
+      <th>Nom de la ville
           <br/>(exemple "saint")</th>
       <td>
-        <input type="text" id="search_name" name="search_name" size="30"
-               stl:attributes="value search_name"/>
+        <input name="search_name" size="30" value="${search_name}" id="search_name" type="text"/>
       </td>
     </tr>
-    <tr> 
-      <th>Département (exemple : 02)<br/> 
+    <tr>
+      <th>Département (exemple : 02)<br/>
 	      <!--i style="font-size:8px;">Seul 01 et 02 sont en base</i-->
       </th>
       <td>
         <select name="search_dep" id="search_dep">
           <option value="">--- Tous les départements ---</option>
-          <option stl:repeat="dep departements"
-                  stl:content="dep/name"
-                  stl:attributes="value dep/value; selected dep/selected"/>
+          <option selected="${dep/selected}" stl:repeat="dep departements" value="${dep/value}">${dep/name}</option>
         </select>
         <!--input type="text" name="search_dep" size="4"
                stl:attributes="value search_dep"/--><br/>
       </td>
     </tr>
-    <tr> 
-      <th>Code_ua <br/> 
+    <tr>
+      <th>Code_ua <br/>
       </th>
       <td>
-        <input type="text" name="search_code" size="6"
-               stl:attributes="value search_code"/><br/>
+        <input name="search_code" size="6" type="text" value="${search_code}"/><br/>
       </td>
     </tr>
-     <tr> 
-      <th>Etat du formulaire<br/> 
+     <tr>
+      <th>Etat du formulaire<br/>
       </th>
       <td>
         <!--input type="text" name="search_state" size="7"
                stl:attributes="value search_state"/--><br/>
         <select name="search_state" id="search_state">
           <option value=""></option>
-          <option stl:repeat="state states"
-                  stl:content="state/name"
-                  stl:attributes="value state/value; selected state/selected"/>
+          <option selected="${state/selected}" stl:repeat="state states" value="${state/value}">${state/name}</option>
         </select>
       </td>
     </tr>
     <tr>
       <th></th>
-      <td class="submit"><input type="submit" value="Rechercher" /></td>
+      <td class="submit"><input type="submit" value="Rechercher"/></td>
     </tr>
   </table>
 </form>
 
 
-<hr />
+<hr/>
 
 <table class="form">
   <tr stl:if="not table/objects">
@@ -72,15 +65,15 @@
   </tr>
   <tr stl:if="too_long_answer">
     <td colspan="4">
-      <em stl:content="too_long_answer"/>
+      <em>${too_long_answer}</em>
     </td>
     <td></td>
     <td></td>
   </tr>
   <div class="batchcontrol" stl:if="batch/total">
-    <stl:inline if="batch/control" content="batch/control" />
-    <a stl:if="batch/previous" stl:attributes="href batch/previous">&lt;&lt;</a>
-    <a stl:if="batch/next" stl:attributes="href batch/next">&gt;&gt;</a>
+    <stl:inline if="batch/control">${batch/control}</stl:inline>
+    <a stl:if="batch/previous" href="${batch/previous}">&lt;&lt;</a>
+    <a stl:if="batch/next" href="${batch/next}">>></a>
   </div>
 
   <stl:block if="table/objects">
@@ -88,28 +81,25 @@
       <th style="border-bottom: 1px dotted black; text-align: center">
         Code <!--stl:inline content="table/sortcontrol(oid)" /-->
       </th>
-      <th align="left"
-          style="border-bottom: 1px dotted black; text-align: center">
-        Ville <stl:inline content="table/sortcontrol(title)" />
+      <th align="left" style="border-bottom: 1px dotted black; text-align: center">
+        Ville <stl:inline>${table/sortcontrol(title)}</stl:inline>
       </th>
-      <th align="left"
-          style="border-bottom: 1px dotted black; text-align: center">
-        Date <stl:inline content="table/sortcontrol(date)" />
+      <th align="left" style="border-bottom: 1px dotted black; text-align: center">
+        Date <stl:inline>${table/sortcontrol(date)}</stl:inline>
       </th>
-      <th align="left"
-          style="border-bottom: 1px dotted black; text-align: center">
-        Etat <stl:inline content="table/sortcontrol(form_state)" />
+      <th align="left" style="border-bottom: 1px dotted black; text-align: center">
+        Etat <stl:inline>${table/sortcontrol(form_state)}</stl:inline>
       </th>
     </tr>
     <tr stl:repeat="object table/objects">
       <td style="text-align: right">
-        <a stl:attributes="href object/url" stl:content="object/name" />
+        <a href="${object/url}">${object/name}</a>
       </td>
       <td>
-        <a stl:attributes="href object/url" stl:content="object/title" />
+        <a href="${object/url}">${object/title}</a>
       </td>
-      <td stl:content="object/date" />
-      <td stl:content="object/form_state" />
+      <td>${object/date}</td>
+      <td>${object/form_state}</td>
     </tr>
   </stl:block>
 </table>

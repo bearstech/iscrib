@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
    <title>Aide</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
-    <link href="../../ui/culture/main.css" type="text/css" rel="stylesheet"></link>
+    
+    <link type="text/css" rel="stylesheet" href="../../ui/culture/main.css"/>
 
   </head>
   <body id="body">
@@ -15,31 +14,31 @@
 <p align="right"><a href=";help_menu">Sommaire</a></p>
 <h2> SERVICES</h2>
 <dl class="description">
-<dt>Chaque partie commence par une question «&nbsp;en oui/non&nbsp;», les questions suivantes ne vous concernent que si vous avez r&eacute;pondu «&nbsp;oui&nbsp;» &agrave; la premi&egrave;re. </dt>
+<dt>Chaque partie commence par une question « en oui/non », les questions suivantes ne vous concernent que si vous avez répondu « oui » à la première. </dt>
 </dl>
 
-<h4>H1. Services &agrave; distance</h4>
+<h4>H1. Services à distance</h4>
 <dl class="description">
-<dt>Les services &eacute;lectroniques de biblioth&egrave;que comprennent le catalogue interrogeable en ligne par le public, le site Web de la biblioth&egrave;que, la collection &eacute;lectronique, la fourniture de documents &eacute;lectroniques, un service de r&eacute;f&eacute;rence &eacute;lectronique, la formation des usagers aux services &eacute;lectroniques et l'acc&egrave;s &agrave; Internet propos&eacute; par la biblioth&egrave;que.</dt>
-<dt>Une session est une connexion effective &agrave; une base de donn&eacute;es ou au catalogue interrogeable en ligne par le public.<br/>
+<dt>Les services électroniques de bibliothèque comprennent le catalogue interrogeable en ligne par le public, le site Web de la bibliothèque, la collection électronique, la fourniture de documents électroniques, un service de référence électronique, la formation des usagers aux services électroniques et l'accès à Internet proposé par la bibliothèque.</dt>
+<dt>Une session est une connexion effective à une base de données ou au catalogue interrogeable en ligne par le public.<br/>
 </dt>
 <dt><ul><i>
-<li>Note 1:  une session est un cycle d'activit&eacute;s qui d&eacute;bute lorsque l'usager se connecte &agrave; une base de donn&eacute;es ou au catalogue interrogeable en ligne, et qui se termine de fa&ccedil;on explicite (en quittant la base de donn&eacute;es par d&eacute;connexion ou en utilisant la fonction quitter) ou implicite (mise en veille apr&egrave;s une p&eacute;riode d&eacute;termin&eacute;e de non utilisation). Le d&eacute;lai moyen de mise en veille est de 30 minutes.
+<li>Note 1:  une session est un cycle d'activités qui débute lorsque l'usager se connecte à une base de données ou au catalogue interrogeable en ligne, et qui se termine de façon explicite (en quittant la base de données par déconnexion ou en utilisant la fonction quitter) ou implicite (mise en veille après une période déterminée de non utilisation). Le délai moyen de mise en veille est de 30 minutes.
 </li>
-<li>Note 2: les sessions sur le site Web de la biblioth&egrave;que sont comptabilis&eacute;es comme visites virtuelles.
+<li>Note 2: les sessions sur le site Web de la bibliothèque sont comptabilisées comme visites virtuelles.
 </li>
-<li>Note 3: il convient d'exclure les connexions &agrave; une page d'accueil
+<li>Note 3: il convient d'exclure les connexions à une page d'accueil
 </li>
 </i>
 </ul>
 </dt>
 </dl>
 
-<h4>H3. et H4. Aides et conseils de la BDP aux collectivit&eacute;s&nbsp;</h4>
+<h4>H3. et H4. Aides et conseils de la BDP aux collectivités </h4>
 <dl class="description">
-<dt>Il s'agit &agrave; la fois des subventions des d&eacute;partements pour les biblioth&egrave;ques du r&eacute;seaux et des acquisitions de la BDP pour &eacute;quiper les biblioth&egrave;ques du r&eacute;seau.
+<dt>Il s'agit à la fois des subventions des départements pour les bibliothèques du réseaux et des acquisitions de la BDP pour équiper les bibliothèques du réseau.
 </dt>
-<dt>cochez les cases correspondant aux aides que vous apportez, si le formulaire omet une activit&eacute; que vous exercez couramment, dites le en annexe de mani&egrave;re &agrave; am&eacute;liorer le questionnaire.
+<dt>cochez les cases correspondant aux aides que vous apportez, si le formulaire omet une activité que vous exercez couramment, dites le en annexe de manière à améliorer le questionnaire.
 </dt>
 </dl>
 

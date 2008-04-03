@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stl:block xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:stl="http://xml.itools.org/namespaces/stl">
+<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
 
-<h1>Etat du formulaire : <em stl:content="state" /></h1>
+<h1>Etat du formulaire : <em>${state}</em></h1>
 
 <p>
-  Il y a encore <b stl:content="mandatory_Empties"/>  rubrique(s) obligatoire(s) non renseignée(s) 
+  Il y a encore <b>${mandatory_Empties}</b>  rubrique(s) obligatoire(s) non renseignée(s)
 </p>
 
 
@@ -30,31 +29,30 @@
   MySQL en cliquant le bouton ci-dessus :
   </p>
   <blockquote>
-    <form action=";submitted2exported" method="post">
-      <input type="submit" value="Exporter" />
+    <form method="post" action=";submitted2exported">
+      <input type="submit" value="Exporter"/>
     </form>
   </blockquote>
 </stl:block>
 
 <stl:block if="not is_complete">
 <stl:block if="not is_finished">
-    <p > La<a href="#controles">  liste des contrôles </a> et la<a href="#vides"> liste des rubriques non remplies </a> doivent être vides pour pouvoir envoyer le formulaire</p>
+    <p> La<a href="#controles">  liste des contrôles </a> et la<a href="#vides"> liste des rubriques non remplies </a> doivent être vides pour pouvoir envoyer le formulaire</p>
    <blockquote>
-    <form action=";pending2submitted" method="post">
-      <input style="color: gray;" value="Envoyer le formulaire" type="submit" 
-             disabled="True"/>
+    <form method="post" action=";pending2submitted">
+      <input style="color: gray;" type="submit" value="Envoyer le formulaire" disabled="True"/>
     </form>
   </blockquote>
-</stl:block> 
+</stl:block>
 </stl:block>
 
 <stl:block if="is_complete">
    <p> Le formulaire est complet, tous les contrôles sont à OUI. Vous pouvez
     envoyer le formulaire.  Pour l'envoyer à l'administrateur cliquez sur le
-    bouton ci-dessous : </p> 
-  <blockquote> 
-    <form action=";pending2submitted" method="post">
-      <input type="submit" value="Envoyer le formulaire" />
+    bouton ci-dessous : </p>
+  <blockquote>
+    <form method="post" action=";pending2submitted">
+      <input type="submit" value="Envoyer le formulaire"/>
     </form>
   </blockquote>
 </stl:block>
@@ -62,9 +60,9 @@
 <h2>Pour information, en l'état actuel du remplissage</h2>
 <table class="Check" cellspacing="0" cellpadding="0">
   <tr stl:repeat="alert resalt">
-    <td  class="idCheck" stl:content="alert/idalt"/>
-    <td  class="textCheck" stl:content="alert/textalt"/>
-    <td  class="textCheck" stl:content="alert/resultat"/>
+    <td class="idCheck">${alert/idalt}</td>
+    <td class="textCheck">${alert/textalt}</td>
+    <td class="textCheck">${alert/resultat}</td>
   </tr>
 </table>
 
@@ -78,42 +76,40 @@ La liste des contrôles doit être vide  pour que l'on puisse envoyer le formula
     <td>
       <table class="Check" cellspacing="0" cellpadding="0">
         <stl:block repeat="res1 controle_blocks1">
-        <tr style="background-color: rgb(202,220,255); text-align:center" >
+        <tr style="background-color: rgb(202,220,255); text-align:center">
           <td colspan="4">
-            <a style="text-decoration: underline" 
-               stl:attributes="href res1/section_url">
-             Retour chapitre <b stl:content="res1/section_title"/>
-            </a> 
+            <a style="text-decoration: underline" href="${res1/section_url}">
+             Retour chapitre <b>${res1/section_title}</b>
+            </a>
       </td>
         </tr>
         <tr stl:repeat="control res1/lines">
-          <td class="idCheck" stl:content="control/num"/>
-          <td class="textCheck" stl:content="control/text"/>
-          <td colspan="2" stl:if="control/empty" class="emptyCheck">Incomplet</td>
-          <stl:block stl:if="not control/empty">
+          <td class="idCheck">${control/num}</td>
+          <td class="textCheck">${control/text}</td>
+          <td stl:if="control/empty" class="emptyCheck" colspan="2">Incomplet</td>
+          <stl:block if="not control/empty">
             <td stl:if="not control/fail" class="okCheck">Oui</td>
             <td stl:if="control/fail" class="failCheck">Non</td>
           </stl:block>
         </tr>
         </stl:block>
       </table>
-    </td> 
+    </td>
     <td>
       <table class="Check" cellspacing="0" cellpadding="0">
         <stl:block repeat="res2 controle_blocks2">
-        <tr style="background-color: rgb(202,220,255); text-align:center" >
+        <tr style="background-color: rgb(202,220,255); text-align:center">
           <td colspan="4">
-            <a style="text-decoration: underline" 
-               stl:attributes="href res2/section_url" >
-             Retour chapitre <b stl:content="res2/section_title"/>
-            </a> 
+            <a style="text-decoration: underline" href="${res2/section_url}">
+             Retour chapitre <b>${res2/section_title}</b>
+            </a>
           </td>
         </tr>
         <tr stl:repeat="control res2/lines">
-          <td class="idCheck" stl:content="control/num"/>
-          <td class="textCheck" stl:content="control/text"/>
-          <td colspan="2" stl:if="control/empty" class="emptyCheck">Incomplet</td>
-          <stl:block stl:if="not control/empty">
+          <td class="idCheck">${control/num}</td>
+          <td class="textCheck">${control/text}</td>
+          <td stl:if="control/empty" class="emptyCheck" colspan="2">Incomplet</td>
+          <stl:block if="not control/empty">
             <td stl:if="not control/fail" class="okCheck">Oui</td>
             <td stl:if="control/fail" class="failCheck">Non</td>
           </stl:block>
@@ -150,19 +146,19 @@ La liste des contrôles doit être vide  pour que l'on puisse envoyer le formula
   <tr valign="top">
     <td>
 
-      <table  class="Check" cellspacing="0" cellpadding="0">
+      <table class="Check" cellspacing="0" cellpadding="0">
         <tr stl:repeat="champ restype0">
-          <td class="idCheck" stl:content="champ/chp"/>
+          <td class="idCheck">${champ/chp}</td>
           <!--td class="textCheck" stl:content="champ/type"/-->
         </tr>
       </table>
 
-    </td> 
+    </td>
     <td>
- 
-      <table  class="Check" cellspacing="0" cellpadding="0">
+
+      <table class="Check" cellspacing="0" cellpadding="0">
         <tr stl:repeat="champ restype1">
-          <td class="idCheck" stl:content="champ/chp"/>
+          <td class="idCheck">${champ/chp}</td>
           <!--td class="textCheck" stl:content="champ/type"/-->
         </tr>
       </table>
@@ -171,28 +167,28 @@ La liste des contrôles doit être vide  pour que l'on puisse envoyer le formula
     </td>
     <td>
 
-      <table  class="Check" cellspacing="0" cellpadding="0">
+      <table class="Check" cellspacing="0" cellpadding="0">
         <tr stl:repeat="champ restype2">
-          <td class="idCheck" stl:content="champ/chp"/>
+          <td class="idCheck">${champ/chp}</td>
           <!--td class="textCheck" stl:content="champ/type"/-->
         </tr>
       </table>
 
-    </td> 
+    </td>
     <td>
- 
-      <table  class="Check" cellspacing="0" cellpadding="0">
+
+      <table class="Check" cellspacing="0" cellpadding="0">
         <tr stl:repeat="champ restype3">
-          <td class="idCheck" stl:content="champ/chp"/>
+          <td class="idCheck">${champ/chp}</td>
           <!--td class="textCheck" stl:content="champ/type"/-->
         </tr>
       </table>
 
-       
+
 
     </td>
   </tr>
 </table>
 
- 
-</stl:block>  
+
+</stl:block>

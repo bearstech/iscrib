@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stl:block xmlns="http://www.w3.org/1999/xhtml"
-           xmlns:stl="http://xml.itools.org/namespaces/stl">
+<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <h4>Le code des contrôles</h4>
-  <pre stl:content="controles"/>
+  <pre>${controles}</pre>
 </stl:block>

@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" 
-     xmlns:stl="http://xml.itools.org/namespaces/stl"
-     id="formBiblio">
-<form action=";report" method="post" name="form">
- 
+<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<form method="post" name="form" action=";report">
+
 <table width="100%">
   <tr>
   <td align="left">
-  
-  <a stl:if="not printable" href="#" style="color:red " alt="Aide"
-      onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">? Consulter l'aide sur cette page</a>
+
+  <a stl:if="not printable" style="color:red " onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">? Consulter l'aide sur cette page</a>
       </td>
   <td align="right">
-  <a stl:if="not printable" style="border:0;text-color:gray" alt="Imprimer" 
-     name="Imprimer" href="#"
-     onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="../../ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
-   
-   
+  <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
+     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+
+
     <stl:block if="not printable">
-      <input type="submit" value="Enregistrer" 
-             style="background-color:rgb(145,191,255); border:0"
-             stl:if="is_allowed_to_edit"></input>
+      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
     </stl:block>
-  </td>  
+  </td>
   </tr>
   </table>
- 
+
 <h1>F-  RÉSEAU TOUS PUBLICS
     <!--a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a-->
@@ -48,163 +41,115 @@
   <td></td>
   </tr>
   <tr>
-    <th>Bibliothèques municipales niveau 1</th> 
+    <th>Bibliothèques municipales niveau 1</th>
     <td>
-       <input stl:attributes="value fieldF11W"
-              type="text" name="fieldF11W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF11W}" name="fieldF11W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF11X"
-              type="text" name="fieldF11X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF11X}" name="fieldF11X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF11Y"
-              type="text" name="fieldF11Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF11Y}" name="fieldF11Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F11">F11</b></td>
+    <td><b class="${_F11}">F11</b></td>
   </tr>
 
   <tr>
-    <th>Bibliothèques municipales niveau 2</th> 
+    <th>Bibliothèques municipales niveau 2</th>
     <td>
-       <input stl:attributes="value fieldF12W"
-              type="text" name="fieldF12W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF12W}" name="fieldF12W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF12X"
-              type="text" name="fieldF12X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF12X}" name="fieldF12X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF12Y"
-              type="text" name="fieldF12Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF12Y}" name="fieldF12Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F12">F12</b></td>
+    <td><b class="${_F12}">F12</b></td>
   </tr>
 
   <tr>
-    <th>Bibliothèques relais niveau 3</th> 
+    <th>Bibliothèques relais niveau 3</th>
     <td>
-       <input stl:attributes="value fieldF13W"
-              type="text" name="fieldF13W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF13W}" name="fieldF13W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF13X"
-              type="text" name="fieldF13X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF13X}" name="fieldF13X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF13Y"
-              type="text" name="fieldF13Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF13Y}" name="fieldF13Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F13">F13</b></td>
+    <td><b class="${_F13}">F13</b></td>
   </tr>
 
   <tr>
-    <th>Point-lecture</th> 
+    <th>Point-lecture</th>
     <td>
-       <input stl:attributes="value fieldF14W"
-              type="text" name="fieldF14W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF14W}" name="fieldF14W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF14X"
-              type="text" name="fieldF14X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF14X}" name="fieldF14X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF14Y"
-              type="text" name="fieldF14Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF14Y}" name="fieldF14Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F14">F14</b></td>
+    <td><b class="${_F14}">F14</b></td>
   </tr>
 
   <tr>
-    <th>Autres dépôts tous publics</th> 
+    <th>Autres dépôts tous publics</th>
     <td>
-       <input stl:attributes="value fieldF15W"
-              type="text" name="fieldF15W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF15W}" name="fieldF15W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF15X"
-              type="text" name="fieldF15X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF15X}" name="fieldF15X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF15Y"
-              type="text" name="fieldF15Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF15Y}" name="fieldF15Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F15">F15</b></td>
+    <td><b class="${_F15}">F15</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (F11 à F15)</b></th> 
+    <th><b>TOTAL (F11 à F15)</b></th>
     <td>
-       <input stl:attributes="value fieldF16W"
-              type="text" name="fieldF16W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF16W}" name="fieldF16W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF16X"
-              type="text" name="fieldF16X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF16X}" name="fieldF16X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF16Y"
-              type="text" name="fieldF16Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF16Y}" name="fieldF16Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F16">F16</b></td>
+    <td><b class="${_F16}">F16</b></td>
   </tr>
 
   <tr>
-    <th>Arrêts bibliobus-médiabus prêt direct</th> 
+    <th>Arrêts bibliobus-médiabus prêt direct</th>
     <td>
-       <input stl:attributes="value fieldF17W"
-              type="text" name="fieldF17W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF17W}" name="fieldF17W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF17X"
-              type="text" name="fieldF17X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF17X}" name="fieldF17X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF17Y"
-              type="text" name="fieldF17Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF17Y}" name="fieldF17Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F17">F17</b></td>
+    <td><b class="${_F17}">F17</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (F16 + F17)</b></th> 
+    <th><b>TOTAL (F16 + F17)</b></th>
     <td>
-       <input stl:attributes="value fieldF18W"
-              type="text" name="fieldF18W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF18W}" name="fieldF18W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF18X"
-              type="text" name="fieldF18X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF18X}" name="fieldF18X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF18Y"
-              type="text" name="fieldF18Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF18Y}" name="fieldF18Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F18">F18</b></td>
+    <td><b class="${_F18}">F18</b></td>
   </tr>
 </table>
 <table>
@@ -226,33 +171,25 @@
   <td></td>
   </tr>
   <tr>
-    <th>communes de + 10 000 habitants</th> 
+    <th>communes de + 10 000 habitants</th>
     <td>
-       <input stl:attributes="value fieldF19X"
-              type="text" name="fieldF19X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF19X}" name="fieldF19X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF19Y"
-              type="text" name="fieldF19Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF19Y}" name="fieldF19Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F19">F19</b></td>
+    <td><b class="${_F19}">F19</b></td>
   </tr>
 
   <tr>
-    <th>groupements de communes de + 10 000 habitants</th> 
+    <th>groupements de communes de + 10 000 habitants</th>
     <td>
-       <input stl:attributes="value fieldF20X"
-              type="text" name="fieldF20X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF20X}" name="fieldF20X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF20Y"
-              type="text" name="fieldF20Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF20Y}" name="fieldF20Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F20">F20</b></td>
+    <td><b class="${_F20}">F20</b></td>
   </tr>
 </table>
 <table width="100%">
@@ -269,18 +206,14 @@
   <td></td>
   </tr>
   <tr>
-    <th>communes desservies par plusieurs modes de desserte (ex BM + prêt direct)</th> 
+    <th>communes desservies par plusieurs modes de desserte (ex BM + prêt direct)</th>
     <td>
-       <input stl:attributes="value fieldF21X"
-              type="text" name="fieldF21X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF21X}" name="fieldF21X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF21Y"
-              type="text" name="fieldF21Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF21Y}" name="fieldF21Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F21">F21</b></td>
+    <td><b class="${_F21}">F21</b></td>
   </tr>
 </table>
 <h2>F. 3 DÉPÔTS DE LA BDP</h2>
@@ -298,123 +231,91 @@
   <td></td>
   </tr>
   <tr>
-    <th>Imprimés adultes</th> 
+    <th>Imprimés adultes</th>
     <td>
-       <input stl:attributes="value fieldF31Y"
-              type="text" name="fieldF31Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF31Y}" name="fieldF31Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF31Z"
-              type="text" name="fieldF31Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF31Z}" name="fieldF31Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F31">F31</b></td>
+    <td><b class="${_F31}">F31</b></td>
   </tr>
 
   <tr>
-    <th>Imprimés enfants</th> 
+    <th>Imprimés enfants</th>
     <td>
-       <input stl:attributes="value fieldF32Y"
-              type="text" name="fieldF32Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF32Y}" name="fieldF32Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF32Z"
-              type="text" name="fieldF32Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF32Z}" name="fieldF32Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F32">F32</b></td>
+    <td><b class="${_F32}">F32</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL ( F31 + F32)</b></th> 
+    <th><b>TOTAL ( F31 + F32)</b></th>
     <td>
-       <input stl:attributes="value fieldF33Y"
-              type="text" name="fieldF33Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF33Y}" name="fieldF33Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF33Z"
-              type="text" name="fieldF33Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF33Z}" name="fieldF33Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F33">F33</b></td>
+    <td><b class="${_F33}">F33</b></td>
   </tr>
 
   <tr>
-    <th>Phonogrammes</th> 
+    <th>Phonogrammes</th>
     <td>
-       <input stl:attributes="value fieldF34Y"
-              type="text" name="fieldF34Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF34Y}" name="fieldF34Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF34Z"
-              type="text" name="fieldF34Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF34Z}" name="fieldF34Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F34">F34</b></td>
+    <td><b class="${_F34}">F34</b></td>
   </tr>
 
   <tr>
-    <th>Vidéogrammes</th> 
+    <th>Vidéogrammes</th>
     <td>
-       <input stl:attributes="value fieldF35Y"
-              type="text" name="fieldF35Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF35Y}" name="fieldF35Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF35Z"
-              type="text" name="fieldF35Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF35Z}" name="fieldF35Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F35">F35</b></td>
+    <td><b class="${_F35}">F35</b></td>
   </tr>
 
   <tr>
-    <th>Cédéroms</th> 
+    <th>Cédéroms</th>
     <td>
-       <input stl:attributes="value fieldF36Y"
-              type="text" name="fieldF36Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF36Y}" name="fieldF36Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF36Z"
-              type="text" name="fieldF36Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF36Z}" name="fieldF36Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F36">F36</b></td>
+    <td><b class="${_F36}">F36</b></td>
   </tr>
 
   <tr>
-    <th>Autres documents</th> 
+    <th>Autres documents</th>
     <td>
-       <input stl:attributes="value fieldF37Y"
-              type="text" name="fieldF37Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF37Y}" name="fieldF37Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF37Z"
-              type="text" name="fieldF37Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF37Z}" name="fieldF37Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F37">F37</b></td>
+    <td><b class="${_F37}">F37</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (F33 à F37 )</b></th> 
+    <th><b>TOTAL (F33 à F37 )</b></th>
     <td>
-       <input stl:attributes="value fieldF38Y"
-              type="text" name="fieldF38Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF38Y}" name="fieldF38Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF38Z"
-              type="text" name="fieldF38Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF38Z}" name="fieldF38Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F38">F38</b></td>
+    <td><b class="${_F38}">F38</b></td>
   </tr>
 </table>
 <h2>F. 4 BIBLIOTHÈQUES AYANT FOURNI DES STATISTIQUES</h2>
@@ -434,126 +335,90 @@
   <td></td>
   </tr>
   <tr>
-    <th>Bibliothèques niveau 1</th> 
+    <th>Bibliothèques niveau 1</th>
     <td>
-       <input stl:attributes="value fieldF41W"
-              type="text" name="fieldF41W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF41W}" name="fieldF41W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF41X"
-              type="text" name="fieldF41X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF41X}" name="fieldF41X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF41Y"
-              type="text" name="fieldF41Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF41Y}" name="fieldF41Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F41">F41</b></td>
+    <td><b class="${_F41}">F41</b></td>
   </tr>
 
   <tr>
-    <th>Bibliothèques niveau 2</th> 
+    <th>Bibliothèques niveau 2</th>
     <td>
-       <input stl:attributes="value fieldF42W"
-              type="text" name="fieldF42W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF42W}" name="fieldF42W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF42X"
-              type="text" name="fieldF42X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF42X}" name="fieldF42X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF42Y"
-              type="text" name="fieldF42Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF42Y}" name="fieldF42Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F42">F42</b></td>
+    <td><b class="${_F42}">F42</b></td>
   </tr>
 
   <tr>
-    <th>Bibliothèques-relais niveau 3</th> 
+    <th>Bibliothèques-relais niveau 3</th>
     <td>
-       <input stl:attributes="value fieldF43W"
-              type="text" name="fieldF43W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF43W}" name="fieldF43W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF43X"
-              type="text" name="fieldF43X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF43X}" name="fieldF43X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF43Y"
-              type="text" name="fieldF43Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF43Y}" name="fieldF43Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F43">F43</b></td>
+    <td><b class="${_F43}">F43</b></td>
   </tr>
 
   <tr>
-    <th>Points-lecture</th> 
+    <th>Points-lecture</th>
     <td>
-       <input stl:attributes="value fieldF44W"
-              type="text" name="fieldF44W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF44W}" name="fieldF44W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF44X"
-              type="text" name="fieldF44X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF44X}" name="fieldF44X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF44Y"
-              type="text" name="fieldF44Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF44Y}" name="fieldF44Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F44">F44</b></td>
+    <td><b class="${_F44}">F44</b></td>
   </tr>
 
   <tr>
-    <th>Dépôts tous publics</th> 
+    <th>Dépôts tous publics</th>
     <td>
-       <input stl:attributes="value fieldF45W"
-              type="text" name="fieldF45W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF45W}" name="fieldF45W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF45X"
-              type="text" name="fieldF45X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF45X}" name="fieldF45X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF45Y"
-              type="text" name="fieldF45Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF45Y}" name="fieldF45Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F45">F45</b></td>
+    <td><b class="${_F45}">F45</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (F41 à F45  )</b></th> 
+    <th><b>TOTAL (F41 à F45  )</b></th>
     <td>
-       <input stl:attributes="value fieldF46W"
-              type="text" name="fieldF46W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF46W}" name="fieldF46W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF46X"
-              type="text" name="fieldF46X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF46X}" name="fieldF46X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF46Y"
-              type="text" name="fieldF46Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF46Y}" name="fieldF46Y" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F46">F46</b></td>
+    <td><b class="${_F46}">F46</b></td>
   </tr>
 </table>
-<p style = "page-break-after:always "></p>
+<p style="page-break-after:always "></p>
 <h2>F. 5 ACTIVITÉS DU RÉSEAU TOUS PUBLICS : INSCRITS</h2>
 <table>
   <tr>
@@ -578,28 +443,20 @@
   <td></td>
   </tr>
   <tr>
-    <th>0-14 ans</th> 
+    <th>0-14 ans</th>
     <td>
-       <input stl:attributes="value fieldF51W"
-              type="text" name="fieldF51W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF51W}" name="fieldF51W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF51X"
-              type="text" name="fieldF51X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF51X}" name="fieldF51X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF51Y"
-              type="text" name="fieldF51Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF51Y}" name="fieldF51Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF51Z"
-              type="text" name="fieldF51Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF51Z}" name="fieldF51Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F51">F51</b></td>
+    <td><b class="${_F51}">F51</b></td>
   </tr>
 </table>
 <table>
@@ -625,128 +482,88 @@
   <td></td>
   </tr>
   <tr>
-    <th>15-24 ans</th> 
+    <th>15-24 ans</th>
     <td>
-       <input stl:attributes="value fieldF52W"
-              type="text" name="fieldF52W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF52W}" name="fieldF52W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF52X"
-              type="text" name="fieldF52X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF52X}" name="fieldF52X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF52Y"
-              type="text" name="fieldF52Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF52Y}" name="fieldF52Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF52Z"
-              type="text" name="fieldF52Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF52Z}" name="fieldF52Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F52">F52</b></td>
+    <td><b class="${_F52}">F52</b></td>
   </tr>
 
   <tr>
-    <th>25-59 ans</th> 
+    <th>25-59 ans</th>
     <td>
-       <input stl:attributes="value fieldF53W"
-              type="text" name="fieldF53W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF53W}" name="fieldF53W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF53X"
-              type="text" name="fieldF53X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF53X}" name="fieldF53X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF53Y"
-              type="text" name="fieldF53Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF53Y}" name="fieldF53Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF53Z"
-              type="text" name="fieldF53Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF53Z}" name="fieldF53Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F53">F53</b></td>
+    <td><b class="${_F53}">F53</b></td>
   </tr>
 
   <tr>
-    <th>60 ans et +</th> 
+    <th>60 ans et +</th>
     <td>
-       <input stl:attributes="value fieldF54W"
-              type="text" name="fieldF54W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF54W}" name="fieldF54W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF54X"
-              type="text" name="fieldF54X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF54X}" name="fieldF54X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF54Y"
-              type="text" name="fieldF54Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF54Y}" name="fieldF54Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF54Z"
-              type="text" name="fieldF54Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF54Z}" name="fieldF54Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F54">F54</b></td>
+    <td><b class="${_F54}">F54</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL Adultes</b></th> 
+    <th><b>TOTAL Adultes</b></th>
     <td>
-       <input stl:attributes="value fieldF55W"
-              type="text" name="fieldF55W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF55W}" name="fieldF55W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF55X"
-              type="text" name="fieldF55X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF55X}" name="fieldF55X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF55Y"
-              type="text" name="fieldF55Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF55Y}" name="fieldF55Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF55Z"
-              type="text" name="fieldF55Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF55Z}" name="fieldF55Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F55">F55</b></td>
+    <td><b class="${_F55}">F55</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL DES INSCRITS (F51 + F55)</b></th> 
+    <th><b>TOTAL DES INSCRITS (F51 + F55)</b></th>
     <td>
-       <input stl:attributes="value fieldF56W"
-              type="text" name="fieldF56W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF56W}" name="fieldF56W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF56X"
-              type="text" name="fieldF56X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF56X}" name="fieldF56X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF56Y"
-              type="text" name="fieldF56Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF56Y}" name="fieldF56Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF56Z"
-              type="text" name="fieldF56Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF56Z}" name="fieldF56Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F56">F56</b></td>
+    <td><b class="${_F56}">F56</b></td>
   </tr>
 </table>
 <h2>F. 6 ACTIVITÉS DU RÉSEAU TOUS PUBLICS : NOMBRE DE PRÊTS (1)</h2>
@@ -768,237 +585,165 @@
   <td></td>
   </tr>
   <tr>
-    <th>Prêts de livres adultes</th> 
+    <th>Prêts de livres adultes</th>
     <td>
-       <input stl:attributes="value fieldF61W"
-              type="text" name="fieldF61W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF61W}" name="fieldF61W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF61X"
-              type="text" name="fieldF61X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF61X}" name="fieldF61X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF61Y"
-              type="text" name="fieldF61Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF61Y}" name="fieldF61Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF61Z"
-              type="text" name="fieldF61Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF61Z}" name="fieldF61Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F61">F61</b></td>
+    <td><b class="${_F61}">F61</b></td>
   </tr>
 
   <tr>
-    <th>Prêts de livres enfants</th> 
+    <th>Prêts de livres enfants</th>
     <td>
-       <input stl:attributes="value fieldF62W"
-              type="text" name="fieldF62W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF62W}" name="fieldF62W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF62X"
-              type="text" name="fieldF62X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF62X}" name="fieldF62X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF62Y"
-              type="text" name="fieldF62Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF62Y}" name="fieldF62Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF62Z"
-              type="text" name="fieldF62Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF62Z}" name="fieldF62Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F62">F62</b></td>
+    <td><b class="${_F62}">F62</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (F61+F62)</b></th> 
+    <th><b>TOTAL (F61+F62)</b></th>
     <td>
-       <input stl:attributes="value fieldF63W"
-              type="text" name="fieldF63W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF63W}" name="fieldF63W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF63X"
-              type="text" name="fieldF63X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF63X}" name="fieldF63X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF63Y"
-              type="text" name="fieldF63Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF63Y}" name="fieldF63Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF63Z"
-              type="text" name="fieldF63Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF63Z}" name="fieldF63Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F63">F63</b></td>
+    <td><b class="${_F63}">F63</b></td>
   </tr>
 
   <tr>
-    <th>Prêts de périodiques</th> 
+    <th>Prêts de périodiques</th>
     <td>
-       <input stl:attributes="value fieldF64W"
-              type="text" name="fieldF64W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF64W}" name="fieldF64W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF64X"
-              type="text" name="fieldF64X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF64X}" name="fieldF64X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF64Y"
-              type="text" name="fieldF64Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF64Y}" name="fieldF64Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF64Z"
-              type="text" name="fieldF64Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF64Z}" name="fieldF64Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F64">F64</b></td>
+    <td><b class="${_F64}">F64</b></td>
   </tr>
 
   <tr>
-    <th>Prêts de phonogrammes</th> 
+    <th>Prêts de phonogrammes</th>
     <td>
-       <input stl:attributes="value fieldF65W"
-              type="text" name="fieldF65W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF65W}" name="fieldF65W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF65X"
-              type="text" name="fieldF65X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF65X}" name="fieldF65X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF65Y"
-              type="text" name="fieldF65Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF65Y}" name="fieldF65Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF65Z"
-              type="text" name="fieldF65Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF65Z}" name="fieldF65Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F65">F65</b></td>
+    <td><b class="${_F65}">F65</b></td>
   </tr>
 
   <tr>
-    <th>Prêts de vidéogrammes</th> 
+    <th>Prêts de vidéogrammes</th>
     <td>
-       <input stl:attributes="value fieldF66W"
-              type="text" name="fieldF66W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF66W}" name="fieldF66W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF66X"
-              type="text" name="fieldF66X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF66X}" name="fieldF66X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF66Y"
-              type="text" name="fieldF66Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF66Y}" name="fieldF66Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF66Z"
-              type="text" name="fieldF66Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF66Z}" name="fieldF66Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F66">F66</b></td>
+    <td><b class="${_F66}">F66</b></td>
   </tr>
 
   <tr>
-    <th>Prêts de cédéroms</th> 
+    <th>Prêts de cédéroms</th>
     <td>
-       <input stl:attributes="value fieldF67W"
-              type="text" name="fieldF67W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF67W}" name="fieldF67W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF67X"
-              type="text" name="fieldF67X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF67X}" name="fieldF67X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF67Y"
-              type="text" name="fieldF67Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF67Y}" name="fieldF67Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF67Z"
-              type="text" name="fieldF67Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF67Z}" name="fieldF67Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F67">F67</b></td>
+    <td><b class="${_F67}">F67</b></td>
   </tr>
 
   <tr>
-    <th>Prêts d'autres documents</th> 
+    <th>Prêts d'autres documents</th>
     <td>
-       <input stl:attributes="value fieldF68W"
-              type="text" name="fieldF68W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF68W}" name="fieldF68W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF68X"
-              type="text" name="fieldF68X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF68X}" name="fieldF68X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF68Y"
-              type="text" name="fieldF68Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF68Y}" name="fieldF68Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF68Z"
-              type="text" name="fieldF68Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF68Z}" name="fieldF68Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F68">F68</b></td>
+    <td><b class="${_F68}">F68</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL DES PRÊTS (F63 à F68)</b></th> 
+    <th><b>TOTAL DES PRÊTS (F63 à F68)</b></th>
     <td>
-       <input stl:attributes="value fieldF69W"
-              type="text" name="fieldF69W"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF69W}" name="fieldF69W" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF69X"
-              type="text" name="fieldF69X"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF69X}" name="fieldF69X" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF69Y"
-              type="text" name="fieldF69Y"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF69Y}" name="fieldF69Y" size="8" type="text"/>
     </td>
     <td>
-       <input stl:attributes="value fieldF69Z"
-              type="text" name="fieldF69Z"
-              value="" size="8" style="text-align:right"></input>
+       <input style="text-align:right" value="${fieldF69Z}" name="fieldF69Z" size="8" type="text"/>
     </td>
-    <td><b stl:attributes="class _F69">F69</b></td>
+    <td><b class="${_F69}">F69</b></td>
   </tr>
 </table>
 <div>
     <p></p>
     <p>(1)nb de prêts aux lecteurs finaux </p>
-      
-   
+
+
 </div>
 </form>
-  <p style = "page-break-after:always "></p>
+  <p style="page-break-after:always "></p>
 </div>
 
