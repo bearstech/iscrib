@@ -185,9 +185,9 @@ class Form(BaseText):
         namespace = self.get_namespace()
 
         try: 
-            handler = self.get_handler('/ui/culture/%s' % autogen_xml)
+            handler = self.get_object('/ui/culture/%s' % autogen_xml)
         except LookupError:
-            handler = self.get_handler('/ui/culture/%s' % xml)
+            handler = self.get_object('/ui/culture/%s' % xml)
 
         if view == 'printable':
             namespace['printable'] = True
@@ -195,7 +195,7 @@ class Form(BaseText):
             context.response.set_header('Content-Type', 
                                         'text/html; charset=UTF-8')
             namespace['body'] = stl(handler, namespace)
-            handler = self.get_handler('/ui/culture/printable_template.xhtml')
+            handler = self.get_object('/ui/culture/printable_template.xhtml')
         elif view == 'print_all':
             namespace['printable'] = True
 
@@ -647,7 +647,7 @@ class Form(BaseText):
         namespace['total'] = len(schema)
         namespace['is_admin'] = self.is_admin()
 
-        handler = self.get_handler('/ui/culture/Form_controles.xml')
+        handler = self.get_object('/ui/culture/Form_controles.xml')
         return stl(handler, namespace) 
 
 
@@ -978,7 +978,7 @@ class Form(BaseText):
     fill_report_form__access__ = True
     fill_report_form__label__ = u'Auto remplissage'
     def fill_report_form(self, context):
-        handler = self.get_handler('/ui/culture/Form_fill_report.xml')
+        handler = self.get_object('/ui/culture/Form_fill_report.xml')
         return handler.to_str()
 
 
@@ -1184,14 +1184,14 @@ class Form(BaseText):
     help__access__ = True
     help__label__ = u'Aide'
     def help(self, context):
-        handler = self.get_handler('/ui/culture/Form_help.xml')
+        handler = self.get_object('/ui/culture/Form_help.xml')
         return handler.to_str()
 
 
     help2__access__ = True 
     def help2(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/Form_help2.xhtml')
+        handler = self.get_object('/ui/culture/Form_help2.xhtml')
         return handler.to_str()
 
 
@@ -1207,7 +1207,7 @@ class Form(BaseText):
         is_complete = namespace['is_complete']
         is_exported = self.get_form_state() == u'Exporté'
         namespace['show'] = is_finished or is_complete or is_exported
-        handler = self.get_handler('/ui/culture/Form_report_csv.xml')
+        handler = self.get_object('/ui/culture/Form_report_csv.xml')
         return stl(handler, namespace) 
 
 

@@ -196,7 +196,7 @@ class FormBM(Form):
         forms = reduce(lambda x,y: x+y, forms)
         namespace['body'] = forms 
 
-        handler = self.get_handler('/ui/culture/printable_template.xhtml')
+        handler = self.get_object('/ui/culture/printable_template.xhtml')
         return stl(handler, namespace)
 
 
@@ -315,75 +315,75 @@ class FormBM(Form):
     help0__access__ = True 
     def help0(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help0.xml')
+        handler = self.get_object('/ui/culture/FormBM_help0.xml')
         return handler.to_str()
     
     help1__access__ = True 
     def help1(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help1.xml')
+        handler = self.get_object('/ui/culture/FormBM_help1.xml')
         return handler.to_str()
 
 
     help2__access__ = True 
     def help2(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help2.xml')
+        handler = self.get_object('/ui/culture/FormBM_help2.xml')
         return handler.to_str()
 
 
     help3__access__ = True 
     def help3(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help3.xml')
+        handler = self.get_object('/ui/culture/FormBM_help3.xml')
         return handler.to_str()
 
 
     help4__access__ = True 
     def help4(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help4.xml')
+        handler = self.get_object('/ui/culture/FormBM_help4.xml')
         return handler.to_str()
 
 
     help5__access__ = True 
     def help5(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help5.xml')
+        handler = self.get_object('/ui/culture/FormBM_help5.xml')
         return handler.to_str()
 
 
     help6__access__ = True 
     def help6(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help6.xml')
+        handler = self.get_object('/ui/culture/FormBM_help6.xml')
         return handler.to_str()
 
 
     help7__access__ = True 
     def help7(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help7.xml')
+        handler = self.get_object('/ui/culture/FormBM_help7.xml')
         return handler.to_str()
 
 
     help8__access__ = True 
     def help8(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help8.xml')
+        handler = self.get_object('/ui/culture/FormBM_help8.xml')
         return handler.to_str()
 
 
     help9__access__ = True 
     def help9(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help9.xml')
+        handler = self.get_object('/ui/culture/FormBM_help9.xml')
         return handler.to_str()
 
     help11__access__ = True 
     def help11(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_handler('/ui/culture/FormBM_help11.xml')
+        handler = self.get_object('/ui/culture/FormBM_help11.xml')
         return handler.to_str()
 
 

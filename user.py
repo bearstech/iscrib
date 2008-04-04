@@ -317,7 +317,7 @@ class bibUserFolder(BaseUserFolder):
             too_long_answer = msg % answer_len
             # Get the real objects
             documents = results.get_documents(size=100)
-            objects = [ root.get_handler(x.abspath) for x in documents ]
+            objects = [ root.get_object(x.abspath) for x in documents ]
 ##            t_h = time() - t; print 't_h', t_h
 
         # Build objects namespace, add the path to the object from the
@@ -328,7 +328,7 @@ class bibUserFolder(BaseUserFolder):
             node = self
             path = []
             for name in path_to_object:
-                node = node.get_handler(name)
+                node = node.get_object(name)
                 path.append({'name': node.name,
                              'url': '%s/;%s' % (self.get_pathto(node),
                                                 node.get_firstview())})
@@ -360,7 +360,7 @@ class bibUserFolder(BaseUserFolder):
                       sortorder='up', batchstart='0', batchsize='50')
         namespace['table'] = table
 
-        handler = self.get_handler('/ui/culture/bibUserFolder_search.xml')
+        handler = self.get_object('/ui/culture/bibUserFolder_search.xml')
         return stl(handler, namespace)
 
 

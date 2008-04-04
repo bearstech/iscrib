@@ -54,7 +54,7 @@ class Root(BaseRoot):
         namespace = {'referer': context.get_form_value('referer', default=''),
                      'username': context.get_form_value('username', default='')}
 
-        handler = self.get_handler('/ui/culture/SiteRoot_login.xml')
+        handler = self.get_object('/ui/culture/SiteRoot_login.xml')
         return stl(handler, namespace)
 
 
@@ -159,7 +159,7 @@ class Root(BaseRoot):
 
 
     def get_skin(self):
-        return self.get_handler('ui/scrib')
+        return self.get_object('ui/scrib')
 
 
     def get_available_languages(self):
@@ -204,11 +204,11 @@ class Root(BaseRoot):
             return uri.get_reference(';%s' % self.get_firstview())
         elif user.is_BM():
             path = 'BM%s/%s' % (user.get_year(), user.get_BM_code())
-            report = self.get_handler(path)
+            report = self.get_object(path)
             return uri.get_reference('%s/;%s' % (path, report.get_firstview()))
         else:
             path = 'BDP%s/%s' % (user.get_year(), user.get_department())
-            report = self.get_handler(path)
+            report = self.get_object(path)
             return uri.get_reference('%s/;%s' % (path, report.get_firstview()))
 
 
@@ -242,7 +242,7 @@ class Root(BaseRoot):
                 years[i]['is_selected'] = True
                 break
         namespace['BMyears'] = years
-        handler = self.get_handler('/ui/culture/Culture_new_reports.xml')
+        handler = self.get_object('/ui/culture/Culture_new_reports.xml')
         return stl(handler, namespace)
 
 
@@ -255,10 +255,10 @@ class Root(BaseRoot):
         # Add reports and users, one per department
         reports = Forms()
         self.set_object(report_name, reports)
-        reports = self.get_handler(report_name)
+        reports = self.get_object(report_name)
         t = time()
 
-        users = self.get_handler('users')
+        users = self.get_object('users')
         report_c = int(time() -t); print 'get users, deep copy', report_c 
 
         BMs = get_BMs()
@@ -277,7 +277,7 @@ class Root(BaseRoot):
             username = 'BM%s' % code
             if not users.has_handler(username):
                 users.set_object(username, bibUser())
-                user = users.get_handler(username)
+                user = users.get_object(username)
                 user.set_password('BM%s' % code)
                 del user
             print '%s/%s' % (i, BMs_len), dep, code, username
@@ -302,8 +302,8 @@ class Root(BaseRoot):
         name = 'BDP' + str(year)
         self.set_object(name, Forms())
         # Add reports and users, one per department
-        reports = self.get_handler(name)
-        users = self.get_handler('users')
+        reports = self.get_object(name)
+        users = self.get_object('users')
         form = FormBDP()
         for name, dic in get_deps().items():
             title = dic['name']
@@ -313,7 +313,7 @@ class Root(BaseRoot):
             username = 'BDP%s' % name
             if not users.has_handler(username):
                 users.set_object(username, bibUser())
-                user = users.get_handler(username)
+                user = users.get_object(username)
                 user.set_password('BDP%s' % name)
                 del user
 
@@ -328,7 +328,7 @@ class Root(BaseRoot):
     help__access__ = True
     help__label__ = u'Aide'
     def help(self, context):
-        handler = self.get_handler('/ui/culture/Form_help.xml')
+        handler = self.get_object('/ui/culture/Form_help.xml')
         return handler.to_str()
 
 
@@ -337,7 +337,7 @@ class Root(BaseRoot):
     export_form__access__ = 'is_admin'
     export_form__label__ = u"Exporter"
     def export_form(self, context):
-        handler = self.get_handler('/ui/culture/Culture_export.xml')
+        handler = self.get_object('/ui/culture/Culture_export.xml')
         return handler.to_str()
 
 
@@ -346,9 +346,9 @@ class Root(BaseRoot):
 
         def export_bib(container, ouput):
             cursor = get_cursor()
-            names = [name for name in container.get_handler_names()
+            names = [name for name in container.get_object_names()
                     if name.isdigit() and (
-                        container.get_handler('.%s.metadata' % name).get_property('state') == 'public')]
+                        container.get_object('.%s.metadata' % name).get_property('state') == 'public')]
 
             # adresse
             keys = ', '.join(names)
@@ -381,7 +381,7 @@ class Root(BaseRoot):
 
             # (bm|bdp)05
             for name in names:
-                handler = container.get_handler(name)
+                handler = container.get_object(name)
                 schema = handler.get_schema()
                 namespace = handler.get_namespace()
                 # XXX copy/paste
@@ -419,13 +419,13 @@ class Root(BaseRoot):
 
         output.write('-- BM2005\n')
         output.write('\n')
-        BM2005 = self.get_handler('BM2005')
+        BM2005 = self.get_object('BM2005')
         export_bib(BM2005, output)
 
         output.write('\n')
         output.write('-- BDP2005\n')
         output.write('\n')
-        BDP2005 = self.get_handler('BDP2005')
+        BDP2005 = self.get_object('BDP2005')
         export_bib(BDP2005, output)
 
         output.close()
@@ -439,7 +439,7 @@ class Root(BaseRoot):
     new_bm_form__access__ = 'is_admin'
     new_bm_form__sublabel__ = u"Nouvelle BM"
     def new_bm_form(self, context):
-        handler = self.get_handler('/ui/culture/Culture_new_bm.xml')
+        handler = self.get_object('/ui/culture/Culture_new_bm.xml')
         return handler.to_str()
 
 
@@ -456,8 +456,8 @@ class Root(BaseRoot):
                         code=repr(code))
             codes.append(int(code))
 
-        users = self.get_handler('users')
-        bm2005 = self.get_handler('BM2005')
+        users = self.get_object('users')
+        bm2005 = self.get_object('BM2005')
 
         for code in codes:
             name = unicode(code)
@@ -471,7 +471,7 @@ class Root(BaseRoot):
             username = 'BM%s' % code
             if not users.has_handler(username):
                 users.set_object(username, bibUser())
-                user = users.get_handler(username)
+                user = users.get_object(username)
                 user.set_password(username)
 
         message = (u"Formulaire et utilisateur ajoutés : "
