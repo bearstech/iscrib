@@ -94,19 +94,19 @@ def get_checkbox_value(key, value):
 
 
 def get_alertes(context):
-    handler = context.handler
-    if context.handler.is_BDP():
+    object = context.object
+    if object.is_BDP():
         from schema_bdp import alertes
-    if context.handler.is_BM():
+    elif object.is_BM():
         from schema_bm import alertes 
     return alertes
 
 
 def get_controles(context):
-    handler = context.handler
-    if context.handler.is_BDP():
+    object = context.object
+    if object.is_BDP():
         from schema_bdp import controles 
-    if context.handler.is_BM():
+    elif object.is_BM():
         from schema_bm import controles 
     return controles 
 
