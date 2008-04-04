@@ -5,7 +5,7 @@
     <stl:block if="not printable">
 
   <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+     <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
       <!--input type="submit" value="Enregistrer" 
              style="background-color:rgb(145,191,255); border:0"
@@ -26,7 +26,7 @@
   <tr>
     <th>Intitulé de l'EPCI :</th>
     <td>
-       <input value="${fieldK1}" name="fieldK1" readonly="yes" size="40" type="text"/>
+       <input name="fieldK1" readonly="yes" size="40" type="text" value="${fieldK1}"/>
     </td>
     <td><b class="${_K1}">K1</b></td>
   </tr>
@@ -34,7 +34,7 @@
   <tr>
     <th>Population totale :</th>
     <td>
-       <input value="${fieldK2}" name="fieldK2" readonly="yes" size="40" type="text"/>
+       <input name="fieldK2" readonly="yes" size="40" type="text" value="${fieldK2}"/>
     </td>
     <td><b class="${_K2}">K2</b></td>
   </tr>
@@ -64,18 +64,18 @@
 
   <tr>
     <th>
-       <input value="${fieldK17W}" name="fieldK17W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK17W" readonly="yes" size="10" type="text" value="${fieldK17W}"/>
     </th>
 
     <td>
-       <input value="${fieldK17X}" name="fieldK17X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK17X" readonly="yes" size="40" type="text" value="${fieldK17X}"/>
     </td>
     <td>
-       <input value="${fieldK17Y}" name="fieldK17Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK17Y" readonly="yes" size="10" type="text" value="${fieldK17Y}"/>
     </td>
     <td>
       <select name="fieldK17Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK17Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK17Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
     </td>
 
@@ -84,18 +84,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK18W}" name="fieldK18W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK18W" readonly="yes" size="10" type="text" value="${fieldK18W}"/>
     </th>
 
     <td>
-       <input value="${fieldK18X}" name="fieldK18X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK18X" readonly="yes" size="40" type="text" value="${fieldK18X}"/>
     </td>
     <td>
-       <input value="${fieldK18Y}" name="fieldK18Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK18Y" readonly="yes" size="10" type="text" value="${fieldK18Y}"/>
     </td>
     <td>
       <select name="fieldK18Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK18Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK18Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -105,18 +105,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK19W}" name="fieldK19W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK19W" readonly="yes" size="10" type="text" value="${fieldK19W}"/>
     </th>
 
     <td>
-       <input value="${fieldK19X}" name="fieldK19X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK19X" readonly="yes" size="40" type="text" value="${fieldK19X}"/>
     </td>
     <td>
-       <input value="${fieldK19Y}" name="fieldK19Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK19Y" readonly="yes" size="10" type="text" value="${fieldK19Y}"/>
     </td>
     <td>
       <select name="fieldK19Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK19Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK19Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -126,18 +126,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK20W}" name="fieldK20W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK20W" readonly="yes" size="10" type="text" value="${fieldK20W}"/>
     </th>
 
     <td>
-       <input value="${fieldK20X}" name="fieldK20X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK20X" readonly="yes" size="40" type="text" value="${fieldK20X}"/>
     </td>
     <td>
-       <input value="${fieldK20Y}" name="fieldK20Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK20Y" readonly="yes" size="10" type="text" value="${fieldK20Y}"/>
     </td>
     <td>
       <select name="fieldK20Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK20Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK20Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -147,18 +147,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK21W}" name="fieldK21W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK21W" readonly="yes" size="10" type="text" value="${fieldK21W}"/>
     </th>
 
     <td>
-       <input value="${fieldK21X}" name="fieldK21X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK21X" readonly="yes" size="40" type="text" value="${fieldK21X}"/>
     </td>
     <td>
-       <input value="${fieldK21Y}" name="fieldK21Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK21Y" readonly="yes" size="10" type="text" value="${fieldK21Y}"/>
     </td>
     <td>
       <select name="fieldK21Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK21Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK21Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -168,18 +168,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK22W}" name="fieldK22W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK22W" readonly="yes" size="10" type="text" value="${fieldK22W}"/>
     </th>
 
     <td>
-       <input value="${fieldK22X}" name="fieldK22X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK22X" readonly="yes" size="40" type="text" value="${fieldK22X}"/>
     </td>
     <td>
-       <input value="${fieldK22Y}" name="fieldK22Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK22Y" readonly="yes" size="10" type="text" value="${fieldK22Y}"/>
     </td>
     <td>
       <select name="fieldK22Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK22Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK22Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -189,18 +189,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK23W}" name="fieldK23W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK23W" readonly="yes" size="10" type="text" value="${fieldK23W}"/>
     </th>
 
     <td>
-       <input value="${fieldK23X}" name="fieldK23X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK23X" readonly="yes" size="40" type="text" value="${fieldK23X}"/>
     </td>
     <td>
-       <input value="${fieldK23Y}" name="fieldK23Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK23Y" readonly="yes" size="10" type="text" value="${fieldK23Y}"/>
     </td>
     <td>
       <select name="fieldK23Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK23Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK23Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -210,18 +210,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK24W}" name="fieldK24W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK24W" readonly="yes" size="10" type="text" value="${fieldK24W}"/>
     </th>
 
     <td>
-       <input value="${fieldK24X}" name="fieldK24X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK24X" readonly="yes" size="40" type="text" value="${fieldK24X}"/>
     </td>
     <td>
-       <input value="${fieldK24Y}" name="fieldK24Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK24Y" readonly="yes" size="10" type="text" value="${fieldK24Y}"/>
     </td>
     <td>
       <select name="fieldK24Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK24Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK24Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -231,18 +231,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK25W}" name="fieldK25W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK25W" readonly="yes" size="10" type="text" value="${fieldK25W}"/>
     </th>
 
     <td>
-       <input value="${fieldK25X}" name="fieldK25X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK25X" readonly="yes" size="40" type="text" value="${fieldK25X}"/>
     </td>
     <td>
-       <input value="${fieldK25Y}" name="fieldK25Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK25Y" readonly="yes" size="10" type="text" value="${fieldK25Y}"/>
     </td>
     <td>
       <select name="fieldK25Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK25Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK25Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -252,18 +252,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK26W}" name="fieldK26W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK26W" readonly="yes" size="10" type="text" value="${fieldK26W}"/>
     </th>
 
     <td>
-       <input value="${fieldK26X}" name="fieldK26X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK26X" readonly="yes" size="40" type="text" value="${fieldK26X}"/>
     </td>
     <td>
-       <input value="${fieldK26Y}" name="fieldK26Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK26Y" readonly="yes" size="10" type="text" value="${fieldK26Y}"/>
     </td>
     <td>
       <select name="fieldK26Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK26Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK26Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -273,18 +273,18 @@
 
    <tr>
     <th>
-       <input value="${fieldK27W}" name="fieldK27W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK27W" readonly="yes" size="10" type="text" value="${fieldK27W}"/>
     </th>
 
     <td>
-       <input value="${fieldK27X}" name="fieldK27X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK27X" readonly="yes" size="40" type="text" value="${fieldK27X}"/>
     </td>
     <td>
-       <input value="${fieldK27Y}" name="fieldK27Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK27Y" readonly="yes" size="10" type="text" value="${fieldK27Y}"/>
     </td>
     <td>
       <select name="fieldK27Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK27Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK27Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -294,17 +294,17 @@
 
    <tr>
     <th>
-       <input value="${fieldK28W}" name="fieldK28W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK28W" readonly="yes" size="10" type="text" value="${fieldK28W}"/>
     </th>
    <td>
-       <input value="${fieldK28X}" name="fieldK28X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK28X" readonly="yes" size="40" type="text" value="${fieldK28X}"/>
     </td>
     <td>
-       <input value="${fieldK28Y}" name="fieldK28Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK28Y" readonly="yes" size="10" type="text" value="${fieldK28Y}"/>
     </td>
     <td>
       <select name="fieldK28Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK28Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK28Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -312,17 +312,17 @@
    </tr>
    <tr>
     <th>
-       <input value="${fieldK29W}" name="fieldK29W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK29W" readonly="yes" size="10" type="text" value="${fieldK29W}"/>
     </th>
    <td>
-       <input value="${fieldK29X}" name="fieldK29X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK29X" readonly="yes" size="40" type="text" value="${fieldK29X}"/>
     </td>
     <td>
-       <input value="${fieldK29Y}" name="fieldK29Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK29Y" readonly="yes" size="10" type="text" value="${fieldK29Y}"/>
     </td>
     <td>
       <select name="fieldK29Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK29Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK29Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -332,17 +332,17 @@
 
     <tr>
      <th>
-       <input value="${fieldK30W}" name="fieldK30W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK30W" readonly="yes" size="10" type="text" value="${fieldK30W}"/>
     </th>
    <td>
-       <input value="${fieldK30X}" name="fieldK30X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK30X" readonly="yes" size="40" type="text" value="${fieldK30X}"/>
     </td>
     <td>
-       <input value="${fieldK30Y}" name="fieldK30Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK30Y" readonly="yes" size="10" type="text" value="${fieldK30Y}"/>
     </td>
     <td>
       <select name="fieldK30Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK30Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK30Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 
@@ -351,18 +351,18 @@
    </tr>
    <tr>
     <th>
-       <input value="${fieldK31W}" name="fieldK31W" readonly="yes" size="10" type="text"/>
+       <input name="fieldK31W" readonly="yes" size="10" type="text" value="${fieldK31W}"/>
     </th>
 
     <td>
-       <input value="${fieldK31X}" name="fieldK31X" readonly="yes" size="40" type="text"/>
+       <input name="fieldK31X" readonly="yes" size="40" type="text" value="${fieldK31X}"/>
     </td>
     <td>
-       <input value="${fieldK31Y}" name="fieldK31Y" readonly="yes" size="10" type="text"/>
+       <input name="fieldK31Y" readonly="yes" size="10" type="text" value="${fieldK31Y}"/>
     </td>
     <td>
       <select name="fieldK31Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK31Z" value="${option/id}">${option/label}</option>
+        <option stl:repeat="option fieldK31Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
       </select>
    </td>
 

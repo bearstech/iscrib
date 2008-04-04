@@ -17,7 +17,7 @@
             <th align="right">Année</th>
             <td>
               <select name="year">
-                <option stl:repeat="x years" value="${x/value}" disabled="${x/is_disabled}" selected="${x/is_selected}">${x/value}</option>
+                <option stl:repeat="x years" value="${x/value}" selected="${x/is_selected}" disabled="${x/is_disabled}">${x/value}</option>
               </select>
             </td>
           </tr>
@@ -39,7 +39,7 @@
             <th align="right">Année</th>
             <td>
               <select name="year">
-                <option stl:repeat="x BMyears" value="${x/value}" disabled="${x/is_disabled}" selected="${x/is_selected}">${x/value}</option>
+                <option stl:repeat="x BMyears" value="${x/value}" selected="${x/is_selected}" disabled="${x/is_disabled}">${x/value}</option>
               </select>
             </td>
           </tr>

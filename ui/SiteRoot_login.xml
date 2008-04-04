@@ -2,7 +2,7 @@
 <stl:block xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
 
 <form name="loginform" method="post" action=";login">
-  <input name="referer" value="${referer}" stl:if="referer" type="hidden"/>
+  <input name="referer" stl:if="referer" type="hidden" value="${referer}"/>
   <table class="form">
     <tr>
       <th class="title" colspan="2">Authentification</th>

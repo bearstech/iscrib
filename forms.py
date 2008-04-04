@@ -82,7 +82,7 @@ class Forms(Folder):
     def browse_list(self, context):
         context.set_cookie('browse', 'list')
         namespace = self.browse_namespace(16)
-        template = self.get_object('/ui/culture/Forms_browse_list.xml')
+        template = self.get_object('/ui/scrib/Forms_browse_list.xml')
         return stl(template, namespace)
 
 
@@ -187,7 +187,7 @@ class Forms(Folder):
         namespace['table'] = table(path.get_pathtoroot(), tablename, objects,
                 sortby='title', sortorder='up', batchstart='0', batchsize='50')
 
-        template = self.get_object('/ui/culture/Forms_search.xml')
+        template = self.get_object('/ui/scrib/Forms_search.xml')
         return stl(template, namespace)
 
 register_object_class(Forms)

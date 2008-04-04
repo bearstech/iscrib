@@ -6,7 +6,7 @@
 
 
   <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+     <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
    <stl:block if="not printable">
      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
@@ -25,7 +25,7 @@
   <tr>
     <th>Pour le personnel : salaires et charges,</th>
     <td>
-       <input style="text-align: right" value="${fieldA11}" name="fieldA11" size="8" type="text"/>
+       <input name="fieldA11" style="text-align: right" size="8" type="text" value="${fieldA11}"/>
     </td>
     <td><b class="${_A11}">A11</b></td>
   </tr>
@@ -33,7 +33,7 @@
   <tr>
     <th>Pour les acquisitions de tous documents et abonnements</th>
     <td>
-       <input style="text-align: right" value="${fieldA12}" name="fieldA12" size="8" type="text"/>
+       <input name="fieldA12" style="text-align: right" size="8" type="text" value="${fieldA12}"/>
     </td>
     <td><b class="${_A12}">A12</b></td>
   </tr>
@@ -41,7 +41,7 @@
   <tr>
     <th>Pour la reliure et l'équipement des documents</th>
     <td>
-       <input style="text-align: right" value="${fieldA13}" name="fieldA13" size="8" type="text"/>
+       <input name="fieldA13" style="text-align: right" size="8" type="text" value="${fieldA13}"/>
     </td>
     <td><b class="${_A13}">A13</b></td>
   </tr>
@@ -49,7 +49,7 @@
   <tr>
     <th>Pour la maintenance informatique</th>
     <td>
-       <input style="text-align: right" value="${fieldA14}" name="fieldA14" size="8" type="text"/>
+       <input name="fieldA14" style="text-align: right" size="8" type="text" value="${fieldA14}"/>
     </td>
     <td><b class="${_A14}">A14</b></td>
   </tr>
@@ -57,7 +57,7 @@
   <tr>
     <th>Pour l'animation (communication, impression, défraiement)</th>
     <td>
-       <input style="text-align: right" value="${fieldA15}" name="fieldA15" size="8" type="text"/>
+       <input name="fieldA15" style="text-align: right" size="8" type="text" value="${fieldA15}"/>
     </td>
     <td><b class="${_A15}">A15</b></td>
   </tr>
@@ -65,7 +65,7 @@
   <tr>
     <th><b>TOTAL (A11 à A15)</b></th>
     <td>
-       <input style="text-align: right" value="${fieldA16}" name="fieldA16" size="8" type="text"/>
+       <input name="fieldA16" style="text-align: right" size="8" type="text" value="${fieldA16}"/>
     </td>
     <td><b class="${_A16}">A16</b></td>
   </tr>
@@ -80,7 +80,7 @@
   <tr>
     <th>Pour le bâtiment (construction, agrandissement, rénovation)</th>
     <td>
-       <input style="text-align: right" value="${fieldA21}" name="fieldA21" size="8" type="text"/>
+       <input name="fieldA21" style="text-align: right" size="8" type="text" value="${fieldA21}"/>
     </td>
     <td><b class="${_A21}">A21</b></td>
   </tr>
@@ -88,7 +88,7 @@
   <tr>
     <th>Pour le mobilier et le matériel (y compris achat de véhicules)</th>
     <td>
-       <input style="text-align: right" value="${fieldA22}" name="fieldA22" size="8" type="text"/>
+       <input name="fieldA22" style="text-align: right" size="8" type="text" value="${fieldA22}"/>
     </td>
     <td><b class="${_A22}">A22</b></td>
   </tr>
@@ -96,7 +96,7 @@
   <tr>
     <th>Pour l'informatique (logiciel et matériel)</th>
     <td>
-       <input style="text-align: right" value="${fieldA23}" name="fieldA23" size="8" type="text"/>
+       <input name="fieldA23" style="text-align: right" size="8" type="text" value="${fieldA23}"/>
     </td>
     <td><b class="${_A23}">A23</b></td>
   </tr>
@@ -104,7 +104,7 @@
   <tr>
     <th>Pour les acquisitions de tous documents et abonnements</th>
     <td>
-       <input style="text-align: right" value="${fieldA24}" name="fieldA24" size="8" type="text"/>
+       <input name="fieldA24" style="text-align: right" size="8" type="text" value="${fieldA24}"/>
     </td>
     <td><b class="${_A24}">A24</b></td>
   </tr>
@@ -112,7 +112,7 @@
   <tr>
     <th><b>TOTAL (A21 à A24)</b></th>
     <td>
-       <input style="text-align: right" value="${fieldA25}" name="fieldA25" size="8" type="text"/>
+       <input name="fieldA25" style="text-align: right" size="8" type="text" value="${fieldA25}"/>
     </td>
     <td><b class="${_A25}">A25</b></td>
   </tr>
@@ -127,7 +127,7 @@
   <tr>
     <th>Montant total des droits d'inscription perçus dans l'année</th>
     <td>
-       <input style="text-align: right" value="${fieldA31}" name="fieldA31" size="8" type="text"/>
+       <input name="fieldA31" style="text-align: right" size="8" type="text" value="${fieldA31}"/>
     </td>
     <td><b class="${_A31}">A31</b></td>
   </tr>
@@ -135,7 +135,7 @@
   <tr>
     <th>Montant des subventions de fonctionnement</th>
     <td>
-       <input style="text-align: right" value="${fieldA32}" name="fieldA32" size="8" type="text"/>
+       <input name="fieldA32" style="text-align: right" size="8" type="text" value="${fieldA32}"/>
     </td>
     <td><b class="${_A32}">A32</b></td>
   </tr>
@@ -143,7 +143,7 @@
   <tr>
     <th>Montant des subventions d'investissement</th>
     <td>
-       <input style="text-align: right" value="${fieldA33}" name="fieldA33" size="8" type="text"/>
+       <input name="fieldA33" style="text-align: right" size="8" type="text" value="${fieldA33}"/>
     </td>
     <td><b class="${_A33}">A33</b></td>
   </tr>
@@ -151,7 +151,7 @@
   <tr>
     <th>Autres</th>
     <td>
-       <input style="text-align: right" value="${fieldA34}" name="fieldA34" size="8" type="text"/>
+       <input name="fieldA34" style="text-align: right" size="8" type="text" value="${fieldA34}"/>
     </td>
     <td><b class="${_A34}">A34</b></td>
   </tr>

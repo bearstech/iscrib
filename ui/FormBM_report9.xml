@@ -5,7 +5,7 @@
   <div align="right">
 
   <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+     <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
 
     <stl:block if="not printable">
@@ -28,16 +28,16 @@
     <th rowspan="2">La bibliothèque organise-t-elle  régulièrement des animations dans l'année (heures du conte, club de lecteurs) ?</th>
     <th>à destination des enfants</th>
     <td>
-      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI11" style="font-size: 8pt;  border:0px" checked="${fieldI11}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI11" style="font-size: 8pt;  border:0px" checked="${fieldI11_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI11" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldI11}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI11" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldI11_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_I11}">I11</b></td>
   </tr>
 
   <tr>
     <th>à destination des adultes</th>
     <td>
-      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI12" style="font-size: 8pt;  border:0px" checked="${fieldI12}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI12" style="font-size: 8pt;  border:0px" checked="${fieldI12_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI12" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldI12}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI12" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldI12_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_I12}">I12</b></td>
   </tr>
 </table>
@@ -147,32 +147,32 @@
     <th rowspan="4">La bibliothèque édite-t-elle les documents suivants :</th>
     <th> Bulletin d'information </th>
     <td>
-      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI31" style="font-size: 8pt;  border:0px" checked="${fieldI31}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI31" style="font-size: 8pt;  border:0px" checked="${fieldI31_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI31" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldI31}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI31" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldI31_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_I31}">I31</b></td>
   </tr>
 
   <tr>
     <th>Bibliographies sélectives</th>
     <td>
-      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI32" style="font-size: 8pt;  border:0px" checked="${fieldI32}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI32" style="font-size: 8pt;  border:0px" checked="${fieldI32_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI32" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldI32}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI32" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldI32_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_I32}">I32</b></td>
   </tr>
 
   <tr>
     <th>Catalogue d'exposition</th>
     <td>
-      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI33" style="font-size: 8pt;  border:0px" checked="${fieldI33}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI33" style="font-size: 8pt;  border:0px" checked="${fieldI33_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI33" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldI33}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI33" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldI33_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_I33}">I33</b></td>
   </tr>
 
   <tr>
     <th>Autres</th>
     <td>
-      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI34" style="font-size: 8pt;  border:0px" checked="${fieldI34}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI34" style="font-size: 8pt;  border:0px" checked="${fieldI34_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldI34" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldI34}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldI34" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldI34_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_I34}">I34</b></td>
   </tr>
 </table>
@@ -245,7 +245,7 @@
   <tr>
     <th>Nombre d'heures de cours assurées par le personnel (ENSSIB, CRFCB, ABF, CNFPT, BDP, )</th>
     <td>
-       <input style="text-align: right" value="${fieldI41}" name="fieldI41" size="8" type="text"/>
+       <input name="fieldI41" style="text-align: right" size="8" type="text" value="${fieldI41}"/>
     </td>
     <td><b class="${_I41}">I41</b></td>
   </tr>
@@ -266,10 +266,10 @@
   <tr>
     <th>Corps et cadres d'emploi des métiers des bibliothèques, de la documentation ou des archives</th>
     <td>
-       <input style="text-align: right" value="${fieldI42Y}" name="fieldI42Y" size="8" type="text"/>
+       <input name="fieldI42Y" style="text-align: right" size="8" type="text" value="${fieldI42Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldI42Z}" name="fieldI42Z" size="8" type="text"/>
+       <input name="fieldI42Z" style="text-align: right" size="8" type="text" value="${fieldI42Z}"/>
     </td>
     <td><b class="${_I42}">I42</b></td>
   </tr>
@@ -277,10 +277,10 @@
   <tr>
     <th>Autres</th>
     <td>
-       <input style="text-align: right" value="${fieldI43Y}" name="fieldI43Y" size="8" type="text"/>
+       <input name="fieldI43Y" style="text-align: right" size="8" type="text" value="${fieldI43Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldI43Z}" name="fieldI43Z" size="8" type="text"/>
+       <input name="fieldI43Z" style="text-align: right" size="8" type="text" value="${fieldI43Z}"/>
     </td>
     <td><b class="${_I43}">I43</b></td>
   </tr>
@@ -288,10 +288,10 @@
   <tr>
     <th><b>TOTAL</b></th>
     <td>
-       <input style="text-align: right" value="${fieldI44Y}" name="fieldI44Y" size="8" type="text"/>
+       <input name="fieldI44Y" style="text-align: right" size="8" type="text" value="${fieldI44Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldI44Z}" name="fieldI44Z" size="8" type="text"/>
+       <input name="fieldI44Z" style="text-align: right" size="8" type="text" value="${fieldI44Z}"/>
     </td>
     <td><b class="${_I44}">I44</b></td>
   </tr>
@@ -313,10 +313,10 @@
   <tr>
     <th>Professionnels</th>
     <td>
-       <input style="text-align: right" value="${fieldI45Y}" name="fieldI45Y" size="8" type="text"/>
+       <input name="fieldI45Y" style="text-align: right" size="8" type="text" value="${fieldI45Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldI45Z}" name="fieldI45Z" size="8" type="text"/>
+       <input name="fieldI45Z" style="text-align: right" size="8" type="text" value="${fieldI45Z}"/>
     </td>
     <td><b class="${_I45}">I45</b></td>
   </tr>
@@ -324,10 +324,10 @@
   <tr>
     <th>Autres</th>
     <td>
-       <input style="text-align: right" value="${fieldI46Y}" name="fieldI46Y" size="8" type="text"/>
+       <input name="fieldI46Y" style="text-align: right" size="8" type="text" value="${fieldI46Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldI46Z}" name="fieldI46Z" size="8" type="text"/>
+       <input name="fieldI46Z" style="text-align: right" size="8" type="text" value="${fieldI46Z}"/>
     </td>
     <td><b class="${_I46}">I46</b></td>
   </tr>
@@ -335,10 +335,10 @@
   <tr>
     <th><b>TOTAL</b></th>
     <td>
-       <input style="text-align: right" value="${fieldI47Y}" name="fieldI47Y" size="8" type="text"/>
+       <input name="fieldI47Y" style="text-align: right" size="8" type="text" value="${fieldI47Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldI47Z}" name="fieldI47Z" size="8" type="text"/>
+       <input name="fieldI47Z" style="text-align: right" size="8" type="text" value="${fieldI47Z}"/>
     </td>
     <td><b class="${_I47}">I47</b></td>
   </tr>
@@ -359,10 +359,10 @@
   <tr>
     <th>JOURNEES D'ETUDE, RENCONTRES PROFESSIONNELLES</th>
     <td>
-       <input style="text-align: right" value="${fieldI48Y}" name="fieldI48Y" size="8" type="text"/>
+       <input name="fieldI48Y" style="text-align: right" size="8" type="text" value="${fieldI48Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldI48Z}" name="fieldI48Z" size="8" type="text"/>
+       <input name="fieldI48Z" style="text-align: right" size="8" type="text" value="${fieldI48Z}"/>
     </td>
     <td><b class="${_I48}">I48</b></td>
   </tr>

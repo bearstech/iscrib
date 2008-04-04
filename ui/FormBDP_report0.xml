@@ -9,7 +9,7 @@
      </colgroup>
      <tr>
          <td style="vertical-align: middle;" width="68px">
-             <img src="/ui/culture/images/logo-mcc.gif"/>
+             <img src="/ui/scrib/images/logo-mcc.gif"/>
          </td>
          <td></td>
          <td style="text-align: center; font-size:16px">
@@ -38,7 +38,7 @@
   <div align="right">
 
   <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+     <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
    <stl:block if="not printable">
      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
@@ -67,71 +67,71 @@
    </colgroup>
      <tr>
         <th>Code</th>
-        <td><input value="${code_ua}" name="code_ua" readonly="yes" size="5" type="text"/></td>
+        <td><input name="code_ua" readonly="yes" size="5" type="text" value="${code_ua}"/></td>
      </tr>
       <tr>
         <th>Nom </th>
-        <td colspan="3"><input name="field1" size="60" value="${field1}" type="text"/></td>
+        <td colspan="3"><input name="field1" size="60" type="text" value="${field1}"/></td>
         <td sdnum="1036;" sdval="1">1</td>
       </tr>
      <tr>
         <th> </th>
-        <td colspan="3"><input name="field2" size="60" value="${field2}" type="text"/></td>
+        <td colspan="3"><input name="field2" size="60" type="text" value="${field2}"/></td>
         <td sdnum="1036;" sdval="1">2</td>
      </tr>
      <tr>
         <th>Complément d'adresse</th>
-       <td colspan="3"><input name="field3" size="60" value="${field3}" type="text"/></td>
+       <td colspan="3"><input name="field3" size="60" type="text" value="${field3}"/></td>
         <td sdnum="1036;" sdval="1">3</td>
      </tr>
      <tr>
         <th>N°/Type voie/Nom voie</th>
-        <td><input name="field30" size="5" value="${field30}" type="text"/>30</td>
-        <td><input name="field31" size="5" value="${field31}" type="text"/>31</td>
-        <td><input name="field32" size="35" value="${field32}" type="text"/></td>
+        <td><input name="field30" size="5" type="text" value="${field30}"/>30</td>
+        <td><input name="field31" size="5" type="text" value="${field31}"/>31</td>
+        <td><input name="field32" size="35" type="text" value="${field32}"/></td>
         <td sdnum="1036;" sdval="1">32</td>
      </tr>
      <tr>
         <th style="text-align: right">Code postal / Ville </th>
         <td><input style="text-align: right" value="${field4}" name="field4" size="5" maxlength="5" type="text"/> 4 </td>
-        <td colspan="2"><input name="field5" size="48" value="${field5}" type="text"/></td>
+        <td colspan="2"><input name="field5" size="48" type="text" value="${field5}"/></td>
         <td sdnum="1036;" sdval="1">5</td>
       </tr>
      <tr>
         <th style="text-align: right">Cedex </th>
-        <td colspan="3"><input name="field6" size="8" value="${field6}" type="text"/></td>
+        <td colspan="3"><input name="field6" size="8" type="text" value="${field6}"/></td>
         <td sdnum="1036;" sdval="1">6</td>
      </tr>
      <tr></tr>
      <tr>
         <th>Nom et Prénom du Directeur</th>
-        <td colspan="3"><input name="field7" size="60" value="${field7}" type="text"/></td>
+        <td colspan="3"><input name="field7" size="60" type="text" value="${field7}"/></td>
         <td sdnum="1036;" sdval="1">7</td>
      </tr>
      <tr>
         <th>Statut et Grade du Directeur</th>
-        <td colspan="3"><input name="field8" size="60" value="${field8}" type="text"/></td>
+        <td colspan="3"><input name="field8" size="60" type="text" value="${field8}"/></td>
         <td sdnum="1036;" sdval="2">8</td>
      </tr>
      <tr></tr>
       <tr>
         <th>Téléphone</th>
-        <td colspan="3"><input value="${field9}" name="field9" size="10" maxlength="10" type="text"/> </td>
+        <td colspan="3"><input name="field9" size="10" type="text" maxlength="10" value="${field9}"/> </td>
         <td sdnum="1036;" sdval="3">9</td>
       </tr>
       <tr>
         <th>Télécopie</th>
-        <td colspan="3"><input value="${field10}" name="field10" size="10" maxlength="10" type="text"/> </td>
+        <td colspan="3"><input name="field10" size="10" type="text" maxlength="10" value="${field10}"/> </td>
         <td sdnum="1036;" sdval="4">10</td>
       </tr>
       <tr>
         <th>Courriel</th>
-        <td colspan="3"><input name="field11" size="60" value="${field11}" type="text"/> </td>
+        <td colspan="3"><input name="field11" size="60" type="text" value="${field11}"/> </td>
         <td sdnum="1036;" sdval="5">11</td>
       </tr>
       <tr>
         <th>Site Web</th>
-        <td colspan="3"><input name="field12" size="60" value="${field12}" type="text"/> </td>
+        <td colspan="3"><input name="field12" size="60" type="text" value="${field12}"/> </td>
         <td sdnum="1036;" sdval="6">12</td>
       </tr>
 

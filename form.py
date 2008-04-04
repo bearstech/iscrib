@@ -356,9 +356,9 @@ class Form(Text):
         namespace = self.get_namespace()
 
         try: 
-            template = self.get_object('/ui/culture/%s' % autogen_xml)
+            template = self.get_object('/ui/scrib/%s' % autogen_xml)
         except LookupError:
-            template = self.get_object('/ui/culture/%s' % xml)
+            template = self.get_object('/ui/scrib/%s' % xml)
 
         if view == 'printable':
             namespace['printable'] = True
@@ -366,7 +366,7 @@ class Form(Text):
             context.response.set_header('Content-Type', 
                                         'text/html; charset=UTF-8')
             namespace['body'] = stl(template, namespace)
-            template = self.get_object('/ui/culture/printable_template.xhtml')
+            template = self.get_object('/ui/scrib/printable_template.xhtml')
         elif view == 'print_all':
             namespace['printable'] = True
 
@@ -583,7 +583,7 @@ class Form(Text):
         namespace['total'] = len(schema)
         namespace['is_admin'] = self.is_admin()
 
-        template = self.get_object('/ui/culture/Form_controles.xml')
+        template = self.get_object('/ui/scrib/Form_controles.xml')
         return stl(template, namespace) 
 
 
@@ -906,7 +906,7 @@ class Form(Text):
     fill_report_form__access__ = True
     fill_report_form__label__ = u'Auto remplissage'
     def fill_report_form(self, context):
-        template = self.get_object('/ui/culture/Form_fill_report.xml')
+        template = self.get_object('/ui/scrib/Form_fill_report.xml')
         return template.to_str()
 
 
@@ -1075,14 +1075,14 @@ class Form(Text):
     help__access__ = True
     help__label__ = u'Aide'
     def help(self, context):
-        template = self.get_object('/ui/culture/Form_help.xml')
+        template = self.get_object('/ui/scrib/Form_help.xml')
         return template.to_str()
 
 
     help2__access__ = True 
     def help2(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/culture/Form_help2.xhtml')
+        template = self.get_object('/ui/scrib/Form_help2.xhtml')
         return template.to_str()
 
 
@@ -1098,7 +1098,7 @@ class Form(Text):
         is_complete = namespace['is_complete']
         is_exported = self.get_form_state() == u'Exporté'
         namespace['show'] = is_finished or is_complete or is_exported
-        template = self.get_object('/ui/culture/Form_report_csv.xml')
+        template = self.get_object('/ui/scrib/Form_report_csv.xml')
         return stl(template, namespace) 
 
 

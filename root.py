@@ -53,7 +53,7 @@ class Root(BaseRoot):
         namespace = {'referer': context.get_form_value('referer', default=''),
                      'username': context.get_form_value('username', default='')}
 
-        template = self.get_object('/ui/culture/SiteRoot_login.xml')
+        template = self.get_object('/ui/scrib/SiteRoot_login.xml')
         return stl(template, namespace)
 
 
@@ -241,7 +241,7 @@ class Root(BaseRoot):
                 years[i]['is_selected'] = True
                 break
         namespace['BMyears'] = years
-        template = self.get_object('/ui/culture/Culture_new_reports.xml')
+        template = self.get_object('/ui/scrib/Culture_new_reports.xml')
         return stl(template, namespace)
 
 
@@ -327,7 +327,7 @@ class Root(BaseRoot):
     help__access__ = True
     help__label__ = u'Aide'
     def help(self, context):
-        template = self.get_object('/ui/culture/Form_help.xml')
+        template = self.get_object('/ui/scrib/Form_help.xml')
         return template.to_str()
 
 
@@ -336,7 +336,7 @@ class Root(BaseRoot):
     export_form__access__ = 'is_admin'
     export_form__label__ = u"Exporter"
     def export_form(self, context):
-        template = self.get_object('/ui/culture/Culture_export.xml')
+        template = self.get_object('/ui/scrib/Culture_export.xml')
         return template.to_str()
 
 
@@ -442,7 +442,7 @@ class Root(BaseRoot):
     new_bm_form__access__ = 'is_admin'
     new_bm_form__sublabel__ = u"Nouvelle BM"
     def new_bm_form(self, context):
-        template = self.get_object('/ui/culture/Culture_new_bm.xml')
+        template = self.get_object('/ui/scrib/Culture_new_bm.xml')
         return template.to_str()
 
 

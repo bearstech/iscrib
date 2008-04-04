@@ -11,11 +11,11 @@
         <stl:block repeat="bib bib_types">
           <stl:block if="bib/checked">
             <b>${bib/name}</b>
-            <input name="search_bib" checked="checked" onchange="updateSearchField(this.value)" type="radio" value="${bib/value}"/>
+            <input name="search_bib" type="radio" value="${bib/value}" onchange="updateSearchField(this.value)" checked="checked"/>
           </stl:block>
           <stl:block if="not bib/checked">
             <b>${bib/name}</b>
-            <input name="search_bib" type="radio" onchange="updateSearchField(this.value)" value="${bib/value}"/>
+            <input name="search_bib" type="radio" value="${bib/value}" onchange="updateSearchField(this.value)"/>
           </stl:block>
         </stl:block>
       </td>
@@ -25,7 +25,7 @@
           <br/>(exemple "saint")</th>
       <td>
         <stl:block if="is_BM">
-          <input name="search_name" size="30" value="${search_name}" id="search_name" type="text"/>
+          <input name="search_name" id="search_name" size="30" type="text" value="${search_name}"/>
         </stl:block>
         <stl:block if="not is_BM">
           <input style="background: #eee" value="${search_name}" name="search_name" size="30" disabled="disabled" id="search_name" type="text"/>
@@ -37,7 +37,7 @@
       </th>
       <td>
         <select name="search_dep" id="search_dep">
-          <option selected="${dep/selected}" stl:repeat="dep departements" value="${dep/value}">${dep/name}</option>
+          <option stl:repeat="dep departements" value="${dep/value}" selected="${dep/selected}">${dep/name}</option>
         </select>
       </td>
     </tr>

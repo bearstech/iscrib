@@ -10,7 +10,7 @@
       </td>
   <td align="right">
   <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+     <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
 
     <stl:block if="not printable">
@@ -41,13 +41,13 @@
   <tr>
     <th>Surface de la BDP (services publics et intérieurs confondus)</th>
     <td>
-       <input style="text-align: right" value="${fieldB11X}" name="fieldB11X" size="8" type="text"/>
+       <input name="fieldB11X" style="text-align: right" size="8" type="text" value="${fieldB11X}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB11Y}" name="fieldB11Y" size="8" type="text"/>
+       <input name="fieldB11Y" style="text-align: right" size="8" type="text" value="${fieldB11Y}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB11Z}" name="fieldB11Z" size="8" type="text"/>
+       <input name="fieldB11Z" style="text-align:right" size="8" type="text" value="${fieldB11Z}"/>
     </td>
     <td><b class="${_B11}">B11</b></td>
   </tr>
@@ -55,13 +55,13 @@
   <tr>
     <th>Nombre de bâtiments de la BDP ouverts à tous publics</th>
     <td>
-       <input style="text-align:right" value="${fieldB12X}" name="fieldB12X" size="8" type="text"/>
+       <input name="fieldB12X" style="text-align:right" size="8" type="text" value="${fieldB12X}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB12Y}" name="fieldB12Y" size="8" type="text"/>
+       <input name="fieldB12Y" style="text-align:right" size="8" type="text" value="${fieldB12Y}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB12Z}" name="fieldB12Z" size="8" type="text"/>
+       <input name="fieldB12Z" style="text-align:right" size="8" type="text" value="${fieldB12Z}"/>
     </td>
     <td><b class="${_B12}">B12</b></td>
   </tr>
@@ -69,13 +69,13 @@
   <tr>
     <th>Nombre de m² ouverts à tous publics</th>
     <td>
-       <input style="text-align:right" value="${fieldB13X}" name="fieldB13X" size="8" type="text"/>
+       <input name="fieldB13X" style="text-align:right" size="8" type="text" value="${fieldB13X}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB13Y}" name="fieldB13Y" size="8" type="text"/>
+       <input name="fieldB13Y" style="text-align:right" size="8" type="text" value="${fieldB13Y}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB13Z}" name="fieldB13Z" size="8" type="text"/>
+       <input name="fieldB13Z" style="text-align:right" size="8" type="text" value="${fieldB13Z}"/>
     </td>
     <td><b class="${_B13}">B13</b></td>
   </tr>
@@ -103,7 +103,7 @@
   <tr>
     <th>Surface totale des bibliothèques du réseau tous publics</th>
     <td>
-       <input style="text-align:right" value="${fieldB14Z}" name="fieldB14Z" size="8" type="text"/>
+       <input name="fieldB14Z" style="text-align:right" size="8" type="text" value="${fieldB14Z}"/>
     </td>
     <td><b class="${_B14}">B14</b></td>
   </tr>
@@ -118,7 +118,7 @@
   <tr>
     <th>Nombre total de bus : bibliobus ou médiabus (musibus, artobus, etc.)</th>
     <td>
-       <input style="text-align:right" value="${fieldB21}" name="fieldB21" size="8" type="text"/>
+       <input name="fieldB21" style="text-align:right" size="8" type="text" value="${fieldB21}"/>
     </td>
     <td><b class="${_B21}">B21</b></td>
   </tr>
@@ -126,7 +126,7 @@
   <tr>
     <th>Dont nombre de bus faisant du prêt direct</th>
     <td>
-       <input style="text-align:right" value="${fieldB22}" name="fieldB22" size="8" type="text"/>
+       <input name="fieldB22" style="text-align:right" size="8" type="text" value="${fieldB22}"/>
     </td>
     <td><b class="${_B22}">B22</b></td>
   </tr>
@@ -134,7 +134,7 @@
   <tr>
     <th>Autres véhicules (fourgonnettes, voitures légères)</th>
     <td>
-       <input style="text-align:right" value="${fieldB23}" name="fieldB23" size="8" type="text"/>
+       <input name="fieldB23" style="text-align:right" size="8" type="text" value="${fieldB23}"/>
     </td>
     <td><b class="${_B23}">B23</b></td>
   </tr>
@@ -158,7 +158,7 @@
     <th>Si oui, préciser lequel:</th>
     <td>
        <div stl:if="not fieldB31" id="display_fieldB32" style="visibility:hidden">         <input stl:if="not fieldB31" name="fieldB32" size="40" type="text" value=""/></div>
-       <div stl:if="fieldB31" id="display_fieldB32">         <input value="${fieldB32}" stl:if="fieldB31" name="fieldB32" size="40" type="text"/>
+       <div stl:if="fieldB31" id="display_fieldB32">         <input stl:if="fieldB31" name="fieldB32" size="40" type="text" value="${fieldB32}"/>
        </div>    </td>
     <td><b class="${_B32}">B32</b></td>
   </tr>
@@ -184,8 +184,8 @@
     <th>préciser les sources :</th>
     <td>
        <div stl:if="not fieldB33" id="display_fieldB35" style="visibility:hidden">         <input stl:if="not fieldB33" name="fieldB35" size="40" type="text" value=""/></div>
-       <div stl:if="fieldB33" id="display_fieldB35">         <input value="${fieldB35}" stl:if="fieldB33" name="fieldB35" size="40
-             " type="text"/>
+       <div stl:if="fieldB33" id="display_fieldB35">         <input stl:if="fieldB33" name="fieldB35" size="40
+             " type="text" value="${fieldB35}"/>
        </div>    </td>
     <td><b class="${_B35}">B35</b></td>
   </tr>
@@ -211,10 +211,10 @@
   <tr>
     <th>Sans accès internet</th>
     <td>
-       <input style="text-align:right" value="${fieldB36X}" name="fieldB36X" size="8" type="text"/>
+       <input name="fieldB36X" style="text-align:right" size="8" type="text" value="${fieldB36X}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB36Y}" name="fieldB36Y" size="8" type="text"/>
+       <input name="fieldB36Y" style="text-align:right" size="8" type="text" value="${fieldB36Y}"/>
     </td>
     <td><b class="${_B36}">B36</b></td>
   </tr>
@@ -222,10 +222,10 @@
   <tr>
     <th>Avec accès internet</th>
     <td>
-       <input style="text-align:right" value="${fieldB37X}" name="fieldB37X" size="8" type="text"/>
+       <input name="fieldB37X" style="text-align:right" size="8" type="text" value="${fieldB37X}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB37Y}" name="fieldB37Y" size="8" type="text"/>
+       <input name="fieldB37Y" style="text-align:right" size="8" type="text" value="${fieldB37Y}"/>
     </td>
     <td><b class="${_B37}">B37</b></td>
   </tr>
@@ -233,10 +233,10 @@
   <tr>
     <th>Total</th>
     <td>
-       <input style="text-align:right" value="${fieldB38X}" name="fieldB38X" size="8" type="text"/>
+       <input name="fieldB38X" style="text-align:right" size="8" type="text" value="${fieldB38X}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB38Y}" name="fieldB38Y" size="8" type="text"/>
+       <input name="fieldB38Y" style="text-align:right" size="8" type="text" value="${fieldB38Y}"/>
     </td>
     <td><b class="${_B38}">B38</b></td>
   </tr>
@@ -244,10 +244,10 @@
   <tr>
     <th>Les bâtiments de la BDP sont-ils ouverts à tous publics ?</th>
     <td>
-       <input style="text-align:right" value="${fieldB39X}" name="fieldB39X" size="8" type="text"/>
+       <input name="fieldB39X" style="text-align:right" size="8" type="text" value="${fieldB39X}"/>
     </td>
     <td>
-       <input style="text-align:right" value="${fieldB39Y}" name="fieldB39Y" size="8" type="text"/>
+       <input name="fieldB39Y" style="text-align:right" size="8" type="text" value="${fieldB39Y}"/>
     </td>
     <td><b class="${_B39}">B39</b></td>
   </tr>
@@ -267,16 +267,16 @@
   <tr>
     <th>Entièrement gratuit</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB39" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB39}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB39" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB39_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_B39}">B39</b></td>
   </tr>
 
   <tr>
     <th>Payant, même partiellement</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB40" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB40}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB40" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB40_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_B40}">B40</b></td>
   </tr>
 </table>

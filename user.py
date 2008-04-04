@@ -184,7 +184,7 @@ class bibUser(BaseUser):
             if bib:
                 namespace['dep'] = bib.get('name', '')
 
-        template = self.get_object('/ui/culture/User_home.xml')
+        template = self.get_object('/ui/scrib/User_home.xml')
         return stl(template, namespace)
 
 
@@ -361,7 +361,7 @@ class bibUserFolder(BaseUserFolder):
         namespace['table'] = table(path.get_pathtoroot(), tablename, objects,
                 sortby='oid', sortorder='up', batchstart='0', batchsize='50')
 
-        template = self.get_object('/ui/culture/bibUserFolder_search.xml')
+        template = self.get_object('/ui/scrib/bibUserFolder_search.xml')
         return stl(template, namespace)
 
 

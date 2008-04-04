@@ -10,7 +10,7 @@
       <th>Nom de la ville
           <br/>(exemple "saint")</th>
       <td>
-        <input name="search_name" size="30" value="${search_name}" id="search_name" type="text"/>
+        <input name="search_name" id="search_name" size="30" type="text" value="${search_name}"/>
       </td>
     </tr>
     <tr>
@@ -20,7 +20,7 @@
       <td>
         <select name="search_dep" id="search_dep">
           <option value="">--- Tous les départements ---</option>
-          <option selected="${dep/selected}" stl:repeat="dep departements" value="${dep/value}">${dep/name}</option>
+          <option stl:repeat="dep departements" value="${dep/value}" selected="${dep/selected}">${dep/name}</option>
         </select>
         <!--input type="text" name="search_dep" size="4"
                stl:attributes="value search_dep"/--><br/>
@@ -41,7 +41,7 @@
                stl:attributes="value search_state"/--><br/>
         <select name="search_state" id="search_state">
           <option value=""></option>
-          <option selected="${state/selected}" stl:repeat="state states" value="${state/value}">${state/name}</option>
+          <option stl:repeat="state states" value="${state/value}" selected="${state/selected}">${state/name}</option>
         </select>
       </td>
     </tr>

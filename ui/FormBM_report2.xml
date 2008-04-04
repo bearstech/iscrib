@@ -5,7 +5,7 @@
   <div align="right">
 
   <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="/ui/culture/images/imprimer.gif"/> Imprimer cette page</a>
+     <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
 
     <stl:block if="not printable">
@@ -34,13 +34,13 @@
   <tr>
     <th>Surface en m² horsoeuvre nette SHON (services publics et intérieurs confondus)</th>
     <td>
-       <input style="text-align: right" value="${fieldB11X}" name="fieldB11X" size="8" type="text"/>
+       <input name="fieldB11X" style="text-align: right" size="8" type="text" value="${fieldB11X}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB11Y}" name="fieldB11Y" size="8" type="text"/>
+       <input name="fieldB11Y" style="text-align: right" size="8" type="text" value="${fieldB11Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB11Z}" name="fieldB11Z" size="8" type="text"/>
+       <input name="fieldB11Z" style="text-align: right" size="8" type="text" value="${fieldB11Z}"/>
     </td>
     <td><b class="${_B11}">B11</b></td>
   </tr>
@@ -48,13 +48,13 @@
   <tr>
     <th>Nombre de bâtiments</th>
     <td>
-       <input style="text-align: right" value="${fieldB12X}" name="fieldB12X" size="8" type="text"/>
+       <input name="fieldB12X" style="text-align: right" size="8" type="text" value="${fieldB12X}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB12Y}" name="fieldB12Y" size="8" type="text"/>
+       <input name="fieldB12Y" style="text-align: right" size="8" type="text" value="${fieldB12Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB12Z}" name="fieldB12Z" size="8" type="text"/>
+       <input name="fieldB12Z" style="text-align: right" size="8" type="text" value="${fieldB12Z}"/>
     </td>
     <td><b class="${_B12}">B12</b></td>
   </tr>
@@ -62,13 +62,13 @@
   <tr>
     <th>Nombre de places assises (hors auditorium et cafétéria)</th>
     <td>
-       <input style="text-align: right" value="${fieldB13X}" name="fieldB13X" size="8" type="text"/>
+       <input name="fieldB13X" style="text-align: right" size="8" type="text" value="${fieldB13X}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB13Y}" name="fieldB13Y" size="8" type="text"/>
+       <input name="fieldB13Y" style="text-align: right" size="8" type="text" value="${fieldB13Y}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB13Z}" name="fieldB13Z" size="8" type="text"/>
+       <input name="fieldB13Z" style="text-align: right" size="8" type="text" value="${fieldB13Z}"/>
     </td>
     <td><b class="${_B13}">B13</b></td>
   </tr>
@@ -82,15 +82,15 @@
   <tr>
     <th>La bibliothèque possède-t-elle un espace spécifique pour l'accueil des personnes handicapées ?</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB14" style="font-size: 8pt;  border:0px" checked="${fieldB14}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB14" style="font-size: 8pt;  border:0px" checked="${fieldB14_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB14" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB14}"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB14" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB14_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_B14}">B14</b></td>
   </tr>
 
   <tr>
     <th>Nombre de places assises dans cet espace spécifique</th>
     <td>
-       <input style="text-align: right" value="${fieldB15}" name="fieldB15" size="8" type="text"/>
+       <input name="fieldB15" style="text-align: right" size="8" type="text" value="${fieldB15}"/>
     </td>
     <td><b class="${_B15}">B15</b></td>
   </tr>
@@ -105,7 +105,7 @@
   <tr>
     <th>Nombre total de bus : bibliobus ou médiabus (musibus, artobus, etc.)</th>
     <td>
-       <input style="text-align: right" value="${fieldB21}" name="fieldB21" size="8" type="text"/>
+       <input name="fieldB21" style="text-align: right" size="8" type="text" value="${fieldB21}"/>
     </td>
     <td><b class="${_B21}">B21</b></td>
   </tr>
@@ -113,7 +113,7 @@
   <tr>
     <th>Dont nombre de bus faisant du prêt direct</th>
     <td>
-       <input style="text-align: right" value="${fieldB22}" name="fieldB22" size="8" type="text"/>
+       <input name="fieldB22" style="text-align: right" size="8" type="text" value="${fieldB22}"/>
     </td>
     <td><b class="${_B22}">B22</b></td>
   </tr>
@@ -121,7 +121,7 @@
   <tr>
     <th>Autres véhicules (fourgonnettes, voitures légères)</th>
     <td>
-       <input style="text-align: right" value="${fieldB23}" name="fieldB23" size="8" type="text"/>
+       <input name="fieldB23" style="text-align: right" size="8" type="text" value="${fieldB23}"/>
     </td>
     <td><b class="${_B23}">B23</b></td>
   </tr>
@@ -145,7 +145,7 @@
     <th>Si oui, préciser lequel :</th>
     <td>
        <div stl:if="not fieldB31" id="display_fieldB32" style="visibility:hidden">         <input stl:if="not fieldB31" name="fieldB32" size="40" type="text" value=""/></div>
-       <div stl:if="fieldB31" id="display_fieldB32">         <input value="${fieldB32}" stl:if="fieldB31" name="fieldB32" size="40" type="text"/>
+       <div stl:if="fieldB31" id="display_fieldB32">         <input stl:if="fieldB31" name="fieldB32" size="40" type="text" value="${fieldB32}"/>
        </div>    </td>
     <td><b class="${_B32}">B32</b></td>
   </tr>
@@ -200,10 +200,10 @@
   <tr>
     <th>Nombre de postes informatiques sans accès internet</th>
     <td>
-       <input style="text-align: right" value="${fieldB37X}" name="fieldB37X" size="8" type="text"/>
+       <input name="fieldB37X" style="text-align: right" size="8" type="text" value="${fieldB37X}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB37Y}" name="fieldB37Y" size="8" type="text"/>
+       <input name="fieldB37Y" style="text-align: right" size="8" type="text" value="${fieldB37Y}"/>
     </td>
     <td><b class="${_B37}">B37</b></td>
   </tr>
@@ -211,10 +211,10 @@
   <tr>
     <th>Nombre de postes informatique avec accès internet</th>
     <td>
-       <input style="text-align: right" value="${fieldB38X}" name="fieldB38X" size="8" type="text"/>
+       <input name="fieldB38X" style="text-align: right" size="8" type="text" value="${fieldB38X}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB38Y}" name="fieldB38Y" size="8" type="text"/>
+       <input name="fieldB38Y" style="text-align: right" size="8" type="text" value="${fieldB38Y}"/>
     </td>
     <td><b class="${_B38}">B38</b></td>
   </tr>
@@ -222,10 +222,10 @@
   <tr>
     <th>TOTAL</th>
     <td>
-       <input style="text-align: right" value="${fieldB39X}" name="fieldB39X" size="8" type="text"/>
+       <input name="fieldB39X" style="text-align: right" size="8" type="text" value="${fieldB39X}"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldB39Y}" name="fieldB39Y" size="8" type="text"/>
+       <input name="fieldB39Y" style="text-align: right" size="8" type="text" value="${fieldB39Y}"/>
     </td>
     <td><b class="${_B39}">B39</b></td>
   </tr>
@@ -258,14 +258,14 @@
   <tr>
     <th>Entièrement gratuit ?</th>
     <td>
-      <table stl:if="fieldB40" id="display_fieldB41">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41_not}" value="0" type="radio"/>Non      </td>      </tr></table>      <table stl:if="not fieldB40" id="display_fieldB41" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table stl:if="fieldB40" id="display_fieldB41">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB41" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB41}"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB41" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB41_not}"/>Non      </td>      </tr></table>      <table stl:if="not fieldB40" id="display_fieldB41" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB41" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB41}"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB41" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB41_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_B41}">B41</b></td>
   </tr>
 
   <tr>
     <th>Payant, même partiellement ?</th>
     <td>
-      <table stl:if="fieldB40" id="display_fieldB42">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB42" style="font-size: 8pt;  border:0px" checked="${fieldB42}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB42" style="font-size: 8pt;  border:0px" checked="${fieldB42_not}" value="0" type="radio"/>Non      </td>      </tr></table>      <table stl:if="not fieldB40" id="display_fieldB42" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB42" style="font-size: 8pt;  border:0px" checked="${fieldB42}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB42" style="font-size: 8pt;  border:0px" checked="${fieldB42_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table stl:if="fieldB40" id="display_fieldB42">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB42" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB42}"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB42" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB42_not}"/>Non      </td>      </tr></table>      <table stl:if="not fieldB40" id="display_fieldB42" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB42" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB42}"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB42" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB42_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_B42}">B42</b></td>
   </tr>
 </table>
@@ -300,16 +300,16 @@
       <table stl:if="fieldB43" id="display_fieldB44">
         <tr style="padding: 10px; text-align: left">
           <td>
-            <input name="fieldB44" style="font-size: 8pt;  border:0px" checked="${fieldB44}" value="1" type="radio"/>Oui</td>
+            <input name="fieldB44" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB44}"/>Oui</td>
           <td style="border-left: 1px solid black;text-align: right">
-            <input name="fieldB44" style="font-size: 8pt;border:0px" checked="${fieldB44_not}" value="0" type="radio"/>Non</td>
+            <input name="fieldB44" style="font-size: 8pt;border:0px" type="radio" value="0" checked="${fieldB44_not}"/>Non</td>
         </tr>
       </table>
       <table stl:if="not fieldB43" id="display_fieldB44" style="visibility:hidden">
         <tr style="padding: 10px; text-align: left">
-          <td><input name="fieldB44" style="font-size: 8pt;  border:0px" checked="${fieldB44}" value="1" type="radio"/>Oui</td>
+          <td><input name="fieldB44" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB44}"/>Oui</td>
           <td style="border-left: 1px solid black;text-align: right">
-            <input name="fieldB44" style="font-size: 8pt;  border:0px" checked="${fieldB44_not}" value="0" type="radio"/>Non</td>
+            <input name="fieldB44" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB44_not}"/>Non</td>
         </tr>
       </table>
     </td>
@@ -319,14 +319,14 @@
   <tr>
     <th>Règles tactiles</th>
     <td>
-      <table stl:if="fieldB43" id="display_fieldB45"> <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB45" style="font-size: 8pt;  border:0px" checked="${fieldB45}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB45" style="font-size: 8pt;  border:0px" checked="${fieldB45_not}" value="0" type="radio"/>Non      </td>      </tr></table>      <table stl:if="not fieldB43" id="display_fieldB45" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB45" style="font-size: 8pt;  border:0px" checked="${fieldB45}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB45" style="font-size: 8pt;  border:0px" checked="${fieldB45_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table stl:if="fieldB43" id="display_fieldB45"> <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB45" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB45}"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB45" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB45_not}"/>Non      </td>      </tr></table>      <table stl:if="not fieldB43" id="display_fieldB45" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB45" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB45}"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB45" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB45_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_B45}">B45</b></td>
   </tr>
 
   <tr>
     <th>Logiciels adaptés</th>
     <td>
-      <table stl:if="fieldB43" id="display_fieldB46">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB46" style="font-size: 8pt;  border:0px" checked="${fieldB46}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB46" style="font-size: 8pt;  border:0px" checked="${fieldB46_not}" value="0" type="radio"/>Non      </td>      </tr></table>      <table stl:if="not fieldB43" id="display_fieldB46" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB46" style="font-size: 8pt;  border:0px" checked="${fieldB46}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB46" style="font-size: 8pt;  border:0px" checked="${fieldB46_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+      <table stl:if="fieldB43" id="display_fieldB46">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB46" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB46}"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB46" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB46_not}"/>Non      </td>      </tr></table>      <table stl:if="not fieldB43" id="display_fieldB46" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB46" style="font-size: 8pt;  border:0px" type="radio" value="1" checked="${fieldB46}"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB46" style="font-size: 8pt;  border:0px" type="radio" value="0" checked="${fieldB46_not}"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_B46}">B46</b></td>
   </tr>
 
@@ -334,7 +334,7 @@
     <th>Autres, préciser :</th>
     <td>
        <div stl:if="not fieldB43" id="display_fieldB47" style="visibility:hidden">         <input stl:if="not fieldB43" name="fieldB47" size="40" type="text" value=""/></div>
-       <div stl:if="fieldB43" id="display_fieldB47">         <input value="${fieldB47}" stl:if="fieldB43" name="fieldB47" size="40" type="text"/>
+       <div stl:if="fieldB43" id="display_fieldB47">         <input stl:if="fieldB43" name="fieldB47" size="40" type="text" value="${fieldB47}"/>
        </div>    </td>
     <td><b class="${_B47}">B47</b></td>
   </tr>

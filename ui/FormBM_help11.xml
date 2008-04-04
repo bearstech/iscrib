@@ -4,8 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
    <title>Aide</title>
-    
-    <link type="text/css" rel="stylesheet" href="../../ui/culture/main.css"/>
+
+    <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
   </head>
 <body id="body">
 
