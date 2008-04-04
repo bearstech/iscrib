@@ -26,9 +26,6 @@ import socket
 import smtplib
 from decimal import Decimal as dec, InvalidOperation
 
-# Import from mysql
-import MySQLdb
-
 # Import from itools
 from itools.catalog import (schedule_to_reindex, KeywordField, TextField,
         BoolField)
@@ -38,179 +35,105 @@ from itools.stl import stl
 from itools.csv import CSVFile
 
 # Import from ikaaro
-from ikaaro.text import Text as BaseText
+from ikaaro.text import Text
 from ikaaro.workflow import workflow
 from ikaaro.registry import register_object_class
 
 # Import from scrib
 from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from scrib import config
+from utils import get_user_town
 
 
 SMTPServer = config.SMTPServer
 MailResponsableBM = config.MailResponsableBM
 MailResponsableBDP = config.MailResponsableBDP
 
-SqlHost = config.SqlHost
-SqlDatabase = config.SqlDatabase
-SqlUser = config.SqlUser
-SqlPasswd = config.SqlPasswd
-SqlPort = config.SqlPort
-
-
 workflow.add_state('modified', title=u"Modifié",
         description=u"Modifié après export.")
 
 
-def get_checkbox_value(key, value):
 
-    #len_choice = 2
-    #if key == "G11":
-    if key == "CV":
-        len_choice = 15 
-    if key == "CZ":
-        len_choice = 16 
-    elif key == "G11":
-        len_choice = 7
-    elif key == 'K3':
-        len_choice = 4
-    elif key == '13':
-        len_choice = 2
-    elif key == '14':
-        len_choice = 4
-    else:
-        print 345, key, value
-     
-        
-    new_values = choices = [ 'N' for item in range(len_choice)]
-    values = value.split('##')
-    for value in values:
-        if value not in ('', None):
-            i = int(value) - 1 
-            new_values[i] = 'O'
-
-    value = ','.join(new_values)
-    return value
+class FormHandler(File):
+    def new(self):
+        self.fields = {}
 
 
-def get_alertes(context):
-    object = context.object
-    if object.is_BDP():
-        from schema_bdp import alertes
-    elif object.is_BM():
-        from schema_bm import alertes 
-    return alertes
+    def _load_state_from_file(self, file):
+        data = file.read()
+        fields = {}
+        for line in data.splitlines():
+            line = line.strip()
+            if ':' in line:
+                key, value = line.split(':', 1)
+                if key in schema:
+                    value = value.strip()
+                    field_def = schema[key]
+                    type = field_def[0]
+                    default = field_def[1]
+                    fields[key] = type.decode(value)
+        self.fields = fields
 
 
-def get_controles(context):
-    object = context.object
-    if object.is_BDP():
-        from schema_bdp import controles 
-    elif object.is_BM():
-        from schema_bm import controles 
-    return controles 
-
-
-MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
-MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL"
-
-
-def get_cursor(**kw):
-    connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
-                                 port=int(SqlPort), user=SqlUser,
-                                 passwd=SqlPasswd, **kw)
-    return connection.cursor()
+    def to_str(self, encoding='UTF-8'):
+        result = []
+        for key, value in self.fields.items():
+            new_value = schema[key][0].encode(value)
+            if isinstance(new_value, unicode):
+                 new_value = new_value.encode('UTF-8')
+            line = '%s:%s\n' % (key, new_value) 
+            result.append(line)
+        return ''.join(result)
 
 
 
-def get_adresse(query):
-    """ Accès base adresse"""
-    cursor = get_cursor()
-    cursor.execute(query)
-    res = cursor.fetchall()
-    
-    if not len(res):
-        raise ValueError, MSG_NO_ADRESSE
-
-    res = res[0]
-    adresse = []
-    for val in res:
-        if str(val) == 'None':
-            adresse.append('')
-        else:
-            adresse.append(val)
-    cursor.close()
-    connection.close()
-
-    return adresse or ''
-
-
-
-class Form(BaseText):
-
+class Form(Text):
     class_id = 'Form'
     class_icon48 = 'culture/images/form48.png'
-    class_views = ['report_form0', 'controles_form', 'report_csv',
-                   'print_form', 'help']
+    class_views = [['controles_form'], ['report_csv'], ['print_form'],
+                   ['help']]
+    class_handler = FormHandler
     workflow = workflow
 
 
-    def get_catalog_fields(self):
-        fields = BaseText.get_catalog_fields(self)
-        fields['user_town'] = TextField('user_town')
-        fields['dep'] = KeywordField('dep', is_stored=True)
-        fields['year'] = KeywordField('year')
-        fields['is_BDP'] = BoolField('is_BDP')
-        fields['is_BM'] = BoolField('is_BM')
-        fields['form_state'] = KeywordField('form_state', is_stored=True)
-        return fields
-
-
-    def get_catalog_values(self):
-        values = BaseText.get_catalog_values(self)
-        values['user_town'] = self.get_user_town()
-        values['dep'] = self.get_dep()
-        values['year'] = self.get_year()
-        values['is_BDP'] = self.is_BDP()
-        values['is_BM'] = self.is_BM()
-        values['form_state'] = self.get_form_state()
-        return values
-
-
-    def get_ns_and_h(self, xml, autogen_xml, view):
-        """
-        autogen_xml = 'FormXX_report1_autogen.xml'
-        xml = 'FormXX_report1.xml'
-        """
-        namespace = self.get_namespace()
-
-        try: 
-            template = self.get_object('/ui/culture/%s' % autogen_xml)
-        except LookupError:
-            template = self.get_object('/ui/culture/%s' % xml)
-
-        if view == 'printable':
-            namespace['printable'] = True
-            context = get_context()
-            context.response.set_header('Content-Type', 
-                                        'text/html; charset=UTF-8')
-            namespace['body'] = stl(template, namespace)
-            template = self.get_object('/ui/culture/printable_template.xhtml')
-        elif view == 'print_all':
-            namespace['printable'] = True
-
-        namespace['submit_button'] = namespace['is_allowed_to_edit'] \
-                                     and not namespace['printable']
-
-        return stl(template, namespace)
-
-
     ######################################################################
-    # API
+    # Form API
     def set_metadata(self, meta):
-        self.set_changed()
-        self.state.fields.update(meta)
+        self.handler.fields.update(meta)
+        self.handler.set_changed()
+
+
+    @staticmethod
+    def get_schema():
+        raise NotImplementedError
+
+
+    @staticmethod
+    def is_BM():
+        raise NotImplementedError
+
+    
+    @staticmethod
+    def is_BDP():
+        raise NotImplementedError
    
+
+    def get_form_state(self):
+        # State
+        state = self.get_property('state')
+        if state == 'private':
+            if len(self.state.fields) == 0:
+                state = u'Vide'
+            else:
+                state = u'En cours'
+        elif state == 'pending':
+            state = u'Terminé'
+        elif state == 'public':
+            state = u'Exporté'
+        elif state == 'modified':
+            state = u'Modifié après export'
+
+        return state 
+
 
     #######################################################################
     # Namespaces
@@ -234,7 +157,7 @@ class Form(BaseText):
             value = context.get_form_value(key)
             if value is None:
                 # is the value is not in query string, take it in fields 
-                value = self.state.fields.get(name, default)
+                value = self.handler.fields.get(name, default)
             namespace[name] = value
             # If name is 'fieldA23', add 'A23'
             if name.startswith('field'):
@@ -385,7 +308,7 @@ class Form(BaseText):
                     pass
                 # Make the select options
                 elif k.endswith('Z'):
-                    kz = self.state.fields.get(key, '0')
+                    kz = self.handler.fields.get(key, '0')
                     if kz != '0':
                         namespace[key] = EPCI_Statut.get_namespace(kz)
                     else: 
@@ -424,25 +347,37 @@ class Form(BaseText):
         return namespace
 
 
+    def get_ns_and_h(self, xml, autogen_xml, view):
+        """
+        autogen_xml = 'FormXX_report1_autogen.xml'
+        xml = 'FormXX_report1.xml'
+        """
+        namespace = self.get_namespace()
+
+        try: 
+            template = self.get_object('/ui/culture/%s' % autogen_xml)
+        except LookupError:
+            template = self.get_object('/ui/culture/%s' % xml)
+
+        if view == 'printable':
+            namespace['printable'] = True
+            context = get_context()
+            context.response.set_header('Content-Type', 
+                                        'text/html; charset=UTF-8')
+            namespace['body'] = stl(template, namespace)
+            template = self.get_object('/ui/culture/printable_template.xhtml')
+        elif view == 'print_all':
+            namespace['printable'] = True
+
+        namespace['submit_button'] = namespace['is_allowed_to_edit'] \
+                                     and not namespace['printable']
+
+        return stl(template, namespace)
+
+
     ######################################################################
     # User interface
-    def get_form_state(self):
-        # State
-        state = self.get_property('state')
-        if state == 'private':
-            if len(self.state.fields) == 0:
-                state = u'Vide'
-            else:
-                state = u'En cours'
-        elif state == 'pending':
-            state = u'Terminé'
-        elif state == 'public':
-            state = u'Exporté'
-        elif state == 'modified':
-            state = u'Modifié après export'
-
-        return state 
-
+    #######################################################################
 
     #######################################################################
     # Control report
@@ -936,7 +871,7 @@ class Form(BaseText):
         self.set_property('state', 'public')
 
         schedule_to_reindex(self)
-        self.set_changed()
+        self.handler.set_changed()
         
         message = u'Le rapport a été exporté'
         return context.come_back(message, goto=';controles_form')
@@ -985,7 +920,7 @@ class Form(BaseText):
     fill_report__access__ = 'is_allowed_to_edit_form'
     def fill_report(self, context):
         schema = self.get_schema()
-        self.set_changed()
+        self.handler.set_changed()
         
         i = 0
         t0 = time()
@@ -1035,7 +970,7 @@ class Form(BaseText):
            else: 
                value = '0' 
 
-           self.state.fields[key] = value
+           self.handler.fields[key] = value
            t = time() - t0
 
         schedule_to_reindex(self)
@@ -1046,7 +981,7 @@ class Form(BaseText):
     report__access__ = 'is_allowed_to_edit_form'
     def report(self, context):
         schema = self.get_schema()
-        self.set_changed()
+        self.handler.set_changed()
         referer = context.referrer
         new_referer = deepcopy(referer)
 
@@ -1131,56 +1066,19 @@ class Form(BaseText):
                     #query even if the type is wrong
                     badT_values[keyNumber] = value
                 else:
-                    self.state.fields[key] = value
+                    self.handler.fields[key] = value
 
         form_state = self.get_form_state()
         if form_state == u'Exporté':
             self.set_property('state', 'modified')
 
-        new_referer, msg = self.make_msg(new_referer=new_referer, notR=notR, 
-                                         badT=badT, badT_missing=badT_missing,
-                                         badT_values=badT_values)
+        new_referer, msg = make_msg(new_referer=new_referer, notR=notR,
+                badT=badT, badT_missing=badT_missing, badT_values=badT_values)
         return context.come_back(msg, goto=new_referer)
-
-
-    def make_msg(self, new_referer, notR, badT, badT_missing, badT_values):
-        if notR:
-            notR.sort()
-            notR_missing = ['missing_' + x for x in notR]
-            # convert to unicode so we can join them
-            notR = [unicode(x, 'UTF-8') for x in notR]
-
-            msg_notR = (u"Les rubriques suivantes ne sont pas "
-                        u"renseignées : %s") % u', '.join(notR)
-
-            dic = {}.fromkeys(notR_missing, '1')
-            new_referer.query.clear()
-            new_referer.query.update(dic)
-        if badT:
-            badT.sort()
-            # convert to unicode so we can join them
-            msg_badT = (u"Le type des rubriques suivantes n'est pas"
-                        u" correct : %s" ) % u', '.join(badT)
-
-            dic = {}.fromkeys(badT_missing, '1')
-            new_referer.query.update(badT_values)
-            new_referer.query.update(dic)
-                    
-        if not (badT or notR):
-            msg = u"Formulaire enregistré."
-        elif badT and not notR:
-            msg = msg_badT 
-        elif notR and not badT:
-            msg = msg_notR
-        else:
-            msg = u'<br/>'.join([msg_notR,  msg_badT])
-
-        return new_referer, msg
 
 
     #######################################################################
     # Help
-    #######################################################################
     help__access__ = True
     help__label__ = u'Aide'
     def help(self, context):
@@ -1197,7 +1095,7 @@ class Form(BaseText):
 
     #######################################################################
     # Export
-    #report_csv__access__ = BaseText.is_admin
+    #report_csv__access__ = Text.is_admin
     report_csv__access__ = True
     report_csv__label__ = u'Export'
     def report_csv(self, context):
@@ -1262,7 +1160,3 @@ class Form(BaseText):
             csv.add_row([chap, name, value])
 
         return csv.to_str('latin1')
-
-
-#XXX do we need to register FormBM and Form ?
-register_object_class(Form)

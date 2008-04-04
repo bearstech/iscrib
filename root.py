@@ -346,9 +346,11 @@ class Root(BaseRoot):
 
         def export_bib(container, ouput):
             cursor = get_cursor()
-            names = [name for name in container.get_object_names()
+            folder = container.handler
+            names = [name for name in container.get_names()
                     if name.isdigit() and (
-                        container.get_object('.%s.metadata' % name).get_property('state') == 'public')]
+                        folder.get_handler('%s.metadata' % name)\
+                                .get_property('state') == 'public')]
 
             # adresse
             keys = ', '.join(names)

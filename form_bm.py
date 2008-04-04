@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -16,103 +16,74 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from mysql
-from MySQLdb.cursors import DictCursor
-
 # Import from itools
 from itools.catalog import KeywordField
 from itools.stl import stl
 
 # Import from ikaaro
-from ikaaro.text import Text as BaseText
 from ikaaro.registry import register_object_class
 
 # Import from scrib
-from scrib import config
-from schema_bm import schema
-from utils import get_BMs
+from schema_bm import schema, alertes, controles
 from form import get_adresse, Form
-
-SqlHost = config.SqlHost
-SqlDatabase = config.SqlDatabase
-SqlUser = config.SqlUser
-SqlPasswd = config.SqlPasswd
-SqlPort = config.SqlPort
+from utils import get_BMs
 
 
 class FormBM(Form):
     class_id = 'Form_BM'
     class_icon48 = 'culture/images/form48.png'
-
-
-    def get_catalog_fields(self):
-        fields = Form.get_catalog_fields(self)
-        fields['code'] = KeywordField('code')
-        return fields
-
-    
-    def get_catalog_values(self):
-        values = Form.get_catalog_values(self)
-        values['code'] = self.get_code()
-        return values
+    class_views = [['report_form0'], ['report_form10'], ['report_form11'],
+                   ['report_form1'], ['report_form2'], ['report_form3'],
+                   ['report_form4'], ['report_form5'], ['report_form6'],
+                   ['report_form7'], ['report_form8'], ['report_form9'],
+                   ['comments']] + Form.class_views
 
 
     ######################################################################
-    # Parsing
-    def _load_state_from_file(self, file):
-        data = file.read()
-        self.state.fields = {}
-        for line in data.splitlines():
-            line = line.strip()
-            if ':' in line:
-                key, value = line.split(':', 1)
-                if key in schema:
-                    value = value.strip()
-                    field_def = schema[key]
-                    type = field_def[0]
-                    default = field_def[1]
-                    self.state.fields[key] = type.decode(value)
-
-
-    def to_str(self, encoding='UTF-8'):
-        result = []
-        for key, value in self.state.fields.items():
-            new_value = schema[key][0].encode(value)
-            if isinstance(new_value, unicode):
-                 new_value = new_value.encode('UTF-8')
-            line = '%s:%s\n' % (key, new_value) 
-            result.append(line)
-        return ''.join(result)
-
-
-    def get_subviews(self, name):
-        reports = ['report_form0', 'report_form10', 'report_form11',
-        'report_form1', 'report_form2', 'report_form3', 'report_form4',
-        'report_form5', 'report_form6', 'report_form7', 'report_form8',
-        'report_form9', 'comments']
-
-        if name in reports:
-            return reports
-        return BaseText.get_subviews(self, name)
-
-
-    def get_schema(self):
-        from schemaBM import schema
-
+    # Form API
+    @staticmethod
+    def get_schema():
         return schema
 
 
+    @staticmethod
+    def get_alertes():
+        return alertes
+
+
+    @staticmethod
+    def get_controles():
+        return controles
+
+
+    @staticmethod
     def is_BDP(self):
         return False
 
 
+    @staticmethod
     def is_BM(self):
         return True
 
 
+    @staticmethod
+    def base_lect(insee):
+        chaineSQL = ("select * from adresse where "
+                     "insee is not null and code_bib='%s'" % insee)
+        return get_adresse(chaineSQL)
+
+
     def get_year(self):
-        forms = self.parent
-        return forms.name.split('BM')[-1]
+        return self.parent.name.split('BM')[-1]
+
+
+    def get_dep(self):
+        # get department number for BMs
+        dep = ''
+        bib = get_BMs().get(self.name)
+        if bib:
+            dep = bib.get('dep', '')
+        return dep
 
 
     def get_user_town(self):
@@ -123,58 +94,22 @@ class FormBM(Form):
         return title
 
 
-    get_dep__access__ = True
-    def get_dep(self, context):
-        # get department number for BMs
-        dep = ''
-        bib = get_BMs().get(self.name)
-        if bib:
-            dep = bib.get('dep', '')
-        return dep
-
-
     def get_code(self):
         return self.name 
 
 
-    def base_lect(self, insee):
-        chaineSQL = "select * from adresse where "\
-                    "insee is not null and code_bib='%s'" % insee
-        return get_adresse(chaineSQL)
+    ######################################################################
+    # Catalog API
+    def get_catalog_fields(self):
+        fields = Form.get_catalog_fields(self)
+        fields['code'] = KeywordField('code')
+        return fields
 
-
-    def none2str(self, t):
-        new = {} 
-        for k, v in t.items():
-            if v is None:
-                new[k] = ''
-            else:
-                new[k] = v 
-        return new 
-
-
-    def bm_annexes(self, code_ua):
-        cursor = get_cursor(cursorclass=DictCursor)
-        cursor.execute("select * from annexes04  where code_ua = %s", 
-                       (code_ua,))
-        res = cursor.fetchall()
-        res = [self.none2str(d) for d in res]
-        if not res: 
-            return {}
-        else:
-            return res[0]
-
-
-    def ua_epci(self, code_ua):
-        cursor = get_cursor(cursorclass=DictCursor)
-        cursor.execute("select * from ua_epci where code_ua = %s", 
-                       (code_ua,))
-        res = cursor.fetchall()
-        res = [self.none2str(d) for d in res]
-        if not res: 
-            return {}
-        else:
-            return res[0]
+    
+    def get_catalog_values(self):
+        values = Form.get_catalog_values(self)
+        values['code'] = self.get_code()
+        return values
 
 
     #######################################################################
@@ -311,7 +246,6 @@ class FormBM(Form):
 
     #######################################################################
     # Help
-    
     help0__access__ = True 
     def help0(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')

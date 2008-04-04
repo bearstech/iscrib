@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -20,71 +20,54 @@
 from itools.stl import stl
 
 # Import from ikaaro
-from ikaaro.text import Text as BaseText
 from ikaaro.registry import register_object_class
 
 # Import from scrib
-from schema_bdp import schema
-from form import get_adresse, Form
-from utils import get_deps
-
+from schema_bdp import schema, alertes, controles
+from form import Form
+from utils import get_deps, get_adresse
 
 
 class FormBDP(Form):
     class_id = 'FormBDP'
-    class_icon48 = 'culture/images/form48.png'
+    class_views = [['report_form0'], ['report_form1'], ['report_form2'],
+                   ['report_form3'], ['report_form4'], ['report_form5'],
+                   ['report_form6'], ['report_form7'], ['report_form8'],
+                   ['report_form9'], ['comments']] + Form.class_views
+
 
     ######################################################################
-    # Parsing
-    def _load_state_from_file(self, file):
-        data = file.read()
-        self.state.fields = {}
-        for line in data.splitlines():
-            line = line.strip()
-            if ':' in line:
-                key, value = line.split(':', 1)
-                if key in schema:
-                    value = value.strip()
-                    field_def = schema[key]
-                    type = field_def[0]
-                    default = field_def[1]
-                    self.state.fields[key] = type.decode(value)
-
-
-    def to_str(self, encoding='UTF-8'):
-        result = []
-        for key, value in self.state.fields.items():
-            new_value = schema[key][0].encode(value)
-            if isinstance(new_value, unicode):
-                 new_value = new_value.encode('UTF-8') 
-            line = '%s:%s\n' % (key, new_value) 
-            result.append(line)
-        return ''.join(result)
-
-
-    def get_subviews(self, name):
-        reports = ['report_form0', 'report_form1', 'report_form2', 
-                   'report_form3', 'report_form4', 'report_form5',
-                   'report_form6', 'report_form7', 'report_form8',
-                   'report_form9', 'comments']
-        
-        if name in reports:
-            return reports
-        return BaseText.get_subviews(self, name)
-
-
-    def get_schema(self):
-        from schemaBDP import schema
-
+    # Form API
+    @staticmethod
+    def get_schema():
         return schema
 
 
+    @staticmethod
+    def get_alertes():
+        return alertes
+
+
+    @staticmethod
+    def get_controles():
+        return controles
+
+
+    @staticmethod
     def is_BDP(self):
         return True
 
 
+    @staticmethod
     def is_BM(self):
         return False 
+
+
+    @staticmethod
+    def base_lect(dept):
+        chaineSQL = ("select * from adresse where type_adr='3' and "
+                     "code_ua is not null and dept='%s'" % dept)
+        return get_adresse(chaineSQL)
 
 
     def get_year(self):
@@ -99,11 +82,33 @@ class FormBDP(Form):
         return get_deps()[self.name].get('name', '')
 
 
-    def base_lect(self, dept):
-        chaineSQL = "select * from adresse where type_adr='3' and  " \
-                    "code_ua is not null and dept='%s'" % dept
-        return get_adresse(chaineSQL)
+    ######################################################################
+    # Catalog API
+    def get_catalog_fields(self):
+        fields = Text.get_catalog_fields(self)
+        fields['user_town'] = TextField('user_town')
+        fields['dep'] = KeywordField('dep', is_stored=True)
+        fields['year'] = KeywordField('year')
+        fields['is_BDP'] = BoolField('is_BDP')
+        fields['is_BM'] = BoolField('is_BM')
+        fields['form_state'] = KeywordField('form_state', is_stored=True)
+        return fields
 
+
+    def get_catalog_values(self):
+        values = Text.get_catalog_values(self)
+        values['user_town'] = self.get_user_town()
+        values['dep'] = self.get_dep()
+        values['year'] = self.get_year()
+        values['is_BDP'] = self.is_BDP()
+        values['is_BM'] = self.is_BM()
+        values['form_state'] = self.get_form_state()
+        return values
+
+
+    ######################################################################
+    # User interface
+    #######################################################################
 
     #######################################################################
     # Edit report
