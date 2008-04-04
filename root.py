@@ -49,14 +49,14 @@ class Root(BaseRoot):
     class_title = u"SCRIB"
 
 
-    _catalog_fields = BaseRoot._catalog_fields \
-                      + [('user_town', 'text', True, False),
-                         ('dep', 'keyword', True, True),
-                         ('year', 'keyword', True, False),
-                         ('is_BDP', 'bool', True, False),
-                         ('is_BM', 'bool', True, False),
-                         ('form_state', 'keyword', True, True),
-                         ('code', 'keyword', True, False)]
+    _catalog_fields = BaseRoot._catalog_fields + [
+            TextField('user_town'),
+            KeywordField('dep', is_stored=True),
+            KeywordField('year'),
+            BoolField('is_BDP'),
+            BoolField('is_BM'),
+            KeywordField('form_state', is_stored=True),
+            KeywordField('code')]
 
 
     login_form__access__ = True

@@ -300,7 +300,7 @@ class bibUserFolder(BaseUserFolder):
 
         # Search
         if query:
-            results = root.catalog.search(query)
+            results = root.search(query)
             answer_len = results.get_n_documents()
             if answer_len > 100:
                 namespace['too_long_answer'] = msg % answer_len

@@ -165,7 +165,7 @@ class Forms(Folder):
 
             # Search
             root = context.root
-            results = root.catalog.search(query)
+            results = root.search(query)
             # Build objects namespace, add the path to the object from the
             # current folder.
             objects = []
