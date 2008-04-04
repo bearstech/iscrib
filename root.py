@@ -49,16 +49,6 @@ class Root(BaseRoot):
     class_title = u"SCRIB"
 
 
-    _catalog_fields = BaseRoot._catalog_fields + [
-            TextField('user_town'),
-            KeywordField('dep', is_stored=True),
-            KeywordField('year'),
-            BoolField('is_BDP'),
-            BoolField('is_BM'),
-            KeywordField('form_state', is_stored=True),
-            KeywordField('code')]
-
-
     login_form__access__ = True
     def login_form(self, context):
         namespace = {'referer': context.get_form_value('referer', default=''),
@@ -284,7 +274,7 @@ class Root(BaseRoot):
         for code, bib in bib_municipals: 
             name, dep = bib['name'], bib['dep']
             # Add report
-            reports.set_object(code, form, **{'dc:title': name})
+            reports.set_object(code, form, **{'title': name})
             # Add user
             #username = 'user%s_%s' % (code, year)
             username = 'BM%s' % code
@@ -321,7 +311,7 @@ class Root(BaseRoot):
         for name, dic in get_deps().items():
             title = dic['name']
             # Add report
-            reports.set_object(name, form, **{'dc:title': title})
+            reports.set_object(name, form, **{'title': title})
             # Add user
             username = 'BDP%s' % name
             if not users.has_handler(username):
@@ -478,7 +468,7 @@ class Root(BaseRoot):
             # Add report
             ville = bms[name]['name']
             if not bm2005.has_handler(name):
-                bm2005.set_object(name, FormBM(), **{'dc:title': ville})
+                bm2005.set_object(name, FormBM(), **{'title': ville})
 
             # Add user
             username = 'BM%s' % code
