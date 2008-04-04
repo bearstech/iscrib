@@ -19,7 +19,6 @@
 # Import from itools
 from itools import uri
 from itools import vfs
-from itools.web import get_context
 from itools.stl import stl
 from itools.catalog import (KeywordField, TextField, BoolField, EqQuery,
         AndQuery)
@@ -27,7 +26,7 @@ from itools.catalog import (KeywordField, TextField, BoolField, EqQuery,
 # Import from ikaaro
 from ikaaro.file import File
 from ikaaro.folder import Folder
-from ikaaro.users import User as BaseUser, UserFolder as BaseUserFolder
+from ikaaro.users import User, UserFolder
 from ikaaro.utils import get_parameters
 from ikaaro.registry import register_object_class
 from ikaaro.widgets import table
@@ -37,11 +36,11 @@ from utils import get_deps, get_BMs
 
 
 
-class bibUser(BaseUser):
-    class_id = 'bibUser'
+class ScribUser(User):
+    class_views = [['home'], ['edit_password_form']]
 
     def get_catalog_fields(self):
-        fields = BaseUser.get_catalog_fields(self)
+        fields = User.get_catalog_fields(self)
         fields['user_town'] = TextField('user_town')
         fields['dep'] = KeywordField('dep', is_stored=True)
         fields['year'] = KeywordField('year')
@@ -51,7 +50,7 @@ class bibUser(BaseUser):
 
 
     def get_catalog_values(self):
-        values = BaseUser.get_catalog_values(self)
+        values = User.get_catalog_values(self)
         values['user_town'] = self.get_user_town()
         values['dep'] = self.get_dep()
         values['year'] = self.get_year()
@@ -134,25 +133,17 @@ class bibUser(BaseUser):
 
 
     #######################################################################
-    # User interface
+    # Security
     #######################################################################
-    def get_views(self):
-        context = get_context()
-        root = context.root
-        if root.has_user_role(self.name, 'admins'):
-            return ['edit_password_form']
-        elif self.name == 'VoirSCRIB':
-            return ['edit_password_form']
-        return ['home', 'edit_password_form']
-
-
-    def get_subviews(self, name):
-        return []
+    def is_self(self, user, object):
+        if user is None:
+            return False
+        return self.name == user.name
 
 
     #######################################################################
     # Home
-    home__access__ = True 
+    home__access__ = 'is_self'
     home__label__ = u'Home'
     def home(self, context):
         namespace = {}
@@ -193,13 +184,13 @@ class bibUser(BaseUser):
     edit_password_form__label__ = u'Change password'
 
 
-register_object_class(bibUser)
+register_object_class(ScribUser)
 
 
 
-class bibUserFolder(BaseUserFolder):
+class ScribUserFolder(UserFolder):
 
-    is_allowed_to_view = BaseUserFolder.is_admin
+    is_allowed_to_view = UserFolder.is_admin
     browse_thumbnails__access__ = 'is_admin'
     edit_metadata_form__access__ = 'is_admin'
 
@@ -207,7 +198,7 @@ class bibUserFolder(BaseUserFolder):
     #######################################################################
     # Search
     def get_views(self):
-        views = BaseUserFolder.get_views(self)
+        views = UserFolder.get_views(self)
         if 'browse_thumbnails' in views:
             views.remove('browse_thumbnails')
         if 'new_user_form' in views:
@@ -283,12 +274,15 @@ class bibUserFolder(BaseUserFolder):
             is_BDP = True
         
         # Search
-        if year: q_year = EqQuery('year', year)
-        if dep: q_dep = EqQuery('dep', dep)
-        if name: q_name = EqQuery('user_town', name)
+        if year:
+            q_year = EqQuery('year', year)
+        if dep:
+            q_dep = EqQuery('dep', dep)
+        if name:
+            q_name = EqQuery('user_town', name)
 
-        # independent of the form : q_bibUser, q_type_form
-        q_bibUser = EqQuery('format', bibUser.class_id)
+        # independent of the form : q_scribuser, q_type_form
+        q_scribuser = EqQuery('format', ScribUser.class_id)
         if is_BM: 
             q_type_form = EqQuery('is_BM', str(int(is_BM)))
         if is_BDP: 
@@ -298,7 +292,7 @@ class bibUserFolder(BaseUserFolder):
         query, objects = None, []
         if name or dep or year:
             query = q_type_form 
-            query = AndQuery(query, q_bibUser)
+            query = AndQuery(query, q_scribuser)
         if year: 
             query = AndQuery(query, q_year)
         if name: 
@@ -361,8 +355,8 @@ class bibUserFolder(BaseUserFolder):
         namespace['table'] = table(path.get_pathtoroot(), tablename, objects,
                 sortby='oid', sortorder='up', batchstart='0', batchsize='50')
 
-        template = self.get_object('/ui/scrib/bibUserFolder_search.xml')
+        template = self.get_object('/ui/scrib/ScribUserFolder_search.xml')
         return stl(template, namespace)
 
 
-register_object_class(bibUserFolder)
+register_object_class(ScribUserFolder)

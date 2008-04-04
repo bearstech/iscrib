@@ -37,14 +37,14 @@ from ikaaro.registry import register_object_class
 from form_bm import FormBM
 from form_bdp import FormBDP
 from forms import Forms
-from user import bibUser
+from user import ScribUser
 from utils import get_deps, get_BMs, get_connection
 
 
 class Root(BaseRoot):
 
     class_id = 'Culture'
-    class_version = '20060802'
+    class_version = '20080404'
     class_title = u"SCRIB"
 
 
@@ -275,7 +275,7 @@ class Root(BaseRoot):
             #username = 'user%s_%s' % (code, year)
             username = 'BM%s' % code
             if not users.has_object(username):
-                users.set_object(username, bibUser())
+                users.set_object(username, ScribUser())
                 user = users.get_object(username)
                 user.set_password('BM%s' % code)
                 del user
@@ -311,7 +311,7 @@ class Root(BaseRoot):
             # Add user
             username = 'BDP%s' % name
             if not users.has_object(username):
-                users.set_object(username, bibUser())
+                users.set_object(username, ScribUser())
                 user = users.get_object(username)
                 user.set_password('BDP%s' % name)
                 del user
@@ -473,7 +473,7 @@ class Root(BaseRoot):
             # Add user
             username = 'BM%s' % code
             if not users.has_object(username):
-                users.set_object(username, bibUser())
+                users.set_object(username, ScribUser())
                 user = users.get_object(username)
                 user.set_password(username)
 
@@ -488,6 +488,14 @@ class Root(BaseRoot):
     #########################################################################
     # Upgrade
     #########################################################################
+    def update_20080404(self):
+        """Migration "bibUser" -> "user"
+        Avec l'objectif de supprimer ScribUserFolder
+        """
+        users = self.get_object('users')
+
+        for user in users.get_objects():
+            user.set_property('user')
 
 
 
