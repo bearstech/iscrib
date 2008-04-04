@@ -25,12 +25,23 @@ from ikaaro.registry import register_object_class
 
 # Import from scrib
 from schema_bdp import schema, alertes, controles
-from form import Form
+from form import FormHandler, Form
 from utils import get_deps, get_adresse
+
+
+class FormBDPHandler(FormHandler):
+    def _load_state_from_file(self, file):
+        return FormHandler._load_state_from_file(self, file, schema)
+
+
+    def to_str(self, encoding='UTF-8'):
+        return FormHandler.to_str(self, schema, encoding)
+
 
 
 class FormBDP(Form):
     class_id = 'FormBDP'
+    class_handler = FormBDPHandler
     class_views = [['report_form0'], ['report_form1'], ['report_form2'],
                    ['report_form3'], ['report_form4'], ['report_form5'],
                    ['report_form6'], ['report_form7'], ['report_form8'],

@@ -59,7 +59,7 @@ class FormHandler(File):
         self.fields = {}
 
 
-    def _load_state_from_file(self, file):
+    def _load_state_from_file(self, file, schema):
         data = file.read()
         fields = {}
         for line in data.splitlines():
@@ -75,7 +75,7 @@ class FormHandler(File):
         self.fields = fields
 
 
-    def to_str(self, encoding='UTF-8'):
+    def to_str(self, schema, encoding='UTF-8'):
         result = []
         for key, value in self.fields.items():
             new_value = schema[key][0].encode(value)
