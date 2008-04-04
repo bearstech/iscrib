@@ -267,7 +267,7 @@ class Root(BaseRoot):
         report_name = 'BM' + str(year)
         # Add reports and users, one per department
         reports = Forms()
-        self.set_handler(report_name, reports)
+        self.set_object(report_name, reports)
         reports = self.get_handler(report_name)
         t = time()
 
@@ -284,12 +284,12 @@ class Root(BaseRoot):
         for code, bib in bib_municipals: 
             name, dep = bib['name'], bib['dep']
             # Add report
-            reports.set_handler(code, form, **{'dc:title': name})
+            reports.set_object(code, form, **{'dc:title': name})
             # Add user
             #username = 'user%s_%s' % (code, year)
             username = 'BM%s' % code
             if not users.has_handler(username):
-                users.set_handler(username, bibUser())
+                users.set_object(username, bibUser())
                 user = users.get_handler(username)
                 user.set_password('BM%s' % code)
                 del user
@@ -313,7 +313,7 @@ class Root(BaseRoot):
         # Add reports container
         year = context.get_form_value('year')
         name = 'BDP' + str(year)
-        self.set_handler(name, Forms())
+        self.set_object(name, Forms())
         # Add reports and users, one per department
         reports = self.get_handler(name)
         users = self.get_handler('users')
@@ -321,11 +321,11 @@ class Root(BaseRoot):
         for name, dic in get_deps().items():
             title = dic['name']
             # Add report
-            reports.set_handler(name, form, **{'dc:title': title})
+            reports.set_object(name, form, **{'dc:title': title})
             # Add user
             username = 'BDP%s' % name
             if not users.has_handler(username):
-                users.set_handler(username, bibUser())
+                users.set_object(username, bibUser())
                 user = users.get_handler(username)
                 user.set_password('BDP%s' % name)
                 del user
@@ -478,12 +478,12 @@ class Root(BaseRoot):
             # Add report
             ville = bms[name]['name']
             if not bm2005.has_handler(name):
-                bm2005.set_handler(name, FormBM(), **{'dc:title': ville})
+                bm2005.set_object(name, FormBM(), **{'dc:title': ville})
 
             # Add user
             username = 'BM%s' % code
             if not users.has_handler(username):
-                users.set_handler(username, bibUser())
+                users.set_object(username, bibUser())
                 user = users.get_handler(username)
                 user.set_password(username)
 
