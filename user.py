@@ -20,7 +20,8 @@
 from itools import uri
 from itools.web import get_context
 from itools.stl import stl
-from itools.catalog import TextField, EqQuery, AndQuery
+from itools.catalog import (KeywordField, TextField, BoolField, EqQuery,
+        AndQuery)
 
 # Import from ikaaro
 from ikaaro.file import File
@@ -37,15 +38,24 @@ from utils import get_deps, get_BMs
 class bibUser(BaseUser):
     class_id = 'bibUser'
 
-    def get_catalog_indexes(self):
-        document = BaseUser.get_catalog_indexes(self)
-        document['user_town'] = self.get_user_town()
-        document['dep'] = self.get_department()
-        document['year'] = self.get_year()
-        document['is_BDP'] = self.is_BDP()
-        document['is_BM'] = self.is_BM()
+    def get_catalog_fields(self):
+        fields = BaseUser.get_catalog_fields(self)
+        fields['user_town'] = TextField('user_town')
+        fields['dep'] = KeywordField('dep', is_stored=True)
+        fields['year'] = KeywordField('year')
+        fields['is_BDP'] = BoolField('is_BDP')
+        fields['is_BM'] = BoolField('is_BM')
+        return fields
 
-        return document
+
+    def get_catalog_values(self):
+        values = BaseUser.get_catalog_values(self)
+        values['user_town'] = self.get_user_town()
+        values['dep'] = self.get_dep()
+        values['year'] = self.get_year()
+        values['is_BDP'] = self.is_BDP()
+        values['is_BM'] = self.is_BM()
+        return values
 
 
     def is_BM(self):

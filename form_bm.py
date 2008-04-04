@@ -17,10 +17,10 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from mysql
-import MySQLdb
 from MySQLdb.cursors import DictCursor
 
 # Import from itools
+from itools.catalog import KeywordField
 from itools.stl import stl
 
 # Import from ikaaro
@@ -44,11 +44,17 @@ class FormBM(Form):
     class_id = 'Form_BM'
     class_icon48 = 'culture/images/form48.png'
 
-    def get_catalog_indexes(self):
-        document = Form.get_catalog_indexes(self)
-        document['code'] = self.get_code()
 
-        return document
+    def get_catalog_fields(self):
+        fields = Form.get_catalog_fields(self)
+        fields['code'] = KeywordField('code')
+        return fields
+
+    
+    def get_catalog_values(self):
+        values = Form.get_catalog_values(self)
+        values['code'] = self.get_code()
+        return values
 
 
     ######################################################################
