@@ -58,9 +58,6 @@ class Root(BaseRoot):
         return stl(handler, namespace)
 
 
-    _get_handler = BaseRoot._get_handler
-
-
     def before_traverse(self, context):
         BaseRoot.before_traverse(self, context)
         # Set french as default language, whatever the browser config is
