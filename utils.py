@@ -17,14 +17,14 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from mysql
-import MySQLdb
+from MySQLdb import connect
 from MySQLdb.cursors import DictCursor
 
 # Import from itools
 from itools import get_abspath
 
 # Import from scrib
-from scrib import config
+import config
 
 
 path = get_abspath(globals(), 'input_data/init_BM.txt')
@@ -93,28 +93,28 @@ def get_checkbox_value(key, value):
     return value
 
 
-def get_cursor(**kw):
-    connection = MySQLdb.connect(db=SqlDatabase, host=SqlHost,
-            port=int(SqlPort), user=SqlUser, passwd=SqlPasswd, **kw)
-    return connection.cursor()
+def get_connection(**kw):
+    return connect(db=SqlDatabase, host=SqlHost, port=int(SqlPort),
+            user=SqlUser, passwd=SqlPasswd, **kw)
 
 
 def get_adresse(query):
     """ Accès base adresse"""
-    cursor = get_cursor()
+    connection = get_connection()
+    cursor = connection.cursor()
     cursor.execute(query)
-    res = cursor.fetchall()
-    if not len(res):
+    results = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    if not len(results):
         raise ValueError, MSG_NO_ADRESSE
-    res = res[0]
+    results = results[0]
     adresse = []
-    for val in res:
+    for val in results:
         if str(val) == 'None':
             adresse.append('')
         else:
             adresse.append(val)
-    cursor.close()
-    connection.close()
     return adresse or ''
 
 
@@ -129,27 +129,31 @@ def none2str(t):
 
 
 def bm_annexes(code_ua):
-    cursor = get_cursor(cursorclass=DictCursor)
+    connection = get_connection(cursorclass=DictCursor)
+    cursor = connection.cursor()
     cursor.execute("select * from annexes04  where code_ua = %s",
                    (code_ua,))
-    res = cursor.fetchall()
-    res = [none2str(d) for d in res]
-    if not res: 
+    results = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    results = [none2str(d) for d in results]
+    if not results: 
         return {}
-    else:
-        return res[0]
+    return results[0]
 
 
 def ua_epci(code_ua):
-    cursor = get_cursor(cursorclass=DictCursor)
+    connection = get_connection(cursorclass=DictCursor)
+    cursor = connection.cursor()
     cursor.execute("select * from ua_epci where code_ua = %s",
                    (code_ua,))
-    res = cursor.fetchall()
-    res = [none2str(d) for d in res]
-    if not res: 
+    results = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    results = [none2str(d) for d in results]
+    if not results: 
         return {}
-    else:
-        return res[0]
+    return results[0]
 
 
 def make_msg(new_referer, notR, badT, badT_missing, badT_values):

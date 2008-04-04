@@ -18,6 +18,7 @@
 
 # Import from itools
 from itools.stl import stl
+from itools.catalog import KeywordField, TextField, BoolField
 
 # Import from ikaaro
 from ikaaro.registry import register_object_class
@@ -85,7 +86,7 @@ class FormBDP(Form):
     ######################################################################
     # Catalog API
     def get_catalog_fields(self):
-        fields = Text.get_catalog_fields(self)
+        fields = Form.get_catalog_fields(self)
         fields['user_town'] = TextField('user_town')
         fields['dep'] = KeywordField('dep', is_stored=True)
         fields['year'] = KeywordField('year')
@@ -96,7 +97,7 @@ class FormBDP(Form):
 
 
     def get_catalog_values(self):
-        values = Text.get_catalog_values(self)
+        values = Form.get_catalog_values(self)
         values['user_town'] = self.get_user_town()
         values['dep'] = self.get_dep()
         values['year'] = self.get_year()

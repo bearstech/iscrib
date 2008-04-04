@@ -22,26 +22,27 @@ from copy import deepcopy
 from time import time
 import logging
 import datetime
-import socket
-import smtplib
 from decimal import Decimal as dec, InvalidOperation
 
+# Import from mysql
+from MySQLdb import OperationalError
+
 # Import from itools
-from itools.catalog import (schedule_to_reindex, KeywordField, TextField,
-        BoolField)
+from itools.catalog import schedule_to_reindex
 from itools.datatypes import Unicode, Boolean, String
 from itools.web import get_context
 from itools.stl import stl
 from itools.csv import CSVFile
+from itools.handlers import File
 
 # Import from ikaaro
 from ikaaro.text import Text
 from ikaaro.workflow import workflow
-from ikaaro.registry import register_object_class
 
 # Import from scrib
 from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from utils import get_user_town
+import config
+from utils import get_checkbox_value, get_connection, MSG_NO_MYSQL, make_msg
 
 
 SMTPServer = config.SMTPServer
@@ -385,8 +386,8 @@ class Form(Text):
     controles_form__label__ = u'Contrôle de la saisie'
     def controles_form(self, context):
         schema = self.get_schema()
-        controles = get_controles()
-        alertes = get_alertes()
+        controles = self.get_controles()
+        alertes = self.get_alertes()
         namespace = self.get_namespace()
         dependencies = self.get_dependencies()
         # State
@@ -809,70 +810,62 @@ class Form(Text):
     submitted2exported__access__ = 'is_admin'
     def submitted2exported(self, context):
         try:
-            cursor = get_cursor()
-        except MySQLdb.OperationalError: 
-            return context.come_back(MSG_NO_MYSQL)
-        namespace = self.get_namespace()
-        schema = self.get_schema()
-        # Update dans la base ADRESSE
-        query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
-                 u'voie="%(field3)s",cpbiblio="%(field4)s",ville="%(field5)s",'
-                 u'cedexb="%(field6)s",directeu="%(field7)s",tele="%(field9)s",'
-                 u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
-                 u'intercom="%(field13)s",gestion="%(field14)s",'
-                 u'gestion_autre="%(field15)s" where code_bib=%(code_ua)s')
+            connection = get_connection()
+            cursor = connection.cursor()
+            namespace = self.get_namespace()
+            schema = self.get_schema()
+            # Update dans la base ADRESSE
+            query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
+                     u'voie="%(field3)s",cpbiblio="%(field4)s",ville="%(field5)s",'
+                     u'cedexb="%(field6)s",directeu="%(field7)s",tele="%(field9)s",'
+                     u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
+                     u'intercom="%(field13)s",gestion="%(field14)s",'
+                     u'gestion_autre="%(field15)s" where code_bib=%(code_ua)s')
 
-        for key, value in namespace.items():
-            field_def = schema.get(key)
-            if field_def is not None:
-                ftype = field_def[0]
-                if ftype is Unicode:
-                    if value is not None:
-                        value = value.replace(u"€", u"eur")
-                        value = value.replace(u'"', u'\\"')
-                        value = value.replace(u"&quot;", u'\\"')
-                        value = value.replace(u"'", u"\\'")
-                        value = value.replace(u"\u2019", u"\\'")
-                    namespace[key] = value
-                
-        query = query % namespace
-        
-        # XXX charset?
-        cursor.execute(query)
-        cursor.execute('commit')
+            for key, value in namespace.items():
+                field_def = schema.get(key)
+                if field_def is not None:
+                    ftype = field_def[0]
+                    if ftype is Unicode:
+                        if value is not None:
+                            value = value.replace(u"€", u"eur")
+                            value = value.replace(u'"', u'\\"')
+                            value = value.replace(u"&quot;", u'\\"')
+                            value = value.replace(u"'", u"\\'")
+                            value = value.replace(u"\u2019", u"\\'")
+                        namespace[key] = value
 
-        # Insert dans la base BDP
-        code_ua = namespace['code_ua']
-        dept = self.get_dep()
-        year = self.parent.name[-4:]
-
-        # Remove from the database
-        btype = 'bdp'
-        if self.is_BM():
-            btype = 'bm'
+            query = query % namespace
             
-        table = '%s%s' % (btype ,year[-2:])
-        
-        query = "delete from %s where Code_UA=%s" % (table, code_ua)
-
-        try:
+            # XXX charset?
             cursor.execute(query)
-        except MySQLdb.OperationalError, message:
-            message = u'Un problème est survenu durant la connexion'\
-                    u' à la base de donnée %s' % message
-            return context.come_back(message, goto=';controles_form')
-        
-        cursor.execute('commit')
+            cursor.execute('commit')
 
-        # Add into the database
-        query = self.get_export_query(namespace)
-        cursor.execute(query)
-        cursor.execute('commit') 
-        self.set_property('state', 'public')
+            # Remove from the database
+            code_ua = namespace['code_ua']
+            dept = self.get_dep()
+            year = self.parent.name[-4:]
+            btype = 'bdp'
+            if self.is_BM():
+                btype = 'bm'
+            table = '%s%s' % (btype ,year[-2:])
+            query = "delete from %s where Code_UA=%s" % (table, code_ua)
+            cursor.execute(query)
+            cursor.execute('commit')
 
-        schedule_to_reindex(self)
-        self.handler.set_changed()
-        
+            # Add into the database
+            query = self.get_export_query(namespace)
+            cursor.execute(query)
+            cursor.execute('commit') 
+            self.set_property('state', 'public')
+
+            cursor.close()
+            connection.close()
+            self.handler.set_changed()
+        except OperationalError: 
+            context.commit = False
+            return context.come_back(MSG_NO_MYSQL)
+
         message = u'Le rapport a été exporté'
         return context.come_back(message, goto=';controles_form')
 

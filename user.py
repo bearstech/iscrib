@@ -18,6 +18,7 @@
 
 # Import from itools
 from itools import uri
+from itools import vfs
 from itools.web import get_context
 from itools.stl import stl
 from itools.catalog import (KeywordField, TextField, BoolField, EqQuery,
@@ -29,6 +30,7 @@ from ikaaro.folder import Folder
 from ikaaro.users import User as BaseUser, UserFolder as BaseUserFolder
 from ikaaro.utils import get_parameters
 from ikaaro.registry import register_object_class
+from ikaaro.widgets import table
 
 # Import from scrib
 from utils import get_deps, get_BMs
@@ -356,9 +358,8 @@ class bibUserFolder(BaseUserFolder):
 
         # The table
         path = context.path
-        table = table(path.get_pathtoroot(), tablename, objects, sortby='oid',
-                      sortorder='up', batchstart='0', batchsize='50')
-        namespace['table'] = table
+        namespace['table'] = table(path.get_pathtoroot(), tablename, objects,
+                sortby='oid', sortorder='up', batchstart='0', batchsize='50')
 
         template = self.get_object('/ui/culture/bibUserFolder_search.xml')
         return stl(template, namespace)

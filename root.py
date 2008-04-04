@@ -34,12 +34,11 @@ from ikaaro.root import Root as BaseRoot
 from ikaaro.registry import register_object_class
 
 # Import from scrib
-from Form import get_cursor
 from form_bm import FormBM
 from form_bdp import FormBDP
 from forms import Forms
 from user import bibUser
-from utils import get_deps, get_BMs
+from utils import get_deps, get_BMs, get_connection
 
 
 class Root(BaseRoot):
@@ -345,7 +344,8 @@ class Root(BaseRoot):
     def export(self, context):
 
         def export_bib(container, ouput):
-            cursor = get_cursor()
+            connexion = get_connection()
+            cursor = connexion.cursor()
             folder = container.handler
             names = [name for name in container.get_names()
                     if name.isdigit() and (
@@ -360,6 +360,8 @@ class Root(BaseRoot):
                 query = "select * from adresse where type='3' and code_ua is not null and dept in (%s)" % keys
             cursor.execute(query)
             resultset = cursor.fetchall()
+            cursor.close()
+            connexion.close()
             if not resultset:
                 context.commit = False
                 return context.come_back(u'La requête "$query" a échoué',
@@ -405,7 +407,6 @@ class Root(BaseRoot):
                 del object
 
             output.write('\n')
-
 
         output_path = join(getcwd(), 'exportscrib.sql')
         output = open(output_path, 'w')

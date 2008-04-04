@@ -25,6 +25,7 @@ from itools.stl import stl
 from ikaaro.utils import get_parameters
 from ikaaro.registry import register_object_class
 from ikaaro.folder import Folder
+from ikaaro.widgets import table
 
 # Import from scrib
 from form_bm import FormBM
@@ -183,10 +184,8 @@ class Forms(Folder):
 
         # The table
         path = context.path
-        table = table(path.get_pathtoroot(), tablename, objects,
-                      sortby='title', sortorder='up', batchstart='0',
-                      batchsize='50')
-        namespace['table'] = table
+        namespace['table'] = table(path.get_pathtoroot(), tablename, objects,
+                sortby='title', sortorder='up', batchstart='0', batchsize='50')
 
         template = self.get_object('/ui/culture/Forms_search.xml')
         return stl(template, namespace)
