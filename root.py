@@ -54,8 +54,8 @@ class Root(BaseRoot):
         namespace = {'referer': context.get_form_value('referer', default=''),
                      'username': context.get_form_value('username', default='')}
 
-        handler = self.get_object('/ui/culture/SiteRoot_login.xml')
-        return stl(handler, namespace)
+        template = self.get_object('/ui/culture/SiteRoot_login.xml')
+        return stl(template, namespace)
 
 
     def before_traverse(self, context):
@@ -222,7 +222,7 @@ class Root(BaseRoot):
         today = date.today()
         ### BDP form
         years = [ {'value': x, 
-                   'is_disabled': self.has_handler('BDP'+str(x)),
+                   'is_disabled': self.has_object('BDP'+str(x)),
                    'is_selected': False}
                   for x in range(today.year - 2, today.year + 4) ]
         # Select one
@@ -233,7 +233,7 @@ class Root(BaseRoot):
         namespace['years'] = years
         ### BM form
         years = [ {'value': x, 
-                   'is_disabled': self.has_handler('BM'+str(x)),
+                   'is_disabled': self.has_object('BM'+str(x)),
                    'is_selected': False}
                   for x in range(today.year - 2, today.year + 4) ]
         # Select one
@@ -242,8 +242,8 @@ class Root(BaseRoot):
                 years[i]['is_selected'] = True
                 break
         namespace['BMyears'] = years
-        handler = self.get_object('/ui/culture/Culture_new_reports.xml')
-        return stl(handler, namespace)
+        template = self.get_object('/ui/culture/Culture_new_reports.xml')
+        return stl(template, namespace)
 
 
     new_BM_reports__access__ = 'is_admin'
@@ -275,7 +275,7 @@ class Root(BaseRoot):
             # Add user
             #username = 'user%s_%s' % (code, year)
             username = 'BM%s' % code
-            if not users.has_handler(username):
+            if not users.has_object(username):
                 users.set_object(username, bibUser())
                 user = users.get_object(username)
                 user.set_password('BM%s' % code)
@@ -311,7 +311,7 @@ class Root(BaseRoot):
             reports.set_object(name, form, **{'title': title})
             # Add user
             username = 'BDP%s' % name
-            if not users.has_handler(username):
+            if not users.has_object(username):
                 users.set_object(username, bibUser())
                 user = users.get_object(username)
                 user.set_password('BDP%s' % name)
@@ -328,8 +328,8 @@ class Root(BaseRoot):
     help__access__ = True
     help__label__ = u'Aide'
     def help(self, context):
-        handler = self.get_object('/ui/culture/Form_help.xml')
-        return handler.to_str()
+        template = self.get_object('/ui/culture/Form_help.xml')
+        return template.to_str()
 
 
     #########################################################################
@@ -337,8 +337,8 @@ class Root(BaseRoot):
     export_form__access__ = 'is_admin'
     export_form__label__ = u"Exporter"
     def export_form(self, context):
-        handler = self.get_object('/ui/culture/Culture_export.xml')
-        return handler.to_str()
+        template = self.get_object('/ui/culture/Culture_export.xml')
+        return template.to_str()
 
 
     export__access__ = 'is_admin'
@@ -381,9 +381,9 @@ class Root(BaseRoot):
 
             # (bm|bdp)05
             for name in names:
-                handler = container.get_object(name)
-                schema = handler.get_schema()
-                namespace = handler.get_namespace()
+                object = container.get_object(name)
+                schema = object.get_schema()
+                namespace = object.get_namespace()
                 # XXX copy/paste
                 for key, value in namespace.items():
                     field_def = schema.get(key)
@@ -397,10 +397,10 @@ class Root(BaseRoot):
                                 value = value.replace(u"'", u"\\'")
                             namespace[key] = value
                 # XXX end
-                query = handler.get_export_query(namespace)
+                query = object.get_export_query(namespace)
                 output.write(query.encode('latin1') + '\n')
                 del namespace
-                del handler
+                del object
 
             output.write('\n')
 
@@ -439,8 +439,8 @@ class Root(BaseRoot):
     new_bm_form__access__ = 'is_admin'
     new_bm_form__sublabel__ = u"Nouvelle BM"
     def new_bm_form(self, context):
-        handler = self.get_object('/ui/culture/Culture_new_bm.xml')
-        return handler.to_str()
+        template = self.get_object('/ui/culture/Culture_new_bm.xml')
+        return template.to_str()
 
 
     new_bm__access__ = 'is_admin'
@@ -464,12 +464,12 @@ class Root(BaseRoot):
 
             # Add report
             ville = bms[name]['name']
-            if not bm2005.has_handler(name):
+            if not bm2005.has_object(name):
                 bm2005.set_object(name, FormBM(), **{'title': ville})
 
             # Add user
             username = 'BM%s' % code
-            if not users.has_handler(username):
+            if not users.has_object(username):
                 users.set_object(username, bibUser())
                 user = users.get_object(username)
                 user.set_password(username)

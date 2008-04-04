@@ -81,8 +81,8 @@ class Forms(Folder):
     def browse_list(self, context):
         context.set_cookie('browse', 'list')
         namespace = self.browse_namespace(16)
-        handler = self.get_object('/ui/culture/Forms_browse_list.xml')
-        return stl(handler, namespace)
+        template = self.get_object('/ui/culture/Forms_browse_list.xml')
+        return stl(template, namespace)
 
 
     search_form__access__ = 'is_admin_or_consultant'
@@ -188,7 +188,7 @@ class Forms(Folder):
                       batchsize='50')
         namespace['table'] = table
 
-        handler = self.get_object('/ui/culture/Forms_search.xml')
-        return stl(handler, namespace)
+        template = self.get_object('/ui/culture/Forms_search.xml')
+        return stl(template, namespace)
 
 register_object_class(Forms)

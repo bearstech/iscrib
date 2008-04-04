@@ -341,15 +341,15 @@ class bibUserFolder(BaseUserFolder):
                 summary = str(nobjects)
 
             mtime = object.get_mtime()
-            path_to_icon = handler.get_path_to_icon(16)
+            path_to_icon = object.get_path_to_icon(16)
             # XXX ugly
-            path_to_icon = uri.Path(str(path_to_handler) + '/').resolve(path_to_icon)
-            aux.append({'oid': path_to_handler,
+            path_to_icon = uri.Path(str(path_to_object) + '/').resolve(path_to_icon)
+            aux.append({'oid': path_to_object,
                         'icon': path_to_icon,
                         'type': object.handler.get_mimetype(),
                         'date': mtime.strftime('%Y-%m-%d %H:%M'),
-                        'title': (handler.get_user_town() or 
-                                  handler.get_department_name()),
+                        'title': (object.get_user_town() or 
+                                  object.get_department_name()),
                         'content_summary': summary,
                         'path': path})
         objects = aux
@@ -360,8 +360,8 @@ class bibUserFolder(BaseUserFolder):
                       sortorder='up', batchstart='0', batchsize='50')
         namespace['table'] = table
 
-        handler = self.get_object('/ui/culture/bibUserFolder_search.xml')
-        return stl(handler, namespace)
+        template = self.get_object('/ui/culture/bibUserFolder_search.xml')
+        return stl(template, namespace)
 
 
 register_object_class(bibUserFolder)

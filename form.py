@@ -185,24 +185,24 @@ class Form(BaseText):
         namespace = self.get_namespace()
 
         try: 
-            handler = self.get_object('/ui/culture/%s' % autogen_xml)
+            template = self.get_object('/ui/culture/%s' % autogen_xml)
         except LookupError:
-            handler = self.get_object('/ui/culture/%s' % xml)
+            template = self.get_object('/ui/culture/%s' % xml)
 
         if view == 'printable':
             namespace['printable'] = True
             context = get_context()
             context.response.set_header('Content-Type', 
                                         'text/html; charset=UTF-8')
-            namespace['body'] = stl(handler, namespace)
-            handler = self.get_object('/ui/culture/printable_template.xhtml')
+            namespace['body'] = stl(template, namespace)
+            template = self.get_object('/ui/culture/printable_template.xhtml')
         elif view == 'print_all':
             namespace['printable'] = True
 
         namespace['submit_button'] = namespace['is_allowed_to_edit'] \
                                      and not namespace['printable']
 
-        return stl(handler, namespace)
+        return stl(template, namespace)
 
 
     ######################################################################
@@ -647,8 +647,8 @@ class Form(BaseText):
         namespace['total'] = len(schema)
         namespace['is_admin'] = self.is_admin()
 
-        handler = self.get_object('/ui/culture/Form_controles.xml')
-        return stl(handler, namespace) 
+        template = self.get_object('/ui/culture/Form_controles.xml')
+        return stl(template, namespace) 
 
 
     def get_sets(self, namespace):
@@ -978,8 +978,8 @@ class Form(BaseText):
     fill_report_form__access__ = True
     fill_report_form__label__ = u'Auto remplissage'
     def fill_report_form(self, context):
-        handler = self.get_object('/ui/culture/Form_fill_report.xml')
-        return handler.to_str()
+        template = self.get_object('/ui/culture/Form_fill_report.xml')
+        return template.to_str()
 
 
     fill_report__access__ = 'is_allowed_to_edit_form'
@@ -1184,15 +1184,15 @@ class Form(BaseText):
     help__access__ = True
     help__label__ = u'Aide'
     def help(self, context):
-        handler = self.get_object('/ui/culture/Form_help.xml')
-        return handler.to_str()
+        template = self.get_object('/ui/culture/Form_help.xml')
+        return template.to_str()
 
 
     help2__access__ = True 
     def help2(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_object('/ui/culture/Form_help2.xhtml')
-        return handler.to_str()
+        template = self.get_object('/ui/culture/Form_help2.xhtml')
+        return template.to_str()
 
 
     #######################################################################
@@ -1207,8 +1207,8 @@ class Form(BaseText):
         is_complete = namespace['is_complete']
         is_exported = self.get_form_state() == u'Exporté'
         namespace['show'] = is_finished or is_complete or is_exported
-        handler = self.get_object('/ui/culture/Form_report_csv.xml')
-        return stl(handler, namespace) 
+        template = self.get_object('/ui/culture/Form_report_csv.xml')
+        return stl(template, namespace) 
 
 
     comments__access__ = 'is_allowed_to_view_form'
