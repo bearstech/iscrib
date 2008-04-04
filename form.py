@@ -30,6 +30,7 @@ from decimal import Decimal as dec, InvalidOperation
 import MySQLdb
 
 # Import from itools
+from itools.catalog import schedule_to_reindex
 from itools.datatypes import Unicode, Boolean, String
 from itools.web import get_context
 from itools.stl import stl
@@ -728,9 +729,8 @@ class Form(BaseText):
     def pending2submitted(self, context):
         # Change state
         self.set_property('state', 'pending')
-        root = context.root
         user = context.user
-        root.reindex_handler(self)
+        schedule_to_reindex(self)
 
         # Build email
         namespace = self.get_namespace()
@@ -790,7 +790,6 @@ class Form(BaseText):
 
 
     def scrib_log(self, context, event=None, content=None):
-        root = context.root
         user = context.user
         # Event Log 
         event = '\n' \
@@ -928,8 +927,7 @@ class Form(BaseText):
         cursor.execute('commit') 
         self.set_property('state', 'public')
 
-        root = context.root
-        root.reindex_handler(self)
+        schedule_to_reindex(self)
         self.set_changed()
         
         message = u'Le rapport a été exporté'
@@ -1032,8 +1030,7 @@ class Form(BaseText):
            self.state.fields[key] = value
            t = time() - t0
 
-        root = context.root
-        root.reindex_handler(self)
+        schedule_to_reindex(self)
         message = u'Rapport auto remplis en %.2f secondes' % t
         return context.come_back(message, goto=';controles_form')
 
