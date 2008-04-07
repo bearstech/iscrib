@@ -17,51 +17,29 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
-import os
-from os import path
-import sys
+from os.path import exists
 
 # Import from itools
 from itools import get_abspath, get_version
+from itools.handlers import ConfigFile
 
 # Import from ikaaro
 from ikaaro.skins import register_skin
 
 
-class Configuration(object):
-    pass
+# Give a version
+__version__ = get_version(globals())
 
-
-# Read the configuration
-config_path = path.join(os.getcwd(), 'Setup.conf')
-try:
-    config_file = open(config_path, 'r')
-except IOError:
-    print "copiez le fichier 'Setup.conf' (pas 'setup.conf') du répertoire scrib ici."
-    sys.exit(1)
-config = Configuration()
-
-for line in config_file.readlines():
-    line = line.strip()
-    if not line or line.startswith('#'):
-        continue
-    key, value = line.split('=', 1)
-    key = key.strip()
-    if not key:
-        raise ValueError, 'One line has no left value'
-    value = value.strip()
-    if not value:
-        raise ValueError, "No value for the key '%s' in Setup.conf file" % key
-    setattr(config, key, value)
-
-config_file.close()
-
-# Register interface
-path = get_abspath(globals(), 'ui')
-register_skin('scrib', path)
-
+# Read the configuration (TODO move to instance's config.conf)
+config_path = get_abspath(globals(), 'Setup.conf')
+if not exists(config_path):
+    raise ("copiez le fichier 'Setup.conf' (pas 'setup.conf') "
+           "du répertoire scrib ici.")
+config = ConfigFile(config_path)
 
 # Register Root
 from root import Root
 
-__version__ = get_version(globals())
+# Register interface
+path = get_abspath(globals(), 'ui')
+register_skin('scrib', path)

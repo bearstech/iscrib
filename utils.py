@@ -24,7 +24,7 @@ from MySQLdb.cursors import DictCursor
 from itools import get_abspath
 
 # Import from scrib
-import config
+from scrib import config
 
 
 path = get_abspath(globals(), 'input_data/init_BM.txt')
@@ -42,11 +42,11 @@ MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
 MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL"
 
 
-SqlHost = config.SqlHost
-SqlDatabase = config.SqlDatabase
-SqlUser = config.SqlUser
-SqlPasswd = config.SqlPasswd
-SqlPort = config.SqlPort
+SqlHost = config.get_value('SqlHost')
+SqlDatabase = config.get_value('SqlDatabase')
+SqlUser = config.get_value('SqlUser')
+SqlPasswd = config.get_value('SqlPasswd')
+SqlPort = config.get_value('SqlPort')
 
 
 def get_BMs():

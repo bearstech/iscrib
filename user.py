@@ -24,6 +24,7 @@ from itools.catalog import (KeywordField, TextField, BoolField, EqQuery,
         AndQuery)
 
 # Import from ikaaro
+from ikaaro.access import AccessControl
 from ikaaro.file import File
 from ikaaro.folder import Folder
 from ikaaro.users import User, UserFolder
@@ -190,7 +191,7 @@ register_object_class(ScribUser)
 
 class ScribUserFolder(UserFolder):
 
-    is_allowed_to_view = UserFolder.is_admin
+    is_allowed_to_view = AccessControl.is_admin
     browse_thumbnails__access__ = 'is_admin'
     edit_metadata_form__access__ = 'is_admin'
 

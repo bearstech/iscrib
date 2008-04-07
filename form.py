@@ -39,14 +39,14 @@ from ikaaro.text import Text
 from ikaaro.workflow import workflow
 
 # Import from scrib
+from scrib import config
 from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-import config
 from utils import get_checkbox_value, get_connection, MSG_NO_MYSQL, make_msg
 
 
-SMTPServer = config.SMTPServer
-MailResponsableBM = config.MailResponsableBM
-MailResponsableBDP = config.MailResponsableBDP
+SMTPServer = config.get_value('SMTPServer')
+MailResponsableBM = config.get_value('MailResponsableBM')
+MailResponsableBDP = config.get_value('MailResponsableBDP')
 
 workflow.add_state('modified', title=u"Modifié",
         description=u"Modifié après export.")
