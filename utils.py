@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ bib_municipales = [ x.strip().split(';') for x in file.readlines() ]
 bibs = {}
 for x in bib_municipales:
     bibs[x[0]] = {'name': unicode(x[1], 'UTF-8'),
-                  'dep':x[2], 
+                  'dep':x[2],
                   'id':x[3],
                   'code': x[0]}
 
@@ -59,8 +59,8 @@ def get_deps():
     depts = [ x.strip().split(';') for x in file.readlines() ]
     departements = {}
     for x in depts:
-        departements[x[0]] = {'name': unicode(x[1], 'UTF-8'), 
-                              'code': x[0]} 
+        departements[x[0]] = {'name': unicode(x[1], 'UTF-8'),
+                              'code': x[0]}
     return departements
 
 
@@ -68,9 +68,9 @@ def get_checkbox_value(key, value):
     #len_choice = 2
     #if key == "G11":
     if key == "CV":
-        len_choice = 15 
+        len_choice = 15
     if key == "CZ":
-        len_choice = 16 
+        len_choice = 16
     elif key == "G11":
         len_choice = 7
     elif key == 'K3':
@@ -86,7 +86,7 @@ def get_checkbox_value(key, value):
     values = value.split('##')
     for value in values:
         if value not in ('', None):
-            i = int(value) - 1 
+            i = int(value) - 1
             new_values[i] = 'O'
 
     value = ','.join(new_values)
@@ -119,13 +119,13 @@ def get_adresse(query):
 
 
 def none2str(t):
-    new = {} 
+    new = {}
     for k, v in t.items():
         if v is None:
             new[k] = ''
         else:
-            new[k] = v 
-    return new 
+            new[k] = v
+    return new
 
 
 def bm_annexes(code_ua):
@@ -137,7 +137,7 @@ def bm_annexes(code_ua):
     cursor.close()
     connection.close()
     results = [none2str(d) for d in results]
-    if not results: 
+    if not results:
         return {}
     return results[0]
 
@@ -151,7 +151,7 @@ def ua_epci(code_ua):
     cursor.close()
     connection.close()
     results = [none2str(d) for d in results]
-    if not results: 
+    if not results:
         return {}
     return results[0]
 
@@ -182,7 +182,7 @@ def make_msg(new_referer, notR, badT, badT_missing, badT_values):
     if not (badT or notR):
         msg = u"Formulaire enregistré."
     elif badT and not notR:
-        msg = msg_badT 
+        msg = msg_badT
     elif notR and not badT:
         msg = msg_notR
     else:

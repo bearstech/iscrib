@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Juan David Ibáñez Palomar <jdavid@itaapy.com>
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ class Configuration(object):
     pass
 
 
-# Read the configuration 
+# Read the configuration
 config_path = path.join(os.getcwd(), 'Setup.conf')
 try:
     config_file = open(config_path, 'r')
@@ -48,7 +48,7 @@ for line in config_file.readlines():
     key, value = line.split('=', 1)
     key = key.strip()
     if not key:
-        raise ValueError, 'One line has no left value' 
+        raise ValueError, 'One line has no left value'
     value = value.strip()
     if not value:
         raise ValueError, "No value for the key '%s' in Setup.conf file" % key

@@ -2,7 +2,7 @@
 # import from Python
 import os
 
-# import from itools 
+# import from itools
 from itools.datatypes import String, Boolean, Unicode
 
 # import from scrib
@@ -14,7 +14,7 @@ sql = setup.sql
 
 class GenSql:
     """
-    Use by the Makefile to create in the ./input_data" 
+    Use by the Makefile to create in the ./input_data"
     *.sql files who fill the scrib MySQL DB with the schema keys.
     this files will be called fill_bmYear_autogen.sql
     """
@@ -37,13 +37,13 @@ class GenSql:
         bash_cmd = ("$ mysql -u %(SqlUser)s -p'%(SqlPasswd)s' %(SqlDatabase)s"
                     " <  %(year_filename)s")
 
-        bash_cmd = bash_cmd % {'SqlUser': sql.SqlUser, 
-                               'SqlPasswd': sql.SqlPasswd, 
-                               'SqlDatabase':sql.SqlDatabase, 
-                               'year_filename': self.year_filename} 
+        bash_cmd = bash_cmd % {'SqlUser': sql.SqlUser,
+                               'SqlPasswd': sql.SqlPasswd,
+                               'SqlDatabase':sql.SqlDatabase,
+                               'year_filename': self.year_filename}
         doc_header = '%s## %s\n%s' % (line, bash_cmd, line)
 
-        # make the create table 
+        # make the create table
         start_query = ("DROP TABLE IF EXISTS `%(type)s%(year)s`;\n"
                        "CREATE TABLE `%(type)s%(year)s` (\n"
                        "  `Code_UA` int default NULL, \n"
@@ -101,7 +101,7 @@ class GenSql:
 
 create_DB = u"""
 # installation  $ mysql -u root < create_scrib.SQL
-# ou alors 
+# ou alors
 #  $ mysql -u root
 #  mysql> source create_scrib.SQL;
 
@@ -118,15 +118,15 @@ GRANT ALL PRIVILEGES ON %(SqlDatabase)s.* to '%(SqlDatabase)s'@'%(SqlHost)s' ide
 FLUSH PRIVILEGES;
 """
 
-create_DB = create_DB % {'SqlUser':sql.SqlUser, 
-                         'SqlHost':sql.SqlHost, 
-                         'SqlDatabase':sql.SqlDatabase, 
+create_DB = create_DB % {'SqlUser':sql.SqlUser,
+                         'SqlHost':sql.SqlHost,
+                         'SqlDatabase':sql.SqlDatabase,
                          'SqlPasswd':sql.SqlPasswd}
 
 # create the DB
 path = os.getcwd()
 file_abs_path = '%s/input_data/create_scrib.SQL' % path
-print '\nCreate the init SQL DB   ./input_data/create_scrib.SQL' 
+print '\nCreate the init SQL DB   ./input_data/create_scrib.SQL'
 open(file_abs_path, 'w').write(create_DB.encode('latin1'))
 print ''
 

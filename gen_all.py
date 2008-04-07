@@ -1,9 +1,9 @@
 from sys import argv, exit
 
 def no_args():
-    msg = ("Usage : gen_all gen_all \n" 
-           "     or gen_all create_database \n" 
-           "     or gen_all find_python \n" 
+    msg = ("Usage : gen_all gen_all \n"
+           "     or gen_all create_database \n"
+           "     or gen_all find_python \n"
            "     or gen_all fill_tables")
     print msg
 
@@ -22,7 +22,7 @@ def create_database():
         cs.create()
 
 def fill_tables():
-    from gen.FillSql import Fill_tables 
+    from gen.FillSql import Fill_tables
     anwser = raw_input('Do you want fill SQL tables ? : (y/N) ')
     anwser = anwser.strip() or 'non'
     if anwser.lower().startswith('y'):
@@ -36,9 +36,9 @@ def find_python():
         python = python.strip()
         open(python)
     except IOError:
-        # at least try the default python hopping he know about itools 
+        # at least try the default python hopping he know about itools
         print "Start the zope instance first so we know where is you python !"
-        python = 'python' 
+        python = 'python'
     return python
 
 if __name__ == '__main__':
@@ -49,12 +49,12 @@ if __name__ == '__main__':
         arg = None
         no_args()
         exit()
-    if arg == 'gen_all':  
+    if arg == 'gen_all':
         gen_all()
     elif arg == 'create_database':
         create_database()
     elif arg == 'fill_tables':
-        fill_tables() 
+        fill_tables()
     elif arg == 'find_python':
         print find_python()
     else:

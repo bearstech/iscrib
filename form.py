@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com> 
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -80,7 +80,7 @@ class FormHandler(File):
             new_value = schema[key][0].encode(value)
             if isinstance(new_value, unicode):
                  new_value = new_value.encode('UTF-8')
-            line = '%s:%s\n' % (key, new_value) 
+            line = '%s:%s\n' % (key, new_value)
             result.append(line)
         return ''.join(result)
 
@@ -132,7 +132,7 @@ class Form(Text):
         elif state == 'modified':
             state = u'Modifié après export'
 
-        return state 
+        return state
 
 
     #######################################################################
@@ -157,7 +157,7 @@ class Form(Text):
             # take the value in request first
             value = context.get_form_value(key)
             if value is None:
-                # is the value is not in query string, take it in fields 
+                # is the value is not in query string, take it in fields
                 value = fields.get(name, default)
             namespace[name] = value
             # If name is 'fieldA23', add 'A23'
@@ -169,7 +169,7 @@ class Form(Text):
                     namespace['%s_not' % name] = True
                 else:
                     namespace['%s_not' % name] = False
-            # Checkboxes 
+            # Checkboxes
             if type is Checkboxes:
                 values = value.split('##')
                 for i in range(1, 30, 1):
@@ -183,24 +183,24 @@ class Form(Text):
                 field_name = name.split('field')[-1]
 
             # From A21 we get _A21 and for A21X we get _A21 too
-            field_name = '_' + field_name 
+            field_name = '_' + field_name
             # From fieldA21 we get missing_A21
-            missing_name = 'missing' + field_name 
+            missing_name = 'missing' + field_name
             # From fieldA21 we get badT_A21
-            badT_name = 'badT' + field_name 
+            badT_name = 'badT' + field_name
 
             # Missing
-            namespace[field_name] = None 
-            # we have  _B13 in the namespace but _B13XYZ in the form 
-            # so we make form_keys who remove X from _B13X 
+            namespace[field_name] = None
+            # we have  _B13 in the namespace but _B13XYZ in the form
+            # so we make form_keys who remove X from _B13X
             form_keys = context.get_form_keys()
             form_keysXYZ = [k for k in form_keys if not k[-1].isdigit()]
             form_keysXYZ = [k[:-1] for k in form_keys]
             form_keys = form_keys + form_keysXYZ
             if missing_name in form_keys:
-                namespace[field_name] = 'missing_field' 
+                namespace[field_name] = 'missing_field'
             if badT_name in form_keys:
-                namespace[field_name] = 'badT_field' 
+                namespace[field_name] = 'badT_field'
 
         # State
         state = self.get_property('state')
@@ -210,15 +210,15 @@ class Form(Text):
          mandatory_nonEmpties, Empties) = self.get_sets(namespace)
 
         namespace['All_fields'] = len(All_fields)
-        namespace['All_mandatorie'] = len(All_mandatorie) 
-        namespace['All_optional'] = len(All_optional) 
-        namespace['optional_nonEmpties'] = len(optional_nonEmpties)  
-        namespace['mandatory_nonEmpties'] = len(mandatory_nonEmpties) 
-        namespace['mandatory_Empties'] = (len(All_mandatorie) - 
+        namespace['All_mandatorie'] = len(All_mandatorie)
+        namespace['All_optional'] = len(All_optional)
+        namespace['optional_nonEmpties'] = len(optional_nonEmpties)
+        namespace['mandatory_nonEmpties'] = len(mandatory_nonEmpties)
+        namespace['mandatory_Empties'] = (len(All_mandatorie) -
                                           len(mandatory_nonEmpties))
         # from sets import Set
         # print Set(All_mandatorie).difference(Set(mandatory_nonEmpties))
-        namespace['Empties'] =  len(Empties) 
+        namespace['Empties'] =  len(Empties)
 
         is_ready = namespace['mandatory_Empties'] == 0
         namespace['is_ready'] = is_ready
@@ -312,7 +312,7 @@ class Form(Text):
                     kz = fields.get(key, '0')
                     if kz != '0':
                         namespace[key] = EPCI_Statut.get_namespace(kz)
-                    else: 
+                    else:
                         namespace[key] = EPCI_Statut.get_namespace(v)
                 elif not namespace[key]:
                     if isinstance(v, float):
@@ -328,11 +328,11 @@ class Form(Text):
                 empty_or_NC = [i for i in v if namespace[i] in ('', None, 'NC')]
                 # no sum if a value manualy set
                 if namespace[k] and namespace[k] not in (0, '', None, 'NC'):
-                    pass 
+                    pass
                 # no sum if an empty or NC
                 elif empty_or_NC:
-                    pass 
-                # automatic sum 
+                    pass
+                # automatic sum
                 else:
                     res = [namespace[i] for i in v if namespace[i]]
                     key_type = schema[k][0]
@@ -355,7 +355,7 @@ class Form(Text):
         """
         namespace = self.get_namespace()
 
-        try: 
+        try:
             template = self.get_object('/ui/scrib/%s' % autogen_xml)
         except LookupError:
             template = self.get_object('/ui/scrib/%s' % xml)
@@ -363,7 +363,7 @@ class Form(Text):
         if view == 'printable':
             namespace['printable'] = True
             context = get_context()
-            context.response.set_header('Content-Type', 
+            context.response.set_header('Content-Type',
                                         'text/html; charset=UTF-8')
             namespace['body'] = stl(template, namespace)
             template = self.get_object('/ui/scrib/printable_template.xhtml')
@@ -460,7 +460,7 @@ class Form(Text):
             empty = None in left_values or None in right_values
             fail = x3 is False
 
-            if not key is 'sum': 
+            if not key is 'sum':
                 if str(x1) == 'NC' and str(x2) == 'NC':
                     fail = False
                     empty = False
@@ -482,7 +482,7 @@ class Form(Text):
                         sum_of_not_NC = Decimal(0)
                     for real_val in [x for x in right_values
                             if x not in ['NC', None]]:
-                        sum_of_not_NC += real_val 
+                        sum_of_not_NC += real_val
 
                     if sum_of_not_NC:
                         fail = ( x1 <= sum_of_not_NC ) and (str(x1) != 'NC')
@@ -492,7 +492,7 @@ class Form(Text):
                 # Si un seul des termes de la somme est égal à NC, alors le
                 # total doit être égal à NC
                 elif right_values.count('NC') == 1:
-                    fail = not (x1 == 'NC') 
+                    fail = not (x1 == 'NC')
 
             if empty or fail:
                 i += 1
@@ -516,36 +516,36 @@ class Form(Text):
         namespace['ppres2'] = pformat(namespace['res2'])
 
         # clasify controles by report
-        sec2form = {'A': ';report_form1', 'B': ';report_form2', 
-                    'C': ';report_form3', 'D': ';report_form4', 
-                    'E': ';report_form5', 'F': ';report_form6', 
-                    'G': ';report_form7', 'H': ';report_form8', 
+        sec2form = {'A': ';report_form1', 'B': ';report_form2',
+                    'C': ';report_form3', 'D': ';report_form4',
+                    'E': ';report_form5', 'F': ';report_form6',
+                    'G': ';report_form7', 'H': ';report_form8',
                     'I': ';report_form9',}
         titles = sec2form.keys()
         titles.sort()
         
         blocks = []
-        for key in titles: 
+        for key in titles:
             lines = [d for d in res if d['expr1'].startswith(key)]
-            if lines: 
-                block = {'section_title': key, 
-                         'section_url': sec2form[key], 
+            if lines:
+                block = {'section_title': key,
+                         'section_url': sec2form[key],
                          'lines': lines}
                 blocks.append(block)
 
         namespace['controle_blocks2'] = [r for i, r in enumerate(blocks) if i%2]
-        namespace['controle_blocks1'] = [r for i, r in enumerate(blocks) 
+        namespace['controle_blocks1'] = [r for i, r in enumerate(blocks)
                                          if not i%2]
 
         # ControlesFailed
         failedControles = [control for control in res if control.get('fail')]
-        ControlesFailed = len(failedControles) and True or False 
+        ControlesFailed = len(failedControles) and True or False
 
-        # add ControlesFailed 
-        is_complete = namespace['is_complete'] 
-        namespace['is_complete'] =  is_complete and not ControlesFailed 
+        # add ControlesFailed
+        is_complete = namespace['is_complete']
+        namespace['is_complete'] =  is_complete and not ControlesFailed
         #disable control for testing #namespace['is_complete'] = True
-        # add ControlesFailed 
+        # add ControlesFailed
         is_finished = namespace['is_finished']
         
         namespace['is_finished'] =  is_finished and not ControlesFailed
@@ -584,15 +584,15 @@ class Form(Text):
         namespace['is_admin'] = self.is_admin()
 
         template = self.get_object('/ui/scrib/Form_controles.xml')
-        return stl(template, namespace) 
+        return stl(template, namespace)
 
 
     def get_sets(self, namespace):
         """
-        All_fields =  All_mandatorie +  All_optional 
+        All_fields =  All_mandatorie +  All_optional
         All_fields = optional_nonEmpties + mandatory_nonEmpties + Empties
-        return : 
-                 (All_fields, All_mandatorie, All_optional, 
+        return :
+                 (All_fields, All_mandatorie, All_optional,
                   optional_nonEmpties, mandatory_nonEmpties, Empties)
 
         Take dependencies into account: if they
@@ -632,7 +632,7 @@ class Form(Text):
                     # optional_nonEmpties
                     optional_nonEmpties.append(key)
                 
-        return  (All_fields, All_mandatorie, All_optional, 
+        return  (All_fields, All_mandatorie, All_optional,
                  optional_nonEmpties, mandatory_nonEmpties, Empties)
 
 
@@ -702,11 +702,11 @@ class Form(Text):
                                      'subject': subject,
                                      'body': body}
 
-        succsess_mgs = (u'Terminé, un e-mail est envoyé à votre correspondant ' 
+        succsess_mgs = (u'Terminé, un e-mail est envoyé à votre correspondant '
                         u'DLL.')
-        comeback_msg = self.send_email(SMTPServer=SMTPServer, 
-                                       from_addr=report_email, 
-                                       to_addr=to_addr, 
+        comeback_msg = self.send_email(SMTPServer=SMTPServer,
+                                       from_addr=report_email,
+                                       to_addr=to_addr,
                                        message=message,
                                        succsess_mgs=succsess_mgs)
 
@@ -721,9 +721,9 @@ class Form(Text):
                                        'from_addr': to_addr,
                                        'subject': r_subject,
                                        'body': r_body}
-        trash = self.send_email(SMTPServer=SMTPServer, 
-                                from_addr=to_addr, 
-                                to_addr=report_email, 
+        trash = self.send_email(SMTPServer=SMTPServer,
+                                from_addr=to_addr,
+                                to_addr=report_email,
                                 message=r_message,
                                 succsess_mgs="")
         
@@ -734,7 +734,7 @@ class Form(Text):
 
     def scrib_log(self, context, event=None, content=None):
         user = context.user
-        # Event Log 
+        # Event Log
         event = '\n' \
                 '[Scrib event]\n' \
                 'date   : %(date)s\n' \
@@ -746,7 +746,7 @@ class Form(Text):
         event = event % {'date': str(datetime.datetime.now()),
                          'uri': str(context.uri),
                          'referrer': str(context.referrer),
-                         'user': user and user.name or None, 
+                         'user': user and user.name or None,
                          'event': ('email sent '
                                    '\n########\n%s\n#########') % content}
         logging.getLogger().info(event)
@@ -855,12 +855,12 @@ class Form(Text):
             # Add into the database
             query = self.get_export_query(namespace)
             cursor.execute(query)
-            cursor.execute('commit') 
+            cursor.execute('commit')
             self.set_property('state', 'public')
 
             cursor.close()
             connection.close()
-        except OperationalError: 
+        except OperationalError:
             context.commit = False
             return context.come_back(MSG_NO_MYSQL)
 
@@ -874,7 +874,7 @@ class Form(Text):
          'fieldB34': 'fieldB33',
          'fieldB36': 'fieldB35',
          'fieldB41': 'fieldB40',
-         'fieldB42': 'fieldB40',     
+         'fieldB42': 'fieldB40',
         """
         schema = self.get_schema()
         dependencies = {}
@@ -898,7 +898,7 @@ class Form(Text):
             if dep_or_sum:
                 fields = field_def[2].get('sum')
                 sums[field_id] = fields
-        return sums 
+        return sums
 
 
     fill_report_form__access__ = True
@@ -926,7 +926,7 @@ class Form(Text):
                 if ns[key]:
                     value = ns[key]
             elif field_type is EPCI_Statut:
-                value = '4' 
+                value = '4'
             elif field_type is Unicode:
                 if ns[key]:
                     value = ns[key]
@@ -944,7 +944,7 @@ class Form(Text):
                     if key in ['field' + x for x in e_list + g_list]:
                         value = Integer('NC')
                 else:
-                    value = Integer(5) 
+                    value = Integer(5)
             elif field_type is Decimal:
                 value = dec('3.14')
                 if is_sum:
@@ -953,11 +953,11 @@ class Form(Text):
                 else:
                     value = Decimal(value)
             elif field_type is Checkboxes:
-                value = '##1' 
+                value = '##1'
             elif field_type is Boolean:
-                value = True 
-            else: 
-                value = '0' 
+                value = True
+            else:
+                value = '0'
 
             fields[key] = value
 
@@ -988,7 +988,7 @@ class Form(Text):
             if key in schema:
                 value = context.get_form_value(key)
                 #########################################
-                # Take the value from the form 
+                # Take the value from the form
                 field_type = schema[key][0]
                 field_default = schema[key][1]
                 keyNumber = key[len('field'):]
@@ -1013,15 +1013,15 @@ class Form(Text):
                 sum = key in sums
 
                 ## Objectif : we set empty = True or False
-                ## Set value to '' if dep field is False    
-                # True : no dep AND no value AND no String/Unicode AND 
-                # False :  
+                ## Set value to '' if dep field is False
+                # True : no dep AND no value AND no String/Unicode AND
+                # False :
                 empty = False
                 if field_type is not String and \
                        field_type is not Unicode:
                     if dependance is not None :
                         # here we know if they are a dependancies
-                        # and 
+                        # and
                         if context.get_form_value(dependance, '0') == '1':
                             if not value:
                                 empty = True
@@ -1045,7 +1045,7 @@ class Form(Text):
                 field_def = schema[key]
                 type = field_def[0]
                 default = field_def[1]
-                # check for forbiden caracters, 8bits like "é" 
+                # check for forbiden caracters, 8bits like "é"
                 # use unicode instead
                 try:
                     value = type.decode(value)
@@ -1080,7 +1080,7 @@ class Form(Text):
         return template.to_str()
 
 
-    help2__access__ = True 
+    help2__access__ = True
     def help2(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/Form_help2.xhtml')
@@ -1100,14 +1100,14 @@ class Form(Text):
         is_exported = self.get_form_state() == u'Exporté'
         namespace['show'] = is_finished or is_complete or is_exported
         template = self.get_object('/ui/scrib/Form_report_csv.xml')
-        return stl(template, namespace) 
+        return stl(template, namespace)
 
 
     comments__access__ = 'is_allowed_to_view_form'
     comments__label__ = u'Rapport Bibliothèques'
     comments__sublabel__ = u'Commentaires'
     def comments(self, context, view=None):
-        return self.get_ns_and_h('Form_comments.xml', 
+        return self.get_ns_and_h('Form_comments.xml',
                                  'FormBM_report0_autogen.xml',
                                  view)
 
@@ -1134,7 +1134,7 @@ class Form(Text):
                 label = [x['label'] for x in value if x['is_selected']]
                 if label:
                     value = label[0]
-                else: 
+                else:
                     value = ''
             name = name[len('field'):]
             chap = name[0]

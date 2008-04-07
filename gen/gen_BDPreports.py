@@ -7,13 +7,13 @@ from pprint import pprint
 from GenFormsTemplates import GenForms
 
 
-######################################################################## 
+########################################################################
 # Form BDP 1
-######################################################################## 
+########################################################################
 
 f1 = GenForms(encoding='latin1', filename='FormBDP_report1_autogen.xml', no_generation=True)
 f1.main_header()
-f1.add_h1(title=u'A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales)', 
+f1.add_h1(title=u'A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales)',
           help_file='help1')
 # A1
 f1.add_h2(title=u'A.1 DÉPENSES PROPRES A LA BDP')
@@ -48,9 +48,9 @@ body, trach = f1.raw_text2lines(data=data)
 f1.table(body)
 f1.main_footer()
 
-######################################################################## 
+########################################################################
 # Form BDP 2
-######################################################################## 
+########################################################################
 
 f2 = GenForms(encoding='latin1', filename='FormBDP_report2_autogen.xml', no_generation=True)
 f2.main_header()
@@ -79,7 +79,7 @@ f2.table(body, xyz_labels)
 f2.add_h2(title=u"B. 2 VÉHICULES DE LA BDP")
 data = u"""
 Nombre total de bus : bibliobus ou médiabus (musibus, artobus, etc.) B21
-Dont nombre de bus faisant du prêt direct                            B22 
+Dont nombre de bus faisant du prêt direct                            B22
 Autres véhicules (fourgonnettes, voitures légères)                   B23
 """
 body, xyz_labels = f2.raw_text2lines(data=data)
@@ -88,7 +88,7 @@ f2.table(body, xyz_labels)
 f2.add_h2(title=u"B.3 ÉQUIPEMENT INFORMATIQUE (BDP et annexes)")
 data = u"""
 La BDP est-t-elle équipée d'un logiciel de gestion ?                       B31
-Si oui, préciser lequel:                                                              B32 
+Si oui, préciser lequel:                                                              B32
 La BDP constitue-t-elle son catalogue à partir de notices importée         B33
 Si oui, quelle est la proportion des notices importées dans votre catalogue ? (en %)  B34
 préciser les sources :                                                                B35
@@ -115,9 +115,9 @@ f2.table(body, xyz_labels)
 
 f2.main_footer()
 
-######################################################################## 
+########################################################################
 # Form BDP 3
-######################################################################## 
+########################################################################
 
 f3 = GenForms(encoding='latin1', filename='FormBDP_report3_autogen.xml', no_generation=True)
 f3.main_header()
@@ -194,7 +194,7 @@ f3.table(body, xyz_labels)
 f3.main_footer()
 
 
-######################################################################## 
+########################################################################
 # Form BDP 4
 ########################################################################
 
@@ -236,7 +236,7 @@ f4.main_footer()
 
 
 
-######################################################################## 
+########################################################################
 # Form BDP 5
 ########################################################################
 
@@ -353,7 +353,7 @@ f5.table(body, xyz_labels)
 
 f5.main_footer()
 
-######################################################################## 
+########################################################################
 # Form BDP 6
 ########################################################################
 
@@ -411,10 +411,10 @@ f6.add_h2(title=u"F. 4 BIBLIOTHÈQUES AYANT FOURNI DES STATISTIQUES")
 data = u"""
 ##WXY##Nombre de points W##Nombre de communes  X##Population desservie Y
 Bibliothèques niveau 1                                 F41
-Bibliothèques niveau 2                                 F42 
-Bibliothèques-relais niveau 3                          F43 
+Bibliothèques niveau 2                                 F42
+Bibliothèques-relais niveau 3                          F43
 Points-lecture                                         F44
-Dépôts tous publics                                    F45  
+Dépôts tous publics                                    F45
 TOTAL (F41 à F45  )                                    F46
 """
 body, xyz_labels = f6.raw_text2lines(data=data)
@@ -459,7 +459,7 @@ f6.table(body, xyz_labels)
 f6.main_footer()
 
 
-######################################################################## 
+########################################################################
 # Form BDP 7
 ########################################################################
 
@@ -507,7 +507,7 @@ body, xyz_labels = f7.raw_text2lines(data=data)
 f7.table(body, xyz_labels)
 f7.main_footer()
 
-######################################################################## 
+########################################################################
 # Form BDP 8
 ########################################################################
 
@@ -549,9 +549,9 @@ data = u"""
 La BDP organise-t-elle un catalogue collectif départemental ?    H21
 Si oui, préciser le nb de bibliothèques participantes                       H22
 La BDP utilise-t-elle un logiciel pour l'évaluation de son réseau ?  H23
-Si oui, préciser lequel                                                     H24 
+Si oui, préciser lequel                                                     H24
 La BDP appartient-elle à un réseau documentaire autre que le réseau qu'elle déssert ?  H25
-Si oui, préciser lequel                                                     H26 
+Si oui, préciser lequel                                                     H26
 La BDP a-t-elle menée des actions internationales ?         H27
 
 """
@@ -597,7 +597,7 @@ Equipement multimedia                         H44
 body, xyz_labels = f8.raw_text2lines(data=data)
 f8.table(body, xyz_labels)
 
-data = u"""##XYZ##Conseils, aides et assistance BDP X##Nombre de communes aidées inf. à 10000h Y##Nombre de communes aidées sup. à 10000h Z 
+data = u"""##XYZ##Conseils, aides et assistance BDP X##Nombre de communes aidées inf. à 10000h Y##Nombre de communes aidées sup. à 10000h Z
  Acquisition de documents : Imprimés          H45
  Acquisition de documents : Phonogrammes      H46
  Acquisition de documents : Multmedia         H47
@@ -605,7 +605,7 @@ data = u"""##XYZ##Conseils, aides et assistance BDP X##Nombre de communes aidées
 body, xyz_labels = f8.raw_text2lines(data=data)
 f8.table(body, xyz_labels)
 
-data = u"""##XYZ##Conseils, aides et assistance BDP X##Nombre de communes aidées inf. à 10000h Y##Nombre de communes aidées sup. à 10000h Z 
+data = u"""##XYZ##Conseils, aides et assistance BDP X##Nombre de communes aidées inf. à 10000h Y##Nombre de communes aidées sup. à 10000h Z
 Animation                      H48
 Emplois                        H49
 """
@@ -647,7 +647,7 @@ f8.table(body, xyz_labels)
 data = u"""
 Prêt d'expositions                                                    H58
 Prêt de valises thématiques                                           H59
-Prêt de matériel d'animation                                          H60  
+Prêt de matériel d'animation                                          H60
 Groupements d'achats (matériel, documents)                            H61
 Comités de lecture, offices en consultation pour les bibliothèques du réseau   H62
 Autre                                                      H63
@@ -668,7 +668,7 @@ data = u"""##YZ##Nombre de participants Y##Nb  de journées Z
 Formation de base BDP               H65
 Formation ABF                       H66
 Formation continue                  H67
-Voyage d'étude                      H68 
+Voyage d'étude                      H68
 TOTAL                               H69
 """
 body, xyz_labels = f8.raw_text2lines(data=data)
@@ -685,7 +685,7 @@ f8.table(body, xyz_labels)
 # f8 is no more genarated
 f8.main_footer()
 
-######################################################################## 
+########################################################################
 # Form BDP 9
 ########################################################################
 

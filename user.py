@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ class ScribUser(User):
         dep = self.get_department()
         dep_name = get_deps().get(dep)
         if dep_name:
-            dep_name = dep_name.get('name') 
+            dep_name = dep_name.get('name')
         return dep_name
 
 
@@ -119,7 +119,7 @@ class ScribUser(User):
                     title = bib.get('name', '')
                 else:
                     print "bib", code, "n'existe pas"
-        return title 
+        return title
 
 
     def get_year(self):
@@ -169,7 +169,7 @@ class ScribUser(User):
         namespace['dep'] = ''
         if department:
             dep_name = departments[department].get('name', '')
-            namespace['dep'] = dep_name 
+            namespace['dep'] = dep_name
         elif code:
             bib = get_BMs().get(code)
             if bib:
@@ -206,7 +206,7 @@ class ScribUserFolder(UserFolder):
         if 'search_form' in views:
             views.remove('search_form')
         views.insert(0, 'search_form')
-        return views 
+        return views
 
 
     search_form__access__ = 'is_admin'
@@ -218,7 +218,7 @@ class ScribUserFolder(UserFolder):
         admins = []
         user_folder = root.get_object('users')
         for admin_name in admin_names:
-            dic = {} 
+            dic = {}
             user = user_folder.get_object(admin_name)
             dic['name'] = user.get_property('title') or user.name
             dic['url'] = str(self.get_pathto(user))
@@ -227,7 +227,7 @@ class ScribUserFolder(UserFolder):
         tablename = 'search'
 
         # Search parameters
-        parameters = get_parameters(tablename, name='', year='', dep='', 
+        parameters = get_parameters(tablename, name='', year='', dep='',
                                     bib='BM')
 
         name = parameters['name'].strip().lower()
@@ -236,12 +236,12 @@ class ScribUserFolder(UserFolder):
         name = unicode(name, 'utf8')
         year = unicode(year, 'utf8')
         dep= unicode(dep, 'utf8')
-        namespace['search_year'] = year 
+        namespace['search_year'] = year
 
         # make possible the search in 'bellegarde-sur-valserine'
         # by the Complex search on 'bellegarde', 'sur', 'valserine'
         names = [t[0] for t in TextField.split(name)]
-        if names: 
+        if names:
             q_name =  EqQuery('user_town', names[0])
             for subname in names:
                 q_name2 = EqQuery('user_town', subname)
@@ -249,21 +249,21 @@ class ScribUserFolder(UserFolder):
         namespace['search_name'] = name
 
         # departements
-        namespace['search_dep'] = dep 
-        departements = [] 
+        namespace['search_dep'] = dep
+        departements = []
         for dep_key, dep_dic in get_deps().items():
             dep_name = dep_dic['name'].capitalize()
-            departements.append({'name': '%s (%s)' % (dep_name, dep_key), 
-                                 'value': dep_key, 
+            departements.append({'name': '%s (%s)' % (dep_name, dep_key),
+                                 'value': dep_key,
                                  'selected': dep_key == dep})
-        departements = [(d['value'], d) for d in departements] 
+        departements = [(d['value'], d) for d in departements]
         departements.sort()
-        departements = [d[-1] for d in departements] 
+        departements = [d[-1] for d in departements]
         namespace['departements'] = departements
 
         bib = parameters['bib']
-        bib_types = [{'name': x, 'value': x, 'checked': x==bib} 
-                     for x in ['BM', 'BDP']] 
+        bib_types = [{'name': x, 'value': x, 'checked': x==bib}
+                     for x in ['BM', 'BDP']]
         namespace['bib_types'] = bib_types
 
         is_BDP, is_BM = False, False
@@ -283,24 +283,24 @@ class ScribUserFolder(UserFolder):
 
         # independent of the form : q_scribuser, q_type_form
         q_scribuser = EqQuery('format', ScribUser.class_id)
-        if is_BM: 
+        if is_BM:
             q_type_form = EqQuery('is_BM', str(int(is_BM)))
-        if is_BDP: 
+        if is_BDP:
             q_type_form = EqQuery('is_BDP', str(int(is_BDP)))
 
 
         query, objects = None, []
         if name or dep or year:
-            query = q_type_form 
+            query = q_type_form
             query = AndQuery(query, q_scribuser)
-        if year: 
+        if year:
             query = AndQuery(query, q_year)
-        if name: 
+        if name:
             query = AndQuery(query, q_name)
-        if dep: 
+        if dep:
             query = AndQuery(query, q_dep)
 
-        namespace['too_long_answer'] = '' 
+        namespace['too_long_answer'] = ''
         msg = u'Il y a %s réponses, les 100 premières sont présentées.'\
               u'Veuillez restreindre votre recherche.'
 
@@ -344,7 +344,7 @@ class ScribUserFolder(UserFolder):
                         'icon': path_to_icon,
                         'type': object.handler.get_mimetype(),
                         'date': mtime.strftime('%Y-%m-%d %H:%M'),
-                        'title': (object.get_user_town() or 
+                        'title': (object.get_user_town() or
                                   object.get_department_name()),
                         'content_summary': summary,
                         'path': path})

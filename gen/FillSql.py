@@ -1,9 +1,9 @@
 """
-Use by the ./gen_all.py script to create DB and fill table with ./input_data/ 
+Use by the ./gen_all.py script to create DB and fill table with ./input_data/
 SQL files
 """
 
-import os 
+import os
 class Fill_tables:
     def __init__(self):
         str = "mysql -u scrib -p'Scrib-2005*' scrib < ./input_data/%s "
@@ -21,7 +21,7 @@ class Fill_tables:
                 if anwser.lower().startswith('y'):
                     res = os.system(self.cmd_line % name)
                     print './input_data/%s' % name, not res and 'OK' or 'Echec'
-                else: 
+                else:
                     print '    nothing done for %s' % name
 
 

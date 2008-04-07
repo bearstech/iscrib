@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -223,7 +223,7 @@ class Root(BaseRoot):
         namespace = {}
         today = date.today()
         ### BDP form
-        years = [ {'value': x, 
+        years = [ {'value': x,
                    'is_disabled': self.has_object('BDP'+str(x)),
                    'is_selected': False}
                   for x in range(today.year - 2, today.year + 4) ]
@@ -234,7 +234,7 @@ class Root(BaseRoot):
                 break
         namespace['years'] = years
         ### BM form
-        years = [ {'value': x, 
+        years = [ {'value': x,
                    'is_disabled': self.has_object('BM'+str(x)),
                    'is_selected': False}
                   for x in range(today.year - 2, today.year + 4) ]
@@ -261,7 +261,7 @@ class Root(BaseRoot):
         t = time()
 
         users = self.get_object('users')
-        report_c = int(time() -t); print 'get users, deep copy', report_c 
+        report_c = int(time() -t); print 'get users, deep copy', report_c
 
         BMs = get_BMs()
         BMs_len =  len(BMs)
@@ -270,7 +270,7 @@ class Root(BaseRoot):
         bib_municipals.sort(key=itemgetter(0))
         form = FormBM()
         i = 0
-        for code, bib in bib_municipals: 
+        for code, bib in bib_municipals:
             name, dep = bib['name'], bib['dep']
             # Add report
             reports.set_object(code, form, **{'title': name})
@@ -284,9 +284,9 @@ class Root(BaseRoot):
                 del user
             print '%s/%s' % (i, BMs_len), dep, code, username
             i += 1
-        report_m = int(time() -t); print 'users and reperts set ', report_m 
+        report_m = int(time() -t); print 'users and reperts set ', report_m
         secondes = int(time() - t)
-        minutes = secondes / 60 
+        minutes = secondes / 60
         message = u"Les rapports des BM pour l'année %(year)s ont été " \
                   u"ajoutés, ainsi que les utilisateurs associés : " \
                   u"BMxxx:BMxxx, BMyy:BMyy, etc. " \

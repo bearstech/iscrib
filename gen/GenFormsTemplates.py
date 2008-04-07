@@ -12,7 +12,7 @@ from itools.handlers import IO
 
 print_save = """
    <div align="right">
-    <input stl:if="not printable" type="button" 
+    <input stl:if="not printable" type="button"
            onclick="window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600') ;return 0;"           value="Imprimer"></input>
     <input stl:if="not printable" type="submit" value="Enregistrer"
            stl:if="is_allowed_to_edit"></input>
@@ -42,7 +42,7 @@ class GenForms:
     ui/FormBM_report3_autogen.xml
 
     ####################
-    # Exemple 
+    # Exemple
     f2 = GenForms(encoding='latin1', filename='FormBDP_report2_autogen.xml')
     f2.main_header()
     f2.add_h1(title=(u'B  LOCAUX - VÉHICULES - ÉQUIPEMENT INFORMATIQUE'),
@@ -60,17 +60,17 @@ class GenForms:
     f2.main_footer()
     """
 
-    def __init__(self, filename='Form_report2_autogen.xml', encoding='utf8', 
+    def __init__(self, filename='Form_report2_autogen.xml', encoding='utf8',
                  bibType='BDP', no_generation=False):
         self.no_generation = no_generation
-        self.filename = filename 
-        self.encoding = encoding 
+        self.filename = filename
+        self.encoding = encoding
         self.data = ''
         if bibType is 'BM':
-            from schemaBM import schema 
+            from schemaBM import schema
             self.schema = schema
         if bibType is 'BDP':
-            from schemaBDP import schema 
+            from schemaBDP import schema
             self.schema = schema
 
 
@@ -80,7 +80,7 @@ class GenForms:
                """<div xmlns="http://www.w3.org/1999/xhtml" \n"""
                """     xmlns:stl="http://xml.itools.org/namespaces/stl"\n"""
                """     id="formBiblio">\n"""
-               """<form action=";report" method="post" name="form">\n """) 
+               """<form action=";report" method="post" name="form">\n """)
         out += print_save
         out = out % {'current_form' : self.filename.split('.')[0]}
         self.data += out
@@ -120,9 +120,9 @@ class GenForms:
         title = title.encode(self.encoding)
 
 
-        h1 = ('<h1>%(title)s\n' 
+        h1 = ('<h1>%(title)s\n'
               '   <a stl:if="not printable" href="#" style="color:red; border: 1px solid red;"\n'
-            """      onclick="window.open(';%(help_file)s', 'xxx', 
+            """      onclick="window.open(';%(help_file)s', 'xxx',
               '      toolbar=no,\n"""
               '      location=no, status=no, menubar=no, scrollbars=yes,\n'
             """      width=440, height=600');return 0;">Aide</a>\n"""
@@ -151,11 +151,11 @@ class GenForms:
         Pour le personnel : salaires et charges,  A11
         Pour les acquisitions de tous documents et abonnements A12"
 
-        liste = 
-        [{'code': ' A11', 
+        liste =
+        [{'code': ' A11',
           'code_label': 'Pour le personnel : salaires et charges, '},
          {'code': ' A12',
-          'code_label': 'Pour les acquisitions de tous documents 
+          'code_label': 'Pour les acquisitions de tous documents
                          et abonnements'}]
         #####
         or from data2 make liste2
@@ -164,11 +164,11 @@ class GenForms:
         Surface de laBDP (services publics et intérieurs confondus)   B11
         Nombre de bâtiments de la BDP ouverts à tous publics          B12"
 
-        liste2 = 
-        [{'code': 'B11', 'code_values':['fieldB11X','fieldB11Y','fieldB11Z'], 
-          'code_label': 'Surface de laBDP (services publics et intérieurs 
+        liste2 =
+        [{'code': 'B11', 'code_values':['fieldB11X','fieldB11Y','fieldB11Z'],
+          'code_label': 'Surface de laBDP (services publics et intérieurs
                          confondus)'},
-         {'code': 'B12', 'code_values':['fieldB12X','fieldB12Y','fieldB12Z'], 
+         {'code': 'B12', 'code_values':['fieldB12X','fieldB12Y','fieldB12Z'],
           'code_label': 'Nombre de bâtiments de la BDP ouverts à tous publics'}]
 
         Les dépendances sont issues du schema
@@ -202,9 +202,9 @@ class GenForms:
                 if line:
                     dic = {}
                     code_label, code =  line[:-4].strip(), line[-4:].strip()
-                    code_values = ['field%s%s' % (code, x)  for x in xyz_list] 
-                    dic['code_label'] = code_label 
-                    dic['code'] = code 
+                    code_values = ['field%s%s' % (code, x)  for x in xyz_list]
+                    dic['code_label'] = code_label
+                    dic['code'] = code
                     dic['code_values'] = code_values
                     new.append(dic)
         else:
@@ -220,22 +220,22 @@ class GenForms:
                     if field_id in depends_fields.keys():
                         dic['control_dep'] = depends_fields[field_id]
                             
-                    dic['code_label'] = code_label 
+                    dic['code_label'] = code_label
                     dic['code'] = code
                     new.append(dic)
 
 
-        accu = [] 
-        for dic in new: 
+        accu = []
+        for dic in new:
             accu.append(self.line(**dic))
         body = '\n'.join(accu)
-        return body, xyz_labels 
+        return body, xyz_labels
   
 
-    def line(self, code='A11', 
+    def line(self, code='A11',
              code_label=u'Pour le personnel: salaires et charges',
              code_values=None, control_dep=None):
-        """ 
+        """
         code_values is the list of fields ex : [fieldA11]
         the number of columns is len(code_values) + 2
         if code_values is None we assume that the only value is the fieldcode
@@ -249,8 +249,8 @@ class GenForms:
         '      <table><tr style="padding: 10px; text-align: left">'
         '<td>'
         '        <input %(control_dep_on)s type="radio" '
-                    ' name="%(col_code)s" ' 
-                    'value="1" style="font-size: 8pt;  border:0px"\n'             
+                    ' name="%(col_code)s" '
+                    'value="1" style="font-size: 8pt;  border:0px"\n'
         '               stl:attributes="checked %(col_code)s" />Oui'
         '      </td>\n'
         '      <td style="border-left: 1px solid black;text-align: right">'
@@ -259,15 +259,15 @@ class GenForms:
         '               stl:attributes="checked %(col_code)s_not" />Non'
         '      </td>'
         '      </tr></table>'
-        '    </td>\n') 
+        '    </td>\n')
 
 
         temp_dep = (
         '    <td>\n'
         '      <table stl:if="%(dependance)s" id="display_%(col_code)s" >'
         '        <tr style="padding: 10px; text-align: left"><td>'
-        '        <input %(control_dep_on)s type="radio" name="%(col_code)s" ' 
-        '                     value="1" style="font-size: 8pt;  border:0px"\n'             
+        '        <input %(control_dep_on)s type="radio" name="%(col_code)s" '
+        '                     value="1" style="font-size: 8pt;  border:0px"\n'
         '                     stl:attributes="checked %(col_code)s" />Oui'
         '      </td><td style="border-left: 1px solid black;text-align: right">'
         '        <input %(control_dep_off)s type="radio" name="%(col_code)s" '
@@ -278,8 +278,8 @@ class GenForms:
         '      <table stl:if="not %(dependance)s" id="display_%(col_code)s" '
                      'style="visibility:hidden">'
         '        <tr style="padding: 10px; text-align: left"><td>'
-        '        <input %(control_dep_on)s type="radio" name="%(col_code)s" ' 
-        '                     value="1" style="font-size: 8pt;  border:0px"\n'             
+        '        <input %(control_dep_on)s type="radio" name="%(col_code)s" '
+        '                     value="1" style="font-size: 8pt;  border:0px"\n'
         '                     stl:attributes="checked %(col_code)s" />Oui'
         '      </td><td style="border-left: 1px solid black;text-align: right">'
         '        <input %(control_dep_off)s type="radio" name="%(col_code)s" '
@@ -320,7 +320,7 @@ class GenForms:
         class_code = '_' + code
         if code_values is None:
             code_values = ['field%s' % code]
-        dic = {'code_label': code_label, 
+        dic = {'code_label': code_label,
                'code': code, 'class_code': class_code,
                'control_dep' : control_dep}
 
@@ -349,20 +349,20 @@ class GenForms:
                 control_dep_off = ''
         
                 if control_dep is not None:
-                    deps = "[%s]" % ','.join(["'%s'" % item for item 
+                    deps = "[%s]" % ','.join(["'%s'" % item for item
                                              in control_dep])
                     control_dep_on = """onclick="switch_on(%s)" """ % deps
                     control_dep_off = """onclick="switch_off(%s)" """ % deps
                     
                 if dependance is None:
                     temp = temp_nodep % { 'col_code' : col_code,
-                                          'control_dep_on' : control_dep_on, 
+                                          'control_dep_on' : control_dep_on,
                                           'control_dep_off' : control_dep_off}
                     
                 else:
                     temp = temp_dep % { 'dependance' : dependance ,
                                         'col_code' : col_code,
-                                        'control_dep_on' : control_dep_on, 
+                                        'control_dep_on' : control_dep_on,
                                         'control_dep_off' : control_dep_off}
                 
             else:
@@ -377,7 +377,7 @@ class GenForms:
         end_line = ('    <td><b stl:attributes="class %(class_code)s">'
                     '%(code)s</b></td>\n'
                     '  </tr>\n')
-        all_line = start_line + body_line + end_line 
+        all_line = start_line + body_line + end_line
         return all_line % dic
 
 
@@ -394,7 +394,7 @@ class GenForms:
 
         <table>
           <colgroup><col width="59%"/><col width="12%"/><col width="12%"/>
-                    <col width="12%"/> <col width="5%"/> </colgroup> 
+                    <col width="12%"/> <col width="5%"/> </colgroup>
           <tr>
             <td></td>
               <th style="text-align: center">Centrale X</th>
@@ -403,12 +403,12 @@ class GenForms:
             <td></td>
           </tr>
           <tr>
-            <th>Surface de la BDP </th> 
-            <td> <input stl:attributes="value fieldB11X" type="text" 
+            <th>Surface de la BDP </th>
+            <td> <input stl:attributes="value fieldB11X" type="text"
                         name="fieldB11X" value="" size="8"></input> </td>
-            <td> <input stl:attributes="value fieldB11Y" type="text" 
+            <td> <input stl:attributes="value fieldB11Y" type="text"
                         name="fieldB11Y" value="" size="8"></input> </td>
-            <td> <input stl:attributes="value fieldB11Z" type="text" 
+            <td> <input stl:attributes="value fieldB11Z" type="text"
                         name="fieldB11Z" value="" size="8"></input> </td>
             <td> <b stl:attributes="class _B11">B11</b></td>
           </tr>
@@ -448,7 +448,7 @@ class GenForms:
         if xyz_labels:
             xyz_type_table += ('  <tr>\n' '  <td></td>\n')
             for x_label in xyz_labels:
-                th_col = ('    <th style="text-align: center">' 
+                th_col = ('    <th style="text-align: center">'
                           '%s</th>\n') % x_label
                 xyz_type_table += th_col
             xyz_type_table += ('  <td></td>\n' '  </tr>\n')

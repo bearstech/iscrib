@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -16,13 +16,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from Python 
+# Import from Python
 from pprint import pprint
 import re
 import sets
 
 ##############################################################################
-# Controles 
+# Controles
 ##############################################################################
 
 
@@ -31,14 +31,14 @@ def sum2controle(schema=None):
     strucutre of controles : key, text, expr1, expr2, expr3
     with 'A16 = A11+A12+A13+A14+A15'
     we make :
-    ('a_name_whatever we want2', 
+    ('a_name_whatever we want2',
      u"A16 [%s]  = A11+A12+A13+A14+A15 [%s]",
      'A16',
      'A11+A12+A13+A14+A15',
      'A16 == A11+A12+A13+A14+A15')
     
     strucutre of controles : key, text, expr1, expr2, expr3
-    """ 
+    """
 
     all_sums = []
     for key, value in schema.items():
@@ -79,25 +79,25 @@ def checkBib(bib_type='BM', max=30, schema=None):
     Bibkeys = schema.keys()
     accu = ''
     for i in range(max):
-      FormBib = ('Form%s_report%s_autogen.xml' % (bib_type, i), 
+      FormBib = ('Form%s_report%s_autogen.xml' % (bib_type, i),
                 'Form%s_report%s.xml' % (bib_type, i))
       try:
           accu += open('ui/%s' % FormBib[0]).read()
       except:
           accu += open('ui/%s' % FormBib[1]).read()
-    lines = accu.split('\n') 
+    lines = accu.split('\n')
 
     xmlBib = []
     for line in lines:
        m = re.search(r'name="(.*?)"', line)
-       if m: 
+       if m:
            f = m.groups()
            for it in f:
                xmlBib.append(it)
 
     xmlBib = sets.Set(xmlBib)
     Bibkeys = sets.Set(Bibkeys)
-    intersec = Bibkeys.intersection(xmlBib) 
+    intersec = Bibkeys.intersection(xmlBib)
     print '\n#### in xml but not in schema'
     pprint (list(xmlBib.difference(intersec)))
     print '\n#### in schema but not in xml'

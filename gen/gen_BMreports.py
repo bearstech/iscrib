@@ -1,5 +1,5 @@
 # -*- coding: ISO-8859-1 -*-
-#### to check if the autogen and the original one are different 
+#### to check if the autogen and the original one are different
 ## for i in `ls FormBM_report*autogen.xml` ;
 ## do  diff $i `basename $i _autogen.xml`.xml ;done
 
@@ -10,14 +10,14 @@ from pprint import pprint
 from GenFormsTemplates import GenForms
 
 
-######################################################################## 
+########################################################################
 # Form BM 1 A
-######################################################################## 
+########################################################################
 
-f1 = GenForms(bibType='BM', encoding='latin1', 
+f1 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report1_autogen.xml', no_generation=True)
 f1.main_header()
-f1.add_h1(title=u'A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales)', 
+f1.add_h1(title=u'A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales)',
           help_file='help1')
 # A1
 f1.add_h2(title=u'A.1 DEPENSES DE FONCTIONNEMENT PROPRES A LA BIBLIOTHÈQUE')
@@ -55,11 +55,11 @@ body, trach = f1.raw_text2lines(data=data)
 f1.table(body)
 f1.main_footer()
 
-######################################################################## 
+########################################################################
 # Form BM 2 B
-######################################################################## 
+########################################################################
 
-f2 = GenForms(bibType='BM', encoding='latin1', 
+f2 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report2_autogen.xml', no_generation=True)
 f2.main_header()
 f2.add_h1(title=(u"B- LOCAUX - VÉHICULES - ÉQUIPEMENT INFORMATIQUE"
@@ -70,7 +70,7 @@ f2.add_h2(title=u'B.1 LOCAUX')
 data = u"""
 ##XYZ## Centrale  X ##  Annexes Y ##  Total Z
 Surface en m² horsoeuvre nette SHON (services publics et intérieurs confondus)   B11
-Nombre de bâtiments                                                              B12 
+Nombre de bâtiments                                                              B12
 Nombre de places assises (hors auditorium et cafétéria)                          B13
 """
 body, xyz_labels = f2.raw_text2lines(data=data)
@@ -99,14 +99,14 @@ Si oui, préciser lequel :                B32
 Dans l'année, la bibliothèque a-t-elle importé des notices pour alimenter  catalogue ?  B33
 Si oui, dans quelle proportion ? %    B34
 Si la bibliothèque possède des documents patrimoniaux, leur catalogue est- au moins en partie informatisé ? B35
-Si oui : nombre de notices   B36 
+Si oui : nombre de notices   B36
 """
 body, xyz_labels = f2.raw_text2lines(data=data)
 f2.table(body, xyz_labels)
 # B4
 
 data = u"""
-##XY##  Professionnels  X ##  Publics   Y           
+##XY##  Professionnels  X ##  Publics   Y
 Nombre de postes informatiques sans accès internet                      B37
 Nombre de postes informatique avec accès internet                       B38
 TOTAL                                                                   B39
@@ -136,19 +136,19 @@ f2.table(body, xyz_labels)
 f2.add_th_comment(u"Si oui, lesquels ?")
 data = u"""
 Appareils de grossissement          B44
-Règles tactiles                     B45 
-Logiciels adaptés                   B46 
+Règles tactiles                     B45
+Logiciels adaptés                   B46
 Autres, préciser :                  B47
 """
 body, xyz_labels = f2.raw_text2lines(data=data)
 f2.table(body, xyz_labels)
 
 f2.main_footer()
-######################################################################## 
+########################################################################
 # Form BM 3 C
-######################################################################## 
+########################################################################
 
-f3 = GenForms(bibType='BM', encoding='latin1', 
+f3 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report3_autogen.xml', no_generation=True )
 f3.main_header()
 f3.add_h1(title='C-  PERSONNEL EN POSTE AU 31 DECEMBRE 2005', help_file='help3')
@@ -157,14 +157,14 @@ f3.add_h2(title=u"CADRES D' EMPLOIS")
 f3.add_h2(title=u"C.1 FONCTION PUBLIQUE : FILIÈRE CULTURELLE")
 
 data = u"""
-##WXYZ##  NB DE PERSONNES ##  NB  D'EMPLOIS Equivalent Temps Plein (ETP)## NB DE PERSONNES AYANT SUIVI UNE FORMATION DANS L'ANNEE##Responsable de la bibliothèque ? 
-Conservateurs d'Etat                    C11   
-Conservateurs territoriaux              C12         
+##WXYZ##  NB DE PERSONNES ##  NB  D'EMPLOIS Equivalent Temps Plein (ETP)## NB DE PERSONNES AYANT SUIVI UNE FORMATION DANS L'ANNEE##Responsable de la bibliothèque ?
+Conservateurs d'Etat                    C11
+Conservateurs territoriaux              C12
 Bibliothécaires                         C13
-Assistants qualifiés de conservation    C14                   
-Assistants de conservation              C15         
-Agents qualifiés du patrimoine          C16             
-Agents du patrimoine                    C17 
+Assistants qualifiés de conservation    C14
+Assistants de conservation              C15
+Agents qualifiés du patrimoine          C16
+Agents du patrimoine                    C17
 """
 body, xyz_labels = f3.raw_text2lines(data=data)
 f3.table(body, xyz_labels)
@@ -184,9 +184,9 @@ f3.add_h2(title=(u"C.3 AUTRES PERSONNELS REMUNÉRÉS"))
 data = u"""
 ##WXYZ##  NB DE PERSONNES##  NB  D'EMPLOIS D'ETP  ## NB DE PERSONNES AYANT SUIVI UNE FORMATION DANS L'ANNEE##Responsable de la bibliothèque ?
 Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) qualifiés C31
-Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) non qualifiés C32                    
+Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...) non qualifiés C32
 Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.E.J,...) qualifiés  C33
-Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.E.J,...) non qualifiés   C34           
+Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.E.J,...) non qualifiés   C34
 """
 body, xyz_labels = f3.raw_text2lines(data=data)
 f3.table(body, xyz_labels)
@@ -210,10 +210,10 @@ body, xyz_labels = f3.raw_text2lines(data=data)
 f3.table(body, xyz_labels)
 
 f3.main_footer()
-######################################################################## 
+########################################################################
 # Form BM 4 D- COLLECTIONS
-######################################################################## 
-f4 = GenForms(bibType='BM', encoding='latin1', 
+########################################################################
+f4 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report4_autogen.xml', no_generation=True)
 f4.main_header()
 f4.add_h1(title=(u"D- COLLECTIONS au 31 DECEMBRE 2005"),
@@ -231,10 +231,10 @@ Nombre de livres en libre accès réservés a la consultation sur place    D12
 Nombre total de livres en libre accès  (D11+D12)                        D13
 Livres non patrimoniaux en magasin                                      D14
 TOTAL  (D13 + D14)                                                      D15
-Vidéogrammes                                                            D16 
+Vidéogrammes                                                            D16
 Phonogrammes                                                            D17
 Cédéroms sauf périodiques                                               D18
-"""   
+"""
 body, xyz_labels = f4.raw_text2lines(data=data)
 f4.table(body, xyz_labels)
 
@@ -257,7 +257,7 @@ body, xyz_labels = f4.raw_text2lines(data=data)
 f4.table(body, xyz_labels)
 
 # D30
-f4.add_h2(title=u"D.3 DOCUMENTS PATRIMONIAUX (hors périodiques)")  
+f4.add_h2(title=u"D.3 DOCUMENTS PATRIMONIAUX (hors périodiques)")
 data = u"""
 Livres imprimés                            D31
 Manuscrits                                 D32
@@ -271,7 +271,7 @@ body, xyz_labels = f4.raw_text2lines(data=data)
 f4.table(body, xyz_labels)
 
 # D40
-f4.add_h2(title=u"D.4 PÉRIODIQUES")                          
+f4.add_h2(title=u"D.4 PÉRIODIQUES")
 data = u"""
 Nombre de titres de périodiques conservés (titres morts ou courants) imprimés                  D41
 Dont nombre de périodiques patrimoniaux                                                        D42
@@ -283,30 +283,30 @@ f4.table(body, xyz_labels)
                             
 
 f4.main_footer()
-######################################################################## 
+########################################################################
 # Form BM 5 E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE
-######################################################################## 
-f5 = GenForms(bibType='BM', encoding='latin1', 
+########################################################################
+f5 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report5_autogen.xml', no_generation=True)
 f5.main_header()
 f5.add_h1(title=(u"E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE"),
           help_file='help5')
-# E10 
+# E10
 f5.add_h2(title=u"E. 1 NOMBRE DE DOCUMENTS ACHETÉS  (hors périodiques "
                 u"et documents patrimoniaux)")
 data = u"""
-##XYZ##   ADULTES X ##  ENFANTS Y ##  TOTAL Z   
+##XYZ##   ADULTES X ##  ENFANTS Y ##  TOTAL Z
 Livres                            E11
 Phonogrammes                      E12
 Vidéogrammes                      E13
 Cédéroms                          E14
 Autres documents                  E15
-Documents numériques  			  E16	
+Documents numériques  			  E16
 Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)  E17
 """
 body, xyz_labels = f5.raw_text2lines(data=data)
 f5.table(body, xyz_labels)
-# E20 
+# E20
 f5.add_h2(title=u"E. 2 NOMBRE DE DOCUMENTS ENTRÉS PAR DONS, LEGS OU DÉPÔT LEGAL "
                 u"(hors périodiques et documents patrimoniaux )")
 data = u"""
@@ -321,7 +321,7 @@ dont documents adaptés aux personnes handicapées (braille, livres en gros caract
 """
 body, xyz_labels = f5.raw_text2lines(data=data)
 f5.table(body, xyz_labels)
-# E30 
+# E30
 f5.add_h2(title=u"E. 3 NOMBRE DE DOCUMENTS RETIRÉS DE L'INVENTAIRE"
                 u" (hors documents patrimoniaux)")
 data = u"""
@@ -337,11 +337,11 @@ Dont documents adaptés aux personnes handicapées (braille, livres en gros caract
 """
 body, xyz_labels = f5.raw_text2lines(data=data)
 f5.table(body, xyz_labels)
-# E40 
+# E40
 f5.add_h2(title=u"E.4 NOMBRE DE DOCUMENTS PATRIMONIAUX ACQUIS "
                 u"(achats, dons, legs)")
 data = u"""
-##XYZ## ACHATS  X ##  DONS, LEGS  Y ##  TOTAL Z     
+##XYZ## ACHATS  X ##  DONS, LEGS  Y ##  TOTAL Z
 Livres imprimés                          E41
 Périodiques                              E42
 Manuscrits : nombre de cotes             E43
@@ -351,7 +351,7 @@ TOTAL (E41 à  E45)                       E46
 """
 body, xyz_labels = f5.raw_text2lines(data=data)
 f5.table(body, xyz_labels)
-# E50 
+# E50
 f5.add_h2(title=u"E. 5  NOMBRE DE PÉRIODIQUES ACQUIS"
                 u"(ACHÂTS, DONS, LEGS)")
 data = u"""
@@ -362,11 +362,11 @@ Nombre d'abonnements en cours en ligne                                          
 """
 body, xyz_labels = f5.raw_text2lines(data=data)
 f5.table(body, xyz_labels)
-# E60 
+# E60
 f5.add_h2(title=u" E. 6/7 DÉPENSES D'ACQUISITION"
                 u" (en euros, sans  décimale)")
 data = u"""
-##XYZ##   ADULTES X ##  ENFANTS Y ##  TOTAL Z   
+##XYZ##   ADULTES X ##  ENFANTS Y ##  TOTAL Z
 Livres                              E61
 Phonogrammes                        E62
 Vidéogrammes                        E63
@@ -378,7 +378,7 @@ Périodiques imprimés                           E68
 Périodiques sur cédéroms                       E69
 Périodiques en ligne                           E70
 SOUS-TOTAL (E68 à E70)                         E71
-Documents numériques                           E72 
+Documents numériques                           E72
 Documents patrimoniaux                         E73
 TOTAL (E67 + E71 + E72 + E73)                  E74
 """
@@ -386,20 +386,20 @@ body, xyz_labels = f5.raw_text2lines(data=data)
 f5.table(body, xyz_labels)
 
 f5.main_footer()
-######################################################################## 
-# Form BM 6 F- COOPÉRATION ET RÉSEAU 
-######################################################################## 
-f6 = GenForms(bibType='BM', encoding='latin1', 
+########################################################################
+# Form BM 6 F- COOPÉRATION ET RÉSEAU
+########################################################################
+f6 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report6_autogen.xml', no_generation=True)
 f6.main_header()
 f6.add_h1(title=(u"COOPÉRATION ET RÉSEAU (F17-F20)"),
           help_file='help6')
-# F10 
+# F10
 data = u"""
 La bibliothèque appartient-elle au réseau de la BDP ?                  F11
 La bibliothèque appartient-elle à un autre réseau documentaire ?       F12
-si oui, lequel :                                                       F13         
-La bibliothèque participe-t-elle à des actions de coopération ?        F14 
+si oui, lequel :                                                       F13
+La bibliothèque participe-t-elle à des actions de coopération ?        F14
 si oui, préciser lesquelles :                                          F15
 """
 body, xyz_labels = f6.raw_text2lines(data=data)
@@ -434,17 +434,17 @@ f6.table(body, xyz_labels)
 f6.main_footer()
 
 
-######################################################################## 
-# Form BM 7 G- ACTIVITÉS DE LA BIBLIOTHÈQUE 
-######################################################################## 
+########################################################################
+# Form BM 7 G- ACTIVITÉS DE LA BIBLIOTHÈQUE
+########################################################################
 
 # FormBM_report7.xml n'est plus autogénére
-f7 = GenForms(bibType='BM', encoding='latin1', 
+f7 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report7_autogen.xml', no_generation=True)
 f7.main_header()
 f7.add_h1(title=(u"G-  ACTIVITÉS DE LA BIBLIOTHÈQUE"),
           help_file='help7')
-# G10 
+# G10
 f7.add_h2(title=u"G.1 OUVERTURE À TOUS LES PUBLICS"
                 u"(hors accueils de publics spécifiques et de classes)")
 data = u"""
@@ -489,7 +489,7 @@ Préciser combien d'entre elles sont situées dans la commune (ou le groupement de
 body, xyz_labels = f7.raw_text2lines(data=data)
 f7.table(body, xyz_labels)
 
-# G40 
+# G40
 f7.add_h2(title=u"G. 4/5 NOMBRE DE PRÊTS ET COMMUNICATIONS EFFECTUÉS DANS L'ANNÉE")
 data = u"""
 ##XYZ## ADULTES X ##  ENFANTS Y ##   TOTAL Z
@@ -515,17 +515,17 @@ f7.table(body, xyz_labels)
               
 f7.main_footer()
 
-######################################################################## 
+########################################################################
 # Form BM 8 H-   SERVICES OFFERTS PAR LA BIBLIOTHÈQUE
-######################################################################## 
-f8 = GenForms(bibType='BM', encoding='latin1', 
+########################################################################
+f8 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report8_autogen.xml',
               no_generation=True)
 
 f8.main_header()
 f8.add_h1(title=(u" SERVICES OFFERTS PAR LA BIBLIOTHÈQUE"),
           help_file='help8')
-# H10 
+# H10
 f8.add_h2(title=u"H. 1/2 SERVICES AUX USAGERS")
 data = u"""
 La bibliothèque organise-t-elle des actions de formation pour les usagers ?  H11
@@ -536,9 +536,9 @@ f8.table(body, xyz_labels)
 f8.add_th_comment(u"La bibliothèque offre-t-elle ces services ?")
 data = u"""
 Guide du lecteur              H12
-Réservation                   H13 
+Réservation                   H13
 Portage à domicile            H14
-Services pour les personnes handicapées           H15 
+Services pour les personnes handicapées           H15
 Prêt inter-bibliothèques                          H16
 """
 body, xyz_labels = f8.raw_text2lines(data=data)
@@ -557,7 +557,7 @@ Autres                                            H21
 """
 body, xyz_labels = f8.raw_text2lines(data=data)
 f8.table(body, xyz_labels)
-# H30 
+# H30
 f8.add_h2(title=u"H. 3 SERVICES À DISTANCE")
 data = u"""
 La bibliothèque a-t-elle un site web ?                           H31
@@ -614,10 +614,10 @@ TOTAL (H52 à H62)              H63
 body, xyz_labels = f8.raw_text2lines(data=data)
 f8.table(body, xyz_labels)
 f8.main_footer()
-######################################################################## 
+########################################################################
 # Form BM 9 I- ANIMATIONS, PUBLICATIONS ET FORMATION
-######################################################################## 
-f9 = GenForms(bibType='BM', encoding='latin1', 
+########################################################################
+f9 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report9_autogen.xml', no_generation=True )
 f9.main_header()
 f9.add_h1(title=(u"I- ANIMATIONS, PUBLICATIONS ET FORMATION"),
@@ -652,7 +652,7 @@ Autres                          I21
 body, xyz_labels = f9.raw_text2lines(data=data)
 f9.table(body, xyz_labels)
 
-# I30 
+# I30
 f9.add_h2(title=u"I.3 PUBLICATIONS")
 
 data = u"""
@@ -682,7 +682,7 @@ body, xyz_labels = f9.raw_text2lines(data=data)
 f9.table(body, xyz_labels)
 
 
-# I40 
+# I40
 f9.add_h2(title=u"I.4 FORMATIONS DISPENSÉES PAR LA BIBLIOTHÈQUE")
 data = u"""
 Nombre d'heures de cours assurées par le personnel (ENSSIB, CRFCB, ABF, CNFPT, BDP, )  I41
@@ -701,7 +701,7 @@ f9.table(body, xyz_labels)
 
 f9.add_th_comment(u"FORMATIONS ORGANISÉES PAR LA BIBLIOTHÈQUE")
 data = u"""
-##YZ##NB DE PARTICIPANTS  Y ##  NB DE JOURNÉES DE FORMATION Z 
+##YZ##NB DE PARTICIPANTS  Y ##  NB DE JOURNÉES DE FORMATION Z
 Professionnels I45
 Autres                I46
 TOTAL                 I47
@@ -710,7 +710,7 @@ body, xyz_labels = f9.raw_text2lines(data=data)
 f9.table(body, xyz_labels)
 
 data =u"""
-##YZ## NB DE JOURNEES D'ETUDE  Y  ## NB DE PARTICIPANTS  Z   
+##YZ## NB DE JOURNEES D'ETUDE  Y  ## NB DE PARTICIPANTS  Z
 JOURNEES D'ETUDE, RENCONTRES PROFESSIONNELLES I48
 """
 body, xyz_labels = f9.raw_text2lines(data=data)
@@ -720,17 +720,17 @@ f9.table(body, xyz_labels)
 f9.main_footer()
 
 
-######################################################################## 
+########################################################################
 # Form BM 10 J- Annexes
-# Form BM 11 K- EPCI 
-######################################################################## 
-f10 = GenForms(bibType='BM', encoding='latin1', 
+# Form BM 11 K- EPCI
+########################################################################
+f10 = GenForms(bibType='BM', encoding='latin1',
                filename='FormBM_report10_autogen.xml',
                no_generation=True )
 f10.main_header()
 f10.add_h1(title=(u"Annexes"),
           help_file='help2')
-# F10 
+# F10
 data = u"""
 ##TUVWXYZ##NOM ##ADRESSE ##CP##  VILLE ##TÉLÉPHONE## TÉLÉCOPIE ##COURRIEL
 1  J1
@@ -756,17 +756,17 @@ f10.table(body, xyz_labels)
 # So we comment  f10.main_footer()
 f10.main_footer()
 
-######################################################################## 
-# Form BM 11 K- EPCI 
-######################################################################## 
-f11 = GenForms(bibType='BM', encoding='latin1', 
+########################################################################
+# Form BM 11 K- EPCI
+########################################################################
+f11 = GenForms(bibType='BM', encoding='latin1',
               filename='FormBM_report11_autogen.xml', no_generation=True)
 f11.main_header()
 f11.add_h1(title=(u"FICHE DE RENSEIGNEMENTS concernant les Etablissements"
                   u" publics de coopération intercommunale (EPCI) <br/> ayant "
                   u"compétence culturelle"),
           help_file='help2')
-# f11 
+# f11
 data = u"""
 Intitulé de l'EPCI :         K1
 Population totale :          K2

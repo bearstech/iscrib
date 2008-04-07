@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com> 
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -120,19 +120,19 @@ class Forms(Folder):
                            'selected': state_key == state_code})
         namespace['states'] = states
 
-        departements = [] 
+        departements = []
         for dep_key, dep_dic in get_deps().items():
             dep_name = dep_dic['name'].capitalize()
-            departements.append({'name': '%s (%s)' % (dep_name, dep_key), 
-                                 'value': dep_key, 
+            departements.append({'name': '%s (%s)' % (dep_name, dep_key),
+                                 'value': dep_key,
                                  'selected': dep_key == dep})
-        departements = [(d['value'], d) for d in departements] 
+        departements = [(d['value'], d) for d in departements]
         departements.sort()
-        departements = [d[-1] for d in departements] 
+        departements = [d[-1] for d in departements]
         namespace['departements'] = departements
 
-        namespace['search_dep'] = dep 
-        namespace['search_code'] = code 
+        namespace['search_dep'] = dep
+        namespace['search_code'] = code
         namespace['search_state'] = state_code
 
         # Search

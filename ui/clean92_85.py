@@ -1,5 +1,5 @@
 """
-Replace the bad windows cut and past caracter: 
+Replace the bad windows cut and past caracter:
 '\x92' by "'" and '\x85' by "..."
 """
 import os
@@ -12,7 +12,7 @@ for file in os.listdir('.'):
       if lines92:
           print '92', file, len(lines92)
           res = []
-          for l in open(file, 'r').readlines(): 
+          for l in open(file, 'r').readlines():
               if l.count('\x92'):
                   l = l.replace('\x92' ,"'")
               res.append(l)
@@ -21,7 +21,7 @@ for file in os.listdir('.'):
       if lines85:
           print '85', file, len(lines85)
           res = []
-          for l in open(file, 'r').readlines(): 
+          for l in open(file, 'r').readlines():
               if l.count('\x85'):
                   l = l.replace('\x85', "...")
               res.append(l)

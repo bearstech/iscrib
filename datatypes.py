@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
-# Copyright (C) 2006 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -39,15 +39,15 @@ class EPCI_Statut(Enumerate):
     @classmethod
     def get_options(cls):
         return [{'id': '0', 'label': ""},
-                {'id': '1', 
+                {'id': '1',
                  'label': u"Commune dans un EPCI sans compétence bibliothèque"},
-                {'id': '2', 
+                {'id': '2',
                  'label': u"Commune dans EPCI - bibliothèque non transférée"},
-                {'id': '3', 
+                {'id': '3',
                  'label': u"Commune dans EPCI avec compétence biblio"},
-                {'id': '4', 
+                {'id': '4',
                  'label': u"Ville-centre  d'un EPCI avec compétence biblio"},
-                {'id': '5', 
+                {'id': '5',
                  'label': u"Commune dans syndicat intercommunal"},
                 {'id': '6', 'label': "Autre"},
                 ]
@@ -58,7 +58,7 @@ class EPCI_Statut(Enumerate):
 ##############################################################################
 
 class Checkboxes(String):
-    pass 
+    pass
 
 
 

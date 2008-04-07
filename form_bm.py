@@ -105,7 +105,7 @@ class FormBM(Form):
 
 
     def get_code(self):
-        return self.name 
+        return self.name
 
 
     ######################################################################
@@ -127,11 +127,11 @@ class FormBM(Form):
     print_form__access__ = 'is_allowed_to_view'
     print_form__label__ = u'Impression du rapport '
     def print_form(self, context):
-        context.response.set_header('Content-Type', 
+        context.response.set_header('Content-Type',
                                     'text/html; charset=UTF-8')
         namespace = self.get_namespace()
         forms = ['FormBM_report%s' % i for i in range(0, 12)]
-        forms = [('%s.xml' % i, '%s_autogen.xml' % i, 'print_all') 
+        forms = [('%s.xml' % i, '%s_autogen.xml' % i, 'print_all')
                  for i in forms]
         # report_form10 and report_form11 must be in position 2 and 3
         forms.insert(1, forms[-2])
@@ -139,7 +139,7 @@ class FormBM(Form):
         forms = forms[:-2]
         forms = [self.get_ns_and_h(n, a, v) for n, a, v in forms]
         forms = reduce(lambda x,y: x+y, forms)
-        namespace['body'] = forms 
+        namespace['body'] = forms
 
         template = self.get_object('/ui/scrib/printable_template.xhtml')
         return stl(template, namespace)
@@ -150,7 +150,7 @@ class FormBM(Form):
     report_form0__label__ = u'Rapport Bibliothèques'
     report_form0__sublabel__ = u'Identité'
     def report_form0(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report0.xml', 
+        return self.get_ns_and_h('FormBM_report0.xml',
                                  'FormBM_report0_autogen.xml',
                                  view)
 
@@ -159,7 +159,7 @@ class FormBM(Form):
     report_form1__label__ = u'Rapport BM'
     report_form1__sublabel__ = u'A-Finances'
     def report_form1(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report1.xml', 
+        return self.get_ns_and_h('FormBM_report1.xml',
                                  'FormBM_report1_autogen.xml',
                                  view)
 
@@ -167,7 +167,7 @@ class FormBM(Form):
     report_form2__label__ = u'Rapport BM'
     report_form2__sublabel__ = u'B-Locaux'
     def report_form2(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report2.xml', 
+        return self.get_ns_and_h('FormBM_report2.xml',
                                  'FormBM_report2_autogen.xml',
                                  view)
 
@@ -176,7 +176,7 @@ class FormBM(Form):
     report_form3__label__ = u'Rapport BM'
     report_form3__sublabel__ = u'C-Personnel'
     def report_form3(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report3.xml', 
+        return self.get_ns_and_h('FormBM_report3.xml',
                                  'FormBM_report3_autogen.xml',
                                  view)
 
@@ -185,7 +185,7 @@ class FormBM(Form):
     report_form4__label__ = u'Rapport BM'
     report_form4__sublabel__ = u'D-Collections'
     def report_form4(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report4.xml', 
+        return self.get_ns_and_h('FormBM_report4.xml',
                                  'FormBM_report4_autogen.xml',
                                  view)
 
@@ -194,7 +194,7 @@ class FormBM(Form):
     report_form5__label__ = u'Rapport BM'
     report_form5__sublabel__ = u'E-Acquisitions'
     def report_form5(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report5.xml', 
+        return self.get_ns_and_h('FormBM_report5.xml',
                                  'FormBM_report5_autogen.xml',
                                  view)
 
@@ -203,7 +203,7 @@ class FormBM(Form):
     report_form6__label__ = u'Rapport BM'
     report_form6__sublabel__ = u'F-Coopération et réseau'
     def report_form6(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report6.xml', 
+        return self.get_ns_and_h('FormBM_report6.xml',
                                  'FormBM_report6_autogen.xml',
                                  view)
 
@@ -212,7 +212,7 @@ class FormBM(Form):
     report_form7__label__ = u'Rapport BM'
     report_form7__sublabel__ = u'G-Activités'
     def report_form7(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report7.xml', 
+        return self.get_ns_and_h('FormBM_report7.xml',
                                  'FormBM_report7_autogen.xml',
                                  view)
 
@@ -221,7 +221,7 @@ class FormBM(Form):
     report_form8__label__ = u'Rapport BM'
     report_form8__sublabel__ = u'H-Services'
     def report_form8(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report8.xml', 
+        return self.get_ns_and_h('FormBM_report8.xml',
                                  'FormBM_report8_autogen.xml',
                                  view)
 
@@ -230,7 +230,7 @@ class FormBM(Form):
     report_form9__label__ = u'Rapport BM'
     report_form9__sublabel__ = u'I-Animations, publications et formation'
     def report_form9(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report9.xml', 
+        return self.get_ns_and_h('FormBM_report9.xml',
                                  'FormBM_report9_autogen.xml',
                                  view)
 
@@ -239,7 +239,7 @@ class FormBM(Form):
     report_form10__label__ = u'Rapport BM'
     report_form10__sublabel__ = (u'Annexes').capitalize()
     def report_form10(self, context, view=None):
-        return self.get_ns_and_h('FormBM_report10.xml', 
+        return self.get_ns_and_h('FormBM_report10.xml',
                                  'FormBM_report10_autogen.xml',
                                  view)
 
@@ -249,82 +249,82 @@ class FormBM(Form):
     report_form11__sublabel__ = (u'EPCI')
     def report_form11(self, context, view=None):
         code_ua = self.get_code()
-        return self.get_ns_and_h('FormBM_report11.xml', 
+        return self.get_ns_and_h('FormBM_report11.xml',
                                  'FormBM_report11_autogen.xml',
                                  view)
 
 
     #######################################################################
     # Help
-    help0__access__ = True 
+    help0__access__ = True
     def help0(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help0.xml')
         return template.to_str()
     
-    help1__access__ = True 
+    help1__access__ = True
     def help1(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help1.xml')
         return template.to_str()
 
 
-    help2__access__ = True 
+    help2__access__ = True
     def help2(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help2.xml')
         return template.to_str()
 
 
-    help3__access__ = True 
+    help3__access__ = True
     def help3(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help3.xml')
         return template.to_str()
 
 
-    help4__access__ = True 
+    help4__access__ = True
     def help4(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help4.xml')
         return template.to_str()
 
 
-    help5__access__ = True 
+    help5__access__ = True
     def help5(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help5.xml')
         return template.to_str()
 
 
-    help6__access__ = True 
+    help6__access__ = True
     def help6(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help6.xml')
         return template.to_str()
 
 
-    help7__access__ = True 
+    help7__access__ = True
     def help7(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help7.xml')
         return template.to_str()
 
 
-    help8__access__ = True 
+    help8__access__ = True
     def help8(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help8.xml')
         return template.to_str()
 
 
-    help9__access__ = True 
+    help9__access__ = True
     def help9(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help9.xml')
         return template.to_str()
 
-    help11__access__ = True 
+    help11__access__ = True
     def help11(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBM_help11.xml')
