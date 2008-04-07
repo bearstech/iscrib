@@ -48,15 +48,6 @@ class Root(BaseRoot):
     class_title = u"SCRIB"
 
 
-    login_form__access__ = True
-    def login_form(self, context):
-        namespace = {'referer': context.get_form_value('referer', default=''),
-                     'username': context.get_form_value('username', default='')}
-
-        template = self.get_object('/ui/scrib/SiteRoot_login.xml')
-        return stl(template, namespace)
-
-
     def before_traverse(self, context):
         BaseRoot.before_traverse(self, context)
         # Set french as default language, whatever the browser config is
@@ -194,6 +185,18 @@ class Root(BaseRoot):
 
     #########################################################################
     # Login
+    login_form__access__ = True
+    def login_form(self, context):
+        namespace = {}
+        here = context.object
+        site_root = here.get_site_root()
+        namespace['action'] = '%s/;login' % here.get_pathto(site_root)
+        namespace['username'] = context.get_form_value('username')
+
+        template = self.get_object('/ui/scrib/SiteRoot_login.xml')
+        return stl(template, namespace)
+
+
     def login(self, context):
         goto = BaseRoot.login(self, context)
         user = context.user

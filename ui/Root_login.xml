@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://xml.itools.org/namespaces/stl">
+
+  <form name="loginform" method="post" action=";login">
+    <table class="form">
+      <tr>
+        <th class="title" colspan="2">Authentification</th>
+      </tr>
+      <tr>
+        <th>Nom</th>
+        <td>
+          <input id="username" name="username" type="text"
+            value="${username}"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Mot de passe</th>
+        <td>
+          <input id="password" name="password" type="password"/>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <a href="/;forgotten_password_form">Mot de passe oublié ?</a>
+        </td>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" value="OK" clas="button_ok" />
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <p style="color: red">
+    <b>ATTENTION  !</b><br/>
+    Si vous êtes une bibliothèque <b>municipale</b>, il vous reste jusqu'au
+    samedi 30 juin inclus pour conclure votre téléprocédure. <br/> Si vous êtes
+    une bibliothèque <b>départementale</b> de prêt, l'accès à la téléprocédure
+    est maintenu.
+</p>
+
+  <pre>
+    Pour que la connexion s'établisse correctement, il faut que le navigateur
+    accepte les "cookies".
+
+    Assurez-vous que ses paramètres sont corrects :
+
+    - Sur Mozilla-Firefox (recommandé) :
+      Outils/Options - Vie Privée - cookies - Cocher «Autoriser les cookies»
+
+    - Sur Internet Explorer :
+      Outils/Options Internet - Onglet Confidentialité - Bouton «Avancé» puis
+      Accepter tous les cookies.
+
+  </pre>
+
+  <script language="javascript">
+    <stl:inline if="not username">focus_element("username");</stl:inline>
+    <stl:inline if="username">focus_element("password");</stl:inline>
+  </script>
+
+</stl:block>
