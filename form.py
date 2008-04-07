@@ -28,7 +28,6 @@ from decimal import Decimal as dec, InvalidOperation
 from MySQLdb import OperationalError
 
 # Import from itools
-from itools.catalog import schedule_to_reindex
 from itools.datatypes import Unicode, Boolean, String
 from itools.web import get_context
 from itools.stl import stl
@@ -98,8 +97,8 @@ class Form(Text):
 
     ######################################################################
     # Form API
-    def set_metadata(self, meta):
-        self.handler.fields.update(meta)
+    def update_fields(self, fields):
+        self.handler.fields.update(fields)
         self.handler.set_changed()
 
 
@@ -140,6 +139,7 @@ class Form(Text):
     # Namespaces
     def get_namespace(self, context):
         schema = self.get_schema()
+        fields = self.handler.fields
 
         namespace = {}
         # Permissions
@@ -158,7 +158,7 @@ class Form(Text):
             value = context.get_form_value(key)
             if value is None:
                 # is the value is not in query string, take it in fields 
-                value = self.handler.fields.get(name, default)
+                value = fields.get(name, default)
             namespace[name] = value
             # If name is 'fieldA23', add 'A23'
             if name.startswith('field'):
@@ -309,7 +309,7 @@ class Form(Text):
                     pass
                 # Make the select options
                 elif k.endswith('Z'):
-                    kz = self.handler.fields.get(key, '0')
+                    kz = fields.get(key, '0')
                     if kz != '0':
                         namespace[key] = EPCI_Statut.get_namespace(kz)
                     else: 
@@ -674,7 +674,6 @@ class Form(Text):
         # Change state
         self.set_property('state', 'pending')
         user = context.user
-        schedule_to_reindex(self)
 
         # Build email
         namespace = self.get_namespace()
@@ -861,7 +860,6 @@ class Form(Text):
 
             cursor.close()
             connection.close()
-            self.handler.set_changed()
         except OperationalError: 
             context.commit = False
             return context.come_back(MSG_NO_MYSQL)
@@ -913,68 +911,68 @@ class Form(Text):
     fill_report__access__ = 'is_allowed_to_edit_form'
     def fill_report(self, context):
         schema = self.get_schema()
-        self.handler.set_changed()
-        
-        i = 0
+        fields = {}
+
         t0 = time()
         ns = self.get_namespace()
         for key in schema:
-           i += 1
-           field_type = schema[key][0]
-           field_default = schema[key][1]
-           is_sum = False
-           if len(schema[key]) == 3:
-               is_sum = schema[key][2].get('sum', False)
-           keyNumber = key[len('field'):]
-           if field_type is String:
-               if ns[key]:
-                   value = ns[key]
-           elif field_type is EPCI_Statut:
-               value = '4' 
-           elif field_type is Unicode:
-               if ns[key]:
-                   value = ns[key]
-               else:
-                   # do not fill annexes
-                   if not keyNumber.startswith('J'):
-                       value = u'coué'
-                   else:
-                       value = u''
-           elif field_type is Integer:
-               if is_sum:
-                   value = Integer(len(is_sum) * 5)
-                   e_list = ['E74X', 'E46Z', 'E67Z', 'E71Z', 'E74Y', 'E74Z']
-                   g_list = ['G25Y', 'G26Y', 'G26Z']
-                   if key in ['field' + x for x in e_list + g_list]:
-                       value = Integer('NC')
-               else:
-                   value = Integer(5) 
-           elif field_type is Decimal:
-               value = dec('3.14')
-               if is_sum:
-                   value = value * dec(len(is_sum))
-                   value = Decimal(value)
-               else:
-                   value = Decimal(value)
-           elif field_type is Checkboxes:
-               value = '##1' 
-           elif field_type is Boolean:
-               value = True 
-           else: 
-               value = '0' 
+            field_type = schema[key][0]
+            field_default = schema[key][1]
+            is_sum = False
+            if len(schema[key]) == 3:
+                is_sum = schema[key][2].get('sum', False)
+            keyNumber = key[len('field'):]
+            if field_type is String:
+                if ns[key]:
+                    value = ns[key]
+            elif field_type is EPCI_Statut:
+                value = '4' 
+            elif field_type is Unicode:
+                if ns[key]:
+                    value = ns[key]
+                else:
+                    # do not fill annexes
+                    if not keyNumber.startswith('J'):
+                        value = u'coué'
+                    else:
+                        value = u''
+            elif field_type is Integer:
+                if is_sum:
+                    value = Integer(len(is_sum) * 5)
+                    e_list = ['E74X', 'E46Z', 'E67Z', 'E71Z', 'E74Y', 'E74Z']
+                    g_list = ['G25Y', 'G26Y', 'G26Z']
+                    if key in ['field' + x for x in e_list + g_list]:
+                        value = Integer('NC')
+                else:
+                    value = Integer(5) 
+            elif field_type is Decimal:
+                value = dec('3.14')
+                if is_sum:
+                    value = value * dec(len(is_sum))
+                    value = Decimal(value)
+                else:
+                    value = Decimal(value)
+            elif field_type is Checkboxes:
+                value = '##1' 
+            elif field_type is Boolean:
+                value = True 
+            else: 
+                value = '0' 
 
-           self.handler.fields[key] = value
-           t = time() - t0
+            fields[key] = value
 
-        schedule_to_reindex(self)
-        message = u'Rapport auto remplis en %.2f secondes' % t
+        self.update_fields(fields)
+        t = time() - t0
+
+        message = u'Rapport auto rempli en %.2f secondes' % t
         return context.come_back(message, goto=';controles_form')
 
 
     report__access__ = 'is_allowed_to_edit_form'
     def report(self, context):
         schema = self.get_schema()
-        self.handler.set_changed()
+        fields = {}
+
         referer = context.referrer
         new_referer = deepcopy(referer)
 
@@ -1059,7 +1057,10 @@ class Form(Text):
                     #query even if the type is wrong
                     badT_values[keyNumber] = value
                 else:
-                    self.handler.fields[key] = value
+                    fields[key] = value
+
+        if fields:
+            self.update_fields(fields)
 
         form_state = self.get_form_state()
         if form_state == u'Exporté':
