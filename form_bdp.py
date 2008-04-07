@@ -66,12 +66,12 @@ class FormBDP(Form):
 
 
     @staticmethod
-    def is_BDP(self):
+    def is_BDP():
         return True
 
 
     @staticmethod
-    def is_BM(self):
+    def is_BM():
         return False
 
 
@@ -98,12 +98,10 @@ class FormBDP(Form):
     # Catalog API
     def get_catalog_fields(self):
         fields = Form.get_catalog_fields(self)
-        fields['user_town'] = TextField('user_town')
-        fields['dep'] = KeywordField('dep', is_stored=True)
-        fields['year'] = KeywordField('year')
-        fields['is_BDP'] = BoolField('is_BDP')
-        fields['is_BM'] = BoolField('is_BM')
-        fields['form_state'] = KeywordField('form_state', is_stored=True)
+        fields += [TextField('user_town'), KeywordField('dep', is_stored=True),
+                   KeywordField('year'), BoolField('is_BDP'),
+                   BoolField('is_BM'),
+                   KeywordField('form_state', is_stored=True)]
         return fields
 
 

@@ -38,22 +38,21 @@ from utils import get_deps, get_BMs
 
 
 class ScribUser(User):
+    class_version = '20080407'
     class_views = [['home'], ['edit_password_form']]
 
     def get_catalog_fields(self):
         fields = User.get_catalog_fields(self)
-        fields['user_town'] = TextField('user_town')
-        fields['dep'] = KeywordField('dep', is_stored=True)
-        fields['year'] = KeywordField('year')
-        fields['is_BDP'] = BoolField('is_BDP')
-        fields['is_BM'] = BoolField('is_BM')
+        fields += [TextField('user_town'), KeywordField('dep', is_stored=True),
+                   KeywordField('year'), BoolField('is_BDP'),
+                   BoolField('is_BM')]
         return fields
 
 
     def get_catalog_values(self):
         values = User.get_catalog_values(self)
         values['user_town'] = self.get_user_town()
-        values['dep'] = self.get_dep()
+        values['dep'] = self.get_department()
         values['year'] = self.get_year()
         values['is_BDP'] = self.is_BDP()
         values['is_BM'] = self.is_BM()
@@ -183,6 +182,18 @@ class ScribUser(User):
     #######################################################################
     # Password
     edit_password_form__label__ = u'Change password'
+
+
+    #########################################################################
+    # Upgrade
+    #########################################################################
+    def update_20080407(self):
+        """Migration "bibUser" -> "user"
+        Avec l'objectif de supprimer ScribUserFolder
+        """
+        self.metadata.format = 'user'
+        self.metadata.set_changed()
+
 
 
 register_object_class(ScribUser)
@@ -331,7 +342,7 @@ class ScribUserFolder(UserFolder):
                                                 node.get_firstview())})
 
             if isinstance(object, File):
-                summary = self.gettext(u'%d bytes') % vfs.get_size(object.uri)
+                summary = self.gettext(u'%d bytes') % object.get_size()
             elif isinstance(object, Folder):
                 nobjects = len([ x for x in object.get_names()
                                    if not x.endswith('.metadata') ])
@@ -361,3 +372,5 @@ class ScribUserFolder(UserFolder):
 
 
 register_object_class(ScribUserFolder)
+# TODO remove after migration
+register_object_class(ScribUserFolder, 'bibUser')

@@ -121,7 +121,7 @@ class Form(Text):
         # State
         state = self.get_property('state')
         if state == 'private':
-            if len(self.state.fields) == 0:
+            if len(self.handler.fields) == 0:
                 state = u'Vide'
             else:
                 state = u'En cours'

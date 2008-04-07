@@ -25,6 +25,7 @@ from operator import itemgetter
 
 # Import from itools
 from itools import uri
+from itools import vfs
 from itools.datatypes import Unicode
 from itools.web import get_context
 from itools.stl import stl
@@ -44,7 +45,7 @@ from utils import get_deps, get_BMs, get_connection
 class Root(BaseRoot):
 
     class_id = 'Culture'
-    class_version = '20080404'
+    class_version = '20080407'
     class_title = u"SCRIB"
 
 
@@ -491,14 +492,16 @@ class Root(BaseRoot):
     #########################################################################
     # Upgrade
     #########################################################################
-    def update_20080404(self):
-        """Migration "bibUser" -> "user"
-        Avec l'objectif de supprimer ScribUserFolder
-        """
-        users = self.get_object('users')
-
-        for user in users.get_objects():
-            user.set_property('user')
+    def update_20080407(self):
+        root = vfs.open(self.handler.uri)
+        # Add '.admins.users'
+        if root.exists('admins/.users'):
+            root.move('admins/.users', '.admins.users')
+        # Remove handlers
+        for obsolete in ('.archive', '.users', 'admins', 'admins.metadata',
+                'reviewers', 'reviewers.metadata', 'en.po', 'en.po.metadata'):
+            if root.exists(obsolete):
+                root.remove(obsolete)
 
 
 

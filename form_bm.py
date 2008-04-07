@@ -67,12 +67,12 @@ class FormBM(Form):
 
 
     @staticmethod
-    def is_BDP(self):
+    def is_BDP():
         return False
 
 
     @staticmethod
-    def is_BM(self):
+    def is_BM():
         return True
 
 
@@ -112,7 +112,7 @@ class FormBM(Form):
     # Catalog API
     def get_catalog_fields(self):
         fields = Form.get_catalog_fields(self)
-        fields['code'] = KeywordField('code')
+        fields += [KeywordField('code')]
         return fields
 
     
