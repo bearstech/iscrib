@@ -18,7 +18,6 @@
 
 # Import from itools
 from itools import uri
-from itools import vfs
 from itools.stl import stl
 from itools.catalog import (KeywordField, TextField, BoolField, EqQuery,
         AndQuery)
@@ -33,7 +32,7 @@ from ikaaro.registry import register_object_class
 from ikaaro.widgets import table
 
 # Import from scrib
-from utils import get_deps, get_BMs
+from utils import get_bdp, get_bm, get_bdp_namespace
 
 
 
@@ -76,9 +75,9 @@ class ScribUser(User):
     def get_department_name(self):
         name = self.name
         dep = self.get_department()
-        dep_name = get_deps().get(dep)
+        dep_name = get_bdp(dep)
         if dep_name:
-            dep_name = dep_name.get('name')
+            dep_name = dep_name.get_value('name')
         return dep_name
 
 
@@ -91,7 +90,7 @@ class ScribUser(User):
             code = self.get_BM_code()
             if code:
                 # Cf. #2617
-                bib = get_BMs().get(code)
+                bib = get_bm(code)
                 if bib:
                     dep = bib.get('dep', '')
                 else:
@@ -114,7 +113,7 @@ class ScribUser(User):
             code = self.get_BM_code()
             if code:
                 # Cf. #2617
-                bib = get_BMs().get(code)
+                bib = get_bm(code)
                 if bib:
                     title = bib.get('name', '')
                 else:
@@ -165,13 +164,13 @@ class ScribUser(User):
         # The year
         namespace['year'] = year
         # The department or the BM Code
-        departments = get_deps()
         namespace['dep'] = ''
         if department:
-            dep_name = departments[department].get('name', '')
-            namespace['dep'] = dep_name
+            bib = get_bdp(department)
+            if bib:
+                namespace['dep'] = bib.get_value('name')
         elif code:
-            bib = get_BMs().get(code)
+            bib = get_bm(code)
             if bib:
                 namespace['dep'] = bib.get('name', '')
 
@@ -262,16 +261,7 @@ class ScribUserFolder(UserFolder):
 
         # departements
         namespace['search_dep'] = dep
-        departements = []
-        for dep_key, dep_dic in get_deps().items():
-            dep_name = dep_dic['name'].capitalize()
-            departements.append({'name': '%s (%s)' % (dep_name, dep_key),
-                                 'value': dep_key,
-                                 'selected': dep_key == dep})
-        departements = [(d['value'], d) for d in departements]
-        departements.sort()
-        departements = [d[-1] for d in departements]
-        namespace['departements'] = departements
+        namespace['departements'] = get_bdp_namespace(dep)
 
         bib = parameters['bib']
         bib_types = [{'name': x, 'value': x, 'checked': x==bib}

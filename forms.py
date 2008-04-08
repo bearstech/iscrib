@@ -30,7 +30,7 @@ from ikaaro.widgets import table
 # Import from scrib
 from form_bm import FormBM
 from form_bdp import FormBDP
-from utils import get_deps
+from utils import get_bdp_namespace
 
 
 
@@ -120,16 +120,7 @@ class Forms(Folder):
                            'selected': state_key == state_code})
         namespace['states'] = states
 
-        departements = []
-        for dep_key, dep_dic in get_deps().items():
-            dep_name = dep_dic['name'].capitalize()
-            departements.append({'name': '%s (%s)' % (dep_name, dep_key),
-                                 'value': dep_key,
-                                 'selected': dep_key == dep})
-        departements = [(d['value'], d) for d in departements]
-        departements.sort()
-        departements = [d[-1] for d in departements]
-        namespace['departements'] = departements
+        namespace['departements'] = get_bdp_namespace()
 
         namespace['search_dep'] = dep
         namespace['search_code'] = code

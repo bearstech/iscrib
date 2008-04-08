@@ -16,30 +16,48 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from the Standard Library
+from operator import itemgetter
+
 # Import from mysql
 from MySQLdb import connect
 from MySQLdb.cursors import DictCursor
 
 # Import from itools
 from itools import get_abspath
+from itools.datatypes import String, Unicode
+from itools.csv import CSVFile
 
 # Import from scrib
 from scrib import config
 
 
-path = get_abspath(globals(), 'input_data/init_BM.txt')
-file = open(path)
-bib_municipales = [ x.strip().split(';') for x in file.readlines() ]
-bibs = {}
-for x in bib_municipales:
-    bibs[x[0]] = {'name': unicode(x[1], 'UTF-8'),
-                  'dep':x[2],
-                  'id':x[3],
-                  'code': x[0]}
-
-
 MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
 MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL"
+
+
+class AllBM(CSVFile):
+    class_csv_guess = True
+    schema = {'code': String(index='keyword'),
+              'name': Unicode,
+              'dep': String,
+              'id': String}
+    columns = ['code', 'name', 'dep', 'id']
+
+
+
+class AllBDP(CSVFile):
+    class_csv_guess = True
+    # Utilise "text" comme insensible à la casse
+    # Départements "2A" et "2B" mais objets "2a" et "2b"
+    schema = {'code': String(index='text'),
+              'name': Unicode}
+    columns = ['code', 'name']
+
+
+
+all_bm = AllBM(get_abspath(globals(), 'input_data/init_BM.txt'))
+all_bdp = AllBDP(get_abspath(globals(), 'input_data/init_BDP.txt'))
 
 
 SqlHost = config.get_value('SqlHost')
@@ -49,18 +67,29 @@ SqlPasswd = config.get_value('SqlPasswd')
 SqlPort = config.get_value('SqlPort')
 
 
-def get_BMs():
-    return bibs
+def get_bm(code):
+    results = all_bm.search(code=code)
+    if results:
+        return all_bm.get_row(results[0])
+    return None
 
 
-def get_deps():
-    path = get_abspath(globals(), 'input_data/init_BDP.txt')
-    file = open(path)
-    depts = [ x.strip().split(';') for x in file.readlines() ]
-    departements = {}
-    for x in depts:
-        departements[x[0]] = {'name': unicode(x[1], 'UTF-8'),
-                              'code': x[0]}
+def get_bdp(code):
+    results = all_bdp.search(code=code)
+    if results:
+        return all_bdp.get_row(results[0])
+    return None
+
+
+def get_bdp_namespace(dep):
+    departements = []
+    for bib in all_bdp.get_rows():
+        dep_key = bib.get_value('code')
+        dep_name = bib.get_value('name').capitalize()
+        departements.append({'name': '%s (%s)' % (dep_name, dep_key),
+                             'value': dep_key,
+                             'selected': dep_key == dep})
+    departements.sort(key=itemgetter('value'))
     return departements
 
 

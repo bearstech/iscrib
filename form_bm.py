@@ -26,7 +26,7 @@ from ikaaro.registry import register_object_class
 # Import from scrib
 from schema_bm import schema, alertes, controles
 from form import FormHandler, Form
-from utils import get_BMs, get_adresse
+from utils import get_bm, get_adresse
 
 
 class FormBMHandler(FormHandler):
@@ -90,17 +90,17 @@ class FormBM(Form):
     def get_dep(self):
         # get department number for BMs
         dep = ''
-        bib = get_BMs().get(self.name)
+        bib = get_bm(self.name)
         if bib:
-            dep = bib.get('dep', '')
+            dep = bib.get_value('dep')
         return dep
 
 
     def get_user_town(self):
         title = ''
-        bib = get_BMs().get(self.name)
+        bib = get_bm(self.name)
         if bib:
-            title = bib.get('name', '')
+            title = bib.get_value('name')
         return title
 
 

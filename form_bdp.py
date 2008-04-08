@@ -26,7 +26,7 @@ from ikaaro.registry import register_object_class
 # Import from scrib
 from schema_bdp import schema, alertes, controles
 from form import FormHandler, Form
-from utils import get_deps, get_adresse
+from utils import get_bdp, get_adresse
 
 
 class FormBDPHandler(FormHandler):
@@ -91,7 +91,7 @@ class FormBDP(Form):
 
 
     def get_user_town(self):
-        return get_deps()[self.name].get('name', '')
+        return get_bdp(self.name).get_value('name')
 
 
     ######################################################################

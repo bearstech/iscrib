@@ -39,7 +39,7 @@ from form_bm import FormBM
 from form_bdp import FormBDP
 from forms import Forms
 from user import ScribUser
-from utils import get_deps, get_BMs, get_connection
+from utils import all_bm, all_bdp, get_bm, get_connection
 
 
 class Root(BaseRoot):
@@ -264,15 +264,16 @@ class Root(BaseRoot):
         users = self.get_object('users')
         report_c = int(time() -t); print 'get users, deep copy', report_c
 
-        BMs = get_BMs()
-        BMs_len =  len(BMs)
-        bib_municipals = BMs.items()
+        bm_len =  all_bm.get_nrows()
+        bib_municipales = list(all_bm.get_rows())
         # so we sort by integers values
-        bib_municipals.sort(key=itemgetter(0))
+        bib_municipales.sort(key=itemgetter(0))
         form = FormBM()
         i = 0
-        for code, bib in bib_municipals:
-            name, dep = bib['name'], bib['dep']
+        for bib in bib_municipales:
+            code = bib.get_value('code')
+            name = bib.get_value('name')
+            dep = bib.get_value('dep')
             # Add report
             reports.set_object(code, form, **{'title': name})
             # Add user
@@ -283,7 +284,7 @@ class Root(BaseRoot):
                 user = users.get_object(username)
                 user.set_password('BM%s' % code)
                 del user
-            print '%s/%s' % (i, BMs_len), dep, code, username
+            print '%s/%s' % (i, bm_len), dep, code, username
             i += 1
         report_m = int(time() -t); print 'users and reperts set ', report_m
         secondes = int(time() - t)
@@ -308,8 +309,9 @@ class Root(BaseRoot):
         reports = self.get_object(name)
         users = self.get_object('users')
         form = FormBDP()
-        for name, dic in get_deps().items():
-            title = dic['name']
+        for bib in all_bdp.get_rows():
+            name = bib.get('code')
+            title = bib.get('name')
             # Add report
             reports.set_object(name, form, **{'title': title})
             # Add user
@@ -318,7 +320,6 @@ class Root(BaseRoot):
                 users.set_object(username, ScribUser())
                 user = users.get_object(username)
                 user.set_password('BDP%s' % name)
-                del user
 
         message = u"Les rapports des BDP pour l'année %s ont été ajoutés. " \
                   u"Et aussi ses utilisateurs associés (BDP01:BDP01, " \
@@ -453,11 +454,10 @@ class Root(BaseRoot):
     new_bm__access__ = 'is_admin'
     def new_bm(self, context):
         code_bib = context.get_form_value('code_bib')
-        bms = get_BMs()
         codes = []
         
         for code in code_bib.split():
-            if code not in bms:
+            if not all_bm.search(code=code):
                 return context.come_back(u"Le code_bib $code n'est pas "
                         u"dans le fichier input_data/init_BM.txt installé.",
                         code=repr(code))
@@ -467,10 +467,10 @@ class Root(BaseRoot):
         bm2005 = self.get_object('BM2005')
 
         for code in codes:
-            name = unicode(code)
-
+            name = str(code)
             # Add report
-            ville = bms[name]['name']
+            bib = get_bm(name)
+            ville = bib.get_value('name')
             if not bm2005.has_object(name):
                 bm2005.set_object(name, FormBM(), **{'title': ville})
 
@@ -483,8 +483,8 @@ class Root(BaseRoot):
 
         message = (u"Formulaire et utilisateur ajoutés : "
                 u"code_bib=%s ville=%s dept=%s code_insee=%s login=%s password=%s")
-        message = message % (code, ville, bms[name]['dep'],
-                bms[name]['id'], username, username)
+        message = message % (code, ville, bib.get_value('dep'),
+                bib.get_value('id'), username, username)
 
         return context.come_back(message, goto=';new_bm_form')
 
