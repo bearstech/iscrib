@@ -52,8 +52,7 @@ class Root(BaseRoot):
     def before_traverse(self, context):
         BaseRoot.before_traverse(self, context)
         # Set french as default language, whatever the browser config is
-        accept = context.get_accept_language()
-        accept.set('fr', 1.5)
+        context.accept_language.set('fr', 1.5)
 
 
     #########################################################################
