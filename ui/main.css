@@ -47,52 +47,6 @@ input.invalid {
     background: url("images/background.png") rgb(202,220,225) fixed repeat-y;
    Couleur onglet RGB(202,220,255) au lieu de #ddddbb;
 */
-table.tabs td {
-  border-bottom: 1px solid black;
-  /*white-space: nowrap;*/
-}
-
-table.tabs td.tab {
-  border: 1px solid black;
-
-  /*background: #ddddbb;*/
-  background: rgb(202,220,255);
-  padding: 0px 4px 0px 4px;
-  white-space: nowrap;
-  text-align: center;
-  width: 50px;
-}
-
-table.tabs td.tab_active { 
-  border: 1px solid black;
-  /*background: #ddddbb;*/
-  background: rgb(202,220,255);
-  padding: 0px 4px 0px 4px;
-  white-space: nowrap;
-  text-align: center;
-  width: 50px;
-
-  border-bottom: none;
-  background-color: yellow;
-}
-
-table.tabs td.tab_active a { 
-    color: black;
-}
-
-table.tabs td.incomplete a {
-  color: red;
-}
-
-td.subtabs {
-    background-color: yellow;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 2px 5px 2px 5px;
-    /*white-space: nowrap;*/
-}
-
 .alert {
     margin: 0 0 10px 0;
     border: 1px solid red;
@@ -136,7 +90,7 @@ td, th {
 
 body {
     margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 20px;
     color: black;
     font-family: verdana, arial, helvetica, sans-serif;
     font-size : 11px;
@@ -166,9 +120,27 @@ a:hover {
     font-weight: normal;
 }*/
 
+#header {
+  padding-left: 90px;
+  background: url(images/logo-mcc.gif) top left no-repeat;
+  text-align: left;
+  font-size: 8px;
+}
+
+#main {
+  margin: 0 10px;
+  padding-top: 20px;
+  border: 1px solid #000;
+  background: #ff0;
+}
+
+#center {
+  border-top: 1px solid #000;
+  background: #fff;
+}
 
 #body {
-  padding: 0px 10px 0px 25px;
+  border: 0px;
 }
 
 #breadcrumb {
@@ -191,7 +163,6 @@ a:hover {
     text-decoration:none;
     color: #000;
 }
-
 
 #menu {
     padding: 10px 10px 10px 0px;

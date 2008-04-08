@@ -193,7 +193,7 @@ class Root(BaseRoot):
         namespace['action'] = '%s/;login' % here.get_pathto(site_root)
         namespace['username'] = context.get_form_value('username')
 
-        template = self.get_object('/ui/scrib/SiteRoot_login.xml')
+        template = self.get_object('/ui/scrib/Root_login.xml')
         return stl(template, namespace)
 
 

@@ -1,173 +1,120 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
-    <title>Scrib</title>
-    <!-- Changed by: , 14-Jun-2005 -->
-    
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+  <head>
+    <title>${title}</title>
+    <!-- Meta -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="${meta/name}" lang="${meta/lang}" stl:repeat="meta meta_tags" content="${meta/content}"/>
 
-    <script type="text/javascript" src="../menu.js"></script>
-    <script type="text/javascript" src="../main.js"></script>
-    <script type="text/javascript" src="form.js"></script>
-
+    <!-- CSS -->
+    <link type="text/css" stl:repeat="style styles" rel="stylesheet" href="${style}"/>
     <link type="text/css" rel="stylesheet" href="main.css"/>
-    <link type="text/css" rel="stylesheet" href="../content.css"/>
     <link type="text/css" rel="stylesheet" href="form.css"/>
 
-    <!-- Additional resources that maybe needed to render the page -->
-    <link href="${style}" type="text/css" stl:repeat="style styles" rel="stylesheet"/>
-    <script src="${script}" type="text/javascript" stl:repeat="script scripts"></script>
+    <!-- JavaScript -->
+    <script stl:repeat="script scripts" type="text/javascript" src="${script}"></script>
+    <script type="text/javascript" src="form.js"></script>
   </head>
-  <body style="padding: 0px; margin: 0px;">
-
-   <table style="width: 100%; text-align: left; padding: 0px 0px 5px 30px;" border="0" cellspacing="0" cellpadding="0">
-     <tbody>
-       <tr>
-         <td width="68px" colspan="1" rowspan="2" style="vertical-align: middle;">
-            <img src="images/logo-mcc.gif"/>
-         </td>
-         <td style="vertical-align: top;">
-            <span style="font-family: 'Georgia', 'Times New Roman', 
-            serif; font-size: 18pt; font-variant: small-caps;
-            font-weight: bold; padding: 5px; 
-            margin: 0px 0px 0px 0px;">Scrib</span>
-         </td>
-         <td style="vertical-align: middle; padding: 0px;">
-            <div class="adresses2">
-              <p class="adresse">Direction du livre et de la lecture</p>
-              <p class="adresse">Bureau des bibliothèques
-                                 territoriales</p>
-              <p class="adresse">182, rue Saint Honore</p>
-              <p class="adresse">75033 PARIS CEDEX 01</p>
-            </div>
-         </td>
-         <td style="vertical-align: middle; padding: 0px;">
-             <table cellspacing="0" cellpadding="0">
-
-               <tr>
-                 <td><p class="adresse">  BDP : </p></td>
-                 <td><p class="adresse"> <a href="mailto:christophe.sene@culture.gouv.fr">christophe.sene@culture.gouv.fr</a></p></td>
-                </tr>
-                <tr>
-                   <td></td>
-                   <td> <p class="adresse">01 40 15 73 74</p><br/>
-                   </td>
-                </tr>
-                <tr>
-                   <td><p class="adresse"> BM &nbsp;&nbsp;:</p></td>
-                    <td><p class="adresse"><a href="mailto:denis.cordazzo@culture.gouv.fr">denis.cordazzo@culture.gouv.fr</a></p></td>
-                </tr>
-                <tr>
-                   <td></td>
-                   <td><p class="adresse">01 40 15 74 85</p></td>
-                 </tr>
-                 <tr>
-                   <td></td>
-                   <td><p class="adresse"><a href="mailto:jerome.chevrier@culture.gouv.fr">jerome.chevrier@culture.gouv.fr</a></p></td>
-                 </tr>
-                 <tr>
-                   <td></td>
-                   <td><p class="adresse">01 40 15 73 19</p></td>
-               </tr>
-
-             </table>
-         </td>
-
-         <td style="vertical-align: top; padding: 0px;">
-            <table id="users" border="0">
-              <tr>
-                <td><img border="0" src="images/user.png"/></td>
-                <td> <p><stl:block if="user/info">${user/info/title}</stl:block>
-                        <em stl:if="not user/info">non authentifié</em></p>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <stl:block if="not user/info">
-                    <p stl:if="user/joinisopen" style="margin: 1px">
-                      » <a href="${user/join_url}">Join</a></p>
-                    <p style="margin: 1px">
-                      » <a href="${user/login_url}">Login</a></p>
-                  </stl:block>
-                  <stl:block if="user/info">
-                    <div style="margin: 1px">
-                      » <a href="${user/info/home}">Home</a>
-                    </div>
-                    <div style="margin: 1px"> »
-                      <a href="${user/info/logout}">Log&nbsp;out</a>
-                    </div>
-                  </stl:block>
-                </td>
-              </tr>
-            </table>
-          </td>
-       </tr>
-       <tr>
-         <td style="vertical-align: bottom; 
-             padding: 0px 3px 5px 0px ;" colspan="4" rowspan="1">
-           <table id="breadcrumb" border="0">
-             <tr>
-               <td></td>
-               <td width="100%">
-                 <stl:block repeat="x breadcrumb">
-                   / <a stl:if="x/url" href="${x/url}">${x/name}</a>
-                   <stl:block if="not x/url">${x/name}</stl:block>
-                 </stl:block>
-               </td>
-             </tr>
-           </table>
-         </td>
-       </tr>
-     </tbody>
-   </table>
-
-   <table id="body" border="0" cellspacing="0" width="100%" cellpadding="0">
+  <body>
+    <table id="header" width="100%">
       <tr>
-        <td style="margin:0; padding:0" width="1px">&nbsp;</td>
-        <td valign="top" rowspan="2">
-          <table border="0" cellspacing="0" width="100%" cellpadding="0">
+        <td valign="top">
+          <span style="font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 18pt; font-variant: small-caps; font-weight: bold;
+            padding: 5px; margin: 0px 0px 0px 0px;">Scrib</span>
+        </td>
+        <td valign="top">
+          <div class="adresses2">
+            <p class="adresse">Direction du livre et de la lecture</p>
+            <p class="adresse">Bureau des bibliothèques
+                               territoriales</p>
+            <p class="adresse">182, rue Saint Honore</p>
+            <p class="adresse">75033 PARIS CEDEX 01</p>
+          </div>
+        </td>
+        <td valign="top">
+          <table cellspacing="0" cellpadding="0">
             <tr>
-              <td>
-                <table class="tabs" cellspacing="0" width="100%">
-                  <tr>
-                    <stl:block repeat="tab tabs">
-                      <td class="${tab/style}">
-                        <a href="${tab/name}">
-                          <stl:block>${tab/label}</stl:block></a>
-                      </td>
-                      <td width="4">&nbsp;</td>
-                    </stl:block>
-                    <td>&nbsp;</td>
-                  </tr>
-                </table>
-              </td>
+              <td><p class="adresse">  BDP : </p></td>
+              <td><p class="adresse"> <a href="mailto:christophe.sene@culture.gouv.fr">christophe.sene@culture.gouv.fr</a></p></td>
             </tr>
             <tr>
-              <td class="subtabs">
-                <stl:block if="subtabs">
-                  <stl:block repeat="tab subtabs">
-                    <a stl:if="tab/active" style="color: black" href="${tab/name}">${tab/label}</a>
-                    <a stl:if="not tab/active" href="${tab/name}">${tab/label}</a>
-                    <stl:block if="not repeat/tab/end">|</stl:block>
-                  </stl:block>
-                </stl:block>
-                &nbsp;
-              </td>
+              <td></td>
+              <td><p class="adresse">01 40 15 73 74</p><br/></td>
             </tr>
             <tr>
-              <td id="content" valign="top">
-                <table class="alert" stl:if="message" width="100%">
-                  <tr>
-                    <td>${message}</td>
-                  </tr>
-                </table>
-                <stl:block>${body}</stl:block>
-              </td>
+              <td><p class="adresse"> BM &nbsp;&nbsp;:</p></td>
+              <td><p class="adresse"><a href="mailto:denis.cordazzo@culture.gouv.fr">denis.cordazzo@culture.gouv.fr</a></p></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><p class="adresse">01 40 15 74 85</p></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><p class="adresse"><a href="mailto:jerome.chevrier@culture.gouv.fr">jerome.chevrier@culture.gouv.fr</a></p></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><p class="adresse">01 40 15 73 19</p></td>
             </tr>
           </table>
         </td>
+        <td align="right" valign="top">
+          <stl:block stl:if="not user/info">(déconnecté)<br/><br/> <a id="top_menu_login" href="/;login_form">Connexion</a> <a id="top_menu_register" stl:if="user/joinisopen" href="/;register_form">Inscription</a>
+          </stl:block>
+
+          <stl:block stl:if="user/info">(logged in as ${user/info/title})<br/><br/> <a id="top_menu_profile" href="${user/info/home}">My Profile</a> <a id="top_menu_logout" href="/;logout">Log out</a>
+          </stl:block>
+
+          <a id="top_menu_search" href="/;site_search">Rechercher</a> <a id="top_menu_contact" href="/;contact_form">Contact</a>
+        </td>
       </tr>
     </table>
+    <table id="main" border="0" width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <td id="center" class="column" valign="top">
+          <div id="maintitle">
+            <img style="float: left; margin-right: 9px" height="48" src="${metadata/icon}" stl:if="metadata/icon" alt="" width="48"/>
+            <h1>${metadata/title}</h1>
+            <div id="breadcrumbs">
+              <label>Emplacement :</label>
+              <span stl:repeat="item breadcrumb"><a stl:if="item/url" title="${item/name}" href="${item/url}">${item/short_name}</a> <span stl:if="not item/url" title="${item/name}">${item/short_name}</span> <stl:inline stl:if="not repeat/item/end">/</stl:inline></span>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <!-- Object Menu (aka Tabs) -->
+          <div id="tabs">
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="${menu/class}" onmouseover="show('menu_${menu/id}')" stl:repeat="menu tabs" onmouseout="hide('menu_${menu/id}')">
+                  <div class="menu">
+                    <a id="${menu/id}" href="${menu/name}"><span style="background-image: url(${menu/icon})">${menu/label}</span></a>
+                  </div>
+                  <div class="submenu" stl:if="menu/options" id="menu_${menu/id}">
+                    <ul>
+                      <li stl:repeat="option menu/options">
+                        <a href="${option/name}"><span style="background-image: url(${option/icon})">${option/label}</span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- The Body -->
+          <div id="body">
+            <div id="message" stl:if="message">${message}</div>
+            <div id="content">
+              <h2 stl:if="view_title">${view_title}</h2>${body}</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div id="footer">
+      <a href="/;about">À propos</a> <a href="/;credits">Crédits</a> <a href="/;license">Licence</a>
+    </div>
   </body>
 </html>
