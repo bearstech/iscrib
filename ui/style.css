@@ -1,0 +1,151 @@
+body {
+  font-size: 62.5%;
+}
+
+#header {
+  height: 90px;
+  padding-left: 90px;
+  background-image: url(images/logo-mcc.gif);
+  background-position: top left;
+  text-align: left;
+}
+
+#copyright {
+    color: #cc9;
+}
+
+#copyright a {
+    text-decoration: none;
+    color: #CC9;
+}
+
+.summary table  {
+    border-collapse: collapse;
+    border: 5px  solid black;
+}
+
+.summary th  {
+    padding: 2px;
+    border: 1px solid black;
+}
+
+.summary td  {
+    padding: 2px;
+    border: 1px  solid black;
+}
+
+/**************************************************************************
+ Metadata
+    border-bottom: hidden;
+    border-right: hidden;
+ **************************************************************************/
+#metadata {
+    background: white;
+    padding: 0px 0px 0px 0px;
+    padding: 0px 10px 10px 10px;
+    border: 1px solid black;
+}
+
+#users tr td p{
+  line-height: 110%;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+}
+
+#header p {
+  line-height: 110%;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+}
+
+/* Couleur fond RGB(145,191,255) au lieu de 
+    background: url("images/background.png") rgb(202,220,225) fixed repeat-y;
+   Couleur onglet RGB(202,220,255) au lieu de #ddddbb;
+*/
+.alert {
+    margin: 0 0 10px 0;
+    border: 1px solid red;
+    color: red;
+}
+
+
+/* 
+** Style sheet for CSS2-capable browsers.
+
+Three main colors:
+deep blue:    #330066
+light blue:   #333399
+light grey:   #d0d0d0
+*/
+
+
+table td b.missing_field{
+  border: 1px solid SandyBrown;
+  margin: 0;
+  color: SandyBrown;
+}
+
+table td b.badT_field{
+  border: 1px solid SeaGreen;
+  margin: 0;
+  color: SeaGreen;
+}
+table.Check {
+  border: 1px solid #000000;
+  width: 100%;
+  margin: 0;
+}
+
+.Check td {
+  padding: 3px;
+  border: 1px solid #000000;
+}
+
+.Check td.emptyCheck {
+  height: 2em;
+  font: bold 1.0em Arial, sans-serif;
+  color: green; 
+}
+
+.Check td.failCheck {
+  height: 2em;
+  font: bold 1.0em Arial, sans-serif;
+  color: red; 
+}
+
+.Check td.okCheck {
+  height: 2em;
+  width: 50px;
+  font: bold 1.0em Arial, sans-serif;
+  color: blue; 
+}
+
+.Check td.textCheck {
+  height: 2em;
+}
+
+.Check td.idCheck {
+}
+
+
+/*****************************************************************************
+  NEW CODE
+******************************************************************************/
+
+#formBiblio h1 {
+  color: #000080;
+}
+
+#formBiblio h2 {
+  background-color: #333399;
+  color: #ffffff;
+  text-align: center;
+  padding: 2px;
+}
+
+#formBiblio th {
+  text-align: left;
+  padding: 3px;
+  background-color: #C0C0C0;
+  font-weight: normal;
+}
