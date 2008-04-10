@@ -70,7 +70,7 @@ class Root(BaseRoot):
     def is_admin_or_consultant(self, user, object):
         if user is None:
             return False
-        return self.is_admin() or self.is_consultant()
+        return self.is_admin(user, object) or self.is_consultant(user, object)
 
 
     def is_allowed_to_view_form(self, user, object):
@@ -78,7 +78,7 @@ class Root(BaseRoot):
         if user is None:
             return False
         # Admin
-        if self.is_admin():
+        if self.is_admin(user, object):
             return True
         # VoirSCRIB
         if user.name == 'VoirSCRIB':
@@ -98,7 +98,7 @@ class Root(BaseRoot):
 
     def is_allowed_to_edit_form(self, user, object):
         # Admin
-        if self.is_admin():
+        if self.is_admin(user, object):
             return True
         # Anonymous
         if user is None:
@@ -161,17 +161,15 @@ class Root(BaseRoot):
 
 
     def get_views(self):
-        user = get_context().user
+        context = get_context()
+        user = context.user
         if user is None:
             return ['login_form', 'help']
-
-        if user.is_admin():
-            return ['browse_thumbnails', 'new_reports_form', 'export_form',
-                    'edit_metadata_form', 'help', 'catalog_form']
-
         if user.name == 'VoirSCRIB':
             return ['browse_thumbnails', 'help']
-
+        if user.is_admin(user, context.object):
+            return ['browse_thumbnails', 'new_reports_form', 'export_form',
+                    'edit_metadata_form', 'help', 'catalog_form']
         return []
 
 
@@ -202,7 +200,7 @@ class Root(BaseRoot):
         user = context.user
         if user is None:
             return goto
-        if user.is_admin() or user.name == 'VoirSCRIB':
+        if user.name == 'VoirSCRIB' or user.is_admin(user, self):
             return uri.get_reference(';%s' % self.get_firstview())
         elif user.is_BM():
             path = 'BM%s/%s' % (user.get_year(), user.get_BM_code())

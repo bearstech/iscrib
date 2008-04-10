@@ -223,7 +223,8 @@ class Form(Text):
         is_ready = namespace['mandatory_Empties'] == 0
         namespace['is_ready'] = is_ready
         namespace['is_complete'] = state == 'private' and is_ready
-        namespace['is_finished'] = (state == 'pending' and self.is_admin())
+        is_admin = ac.is_admin(user, self)
+        namespace['is_finished'] = (state == 'pending' and is_admin)
 
         # Récupération des champs de la base ADRESSE
         dept = self.name
@@ -422,7 +423,7 @@ class Form(Text):
         restype_for_sort.sort()
         restype = [x[-1] for x in restype_for_sort]
 
-        #namiespace['restype'] = restype
+        #namespace['restype'] = restype
         i = 0
         for res in self.split_in4(restype):
             namespace['restype%s' % i] = res
@@ -552,7 +553,8 @@ class Form(Text):
         #disable control for testing
         #namespace['is_finished'] = True
 
-        is_exported = self.get_form_state() in (u'Exporté', u'Modifié après export')
+        is_exported = self.get_form_state() in (u'Exporté',
+                                                u'Modifié après export')
         namespace['is_exportable'] = is_finished or is_exported
 
         #############################################################
@@ -581,7 +583,8 @@ class Form(Text):
 
         namespace['state'] = state
         namespace['total'] = len(schema)
-        namespace['is_admin'] = self.is_admin()
+        ac = self.get_access_control()
+        namespace['is_admin'] = ac.is_admin(context.user, self)
 
         template = self.get_object('/ui/scrib/Form_controles.xml')
         return stl(template, namespace)
