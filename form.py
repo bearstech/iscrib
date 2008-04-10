@@ -88,7 +88,7 @@ class FormHandler(File):
 
 class Form(Text):
     class_id = 'Form'
-    class_icon48 = 'culture/images/form48.png'
+    class_icon48 = 'scrib/images/form48.png'
     class_views = [['controles_form'], ['report_csv'], ['print_form'],
                    ['help']]
     class_handler = FormHandler

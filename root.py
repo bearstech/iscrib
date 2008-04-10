@@ -31,8 +31,9 @@ from itools.web import get_context
 from itools.stl import stl
 
 # Import from ikaaro
-from ikaaro.root import Root as BaseRoot
 from ikaaro.registry import register_object_class
+from ikaaro.root import Root as BaseRoot
+from ikaaro.file import File
 
 # Import from scrib
 from form_bm import FormBM
@@ -198,6 +199,7 @@ class Root(BaseRoot):
     new_reports_form__access__ = 'is_admin'
     new_reports_form__label__ = u'Ajouter'
     new_reports_form__sublabel__ = u'Rapport'
+    new_reports_form__icon__ = BaseRoot.new_resource_form__icon__
     def new_reports_form(self, context):
         namespace = {}
         today = date.today()
@@ -223,7 +225,7 @@ class Root(BaseRoot):
                 years[i]['is_selected'] = True
                 break
         namespace['BMyears'] = years
-        template = self.get_object('/ui/scrib/Culture_new_reports.xml')
+        template = self.get_object('/ui/scrib/Root_new_reports.xml')
         return stl(template, namespace)
 
 
@@ -299,6 +301,7 @@ class Root(BaseRoot):
     # Help
     help__access__ = True
     help__label__ = u'Aide'
+    help__icon__ = '/ui/icons/16x16/help.png'
     def help(self, context):
         template = self.get_object('/ui/scrib/Form_help.xml')
         return template.to_str()
@@ -308,8 +311,9 @@ class Root(BaseRoot):
     # Export
     export_form__access__ = 'is_admin'
     export_form__label__ = u"Exporter"
+    export_form__icon__ = File.download_form__icon__
     def export_form(self, context):
-        template = self.get_object('/ui/scrib/Culture_export.xml')
+        template = self.get_object('/ui/scrib/Root_export.xml')
         return template.to_str()
 
 
@@ -415,7 +419,7 @@ class Root(BaseRoot):
     new_bm_form__access__ = 'is_admin'
     new_bm_form__sublabel__ = u"Nouvelle BM"
     def new_bm_form(self, context):
-        template = self.get_object('/ui/scrib/Culture_new_bm.xml')
+        template = self.get_object('/ui/scrib/Root_new_bm.xml')
         return template.to_str()
 
 

@@ -39,7 +39,7 @@ class Forms(Folder):
     class_id = 'Forms'
     class_title = u'Forms'
     class_description = u'...'
-    class_icon48 = 'culture/images/form48.png'
+    class_icon48 = 'scrib/images/form48.png'
 
 
     #########################################################################
