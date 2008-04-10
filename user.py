@@ -37,7 +37,7 @@ from utils import get_bdp, get_bm, get_bdp_namespace
 
 
 class ScribUser(User):
-    class_version = '20080407'
+    class_version = '20080410'
     class_views = [['home'], ['edit_password_form']]
 
     def get_catalog_fields(self):
@@ -186,12 +186,10 @@ class ScribUser(User):
     #########################################################################
     # Upgrade
     #########################################################################
-    def update_20080407(self):
-        """Migration "bibUser" -> "user"
-        Avec l'objectif de supprimer ScribUserFolder
+    def update_20080410(self):
+        """username pour compatibilité arrière.
         """
-        self.metadata.format = 'user'
-        self.metadata.set_changed()
+        self.set_property('username', self.name)
 
 
 
@@ -362,5 +360,3 @@ class ScribUserFolder(UserFolder):
 
 
 register_object_class(ScribUserFolder)
-# TODO remove after migration
-register_object_class(ScribUserFolder, 'bibUser')
