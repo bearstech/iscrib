@@ -255,9 +255,7 @@ class Root(BaseRoot):
         year = context.get_form_value('year')
         report_name = 'BM' + str(year)
         # Add reports and users, one per department
-        reports = Forms()
-        self.set_object(report_name, reports)
-        reports = self.get_object(report_name)
+        reports = Forms.make_object(Forms, self, report_name)
         t = time()
 
         users = self.get_object('users')
@@ -267,34 +265,29 @@ class Root(BaseRoot):
         bib_municipales = list(all_bm.get_rows())
         # so we sort by integers values
         bib_municipales.sort(key=itemgetter(0))
-        form = FormBM()
-        i = 0
-        for bib in bib_municipales:
+        for i, bib in enumerate(bib_municipales):
             code = bib.get_value('code')
             name = bib.get_value('name')
             dep = bib.get_value('dep')
             # Add report
-            reports.set_object(code, form, **{'title': name})
+            FormBM.make_object(FormBM, reports, code, **{'title': name})
             # Add user
-            #username = 'user%s_%s' % (code, year)
             username = 'BM%s' % code
             if not users.has_object(username):
-                users.set_object(username, ScribUser())
-                user = users.get_object(username)
+                user = ScribUser.make_object(ScribUser, users, username)
                 user.set_password('BM%s' % code)
-                del user
             print '%s/%s' % (i, bm_len), dep, code, username
-            i += 1
-        report_m = int(time() -t); print 'users and reperts set ', report_m
+        report_m = int(time() -t)
+        print 'users and reperts set ', report_m
         secondes = int(time() - t)
-        minutes = secondes / 60
-        message = u"Les rapports des BM pour l'année %(year)s ont été " \
-                  u"ajoutés, ainsi que les utilisateurs associés : " \
-                  u"BMxxx:BMxxx, BMyy:BMyy, etc. " \
-                  u"En %(temp)s %(unite)s"
-        message = message % {'year': year, 'temp': minutes or secondes,
-                'unite': minutes and 'minutes' or 'secondes' }
-        return context.come_back(message, goto=';browse_thumbnails')
+        minutes = secondes // 60
+        message = (u"Les rapports des BM pour l'année $year ont été "
+                   u"ajoutés, ainsi que les utilisateurs associés : "
+                   u"BMxxxx:BMxxxx, BMyyyy:BMyyyy, etc. "
+                   u"en ${temps} ${unite}")
+        return context.come_back(message, goto=';browse_thumbnails',
+                **{'year': year, 'temps': minutes or secondes,
+                   'unite': minutes and u'minutes' or u'secondes'})
 
 
     new_BDP_reports__access__ = 'is_admin'
@@ -303,27 +296,24 @@ class Root(BaseRoot):
         # Add reports container
         year = context.get_form_value('year')
         name = 'BDP' + str(year)
-        self.set_object(name, Forms())
+        reports = Forms.make_object(Forms, self, name)
         # Add reports and users, one per department
-        reports = self.get_object(name)
         users = self.get_object('users')
-        form = FormBDP()
         for bib in all_bdp.get_rows():
             name = bib.get('code')
             title = bib.get('name')
             # Add report
-            reports.set_object(name, form, **{'title': title})
+            FormBDP.make_object(FormBDP, reports, name, **{'title': title})
             # Add user
             username = 'BDP%s' % name
             if not users.has_object(username):
-                users.set_object(username, ScribUser())
-                user = users.get_object(username)
+                user = ScribUser.make_object(ScribUser, users, username)
                 user.set_password('BDP%s' % name)
 
-        message = u"Les rapports des BDP pour l'année %s ont été ajoutés. " \
-                  u"Et aussi ses utilisateurs associés (BDP01:BDP01, " \
-                  u"BDP02:BDP02, etc.)." % year
-        return context.come_back(message, goto=';browse_thumbnails')
+        message = (u"Les rapports des BDP pour l'année $year ont été "
+                   u"ajoutés, et leurs utilisateurs associés BDPxx:BDPxx, "
+                   u"BDPyy:BDPyy, etc.")
+        return context.come_back(message, goto=';browse_thumbnails', year=year)
 
 
     #########################################################################
@@ -471,21 +461,22 @@ class Root(BaseRoot):
             bib = get_bm(name)
             ville = bib.get_value('name')
             if not bm2005.has_object(name):
-                bm2005.set_object(name, FormBM(), **{'title': ville})
-
+                FormBM.make_object(FormBM, bm2005, name, **{'title': ville})
             # Add user
             username = 'BM%s' % code
             if not users.has_object(username):
-                users.set_object(username, ScribUser())
-                user = users.get_object(username)
+                user = ScribUser.make_object(ScribUser, users, username)
                 user.set_password(username)
 
         message = (u"Formulaire et utilisateur ajoutés : "
-                u"code_bib=%s ville=%s dept=%s code_insee=%s login=%s password=%s")
-        message = message % (code, ville, bib.get_value('dep'),
-                bib.get_value('id'), username, username)
+                   u"code_bib=$code_bib ville=$ville dept=$dept "
+                   u"code_insee=$code_insee login=$login password=$password")
 
-        return context.come_back(message, goto=';new_bm_form')
+        return context.come_back(message, goto=';new_bm_form',
+                **{'code_bib': code, 'ville': ville,
+                    'dept': bib.get_value('dep'),
+                    'code_insee': bib.get_value('id'), 'login': username,
+                    'password': username})
 
 
     #########################################################################
