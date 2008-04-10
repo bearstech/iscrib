@@ -469,8 +469,8 @@ class Root(BaseRoot):
         root = vfs.open(self.handler.uri)
         # Remove handlers
         for obsolete in ('.archive', '.users', '.admins.users', 'admins',
-                'admins.metadata', 'reviewers', 'reviewers.metadata', 'en.po',
-                'en.po.metadata'):
+                'admins.metadata', 'reviewers', 'reviewers.metadata',
+                'en.metadata'):
             if root.exists(obsolete):
                 root.remove(obsolete)
         # Add admin
