@@ -45,7 +45,7 @@ from utils import all_bm, all_bdp, get_bm, get_connection
 class Root(BaseRoot):
 
     class_id = 'Culture'
-    class_version = '20080407'
+    class_version = '20080410'
     class_title = u"SCRIB"
 
 
@@ -200,6 +200,7 @@ class Root(BaseRoot):
         user = context.user
         if user is None:
             return goto
+        print "name", user.name, "is_admin", user.is_admin(user, self)
         if user.name == 'VoirSCRIB' or user.is_admin(user, self):
             return uri.get_reference(';%s' % self.get_firstview())
         elif user.is_BM():
@@ -480,16 +481,16 @@ class Root(BaseRoot):
     #########################################################################
     # Upgrade
     #########################################################################
-    def update_20080407(self):
+    def update_20080410(self):
         root = vfs.open(self.handler.uri)
-        # Add '.admins.users'
-        if root.exists('admins/.users'):
-            root.move('admins/.users', '.admins.users')
         # Remove handlers
-        for obsolete in ('.archive', '.users', 'admins', 'admins.metadata',
-                'reviewers', 'reviewers.metadata', 'en.po', 'en.po.metadata'):
+        for obsolete in ('.archive', '.users', '.admins.users', 'admins',
+                'admins.metadata', 'reviewers', 'reviewers.metadata', 'en.po',
+                'en.po.metadata'):
             if root.exists(obsolete):
                 root.remove(obsolete)
+        # Add admin
+        self.set_user_role('admin', 'admins')
 
 
 
