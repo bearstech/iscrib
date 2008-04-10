@@ -23,7 +23,6 @@ from itools.catalog import (KeywordField, TextField, BoolField, EqQuery,
         AndQuery)
 
 # Import from ikaaro
-from ikaaro.access import AccessControl
 from ikaaro.file import File
 from ikaaro.folder import Folder
 from ikaaro.users import User, UserFolder
@@ -198,26 +197,11 @@ register_object_class(ScribUser)
 
 
 class ScribUserFolder(UserFolder):
-
-    is_allowed_to_view = AccessControl.is_admin
-    browse_thumbnails__access__ = 'is_admin'
-    edit_metadata_form__access__ = 'is_admin'
+    class_views = [['search_form']] + UserFolder.class_views
 
 
     #######################################################################
     # Search
-    def get_views(self):
-        views = UserFolder.get_views(self)
-        if 'browse_thumbnails' in views:
-            views.remove('browse_thumbnails')
-        if 'new_user_form' in views:
-            views.remove('new_user_form')
-        if 'search_form' in views:
-            views.remove('search_form')
-        views.insert(0, 'search_form')
-        return views
-
-
     search_form__access__ = 'is_admin'
     search_form__label__ = u'Search'
     def search_form(self, context):

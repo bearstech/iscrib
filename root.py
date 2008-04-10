@@ -47,6 +47,8 @@ class Root(BaseRoot):
     class_id = 'Culture'
     class_version = '20080410'
     class_title = u"SCRIB"
+    class_views = [['browse_content'], ['new_reports_form', 'new_bm_form'],
+                   ['export_form'], ['edit_metadata_form'], ['help']]
 
 
     def before_traverse(self, context):
@@ -58,7 +60,7 @@ class Root(BaseRoot):
     #########################################################################
     # Security
     #########################################################################
-    browse_list__access__ = 'is_admin'
+    browse_content__access__ = 'is_admin'
 
 
     def is_consultant(self, user, object):
@@ -160,27 +162,6 @@ class Root(BaseRoot):
         return 'fr'
 
 
-    def get_views(self):
-        context = get_context()
-        user = context.user
-        if user is None:
-            return ['login_form', 'help']
-        if user.name == 'VoirSCRIB':
-            return ['browse_thumbnails', 'help']
-        if user.is_admin(user, context.object):
-            return ['browse_thumbnails', 'new_reports_form', 'export_form',
-                    'edit_metadata_form', 'help', 'catalog_form']
-        return []
-
-
-    def get_subviews(self, name):
-        if name in ['browse_thumbnails', 'browse_list']:
-            return ['browse_thumbnails', 'browse_list']
-        elif name in ['new_reports_form', 'new_bm_form']:
-            return ['new_reports_form', 'new_bm_form']
-        return []
-
-
     #########################################################################
     # Login
     login_form__access__ = True
@@ -200,7 +181,6 @@ class Root(BaseRoot):
         user = context.user
         if user is None:
             return goto
-        print "name", user.name, "is_admin", user.is_admin(user, self)
         if user.name == 'VoirSCRIB' or user.is_admin(user, self):
             return uri.get_reference(';%s' % self.get_firstview())
         elif user.is_BM():
@@ -284,7 +264,7 @@ class Root(BaseRoot):
                    u"ajoutés, ainsi que les utilisateurs associés : "
                    u"BMxxxx:BMxxxx, BMyyyy:BMyyyy, etc. "
                    u"en ${temps} ${unite}")
-        return context.come_back(message, goto=';browse_thumbnails',
+        return context.come_back(message, goto=';browse_content',
                 **{'year': year, 'temps': minutes or secondes,
                    'unite': minutes and u'minutes' or u'secondes'})
 
@@ -312,7 +292,7 @@ class Root(BaseRoot):
         message = (u"Les rapports des BDP pour l'année $year ont été "
                    u"ajoutés, et leurs utilisateurs associés BDPxx:BDPxx, "
                    u"BDPyy:BDPyy, etc.")
-        return context.come_back(message, goto=';browse_thumbnails', year=year)
+        return context.come_back(message, goto=';browse_content', year=year)
 
 
     #########################################################################

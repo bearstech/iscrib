@@ -49,15 +49,11 @@ class Forms(Folder):
         if self.is_BM():
             return ['search_form']
         if self.is_BDP():
-            return ['browse_list']
+            return ['browse_content']
 
 
     def get_subviews(self, view):
         return []
-
-
-    def get_browse_view(self):
-        return 'browse_list'
 
 
     def is_BM(self):
@@ -78,9 +74,8 @@ class Forms(Folder):
         line['dep'] = object.get_dep()
 
 
-    browse_list__access__ = 'is_admin_or_consultant'
+    browse_content__access__ = 'is_admin_or_consultant'
     def browse_list(self, context):
-        context.set_cookie('browse', 'list')
         namespace = self.browse_namespace(16)
         template = self.get_object('/ui/scrib/Forms_browse_list.xml')
         return stl(template, namespace)
