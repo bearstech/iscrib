@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+
+  <h2>Contrôle d'accès</h2>
+
+  <!-- Search -->
+  <form method="get" action="">
+    <fieldset>
+      <legend>Rechercher</legend>
+      <!-- Field -->
+      <label for="search_bm">BM&nbsp;:</label>
+      <input type="radio" id="search_bm" name="bib" value="bm"
+        checked="${search_bm}"/>
+      <label for="search_bdp">BDP&nbsp;:</label>
+      <input type="radio" id="search_bdp" name="bib" value="bdp"
+        checked="${search_bdp}"/>
+      <label for="search_all">Toutes&nbsp;:</label>
+      <input type="radio" id="search_all" name="bib" value=""/><br/>
+      <label for="search_ville">Nom de la ville, pour une BM (exemple
+        "saint")&nbsp;:</label>
+      <input type="text" size="20" id="search_ville" name="ville"
+        value="${ville}"/><br/>
+      <label for="search_dep">Département (exemple&nbsp;: 02)&nbsp;:</label>
+      <input type="text" size="2" id="search_dep" name="dep"
+        value="${dep}"/><br/>
+      <label for="search_annee">Année (exemple&nbsp;: 2004)&nbsp;:</label>
+      <input type="text" size="4" id="search_annee" name="annee"
+        value="${annee}"/>
+      <input class="button_search" type="submit" value="OK"/>
+    </fieldset>
+  </form>
+
+  <!-- Batch -->${batch}
+  <!-- Content -->${table}
+</stl:block>

@@ -26,7 +26,8 @@ from operator import itemgetter
 # Import from itools
 from itools import uri
 from itools import vfs
-from itools.datatypes import Unicode
+from itools.catalog import EqQuery, AndQuery
+from itools.datatypes import Unicode, Integer
 from itools.web import get_context
 from itools.stl import stl
 
@@ -34,6 +35,7 @@ from itools.stl import stl
 from ikaaro.registry import register_object_class
 from ikaaro.root import Root as BaseRoot
 from ikaaro.file import File
+from ikaaro.widgets import batch, table
 
 # Import from scrib
 from form_bm import FormBM
@@ -49,7 +51,10 @@ class Root(BaseRoot):
     class_version = '20080410'
     class_title = u"SCRIB"
     class_views = [['browse_content'], ['new_reports_form', 'new_bm_form'],
-                   ['export_form'], ['edit_metadata_form'], ['help']]
+                   ['export_form'], ['permissions_form'],
+                   ['edit_metadata_form'], ['help']]
+
+    __roles__ = [{'name': 'admins', 'title': u'Admin'}]
 
 
     def before_traverse(self, context):
@@ -147,10 +152,6 @@ class Root(BaseRoot):
     #########################################################################
     # User interface
     #########################################################################
-    def get_skin_name(self):
-        return 'scrib'
-
-
     def get_skin(self):
         return self.get_object('ui/scrib')
 
@@ -257,6 +258,7 @@ class Root(BaseRoot):
             if not users.has_object(username):
                 user = ScribUser.make_object(ScribUser, users, username)
                 user.set_password('BM%s' % code)
+                self.set_user_role(username, 'bm')
             print '%s/%s' % (i, bm_len), dep, code, username
         report_m = int(time() -t)
         print 'users and reperts set ', report_m
@@ -290,6 +292,7 @@ class Root(BaseRoot):
             if not users.has_object(username):
                 user = ScribUser.make_object(ScribUser, users, username)
                 user.set_password('BDP%s' % name)
+                self.set_user_role(username, 'bdp')
 
         message = (u"Les rapports des BDP pour l'année $year ont été "
                    u"ajoutés, et leurs utilisateurs associés BDPxx:BDPxx, "
@@ -450,6 +453,7 @@ class Root(BaseRoot):
             if not users.has_object(username):
                 user = ScribUser.make_object(ScribUser, users, username)
                 user.set_password(username)
+                self.set_user_role(username, 'bm')
 
         message = (u"Formulaire et utilisateur ajoutés : "
                    u"code_bib=$code_bib ville=$ville dept=$dept "
@@ -460,6 +464,109 @@ class Root(BaseRoot):
                     'dept': bib.get_value('dep'),
                     'code_insee': bib.get_value('id'), 'login': username,
                     'password': username})
+
+    #########################################################################
+    # Users
+    #########################################################################
+    permissions_form__label__ = u"Utilisateurs"
+    def permissions_form(self, context):
+        namespace = {}
+
+        # Get values from the request
+        sortby = context.get_form_values('sortby', default=['login_name'])
+        sortorder = context.get_form_value('sortorder', default='up')
+        start = context.get_form_value('batchstart', type=Integer, default=0)
+        size = 20
+
+        # The search form
+        search_bib = context.get_form_value('bib')
+        search_ville = context.get_form_value('ville', type=Unicode)
+        search_dep = context.get_form_value('dep')
+        search_annee = context.get_form_value('annee')
+
+        namespace['search_bm'] = search_bib == 'bm'
+        namespace['search_bdp'] = search_bib == 'bdp'
+        namespace['ville'] = search_ville
+        namespace['dep'] = search_dep
+        namespace['annee'] = search_annee
+
+        # Search
+        query = [EqQuery('format', 'user')]
+        if search_bib == 'bm':
+            query.append(EqQuery('is_BM', '1'))
+        elif search_bib == 'bdp':
+            query.append(EqQuery('is_BDP', '1'))
+        if search_ville:
+            query.append(EqQuery('user_town', search_ville))
+        if search_dep:
+            query.append(EqQuery('dep', search_dep))
+        if search_annee:
+            query.append(EqQuery('year', search_annee))
+
+
+        query = AndQuery(*query)
+        results = self.search(query)
+
+        # Build the namespace
+        roles = self.get_members_classified_by_role()
+        members = []
+        for user in results.get_documents():
+            user_id = user.name
+            # Find out the user role
+            for role in roles:
+                if user_id in roles[role]:
+                    break
+            else:
+                role = None
+            # Build the namespace for the user
+            ns = {}
+            ns['checkbox'] = True
+            ns['id'] = user_id
+            ns['img'] = None
+            # Email
+            href = '/users/%s' % user_id
+            ns['user_id'] = user_id, href
+            # Title
+            ns['login_name'] = user.username
+            # Role
+            role = self.get_role_title(role)
+            if role is None:
+                if user.is_BDP:
+                    ns['role'] = u"BDP"
+                elif user.is_BM:
+                    ns['role'] = u"BM"
+            else:
+                ns['role'] = role
+            # Append
+            members.append(ns)
+
+        # Sort
+        members.sort(key=itemgetter(sortby[0]), reverse=sortorder=='down')
+
+        # Batch
+        total = len(members)
+        members = members[start:start+size]
+
+        # The columns
+        columns = [('user_id', u'User ID'),
+                   ('login_name', u'Login'),
+                   ('role', u'Role')]
+
+        # The actions
+        actions = [('permissions_del_members', self.gettext(u'Delete'),
+                    'button_delete', None)]
+        user = context.user
+        ac = self.get_access_control()
+        actions = [
+            x for x in actions if ac.is_access_allowed(user, self, x[0]) ]
+
+        namespace['batch'] = batch(context.uri, start, size, total)
+
+        namespace['table'] = table(columns, members, sortby, sortorder,
+                                   actions, self.gettext)
+
+        handler = self.get_object('/ui/scrib/Root_permissions.xml')
+        return stl(handler, namespace)
 
 
     #########################################################################
@@ -473,7 +580,7 @@ class Root(BaseRoot):
                 'en.metadata'):
             if root.exists(obsolete):
                 root.remove(obsolete)
-        # Add admin
+        # Set admin
         self.set_user_role('admin', 'admins')
 
 

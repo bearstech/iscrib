@@ -17,21 +17,15 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools import uri
 from itools.stl import stl
-from itools.catalog import (KeywordField, TextField, BoolField, EqQuery,
-        AndQuery)
+from itools.catalog import KeywordField, TextField, BoolField
 
 # Import from ikaaro
-from ikaaro.file import File
-from ikaaro.folder import Folder
-from ikaaro.users import User, UserFolder
-from ikaaro.utils import get_parameters
+from ikaaro.users import User
 from ikaaro.registry import register_object_class
-from ikaaro.widgets import table
 
 # Import from scrib
-from utils import get_bdp, get_bm, get_bdp_namespace
+from utils import get_bdp, get_bm
 
 
 
@@ -41,9 +35,11 @@ class ScribUser(User):
 
     def get_catalog_fields(self):
         fields = User.get_catalog_fields(self)
-        fields += [TextField('user_town'), KeywordField('dep', is_stored=True),
-                   KeywordField('year'), BoolField('is_BDP'),
-                   BoolField('is_BM')]
+        fields += [TextField('user_town'),
+                   KeywordField('dep', is_stored=True),
+                   KeywordField('year'),
+                   BoolField('is_BDP', is_stored=True),
+                   BoolField('is_BM', is_stored=True)]
         return fields
 
 
@@ -91,7 +87,7 @@ class ScribUser(User):
                 # Cf. #2617
                 bib = get_bm(code)
                 if bib:
-                    dep = bib.get('dep', '')
+                    dep = bib.get_value('dep')
                 else:
                     print "bib", code, "n'existe pas"
         return dep
@@ -114,7 +110,7 @@ class ScribUser(User):
                 # Cf. #2617
                 bib = get_bm(code)
                 if bib:
-                    title = bib.get('name', '')
+                    title = bib.get_value('name')
                 else:
                     print "bib", code, "n'existe pas"
         return title
@@ -171,7 +167,7 @@ class ScribUser(User):
         elif code:
             bib = get_bm(code)
             if bib:
-                namespace['dep'] = bib.get('name', '')
+                namespace['dep'] = bib.get_value('name')
 
         template = self.get_object('/ui/scrib/User_home.xml')
         return stl(template, namespace)
@@ -185,6 +181,13 @@ class ScribUser(User):
     #########################################################################
     # Upgrade
     #########################################################################
+    def update_20080407(self):
+        """bibUser obsolète.
+        """
+        self.metadata.format = "user"
+        self.metadata.set_changed()
+
+
     def update_20080410(self):
         """username pour compatibilité arrière.
         """
@@ -193,154 +196,5 @@ class ScribUser(User):
 
 
 register_object_class(ScribUser)
-
-
-
-class ScribUserFolder(UserFolder):
-    class_views = [['search_form']] + UserFolder.class_views
-
-
-    #######################################################################
-    # Search
-    search_form__access__ = 'is_admin'
-    search_form__label__ = u'Search'
-    def search_form(self, context):
-        root = context.root
-        namespace = {}
-        admin_names = root.get_members_classified_by_role()['admins']
-        admins = []
-        user_folder = root.get_object('users')
-        for admin_name in admin_names:
-            dic = {}
-            user = user_folder.get_object(admin_name)
-            dic['name'] = user.get_property('title') or user.name
-            dic['url'] = str(self.get_pathto(user))
-            admins.append(dic)
-        namespace['admins'] = admins
-        tablename = 'search'
-
-        # Search parameters
-        parameters = get_parameters(tablename, name='', year='', dep='',
-                                    bib='BM')
-
-        name = parameters['name'].strip().lower()
-        year = parameters['year'].strip().lower()
-        dep = parameters['dep'].strip().lower()
-        name = unicode(name, 'utf8')
-        year = unicode(year, 'utf8')
-        dep= unicode(dep, 'utf8')
-        namespace['search_year'] = year
-
-        # make possible the search in 'bellegarde-sur-valserine'
-        # by the Complex search on 'bellegarde', 'sur', 'valserine'
-        names = [t[0] for t in TextField.split(name)]
-        if names:
-            q_name =  EqQuery('user_town', names[0])
-            for subname in names:
-                q_name2 = EqQuery('user_town', subname)
-                q_name = AndQuery(q_name, q_name2)
-        namespace['search_name'] = name
-
-        # departements
-        namespace['search_dep'] = dep
-        namespace['departements'] = get_bdp_namespace(dep)
-
-        bib = parameters['bib']
-        bib_types = [{'name': x, 'value': x, 'checked': x==bib}
-                     for x in ['BM', 'BDP']]
-        namespace['bib_types'] = bib_types
-
-        is_BDP, is_BM = False, False
-        if bib == 'BM':
-            is_BM = True
-        namespace['is_BM'] = is_BM
-        if bib == 'BDP':
-            is_BDP = True
-        
-        # Search
-        if year:
-            q_year = EqQuery('year', year)
-        if dep:
-            q_dep = EqQuery('dep', dep)
-        if name:
-            q_name = EqQuery('user_town', name)
-
-        # independent of the form : q_scribuser, q_type_form
-        q_scribuser = EqQuery('format', ScribUser.class_id)
-        if is_BM:
-            q_type_form = EqQuery('is_BM', str(int(is_BM)))
-        if is_BDP:
-            q_type_form = EqQuery('is_BDP', str(int(is_BDP)))
-
-
-        query, objects = None, []
-        if name or dep or year:
-            query = q_type_form
-            query = AndQuery(query, q_scribuser)
-        if year:
-            query = AndQuery(query, q_year)
-        if name:
-            query = AndQuery(query, q_name)
-        if dep:
-            query = AndQuery(query, q_dep)
-
-        namespace['too_long_answer'] = ''
-        msg = u'Il y a %s réponses, les 100 premières sont présentées.'\
-              u'Veuillez restreindre votre recherche.'
-
-        # Search
-        if query:
-            results = root.search(query)
-            answer_len = results.get_n_documents()
-            if answer_len > 100:
-                namespace['too_long_answer'] = msg % answer_len
-            too_long_answer = msg % answer_len
-            # Get the real objects
-            documents = results.get_documents(size=100)
-            objects = [ root.get_object(x.abspath) for x in documents ]
-##            t_h = time() - t; print 't_h', t_h
-
-        # Build objects namespace, add the path to the object from the
-        # current folder.
-        aux = []
-        for object in objects:
-            path_to_object = self.get_pathto(object)
-            node = self
-            path = []
-            for name in path_to_object:
-                node = node.get_object(name)
-                path.append({'name': node.name,
-                             'url': '%s/;%s' % (self.get_pathto(node),
-                                                node.get_firstview())})
-
-            if isinstance(object, File):
-                summary = self.gettext(u'%d bytes') % object.get_size()
-            elif isinstance(object, Folder):
-                nobjects = len([ x for x in object.get_names()
-                                   if not x.endswith('.metadata') ])
-                summary = str(nobjects)
-
-            mtime = object.get_mtime()
-            path_to_icon = object.get_path_to_icon(16)
-            # XXX ugly
-            path_to_icon = uri.Path(str(path_to_object) + '/').resolve(path_to_icon)
-            aux.append({'oid': path_to_object,
-                        'icon': path_to_icon,
-                        'type': object.handler.get_mimetype(),
-                        'date': mtime.strftime('%Y-%m-%d %H:%M'),
-                        'title': (object.get_user_town() or
-                                  object.get_department_name()),
-                        'content_summary': summary,
-                        'path': path})
-        objects = aux
-
-        # The table
-        path = context.path
-        namespace['table'] = table(path.get_pathtoroot(), tablename, objects,
-                sortby='oid', sortorder='up', batchstart='0', batchsize='50')
-
-        template = self.get_object('/ui/scrib/ScribUserFolder_search.xml')
-        return stl(template, namespace)
-
-
-register_object_class(ScribUserFolder)
+# TODO remove after migration
+register_object_class(ScribUser, format="bibUser")

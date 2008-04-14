@@ -98,8 +98,10 @@ class FormBDP(Form):
     # Catalog API
     def get_catalog_fields(self):
         fields = Form.get_catalog_fields(self)
-        fields += [TextField('user_town'), KeywordField('dep', is_stored=True),
-                   KeywordField('year'), BoolField('is_BDP'),
+        fields += [TextField('user_town'),
+                   KeywordField('dep', is_stored=True),
+                   KeywordField('year'),
+                   BoolField('is_BDP'),
                    BoolField('is_BM'),
                    KeywordField('form_state', is_stored=True)]
         return fields
