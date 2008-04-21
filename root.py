@@ -577,7 +577,7 @@ class Root(BaseRoot):
         # Remove handlers
         for obsolete in ('.archive', '.users', '.admins.users', 'admins',
                 'admins.metadata', 'reviewers', 'reviewers.metadata',
-                'en.metadata'):
+                'en.po', 'en.metadata'):
             if root.exists(obsolete):
                 root.remove(obsolete)
         # Set admin

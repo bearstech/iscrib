@@ -152,9 +152,14 @@ class ScribUser(User):
         elif self.is_BDP():
             department = self.get_department()
             report = root.get_object('BDP%s/%s' % (year, department))
+        else:
+            report = None
 
-        namespace['report_url'] = '%s/;%s' % (self.get_pathto(report),
-                                              report.get_firstview())
+        if report is not None:
+            namespace['report_url'] = '%s/;%s' % (self.get_pathto(report),
+                                                  report.get_firstview())
+        else:
+            namespace['report_url'] = None
 
         # The year
         namespace['year'] = year
