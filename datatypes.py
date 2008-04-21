@@ -20,36 +20,25 @@
 from decimal import Decimal as dec
 
 # Import from itools
-from itools.datatypes import String
-
-
-class Enumerate(String):
-
-    @classmethod
-    def get_namespace(cls, value):
-        options = cls.get_options()
-        for option in options:
-            option['is_selected'] = option['id'] == value
-        return options
-
+from itools.datatypes import String, Enumerate
 
 
 class EPCI_Statut(Enumerate):
 
     @classmethod
     def get_options(cls):
-        return [{'id': '0', 'label': ""},
-                {'id': '1',
+        return [{'name': '0', 'label': ""},
+                {'name': '1',
                  'label': u"Commune dans un EPCI sans compétence bibliothèque"},
-                {'id': '2',
+                {'name': '2',
                  'label': u"Commune dans EPCI - bibliothèque non transférée"},
-                {'id': '3',
+                {'name': '3',
                  'label': u"Commune dans EPCI avec compétence biblio"},
-                {'id': '4',
+                {'name': '4',
                  'label': u"Ville-centre  d'un EPCI avec compétence biblio"},
-                {'id': '5',
+                {'name': '5',
                  'label': u"Commune dans syndicat intercommunal"},
-                {'id': '6', 'label': "Autre"},
+                {'name': '6', 'label': "Autre"},
                 ]
 
 
@@ -197,3 +186,11 @@ class Integer(object):
         if not value:
             return None
         return Integer(value)
+
+
+class WorkflowState(Enumerate):
+    options = [{'name': 'vide', 'value': u"Vide"},
+               {'name': 'en_cours', 'value': u"En cours"},
+               {'name': 'termine', 'value': u"Terminé"},
+               {'name': 'exporte', 'value': u"Exporté"},
+               {'name': 'modifie', 'value': u"Modifié après export"}]

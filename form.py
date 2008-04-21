@@ -28,6 +28,7 @@ from decimal import Decimal as dec, InvalidOperation
 from MySQLdb import OperationalError
 
 # Import from itools
+from itools.catalog import KeywordField, TextField, BoolField
 from itools.datatypes import Unicode, Boolean, String
 from itools.web import get_context
 from itools.stl import stl
@@ -133,6 +134,30 @@ class Form(Text):
             state = u'Modifié après export'
 
         return state
+
+
+    ######################################################################
+    # Catalog API
+    def get_catalog_fields(self):
+        fields = Text.get_catalog_fields(self)
+        fields += [TextField('user_town'),
+                   KeywordField('dep', is_stored=True),
+                   KeywordField('year'),
+                   BoolField('is_BDP'),
+                   BoolField('is_BM'),
+                   KeywordField('form_state', is_stored=True)]
+        return fields
+
+
+    def get_catalog_values(self):
+        values = Text.get_catalog_values(self)
+        values['user_town'] = self.get_user_town()
+        values['dep'] = self.get_dep()
+        values['year'] = self.get_year()
+        values['is_BDP'] = self.is_BDP()
+        values['is_BM'] = self.is_BM()
+        values['form_state'] = self.get_form_state()
+        return values
 
 
     #######################################################################

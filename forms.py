@@ -17,17 +17,19 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.catalog import TextField
-from itools.catalog import queries
+from itools.catalog import EqQuery, PhraseQuery, AndQuery
 from itools.stl import stl
+from itools.datatypes import Integer, Unicode
 
 # Import from ikaaro
-from ikaaro.utils import get_parameters
 from ikaaro.registry import register_object_class
 from ikaaro.folder import Folder
-from ikaaro.widgets import table
+from ikaaro.widgets import table, batch
+from ikaaro.forms import Select as SelectWidget
 
 # Import from scrib
+from datatypes import WorkflowState
+from form import Form
 from form_bm import FormBM
 from form_bdp import FormBDP
 from utils import get_bdp_namespace
@@ -68,10 +70,14 @@ class Forms(Folder):
 
     #########################################################################
     # Browse
-    def _browse_namespace(self, line, object):
-        line['form_state'] = object.get_form_state()
-        line['title'] = object.get_user_town()
-        line['dep'] = object.get_dep()
+    def _browse_namespace(self, object, icon_size):
+        print "object", object
+        line = Folder._browse_namespace(self, object, icon_size)
+        if isinstance(object, Form):
+            line['form_state'] = object.get_form_state()
+            line['title'] = object.get_user_town()
+            line['dep'] = object.get_dep()
+        return line
 
 
     browse_content__access__ = 'is_admin_or_consultant'
@@ -84,23 +90,11 @@ class Forms(Folder):
     search_form__access__ = 'is_admin_or_consultant'
     search_form__label__ = u'Search'
     def search_form(self, context):
-        tablename = 'search'
-
         # Get the search parameters
-        parameters = get_parameters(tablename, name='', dep='', code='',
-                                    state='')
-        states_dic = {'1': u'Vide', '2': u'En cours', '3': u'Terminé',
-                '4': u'Exporté', '5': u'Modifié après export'}
-
-        name = parameters['name'].strip().lower()
-        dep = parameters['dep'].strip()
-        code = parameters['code'].strip().lower()
-        state_code = parameters['state'].strip()
-
-        name = unicode(name, 'utf8')
-        dep= unicode(dep, 'utf8')
-        code = unicode(code, 'utf8')
-        state = states_dic.get(state_code)
+        name = context.get_form_value('name', type=Unicode)
+        dep = context.get_form_value('dep', type=Unicode)
+        code = context.get_form_value('code', type=Unicode)
+        state = context.get_form_value('state')
 
         # Build the namespace
         namespace = {}
@@ -108,70 +102,70 @@ class Forms(Folder):
 
         # The search form
         namespace['search_name'] = name
-
-        states = []
-        for state_key, state_name in states_dic.items():
-            states.append({'name': state_name, 'value': state_key,
-                           'selected': state_key == state_code})
-        namespace['states'] = states
-
-        namespace['departements'] = get_bdp_namespace()
-
-        namespace['search_dep'] = dep
         namespace['search_code'] = code
-        namespace['search_state'] = state_code
+        namespace['departements'] = get_bdp_namespace(dep)
+        widget = SelectWidget('state')
+        namespace['states'] = widget.to_html(WorkflowState, state)
+
+        # The batch
+        sortby = context.get_form_value('sortby', default='title')
+        sortorder = context.get_form_value('sortorder', default='up')
+        batchstart = context.get_form_value('batchstart', type=Integer,
+                                            default=0)
+        batchsize = context.get_form_value('batchsize', type=Integer,
+                                           default=50)
+
+        # Build the query
+        query = []
+        # The format (BM or BDP)
+        if self.is_BM():
+            query.append(EqQuery('format', FormBM.class_id))
+        else:
+            query.append(EqQuery('format', FormBDP.class_id))
+        # The year
+        query.append(EqQuery('year', self.get_year()))
+        # The name of the town
+        if name:
+            query.append(PhraseQuery('user_town', name))
+        # The department
+        if dep:
+            query.append(EqQuery('dep', dep))
+        # The code UA
+        if code:
+            query.append(EqQuery('code', code))
+        # The state
+        if state:
+            form_state = WorkflowState.get_value(state)
+            query.append(EqQuery('form_state', form_state))
+        query = AndQuery(*query)
 
         # Search
-        if name or code or state or dep:
-            # Build the query
-            # The format (BM or BDP)
-            if self.is_BM():
-                query = queries.Equal('format', FormBM.class_id)
-            else:
-                query = queries.Equal('format', FormBDP.class_id)
-            # The year
-            year = self.get_year()
-            q_year = queries.Equal('year', year)
-            query = queries.And(query, q_year)
-            # The name of the town
-            for word, pos in TextField.split(name):
-                q_name = queries.Equal('user_town', word)
-                query = queries.And(query, q_name)
-            # The department
-            if dep:
-                q_dep = queries.Equal('dep', dep)
-                query = queries.And(query, q_dep)
-            # The code UA
-            if code:
-                q_code = queries.Equal('code', code)
-                query = queries.And(query, q_code)
-            # The state
-            if state_code:
-                q_state = queries.Equal('form_state', state)
-                query = queries.And(query, q_state)
-
-            # Search
-            root = context.root
-            results = root.search(query)
-            # Build objects namespace, add the path to the object from the
-            # current folder.
-            objects = []
-            get_object = root.get_object
-            for document in results.get_documents():
-                # XXX Use document.mtime_microsecond instead?
-                mtime = get_object(document.abspath).get_mtime()
-                objects.append({'name': document.name,
-                                'url': '%s/;report_form0' % document.name,
-                                'title': document.title,
-                                'form_state': document.form_state,
-                                'date': mtime.strftime('%Y-%m-%d %H:%M')})
-        else:
-            objects = []
+        root = context.root
+        results = root.search(query)
+        # Build objects namespace, add the path to the object from the
+        # current folder.
+        rows = []
+        get_object = root.get_object
+        for document in results.get_documents(sort_by=sortby,
+                                              reverse=(sortorder=='up'),
+                                              start=batchstart,
+                                              size=batchsize):
+            mtime = get_object(document.abspath).get_mtime()
+            url = '%s/;report_form0' % document.name
+            rows.append({'name': document.name,
+                         'title': (document.title, url),
+                         'form_state': document.form_state,
+                         'date': mtime.strftime('%d-%m-%Y %Hh%M')})
 
         # The table
-        path = context.path
-        namespace['table'] = table(path.get_pathtoroot(), tablename, objects,
-                sortby='title', sortorder='up', batchstart='0', batchsize='50')
+        namespace['batch'] = batch(context.uri, batchstart, batchsize,
+                                   results.get_n_documents())
+        columns = [('name', u"Code"),
+                   ('title', u"Ville"),
+                   ('date', u"Date"),
+                   ('form_state', u"État")]
+        namespace['table'] = table(columns, rows, sortby, sortorder,
+                table_with_form=False)
 
         template = self.get_object('/ui/scrib/Forms_search.xml')
         return stl(template, namespace)
