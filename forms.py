@@ -42,22 +42,12 @@ class Forms(Folder):
     class_title = u'Forms'
     class_description = u'...'
     class_icon48 = 'scrib/images/form48.png'
+    class_views = [['search_form']]
 
 
     #########################################################################
-    # User interface
+    # API
     #########################################################################
-    def get_views(self):
-        if self.is_BM():
-            return ['search_form']
-        if self.is_BDP():
-            return ['browse_content']
-
-
-    def get_subviews(self, view):
-        return []
-
-
     def is_BM(self):
         return self.name.count('BM') and True
 
@@ -68,25 +58,10 @@ class Forms(Folder):
     def get_year(self):
         return self.name[-4:]
 
+
     #########################################################################
-    # Browse
-    def _browse_namespace(self, object, icon_size):
-        print "object", object
-        line = Folder._browse_namespace(self, object, icon_size)
-        if isinstance(object, Form):
-            line['form_state'] = object.get_form_state()
-            line['title'] = object.get_user_town()
-            line['dep'] = object.get_dep()
-        return line
-
-
-    browse_content__access__ = 'is_admin_or_consultant'
-    def browse_list(self, context):
-        namespace = self.browse_namespace(16)
-        template = self.get_object('/ui/scrib/Forms_browse_list.xml')
-        return stl(template, namespace)
-
-
+    # User interface
+    #########################################################################
     search_form__access__ = 'is_admin_or_consultant'
     search_form__label__ = u'Search'
     def search_form(self, context):
@@ -102,10 +77,11 @@ class Forms(Folder):
 
         # The search form
         namespace['search_name'] = name
-        namespace['search_code'] = code
         namespace['departements'] = get_bdp_namespace(dep)
+        namespace['search_code'] = code
         widget = SelectWidget('state')
         namespace['states'] = widget.to_html(WorkflowState, state)
+        namespace['is_BM'] = self.is_BM()
 
         # The batch
         sortby = context.get_form_value('sortby', default='title')
@@ -120,6 +96,9 @@ class Forms(Folder):
         # The format (BM or BDP)
         if self.is_BM():
             query.append(EqQuery('format', FormBM.class_id))
+            # The code UA
+            if code:
+                query.append(EqQuery('code', code))
         else:
             query.append(EqQuery('format', FormBDP.class_id))
         # The year
@@ -130,9 +109,6 @@ class Forms(Folder):
         # The department
         if dep:
             query.append(EqQuery('dep', dep))
-        # The code UA
-        if code:
-            query.append(EqQuery('code', code))
         # The state
         if state:
             form_state = WorkflowState.get_value(state)
@@ -164,10 +140,14 @@ class Forms(Folder):
                    ('title', u"Ville"),
                    ('date', u"Date"),
                    ('form_state', u"État")]
+        if self.is_BDP():
+            columns[1] = ('title', u"Département")
         namespace['table'] = table(columns, rows, sortby, sortorder,
                 table_with_form=False)
 
         template = self.get_object('/ui/scrib/Forms_search.xml')
         return stl(template, namespace)
+
+
 
 register_object_class(Forms)
