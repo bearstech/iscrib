@@ -374,12 +374,12 @@ class Form(Text):
         return namespace
 
 
-    def get_ns_and_h(self, xml, autogen_xml, view):
+    def get_ns_and_h(self, context, xml, autogen_xml, view):
         """
         autogen_xml = 'FormXX_report1_autogen.xml'
         xml = 'FormXX_report1.xml'
         """
-        namespace = self.get_namespace()
+        namespace = self.get_namespace(context)
 
         try:
             template = self.get_object('/ui/scrib/%s' % autogen_xml)
@@ -414,7 +414,7 @@ class Form(Text):
         schema = self.get_schema()
         controles = self.get_controles()
         alertes = self.get_alertes()
-        namespace = self.get_namespace()
+        namespace = self.get_namespace(context)
         dependencies = self.get_dependencies()
         # State
         state = self.get_form_state()
@@ -704,7 +704,7 @@ class Form(Text):
         user = context.user
 
         # Build email
-        namespace = self.get_namespace()
+        namespace = self.get_namespace(context)
         message_pattern = u'To: %(to_addr)s\n' \
                           u'From: %(from_addr)s\n' \
                           u'Subject: %(subject)s\n' \
@@ -839,7 +839,7 @@ class Form(Text):
         try:
             connection = get_connection()
             cursor = connection.cursor()
-            namespace = self.get_namespace()
+            namespace = self.get_namespace(context)
             schema = self.get_schema()
             # Update dans la base ADRESSE
             query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
@@ -942,7 +942,7 @@ class Form(Text):
         fields = {}
 
         t0 = time()
-        ns = self.get_namespace()
+        ns = self.get_namespace(context)
         for key in schema:
             field_type = schema[key][0]
             field_default = schema[key][1]
@@ -1122,7 +1122,7 @@ class Form(Text):
     report_csv__label__ = u'Export'
     def report_csv(self, context):
         """ Call downloadCSV """
-        namespace = self.get_namespace()
+        namespace = self.get_namespace(context)
         is_finished = namespace['is_finished']
         is_complete = namespace['is_complete']
         is_exported = self.get_form_state() == u'Exporté'
@@ -1135,7 +1135,8 @@ class Form(Text):
     comments__label__ = u'Rapport Bibliothèques'
     comments__sublabel__ = u'Commentaires'
     def comments(self, context, view=None):
-        return self.get_ns_and_h('Form_comments.xml',
+        return self.get_ns_and_h(context,
+                                 'Form_comments.xml',
                                  'FormBM_report0_autogen.xml',
                                  view)
 
@@ -1150,7 +1151,7 @@ class Form(Text):
         response.set_header('Content-Disposition',
                 'attachment; filename="scrib.csv"')
 
-        namespace = self.get_namespace()
+        namespace = self.get_namespace(context)
         # construct the csv
         names = schema.keys()
         names.sort()
