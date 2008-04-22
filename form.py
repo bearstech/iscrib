@@ -30,7 +30,6 @@ from MySQLdb import OperationalError
 # Import from itools
 from itools.catalog import KeywordField, TextField, BoolField
 from itools.datatypes import Unicode, Boolean, String
-from itools.web import get_context
 from itools.stl import stl
 from itools.csv import CSVFile
 from itools.handlers import File
@@ -389,7 +388,6 @@ class Form(Text):
 
         if view == 'printable':
             namespace['printable'] = True
-            context = get_context()
             context.response.set_header('Content-Type',
                                         'text/html; charset=UTF-8')
             namespace['body'] = stl(template, namespace)
