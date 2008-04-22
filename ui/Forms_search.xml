@@ -2,41 +2,41 @@
 <stl:block xmlns:stl="http://xml.itools.org/namespaces/stl"
   xmlns="http://www.w3.org/1999/xhtml">
   <form method="get" action=";search_form">
-    <h2>Rechercher</h2>
-    <table class="form">
-      <tr stl:if="is_BM">
-        <th>Nom de la ville (exemple : "saint")</th>
-        <td>
-          <input name="name" size="30" type="text" value="${search_name}"/>
-        </td>
-        <th align="right">Code UA</th>
-        <td>
-          <input name="code" size="6" type="text" value="${search_code}"/>
-        </td>
-      </tr>
-      <tr>
-        <th align="right">Département (exemple : 02)</th>
-        <td>
-          <select name="dep">
-            <option value="">--- Tous les départements ---</option>
-            <option stl:repeat="dep departements" value="${dep/value}" selected="${dep/selected}">${dep/name}</option>
-          </select>
-        </td>
-        <th>État du formulaire</th>
-        <td>
-          ${states}
-        </td>
-      </tr>
-      <tr>
-        <th></th>
-        <td class="submit">
-          <input type="submit" value="Rechercher"/>
-        </td>
-      </tr>
-    </table>
+    <fieldset>
+      <legend>Rechercher</legend>
+      <table class="form">
+        <tr stl:if="is_BM">
+          <th>Nom de la ville (exemple : "saint")</th>
+          <td>
+            <input name="name" size="30" type="text" value="${search_name}"/>
+          </td>
+          <th align="right">Code UA</th>
+          <td>
+            <input name="code" size="6" type="text" value="${search_code}"/>
+          </td>
+        </tr>
+        <tr>
+          <th align="right">Département (exemple : 02)</th>
+          <td>
+            <select name="dep">
+              <option value="">--- Tous les départements ---</option>
+              <option stl:repeat="dep departements" value="${dep/value}" selected="${dep/selected}">${dep/name}</option>
+            </select>
+          </td>
+          <th>État du formulaire</th>
+          <td>
+            ${states}
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="submit">
+            <input type="submit" value="Rechercher"/>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
   </form>
-
-  <hr/>
 
   <p>
     <em>${too_long_answer}</em>
