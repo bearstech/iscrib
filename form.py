@@ -42,7 +42,8 @@ from ikaaro.workflow import workflow
 # Import from scrib
 from scrib import config
 from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from utils import get_checkbox_value, get_connection, MSG_NO_MYSQL, make_msg
+from utils import (get_checkbox_value, get_connection, MSG_NO_MYSQL, make_msg,
+        bm_annexes, ua_epci)
 
 
 SMTPServer = config.get_value('SMTPServer')
@@ -317,8 +318,8 @@ class Form(Text):
  
         # autofill Annexes
         if self.is_BM():
-            bm_annexes = self.bm_annexes(code_ua)
-            for k, v in bm_annexes.items():
+            annexes = bm_annexes(code_ua)
+            for k, v in annexes.items():
                 key = 'field%s' % k
                 if not k.startswith('J'):
                     pass
@@ -328,8 +329,8 @@ class Form(Text):
        
         # autofill BM epci
         if self.is_BM():
-            ua_epci = self.ua_epci(code_ua)
-            for k, v in ua_epci.items():
+            epci = ua_epci(code_ua)
+            for k, v in epci.items():
                 key = 'field%s' % k
                 if not k.startswith('K'):
                     pass

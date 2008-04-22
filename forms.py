@@ -29,7 +29,6 @@ from ikaaro.forms import Select as SelectWidget
 
 # Import from scrib
 from datatypes import WorkflowState
-from form import Form
 from form_bm import FormBM
 from form_bdp import FormBDP
 from utils import get_bdp_namespace
