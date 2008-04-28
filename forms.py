@@ -122,7 +122,7 @@ class Forms(Folder):
         rows = []
         get_object = root.get_object
         for document in results.get_documents(sort_by=sortby,
-                                              reverse=(sortorder=='up'),
+                                              reverse=(sortorder=='down'),
                                               start=batchstart,
                                               size=batchsize):
             mtime = get_object(document.abspath).get_mtime()
