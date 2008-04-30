@@ -772,7 +772,7 @@ class Form(Text):
                 '\n'
         event = event % {'date': str(datetime.datetime.now()),
                          'uri': str(context.uri),
-                         'referrer': str(context.referrer),
+                         'referrer': str(context.request.referrer),
                          'user': user and user.name or None,
                          'event': ('email sent '
                                    '\n########\n%s\n#########') % content}
@@ -1000,7 +1000,7 @@ class Form(Text):
         schema = self.get_schema()
         fields = {}
 
-        referer = context.referrer
+        referer = context.request.referrer
         new_referer = deepcopy(referer)
 
         dependencies = self.get_dependencies()

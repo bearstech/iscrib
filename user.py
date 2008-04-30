@@ -120,9 +120,9 @@ class ScribUser(User):
         name = self.name
         if self.is_BDP():
            # XXX just for 2005 ;)
-           return '2005'
+           return '2006'
         elif self.is_BM():
-           return '2005'
+           return '2006'
         return None
 
 

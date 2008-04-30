@@ -99,7 +99,7 @@ class FormBDP(Form):
 
     #######################################################################
     # Edit report
-    print_form__access__ = 'is_allowed_to_view'
+    print_form__access__ = 'is_allowed_to_view_form'
     print_form__label__ = u'Impression du formulaire '
     def print_form(self, context):
         context.response.set_header('Content-Type',
@@ -116,7 +116,7 @@ class FormBDP(Form):
         return stl(template, namespace)
 
 
-    report_form0__access__ = 'is_allowed_to_view'
+    report_form0__access__ = 'is_allowed_to_view_form'
     report_form0__label__ = u'Rapport Bibliothèques'
     report_form0__sublabel__ = u'Identité'
     def report_form0(self, context, view=None):
@@ -126,7 +126,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form1__access__ = 'is_allowed_to_view'
+    report_form1__access__ = 'is_allowed_to_view_form'
     report_form1__label__ = u'Rapport BDP'
     report_form1__sublabel__ = u'A-Finances'
     def report_form1(self, context, view=None):
@@ -136,7 +136,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form2__access__ = 'is_allowed_to_view'
+    report_form2__access__ = 'is_allowed_to_view_form'
     report_form2__label__ = u'Rapport BDP'
     report_form2__sublabel__ = u'B-Locaux'
     def report_form2(self, context, view=None):
@@ -146,7 +146,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form3__access__ = 'is_allowed_to_view'
+    report_form3__access__ = 'is_allowed_to_view_form'
     report_form3__label__ = u'Rapport BDP'
     report_form3__sublabel__ = u'C-Personnel'
     def report_form3(self, context, view=None):
@@ -156,7 +156,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form4__access__ = 'is_allowed_to_view'
+    report_form4__access__ = 'is_allowed_to_view_form'
     report_form4__label__ = u'Rapport BDP'
     report_form4__sublabel__ = u'D-Collections'
     def report_form4(self, context, view=None):
@@ -166,7 +166,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form5__access__ = 'is_allowed_to_view'
+    report_form5__access__ = 'is_allowed_to_view_form'
     report_form5__label__ = u'Rapport BDP'
     report_form5__sublabel__ = u'E-Acquisitions'
     def report_form5(self, context, view=None):
@@ -176,7 +176,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form6__access__ = 'is_allowed_to_view'
+    report_form6__access__ = 'is_allowed_to_view_form'
     report_form6__label__ = u'Rapport BDP'
     report_form6__sublabel__ = u'F-Réseau tous public'
     def report_form6(self, context, view=None):
@@ -186,7 +186,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form7__access__ = 'is_allowed_to_view'
+    report_form7__access__ = 'is_allowed_to_view_form'
     report_form7__label__ = u'Rapport BDP'
     report_form7__sublabel__ = u'G-Réseau spécifique'
     def report_form7(self, context, view=None):
@@ -196,7 +196,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form8__access__ = 'is_allowed_to_view'
+    report_form8__access__ = 'is_allowed_to_view_form'
     report_form8__label__ = u'Rapport BDP'
     report_form8__sublabel__ = u'H-Services'
     def report_form8(self, context, view=None):
@@ -206,7 +206,7 @@ class FormBDP(Form):
                                  view)
 
 
-    report_form9__access__ = 'is_allowed_to_view'
+    report_form9__access__ = 'is_allowed_to_view_form'
     report_form9__label__ = u'Rapport BDP'
     report_form9__sublabel__ = u'I-Action Culturelle'
     def report_form9(self, context, view=None):
