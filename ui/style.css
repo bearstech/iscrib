@@ -34,6 +34,11 @@ body {
     border: 1px  solid black;
 }
 
+#tabs .menu a span {
+  background: transparent !important;
+  padding: 4px;
+}
+
 /**************************************************************************
  Metadata
     border-bottom: hidden;
@@ -132,8 +137,13 @@ table.Check {
   NEW CODE
 ******************************************************************************/
 
+#formBiblio {
+  font-size: 10px;
+}
+
 #formBiblio h1 {
   color: #000080;
+  font-size: 12px;
 }
 
 #formBiblio h2 {
@@ -141,6 +151,7 @@ table.Check {
   color: #ffffff;
   text-align: center;
   padding: 2px;
+  font-size: 10px;
 }
 
 #formBiblio th {
