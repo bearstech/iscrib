@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2004 Luis Belmar Letelier <luis@itaapy.com>
 # Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
