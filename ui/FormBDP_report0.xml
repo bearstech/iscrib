@@ -79,11 +79,11 @@
         <td colspan="3"><input name="field2" size="60" type="text" value="${field2}"/></td>
         <td sdnum="1036;" sdval="1">2</td>
      </tr>
-     <tr>
+     <!--tr>
         <th>Complément d'adresse</th>
        <td colspan="3"><input name="field3" size="60" type="text" value="${field3}"/></td>
         <td sdnum="1036;" sdval="1">3</td>
-     </tr>
+     </tr-->
      <tr>
         <th>N°/Type voie/Nom voie</th>
         <td><input name="field30" size="5" type="text" value="${field30}"/>30</td>
