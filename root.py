@@ -570,6 +570,19 @@ class Root(BaseRoot):
 
 
     #########################################################################
+    # Debug
+    #########################################################################
+    xchangepassword__access__ = 'is_admin'
+    def xchangepassword(self, context):
+        users = self.get_object('users')
+        for user in users.get_objects():
+            user.set_password('a')
+        # XXX écrit sur une méthode GET
+        context.commit = True
+        return context.come_back(u"Done", goto='/;browse_content')
+
+
+    #########################################################################
     # Upgrade
     #########################################################################
     def update_20080410(self):
