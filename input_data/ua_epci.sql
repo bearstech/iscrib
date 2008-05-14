@@ -6,9 +6,9 @@
 # Généré le : Lundi 16 Janvier 2006 à 10:15
 # Version du serveur: 3.23.56
 # Version de PHP: 4.2.3
-# 
+#
 # Base de données: `scrib`
-# 
+#
 
 # --------------------------------------------------------
 

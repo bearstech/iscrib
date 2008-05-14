@@ -3,9 +3,9 @@
 ###################################################################
 DROP TABLE IF EXISTS `bm05`;
 CREATE TABLE `bm05` (
-  `Code_UA` int default NULL, 
-  `dept` char(3) default NULL, 
-  `exer` int default NULL, 
+  `Code_UA` int default NULL,
+  `dept` char(3) default NULL,
+  `exer` int default NULL,
   `A11` int default NULL ,
   `A12` int default NULL ,
   `A13` int default NULL ,
@@ -621,5 +621,5 @@ CREATE TABLE `bm05` (
   `K7` varchar(100) default '' ,
   `K8` varchar(100) default '' ,
   `K9` varchar(100) default '' ,
-  `L20` varchar(100) default '' 
+  `L20` varchar(100) default ''
 );

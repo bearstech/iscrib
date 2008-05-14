@@ -3,9 +3,9 @@
 ###################################################################
 DROP TABLE IF EXISTS `bdp05`;
 CREATE TABLE `bdp05` (
-  `Code_UA` int default NULL, 
-  `dept` char(3) default NULL, 
-  `exer` int default NULL, 
+  `Code_UA` int default NULL,
+  `dept` char(3) default NULL,
+  `exer` int default NULL,
   `A11` int default NULL ,
   `A12` int default NULL ,
   `A13` int default NULL ,
@@ -752,5 +752,5 @@ CREATE TABLE `bdp05` (
   `I32Z` int default NULL ,
   `I33Z` int default NULL ,
   `I34Y` int default NULL ,
-  `I34Z` int default NULL 
+  `I34Z` int default NULL
 );

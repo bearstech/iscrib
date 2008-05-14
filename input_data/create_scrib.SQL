@@ -1,6 +1,6 @@
 
 # installation  $ mysql -u root < create_scrib.SQL
-# ou alors 
+# ou alors
 #  $ mysql -u root
 #  mysql> source create_scrib.SQL;
 
