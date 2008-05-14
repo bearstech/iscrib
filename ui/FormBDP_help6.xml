@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN"
   "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <title>Aide</title>
-
+    
     <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
   </head>
   <body id="body">
@@ -37,9 +37,9 @@
       <tr>
         <td valign="middle" width="16%">Crédits d'acquisition
         tous documents</td>
-        <td valign="middle" width="26%">2 / hb</td>
-        <td valign="middle" width="18%">1 / hb</td>
-        <td valign="middle" width="17%">0,50 / hb</td>
+        <td valign="middle" width="26%">2€ / hb</td>
+        <td valign="middle" width="18%">1€ / hb</td>
+        <td valign="middle" width="17%">0,50€ / hb</td>
         <td valign="middle" width="12%" rowspan="5">Deux ou trois
         critères du niveau 3 sont respectés</td>
         <td valign="middle" width="11%" rowspan="5">Moins de deux
@@ -82,35 +82,19 @@
 
     <h4>F1/2. Desserte réseau tous publics</h4>
     <dl class="description">
-      <dt>Colonne Y (POPULATION DESSERVIE) : Indiquer la population
-      desservie par les bibliothèques, dépôts et
-      arrêts bibliobus du réseau de la BDP. Prendre en
-      compte la population de la commune (ou du regroupement de
-      communes) où se situe le point, mais pas celle des
-      communes avoisinantes.</dt>
+      <dt>Colonne Y (POPULATION DESSERVIE) : indiquer la population desservie par les bibliothèques, dépôts et arrêts bibliobus du réseau de la BDP. Prendre en compte la population de la commune (ou du regroupement de communes) où se situe le point, mais pas celle des communes avoisinantes.</dt>
     </dl>
-    <h4>F3. Dépôts de la BDP</h4>
+    <h4>F.3 Dépôts de la BDP</h4>
     <dl class="description">
-      <dt>colonne Y (NOMBRE DE DOCUMENTS DEPOSES DANS LANNEE).
-      Exemple : la BDP dépose une première fois 2 000
-      documents. Au deuxième passage, elle ne renouvelle que 1
-      000 documents. Le total des dépôts est 3 000
-      documents.</dt>
+      <dt>Colonne Y (NOMBRE DE DOCUMENTS DÉPOSÉS DANS L’ANNÉE). Exemple : la BDP dépose une première fois 2 000 documents. Au deuxième passage, elle ne renouvelle que 1 000 documents. Le total des dépôts est 3 000 documents.</dt>
     </dl>
-    <h4>F4. Bibliothèques ayant fourni des statistiques</h4>
+    <h4>F.4 Bibliothèques ayant fourni des statistiques </h4>
     <dl class="description">
-      <dt>Un point sera retenu sil indique ses collections, ses
-      acquisitions, ses dépenses dacquisition , son volume de
-      prêts, son nombre de lecteurs et son personnel, pour
-      permettre un traitement des données sur des
-      résultats homogènes.</dt>
+      <dt>Un point sera retenu s’il indique ses collections, ses acquisitions, ses dépenses d’acquisitions,  son volume de prêts, son nombre de lecteurs et son personnel, pour permettre un traitement des données sur des résultats homogènes.</dt>
     </dl>
-    <h4>F5/6. Activités du réseau tous publics</h4>
+    <h4>F.5 et 6 Activités du réseau tous publics</h4>
     <dl class="description">
-      <dt>colonne W (BDP ET / OU ANNEXES ouvertes è tous les
-      publics) : è remplir uniquement lorsque louverture est
-      tous publics. Exemple : la BDP ouverte è lensemble des
-      habitants de la commune où elle se trouve.</dt>
+      <dt>Colonne W (BDP ET / OU ANNEXES ouvertes à tous les publics) : à remplir uniquement lorsque l’ouverture est tous publics. Exemple : la BDP ouverte à l’ensemble des habitants de la commune où elle se trouve.</dt>
     </dl>
   </body>
 </html>

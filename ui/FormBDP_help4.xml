@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <title>Aide</title>
-
+    
     <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
 
   </head>
   <body id="body">
 <p align="right"><a href=";help_menu">Sommaire</a></p>
-<h2>COLLECTIONS</h2>
+<h2>D - COLLECTIONS</h2>
 
-<h4> Rubriques D11 à D32 </h4>
+<h4> Rubriques D.11 à D.31  </h4>
 <dl class="description">
-<dt>La distinction adultes/enfants concerne l'ensemble des supports à l'exception de « autres documents » et « bases de données », si le détail n'est pas effectué, écrire « NC » en D11/D12, D14/D15, D17/D18,D20/D21) et noter le total par support. </dt>
-<dt>Pour les périodiques compter le nombre de titres e le nombre d'unités matérielles (unité matérielle ex . : 6 fascicules reliés en 1 volume comptent pour une unité).</dt>
+<dt>La distinction adultes/enfants concerne l’ensemble des supports à l’exception de "autres documents / autres supports" et "bases de données", si le détail n’est pas effectué, écrire "NC" en D.11/D.12, D.14/D.15, D.17/D.18, D.20/D.21) et noter le total par support. </dt>
+<dt>Pour les périodiques, compter le nombre de titres et le nombre d’unités matérielles (unité matérielle, exemple : 6 fascicules reliés en 1 volume comptent pour une unité).</dt>
 </dl>
 
 <h4> Phonogrammes - vidéogrammes - cédéroms </h4>
@@ -24,13 +24,20 @@
 <li>
   <u>Nombre de phonogrammes </u> = tous documents sonores quel que soit le support.</li>
 <li><u>Nombre de vidéogrammes </u> = vidéos et DVD.</li>
-<li><u>Nombre de cédéroms et disques optiques numériques</u>  : compter les unités matérielles de présentation. Exemple : 1 boîtier de 2 CD = 1 phonogramme. </li>
+<li><u>Nombre de cédéroms et disques optiques numériques</u>  : compter les unités matérielles de présentation. Exemple : 1 boîtier de 2 CD = 1 phonogramme.
+Ne pas comptabiliser les cédéroms Électre ou assimilés.</li>
 </ul>
 </dt>
 </dl>
+
+<h4>Autres documents / autres supports</h4>
+<dl class="description">
+<dt>indiquez dans cette catégorie (que vous retrouverez dans d'autres parties du rapport) les partitions, valises thématiques, supports d'animation, etc... que vous comptabiliser comme des documents dans vos collections.</dt>
+</dl>
+
 <h4>Bases de données </h4>
 <dl class="description">
-<dt>Exclure la base de données informatisée de la bibliothèque. Les bases de données soumises à licence sont comptabilisées à l'unité. Ces bases de données peuvent être bibliographiques (collection de références bibliographiques ou de texte (collection de textes originaux). On comptabilisera les bases de données qui contiennent une information descriptive ou des données numériques, par exemple les annuaires, encyclopédie, dictionnaires, tableaux statistiques et données chiffrées. On comptabilisera également les catalogues de bibliothèques acquis comme base de données.</dt>
+<dt>exclure la base de données informatisée de la bibliothèque. Les bases de données soumises à licence sont comptabilisées à l’unité. Ces bases de données peuvent être bibliographiques, collection de références bibliographiques, ou de texte (collection de textes originaux). On comptabilisera les bases de données qui contiennent une information descriptive ou des données numériques, par exemple les annuaires, encyclopédies, dictionnaires, tableaux statistiques et données chiffrées. On comptabilisera également les catalogues de bibliothèques acquis comme bases de données.</dt>
 </dl>
 
 </body>

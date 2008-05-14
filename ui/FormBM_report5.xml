@@ -13,7 +13,7 @@
     </stl:block>
   </div>
 <h1>E- ACQUISITIONS ET ÉLIMINATIONS DE L'ANNÉE
-   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help5', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">?</a>
+   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help5', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
 </h1>
 <h2>E. 1 NOMBRE DE DOCUMENTS ACHETÉS  (hors périodiques et documents patrimoniaux)</h2>
 <table width="100%">
@@ -34,13 +34,13 @@
   <tr>
     <th>Livres</th>
     <td>
-       <input name="fieldE11X" style="text-align: right" size="8" type="text" value="${fieldE11X}"/>
+       <input style="text-align: right" value="${fieldE11X}" name="fieldE11X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE11Y" style="text-align: right" size="8" type="text" value="${fieldE11Y}"/>
+       <input style="text-align: right" value="${fieldE11Y}" name="fieldE11Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE11Z" style="text-align: right" size="8" type="text" value="${fieldE11Z}"/>
+       <input style="text-align: right" value="${fieldE11Z}" name="fieldE11Z" size="8" type="text"/>
     </td>
     <td><b class="${_E11}">E11</b></td>
   </tr>
@@ -48,13 +48,13 @@
   <tr>
     <th>Phonogrammes</th>
     <td>
-       <input name="fieldE12X" style="text-align: right" size="8" type="text" value="${fieldE12X}"/>
+       <input style="text-align: right" value="${fieldE12X}" name="fieldE12X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE12Y" style="text-align: right" size="8" type="text" value="${fieldE12Y}"/>
+       <input style="text-align: right" value="${fieldE12Y}" name="fieldE12Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE12Z" style="text-align: right" size="8" type="text" value="${fieldE12Z}"/>
+       <input style="text-align: right" value="${fieldE12Z}" name="fieldE12Z" size="8" type="text"/>
     </td>
     <td><b class="${_E12}">E12</b></td>
   </tr>
@@ -62,13 +62,13 @@
   <tr>
     <th>Vidéogrammes</th>
     <td>
-       <input name="fieldE13X" style="text-align: right" size="8" type="text" value="${fieldE13X}"/>
+       <input style="text-align: right" value="${fieldE13X}" name="fieldE13X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE13Y" style="text-align: right" size="8" type="text" value="${fieldE13Y}"/>
+       <input style="text-align: right" value="${fieldE13Y}" name="fieldE13Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE13Z" style="text-align: right" size="8" type="text" value="${fieldE13Z}"/>
+       <input style="text-align: right" value="${fieldE13Z}" name="fieldE13Z" size="8" type="text"/>
     </td>
     <td><b class="${_E13}">E13</b></td>
   </tr>
@@ -76,13 +76,13 @@
   <tr>
     <th>Cédéroms</th>
     <td>
-       <input name="fieldE14X" style="text-align: right" size="8" type="text" value="${fieldE14X}"/>
+       <input style="text-align: right" value="${fieldE14X}" name="fieldE14X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE14Y" style="text-align: right" size="8" type="text" value="${fieldE14Y}"/>
+       <input style="text-align: right" value="${fieldE14Y}" name="fieldE14Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE14Z" style="text-align: right" size="8" type="text" value="${fieldE14Z}"/>
+       <input style="text-align: right" value="${fieldE14Z}" name="fieldE14Z" size="8" type="text"/>
     </td>
     <td><b class="${_E14}">E14</b></td>
   </tr>
@@ -90,13 +90,13 @@
   <tr>
     <th>Autres documents</th>
     <td>
-       <input name="fieldE15X" style="text-align: right" size="8" type="text" value="${fieldE15X}"/>
+       <input style="text-align: right" value="${fieldE15X}" name="fieldE15X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE15Y" style="text-align: right" size="8" type="text" value="${fieldE15Y}"/>
+       <input style="text-align: right" value="${fieldE15Y}" name="fieldE15Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE15Z" style="text-align: right" size="8" type="text" value="${fieldE15Z}"/>
+       <input style="text-align: right" value="${fieldE15Z}" name="fieldE15Z" size="8" type="text"/>
     </td>
     <td><b class="${_E15}">E15</b></td>
   </tr>
@@ -104,29 +104,29 @@
   <tr>
     <th>Documents numériques</th>
     <td>
-       <input name="fieldE16X" style="text-align: right" size="8" type="text" value="${fieldE16X}"/>
+       <input style="text-align: right" value="${fieldE16X}" name="fieldE16X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE16Y" style="text-align: right" size="8" type="text" value="${fieldE16Y}"/>
+       <input style="text-align: right" value="${fieldE16Y}" name="fieldE16Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE16Z" style="text-align: right" size="8" type="text" value="${fieldE16Z}"/>
+       <input style="text-align: right" value="${fieldE16Z}" name="fieldE16Z" size="8" type="text"/>
     </td>
     <td><b class="${_E16}">E16</b></td>
   </tr>
 
   <tr>
-    <th>Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)</th>
+    <th style="background-color:#FFE15C"><b>TOTAL (E11 à E16)</b></th>
     <td>
-       <input name="fieldE17X" style="text-align: right" size="8" type="text" value="${fieldE17X}"/>
+       <input style="text-align: right" value="${fieldE18X}" name="fieldE18X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE17Y" style="text-align: right" size="8" type="text" value="${fieldE17Y}"/>
+       <input style="text-align: right" value="${fieldE18Y}" name="fieldE18Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE17Z" style="text-align: right" size="8" type="text" value="${fieldE17Z}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldE18Z}" name="fieldE18Z" size="8" type="text"/>
     </td>
-    <td><b class="${_E17}">E17</b></td>
+    <td style="background-color:#FFE15C"><b class="${_E18}">E18</b></td>
   </tr>
 </table>
 <h2>E. 2 NOMBRE DE DOCUMENTS ENTRÉS PAR DONS, LEGS OU DÉPÔT LEGAL (hors périodiques et documents patrimoniaux )</h2>
@@ -148,13 +148,13 @@
   <tr>
     <th>Livres</th>
     <td>
-       <input name="fieldE21X" style="text-align: right" size="8" type="text" value="${fieldE21X}"/>
+       <input style="text-align: right" value="${fieldE21X}" name="fieldE21X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE21Y" style="text-align: right" size="8" type="text" value="${fieldE21Y}"/>
+       <input style="text-align: right" value="${fieldE21Y}" name="fieldE21Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE21Z" style="text-align: right" size="8" type="text" value="${fieldE21Z}"/>
+       <input style="text-align: right" value="${fieldE21Z}" name="fieldE21Z" size="8" type="text"/>
     </td>
     <td><b class="${_E21}">E21</b></td>
   </tr>
@@ -162,13 +162,13 @@
   <tr>
     <th>Phonogrammes</th>
     <td>
-       <input name="fieldE22X" style="text-align: right" size="8" type="text" value="${fieldE22X}"/>
+       <input style="text-align: right" value="${fieldE22X}" name="fieldE22X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE22Y" style="text-align: right" size="8" type="text" value="${fieldE22Y}"/>
+       <input style="text-align: right" value="${fieldE22Y}" name="fieldE22Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE22Z" style="text-align: right" size="8" type="text" value="${fieldE22Z}"/>
+       <input style="text-align: right" value="${fieldE22Z}" name="fieldE22Z" size="8" type="text"/>
     </td>
     <td><b class="${_E22}">E22</b></td>
   </tr>
@@ -176,13 +176,13 @@
   <tr>
     <th>Vidéogrammes</th>
     <td>
-       <input name="fieldE23X" style="text-align: right" size="8" type="text" value="${fieldE23X}"/>
+       <input style="text-align: right" value="${fieldE23X}" name="fieldE23X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE23Y" style="text-align: right" size="8" type="text" value="${fieldE23Y}"/>
+       <input style="text-align: right" value="${fieldE23Y}" name="fieldE23Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE23Z" style="text-align: right" size="8" type="text" value="${fieldE23Z}"/>
+       <input style="text-align: right" value="${fieldE23Z}" name="fieldE23Z" size="8" type="text"/>
     </td>
     <td><b class="${_E23}">E23</b></td>
   </tr>
@@ -190,13 +190,13 @@
   <tr>
     <th>Cédéroms</th>
     <td>
-       <input name="fieldE24X" style="text-align: right" size="8" type="text" value="${fieldE24X}"/>
+       <input style="text-align: right" value="${fieldE24X}" name="fieldE24X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE24Y" style="text-align: right" size="8" type="text" value="${fieldE24Y}"/>
+       <input style="text-align: right" value="${fieldE24Y}" name="fieldE24Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE24Z" style="text-align: right" size="8" type="text" value="${fieldE24Z}"/>
+       <input style="text-align: right" value="${fieldE24Z}" name="fieldE24Z" size="8" type="text"/>
     </td>
     <td><b class="${_E24}">E24</b></td>
   </tr>
@@ -204,13 +204,13 @@
   <tr>
     <th>Autres documents</th>
     <td>
-       <input name="fieldE25X" style="text-align: right" size="8" type="text" value="${fieldE25X}"/>
+       <input style="text-align: right" value="${fieldE25X}" name="fieldE25X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE25Y" style="text-align: right" size="8" type="text" value="${fieldE25Y}"/>
+       <input style="text-align: right" value="${fieldE25Y}" name="fieldE25Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE25Z" style="text-align: right" size="8" type="text" value="${fieldE25Z}"/>
+       <input style="text-align: right" value="${fieldE25Z}" name="fieldE25Z" size="8" type="text"/>
     </td>
     <td><b class="${_E25}">E25</b></td>
   </tr>
@@ -218,29 +218,29 @@
   <tr>
     <th>Documents numériques</th>
     <td>
-       <input name="fieldE26X" style="text-align: right" size="8" type="text" value="${fieldE26X}"/>
+       <input style="text-align: right" value="${fieldE26X}" name="fieldE26X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE26Y" style="text-align: right" size="8" type="text" value="${fieldE26Y}"/>
+       <input style="text-align: right" value="${fieldE26Y}" name="fieldE26Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE26Z" style="text-align: right" size="8" type="text" value="${fieldE26Z}"/>
+       <input style="text-align: right" value="${fieldE26Z}" name="fieldE26Z" size="8" type="text"/>
     </td>
     <td><b class="${_E26}">E26</b></td>
   </tr>
 
   <tr>
-    <th>dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)</th>
+    <th style="background-color:#FFE15C"><b>TOTAL (E21 à E26)</b></th>
     <td>
-       <input name="fieldE27X" style="text-align: right" size="8" type="text" value="${fieldE27X}"/>
+       <input style="text-align: right" value="${fieldE28X}" name="fieldE28X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE27Y" style="text-align: right" size="8" type="text" value="${fieldE27Y}"/>
+       <input style="text-align: right" value="${fieldE28Y}" name="fieldE28Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE27Z" style="text-align: right" size="8" type="text" value="${fieldE27Z}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldE28Z}" name="fieldE28Z" size="8" type="text"/>
     </td>
-    <td><b class="${_E27}">E27</b></td>
+    <td style="background-color:#FFE15C"><b class="${_E28}">E28</b></td>
   </tr>
 </table>
 <h2>E. 3 NOMBRE DE DOCUMENTS RETIRÉS DE L'INVENTAIRE (hors documents patrimoniaux)</h2>
@@ -262,13 +262,13 @@
   <tr>
     <th>Livres</th>
     <td>
-       <input name="fieldE31X" style="text-align: right" size="8" type="text" value="${fieldE31X}"/>
+       <input style="text-align: right" value="${fieldE31X}" name="fieldE31X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE31Y" style="text-align: right" size="8" type="text" value="${fieldE31Y}"/>
+       <input style="text-align: right" value="${fieldE31Y}" name="fieldE31Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE31Z" style="text-align: right" size="8" type="text" value="${fieldE31Z}"/>
+       <input style="text-align: right" value="${fieldE31Z}" name="fieldE31Z" size="8" type="text"/>
     </td>
     <td><b class="${_E31}">E31</b></td>
   </tr>
@@ -276,13 +276,13 @@
   <tr>
     <th>Périodiques (unités matérielles)</th>
     <td>
-       <input name="fieldE32X" style="text-align: right" size="8" type="text" value="${fieldE32X}"/>
+       <input style="text-align: right" value="${fieldE32X}" name="fieldE32X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE32Y" style="text-align: right" size="8" type="text" value="${fieldE32Y}"/>
+       <input style="text-align: right" value="${fieldE32Y}" name="fieldE32Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE32Z" style="text-align: right" size="8" type="text" value="${fieldE32Z}"/>
+       <input style="text-align: right" value="${fieldE32Z}" name="fieldE32Z" size="8" type="text"/>
     </td>
     <td><b class="${_E32}">E32</b></td>
   </tr>
@@ -290,13 +290,13 @@
   <tr>
     <th>Phonogrammes</th>
     <td>
-       <input name="fieldE33X" style="text-align: right" size="8" type="text" value="${fieldE33X}"/>
+       <input style="text-align: right" value="${fieldE33X}" name="fieldE33X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE33Y" style="text-align: right" size="8" type="text" value="${fieldE33Y}"/>
+       <input style="text-align: right" value="${fieldE33Y}" name="fieldE33Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE33Z" style="text-align: right" size="8" type="text" value="${fieldE33Z}"/>
+       <input style="text-align: right" value="${fieldE33Z}" name="fieldE33Z" size="8" type="text"/>
     </td>
     <td><b class="${_E33}">E33</b></td>
   </tr>
@@ -304,13 +304,13 @@
   <tr>
     <th>Vidéogrammes</th>
     <td>
-       <input name="fieldE34X" style="text-align: right" size="8" type="text" value="${fieldE34X}"/>
+       <input style="text-align: right" value="${fieldE34X}" name="fieldE34X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE34Y" style="text-align: right" size="8" type="text" value="${fieldE34Y}"/>
+       <input style="text-align: right" value="${fieldE34Y}" name="fieldE34Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE34Z" style="text-align: right" size="8" type="text" value="${fieldE34Z}"/>
+       <input style="text-align: right" value="${fieldE34Z}" name="fieldE34Z" size="8" type="text"/>
     </td>
     <td><b class="${_E34}">E34</b></td>
   </tr>
@@ -318,13 +318,13 @@
   <tr>
     <th>Cédéroms</th>
     <td>
-       <input name="fieldE35X" style="text-align: right" size="8" type="text" value="${fieldE35X}"/>
+       <input style="text-align: right" value="${fieldE35X}" name="fieldE35X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE35Y" style="text-align: right" size="8" type="text" value="${fieldE35Y}"/>
+       <input style="text-align: right" value="${fieldE35Y}" name="fieldE35Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE35Z" style="text-align: right" size="8" type="text" value="${fieldE35Z}"/>
+       <input style="text-align: right" value="${fieldE35Z}" name="fieldE35Z" size="8" type="text"/>
     </td>
     <td><b class="${_E35}">E35</b></td>
   </tr>
@@ -332,13 +332,13 @@
   <tr>
     <th>Autres documents</th>
     <td>
-       <input name="fieldE36X" style="text-align: right" size="8" type="text" value="${fieldE36X}"/>
+       <input style="text-align: right" value="${fieldE36X}" name="fieldE36X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE36Y" style="text-align: right" size="8" type="text" value="${fieldE36Y}"/>
+       <input style="text-align: right" value="${fieldE36Y}" name="fieldE36Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE36Z" style="text-align: right" size="8" type="text" value="${fieldE36Z}"/>
+       <input style="text-align: right" value="${fieldE36Z}" name="fieldE36Z" size="8" type="text"/>
     </td>
     <td><b class="${_E36}">E36</b></td>
   </tr>
@@ -346,30 +346,18 @@
   <tr>
     <th>Documents numériques</th>
     <td>
-       <input name="fieldE37X" style="text-align: right" size="8" type="text" value="${fieldE37X}"/>
+       <input style="text-align: right" value="${fieldE37X}" name="fieldE37X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE37Y" style="text-align: right" size="8" type="text" value="${fieldE37Y}"/>
+       <input style="text-align: right" value="${fieldE37Y}" name="fieldE37Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE37Z" style="text-align: right" size="8" type="text" value="${fieldE37Z}"/>
+       <input style="text-align: right" value="${fieldE37Z}" name="fieldE37Z" size="8" type="text"/>
     </td>
     <td><b class="${_E37}">E37</b></td>
   </tr>
 
-  <tr>
-    <th>Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)</th>
-    <td>
-       <input name="fieldE38X" style="text-align: right" size="8" type="text" value="${fieldE38X}"/>
-    </td>
-    <td>
-       <input name="fieldE38Y" style="text-align: right" size="8" type="text" value="${fieldE38Y}"/>
-    </td>
-    <td>
-       <input name="fieldE38Z" style="text-align: right" size="8" type="text" value="${fieldE38Z}"/>
-    </td>
-    <td><b class="${_E38}">E38</b></td>
-  </tr>
+
 </table>
 <p style="page-break-after:always "></p>
 <h2>E.4 NOMBRE DE DOCUMENTS PATRIMONIAUX ACQUIS (achats, dons, legs)</h2>
@@ -391,13 +379,13 @@
   <tr>
     <th>Livres imprimés</th>
     <td>
-       <input name="fieldE41X" style="text-align: right" size="8" type="text" value="${fieldE41X}"/>
+       <input style="text-align: right" value="${fieldE41X}" name="fieldE41X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE41Y" style="text-align: right" size="8" type="text" value="${fieldE41Y}"/>
+       <input style="text-align: right" value="${fieldE41Y}" name="fieldE41Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE41Z" style="text-align: right" size="8" type="text" value="${fieldE41Z}"/>
+       <input style="text-align: right" value="${fieldE41Z}" name="fieldE41Z" size="8" type="text"/>
     </td>
     <td><b class="${_E41}">E41</b></td>
   </tr>
@@ -405,13 +393,13 @@
   <tr>
     <th>Périodiques</th>
     <td>
-       <input name="fieldE42X" style="text-align: right" size="8" type="text" value="${fieldE42X}"/>
+       <input style="text-align: right" value="${fieldE42X}" name="fieldE42X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE42Y" style="text-align: right" size="8" type="text" value="${fieldE42Y}"/>
+       <input style="text-align: right" value="${fieldE42Y}" name="fieldE42Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE42Z" style="text-align: right" size="8" type="text" value="${fieldE42Z}"/>
+       <input style="text-align: right" value="${fieldE42Z}" name="fieldE42Z" size="8" type="text"/>
     </td>
     <td><b class="${_E42}">E42</b></td>
   </tr>
@@ -419,13 +407,13 @@
   <tr>
     <th>Manuscrits : nombre de cotes</th>
     <td>
-       <input name="fieldE43X" style="text-align: right" size="8" type="text" value="${fieldE43X}"/>
+       <input style="text-align: right" value="${fieldE43X}" name="fieldE43X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE43Y" style="text-align: right" size="8" type="text" value="${fieldE43Y}"/>
+       <input style="text-align: right" value="${fieldE43Y}" name="fieldE43Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE43Z" style="text-align: right" size="8" type="text" value="${fieldE43Z}"/>
+       <input style="text-align: right" value="${fieldE43Z}" name="fieldE43Z" size="8" type="text"/>
     </td>
     <td><b class="${_E43}">E43</b></td>
   </tr>
@@ -433,13 +421,13 @@
   <tr>
     <th>Documents graphiques, cartes et plans</th>
     <td>
-       <input name="fieldE44X" style="text-align: right" size="8" type="text" value="${fieldE44X}"/>
+       <input style="text-align: right" value="${fieldE44X}" name="fieldE44X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE44Y" style="text-align: right" size="8" type="text" value="${fieldE44Y}"/>
+       <input style="text-align: right" value="${fieldE44Y}" name="fieldE44Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE44Z" style="text-align: right" size="8" type="text" value="${fieldE44Z}"/>
+       <input style="text-align: right" value="${fieldE44Z}" name="fieldE44Z" size="8" type="text"/>
     </td>
     <td><b class="${_E44}">E44</b></td>
   </tr>
@@ -447,27 +435,27 @@
   <tr>
     <th>Autres (monnaies, ...)</th>
     <td>
-       <input name="fieldE45X" style="text-align: right" size="8" type="text" value="${fieldE45X}"/>
+       <input style="text-align: right" value="${fieldE45X}" name="fieldE45X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE45Y" style="text-align: right" size="8" type="text" value="${fieldE45Y}"/>
+       <input style="text-align: right" value="${fieldE45Y}" name="fieldE45Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE45Z" style="text-align: right" size="8" type="text" value="${fieldE45Z}"/>
+       <input style="text-align: right" value="${fieldE45Z}" name="fieldE45Z" size="8" type="text"/>
     </td>
     <td><b class="${_E45}">E45</b></td>
   </tr>
 
   <tr>
-    <th>TOTAL (E41 à  E45)</th>
+    <th><b>TOTAL (E41 à  E45)</b></th>
     <td>
-       <input name="fieldE46X" style="text-align: right" size="8" type="text" value="${fieldE46X}"/>
+       <input style="text-align: right" value="${fieldE46X}" name="fieldE46X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE46Y" style="text-align: right" size="8" type="text" value="${fieldE46Y}"/>
+       <input style="text-align: right" value="${fieldE46Y}" name="fieldE46Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE46Z" style="text-align: right" size="8" type="text" value="${fieldE46Z}"/>
+       <input style="text-align: right" value="${fieldE46Z}" name="fieldE46Z" size="8" type="text"/>
     </td>
     <td><b class="${_E46}">E46</b></td>
   </tr>
@@ -491,13 +479,13 @@
   <tr>
     <th>Nombre d'abonnements en cours (payants et gratuits, support imprimé ou microforme)</th>
     <td>
-       <input name="fieldE51X" style="text-align: right" size="8" type="text" value="${fieldE51X}"/>
+       <input style="text-align: right" value="${fieldE51X}" name="fieldE51X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE51Y" style="text-align: right" size="8" type="text" value="${fieldE51Y}"/>
+       <input style="text-align: right" value="${fieldE51Y}" name="fieldE51Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE51Z" style="text-align: right" size="8" type="text" value="${fieldE51Z}"/>
+       <input style="text-align: right" value="${fieldE51Z}" name="fieldE51Z" size="8" type="text"/>
     </td>
     <td><b class="${_E51}">E51</b></td>
   </tr>
@@ -505,13 +493,13 @@
   <tr>
     <th>Nombre d'abonnements en cours sur cédéroms</th>
     <td>
-       <input name="fieldE52X" style="text-align: right" size="8" type="text" value="${fieldE52X}"/>
+       <input style="text-align: right" value="${fieldE52X}" name="fieldE52X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE52Y" style="text-align: right" size="8" type="text" value="${fieldE52Y}"/>
+       <input style="text-align: right" value="${fieldE52Y}" name="fieldE52Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE52Z" style="text-align: right" size="8" type="text" value="${fieldE52Z}"/>
+       <input style="text-align: right" value="${fieldE52Z}" name="fieldE52Z" size="8" type="text"/>
     </td>
     <td><b class="${_E52}">E52</b></td>
   </tr>
@@ -519,13 +507,13 @@
   <tr>
     <th>Nombre d'abonnements en cours en ligne</th>
     <td>
-       <input name="fieldE53X" style="text-align: right" size="8" type="text" value="${fieldE53X}"/>
+       <input style="text-align: right" value="${fieldE53X}" name="fieldE53X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE53Y" style="text-align: right" size="8" type="text" value="${fieldE53Y}"/>
+       <input style="text-align: right" value="${fieldE53Y}" name="fieldE53Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE53Z" style="text-align: right" size="8" type="text" value="${fieldE53Z}"/>
+       <input style="text-align: right" value="${fieldE53Z}" name="fieldE53Z" size="8" type="text"/>
     </td>
     <td><b class="${_E53}">E53</b></td>
   </tr>
@@ -549,13 +537,13 @@
   <tr>
     <th>Livres</th>
     <td>
-       <input name="fieldE61X" style="text-align: right" size="8" type="text" value="${fieldE61X}"/>
+       <input style="text-align: right" value="${fieldE61X}" name="fieldE61X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE61Y" style="text-align: right" size="8" type="text" value="${fieldE61Y}"/>
+       <input style="text-align: right" value="${fieldE61Y}" name="fieldE61Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE61Z" style="text-align: right" size="8" type="text" value="${fieldE61Z}"/>
+       <input style="text-align: right" value="${fieldE61Z}" name="fieldE61Z" size="8" type="text"/>
     </td>
     <td><b class="${_E61}">E61</b></td>
   </tr>
@@ -563,13 +551,13 @@
   <tr>
     <th>Phonogrammes</th>
     <td>
-       <input name="fieldE62X" style="text-align: right" size="8" type="text" value="${fieldE62X}"/>
+       <input style="text-align: right" value="${fieldE62X}" name="fieldE62X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE62Y" style="text-align: right" size="8" type="text" value="${fieldE62Y}"/>
+       <input style="text-align: right" value="${fieldE62Y}" name="fieldE62Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE62Z" style="text-align: right" size="8" type="text" value="${fieldE62Z}"/>
+       <input style="text-align: right" value="${fieldE62Z}" name="fieldE62Z" size="8" type="text"/>
     </td>
     <td><b class="${_E62}">E62</b></td>
   </tr>
@@ -577,13 +565,13 @@
   <tr>
     <th>Vidéogrammes</th>
     <td>
-       <input name="fieldE63X" style="text-align: right" size="8" type="text" value="${fieldE63X}"/>
+       <input style="text-align: right" value="${fieldE63X}" name="fieldE63X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE63Y" style="text-align: right" size="8" type="text" value="${fieldE63Y}"/>
+       <input style="text-align: right" value="${fieldE63Y}" name="fieldE63Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE63Z" style="text-align: right" size="8" type="text" value="${fieldE63Z}"/>
+       <input style="text-align: right" value="${fieldE63Z}" name="fieldE63Z" size="8" type="text"/>
     </td>
     <td><b class="${_E63}">E63</b></td>
   </tr>
@@ -591,13 +579,13 @@
   <tr>
     <th>Cédéroms</th>
     <td>
-       <input name="fieldE64X" style="text-align: right" size="8" type="text" value="${fieldE64X}"/>
+       <input style="text-align: right" value="${fieldE64X}" name="fieldE64X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE64Y" style="text-align: right" size="8" type="text" value="${fieldE64Y}"/>
+       <input style="text-align: right" value="${fieldE64Y}" name="fieldE64Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE64Z" style="text-align: right" size="8" type="text" value="${fieldE64Z}"/>
+       <input style="text-align: right" value="${fieldE64Z}" name="fieldE64Z" size="8" type="text"/>
     </td>
     <td><b class="${_E64}">E64</b></td>
   </tr>
@@ -605,41 +593,56 @@
   <tr>
     <th>Autres documents</th>
     <td>
-       <input name="fieldE65X" style="text-align: right" size="8" type="text" value="${fieldE65X}"/>
+       <input style="text-align: right" value="${fieldE65X}" name="fieldE65X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE65Y" style="text-align: right" size="8" type="text" value="${fieldE65Y}"/>
+       <input style="text-align: right" value="${fieldE65Y}" name="fieldE65Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE65Z" style="text-align: right" size="8" type="text" value="${fieldE65Z}"/>
+       <input style="text-align: right" value="${fieldE65Z}" name="fieldE65Z" size="8" type="text"/>
     </td>
     <td><b class="${_E65}">E65</b></td>
   </tr>
 
   <tr>
-    <th>dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés...)</th>
+    <th><i>dont documents imprimés  en gros caractères</i></th>
     <td>
-       <input name="fieldE66X" style="text-align: right" size="8" type="text" value="${fieldE66X}"/>
+       <input style="text-align: right" value="${fieldE66X}" name="fieldE66X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE66Y" style="text-align: right" size="8" type="text" value="${fieldE66Y}"/>
+       <input style="text-align: right" value="${fieldE66Y}" name="fieldE66Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE66Z" style="text-align: right" size="8" type="text" value="${fieldE66Z}"/>
+       <input style="text-align: right" value="${fieldE66Z}" name="fieldE66Z" size="8" type="text"/>
     </td>
     <td><b class="${_E66}">E66</b></td>
   </tr>
 
   <tr>
+    <th><i>dont documents adaptés aux personnes handicapées à l'exception des documents en gros caractères</i></th>
+    <td>
+       <input style="text-align: right" value="${fieldE661X}" name="fieldE661X" size="8" type="text"/>
+    </td>
+    <td>
+       <input style="text-align: right" value="${fieldE661Y}" name="fieldE661Y" size="8" type="text"/>
+    </td>
+    <td>
+       <input style="text-align: right" value="${fieldE661Z}" name="fieldE661Z" size="8" type="text"/>
+    </td>
+    <td><b class="${_E661}">E661</b></td>
+  </tr>
+
+
+  <tr>
     <th>SOUS-TOTAL (E61 à E65)</th>
     <td>
-       <input name="fieldE67X" style="text-align: right" size="8" type="text" value="${fieldE67X}"/>
+       <input style="text-align: right" value="${fieldE67X}" name="fieldE67X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE67Y" style="text-align: right" size="8" type="text" value="${fieldE67Y}"/>
+       <input style="text-align: right" value="${fieldE67Y}" name="fieldE67Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE67Z" style="text-align: right" size="8" type="text" value="${fieldE67Z}"/>
+       <input style="text-align: right" value="${fieldE67Z}" name="fieldE67Z" size="8" type="text"/>
     </td>
     <td><b class="${_E67}">E67</b></td>
   </tr>
@@ -647,13 +650,13 @@
   <tr>
     <th>Périodiques imprimés</th>
     <td>
-       <input name="fieldE68X" style="text-align: right" size="8" type="text" value="${fieldE68X}"/>
+       <input style="text-align: right" value="${fieldE68X}" name="fieldE68X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE68Y" style="text-align: right" size="8" type="text" value="${fieldE68Y}"/>
+       <input style="text-align: right" value="${fieldE68Y}" name="fieldE68Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE68Z" style="text-align: right" size="8" type="text" value="${fieldE68Z}"/>
+       <input style="text-align: right" value="${fieldE68Z}" name="fieldE68Z" size="8" type="text"/>
     </td>
     <td><b class="${_E68}">E68</b></td>
   </tr>
@@ -661,13 +664,13 @@
   <tr>
     <th>Périodiques sur cédéroms</th>
     <td>
-       <input name="fieldE69X" style="text-align: right" size="8" type="text" value="${fieldE69X}"/>
+       <input style="text-align: right" value="${fieldE69X}" name="fieldE69X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE69Y" style="text-align: right" size="8" type="text" value="${fieldE69Y}"/>
+       <input style="text-align: right" value="${fieldE69Y}" name="fieldE69Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE69Z" style="text-align: right" size="8" type="text" value="${fieldE69Z}"/>
+       <input style="text-align: right" value="${fieldE69Z}" name="fieldE69Z" size="8" type="text"/>
     </td>
     <td><b class="${_E69}">E69</b></td>
   </tr>
@@ -675,13 +678,13 @@
   <tr>
     <th>Périodiques en ligne</th>
     <td>
-       <input name="fieldE70X" style="text-align: right" size="8" type="text" value="${fieldE70X}"/>
+       <input style="text-align: right" value="${fieldE70X}" name="fieldE70X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE70Y" style="text-align: right" size="8" type="text" value="${fieldE70Y}"/>
+       <input style="text-align: right" value="${fieldE70Y}" name="fieldE70Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE70Z" style="text-align: right" size="8" type="text" value="${fieldE70Z}"/>
+       <input style="text-align: right" value="${fieldE70Z}" name="fieldE70Z" size="8" type="text"/>
     </td>
     <td><b class="${_E70}">E70</b></td>
   </tr>
@@ -689,13 +692,13 @@
   <tr>
     <th>SOUS-TOTAL (E68 à E70)</th>
     <td>
-       <input name="fieldE71X" style="text-align: right" size="8" type="text" value="${fieldE71X}"/>
+       <input style="text-align: right" value="${fieldE71X}" name="fieldE71X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE71Y" style="text-align: right" size="8" type="text" value="${fieldE71Y}"/>
+       <input style="text-align: right" value="${fieldE71Y}" name="fieldE71Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE71Z" style="text-align: right" size="8" type="text" value="${fieldE71Z}"/>
+       <input style="text-align: right" value="${fieldE71Z}" name="fieldE71Z" size="8" type="text"/>
     </td>
     <td><b class="${_E71}">E71</b></td>
   </tr>
@@ -703,13 +706,13 @@
   <tr>
     <th>Documents numériques</th>
     <td>
-       <input name="fieldE72X" style="text-align: right" size="8" type="text" value="${fieldE72X}"/>
+       <input style="text-align: right" value="${fieldE72X}" name="fieldE72X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE72Y" style="text-align: right" size="8" type="text" value="${fieldE72Y}"/>
+       <input style="text-align: right" value="${fieldE72Y}" name="fieldE72Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE72Z" style="text-align: right" size="8" type="text" value="${fieldE72Z}"/>
+       <input style="text-align: right" value="${fieldE72Z}" name="fieldE72Z" size="8" type="text"/>
     </td>
     <td><b class="${_E72}">E72</b></td>
   </tr>
@@ -717,27 +720,27 @@
   <tr>
     <th>Documents patrimoniaux</th>
     <td>
-       <input name="fieldE73X" style="text-align: right" size="8" type="text" value="${fieldE73X}"/>
+       <input style="text-align: right" value="${fieldE73X}" name="fieldE73X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE73Y" style="text-align: right" size="8" type="text" value="${fieldE73Y}"/>
+       <input style="text-align: right" value="${fieldE73Y}" name="fieldE73Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE73Z" style="text-align: right" size="8" type="text" value="${fieldE73Z}"/>
+       <input style="text-align: right" value="${fieldE73Z}" name="fieldE73Z" size="8" type="text"/>
     </td>
     <td><b class="${_E73}">E73</b></td>
   </tr>
 
   <tr>
-    <th>TOTAL (E67 + E71 + E72 + E73)</th>
+    <th><b>TOTAL (E67 + E71 + E72 + E73)</b></th>
     <td>
-       <input name="fieldE74X" style="text-align: right" size="8" type="text" value="${fieldE74X}"/>
+       <input style="text-align: right" value="${fieldE74X}" name="fieldE74X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE74Y" style="text-align: right" size="8" type="text" value="${fieldE74Y}"/>
+       <input style="text-align: right" value="${fieldE74Y}" name="fieldE74Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldE74Z" style="text-align: right" size="8" type="text" value="${fieldE74Z}"/>
+       <input style="text-align: right" value="${fieldE74Z}" name="fieldE74Z" size="8" type="text"/>
     </td>
     <td><b class="${_E74}">E74</b></td>
   </tr>

@@ -34,8 +34,8 @@
   <tr>
     <th>La BDP a-t-elle (co-) organisé des manifestations culturelles dans l'année ?</th>
     <td>
-      <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldI11" checked="${fieldI11}" type="radio" onclick="switch_on(['fieldI12','fieldI13','fieldI14','fieldI15','fieldI16','fieldI17','fieldI18','fieldI19','fieldI20'])"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldI11" checked="${fieldI11_not}" type="radio" onclick="switch_off(['fieldI12','fieldI13','fieldI14','fieldI15','fieldI16','fieldI17','fieldI18','fieldI19','fieldI20'])"/>Non      </td>      </tr></table>    </td>
+      <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldI11" checked="${fieldI11}" type="radio" onclick="switch_on(['fieldI12','fieldI13','fieldI14','fieldI15','fieldI16','fieldI17','fieldI18','fieldI19','fieldI20','fieldI29'])"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldI11" checked="${fieldI11_not}" type="radio" onclick="switch_off(['fieldI12','fieldI13','fieldI14','fieldI15','fieldI16','fieldI17','fieldI18','fieldI19','fieldI20','fieldI29'])"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_I11}">I11</b></td>
   </tr>
 </table>
@@ -128,7 +128,7 @@
        <div stl:if="not fieldI11" id="display_fieldI29" style="visibility:hidden">         <input style="text-align:right" value="" stl:if="not fieldI11" name="fieldI29" size="8" type="text"/></div>
        <div stl:if="fieldI11" id="display_fieldI29">         <input style="text-align:right" value="${fieldI29}" stl:if="fieldI11" name="fieldI29" size="8" type="text"/>
        </div>    </td>
-    <td><b class="${_I29}">I29</b></td>
+    <td><b class="${_I19}">I29</b></td>
   </tr>
 
   <tr>
@@ -229,7 +229,7 @@
     <td><b class="${_I28}">I28</b></td>
   </tr>
 </table>
-<h2>I.3 FORMATIONS HORS RÉSEAU</h2>
+<h2>I.3 FORMATIONS HORS  DU RÉSEAU DE LA BDP</h2>
 <table width="100%">
   <colgroup>
     <col width="76%"/>
@@ -237,9 +237,9 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Nombre d'heures de cours assurées par le personnel  (ENSSIB, CRFCB, ABF, CNFPT, BDP, ...)</th>
+    <th>Nombre d'heures de cours assurées par le personnel auprès de l'ENSSIB, d'un CRFCB, de l'ABF, du CNFPT, d'une autre BDP, …</th>
     <td>
-       <input name="fieldI31" style="text-align:right" size="8" type="text" value="${fieldI31}"/>
+       <input style="text-align:right" value="${fieldI31}" name="fieldI31" size="8" type="text"/>
     </td>
     <td><b class="${_I31}">I31</b></td>
   </tr>
@@ -258,7 +258,7 @@
   <tr>
     <th>Professionnels</th>
     <td>
-       <input name="fieldI32Z" style="text-align:right" size="8" type="text" value="${fieldI32Z}"/>
+       <input style="text-align:right" value="${fieldI32Z}" name="fieldI32Z" size="8" type="text"/>
     </td>
     <td><b class="${_I32}">I32</b></td>
   </tr>
@@ -266,7 +266,7 @@
   <tr>
     <th>Hors professionnels</th>
     <td>
-       <input name="fieldI33Z" style="text-align:right" size="8" type="text" value="${fieldI33Z}"/>
+       <input style="text-align:right" value="${fieldI33Z}" name="fieldI33Z" size="8" type="text"/>
     </td>
     <td><b class="${_I33}">I33</b></td>
   </tr>
@@ -274,7 +274,7 @@
   <tr>
     <th>TOTAL</th>
     <td>
-       <input name="fieldI34Z" style="text-align:right" size="8" type="text" value="${fieldI34Z}"/>
+       <input style="text-align:right" value="${fieldI34Z}" name="fieldI34Z" size="8" type="text"/>
     </td>
     <td><b class="${_I34}">I34</b></td>
   </tr>

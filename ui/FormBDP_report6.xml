@@ -43,13 +43,13 @@
   <tr>
     <th>Bibliothèques municipales niveau 1</th>
     <td>
-       <input name="fieldF11W" style="text-align:right" size="8" type="text" value="${fieldF11W}"/>
+       <input style="text-align:right" value="${fieldF11W}" name="fieldF11W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF11X" style="text-align:right" size="8" type="text" value="${fieldF11X}"/>
+       <input style="text-align:right" value="${fieldF11X}" name="fieldF11X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF11Y" style="text-align:right" size="8" type="text" value="${fieldF11Y}"/>
+       <input style="text-align:right" value="${fieldF11Y}" name="fieldF11Y" size="8" type="text"/>
     </td>
     <td><b class="${_F11}">F11</b></td>
   </tr>
@@ -57,13 +57,13 @@
   <tr>
     <th>Bibliothèques municipales niveau 2</th>
     <td>
-       <input name="fieldF12W" style="text-align:right" size="8" type="text" value="${fieldF12W}"/>
+       <input style="text-align:right" value="${fieldF12W}" name="fieldF12W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF12X" style="text-align:right" size="8" type="text" value="${fieldF12X}"/>
+       <input style="text-align:right" value="${fieldF12X}" name="fieldF12X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF12Y" style="text-align:right" size="8" type="text" value="${fieldF12Y}"/>
+       <input style="text-align:right" value="${fieldF12Y}" name="fieldF12Y" size="8" type="text"/>
     </td>
     <td><b class="${_F12}">F12</b></td>
   </tr>
@@ -71,13 +71,13 @@
   <tr>
     <th>Bibliothèques relais niveau 3</th>
     <td>
-       <input name="fieldF13W" style="text-align:right" size="8" type="text" value="${fieldF13W}"/>
+       <input style="text-align:right" value="${fieldF13W}" name="fieldF13W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF13X" style="text-align:right" size="8" type="text" value="${fieldF13X}"/>
+       <input style="text-align:right" value="${fieldF13X}" name="fieldF13X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF13Y" style="text-align:right" size="8" type="text" value="${fieldF13Y}"/>
+       <input style="text-align:right" value="${fieldF13Y}" name="fieldF13Y" size="8" type="text"/>
     </td>
     <td><b class="${_F13}">F13</b></td>
   </tr>
@@ -85,13 +85,13 @@
   <tr>
     <th>Point-lecture</th>
     <td>
-       <input name="fieldF14W" style="text-align:right" size="8" type="text" value="${fieldF14W}"/>
+       <input style="text-align:right" value="${fieldF14W}" name="fieldF14W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF14X" style="text-align:right" size="8" type="text" value="${fieldF14X}"/>
+       <input style="text-align:right" value="${fieldF14X}" name="fieldF14X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF14Y" style="text-align:right" size="8" type="text" value="${fieldF14Y}"/>
+       <input style="text-align:right" value="${fieldF14Y}" name="fieldF14Y" size="8" type="text"/>
     </td>
     <td><b class="${_F14}">F14</b></td>
   </tr>
@@ -99,13 +99,13 @@
   <tr>
     <th>Autres dépôts tous publics</th>
     <td>
-       <input name="fieldF15W" style="text-align:right" size="8" type="text" value="${fieldF15W}"/>
+       <input style="text-align:right" value="${fieldF15W}" name="fieldF15W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF15X" style="text-align:right" size="8" type="text" value="${fieldF15X}"/>
+       <input style="text-align:right" value="${fieldF15X}" name="fieldF15X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF15Y" style="text-align:right" size="8" type="text" value="${fieldF15Y}"/>
+       <input style="text-align:right" value="${fieldF15Y}" name="fieldF15Y" size="8" type="text"/>
     </td>
     <td><b class="${_F15}">F15</b></td>
   </tr>
@@ -113,13 +113,13 @@
   <tr>
     <th><b>TOTAL (F11 à F15)</b></th>
     <td>
-       <input name="fieldF16W" style="text-align:right" size="8" type="text" value="${fieldF16W}"/>
+       <input style="text-align:right" value="${fieldF16W}" name="fieldF16W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF16X" style="text-align:right" size="8" type="text" value="${fieldF16X}"/>
+       <input style="text-align:right" value="${fieldF16X}" name="fieldF16X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF16Y" style="text-align:right" size="8" type="text" value="${fieldF16Y}"/>
+       <input style="text-align:right" value="${fieldF16Y}" name="fieldF16Y" size="8" type="text"/>
     </td>
     <td><b class="${_F16}">F16</b></td>
   </tr>
@@ -127,13 +127,13 @@
   <tr>
     <th>Arrêts bibliobus-médiabus prêt direct</th>
     <td>
-       <input name="fieldF17W" style="text-align:right" size="8" type="text" value="${fieldF17W}"/>
+       <input style="text-align:right" value="${fieldF17W}" name="fieldF17W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF17X" style="text-align:right" size="8" type="text" value="${fieldF17X}"/>
+       <input style="text-align:right" value="${fieldF17X}" name="fieldF17X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF17Y" style="text-align:right" size="8" type="text" value="${fieldF17Y}"/>
+       <input style="text-align:right" value="${fieldF17Y}" name="fieldF17Y" size="8" type="text"/>
     </td>
     <td><b class="${_F17}">F17</b></td>
   </tr>
@@ -141,13 +141,13 @@
   <tr>
     <th><b>TOTAL (F16 + F17)</b></th>
     <td>
-       <input name="fieldF18W" style="text-align:right" size="8" type="text" value="${fieldF18W}"/>
+       <input style="text-align:right" value="${fieldF18W}" name="fieldF18W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF18X" style="text-align:right" size="8" type="text" value="${fieldF18X}"/>
+       <input style="text-align:right" value="${fieldF18X}" name="fieldF18X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF18Y" style="text-align:right" size="8" type="text" value="${fieldF18Y}"/>
+       <input style="text-align:right" value="${fieldF18Y}" name="fieldF18Y" size="8" type="text"/>
     </td>
     <td><b class="${_F18}">F18</b></td>
   </tr>
@@ -173,10 +173,10 @@
   <tr>
     <th>communes de + 10 000 habitants</th>
     <td>
-       <input name="fieldF19X" style="text-align:right" size="8" type="text" value="${fieldF19X}"/>
+       <input style="text-align:right" value="${fieldF19X}" name="fieldF19X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF19Y" style="text-align:right" size="8" type="text" value="${fieldF19Y}"/>
+       <input style="text-align:right" value="${fieldF19Y}" name="fieldF19Y" size="8" type="text"/>
     </td>
     <td><b class="${_F19}">F19</b></td>
   </tr>
@@ -184,10 +184,10 @@
   <tr>
     <th>groupements de communes de + 10 000 habitants</th>
     <td>
-       <input name="fieldF20X" style="text-align:right" size="8" type="text" value="${fieldF20X}"/>
+       <input style="text-align:right" value="${fieldF20X}" name="fieldF20X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF20Y" style="text-align:right" size="8" type="text" value="${fieldF20Y}"/>
+       <input style="text-align:right" value="${fieldF20Y}" name="fieldF20Y" size="8" type="text"/>
     </td>
     <td><b class="${_F20}">F20</b></td>
   </tr>
@@ -208,10 +208,10 @@
   <tr>
     <th>communes desservies par plusieurs modes de desserte (ex BM + prêt direct)</th>
     <td>
-       <input name="fieldF21X" style="text-align:right" size="8" type="text" value="${fieldF21X}"/>
+       <input style="text-align:right" value="${fieldF21X}" name="fieldF21X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF21Y" style="text-align:right" size="8" type="text" value="${fieldF21Y}"/>
+       <input style="text-align:right" value="${fieldF21Y}" name="fieldF21Y" size="8" type="text"/>
     </td>
     <td><b class="${_F21}">F21</b></td>
   </tr>
@@ -227,16 +227,16 @@
   <tr>
   <td></td>
     <th style="text-align: center">Nombre de documents déposés dans l'année Y</th>
-    <th style="text-align: center">Nombre de documents en dépôt au 31.12.05 Z</th>
+    <th style="text-align: center">Nombre de documents en dépôt au 31.12.07 Z</th>
   <td></td>
   </tr>
   <tr>
     <th>Imprimés adultes</th>
     <td>
-       <input name="fieldF31Y" style="text-align:right" size="8" type="text" value="${fieldF31Y}"/>
+       <input style="text-align:right" value="${fieldF31Y}" name="fieldF31Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF31Z" style="text-align:right" size="8" type="text" value="${fieldF31Z}"/>
+       <input style="text-align:right" value="${fieldF31Z}" name="fieldF31Z" size="8" type="text"/>
     </td>
     <td><b class="${_F31}">F31</b></td>
   </tr>
@@ -244,10 +244,10 @@
   <tr>
     <th>Imprimés enfants</th>
     <td>
-       <input name="fieldF32Y" style="text-align:right" size="8" type="text" value="${fieldF32Y}"/>
+       <input style="text-align:right" value="${fieldF32Y}" name="fieldF32Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF32Z" style="text-align:right" size="8" type="text" value="${fieldF32Z}"/>
+       <input style="text-align:right" value="${fieldF32Z}" name="fieldF32Z" size="8" type="text"/>
     </td>
     <td><b class="${_F32}">F32</b></td>
   </tr>
@@ -255,10 +255,10 @@
   <tr>
     <th><b>TOTAL ( F31 + F32)</b></th>
     <td>
-       <input name="fieldF33Y" style="text-align:right" size="8" type="text" value="${fieldF33Y}"/>
+       <input style="text-align:right" value="${fieldF33Y}" name="fieldF33Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF33Z" style="text-align:right" size="8" type="text" value="${fieldF33Z}"/>
+       <input style="text-align:right" value="${fieldF33Z}" name="fieldF33Z" size="8" type="text"/>
     </td>
     <td><b class="${_F33}">F33</b></td>
   </tr>
@@ -266,10 +266,10 @@
   <tr>
     <th>Phonogrammes</th>
     <td>
-       <input name="fieldF34Y" style="text-align:right" size="8" type="text" value="${fieldF34Y}"/>
+       <input style="text-align:right" value="${fieldF34Y}" name="fieldF34Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF34Z" style="text-align:right" size="8" type="text" value="${fieldF34Z}"/>
+       <input style="text-align:right" value="${fieldF34Z}" name="fieldF34Z" size="8" type="text"/>
     </td>
     <td><b class="${_F34}">F34</b></td>
   </tr>
@@ -277,10 +277,10 @@
   <tr>
     <th>Vidéogrammes</th>
     <td>
-       <input name="fieldF35Y" style="text-align:right" size="8" type="text" value="${fieldF35Y}"/>
+       <input style="text-align:right" value="${fieldF35Y}" name="fieldF35Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF35Z" style="text-align:right" size="8" type="text" value="${fieldF35Z}"/>
+       <input style="text-align:right" value="${fieldF35Z}" name="fieldF35Z" size="8" type="text"/>
     </td>
     <td><b class="${_F35}">F35</b></td>
   </tr>
@@ -288,10 +288,10 @@
   <tr>
     <th>Cédéroms</th>
     <td>
-       <input name="fieldF36Y" style="text-align:right" size="8" type="text" value="${fieldF36Y}"/>
+       <input style="text-align:right" value="${fieldF36Y}" name="fieldF36Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF36Z" style="text-align:right" size="8" type="text" value="${fieldF36Z}"/>
+       <input style="text-align:right" value="${fieldF36Z}" name="fieldF36Z" size="8" type="text"/>
     </td>
     <td><b class="${_F36}">F36</b></td>
   </tr>
@@ -299,10 +299,10 @@
   <tr>
     <th>Autres documents</th>
     <td>
-       <input name="fieldF37Y" style="text-align:right" size="8" type="text" value="${fieldF37Y}"/>
+       <input style="text-align:right" value="${fieldF37Y}" name="fieldF37Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF37Z" style="text-align:right" size="8" type="text" value="${fieldF37Z}"/>
+       <input style="text-align:right" value="${fieldF37Z}" name="fieldF37Z" size="8" type="text"/>
     </td>
     <td><b class="${_F37}">F37</b></td>
   </tr>
@@ -310,10 +310,10 @@
   <tr>
     <th><b>TOTAL (F33 à F37 )</b></th>
     <td>
-       <input name="fieldF38Y" style="text-align:right" size="8" type="text" value="${fieldF38Y}"/>
+       <input style="text-align:right" value="${fieldF38Y}" name="fieldF38Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF38Z" style="text-align:right" size="8" type="text" value="${fieldF38Z}"/>
+       <input style="text-align:right" value="${fieldF38Z}" name="fieldF38Z" size="8" type="text"/>
     </td>
     <td><b class="${_F38}">F38</b></td>
   </tr>
@@ -337,13 +337,13 @@
   <tr>
     <th>Bibliothèques niveau 1</th>
     <td>
-       <input name="fieldF41W" style="text-align:right" size="8" type="text" value="${fieldF41W}"/>
+       <input style="text-align:right" value="${fieldF41W}" name="fieldF41W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF41X" style="text-align:right" size="8" type="text" value="${fieldF41X}"/>
+       <input style="text-align:right" value="${fieldF41X}" name="fieldF41X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF41Y" style="text-align:right" size="8" type="text" value="${fieldF41Y}"/>
+       <input style="text-align:right" value="${fieldF41Y}" name="fieldF41Y" size="8" type="text"/>
     </td>
     <td><b class="${_F41}">F41</b></td>
   </tr>
@@ -351,13 +351,13 @@
   <tr>
     <th>Bibliothèques niveau 2</th>
     <td>
-       <input name="fieldF42W" style="text-align:right" size="8" type="text" value="${fieldF42W}"/>
+       <input style="text-align:right" value="${fieldF42W}" name="fieldF42W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF42X" style="text-align:right" size="8" type="text" value="${fieldF42X}"/>
+       <input style="text-align:right" value="${fieldF42X}" name="fieldF42X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF42Y" style="text-align:right" size="8" type="text" value="${fieldF42Y}"/>
+       <input style="text-align:right" value="${fieldF42Y}" name="fieldF42Y" size="8" type="text"/>
     </td>
     <td><b class="${_F42}">F42</b></td>
   </tr>
@@ -365,13 +365,13 @@
   <tr>
     <th>Bibliothèques-relais niveau 3</th>
     <td>
-       <input name="fieldF43W" style="text-align:right" size="8" type="text" value="${fieldF43W}"/>
+       <input style="text-align:right" value="${fieldF43W}" name="fieldF43W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF43X" style="text-align:right" size="8" type="text" value="${fieldF43X}"/>
+       <input style="text-align:right" value="${fieldF43X}" name="fieldF43X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF43Y" style="text-align:right" size="8" type="text" value="${fieldF43Y}"/>
+       <input style="text-align:right" value="${fieldF43Y}" name="fieldF43Y" size="8" type="text"/>
     </td>
     <td><b class="${_F43}">F43</b></td>
   </tr>
@@ -379,13 +379,13 @@
   <tr>
     <th>Points-lecture</th>
     <td>
-       <input name="fieldF44W" style="text-align:right" size="8" type="text" value="${fieldF44W}"/>
+       <input style="text-align:right" value="${fieldF44W}" name="fieldF44W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF44X" style="text-align:right" size="8" type="text" value="${fieldF44X}"/>
+       <input style="text-align:right" value="${fieldF44X}" name="fieldF44X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF44Y" style="text-align:right" size="8" type="text" value="${fieldF44Y}"/>
+       <input style="text-align:right" value="${fieldF44Y}" name="fieldF44Y" size="8" type="text"/>
     </td>
     <td><b class="${_F44}">F44</b></td>
   </tr>
@@ -393,13 +393,13 @@
   <tr>
     <th>Dépôts tous publics</th>
     <td>
-       <input name="fieldF45W" style="text-align:right" size="8" type="text" value="${fieldF45W}"/>
+       <input style="text-align:right" value="${fieldF45W}" name="fieldF45W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF45X" style="text-align:right" size="8" type="text" value="${fieldF45X}"/>
+       <input style="text-align:right" value="${fieldF45X}" name="fieldF45X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF45Y" style="text-align:right" size="8" type="text" value="${fieldF45Y}"/>
+       <input style="text-align:right" value="${fieldF45Y}" name="fieldF45Y" size="8" type="text"/>
     </td>
     <td><b class="${_F45}">F45</b></td>
   </tr>
@@ -407,13 +407,13 @@
   <tr>
     <th><b>TOTAL (F41 à F45  )</b></th>
     <td>
-       <input name="fieldF46W" style="text-align:right" size="8" type="text" value="${fieldF46W}"/>
+       <input style="text-align:right" value="${fieldF46W}" name="fieldF46W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF46X" style="text-align:right" size="8" type="text" value="${fieldF46X}"/>
+       <input style="text-align:right" value="${fieldF46X}" name="fieldF46X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF46Y" style="text-align:right" size="8" type="text" value="${fieldF46Y}"/>
+       <input style="text-align:right" value="${fieldF46Y}" name="fieldF46Y" size="8" type="text"/>
     </td>
     <td><b class="${_F46}">F46</b></td>
   </tr>
@@ -445,16 +445,16 @@
   <tr>
     <th>0-14 ans</th>
     <td>
-       <input name="fieldF51W" style="text-align:right" size="8" type="text" value="${fieldF51W}"/>
+       <input style="text-align:right" value="${fieldF51W}" name="fieldF51W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF51X" style="text-align:right" size="8" type="text" value="${fieldF51X}"/>
+       <input style="text-align:right" value="${fieldF51X}" name="fieldF51X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF51Y" style="text-align:right" size="8" type="text" value="${fieldF51Y}"/>
+       <input style="text-align:right" value="${fieldF51Y}" name="fieldF51Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF51Z" style="text-align:right" size="8" type="text" value="${fieldF51Z}"/>
+       <input style="text-align:right" value="${fieldF51Z}" name="fieldF51Z" size="8" type="text"/>
     </td>
     <td><b class="${_F51}">F51</b></td>
   </tr>
@@ -484,16 +484,16 @@
   <tr>
     <th>15-24 ans</th>
     <td>
-       <input name="fieldF52W" style="text-align:right" size="8" type="text" value="${fieldF52W}"/>
+       <input style="text-align:right" value="${fieldF52W}" name="fieldF52W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF52X" style="text-align:right" size="8" type="text" value="${fieldF52X}"/>
+       <input style="text-align:right" value="${fieldF52X}" name="fieldF52X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF52Y" style="text-align:right" size="8" type="text" value="${fieldF52Y}"/>
+       <input style="text-align:right" value="${fieldF52Y}" name="fieldF52Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF52Z" style="text-align:right" size="8" type="text" value="${fieldF52Z}"/>
+       <input style="text-align:right" value="${fieldF52Z}" name="fieldF52Z" size="8" type="text"/>
     </td>
     <td><b class="${_F52}">F52</b></td>
   </tr>
@@ -501,16 +501,16 @@
   <tr>
     <th>25-59 ans</th>
     <td>
-       <input name="fieldF53W" style="text-align:right" size="8" type="text" value="${fieldF53W}"/>
+       <input style="text-align:right" value="${fieldF53W}" name="fieldF53W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF53X" style="text-align:right" size="8" type="text" value="${fieldF53X}"/>
+       <input style="text-align:right" value="${fieldF53X}" name="fieldF53X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF53Y" style="text-align:right" size="8" type="text" value="${fieldF53Y}"/>
+       <input style="text-align:right" value="${fieldF53Y}" name="fieldF53Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF53Z" style="text-align:right" size="8" type="text" value="${fieldF53Z}"/>
+       <input style="text-align:right" value="${fieldF53Z}" name="fieldF53Z" size="8" type="text"/>
     </td>
     <td><b class="${_F53}">F53</b></td>
   </tr>
@@ -518,16 +518,16 @@
   <tr>
     <th>60 ans et +</th>
     <td>
-       <input name="fieldF54W" style="text-align:right" size="8" type="text" value="${fieldF54W}"/>
+       <input style="text-align:right" value="${fieldF54W}" name="fieldF54W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF54X" style="text-align:right" size="8" type="text" value="${fieldF54X}"/>
+       <input style="text-align:right" value="${fieldF54X}" name="fieldF54X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF54Y" style="text-align:right" size="8" type="text" value="${fieldF54Y}"/>
+       <input style="text-align:right" value="${fieldF54Y}" name="fieldF54Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF54Z" style="text-align:right" size="8" type="text" value="${fieldF54Z}"/>
+       <input style="text-align:right" value="${fieldF54Z}" name="fieldF54Z" size="8" type="text"/>
     </td>
     <td><b class="${_F54}">F54</b></td>
   </tr>
@@ -535,16 +535,16 @@
   <tr>
     <th><b>TOTAL Adultes</b></th>
     <td>
-       <input name="fieldF55W" style="text-align:right" size="8" type="text" value="${fieldF55W}"/>
+       <input style="text-align:right" value="${fieldF55W}" name="fieldF55W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF55X" style="text-align:right" size="8" type="text" value="${fieldF55X}"/>
+       <input style="text-align:right" value="${fieldF55X}" name="fieldF55X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF55Y" style="text-align:right" size="8" type="text" value="${fieldF55Y}"/>
+       <input style="text-align:right" value="${fieldF55Y}" name="fieldF55Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF55Z" style="text-align:right" size="8" type="text" value="${fieldF55Z}"/>
+       <input style="text-align:right" value="${fieldF55Z}" name="fieldF55Z" size="8" type="text"/>
     </td>
     <td><b class="${_F55}">F55</b></td>
   </tr>
@@ -552,16 +552,16 @@
   <tr>
     <th><b>TOTAL DES INSCRITS (F51 + F55)</b></th>
     <td>
-       <input name="fieldF56W" style="text-align:right" size="8" type="text" value="${fieldF56W}"/>
+       <input style="text-align:right" value="${fieldF56W}" name="fieldF56W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF56X" style="text-align:right" size="8" type="text" value="${fieldF56X}"/>
+       <input style="text-align:right" value="${fieldF56X}" name="fieldF56X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF56Y" style="text-align:right" size="8" type="text" value="${fieldF56Y}"/>
+       <input style="text-align:right" value="${fieldF56Y}" name="fieldF56Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF56Z" style="text-align:right" size="8" type="text" value="${fieldF56Z}"/>
+       <input style="text-align:right" value="${fieldF56Z}" name="fieldF56Z" size="8" type="text"/>
     </td>
     <td><b class="${_F56}">F56</b></td>
   </tr>
@@ -587,16 +587,16 @@
   <tr>
     <th>Prêts de livres adultes</th>
     <td>
-       <input name="fieldF61W" style="text-align:right" size="8" type="text" value="${fieldF61W}"/>
+       <input style="text-align:right" value="${fieldF61W}" name="fieldF61W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF61X" style="text-align:right" size="8" type="text" value="${fieldF61X}"/>
+       <input style="text-align:right" value="${fieldF61X}" name="fieldF61X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF61Y" style="text-align:right" size="8" type="text" value="${fieldF61Y}"/>
+       <input style="text-align:right" value="${fieldF61Y}" name="fieldF61Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF61Z" style="text-align:right" size="8" type="text" value="${fieldF61Z}"/>
+       <input style="text-align:right" value="${fieldF61Z}" name="fieldF61Z" size="8" type="text"/>
     </td>
     <td><b class="${_F61}">F61</b></td>
   </tr>
@@ -604,16 +604,16 @@
   <tr>
     <th>Prêts de livres enfants</th>
     <td>
-       <input name="fieldF62W" style="text-align:right" size="8" type="text" value="${fieldF62W}"/>
+       <input style="text-align:right" value="${fieldF62W}" name="fieldF62W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF62X" style="text-align:right" size="8" type="text" value="${fieldF62X}"/>
+       <input style="text-align:right" value="${fieldF62X}" name="fieldF62X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF62Y" style="text-align:right" size="8" type="text" value="${fieldF62Y}"/>
+       <input style="text-align:right" value="${fieldF62Y}" name="fieldF62Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF62Z" style="text-align:right" size="8" type="text" value="${fieldF62Z}"/>
+       <input style="text-align:right" value="${fieldF62Z}" name="fieldF62Z" size="8" type="text"/>
     </td>
     <td><b class="${_F62}">F62</b></td>
   </tr>
@@ -621,16 +621,16 @@
   <tr>
     <th><b>TOTAL (F61+F62)</b></th>
     <td>
-       <input name="fieldF63W" style="text-align:right" size="8" type="text" value="${fieldF63W}"/>
+       <input style="text-align:right" value="${fieldF63W}" name="fieldF63W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF63X" style="text-align:right" size="8" type="text" value="${fieldF63X}"/>
+       <input style="text-align:right" value="${fieldF63X}" name="fieldF63X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF63Y" style="text-align:right" size="8" type="text" value="${fieldF63Y}"/>
+       <input style="text-align:right" value="${fieldF63Y}" name="fieldF63Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF63Z" style="text-align:right" size="8" type="text" value="${fieldF63Z}"/>
+       <input style="text-align:right" value="${fieldF63Z}" name="fieldF63Z" size="8" type="text"/>
     </td>
     <td><b class="${_F63}">F63</b></td>
   </tr>
@@ -638,16 +638,16 @@
   <tr>
     <th>Prêts de périodiques</th>
     <td>
-       <input name="fieldF64W" style="text-align:right" size="8" type="text" value="${fieldF64W}"/>
+       <input style="text-align:right" value="${fieldF64W}" name="fieldF64W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF64X" style="text-align:right" size="8" type="text" value="${fieldF64X}"/>
+       <input style="text-align:right" value="${fieldF64X}" name="fieldF64X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF64Y" style="text-align:right" size="8" type="text" value="${fieldF64Y}"/>
+       <input style="text-align:right" value="${fieldF64Y}" name="fieldF64Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF64Z" style="text-align:right" size="8" type="text" value="${fieldF64Z}"/>
+       <input style="text-align:right" value="${fieldF64Z}" name="fieldF64Z" size="8" type="text"/>
     </td>
     <td><b class="${_F64}">F64</b></td>
   </tr>
@@ -655,16 +655,16 @@
   <tr>
     <th>Prêts de phonogrammes</th>
     <td>
-       <input name="fieldF65W" style="text-align:right" size="8" type="text" value="${fieldF65W}"/>
+       <input style="text-align:right" value="${fieldF65W}" name="fieldF65W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF65X" style="text-align:right" size="8" type="text" value="${fieldF65X}"/>
+       <input style="text-align:right" value="${fieldF65X}" name="fieldF65X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF65Y" style="text-align:right" size="8" type="text" value="${fieldF65Y}"/>
+       <input style="text-align:right" value="${fieldF65Y}" name="fieldF65Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF65Z" style="text-align:right" size="8" type="text" value="${fieldF65Z}"/>
+       <input style="text-align:right" value="${fieldF65Z}" name="fieldF65Z" size="8" type="text"/>
     </td>
     <td><b class="${_F65}">F65</b></td>
   </tr>
@@ -672,16 +672,16 @@
   <tr>
     <th>Prêts de vidéogrammes</th>
     <td>
-       <input name="fieldF66W" style="text-align:right" size="8" type="text" value="${fieldF66W}"/>
+       <input style="text-align:right" value="${fieldF66W}" name="fieldF66W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF66X" style="text-align:right" size="8" type="text" value="${fieldF66X}"/>
+       <input style="text-align:right" value="${fieldF66X}" name="fieldF66X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF66Y" style="text-align:right" size="8" type="text" value="${fieldF66Y}"/>
+       <input style="text-align:right" value="${fieldF66Y}" name="fieldF66Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF66Z" style="text-align:right" size="8" type="text" value="${fieldF66Z}"/>
+       <input style="text-align:right" value="${fieldF66Z}" name="fieldF66Z" size="8" type="text"/>
     </td>
     <td><b class="${_F66}">F66</b></td>
   </tr>
@@ -689,16 +689,16 @@
   <tr>
     <th>Prêts de cédéroms</th>
     <td>
-       <input name="fieldF67W" style="text-align:right" size="8" type="text" value="${fieldF67W}"/>
+       <input style="text-align:right" value="${fieldF67W}" name="fieldF67W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF67X" style="text-align:right" size="8" type="text" value="${fieldF67X}"/>
+       <input style="text-align:right" value="${fieldF67X}" name="fieldF67X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF67Y" style="text-align:right" size="8" type="text" value="${fieldF67Y}"/>
+       <input style="text-align:right" value="${fieldF67Y}" name="fieldF67Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF67Z" style="text-align:right" size="8" type="text" value="${fieldF67Z}"/>
+       <input style="text-align:right" value="${fieldF67Z}" name="fieldF67Z" size="8" type="text"/>
     </td>
     <td><b class="${_F67}">F67</b></td>
   </tr>
@@ -706,16 +706,16 @@
   <tr>
     <th>Prêts d'autres documents</th>
     <td>
-       <input name="fieldF68W" style="text-align:right" size="8" type="text" value="${fieldF68W}"/>
+       <input style="text-align:right" value="${fieldF68W}" name="fieldF68W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF68X" style="text-align:right" size="8" type="text" value="${fieldF68X}"/>
+       <input style="text-align:right" value="${fieldF68X}" name="fieldF68X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF68Y" style="text-align:right" size="8" type="text" value="${fieldF68Y}"/>
+       <input style="text-align:right" value="${fieldF68Y}" name="fieldF68Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF68Z" style="text-align:right" size="8" type="text" value="${fieldF68Z}"/>
+       <input style="text-align:right" value="${fieldF68Z}" name="fieldF68Z" size="8" type="text"/>
     </td>
     <td><b class="${_F68}">F68</b></td>
   </tr>
@@ -723,16 +723,16 @@
   <tr>
     <th><b>TOTAL DES PRÊTS (F63 à F68)</b></th>
     <td>
-       <input name="fieldF69W" style="text-align:right" size="8" type="text" value="${fieldF69W}"/>
+       <input style="text-align:right" value="${fieldF69W}" name="fieldF69W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF69X" style="text-align:right" size="8" type="text" value="${fieldF69X}"/>
+       <input style="text-align:right" value="${fieldF69X}" name="fieldF69X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF69Y" style="text-align:right" size="8" type="text" value="${fieldF69Y}"/>
+       <input style="text-align:right" value="${fieldF69Y}" name="fieldF69Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldF69Z" style="text-align:right" size="8" type="text" value="${fieldF69Z}"/>
+       <input style="text-align:right" value="${fieldF69Z}" name="fieldF69Z" size="8" type="text"/>
     </td>
     <td><b class="${_F69}">F69</b></td>
   </tr>

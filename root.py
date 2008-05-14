@@ -352,10 +352,10 @@ class Root(BaseRoot):
                     ftype = field_def[0]
                     if ftype is Unicode:
                            if value is not None:
-                                value = value.replace(u"€", u"eur")
-                                value = value.replace(u'"', u'\\"')
-                                   value = value.replace(u"&quot;", u'\\"')
-                                   value = value.replace(u"'", u"\\'")
+                               value = value.replace(u"€", u"eur")
+                               value = value.replace(u'"', u'\\"')
+                               value = value.replace(u"&quot;", u'\\"')
+                               value = value.replace(u"'", u"\\'")
                            namespace[key] = value
 
             query = query % namespace

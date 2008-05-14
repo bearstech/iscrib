@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
    <title>Aide</title>
-
+    
     <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
 
   </head>
@@ -16,7 +16,7 @@
 
 <h4>Publications (I.3)</h4>
 <dl class="description">
-<dt><u>Titres ou fascicules </u>: ne pas compter les tirages, retirages ou nombre d'exemplaires. Compter le nombre de fascicules d'une série. Exemple, la bibliothèque publie 4 numéros par saison d'un bulletin d'information, compter 4.</dt>
+<dt><u>Titres ou fascicules (I36 à I39)</u>: ne pas compter les tirages, retirages ou nombre d'exemplaires. Compter le nombre de fascicules d'une série. Exemple, la bibliothèque publie 4 numéros par saison d'un bulletin d'information, compter 4.</dt>
 </dl>
 
 <h4>Formations dispensées par la bibliothèque (I.4)</h4>

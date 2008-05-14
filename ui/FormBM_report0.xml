@@ -27,7 +27,7 @@
             </div>
          </td>
          <td style="text-align: center;font-weight: bold; font-size:16px">
-            RAPPORT ANNUEL 2006 <br/> des bibliothèques municipales
+            RAPPORT ANNUEL 2007 <br/> des bibliothèques municipales
          </td>
      </tr>
      </table>
@@ -53,8 +53,7 @@
 <a stl:if="is_vide" style="color:white;background-color:red; border: 1px solid red; font-size:20px" href=";help" alt="Aide">Veuillez consulter l'aide</a>
 
 <h1>IDENTITE
-<a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help0', 'xxx', 'toolbar=no,   location=no, status=no,
-   menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">?</a>
+<a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help0', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
 </h1>
 
  <table width="100%">
@@ -67,71 +66,71 @@
    </colgroup>
      <tr>
         <th>Code</th>
-        <td><input name="code_ua" readonly="yes" size="5" type="text" value="${code_ua}"/></td>
+        <td><input value="${code_ua}" name="code_ua" readonly="yes" size="5" type="text"/></td>
      </tr>
       <tr>
         <th>Nom </th>
-        <td colspan="3"><input name="field1" size="60" type="text" value="${field1}"/></td>
+        <td colspan="3"><input name="field1" size="60" value="${field1}" type="text"/></td>
         <td sdnum="1036;" sdval="1">1</td>
       </tr>
      <tr>
         <th> </th>
-        <td colspan="3"><input name="field2" size="60" type="text" value="${field2}"/></td>
+        <td colspan="3"><input name="field2" size="60" value="${field2}" type="text"/></td>
         <td sdnum="1036;" sdval="1">2</td>
      </tr>
-     <!--tr>
+     <tr>
         <th>Complément d'adresse</th>
-       <td colspan="3"><input name="field3" size="60" type="text" value="${field3}"/></td>
-        <td sdnum="1036;" sdval="1">3</td>
-     </tr-->
+       <td colspan="3"><input name="field30" size="60" value="${field30}" type="text"/></td>
+        <td sdnum="1036;" sdval="1">30</td>
+     </tr>
      <tr>
         <th>N°/Type voie/Nom voie</th>
-        <td><input name="field30" size="5" type="text" value="${field30}"/>30</td>
-        <td><input name="field31" size="5" type="text" value="${field31}"/>31</td>
-        <td><input name="field32" size="35" type="text" value="${field32}"/></td>
-        <td sdnum="1036;" sdval="1">32</td>
+        <td><input name="field31" size="5" value="${field31}" type="text"/></td>
+        <td><input name="field32" size="10" value="${field32}" type="text"/></td>
+        <td><input name="field33" size="35" value="${field33}" type="text"/></td>
+        <td sdnum="1036;" sdval="1">31/32/33</td>
      </tr>
      <tr>
         <th style="text-align: right">Code postal / Ville </th>
-        <td><input style="text-align: right" value="${field4}" name="field4" size="5" maxlength="5" type="text"/> 4 </td>
-        <td colspan="2"><input name="field5" size="48" type="text" value="${field5}"/></td>
-        <td sdnum="1036;" sdval="1">5</td>
+        <td><input style="text-align: right" value="${field4}" name="field4" size="5" maxlength="5" type="text"/></td>
+        <td colspan="2"><input name="field5" size="48" value="${field5}" type="text"/></td>
+        <td sdnum="1036;" sdval="1">4/5</td>
       </tr>
      <tr>
         <th style="text-align: right">Cedex </th>
-        <td colspan="3"><input name="field6" size="8" type="text" value="${field6}"/></td>
+        <td colspan="3"><input name="field6" size="8" value="${field6}" type="text"/></td>
         <td sdnum="1036;" sdval="1">6</td>
      </tr>
      <tr></tr>
      <tr>
         <th>Nom et Prénom du Directeur</th>
-        <td colspan="3"><input name="field7" size="60" type="text" value="${field7}"/></td>
+        <td colspan="3"><input name="field7" size="60" value="${field7}" type="text"/></td>
         <td sdnum="1036;" sdval="1">7</td>
      </tr>
      <tr>
         <th>Statut et Grade du Directeur</th>
-        <td colspan="3"><input name="field8" size="60" type="text" value="${field8}"/></td>
+        <td colspan="3"><input name="field8" size="60" value="${field8}" type="text"/></td>
         <td sdnum="1036;" sdval="2">8</td>
      </tr>
      <tr></tr>
       <tr>
         <th>Téléphone</th>
-        <td colspan="3"><input name="field9" size="10" type="text" maxlength="10" value="${field9}"/> </td>
+        <td colspan="3"><input value="${field9}" name="field9" size="10" maxlength="10" type="text"/> </td>
         <td sdnum="1036;" sdval="3">9</td>
       </tr>
       <tr>
         <th>Télécopie</th>
-        <td colspan="3"><input name="field10" size="10" type="text" maxlength="10" value="${field10}"/> </td>
+        <td colspan="3"><input value="${field10}" name="field10" size="10" maxlength="10" type="text"/> </td>
         <td sdnum="1036;" sdval="4">10</td>
       </tr>
       <tr>
         <th>Courriel</th>
-        <td colspan="3"><input name="field11" size="60" type="text" value="${field11}"/> </td>
+        <td colspan="3"><input name="field11" size="60" value="${field11}" type="text"/> </td>
         <td sdnum="1036;" sdval="5">11</td>
       </tr>
       <tr>
         <th>Site Web</th>
-        <td colspan="3"><input name="field12" size="60" type="text" value="${field12}"/> </td>
+        <td colspan="3"><input name="field12" size="60" value="${field12}" type="text"/> </td>
         <td sdnum="1036;" sdval="6">12</td>
       </tr>
 
@@ -139,31 +138,31 @@
       <tr>
         <th>Rattachement administratif</th>
         <td colspan="3">
-	  <input name="field13" style="border:0px" type="radio" value="1" checked="${field13_1}"/> Commune <span style="line-height:0pt"><br/></span>
-	  <input name="field13" style="border:0px" type="radio" value="2" checked="${field13_2}"/> Groupement de communes *
+	  <input name="field13" style="border:0px" checked="${field13_1}" value="1" type="radio"/> Commune <span style="line-height:0pt"><br/></span>
+	  <input name="field13" style="border:0px" checked="${field13_2}" value="2" type="radio"/> Groupement de communes *
 	
         </td>
         <td sdnum="1036;" sdval="6">13</td>
       </tr>
+
       <tr>
         <th>Mode de gestion</th>
         <td colspan="3">
-          <input name="field14" style="border:0px " type="radio" value="1" checked="${field14_1}"/>Régie directe<span style="line-height:0pt"><br/></span>
-          <input name="field14" style="border:0px " type="radio" value="2" checked="${field14_2}"/>Etablissement public
-            de coopération culturelle<span style="line-height:0pt"><br/></span>
-          <input name="field14" style="border:0px" type="radio" value="3" checked="${field14_3}"/> Association<span style="line-height:0pt"><br/></span>
-          <input name="field14" style="border:0px" type="radio" value="4" checked="${field14_4}"/> Autre, préciser :
-          <input name="field15" size="44" type="text" value="${field15}"/>
-        </td>
+	  <input name="field14" style="border:0px " checked="${field14_1}" value="1" type="radio"/>Régie directe<span style="line-height:0pt"><br/></span>
+	  <input name="field14" style="border:0px " checked="${field14_2}" value="2" type="radio"/> Etablissement public de coopération culturelle<span style="line-height:0pt"><br/></span>
+	  <input name="field14" style="border:0px" checked="${field14_3}" value="3" type="radio"/> Association<span style="line-height:0pt"><br/></span>
+	  <input name="field14" style="border:0px" checked="${field14_4}" value="4" type="radio"/> Autre ,
+	    préciser : <input name="field15" size="44" type="text" value="${field15}"/>
+	    </td>
         <td sdnum="1036;" sdval="6">14</td>
-      </tr>
-      <tr>
-        <th>Population concernée</th>
-        <td colspan="3">
-          <input name="fieldK0" readonly="yes" size="8" type="text" value="${fieldK0}"/> habitants
-        </td>
-        <td sdnum="1036;" sdval="6">K0</td>
-      </tr>
+     </tr>
+     <tr>
+     <th>Population concernée</th>
+     <td colspan="3">
+       <input value="${fieldK0}" name="fieldK0" readonly="yes" size="8" type="text"/> habitants
+    </td>
+    <td sdnum="1036;" sdval="6">K0</td>
+  </tr>
     </table>
     * merci de consulter l'onglet EPCI
  </form>

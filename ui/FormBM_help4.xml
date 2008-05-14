@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
    <title>Aide</title>
-
+    
     <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
   </head>
 <body id="body">
@@ -23,7 +23,7 @@ Pour les unités matérielles composées d'un assemblage de documents aux suppor
 
 <h4>Phonogrammes (D17)  </h4>
 <dl class="description">
-<dt>les livres cassettes et les méthodes de langue peuvent être comptés dans les phonogrammes ainsi que les DVD Audio et/ou Super Audio CD</dt>
+<dt>les livres cassettes et les méthodes de langue peuvent être comptés dans les phonogrammes ainsi que les DVD Audio et/ou Super Audio CD.</dt>
 </dl>
 
 <h4>Cédéroms (D18)  </h4>
@@ -70,15 +70,6 @@ Pour les unités matérielles composées d'un assemblage de documents aux suppor
 <dt>documents anciens (19ème siècle compris), rares ou précieux, soumis à des conditions particulières de conservation. A défaut d'un chiffre précis pour les imprimés, compter 30 volumes / mètre linéaire. Pour compter les périodiques (D4), procéder comme pour les non-patrimoniaux. Pour les manuscrits on favorisera un comptage par cotes.
 </dt>
 </dl>
-
-<h4>Périodiques (D.4)  </h4>
-<dl class="description">
-<dt> pour les périodiques reliés, compter en nombre d'unités matérielles, exemple : 6 fascicules reliés en 1 volume comptent pour 1 unité.</dt>
-<dt>Les périodiques non reliés seront comptés comme s'ils étaient reliés. </dt>
-<dt>En général, les numéros d'une année forment une unité matérielle. On comptera un volume de publication à feuillets mobiles comme une unité matérielle.</dt>
-</dl>
-
-
 
 <br/>
 

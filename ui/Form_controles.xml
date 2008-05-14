@@ -26,7 +26,7 @@
 <stl:block if="is_exportable">
   <p>
   Le formulaire est terminé, vous pouvez l'exporter dans la base de données
-  MySQL en cliquant le bouton ci-dessus :
+  MySQL en cliquant le bouton ci-dessous :
   </p>
   <blockquote>
     <form method="post" action=";submitted2exported">
@@ -40,7 +40,8 @@
     <p> La<a href="#controles">  liste des contrôles </a> et la<a href="#vides"> liste des rubriques non remplies </a> doivent être vides pour pouvoir envoyer le formulaire</p>
    <blockquote>
     <form method="post" action=";pending2submitted">
-      <input style="color: gray;" type="submit" value="Envoyer le formulaire" disabled="True"/>
+      <input style="color: gray;" type="submit" value="Envoyer le formulaire"
+        disabled="disabled"/>
     </form>
   </blockquote>
 </stl:block>

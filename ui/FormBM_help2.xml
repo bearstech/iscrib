@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
    <title>Aide</title>
-
+    
     <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
 
   </head>
@@ -31,8 +31,6 @@
 <li><u> Postes informatiques </u> (B37 et B38): pour les postes informatiques publics inclure les postes de consultation du catalogue et tous les autres destinés au public (logithèque, laboratoire de langue, etc.) ; quand un  poste avec ou sans accès internet est à la fois à destination professionnelle et publique choisir « poste informatique public avec/sans accès internet »</li>
 <li><u> Accès public à internet </u> (B40, B41 et B42): cocher la case correspondante </li>
 <li><u>Notices importées </u>(B33) : l'utilisation de notices provisoires à seule fin d'acquisition n'est pas considérée comme une importation de notices.
- </li>
-<li><u>Logiciels adaptés </u>(B46) : principalement les logiciels de synthèse vocale.
  </li>
 
 </ul>

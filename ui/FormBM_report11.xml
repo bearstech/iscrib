@@ -7,9 +7,7 @@
   <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
      <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
-      <!--input type="submit" value="Enregistrer" 
-             style="background-color:rgb(145,191,255); border:0"
-             stl:if="is_allowed_to_edit"></input-->
+      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
     </stl:block>
 
   </div>
@@ -17,16 +15,17 @@
 	  publique intégrale ou partagée
 
    <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help11', 'xxx', 'toolbar=no,   location=no, status=no,
-		       menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">?</a>
+		       menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
   </h1>
   <table>
   <colgroup>
     <!-- col width="30%"/> <col width="55%"/> <col width="5%"/-->
   </colgroup>
+
   <tr>
     <th>Intitulé de l'EPCI :</th>
     <td>
-       <input name="fieldK1" readonly="yes" size="40" type="text" value="${fieldK1}"/>
+       <input value="${fieldK1}" name="fieldK1" readonly="yes" size="40" type="text"/>
     </td>
     <td><b class="${_K1}">K1</b></td>
   </tr>
@@ -34,7 +33,7 @@
   <tr>
     <th>Population totale :</th>
     <td>
-       <input name="fieldK2" readonly="yes" size="40" type="text" value="${fieldK2}"/>
+       <input value="${fieldK2}" name="fieldK2" readonly="yes" size="40" type="text"/>
     </td>
     <td><b class="${_K2}">K2</b></td>
   </tr>
@@ -64,18 +63,18 @@
 
   <tr>
     <th>
-       <input name="fieldK17W" readonly="yes" size="10" type="text" value="${fieldK17W}"/>
+       <input value="${fieldK17W}" name="fieldK17W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK17X" readonly="yes" size="40" type="text" value="${fieldK17X}"/>
+       <input value="${fieldK17X}" name="fieldK17X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK17Y" readonly="yes" size="10" type="text" value="${fieldK17Y}"/>
+       <input value="${fieldK17Y}" name="fieldK17Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK17Z">
-        <option stl:repeat="option fieldK17Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK17Z" value="${option/id}">${option/label}</option>
       </select>
     </td>
 
@@ -84,18 +83,18 @@
 
    <tr>
     <th>
-       <input name="fieldK18W" readonly="yes" size="10" type="text" value="${fieldK18W}"/>
+       <input value="${fieldK18W}" name="fieldK18W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK18X" readonly="yes" size="40" type="text" value="${fieldK18X}"/>
+       <input value="${fieldK18X}" name="fieldK18X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK18Y" readonly="yes" size="10" type="text" value="${fieldK18Y}"/>
+       <input value="${fieldK18Y}" name="fieldK18Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK18Z">
-        <option stl:repeat="option fieldK18Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK18Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -105,18 +104,18 @@
 
    <tr>
     <th>
-       <input name="fieldK19W" readonly="yes" size="10" type="text" value="${fieldK19W}"/>
+       <input value="${fieldK19W}" name="fieldK19W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK19X" readonly="yes" size="40" type="text" value="${fieldK19X}"/>
+       <input value="${fieldK19X}" name="fieldK19X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK19Y" readonly="yes" size="10" type="text" value="${fieldK19Y}"/>
+       <input value="${fieldK19Y}" name="fieldK19Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK19Z">
-        <option stl:repeat="option fieldK19Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK19Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -126,18 +125,18 @@
 
    <tr>
     <th>
-       <input name="fieldK20W" readonly="yes" size="10" type="text" value="${fieldK20W}"/>
+       <input value="${fieldK20W}" name="fieldK20W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK20X" readonly="yes" size="40" type="text" value="${fieldK20X}"/>
+       <input value="${fieldK20X}" name="fieldK20X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK20Y" readonly="yes" size="10" type="text" value="${fieldK20Y}"/>
+       <input value="${fieldK20Y}" name="fieldK20Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK20Z">
-        <option stl:repeat="option fieldK20Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK20Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -147,18 +146,18 @@
 
    <tr>
     <th>
-       <input name="fieldK21W" readonly="yes" size="10" type="text" value="${fieldK21W}"/>
+       <input value="${fieldK21W}" name="fieldK21W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK21X" readonly="yes" size="40" type="text" value="${fieldK21X}"/>
+       <input value="${fieldK21X}" name="fieldK21X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK21Y" readonly="yes" size="10" type="text" value="${fieldK21Y}"/>
+       <input value="${fieldK21Y}" name="fieldK21Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK21Z">
-        <option stl:repeat="option fieldK21Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK21Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -168,18 +167,18 @@
 
    <tr>
     <th>
-       <input name="fieldK22W" readonly="yes" size="10" type="text" value="${fieldK22W}"/>
+       <input value="${fieldK22W}" name="fieldK22W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK22X" readonly="yes" size="40" type="text" value="${fieldK22X}"/>
+       <input value="${fieldK22X}" name="fieldK22X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK22Y" readonly="yes" size="10" type="text" value="${fieldK22Y}"/>
+       <input value="${fieldK22Y}" name="fieldK22Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK22Z">
-        <option stl:repeat="option fieldK22Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK22Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -189,18 +188,18 @@
 
    <tr>
     <th>
-       <input name="fieldK23W" readonly="yes" size="10" type="text" value="${fieldK23W}"/>
+       <input value="${fieldK23W}" name="fieldK23W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK23X" readonly="yes" size="40" type="text" value="${fieldK23X}"/>
+       <input value="${fieldK23X}" name="fieldK23X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK23Y" readonly="yes" size="10" type="text" value="${fieldK23Y}"/>
+       <input value="${fieldK23Y}" name="fieldK23Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK23Z">
-        <option stl:repeat="option fieldK23Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK23Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -210,18 +209,18 @@
 
    <tr>
     <th>
-       <input name="fieldK24W" readonly="yes" size="10" type="text" value="${fieldK24W}"/>
+       <input value="${fieldK24W}" name="fieldK24W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK24X" readonly="yes" size="40" type="text" value="${fieldK24X}"/>
+       <input value="${fieldK24X}" name="fieldK24X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK24Y" readonly="yes" size="10" type="text" value="${fieldK24Y}"/>
+       <input value="${fieldK24Y}" name="fieldK24Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK24Z">
-        <option stl:repeat="option fieldK24Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK24Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -231,18 +230,18 @@
 
    <tr>
     <th>
-       <input name="fieldK25W" readonly="yes" size="10" type="text" value="${fieldK25W}"/>
+       <input value="${fieldK25W}" name="fieldK25W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK25X" readonly="yes" size="40" type="text" value="${fieldK25X}"/>
+       <input value="${fieldK25X}" name="fieldK25X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK25Y" readonly="yes" size="10" type="text" value="${fieldK25Y}"/>
+       <input value="${fieldK25Y}" name="fieldK25Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK25Z">
-        <option stl:repeat="option fieldK25Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK25Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -252,18 +251,18 @@
 
    <tr>
     <th>
-       <input name="fieldK26W" readonly="yes" size="10" type="text" value="${fieldK26W}"/>
+       <input value="${fieldK26W}" name="fieldK26W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK26X" readonly="yes" size="40" type="text" value="${fieldK26X}"/>
+       <input value="${fieldK26X}" name="fieldK26X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK26Y" readonly="yes" size="10" type="text" value="${fieldK26Y}"/>
+       <input value="${fieldK26Y}" name="fieldK26Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK26Z">
-        <option stl:repeat="option fieldK26Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK26Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -273,18 +272,18 @@
 
    <tr>
     <th>
-       <input name="fieldK27W" readonly="yes" size="10" type="text" value="${fieldK27W}"/>
+       <input value="${fieldK27W}" name="fieldK27W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK27X" readonly="yes" size="40" type="text" value="${fieldK27X}"/>
+       <input value="${fieldK27X}" name="fieldK27X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK27Y" readonly="yes" size="10" type="text" value="${fieldK27Y}"/>
+       <input value="${fieldK27Y}" name="fieldK27Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK27Z">
-        <option stl:repeat="option fieldK27Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK27Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -294,17 +293,17 @@
 
    <tr>
     <th>
-       <input name="fieldK28W" readonly="yes" size="10" type="text" value="${fieldK28W}"/>
+       <input value="${fieldK28W}" name="fieldK28W" readonly="yes" size="10" type="text"/>
     </th>
    <td>
-       <input name="fieldK28X" readonly="yes" size="40" type="text" value="${fieldK28X}"/>
+       <input value="${fieldK28X}" name="fieldK28X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK28Y" readonly="yes" size="10" type="text" value="${fieldK28Y}"/>
+       <input value="${fieldK28Y}" name="fieldK28Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK28Z">
-        <option stl:repeat="option fieldK28Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK28Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -312,17 +311,17 @@
    </tr>
    <tr>
     <th>
-       <input name="fieldK29W" readonly="yes" size="10" type="text" value="${fieldK29W}"/>
+       <input value="${fieldK29W}" name="fieldK29W" readonly="yes" size="10" type="text"/>
     </th>
    <td>
-       <input name="fieldK29X" readonly="yes" size="40" type="text" value="${fieldK29X}"/>
+       <input value="${fieldK29X}" name="fieldK29X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK29Y" readonly="yes" size="10" type="text" value="${fieldK29Y}"/>
+       <input value="${fieldK29Y}" name="fieldK29Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK29Z">
-        <option stl:repeat="option fieldK29Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK29Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -332,17 +331,17 @@
 
     <tr>
      <th>
-       <input name="fieldK30W" readonly="yes" size="10" type="text" value="${fieldK30W}"/>
+       <input value="${fieldK30W}" name="fieldK30W" readonly="yes" size="10" type="text"/>
     </th>
    <td>
-       <input name="fieldK30X" readonly="yes" size="40" type="text" value="${fieldK30X}"/>
+       <input value="${fieldK30X}" name="fieldK30X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK30Y" readonly="yes" size="10" type="text" value="${fieldK30Y}"/>
+       <input value="${fieldK30Y}" name="fieldK30Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK30Z">
-        <option stl:repeat="option fieldK30Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK30Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
@@ -351,24 +350,156 @@
    </tr>
    <tr>
     <th>
-       <input name="fieldK31W" readonly="yes" size="10" type="text" value="${fieldK31W}"/>
+       <input value="${fieldK31W}" name="fieldK31W" readonly="yes" size="10" type="text"/>
     </th>
 
     <td>
-       <input name="fieldK31X" readonly="yes" size="40" type="text" value="${fieldK31X}"/>
+       <input value="${fieldK31X}" name="fieldK31X" readonly="yes" size="40" type="text"/>
     </td>
     <td>
-       <input name="fieldK31Y" readonly="yes" size="10" type="text" value="${fieldK31Y}"/>
+       <input value="${fieldK31Y}" name="fieldK31Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
       <select name="fieldK31Z">
-        <option stl:repeat="option fieldK31Z" value="${option/id}" selected="${option/is_selected}">${option/label}</option>
+        <option selected="${option/is_selected}" stl:repeat="option fieldK31Z" value="${option/id}">${option/label}</option>
       </select>
    </td>
 
    <td><b class="${_K31}">K31</b></td>
 
    </tr>
+
+</table>
+
+   <table style="visibility:hidden">
+        <th>Rattachement administratif</th>
+        <td>
+	  <input style="border:0px" value="1" name="field13" checked="${field13_1}" type="radio" onclick="switch_off(['fieldK40'])"/> Commune <span style="line-height:0pt"><br/></span>
+	  <input style="border:0px" value="2" name="field13" checked="${field13_2}" type="radio" onclick="switch_on(['fieldK40'])"/> Groupement de communes *
+	     </td>
+      <td sdnum="1036;" sdval="6">13</td>
+
+   </table>
+
+
+<table width="100%">
+  <colgroup>
+    <col width="63%"/>
+    <col width="22%"/>
+    <col width="5%"/>
+   </colgroup>
+
+  <tr>
+    <th>La compétence culturelle est-elle partagée ?</th>
+    <td>
+       <table stl:if="field13_2" id="display_fieldK40">
+          <tr style="padding:0px;  text-align: left">
+          <td><input style="font-size: 8pt;  border:0px" value="1" name="fieldK40" checked="${fieldK40}" type="radio" onclick="switch_on(['fieldK41','fieldK42','fieldK43','fieldK44','fieldK45','fieldK46'])"/>Oui</td>
+          <td style="border-left: 1px solid black;text-align: right"><input style="font-size: 8pt;  border:0px" value="0" name="fieldK40" checked="${fieldK40_not}" type="radio" onclick="switch_off(['fieldK41','fieldK42','fieldK43','fieldK44','fieldK45','fieldK46'])"/>Non      </td>
+           </tr>
+       </table>
+       <table stl:if="field13_1" id="display_fieldK40" style="visibility:hidden">
+        <tr style="padding:0px;  text-align: left">
+        <td><input style="font-size: 8pt;  border:0px" value="1" name="fieldK40" checked="${fieldK40}" type="radio" onclick="switch_on(['fieldK41','fieldK42','fieldK43','fieldK44','fieldK45','fieldK46'])"/>Oui</td>
+        <td style="border-left: 1px solid black;text-align: right"><input style="font-size: 8pt;  border:0px" value="0" name="fieldK40" checked="${fieldK40_not}" type="radio" onclick="switch_off(['fieldK41','fieldK42','fieldK43','fieldK44','fieldK45','fieldK46'])"/>Non      </td>
+        </tr>
+      </table>
+    </td>
+    <td><b class="${_K40}">K40</b></td>
+  </tr>
+
+   <tr> <th>Si la compétence culturelle est partagée, quelle est la répartition des secteurs d'intervention ?</th></tr>
+
+   <tr>
+    <th>Bibliothèque centrale</th>
+    <td>
+      <table stl:if="fieldK40" id="display_fieldK41"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK41" style="font-size: 8pt;  border:0px" checked="${fieldK41}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK41" style="font-size: 8pt;  border:0px" checked="${fieldK41_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+      <table stl:if="not fieldK40" id="display_fieldK41" style="visibility:hidden"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK41" style="font-size: 8pt;  border:0px" checked="${fieldK41}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK41" style="font-size: 8pt;  border:0px" checked="${fieldK41_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+    </td>
+    <td><b class="${_K41}">K41</b></td>
+   </tr>
+
+  <tr>
+    <th>Bibliothèque du réseau</th>
+    <td>
+      <table stl:if="fieldK40" id="display_fieldK42"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK42" style="font-size: 8pt;  border:0px" checked="${fieldK42}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK42" style="font-size: 8pt;  border:0px" checked="${fieldK42_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+       <table stl:if="not fieldK40" id="display_fieldK42" style="visibility:hidden"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK42" style="font-size: 8pt;  border:0px" checked="${fieldK42}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK42" style="font-size: 8pt;  border:0px" checked="${fieldK42_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+    </td>
+    <td><b class="${_K42}">K42</b></td>
+
+  </tr>
+ </table>
+
+ <table width="100%">
+  <colgroup>
+    <col width="30"/>
+    <col width="30%"/>
+    <col width="25%"/>
+    <col width="5%"/>
+   </colgroup>
+
+  <tr>
+    <th rowspan="2">Dépenses d'investissement</th>
+    <th>partielles</th>
+    <td>
+      <table stl:if="fieldK40" id="display_fieldK43"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK43" style="font-size: 8pt;  border:0px" checked="${fieldK43}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK43" style="font-size: 8pt;  border:0px" checked="${fieldK43_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+       <table stl:if="not fieldK40" id="display_fieldK43" style="visibility:hidden"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK43" style="font-size: 8pt;  border:0px" checked="${fieldK43}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK43" style="font-size: 8pt;  border:0px" checked="${fieldK43_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+    </td>
+    <td><b class="${_K43}">K43</b></td>
+  </tr>
+
+  <tr>
+    <th>intégrales</th>
+    <td>
+      <table stl:if="fieldK40" id="display_fieldK44"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK44" style="font-size: 8pt;  border:0px" checked="${fieldK44}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK44" style="font-size: 8pt;  border:0px" checked="${fieldK44_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+       <table stl:if="not fieldK40" id="display_fieldK44" style="visibility:hidden"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK44" style="font-size: 8pt;  border:0px" checked="${fieldK44}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK44" style="font-size: 8pt;  border:0px" checked="${fieldK44_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+    </td>
+    <td><b class="${_K44}">K44</b></td>
+  </tr>
+
+  <tr>
+    <th rowspan="2">Dépenses de fonctionnement</th>
+    <th>partielles</th>
+     <td>
+      <table stl:if="fieldK40" id="display_fieldK45"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK45" style="font-size: 8pt;  border:0px" checked="${fieldK45}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK45" style="font-size: 8pt;  border:0px" checked="${fieldK45_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+       <table stl:if="not fieldK40" id="display_fieldK45" style="visibility:hidden"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK45" style="font-size: 8pt;  border:0px" checked="${fieldK45}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK45" style="font-size: 8pt;  border:0px" checked="${fieldK45_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+    </td>
+    <td><b class="${_K45}">K45</b></td>
+  </tr>
+
+  <tr>
+    <th>intégrales</th>
+    <td>
+
+      <table stl:if="fieldK40" id="display_fieldK46"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK46" style="font-size: 8pt;  border:0px" checked="${fieldK46}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK46" style="font-size: 8pt;  border:0px" checked="${fieldK46_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+       <table stl:if="not fieldK40" id="display_fieldK46" style="visibility:hidden"><tr style="padding:0px;  text-align: left"><td>        <input name="fieldK46" style="font-size: 8pt;  border:0px" checked="${fieldK46}" value="1" type="radio"/>EPCI      </td>
+            <td style="border-left: 1px solid black;text-align: right">        <input name="fieldK46" style="font-size: 8pt;  border:0px" checked="${fieldK46_not}" value="0" type="radio"/>Communes(s)      </td>      </tr>
+      </table>
+    </td>
+    <td><b class="${_K46}">K46</b></td>
+  </tr>
 
 </table>
 </form>

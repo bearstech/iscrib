@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
    <title>Aide</title>
-
+    
     <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
 
   </head>
 <body id="body">
 <p align="right"><a href=";help_menu">Sommaire</a></p>
-<h2> ACTIONS CULTURELLES</h2>
+<h2>I -  ACTIONS CULTURELLES </h2>
 <dl class="description">
-<dt>A nouveau quelques données qualitatives, certaines BDP nous envoient régulièrement leurs publications, merci de nous transmettre au moins, quelques exemples de votre activité dans ces domaines.
+<dt>Certaines BDP nous envoient régulièrement leurs publications, merci de nous transmettre au moins quelques exemples de votre activité dans ces différents domaines.
 </dt>
 </dl>
 </body>

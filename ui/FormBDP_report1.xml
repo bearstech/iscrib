@@ -32,7 +32,7 @@
   <tr>
     <th>Pour le personnel : salaires et charges,</th>
     <td>
-       <input name="fieldA11" style="text-align:right" size="8" type="text" value="${fieldA11}"/>
+       <input style="text-align:right" value="${fieldA11}" name="fieldA11" size="8" type="text"/>
     </td>
     <td><b class="${_A11}">A11</b></td>
   </tr>
@@ -40,7 +40,7 @@
   <tr>
     <th>Pour les acquisitions de tous documents et abonnements</th>
     <td>
-       <input name="fieldA12" style="text-align:right" size="8" type="text" value="${fieldA12}"/>
+       <input style="text-align:right" value="${fieldA12}" name="fieldA12" size="8" type="text"/>
     </td>
     <td><b class="${_A12}">A12</b></td>
   </tr>
@@ -48,7 +48,7 @@
   <tr>
     <th>Pour la reliure et l'équipement des documents</th>
     <td>
-       <input name="fieldA13" style="text-align:right" size="8" type="text" value="${fieldA13}"/>
+       <input style="text-align:right" value="${fieldA13}" name="fieldA13" size="8" type="text"/>
     </td>
     <td><b class="${_A13}">A13</b></td>
   </tr>
@@ -56,34 +56,43 @@
   <tr>
     <th>Pour la maintenance informatique</th>
     <td>
-       <input name="fieldA14" style="text-align:right" size="8" type="text" value="${fieldA14}"/>
+       <input style="text-align:right" value="${fieldA14}" name="fieldA14" size="8" type="text"/>
     </td>
     <td><b class="${_A14}">A14</b></td>
   </tr>
 
   <tr>
-    <th>Pour l'animation (communication, impression, défraiement)</th>
+    <th>Pour l'animation (communication, impression, défraiement, intervenants…) </th>
     <td>
-       <input name="fieldA15" style="text-align:right" size="8" type="text" value="${fieldA15}"/>
+       <input style="text-align:right" value="${fieldA15}" name="fieldA15" size="8" type="text"/>
     </td>
     <td><b class="${_A15}">A15</b></td>
   </tr>
 
   <tr>
-    <th>Pour la formation</th>
+    <th>Pour la formation des agents de la BDP</th>
     <td>
-       <input name="fieldA16" style="text-align:right" size="8" type="text" value="${fieldA16}"/>
+       <input style="text-align:right" value="${fieldA16}" name="fieldA16" size="8" type="text"/>
     </td>
     <td><b class="${_A16}">A16</b></td>
   </tr>
 
-  <tr>
-    <th><b>TOTAL (A11à A16)</b></th>
+   <tr>
+    <th>Pour la formation dispensée au réseau</th>
     <td>
-       <input name="fieldA17" style="text-align:right" size="8" type="text" value="${fieldA17}"/>
+       <input style="text-align:right" value="${fieldA18}" name="fieldA18" size="8" type="text"/>
+    </td>
+    <td><b class="${_A18}">A18</b></td>
+  </tr>
+
+  <tr>
+    <th><b>TOTAL (A11 à A18)</b></th>
+    <td>
+       <input style="text-align:right" value="${fieldA17}" name="fieldA17" size="8" type="text"/>
     </td>
     <td><b class="${_A17}">A17</b></td>
   </tr>
+
 </table>
 <h2>A.2 DÉPENSES D'INVESTISSEMENT POUR LA BDP (hors documents)
                     : construction, équipement, informatisation</h2>
@@ -96,7 +105,7 @@
   <tr>
     <th>Pour les bâtiments de la BDP, centrale et annexes (construction, agrandissement, rénovation)</th>
     <td>
-       <input name="fieldA21" style="text-align:right" size="8" type="text" value="${fieldA21}"/>
+       <input style="text-align:right" value="${fieldA21}" name="fieldA21" size="8" type="text"/>
     </td>
     <td><b class="${_A21}">A21</b></td>
   </tr>
@@ -104,7 +113,7 @@
   <tr>
     <th>Pour le mobilier et le matériel (y compris achat de véhicules)</th>
     <td>
-       <input name="fieldA22" style="text-align:right" size="8" type="text" value="${fieldA22}"/>
+       <input style="text-align:right" value="${fieldA22}" name="fieldA22" size="8" type="text"/>
     </td>
     <td><b class="${_A22}">A22</b></td>
   </tr>
@@ -112,7 +121,7 @@
   <tr>
     <th>Pour l'informatique (logiciel et matériel)</th>
     <td>
-       <input name="fieldA23" style="text-align:right" size="8" type="text" value="${fieldA23}"/>
+       <input style="text-align:right" value="${fieldA23}" name="fieldA23" size="8" type="text"/>
     </td>
     <td><b class="${_A23}">A23</b></td>
   </tr>
@@ -120,7 +129,7 @@
   <tr>
     <th><b>TOTAL (A21à A23)</b></th>
     <td>
-       <input name="fieldA24" style="text-align:right" size="8" type="text" value="${fieldA24}"/>
+       <input style="text-align:right" value="${fieldA24}" name="fieldA24" size="8" type="text"/>
     </td>
     <td><b class="${_A24}">A24</b></td>
   </tr>
@@ -135,7 +144,7 @@
   <tr>
     <th>Montant total des droits d'inscription (prêts directs, cotisations des communes) perçus dans l'année sur budget départemental (hors association)</th>
     <td>
-       <input name="fieldA31" style="text-align:right" size="8" type="text" value="${fieldA31}"/>
+       <input style="text-align:right" value="${fieldA31}" name="fieldA31" size="8" type="text"/>
     </td>
     <td><b class="${_A31}">A31</b></td>
   </tr>
@@ -143,7 +152,7 @@
   <tr>
     <th>Montant total des autres recettes (inscription aux formations, droits de location)</th>
     <td>
-       <input name="fieldA32" style="text-align:right" size="8" type="text" value="${fieldA32}"/>
+       <input style="text-align:right" value="${fieldA32}" name="fieldA32" size="8" type="text"/>
     </td>
     <td><b class="${_A32}">A32</b></td>
   </tr>

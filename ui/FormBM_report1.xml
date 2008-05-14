@@ -13,7 +13,7 @@
    </stl:block>
   </div>
 <h1>A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales)
-  <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help1', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">?</a>
+  <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help1', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
 </h1>
 <h2>A.1 DEPENSES DE FONCTIONNEMENT PROPRES A LA BIBLIOTHÈQUE</h2>
 <table width="100%">
@@ -23,9 +23,9 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Pour le personnel : salaires et charges,</th>
+    <th>Pour le personnel : salaires et charges</th>
     <td>
-       <input name="fieldA11" style="text-align: right" size="8" type="text" value="${fieldA11}"/>
+       <input style="text-align: right" value="${fieldA11}" name="fieldA11" size="8" type="text"/>
     </td>
     <td><b class="${_A11}">A11</b></td>
   </tr>
@@ -33,7 +33,7 @@
   <tr>
     <th>Pour les acquisitions de tous documents et abonnements</th>
     <td>
-       <input name="fieldA12" style="text-align: right" size="8" type="text" value="${fieldA12}"/>
+       <input style="text-align: right" value="${fieldA12}" name="fieldA12" size="8" type="text"/>
     </td>
     <td><b class="${_A12}">A12</b></td>
   </tr>
@@ -41,7 +41,7 @@
   <tr>
     <th>Pour la reliure et l'équipement des documents</th>
     <td>
-       <input name="fieldA13" style="text-align: right" size="8" type="text" value="${fieldA13}"/>
+       <input style="text-align: right" value="${fieldA13}" name="fieldA13" size="8" type="text"/>
     </td>
     <td><b class="${_A13}">A13</b></td>
   </tr>
@@ -49,7 +49,7 @@
   <tr>
     <th>Pour la maintenance informatique</th>
     <td>
-       <input name="fieldA14" style="text-align: right" size="8" type="text" value="${fieldA14}"/>
+       <input style="text-align: right" value="${fieldA14}" name="fieldA14" size="8" type="text"/>
     </td>
     <td><b class="${_A14}">A14</b></td>
   </tr>
@@ -57,17 +57,17 @@
   <tr>
     <th>Pour l'animation (communication, impression, défraiement)</th>
     <td>
-       <input name="fieldA15" style="text-align: right" size="8" type="text" value="${fieldA15}"/>
+       <input style="text-align: right" value="${fieldA15}" name="fieldA15" size="8" type="text"/>
     </td>
     <td><b class="${_A15}">A15</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (A11 à A15)</b></th>
+    <th style="background-color:#FFE15C"><b>TOTAL (A11 à A15)</b></th>
     <td>
-       <input name="fieldA16" style="text-align: right" size="8" type="text" value="${fieldA16}"/>
+       <input style="text-align: right; background-color:#FFE15C" value="${fieldA16}" name="fieldA16" size="8" type="text"/>
     </td>
-    <td><b class="${_A16}">A16</b></td>
+    <td style="background-color:#FFE15C"><b class="${_A16}">A16</b></td>
   </tr>
 </table>
 <h2>A.2 DEPENSES D'INVESTISSEMENT PROPRES A LA BIBLIOTHÈQUE</h2>
@@ -80,7 +80,7 @@
   <tr>
     <th>Pour le bâtiment (construction, agrandissement, rénovation)</th>
     <td>
-       <input name="fieldA21" style="text-align: right" size="8" type="text" value="${fieldA21}"/>
+       <input style="text-align: right" value="${fieldA21}" name="fieldA21" size="8" type="text"/>
     </td>
     <td><b class="${_A21}">A21</b></td>
   </tr>
@@ -88,7 +88,7 @@
   <tr>
     <th>Pour le mobilier et le matériel (y compris achat de véhicules)</th>
     <td>
-       <input name="fieldA22" style="text-align: right" size="8" type="text" value="${fieldA22}"/>
+       <input style="text-align: right" value="${fieldA22}" name="fieldA22" size="8" type="text"/>
     </td>
     <td><b class="${_A22}">A22</b></td>
   </tr>
@@ -96,7 +96,7 @@
   <tr>
     <th>Pour l'informatique (logiciel et matériel)</th>
     <td>
-       <input name="fieldA23" style="text-align: right" size="8" type="text" value="${fieldA23}"/>
+       <input style="text-align: right" value="${fieldA23}" name="fieldA23" size="8" type="text"/>
     </td>
     <td><b class="${_A23}">A23</b></td>
   </tr>
@@ -104,17 +104,17 @@
   <tr>
     <th>Pour les acquisitions de tous documents et abonnements</th>
     <td>
-       <input name="fieldA24" style="text-align: right" size="8" type="text" value="${fieldA24}"/>
+       <input style="text-align: right" value="${fieldA24}" name="fieldA24" size="8" type="text"/>
     </td>
     <td><b class="${_A24}">A24</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (A21 à A24)</b></th>
+    <th style="background-color:#FFE15C"><b>TOTAL (A21 à A24)</b></th>
     <td>
-       <input name="fieldA25" style="text-align: right" size="8" type="text" value="${fieldA25}"/>
+       <input style="text-align: right; background-color:#FFE15C" value="${fieldA25}" name="fieldA25" size="8" type="text"/>
     </td>
-    <td><b class="${_A25}">A25</b></td>
+    <td style="background-color:#FFE15C"><b class="${_A25}">A25</b></td>
   </tr>
 </table>
 <h2>A.3 RECETTES PROPRES A LA BIBLIOTHÈQUE</h2>
@@ -125,17 +125,17 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>Montant total des droits d'inscription perçus dans l'année</th>
+    <th style="background-color:#FFE15C">Montant total des droits d'inscription perçus dans l'année</th>
     <td>
-       <input name="fieldA31" style="text-align: right" size="8" type="text" value="${fieldA31}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldA31}" name="fieldA31" size="8" type="text"/>
     </td>
-    <td><b class="${_A31}">A31</b></td>
+    <td style="background-color:#FFE15C"><b class="${_A31}">A31</b></td>
   </tr>
 
   <tr>
     <th>Montant des subventions de fonctionnement</th>
     <td>
-       <input name="fieldA32" style="text-align: right" size="8" type="text" value="${fieldA32}"/>
+       <input style="text-align: right" value="${fieldA32}" name="fieldA32" size="8" type="text"/>
     </td>
     <td><b class="${_A32}">A32</b></td>
   </tr>
@@ -143,7 +143,7 @@
   <tr>
     <th>Montant des subventions d'investissement</th>
     <td>
-       <input name="fieldA33" style="text-align: right" size="8" type="text" value="${fieldA33}"/>
+       <input style="text-align: right" value="${fieldA33}" name="fieldA33" size="8" type="text"/>
     </td>
     <td><b class="${_A33}">A33</b></td>
   </tr>
@@ -151,7 +151,7 @@
   <tr>
     <th>Autres</th>
     <td>
-       <input name="fieldA34" style="text-align: right" size="8" type="text" value="${fieldA34}"/>
+       <input style="text-align: right" value="${fieldA34}" name="fieldA34" size="8" type="text"/>
     </td>
     <td><b class="${_A34}">A34</b></td>
   </tr>

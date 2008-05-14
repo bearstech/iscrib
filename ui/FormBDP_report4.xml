@@ -19,7 +19,8 @@
   </tr>
   </table>
 
-<h1>D - COLLECTIONS AU 31 DÉCEMBRE 2006
+<h1>D - COLLECTIONS AU 31 DÉCEMBRE 2007
+
    <!--a stl:if="not printable" href="#" style="color:white;background-color:red; border: 1px solid red; " alt="Aide"
       onclick="window.open(';help4', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;">?</a-->
 </h1>
@@ -42,13 +43,13 @@
   <tr>
     <th>Livres adultes</th>
     <td>
-       <input name="fieldD11X" style="text-align:right" size="8" type="text" value="${fieldD11X}"/>
+       <input style="text-align:right" value="${fieldD11X}" name="fieldD11X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD11Y" style="text-align:right" size="8" type="text" value="${fieldD11Y}"/>
+       <input style="text-align:right" value="${fieldD11Y}" name="fieldD11Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD11Z" style="text-align:right" size="8" type="text" value="${fieldD11Z}"/>
+       <input style="text-align:right" value="${fieldD11Z}" name="fieldD11Z" size="8" type="text"/>
     </td>
     <td><b class="${_D11}">D11</b></td>
   </tr>
@@ -56,13 +57,13 @@
   <tr>
     <th>Livres enfants</th>
     <td>
-       <input name="fieldD12X" style="text-align:right" size="8" type="text" value="${fieldD12X}"/>
+       <input style="text-align:right" value="${fieldD12X}" name="fieldD12X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD12Y" style="text-align:right" size="8" type="text" value="${fieldD12Y}"/>
+       <input style="text-align:right" value="${fieldD12Y}" name="fieldD12Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD12Z" style="text-align:right" size="8" type="text" value="${fieldD12Z}"/>
+       <input style="text-align:right" value="${fieldD12Z}" name="fieldD12Z" size="8" type="text"/>
     </td>
     <td><b class="${_D12}">D12</b></td>
   </tr>
@@ -70,13 +71,13 @@
   <tr>
     <th><b>TOTAL des livres (D11+D12)</b></th>
     <td>
-       <input name="fieldD13X" style="text-align:right" size="8" type="text" value="${fieldD13X}"/>
+       <input style="text-align:right" value="${fieldD13X}" name="fieldD13X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD13Y" style="text-align:right" size="8" type="text" value="${fieldD13Y}"/>
+       <input style="text-align:right" value="${fieldD13Y}" name="fieldD13Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD13Z" style="text-align:right" size="8" type="text" value="${fieldD13Z}"/>
+       <input style="text-align:right" value="${fieldD13Z}" name="fieldD13Z" size="8" type="text"/>
     </td>
     <td><b class="${_D13}">D13</b></td>
   </tr>
@@ -84,13 +85,13 @@
   <tr>
     <th>Phonogrammes adultes (tous supports)</th>
     <td>
-       <input name="fieldD14X" style="text-align:right" size="8" type="text" value="${fieldD14X}"/>
+       <input style="text-align:right" value="${fieldD14X}" name="fieldD14X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD14Y" style="text-align:right" size="8" type="text" value="${fieldD14Y}"/>
+       <input style="text-align:right" value="${fieldD14Y}" name="fieldD14Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD14Z" style="text-align:right" size="8" type="text" value="${fieldD14Z}"/>
+       <input style="text-align:right" value="${fieldD14Z}" name="fieldD14Z" size="8" type="text"/>
     </td>
     <td><b class="${_D14}">D14</b></td>
   </tr>
@@ -98,13 +99,13 @@
   <tr>
     <th>Phonogrammes enfants (tous supports)</th>
     <td>
-       <input name="fieldD15X" style="text-align:right" size="8" type="text" value="${fieldD15X}"/>
+       <input style="text-align:right" value="${fieldD15X}" name="fieldD15X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD15Y" style="text-align:right" size="8" type="text" value="${fieldD15Y}"/>
+       <input style="text-align:right" value="${fieldD15Y}" name="fieldD15Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD15Z" style="text-align:right" size="8" type="text" value="${fieldD15Z}"/>
+       <input style="text-align:right" value="${fieldD15Z}" name="fieldD15Z" size="8" type="text"/>
     </td>
     <td><b class="${_D15}">D15</b></td>
   </tr>
@@ -112,13 +113,13 @@
   <tr>
     <th><b>TOTAL des phonogrammes (D14 + D15)</b></th>
     <td>
-       <input name="fieldD16X" style="text-align:right" size="8" type="text" value="${fieldD16X}"/>
+       <input style="text-align:right" value="${fieldD16X}" name="fieldD16X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD16Y" style="text-align:right" size="8" type="text" value="${fieldD16Y}"/>
+       <input style="text-align:right" value="${fieldD16Y}" name="fieldD16Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD16Z" style="text-align:right" size="8" type="text" value="${fieldD16Z}"/>
+       <input style="text-align:right" value="${fieldD16Z}" name="fieldD16Z" size="8" type="text"/>
     </td>
     <td><b class="${_D16}">D16</b></td>
   </tr>
@@ -126,13 +127,13 @@
   <tr>
     <th>Vidéogrammes adultes (tous supports)</th>
     <td>
-       <input name="fieldD17X" style="text-align:right" size="8" type="text" value="${fieldD17X}"/>
+       <input style="text-align:right" value="${fieldD17X}" name="fieldD17X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD17Y" style="text-align:right" size="8" type="text" value="${fieldD17Y}"/>
+       <input style="text-align:right" value="${fieldD17Y}" name="fieldD17Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD17Z" style="text-align:right" size="8" type="text" value="${fieldD17Z}"/>
+       <input style="text-align:right" value="${fieldD17Z}" name="fieldD17Z" size="8" type="text"/>
     </td>
     <td><b class="${_D17}">D17</b></td>
   </tr>
@@ -140,13 +141,13 @@
   <tr>
     <th>Vidéogrammes enfants (tous supports)</th>
     <td>
-       <input name="fieldD18X" style="text-align:right" size="8" type="text" value="${fieldD18X}"/>
+       <input style="text-align:right" value="${fieldD18X}" name="fieldD18X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD18Y" style="text-align:right" size="8" type="text" value="${fieldD18Y}"/>
+       <input style="text-align:right" value="${fieldD18Y}" name="fieldD18Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD18Z" style="text-align:right" size="8" type="text" value="${fieldD18Z}"/>
+       <input style="text-align:right" value="${fieldD18Z}" name="fieldD18Z" size="8" type="text"/>
     </td>
     <td><b class="${_D18}">D18</b></td>
   </tr>
@@ -154,13 +155,13 @@
   <tr>
     <th><b>TOTAL des vidéogrammes (D17 + D18)</b></th>
     <td>
-       <input name="fieldD19X" style="text-align:right" size="8" type="text" value="${fieldD19X}"/>
+       <input style="text-align:right" value="${fieldD19X}" name="fieldD19X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD19Y" style="text-align:right" size="8" type="text" value="${fieldD19Y}"/>
+       <input style="text-align:right" value="${fieldD19Y}" name="fieldD19Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD19Z" style="text-align:right" size="8" type="text" value="${fieldD19Z}"/>
+       <input style="text-align:right" value="${fieldD19Z}" name="fieldD19Z" size="8" type="text"/>
     </td>
     <td><b class="${_D19}">D19</b></td>
   </tr>
@@ -168,13 +169,13 @@
   <tr>
     <th>Cédéroms adultes</th>
     <td>
-       <input name="fieldD20X" style="text-align:right" size="8" type="text" value="${fieldD20X}"/>
+       <input style="text-align:right" value="${fieldD20X}" name="fieldD20X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD20Y" style="text-align:right" size="8" type="text" value="${fieldD20Y}"/>
+       <input style="text-align:right" value="${fieldD20Y}" name="fieldD20Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD20Z" style="text-align:right" size="8" type="text" value="${fieldD20Z}"/>
+       <input style="text-align:right" value="${fieldD20Z}" name="fieldD20Z" size="8" type="text"/>
     </td>
     <td><b class="${_D20}">D20</b></td>
   </tr>
@@ -182,13 +183,13 @@
   <tr>
     <th>Cédéroms enfants</th>
     <td>
-       <input name="fieldD21X" style="text-align:right" size="8" type="text" value="${fieldD21X}"/>
+       <input style="text-align:right" value="${fieldD21X}" name="fieldD21X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD21Y" style="text-align:right" size="8" type="text" value="${fieldD21Y}"/>
+       <input style="text-align:right" value="${fieldD21Y}" name="fieldD21Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD21Z" style="text-align:right" size="8" type="text" value="${fieldD21Z}"/>
+       <input style="text-align:right" value="${fieldD21Z}" name="fieldD21Z" size="8" type="text"/>
     </td>
     <td><b class="${_D21}">D21</b></td>
   </tr>
@@ -196,13 +197,13 @@
   <tr>
     <th><b>TOTAL des cédéroms (D20 + D21)</b></th>
     <td>
-       <input name="fieldD22X" style="text-align:right" size="8" type="text" value="${fieldD22X}"/>
+       <input style="text-align:right" value="${fieldD22X}" name="fieldD22X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD22Y" style="text-align:right" size="8" type="text" value="${fieldD22Y}"/>
+       <input style="text-align:right" value="${fieldD22Y}" name="fieldD22Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD22Z" style="text-align:right" size="8" type="text" value="${fieldD22Z}"/>
+       <input style="text-align:right" value="${fieldD22Z}" name="fieldD22Z" size="8" type="text"/>
     </td>
     <td><b class="${_D22}">D22</b></td>
   </tr>
@@ -210,13 +211,13 @@
   <tr>
     <th>Autres documents</th>
     <td>
-       <input name="fieldD23X" style="text-align:right" size="8" type="text" value="${fieldD23X}"/>
+       <input style="text-align:right" value="${fieldD23X}" name="fieldD23X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD23Y" style="text-align:right" size="8" type="text" value="${fieldD23Y}"/>
+       <input style="text-align:right" value="${fieldD23Y}" name="fieldD23Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD23Z" style="text-align:right" size="8" type="text" value="${fieldD23Z}"/>
+       <input style="text-align:right" value="${fieldD23Z}" name="fieldD23Z" size="8" type="text"/>
     </td>
     <td><b class="${_D23}">D23</b></td>
   </tr>
@@ -224,27 +225,27 @@
   <tr>
     <th>Bases de données</th>
     <td>
-       <input name="fieldD24X" style="text-align:right" size="8" type="text" value="${fieldD24X}"/>
+       <input style="text-align:right" value="${fieldD24X}" name="fieldD24X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD24Y" style="text-align:right" size="8" type="text" value="${fieldD24Y}"/>
+       <input style="text-align:right" value="${fieldD24Y}" name="fieldD24Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD24Z" style="text-align:right" size="8" type="text" value="${fieldD24Z}"/>
+       <input style="text-align:right" value="${fieldD24Z}" name="fieldD24Z" size="8" type="text"/>
     </td>
     <td><b class="${_D24}">D24</b></td>
   </tr>
 
    <tr>
-    <th>Dont documents</th>
+    <th>Dont documents destinés aux personnes handicapées (livres parlés, braille)</th>
     <td>
-       <input name="fieldD25X" style="text-align:right" size="8" type="text" value="${fieldD25X}"/>
+       <input style="text-align:right" value="${fieldD25X}" name="fieldD25X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD25Y" style="text-align:right" size="8" type="text" value="${fieldD25Y}"/>
+       <input style="text-align:right" value="${fieldD25Y}" name="fieldD25Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD25Z" style="text-align:right" size="8" type="text" value="${fieldD25Z}"/>
+       <input style="text-align:right" value="${fieldD25Z}" name="fieldD25Z" size="8" type="text"/>
     </td>
     <td><b class="${_D25}">D25</b></td>
   </tr>
@@ -260,7 +261,7 @@
   <tr>
     <th>Nombre de titres de périodiques conservés (titres morts ou courants)</th>
     <td>
-       <input name="fieldD31" style="text-align:right" size="8" type="text" value="${fieldD31}"/>
+       <input style="text-align:right" value="${fieldD31}" name="fieldD31" size="8" type="text"/>
     </td>
     <td><b class="${_D31}">D31</b></td>
   </tr>

@@ -20,7 +20,7 @@
   </tr>
   </table>
 
- <h1>C - PERSONNEL EN POSTE AU 31 DECEMBRE 2006
+ <h1>C - PERSONNEL EN POSTE AU 31 DECEMBRE 2007
 
 </h1>
 <h2>C.1 FONCTION PUBLIQUE : FILIERE CULTURELLE</h2>
@@ -70,28 +70,28 @@
   <tr>
     <th>Conservateurs</th>
     <td>
-       <input name="fieldC11S" style="text-align: right" size="8" type="text" value="${fieldC11S}"/>
+       <input style="text-align: right" value="${fieldC11S}" name="fieldC11S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC11T" style="text-align: right" size="8" type="text" value="${fieldC11T}"/>
+       <input style="text-align: right" value="${fieldC11T}" name="fieldC11T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC11U" style="text-align: right" size="8" type="text" value="${fieldC11U}"/>
+       <input style="text-align: right" value="${fieldC11U}" name="fieldC11U" size="8" type="text"/>
     </td>
     <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="1" checked="${fieldCV_1}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_1}" value="1" type="radio"/>
     </td>
     <td>
-       <input name="fieldC11W" style="text-align: right" size="8" type="text" value="${fieldC11W}"/>
+       <input style="text-align: right" value="${fieldC11W}" name="fieldC11W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC11X" style="text-align: right" size="8" type="text" value="${fieldC11X}"/>
+       <input style="text-align: right" value="${fieldC11X}" name="fieldC11X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC11Y" style="text-align: right" size="8" type="text" value="${fieldC11Y}"/>
+       <input style="text-align: right" value="${fieldC11Y}" name="fieldC11Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC11Z" style="text-align: right" size="8" type="text" value="${fieldC11Z}"/>
+       <input style="text-align: right" value="${fieldC11Z}" name="fieldC11Z" size="8" type="text"/>
     </td>
     <td><b class="${_C11}">C11</b></td>
   </tr>
@@ -99,28 +99,28 @@
   <tr>
     <th>Bibliothécaires</th>
     <td>
-       <input name="fieldC12S" style="text-align: right" size="8" type="text" value="${fieldC12S}"/>
+       <input style="text-align: right" value="${fieldC12S}" name="fieldC12S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC12T" style="text-align: right" size="8" type="text" value="${fieldC12T}"/>
+       <input style="text-align: right" value="${fieldC12T}" name="fieldC12T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC12U" style="text-align: right" size="8" type="text" value="${fieldC12U}"/>
+       <input style="text-align: right" value="${fieldC12U}" name="fieldC12U" size="8" type="text"/>
     </td>
     <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="2" checked="${fieldCV_2}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_2}" value="2" type="radio"/>
     </td>
     <td>
-       <input name="fieldC12W" style="text-align: right" size="8" type="text" value="${fieldC12W}"/>
+       <input style="text-align: right" value="${fieldC12W}" name="fieldC12W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC12X" style="text-align: right" size="8" type="text" value="${fieldC12X}"/>
+       <input style="text-align: right" value="${fieldC12X}" name="fieldC12X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC12Y" style="text-align: right" size="8" type="text" value="${fieldC12Y}"/>
+       <input style="text-align: right" value="${fieldC12Y}" name="fieldC12Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC12Z" style="text-align: right" size="8" type="text" value="${fieldC12Z}"/>
+       <input style="text-align: right" value="${fieldC12Z}" name="fieldC12Z" size="8" type="text"/>
     </td>
     <td><b class="${_C12}">C12</b></td>
   </tr>
@@ -128,28 +128,28 @@
   <tr>
     <th>Assistants qualifiés de conservation</th>
     <td>
-       <input name="fieldC13S" style="text-align: right" size="8" type="text" value="${fieldC13S}"/>
+       <input style="text-align: right" value="${fieldC13S}" name="fieldC13S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC13T" style="text-align: right" size="8" type="text" value="${fieldC13T}"/>
+       <input style="text-align: right" value="${fieldC13T}" name="fieldC13T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC13U" style="text-align: right" size="8" type="text" value="${fieldC13U}"/>
+       <input style="text-align: right" value="${fieldC13U}" name="fieldC13U" size="8" type="text"/>
     </td>
    <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="3" checked="${fieldCV_3}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_3}" value="3" type="radio"/>
     </td>
     <td>
-       <input name="fieldC13W" style="text-align: right" size="8" type="text" value="${fieldC13W}"/>
+       <input style="text-align: right" value="${fieldC13W}" name="fieldC13W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC13X" style="text-align: right" size="8" type="text" value="${fieldC13X}"/>
+       <input style="text-align: right" value="${fieldC13X}" name="fieldC13X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC13Y" style="text-align: right" size="8" type="text" value="${fieldC13Y}"/>
+       <input style="text-align: right" value="${fieldC13Y}" name="fieldC13Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC13Z" style="text-align: right" size="8" type="text" value="${fieldC13Z}"/>
+       <input style="text-align: right" value="${fieldC13Z}" name="fieldC13Z" size="8" type="text"/>
     </td>
     <td><b class="${_C13}">C13</b></td>
   </tr>
@@ -157,89 +157,62 @@
   <tr>
     <th>Assistants de conservation</th>
     <td>
-       <input name="fieldC14S" style="text-align: right" size="8" type="text" value="${fieldC14S}"/>
+       <input style="text-align: right" value="${fieldC14S}" name="fieldC14S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC14T" style="text-align: right" size="8" type="text" value="${fieldC14T}"/>
+       <input style="text-align: right" value="${fieldC14T}" name="fieldC14T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC14U" style="text-align: right" size="8" type="text" value="${fieldC14U}"/>
+       <input style="text-align: right" value="${fieldC14U}" name="fieldC14U" size="8" type="text"/>
     </td>
     <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="4" checked="${fieldCV_4}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_4}" value="4" type="radio"/>
     </td>
     <td>
-       <input name="fieldC14W" style="text-align: right" size="8" type="text" value="${fieldC14W}"/>
+       <input style="text-align: right" value="${fieldC14W}" name="fieldC14W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC14X" style="text-align: right" size="8" type="text" value="${fieldC14X}"/>
+       <input style="text-align: right" value="${fieldC14X}" name="fieldC14X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC14Y" style="text-align: right" size="8" type="text" value="${fieldC14Y}"/>
+       <input style="text-align: right" value="${fieldC14Y}" name="fieldC14Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC14Z" style="text-align: right" size="8" type="text" value="${fieldC14Z}"/>
+       <input style="text-align: right" value="${fieldC14Z}" name="fieldC14Z" size="8" type="text"/>
     </td>
     <td><b class="${_C14}">C14</b></td>
   </tr>
 
   <tr>
-    <th>Agents qualifiés du patrimoine</th>
+    <th>Adjoints territorial du patrimoine</th>
     <td>
-       <input name="fieldC15S" style="text-align: right" size="8" type="text" value="${fieldC15S}"/>
+       <input style="text-align: right" value="${fieldC17S}" name="fieldC17S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC15T" style="text-align: right" size="8" type="text" value="${fieldC15T}"/>
+       <input style="text-align: right" value="${fieldC17T}" name="fieldC17T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC15U" style="text-align: right" size="8" type="text" value="${fieldC15U}"/>
+       <input style="text-align: right" value="${fieldC17U}" name="fieldC17U" size="8" type="text"/>
     </td>
    <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="5" checked="${fieldCV_5}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_5}" value="5" type="radio"/>
     </td>
     <td>
-       <input name="fieldC15W" style="text-align: right" size="8" type="text" value="${fieldC15W}"/>
+       <input style="text-align: right" value="${fieldC17W}" name="fieldC17W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC15X" style="text-align: right" size="8" type="text" value="${fieldC15X}"/>
+       <input style="text-align: right" value="${fieldC17X}" name="fieldC17X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC15Y" style="text-align: right" size="8" type="text" value="${fieldC15Y}"/>
+       <input style="text-align: right" value="${fieldC17Y}" name="fieldC17Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC15Z" style="text-align: right" size="8" type="text" value="${fieldC15Z}"/>
+       <input style="text-align: right" value="${fieldC17Z}" name="fieldC17Z" size="8" type="text"/>
     </td>
-    <td><b class="${_C15}">C15</b></td>
+    <td><b class="${_C17}">C17</b></td>
   </tr>
 
-  <tr>
-    <th>Agents du patrimoine</th>
-    <td>
-       <input name="fieldC16S" style="text-align: right" size="8" type="text" value="${fieldC16S}"/>
-    </td>
-    <td>
-       <input name="fieldC16T" style="text-align: right" size="8" type="text" value="${fieldC16T}"/>
-    </td>
-    <td>
-       <input name="fieldC16U" style="text-align: right" size="8" type="text" value="${fieldC16U}"/>
-    </td>
-   <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="6" checked="${fieldCV_6}"/>
-    </td>
-    <td>
-       <input name="fieldC16W" style="text-align: right" size="8" type="text" value="${fieldC16W}"/>
-    </td>
-    <td>
-       <input name="fieldC16X" style="text-align: right" size="8" type="text" value="${fieldC16X}"/>
-    </td>
-    <td>
-       <input name="fieldC16Y" style="text-align: right" size="8" type="text" value="${fieldC16Y}"/>
-    </td>
-    <td>
-       <input name="fieldC16Z" style="text-align: right" size="8" type="text" value="${fieldC16Z}"/>
-    </td>
-    <td><b class="${_C16}">C16</b></td>
-  </tr>
+
 </table>
 
 <h2>C.2 FONCTION PUBLIQUE : AUTRE FILIERE</h2>
@@ -263,28 +236,28 @@
     <th rowspan="3">Personnels d'autres filières (administrative, technique, sociale...)</th>
     <th>Cat. A</th>
     <td>
-       <input name="fieldC21S" style="text-align: right" size="8" type="text" value="${fieldC21S}"/>
+       <input style="text-align: right" value="${fieldC21S}" name="fieldC21S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC21T" style="text-align: right" size="8" type="text" value="${fieldC21T}"/>
+       <input style="text-align: right" value="${fieldC21T}" name="fieldC21T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC21U" style="text-align: right" size="8" type="text" value="${fieldC21U}"/>
+       <input style="text-align: right" value="${fieldC21U}" name="fieldC21U" size="8" type="text"/>
     </td>
    <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="7" checked="${fieldCV_7}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_7}" value="7" type="radio"/>
     </td>
     <td>
-       <input name="fieldC21W" style="text-align: right" size="8" type="text" value="${fieldC21W}"/>
+       <input style="text-align: right" value="${fieldC21W}" name="fieldC21W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC21X" style="text-align: right" size="8" type="text" value="${fieldC21X}"/>
+       <input style="text-align: right" value="${fieldC21X}" name="fieldC21X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC21Y" style="text-align: right" size="8" type="text" value="${fieldC21Y}"/>
+       <input style="text-align: right" value="${fieldC21Y}" name="fieldC21Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC21Z" style="text-align: right" size="8" type="text" value="${fieldC21Z}"/>
+       <input style="text-align: right" value="${fieldC21Z}" name="fieldC21Z" size="8" type="text"/>
     </td>
     <td><b class="${_C21}">C21</b></td>
   </tr>
@@ -292,28 +265,28 @@
   <tr>
     <th>Cat. B</th>
     <td>
-       <input name="fieldC22S" style="text-align: right" size="8" type="text" value="${fieldC22S}"/>
+       <input style="text-align: right" value="${fieldC22S}" name="fieldC22S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC22T" style="text-align: right" size="8" type="text" value="${fieldC22T}"/>
+       <input style="text-align: right" value="${fieldC22T}" name="fieldC22T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC22U" style="text-align: right" size="8" type="text" value="${fieldC22U}"/>
+       <input style="text-align: right" value="${fieldC22U}" name="fieldC22U" size="8" type="text"/>
     </td>
    <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="8" checked="${fieldCV_8}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_8}" value="8" type="radio"/>
     </td>
     <td>
-       <input name="fieldC22W" style="text-align: right" size="8" type="text" value="${fieldC22W}"/>
+       <input style="text-align: right" value="${fieldC22W}" name="fieldC22W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC22X" style="text-align: right" size="8" type="text" value="${fieldC22X}"/>
+       <input style="text-align: right" value="${fieldC22X}" name="fieldC22X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC22Y" style="text-align: right" size="8" type="text" value="${fieldC22Y}"/>
+       <input style="text-align: right" value="${fieldC22Y}" name="fieldC22Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC22Z" style="text-align: right" size="8" type="text" value="${fieldC22Z}"/>
+       <input style="text-align: right" value="${fieldC22Z}" name="fieldC22Z" size="8" type="text"/>
     </td>
     <td><b class="${_C22}">C22</b></td>
   </tr>
@@ -321,28 +294,28 @@
   <tr>
     <th>Cat. C</th>
     <td>
-       <input name="fieldC23S" style="text-align: right" size="8" type="text" value="${fieldC23S}"/>
+       <input style="text-align: right" value="${fieldC23S}" name="fieldC23S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC23T" style="text-align: right" size="8" type="text" value="${fieldC23T}"/>
+       <input style="text-align: right" value="${fieldC23T}" name="fieldC23T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC23U" style="text-align: right" size="8" type="text" value="${fieldC23U}"/>
+       <input style="text-align: right" value="${fieldC23U}" name="fieldC23U" size="8" type="text"/>
     </td>
    <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="9" checked="${fieldCV_9}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_9}" value="9" type="radio"/>
     </td>
     <td>
-       <input name="fieldC23W" style="text-align: right" size="8" type="text" value="${fieldC23W}"/>
+       <input style="text-align: right" value="${fieldC23W}" name="fieldC23W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC23X" style="text-align: right" size="8" type="text" value="${fieldC23X}"/>
+       <input style="text-align: right" value="${fieldC23X}" name="fieldC23X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC23Y" style="text-align: right" size="8" type="text" value="${fieldC23Y}"/>
+       <input style="text-align: right" value="${fieldC23Y}" name="fieldC23Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC23Z" style="text-align: right" size="8" type="text" value="${fieldC23Z}"/>
+       <input style="text-align: right" value="${fieldC23Z}" name="fieldC23Z" size="8" type="text"/>
     </td>
     <td><b class="${_C23}">C23</b></td>
   </tr>
@@ -366,28 +339,28 @@
   <tr>
     <th>Agents non titulaires/emplois non aidés par l'Etat (contractuels, vacataires...)</th>
     <td>
-       <input name="fieldC31S" style="text-align: right" size="8" type="text" value="${fieldC31S}"/>
+       <input style="text-align: right" value="${fieldC31S}" name="fieldC31S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC31T" style="text-align: right" size="8" type="text" value="${fieldC31T}"/>
+       <input style="text-align: right" value="${fieldC31T}" name="fieldC31T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC31U" style="text-align: right" size="8" type="text" value="${fieldC31U}"/>
+       <input style="text-align: right" value="${fieldC31U}" name="fieldC31U" size="8" type="text"/>
     </td>
    <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="10" checked="${fieldCV_10}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_10}" value="10" type="radio"/>
     </td>
     <td>
-       <input name="fieldC31W" style="text-align: right" size="8" type="text" value="${fieldC31W}"/>
+       <input style="text-align: right" value="${fieldC31W}" name="fieldC31W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC31X" style="text-align: right" size="8" type="text" value="${fieldC31X}"/>
+       <input style="text-align: right" value="${fieldC31X}" name="fieldC31X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC31Y" style="text-align: right" size="8" type="text" value="${fieldC31Y}"/>
+       <input style="text-align: right" value="${fieldC31Y}" name="fieldC31Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC31Z" style="text-align: right" size="8" type="text" value="${fieldC31Z}"/>
+       <input style="text-align: right" value="${fieldC31Z}" name="fieldC31Z" size="8" type="text"/>
     </td>
     <td><b class="${_C31}">C31</b></td>
   </tr>
@@ -395,28 +368,28 @@
   <tr>
     <th>dont personnels qualifiés (3)</th>
     <td>
-       <input name="fieldC32S" style="text-align: right" size="8" type="text" value="${fieldC32S}"/>
+       <input style="text-align: right" value="${fieldC32S}" name="fieldC32S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC32T" style="text-align: right" size="8" type="text" value="${fieldC32T}"/>
+       <input style="text-align: right" value="${fieldC32T}" name="fieldC32T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC32U" style="text-align: right" size="8" type="text" value="${fieldC32U}"/>
+       <input style="text-align: right" value="${fieldC32U}" name="fieldC32U" size="8" type="text"/>
     </td>
    <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="11" checked="${fieldCV_11}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_11}" value="11" type="radio"/>
     </td>
     <td>
-       <input name="fieldC32W" style="text-align: right" size="8" type="text" value="${fieldC32W}"/>
+       <input style="text-align: right" value="${fieldC32W}" name="fieldC32W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC32X" style="text-align: right" size="8" type="text" value="${fieldC32X}"/>
+       <input style="text-align: right" value="${fieldC32X}" name="fieldC32X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC32Y" style="text-align: right" size="8" type="text" value="${fieldC32Y}"/>
+       <input style="text-align: right" value="${fieldC32Y}" name="fieldC32Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC32Z" style="text-align: right" size="8" type="text" value="${fieldC32Z}"/>
+       <input style="text-align: right" value="${fieldC32Z}" name="fieldC32Z" size="8" type="text"/>
     </td>
     <td><b class="${_C32}">C32</b></td>
   </tr>
@@ -424,28 +397,28 @@
   <tr>
     <th>Agents non titulaires/ emplois aidés par l'Etat ( C.E.S., C.E.C., C.EJ...)</th>
     <td>
-       <input name="fieldC33S" style="text-align: right" size="8" type="text" value="${fieldC33S}"/>
+       <input style="text-align: right" value="${fieldC33S}" name="fieldC33S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC33T" style="text-align: right" size="8" type="text" value="${fieldC33T}"/>
+       <input style="text-align: right" value="${fieldC33T}" name="fieldC33T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC33U" style="text-align: right" size="8" type="text" value="${fieldC33U}"/>
+       <input style="text-align: right" value="${fieldC33U}" name="fieldC33U" size="8" type="text"/>
     </td>
     <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="12" checked="${fieldCV_12}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_12}" value="12" type="radio"/>
     </td>
     <td>
-       <input name="fieldC33W" style="text-align: right" size="8" type="text" value="${fieldC33W}"/>
+       <input style="text-align: right" value="${fieldC33W}" name="fieldC33W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC33X" style="text-align: right" size="8" type="text" value="${fieldC33X}"/>
+       <input style="text-align: right" value="${fieldC33X}" name="fieldC33X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC33Y" style="text-align: right" size="8" type="text" value="${fieldC33Y}"/>
+       <input style="text-align: right" value="${fieldC33Y}" name="fieldC33Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC33Z" style="text-align: right" size="8" type="text" value="${fieldC33Z}"/>
+       <input style="text-align: right" value="${fieldC33Z}" name="fieldC33Z" size="8" type="text"/>
     </td>
     <td><b class="${_C33}">C33</b></td>
   </tr>
@@ -453,28 +426,28 @@
   <tr>
     <th>dont personnels qualifiés</th>
     <td>
-       <input name="fieldC34S" style="text-align: right" size="8" type="text" value="${fieldC34S}"/>
+       <input style="text-align: right" value="${fieldC34S}" name="fieldC34S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC34T" style="text-align: right" size="8" type="text" value="${fieldC34T}"/>
+       <input style="text-align: right" value="${fieldC34T}" name="fieldC34T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC34U" style="text-align: right" size="8" type="text" value="${fieldC34U}"/>
+       <input style="text-align: right" value="${fieldC34U}" name="fieldC34U" size="8" type="text"/>
     </td>
    <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="13" checked="${fieldCV_13}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_13}" value="13" type="radio"/>
     </td>
     <td>
-       <input name="fieldC34W" style="text-align: right" size="8" type="text" value="${fieldC34W}"/>
+       <input style="text-align: right" value="${fieldC34W}" name="fieldC34W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC34X" style="text-align: right" size="8" type="text" value="${fieldC34X}"/>
+       <input style="text-align: right" value="${fieldC34X}" name="fieldC34X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC34Y" style="text-align: right" size="8" type="text" value="${fieldC34Y}"/>
+       <input style="text-align: right" value="${fieldC34Y}" name="fieldC34Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC34Z" style="text-align: right" size="8" type="text" value="${fieldC34Z}"/>
+       <input style="text-align: right" value="${fieldC34Z}" name="fieldC34Z" size="8" type="text"/>
     </td>
     <td><b class="${_C34}">C34</b></td>
   </tr>
@@ -499,26 +472,26 @@
   <tr>
     <th>Bénévoles qualifiés (3)</th>
     <td>
-       <input name="fieldC41S" style="text-align: right" size="8" type="text" value="${fieldC41S}"/>
+       <input style="text-align: right" value="${fieldC41S}" name="fieldC41S" size="8" type="text"/>
     </td>
     <td>
     </td>
     <td>
-       <input name="fieldC41U" style="text-align: right" size="8" type="text" value="${fieldC41U}"/>
+       <input style="text-align: right" value="${fieldC41U}" name="fieldC41U" size="8" type="text"/>
     </td>
     <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="14" checked="${fieldCV_14}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_14}" value="14" type="radio"/>
     </td>
     <td>
-       <input name="fieldC41W" style="text-align: right" size="8" type="text" value="${fieldC41W}"/>
+       <input style="text-align: right" value="${fieldC41W}" name="fieldC41W" size="8" type="text"/>
     </td>
     <td>
     </td>
     <td>
-       <input name="fieldC41Y" style="text-align: right" size="8" type="text" value="${fieldC41Y}"/>
+       <input style="text-align: right" value="${fieldC41Y}" name="fieldC41Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC41Z" style="text-align: right" size="8" type="text" value="${fieldC41Z}"/>
+       <input style="text-align: right" value="${fieldC41Z}" name="fieldC41Z" size="8" type="text"/>
     </td>
     <td><b class="${_C41}">C41</b></td>
   </tr>
@@ -526,20 +499,20 @@
   <tr>
     <th>Bénévoles non formés</th>
     <td>
-       <input name="fieldC42S" style="text-align: right" size="8" type="text" value="${fieldC42S}"/>
+       <input style="text-align: right" value="${fieldC42S}" name="fieldC42S" size="8" type="text"/>
     </td>
     <td></td>
     <td></td>
     <td style="padding: 0px; text-align: center">
-           <input name="fieldCV" style="font-size: 8pt; border:0px" type="radio" value="15" checked="${fieldCV_15}"/>
+           <input name="fieldCV" style="font-size: 8pt; border:0px" checked="${fieldCV_15}" value="15" type="radio"/>
     </td>
     <td>
-       <input name="fieldC42W" style="text-align: right" size="8" type="text" value="${fieldC42W}"/>
+       <input style="text-align: right" value="${fieldC42W}" name="fieldC42W" size="8" type="text"/>
     </td>
     <td></td>
     <td></td>
     <td>
-       <input name="fieldC42Z" style="text-align: right" size="8" type="text" value="${fieldC42Z}"/>
+       <input style="text-align: right" value="${fieldC42Z}" name="fieldC42Z" size="8" type="text"/>
     </td>
     <td><b class="${_C42}">C42</b></td>
   </tr>
@@ -562,26 +535,26 @@
   <tr>
     <th><b>TOTAL (C11 à C42)</b> </th>
     <td>
-       <input name="fieldC43S" style="text-align: right" size="8" type="text" value="${fieldC43S}"/>
+       <input style="text-align: right" value="${fieldC43S}" name="fieldC43S" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC43T" style="text-align: right" size="8" type="text" value="${fieldC43T}"/>
+       <input style="text-align: right" value="${fieldC43T}" name="fieldC43T" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC43U" style="text-align: right" size="8" type="text" value="${fieldC43U}"/>
+       <input style="text-align: right" value="${fieldC43U}" name="fieldC43U" size="8" type="text"/>
     </td>
     <td></td>
     <td>
-       <input name="fieldC43W" style="text-align: right" size="8" type="text" value="${fieldC43W}"/>
+       <input style="text-align: right" value="${fieldC43W}" name="fieldC43W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC43X" style="text-align: right" size="8" type="text" value="${fieldC43X}"/>
+       <input style="text-align: right" value="${fieldC43X}" name="fieldC43X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC43Y" style="text-align: right" size="8" type="text" value="${fieldC43Y}"/>
+       <input style="text-align: right" value="${fieldC43Y}" name="fieldC43Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldC43Z" style="text-align: right" size="8" type="text" value="${fieldC43Z}"/>
+       <input style="text-align: right" value="${fieldC43Z}" name="fieldC43Z" size="8" type="text"/>
     </td>
     <td><b class="${_C43}">C43</b></td>
   </tr>
@@ -601,7 +574,7 @@
   <tr>
     <th>NOMBRE TOTAL DE PERSONNES AYANT SUIVI UNE FIA (formation initiale d'application)</th>
     <td>
-       <input name="fieldC51Z" style="text-align: right" size="8" type="text" value="${fieldC51Z}"/>
+       <input style="text-align: right" value="${fieldC51Z}" name="fieldC51Z" size="8" type="text"/>
     </td>
     <td><b class="${_C51}">C51</b></td>
   </tr>

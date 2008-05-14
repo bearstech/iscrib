@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
    <title>Aide</title>
-
+    
     <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
 
   </head>
@@ -18,7 +18,7 @@
 <dl class="description">
 <dt>
 <ul>
-<li><u>Services pour les handicapés</u> (H15): sur les infrastructures (rampes d'accès ; ouverture automatique ; bornes auditives , tactiles ) ; sur les collections (documents adaptés, par exemple, livre en braille ou visionneuse).</li>
+<li><u>Services pour les handicapés</u> (H15): sur les infrastructures (rampes d'accès ; ouverture automatique ; bornes auditives , tactiles ) ; sur les collections (documents adaptés, par exemple, livre en braille ou visionneuse); sur les services (ateliers pédagogiques, visites, documentations adaptés, prêt de matériel, accueil de groupes).</li>
 <li><u>Prêt Inter Bibliothèques</u> (H16 à H20): ne pas compter les échanges à l'intérieur d'un réseau intercommunal ou avec la BDP.</li>
 </ul>
 </dt>
@@ -32,7 +32,7 @@
 <li><u>Les sessions internet </u>(H38): c'est à dire l'accès d'un usager à internet par le biais d'une station de travail, et une connexion effectuée à une base de données ou à un catalogue interrogeable  en ligne par le public.
 On intégrera dans ces sessions les visites virtuelles, c'est à dire les recherches faites par un usager anonyme sur le site Web de la bibliothèque.
 On pourra se référer sur cette question au rapport technique de l'ISO (International Standard Organization), indicateurs de performance pour les services électroniques des bibliothèques, consultable à l'AFNOR.
-H40 : on entend par procédés techniques adaptés le respect des normes internationales d'accessibilité des sites (www.accessiweb.org).
+H39 : on entend par procédés techniques adaptés le respect des normes internationales d'accessibilité des sites (www.accessiweb.org).
 </li>
 
 </ul>

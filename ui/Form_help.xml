@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://xml.itools.org/namespaces/stl">
+<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <title>Aide</title>
-
+    
     <link type="text/css" rel="stylesheet" href="main.css"/>
     <link type="text/css" rel="stylesheet" href="content.css"/>
     <link type="text/css" rel="stylesheet" href="form.css"/>
@@ -14,7 +14,8 @@
 
 <b>Bonjour,
 <br/><br/>
-Comme chaque année vous avez à remplir le questionnaire national d'activité de votre bibliothèque. A partir de cette année plusieurs changements apparaissent : sur le contenu et sur les modalités de son remplissage.
+Comme chaque année vous avez à remplir le questionnaire national d'activité de votre bibliothèque.
+Vous noterez que pour ce rapport 2007 il vous est demandé de renseigner de nouvelles questions se rapportant principalement à la prise en compte du handicap (accessibilité des équipements) et à la coopération (différents types de partenariats). Ces questions participent de l'effort commun à accomplir pour répondre, au plus près des directives nationales et des problématiques régionales, à la prise en compte des publics diversifiés.
 Merci de prendre connaissance des éléments d'information suivants, propres nous l'espérons, à bien vous guider.
 </b>
 <br/>
@@ -67,10 +68,17 @@ soit cliquer sur l'onglet Impression du formulaire pour imprimer l'ensemble du r
 <dt> Quelques conseils : </dt>
 <dt><ul>
 <li> Sous Firefox/Mozilla : avant d'imprimer cocher l'option "Imprimer le fond de page" et "Adapter à la taille de la page" dans "Mise en page" </li>
-<li> Sous Internet Explorer : avant d'imprimer, paramétrer votre navigateur : Outils, Options Internet, Onglet Avancé, cocher Imprimer les couleurs et les images d'arriere-plan. Réduire les marges. </li>
+<li> Sous Internet Explorer : avant d'imprimer, paramétrer votre navigateur : Outils, Options Internet, Onglet Avancé, cocher Imprimer les couleurs et les images d'arrière-plan. Réduire les marges. </li>
 </ul>
 </dt>
 </dl>
 
+<h4>Enregistrer et traiter vos données</h4>
+<dl class="description">
+<dt>Nous vous conseillons, une fois votre formulaire rempli et adressé, de procéder à un enregistrement local - comme un quelconque document bureautique. Ceci vous permettra en cas de diffusion ultérieure ou d'erreur à rectifier de disposer d'un document intègre.
+Par ailleurs, SCRIB vous offre la possibilité d'exporter les données que vous venez de renseigner sur vos propres applications bureautiques. Pour cela il vous suffit de cliquer sur l'onglet "Export vers la bibliothèque" et d'activer le bouton "exporter en format csv", puis de vous laisser guider et de suivre les procédures classiques d'enregistrement.
+Vous obtiendrez alors un résultat semblable à une feuille de calcul d'un tableur ordinaire qui vous permettra de procéder aux calculs offerts part ce type d'applicatifs.
+</dt>
+</dl>
 </BODY>
 </html>

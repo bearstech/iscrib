@@ -13,8 +13,8 @@
     </stl:block>
   </div>
 
-<h1>D- COLLECTIONS au 31 DECEMBRE 2005
-   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help4', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">?</a>
+<h1>D- COLLECTIONS au 31 DECEMBRE 2007
+   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help4', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
 </h1>
 <table>
   <tr>
@@ -40,13 +40,13 @@
   <tr>
     <th>Nombre de livres en libre accès pour le prêt</th>
     <td>
-       <input name="fieldD11X" style="text-align: right" size="8" type="text" value="${fieldD11X}"/>
+       <input style="text-align: right" value="${fieldD11X}" name="fieldD11X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD11Y" style="text-align: right" size="8" type="text" value="${fieldD11Y}"/>
+       <input style="text-align: right" value="${fieldD11Y}" name="fieldD11Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD11Z" style="text-align: right" size="8" type="text" value="${fieldD11Z}"/>
+       <input style="text-align: right" value="${fieldD11Z}" name="fieldD11Z" size="8" type="text"/>
     </td>
     <td><b class="${_D11}">D11</b></td>
   </tr>
@@ -54,13 +54,13 @@
   <tr>
     <th>Nombre de livres en libre accès réservés a la consultation sur place</th>
     <td>
-       <input name="fieldD12X" style="text-align: right" size="8" type="text" value="${fieldD12X}"/>
+       <input style="text-align: right" value="${fieldD12X}" name="fieldD12X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD12Y" style="text-align: right" size="8" type="text" value="${fieldD12Y}"/>
+       <input style="text-align: right" value="${fieldD12Y}" name="fieldD12Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD12Z" style="text-align: right" size="8" type="text" value="${fieldD12Z}"/>
+       <input style="text-align: right" value="${fieldD12Z}" name="fieldD12Z" size="8" type="text"/>
     </td>
     <td><b class="${_D12}">D12</b></td>
   </tr>
@@ -68,13 +68,13 @@
   <tr>
     <th>Nombre total de livres en libre accès  (D11+D12)</th>
     <td>
-       <input name="fieldD13X" style="text-align: right" size="8" type="text" value="${fieldD13X}"/>
+       <input style="text-align: right" value="${fieldD13X}" name="fieldD13X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD13Y" style="text-align: right" size="8" type="text" value="${fieldD13Y}"/>
+       <input style="text-align: right" value="${fieldD13Y}" name="fieldD13Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD13Z" style="text-align: right" size="8" type="text" value="${fieldD13Z}"/>
+       <input style="text-align: right" value="${fieldD13Z}" name="fieldD13Z" size="8" type="text"/>
     </td>
     <td><b class="${_D13}">D13</b></td>
   </tr>
@@ -82,13 +82,13 @@
   <tr>
     <th>Livres non patrimoniaux en magasin</th>
     <td>
-       <input name="fieldD14X" style="text-align: right" size="8" type="text" value="${fieldD14X}"/>
+       <input style="text-align: right" value="${fieldD14X}" name="fieldD14X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD14Y" style="text-align: right" size="8" type="text" value="${fieldD14Y}"/>
+       <input style="text-align: right" value="${fieldD14Y}" name="fieldD14Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD14Z" style="text-align: right" size="8" type="text" value="${fieldD14Z}"/>
+       <input style="text-align: right" value="${fieldD14Z}" name="fieldD14Z" size="8" type="text"/>
     </td>
     <td><b class="${_D14}">D14</b></td>
   </tr>
@@ -96,13 +96,13 @@
   <tr>
     <th><b>TOTAL  (D13 + D14)</b></th>
     <td>
-       <input name="fieldD15X" style="text-align: right" size="8" type="text" value="${fieldD15X}"/>
+       <input style="text-align: right" value="${fieldD15X}" name="fieldD15X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD15Y" style="text-align: right" size="8" type="text" value="${fieldD15Y}"/>
+       <input style="text-align: right" value="${fieldD15Y}" name="fieldD15Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD15Z" style="text-align: right" size="8" type="text" value="${fieldD15Z}"/>
+       <input style="text-align: right" value="${fieldD15Z}" name="fieldD15Z" size="8" type="text"/>
     </td>
     <td><b class="${_D15}">D15</b></td>
   </tr>
@@ -110,13 +110,13 @@
   <tr>
     <th>Vidéogrammes</th>
     <td>
-       <input name="fieldD16X" style="text-align: right" size="8" type="text" value="${fieldD16X}"/>
+       <input style="text-align: right" value="${fieldD16X}" name="fieldD16X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD16Y" style="text-align: right" size="8" type="text" value="${fieldD16Y}"/>
+       <input style="text-align: right" value="${fieldD16Y}" name="fieldD16Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD16Z" style="text-align: right" size="8" type="text" value="${fieldD16Z}"/>
+       <input style="text-align: right" value="${fieldD16Z}" name="fieldD16Z" size="8" type="text"/>
     </td>
     <td><b class="${_D16}">D16</b></td>
   </tr>
@@ -124,13 +124,13 @@
   <tr>
     <th>Phonogrammes</th>
     <td>
-       <input name="fieldD17X" style="text-align: right" size="8" type="text" value="${fieldD17X}"/>
+       <input style="text-align: right" value="${fieldD17X}" name="fieldD17X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD17Y" style="text-align: right" size="8" type="text" value="${fieldD17Y}"/>
+       <input style="text-align: right" value="${fieldD17Y}" name="fieldD17Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD17Z" style="text-align: right" size="8" type="text" value="${fieldD17Z}"/>
+       <input style="text-align: right" value="${fieldD17Z}" name="fieldD17Z" size="8" type="text"/>
     </td>
     <td><b class="${_D17}">D17</b></td>
   </tr>
@@ -138,13 +138,13 @@
   <tr>
     <th>Cédéroms sauf périodiques</th>
     <td>
-       <input name="fieldD18X" style="text-align: right" size="8" type="text" value="${fieldD18X}"/>
+       <input style="text-align: right" value="${fieldD18X}" name="fieldD18X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD18Y" style="text-align: right" size="8" type="text" value="${fieldD18Y}"/>
+       <input style="text-align: right" value="${fieldD18Y}" name="fieldD18Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD18Z" style="text-align: right" size="8" type="text" value="${fieldD18Z}"/>
+       <input style="text-align: right" value="${fieldD18Z}" name="fieldD18Z" size="8" type="text"/>
     </td>
     <td><b class="${_D18}">D18</b></td>
   </tr>
@@ -158,7 +158,7 @@
   <tr>
     <th>Cartes et plans</th>
     <td>
-       <input name="fieldD19" style="text-align: right" size="8" type="text" value="${fieldD19}"/>
+       <input style="text-align: right" value="${fieldD19}" name="fieldD19" size="8" type="text"/>
     </td>
     <td><b class="${_D19}">D19</b></td>
   </tr>
@@ -166,7 +166,7 @@
   <tr>
     <th>Partitions</th>
     <td>
-       <input name="fieldD20" style="text-align: right" size="8" type="text" value="${fieldD20}"/>
+       <input style="text-align: right" value="${fieldD20}" name="fieldD20" size="8" type="text"/>
     </td>
     <td><b class="${_D20}">D20</b></td>
   </tr>
@@ -174,7 +174,7 @@
   <tr>
     <th>Documents graphiques</th>
     <td>
-       <input name="fieldD21" style="text-align: right" size="8" type="text" value="${fieldD21}"/>
+       <input style="text-align: right" value="${fieldD21}" name="fieldD21" size="8" type="text"/>
     </td>
     <td><b class="${_D21}">D21</b></td>
   </tr>
@@ -182,7 +182,7 @@
   <tr>
     <th>Autres</th>
     <td>
-       <input name="fieldD22" style="text-align: right" size="8" type="text" value="${fieldD22}"/>
+       <input style="text-align: right" value="${fieldD22}" name="fieldD22" size="8" type="text"/>
     </td>
     <td><b class="${_D22}">D22</b></td>
   </tr>
@@ -190,7 +190,7 @@
   <tr>
     <th>Documents numériques</th>
     <td>
-       <input name="fieldD23" style="text-align: right" size="8" type="text" value="${fieldD23}"/>
+       <input style="text-align: right" value="${fieldD23}" name="fieldD23" size="8" type="text"/>
     </td>
     <td><b class="${_D23}">D23</b></td>
   </tr>
@@ -198,11 +198,12 @@
   <tr>
     <th>Bases de données</th>
     <td>
-       <input name="fieldD24" style="text-align: right" size="8" type="text" value="${fieldD24}"/>
+       <input style="text-align: right" value="${fieldD24}" name="fieldD24" size="8" type="text"/>
     </td>
     <td><b class="${_D24}">D24</b></td>
   </tr>
 </table>
+
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -212,26 +213,50 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-  <td></td>
-    <th style="text-align: center">ADULTES X</th>
-    <th style="text-align: center">ENFANTS Y</th>
-    <th style="text-align: center">TOTAL   Z</th>
-  <td></td>
+    <th><i>dont documents imprimés en gros caractères</i></th>
+    <td>
+       <input style="text-align: right" value="${fieldD26X}" name="fieldD26X" size="8" type="text"/>
+    </td>
+    <td>
+       <input style="text-align: right" value="${fieldD26Y}" name="fieldD26Y" size="8" type="text"/>
+    </td>
+    <td>
+       <input style="text-align: right" value="${fieldD26Z}" name="fieldD26Z" size="8" type="text"/>
+    </td>
+    <td><b class="${_D26}">D26</b></td>
   </tr>
+
   <tr>
-    <th>Dont documents adaptés aux personnes handicapées (braille, livres en gros caractères, livres parlés,...)</th>
+    <th><i>dont documents adaptés aux personnes handicapées à l'exception des documents en gros caractères</i></th>
     <td>
-       <input name="fieldD25X" style="text-align: right" size="8" type="text" value="${fieldD25X}"/>
+       <input style="text-align: right" value="${fieldD27X}" name="fieldD27X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD25Y" style="text-align: right" size="8" type="text" value="${fieldD25Y}"/>
+       <input style="text-align: right" value="${fieldD27Y}" name="fieldD27Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldD25Z" style="text-align: right" size="8" type="text" value="${fieldD25Z}"/>
+       <input style="text-align: right" value="${fieldD27Z}" name="fieldD27Z" size="8" type="text"/>
     </td>
-    <td><b class="${_D25}">D25</b></td>
+    <td><b class="${_D27}">D27</b></td>
   </tr>
+
 </table>
+
+<table width="100%">
+  <colgroup>
+    <col width="83%"/>
+    <col width="12%"/>
+    <col width="5%"/>
+   </colgroup>
+  <tr>
+    <th style="background-color:#FFE15C"><b>TOTAL (D15 à D24)</b> </th>
+    <td>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldD28}" name="fieldD28" size="8" type="text"/>
+    </td>
+    <td style="background-color:#FFE15C"><b class="${_D28}">D28</b></td>
+  </tr>
+  </table>
+
 <h2>D.3 DOCUMENTS PATRIMONIAUX (hors périodiques)</h2>
 <table width="100%">
   <colgroup>
@@ -242,7 +267,7 @@
   <tr>
     <th>Livres imprimés</th>
     <td>
-       <input name="fieldD31" style="text-align: right" size="8" type="text" value="${fieldD31}"/>
+       <input style="text-align: right" value="${fieldD31}" name="fieldD31" size="8" type="text"/>
     </td>
     <td><b class="${_D31}">D31</b></td>
   </tr>
@@ -250,7 +275,7 @@
   <tr>
     <th>Manuscrits</th>
     <td>
-       <input name="fieldD32" style="text-align: right" size="8" type="text" value="${fieldD32}"/>
+       <input style="text-align: right" value="${fieldD32}" name="fieldD32" size="8" type="text"/>
     </td>
     <td><b class="${_D32}">D32</b></td>
   </tr>
@@ -258,7 +283,7 @@
   <tr>
     <th>Documents graphiques, cartes et plans</th>
     <td>
-       <input name="fieldD33" style="text-align: right" size="8" type="text" value="${fieldD33}"/>
+       <input style="text-align: right" value="${fieldD33}" name="fieldD33" size="8" type="text"/>
     </td>
     <td><b class="${_D33}">D33</b></td>
   </tr>
@@ -266,7 +291,7 @@
   <tr>
     <th>Documents numériques</th>
     <td>
-       <input name="fieldD34" style="text-align: right" size="8" type="text" value="${fieldD34}"/>
+       <input style="text-align: right" value="${fieldD34}" name="fieldD34" size="8" type="text"/>
     </td>
     <td><b class="${_D34}">D34</b></td>
   </tr>
@@ -274,7 +299,7 @@
   <tr>
     <th>Bases de données</th>
     <td>
-       <input name="fieldD35" style="text-align: right" size="8" type="text" value="${fieldD35}"/>
+       <input style="text-align: right" value="${fieldD35}" name="fieldD35" size="8" type="text"/>
     </td>
     <td><b class="${_D35}">D35</b></td>
   </tr>
@@ -282,17 +307,17 @@
   <tr>
     <th>Autres : monnaies, etc.</th>
     <td>
-       <input name="fieldD36" style="text-align: right" size="8" type="text" value="${fieldD36}"/>
+       <input style="text-align: right" value="${fieldD36}" name="fieldD36" size="8" type="text"/>
     </td>
     <td><b class="${_D36}">D36</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL (D31 à D36)</b></th>
+    <th style="background-color:#FFE15C"><b>TOTAL (D31 à D36)</b></th>
     <td>
-       <input name="fieldD37" style="text-align: right" size="8" type="text" value="${fieldD37}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldD37}" name="fieldD37" size="8" type="text"/>
     </td>
-    <td><b class="${_D37}">D37</b></td>
+    <td style="background-color:#FFE15C"><b class="${_D37}">D37</b></td>
   </tr>
 </table>
 <h2>D.4 PÉRIODIQUES</h2>
@@ -305,7 +330,7 @@
   <tr>
     <th>Nombre de titres de périodiques conservés (titres morts ou courants) imprimés</th>
     <td>
-       <input name="fieldD41" style="text-align: right" size="8" type="text" value="${fieldD41}"/>
+       <input style="text-align: right" value="${fieldD41}" name="fieldD41" size="8" type="text"/>
     </td>
     <td><b class="${_D41}">D41</b></td>
   </tr>
@@ -313,7 +338,7 @@
   <tr>
     <th>Dont nombre de périodiques patrimoniaux</th>
     <td>
-       <input name="fieldD42" style="text-align: right" size="8" type="text" value="${fieldD42}"/>
+       <input style="text-align: right" value="${fieldD42}" name="fieldD42" size="8" type="text"/>
     </td>
     <td><b class="${_D42}">D42</b></td>
   </tr>
@@ -321,17 +346,17 @@
   <tr>
     <th>Nombre de titres de périodiques conservés (titres morts ou courants) sur Cédéroms ou en ligne</th>
     <td>
-       <input name="fieldD43" style="text-align: right" size="8" type="text" value="${fieldD43}"/>
+       <input style="text-align: right" value="${fieldD43}" name="fieldD43" size="8" type="text"/>
     </td>
     <td><b class="${_D43}">D43</b></td>
   </tr>
 
   <tr>
-    <th>Nombre total de titres de périodiques conservés ou non conservés</th>
+    <th style="background-color:#FFE15C">Nombre total de titres de périodiques conservés ou non conservés</th>
     <td>
-       <input name="fieldD44" style="text-align: right" size="8" type="text" value="${fieldD44}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldD44}" name="fieldD44" size="8" type="text"/>
     </td>
-    <td><b class="${_D44}">D44</b></td>
+    <td style="background-color:#FFE15C"><b class="${_D44}">D44</b></td>
   </tr>
 </table>
 </form>

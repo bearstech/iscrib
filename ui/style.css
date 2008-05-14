@@ -63,7 +63,7 @@ body {
   padding: 0px;
 }
 
-/* Couleur fond RGB(145,191,255) au lieu de 
+/* Couleur fond RGB(145,191,255) au lieu de
     background: url("images/background.png") rgb(202,220,225) fixed repeat-y;
    Couleur onglet RGB(202,220,255) au lieu de #ddddbb;
 */
@@ -74,7 +74,7 @@ body {
 }
 
 
-/* 
+/*
 ** Style sheet for CSS2-capable browsers.
 
 Three main colors:
@@ -83,6 +83,71 @@ light blue:   #333399
 light grey:   #d0d0d0
 */
 
+p {
+    font-size: 11px;
+    /*font-family: verdana, arial, helvetica, sans-serif;*/
+    color: #330;
+    line-height: 15px;
+    white-space: nowrap;
+}
+
+h1 {
+  font-size : 20px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 18px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 14px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-weight: bold;
+}
+
+td, th {
+    font-size : 11px;
+}
+
+form {
+  border: none;
+}
+
+textarea {
+  /* Small cosmetic hack which makes textarea gadgets look nicer.*/
+  font: bold 10px Verdana, Helvetica, Arial, sans-serif;
+  border: 1px solid rgb(102, 102, 51);
+  width: 100%;
+  color: black;
+  background-color: white;
+}
+
+input {
+  font: bold 10px Verdana, Helvetica, Arial, sans-serif;
+  border: 1px solid rgb(102, 102, 51);
+  color: black;
+  background-color: white;
+  vertical-align: middle;
+  margin-bottom: 1px; /* IE bug fix */
+}
+
+input.invalid {
+  border: 1px solid rgb(255, 0, 0);
+}
+
+select {
+  font: bold 10px Verdana, Helvetica, Arial, sans-serif;
+  border: 1px solid rgb(102, 102, 51);
+  vertical-align: middle;
+}
+
+optgroup {
+  font: bold 10px Verdana, Helvetica, Arial, sans-serif;
+}
 
 table td b.missing_field{
   border: 1px solid SandyBrown;
@@ -109,20 +174,20 @@ table.Check {
 .Check td.emptyCheck {
   height: 2em;
   font: bold 1.0em Arial, sans-serif;
-  color: green; 
+  color: green;
 }
 
 .Check td.failCheck {
   height: 2em;
   font: bold 1.0em Arial, sans-serif;
-  color: red; 
+  color: red;
 }
 
 .Check td.okCheck {
   height: 2em;
   width: 50px;
   font: bold 1.0em Arial, sans-serif;
-  color: blue; 
+  color: blue;
 }
 
 .Check td.textCheck {

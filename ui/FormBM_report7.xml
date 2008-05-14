@@ -14,35 +14,35 @@
   </div>
 
  <h1>G- ACTIVITÉS DE LA BIBLIOTHÈQUE
-   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help7', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">?</a>
+   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help7', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
 </h1>
 <h2>G.1 OUVERTURE À TOUS LES PUBLICS(hors accueils de publics spécifiques et de classes)</h2>
 <table width="100%">
 <colgroup>
-    <col width="45%"/>
-    <col width="50%"/>
+    <col width="41%"/>
+    <col width="54%"/>
     <col width="5%"/>
    </colgroup>
 
   <tr>
-    <th>Jours d'ouverture par semaine</th>
+    <th style="background-color:#FFE15C">Jours d'ouverture par semaine</th>
     <td>
-      Lundi <input name="fieldG11" style="font-size: 8pt;  border:0px" type="checkbox" value="1" checked="${fieldG11_1}"/>
-      Mardi <input name="fieldG11" style="font-size: 8pt;  border:0px" type="checkbox" value="2" checked="${fieldG11_2}"/>
-      Mercredi <input name="fieldG11" style="font-size: 8pt;  border:0px" type="checkbox" value="3" checked="${fieldG11_3}"/>
-      Jeudi <input name="fieldG11" style="font-size: 8pt;  border:0px" type="checkbox" value="4" checked="${fieldG11_4}"/>
-      Vendredi <input name="fieldG11" style="font-size: 8pt;  border:0px" type="checkbox" value="5" checked="${fieldG11_5}"/>
-      Samedi <input name="fieldG11" style="font-size: 8pt;  border:0px" type="checkbox" value="6" checked="${fieldG11_6}"/>
-      Dimanche <input name="fieldG11" style="font-size: 8pt;  border:0px" type="checkbox" value="7" checked="${fieldG11_7}"/>
+      Lundi <input name="fieldG11" style="font-size: 8pt;  border:0px;background-color:#FFE15C" checked="${fieldG11_1}" value="1" type="checkbox"/>
+      Mardi <input name="fieldG11" style="font-size: 8pt;  border:0px;background-color:#FFE15C" checked="${fieldG11_2}" value="2" type="checkbox"/>
+      Mercredi <input name="fieldG11" style="font-size: 8pt;  border:0px;background-color:#FFE15C" checked="${fieldG11_3}" value="3" type="checkbox"/>
+      Jeudi <input name="fieldG11" style="font-size: 8pt;  border:0px;background-color:#FFE15C" checked="${fieldG11_4}" value="4" type="checkbox"/>
+      Vendredi <input name="fieldG11" style="font-size: 8pt;  border:0px;background-color:#FFE15C" checked="${fieldG11_5}" value="5" type="checkbox"/>
+      Samedi <input name="fieldG11" style="font-size: 8pt;  border:0px;background-color:#FFE15C" checked="${fieldG11_6}" value="6" type="checkbox"/>
+      Dimanche <input name="fieldG11" style="font-size: 8pt;  border:0px;background-color:#FFE15C" checked="${fieldG11_7}" value="7" type="checkbox"/>
     </td>
-    <td><b class="${_G11}">G11</b></td>
+    <td style="background-color:#FFE15C"><b class="${_G11}">G11</b></td>
   </tr>
   </table>
 <table width="100%">
   <colgroup>
-    <col width="45%"/>
-    <col width="25%"/>
-    <col width="25%"/>
+    <col width="41%"/>
+    <col width="27%"/>
+    <col width="27%"/>
     <col width="5%"/>
    </colgroup>
   <!--tr>
@@ -52,23 +52,23 @@
   <td></td>
   </tr-->
   <tr>
-    <th>Nombre d'heures d'ouverture par semaine</th>
+    <th style="background-color:#FFE15C">Nombre d'heures d'ouverture par semaine</th>
     <td>
-       <input name="fieldG12H" style="text-align: right" size="8" type="text" value="${fieldG12H}"/>  Heures
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldG12H}" name="fieldG12H" size="8" type="text"/>  Heures
     </td>
     <td>
-       <input name="fieldG12M" style="text-align: right" size="8" type="text" value="${fieldG12M}"/>  Minutes
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldG12M}" name="fieldG12M" size="8" type="text"/>  Minutes
     </td>
-    <td><b class="${_G12}">G12</b></td>
+    <td style="background-color:#FFE15C"><b class="${_G12}">G12</b></td>
   </tr>
 
   <tr>
     <th>Nombre d'heures d'ouverture dans l'année</th>
     <td>
-       <input name="fieldG13H" style="text-align: right" size="8" type="text" value="${fieldG13H}"/>  Heures
+       <input style="text-align: right" value="${fieldG13H}" name="fieldG13H" size="8" type="text"/>  Heures
     </td>
      <td>
-       <input name="fieldG13M" style="text-align: right" size="8" type="text" value="${fieldG13M}"/>  Minutes
+       <input style="text-align: right" value="${fieldG13M}" name="fieldG13M" size="8" type="text"/>  Minutes
     </td>
     <td><b class="${_G13}">G13</b></td>
   </tr>
@@ -76,7 +76,8 @@
 <h2>G.2/3 INSCRITS ET EMPRUNTEURS</h2>
 <table width="100%">
   <colgroup>
-    <col width="59%"/>
+    <col width="30%"/>
+    <col width="29%"/>
     <col width="9%"/>
     <col width="9%"/>
     <col width="9%"/>
@@ -84,7 +85,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-  <th>Inscrits actifs </th>
+  <th colspan="2">Inscrits actifs </th>
     <th style="text-align: center">HOMMES  W</th>
     <th style="text-align: center">FEMMES  X</th>
     <th style="text-align: center">TOTAL   Y </th>
@@ -92,103 +93,105 @@
   <td></td>
   </tr>
   <tr>
-    <th>Age non déclaré</th>
+    <th colspan="2">Age non déclaré</th>
     <td>
-       <input name="fieldG20W" style="text-align: right" size="8" type="text" value="${fieldG20W}"/>
+       <input style="text-align: right" value="${fieldG20W}" name="fieldG20W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG20X" style="text-align: right" size="8" type="text" value="${fieldG20X}"/>
+       <input style="text-align: right" value="${fieldG20X}" name="fieldG20X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG20Y" style="text-align: right" size="8" type="text" value="${fieldG20Y}"/>
+       <input style="text-align: right" value="${fieldG20Y}" name="fieldG20Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG20Z" style="text-align: right" size="8" type="text" value="${fieldG20Z}"/>
+       <input style="text-align: right" value="${fieldG20Z}" name="fieldG20Z" size="8" type="text"/>
     </td>
     <td><b class="${_G20}">G20</b></td>
   </tr>
   <tr>
-    <th>ENFANTS 0-14 ans</th>
+    <th style="background-color:#FFE15C">ENFANTS</th>
+    <td style="background-color:#FFE15C">0-14 ans</td>
     <td>
-       <input name="fieldG21W" style="text-align: right" size="8" type="text" value="${fieldG21W}"/>
+       <input style="text-align: right" value="${fieldG21W}" name="fieldG21W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG21X" style="text-align: right" size="8" type="text" value="${fieldG21X}"/>
+       <input style="text-align: right" value="${fieldG21X}" name="fieldG21X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG21Y" style="text-align: right" size="8" type="text" value="${fieldG21Y}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldG21Y}" name="fieldG21Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG21Z" style="text-align: right" size="8" type="text" value="${fieldG21Z}"/>
+       <input style="text-align: right" value="${fieldG21Z}" name="fieldG21Z" size="8" type="text"/>
     </td>
-    <td><b class="${_G21}">G21</b></td>
+    <td style="background-color:#FFE15C"><b class="${_G21}">G21</b></td>
   </tr>
   <tr>
-    <th>ADULTES 15-24 ans</th>
+    <th style="background-color:#FFE15C" rowspan="5">ADULTES </th>
+    <th>15-24 ans</th>
     <td>
-       <input name="fieldG22W" style="text-align: right" size="8" type="text" value="${fieldG22W}"/>
+       <input style="text-align: right" value="${fieldG22W}" name="fieldG22W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG22X" style="text-align: right" size="8" type="text" value="${fieldG22X}"/>
+       <input style="text-align: right" value="${fieldG22X}" name="fieldG22X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG22Y" style="text-align: right" size="8" type="text" value="${fieldG22Y}"/>
+       <input style="text-align: right" value="${fieldG22Y}" name="fieldG22Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG22Z" style="text-align: right" size="8" type="text" value="${fieldG22Z}"/>
+       <input style="text-align: right" value="${fieldG22Z}" name="fieldG22Z" size="8" type="text"/>
     </td>
     <td><b class="${_G22}">G22</b></td>
   </tr>
 
   <tr>
-    <th>ADULTES 25-59 ans</th>
+    <th>25-59 ans</th>
     <td>
-       <input name="fieldG23W" style="text-align: right" size="8" type="text" value="${fieldG23W}"/>
+       <input style="text-align: right" value="${fieldG23W}" name="fieldG23W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG23X" style="text-align: right" size="8" type="text" value="${fieldG23X}"/>
+       <input style="text-align: right" value="${fieldG23X}" name="fieldG23X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG23Y" style="text-align: right" size="8" type="text" value="${fieldG23Y}"/>
+       <input style="text-align: right" value="${fieldG23Y}" name="fieldG23Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG23Z" style="text-align: right" size="8" type="text" value="${fieldG23Z}"/>
+       <input style="text-align: right" value="${fieldG23Z}" name="fieldG23Z" size="8" type="text"/>
     </td>
     <td><b class="${_G23}">G23</b></td>
   </tr>
 
   <tr>
-    <th>ADULTES 60 ans et +</th>
+    <th>60 ans et +</th>
     <td>
-       <input name="fieldG24W" style="text-align: right" size="8" type="text" value="${fieldG24W}"/>
+       <input style="text-align: right" value="${fieldG24W}" name="fieldG24W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG24X" style="text-align: right" size="8" type="text" value="${fieldG24X}"/>
+       <input style="text-align: right" value="${fieldG24X}" name="fieldG24X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG24Y" style="text-align: right" size="8" type="text" value="${fieldG24Y}"/>
+       <input style="text-align: right" value="${fieldG24Y}" name="fieldG24Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG24Z" style="text-align: right" size="8" type="text" value="${fieldG24Z}"/>
+       <input style="text-align: right" value="${fieldG24Z}" name="fieldG24Z" size="8" type="text"/>
     </td>
     <td><b class="${_G24}">G24</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL ADULTES</b></th>
+    <th style="background-color:#FFE15C"><b>TOTAL ADULTES</b></th>
     <td>
-       <input name="fieldG25W" style="text-align: right" size="8" type="text" value="${fieldG25W}"/>
+       <input style="text-align: right" value="${fieldG25W}" name="fieldG25W" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG25X" style="text-align: right" size="8" type="text" value="${fieldG25X}"/>
+       <input style="text-align: right" value="${fieldG25X}" name="fieldG25X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG25Y" style="text-align: right" size="8" type="text" value="${fieldG25Y}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldG25Y}" name="fieldG25Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG25Z" style="text-align: right" size="8" type="text" value="${fieldG25Z}"/>
+       <input style="text-align: right" value="${fieldG25Z}" name="fieldG25Z" size="8" type="text"/>
     </td>
-    <td><b class="${_G25}">G25</b></td>
+    <td style="background-color:#FFE15C"><b class="${_G25}">G25</b></td>
   </tr>
 </table>
 <table width="100%">
@@ -205,25 +208,25 @@
   <td></td>
   </tr-->
   <tr>
-    <th>
+    <th style="background-color:#FFE15C">
       <b>TOTAL USAGERS INSCRITS et/ou EMPRUNTEURS (G20 + G21 + G25)</b>
     </th>
     <td>
-       <input name="fieldG26Y" style="text-align: right" size="8" type="text" value="${fieldG26Y}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldG26Y}" name="fieldG26Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG26Z" style="text-align: right" size="8" type="text" value="${fieldG26Z}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldG26Z}" name="fieldG26Z" size="8" type="text"/>
     </td>
-    <td><b class="${_G26}">G26</b></td>
+    <td style="background-color:#FFE15C"><b class="${_G26}">G26</b></td>
   </tr>
 
   <tr>
     <th>Préciser combien d'entre eux résident dans la commune (ou dans les communes du groupement si la bibliothèque est intercommunale)</th>
     <td>
-       <input name="fieldG27Y" style="text-align: right" size="8" type="text" value="${fieldG27Y}"/>
+       <input style="text-align: right" value="${fieldG27Y}" name="fieldG27Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG27Z" style="text-align: right" size="8" type="text" value="${fieldG27Z}"/>
+       <input style="text-align: right" value="${fieldG27Z}" name="fieldG27Z" size="8" type="text"/>
     </td>
     <td><b class="${_G27}">G27</b></td>
   </tr>
@@ -240,7 +243,7 @@
   <tr>
     <th>Nombre d'entrées dans la bibliothèque centrale </th>
     <td>
-       <input name="fieldG28" style="text-align: right" size="8" type="text" value="${fieldG28}"/>
+       <input style="text-align: right" value="${fieldG28}" name="fieldG28" size="8" type="text"/>
     </td>
     <td><b class="${_G28}">G28</b></td>
   </tr>
@@ -249,7 +252,7 @@
     <th>Nombre d'entrées dans les bibliothèques annexes ou autres bibliothèques
         du réseau</th>
     <td>
-       <input name="fieldG29" style="text-align: right" size="8" type="text" value="${fieldG29}"/>
+       <input style="text-align: right" value="${fieldG29}" name="fieldG29" size="8" type="text"/>
     </td>
     <td><b class="${_G29}">G29</b></td>
   </tr>
@@ -258,7 +261,7 @@
     <th> Nombre total d'entrées dans l'année (bibliothèque centrale et
          annexes) </th>
     <td>
-       <input name="fieldG30" style="text-align: right" size="8" type="text" value="${fieldG30}"/>
+       <input style="text-align: right" value="${fieldG30}" name="fieldG30" size="8" type="text"/>
     </td>
     <td><b class="${_G30}">G30</b></td>
   </tr>
@@ -274,7 +277,7 @@
   <tr>
     <th>Nombre de collectivités utilisatrices : </th>
     <td>
-       <input name="fieldG31" style="text-align: right" size="8" type="text" value="${fieldG31}"/>
+       <input style="text-align: right" value="${fieldG31}" name="fieldG31" size="8" type="text"/>
     </td>
     <td><b class="${_G31}">G31</b></td>
   </tr>
@@ -282,7 +285,7 @@
   <tr>
     <th>Dont nombre de classes</th>
     <td>
-       <input name="fieldG32" style="text-align: right" size="8" type="text" value="${fieldG32}"/>
+       <input style="text-align: right" value="${fieldG32}" name="fieldG32" size="8" type="text"/>
     </td>
     <td><b class="${_G32}">G32</b></td>
   </tr>
@@ -290,7 +293,7 @@
   <tr>
     <th>Préciser combien d'entre elles sont situées dans la commune (ou le groupement de communes si la bibliothèque est intercommunale)</th>
     <td>
-       <input name="fieldG33" style="text-align: right" size="8" type="text" value="${fieldG33}"/>
+       <input style="text-align: right" value="${fieldG33}" name="fieldG33" size="8" type="text"/>
     </td>
     <td><b class="${_G33}">G33</b></td>
   </tr>
@@ -315,13 +318,13 @@
   <tr>
     <th>Prêts de livres</th>
     <td>
-       <input name="fieldG41X" style="text-align: right" size="8" type="text" value="${fieldG41X}"/>
+       <input style="text-align: right" value="${fieldG41X}" name="fieldG41X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG41Y" style="text-align: right" size="8" type="text" value="${fieldG41Y}"/>
+       <input style="text-align: right" value="${fieldG41Y}" name="fieldG41Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG41Z" style="text-align: right" size="8" type="text" value="${fieldG41Z}"/>
+       <input style="text-align: right" value="${fieldG41Z}" name="fieldG41Z" size="8" type="text"/>
     </td>
     <td><b class="${_G41}">G41</b></td>
   </tr>
@@ -329,13 +332,13 @@
   <tr>
     <th>Prêts de périodiques</th>
     <td>
-       <input name="fieldG42X" style="text-align: right" size="8" type="text" value="${fieldG42X}"/>
+       <input style="text-align: right" value="${fieldG42X}" name="fieldG42X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG42Y" style="text-align: right" size="8" type="text" value="${fieldG42Y}"/>
+       <input style="text-align: right" value="${fieldG42Y}" name="fieldG42Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG42Z" style="text-align: right" size="8" type="text" value="${fieldG42Z}"/>
+       <input style="text-align: right" value="${fieldG42Z}" name="fieldG42Z" size="8" type="text"/>
     </td>
     <td><b class="${_G42}">G42</b></td>
   </tr>
@@ -343,13 +346,13 @@
   <tr>
     <th>Prêts de phonogrammes</th>
     <td>
-       <input name="fieldG43X" style="text-align: right" size="8" type="text" value="${fieldG43X}"/>
+       <input style="text-align: right" value="${fieldG43X}" name="fieldG43X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG43Y" style="text-align: right" size="8" type="text" value="${fieldG43Y}"/>
+       <input style="text-align: right" value="${fieldG43Y}" name="fieldG43Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG43Z" style="text-align: right" size="8" type="text" value="${fieldG43Z}"/>
+       <input style="text-align: right" value="${fieldG43Z}" name="fieldG43Z" size="8" type="text"/>
     </td>
     <td><b class="${_G43}">G43</b></td>
   </tr>
@@ -357,13 +360,13 @@
   <tr>
     <th>Prêts de vidéogrammes</th>
     <td>
-       <input name="fieldG44X" style="text-align: right" size="8" type="text" value="${fieldG44X}"/>
+       <input style="text-align: right" value="${fieldG44X}" name="fieldG44X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG44Y" style="text-align: right" size="8" type="text" value="${fieldG44Y}"/>
+       <input style="text-align: right" value="${fieldG44Y}" name="fieldG44Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG44Z" style="text-align: right" size="8" type="text" value="${fieldG44Z}"/>
+       <input style="text-align: right" value="${fieldG44Z}" name="fieldG44Z" size="8" type="text"/>
     </td>
     <td><b class="${_G44}">G44</b></td>
   </tr>
@@ -371,13 +374,13 @@
   <tr>
     <th>Prêts de cédéroms</th>
     <td>
-       <input name="fieldG45X" style="text-align: right" size="8" type="text" value="${fieldG45X}"/>
+       <input style="text-align: right" value="${fieldG45X}" name="fieldG45X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG45Y" style="text-align: right" size="8" type="text" value="${fieldG45Y}"/>
+       <input style="text-align: right" value="${fieldG45Y}" name="fieldG45Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG45Z" style="text-align: right" size="8" type="text" value="${fieldG45Z}"/>
+       <input style="text-align: right" value="${fieldG45Z}" name="fieldG45Z" size="8" type="text"/>
     </td>
     <td><b class="${_G45}">G45</b></td>
   </tr>
@@ -385,29 +388,29 @@
   <tr>
     <th>Prêts d'autres documents</th>
     <td>
-       <input name="fieldG47X" style="text-align: right" size="8" type="text" value="${fieldG47X}"/>
+       <input style="text-align: right" value="${fieldG47X}" name="fieldG47X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG47Y" style="text-align: right" size="8" type="text" value="${fieldG47Y}"/>
+       <input style="text-align: right" value="${fieldG47Y}" name="fieldG47Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG47Z" style="text-align: right" size="8" type="text" value="${fieldG47Z}"/>
+       <input style="text-align: right" value="${fieldG47Z}" name="fieldG47Z" size="8" type="text"/>
     </td>
     <td><b class="${_G47}">G47</b></td>
   </tr>
 
   <tr>
-    <th><b>TOTAL DES PRÊTS (G41 à G47)</b></th>
+    <th style="background-color:#FFE15C"><b>TOTAL DES PRÊTS (G41 à G47)</b></th>
     <td>
-       <input name="fieldG48X" style="text-align: right" size="8" type="text" value="${fieldG48X}"/>
+       <input style="text-align: right" value="${fieldG48X}" name="fieldG48X" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG48Y" style="text-align: right" size="8" type="text" value="${fieldG48Y}"/>
+       <input style="text-align: right" value="${fieldG48Y}" name="fieldG48Y" size="8" type="text"/>
     </td>
     <td>
-       <input name="fieldG48Z" style="text-align: right" size="8" type="text" value="${fieldG48Z}"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldG48Z}" name="fieldG48Z" size="8" type="text"/>
     </td>
-    <td><b class="${_G48}">G48</b></td>
+    <td style="background-color:#FFE15C"><b class="${_G48}">G48</b></td>
   </tr>
 </table>
 
@@ -423,7 +426,7 @@
 
     <th>Documents hors patrimoine</th>
     <td>
-       <input name="fieldG49" style="text-align: right" size="8" type="text" value="${fieldG49}"/>
+       <input style="text-align: right" value="${fieldG49}" name="fieldG49" size="8" type="text"/>
     </td>
     <td><b class="${_G49}">G49</b></td>
   </tr>
@@ -431,7 +434,7 @@
   <tr>
     <th>Documents patrimoniaux</th>
     <td>
-       <input name="fieldG50" style="text-align: right" size="8" type="text" value="${fieldG50}"/>
+       <input style="text-align: right" value="${fieldG50}" name="fieldG50" size="8" type="text"/>
     </td>
     <td><b class="${_G50}">G50</b></td>
   </tr>
@@ -439,7 +442,7 @@
   <tr>
     <th><b>TOTAL (G49 à G50)</b></th>
     <td>
-       <input name="fieldG51" style="text-align: right" size="8" type="text" value="${fieldG51}"/>
+       <input style="text-align: right" value="${fieldG51}" name="fieldG51" size="8" type="text"/>
     </td>
     <td><b class="${_G51}">G51</b></td>
   </tr>

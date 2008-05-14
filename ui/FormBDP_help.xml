@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
   <h4> AIDE </h4>
-  <p> Pour éviter toute erreur de saisie informatique, toutes les cases
-  doivent être remplies : lorsque vous ne comptabilisez pas une donnée
-  demandée, indiquez NC (non comptabilisé) indiquer 0 seulement lorsque la
-  donnée est égale à 0.  </p>
+  <dl class="description">
+  <dt> De nouvelles questions ont été insérées dans ce rapport afin de mieux cerner certains pans de votre activité,
+    merci d'y prêter attention.</dt>
+  <dt> Nous sommes à votre écoute pour faire évoluer ce questionnaire; n'hésitez pas à nous faire part de vos suggestions et remarques
+  </dt>
+  <dt>  Pour éviter toute erreur de saisie informatique, toutes les cases doivent être remplies : </dt>
+  <dt><ul>
+  <li>lorsque vous ne comptabilisez pas une donnée demandée, indiquez NC (non comptabilisé) ;</li>
+  <li>indiquer 0 lorsque la donnée est égale à 0 ;</li>
+  <li>ne jamais mettre de tiret ou de croix (hors les questions par oui/non) ou de barré qui ne sont pas interprétables en informatique.
+  </li></ul>
+  </dt>
+  </dl>
+
 </div>
