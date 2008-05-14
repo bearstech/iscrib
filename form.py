@@ -267,7 +267,7 @@ class Form(Text):
         #    namespace['field3'] = unicode(champs_adr[9], 'ISO-8859-1')
         # COMPLEMENT ADRESSE
         if not namespace['field30']:
-            namespace['field30'] = unicode(champs_adr[9], 'ISO-8859-1')
+            namespace['field30'] = unicode(champs_adr[8], 'ISO-8859-1')
         # Numéro VOIE
         if not namespace['field31']:
             namespace['field31'] = unicode(champs_adr[24], 'ISO-8859-1')
@@ -427,7 +427,8 @@ class Form(Text):
             stype = field_def[0]
             default = field_def[1]
             empty = False
-            if stype is not String and \
+            if stype is not String and stype is not EPCI_Statut and \
+                   name not in ['fieldK%s' % i for i in range(40,47)] and \
                    stype is not Unicode:
                 if namespace[name] in ('', None):
                     dependance = dependencies.get(name)
@@ -638,10 +639,14 @@ class Form(Text):
             field_type = field_def[0]
             value = namespace[key]
             if value in ('', None):
+                empty = False
                 # Empties
                 Empties.append(key)
             is_mandatory = (field_type is not Unicode) and \
-                            (field_type is not EPCI_Statut)
+                            (field_type is not EPCI_Statut) and \
+                            (field_type is not String) and \
+                            (key != 'fieldK0') and \
+                            (key not in ['fieldK%s' % i for i in range(40,47)])
             dependence_id = dependencies.get(key)
             if dependence_id is not None:
                 dependence_value = namespace.get(dependence_id, False)
@@ -842,8 +847,9 @@ class Form(Text):
             schema = self.get_schema()
             # Update dans la base ADRESSE
             query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
-                     u'voie="%(field3)s",cpbiblio="%(field4)s",ville="%(field5)s",'
-                     u'cedexb="%(field6)s",directeu="%(field7)s",tele="%(field9)s",'
+                     u'local="%(field30)s",voie_num="%(field31)s",voie_type="%(field32)s",'
+                     u'voie_nom="%(field33)s",cpbiblio="%(field4)s",ville="%(field5)s",'
+                     u'cedexb="%(field6)s",directeu="%(field7)s",st_dir="%(field8)s",tele="%(field9)s",'
                      u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
                      u'intercom="%(field13)s",gestion="%(field14)s",'
                      u'gestion_autre="%(field15)s" where code_bib=%(code_ua)s')
@@ -858,7 +864,6 @@ class Form(Text):
                             value = value.replace(u'"', u'\\"')
                             value = value.replace(u"&quot;", u'\\"')
                             value = value.replace(u"'", u"\\'")
-                            value = value.replace(u"\u2019", u"\\'")
                         namespace[key] = value
 
             query = query % namespace
@@ -1058,10 +1063,10 @@ class Form(Text):
                                 value = ''
                     elif not sum:
                         empty = not str(value)
-                        
-                #if key in ['fieldK%s' % i for i in range(2, 2)]:
-                #    empty = False
+
                 if key in ['fieldK%sY' % i for i in range(17, 31)]:
+                    empty = False
+                if key in ['fieldK%s' % i for i in range(40, 46)]:
                     empty = False
                 #########################################
                 # fill badT_missing and badT  lists
@@ -1118,11 +1123,13 @@ class Form(Text):
     # Export
     #report_csv__access__ = Text.is_admin
     report_csv__access__ = True
-    report_csv__label__ = u'Export'
+    report_csv__label__ = u'Export vers la bibliothèque'
     def report_csv(self, context):
         """ Call downloadCSV """
         namespace = self.get_namespace(context)
-        is_finished = namespace['is_finished']
+        #is_finished = namespace['is_finished']
+        state = self.get_property('state')
+        is_finished = (state == 'pending')
         is_complete = namespace['is_complete']
         is_exported = self.get_form_state() == u'Exporté'
         namespace['show'] = is_finished or is_complete or is_exported

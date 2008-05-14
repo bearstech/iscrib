@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2008 ALPantin  <anne-laure.pantin@culture.gouv.fr>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -35,6 +36,7 @@ from ikaaro.registry import register_object_class
 from ikaaro.root import Root as BaseRoot
 from ikaaro.file import File
 from ikaaro.widgets import batch, table
+from ikaaro.users import crypt_password
 
 # Import from scrib
 from form_bm import FormBM
@@ -240,6 +242,8 @@ class Root(BaseRoot):
         t = time()
 
         users = self.get_object('users')
+        users.set_handler('VoirSCRIB', bibUser(),
+                **{'ikaaro:password': crypt_password('BMBDP')})
         report_c = int(time() -t); print 'get users, deep copy', report_c
 
         bm_len =  all_bm.get_nrows()
@@ -312,7 +316,7 @@ class Root(BaseRoot):
     #########################################################################
     # Export
     export_form__access__ = 'is_admin'
-    export_form__label__ = u"Exporter"
+    export_form__label__ = u"Export"
     export_form__icon__ = File.download_form__icon__
     def export_form(self, context):
         template = self.get_object('/ui/scrib/Root_export.xml')
@@ -321,6 +325,43 @@ class Root(BaseRoot):
 
     export__access__ = 'is_admin'
     def export(self, context):
+
+        def export_adr(container, output):
+            """Ajout ALP - 27 nov 2007
+            """
+            folder = container.handler
+            names = [name for name in container.get_names()
+                        if name.isdigit() and (
+                            folder.get_handler('%s.metadata' % name)\
+                                    .get_property('state') == 'public')]
+            for name in names:
+                form = container.get_object(name)
+                schema = form.get_schema()
+                namespace = form.get_namespace()
+                query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
+                 u'local="%(field30)s",voie_num="%(field31)s",voie_type="%(field32)s",'
+                 u'voie_nom="%(field33)s",cpbiblio="%(field4)s",ville="%(field5)s",'
+                 u'cedexb="%(field6)s",directeu="%(field7)s",st_dir="%(field8)s",tele="%(field9)s",'
+                 u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
+                 u'intercom="%(field13)s",gestion="%(field14)s",'
+                 u'gestion_autre="%(field15)s" where code_bib=')
+
+            for key, value in namespace.items():
+                field_def = schema.get(key)
+                if field_def is not None:
+                    ftype = field_def[0]
+                    if ftype is Unicode:
+                           if value is not None:
+                                value = value.replace(u"€", u"eur")
+                                value = value.replace(u'"', u'\\"')
+                                   value = value.replace(u"&quot;", u'\\"')
+                                   value = value.replace(u"'", u"\\'")
+                           namespace[key] = value
+
+            query = query % namespace
+            query = query + name
+            output.write(query.encode('latin1') + '\n')
+
 
         def export_bib(container, ouput):
             connexion = get_connection()
@@ -336,7 +377,7 @@ class Root(BaseRoot):
             if container.is_BM():
                 query = "select * from adresse where insee is not null and code_bib in (%s)" % keys
             else:
-                query = "select * from adresse where type='3' and code_ua is not null and dept in (%s)" % keys
+                query = "select * from adresse where type_adr='3' and code_ua is not null and dept in (%s)" % keys
             cursor.execute(query)
             resultset = cursor.fetchall()
             cursor.close()
@@ -382,10 +423,6 @@ class Root(BaseRoot):
                 # XXX end
                 query = object.get_export_query(namespace)
                 output.write(query.encode('latin1') + '\n')
-                del namespace
-                del object
-
-            output.write('\n')
 
         output_path = join(getcwd(), 'exportscrib.sql')
         output = open(output_path, 'w')
@@ -394,21 +431,26 @@ class Root(BaseRoot):
 
         output.write(u'-- Réinitialisation'.encode('latin1'))
         output.write('\n')
-        output.write('DELETE FROM adresse;\n')
-        output.write('DELETE FROM bm05;\n')
-        output.write('DELETE FROM bdp05;\n')
+        #output.write('DELETE FROM adresse;\n')
+        output.write('DELETE FROM bm07;\n')
+        output.write('DELETE FROM bdp07;\n')
         output.write('\n')
 
-        output.write('-- BM2005\n')
+        BM2007 = self.get_object('BM2007')
+        BDP2007 = self.get_object('BDP2007')
+        output.write('-- ADRESSE\n')
         output.write('\n')
-        BM2005 = self.get_object('BM2005')
-        export_bib(BM2005, output)
+        export_adr(BM2007, output)
+        export_adr(BDP2007, output)
+
+        output.write('-- BM2007\n')
+        output.write('\n')
+        export_bib(BM2007, output)
 
         output.write('\n')
-        output.write('-- BDP2005\n')
+        output.write('-- BDP2007\n')
         output.write('\n')
-        BDP2005 = self.get_object('BDP2005')
-        export_bib(BDP2005, output)
+        export_bib(BDP2007, output)
 
         output.close()
 
@@ -438,15 +480,15 @@ class Root(BaseRoot):
             codes.append(int(code))
 
         users = self.get_object('users')
-        bm2005 = self.get_object('BM2005')
+        bm2007 = self.get_object('BM2007')
 
         for code in codes:
             name = str(code)
             # Add report
             bib = get_bm(name)
             ville = bib.get_value('name')
-            if not bm2005.has_object(name):
-                FormBM.make_object(FormBM, bm2005, name, **{'title': ville})
+            if not bm2007.has_object(name):
+                FormBM.make_object(FormBM, bm2007, name, **{'title': ville})
             # Add user
             username = 'BM%s' % code
             if not users.has_object(username):

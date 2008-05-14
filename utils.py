@@ -160,7 +160,7 @@ def none2str(t):
 def bm_annexes(code_ua):
     connection = get_connection(cursorclass=DictCursor)
     cursor = connection.cursor()
-    cursor.execute("select * from annexes04  where code_ua = %s",
+    cursor.execute("select * from annexes  where code_ua = %s",
                    (code_ua,))
     results = cursor.fetchall()
     cursor.close()

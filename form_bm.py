@@ -131,6 +131,7 @@ class FormBM(Form):
                                     'text/html; charset=UTF-8')
         namespace = self.get_namespace(context)
         forms = ['FormBM_report%s' % i for i in range(0, 12)]
+        forms.insert(9,'Form_comments')
         forms = [('%s.xml' % i, '%s_autogen.xml' % i, 'print_all')
                  for i in forms]
         # report_form10 and report_form11 must be in position 2 and 3
@@ -245,7 +246,7 @@ class FormBM(Form):
 
 
     report_form11__access__ = 'is_allowed_to_view_form'
-    report_form11__label__ = u'EPCI'
+    report_form11__label__ = u'K-EPCI'
     def report_form11(self, context, view=None):
         code_ua = self.get_code()
         return self.get_ns_and_h(context,

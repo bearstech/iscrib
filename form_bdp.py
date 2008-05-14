@@ -106,6 +106,7 @@ class FormBDP(Form):
                                     'text/html; charset=UTF-8')
         namespace = self.get_namespace(context)
         forms = ['FormBDP_report%s' % i for i in range(0, 10)]
+        forms.append('Form_comments')
         forms = [('%s.xml' % i, '%s_autogen.xml' % i, 'print_all')
                  for i in forms]
         forms = [self.get_ns_and_h(context, n, a, v) for n, a, v in forms]
@@ -213,6 +214,14 @@ class FormBDP(Form):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         template = self.get_object('/ui/scrib/FormBDP_help_menu.xml')
         return template.to_str()
+
+
+    help0__access__ = True
+    def help0(self):
+        context = get_context()
+        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
+        handler = self.get_handler('/ui/culture/FormBDP_help0.xml')
+        return handler.to_str()
 
 
     help1__access__ = True
