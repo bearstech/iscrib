@@ -12,6 +12,6 @@ delete from db where user='scrib' and host='localhost';
 DROP DATABASE IF EXISTS scrib;
 CREATE DATABASE  scrib;
 USE  scrib;
-GRANT ALL PRIVILEGES ON scrib.* to 'scrib'@'localhost' identified by 'Scrib-2005*';
+GRANT ALL PRIVILEGES ON scrib.* to 'scrib'@'localhost' identified by 'chili';
 
 FLUSH PRIVILEGES;

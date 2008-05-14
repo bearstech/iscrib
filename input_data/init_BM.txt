@@ -265,6 +265,7 @@
 292;Méry-sur-Seine;10;10233
 293;Mussy-sur-Seine;10;10261
 294;Nogent-sur-Seine;10;10268
+295;Les Riceys;10;10317
 296;Romilly-sur-Seine;10;10323
 297;Saint-André-les-Vergers;10;10333
 299;Saint-Julien-les-Villas;10;10343
@@ -480,16 +481,19 @@
 526;Ver-sur-Mer;14;14739
 527;Verson;14;14738
 528;Vire;14;14762
+529;Arpajon-sur-Cère;15;15012
 530;Aurillac;15;15014
 532;Champs-sur-Tarentaine-Marchal;15;15038
 533;Chaudes-Aigues;15;15045
 534;Condat;15;15054
+535;Jussac;15;15083
 536;Laroquebrou;15;15094
 537;Massiac;15;15119
 538;Mauriac;15;15120
 539;Maurs;15;15122
 540;Mourjou;15;15136
 541;Murat;15;15138
+542;Naucelles;15;15140
 543;Neussargues-Moissac;15;15141
 544;Pierrefort;15;15152
 545;Pleaux;15;15153
@@ -502,6 +506,7 @@
 553;Saint-Mamet-la-Salvetat;15;15196
 554;Vic-sur-Cère;15;15258
 555;Ydes;15;15265
+556;Ytrac;15;15267
 557;Angoulême;16;16015
 558;Ars;16;16018
 559;Baignes-Sainte-Radegonde;16;16025
@@ -771,7 +776,6 @@
 834;Ploumagoar;22;22225
 835;Ploumilliau;22;22226
 836;Pluduno;22;22237
-837;Plumaudan;22;22239
 838;Plurien;22;22242
 839;Pommeret;22;22246
 840;Pommerit-Jaudy;22;22247
@@ -1665,6 +1669,7 @@
 1776;Saint-Aignan;41;41198
 1777;Saint-Laurent-Nouan;41;41220
 1778;Vendôme;41;41269
+1779;La Ville-aux-Clercs;41;41275
 1780;Belmont-de-la-Loire;42;42015
 1781;Boën;42;42019
 1782;Bonson;42;42022
@@ -1793,8 +1798,6 @@
 1914;Beaugency;45;45028
 1915;Beaulieu-sur-Loire;45;45029
 1916;Beaune-la-Rolande;45;45030
-1917;Bonnée;45;45039
-1919;Bray-en-Val;45;45051
 1920;Châlette-sur-Loing;45;45068
 1921;La Chapelle-Saint-Mesmin;45;45075
 1922;Châteauneuf-sur-Loire;45;45082
@@ -1911,7 +1914,7 @@
 2041;Juigné-sur-Loire;49;49167
 2043;Martigné-Briand;49;49191
 2044;Le Mesnil-en-Vallée;49;49204
-2045;Montfaucon;49;49206
+2045;Montfaucon-Montigné;49;49206
 2047;Montreuil-Juigné;49;49214
 2048;Montrevault;49;49218
 2049;Mûrs-Erigné;49;49223
@@ -2006,6 +2009,7 @@
 2144;Bologne;52;52058
 2145;Bourbonne-les-Bains;52;52060
 2146;Breuvannes-en-Bassigny;52;52074
+2148;Châteauvillain;52;52114
 2149;Chaumont;52;52121
 2150;Chevillon;52;52123
 2151;Doulaincourt-Saucourt;52;52177
@@ -2020,6 +2024,7 @@
 2161;Prauthoy;52;52405
 2162;Saint-Dizier;52;52448
 2163;Val-de-Meuse;52;52332
+2165;Voisey;52;52544
 2166;Wassy;52;52550
 2167;Ambrières-les-Vallées;53;53003
 2168;Andouillé;53;53005
@@ -2650,7 +2655,6 @@
 2846;Bischwiller;67;67046
 2847;La Broque;67;67066
 2848;Brumath;67;67067
-2849;Châtenois;67;67073
 2850;Dettwiller;67;67089
 2851;Dingsheim;67;67097
 2852;Dorlisheim;67;67101
@@ -2706,7 +2710,6 @@
 2904;Rosheim;67;67411
 2905;Rossfeld;67;67412
 2907;Saverne;67;67437
-2908;Scherwiller;67;67445
 2909;Schirmeck;67;67448
 2910;Schirrhein;67;67449
 2911;Schweighouse-sur-Moder;67;67458
@@ -2748,6 +2751,7 @@
 2950;Kembs;68;68163
 2951;Kingersheim;68;68166
 2952;Landser;68;68174
+2953;Lapoutroie;68;68175
 2954;Lutterbach;68;68195
 2955;Mulhouse;68;68224
 2956;Munster;68;68226
@@ -2819,6 +2823,7 @@
 3024;Givors;69;69091
 3025;Gleizé;69;69092
 3026;Grézieu-la-Varenne;69;69094
+3027;Grigny;69;69096
 3028;Haute-Rivoire;69;69099
 3029;Irigny;69;69100
 3030;Jonage;69;69279
@@ -3091,7 +3096,6 @@
 3306;Saint-Pierre-d'Albigny;73;73270
 3307;Saint-Pierre-d'Entremont;73;73274
 3308;Sainte-Hélène-sur-Isère;73;73241
-3309;Ugine;73;73303
 3310;Val-d'Isère;73;73304
 3311;Voglans;73;73329
 3312;Yenne;73;73330
@@ -3389,7 +3393,7 @@
 3628;Moncoutant;79;79179
 3629;La Mothe-Saint-Héray;79;79184
 3630;Niort;79;79191
-3632;LES AUBIERS;79;79017
+3632;Les Aubiers;79;79017
 3633;Pamproux;79;79201
 3634;Parthenay;79;79202
 3636;Prahecq;79;79216
@@ -3477,21 +3481,16 @@
 3725;Lamagistère;82;82089
 3726;Lavit;82;82097
 3727;Moissac;82;82112
-3728;Molières;82;82113
 3729;Monclar-de-Quercy;82;82115
 3730;Montaigu-de-Quercy;82;82117
 3731;Montauban;82;82121
-3733;Montpezat-de-Quercy;82;82131
 3734;Nègrepelisse;82;82134
-3735;Réalville;82;82149
-3736;Septfonds;82;82179
 3737;Saint-Antonin-Noble-Val;82;82155
 3739;Saint-Nicolas-de-la-Grave;82;82169
 3740;Valence;82;82186
 3742;Verdun-sur-Garonne;82;82190
 3743;Aups;83;83007
 3744;Bandol;83;83009
-3745;Bargemon;83;83011
 3746;Le Beausset;83;83016
 3747;Bras;83;83021
 3748;Brignoles;83;83023
@@ -3546,7 +3545,6 @@
 3800;Le Val;83;83143
 3801;La Valette-du-Var;83;83144
 3802;La Verdière;83;83146
-3803;Vidauban;83;83148
 3804;Villecroze;83;83149
 3805;Ansouis;84;84002
 3806;Apt;84;84003
@@ -3688,7 +3686,6 @@
 3954;Oradour-sur-Vayres;87;87111
 3955;Le Palais-sur-Vienne;87;87113
 3956;Panazol;87;87114
-3957;Peyrat-le-Château;87;87117
 3958;Rochechouart;87;87126
 3959;Saint-Junien;87;87154
 3960;Saint-Just-le-Martel;87;87156
@@ -3972,7 +3969,6 @@
 4256;Vincennes;94;94080
 4257;Vitry-sur-Seine;94;94081
 4258;Argenteuil;95;95018
-4259;Arnouville-lès-Gonesse;95;95019
 4260;Beauchamp;95;95051
 4261;Beaumont-sur-Oise;95;95052
 4262;Bessancourt;95;95060
@@ -3992,7 +3988,6 @@
 4276;Fosses;95;95250
 4277;Franconville;95;95252
 4278;La Frette-sur-Seine;95;95257
-4279;Garges-lès-Gonesse;95;95268
 4280;Gonesse;95;95277
 4281;Goussainville;95;95280
 4282;Groslay;95;95288
@@ -4022,7 +4017,6 @@
 4308;Taverny;95;95607
 4309;Vauréal;95;95637
 4310;Viarmes;95;95652
-4311;Villiers-le-Bel;95;95680
 4312;Les Abymes;971;97101
 4313;Anse-Bertrand;971;97102
 4314;Baie-Mahault;971;97103
@@ -4215,3 +4209,80 @@
 4535;Montbrehain;02;02500
 4536;Montmartin-sur-Mer;50;50349
 4539;Méricourt;62;62570
+4540;Paimpol;22;22162
+4545;Bouloupari;988;98802
+4546;Bourail;988;98803
+4547;Canala;988;98804
+4548;Dumbéa;988;98805
+4549;Hienghène;988;98807
+4550;Houaïlou;988;98808
+4551;L'Ile-des-Pins;988;98809
+4552;Koné;988;98811
+4553;Koumac;988;98812
+4554;La Foa;988;98813
+4555;Lifou;988;98814
+4556;Maré;988;98815
+4557;Le Mont-Dore;988;98817
+4558;Ouvéa;988;98820
+4559;Païta;988;98821
+4560;Pouébo;988;98824
+4561;Thio;988;98829
+4562;Voh;988;98831
+4563;Yaté;988;98832
+4564;Yvoire;74;74315
+4565;Montech;82;82125
+4566;Craponne-sur-Arzon;43;43080
+4570;Danzé;41;41073
+4578;Toulenne;33;33533
+4579;Castets-en-Dorthe;33;33106
+4580;Nanteuil-lès-Meaux;77;77330
+4581;Roybon;38;38347
+4612;Noirétable;42;42159
+4613;Noueilles;31;31401
+4614;Rocbaron;83;83106
+4615;Le Thillot;88;88468
+4616;Allaire;56;56001
+4617;Montbouton;90;90070
+4618;Charleval;13;13024
+4619;Les Adrets-de-l'Estérel;83;83001
+4620;Rantigny;60;60524
+4622;Baden;56;56008
+4623;Benfeld;67;67028
+4624;Sangatte;62;62774
+4625;La Chapelle-des-Marais;44;44030
+4626;Ville-la-Grand;74;74305
+4627;Forcalqueiret;83;83059
+4628;Beauzac;43;43025
+4634;Mouriès;13;13065
+4635;Montoir-de-Bretagne;44;44103
+4637;Chaulnes;80;80186
+4638;Ailly-sur-Somme;80;80011
+4639;Combles;80;80204
+4640;Corbie;80;80212
+4641;Feuquières-en-Vimeu;80;80308
+4642;Monchy-Lagache;80;80555
+4643;Saint-Sauflieu;80;80717
+4644;Capestang;34;34052
+4645;Cazouls-lès-Béziers;34;34069
+4646;Le Bousquet-d'Orb;34;34038
+4647;Le Crès;34;34090
+4648;Les Matelles;34;34153
+4649;Pérols;34;34198
+4650;Restinclières;34;34227
+4651;La Salvetat-sur-Agout;34;34293
+4652;Saint-Bauzille-de-Putois;34;34243
+4653;Saint-Pargoire;34;34281
+4655;Le Puiset-Doré;49;49252
+4657;La Salle-et-Chapelle-Aubry;49;49324
+4658;La Boissière-sur-Evre;49;49033
+4659;Saint-Jeures;43;43199
+4660;Pleucadeuc;56;56159
+4661;LA BASTIDE DE SEROU;09;09042
+4662;Châteauneuf-les-Martigues;13;13026
+4663;Saint-Gildas-des-Bois;44;44161
+4664;La Roque-d'Anthéron;13;13084
+4665;Neuvy-le-Roi;37;37170
+4666;Le Loroux-Bottereau;44;44084
+4667;Luisant;28;28220
+4668;Magny-en-Vexin;95;95355
+4670;Saint-Georges-des-Coteaux;17;17336
