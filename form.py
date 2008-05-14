@@ -1138,7 +1138,7 @@ class Form(Text):
 
 
     comments__access__ = 'is_allowed_to_view_form'
-    comments__label__ = u'Commentaires'
+    comments__sublabel__ = u'Commentaires'
     def comments(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'Form_comments.xml',

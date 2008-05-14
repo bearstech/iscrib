@@ -41,10 +41,10 @@ class FormBDPHandler(FormHandler):
 class FormBDP(Form):
     class_id = 'FormBDP'
     class_handler = FormBDPHandler
-    class_views = [['report_form0'], ['report_form1'], ['report_form2'],
-                   ['report_form3'], ['report_form4'], ['report_form5'],
-                   ['report_form6'], ['report_form7'], ['report_form8'],
-                   ['report_form9'], ['comments']] + Form.class_views
+    class_views = [['report_form0', 'report_form1', 'report_form2',
+                    'report_form3', 'report_form4', 'report_form5',
+                    'report_form6', 'report_form7', 'report_form8',
+                    'report_form9', 'comments']] + Form.class_views
 
 
     ######################################################################
@@ -118,7 +118,8 @@ class FormBDP(Form):
 
 
     report_form0__access__ = 'is_allowed_to_view_form'
-    report_form0__label__ = u'Identité'
+    report_form0__label__ = u'Rapport Bibliothèques'
+    report_form0__sublabel__ = u'Identité'
     def report_form0(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report0.xml',
@@ -127,7 +128,7 @@ class FormBDP(Form):
 
 
     report_form1__access__ = 'is_allowed_to_view_form'
-    report_form1__label__ = u'A-Finances'
+    report_form1__sublabel__ = u'A-Finances'
     def report_form1(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report1.xml',
@@ -136,7 +137,7 @@ class FormBDP(Form):
 
 
     report_form2__access__ = 'is_allowed_to_view_form'
-    report_form2__label__ = u'B-Locaux'
+    report_form2__sublabel__ = u'B-Locaux'
     def report_form2(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report2.xml',
@@ -145,7 +146,7 @@ class FormBDP(Form):
 
 
     report_form3__access__ = 'is_allowed_to_view_form'
-    report_form3__label__ = u'C-Personnel'
+    report_form3__sublabel__ = u'C-Personnel'
     def report_form3(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report3.xml',
@@ -154,7 +155,7 @@ class FormBDP(Form):
 
 
     report_form4__access__ = 'is_allowed_to_view_form'
-    report_form4__label__ = u'D-Collections'
+    report_form4__sublabel__ = u'D-Collections'
     def report_form4(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report4.xml',
@@ -163,7 +164,7 @@ class FormBDP(Form):
 
 
     report_form5__access__ = 'is_allowed_to_view_form'
-    report_form5__label__ = u'E-Acquisitions'
+    report_form5__sublabel__ = u'E-Acquisitions'
     def report_form5(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report5.xml',
@@ -172,7 +173,7 @@ class FormBDP(Form):
 
 
     report_form6__access__ = 'is_allowed_to_view_form'
-    report_form6__label__ = u'F-Réseau tous public'
+    report_form6__sublabel__ = u'F-Réseau tous public'
     def report_form6(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report6.xml',
@@ -181,7 +182,7 @@ class FormBDP(Form):
 
 
     report_form7__access__ = 'is_allowed_to_view_form'
-    report_form7__label__ = u'G-Réseau spécifique'
+    report_form7__sublabel__ = u'G-Réseau spécifique'
     def report_form7(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report7.xml',
@@ -190,7 +191,7 @@ class FormBDP(Form):
 
 
     report_form8__access__ = 'is_allowed_to_view_form'
-    report_form8__label__ = u'H-Services'
+    report_form8__sublabel__ = u'H-Services'
     def report_form8(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report8.xml',
@@ -199,7 +200,7 @@ class FormBDP(Form):
 
 
     report_form9__access__ = 'is_allowed_to_view_form'
-    report_form9__label__ = u'I-Action Culturelle'
+    report_form9__sublabel__ = u'I-Action Culturelle'
     def report_form9(self, context, view=None):
         return self.get_ns_and_h(context,
                                  'FormBDP_report9.xml',
