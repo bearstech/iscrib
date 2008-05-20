@@ -1016,6 +1016,8 @@ class Form(Text):
         badT_missing = [] # list of field to highlight (badT_missing)
         badT_values = {} # a dict of field : value to put into namespace
         
+        old_form_state = self.get_form_state()
+
         for key in context.get_form_keys():
             if key in schema:
                 value = context.get_form_value(key)
@@ -1094,9 +1096,13 @@ class Form(Text):
         if fields:
             self.update_fields(fields)
 
-        form_state = self.get_form_state()
-        if form_state == u'Exporté':
-            self.set_property('state', 'modified')
+        if old_form_state == u'Exporté':
+            self.set_workflow_state('modified')
+        else:
+            new_form_state = self.get_form_state()
+            # 0005453: Reindex
+            if new_form_state != old_form_state:
+                context.server.change_object(self)
 
         new_referer, msg = make_msg(new_referer=new_referer, notR=notR,
                 badT=badT, badT_missing=badT_missing, badT_values=badT_values)
