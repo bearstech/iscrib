@@ -74,7 +74,8 @@
     </td>
     <td>
       <select name="fieldK17Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK17Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK17Z"
+          value="${option/name}">${option/label}</option>
       </select>
     </td>
 
@@ -94,7 +95,8 @@
     </td>
     <td>
       <select name="fieldK18Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK18Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK18Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -115,7 +117,8 @@
     </td>
     <td>
       <select name="fieldK19Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK19Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK19Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -136,7 +139,8 @@
     </td>
     <td>
       <select name="fieldK20Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK20Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK20Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -157,7 +161,8 @@
     </td>
     <td>
       <select name="fieldK21Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK21Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK21Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -178,7 +183,8 @@
     </td>
     <td>
       <select name="fieldK22Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK22Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK22Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -199,7 +205,8 @@
     </td>
     <td>
       <select name="fieldK23Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK23Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK23Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -220,7 +227,8 @@
     </td>
     <td>
       <select name="fieldK24Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK24Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK24Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -241,7 +249,8 @@
     </td>
     <td>
       <select name="fieldK25Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK25Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK25Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -262,7 +271,8 @@
     </td>
     <td>
       <select name="fieldK26Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK26Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK26Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -283,7 +293,8 @@
     </td>
     <td>
       <select name="fieldK27Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK27Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK27Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -303,7 +314,8 @@
     </td>
     <td>
       <select name="fieldK28Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK28Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK28Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -321,7 +333,8 @@
     </td>
     <td>
       <select name="fieldK29Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK29Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK29Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -341,7 +354,8 @@
     </td>
     <td>
       <select name="fieldK30Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK30Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK30Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 
@@ -361,7 +375,8 @@
     </td>
     <td>
       <select name="fieldK31Z">
-        <option selected="${option/is_selected}" stl:repeat="option fieldK31Z" value="${option/id}">${option/label}</option>
+        <option selected="${option/selected}" stl:repeat="option fieldK31Z"
+          value="${option/name}">${option/label}</option>
       </select>
    </td>
 

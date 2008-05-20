@@ -824,7 +824,7 @@ class Form(Text):
                 elif field_type == Decimal:
                     value = "'%s'" % str(value)
                 elif field_type == EPCI_Statut:
-                    ids = [x['id'] for x in value if x['is_selected']]
+                    ids = [x['name'] for x in value if x['selected']]
                     if ids:
                         value = ids[0]
                     else:
