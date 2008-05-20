@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # Copyright (C) 2006 Luis Belmar Letelier <luis@itaapy.com>
 # Copyright (C) 2008 Hervé Cauwelier <herve@itaapy.com>
 from sys import argv, exit
