@@ -218,3 +218,11 @@ def make_msg(new_referer, notR, badT, badT_missing, badT_values):
         msg = u'<br/>'.join([msg_notR,  msg_badT])
 
     return new_referer, msg
+
+
+def reduce_generators(generators):
+    # Migrating "reduce(lambda x,y: x+y, forms)"
+    # More like linearizing
+    for generator in generators:
+        for item in generator:
+            yield item

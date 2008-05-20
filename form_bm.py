@@ -26,7 +26,8 @@ from ikaaro.registry import register_object_class
 # Import from scrib
 from schema_bm import schema, alertes, controles
 from form import FormHandler, Form
-from utils import get_bm, get_adresse
+from utils import get_bm, get_adresse, reduce_generators
+
 
 
 class FormBMHandler(FormHandler):
@@ -138,8 +139,7 @@ class FormBM(Form):
         forms.insert(2, forms[-1])
         forms = forms[:-2]
         forms = [self.get_ns_and_h(context, n, a, v) for n, a, v in forms]
-        forms = reduce(lambda x,y: x+y, forms)
-        namespace['body'] = forms
+        namespace['body'] = reduce_generators(forms)
 
         template = self.get_object('/ui/scrib/printable_template.xhtml')
         return stl(template, namespace)
