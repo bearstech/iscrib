@@ -47,11 +47,12 @@ class Forms(Folder):
     # API
     #########################################################################
     def is_BM(self):
-        return self.name.count('BM') and True
+        return 'BM' in self.name
 
 
     def is_BDP(self):
-        return self.name.count('BDP') and True
+        return 'BDP' in self.name
+
 
     def get_year(self):
         return self.name[-4:]

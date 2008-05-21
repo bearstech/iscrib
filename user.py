@@ -38,8 +38,8 @@ class ScribUser(User):
         fields += [TextField('user_town'),
                    KeywordField('dep', is_stored=True),
                    KeywordField('year'),
-                   BoolField('is_BDP', is_stored=True),
-                   BoolField('is_BM', is_stored=True)]
+                   BoolField('stored_BDP', is_stored=True),
+                   BoolField('stored_BM', is_stored=True)]
         return fields
 
 
@@ -48,8 +48,8 @@ class ScribUser(User):
         values['user_town'] = self.get_user_town()
         values['dep'] = self.get_department()
         values['year'] = self.get_year()
-        values['is_BDP'] = self.is_BDP()
-        values['is_BM'] = self.is_BM()
+        values['stored_BDP'] = self.is_BDP()
+        values['stored_BM'] = self.is_BM()
         return values
 
 

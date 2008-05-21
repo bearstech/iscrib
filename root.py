@@ -534,9 +534,9 @@ class Root(BaseRoot):
         # Search
         query = [EqQuery('format', 'user')]
         if search_bib == 'bm':
-            query.append(EqQuery('is_BM', '1'))
+            query.append(EqQuery('stored_BM', '1'))
         elif search_bib == 'bdp':
-            query.append(EqQuery('is_BDP', '1'))
+            query.append(EqQuery('stored_BDP', '1'))
         if search_ville:
             query.append(EqQuery('user_town', search_ville))
         if search_dep:
