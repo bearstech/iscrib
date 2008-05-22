@@ -8,7 +8,7 @@ use mysql;
 delete from mysql.user where user='scrib' and host='localhost';
 delete from db where user='scrib' and host='localhost';
 
-# Base de données: `scrib`
+# Base de donnÃ©es: `scrib`
 DROP DATABASE IF EXISTS scrib;
 CREATE DATABASE  scrib;
 USE  scrib;

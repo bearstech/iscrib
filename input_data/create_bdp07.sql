@@ -1,3 +1,5 @@
+-- -*- coding: UTF-8 -*-
+
 DROP TABLE IF EXISTS `bdp07`;
 CREATE TABLE `bdp07` (
   `Code_UA` int default NULL,
@@ -778,4 +780,4 @@ CREATE TABLE `bdp07` (
   `I33Z` int default NULL ,
   `I34Y` int default NULL ,
   `I34Z` int default NULL
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;

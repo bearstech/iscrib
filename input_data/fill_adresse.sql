@@ -1,3 +1,5 @@
+-- -*- coding: UTF-8 -*-
+
 -- MySQL dump 10.9
 --
 -- Host: goffanon.culture.fr    Database: scrib
@@ -52,7 +54,7 @@ CREATE TABLE `adresse` (
   `DMODIF` date default NULL,
   `REMARQUE` varchar(30) default NULL,
   `REGI` char(2) default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish;
 
 --
 -- Dumping data for table `adresse`

@@ -1,3 +1,5 @@
+-- -*- coding: UTF-8 -*-
+
 -- MySQL dump 10.9
 --
 -- Host: goffanon.culture.fr    Database: scrib
@@ -83,7 +85,7 @@ CREATE TABLE `ua_epci` (
   `K29Z` varchar(60) default NULL,
   `K30Z` varchar(60) default NULL,
   `K31Z` varchar(60) default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumping data for table `ua_epci`

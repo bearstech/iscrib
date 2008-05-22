@@ -1,3 +1,5 @@
+-- -*- coding: UTF-8 -*-
+
 -- MySQL dump 10.9
 --
 -- Host: goffanon.culture.fr    Database: scrib
@@ -125,7 +127,7 @@ CREATE TABLE `annexes` (
   `J9X` varchar(100) default NULL,
   `J9Y` varchar(100) default NULL,
   `J9Z` varchar(100) default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumping data for table `annexes`
