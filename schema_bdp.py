@@ -49,7 +49,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'fieldA31': (Integer, None, {'depend_field' : ('fieldB32',)}),
           'fieldA32': (Integer, None),
           #
-     
+
           'fieldB11X': (Integer, None), 'fieldB11Y': (Integer, None),
           'fieldB11Z': (Integer, None, {'sum': ('fieldB11X', 'fieldB11Y')}),
           'fieldB12X': (Integer, None),
@@ -77,7 +77,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           #
           'fieldB41': (Boolean,'', {'depend_field' : ('fieldB39','fieldB40')}),
           #
-          
+
           'fieldC11S' : (Integer, None), 'fieldC11T' : (Decimal, None),
           'fieldC11U' : (Integer, None),
           'fieldCV': (Checkboxes, ''),
@@ -109,10 +109,11 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
            'fieldC15W' : (Integer, None), 'fieldC15X' : (Decimal, None),
            'fieldC15Y' : (Integer, None), 'fieldC15Z' : (Integer, None),
           #
-          #'fieldC16S' : (Integer, None), 'fieldC16T' : (Decimal, None),
-          #'fieldC16U' : (Integer, None),
-          #'fieldC16W' : (Integer, None), 'fieldC16X' : (Decimal, None),
-          #'fieldC16Y' : (Integer, None), 'fieldC16Z' : (Integer, None),
+          #
+#           'fieldC16S' : (Integer, None), 'fieldC16T' : (Decimal, None),
+#           'fieldC16U' : (Integer, None),
+#           'fieldC16W' : (Integer, None), 'fieldC16X' : (Decimal, None),
+#           'fieldC16Y' : (Integer, None), 'fieldC16Z' : (Integer, None),
           #
           'fieldC21S' : (Integer, None), 'fieldC21T' : (Decimal, None),
           'fieldC21U' : (Integer, None),
@@ -160,32 +161,32 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           #
           'fieldC43S' : (Integer, None,
                        {'sum': ('fieldC11S','fieldC12S', 'fieldC13S', 'fieldC14S',
-                                'fieldC15S', 'fieldC21S',
+                                 'fieldC15S', 'fieldC21S',
                                 'fieldC22S', 'fieldC23S', 'fieldC31S',
                                 'fieldC33S', 'fieldC41S', 'fieldC42S')}),
           'fieldC43T' : (Decimal, None,
                         {'sum': ('fieldC11T','fieldC12T', 'fieldC13T', 'fieldC14T',
-                                'fieldC15T', 'fieldC21T',
+                                 'fieldC15T', 'fieldC21T',
                                 'fieldC22T', 'fieldC23T', 'fieldC31T',
                                 'fieldC33T' )}),
           'fieldC43U' : (Integer, None,
                         {'sum': ('fieldC11U','fieldC12U', 'fieldC13U', 'fieldC14U',
-                                'fieldC15U', 'fieldC21U',
+                                 'fieldC15U', 'fieldC21U',
                                 'fieldC22U', 'fieldC23U', 'fieldC31U',
                                 'fieldC33U', 'fieldC41U')}),
           'fieldC43W' : (Integer, None,
                          {'sum': ('fieldC11W','fieldC12W', 'fieldC13W', 'fieldC14W',
-                                'fieldC15W', 'fieldC21W',
+                                 'fieldC15W', 'fieldC21W',
                                 'fieldC22W', 'fieldC23W', 'fieldC31W',
                                 'fieldC33W', 'fieldC41W', 'fieldC42W')}),
           'fieldC43X' : (Decimal, None,
                         {'sum': ('fieldC11X','fieldC12X', 'fieldC13X', 'fieldC14X',
-                                'fieldC15X', 'fieldC21X',
+                                 'fieldC15X', 'fieldC21X',
                                 'fieldC22X', 'fieldC23X', 'fieldC31X',
                                 'fieldC33X'  )}),
           'fieldC43Y' : (Integer, None,
                         {'sum': ('fieldC11Y','fieldC12Y', 'fieldC13Y', 'fieldC14Y',
-                                'fieldC15Y', 'fieldC21Y',
+                                 'fieldC15Y', 'fieldC21Y',
                                 'fieldC22Y', 'fieldC23Y', 'fieldC31Y',
                                 'fieldC33Y', 'fieldC41Y')}),
           'fieldC43Z' : (Integer, None,
@@ -196,7 +197,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           #
           'fieldC51Z' : (Integer, None),
           #
-          
+
           'fieldD11X' : (Integer, None), 'fieldD11Y' : (Integer, None),
           'fieldD11Z' : (Integer, None,{'sum': ('fieldD11X', 'fieldD11Y')}),
           'fieldD12X' : (Integer, None), 'fieldD12Y' : (Integer, None),
@@ -386,7 +387,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'fieldE98Y' : (Integer, None,{'sum': ('fieldE85Y', 'fieldE88Y','fieldE91Y', 'fieldE94Y','fieldE95Y', 'fieldE96Y','fieldE97Y')}),
           'fieldE98Z' : (Integer, None,{'sum': ('fieldE98X', 'fieldE98Y')}),
           #
-            
+
           'fieldF11W' : (Integer, None), 'fieldF11X' : (Integer, None),
           'fieldF11Y' : (Integer, None),
           'fieldF12W' : (Integer, None), 'fieldF12X' : (Integer, None),
@@ -485,7 +486,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           'fieldF69Y' : (Integer, None,{'sum': ('fieldF63Y', 'fieldF64Y','fieldF65Y','fieldF66Y', 'fieldF67Y','fieldF68Y')}),
           'fieldF69Z' : (Integer, None,{'sum': ('fieldF69W', 'fieldF69X','fieldF69Y')}),
           #
-            
+
           'fieldG11V' : (Integer, None), 'fieldG11W' : (Integer, None),
           'fieldG11X' : (Integer, None), 'fieldG11Y' : (Integer, None),
           'fieldG11Z' : (Integer, None),
@@ -565,8 +566,7 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
                                                           'fieldH15',
                                                           'fieldH16',
                                                           'fieldH17',
-                                                          'fieldH18',
-                                                          'fieldH19')}),
+                                                          'fieldH18','fieldH19')}),
           'fieldH12': (Boolean, ''),
           'fieldH13': (Boolean, ''), 'fieldH14': (Boolean, ''),
           'fieldH15': (Boolean, ''), 'fieldH16': (Boolean, ''),
@@ -702,10 +702,11 @@ schema = {'field1': (Unicode, ''), 'field2': (Unicode, ''),
           #'fieldI34Y' : (Integer, None),
           'fieldI34Z' : (Integer, None,
                          {'sum': ('fieldI32Z', 'fieldI33Z')}),
-                         
-        
+
+
           ## comments form
           'fieldL20': (Unicode, ''),}
+
 
 ##############################################################################
 # Alerts
