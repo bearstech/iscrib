@@ -188,6 +188,7 @@ class Integer(object):
         return Integer(value)
 
 
+
 class WorkflowState(Enumerate):
     options = [{'name': 'vide', 'value': u"Vide"},
                {'name': 'en_cours', 'value': u"En cours"},

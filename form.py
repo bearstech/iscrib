@@ -112,11 +112,11 @@ class Form(Text):
     def is_BM():
         raise NotImplementedError
 
-    
+
     @staticmethod
     def is_BDP():
         raise NotImplementedError
-   
+
 
     def get_form_state(self):
         # State
@@ -199,7 +199,6 @@ class Form(Text):
                 values = value.split('##')
                 for i in range(1, 30, 1):
                     namespace['%s_%s' % (name, i)] = str(i) in values
-                    
 
             # for the names :fieldA21X, fieldA21Y, we call A21 field_name
             if not name[-1].isdigit(): # fieldA21X
@@ -277,7 +276,6 @@ class Form(Text):
         # NOM VOIE
         if not namespace['field33']:
             namespace['field33'] = unicode(champs_adr[26], 'ISO-8859-1')
-        
         # CPBIBLIO
         if not namespace['field4']:
             namespace['field4'] = unicode(champs_adr[11], 'ISO-8859-1')
@@ -314,7 +312,6 @@ class Form(Text):
         # GESTION_AUTRE
         if namespace.get('field15') is None:
             namespace['field15'] = unicode(champs_adr[23], 'ISO-8859-1')
- 
         # autofill Annexes
         if self.is_BM():
             annexes = bm_annexes(code_ua)
@@ -325,7 +322,6 @@ class Form(Text):
                 elif not namespace[key]:
                     value = unicode(str(v), 'ISO-8859-1')
                     namespace[key] = value
-       
         # autofill BM epci
         if self.is_BM():
             epci = ua_epci(code_ua)
@@ -346,7 +342,6 @@ class Form(Text):
                     else:
                         value = unicode(str(v), 'ISO-8859-1')
                     namespace[key] = value
-       
         # get namespace
         sums = self.get_sums()
         for k, v in sums.items():
@@ -417,7 +412,7 @@ class Form(Text):
         dependencies = self.get_dependencies()
         # State
         state = self.get_form_state()
-        
+
         #############################################################
         # Vérification des champs renseignés
         restype = []
@@ -443,7 +438,7 @@ class Form(Text):
                                 'num': j,
                                 'type': u'Non renseigné',
                                 })
-                    
+
         restype_for_sort = [(x['type'], x['chp'], x) for x in restype]
         restype_for_sort.sort()
         restype = [x[-1] for x in restype_for_sort]
@@ -461,7 +456,6 @@ class Form(Text):
 
         for controle in controles:
             key, text, expr1, expr2, expr3, left_args, right_args = controle
-                            
             try:
                 x1 = eval(expr1, namespace)
             except (TypeError, ZeroDivisionError):
@@ -535,7 +529,7 @@ class Form(Text):
                             'text': text % (x1, x2),
                             'empty': empty,
                             'fail': fail })
-                
+
         namespace['res2'] = [r for ii, r in enumerate(res) if ii%2]
         namespace['res1'] = [r for ii, r in enumerate(res) if not ii%2]
         namespace['ppres1'] = pformat(namespace['res1'])
@@ -549,7 +543,7 @@ class Form(Text):
                     'I': ';report_form9',}
         titles = sec2form.keys()
         titles.sort()
-        
+
         blocks = []
         for key in titles:
             lines = [d for d in res if d['expr1'].startswith(key)]
@@ -573,7 +567,7 @@ class Form(Text):
         #disable control for testing #namespace['is_complete'] = True
         # add ControlesFailed
         is_finished = namespace['is_finished']
-        
+
         namespace['is_finished'] =  is_finished and not ControlesFailed
         #disable control for testing
         #namespace['is_finished'] = True
@@ -663,7 +657,7 @@ class Form(Text):
                 if value not in ('', None):
                     # optional_nonEmpties
                     optional_nonEmpties.append(key)
-                
+
         return  (All_fields, All_mandatorie, All_optional,
                  optional_nonEmpties, mandatory_nonEmpties, Empties)
 
@@ -674,7 +668,7 @@ class Form(Text):
         empties = []
         schema = self.get_schema()
         dependencies = self.get_dependencies()
-        
+
         for key in schema.keys():
             field_def = schema[key]
             field_type = field_def[0]
@@ -687,7 +681,7 @@ class Form(Text):
                     mendatories.append(key)
             else:
                 optionals.append(key)
-                
+
         return mendatories, optionals, empties
 
 
@@ -758,7 +752,7 @@ class Form(Text):
                                 to_addr=report_email,
                                 message=r_message,
                                 succsess_mgs="")
-        
+
         self.scrib_log(event='recipe sent', content=r_message)
 
         return context.come_back(comeback_msg, goto=';controles_form')
@@ -804,7 +798,7 @@ class Form(Text):
             value = namespace[name]
             key = name.split('field')[-1]
             chap = key[0]
-            
+
             if not chap.isdigit():
                 keys.append(key)
                 if value in ('', None, 'NC'):
@@ -830,7 +824,7 @@ class Form(Text):
                     else:
                         value = '0'
                 values.append(value)
-                
+
         keys = ','.join(keys)
         values = ','.join(values)
         query = "INSERT INTO %s (%s) VALUES (%s);" % (table, keys, values)
@@ -867,7 +861,7 @@ class Form(Text):
                         namespace[key] = value
 
             query = query % namespace
-            
+
             # XXX charset?
             cursor.execute(query)
             cursor.execute('commit')
@@ -1015,83 +1009,102 @@ class Form(Text):
         badT = [] # list of field of bad type
         badT_missing = [] # list of field to highlight (badT_missing)
         badT_values = {} # a dict of field : value to put into namespace
-        
+
         old_form_state = self.get_form_state()
 
         for key in context.get_form_keys():
-            if key in schema:
+            if key not in schema:
+                continue
+            field_type = schema[key][0]
+            field_default = schema[key][1]
+            #########################################
+            # Take the value from the form
+            # Support checkboxes
+            if isinstance(field_type, Checkboxes):
+                values = context.get_form_values(key)
+                value = '##'.join(values)
+            else:
                 value = context.get_form_value(key)
-                #########################################
-                # Take the value from the form
-                field_type = schema[key][0]
-                field_default = schema[key][1]
-                keyNumber = key[len('field'):]
-                if isinstance(value, list):
-                    if len(value) == 1:
-                        value = '1'
+            value = value.strip()
+            keyNumber = key[len('field'):]
+
+            #########################################
+            # Dependance machinery XXX need to be clean up and commented
+            # We need to finish comments and put it in a method
+            # dependancies = {'A13': 'A11', 'A12': 'A11'}
+            # dependancies.keys() == ['A13', 'A12']
+            # None if no dep
+            dependance = dependencies.get(key)
+
+            #########################################
+            # Field as the sum of other fields
+            sum = key in sums
+
+            ## Objectif : we set empty = True or False
+            ## Set value to '' if dep field is False
+            # True : no dep AND no value AND no String/Unicode AND
+            # False :
+            empty = False
+            if not isinstance(field_type, (String, Unicode)):
+                if dependance is not None:
+                    # here we know if they are a dependancies
+                    # and
+                    if context.get_form_value(dependance, '0') == '1':
+                        if not value:
+                            empty = True
+                    # clean value if dependance False
                     else:
-                        # Support checkboxes
-                        value = '##'.join(value)
-                # Pre-process value
-                value = value.strip()
+                        if value:
+                            value = ''
+                elif not sum:
+                    empty = not str(value)
 
-                #########################################
-                # Dependance machinery XXX need to be clean up and commented
-                # We need to finish comments and put it in a method
-                # dependancies = {'A13': 'A11', 'A12': 'A11'}
-                # dependancies.keys() == ['A13', 'A12']
-                dependance = dependencies.get(key) # None if no dep
-
-                #########################################
-                # Field as the sum of other fields
-                sum = key in sums
-
-                ## Objectif : we set empty = True or False
-                ## Set value to '' if dep field is False
-                # True : no dep AND no value AND no String/Unicode AND
-                # False :
+            if key in ['fieldK%sY' % i for i in range(17, 31)]:
                 empty = False
-                if field_type is not String and \
-                       field_type is not Unicode:
-                    if dependance is not None :
-                        # here we know if they are a dependancies
-                        # and
-                        if context.get_form_value(dependance, '0') == '1':
-                            if not value:
-                                empty = True
-                        # clean value if dependance False
-                        else:
-                            if value:
-                                value = ''
-                    elif not sum:
-                        empty = not str(value)
+            if key in ['fieldK%s' % i for i in range(40, 46)]:
+                empty = False
+            #########################################
+            # fill badT_missing and badT  lists
+            if empty:
+                notR.append(keyNumber)
 
-                if key in ['fieldK%sY' % i for i in range(17, 31)]:
-                    empty = False
-                if key in ['fieldK%s' % i for i in range(40, 46)]:
-                    empty = False
-                #########################################
-                # fill badT_missing and badT  lists
-                if empty:
-                    notR.append(keyNumber)
+            # Encode and store
+            field_def = schema[key]
+            type = field_def[0]
+            default = field_def[1]
+            # check for forbiden caracters, 8bits like "é"
+            # use unicode instead
+            try:
+                value = type.decode(value)
+            except (ValueError, UnicodeEncodeError, InvalidOperation):
+                badT_missing.append('badT_%s' % keyNumber)
+                badT.append(u'%s: <b>%s</b>'
+                            % (keyNumber, unicode(value, 'UTF-8')))
+                # we need the field and it's value in the
+                #query even if the type is wrong
+                badT_values[keyNumber] = value
+            else:
+                fields[key] = value
 
-                # Encode and store
-                field_def = schema[key]
-                type = field_def[0]
-                default = field_def[1]
-                # check for forbiden caracters, 8bits like "é"
-                # use unicode instead
-                try:
-                    value = type.decode(value)
-                except (ValueError, UnicodeEncodeError, InvalidOperation):
-                    badT_missing.append('badT_%s' % keyNumber)
-                    badT.append(u'%s: <b>%s</b>'
-                                % (keyNumber, unicode(value, 'UTF-8')))
-                    # we need the field and it's value in the
-                    #query even if the type is wrong
-                    badT_values[keyNumber] = value
-                else:
-                    fields[key] = value
+        # 0000320: pb calcul total et champ vide
+        for key, terms in sums.items():
+            if not terms:
+                continue
+            # no sum if an empty or NC
+            empty_or_NC = [term for term in terms
+                                if fields.get(term) in ('', None, 'NC')]
+            if empty_or_NC:
+                continue
+            # no sum if a value manualy set
+            if key in fields and fields.get(key) not in (0, '', None, 'NC'):
+                continue
+            # automatic sum
+            key_type = schema[key][0]
+            # Initialisation du type du total
+            total = Decimal('0') if key_type is Decimal else Integer(0)
+            for term in terms:
+                total = fields[term] + total
+            fields[key] = total
 
         if fields:
             self.update_fields(fields)
