@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
-    <title>Scrib</title>
-    <!-- Changed by: , 18-Nov-2004 -->
-    
-
-    <script type="text/javascript" src="menu.js"></script>
-    <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" src="form.js"></script>
-
-    <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
-    <link type="text/css" rel="stylesheet" href="/ui/scrib/content.css"/>
-    <link type="text/css" rel="stylesheet" href="/ui/scrib/form.css"/>
-
+<html xmlns:stl="http://xml.itools.org/namespaces/stl"
+  xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>${title}</title>
+    <!-- CSS -->
+    <link type="text/css" stl:repeat="style styles" rel="stylesheet"
+      href="${style}"/>
   </head>
-  <body style="margin-left:5em; background: url('images/background.png') rgb(255,255,255) fixed repeat-y;">${body}</body>
+  <body style="margin-left:5em; background: url('images/background.png') rgb(255,255,255) fixed repeat-y;">
+    ${body}
+  </body>
 </html>

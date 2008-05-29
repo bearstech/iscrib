@@ -140,6 +140,8 @@ class FormBM(Form):
         forms = forms[:-2]
         forms = [self.get_ns_and_h(context, n, a, v) for n, a, v in forms]
         namespace['body'] = reduce_generators(forms)
+        namespace['title'] = self.get_title()
+        namespace['styles'] = context.root.get_skin().get_styles(context)
 
         template = self.get_object('/ui/scrib/printable_template.xhtml')
         return stl(template, namespace)
