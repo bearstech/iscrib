@@ -1180,11 +1180,11 @@ class Form(Text):
         names = schema.keys()
         names.sort()
         csv = CSVFile()
-        csv.add_row([u"Chapitre du formulaire", u"rubrique", u"valeur"])
+        csv.add_row(["Chapitre du formulaire", "rubrique", "valeur"])
         for name in names:
             value = namespace.get(name, '')
             if schema[name][0] is EPCI_Statut:
-                label = [x['label'] for x in value if x['is_selected']]
+                label = [x['label'] for x in value if x['selected']]
                 if label:
                     value = label[0]
                 else:
@@ -1192,18 +1192,18 @@ class Form(Text):
             name = name[len('field'):]
             chap = name[0]
             if value is None:
-                value = u"NULL"
+                value = "NULL"
             elif isinstance(value, bool):
-                value = unicode(int(value))
+                value = str(int(value))
             elif isinstance(value, (int, long, float, dec)):
-                value = unicode(str(value))
-            elif isinstance(value, str):
-                value = unicode(str(value), 'UTF-8')
+                value = str(value)
             elif isinstance(value, unicode):
-                value = value.replace(u"€", u"eur")
+                value = value.encode('cp1252')
             else:
                 # Culture Types
-                value = unicode(value.__class__.encode(value), 'UTF-8')
+                value = value.__class__.encode(value)
+            if not isinstance(value, str):
+                raise "value", str(type(value))
             csv.add_row([chap, name, value])
 
-        return csv.to_str('latin1')
+        return csv.to_str(separator=';')
