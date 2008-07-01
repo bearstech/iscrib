@@ -26,7 +26,7 @@ from operator import itemgetter
 # Import from itools
 from itools import uri
 from itools import vfs
-from itools.catalog import EqQuery, AndQuery
+from itools.catalog import EqQuery, AndQuery, OrQuery
 from itools.datatypes import Unicode, Integer
 from itools.web import get_context
 from itools.stl import stl
@@ -52,16 +52,15 @@ class Root(BaseRoot):
     class_version = '20080410'
     class_title = u"SCRIB"
     class_views = [['browse_content'], ['new_reports_form', 'new_bm_form'],
-                   ['export_form'], ['permissions_form'],
+                   ['export_form'], ['permissions_form', 'new_user_form'],
                    ['edit_metadata_form'], ['help']]
 
     __roles__ = [{'name': 'admins', 'title': u'Admin'}]
 
 
     def before_traverse(self, context):
-        BaseRoot.before_traverse(self, context)
         # Set french as default language, whatever the browser config is
-        context.accept_language.set('fr', 1.5)
+        context.accept_language.set('fr', 2.0)
 
 
     #########################################################################
@@ -525,25 +524,31 @@ class Root(BaseRoot):
         search_dep = context.get_form_value('dep')
         search_annee = context.get_form_value('annee')
 
+        namespace['search_admins'] = search_bib == 'admins'
         namespace['search_bm'] = search_bib == 'bm'
         namespace['search_bdp'] = search_bib == 'bdp'
+        namespace['search_all'] = not search_bib
         namespace['ville'] = search_ville
         namespace['dep'] = search_dep
         namespace['annee'] = search_annee
 
         # Search
         query = [EqQuery('format', 'user')]
-        if search_bib == 'bm':
-            query.append(EqQuery('stored_BM', '1'))
-        elif search_bib == 'bdp':
-            query.append(EqQuery('stored_BDP', '1'))
-        if search_ville:
-            query.append(EqQuery('user_town', search_ville))
-        if search_dep:
-            query.append(EqQuery('dep', search_dep))
-        if search_annee:
-            query.append(EqQuery('year', search_annee))
-
+        if search_bib == 'admins':
+            any_admin = OrQuery(*[EqQuery('name', admin)
+                for admin in self.get_property('admins')])
+            query.append(any_admin)
+        else:
+            if search_bib == 'bm':
+                query.append(EqQuery('stored_BM', '1'))
+            elif search_bib == 'bdp':
+                query.append(EqQuery('stored_BDP', '1'))
+            if search_ville:
+                query.append(EqQuery('user_town', search_ville))
+            if search_dep:
+                query.append(EqQuery('dep', search_dep))
+            if search_annee:
+                query.append(EqQuery('year', search_annee))
 
         query = AndQuery(*query)
         results = self.search(query)
@@ -572,10 +577,12 @@ class Root(BaseRoot):
             # Role
             role = self.get_role_title(role)
             if role is None:
-                if user.is_BDP:
+                if user.stored_BDP:
                     ns['role'] = u"BDP"
-                elif user.is_BM:
+                elif user.stored_BM:
                     ns['role'] = u"BM"
+                else:
+                    ns['role'] = u""
             else:
                 ns['role'] = role
             # Append

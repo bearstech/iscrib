@@ -10,14 +10,16 @@
     <fieldset>
       <legend>Rechercher</legend>
       <!-- Field -->
-      <label for="search_bm">BM&nbsp;:</label>
+      <input type="radio" id="search_admins" name="bib" value="admins"
+        checked="${search_admins}"/><label
+        for="search_admins">Administrateurs</label>
       <input type="radio" id="search_bm" name="bib" value="bm"
-        checked="${search_bm}"/>
-      <label for="search_bdp">BDP&nbsp;:</label>
+        checked="${search_bm}"/><label for="search_bm">BM</label>
       <input type="radio" id="search_bdp" name="bib" value="bdp"
-        checked="${search_bdp}"/>
-      <label for="search_all">Toutes&nbsp;:</label>
-      <input type="radio" id="search_all" name="bib" value=""/><br/>
+        checked="${search_bdp}"/><label for="search_bdp">BDP</label>
+      <input type="radio" id="search_all" name="bib" value=""
+        checked="${search_all}"/><label for="search_all">Toutes</label>
+      <br/>
       <label for="search_ville">Nom de la ville, pour une BM (exemple
         "saint")&nbsp;:</label>
       <input type="text" size="20" id="search_ville" name="ville"
@@ -32,6 +34,8 @@
     </fieldset>
   </form>
 
-  <!-- Batch -->${batch}
-  <!-- Content -->${table}
+  <!-- Batch -->
+  ${batch}
+  <!-- Content -->
+  ${table}
 </stl:block>
