@@ -45,7 +45,6 @@ from utils import (get_checkbox_value, get_connection, MSG_NO_MYSQL, make_msg,
         bm_annexes, ua_epci)
 
 
-SMTPServer = config.get_value('SMTPServer')
 MailResponsableBM = config.get_value('MailResponsableBM')
 MailResponsableBDP = config.get_value('MailResponsableBDP')
 
@@ -697,9 +696,11 @@ class Form(Text):
 
     pending2submitted__access__ = 'is_allowed_to_edit_form'
     def pending2submitted(self, context):
+        root = context.root
+        user = context.user
+
         # Change state
         self.set_property('state', 'pending')
-        user = context.user
 
         # Build email
         namespace = self.get_namespace(context)
@@ -708,52 +709,47 @@ class Form(Text):
                           u'Subject: %(subject)s\n' \
                           u'\n' \
                           u'%(body)s\n'
-
         dep = self.get_dep()
         report_email = namespace['field11']
         if self.is_BDP():
-            to_addr = MailResponsableBDP
+            to_addr = unicode(MailResponsableBDP, 'utf_8')
             subject = u'SCRIB-BDP : %s' % dep
             body = u'La Bibliothèque %s a terminé son formulaire.' % self.name
         else:
-            to_addr = unicode(MailResponsableBM, 'UTF-8')
-            subject = u'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
+            to_addr = unicode(MailResponsableBM, 'utf_8')
             subject = u'SCRIB-BM : %s (%s)' % (namespace['code_ua'], dep)
             body = u'La Bibliothèque %s (%s), du département %s, a terminé' \
                    u' son formulaire.'
             body = body % (self.name, self.get_title(), dep)
-
         message = message_pattern % {'to_addr': to_addr,
                                      'from_addr': report_email,
                                      'subject': subject,
                                      'body': body}
+        comeback_msg = (u'Terminé, un e-mail est envoyé à votre '
+                        u'correspondant DLL.')
+        try:
+            root.send_email(to_addr, subject, from_addr=report_email,
+                    text=body, subject_with_host=False)
+        except Exception, e:
+            context.server.log_error(context)
+            comeback_msg = u"%r %s" % (Exception, e)
+        self.scrib_log(context, event='email sent', content=message)
 
-        succsess_mgs = (u'Terminé, un e-mail est envoyé à votre correspondant '
-                        u'DLL.')
-        comeback_msg = self.send_email(SMTPServer=SMTPServer,
-                                       from_addr=report_email,
-                                       to_addr=to_addr,
-                                       message=message,
-                                       succsess_mgs=succsess_mgs)
-
-        self.scrib_log(event='email sent', content=comeback_msg)
-
-        # recipe
+        # Recipient
         r_subject = u'Accusé de réception, DLL'
         r_body = (u"Votre rapport annuel a bien été reçu par votre "
-                  u"correspondant à la DLL. \n\nNous vous remercions "
-                  u"de votre envoi.  Cordialement.")
+                  u"correspondant à la DLL.\n\nNous vous remercions "
+                  u"de votre envoi.\n\nCordialement.")
         r_message = message_pattern % {'to_addr': report_email,
                                        'from_addr': to_addr,
                                        'subject': r_subject,
                                        'body': r_body}
-        trash = self.send_email(SMTPServer=SMTPServer,
-                                from_addr=to_addr,
-                                to_addr=report_email,
-                                message=r_message,
-                                succsess_mgs="")
-
-        self.scrib_log(event='recipe sent', content=r_message)
+        try:
+            root.send_email(report_email, r_subject, from_addr=to_addr,
+                    text=r_body, subject_with_host=False)
+        except:
+            context.server.log_error(context)
+        self.scrib_log(context, event='recipe sent', content=r_message)
 
         return context.come_back(comeback_msg, goto=';controles_form')
 
@@ -769,6 +765,8 @@ class Form(Text):
                 'user   : %(user)s\n' \
                 'event : %(event)s\n' \
                 '\n'
+        if isinstance(content, unicode):
+            content = content.encode('utf_8')
         event = event % {'date': str(datetime.datetime.now()),
                          'uri': str(context.uri),
                          'referrer': str(context.request.referrer),
@@ -887,6 +885,7 @@ class Form(Text):
             cursor.close()
             connection.close()
         except OperationalError:
+            context.server.log_error(context)
             context.commit = False
             return context.come_back(MSG_NO_MYSQL)
 
