@@ -29,7 +29,7 @@ from MySQLdb import OperationalError
 
 # Import from itools
 from itools.catalog import KeywordField, TextField, BoolField
-from itools.datatypes import Unicode, Boolean, String
+from itools.datatypes import is_datatype, Unicode, Boolean, String
 from itools.stl import stl
 from itools.csv import CSVFile
 from itools.handlers import File
@@ -635,11 +635,12 @@ class Form(Text):
                 empty = False
                 # Empties
                 Empties.append(key)
-            is_mandatory = (field_type is not Unicode) and \
-                            (field_type is not EPCI_Statut) and \
-                            (field_type is not String) and \
-                            (key != 'fieldK0') and \
-                            (key not in ['fieldK%s' % i for i in range(40,47)])
+            is_mandatory = (not is_datatype(field_type, (Unicode,
+                                                         EPCI_Statut,
+                                                         String))
+                                and (key != 'fieldK0')
+                                and (key not in ['fieldK%s' % i
+                                         for i in range(40,47)]))
             dependence_id = dependencies.get(key)
             if dependence_id is not None:
                 dependence_value = namespace.get(dependence_id, False)
@@ -675,7 +676,7 @@ class Form(Text):
             if value in ('', None):
                 empties.append(key)
             # XXX check if Checkbox and Decimal and ... are needed here
-            if field_type is not Unicode:
+            if not is_datatype(field_type, Unicode):
                 if value not in ('', None):
                     mendatories.append(key)
             else:
@@ -801,21 +802,21 @@ class Form(Text):
                 keys.append(key)
                 if value in ('', None, 'NC'):
                     value = "null"
-                elif field_type is Unicode:
+                elif is_datatype(field_type, Unicode):
                     value = "'%s'" % value
-                elif field_type is Integer:
+                elif is_datatype(field_type, Integer):
                     value = str(value)
-                elif field_type == Boolean:
+                elif is_datatype(field_type, Boolean):
                     if value:
                         value = "'O'"
                     else:
                         value = "'N'"
-                elif field_type == Checkboxes:
+                elif is_datatype(field_type, Checkboxes):
                     # get the value from checkboxes
                     value = "'%s'" % get_checkbox_value(key, value)
-                elif field_type == Decimal:
+                elif is_datatype(field_type, Decimal):
                     value = "'%s'" % str(value)
-                elif field_type == EPCI_Statut:
+                elif is_datatype(field_type, EPCI_Statut):
                     ids = [x['name'] for x in value if x['selected']]
                     if ids:
                         value = ids[0]
@@ -947,12 +948,12 @@ class Form(Text):
             if len(schema[key]) == 3:
                 is_sum = schema[key][2].get('sum', False)
             keyNumber = key[len('field'):]
-            if field_type is String:
+            if is_datatype(field_type, String):
                 if ns[key]:
                     value = ns[key]
-            elif field_type is EPCI_Statut:
+            elif is_datatype(field_type, EPCI_Statut):
                 value = '4'
-            elif field_type is Unicode:
+            elif is_datatype(field_type, Unicode):
                 if ns[key]:
                     value = ns[key]
                 else:
@@ -961,7 +962,7 @@ class Form(Text):
                         value = u'coué'
                     else:
                         value = u''
-            elif field_type is Integer:
+            elif is_datatype(field_type, Integer):
                 if is_sum:
                     value = Integer(len(is_sum) * 5)
                     e_list = ['E74X', 'E46Z', 'E67Z', 'E71Z', 'E74Y', 'E74Z']
@@ -970,16 +971,16 @@ class Form(Text):
                         value = Integer('NC')
                 else:
                     value = Integer(5)
-            elif field_type is Decimal:
+            elif is_datatype(field_type, Decimal):
                 value = dec('3.14')
                 if is_sum:
                     value = value * dec(len(is_sum))
                     value = Decimal(value)
                 else:
                     value = Decimal(value)
-            elif field_type is Checkboxes:
+            elif is_datatype(field_type, Checkboxes):
                 value = '##1'
-            elif field_type is Boolean:
+            elif is_datatype(field_type, Boolean):
                 value = True
             else:
                 value = '0'
@@ -1019,7 +1020,7 @@ class Form(Text):
             #########################################
             # Take the value from the form
             # Support checkboxes
-            if isinstance(field_type, Checkboxes):
+            if is_datatype(field_type, Checkboxes):
                 values = context.get_form_values(key)
                 value = '##'.join(values)
             else:
@@ -1044,7 +1045,7 @@ class Form(Text):
             # True : no dep AND no value AND no String/Unicode AND
             # False :
             empty = False
-            if not isinstance(field_type, (String, Unicode)):
+            if not is_datatype(field_type, (String, Unicode)):
                 if dependance is not None:
                     # here we know if they are a dependancies
                     # and
