@@ -169,8 +169,7 @@ class Form(Text):
         # Permissions
         user = context.user
         ac = self.get_access_control()
-        namespace['is_allowed_to_edit'] = ac.is_allowed_to_edit_form(user,
-                self)
+        namespace['is_allowed_to_edit'] = ac.is_allowed_to_edit(user, self)
         # Fields
         for name in schema:
             field_def = schema[name]
@@ -401,7 +400,7 @@ class Form(Text):
 
     #######################################################################
     # Control report
-    controles_form__access__ = 'is_allowed_to_view_form'
+    controles_form__access__ = 'is_allowed_to_view'
     controles_form__label__ = u'Contrôle de la saisie'
     def controles_form(self, context):
         schema = self.get_schema()
@@ -695,7 +694,7 @@ class Form(Text):
         return (res0, res1, res2, res3)
 
 
-    pending2submitted__access__ = 'is_allowed_to_edit_form'
+    pending2submitted__access__ = 'is_allowed_to_edit'
     def pending2submitted(self, context):
         root = context.root
         user = context.user
@@ -934,7 +933,7 @@ class Form(Text):
         return template.to_str()
 
 
-    fill_report__access__ = 'is_allowed_to_edit_form'
+    fill_report__access__ = 'is_allowed_to_edit'
     def fill_report(self, context):
         schema = self.get_schema()
         fields = {}
@@ -994,7 +993,7 @@ class Form(Text):
         return context.come_back(message, goto=';controles_form')
 
 
-    report__access__ = 'is_allowed_to_edit_form'
+    report__access__ = 'is_allowed_to_edit'
     def report(self, context):
         schema = self.get_schema()
         fields = {}
@@ -1156,7 +1155,7 @@ class Form(Text):
         return stl(template, namespace)
 
 
-    comments__access__ = 'is_allowed_to_view_form'
+    comments__access__ = 'is_allowed_to_view'
     comments__sublabel__ = u'Commentaires'
     def comments(self, context, view=None):
         return self.get_ns_and_h(context,

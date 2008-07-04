@@ -39,6 +39,7 @@ from ikaaro.widgets import batch, table
 from ikaaro.users import crypt_password
 
 # Import from scrib
+from form import Form
 from form_bm import FormBM
 from form_bdp import FormBDP
 from forms import Forms
@@ -66,7 +67,7 @@ class Root(BaseRoot):
     #########################################################################
     # Security
     #########################################################################
-    browse_content__access__ = 'is_admin'
+    browse_content__access__ = 'is_admin_or_consultant'
 
 
     def is_consultant(self, user, object):
@@ -81,7 +82,7 @@ class Root(BaseRoot):
         return self.is_admin(user, object) or self.is_consultant(user, object)
 
 
-    def is_allowed_to_view_form(self, user, object):
+    def is_allowed_to_view(self, user, object):
         # Anonymous
         if user is None:
             return False
@@ -91,38 +92,41 @@ class Root(BaseRoot):
         # VoirSCRIB
         if user.name == 'VoirSCRIB':
             return True
-        # Check the year
-        if user.get_year() != object.parent.get_year():
-            return False
-        # Check the department
-        if user.is_BM():
-            if user.get_BM_code() != object.name:
+        if isinstance(object, Form):
+            # Check the year
+            if user.get_year() != object.parent.get_year():
                 return False
-        elif user.is_BDP():
-            if user.get_department() != object.name:
-                return False
+            # Check the department
+            if user.is_BM():
+                if user.get_BM_code() != object.name:
+                    return False
+            elif user.is_BDP():
+                if user.get_department() != object.name:
+                    return False
         return True
 
 
-    def is_allowed_to_edit_form(self, user, object):
+    def is_allowed_to_edit(self, user, object):
         # Admin
         if self.is_admin(user, object):
             return True
         # Anonymous
-        if user is None:
+        if user is None or user.name == 'VoirSCRIB':
             return False
-        # Check the year
-        if user.get_year() != object.parent.get_year():
-            return False
-        # Check the department
-        if user.is_BM():
-            if user.get_BM_code() != object.name:
+        if isinstance(object, Form):
+            # Check the year
+            if user.get_year() != object.parent.get_year():
                 return False
-        elif user.is_BDP():
-            if user.get_department() != object.name:
-                return False
-        # Only if 'private' -> 'Vide', 'En cours'
-        return object.get_workflow_state() == 'private'
+            # Check the department
+            if user.is_BM():
+                if user.get_BM_code() != object.name:
+                    return False
+            elif user.is_BDP():
+                if user.get_department() != object.name:
+                    return False
+            # Only if 'private' -> 'Vide', 'En cours'
+            return object.get_workflow_state() == 'private'
+        return False
 
 
     def is_allowed_to_trans(self, user, object, name):
@@ -504,6 +508,7 @@ class Root(BaseRoot):
                     'dept': bib.get_value('dep'),
                     'code_insee': bib.get_value('id'), 'login': username,
                     'password': username})
+
 
     #########################################################################
     # Users
