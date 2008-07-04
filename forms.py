@@ -130,14 +130,14 @@ class Forms(Folder):
             rows.append({'name': document.name,
                          'title': (document.title, url),
                          'form_state': document.form_state,
-                         'date': mtime.strftime('%d-%m-%Y %Hh%M')})
+                         'mtime': mtime.strftime('%d-%m-%Y %Hh%M')})
 
         # The table
         namespace['batch'] = batch(context.uri, batchstart, batchsize,
                                    results.get_n_documents())
         columns = [('name', u"Code"),
                    ('title', u"Ville"),
-                   ('date', u"Date"),
+                   ('mtime', u"Date"),
                    ('form_state', u"État")]
         if self.is_BDP():
             columns[1] = ('title', u"Département")
