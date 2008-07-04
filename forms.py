@@ -15,6 +15,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from the Standard Library
+from operator import itemgetter
+
 # Import from itools
 from itools.catalog import EqQuery, PhraseQuery, AndQuery
 from itools.stl import stl
@@ -47,11 +50,11 @@ class Forms(Folder):
     # API
     #########################################################################
     def is_BM(self):
-        return 'BM' in self.name
+        return self.name.startswith('BM')
 
 
     def is_BDP(self):
-        return 'BDP' in self.name
+        return self.name.startswith('BDP')
 
 
     def get_year(self):
@@ -121,16 +124,20 @@ class Forms(Folder):
         # current folder.
         rows = []
         get_object = root.get_object
-        for document in results.get_documents(sort_by=sortby,
-                                              reverse=(sortorder=='down'),
-                                              start=batchstart,
-                                              size=batchsize):
+        for document in results.get_documents():
             mtime = get_object(document.abspath).get_mtime()
-            url = '%s/;report_form0' % document.name
-            rows.append({'name': document.name,
+            form_name = document.name
+            url = '%s/;report_form0' % form_name
+            if self.is_BM():
+                form_name = int(form_name)
+            rows.append({'name': form_name,
                          'title': (document.title, url),
                          'form_state': document.form_state,
                          'mtime': mtime.strftime('%d-%m-%Y %Hh%M')})
+        # 0005562: Tri par code_ua est alphanumérique au lieu d'être numérique
+        reverse = (sortorder == 'down')
+        rows.sort(key=itemgetter(sortby), reverse=reverse)
+        rows = rows[batchstart:batchstart+batchsize]
 
         # The table
         namespace['batch'] = batch(context.uri, batchstart, batchsize,

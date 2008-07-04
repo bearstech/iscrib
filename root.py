@@ -241,7 +241,7 @@ class Root(BaseRoot):
         t = time()
 
         users = self.get_object('users')
-        users.set_handler('VoirSCRIB', bibUser(),
+        users.set_handler('VoirSCRIB', ScribUser(),
                 **{'ikaaro:password': crypt_password('BMBDP')})
         report_c = int(time() -t); print 'get users, deep copy', report_c
 
