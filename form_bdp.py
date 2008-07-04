@@ -220,8 +220,7 @@ class FormBDP(Form):
 
 
     help0__access__ = True
-    def help0(self):
-        context = get_context()
+    def help0(self, context):
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         handler = self.get_handler('/ui/culture/FormBDP_help0.xml')
         return handler.to_str()

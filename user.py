@@ -33,6 +33,7 @@ class ScribUser(User):
     class_version = '20080410'
     class_views = [['home'], ['edit_password_form']]
 
+
     def get_catalog_fields(self):
         fields = User.get_catalog_fields(self)
         fields += [TextField('user_town'),
@@ -140,10 +141,10 @@ class ScribUser(User):
     home__access__ = 'is_self'
     home__label__ = u'Home'
     def home(self, context):
-        namespace = {}
-        root = self.get_root()
+        root = context.root
         name = self.name
         department, code = '', ''
+        namespace = {}
 
         year = self.get_year()
         if self.is_BM():

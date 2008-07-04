@@ -141,8 +141,8 @@ class Forms(Folder):
                    ('form_state', u"État")]
         if self.is_BDP():
             columns[1] = ('title', u"Département")
-        namespace['table'] = table(columns, rows, sortby, sortorder,
-                table_with_form=False)
+        namespace['table'] = table(columns, rows, [sortby], sortorder,
+                table_with_form=True)
 
         template = self.get_object('/ui/scrib/Forms_search.xml')
         return stl(template, namespace)
