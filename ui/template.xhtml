@@ -86,12 +86,14 @@
               <tr>
                 <td class="${menu/class}" onmouseover="show('menu_${menu/id}')" stl:repeat="menu tabs" onmouseout="hide('menu_${menu/id}')">
                   <div class="menu">
-                    <a id="${menu/id}" href="${menu/name}"><span style="background-image: url(${menu/icon})">${menu/label}</span></a>
+                    <a id="${menu/id}" href="${menu/name}"><span
+                        style="${menu/style}">${menu/label}</span></a>
                   </div>
                   <div class="submenu" stl:if="menu/options" id="menu_${menu/id}">
                     <ul>
                       <li stl:repeat="option menu/options">
-                        <a href="${option/name}"><span style="background-image: url(${option/icon})">${option/label}</span></a>
+                        <a href="${option/name}"><span
+                            style="${option/style}">${option/label}</span></a>
                       </li>
                     </ul>
                   </div>
