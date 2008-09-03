@@ -526,7 +526,7 @@ class Root(BaseRoot):
         # The search form
         search_bib = context.get_form_value('bib')
         search_ville = context.get_form_value('ville', type=Unicode)
-        search_dep = context.get_form_value('dep')
+        search_dep = context.get_form_value('dep', default='').upper()
         search_annee = context.get_form_value('annee')
 
         namespace['search_admins'] = search_bib == 'admins'

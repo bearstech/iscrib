@@ -110,7 +110,7 @@ class Forms(Folder):
             query.append(PhraseQuery('user_town', name))
         # The department
         if dep:
-            query.append(EqQuery('dep', dep))
+            query.append(EqQuery('dep', dep.lower()))
         # The state
         if state:
             form_state = WorkflowState.get_value(state)

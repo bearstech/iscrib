@@ -81,7 +81,7 @@ class ScribUser(User):
         name = self.name
         dep = ''
         if self.is_BDP():
-           dep = name.split('BDP')[-1]
+           dep = name.split('BDP')[-1].lower()
         elif self.is_BM():
             code = self.get_BM_code()
             if code:
