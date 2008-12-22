@@ -167,8 +167,8 @@
     <th style="background-color:#FFE15C">La bibliothèque a-t-elle un site web ?</th>
     <td>
       <table><tr style="padding:0px;  text-align: left;background-color:#FFE15C">
-        <td><input style="font-size: 8pt;  border:0px;background-color:#FFE15C" value="1" name="fieldH31" checked="${fieldH31}" type="radio" onclick="switch_on(['fieldH32','fieldH33','fieldH34','fieldH35','fieldH36','fieldH37', 'fieldH39'])"/>Oui</td>
-      <td style="border-left: 1px solid black;text-align: right;background-color:#FFE15C"><input style="font-size: 8pt;  border:0px;background-color:#FFE15C" value="0" name="fieldH31" checked="${fieldH31_not}" type="radio" onclick="switch_off(['fieldH32','fieldH33','fieldH34','fieldH35','fieldH36','fieldH37', 'fieldH39'])"/>Non      </td>      </tr></table>    </td>
+        <td><input style="font-size: 8pt;  border:0px;background-color:#FFE15C" value="1" name="fieldH31" checked="${fieldH31}" type="radio" onclick="switch_on(['fieldH32','fieldH33','fieldH34','fieldH35','fieldH36','fieldH37','fieldH38X', 'fieldH38Y','fieldH38Z','fieldH39'])"/>Oui</td>
+      <td style="border-left: 1px solid black;text-align: right;background-color:#FFE15C"><input style="font-size: 8pt;  border:0px;background-color:#FFE15C" value="0" name="fieldH31" checked="${fieldH31_not}" type="radio" onclick="switch_off(['fieldH32','fieldH33','fieldH34','fieldH35','fieldH36','fieldH37', 'fieldH38X', 'fieldH38Y','fieldH38Z','fieldH39'])"/>Non      </td>      </tr></table>    </td>
     <td style="background-color:#FFE15C"><b class="${_H31}">H31</b></td>
   </tr>
 
@@ -248,15 +248,39 @@
   </tr>
   <tr>
     <th>Nombre de sessions / an</th>
-    <td>
-       <input style="text-align: right" value="${fieldH38X}" name="fieldH38X" size="8" type="text"/>
+    <!--td>
+       <input style="text-align: right"  value="${fieldH38X}" name="fieldH38X" size="8" type="text"/>
     </td>
     <td>
        <input style="text-align: right" value="${fieldH38Y}" name="fieldH38Y" size="8" type="text"/>
     </td>
     <td>
        <input style="text-align: right" value="${fieldH38Z}" name="fieldH38Z" size="8" type="text"/>
+    </td-->
+    
+    <td>
+       <div stl:if="not fieldH31" id="display_fieldH38X" style="visibility:hidden">
+              <input style="text-align: right" value="" stl:if="not fieldH31" name="fieldH38X" size="8" type="text"/></div>
+       <div stl:if="fieldH31" id="display_fieldH38X"> 
+              <input style="text-align: right" value="${fieldH38X}" stl:if="fieldH31" name="fieldH38X" size="8" type="text"/>
+       </div>
     </td>
+     <td>
+       <div stl:if="not fieldH31" id="display_fieldH38Y" style="visibility:hidden">
+              <input style="text-align: right" value="" stl:if="not fieldH31" name="fieldH38Y" size="8" type="text"/></div>
+       <div stl:if="fieldH31" id="display_fieldH38Y"> 
+              <input style="text-align: right" value="${fieldH38Y}" stl:if="fieldH31" name="fieldH38Y" size="8" type="text"/>
+       </div>
+    </td>
+     <td>
+       <div stl:if="not fieldH31" id="display_fieldH38Z" style="visibility:hidden">
+              <input style="text-align: right" value="" stl:if="not fieldH31" name="fieldH38Z" size="8" type="text"/></div>
+       <div stl:if="fieldH31" id="display_fieldH38Z"> 
+              <input style="text-align: right" value="${fieldH38Z}" stl:if="fieldH31" name="fieldH38Z" size="8" type="text"/>
+       </div>
+    </td>
+    
+    
     <td><b class="${_H38}">H38</b></td>
   </tr>
 </table>

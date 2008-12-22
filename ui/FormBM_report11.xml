@@ -12,11 +12,14 @@
 
   </div>
   <h1>FICHE DE RENSEIGNEMENTS concernant les Etablissements Publics de Coopération Intercommunale (EPCI) ayant compétence en matière de lecture
-	  publique intégrale ou partagée
+	  publique intégrale ou partagée <br/>
 
-   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help11', 'xxx', 'toolbar=no,   location=no, status=no,
-		       menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
+   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help11', 'xxx', 'toolbar=no, 
+       location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
+      
+		       
   </h1>
+  
   <table>
   <colgroup>
     <!-- col width="30%"/> <col width="55%"/> <col width="5%"/-->
@@ -78,6 +81,7 @@
           value="${option/name}">${option/label}</option>
       </select>
     </td>
+    
 
    <td><b class="${_K17}">K17</b></td>
    </tr>
@@ -99,6 +103,7 @@
           value="${option/name}">${option/label}</option>
       </select>
    </td>
+    
 
    <td><b class="${_K18}">K18</b></td>
 
@@ -121,6 +126,7 @@
           value="${option/name}">${option/label}</option>
       </select>
    </td>
+    
 
    <td><b class="${_K7}">K19</b></td>
 
@@ -143,6 +149,7 @@
           value="${option/name}">${option/label}</option>
       </select>
    </td>
+   
 
    <td><b class="${_K20}">K20</b></td>
 
@@ -165,6 +172,7 @@
           value="${option/name}">${option/label}</option>
       </select>
    </td>
+   
 
    <td><b class="${_K21}">K21</b></td>
 
@@ -187,6 +195,7 @@
           value="${option/name}">${option/label}</option>
       </select>
    </td>
+   
 
    <td><b class="${_K22}">K22</b></td>
 

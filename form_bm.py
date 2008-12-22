@@ -125,7 +125,7 @@ class FormBM(Form):
     #######################################################################
     # Edit report
     print_form__access__ = 'is_allowed_to_view'
-    print_form__label__ = u'Impression du rapport '
+    print_form__label__ = u'Imprimez votre rapport '
     def print_form(self, context):
         context.response.set_header('Content-Type',
                                     'text/html; charset=UTF-8')
@@ -149,7 +149,7 @@ class FormBM(Form):
 
 
     report_form0__access__ = 'is_allowed_to_view'
-    report_form0__label__ = u'Rapport Bibliothèques'
+    report_form0__label__ = u'Renseignez votre rapport'
     report_form0__sublabel__ = u'Identité'
     def report_form0(self, context, view=None):
         return self.get_ns_and_h(context,

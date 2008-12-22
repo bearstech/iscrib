@@ -51,7 +51,19 @@
     </td>
     <td><b class="${_B11}">B11</b></td>
   </tr>
-
+ <tr>
+    <th>Nombre de bâtiments de la BDP</th>
+    <td>
+       <input style="text-align: right" value="${fieldB16X}" name="fieldB16X" size="8" type="text"/>
+    </td>
+    <td>
+       <input style="text-align: right" value="${fieldB16Y}" name="fieldB16Y" size="8" type="text"/>
+    </td>
+    <td>
+       <input style="text-align:right" value="${fieldB16Z}" name="fieldB16Z" size="8" type="text"/>
+    </td>
+    <td><b class="${_B16}">B16</b></td>
+  </tr>
   <tr>
     <th>Nombre de bâtiments de la BDP ouverts à tous publics</th>
     <td>
@@ -277,17 +289,50 @@
   <tr>
     <th>Entièrement gratuit</th>
     <td>
+      <table stl:if="fieldB41" id="display_fieldB39"> 
+                  <tr style="padding: 10px; text-align: left">
+                    <td> <input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
+                    <td style="border-left: 1px solid black;text-align: right"><input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
+                  </tr>
+      </table> 
+      <table stl:if="not fieldB31" id="display_fieldB39" style="visibility:hidden">
+                 <tr style="padding: 10px; text-align: left">
+                    <td><input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
+                    <td style="border-left: 1px solid black;text-align: right"> <input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
+                  </tr>
+       </table>
+       </td>
+    
+    
+    <!--td>
       <table stl:if="fieldB41" id="display_fieldB39"><tr style="padding: 10px; text-align: left">
           <td><input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39}" value="1" type="radio"/>Oui      </td>
-          <td style="border-left: 1px solid black;text-align: right"><input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+          <td style="border-left: 1px solid black;text-align: right"><input name="fieldB39" style="font-size: 8pt;  border:0px" checked="${fieldB39_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td-->
     <td><b class="${_B39}">B39</b></td>
   </tr>
 
   <tr>
     <th>Payant, même partiellement</th>
-    <td>
-      <table stl:if="fieldB41" id="display_fieldB40"><tr style="padding: 10px; text-align: left"><td>        <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
+    
+      <td>
+      <table stl:if="fieldB41" id="display_fieldB40"> 
+                  <tr style="padding: 10px; text-align: left">
+                    <td> <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
+                    <td style="border-left: 1px solid black;text-align: right"><input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
+                  </tr>
+      </table> 
+      <table stl:if="not fieldB31" id="display_fieldB40" style="visibility:hidden">
+                 <tr style="padding: 10px; text-align: left">
+                    <td><input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
+                    <td style="border-left: 1px solid black;text-align: right"> <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
+                  </tr>
+       </table>
+       </td>
+    
+    <!--td>
+      <table stl:if="fieldB41" id="display_fieldB40"><tr style="padding: 10px; text-align: left">
+      <td><input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40}" value="1" type="radio"/>Oui      </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB40" style="font-size: 8pt;  border:0px" checked="${fieldB40_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td-->
     <td><b class="${_B40}">B40</b></td>
   </tr>
 </table>

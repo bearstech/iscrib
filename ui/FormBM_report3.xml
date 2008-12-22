@@ -12,7 +12,7 @@
     </stl:block>
   </div>
 
- <h1>C-  PERSONNEL EN POSTE AU 31 DECEMBRE 2007
+ <h1>C-  PERSONNEL EN POSTE AU 31 DECEMBRE 2008
   <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help3', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
 </h1>
 <!--h2>CADRES D' EMPLOIS</h2-->
@@ -77,7 +77,7 @@
      <td><b class="${_C12}">C12</b></td>
   </tr>
   <tr>
-    <th style="background-color:#FFE15C">Bibliothécaires</th>
+    <th style="background-color:#FFE15C">Bibliothécaires et Attachés de conservation</th>
     <td>
        <input style="text-align: right" value="${fieldC13W}" name="fieldC13W" size="8" type="text"/>
     </td>
@@ -124,37 +124,22 @@
     </td>
      <td><b class="${_C15}">C15</b></td>
   </tr>
+  
   <tr>
-    <th style="background-color:#FFE15C">Agents qualifiés du patrimoine</th>
+    <th style="background-color:#FFE15C">Adjoints du patrimoine</th>
     <td>
-       <input style="text-align: right" value="${fieldC16W}" name="fieldC16W" size="8" type="text"/>
+       <input style="text-align: right" value="${fieldC18W}" name="fieldC18W" size="8" type="text"/>
     </td>
     <td>
-       <input style="text-align: right;background-color:#FFE15C" value="${fieldC16X}" name="fieldC16X" size="8" type="text"/>
+       <input style="text-align: right;background-color:#FFE15C" value="${fieldC18X}" name="fieldC18X" size="8" type="text"/>
     </td>
     <td>
-       <input style="text-align: right" value="${fieldC16Y}" name="fieldC16Y" size="8" type="text"/>
-    </td>
-   <td style="padding:0px;  text-align: center">
-           <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_6}" value="6" type="radio"/>
-    </td>
-     <td><b class="${_C16}">C16</b></td>
-  </tr>
-  <tr>
-    <th style="background-color:#FFE15C">Agents du patrimoine</th>
-    <td>
-       <input style="text-align: right" value="${fieldC17W}" name="fieldC17W" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right;background-color:#FFE15C" value="${fieldC17X}" name="fieldC17X" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldC17Y}" name="fieldC17Y" size="8" type="text"/>
+       <input style="text-align: right" value="${fieldC18Y}" name="fieldC18Y" size="8" type="text"/>
     </td>
     <td style="padding:0px;  text-align: center">
            <input name="fieldCZ" style="font-size: 8pt;  border:0px" checked="${fieldCZ_7}" value="7" type="radio"/>
     </td>
-    <td><b class="${_C17}">C17</b></td>
+    <td><b class="${_C18}">C18</b></td>
   </tr>
 </table>
 <h2>C.2 FONCTION PUBLIQUE : AUTRES FILIÈRES  (administrative, technique, sociale...)</h2>

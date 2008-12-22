@@ -13,7 +13,7 @@
     </stl:block>
   </div>
 
- <h1>G- ACTIVITÉS DE LA BIBLIOTHÈQUE
+ <h1>G- ACTIVITÉS DE LA BIBLIOTHÈQUE DE L'ANNÉE 
    <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help7', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page</a>
 </h1>
 <h2>G.1 OUVERTURE À TOUS LES PUBLICS(hors accueils de publics spécifiques et de classes)</h2>
@@ -73,7 +73,7 @@
     <td><b class="${_G13}">G13</b></td>
   </tr>
 </table>
-<h2>G.2/3 INSCRITS ET EMPRUNTEURS</h2>
+<h2>G. 2/3 USAGERS (INSCRITS,  EMPRUNTEURS, FRÉQUENTANTS)</h2>
 <table width="100%">
   <colgroup>
     <col width="30%"/>
@@ -209,7 +209,7 @@
   </tr-->
   <tr>
     <th style="background-color:#FFE15C">
-      <b>TOTAL USAGERS INSCRITS et/ou EMPRUNTEURS (G20 + G21 + G25)</b>
+      <b>TOTAL INSCRITS ACTIFS et/ou EMPRUNTEURS ACTIFS (G20 + G21 + G25)</b>
     </th>
     <td>
        <input style="text-align: right;background-color:#FFE15C" value="${fieldG26Y}" name="fieldG26Y" size="8" type="text"/>
@@ -241,7 +241,7 @@
    </colgroup>
 
   <tr>
-    <th>Nombre d'entrées dans la bibliothèque centrale </th>
+    <th>Fréquentants : Nombre d'entrées dans la bibliothèque centrale </th>
     <td>
        <input style="text-align: right" value="${fieldG28}" name="fieldG28" size="8" type="text"/>
     </td>
@@ -249,8 +249,7 @@
   </tr>
 
   <tr>
-    <th>Nombre d'entrées dans les bibliothèques annexes ou autres bibliothèques
-        du réseau</th>
+    <th>Fréquentants : Nombre d'entrées dans les bibliothèques annexes ou autres bibliothèques du réseau</th>
     <td>
        <input style="text-align: right" value="${fieldG29}" name="fieldG29" size="8" type="text"/>
     </td>
@@ -258,8 +257,7 @@
   </tr>
 
   <tr>
-    <th> Nombre total d'entrées dans l'année (bibliothèque centrale et
-         annexes) </th>
+    <th> Fréquentants : Nombre total  d'entrées dans l'année (bibliothèque centrale et annexes)</th>
     <td>
        <input style="text-align: right" value="${fieldG30}" name="fieldG30" size="8" type="text"/>
     </td>
@@ -298,7 +296,7 @@
     <td><b class="${_G33}">G33</b></td>
   </tr>
 </table>
-<h2>G. 4/5 NOMBRE DE PRÊTS ET COMMUNICATIONS EFFECTUÉS  DANS L'ANNÉE</h2>
+<h2>G. 4/5 NOMBRE DE PRÊTS ET COMMUNICATIONS DE DOCUMENTS</h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>
@@ -413,7 +411,7 @@
     <td style="background-color:#FFE15C"><b class="${_G48}">G48</b></td>
   </tr>
 </table>
-
+<h2>  </h2>
 <table width="100%">
   <colgroup>
     <col width="59%"/>

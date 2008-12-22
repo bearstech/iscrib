@@ -30,8 +30,9 @@ Dans le cadre d’un réseau de bibliothèques relevant d’une même collectivi
 <dl class="description">
 <dt><b>ATTENTION ! l'emprunteur est distinct de l'inscrit : on peut être inscrit sans être emprunteur mais pas l'inverse </b>
 <ul>
-<li><u>Un inscrit actif </u> est un usager inscrit (norme ISO 2789 " Statistiques internationales des bibliothèques ", juillet 2003).</li>
+<li><u>Un inscrit actif </u> est un usager inscrit (norme ISO 2789 " Statistiques internationales des bibliothèques ", 2006).</li>
 <li><u>Un emprunteur actif </u> est un usager inscrit ayant  emprunté au moins un document dans l'année civile. </li>
+<li><u>Fréquentants (G30)</u> : une entrée est l'action pour un usager, c'est à dire un bénéficiaire des services de la bibliothèque, de pénétrer dans ses locaux.</li>
 </ul>
 </dt>
 <dt>
@@ -39,7 +40,6 @@ Dans le cadre d’un réseau de bibliothèques relevant d’une même collectivi
 <li><u>Enfants </u>: à titre indicatif, moins de 15 ans.</li>
 <li><u>Collectivités</u> : compter dans cette rubrique les collectivités inscrites qui viennent à la bibliothèque pour emprunter des documents pour une durée normale, et qui n'ont pu être comptabilisées  ni dans les inscrits adultes, ni dans les inscrits enfants. Leurs prêts sont normalement comptabilisés avec les PRETS AUX USAGERS aux lignes G41 à G47.
 Compter ainsi : 1 carte d'inscription pour 1 classe = 1 inscrit Collectivités.</li>
-<li><u>Nombre total d'entrées dans l'année </u>: un entrée est l'action pour un usager, c'est à dire un bénéficiaire des services de la bibliothèque, de pénétrer dans les locaux de celle-ci.</li>
 </ul>
 </dt>
 </dl>

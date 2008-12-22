@@ -181,11 +181,37 @@
     <td><b class="${_B34}">B34</b></td>
   </tr>
 
-  <tr>
-    <th>Si la bibliothèque possède des documents patrimoniaux, leur catalogue est- au moins en partie informatisé ?</th>
+  
+   <tr>
+    <th>La bibliothèque possède-t-elle des documents patrimoniaux ?</th>
     <td>
+      <table><tr style="padding: 10px; text-align: left"><td>
+           <input style="font-size: 8pt;  border:0px" value="1" name="fieldB341" checked="${fieldB341}" type="radio" onclick="switch_on(['fieldB35'])"/>Oui  </td>
+      <td style="border-left: 1px solid black;text-align: right">
+              <input style="font-size: 8pt;  border:0px" value="0" name="fieldB341" checked="${fieldB341_not}" type="radio" onclick="switch_off(['fieldB35'])"/>Non  </td>      </tr></table>    </td>
+    <td><b class="${_B341}">B341</b></td>
+  </tr>
+  
+  <tr>
+    <th>Si oui, leur catalogue est-il au moins en partie informatisé ?</th>
+    <!--td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldB35" checked="${fieldB35}" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldB35" checked="${fieldB35_not}" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>      </tr></table>    </td>
+      <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldB35" checked="${fieldB35_not}" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>      </tr></table>    </td-->
+      <td>
+      <table stl:if="fieldB341" id="display_fieldB35"> 
+                  <tr style="padding: 10px; text-align: left">
+                    <td> <input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
+                    <td style="border-left: 1px solid black;text-align: right"><input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
+                  </tr>
+      </table> 
+      <table stl:if="not fieldB341" id="display_fieldB35" style="visibility:hidden">
+                 <tr style="padding: 10px; text-align: left">
+                    <td><input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
+                    <td style="border-left: 1px solid black;text-align: right"> <input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
+                  </tr>
+       </table>
+       </td>
+    
     <td><b class="${_B35}">B35</b></td>
   </tr>
 
@@ -276,12 +302,7 @@
     <td><b class="${_B41}">B41</b></td>
   </tr>
 
-  <tr>
-    <th>Payant, même partiellement ?</th>
-    <td>
-      <table stl:if="fieldB40" id="display_fieldB42">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB42" style="font-size: 8pt;  border:0px" checked="${fieldB42}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB42" style="font-size: 8pt;  border:0px" checked="${fieldB42_not}" value="0" type="radio"/>Non      </td>      </tr></table>      <table stl:if="not fieldB40" id="display_fieldB42" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB42" style="font-size: 8pt;  border:0px" checked="${fieldB42}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB42" style="font-size: 8pt;  border:0px" checked="${fieldB42_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
-    <td><b class="${_B42}">B42</b></td>
-  </tr>
+ 
 </table>
 <table width="100%">
   <colgroup>

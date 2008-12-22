@@ -23,7 +23,7 @@
         <td valign="top">
           <p>Direction du livre et de la lecture</p>
           <p>Bureau des bibliothèques territoriales</p>
-          <p>182, rue Saint Honore</p>
+          <p>182, rue Saint-Honoré</p>
           <p>75033 PARIS CEDEX 01</p>
         </td>
         <td valign="top">
@@ -58,13 +58,15 @@
           </table>
         </td>
         <td align="right" valign="top">
-          <stl:block stl:if="not user/info">(déconnecté)<br/><br/> <a id="top_menu_login" href="/;login_form">Connexion</a> <a id="top_menu_register" stl:if="user/joinisopen" href="/;register_form">Inscription</a>
+          <stl:block stl:if="not user/info">(déconnecté)<br/><br/> <a id="top_menu_login" href="/;login_form">Accéder à votre rapport</a> <a id="top_menu_register" stl:if="user/joinisopen" href="/;register_form">Inscription</a>
           </stl:block>
 
-          <stl:block stl:if="user/info">(logged in as ${user/info/title})<br/><br/> <a id="top_menu_profile" href="${user/info/home}">My Profile</a> <a id="top_menu_logout" href="/;logout">Log out</a>
+          <stl:block stl:if="user/info">(connecté en tant que ${user/info/title})<br/><br/> 
+          <!--a id="top_menu_profile" href="${user/info/home}">Mon profil</a-->
+           <a id="top_menu_logout" href="/;logout">Quitter</a>
           </stl:block>
 
-          <a id="top_menu_search" href="/;site_search">Rechercher</a> <a id="top_menu_contact" href="/;contact_form">Contact</a>
+          <!--a id="top_menu_search" href="/;site_search">Rechercher</a> <a id="top_menu_contact" href="/;contact_form">Contact</a-->
         </td>
       </tr>
     </table>

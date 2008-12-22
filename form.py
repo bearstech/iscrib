@@ -408,7 +408,7 @@ class Form(Text):
     #######################################################################
     # Control report
     controles_form__access__ = 'is_allowed_to_view'
-    controles_form__label__ = u'Contrôle de la saisie'
+    controles_form__label__ = u'Contrôlez votre saisie'
     def controles_form(self, context):
         schema = self.get_schema()
         controles = self.get_controles()
@@ -1135,7 +1135,7 @@ class Form(Text):
     #######################################################################
     # Help
     help__access__ = True
-    help__label__ = u'Aide'
+    help__label__ = u'Aidez-vous !'
     def help(self, context):
         template = self.get_object('/ui/scrib/Form_help.xml')
         return template.to_str()
@@ -1152,7 +1152,7 @@ class Form(Text):
     # Export
     #report_csv__access__ = Text.is_admin
     report_csv__access__ = True
-    report_csv__label__ = u'Export vers la bibliothèque'
+    report_csv__label__ = u'Exportez chez vous votre rapport'
     def report_csv(self, context):
         """ Call downloadCSV """
         namespace = self.get_namespace(context)

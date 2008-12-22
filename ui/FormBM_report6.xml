@@ -73,7 +73,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque a-t-elle mené en 2007 des actions internationales ?</th>
+    <th>La bibliothèque a-t-elle mené en 2008 des actions internationales ?</th>
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldF16" checked="${fieldF16}" type="radio" onclick="switch_on(['fieldF17','fieldF18','fieldF19','fieldF20'])"/>Oui      </td>
       <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldF16" checked="${fieldF16_not}" type="radio" onclick="switch_off(['fieldF17','fieldF18','fieldF19','fieldF20'])"/>Non      </td>      </tr></table>    </td>
@@ -125,7 +125,7 @@
     <col width="5%"/>
    </colgroup>
   <tr>
-    <th>La bibliothèque a-t-elle entretenu en 2007 des partenariats avec des structures publiques ou privées (associations...) ?</th>
+    <th>La bibliothèque a-t-elle entretenu en 2008 des partenariats avec des structures publiques ou privées (associations...)</th>
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldF24" checked="${fieldF24}" type="radio" onclick="switch_on(['fieldF25','fieldF26','fieldF27','fieldF28','fieldF29','fieldF30'])"/>Oui      </td>
       <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldF24" checked="${fieldF24_not}" type="radio" onclick="switch_off(['fieldF25','fieldF26','fieldF27','fieldF28','fieldF29','fieldF30'])"/>Non      </td>      </tr></table>    </td>

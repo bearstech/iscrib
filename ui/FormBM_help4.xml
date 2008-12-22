@@ -14,12 +14,8 @@
 <h2>COLLECTIONS </h2>
 
 Il s'agit du nombre de documents entrés dans les collections de la bibliothèque. Ne pas inclure les documents déposés par les bibliothèques départementales de prêt.
-Pour les unités matérielles composées d'un assemblage de documents aux supports différents (enregistrement sonore + livre), il faut déterminer l'élément principal et le verser au compte de l'un ou l'autre support. En revanche, pour les livres simplement accompagnés de matériels sonores conçus comme des " bonus " (cassettes audio, disques compacts audio, cédéroms), c'est le livre qui prime lorsqu'il peut être vendu sans accompagnement sonore. Ces documents avec matériel d'accompagnement sonore ne sont donc pas à compter avec les phonogrammes.
+Pour les unités matérielles composées d'un assemblage de documents aux supports différents (enregistrement sonore + livre), il convient de déterminer l'élément principal et le verser au compte de l'un ou l'autre support. En revanche, pour les livres simplement accompagnés de matériels sonores conçus comme des " bonus " (cassettes audio, disques compacts audio, cédéroms), c'est le livre qui prime lorsqu'il peut être vendu sans accompagnement sonore. Ces documents avec matériel d'accompagnement sonore ne sont donc pas à compter avec les phonogrammes.
 
-<dl class="description">
-<dt>NOMBRE DE DOCUMENTS : <b>ATTENTION ! </b>depuis 2004, et contrairement aux rapports des années passées il doit être procédé au décompte différencié des périodiques (D4)  et des livres (D1/2) dans les collections d'imprimés.
-</dt>
-</dl>
 
 <h4>Phonogrammes (D17)  </h4>
 <dl class="description">
@@ -28,7 +24,7 @@ Pour les unités matérielles composées d'un assemblage de documents aux suppor
 
 <h4>Cédéroms (D18)  </h4>
 <dl class="description">
-<dt>inclut tous les disques optiques numériques excepté les CD audio qui font partie des phonogrammes,  les CD vidéo et DVD qui font partie des vidéogrammes.</dt>
+<dt>inclut tous les disques optiques numériques exceptés les CD audio qui font partie des phonogrammes,  les CD vidéo et DVD qui font partie des vidéogrammes.</dt>
 <dt>Compter les unités matérielles, par unité de présentation. L'unité de présentation peut être un boîtier contenant plusieurs disques.</dt>
 </dl>
 
@@ -63,6 +59,12 @@ Pour les unités matérielles composées d'un assemblage de documents aux suppor
 </dt>
 <dt>Pour information, <u>les documents multimédias</u> sont comptabilisés en fonction de leurs principales caractéristiques ou objectifs, par exemple, en tant que base de données, périodique électronique ou document numérique.
 </dt>
+</dl>
+
+<h4>Documents adaptés et livres en gros caractères (D26 et D27)</h4>
+<dl class="description">
+<dt>Les documents en gros caractères sont traités séparément des documents adaptés aux personnes handicapées. Ce type d'édition bénéficie en effet d'une bonne diffusion commerciale et son usage n'est pas systématiquement le fait des personnes handicapées.
+Les documents adaptés regroupent, par exemple : livres en braille, livres tactiles, livres sonores, multisupports, multimédia.</dt>
 </dl>
 
 <h4>Documents patrimoniaux (D.3)  </h4>
