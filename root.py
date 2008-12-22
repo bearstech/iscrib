@@ -245,8 +245,9 @@ class Root(BaseRoot):
         t = time()
 
         users = self.get_object('users')
-        users.set_handler('VoirSCRIB', ScribUser(),
-                **{'ikaaro:password': crypt_password('BMBDP')})
+        if not users.has_object('VoirSCRIB'):
+            ScribUser.make_object(ScribUser, users, 'VoirSCRIB',
+                    **{'ikaaro:password': crypt_password('BMBDP')})
         report_c = int(time() -t); print 'get users, deep copy', report_c
 
         bm_len =  all_bm.get_nrows()
@@ -262,12 +263,13 @@ class Root(BaseRoot):
             # Add user
             username = 'BM%s' % code
             if not users.has_object(username):
-                user = ScribUser.make_object(ScribUser, users, username)
-                user.set_password('BM%s' % code)
-                self.set_user_role(username, 'bm')
-            print '%s/%s' % (i, bm_len), dep, code, username
-        report_m = int(time() -t)
-        print 'users and reperts set ', report_m
+                ScribUser.make_object(ScribUser, users, username,
+                        username=username,
+                        password=crypt_password('BM%s' % code))
+            if i % 10 == 0:
+                print '%s/%s' % (i, bm_len), dep, code, username
+        report_m = int(time() - t)
+        print 'users and reports set ', report_m
         secondes = int(time() - t)
         minutes = secondes // 60
         message = (u"Les rapports des BM pour l'année $year ont été "
@@ -289,8 +291,8 @@ class Root(BaseRoot):
         # Add reports and users, one per department
         users = self.get_object('users')
         for bib in all_bdp.get_rows():
-            name = bib.get('code')
-            title = bib.get('name')
+            name = bib.get_value('code')
+            title = bib.get_value('name')
             # Add report
             FormBDP.make_object(FormBDP, reports, name, **{'title': title})
             # Add user
