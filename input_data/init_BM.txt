@@ -3838,7 +3838,6 @@
 4114;Paray-Vieille-Poste;91;91479
 4115;Le Plessis-Pâté;91;91494
 4116;Quincy-sous-Sénart;91;91514
-4117;Ris-Orangis;91;91521
 4118;Saintry-sur-Seine;91;91577
 4119;Saulx-les-Chartreux;91;91587
 4120;Savigny-sur-Orge;91;91589
@@ -4286,3 +4285,6 @@
 4667;Luisant;28;28220
 4668;Magny-en-Vexin;95;95355
 4670;Saint-Georges-des-Coteaux;17;17336
+4671;Briis-sous-Forges;91;91111
+4672;Meuzac;87;87095
+4673;Saint-Amour;39;39475
