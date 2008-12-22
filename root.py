@@ -445,21 +445,21 @@ class Root(BaseRoot):
         output.write('DELETE FROM bdp07;\n')
         output.write('\n')
 
-        BM2007 = self.get_object('BM2007')
-        BDP2007 = self.get_object('BDP2007')
+        BM2008 = self.get_object('BM2008')
+        BDP2008 = self.get_object('BDP2008')
         output.write('-- ADRESSE\n')
         output.write('\n')
-        export_adr(BM2007, output, context)
-        export_adr(BDP2007, output, context)
+        export_adr(BM2008, output)
+        export_adr(BDP2008, output)
 
-        output.write('-- BM2007\n')
+        output.write('-- BM2008\n')
         output.write('\n')
-        export_bib(BM2007, output, context)
+        export_bib(BM2008, output)
 
         output.write('\n')
-        output.write('-- BDP2007\n')
+        output.write('-- BDP2008\n')
         output.write('\n')
-        export_bib(BDP2007, output, context)
+        export_bib(BDP2008, output)
 
         output.close()
 
@@ -489,15 +489,15 @@ class Root(BaseRoot):
             codes.append(int(code))
 
         users = self.get_object('users')
-        bm2007 = self.get_object('BM2007')
+        bm2008 = self.get_object('BM2008')
 
         for code in codes:
             name = str(code)
             # Add report
             bib = get_bm(name)
             ville = bib.get_value('name')
-            if not bm2007.has_object(name):
-                FormBM.make_object(FormBM, bm2007, name, **{'title': ville})
+            if not bm2008.has_object(name):
+                FormBM.make_object(FormBM, bm2008, name, **{'title': ville})
             # Add user
             username = 'BM%s' % code
             if not users.has_object(username):

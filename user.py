@@ -120,10 +120,10 @@ class ScribUser(User):
     def get_year(self):
         name = self.name
         if self.is_BDP():
-           # XXX just for 2007 ;)
-           return '2007'
+           # XXX just for 2008 ;)
+           return '2008'
         elif self.is_BM():
-           return '2007'
+           return '2008'
         return None
 
 
