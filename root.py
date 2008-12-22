@@ -356,28 +356,43 @@ class Root(BaseRoot):
             if name not in __cache__:
                 form = container.get_object(name)
                 schema = form.get_schema()
-                namespace = form.get_namespace(context)
-                quote_namespace(namespace, schema)
-                __cache__[name] = (form, namespace)
+                namespace = form.get_namespace()
+                query = (u'update adresse08 set libelle1="%(field1)s",libelle2="%(field2)s",'
+                 u'local="%(field30)s",voie_num="%(field31)s",voie_type="%(field32)s",'
+                 u'voie_nom="%(field33)s",cpbiblio="%(field4)s",ville="%(field5)s",'
+                 u'cedexb="%(field6)s",directeu="%(field7)s",st_dir="%(field8)s",tele="%(field9)s",'
+                 u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
+                 u'intercom="%(field13)s",gestion="%(field14)s",'
+                 u'gestion_autre="%(field15)s" where code_bib=')
 
-            return __cache__[name]
+            for key, value in namespace.items():
+                field_def = schema.get(key)
+                if field_def is not None:
+                    ftype = field_def[0]
+                    if ftype is Unicode:
+                           if value is not None:
+                               value = value.replace(u"€", u"eur")
+                               value = value.replace(u'"', u'\\"')
+                               value = value.replace(u"&quot;", u'\\"')
+                               value = value.replace(u"'", u"\\'")
+                           namespace[key] = value
+
+            query = query % namespace
+            query = query + name
+            output.write(query.encode('latin1') + '\n')
 
 
-        def export_adr(container, output, context):
-            """Ajout ALP - 27 nov 2007
-            """
+        def export_bib(container, ouput):
+            connexion = get_connection()
+            cursor = connexion.cursor()
             folder = container.handler
             names = [o.name for o in container.search_objects(state='public')]
 
             # Adresses déjà exportées
             if container.is_BM():
-                query = ("SELECT code_bib FROM adresse08 "
-                         "WHERE insee is not null")
+                query = "select * from adresse08 where insee is not null and code_bib in (%s)" % keys
             else:
-                query = ("SELECT dept FROM adresse08 "
-                         "WHERE type_adr='3' and code_ua is not null")
-            connexion = get_connection()
-            cursor = connexion.cursor()
+                query = "select * from adresse08 where type_adr='3' and code_ua is not null and dept in (%s)" % keys
             cursor.execute(query)
             results = cursor.fetchall()
             adresses_connues = []
@@ -390,7 +405,28 @@ class Root(BaseRoot):
                 adresses_connues.append(value)
             cursor.close()
             connexion.close()
+            if not resultset:
+                context.commit = False
+                return context.come_back(u'La requête "$query" a échoué',
+                        query=query)
 
+            for result in resultset:
+                values = []
+                for value in result:
+                    if value is None:
+                        values.append('NULL')
+                    elif isinstance(value, str):
+                        if "'" in value:
+                            value = value.replace("'", "\\'")
+                        values.append("'%s'" % value)
+                    else:
+                        values.append(str(value))
+                values = ','.join(values)
+                output.write('INSERT INTO adresse08 VALUES (%s);\n' % values)
+
+            output.write('\n')
+
+            # (bm|bdp)05
             for name in names:
                 form, namespace = get_form_and_namespace(container, name)
                 namespace['myname'] = name
@@ -448,10 +484,9 @@ class Root(BaseRoot):
 
         output.write(u'-- Réinitialisation'.encode('latin1'))
         output.write('\n')
-        # 0006036 ne pas effacer cette table, on ne la gère pas
         #output.write('DELETE FROM adresse08;\n')
-        output.write('DELETE FROM bm08;\n')
-        output.write('DELETE FROM bdp08;\n')
+        output.write('DELETE FROM bm07;\n')
+        output.write('DELETE FROM bdp07;\n')
         output.write('\n')
 
         BM2008 = self.get_object('BM2008')

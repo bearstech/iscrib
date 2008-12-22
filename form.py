@@ -844,14 +844,11 @@ class Form(Text):
             schema = self.get_schema()
             quote_namespace(namespace, schema)
             # Update dans la base ADRESSE
-            query = (u'update adresse08 set libelle1="%(field1)s",'
-                     u'libelle2="%(field2)s",local="%(field30)s",'
-                     u'voie_num="%(field31)s",voie_type="%(field32)s",'
-                     u'voie_nom="%(field33)s",cpbiblio="%(field4)s",'
-                     u'ville="%(field5)s",cedexb="%(field6)s",'
-                     u'directeu="%(field7)s",st_dir="%(field8)s",'
-                     u'tele="%(field9)s",fax="%(field10)s",'
-                     u'mel="%(field11)s",www="%(field12)s",'
+            query = (u'update adresse08 set libelle1="%(field1)s",libelle2="%(field2)s",'
+                     u'local="%(field30)s",voie_num="%(field31)s",voie_type="%(field32)s",'
+                     u'voie_nom="%(field33)s",cpbiblio="%(field4)s",ville="%(field5)s",'
+                     u'cedexb="%(field6)s",directeu="%(field7)s",st_dir="%(field8)s",tele="%(field9)s",'
+                     u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
                      u'intercom="%(field13)s",gestion="%(field14)s",'
                      u'gestion_autre="%(field15)s" '
                      u'where code_bib=%(code_ua)s')
