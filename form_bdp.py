@@ -77,7 +77,7 @@ class FormBDP(Form):
 
     @staticmethod
     def base_lect(dept):
-        chaineSQL = ("select * from adresse where type_adr='3' and "
+        chaineSQL = ("select * from adresse08 where type_adr='3' and "
                      "code_ua is not null and dept='%s'" % dept)
         return get_adresse(chaineSQL)
 

@@ -78,7 +78,7 @@ class FormBM(Form):
 
     @staticmethod
     def base_lect(insee):
-        chaineSQL = ("select * from adresse where "
+        chaineSQL = ("select * from adresse08 where "
                      "insee is not null and code_bib='%s'" % insee)
         return get_adresse(chaineSQL)
 

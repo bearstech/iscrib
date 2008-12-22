@@ -849,7 +849,7 @@ class Form(Text):
             namespace = self.get_namespace(context)
             schema = self.get_schema()
             # Update dans la base ADRESSE
-            query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
+            query = (u'update adresse08 set libelle1="%(field1)s",libelle2="%(field2)s",'
                      u'local="%(field30)s",voie_num="%(field31)s",voie_type="%(field32)s",'
                      u'voie_nom="%(field33)s",cpbiblio="%(field4)s",ville="%(field5)s",'
                      u'cedexb="%(field6)s",directeu="%(field7)s",st_dir="%(field8)s",tele="%(field9)s",'
