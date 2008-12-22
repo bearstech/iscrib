@@ -458,17 +458,17 @@ class Root(BaseRoot):
         BDP2008 = self.get_object('BDP2008')
         output.write('-- ADRESSE\n')
         output.write('\n')
-        export_adr(BM2008, output, context)
-        export_adr(BDP2008, output, context)
+        export_adr(BM2008, output)
+        export_adr(BDP2008, output)
 
         output.write('-- BM2008\n')
         output.write('\n')
-        export_bib(BM2008, output, context)
+        export_bib(BM2008, output)
 
         output.write('\n')
         output.write('-- BDP2008\n')
         output.write('\n')
-        export_bib(BDP2008, output, context)
+        export_bib(BDP2008, output)
 
         output.close()
 
