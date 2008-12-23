@@ -76,10 +76,12 @@
        <input value="${fieldK17Y}" name="fieldK17Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK17Z">
+      <!--select name="fieldK17Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK17Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK17Z"
+        stl:if="option/selected">${option/label}</span>
     </td>
     
 
@@ -98,10 +100,12 @@
        <input value="${fieldK18Y}" name="fieldK18Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK18Z">
+      <!--select name="fieldK18Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK18Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK18Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
     
 
@@ -121,10 +125,12 @@
        <input value="${fieldK19Y}" name="fieldK19Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK19Z">
+      <!--select name="fieldK19Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK19Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK19Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
     
 
@@ -144,10 +150,12 @@
        <input value="${fieldK20Y}" name="fieldK20Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK20Z">
+      <!--select name="fieldK20Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK20Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK20Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
    
 
@@ -167,10 +175,12 @@
        <input value="${fieldK21Y}" name="fieldK21Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK21Z">
+      <!--select name="fieldK21Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK21Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK21Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
    
 
@@ -190,10 +200,12 @@
        <input value="${fieldK22Y}" name="fieldK22Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK22Z">
+      <!--select name="fieldK22Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK22Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK22Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
    
 
@@ -213,10 +225,12 @@
        <input value="${fieldK23Y}" name="fieldK23Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK23Z">
+      <!--select name="fieldK23Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK23Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK23Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K23}">K23</b></td>
@@ -235,10 +249,12 @@
        <input value="${fieldK24Y}" name="fieldK24Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK24Z">
+      <!--select name="fieldK24Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK24Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK24Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K24}">K24</b></td>
@@ -257,10 +273,12 @@
        <input value="${fieldK25Y}" name="fieldK25Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK25Z">
+      <!--select name="fieldK25Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK25Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK25Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K25}">K25</b></td>
@@ -279,10 +297,12 @@
        <input value="${fieldK26Y}" name="fieldK26Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK26Z">
+      <!--select name="fieldK26Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK26Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK26Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K26}">K26</b></td>
@@ -301,10 +321,12 @@
        <input value="${fieldK27Y}" name="fieldK27Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK27Z">
+      <!--select name="fieldK27Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK27Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK27Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K27}">K27</b></td>
@@ -322,10 +344,12 @@
        <input value="${fieldK28Y}" name="fieldK28Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK28Z">
+      <!--select name="fieldK28Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK28Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK28Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K28}">K28</b></td>
@@ -341,10 +365,12 @@
        <input value="${fieldK29Y}" name="fieldK29Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK29Z">
+      <!--select name="fieldK29Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK29Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK29Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K29}">K29</b></td>
@@ -362,10 +388,12 @@
        <input value="${fieldK30Y}" name="fieldK30Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK30Z">
+      <!--select name="fieldK30Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK30Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK30Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K30}">K30</b></td>
@@ -383,10 +411,12 @@
        <input value="${fieldK31Y}" name="fieldK31Y" readonly="yes" size="10" type="text"/>
     </td>
     <td>
-      <select name="fieldK31Z">
+      <!--select name="fieldK31Z" disabled="disabled">
         <option selected="${option/selected}" stl:repeat="option fieldK31Z"
           value="${option/name}">${option/label}</option>
-      </select>
+      </select-->
+      <span stl:repeat="option fieldK31Z"
+        stl:if="option/selected">${option/label}</span>
    </td>
 
    <td><b class="${_K31}">K31</b></td>
