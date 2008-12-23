@@ -128,17 +128,8 @@ class ScribUser(User):
 
 
     #######################################################################
-    # Security
-    #######################################################################
-    def is_self(self, user, object):
-        if user is None:
-            return False
-        return self.name == user.name
-
-
-    #######################################################################
     # Home
-    home__access__ = 'is_self'
+    home__access__ = 'is_self_or_admin'
     home__label__ = u'Home'
     def home(self, context):
         root = context.root
