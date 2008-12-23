@@ -110,6 +110,8 @@ class Forms(Folder):
             query.append(PhraseQuery('user_town', name))
         # The department
         if dep:
+            # 0005862: La recherche des BM sur les départements 2A et 2B ne
+            # fonctionne pas  
             query.append(EqQuery('dep', dep.lower()))
         # The state
         if state:
