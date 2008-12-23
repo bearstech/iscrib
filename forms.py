@@ -112,7 +112,7 @@ class Forms(Folder):
         if dep:
             # 0005862: La recherche des BM sur les départements 2A et 2B ne
             # fonctionne pas  
-            query.append(EqQuery('dep', dep.lower()))
+            query.append(EqQuery('dep', dep.upper()))
         # The state
         if state:
             form_state = WorkflowState.get_value(state)
