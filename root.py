@@ -264,8 +264,8 @@ class Root(BaseRoot):
             username = 'BM%s' % code
             if not users.has_object(username):
                 ScribUser.make_object(ScribUser, users, username,
-                        username=username,
-                        password=crypt_password('BM%s' % code))
+                                      username=username,
+                                      password=crypt_password(username))
             if i % 10 == 0:
                 print '%s/%s' % (i, bm_len), dep, code, username
         report_m = int(time() - t)
@@ -531,9 +531,9 @@ class Root(BaseRoot):
             # Add user
             username = 'BM%s' % code
             if not users.has_object(username):
-                user = ScribUser.make_object(ScribUser, users, username)
-                user.set_password(username)
-                self.set_user_role(username, 'bm')
+                ScribUser.make_object(ScribUser, users, username,
+                                      username=username,
+                                      password=crypt_password(username))
 
         message = (u"Formulaire et utilisateur ajoutés : "
                    u"code_bib=$code_bib ville=$ville dept=$dept "
