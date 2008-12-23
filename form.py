@@ -119,7 +119,7 @@ class Form(Text):
 
     def get_form_state(self):
         # State
-        state = self.get_property('state')
+        state = self.get_workflow_state()
         if state == 'private':
             if len(self.handler.fields) == 0:
                 state = u'Vide'
@@ -225,7 +225,7 @@ class Form(Text):
                 namespace[field_name] = 'badT_field'
 
         # State
-        state = self.get_property('state')
+        state = self.get_workflow_state()
         namespace['is_vide'] = self.get_form_state() == u'Vide'
 
         (All_fields, All_mandatorie, All_optional, optional_nonEmpties,
@@ -1157,7 +1157,7 @@ class Form(Text):
         """ Call downloadCSV """
         namespace = self.get_namespace(context)
         #is_finished = namespace['is_finished']
-        state = self.get_property('state')
+        state = self.get_workflow_state()
         is_finished = (state == 'pending')
         is_complete = namespace['is_complete']
         is_exported = self.get_form_state() == u'Exporté'
