@@ -245,9 +245,11 @@ class Root(BaseRoot):
         t = time()
 
         users = self.get_object('users')
-        if not users.has_object('VoirSCRIB'):
-            ScribUser.make_object(ScribUser, users, 'VoirSCRIB',
-                    **{'ikaaro:password': crypt_password('BMBDP')})
+        username = 'VoirSCRIB'
+        if not users.has_object(username):
+            ScribUser.make_object(ScribUser, users, username,
+                                  username=username,
+                                  password=crypt_password('BMBDP'))
         report_c = int(time() -t); print 'get users, deep copy', report_c
 
         bm_len =  all_bm.get_nrows()
@@ -298,9 +300,9 @@ class Root(BaseRoot):
             # Add user
             username = 'BDP%s' % name
             if not users.has_object(username):
-                user = ScribUser.make_object(ScribUser, users, username)
-                user.set_password('BDP%s' % name)
-                self.set_user_role(username, 'bdp')
+                ScribUser.make_object(ScribUser, users, username,
+                                      username=username,
+                                      password=crypt_password(username))
 
         message = (u"Les rapports des BDP pour l'année $year ont été "
                    u"ajoutés, et leurs utilisateurs associés BDPxx:BDPxx, "
