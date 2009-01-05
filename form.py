@@ -295,16 +295,10 @@ class Form(Text):
                                         ('field13', 21), # INTERCOM
                                         ('field14', 22), # GESTION
                                         ('field15', 23)]: # GESTION_AUTRE
-            if field_name in schema and not field_name in fields:
+            if not field_name in fields:
                 # Prend la valeur par défaut dans la table adresse
                 value = unicode(champs_adr[champ_index], 'ISO-8859-1')
                 namespace[field_name] = value
-                field_def = schema[field_name]
-                type = field_def[0]
-                if type is Checkboxes:
-                    for i in range(1, 10):
-                        namespace['%s_%s' % (field_name, i)] = (
-                                unicode(i) == value)
 
         # autofill Annexes
         if self.is_BM():
