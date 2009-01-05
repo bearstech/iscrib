@@ -1283,7 +1283,6 @@
 1373;Béziers;34;34032
 1375;Boujan-sur-Libron;34;34037
 1376;Castelnau-le-Lez;34;34057
-1377;Castries;34;34058
 1378;Claret;34;34078
 1379;Clermont-l'Hérault;34;34079
 1380;Combaillaux;34;34082
@@ -2598,7 +2597,6 @@
 2781;Coarraze;64;64191
 2782;Hasparren;64;64256
 2784;Hendaye;64;64260
-2785;Jurançon;64;64284
 2786;Labastide-Monréjeau;64;64290
 2787;Lescar;64;64335
 2788;Lons;64;64348
@@ -4126,6 +4124,7 @@
 4435;Beauvois-en-Cambrésis;59;59063
 4436;Haspres;59;59285
 4437;Vendeville;59;59609
+4438;Balbigny;42;42011
 4439;Chaudron-en-Mauges;49;49083
 4440;Mazères-sur-Salat;31;31336
 4441;Sainte-Foy-d'Aigrefeuille;31;31480
@@ -4288,3 +4287,12 @@
 4671;Briis-sous-Forges;91;91111
 4672;Meuzac;87;87095
 4673;Saint-Amour;39;39475
+4674;Betton;35;35024
+4677;Bû;28;28064
+4678;Saint-Prest;28;28358
+4679;Janville;28;28199
+4682;Gensac;33;33186
+4683;Villefagnan;16;16409
+4684;Mugron;40;40201
+4697;Balbigny;42;42011
+4698;Truchtersheim;67;67495
