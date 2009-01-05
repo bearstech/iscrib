@@ -175,7 +175,6 @@ class Form(Text):
             field_def = schema[name]
             type = field_def[0]
             default = field_def[1]
-            value = context.get_form_value(name)
             key = name[len('field'):]
             # take the value in request first
             value = context.get_form_value(key)
@@ -260,63 +259,31 @@ class Form(Text):
         namespace['minitel'] = unicode(champs_adr[28], 'ISO-8859-1')
         code_ua = int(champs_adr[17])
         namespace['code_ua'] = code_ua
-        # LIBELLE1
-        if not namespace['field1']:
-            namespace['field1'] = unicode(champs_adr[6], 'ISO-8859-1')
-        # LIBELLE2
-        if not namespace['field2']:
-            namespace['field2'] = unicode(champs_adr[7], 'ISO-8859-1')
-        # VOIE
-        #if not namespace['field3']:
-        #    namespace['field3'] = unicode(champs_adr[9], 'ISO-8859-1')
-        # COMPLEMENT ADRESSE
-        if not namespace['field30']:
-            namespace['field30'] = unicode(champs_adr[8], 'ISO-8859-1')
-        # Numéro VOIE
-        if not namespace['field31']:
-            namespace['field31'] = unicode(champs_adr[24], 'ISO-8859-1')
-        # type de VOIE
-        if not namespace['field32']:
-            namespace['field32'] = unicode(champs_adr[25], 'ISO-8859-1')
-        # NOM VOIE
-        if not namespace['field33']:
-            namespace['field33'] = unicode(champs_adr[26], 'ISO-8859-1')
-        # CPBIBLIO
-        if not namespace['field4']:
-            namespace['field4'] = unicode(champs_adr[11], 'ISO-8859-1')
-        # VILLE
-        if not namespace['field5']:
-            namespace['field5'] = unicode(champs_adr[18], 'ISO-8859-1')
-        # CEDEXB
-        if not namespace['field6']:
-            namespace['field6'] = unicode(champs_adr[12], 'ISO-8859-1')
-        # DIRECTEU
-        if not namespace['field7']:
-            namespace['field7'] = unicode(champs_adr[3], 'ISO-8859-1')
-        # STDIR
-        if not namespace['field8']:
-            namespace['field8'] = unicode(champs_adr[19], 'ISO-8859-1')
-        # TELE
-        if not namespace['field9']:
-            namespace['field9'] = unicode(champs_adr[14], 'ISO-8859-1')
-        # FAX
-        if not namespace['field10']:
-            namespace['field10'] = unicode(champs_adr[13], 'ISO-8859-1')
-        # MEL
-        if not namespace['field11']:
-            namespace['field11'] = unicode(champs_adr[2], 'ISO-8859-1')
-        # WWW
-        if not namespace['field12']:
-            namespace['field12'] = unicode(champs_adr[15], 'ISO-8859-1')
-        # INTERCOM
-        if namespace.get('field13') is None:
-            namespace['field13'] = unicode(champs_adr[21], 'ISO-8859-1')
-        # GESTION
-        if namespace.get('field14') is None:
-            namespace['field14'] = unicode(champs_adr[22], 'ISO-8859-1')
-        # GESTION_AUTRE
-        if namespace.get('field15') is None:
-            namespace['field15'] = unicode(champs_adr[23], 'ISO-8859-1')
+
+        for field_name, champ_index in [('field1', 6), # LIBELLE1
+                                        ('field2', 7), # LIBELLE2
+                                        #('field3', 9), # VOIE
+                                        ('field30', 8), # COMPLEMENT ADRESSE
+                                        ('field31', 24), # Numéro VOIE
+                                        ('field32', 25), # type de VOIE
+                                        ('field33', 26), # NOM VOIE
+                                        ('field4', 11), # CPBIBLIO
+                                        ('field5', 18), # VILLE
+                                        ('field6', 12), # CEDEXB
+                                        ('field7', 3), # DIRECTEU
+                                        ('field8', 19), # STDIR
+                                        ('field9', 14), # TELE
+                                        ('field10', 13), # FAX
+                                        ('field11', 2), # MEL
+                                        ('field12', 15), # WWW
+                                        ('field13', 21), # INTERCOM
+                                        ('field14', 22), # GESTION
+                                        ('field15', 23)]: # GESTION_AUTRE
+            if not field_name in fields:
+                # Prend la valeur par défaut dans la table adresse
+                value = unicode(champs_adr[champ_index], 'ISO-8859-1')
+                namespace[field_name] = value
+
         # autofill Annexes
         if self.is_BM():
             annexes = bm_annexes(code_ua)
