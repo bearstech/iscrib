@@ -52,9 +52,12 @@ class Root(BaseRoot):
     class_id = 'Culture'
     class_version = '20080410'
     class_title = u"SCRIB"
-    class_views = [['browse_content'], ['new_reports_form', 'new_bm_form'],
-                   ['export_form'], ['permissions_form', 'new_user_form'],
-                   ['edit_metadata_form'], ['help']]
+    class_views = [['browse_content'],
+                   ['new_reports_form', 'new_bm_form', 'creer_VoirSCRIB'],
+                   ['export_form'],
+                   ['permissions_form', 'new_user_form'],
+                   ['edit_metadata_form'],
+                   ['help']]
 
     __roles__ = [{'name': 'admins', 'title': u'Admin'}]
 
@@ -242,20 +245,14 @@ class Root(BaseRoot):
         report_name = 'BM' + str(year)
         # Add reports and users, one per department
         reports = Forms.make_object(Forms, self, report_name)
-        t = time()
-
         users = self.get_object('users')
-        username = 'VoirSCRIB'
-        if not users.has_object(username):
-            ScribUser.make_object(ScribUser, users, username,
-                                  username=username,
-                                  password=crypt_password('BMBDP'))
-        report_c = int(time() -t); print 'get users, deep copy', report_c
 
         bm_len =  all_bm.get_nrows()
         bib_municipales = list(all_bm.get_rows())
         # so we sort by integers values
         bib_municipales.sort(key=itemgetter(0))
+
+        t = time()
         for i, bib in enumerate(bib_municipales):
             code = bib.get_value('code')
             name = bib.get_value('name')
@@ -308,6 +305,25 @@ class Root(BaseRoot):
                    u"ajoutés, et leurs utilisateurs associés BDPxx:BDPxx, "
                    u"BDPyy:BDPyy, etc.")
         return context.come_back(message, goto=';browse_content', year=year)
+
+
+    creer_VoirSCRIB__access__ = 'is_admin'
+    creer_VoirSCRIB__sublabel__ = u"Créer VoirSCRIB"
+    def creer_VoirSCRIB(self, context):
+        username = 'VoirSCRIB'
+        password = 'BMBDP'
+
+        users = self.get_object('users')
+        if users.has_object(username):
+            return context.come_back(u"Le compte VoirSCRIB existe déjà.")
+
+        ScribUser.make_object(ScribUser, users, username, username=username,
+                              password=crypt_password(password))
+
+        # Était un GET
+        context.commit = True
+
+        return context.come_back(u"Compte VoirSCRIB créé.")
 
 
     #########################################################################
