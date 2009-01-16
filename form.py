@@ -17,12 +17,12 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
-from pprint import pformat
 from copy import deepcopy
-from time import time
-import logging
-import datetime
 from decimal import Decimal as dec, InvalidOperation
+from pprint import pformat
+from time import time
+import datetime
+import logging
 
 # Import from mysql
 from MySQLdb import OperationalError
@@ -886,9 +886,20 @@ class Form(Text):
             dep_or_sum = len(field_def) == 3
             if dep_or_sum:
                 fields = field_def[2].get('depend_field')
-                if fields:
-                    for field in fields:
-                        dependencies[field] = field_id
+                if fields is None:
+                    continue
+                # 0006009: rubriques B41 et H38Z
+                if not isinstance(fields, tuple):
+                    raise TypeError, ("""champ "%s": la propriété"""
+                                      """"depend_field" n'est pas un"""
+                                      """ tuple""" % field_id)
+                for field in fields:
+                    # 0006009: rubriques B41 et H38Z
+                    if field.count('field') > 1:
+                        raise ValueError, ("""champ "%s": il manque une"""
+                                           """ virgule dans "%s\"""" % (
+                                               field_id, field))
+                    dependencies[field] = field_id
         return dependencies
 
 
