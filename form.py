@@ -460,13 +460,19 @@ class Form(Text):
                     empty = True
                     fail = False
             else:
+                # 0006009: une somme en dépendance d'un champ désactivé
+                field_name = 'field%s' % expr1
+                if (field_name in dependencies
+                        and namespace[dependencies[field_name]] is False):
+                    empty = False
+                    fail = False
                 # Si plusieurs termes de la somme sont égaux à NC, alors le
                 # total doit être strictement supérieur à la somme des termes
                 # différents de NC
-                if not 'NC' in right_values:
+                elif not 'NC' in right_values:
                     pass
                 elif right_values.count('NC') > 1:
-                    key_type = schema['field%s' % expr1][0]
+                    key_type = schema[field_name][0]
 
                     if key_type is Integer:
                         sum_of_not_NC = Integer(0)
@@ -480,7 +486,6 @@ class Form(Text):
                         fail = ( x1 <= sum_of_not_NC ) and (str(x1) != 'NC')
                     else:
                         fail = not ( x1 == 'NC')
-
                 # Si un seul des termes de la somme est égal à NC, alors le
                 # total doit être égal à NC
                 elif right_values.count('NC') == 1:
