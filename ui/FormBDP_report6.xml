@@ -9,7 +9,7 @@
   <a stl:if="not printable" style="color:red " onclick="window.open(';help6', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">? Consulter l'aide sur cette page</a>
       </td>
   <td align="right">
-  <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
+  <a style="border:0;color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
      <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
 

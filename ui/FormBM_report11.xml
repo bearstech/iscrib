@@ -4,7 +4,7 @@
   <div stl:if="is_allowed_to_edit" align="right">
     <stl:block if="not printable">
 
-  <a style="border:0;text-color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
+  <a style="border:0;color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
      <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
       <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
