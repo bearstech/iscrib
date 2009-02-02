@@ -39,12 +39,13 @@ from ikaaro.widgets import batch, table
 from ikaaro.users import crypt_password
 
 # Import from scrib
-from form import Form
+from form import Form, quote_namespace
 from form_bm import FormBM
 from form_bdp import FormBDP
 from forms import Forms
 from user import ScribUser
 from utils import all_bm, all_bdp, get_bm, get_connection
+
 
 
 class Root(BaseRoot):
@@ -349,44 +350,45 @@ class Root(BaseRoot):
     export__access__ = 'is_admin'
     def export(self, context):
 
-        __cache__ = {}
-
-        def get_form_and_namespace(container, name):
-            if name not in __cache__:
+        def export_adr(container, output, context):
+            """Ajout ALP - 27 nov 2007
+            """
+            folder = container.handler
+            names = [name for name in container.get_names()
+                        if name.isdigit() and (
+                            folder.get_handler('%s.metadata' % name)\
+                                    .get_property('state') == 'public')]
+            for name in names:
                 form = container.get_object(name)
                 schema = form.get_schema()
-                namespace = form.get_namespace()
-                query = (u'update adresse08 set libelle1="%(field1)s",libelle2="%(field2)s",'
-                 u'local="%(field30)s",voie_num="%(field31)s",voie_type="%(field32)s",'
-                 u'voie_nom="%(field33)s",cpbiblio="%(field4)s",ville="%(field5)s",'
-                 u'cedexb="%(field6)s",directeu="%(field7)s",st_dir="%(field8)s",tele="%(field9)s",'
-                 u'fax="%(field10)s",mel="%(field11)s",www="%(field12)s",'
-                 u'intercom="%(field13)s",gestion="%(field14)s",'
-                 u'gestion_autre="%(field15)s" where code_bib=')
-
-            for key, value in namespace.items():
-                field_def = schema.get(key)
-                if field_def is not None:
-                    ftype = field_def[0]
-                    if ftype is Unicode:
-                           if value is not None:
-                               value = value.replace(u"€", u"eur")
-                               value = value.replace(u'"', u'\\"')
-                               value = value.replace(u"&quot;", u'\\"')
-                               value = value.replace(u"'", u"\\'")
-                           namespace[key] = value
-
-            query = query % namespace
-            query = query + name
-            output.write(query.encode('latin1') + '\n')
+                namespace = form.get_namespace(context)
+                quote_namespace(namespace, schema)
+                query = (u'update adresse08 set libelle1="%(field1)s",'
+                         u'libelle2="%(field2)s",local="%(field30)s",'
+                         u'voie_num="%(field31)s",voie_type="%(field32)s",'
+                         u'voie_nom="%(field33)s",cpbiblio="%(field4)s",'
+                         u'ville="%(field5)s",cedexb="%(field6)s",'
+                         u'directeu="%(field7)s",st_dir="%(field8)s",'
+                         u'tele="%(field9)s",fax="%(field10)s",'
+                         u'mel="%(field11)s",www="%(field12)s",'
+                         u'intercom="%(field13)s",gestion="%(field14)s",'
+                         u'gestion_autre="%(field15)s" where code_bib=')
+                query = query % namespace
+                query = query + name
+                output.write(query.encode('latin1') + '\n')
 
 
-        def export_bib(container, ouput):
+        def export_bib(container, ouput, context):
             connexion = get_connection()
             cursor = connexion.cursor()
             folder = container.handler
-            names = [o.name
-                     for o in container.search_objects(state='public')]
+            names = [name for name in container.get_names()
+                    if name.isdigit() and (
+                        folder.get_handler('%s.metadata' % name)\
+                                .get_property('state') == 'public')]
+            if len(names) == 0:
+                output.write(u'-- aucune bibliothèque exportée'.encode('latin1'))
+                return
 
             # Adresses déjà exportées
             if container.is_BM():
@@ -426,57 +428,12 @@ class Root(BaseRoot):
 
             output.write('\n')
 
-            # (bm|bdp)05
+            # (bm|bdp)08
             for name in names:
-                form, namespace = get_form_and_namespace(container, name)
-                namespace['myname'] = name
-                if name in adresses_connues:
-                    query = (u'UPDATE adresse SET libelle1="%(field1)s",'
-                             u'libelle2="%(field2)s",local="%(field30)s",'
-                             u'voie_num="%(field31)s",'
-                             u'voie_type="%(field32)s",'
-                             u'voie_nom="%(field33)s",cpbiblio="%(field4)s",'
-                             u'ville="%(field5)s",cedexb="%(field6)s",'
-                             u'directeu="%(field7)s",st_dir="%(field8)s",'
-                             u'tele="%(field9)s",fax="%(field10)s",'
-                             u'mel="%(field11)s",www="%(field12)s",'
-                             u'intercom="%(field13)s",gestion="%(field14)s",'
-                             u'gestion_autre="%(field15)s" '
-                             u'where code_bib=%(myname)s;\n')
-                    query = query % namespace
-                else:
-                    # N'est pas censé être utilisé dans 99 % des cas
-                    query = (u'INSERT INTO adresse (insee,type_adr,mel,'
-                             u'directeu,region,dept,libelle1,libelle2,local,'
-                             u'cpbiblio,cedexb,fax,tele,www,code_bib,'
-                             u'code_ua,ville,st_dir,type,intercom,gestion,'
-                             u'gestion_autre,voie_num,voie_type,voie_nom,'
-                             u'commune,minitel) VALUES ("%(insee)s",'
-                             u'"%(type_adr)s","%(field11)s","%(field7)s",'
-                             u'"%(region)s","%(dept)s","%(field1)s",'
-                             u'"%(field2)s","%(field30)s","%(field4)s",'
-                             u'"%(field6)s","%(field10)s","%(field9)s",'
-                             u'"%(field12)s","%(myname)s","%(code_ua)s",'
-                             u'"%(field5)s","%(field8)s","%(type)s",'
-                             u'"%(field13)s","%(field14)s","%(field15)s",'
-                             u'"%(field31)s","%(field32)s","%(field33)s",'
-                             u'"%(commune)s","%(minitel)s");\n')
-                    query = query % namespace
-                output.write(query.encode('latin1'))
-
-
-        def export_bib(container, ouput, context):
-            """ (bm|bdp)07
-            """
-            folder = container.handler
-            names = [o.name
-                     for o in container.search_objects(state='public')]
-            if len(names) == 0:
-                output.write(u'-- aucune bibliothèque exportée'.encode('latin1'))
-                return
-
-            for name in names:
-                form, namespace = get_form_and_namespace(container, name)
+                form = container.get_object(name)
+                schema = form.get_schema()
+                namespace = form.get_namespace(context)
+                quote_namespace(namespace, schema)
                 query = form.get_export_query(namespace)
                 output.write(query.encode('latin1') + '\n')
 
@@ -497,17 +454,17 @@ class Root(BaseRoot):
         BDP2008 = self.get_object('BDP2008')
         output.write('-- ADRESSE\n')
         output.write('\n')
-        export_adr(BM2008, output)
-        export_adr(BDP2008, output)
+        export_adr(BM2008, output, context)
+        export_adr(BDP2008, output, context)
 
         output.write('-- BM2008\n')
         output.write('\n')
-        export_bib(BM2008, output)
+        export_bib(BM2008, output, context)
 
         output.write('\n')
         output.write('-- BDP2008\n')
         output.write('\n')
-        export_bib(BDP2008, output)
+        export_bib(BDP2008, output, context)
 
         output.close()
 
