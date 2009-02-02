@@ -329,7 +329,7 @@ class Root(BaseRoot):
     export__access__ = 'is_admin'
     def export(self, context):
 
-        def export_adr(container, output):
+        def export_adr(container, output, context):
             """Ajout ALP - 27 nov 2007
             """
             folder = container.handler
@@ -340,7 +340,7 @@ class Root(BaseRoot):
             for name in names:
                 form = container.get_object(name)
                 schema = form.get_schema()
-                namespace = form.get_namespace()
+                namespace = form.get_namespace(context)
                 query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
                  u'local="%(field30)s",voie_num="%(field31)s",voie_type="%(field32)s",'
                  u'voie_nom="%(field33)s",cpbiblio="%(field4)s",ville="%(field5)s",'
@@ -349,24 +349,24 @@ class Root(BaseRoot):
                  u'intercom="%(field13)s",gestion="%(field14)s",'
                  u'gestion_autre="%(field15)s" where code_bib=')
 
-            for key, value in namespace.items():
-                field_def = schema.get(key)
-                if field_def is not None:
-                    ftype = field_def[0]
-                    if ftype is Unicode:
-                           if value is not None:
-                               value = value.replace(u"€", u"eur")
-                               value = value.replace(u'"', u'\\"')
-                               value = value.replace(u"&quot;", u'\\"')
-                               value = value.replace(u"'", u"\\'")
-                           namespace[key] = value
+                for key, value in namespace.items():
+                    field_def = schema.get(key)
+                    if field_def is not None:
+                        ftype = field_def[0]
+                        if ftype is Unicode:
+                               if value is not None:
+                                   value = value.replace(u"€", u"eur")
+                                   value = value.replace(u'"', u'\\"')
+                                   value = value.replace(u"&quot;", u'\\"')
+                                   value = value.replace(u"'", u"\\'")
+                               namespace[key] = value
 
-            query = query % namespace
-            query = query + name
-            output.write(query.encode('latin1') + '\n')
+                query = query % namespace
+                query = query + name
+                output.write(query.encode('latin1') + '\n')
 
 
-        def export_bib(container, ouput):
+        def export_bib(container, ouput, context):
             connexion = get_connection()
             cursor = connexion.cursor()
             folder = container.handler
@@ -374,6 +374,9 @@ class Root(BaseRoot):
                     if name.isdigit() and (
                         folder.get_handler('%s.metadata' % name)\
                                 .get_property('state') == 'public')]
+            if len(names) == 0:
+                output.write(u'-- aucune bibliothèque exportée'.encode('latin1'))
+                return
 
             # adresse
             keys = ', '.join(names)
@@ -406,11 +409,11 @@ class Root(BaseRoot):
 
             output.write('\n')
 
-            # (bm|bdp)05
+            # (bm|bdp)07
             for name in names:
                 object = container.get_object(name)
                 schema = object.get_schema()
-                namespace = object.get_namespace()
+                namespace = object.get_namespace(context)
                 # XXX copy/paste
                 for key, value in namespace.items():
                     field_def = schema.get(key)
@@ -443,17 +446,17 @@ class Root(BaseRoot):
         BDP2007 = self.get_object('BDP2007')
         output.write('-- ADRESSE\n')
         output.write('\n')
-        export_adr(BM2007, output)
-        export_adr(BDP2007, output)
+        export_adr(BM2007, output, context)
+        export_adr(BDP2007, output, context)
 
         output.write('-- BM2007\n')
         output.write('\n')
-        export_bib(BM2007, output)
+        export_bib(BM2007, output, context)
 
         output.write('\n')
         output.write('-- BDP2007\n')
         output.write('\n')
-        export_bib(BDP2007, output)
+        export_bib(BDP2007, output, context)
 
         output.close()
 
