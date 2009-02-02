@@ -299,6 +299,12 @@ class Form(Text):
                 # Prend la valeur par défaut dans la table adresse
                 value = unicode(champs_adr[champ_index], 'ISO-8859-1')
                 namespace[field_name] = value
+                field_def = schema[field_name]
+                type = field_def[0]
+                if type is Checkboxes:
+                    for i in range(1, 10):
+                        namespace['%s_%s' % (field_name, i)] = (
+                                unicode(i) == value)
 
         # autofill Annexes
         if self.is_BM():
@@ -410,9 +416,9 @@ class Form(Text):
             stype = field_def[0]
             default = field_def[1]
             empty = False
-            if stype is not String and stype is not EPCI_Statut and \
-                   name not in ['fieldK%s' % i for i in range(40,47)] and \
-                   stype is not Unicode:
+            if (stype is not String and stype is not EPCI_Statut
+                    and stype is not Unicode
+                    and name not in ['fieldK%s' % i for i in range(40,47)]):
                 if namespace[name] in ('', None):
                     dependance = dependencies.get(name)
                     if dependance is not None:
