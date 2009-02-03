@@ -295,7 +295,7 @@ class Form(Text):
                                         ('field13', 21), # INTERCOM
                                         ('field14', 22), # GESTION
                                         ('field15', 23)]: # GESTION_AUTRE
-            if not field_name in fields:
+            if field_name in schema and not field_name in fields:
                 # Prend la valeur par défaut dans la table adresse
                 value = unicode(champs_adr[champ_index], 'ISO-8859-1')
                 namespace[field_name] = value

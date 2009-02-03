@@ -363,7 +363,7 @@ class Root(BaseRoot):
                 schema = form.get_schema()
                 namespace = form.get_namespace(context)
                 quote_namespace(namespace, schema)
-                query = (u'update adresse08 set libelle1="%(field1)s",'
+                query = (u'UPDATE adresse08 SET libelle1="%(field1)s",'
                          u'libelle2="%(field2)s",local="%(field30)s",'
                          u'voie_num="%(field31)s",voie_type="%(field32)s",'
                          u'voie_nom="%(field33)s",cpbiblio="%(field4)s",'
@@ -374,7 +374,7 @@ class Root(BaseRoot):
                          u'intercom="%(field13)s",gestion="%(field14)s",'
                          u'gestion_autre="%(field15)s" where code_bib=')
                 query = query % namespace
-                query = query + name
+                query = query + name + ';'
                 output.write(query.encode('latin1') + '\n')
 
 
