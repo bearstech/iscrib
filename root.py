@@ -341,7 +341,7 @@ class Root(BaseRoot):
                 form = container.get_object(name)
                 schema = form.get_schema()
                 namespace = form.get_namespace(context)
-                query = (u'update adresse set libelle1="%(field1)s",libelle2="%(field2)s",'
+                query = (u'UPDATE adresse SET libelle1="%(field1)s",libelle2="%(field2)s",'
                  u'local="%(field30)s",voie_num="%(field31)s",voie_type="%(field32)s",'
                  u'voie_nom="%(field33)s",cpbiblio="%(field4)s",ville="%(field5)s",'
                  u'cedexb="%(field6)s",directeu="%(field7)s",st_dir="%(field8)s",tele="%(field9)s",'
@@ -362,7 +362,7 @@ class Root(BaseRoot):
                                namespace[key] = value
 
                 query = query % namespace
-                query = query + name
+                query = query + name + ';'
                 output.write(query.encode('latin1') + '\n')
 
 
