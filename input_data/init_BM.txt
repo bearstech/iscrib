@@ -2004,6 +2004,7 @@
 2139;Tinqueux;51;51573
 2140;Verzenay;51;51613
 2141;Vitry-le-François;51;51649
+2142;Arc-en-Barrois;52;52017
 2143;Auberive;52;52023
 2144;Bologne;52;52058
 2145;Bourbonne-les-Bains;52;52060
@@ -3368,6 +3369,7 @@
 3599;Viroflay;78;78686
 3602;Airvault;79;79005
 3603;Argenton-Château;79;79013
+3603;Argenton-Château;79;79013
 3604;Beauvoir-sur-Niort;79;79031
 3605;Bouillé-Loretz;79;79043
 3606;Bressuire;79;79049
@@ -3444,7 +3446,6 @@
 3689;Cordes-sur-Ciel;81;81069
 3690;Gaillac;81;81099
 3691;Giroussens;81;81104
-3692;Graulhet;81;81105
 3693;Lacaune;81;81124
 3694;Lautrec;81;81139
 3695;Lavaur;81;81140
@@ -3453,7 +3454,6 @@
 3698;Montredon-Labessonnié;81;81182
 3699;Murat-sur-Vèbre;81;81192
 3700;Pampelonne;81;81201
-3701;Puybegon;81;81215
 3702;Puylaurens;81;81219
 3703;Saint-Benoît-de-Carmaux;81;81244
 3704;Saint-Juéry;81;81257
@@ -4271,6 +4271,7 @@
 4652;Saint-Bauzille-de-Putois;34;34243
 4653;Saint-Pargoire;34;34281
 4655;Le Puiset-Doré;49;49252
+4656;Le Fuilet;49;49145
 4657;La Salle-et-Chapelle-Aubry;49;49324
 4658;La Boissière-sur-Evre;49;49033
 4659;Saint-Jeures;43;43199
@@ -4288,11 +4289,27 @@
 4672;Meuzac;87;87095
 4673;Saint-Amour;39;39475
 4674;Betton;35;35024
+4674;Betton;35;35024
 4677;Bû;28;28064
 4678;Saint-Prest;28;28358
 4679;Janville;28;28199
+4680;Le Coudray;28;28110
 4682;Gensac;33;33186
 4683;Villefagnan;16;16409
 4684;Mugron;40;40201
+4686;Roquefort-les-Pins;06;06105
+4687;Gallardon;28;28168
+4688;Bords;17;17053
+4689;Custines;54;54150
+4690;Anais;16;16011
+4691;Varilhes;09;09324
+4692;Bessines-sur-Gartempe;87;87014
+4693;Guillestre;05;05065
+4694;Laragne-Montéglin;05;05070
+4695;Solliès-Ville;83;83132
+4696;La Saulce;05;05162
 4697;Balbigny;42;42011
 4698;Truchtersheim;67;67495
+4699;Campbon;44;44025
+4700;Seltz;67;67463
+4701;Técou;81;81294
