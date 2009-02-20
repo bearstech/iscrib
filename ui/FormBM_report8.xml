@@ -87,7 +87,7 @@
   </tr>
 
   <tr>
-    <th>Adaptés au handicap visuel moteurr</th>
+    <th>Adaptés au handicap moteur</th>
     <td>
       <table stl:if="fieldH15" id="display_fieldH153">        <tr style="padding:0px;  text-align: left"><td>        <input name="fieldH153" style="font-size: 8pt;  border:0px" checked="${fieldH153}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldH153" style="font-size: 8pt;  border:0px" checked="${fieldH153_not}" value="0" type="radio"/>Non      </td>      </tr></table>      <table stl:if="not fieldH15" id="display_fieldH153" style="visibility:hidden">        <tr style="padding:0px;  text-align: left"><td>        <input name="fieldH153" style="font-size: 8pt;  border:0px" checked="${fieldH153}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldH153" style="font-size: 8pt;  border:0px" checked="${fieldH153_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
     <td><b class="${_H153}">H153</b></td>
