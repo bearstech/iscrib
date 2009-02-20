@@ -1,324 +1,393 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-<form method="post" name="form" action=";report">
-
-  <div align="right">
-
-  <a style="border:0;color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
-     <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
-
-
-    <stl:block if="not printable">
-      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
-    </stl:block>
-  </div>
-<h1>B- LOCAUX - VÉHICULES - ÉQUIPEMENT INFORMATIQUE ET INFORMATISATION
+<div xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml" id="formBiblio">
+  <form method="post" name="form" action=";report">
+    <div align="right">
+      <a style="border:0;color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;"><img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
+      <stl:block if="not printable">
+        <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
+      </stl:block>
+    </div>
+    <h1>B- LOCAUX - VÉHICULES - ÉQUIPEMENT INFORMATIQUE ET INFORMATISATION
    <a stl:if="not printable" style="color:white;background-color:red; border: 1px solid red; " onclick="window.open(';help2', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">Voir l'aide sur cette page?</a>
 </h1>
-<h2>B.1 LOCAUX</h2>
-<table width="100%">
-  <colgroup>
-    <col width="59%"/>
-    <col width="12%"/>
-    <col width="12%"/>
-    <col width="12%"/>
-    <col width="5%"/>
-   </colgroup>
-  <tr>
-  <td></td>
-    <th style="text-align: center">Centrale  X</th>
-    <th style="text-align: center">Annexes Y</th>
-    <th style="text-align: center">Total Z</th>
-  <td></td>
-  </tr>
-  <tr>
-    <th style="background-color:#FFE15C">Surface en m² horsoeuvre nette SHON (services publics et intérieurs confondus)</th>
-    <td>
-       <input style="text-align: right" value="${fieldB11X}" name="fieldB11X" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldB11Y}" name="fieldB11Y" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right;background-color:#FFE15C" value="${fieldB11Z}" name="fieldB11Z" size="8" type="text"/>
-    </td>
-    <td style="background-color:#FFE15C"><b class="${_B11}">B11</b></td>
-  </tr>
+    <h2>B.1 LOCAUX</h2>
+    <table width="100%">
+      <colgroup>
+        <col width="59%"/>
+        <col width="12%"/>
+        <col width="12%"/>
+        <col width="12%"/>
+        <col width="5%"/>
+      </colgroup>
+      <tr>
+        <td/>
+        <th style="text-align: center">Centrale  X</th>
+        <th style="text-align: center">Annexes Y</th>
+        <th style="text-align: center">Total Z</th>
+        <td/>
+      </tr>
+      <tr>
+        <th style="background-color:#FFE15C">Surface en m² horsoeuvre nette SHON (services publics et intérieurs confondus)</th>
+        <td>
+          <input style="text-align: right" value="${fieldB11X}" name="fieldB11X" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right" value="${fieldB11Y}" name="fieldB11Y" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right;background-color:#FFE15C" value="${fieldB11Z}" name="fieldB11Z" size="8" type="text"/>
+        </td>
+        <td style="background-color:#FFE15C">
+          <b class="${_B11}">B11</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Nombre de bâtiments</th>
+        <td>
+          <input style="text-align: right" value="${fieldB12X}" name="fieldB12X" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right" value="${fieldB12Y}" name="fieldB12Y" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right" value="${fieldB12Z}" name="fieldB12Z" size="8" type="text"/>
+        </td>
+        <td>
+          <b class="${_B12}">B12</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Nombre de places assises (hors auditorium et cafétéria)</th>
+        <td>
+          <input style="text-align: right" value="${fieldB13X}" name="fieldB13X" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right" value="${fieldB13Y}" name="fieldB13Y" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right" value="${fieldB13Z}" name="fieldB13Z" size="8" type="text"/>
+        </td>
+        <td>
+          <b class="${_B13}">B13</b>
+        </td>
+      </tr>
+    </table>
+    <table width="100%">
+      <colgroup>
+        <col width="76%"/>
+        <col width="19%"/>
+        <col width="5%"/>
+      </colgroup>
+      <tr>
+        <th>Votre bibliothèque est-elle accessible aux personnes handicapées au regard de la loi du 11 février 2005 ?</th>
+        <td>
+          <table>
+            <tr style="padding: 10px; text-align: left">
+              <td><input style="font-size: 8pt;  border:0px" value="0" name="fieldB16" checked="${fieldB16_not}" type="radio" onclick="switch_off(['fieldB17'])"/>Oui</td>
+              <td style="border-left: 1px solid black;text-align: right"><input style="font-size: 8pt;  border:0px" value="1" name="fieldB16" checked="${fieldB16}" type="radio" onclick="switch_on(['fieldB17'])"/>Non </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <b class="${_B16}">B16</b>
+        </td>
+      </tr>
+      <th>Si non, l'accessibilité de votre bibliothèque a-t-elle fait l'objet d'une évaluation ?</th>
+      <td>
+        <table stl:if="fieldB16" id="display_fieldB17">
+          <tr style="padding: 10px; text-align: left">
+            <td><input name="fieldB17" style="font-size: 8pt;  border:0px" checked="${fieldB17}" value="1" type="radio"/>Oui </td>
+            <td style="border-left: 1px solid black;text-align: right"><input name="fieldB17" style="font-size: 8pt;  border:0px" checked="${fieldB17_not}" value="0" type="radio"/>Non </td>
+          </tr>
+        </table>
+        <table stl:if="not fieldB16" id="display_fieldB17" style="visibility:hidden">
+          <tr style="padding: 10px; text-align: left">
+            <td><input name="fieldB17" style="font-size: 8pt;  border:0px" checked="${fieldB17}" value="1" type="radio"/>Oui      </td>
+            <td style="border-left: 1px solid black;text-align: right"><input name="fieldB17" style="font-size: 8pt;  border:0px" checked="${fieldB17_not}" value="0" type="radio"/>Non      </td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <b class="${_B17}">B17</b>
+      </td>
+      <tr>
 
-  <tr>
-    <th>Nombre de bâtiments</th>
-    <td>
-       <input style="text-align: right" value="${fieldB12X}" name="fieldB12X" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldB12Y}" name="fieldB12Y" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldB12Z}" name="fieldB12Z" size="8" type="text"/>
-    </td>
-    <td><b class="${_B12}">B12</b></td>
   </tr>
-
-  <tr>
-    <th>Nombre de places assises (hors auditorium et cafétéria)</th>
-    <td>
-       <input style="text-align: right" value="${fieldB13X}" name="fieldB13X" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldB13Y}" name="fieldB13Y" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldB13Z}" name="fieldB13Z" size="8" type="text"/>
-    </td>
-    <td><b class="${_B13}">B13</b></td>
-  </tr>
-</table>
-<table width="100%">
-  <colgroup>
-    <col width="76%"/>
-    <col width="19%"/>
-    <col width="5%"/>
-   </colgroup>
-  <tr>
-    <th>Votre bibliothèque est-elle accessible aux personnes handicapées au regard de la loi du 11 février 2005 ?</th>
-    <td>
-     <table><tr style="padding: 10px; text-align: left">
-      <td><input style="font-size: 8pt;  border:0px" value="0" name="fieldB16" checked="${fieldB16_not}" type="radio" onclick="switch_off(['fieldB17'])"/>Oui</td>
-      <td style="border-left: 1px solid black;text-align: right">
-          <input style="font-size: 8pt;  border:0px" value="1" name="fieldB16" checked="${fieldB16}" type="radio" onclick="switch_on(['fieldB17'])"/>Non </td> </tr>
-      </table>
-     </td>
-    <td><b class="${_B16}">B16</b></td>
-  </tr>
-<th>Si non, l'accessibilité de votre bibliothèque a-t-elle fait l'objet d'une évaluation ?</th>
-    <td>
-       <table stl:if="fieldB16" id="display_fieldB17">
-        <tr style="padding: 10px; text-align: left">
-          <td> <input name="fieldB17" style="font-size: 8pt;  border:0px" checked="${fieldB17}" value="1" type="radio"/>Oui </td>
-           <td style="border-left: 1px solid black;text-align: right"> <input name="fieldB17" style="font-size: 8pt;  border:0px" checked="${fieldB17_not}" value="0" type="radio"/>Non </td>
-          </tr></table>
-        <table stl:if="not fieldB16" id="display_fieldB17" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>
-              <input name="fieldB17" style="font-size: 8pt;  border:0px" checked="${fieldB17}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB17" style="font-size: 8pt;  border:0px" checked="${fieldB17_not}" value="0" type="radio"/>Non      </td>      </tr></table>
-    </td>
-    <td><b class="${_B17}">B17</b></td>
-  <tr>
-
-  </tr>
-</table>
-<h2>B. 2 VÉHICULES</h2>
-<table width="100%">
-  <colgroup>
-    <col width="76%"/>
-    <col width="19%"/>
-    <col width="5%"/>
-   </colgroup>
-  <tr>
-    <th>Nombre total de bus : bibliobus ou médiabus (musibus, artobus, etc.)</th>
-    <td>
-       <input style="text-align: right" value="${fieldB21}" name="fieldB21" size="8" type="text"/>
-    </td>
-    <td><b class="${_B21}">B21</b></td>
-  </tr>
-
-  <tr>
-    <th>Dont nombre de bus faisant du prêt direct</th>
-    <td>
-       <input style="text-align: right" value="${fieldB22}" name="fieldB22" size="8" type="text"/>
-    </td>
-    <td><b class="${_B22}">B22</b></td>
-  </tr>
-
-  <tr>
-    <th>Autres véhicules (fourgonnettes, voitures légères)</th>
-    <td>
-       <input style="text-align: right" value="${fieldB23}" name="fieldB23" size="8" type="text"/>
-    </td>
-    <td><b class="${_B23}">B23</b></td>
-  </tr>
-</table>
-<h2>B.3/4 ÉQUIPEMENT INFORMATIQUE ET INFORMATISATION</h2>
-<table width="100%">
-  <colgroup>
-    <col width="76%"/>
-    <col width="19%"/>
-    <col width="5%"/>
-   </colgroup>
-  <tr>
-    <th style="background-color:#FFE15C">La bibliothèque est-t-elle équipée d'un logiciel de gestion de  catalogue ?</th>
-    <td>
-      <table><tr style="padding: 10px; text-align: left; background-color:#FFE15C"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldB31" checked="${fieldB31}" type="radio" onclick="switch_on(['fieldB32'])"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right;background-color:#FFE15C">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldB31" checked="${fieldB31_not}" type="radio" onclick="switch_off(['fieldB32'])"/>Non      </td>      </tr></table>    </td>
-    <td style="background-color:#FFE15C"><b class="${_B31}">B31</b></td>
-  </tr>
-
-  <tr>
-    <th>Si oui, préciser lequel :</th>
-    <td>
-       <div stl:if="not fieldB31" id="display_fieldB32" style="visibility:hidden">
-             <input stl:if="not fieldB31" name="fieldB32" size="40" type="text" value=""/></div>
-       <div stl:if="fieldB31" id="display_fieldB32">
-              <input value="${fieldB32}" stl:if="fieldB31" name="fieldB32" size="40" type="text"/>
-       </div>    </td>
-    <td><b class="${_B32}">B32</b></td>
-  </tr>
-
-  <tr>
-    <th>Dans l'année, la bibliothèque a-t-elle importé des notices pour alimenter  catalogue ?</th>
-    <td>
-      <table><tr style="padding: 10px; text-align: left"><td>
-           <input style="font-size: 8pt;  border:0px" value="1" name="fieldB33" checked="${fieldB33}" type="radio" onclick="switch_on(['fieldB34'])"/>Oui  </td>
-      <td style="border-left: 1px solid black;text-align: right">
-              <input style="font-size: 8pt;  border:0px" value="0" name="fieldB33" checked="${fieldB33_not}" type="radio" onclick="switch_off(['fieldB34'])"/>Non  </td>      </tr></table>    </td>
-    <td><b class="${_B33}">B33</b></td>
-  </tr>
-
-  <tr>
-    <th>Si oui, dans quelle proportion ? %</th>
-    <td>
-       <div stl:if="not fieldB33" id="display_fieldB34" style="visibility:hidden">         <input style="text-align: right" value="" stl:if="not fieldB33" name="fieldB34" size="8" type="text"/></div>
-       <div stl:if="fieldB33" id="display_fieldB34">         <input style="text-align: right" value="${fieldB34}" stl:if="fieldB33" name="fieldB34" size="8" type="text"/>
-       </div>    </td>
-    <td><b class="${_B34}">B34</b></td>
-  </tr>
-
-  
-   <tr>
-    <th>La bibliothèque possède-t-elle des documents patrimoniaux ?</th>
-    <td>
-      <table><tr style="padding: 10px; text-align: left"><td>
-           <input style="font-size: 8pt;  border:0px" value="1" name="fieldB341" checked="${fieldB341}" type="radio" onclick="switch_on(['fieldB35'])"/>Oui  </td>
-      <td style="border-left: 1px solid black;text-align: right">
-              <input style="font-size: 8pt;  border:0px" value="0" name="fieldB341" checked="${fieldB341_not}" type="radio" onclick="switch_off(['fieldB35'])"/>Non  </td>      </tr></table>    </td>
-    <td><b class="${_B341}">B341</b></td>
-  </tr>
-  
-  <tr>
-    <th>Si oui, leur catalogue est-il au moins en partie informatisé ?</th>
-    <!--td>
+    </table>
+    <h2>B. 2 VÉHICULES</h2>
+    <table width="100%">
+      <colgroup>
+        <col width="76%"/>
+        <col width="19%"/>
+        <col width="5%"/>
+      </colgroup>
+      <tr>
+        <th>Nombre total de bus : bibliobus ou médiabus (musibus, artobus, etc.)</th>
+        <td>
+          <input style="text-align: right" value="${fieldB21}" name="fieldB21" size="8" type="text"/>
+        </td>
+        <td>
+          <b class="${_B21}">B21</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Dont nombre de bus faisant du prêt direct</th>
+        <td>
+          <input style="text-align: right" value="${fieldB22}" name="fieldB22" size="8" type="text"/>
+        </td>
+        <td>
+          <b class="${_B22}">B22</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Autres véhicules (fourgonnettes, voitures légères)</th>
+        <td>
+          <input style="text-align: right" value="${fieldB23}" name="fieldB23" size="8" type="text"/>
+        </td>
+        <td>
+          <b class="${_B23}">B23</b>
+        </td>
+      </tr>
+    </table>
+    <h2>B.3/4 ÉQUIPEMENT INFORMATIQUE ET INFORMATISATION</h2>
+    <table width="100%">
+      <colgroup>
+        <col width="76%"/>
+        <col width="19%"/>
+        <col width="5%"/>
+      </colgroup>
+      <tr>
+        <th style="background-color:#FFE15C">La bibliothèque est-t-elle équipée d'un logiciel de gestion de  catalogue ?</th>
+        <td>
+          <table>
+            <tr style="padding: 10px; text-align: left; background-color:#FFE15C">
+              <td><input style="font-size: 8pt;  border:0px" value="1" name="fieldB31" checked="${fieldB31}" type="radio" onclick="switch_on(['fieldB32'])"/>Oui      </td>
+              <td style="border-left: 1px solid black;text-align: right;background-color:#FFE15C"><input style="font-size: 8pt;  border:0px" value="0" name="fieldB31" checked="${fieldB31_not}" type="radio" onclick="switch_off(['fieldB32'])"/>Non      </td>
+            </tr>
+          </table>
+        </td>
+        <td style="background-color:#FFE15C">
+          <b class="${_B31}">B31</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Si oui, préciser lequel :</th>
+        <td>
+          <div stl:if="not fieldB31" id="display_fieldB32" style="visibility:hidden">
+            <input stl:if="not fieldB31" name="fieldB32" size="40" type="text" value=""/>
+          </div>
+          <div stl:if="fieldB31" id="display_fieldB32">
+            <input value="${fieldB32}" stl:if="fieldB31" name="fieldB32" size="40" type="text"/>
+          </div>
+        </td>
+        <td>
+          <b class="${_B32}">B32</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Dans l'année, la bibliothèque a-t-elle importé des notices pour alimenter  catalogue ?</th>
+        <td>
+          <table>
+            <tr style="padding: 10px; text-align: left">
+              <td><input style="font-size: 8pt;  border:0px" value="1" name="fieldB33" checked="${fieldB33}" type="radio" onclick="switch_on(['fieldB34'])"/>Oui  </td>
+              <td style="border-left: 1px solid black;text-align: right"><input style="font-size: 8pt;  border:0px" value="0" name="fieldB33" checked="${fieldB33_not}" type="radio" onclick="switch_off(['fieldB34'])"/>Non  </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <b class="${_B33}">B33</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Si oui, dans quelle proportion ? %</th>
+        <td>
+          <div stl:if="not fieldB33" id="display_fieldB34" style="visibility:hidden">
+            <input style="text-align: right" value="" stl:if="not fieldB33" name="fieldB34" size="8" type="text"/>
+          </div>
+          <div stl:if="fieldB33" id="display_fieldB34">
+            <input style="text-align: right" value="${fieldB34}" stl:if="fieldB33" name="fieldB34" size="8" type="text"/>
+          </div>
+        </td>
+        <td>
+          <b class="${_B34}">B34</b>
+        </td>
+      </tr>
+      <tr>
+        <th>La bibliothèque possède-t-elle des documents patrimoniaux ?</th>
+        <td>
+          <table>
+            <tr style="padding: 10px; text-align: left">
+              <td><input style="font-size: 8pt;  border:0px" value="1" name="fieldB341" checked="${fieldB341}" type="radio" onclick="switch_on(['fieldB35'])"/>Oui  </td>
+              <td style="border-left: 1px solid black;text-align: right"><input style="font-size: 8pt;  border:0px" value="0" name="fieldB341" checked="${fieldB341_not}" type="radio" onclick="switch_off(['fieldB35'])"/>Non  </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <b class="${_B341}">B341</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Si oui, leur catalogue est-il au moins en partie informatisé ?</th>
+        <!--td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldB35" checked="${fieldB35}" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
       <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldB35" checked="${fieldB35_not}" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>      </tr></table>    </td-->
-      <td>
-      <table stl:if="fieldB341" id="display_fieldB35"> 
-                  <tr style="padding: 10px; text-align: left">
-                    <td> <input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
-                    <td style="border-left: 1px solid black;text-align: right"><input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
-                  </tr>
-      </table> 
-      <table stl:if="not fieldB341" id="display_fieldB35" style="visibility:hidden">
-                 <tr style="padding: 10px; text-align: left">
-                    <td><input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
-                    <td style="border-left: 1px solid black;text-align: right"> <input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
-                  </tr>
-       </table>
-       </td>
-    
-    <td><b class="${_B35}">B35</b></td>
-  </tr>
-
-  <tr>
-    <th>Si oui : nombre de notices</th>
-    <td>
-       <div stl:if="not fieldB35" id="display_fieldB36" style="visibility:hidden">         <input style="text-align: right" value="" stl:if="not fieldB35" name="fieldB36" size="8" type="text"/></div>
-       <div stl:if="fieldB35" id="display_fieldB36">         <input style="text-align: right" value="${fieldB36}" stl:if="fieldB35" name="fieldB36" size="8" type="text"/>
-       </div>    </td>
-    <td><b class="${_B36}">B36</b></td>
-  </tr>
-</table>
-<table width="100%">
-  <colgroup>
-    <col width="59%"/>
-    <col width="18%"/>
-    <col width="18%"/>
-    <col width="5%"/>
-   </colgroup>
-  <tr>
-  <td></td>
-    <th style="text-align: center">Professionnels  X</th>
-    <th style="text-align: center">Publics   Y</th>
-  <td></td>
-  </tr>
-  <tr>
-    <th>Nombre de postes informatiques sans accès internet</th>
-    <td>
-       <input style="text-align: right" value="${fieldB37X}" name="fieldB37X" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldB37Y}" name="fieldB37Y" size="8" type="text"/>
-    </td>
-    <td><b class="${_B37}">B37</b></td>
-  </tr>
-
-  <tr>
-    <th>Nombre de postes informatique avec accès internet</th>
-    <td>
-       <input style="text-align: right" value="${fieldB38X}" name="fieldB38X" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldB38Y}" name="fieldB38Y" size="8" type="text"/>
-    </td>
-    <td><b class="${_B38}">B38</b></td>
-  </tr>
-
-  <tr>
-    <th>TOTAL</th>
-    <td>
-       <input style="text-align: right" value="${fieldB39X}" name="fieldB39X" size="8" type="text"/>
-    </td>
-    <td>
-       <input style="text-align: right" value="${fieldB39Y}" name="fieldB39Y" size="8" type="text"/>
-    </td>
-    <td><b class="${_B39}">B39</b></td>
-  </tr>
-</table>
-<table width="100%">
-  <colgroup>
-    <col width="76%"/>
-    <col width="19%"/>
-    <col width="5%"/>
-   </colgroup>
-  <tr>
-    <th style="background-color:#FFE15C">Possédez-vous un accès public à internet ?</th>
-    <td>
-      <table><tr style="padding: 10px; text-align: left;background-color:#FFE15C"><td>        <input style="font-size: 8pt;  border:0px" value="1" name="fieldB40" checked="${fieldB40}" type="radio" onclick="switch_on(['fieldB41','fieldB42'])"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input style="font-size: 8pt;  border:0px" value="0" name="fieldB40" checked="${fieldB40_not}" type="radio" onclick="switch_off(['fieldB41','fieldB42'])"/>Non      </td>      </tr></table>    </td>
-    <td style="background-color:#FFE15C"><b class="${_B40}">B40</b></td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <th>Si oui, l'accès public à internet est-il :</th>
-  </tr>
-</table>
-<table width="100%">
-  <colgroup>
-    <col width="76%"/>
-    <col width="19%"/>
-    <col width="5%"/>
-   </colgroup>
-  <tr>
-    <th>Entièrement gratuit ?</th>
-    <td>
-      <table stl:if="fieldB40" id="display_fieldB41">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41_not}" value="0" type="radio"/>Non      </td>      </tr></table>      <table stl:if="not fieldB40" id="display_fieldB41" style="visibility:hidden">        <tr style="padding: 10px; text-align: left"><td>        <input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41}" value="1" type="radio"/>Oui      </td><td style="border-left: 1px solid black;text-align: right">        <input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41_not}" value="0" type="radio"/>Non      </td>      </tr></table>    </td>
-    <td><b class="${_B41}">B41</b></td>
-  </tr>
-
- 
-</table>
-<table width="100%">
-  <colgroup>
-    <col width="76%"/>
-    <col width="19%"/>
-    <col width="5%"/>
-   </colgroup>
-  <tr>
-    <th>La bibliothèque dispose-t-elle d' équipements spécifiques facilitant l'accès à la lecture des personnes handicapées ?</th>
-    <td>
-      <table><tr style="padding:0px;  text-align: left"><td>        <input name="fieldB48" style="font-size: 8pt;  border:0px" checked="${fieldB48}" value="1" type="radio"/>Oui      </td>
-      <td style="border-left: 1px solid black;text-align: right">        <input name="fieldB48" style="font-size: 8pt;  border:0px" checked="${fieldB48_not}" value="0" type="radio"/>Non      </td>      </tr></table>      </td>
-    <td><b class="${_B48}">B48</b></td>
-  </tr>
-</table>
-
-</form>
- <p style="page-break-after:always "></p>
+        <td>
+          <table stl:if="fieldB341" id="display_fieldB35">
+            <tr style="padding: 10px; text-align: left">
+              <td><input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
+              <td style="border-left: 1px solid black;text-align: right"><input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
+            </tr>
+          </table>
+          <table stl:if="not fieldB341" id="display_fieldB35" style="visibility:hidden">
+            <tr style="padding: 10px; text-align: left">
+              <td><input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35}" value="1" type="radio" onclick="switch_on(['fieldB36'])"/>Oui      </td>
+              <td style="border-left: 1px solid black;text-align: right"><input name="fieldB35" style="font-size: 8pt;  border:0px" checked="${fieldB35_not}" value="0" type="radio" onclick="switch_off(['fieldB36'])"/>Non      </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <b class="${_B35}">B35</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Si oui : nombre de notices</th>
+        <td>
+          <div stl:if="not fieldB35" id="display_fieldB36" style="visibility:hidden">
+            <input style="text-align: right" value="" stl:if="not fieldB35" name="fieldB36" size="8" type="text"/>
+          </div>
+          <div stl:if="fieldB35" id="display_fieldB36">
+            <input style="text-align: right" value="${fieldB36}" stl:if="fieldB35" name="fieldB36" size="8" type="text"/>
+          </div>
+        </td>
+        <td>
+          <b class="${_B36}">B36</b>
+        </td>
+      </tr>
+    </table>
+    <table width="100%">
+      <colgroup>
+        <col width="59%"/>
+        <col width="18%"/>
+        <col width="18%"/>
+        <col width="5%"/>
+      </colgroup>
+      <tr>
+        <td/>
+        <th style="text-align: center">Professionnels  X</th>
+        <th style="text-align: center">Publics   Y</th>
+        <td/>
+      </tr>
+      <tr>
+        <th>Nombre de postes informatiques sans accès internet</th>
+        <td>
+          <input style="text-align: right" value="${fieldB37X}" name="fieldB37X" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right" value="${fieldB37Y}" name="fieldB37Y" size="8" type="text"/>
+        </td>
+        <td>
+          <b class="${_B37}">B37</b>
+        </td>
+      </tr>
+      <tr>
+        <th>Nombre de postes informatique avec accès internet</th>
+        <td>
+          <input style="text-align: right" value="${fieldB38X}" name="fieldB38X" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right" value="${fieldB38Y}" name="fieldB38Y" size="8" type="text"/>
+        </td>
+        <td>
+          <b class="${_B38}">B38</b>
+        </td>
+      </tr>
+      <tr>
+        <th>TOTAL</th>
+        <td>
+          <input style="text-align: right" value="${fieldB39X}" name="fieldB39X" size="8" type="text"/>
+        </td>
+        <td>
+          <input style="text-align: right" value="${fieldB39Y}" name="fieldB39Y" size="8" type="text"/>
+        </td>
+        <td>
+          <b class="${_B39}">B39</b>
+        </td>
+      </tr>
+    </table>
+    <table width="100%">
+      <colgroup>
+        <col width="76%"/>
+        <col width="19%"/>
+        <col width="5%"/>
+      </colgroup>
+      <tr>
+        <th style="background-color:#FFE15C">Possédez-vous un accès public à internet ?</th>
+        <td>
+          <table>
+            <tr style="padding: 10px; text-align: left;background-color:#FFE15C">
+              <td><input style="font-size: 8pt;  border:0px" value="1" name="fieldB40" checked="${fieldB40}" type="radio" onclick="switch_on(['fieldB41','fieldB42'])"/>Oui      </td>
+              <td style="border-left: 1px solid black;text-align: right"><input style="font-size: 8pt;  border:0px" value="0" name="fieldB40" checked="${fieldB40_not}" type="radio" onclick="switch_off(['fieldB41','fieldB42'])"/>Non      </td>
+            </tr>
+          </table>
+        </td>
+        <td style="background-color:#FFE15C">
+          <b class="${_B40}">B40</b>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>Si oui, l'accès public à internet est-il :</th>
+      </tr>
+    </table>
+    <table width="100%">
+      <colgroup>
+        <col width="76%"/>
+        <col width="19%"/>
+        <col width="5%"/>
+      </colgroup>
+      <tr>
+        <th>Entièrement gratuit ?</th>
+        <td>
+          <table stl:if="fieldB40" id="display_fieldB41">
+            <tr style="padding: 10px; text-align: left">
+              <td><input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41}" value="1" type="radio"/>Oui      </td>
+              <td style="border-left: 1px solid black;text-align: right"><input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41_not}" value="0" type="radio"/>Non      </td>
+            </tr>
+          </table>
+          <table stl:if="not fieldB40" id="display_fieldB41" style="visibility:hidden">
+            <tr style="padding: 10px; text-align: left">
+              <td><input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41}" value="1" type="radio"/>Oui      </td>
+              <td style="border-left: 1px solid black;text-align: right"><input name="fieldB41" style="font-size: 8pt;  border:0px" checked="${fieldB41_not}" value="0" type="radio"/>Non      </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <b class="${_B41}">B41</b>
+        </td>
+      </tr>
+    </table>
+    <table width="100%">
+      <colgroup>
+        <col width="76%"/>
+        <col width="19%"/>
+        <col width="5%"/>
+      </colgroup>
+      <tr>
+        <th>La bibliothèque dispose-t-elle d' équipements spécifiques facilitant l'accès à la lecture des personnes handicapées ?</th>
+        <td>
+          <table>
+            <tr style="padding:0px;  text-align: left">
+              <td><input name="fieldB48" style="font-size: 8pt;  border:0px" checked="${fieldB48}" value="1" type="radio"/>Oui      </td>
+              <td style="border-left: 1px solid black;text-align: right"><input name="fieldB48" style="font-size: 8pt;  border:0px" checked="${fieldB48_not}" value="0" type="radio"/>Non      </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <b class="${_B48}">B48</b>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <p style="page-break-after:always "/>
 </div>

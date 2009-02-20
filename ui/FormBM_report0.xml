@@ -138,9 +138,11 @@
       <tr>
         <th>Rattachement administratif</th>
         <td colspan="3">
-	  <input name="field13" style="border:0px" checked="${field13_1}" value="1" type="radio"/> Commune <span style="line-height:0pt"><br/></span>
-	  <input name="field13" style="border:0px" checked="${field13_2}" value="2" type="radio"/> Groupement de communes *
-	
+          <input name="field13" style="border:0px" checked="${field13_1}"
+            value="1" type="radio"/> Commune <span
+            style="line-height:0pt"><br/></span>
+          <input name="field13" style="border:0px" checked="${field13_2}"
+            value="2" type="radio"/> Groupement de communes *
         </td>
         <td sdnum="1036;" sdval="6">13</td>
       </tr>
@@ -148,18 +150,27 @@
       <tr>
         <th>Mode de gestion</th>
         <td colspan="3">
-	  <input name="field14" style="border:0px " checked="${field14_1}" value="1" type="radio"/>Régie directe<span style="line-height:0pt"><br/></span>
-	  <input name="field14" style="border:0px " checked="${field14_2}" value="2" type="radio"/> Etablissement public de coopération culturelle<span style="line-height:0pt"><br/></span>
-	  <input name="field14" style="border:0px" checked="${field14_3}" value="3" type="radio"/> Association<span style="line-height:0pt"><br/></span>
-	  <input name="field14" style="border:0px" checked="${field14_4}" value="4" type="radio"/> Autre ,
-	    préciser : <input name="field15" size="44" type="text" value="${field15}"/>
+          <input name="field14" style="border:0px " checked="${field14_1}"
+            value="1" type="radio"/>
+          Régie directe<span style="line-height:0pt"><br/></span>
+          <input name="field14" style="border:0px " checked="${field14_2}"
+            value="2" type="radio"/>
+          Etablissement public de coopération culturelle<span
+            style="line-height:0pt"><br/></span>
+          <input name="field14" style="border:0px" checked="${field14_3}"
+            value="3" type="radio"/>
+          Association<span style="line-height:0pt"><br/></span>
+          <input name="field14" style="border:0px" checked="${field14_4}" value="4" type="radio"/>
+          Autre , préciser :
+          <input name="field15" size="44" type="text" value="${field15}"/>
 	    </td>
         <td sdnum="1036;" sdval="6">14</td>
      </tr>
      <tr>
      <th>Population concernée</th>
      <td colspan="3">
-       <input value="${fieldK0}" name="fieldK0" readonly="yes" size="8" type="text"/> habitants
+       <input value="${fieldK0}" name="fieldK0" readonly="yes" size="8"
+         type="text"/> habitants
     </td>
     <td sdnum="1036;" sdval="6">K0</td>
   </tr>

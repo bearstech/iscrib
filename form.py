@@ -54,7 +54,6 @@ workflow.add_state('modified', title=u"Modifié",
 
 
 def quote_namespace(namespace, schema):
-
     for key, value in namespace.items():
         field_def = schema.get(key)
         if field_def is not None:
@@ -70,6 +69,7 @@ def quote_namespace(namespace, schema):
 
 
 class FormHandler(File):
+
     def new(self):
         self.fields = {}
 
@@ -202,13 +202,13 @@ class Form(Text):
             if name.startswith('field'):
                 namespace[key] = value
             # Booleans
-            if type is Boolean:
+            if is_datatype(type, Boolean):
                 if namespace[name] is False:
                     namespace['%s_not' % name] = True
                 else:
                     namespace['%s_not' % name] = False
             # Checkboxes
-            if type is Checkboxes:
+            elif is_datatype(type, Checkboxes):
                 values = value.split('##')
                 for i in range(1, 30, 1):
                     namespace['%s_%s' % (name, i)] = str(i) in values
@@ -1056,7 +1056,12 @@ class Form(Text):
                 if dependance is not None:
                     # here we know if they are a dependancies
                     # and
-                    if context.get_form_value(dependance, '0') == '1':
+                    dependance_type = schema[dependance][0]
+                    if is_datatype(dependance_type, Checkboxes):
+                        true = context.get_form_value(dependance, '0') != '0'
+                    else:
+                        true = context.get_form_value(dependance, '0') == '1'
+                    if true:
                         if not value:
                             empty = True
                     # clean value if dependance False
