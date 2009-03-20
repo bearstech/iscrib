@@ -32,8 +32,8 @@ from itools.csv import CSVFile
 from scrib import config
 
 
-MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
-MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL"
+MSG_NO_MYSQL = "La connexion à MySql ne s'est pas faite"
+MSG_NO_ADRESSE = "La bibliothèque n'existe pas dans la base SQL : %r"
 
 
 class AllBM(CSVFile):
@@ -136,7 +136,10 @@ def get_adresse(query):
     cursor.close()
     connection.close()
     if not len(results):
-        raise ValueError, MSG_NO_ADRESSE
+        #dummy = [''] * 99
+        #dummy[17] = 0
+        #return dummy
+        raise ValueError, MSG_NO_ADRESSE % query
     results = results[0]
     adresse = []
     for val in results:
@@ -144,7 +147,7 @@ def get_adresse(query):
             adresse.append('')
         else:
             adresse.append(val)
-    return adresse or ''
+    return adresse
 
 
 def none2str(t):

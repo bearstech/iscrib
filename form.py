@@ -816,11 +816,15 @@ class Form(Text):
                 elif is_datatype(field_type, Decimal):
                     value = "'%s'" % str(value)
                 elif is_datatype(field_type, EPCI_Statut):
-                    ids = [x['name'] for x in value if x['selected']]
-                    if ids:
-                        value = ids[0]
+                    # 0006036: Export général ne marche pas
+                    if isinstance(value, str):
+                        pass
                     else:
-                        value = '0'
+                        ids = [x['name'] for x in value if x['selected']]
+                        if ids:
+                            value = ids[0]
+                        else:
+                            value = '0'
                 values.append(value)
 
         keys = ','.join(keys)

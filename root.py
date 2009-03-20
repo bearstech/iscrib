@@ -474,7 +474,7 @@ class Root(BaseRoot):
     def new_bm(self, context):
         code_bib = context.get_form_value('code_bib')
         codes = []
-        
+
         for code in code_bib.split():
             if not all_bm.search(code=code):
                 return context.come_back(u"Le code_bib $code n'est pas "
