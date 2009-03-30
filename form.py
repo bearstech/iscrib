@@ -251,6 +251,13 @@ class Form(Text):
         # Récupération des champs de la base ADRESSE
         dept = self.name
         champs_adr = self.base_lect(dept)
+        namespace['insee'] = unicode(champs_adr[0], 'ISO-8859-1')
+        namespace['type_adr'] = int(champs_adr[1])
+        namespace['region'] = unicode(champs_adr[4], 'ISO-8859-1')
+        namespace['dept'] = dept
+        namespace['type'] = unicode(champs_adr[10], 'ISO-8859-1')
+        namespace['commune'] = unicode(champs_adr[27], 'ISO-8859-1')
+        namespace['minitel'] = unicode(champs_adr[28], 'ISO-8859-1')
         code_ua = int(champs_adr[17])
         namespace['code_ua'] = code_ua
         # LIBELLE1

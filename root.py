@@ -356,72 +356,77 @@ class Root(BaseRoot):
             """Ajout ALP - 27 nov 2007
             """
             folder = container.handler
-            names = [name for name in container.get_names()
-                        if name.isdigit() and (
-                            folder.get_handler('%s.metadata' % name)\
-                                    .get_property('state') == 'public')]
+            names = [o.name
+                     for o in container.search_objects(state='public')]
+
+            # Adresses déjà exportées
+            if container.is_BM():
+                query = "select code_bib from adresse where insee is not null"
+            else:
+                query = "select dept from adresse where type_adr='3' and code_ua is not null"
+            connexion = get_connection()
+            cursor = connexion.cursor()
+            cursor.execute(query)
+            results = cursor.fetchall()
+            adresses_connues = []
+            for result in results:
+                try:
+                    value = str(int(result[0]))
+                except ValueError:
+                    # Corse
+                    value = str(result[0])
+                adresses_connues.append(value)
+            cursor.close()
+            connexion.close()
+
             for name in names:
                 form, namespace = get_form_and_namespace(container, name)
-                query = (u'UPDATE adresse SET libelle1="%(field1)s",'
-                         u'libelle2="%(field2)s",local="%(field30)s",'
-                         u'voie_num="%(field31)s",'
-                         u'voie_type="%(field32)s",'
-                         u'voie_nom="%(field33)s",cpbiblio="%(field4)s",'
-                         u'ville="%(field5)s",cedexb="%(field6)s",'
-                         u'directeu="%(field7)s",st_dir="%(field8)s",'
-                         u'tele="%(field9)s",fax="%(field10)s",'
-                         u'mel="%(field11)s",www="%(field12)s",'
-                         u'intercom="%(field13)s",gestion="%(field14)s",'
-                         u'gestion_autre="%(field15)s" where code_bib=')
-                query = query % namespace
-                query = query + name + ';'
-                output.write(query.encode('latin1') + '\n')
+                namespace['myname'] = name
+                if name in adresses_connues:
+                    query = (u'UPDATE adresse SET libelle1="%(field1)s",'
+                             u'libelle2="%(field2)s",local="%(field30)s",'
+                             u'voie_num="%(field31)s",'
+                             u'voie_type="%(field32)s",'
+                             u'voie_nom="%(field33)s",cpbiblio="%(field4)s",'
+                             u'ville="%(field5)s",cedexb="%(field6)s",'
+                             u'directeu="%(field7)s",st_dir="%(field8)s",'
+                             u'tele="%(field9)s",fax="%(field10)s",'
+                             u'mel="%(field11)s",www="%(field12)s",'
+                             u'intercom="%(field13)s",gestion="%(field14)s",'
+                             u'gestion_autre="%(field15)s" '
+                             u'where code_bib=%(myname)s;\n')
+                    query = query % namespace
+                else:
+                    # N'est pas censé être utilisé dans 99 % des cas
+                    query = (u'INSERT INTO adresse (insee,type_adr,mel,'
+                             u'directeu,region,dept,libelle1,libelle2,local,'
+                             u'cpbiblio,cedexb,fax,tele,www,code_bib,'
+                             u'code_ua,ville,st_dir,type,intercom,gestion,'
+                             u'gestion_autre,voie_num,voie_type,voie_nom,'
+                             u'commune,minitel) VALUES ("%(insee)s",'
+                             u'"%(type_adr)s","%(field11)s","%(field7)s",'
+                             u'"%(region)s","%(dept)s","%(field1)s",'
+                             u'"%(field2)s","%(field30)s","%(field4)s",'
+                             u'"%(field6)s","%(field10)s","%(field9)s",'
+                             u'"%(field12)s","%(myname)s","%(code_ua)s",'
+                             u'"%(field5)s","%(field8)s","%(type)s",'
+                             u'"%(field13)s","%(field14)s","%(field15)s",'
+                             u'"%(field31)s","%(field32)s","%(field33)s",'
+                             u'"%(commune)s","%(minitel)s");\n')
+                    query = query % namespace
+                output.write(query.encode('latin1'))
 
 
         def export_bib(container, ouput, context):
-            connexion = get_connection()
-            cursor = connexion.cursor()
+            """ (bm|bdp)07
+            """
             folder = container.handler
-            names = [name for name in container.get_names()
-                        if name.isdigit() and (
-                            folder.get_handler('%s.metadata' % name)\
-                                    .get_property('state') == 'public')]
+            names = [o.name
+                     for o in container.search_objects(state='public')]
             if len(names) == 0:
                 output.write(u'-- aucune bibliothèque exportée'.encode('latin1'))
                 return
 
-            # adresse
-            keys = ', '.join(names)
-            if container.is_BM():
-                query = "select * from adresse where insee is not null and code_bib in (%s)" % keys
-            else:
-                query = "select * from adresse where type_adr='3' and code_ua is not null and dept in (%s)" % keys
-            cursor.execute(query)
-            resultset = cursor.fetchall()
-            cursor.close()
-            connexion.close()
-            if not resultset:
-                context.commit = False
-                return context.come_back(u'La requête "$query" a échoué',
-                        query=query)
-
-            for result in resultset:
-                values = []
-                for value in result:
-                    if value is None:
-                        values.append('NULL')
-                    elif isinstance(value, str):
-                        if "'" in value:
-                            value = value.replace("'", "\\'")
-                        values.append("'%s'" % value)
-                    else:
-                        values.append(str(value))
-                values = ','.join(values)
-                output.write('INSERT INTO adresse VALUES (%s);\n' % values)
-
-            output.write('\n')
-
-            # (bm|bdp)07
             for name in names:
                 form, namespace = get_form_and_namespace(container, name)
                 query = form.get_export_query(namespace)
@@ -434,6 +439,7 @@ class Root(BaseRoot):
 
         output.write(u'-- Réinitialisation'.encode('latin1'))
         output.write('\n')
+        # 0006036: ne pas effacer cette table, on ne la gère pas
         #output.write('DELETE FROM adresse;\n')
         output.write('DELETE FROM bm07;\n')
         output.write('DELETE FROM bdp07;\n')

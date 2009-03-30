@@ -54,7 +54,7 @@ CREATE TABLE `adresse` (
   `DMODIF` date default NULL,
   `REMARQUE` varchar(30) default NULL,
   `REGI` char(2) default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumping data for table `adresse`
