@@ -1,7 +1,7 @@
 -- -*- coding: UTF-8 -*-
 
-DROP TABLE IF EXISTS `bdp07`;
-CREATE TABLE `bdp07` (
+DROP TABLE IF EXISTS `bdp08`;
+CREATE TABLE `bdp08` (
   `Code_UA` int default NULL,
   `dept` char(3) default NULL,
   `exer` int default NULL,
