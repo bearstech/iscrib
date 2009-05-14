@@ -350,19 +350,29 @@ class Root(BaseRoot):
     export__access__ = 'is_admin'
     def export(self, context):
 
+        __cache__ = {}
+
+        def get_form_and_namespace(container, name):
+            if name not in __cache__:
+                form = container.get_object(name)
+                schema = form.get_schema()
+                namespace = form.get_namespace(context)
+                quote_namespace(namespace, schema)
+                __cache__[name] = (form, namespace)
+
+            return __cache__[name]
+
+
         def export_adr(container, output, context):
             """Ajout ALP - 27 nov 2007
             """
             folder = container.handler
             names = [name for name in container.get_names()
-                        if name.isdigit() and (
-                            folder.get_handler('%s.metadata' % name)\
+                          if name.isdigit() and (
+                              folder.get_handler('%s.metadata' % name)
                                     .get_property('state') == 'public')]
             for name in names:
-                form = container.get_object(name)
-                schema = form.get_schema()
-                namespace = form.get_namespace(context)
-                quote_namespace(namespace, schema)
+                form, namespace = get_form_and_namespace(container, name)
                 query = (u'UPDATE adresse08 SET libelle1="%(field1)s",'
                          u'libelle2="%(field2)s",local="%(field30)s",'
                          u'voie_num="%(field31)s",voie_type="%(field32)s",'
@@ -383,9 +393,9 @@ class Root(BaseRoot):
             cursor = connexion.cursor()
             folder = container.handler
             names = [name for name in container.get_names()
-                    if name.isdigit() and (
-                        folder.get_handler('%s.metadata' % name)\
-                                .get_property('state') == 'public')]
+                          if name.isdigit() and (
+                              folder.get_handler('%s.metadata' % name)
+                                    .get_property('state') == 'public')]
             if len(names) == 0:
                 output.write(u'-- aucune bibliothèque exportée'.encode('latin1'))
                 return
@@ -430,10 +440,7 @@ class Root(BaseRoot):
 
             # (bm|bdp)08
             for name in names:
-                form = container.get_object(name)
-                schema = form.get_schema()
-                namespace = form.get_namespace(context)
-                quote_namespace(namespace, schema)
+                form, namespace = get_form_and_namespace(container, name)
                 query = form.get_export_query(namespace)
                 output.write(query.encode('latin1') + '\n')
 

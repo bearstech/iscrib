@@ -60,10 +60,10 @@ def quote_namespace(namespace, schema):
             ftype = field_def[0]
             if ftype is Unicode:
                    if value is not None:
-                       value = value.replace(u"€", u"eur")
-                       value = value.replace(u'"', u'\\"')
-                       value = value.replace(u"&quot;", u'\\"')
-                       value = value.replace(u"'", u"\\'")
+                       value = (value.replace(u"€", u"eur")
+                                     .replace(u'"', u'\\"')
+                                     .replace(u"&quot;", u'\\"')
+                                     .replace(u"'", u"\\'"))
                    namespace[key] = value
 
 
