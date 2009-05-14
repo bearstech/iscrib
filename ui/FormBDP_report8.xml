@@ -644,7 +644,7 @@
     <td><b class="${_H41}">H41</b></td>
   </tr>
 
-  <!--tr>
+  <tr>
     <th>Aménagement</th>
     <td>
       <table><tr style="padding: 10px; text-align: left"><td>        <input name="fieldH42X" style="font-size: 8pt;  border:0px" checked="${fieldH42X}" value="1" type="radio" onclick="switch_on(['fieldH42Y','fieldH42Z']"/>Oui      </td>
@@ -690,7 +690,7 @@
        <div stl:if="fieldH44X" id="display_fieldH44Z">         <input style="text-align:right" value="${fieldH44Z}" stl:if="fieldH44X" name="fieldH44Z" size="8" type="text"/>
        </div>    </td>
     <td><b class="${_H44}">H44</b></td>
-  </tr-->
+  </tr>
 </table>
 <table width="100%">
   <colgroup>
