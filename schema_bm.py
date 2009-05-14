@@ -1089,7 +1089,7 @@ schema = {'field1': (Unicode, ''),
           'fieldJ15Y': (Unicode, ''),
           'fieldJ15Z': (Unicode, ''),
           ## K- EPCI
-          'fieldK0': (Unicode, None),
+          'fieldK0': (Integer, None),
           'fieldK1': (Unicode, ''),
           'fieldK2': (Unicode, ''),
           'fieldK3': (Checkboxes, '1'),

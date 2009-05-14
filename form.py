@@ -658,8 +658,8 @@ class Form(Text):
                     # optional_nonEmpties
                     optional_nonEmpties.append(key)
 
-        return  (All_fields, All_mandatorie, All_optional,
-                 optional_nonEmpties, mandatory_nonEmpties, Empties)
+        return (All_fields, All_mandatorie, All_optional,
+                optional_nonEmpties, mandatory_nonEmpties, Empties)
 
 
     def get_total_good_fields(self, namespace):
