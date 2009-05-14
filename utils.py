@@ -32,8 +32,8 @@ from itools.csv import CSVFile
 from scrib import config
 
 
-MSG_NO_MYSQL = "La connexion à MySql ne s'est pas faite"
-MSG_NO_ADRESSE = "La bibliothèque n'existe pas dans la base SQL : %r"
+MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
+MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL : %r"
 
 
 class AllBM(CSVFile):
