@@ -1,0 +1,48 @@
+===============================================
+Stocker plusieurs années dans une même instance
+===============================================
+
+Problème : les formulaires et les contrôles changent chaque annnée. La base SQL
+avec laquelle on interagit voit ses tables « millésimmées » avec un préfixe
+pour l'année.
+
+Indice (sur Pelleas) ::
+
+   git grep 200?
+
+Chaque année, il faut incrémenter toutes les années en dur dans le code, plus
+intégrer les formulaires qu'Anne-Laure refait à la main.
+
+Solution possible
+=================
+
+Se limiter à la migration de l'année en cours plus l'année à venir. Ne pas
+ressortir les années précédentes.
+
+au niveau de la database
+------------------------
+
+Chaque année dans un Website. Les utilisateurs apparaissent et disparaissent,
+donc il leur faudra un rôle pour autoriser l'accès à telle ou telle année.
+
+Les conteneurs « BM2008 » et « BDP2008 » actuels deviendront « 2008/BM » et
+« 2008/BDP ».
+
+au niveau du code
+-----------------
+
+Chaque Website a un class_id du type « Scrib-200? ». Le code commun peut être
+mis dans une classe mixin.
+
+Il y a des modules form_bdp, form_bm, schema_bdp et schema_bm. Mettre l'année
+dans le nom. Chaque Website importera les forms et les schemas de son année.
+
+Le module forms est à priori réutilisable chaque année, moyennant bien sûr le
+changement d'algorithme de ses méthodes, par exemple « is_BM ».
+
+au niveau des templates
+-----------------------
+
+Chaque année est une skin avec ses propres templates, et ses propres fichiers
+CSV le cas échéant. Donner au Website de la même année un class_skin
+correspondant.
