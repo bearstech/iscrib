@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
 <h1>Etat du formulaire : <em>${state}</em></h1>
 
@@ -29,8 +32,8 @@
   MySQL en cliquant le bouton ci-dessous :
   </p>
   <blockquote>
-    <form method="post" action=";submitted2exported">
-      <input type="submit" value="Exporter"/>
+    <form method="post">
+      <input type="submit" value="Exporter" name=";submitted2exported"/>
     </form>
   </blockquote>
 </stl:block>
@@ -39,9 +42,9 @@
 <stl:block if="not is_finished">
     <p> La<a href="#controles">  liste des contrôles </a> et la<a href="#vides"> liste des rubriques non remplies </a> doivent être vides pour pouvoir envoyer le formulaire</p>
    <blockquote>
-    <form method="post" action=";pending2submitted">
+    <form method="post">
       <input style="color: gray;" type="submit" value="Envoyer le formulaire"
-        disabled="disabled"/>
+        disabled="disabled" name=";pending2submitted"/>
     </form>
   </blockquote>
 </stl:block>
@@ -52,8 +55,8 @@
     envoyer le formulaire.  Pour l'envoyer à l'administrateur cliquez sur le
     bouton ci-dessous : </p>
   <blockquote>
-    <form method="post" action=";pending2submitted">
-      <input type="submit" value="Envoyer le formulaire"/>
+    <form method="post">
+      <input type="submit" value="Envoyer le formulaire" name=";pending2submitted"/>
     </form>
   </blockquote>
 </stl:block>
@@ -76,7 +79,7 @@ La liste des contrôles doit être vide  pour que l'on puisse envoyer le formula
   <tr valign="top">
     <td>
       <table class="Check" cellspacing="0" cellpadding="0">
-        <stl:block repeat="res1 controle_blocks1">
+        <stl:block stl:repeat="res1 controle_blocks1">
         <tr style="background-color: rgb(202,220,255); text-align:center">
           <td colspan="4">
             <a style="text-decoration: underline" href="${res1/section_url}">
@@ -98,7 +101,7 @@ La liste des contrôles doit être vide  pour que l'on puisse envoyer le formula
     </td>
     <td>
       <table class="Check" cellspacing="0" cellpadding="0">
-        <stl:block repeat="res2 controle_blocks2">
+        <stl:block stl:repeat="res2 controle_blocks2">
         <tr style="background-color: rgb(202,220,255); text-align:center">
           <td colspan="4">
             <a style="text-decoration: underline" href="${res2/section_url}">

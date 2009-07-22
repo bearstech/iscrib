@@ -20,16 +20,18 @@
 from itools.stl import stl
 
 # Import from ikaaro
-from ikaaro.registry import register_object_class
+from ikaaro.registry import register_resource_class
 
 # Import from scrib
 from schema_bdp import schema, alertes, controles
 from form import FormHandler, Form
+from form_views import Form_View
 from utils import get_bdp, get_adresse, reduce_generators
-
+from utils_views import HelpView
 
 
 class FormBDPHandler(FormHandler):
+
     def _load_state_from_file(self, file):
         return FormHandler._load_state_from_file(self, file, schema)
 
@@ -40,18 +42,19 @@ class FormBDPHandler(FormHandler):
 
 
 class FormBDP(Form):
+
     class_id = 'FormBDP'
     class_handler = FormBDPHandler
-    class_views = [['report_form0', 'report_form1', 'report_form2',
-                    'report_form3', 'report_form4', 'report_form5',
-                    'report_form6', 'report_form7', 'report_form8',
-                    'report_form9', 'comments']] + Form.class_views
+    class_views = ['report_form0', 'report_form1', 'report_form2',
+                   'report_form3', 'report_form4', 'report_form5',
+                   'report_form6', 'report_form7', 'report_form8',
+                   'report_form9', 'comments'] + Form.class_views
 
 
     ######################################################################
     # Form API
     @staticmethod
-    def get_schema():
+    def get_scrib_schema():
         return schema
 
 
@@ -83,7 +86,7 @@ class FormBDP(Form):
 
 
     def get_year(self):
-        return self.parent.name.split('BDP')[-1]
+        return int(self.parent.name.split('BDP')[-1])
 
 
     def get_dep(self):
@@ -119,175 +122,83 @@ class FormBDP(Form):
         return stl(template, namespace)
 
 
-    report_form0__access__ = 'is_allowed_to_view'
-    report_form0__label__ = u'Renseignez votre rapport'
-    report_form0__sublabel__ = u'Identité'
-    def report_form0(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report0.xml',
-                                 'FormBDP_report0_autogen.xml',
-                                 view)
+
+    #title=u'Renseignez votre rapport',
+
+    report_form0 = Form_View(access='is_allowed_to_view',
+                             title=u'Identité',
+                             xml='FormBDP_report0.xml',
+                             autogen_xml='FormBDP_report0_autogen.xml')
+
+    report_form1 = Form_View(access='is_allowed_to_view',
+                             title=u'A-Finances',
+                             xml='FormBDP_report1.xml',
+                             autogen_xml='FormBDP_report1_autogen.xml')
 
 
-    report_form1__access__ = 'is_allowed_to_view'
-    report_form1__sublabel__ = u'A-Finances'
-    def report_form1(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report1.xml',
-                                 'FormBDP_report1_autogen.xml',
-                                 view)
+    report_form2 = Form_View(access='is_allowed_to_view',
+                             title=u'B-Locaux',
+                             xml='FormBDP_report2.xml',
+                             autogen_xml='FormBDP_report2_autogen.xml')
 
 
-    report_form2__access__ = 'is_allowed_to_view'
-    report_form2__sublabel__ = u'B-Locaux'
-    def report_form2(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report2.xml',
-                                 'FormBDP_report2_autogen.xml',
-                                 view)
+    report_form3 = Form_View(access='is_allowed_to_view',
+                             title=u'C-Personnel',
+                             xml='FormBDP_report3.xml',
+                             autogen_xml='FormBDP_report3_autogen.xml')
 
 
-    report_form3__access__ = 'is_allowed_to_view'
-    report_form3__sublabel__ = u'C-Personnel'
-    def report_form3(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report3.xml',
-                                 'FormBDP_report3_autogen.xml',
-                                 view)
+    report_form4 = Form_View(access='is_allowed_to_view',
+                             title=u'D-Collections',
+                             xml='FormBDP_report4.xml',
+                             autogen_xml='FormBDP_report4_autogen.xml')
 
 
-    report_form4__access__ = 'is_allowed_to_view'
-    report_form4__sublabel__ = u'D-Collections'
-    def report_form4(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report4.xml',
-                                 'FormBDP_report4_autogen.xml',
-                                 view)
+    report_form5 = Form_View(access='is_allowed_to_view',
+                             title=u'E-Acquisitions',
+                             xml='FormBDP_report5.xml',
+                             autogen_xml='FormBDP_report5_autogen.xml')
 
 
-    report_form5__access__ = 'is_allowed_to_view'
-    report_form5__sublabel__ = u'E-Acquisitions'
-    def report_form5(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report5.xml',
-                                 'FormBDP_report5_autogen.xml',
-                                 view)
+    report_form6 = Form_View(access='is_allowed_to_view',
+                             title=u'F-Réseau tous public',
+                             xml='FormBDP_report6.xml',
+                             autogen_xml='FormBDP_report6_autogen.xml')
 
 
-    report_form6__access__ = 'is_allowed_to_view'
-    report_form6__sublabel__ = u'F-Réseau tous public'
-    def report_form6(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report6.xml',
-                                 'FormBDP_report6_autogen.xml',
-                                 view)
+    report_form7 = Form_View(access='is_allowed_to_view',
+                             title=u'G-Réseau spécifique',
+                             xml='FormBDP_report7.xml',
+                             autogen_xml='FormBDP_report7_autogen.xml')
 
 
-    report_form7__access__ = 'is_allowed_to_view'
-    report_form7__sublabel__ = u'G-Réseau spécifique'
-    def report_form7(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report7.xml',
-                                 'FormBDP_report7_autogen.xml',
-                                 view)
+    report_form8 = Form_View(access='is_allowed_to_view',
+                             title=u'H-Services',
+                             xml='FormBDP_report8.xml',
+                             autogen_xml='FormBDP_report8_autogen.xml')
 
 
-    report_form8__access__ = 'is_allowed_to_view'
-    report_form8__sublabel__ = u'H-Services'
-    def report_form8(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report8.xml',
-                                 'FormBDP_report8_autogen.xml',
-                                 view)
+    report_form9 = Form_View(access='is_allowed_to_view',
+                             title=u'I-Action Culturelle',
+                             xml='FormBDP_report9.xml',
+                             autogen_xml='FormBDP_report9_autogen.xml')
 
-
-    report_form9__access__ = 'is_allowed_to_view'
-    report_form9__sublabel__ = u'I-Action Culturelle'
-    def report_form9(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBDP_report9.xml',
-                                 'FormBDP_report9_autogen.xml',
-                                 view)
 
 
     #######################################################################
     # Help
-    help_menu__access__ = True
-    def help_menu(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help_menu.xml')
-        return template.to_str()
-
-
-    help0__access__ = True
-    def help0(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        handler = self.get_object('/ui/scrib/FormBDP_help0.xml')
-        return handler.to_str()
-
-
-    help1__access__ = True
-    def help1(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help1.xml')
-        return template.to_str()
-
-
-    help2__access__ = True
-    def help2(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help2.xml')
-        return template.to_str()
-
-
-    help3__access__ = True
-    def help3(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help3.xml')
-        return template.to_str()
-
-
-    help4__access__ = True
-    def help4(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help4.xml')
-        return template.to_str()
-
-
-    help5__access__ = True
-    def help5(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help5.xml')
-        return template.to_str()
-
-
-    help6__access__ = True
-    def help6(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help6.xml')
-        return template.to_str()
-
-
-    help7__access__ = True
-    def help7(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help7.xml')
-        return template.to_str()
-
-
-    help8__access__ = True
-    def help8(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help8.xml')
-        return template.to_str()
-
-
-    help9__access__ = True
-    def help9(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBDP_help9.xml')
-        return template.to_str()
+    help_menu = HelpView(access=True, template='/ui/scrib/FormBDP_help_menu.xml')
+    help0 = HelpView(access=True, template='/ui/scrib/FormBDP_help0.xml')
+    help1 = HelpView(access=True, template='/ui/scrib/FormBDP_help1.xml')
+    help2 = HelpView(access=True, template='/ui/scrib/FormBDP_help2.xml')
+    help3 = HelpView(access=True, template='/ui/scrib/FormBDP_help3.xml')
+    help4 = HelpView(access=True, template='/ui/scrib/FormBDP_help4.xml')
+    help5 = HelpView(access=True, template='/ui/scrib/FormBDP_help5.xml')
+    help6 = HelpView(access=True, template='/ui/scrib/FormBDP_help6.xml')
+    help7 = HelpView(access=True, template='/ui/scrib/FormBDP_help7.xml')
+    help8 = HelpView(access=True, template='/ui/scrib/FormBDP_help8.xml')
+    help9 = HelpView(access=True, template='/ui/scrib/FormBDP_help9.xml')
 
 
 
-register_object_class(FormBDP)
+register_resource_class(FormBDP)

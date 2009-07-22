@@ -1,5 +1,7 @@
 version.txt
 MANIFEST
 build
+*.patch
 dist
 .*.swp
+*.pyc

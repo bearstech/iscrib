@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+<div id="formBiblio">
   <!--p style = "page-break-after:always "></p-->
   <table width="100%">
      <colgroup>
@@ -174,12 +179,13 @@
     </td>
     <td sdnum="1036;" sdval="6">K0</td>
   </tr>
-  
-  
+
+
     </table>
     * merci de remplir l'onglet EPCI
-    
-  
+
+
  </form>
  <p style="page-break-after:always "></p>
 </div>
+</stl:block>

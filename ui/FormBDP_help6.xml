@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN"
-  "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
   <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <title>Aide</title>
-    
     <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
   </head>
   <body id="body">
-    <p align="right"><a href=";help_menu">Sommaire</a></p>
+    <p style="text-align:right"><a href=";help_menu">Sommaire</a></p>
     <h2>RESEAU TOUS PUBLICS</h2>
     <h4>Cette rubrique reprend la typologie ADBDP</h4>
     <table border="1" width="100%">
@@ -55,7 +56,7 @@
         <td valign="middle" width="16%">Personnel</td>
         <td valign="middle" width="26%">1 agt cat. B fil. cult. / 5
         000 hb
-        <BR></BR>1 salarié qualifié / 2 000 hb</td>
+        <br/>1 salarié qualifié / 2 000 hb</td>
         <td valign="middle" width="18%">1 salarié
         qualifié</td>
         <td valign="middle" width="17%">Bénévoles
@@ -68,13 +69,13 @@
       </tr>
       <tr>
         <td valign="middle" width="26%">0,07 m
-        <SUP>2</SUP>/ hb >100 m
-        <SUP>2</SUP></td>
+        <span id="sup">2</span>/ hb >100 m
+        <span id="sup">2</span></td>
         <td valign="middle" width="18%">0,04 m
-        <SUP>2</SUP>/ hb 50 m
-        <SUP>2</SUP></td>
+        <span id="sup">2</span>/ hb 50 m
+        <span id="sup">2</span></td>
         <td valign="middle" width="17%">25 m
-        <SUP>2</SUP></td>
+        <span id="sup">2</span></td>
       </tr>
     </table>
 

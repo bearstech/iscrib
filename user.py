@@ -17,35 +17,26 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.stl import stl
-from itools.catalog import KeywordField, TextField, BoolField
+from itools.datatypes import Integer, Unicode, Boolean
 
 # Import from ikaaro
-from ikaaro.users import User
-from ikaaro.registry import register_object_class
+from ikaaro.user import User
+from ikaaro.registry import register_field, register_resource_class
 
 # Import from scrib
+from user_views import User_Home
 from utils import get_bdp, get_bm
 
 
-
 class ScribUser(User):
+
     class_version = '20080410'
-    class_views = [['home'], ['edit_password_form']]
+    class_views = ['home', 'edit_password']
 
+    home = User_Home()
 
-    def get_catalog_fields(self):
-        fields = User.get_catalog_fields(self)
-        fields += [TextField('user_town'),
-                   KeywordField('dep', is_stored=True),
-                   KeywordField('year'),
-                   BoolField('stored_BDP', is_stored=True),
-                   BoolField('stored_BM', is_stored=True)]
-        return fields
-
-
-    def get_catalog_values(self):
-        values = User.get_catalog_values(self)
+    def _get_catalog_values(self):
+        values = User._get_catalog_values(self)
         values['user_town'] = self.get_user_town()
         values['dep'] = self.get_department()
         values['year'] = self.get_year()
@@ -121,58 +112,10 @@ class ScribUser(User):
         name = self.name
         if self.is_BDP():
            # XXX just for 2008 ;)
-           return '2008'
+           return 2008
         elif self.is_BM():
-           return '2008'
+           return 2008
         return None
-
-
-    #######################################################################
-    # Home
-    home__access__ = 'is_self_or_admin'
-    home__label__ = u'Home'
-    def home(self, context):
-        root = context.root
-        name = self.name
-        department, code = '', ''
-        namespace = {}
-
-        year = self.get_year()
-        if self.is_BM():
-            code = self.get_BM_code()
-            report = root.get_object('BM%s/%s' % (year, code))
-        elif self.is_BDP():
-            department = self.get_department()
-            report = root.get_object('BDP%s/%s' % (year, department))
-        else:
-            report = None
-
-        if report is not None:
-            namespace['report_url'] = '%s/;%s' % (self.get_pathto(report),
-                                                  report.get_firstview())
-        else:
-            namespace['report_url'] = None
-
-        # The year
-        namespace['year'] = year
-        # The department or the BM Code
-        namespace['dep'] = ''
-        if department:
-            bib = get_bdp(department)
-            if bib:
-                namespace['dep'] = bib.get_value('name')
-        elif code:
-            bib = get_bm(code)
-            if bib:
-                namespace['dep'] = bib.get_value('name')
-
-        template = self.get_object('/ui/scrib/User_home.xml')
-        return stl(template, namespace)
-
-
-    #######################################################################
-    # Password
-    edit_password_form__label__ = u'Change password'
 
 
     #########################################################################
@@ -192,6 +135,13 @@ class ScribUser(User):
 
 
 
-register_object_class(ScribUser)
+register_resource_class(ScribUser)
 # TODO remove after migration
-register_object_class(ScribUser, format="bibUser")
+register_resource_class(ScribUser, format="bibUser")
+
+
+register_field('user_town', Unicode)
+register_field('dep', Unicode(is_indexed=True, is_stored=True))
+register_field('year', Integer(is_indexed=True))
+register_field('stored_BDP', Boolean(is_stored=True))
+register_field('stored_BM', Boolean(is_stored=True))

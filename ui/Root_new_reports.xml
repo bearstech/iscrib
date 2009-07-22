@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:stl="http://xml.itools.org/namespaces/stl">
+           xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <h2>Attention !</h2>
   <h3>La création d'une nouvelle série pour une nouvelle année est une opération
@@ -9,7 +11,7 @@
   <table>
     <tr>
       <td>
-        <form name="new_folder" method="post" action=";new_BDP_reports">
+        <form name="new_folder" method="post">
           <table class="form">
             <tr>
               <th class="title" colspan="2">Nouveaux rapports BDP</th>
@@ -24,14 +26,14 @@
             </tr>
             <tr>
               <td></td>
-              <td class="submit"><input type="submit" value="Ajouter"/>
+              <td class="submit"><input type="submit" value="Ajouter" name=";new_BDP_reports"/>
               </td>
             </tr>
           </table>
         </form>
       </td>
       <td>
-        <form name="new_folder" method="post" action=";new_BM_reports">
+        <form name="new_folder" method="post">
           <table class="form">
             <tr>
               <th class="title" colspan="2">Nouveaux rapports BM</th>
@@ -46,7 +48,8 @@
             </tr>
             <tr>
               <td></td>
-              <td class="submit"><input type="submit" value="Ajouter"/>
+              <td class="submit">
+                <input type="submit" value="Ajouter" name=";new_BM_reports"/>
               </td>
             </tr>
           </table>

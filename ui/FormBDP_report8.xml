@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div id="formBiblio" xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-<form method="post" name="form" action=";report">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+<div id="formBiblio">
+<form method="post" name="form">
  <table width="100%">
   <tr>
   <td align="left">
 
-  <a stl:if="not printable" style="color:red " onclick="window.open(';help8', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" alt="Aide">? Consulter l'aide sur cette page</a>
+  <a stl:if="not printable" style="color:red " onclick="window.open(';help8', 'xxx', 'toolbar=no,   location=no, status=no, menubar=no, scrollbars=yes, width=440, height=540');return 0;" href="#" title="Aide">? Consulter l'aide sur cette page</a>
       </td>
   <td align="right">
-  <a style="border:0;color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
+  <a style="border:0;color:gray" stl:if="not printable" title="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;">
      <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
 
     <stl:block if="not printable">
-      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
+      <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"
+        name=";report"/>
     </stl:block>
   </td>
   </tr>
@@ -1106,3 +1112,4 @@
 </form>
  <p style="page-break-after:always "></p>
 </div>
+</stl:block>

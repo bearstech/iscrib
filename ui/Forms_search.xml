@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stl:block xmlns:stl="http://xml.itools.org/namespaces/stl"
-  xmlns="http://www.w3.org/1999/xhtml">
-  <form method="get" action=";search_form">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <form method="get">
     <fieldset>
       <legend>Rechercher</legend>
       <table class="form">
@@ -41,8 +44,5 @@
   <p>
     <em>${too_long_answer}</em>
   </p>
-
-  ${batch}
-  ${table}
 
 </stl:block>

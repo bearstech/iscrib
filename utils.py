@@ -24,21 +24,22 @@ from MySQLdb import connect
 from MySQLdb.cursors import DictCursor
 
 # Import from itools
-from itools import get_abspath
+from itools.core import get_abspath
 from itools.datatypes import String, Unicode
+from itools.gettext import MSG
 from itools.csv import CSVFile
 
 # Import from scrib
 from scrib import config
 
 
-MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
-MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL : %r"
+MSG_NO_MYSQL = MSG(u"La connexion à MySql ne s'est pas faite")
+MSG_NO_ADRESSE = MSG(u"La bibliothèque n'existe pas dans la base SQL : %r")
 
 
 class AllBM(CSVFile):
     class_csv_guess = True
-    schema = {'code': String(index='keyword'),
+    schema = {'code': String(is_indexed=True),
               'name': Unicode,
               'dep': String,
               'id': String}
@@ -50,14 +51,14 @@ class AllBDP(CSVFile):
     class_csv_guess = True
     # Utilise "text" comme insensible à la casse
     # Départements "2A" et "2B" mais objets "2a" et "2b"
-    schema = {'code': String(index='text'),
+    schema = {'code': String(is_indexed=True),
               'name': Unicode}
     columns = ['code', 'name']
 
 
 
-all_bm = AllBM(get_abspath(globals(), 'input_data/init_BM.txt'))
-all_bdp = AllBDP(get_abspath(globals(), 'input_data/init_BDP.txt'))
+all_bm = AllBM(get_abspath('input_data/init_BM.txt'))
+all_bdp = AllBDP(get_abspath('input_data/init_BDP.txt'))
 
 
 SqlHost = config.get_value('SqlHost')

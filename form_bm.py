@@ -16,17 +16,17 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from itools
-from itools.catalog import KeywordField
-from itools.stl import stl
 
 # Import from ikaaro
-from ikaaro.registry import register_object_class
+from ikaaro.registry import register_resource_class
 
 # Import from scrib
 from schema_bm import schema, alertes, controles
 from form import FormHandler, Form
-from utils import get_bm, get_adresse, reduce_generators
+from form_views import Form_View
+from form_bm_views import FormBM_PrintForm
+from utils import get_bm, get_adresse
+from utils_views import HelpView
 
 
 
@@ -41,18 +41,21 @@ class FormBMHandler(FormHandler):
 
 
 class FormBM(Form):
+
     class_id = 'Form_BM'
     class_handler = FormBMHandler
-    class_views = [['report_form0', 'report_form10', 'report_form11',
-                    'report_form1', 'report_form2', 'report_form3',
-                    'report_form4', 'report_form5', 'report_form6',
-                    'report_form7', 'report_form8', 'report_form9',
-                    'comments']] + Form.class_views 
+    class_views = ['report_form0', 'report_form10', 'report_form11',
+                   'report_form1', 'report_form2', 'report_form3',
+                   'report_form4', 'report_form5', 'report_form6',
+                   'report_form7', 'report_form8', 'report_form9',
+                   'comments'] + Form.class_views
+
+    print_form = FormBM_PrintForm()
 
     ######################################################################
     # Form API
     @staticmethod
-    def get_schema():
+    def get_scrib_schema():
         return schema
 
 
@@ -84,7 +87,7 @@ class FormBM(Form):
 
 
     def get_year(self):
-        return self.parent.name.split('BM')[-1]
+        return int(self.parent.name.split('BM')[-1])
 
 
     def get_dep(self):
@@ -110,228 +113,95 @@ class FormBM(Form):
 
     ######################################################################
     # Catalog API
-    def get_catalog_fields(self):
-        fields = Form.get_catalog_fields(self)
-        fields += [KeywordField('code')]
-        return fields
-
-    
-    def get_catalog_values(self):
-        values = Form.get_catalog_values(self)
+    def _get_catalog_values(self):
+        values = Form._get_catalog_values(self)
         values['code'] = self.get_code()
         return values
 
 
     #######################################################################
     # Edit report
-    print_form__access__ = 'is_allowed_to_view'
-    print_form__label__ = u'Imprimez votre rapport '
-    def print_form(self, context):
-        context.response.set_header('Content-Type',
-                                    'text/html; charset=UTF-8')
-        namespace = self.get_namespace(context)
-        forms = ['FormBM_report%s' % i for i in range(0, 12)]
-        forms.insert(9,'Form_comments')
-        forms = [('%s.xml' % i, '%s_autogen.xml' % i, 'print_all')
-                 for i in forms]
-        # report_form10 and report_form11 must be in position 2 and 3
-        forms.insert(1, forms[-2])
-        forms.insert(2, forms[-1])
-        forms = forms[:-2]
-        forms = [self.get_ns_and_h(context, n, a, v) for n, a, v in forms]
-        namespace['body'] = reduce_generators(forms)
-        namespace['title'] = self.get_title()
-        namespace['styles'] = context.root.get_skin().get_styles(context)
 
-        template = self.get_object('/ui/scrib/printable_template.xhtml')
-        return stl(template, namespace)
+    report_form0 = Form_View(access='is_allowed_to_view',
+                             title=u'Identité',
+                             xml='FormBM_report0.xml',
+                             autogen_xml='FormBM_report0_autogen.xml')
 
+    report_form1 = Form_View(access='is_allowed_to_view',
+                             title=u'A-Finances',
+                             xml='FormBM_report1.xml',
+                             autogen_xml='FormBM_report1_autogen.xml')
 
+    report_form2 = Form_View(access='is_allowed_to_view',
+                             title=u'B-Locaux',
+                             xml='FormBM_report2.xml',
+                             autogen_xml='FormBM_report2_autogen.xml')
 
-    report_form0__access__ = 'is_allowed_to_view'
-    report_form0__label__ = u'Renseignez votre rapport'
-    report_form0__sublabel__ = u'Identité'
-    def report_form0(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report0.xml',
-                                 'FormBM_report0_autogen.xml',
-                                 view)
+    report_form3 = Form_View(access='is_allowed_to_view',
+                             title=u'C-Personnel',
+                             xml='FormBM_report3.xml',
+                             autogen_xml='FormBM_report3_autogen.xml')
 
+    report_form4 = Form_View(access='is_allowed_to_view',
+                             title=u'D-Collections',
+                             xml='FormBM_report4.xml',
+                             autogen_xml='FormBM_report4_autogen.xml')
 
-    report_form1__access__ = 'is_allowed_to_view'
-    report_form1__sublabel__ = u'A-Finances'
-    def report_form1(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report1.xml',
-                                 'FormBM_report1_autogen.xml',
-                                 view)
+    report_form5 = Form_View(access='is_allowed_to_view',
+                             title=u'E-Acquisitions',
+                             xml='FormBM_report5.xml',
+                             autogen_xml='FormBM_report5_autogen.xml')
 
-    report_form2__access__ = 'is_allowed_to_view'
-    report_form2__sublabel__ = u'B-Locaux'
-    def report_form2(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report2.xml',
-                                 'FormBM_report2_autogen.xml',
-                                 view)
+    report_form6 = Form_View(access='is_allowed_to_view',
+                             title=u'F-Coopération et réseau',
+                             xml='FormBM_report6.xml',
+                             autogen_xml='FormBM_report6_autogen.xml')
 
+    report_form7 = Form_View(access='is_allowed_to_view',
+                             title=u'G-Activités',
+                             xml='FormBM_report7.xml',
+                             autogen_xml='FormBM_report7_autogen.xml')
 
-    report_form3__access__ = 'is_allowed_to_view'
-    report_form3__sublabel__ = u'C-Personnel'
-    def report_form3(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report3.xml',
-                                 'FormBM_report3_autogen.xml',
-                                 view)
+    report_form8 = Form_View(access='is_allowed_to_view',
+                             title=u'H-Services',
+                             xml='FormBM_report8.xml',
+                             autogen_xml='FormBM_report8_autogen.xml')
 
+    report_form9 = Form_View(access='is_allowed_to_view',
+                             title=u'I-Animations, publications et formation',
+                             xml='FormBM_report9.xml',
+                             autogen_xml='FormBM_report9_autogen.xml')
 
-    report_form4__access__ = 'is_allowed_to_view'
-    report_form4__sublabel__ = u'D-Collections'
-    def report_form4(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report4.xml',
-                                 'FormBM_report4_autogen.xml',
-                                 view)
+    report_form10 = Form_View(access='is_allowed_to_view',
+                             title=u'Annexes',
+                             xml='FormBM_report10.xml',
+                             autogen_xml='FormBM_report10_autogen.xml')
+
+    report_form11 = Form_View(access='is_allowed_to_view',
+                             title=u'K-EPCI',
+                             xml='FormBM_report10.xml',
+                             autogen_xml='FormBM_report10_autogen.xml')
 
 
-    report_form5__access__ = 'is_allowed_to_view'
-    report_form5__sublabel__ = u'E-Acquisitions'
-    def report_form5(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report5.xml',
-                                 'FormBM_report5_autogen.xml',
-                                 view)
+    help0 = HelpView(access=True, template='/ui/scrib/FormBM_help0.xml')
+    help1 = HelpView(access=True, template='/ui/scrib/FormBM_help1.xml')
+    help2 = HelpView(access=True, template='/ui/scrib/FormBM_help2.xml')
+    help3 = HelpView(access=True, template='/ui/scrib/FormBM_help3.xml')
+    help4 = HelpView(access=True, template='/ui/scrib/FormBM_help4.xml')
+    help5 = HelpView(access=True, template='/ui/scrib/FormBM_help5.xml')
+    help6 = HelpView(access=True, template='/ui/scrib/FormBM_help6.xml')
+    help7 = HelpView(access=True, template='/ui/scrib/FormBM_help7.xml')
+    help8 = HelpView(access=True, template='/ui/scrib/FormBM_help8.xml')
+    help9 = HelpView(access=True, template='/ui/scrib/FormBM_help9.xml')
+    help11 = HelpView(access=True, template='/ui/scrib/FormBM_help11.xml')
 
+register_resource_class(FormBM)
 
-    report_form6__access__ = 'is_allowed_to_view'
-    report_form6__sublabel__ = u'F-Coopération et réseau'
-    def report_form6(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report6.xml',
-                                 'FormBM_report6_autogen.xml',
-                                 view)
-
-
-    report_form7__access__ = 'is_allowed_to_view'
-    report_form7__sublabel__ = u'G-Activités'
-    def report_form7(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report7.xml',
-                                 'FormBM_report7_autogen.xml',
-                                 view)
-
-
-    report_form8__access__ = 'is_allowed_to_view'
-    report_form8__sublabel__ = u'H-Services'
-    def report_form8(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report8.xml',
-                                 'FormBM_report8_autogen.xml',
-                                 view)
-
-
-    report_form9__access__ = 'is_allowed_to_view'
-    report_form9__sublabel__ = u'I-Animations, publications et formation'
-    def report_form9(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report9.xml',
-                                 'FormBM_report9_autogen.xml',
-                                 view)
-
-
-    report_form10__access__ = 'is_allowed_to_view'
-    report_form10__sublabel__ = u'Annexes'
-    def report_form10(self, context, view=None):
-        return self.get_ns_and_h(context,
-                                 'FormBM_report10.xml',
-                                 'FormBM_report10_autogen.xml',
-                                 view)
-
-
-    report_form11__access__ = 'is_allowed_to_view'
-    report_form11__sublabel__ = u'K-EPCI'
-    def report_form11(self, context, view=None):
-        code_ua = self.get_code()
-        return self.get_ns_and_h(context,
-                                 'FormBM_report11.xml',
-                                 'FormBM_report11_autogen.xml',
-                                 view)
-
-
-    #######################################################################
-    # Help
-    help0__access__ = True
-    def help0(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help0.xml')
-        return template.to_str()
-    
-    help1__access__ = True
-    def help1(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help1.xml')
-        return template.to_str()
-
-
-    help2__access__ = True
-    def help2(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help2.xml')
-        return template.to_str()
-
-
-    help3__access__ = True
-    def help3(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help3.xml')
-        return template.to_str()
-
-
-    help4__access__ = True
-    def help4(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help4.xml')
-        return template.to_str()
-
-
-    help5__access__ = True
-    def help5(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help5.xml')
-        return template.to_str()
-
-
-    help6__access__ = True
-    def help6(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help6.xml')
-        return template.to_str()
-
-
-    help7__access__ = True
-    def help7(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help7.xml')
-        return template.to_str()
-
-
-    help8__access__ = True
-    def help8(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help8.xml')
-        return template.to_str()
-
-
-    help9__access__ = True
-    def help9(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help9.xml')
-        return template.to_str()
-
-    help11__access__ = True
-    def help11(self, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        template = self.get_object('/ui/scrib/FormBM_help11.xml')
-        return template.to_str()
-
-
-register_object_class(FormBM)
+# XXX to migrate
+#
+#    def get_catalog_fields(self):
+#        fields = Form.get_catalog_fields(self)
+#        fields += [KeywordField('code')]
+#        return fields
+#
+#

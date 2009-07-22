@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
-   <title>Aide</title>
-    
-    <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
+  <head>
+    <title>Aide</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="/ui/scrib/main.css"/>
   </head>
+
 <body id="body">
 
 
-<p align="right"><a href=";help0">Sommaire</a></p>
+<p style="text-align:right"><a href=";help0">Sommaire</a></p>
 <h2>COOPERATION, RESEAU ET PARTENARIATS</h2>
 
 

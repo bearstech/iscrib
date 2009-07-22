@@ -4,7 +4,6 @@ from pprint import pprint
 import os
 
 # Import from itools
-from itools import get_abspath
 from itools.handlers import get_handler
 from itools.handlers import IO
 

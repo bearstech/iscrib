@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml" id="formBiblio">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+<div id="formBiblio">
   <form method="post" name="form" action=";report">
     <div align="right">
       <a style="border:0;color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx', 'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes, width=800, height=600'); return True;"><img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
@@ -391,3 +396,4 @@
   </form>
   <p style="page-break-after:always "/>
 </div>
+</stl:block>

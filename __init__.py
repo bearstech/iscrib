@@ -19,26 +19,25 @@
 from os.path import exists
 
 # Import from itools
-from itools import get_abspath, get_version
+from itools.core import get_abspath, get_version
 from itools.handlers import ConfigFile
 
 # Import from ikaaro
 from ikaaro.skins import register_skin
 
+# Import from pelleas
+import skin
+
 
 # Give a version
-__version__ = get_version(globals())
+__version__ = get_version()
 
 # Read the configuration (TODO move to instance's config.conf)
-config_path = get_abspath(globals(), 'Setup.conf')
+config_path = get_abspath('Setup.conf')
 if not exists(config_path):
     raise ("copiez le fichier 'Setup.conf' (pas 'setup.conf') "
            "du répertoire scrib ici.")
 config = ConfigFile(config_path)
 
-# Register Root
+# Register root
 from root import Root
-
-# Register interface
-path = get_abspath(globals(), 'ui')
-register_skin('scrib', path)

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:stl="http://xml.itools.org/namespaces/stl" xmlns="http://www.w3.org/1999/xhtml">
-  <head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <head>
     <title>Aide</title>
-    
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <link type="text/css" rel="stylesheet" href="main.css"/>
     <link type="text/css" rel="stylesheet" href="content.css"/>
     <link type="text/css" rel="stylesheet" href="form.css"/>
 
   </head>
-<BODY>
+<body>
 
 <b>Bonjour,
 <br/><br/>
@@ -85,5 +87,5 @@ Par ailleurs, SCRIB vous offre la possibilité d'exporter les données que vous 
 Vous obtiendrez alors un résultat semblable à une feuille de calcul d'un tableur ordinaire qui vous permettra de procéder aux calculs offerts part ce type d'applicatifs.
 </dt>
 </dl>
-</BODY>
+</body>
 </html>
