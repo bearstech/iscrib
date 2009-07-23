@@ -16,9 +16,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from itools
+from itools.datatypes import String
 
 # Import from ikaaro
-from ikaaro.registry import register_resource_class
+from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
 from schema_bm import schema, alertes, controles
@@ -29,8 +31,8 @@ from utils import get_bm, get_adresse
 from utils_views import HelpView
 
 
-
 class FormBMHandler(FormHandler):
+
     def _load_state_from_file(self, file):
         return FormHandler._load_state_from_file(self, file, schema)
 
@@ -179,8 +181,8 @@ class FormBM(Form):
 
     report_form11 = Form_View(access='is_allowed_to_view',
                              title=u'K-EPCI',
-                             xml='FormBM_report10.xml',
-                             autogen_xml='FormBM_report10_autogen.xml')
+                             xml='FormBM_report11.xml',
+                             autogen_xml='FormBM_report11_autogen.xml')
 
 
     help0 = HelpView(access=True, template='/ui/scrib/FormBM_help0.xml')
@@ -195,13 +197,6 @@ class FormBM(Form):
     help9 = HelpView(access=True, template='/ui/scrib/FormBM_help9.xml')
     help11 = HelpView(access=True, template='/ui/scrib/FormBM_help11.xml')
 
-register_resource_class(FormBM)
 
-# XXX to migrate
-#
-#    def get_catalog_fields(self):
-#        fields = Form.get_catalog_fields(self)
-#        fields += [KeywordField('code')]
-#        return fields
-#
-#
+register_resource_class(FormBM)
+register_field('code', String(is_indexed=True))

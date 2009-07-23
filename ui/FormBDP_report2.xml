@@ -18,7 +18,7 @@
      <img src="/ui/scrib/images/imprimer.gif"/> Imprimer cette page</a>
 
 
-    <stl:block if="not printable">
+    <stl:block stl:if="not printable">
       <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"
         name=";report"/>
     </stl:block>

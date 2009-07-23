@@ -60,13 +60,17 @@
           </table>
         </td>
         <td align="right" valign="top">
-          <stl:block stl:if="not user/info">(déconnecté)<br/><br/> <a id="top_menu_login" href="/;login_form">Accéder à votre rapport</a> <a id="top_menu_register" stl:if="user/joinisopen" href="/;register_form">Inscription</a>
-          </stl:block>
+          <div id="top-menu">
+            <stl:block stl:if="not user/info">(déconnecté)<br/><br/>
+              <a id="top-menu-login" href="/;login_form">Accéder à votre rapport</a>
+              <a id="top-menu-register" stl:if="user/joinisopen" href="/;register_form">Inscription</a>
+            </stl:block>
 
-          <stl:block stl:if="user/info">(connecté en tant que ${user/info/title})<br/><br/> 
-          <!--a id="top_menu_profile" href="${user/info/home}">Mon profil</a-->
-           <a id="top_menu_logout" href="/;logout">Quitter</a>
-          </stl:block>
+            <stl:block stl:if="user/info">(connecté en tant que ${user/info/title})<br/><br/>
+             <a id="top-menu-profile" href="${user/info/home}">Mon profil</a>
+             <a id="top-menu-logout" href="/;logout">Quitter</a>
+            </stl:block>
+          </div>
 
           <!--a id="top_menu_search" href="/;site_search">Rechercher</a> <a id="top_menu_contact" href="/;contact_form">Contact</a-->
         </td>
@@ -78,7 +82,7 @@
           ${location}
           <!-- The Body -->
           <div id="body">
-            <div id="message" stl:if="message">${message}</div>
+            ${message}
             <div id="content">
               <h2 stl:if="page_title">${page_title}</h2>${body}</div>
           </div>
@@ -86,7 +90,9 @@
       </tr>
     </table>
     <div id="footer">
-      <a href="/;about">À propos</a> <a href="/;credits">Crédits</a> <a href="/;license">Licence</a>
+      <a href="/;about">À propos</a>
+      <a href="/;credits">Crédits</a>
+      <a href="/;license">Licence</a>
     </div>
   </body>
 </html>

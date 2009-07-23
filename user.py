@@ -140,7 +140,7 @@ register_resource_class(ScribUser)
 register_resource_class(ScribUser, format="bibUser")
 
 
-register_field('user_town', Unicode)
+register_field('user_town', Unicode(is_indexed=True))
 register_field('dep', Unicode(is_indexed=True, is_stored=True))
 register_field('year', Integer(is_indexed=True))
 register_field('stored_BDP', Boolean(is_stored=True))

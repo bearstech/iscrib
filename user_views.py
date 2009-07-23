@@ -20,9 +20,6 @@ from itools.web import STLView
 # Import from scrib
 from utils import get_bdp, get_bm
 
-# XXX
-#edit_password_form__label__ = u'Change password'
-
 class User_Home(STLView):
 
     access = 'is_self_or_admin'

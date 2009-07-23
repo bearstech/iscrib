@@ -20,7 +20,7 @@ from itools.datatypes import Boolean, Integer, String, Unicode
 from itools.xapian import PhraseQuery, AndQuery
 
 # Import from ikaaro
-from ikaaro.views import SearchForm
+from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.forms import SelectWidget
 
 # Import from scrib
@@ -30,7 +30,7 @@ from form_bdp import FormBDP
 from utils import get_bdp_namespace
 
 
-class Forms_SearchForm(SearchForm):
+class Forms_SearchForm(Folder_BrowseContent):
 
     access = 'is_admin_or_consultant'
     title = u'Search'
@@ -38,10 +38,12 @@ class Forms_SearchForm(SearchForm):
 
 
     query_schema = merge_dicts(
-        SearchForm.query_schema,
+        Folder_BrowseContent.query_schema,
         sort_by=String(default='title'),
         batch_size=Integer(default=50),
         reverse=Boolean(default=False))
+
+    table_actions = []
 
     def get_table_columns(self, resource, context):
         columns = [('name', u"Code"),
@@ -109,27 +111,22 @@ class Forms_SearchForm(SearchForm):
 
         # Search
         root = context.root
-        return root.search(query).get_documents()
+        return root.search(query)#.get_documents()
 
 
     def get_item_value(self, resource, context, item, column):
         root = context.root
+        item_brain, item_resource = item
         if column == 'name':
-            form_name = item.name
+            form_name = item_brain.name
             if resource.is_BM():
                 form_name = int(form_name)
             return form_name
         elif column == 'title':
-            url = '%s/;report_form0' % item.name
-            return item.title, url
+            url = '%s/;report_form0' % item_brain.name
+            return item_brain.title, url
         elif column == 'mtime':
-            mtime = root.get_resource(item.abspath).get_mtime()
+            mtime = resource.get_mtime()
             return mtime.strftime('%d-%m-%Y %Hh%M')
         elif column == 'form_state':
-            return item.form_state
-
-
-
-    def sort_and_batch(self, resource, context, items):
-        # XXX
-        return items
+            return item_brain.form_state

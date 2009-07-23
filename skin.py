@@ -26,6 +26,12 @@ from ikaaro.skins import Skin, register_skin
 
 class ScribSkin(Skin):
 
+    def get_styles(self, context):
+        styles = Skin.get_styles(self, context)
+        styles.insert(0, '/ui/aruni/style.css')
+        return styles
+
+
     def get_template(self):
         context = get_context()
         if (context.has_form_value('view') and

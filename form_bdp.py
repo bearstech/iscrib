@@ -16,9 +16,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from itools
-from itools.stl import stl
-
 # Import from ikaaro
 from ikaaro.registry import register_resource_class
 
@@ -26,7 +23,8 @@ from ikaaro.registry import register_resource_class
 from schema_bdp import schema, alertes, controles
 from form import FormHandler, Form
 from form_views import Form_View
-from utils import get_bdp, get_adresse, reduce_generators
+from form_bdp_views import Form_BDP_PrintForm
+from utils import get_bdp, get_adresse
 from utils_views import HelpView
 
 
@@ -50,6 +48,7 @@ class FormBDP(Form):
                    'report_form6', 'report_form7', 'report_form8',
                    'report_form9', 'comments'] + Form.class_views
 
+    print_form = Form_BDP_PrintForm()
 
     ######################################################################
     # Form API
@@ -96,30 +95,6 @@ class FormBDP(Form):
     def get_user_town(self):
         return get_bdp(self.name).get_value('name')
 
-
-    ######################################################################
-    # User interface
-    #######################################################################
-
-    #######################################################################
-    # Edit report
-    print_form__access__ = 'is_allowed_to_view'
-    print_form__label__ = u'Imprimez votre rapport'
-    def print_form(self, context):
-        context.response.set_header('Content-Type',
-                                    'text/html; charset=UTF-8')
-        namespace = self.get_namespace(context)
-        forms = ['FormBDP_report%s' % i for i in range(0, 10)]
-        forms.append('Form_comments')
-        forms = [('%s.xml' % i, '%s_autogen.xml' % i, 'print_all')
-                 for i in forms]
-        forms = [self.get_ns_and_h(context, n, a, v) for n, a, v in forms]
-        namespace['body'] = reduce_generators(forms)
-        namespace['title'] = self.get_title()
-        namespace['styles'] = context.root.get_skin().get_styles(context)
-
-        template = self.get_object('/ui/scrib/printable_template.xhtml')
-        return stl(template, namespace)
 
 
 

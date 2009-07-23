@@ -31,7 +31,7 @@ from ikaaro.workflow import workflow
 
 # Import from scrib
 from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from utils import get_checkbox_value
+from utils import get_checkbox_value, bm_annexes, ua_epci
 from form_views import Form_DownloadCSV, Form_Help, Form_Help2
 from form_views import Form_Controles, Form_View, Form_ReportCSV
 
@@ -565,10 +565,6 @@ class Form(Text):
 
 
 
-# XXX
-#register_field('user_town', Unicode)
-#KeywordField('dep', is_stored=True),
-#  KeywordField('year'),
 register_field('is_BDP', Boolean)
 register_field('is_BM', Boolean)
 register_field('form_state', Unicode(is_indexed=True, is_stored=True))

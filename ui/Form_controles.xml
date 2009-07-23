@@ -26,7 +26,7 @@
   </tr>
 </table-->
 
-<stl:block if="is_exportable">
+<stl:block stl:if="is_exportable">
   <p>
   Le formulaire est terminé, vous pouvez l'exporter dans la base de données
   MySQL en cliquant le bouton ci-dessous :
@@ -38,8 +38,8 @@
   </blockquote>
 </stl:block>
 
-<stl:block if="not is_complete">
-<stl:block if="not is_finished">
+<stl:block stl:if="not is_complete">
+<stl:block stl:if="not is_finished">
     <p> La<a href="#controles">  liste des contrôles </a> et la<a href="#vides"> liste des rubriques non remplies </a> doivent être vides pour pouvoir envoyer le formulaire</p>
    <blockquote>
     <form method="post">
@@ -50,7 +50,7 @@
 </stl:block>
 </stl:block>
 
-<stl:block if="is_complete">
+<stl:block stl:if="is_complete">
    <p> Le formulaire est complet, tous les contrôles sont à OUI. Vous pouvez
     envoyer le formulaire.  Pour l'envoyer à l'administrateur cliquez sur le
     bouton ci-dessous : </p>
@@ -91,7 +91,7 @@ La liste des contrôles doit être vide  pour que l'on puisse envoyer le formula
           <td class="idCheck">${control/num}</td>
           <td class="textCheck">${control/text}</td>
           <td stl:if="control/empty" class="emptyCheck" colspan="2">Incomplet</td>
-          <stl:block if="not control/empty">
+          <stl:block stl:if="not control/empty">
             <td stl:if="not control/fail" class="okCheck">Oui</td>
             <td stl:if="control/fail" class="failCheck">Non</td>
           </stl:block>
@@ -113,7 +113,7 @@ La liste des contrôles doit être vide  pour que l'on puisse envoyer le formula
           <td class="idCheck">${control/num}</td>
           <td class="textCheck">${control/text}</td>
           <td stl:if="control/empty" class="emptyCheck" colspan="2">Incomplet</td>
-          <stl:block if="not control/empty">
+          <stl:block stl:if="not control/empty">
             <td stl:if="not control/fail" class="okCheck">Oui</td>
             <td stl:if="control/fail" class="failCheck">Non</td>
           </stl:block>

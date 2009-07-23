@@ -5,18 +5,19 @@
            xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
 <div id="formBiblio">
-  <form method="post" action=";report">
+  <form method="post">
     <div stl:if="is_allowed_to_edit" align="right">
-      <stl:block if="not printable">
-        <a style="border:0;color:gray" stl:if="not printable" alt="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx',           'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes,           width=800, height=600'); return True;"><img src="/ui/scrib/images/imprimer.gif"/>Imprimer cette page
+      <stl:block stl:if="not printable">
+        <a style="border:0;color:gray" stl:if="not printable" title="Imprimer" href="#" name="Imprimer" onclick="javascript:window.open('?view=printable', 'xxx',           'toolbar=yes, location=no, status=no, menubar=yes, scrollbars=yes,           width=800, height=600'); return True;"><img src="/ui/scrib/images/imprimer.gif"/>Imprimer cette page
         </a>
-        <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
+        <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"
+          name=";report"/>
       </stl:block>
     </div>
     <h1>FICHE DE RENSEIGNEMENTS concernant les Etablissements Publics de
       Coopération Intercommunale (EPCI) ayant compétence en matière de lecture
       publique intégrale ou partagée <br/>
-      <a stl:if="not printable" style="color:white;background-color:red;         border: 1px solid red; " onclick="window.open(';help11', 'xxx',         'toolbar=no,  location=no, status=no, menubar=no, scrollbars=yes,         width=440, height=540');return 0;" href="#" alt="Aide">
+      <a stl:if="not printable" style="color:white;background-color:red;         border: 1px solid red; " onclick="window.open(';help11', 'xxx',         'toolbar=no,  location=no, status=no, menubar=no, scrollbars=yes,         width=440, height=540');return 0;" href="#" title="Aide">
         Voir l'aide sur cette page
       </a>
     </h1>

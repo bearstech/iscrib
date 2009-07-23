@@ -17,11 +17,13 @@
 # Import from standard library
 from copy import deepcopy
 from pprint import pformat
+from decimal import Decimal as dec, InvalidOperation
 
 # Import from mysql
 from _mysql import OperationalError
 
 # Import from itools
+from itools.csv import CSVFile
 from itools.datatypes import is_datatype, Boolean, String, Unicode
 from itools.gettext import MSG
 from itools.http.exceptions import Forbidden
@@ -30,7 +32,8 @@ from itools.web import BaseView, STLView, STLForm
 # Import from scrib
 from scrib import config
 from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from utils import bm_annexes, ua_epci, get_connection, make_msg
+from utils import bm_annexes, ua_epci, get_connection, make_msg, MSG_NO_MYSQL
+from utils_views import HelpView
 
 MailResponsableBM = config.get_value('MailResponsableBM')
 MailResponsableBDP = config.get_value('MailResponsableBDP')
@@ -53,7 +56,8 @@ class Form_View(STLForm):
 
     def get_namespace(self, resource, context):
         namespace = resource.get_namespace(context)
-        if context.get_form_value('view') in ['print_all', 'printable']:
+        view = getattr(self, 'view', None)
+        if context.get_form_value('view', default=view) in ['print_all', 'printable']:
             namespace['printable'] = True
         return namespace
 
@@ -114,9 +118,9 @@ class Form_View(STLForm):
                     # and
                     dependance_type = schema[dependance][0]
                     if is_datatype(dependance_type, Checkboxes):
-                        true = context.get_form_value(dependance, '0') != '0'
+                        true = context.get_form_value(dependance, default='0') != '0'
                     else:
-                        true = context.get_form_value(dependance, '0') == '1'
+                        true = context.get_form_value(dependance, default='0') == '1'
                     if true:
                         if not value:
                             empty = True
@@ -183,7 +187,7 @@ class Form_View(STLForm):
             new_form_state = resource.get_form_state()
             # 0005453: Reindex
             if new_form_state != old_form_state:
-                context.server.change_object(resource)
+                context.server.change_resource(resource)
 
         new_referer, msg = make_msg(new_referer=new_referer, notR=notR,
                 badT=badT, badT_missing=badT_missing, badT_values=badT_values)
@@ -523,7 +527,7 @@ class Form_Controles(STLForm):
             context.commit = False
             return context.come_back(MSG_NO_MYSQL)
 
-        message = u'Le rapport a été exporté'
+        message = MSG(u'Le rapport a été exporté')
         return context.come_back(message, goto=';controles_form')
 
 
@@ -588,30 +592,24 @@ class Form_FillReportForm(STLView):
         resource.update_fields(fields)
         t = time() - t0
 
-        message = u'Rapport auto rempli en %.2f secondes' % t
+        message = MSG(u'Rapport auto rempli en %.2f secondes' % t)
         return context.come_back(message, goto=';controles_form')
 
 
 
 
-class Form_Help(STLView):
+class Form_Help(HelpView):
 
     access = True
     title = u'Aidez-vous !'
     template = '/ui/scrib/Form_help.xml'
 
-    # XXX
-    #context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
 
-
-class Form_Help2(STLView):
+class Form_Help2(HelpView):
 
     access = True
     title = u'Aidez-vous !'
     template = '/ui/scrib/Form_help2.xhtml'
-
-    # XXX
-    #context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
 
 
 

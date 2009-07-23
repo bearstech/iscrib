@@ -31,7 +31,7 @@ from itools.datatypes import Unicode
 from itools.web import BaseView, STLView, STLForm
 
 # Import from ikaaro
-from ikaaro.views import SearchForm
+from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.user import crypt_password
 from ikaaro.resource_views import LoginView
 
@@ -128,12 +128,18 @@ class NewReportsForm(STLForm):
         bib_municipales.sort(key=itemgetter(0))
 
         t = time()
-        for i, bib in enumerate(bib_municipales):
+        for i, bib in list(enumerate(bib_municipales))[:20]:
             code = bib.get_value('code')
             name = bib.get_value('name')
             dep = bib.get_value('dep')
             # Add report
-            FormBM.make_resource(FormBM, reports, code, **{'title': name})
+            if reports.get_resource(code, soft=True) is None:
+                # XXX on fait cette verification car le fichier init_BM.txt
+                # contient deux doublon
+                # 3603;Argenton-Château;79;79013
+                # 4674;Betton;35;35024
+                # A verifier si c'est normal
+                FormBM.make_resource(FormBM, reports, code, **{'title': name})
             # Add user
             username = 'BM%s' % code
             if users.get_resource(username, soft=True) is None:
@@ -150,8 +156,8 @@ class NewReportsForm(STLForm):
                    u"ajoutés, ainsi que les utilisateurs associés : "
                    u"BMxxxx:BMxxxx, BMyyyy:BMyyyy, etc. "
                    u"en {temps} {unite}")
-        message.format(year=year, temps=minutes or secondes,
-                       unite=minutes and u'minutes' or u'secondes')
+        message = message.format(year=year, temps=minutes or secondes,
+                                  unite=minutes and u'minutes' or u'secondes')
         return context.come_back(MSG(message), goto=';browse_content')
 
 
@@ -344,7 +350,8 @@ class Root_ExportForm(STLForm):
 
         output.close()
 
-        return context.come_back(u"Fichier exporté dans '%s'" % output_path)
+        msg = MSG(u"Fichier exporté dans '%s'" % output_path)
+        return context.come_back(msg)
 
 
 #########################################################################
@@ -363,9 +370,9 @@ class Root_NewBmForm(STLForm):
 
         for code in code_bib.split():
             if not all_bm.search(code=code):
-                return context.come_back(u"Le code_bib $code n'est pas "
-                        u"dans le fichier input_data/init_BM.txt installé.",
-                        code=repr(code))
+                msg = MSG(u"Le code_bib %s n'est pas "
+                          u"dans le fichier input_data/init_BM.txt installé." % repr(code))
+                return context.come_back(msg)
             codes.append(int(code))
 
         users = resource.get_resource('users')
@@ -376,42 +383,39 @@ class Root_NewBmForm(STLForm):
             # Add report
             bib = get_bm(name)
             ville = bib.get_value('name')
-            if bm2008.has_resource(name, soft=True) is None:
+            if bm2008.get_resource(name, soft=True) is None:
                 FormBM.make_resource(FormBM, bm2008, name, **{'title': ville})
             # Add user
             username = 'BM%s' % code
-            if not users.has_resource(username):
-                ScribUser.make_resoruce(ScribUser, users, username,
+            if users.get_resource(username, soft=True) is None:
+                ScribUser.make_resource(ScribUser, users, username,
                                       username=username,
                                       password=crypt_password(username))
 
         message = (u"Formulaire et utilisateur ajoutés : "
                    u"code_bib={code_bib} ville={ville} dept={dept} "
                    u"code_insee={code_insee} login={login} password={password}")
-        message.format(code_bib=code, ville=ville, dept=bib.get_value('dep'),
-                       code_insee=bib.get_value('id'), login=username,
-                       password=username)
-        return context.come_back(message, goto=';new_bm_form')
+        message = message.format(code_bib=code, ville=ville,
+                       dept=bib.get_value('dep'), code_insee=bib.get_value('id'),
+                       login=username, password=username)
+        return context.come_back(MSG(message), goto=';new_bm_form')
 
 
 
-class Root_PermissionsForm(SearchForm):
+class Root_PermissionsForm(Folder_BrowseContent):
 
     title = u"Utilisateurs"
     search_template = '/ui/scrib/Root_permissions.xml'
 
-    # XXX Get values from the request
-    #sortby = context.get_form_values('sortby', default=['login_name'])
-    #sortorder = context.get_form_value('sortorder', default='up')
-    #start = context.get_form_value('batchstart', type=Integer, default=0)
-    #size = 20
     access = 'is_admin' # XXX Acls ?
 
     query_schema = merge_dicts(
-        SearchForm.query_schema,
+        Folder_BrowseContent.query_schema,
         sort_by=String(default='login_name'),
         reverse=Boolean(default=False))
 
+
+    table_actions = []
     table_columns = [('user_id', u'User ID'),
                      ('login_name', u'Login'),
                      ('role', u'Role')]
@@ -419,8 +423,6 @@ class Root_PermissionsForm(SearchForm):
 
     def get_search_namespace(self, resource, context):
         namespace = {}
-
-
         # The search form
         search_bib = context.get_form_value('bib')
         search_ville = context.get_form_value('ville', type=Unicode)
@@ -460,11 +462,11 @@ class Root_PermissionsForm(SearchForm):
                 query.append(PhraseQuery('year', search_annee))
 
         query = AndQuery(*query)
-        return resource.search(query).get_documents()
+        return resource.search(query)
 
 
     def get_item_value(self, resource, context, item, column):
-        user = item
+        user, item_resource = item
         if column == 'user_id':
             href = '/users/%s' % user.name
             return user.name, href
@@ -492,13 +494,8 @@ class Root_PermissionsForm(SearchForm):
         raise ValueError, u'Unknow column'
 
 
-    def sort_and_batch(self, resource, context, results):
-        # XXX
-        return results
-
-
 #########################################################################
-# XXX Migrate to 060
+# XXX Migrate to 060 ?
 # Debug
 #########################################################################
 #xchangepassword__access__ = 'is_admin'
@@ -508,4 +505,4 @@ class Root_PermissionsForm(SearchForm):
 #        user.set_password('a')
 #    # XXX écrit sur une méthode GET
 #    context.commit = True
-#    return context.come_back(u"Done", goto='/;browse_content')
+#    return context.come_back(MSG(u"Done"), goto='/;browse_content')

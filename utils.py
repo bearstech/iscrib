@@ -28,13 +28,13 @@ from itools.core import get_abspath
 from itools.datatypes import String, Unicode
 from itools.gettext import MSG
 from itools.csv import CSVFile
+from itools.uri import get_reference
 
 # Import from scrib
 from scrib import config
 
 
 MSG_NO_MYSQL = MSG(u"La connexion à MySql ne s'est pas faite")
-MSG_NO_ADRESSE = MSG(u"La bibliothèque n'existe pas dans la base SQL : %r")
 
 
 class AllBM(CSVFile):
@@ -140,7 +140,8 @@ def get_adresse(query):
         #dummy = [''] * 99
         #dummy[17] = 0
         #return dummy
-        raise ValueError, MSG_NO_ADRESSE % query
+        msg = "La bibliothèque n'existe pas dans la base SQL : %s" % query
+        raise ValueError, msg
     results = results[0]
     adresse = []
     for val in results:
@@ -190,6 +191,7 @@ def ua_epci(code_ua):
 
 
 def make_msg(new_referer, notR, badT, badT_missing, badT_values):
+    new_referer = get_reference(new_referer)
     if notR:
         notR.sort()
         notR_missing = ['missing_' + x for x in notR]

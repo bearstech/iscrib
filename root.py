@@ -22,6 +22,7 @@ from itools.gettext import MSG
 from itools.web import get_context
 
 # Import from ikaaro
+from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.registry import register_resource_class
 from ikaaro.root import Root as BaseRoot
 
@@ -39,23 +40,20 @@ class Root(BaseRoot):
     class_title = MSG(u"SCRIB")
     class_skin = 'ui/scrib'
 
-    # XXX
-    #browse_content__access__ = 'is_admin_or_consultant'
 
-    # XXX Menu à deux niveaux
-    class_views = [['browse_content'],
-                   ['new_reports_form', 'new_bm_form', 'creer_VoirSCRIB'],
-                   ['export_form'],
-                   ['permissions_form', 'new_user_form'],
-                   ['edit_metadata_form'],
-                   ['help']]
+    # XXX Ancien menu à deux niveaux
+    #class_views = [['browse_content'],
+    #               ['new_reports_form', 'new_bm_form', 'creer_VoirSCRIB'],
+    #               ['export_form'],
+    #               ['permissions_form', 'new_user_form'],
+    #               ['edit_metadata_form'],
+    #               ['help']]
 
     class_views = ['browse_content',
                    'new_reports_form', 'new_bm_form', 'creer_VoirSCRIB',
                    'export_form',
-                   'permissions_form', 'new_user_form',
-                   'edit_metadata_form',
-                   'help']
+                   'permissions_form', 'add_user',
+                   'edit', 'help']
 
     __roles__ = [{'name': 'admins', 'title': u'Admin'}]
 
@@ -71,10 +69,8 @@ class Root(BaseRoot):
     export_form = Root_ExportForm()
     permissions_form = Root_PermissionsForm()
     help = Root_HELP()
+    browse_content = Folder_BrowseContent(access='is_admin_or_consultant')
 
-    # XXX
-    #new_user_form =
-    #edit_metadata_form =
 
     def before_traverse(self, context):
         # Set french as default language, whatever the browser config is
@@ -146,29 +142,30 @@ class Root(BaseRoot):
 
 
     def is_allowed_to_trans(self, user, resource, name):
-        # XXX Sylvain
-        return True
         if user is None:
             return False
 
         context = get_context()
         root = context.root
 
-        namespace = self.get_namespace()
-        is_admin = self.is_admin(user, resource)
+        # XXX Check that !!
+        if isinstance(resource, Form):
+            namespace = resource.get_namespace(context)
+            is_admin = self.is_admin(user, resource)
 
-        if is_admin:
-            if name in ['request', 'accept', 'publish']:
-                return namespace['is_ready']
+            if is_admin:
+                if name in ['request', 'accept', 'publish']:
+                    return namespace['is_ready']
+                else:
+                    return True
             else:
-                return True
-        else:
-            if name in ['request']:
-                return namespace['is_ready']
-            elif name in ['unrequest']:
-                return True
-            else:
-                return False
+                if name in ['request']:
+                    return namespace['is_ready']
+                elif name in ['unrequest']:
+                    return True
+                else:
+                    return False
+        return BaseRoot.is_allowed_to_trans(self, user, resource, name)
 
 
     #########################################################################

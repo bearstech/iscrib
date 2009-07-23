@@ -7,7 +7,7 @@
 <div id="formBiblio">
 <form method="post" name="form" action=";report">
   <div align="right">
-    <stl:block if="not printable">
+    <stl:block stl:if="not printable">
       <input stl:if="is_allowed_to_edit" style="background-color:rgb(145,191,255); border:0" type="submit" value="Enregistrer"/>
     </stl:block>
   </div>
