@@ -26,7 +26,6 @@ from MySQLdb.cursors import DictCursor
 # Import from itools
 from itools.core import get_abspath
 from itools.datatypes import String, Unicode
-from itools.gettext import MSG
 from itools.csv import CSVFile
 from itools.uri import get_reference
 
@@ -34,7 +33,8 @@ from itools.uri import get_reference
 from scrib import config
 
 
-MSG_NO_MYSQL = MSG(u"La connexion à MySql ne s'est pas faite")
+MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
+MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL : %r"
 
 
 class AllBM(CSVFile):
@@ -140,8 +140,7 @@ def get_adresse(query):
         #dummy = [''] * 99
         #dummy[17] = 0
         #return dummy
-        msg = "La bibliothèque n'existe pas dans la base SQL : %s" % query
-        raise ValueError, msg
+        raise ValueError, MSG_NO_ADRESSE % query
     results = results[0]
     adresse = []
     for val in results:

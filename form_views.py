@@ -16,8 +16,9 @@
 
 # Import from standard library
 from copy import deepcopy
-from pprint import pformat
 from decimal import Decimal as dec, InvalidOperation
+from pprint import pformat
+from time import time
 
 # Import from mysql
 from _mysql import OperationalError
@@ -32,7 +33,7 @@ from itools.web import BaseView, STLView, STLForm
 # Import from scrib
 from scrib import config
 from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from utils import bm_annexes, ua_epci, get_connection, make_msg, MSG_NO_MYSQL
+from utils import get_connection, make_msg, MSG_NO_MYSQL
 from utils_views import HelpView
 
 MailResponsableBM = config.get_value('MailResponsableBM')
@@ -525,7 +526,7 @@ class Form_Controles(STLForm):
         except OperationalError:
             context.server.log_error(context)
             context.commit = False
-            return context.come_back(MSG_NO_MYSQL)
+            return context.come_back(MSG(MSG_NO_MYSQL))
 
         message = MSG(u'Le rapport a été exporté')
         return context.come_back(message, goto=';controles_form')
