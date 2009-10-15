@@ -36,6 +36,45 @@ class Scrib2009(WebSite):
     browse_content = Folder_BrowseContent(access='is_admin_or_consultant')
     xchangepassword = Scrib_ChangePassword()
 
+    # Skeleton
+    @staticmethod
+    def make_resource(cls, container, name, *args, **kw):
+        # Ici les créations annexes à l'application/année
+        website = WebSite.make_resource(cls, container, name, *args, **kw)
+        # Users
+        path = get_abspath('ui/users.csv')
+        handler = CSVFile(path)
+        rows =  handler.get_rows()
+        users_folder = container.get_resource('/users')
+        # Header
+        header = rows.next()
+        users = [# TODO Responsable équivalent de Marie Sotto pour Pelleas
+                 ('VoirSCRIB', 'BMBDP', 'TODO')]
+        user_ids = set()
+        for row in rows:
+            index_email = header.index('ADRESSEMEL')
+            email = row[index_email].strip() or 'TODO'
+            # Contre les adresses avec des accents
+            try:
+                unicode(email)
+            except UnicodeDecodeError:
+                raise TypeError, '*** %s ***\n' % row[index_email]
+            # Attention l'email pourrait déjà être utilisé
+            user = users_folder.set_user(email, 'a')
+            user_ids.add(user.name)
+        # Donne un rôle dans ce website = accès à cette année
+        website.set_user_role(user_ids, 'members')
+        return website
+
+
+    @staticmethod
+    def _make_resource(cls, folder, name):
+        # Ici les créations de l'application/année et ses sous-ressources
+        WebSite._make_resource(cls, folder, name, website_languages=['fr'],
+                               title={'fr': u"Scrib 2009"})
+        # TODO Créer les BM
+        # TODO Créer les BDP
+
 
     # Security
     def is_consultant(self, user, resource):
