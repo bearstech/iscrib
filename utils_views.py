@@ -19,6 +19,10 @@ from itools.web import STLView
 
 class HelpView(STLView):
 
+    access = True
+
+
     def GET(self, resource, context):
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
+        context.response.set_header('Content-Type',
+                                    'text/html; charset=UTF-8')
         return STLView.GET(self, resource, context)
