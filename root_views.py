@@ -75,151 +75,15 @@ class Root_Login(LoginView):
 
 
 
-class NewReportsForm(STLForm):
-
-    access = 'is_admin'
-    title = u'Ajouter'
-    subtitle = u'Rapport'
-    #icon = BaseRoot.new_resource_form__icon__
-    template = '/ui/scrib/Root_new_reports.xml'
-
-    def get_namespace(self, resource, context):
-        namespace = {}
-        today = date.today()
-        ### BDP form
-        years = [
-          {'value': x,
-           'is_disabled': resource.get_resource('BDP'+str(x), soft=True) is not None,
-           'is_selected': False}
-                  for x in range(today.year - 2, today.year + 4) ]
-        # Select one
-        for i in [2, 3, 4, 5, 1, 0]:
-            if years[i]['is_disabled'] is False:
-                years[i]['is_selected'] = True
-                break
-        namespace['years'] = years
-        ### BM form
-        years = [
-          {'value': x,
-           'is_disabled': resource.get_resource('BM'+str(x), soft=True) is not None,
-           'is_selected': False}
-                  for x in range(today.year - 2, today.year + 4) ]
-        # Select one
-        for i in [2, 3, 4, 5, 1, 0]:
-            if years[i]['is_disabled'] is False:
-                years[i]['is_selected'] = True
-                break
-        namespace['BMyears'] = years
-        return namespace
-
-
-    def action_new_BM_reports(self, resource, context, form):
-        """ """
-        # Add reports container
-        year = context.get_form_value('year')
-        report_name = 'BM' + str(year)
-        # Add reports and users, one per department
-        reports = Forms.make_resource(Forms, resource, report_name)
-        users = resource.get_resource('users')
-
-        bm_len =  all_bm.get_nrows()
-        bib_municipales = list(all_bm.get_rows())
-        # so we sort by integers values
-        bib_municipales.sort(key=itemgetter(0))
-
-        t = time()
-        for i, bib in list(enumerate(bib_municipales))[:20]:
-            code = bib.get_value('code')
-            name = bib.get_value('name')
-            dep = bib.get_value('dep')
-            # Add report
-            if reports.get_resource(code, soft=True) is None:
-                # XXX on fait cette verification car le fichier init_BM.txt
-                # contient deux doublon
-                # 3603;Argenton-Château;79;79013
-                # 4674;Betton;35;35024
-                # A verifier si c'est normal
-                FormBM.make_resource(FormBM, reports, code, **{'title': name})
-            # Add user
-            username = 'BM%s' % code
-            if users.get_resource(username, soft=True) is None:
-                ScribUser.make_resource(ScribUser, users, username,
-                                      username=username,
-                                      password=crypt_password(username))
-            if i % 10 == 0:
-                print '%s/%s' % (i, bm_len), dep, code, username
-        report_m = int(time() - t)
-        print 'users and reports set ', report_m
-        secondes = int(time() - t)
-        minutes = secondes // 60
-        message = (u"Les rapports des BM pour l'année {year} ont été "
-                   u"ajoutés, ainsi que les utilisateurs associés : "
-                   u"BMxxxx:BMxxxx, BMyyyy:BMyyyy, etc. "
-                   u"en {temps} {unite}")
-        message = message.format(year=year, temps=minutes or secondes,
-                                  unite=minutes and u'minutes' or u'secondes')
-        return context.come_back(MSG(message), goto=';browse_content')
-
-
-    def action_new_BDP_reports(self, resource, context, form):
-        """ patern for BDP users is BDPxx_Year"""
-        # Add reports container
-        year = context.get_form_value('year')
-        name = 'BDP' + str(year)
-        reports = Forms.make_resource(Forms, resource, name)
-        # Add reports and users, one per department
-        users = resource.get_resource('users')
-        for bib in all_bdp.get_rows():
-            name = bib.get_value('code')
-            title = bib.get_value('name')
-            # Add report
-            FormBDP.make_resource(FormBDP, reports, name, **{'title': title})
-            # Add user
-            username = 'BDP%s' % name
-            if users.get_resource(username, soft=True) is None:
-                ScribUser.make_resource(ScribUser, users, username,
-                                      username=username,
-                                      password=crypt_password(username))
-
-        message = MSG(
-                   u"Les rapports des BDP pour l'année %s ont été "
-                   u"ajoutés, et leurs utilisateurs associés BDPxx:BDPxx, "
-                   u"BDPyy:BDPyy, etc." % year)
-        return context.come_back(message, goto=';browse_content')
-
-
-class Root_CreerVoirSCRIB(BaseView):
-
-    access = 'is_admin'
-    title = u"Créer VoirSCRIB"
-
-    def GET(self, resource, context):
-        username = 'VoirSCRIB'
-        password = 'BMBDP'
-
-        users = resource.get_resource('users')
-        if users.get_resource(username, soft=True) is not None:
-            return context.come_back(MSG(u"Le compte VoirSCRIB existe déjà."))
-
-        ScribUser.make_resource(ScribUser, users, username, username=username,
-                              password=crypt_password(password))
-
-        # Était un GET
-        context.commit = True
-
-        return context.come_back(MSG(u"Compte VoirSCRIB créé."))
-
-
-class Root_HELP(STLView):
-
+class Root_Help(STLView):
     access = True
     title = u'Aide'
     #icon = '/ui/icons/16x16/help.png'
     template = '/ui/scrib/Form_help.xml'
 
 
-class Root_ExportForm(STLForm):
 
+class Root_ExportForm(STLForm):
     access = 'is_admin'
     title = u"Export"
     #icon = File.download_form__icon__
@@ -354,66 +218,16 @@ class Root_ExportForm(STLForm):
         return context.come_back(msg)
 
 
-#########################################################################
-# New User
-
-class Root_NewBmForm(STLForm):
-
-    access = 'is_admin'
-    title = u"Nouvelle BM"
-
-    template = '/ui/scrib/Root_new_bm.xml'
-
-    def action(self, resource, context, form):
-        code_bib = context.get_form_value('code_bib')
-        codes = []
-
-        for code in code_bib.split():
-            if not all_bm.search(code=code):
-                msg = MSG(u"Le code_bib %s n'est pas "
-                          u"dans le fichier input_data/init_BM.txt installé." % repr(code))
-                return context.come_back(msg)
-            codes.append(int(code))
-
-        users = resource.get_resource('users')
-        bm2008 = resource.get_resource('BM2008')
-
-        for code in codes:
-            name = str(code)
-            # Add report
-            bib = get_bm(name)
-            ville = bib.get_value('name')
-            if bm2008.get_resource(name, soft=True) is None:
-                FormBM.make_resource(FormBM, bm2008, name, **{'title': ville})
-            # Add user
-            username = 'BM%s' % code
-            if users.get_resource(username, soft=True) is None:
-                ScribUser.make_resource(ScribUser, users, username,
-                                      username=username,
-                                      password=crypt_password(username))
-
-        message = (u"Formulaire et utilisateur ajoutés : "
-                   u"code_bib={code_bib} ville={ville} dept={dept} "
-                   u"code_insee={code_insee} login={login} password={password}")
-        message = message.format(code_bib=code, ville=ville,
-                       dept=bib.get_value('dep'), code_insee=bib.get_value('id'),
-                       login=username, password=username)
-        return context.come_back(MSG(message), goto=';new_bm_form')
-
-
 
 class Root_PermissionsForm(Folder_BrowseContent):
-
+    access = 'is_admin'
     title = u"Utilisateurs"
     search_template = '/ui/scrib/Root_permissions.xml'
-
-    access = 'is_admin' # XXX Acls ?
 
     query_schema = merge_dicts(
         Folder_BrowseContent.query_schema,
         sort_by=String(default='login_name'),
         reverse=Boolean(default=False))
-
 
     table_actions = []
     table_columns = [('user_id', u'User ID'),
@@ -494,15 +308,14 @@ class Root_PermissionsForm(Folder_BrowseContent):
         raise ValueError, u'Unknow column'
 
 
-#########################################################################
-# XXX Migrate to 060 ?
-# Debug
-#########################################################################
-#xchangepassword__access__ = 'is_admin'
-#def xchangepassword(self, context):
-#    users = self.get_resource('users')
-#    for user in users.get_resources():
-#        user.set_password('a')
-#    # XXX écrit sur une méthode GET
-#    context.commit = True
-#    return context.come_back(MSG(u"Done"), goto='/;browse_content')
+
+class XChangePassword(BaseView):
+
+    def GET(self, resource, context):
+        access = 'is_admin'
+        users = resource.get_resource('/users')
+        for user in users.get_resources():
+            user.set_password('a')
+        # XXX écrit sur une méthode GET
+        context.commit = True
+        return context.come_back(MSG(u"Done"), goto='/;browse_content')
