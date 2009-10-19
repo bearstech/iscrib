@@ -16,22 +16,41 @@
 
 # Import from itools
 from itools.core import get_abspath
+from itools.csv import CSVFile
+from itools.datatypes import String, Unicode, Integer
 from itools.web import get_context
 
 # Import from ikaaro
-from folder_views import Folder_BrowseContent
-from website import WebSite
+from ikaaro.folder_views import Folder_BrowseContent
+from ikaaro.registry import register_resource_class
+from ikaaro.website import WebSite
 
 # Import from scrib
-from bm2009 import FormBM
+from bm2009 import BM2009
 from form import Form
 from scrib_views import Scrib_Login, Scrib_PermissionsForm, Scrib_ExportForm
 from scrib_views import Scrib_Help, Scrib_ChangePassword
-from utils import UsersCSV
+
+
+class UsersCSV(CSVFile):
+    schema = {'annee': Unicode,
+              'code': Integer,
+              'categorie': String(is_indexed=True),
+              'nom': Unicode,
+              'departement': String, # Corse « 2A » et « 2B »
+              'id': String, # Corse « 2A004 »
+              'mel': String,
+              'utilisateur': String,
+              'motdepasse': String}
+    columns = ['annee', 'code', 'categorie', 'nom', 'departement', 'id',
+               'mel', 'utilisateur', 'motdepasse']
+    skip_header = True
+
 
 
 class Scrib2009(WebSite):
     class_id = 'Scrib2009'
+    class_title = u"Scrib 2009"
 
     # Views
     login = Scrib_Login()
@@ -41,6 +60,7 @@ class Scrib2009(WebSite):
     help = Scrib_Help()
     browse_content = Folder_BrowseContent(access='is_admin_or_consultant')
     xchangepassword = Scrib_ChangePassword()
+
 
     # Skeleton
     @staticmethod
@@ -76,17 +96,17 @@ class Scrib2009(WebSite):
     @staticmethod
     def _make_resource(cls, folder, name):
         # Ici les créations de l'application/année et ses sous-ressources
-        WebSite._make_resource(cls, folder, name, website_languages=['fr'],
+        WebSite._make_resource(cls, folder, name, website_languages=('fr',),
                                title={'fr': u"Scrib 2009"})
         # BM
         users_csv = UsersCSV(get_abspath('ui/users.csv'))
         rows = users_csv.search(categorie='BM')
         for row in users_csv.get_rows(rows):
             code = row.get_value('code')
-            title = row.get_value('nomecole')
+            title = row.get_value('nom')
             departement = row.get_value('departement')
             id = row.get_value('id')
-            FormBM._make_resource(FormBM, folder, '%s/%s' % (name, code))
+            BM2009._make_resource(BM2009, folder, '%s/%s' % (name, code))
         # TODO Créer les BDP
 
 
@@ -174,3 +194,9 @@ class Scrib2009(WebSite):
                 else:
                     return False
         return WebSite.is_allowed_to_trans(self, user, resource, name)
+
+
+###########################################################################
+# Register
+###########################################################################
+register_resource_class(Scrib2009)

@@ -23,23 +23,19 @@ from itools.datatypes import String
 from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
-from schema_bm import schema, alertes, controles
-from form import get_schema_pages, get_controles, FormHandler, Form
+from form import get_schema_pages, get_controls, FormHandler, Form
 from form_views import Page_Form
-from utils import get_bm, get_adresse
 
 
-class FormBMHandler(FormHandler):
-
+class BM2009Handler(FormHandler):
     schema, pages = get_schema_pages('ui/schema-bm.csv')
-    controles = get_controles('ui/controles-bm.csv')
+    controles = get_controls('ui/controls-bm.csv')
 
 
 
-class FormBM(Form):
-
-    class_id = 'Form_BM'
-    class_handler = FormBMHandler
+class BM2009(Form):
+    class_id = 'BM2009'
+    class_handler = BM2009Handler
     class_views = ['pageA', 'pageB', 'pageC'] + Form.class_views
 
     # Views
@@ -49,74 +45,15 @@ class FormBM(Form):
 
 
     ######################################################################
-    # Form API
-    @staticmethod
-    def get_scrib_schema():
-        return schema
-
-
-    @staticmethod
-    def get_alertes():
-        return alertes
-
-
-    @staticmethod
-    def get_controles():
-        return controles
-
-
-    @staticmethod
-    def is_BDP():
-        return False
-
-
-    @staticmethod
-    def is_BM():
-        return True
-
-
-    @staticmethod
-    def base_lect(insee):
-        chaineSQL = ("select * from adresse08 where "
-                     "insee is not null and code_bib='%s'" % insee)
-        return get_adresse(chaineSQL)
-
-
-    def get_year(self):
-        return int(self.parent.name.split('BM')[-1])
-
-
-    def get_dep(self):
-        # get department number for BMs
-        dep = ''
-        bib = get_bm(self.name)
-        if bib:
-            dep = bib.get_value('dep')
-        return dep
-
-
-    def get_user_town(self):
-        title = ''
-        bib = get_bm(self.name)
-        if bib:
-            title = bib.get_value('name')
-        return title
-
-
-    def get_code(self):
-        return self.name
-
-
-    ######################################################################
     # Catalog API
     def _get_catalog_values(self):
         values = Form._get_catalog_values(self)
-        values['code'] = self.get_code()
+        #values['code'] = self.get_code()
         return values
 
 
-    #######################################################################
-    # Edit report
-
-register_resource_class(FormBM)
+###########################################################################
+# Register
+###########################################################################
+register_resource_class(BM2009)
 register_field('code', String(is_indexed=True))

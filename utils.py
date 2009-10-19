@@ -20,8 +20,7 @@
 from MySQLdb import connect
 
 # Import from itools
-from itools.csv import CSVFile
-from itools.datatypes import String, Unicode, Integer
+from itools.datatypes import Integer
 
 # Import from ikaaro
 from ikaaro.server import get_config
@@ -68,20 +67,3 @@ def parse_control(title):
                     yield True, title[start+1:end]
                     break
     yield False, title[end:]
-
-
-
-class UsersCSV(CSVFile):
-
-    schema = {'annee': Unicode,
-              'code': Integer,
-              'categorie': String(is_indexed=True),
-              'nomecole': Unicode,
-              'departement': String, # Corse 2A et 2B
-              'id': Integer,
-              'mel': String,
-              'utilisateur': String,
-              'motdepasse': String}
-    columns = ['annee', 'code', 'categorie', 'nomecole', 'departement', 'id',
-               'utilisateur', 'motdepasse']
-    skip_header = True

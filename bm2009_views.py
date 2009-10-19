@@ -19,28 +19,4 @@ from form_views import Form_View
 from utils import reduce_generators
 from utils_views import HelpView
 
-
-class FormBM_PrintForm(HelpView):
-
-
-    access = 'is_allowed_to_view'
-    title = u'Imprimez votre rapport '
-
-    template = '/ui/scrib/printable_template.xhtml'
-
-    def get_namespace(self, resource, context):
-        namespace =resource.get_namespace(context)
-        forms = ['FormBM_report%s' % i for i in range(0, 12)]
-        forms.insert(9,'Form_comments')
-        forms = [('%s.xml' % i, '%s_autogen.xml' % i, 'print_all')
-                 for i in forms]
-        # report_form10 and report_form11 must be in position 2 and 3
-        forms.insert(1, forms[-2])
-        forms.insert(2, forms[-1])
-        forms = forms[:-2]
-        forms = [Form_View(xml=n, autogen_xml=a, view=v).GET(resource, context)
-                        for n, a, v in forms]
-        namespace['body'] = reduce_generators(forms)
-        namespace['title'] = resource.get_title()
-        namespace['styles'] = context.root.get_skin(context).get_styles(context)
-        return namespace
+# TODO print

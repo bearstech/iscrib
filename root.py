@@ -43,7 +43,7 @@ class Root(BaseRoot):
         root = BaseRoot._make_resource(cls, folder, email, password)
         # La première application/année créée en dur
         # Les suivantes devront être ajoutées depuis l'interface
-        Scrib2009._make_resource(Scrib2009, folder, 'Scrib2009')
+        Scrib2009._make_resource(Scrib2009, folder, 'scrib2009')
         return root
 
 

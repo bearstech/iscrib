@@ -22,10 +22,10 @@
 from itools.core import get_abspath
 from itools.csv import CSVFile
 from itools.datatypes import Unicode, Boolean
-from itools.file import FileHandler
-from itools.handlers import File
+from itools.handlers import File as FileHandler
 
 # Import from ikaaro
+from ikaaro.file import File
 from ikaaro.registry import register_field
 from ikaaro.text import Text
 from ikaaro.workflow import workflow
@@ -33,8 +33,6 @@ from ikaaro.workflow import workflow
 # Import from scrib
 from datatypes import Integer, Decimal, Time, ShortTime, Date, ShortDate
 from datatypes import Digit
-from form_views import Form_DownloadCSV, Form_Help, Form_Help2
-from form_views import Form_Controles, Form_ReportCSV
 from help import HelpAware
 
 
@@ -69,6 +67,13 @@ def get_schema_pages(path):
     pages = {}
     for (name, title, form, page_number, type, repr, vocabulary,
             is_mandatory, fixed, somme, dependances, abrege, init) in rows:
+        # The name
+        name = name.strip()
+        if name == '':
+            # Ligne vide
+            continue
+        if name[0] == '#':
+            name = name[1:]
         # The type and representation
         type = type.strip().lower()
         if type == 'text':
@@ -103,7 +108,7 @@ def get_schema_pages(path):
         # allow multiple page numbers
         page_numbers = []
         for page in page_number.split(','):
-            page = int(page)
+            assert page.isalpha()
             page_fields = pages.setdefault(page, set())
             page_fields.add(name)
             page_numbers.append(page)
@@ -227,11 +232,6 @@ class Form(HelpAware, File):
     workflow = workflow
 
     # Views
-    controles = Form_Controles()
-    report_csv = Form_ReportCSV()
-    help = Form_Help()
-    help2 = Form_Help2()
-    downloadCSV = Form_DownloadCSV()
 
 
     @staticmethod
@@ -264,12 +264,12 @@ class Form(HelpAware, File):
     ######################################################################
     # Catalog API
     def _get_catalog_values(self):
-        values = Text._get_catalog_values(self)
-        values['user_town'] = self.get_user_town()
-        values['dep'] = self.get_dep()
-        values['year'] = self.get_year()
-        values['is_BDP'] = self.is_BDP()
-        values['is_BM'] = self.is_BM()
+        values = File._get_catalog_values(self)
+        #values['user_town'] = self.get_user_town()
+        #values['dep'] = self.get_dep()
+        #values['year'] = self.get_year()
+        #values['is_BDP'] = self.is_BDP()
+        #values['is_BM'] = self.is_BM()
         values['form_state'] = self.get_form_state()
         return values
 
