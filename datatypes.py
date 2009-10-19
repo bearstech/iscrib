@@ -17,176 +17,775 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from python
-from decimal import Decimal as dec
+from datetime import date
+from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
-from itools.datatypes import String, Enumerate
+from itools.datatypes import Unicode as BaseUnicode, Enumerate
 
 
-class EPCI_Statut(Enumerate):
+class DataType(object):
 
-    @classmethod
-    def get_options(cls):
-        return [{'name': '0', 'label': ""},
-                {'name': '1',
-                 'label': u"Commune dans un EPCI sans compétence bibliothèque"},
-                {'name': '2',
-                 'label': u"Commune dans EPCI - bibliothèque non transférée"},
-                {'name': '3',
-                 'label': u"Commune dans EPCI avec compétence biblio"},
-                {'name': '4',
-                 'label': u"Ville-centre  d'un EPCI avec compétence biblio"},
-                {'name': '5',
-                 'label': u"Commune dans syndicat intercommunal"},
-                {'name': '6', 'label': "Autre"},
-                ]
+    default = None
 
 
-##############################################################################
-# Schema
-##############################################################################
-
-class Checkboxes(String):
-    pass
+    def __init__(self, **kw):
+        for key in kw:
+            setattr(self, key, kw[key])
 
 
-
-class Decimal(object):
-
-    def __init__(self, value='0'):
-        if value == 'NC':
-            pass
-        elif isinstance(value, Decimal):
-            pass
-        else:
-            value = dec(value)
-        self.value = value
+    @staticmethod
+    def decode(data):
+        """Deserializes the given byte string to a value with a type."""
+        raise NotImplementedError
 
 
-    def __str__(self):
-        return str(self.value)
+    @staticmethod
+    def encode(value):
+        """Serializes the given value to a byte string."""
+        raise NotImplementedError
 
+
+    @staticmethod
+    def is_valid(value):
+        """Checks whether the given value is valid.
+
+        For example, for a natural number the value will be an integer,
+        and this method will check that it is not a negative number.
+        """
+        return True
+
+
+class PelleasNumeric(DataType):
+    """All arithmetical operations."""
+    default = '0'
 
     def __int__(self):
-        if self.value == 'NC':
-            return 'NC'
         return int(self.value)
 
 
     def __float__(self):
-        if self.value == 'NC':
-            return 'NC'
         return float(self.value)
 
 
-    def __add__(self, value):
-        if isinstance(value, Decimal):
-            value = value.value
-        if self.value == 'NC' or value == 'NC':
-            return Decimal('NC')
-        return Decimal(self.value + value)
+    def __str__(self):
+        return self.encode(self.value)
 
 
-    def __div__(self, value):
-        if isinstance(value, Integer) or isinstance(value, Decimal):
-            value = value.value
-        if self.value == 'NC' or value == 'NC':
-            return Decimal('NC')
-        return Decimal(self.value / value)
+    def __repr__(self):
+        return "%s(%s)" % (self.__class__.__name__, self.value)
 
 
-    def __cmp__(self, x):
-        if isinstance(x, Integer) or isinstance(x, Decimal):
-            if self.value == 'NC' or x.value == 'NC':
-                return 0
-            return cmp(self.value, x.value)
-        return cmp(self.value, x)
+    def __add__(self, right):
+        if self.value is None:
+            # NC + right = NC
+            return self.__class__('NC')
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+            if right is None:
+                # left + NC = NC
+                return self.__class__('NC')
+        elif right == '':
+            right = 0
+        left = dec(str(self.value))
+        right = dec(str(right))
+        # <type> + <type>
+        return self.__class__(left + right)
+
+    __radd__ = __add__
+
+
+    def __sub__(self, right):
+        if self.value is None:
+            # NC - right = NC
+            return self.__class__('NC')
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+            if right is None:
+                # left - NC = NC
+                return self.__class__('NC')
+        elif right == '':
+            right = 0
+        left = dec(str(self.value))
+        right = dec(str(right))
+        # <type> - <type>
+        return self.__class__(left - right)
+
+
+    def __rsub__(self, left):
+        if self.value is None:
+            # left - NC = NC
+            return self.__class__('NC')
+        if isinstance(left, PelleasNumeric):
+            left = left.value
+            if left is None:
+                # NC - right = NC
+                return self.__class__('NC')
+        elif left == '':
+            left = 0
+        left = dec(str(left))
+        right = dec(str(self.value))
+        # <type> - <type>
+        return self.__class__(left - right)
+
+
+
+    def __mul__(self, right):
+        if self.value is None:
+            # NC * right = NC
+            return self.__class__('NC')
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+            if right is None:
+                # left * NC = NC
+                return self.__class__('NC')
+        elif right == '':
+            right = 0
+        left = dec(str(self.value))
+        right = dec(str(right))
+        # <type> * <type>
+        return self.__class__(left * right)
+
+    __rmul__ = __mul__
+
+
+    def __div__(self, right):
+        if self.value is None:
+            # NC / right = NC
+            return self.__class__('NC')
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+            if right is None:
+                # left / NC = NC
+                return self.__class__('NC')
+        elif right == '':
+            right = 0
+        if right == 0:
+            # Pas de division par zéro !
+            return self.__class__(0)
+        left = dec(str(self.value))
+        right = dec(str(right))
+        # <type> / <type>
+        return self.__class__(left / right)
+
+
+    def __rdiv__(self, left):
+        if self.value is None:
+            # left / NC = NC
+            return self.__class__('NC')
+        if isinstance(left, PelleasNumeric):
+            left = left.value
+            if left is None:
+                # NC / right = NC
+                return self.__class__('NC')
+        elif left == '':
+            left = 0
+        if left == 0:
+            # Pas de division par zéro !
+            return self.__class__(0)
+        left = dec(str(left))
+        right = dec(str(self.value))
+        # <type> / <type>
+        return self.__class__(left / right)
+
+
+    def __gt__(self, right):
+        left = self.value
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+        if right is 'NC' or right is None:
+            # left > NC
+            return True
+        elif left is None:
+            # NC > right
+            return True
+        # <type> > <type>
+        return left > right
+
+
+    def __ge__(self, right):
+        left = self.value
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+        if right is 'NC' or right is None:
+            # left >= NC
+            return True
+        elif left is None:
+            # NC >= right
+            return True
+        # <type> >= <type>
+        return left >= right
+
+
+    def __lt__(self, right):
+        left = self.value
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+        if right is 'NC' or right is None:
+            # left < NC
+            return True
+        elif left is None:
+            # NC < right
+            return True
+        # <type> < <type>
+        return left < right
+
+
+    def __le__(self, right):
+        left = self.value
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+        if right is 'NC' or right is None:
+            # left <= NC
+            return True
+        elif left is None:
+            # NC <= right
+            return True
+        # <type> <= <type>
+        return left <= right
+
+
+    def __eq__(self, right):
+        left = self.value
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+        if left is None:
+            # NC == right
+            return True
+        elif right == 'NC' or right is None:
+            # <type> == NC
+            return True
+        # <type> == <type>
+        return left == right
+
+
+    def __ne__(self, right):
+        left = self.value
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+        if left is None:
+            # NC != right
+            return right != 'NC' and right is not None
+        elif right == 'NC' or right is None:
+            # <type> != NC
+            return True
+        # <type> != <type>
+        return left != right
+
+
+    def __cmp__(self, right):
+        # Toutes les combinaisons ont été épuisées
+        raise NotImplementedError
 
 
     @classmethod
-    def encode(cls, value):
+    def decode(cls, data):
+        if isinstance(data, PelleasNumeric):
+            return data
+        elif data is None or str(data).upper() == 'NC':
+            return cls('NC')
+        return cls(data)
+
+
+    @staticmethod
+    def encode(value):
+        if isinstance(value, PelleasNumeric):
+            value = value.value
         if value is None:
-            return ''
+            return 'NC'
         return str(value)
 
 
+
+class Decimal(PelleasNumeric):
+
+    def __init__(self, value=None, **kw):
+        PelleasNumeric.__init__(self, **kw)
+
+        if value is not None:
+            if value == 'NC':
+                value = None
+            elif isinstance(value, dec):
+                pass
+            elif value == '':
+                value = dec(0)
+            else:
+                if isinstance(value, str):
+                    value = value.replace(',', '.')
+                value = dec(str(value))
+
+        self.value = value
+
+
+    @staticmethod
+    def is_valid(data, repr):
+        if data.upper() == 'NC':
+            return True
+        try:
+            dec(str(data))
+        except InvalidOperation:
+            return False
+
+        return True
+
+
+    def get_sql_schema(self):
+        # ASSUME precision == 2
+        repr = self.repr - 3
+        return "DECIMAL(%s,2) default 0.0" % repr
+
+
     @classmethod
-    def decode(cls, value):
-        value = value.strip()
-        if not value:
-            return None
-        return Decimal(value)
+    def encode_sql(cls, value):
+        if isinstance(value, Decimal):
+            if value.value is None:
+                return 'NULL'
+        return cls.encode(value)
 
 
 
-class Integer(object):
+class Integer(PelleasNumeric):
 
-    def __init__(self, value=0):
-        if value == 'NC':
-            pass
-        elif isinstance(value, int):
-            pass
-        elif isinstance(value, str):
-            value = int(str(value))
+    def __init__(self, value=None, **kw):
+        PelleasNumeric.__init__(self, **kw)
+
+        if value is not None:
+            if value == 'NC':
+                value = None
+            elif isinstance(value, int):
+                pass
+            elif value == '':
+                value = 0
+            else:
+                if isinstance(value, str):
+                    value = ''.join([x for x in value if x.isdigit()])
+                value = int(value)
+
+        self.value = value
+
+
+    @staticmethod
+    def is_valid(data, repr):
+        if data.upper() == 'NC':
+            return True
+        try:
+            int(data)
+        except ValueError:
+            return False
+
+        return True
+
+
+    def get_sql_schema(self):
+        return "INT(%s) default 0" % self.repr
+
+
+    @classmethod
+    def encode_sql(cls, value):
+        if isinstance(value, Integer):
+            if value.value is None:
+                return 'NULL'
+        return cls.encode(value)
+
+
+
+class Time(PelleasNumeric):
+
+    def __init__(self, value=None, **kw):
+        PelleasNumeric.__init__(self, **kw)
+
+        if value is not None:
+            if value == 'NC':
+                value = None
+            elif isinstance(value, int):
+                pass
+            elif value == '':
+                value = 0
+            else:
+                value = int(value)
+
+        self.value = value
+
+
+    @classmethod
+    def decode(cls, data):
+        if data is None or str(data).upper() == 'NC':
+            return cls('NC')
+        data = str(data).strip()
+        if data == '':
+            return ''
+        elif ':' in data:
+            hours, minutes = data.split(':')
         else:
-            value = int(value)
+            hours = int(data)
+            minutes = 0
+
+        return cls(int(hours) * 60 + int(minutes))
+
+
+    @staticmethod
+    def encode(value):
+        if isinstance(value, Time):
+            value = value.value
+        if value is None:
+            return 'NC'
+        elif value == '':
+            return ''
+
+        return '%03d:%02d' % (value / 60, value % 60)
+
+
+    @staticmethod
+    def is_valid(data, repr):
+        if data == '' or data.upper() == 'NC':
+            return True
+        if data.count(':') > 1:
+            return False
+        for x in data.split(':'):
+            try:
+                int(x)
+            except ValueError:
+                return False
+
+        return True
+
+
+    def get_sql_schema(self):
+        return "CHAR(6) default '000:00'"
+
+
+    @classmethod
+    def encode_sql(cls, value):
+        if isinstance(value, Time):
+            if value.value is None:
+                return 'NULL'
+        return "'%s'" % cls.encode(value)
+
+
+
+class ShortTime(Time):
+
+    @staticmethod
+    def encode(value):
+        data = Time.encode(value)
+        if data == '' or data == 'NC':
+            return data
+
+        return data[1:]
+
+
+    def get_sql_schema(self):
+        return "CHAR(5) default '00:00'"
+
+
+
+class Date(DataType):
+
+    def __init__(self, value=None, **kw):
+        DataType.__init__(self, **kw)
+
+        if value is not None:
+            if value == 'NC':
+                value = None
+            elif isinstance(value, date):
+                pass
+            elif value == '':
+                pass
+            else:
+                parts = value.split('/')
+                if len(parts) == 2:
+                    # Support ShortDate
+                    parts.insert(0, 1)
+                j, m, a = parts
+                value = date(int(a), int(m), int(j))
+
         self.value = value
 
 
     def __str__(self):
-        return str(self.value)
+        return self.encode(self.value)
 
 
-    def __int__(self):
-        if self.value == 'NC':
-            return 'NC'
-        return self.value
+    def __repr__(self):
+        return "%s(%s)" % (self.__class__.__name__, self.value)
 
 
-    def __float__(self):
-        if self.value == 'NC':
-            return 'NC'
-        return float(self.value)
-
-
-    def __add__(self, value):
-        if isinstance(value, Integer):
-            value = value.value
-        if self.value == 'NC' or value == 'NC':
-            return Integer('NC')
-        return Integer(self.value + value)
-
-
-    def __div__(self, value):
-        if isinstance(value, Integer):
-            value = value.value
-        if self.value == 'NC' or value == 'NC':
-            return Integer('NC')
-        return Integer(self.value / value)
-
-
-    def __cmp__(self, x):
-        if isinstance(x, Integer):
-            if self.value == 'NC' or x.value == 'NC':
+    def __cmp__(self, right):
+        left = self.value
+        if isinstance(right, PelleasNumeric):
+            right = right.value
+        if right is 'NC' or right is None:
+            if left is None:
+                # NC == NC
                 return 0
-            return cmp(self.value, x.value)
-        return cmp(self.value, x)
+            # left (!NC) > NC
+            return 1
+        elif left is None:
+            # NC < right (!NC)
+            return -1
+        # cmp(left (!NC), right (!NC)
+        return cmp(left, right)
 
 
     @classmethod
-    def encode(cls, value):
+    def decode(cls, data):
+        if data is None or str(data).upper() == 'NC':
+            return cls('NC')
+        parts = data.split('/')
+        if len(parts) == 3:
+            pass
+        elif len(parts) == 2:
+            parts.insert(0, '1')
+        else:
+            return data
+        for i in range(3):
+            try:
+                parts[i] = int(parts[i])
+            except ValueError:
+                return data
+        j, m, a = parts
+        if a < 10:
+            a += 2000
+        if a < 100:
+            a += 1900
+
+        try:
+            value = cls(date(a, m, j))
+        except ValueError:
+            value = data
+        return value
+
+
+    @staticmethod
+    def encode(value):
+        if isinstance(value, Date):
+            value = value.value
         if value is None:
-            return ''
-        return str(value.value)
+            return 'NC'
+        elif isinstance(value, str):
+            return value
+
+        return value.strftime('%d/%m/%Y')
+
+
+    @staticmethod
+    def is_valid(data, repr):
+        if data.upper() == 'NC':
+            return True
+        if data.count('/') != 2:
+            return False
+        for x in data.split('/'):
+            try:
+                int(x)
+            except ValueError:
+                return False
+        j, m, a = data.split('/')
+        try:
+            date(int(a), int(m), int(j))
+        except ValueError:
+            return False
+
+        return True
+
+
+    def get_sql_schema(self):
+        return "CHAR(10) NOT NULL default ''"
 
 
     @classmethod
-    def decode(cls, value):
-        value = value.strip()
-        if not value:
-            return None
-        return Integer(value)
+    def encode_sql(cls, value):
+        return "'%s'" % cls.encode(value)
 
+
+
+class ShortDate(Date):
+
+    @staticmethod
+    def encode(value):
+        data = Date.encode(value)
+        if data == '' or data == 'NC':
+            return data
+
+        return data[3:]
+
+
+    @staticmethod
+    def is_valid(data, repr):
+        if data.upper() == 'NC':
+            return True
+        if data.count('/') != 1:
+            return False
+        for x in data.split('/'):
+            try:
+                int(x)
+            except ValueError:
+                return False
+        m, a = data.split('/')
+        try:
+            date(int(a), int(m), 1)
+        except ValueError:
+            return False
+
+        return True
+
+
+    def get_sql_schema(self):
+        return "CHAR(7) NOT NULL default ''"
+
+
+
+class Unicode(BaseUnicode):
+
+    default = ''
+
+    @staticmethod
+    def is_valid(value, repr):
+        try:
+            unicode(value, 'utf_8')
+        except UnicodeDecodeError:
+            return False
+
+        return True
+
+
+    def get_sql_schema(self):
+        return "VARCHAR(%s) NOT NULL default ''" % self.repr
+
+
+    @classmethod
+    def encode_sql(cls, value):
+        return '"%s"' % cls.encode(value).replace('"', r'\"')
+
+
+
+class Text(Unicode):
+
+    @staticmethod
+    def decode(data):
+        data = Unicode.decode(data)
+        return data.replace(u'\\r\\n', u'\r\n')
+
+
+    @staticmethod
+    def encode(value):
+        value = Unicode.encode(value)
+        return value.replace('\r\n', '\\r\\n')
+
+
+
+class Boolean(Enumerate):
+
+    options = [
+        {'name': '1', 'value': u"Oui"},
+        {'name': '2', 'value': u"Non"},
+    ]
+
+    @staticmethod
+    def is_valid(value, repr):
+        return value in (True, False, '1', '2')
+
+
+    @staticmethod
+    def decode(data):
+        if isinstance(data, bool):
+            return data
+        # 0001892: '0' est l'ancienne représentation de False
+        elif data in (None, '', '0', '2'):
+            return False
+        elif data == '1':
+            return True
+
+        raise ValueError, str(data)
+
+
+
+    @staticmethod
+    def encode(value):
+        if value in (True, '1'):
+            return '1'
+        elif value in (False, '2'):
+            return '2'
+
+        raise ValueError, str(value)
+
+
+    def get_sql_schema(self):
+        return "TINYINT NOT NULL default 0"
+
+
+    @classmethod
+    def encode_sql(cls, value):
+        if value is None:
+            value = False
+        return cls.encode(value)
+
+
+
+class Digit(DataType):
+
+    @staticmethod
+    def encode(value):
+        if value is None:
+            return 'NC'
+        return ''.join([x for x in value if x.isdigit()])
+
+
+    @staticmethod
+    def decode(data):
+        if data is None or str(data).upper() == 'NC':
+            return None
+        return ''.join([x for x in data if x.isdigit()])
+
+
+    @staticmethod
+    def is_valid(data, repr):
+        return data.isdigit() if len(data) == repr else data == ''
+
+
+    def get_sql_schema(self):
+        return "CHAR(%s) NOT NULL default ''" % self.repr
+
+
+    @classmethod
+    def encode_sql(cls, value):
+        return "'%s'" % cls.encode(value)
+
+
+
+class SqlEnumerate(Enumerate):
+
+    @classmethod
+    def is_valid(cls, data, repr):
+        return data in [x['name'] for x in cls.options]
+
+
+    def get_sql_schema(self):
+        return "INT(3) default NULL"
+
+
+    @classmethod
+    def encode_sql(cls, value):
+        if value is None or value == '':
+            return 'NULL'
+        return cls.encode(value)
+
+
+
+class EPCI_Statut(Enumerate):
+
+    options = [
+        {'name': '0', 'label': ""},
+        {'name': '1',
+         'label': u"Commune dans un EPCI sans compétence bibliothèque"},
+        {'name': '2',
+         'label': u"Commune dans EPCI - bibliothèque non transférée"},
+        {'name': '3',
+         'label': u"Commune dans EPCI avec compétence biblio"},
+        {'name': '4',
+         'label': u"Ville-centre d'un EPCI avec compétence biblio"},
+        {'name': '5',
+         'label': u"Commune dans syndicat intercommunal"},
+        {'name': '6', 'label': "Autre"}]
 
 
 class WorkflowState(Enumerate):
