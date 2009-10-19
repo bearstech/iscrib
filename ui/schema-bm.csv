@@ -1,0 +1,52 @@
+"variable","titre","Formulaire
+(par défaut BM)","page","type","Représentation 
+(par défaut INPUT TEXT)","valeurs autorisées / modalités","Obligatoire (par défaut OUI)","Non Modifiable
+(par défaut NON°","SOMME","DEPENDANCES","Abrégé (A) / Complet (C) / Les deux (AC) (AC par défaut)","initialisation 
+(par défaut aucune)"
+"#A100","Code","BM","A","Int",10,,,"Oui",,,"AC","N-1"
+"#A101","Nom de l'établissement","BM","A","Str",60,,,,,,"AC","N-1"
+"#A102","Libellé 1","BM","A","Str",60,,"N",,,,"AC","N-1"
+"#A103","Complément d'adresse","BM","A","Str",60,,"N",,,,"AC","N-1"
+"#A104","N°","BM","A","Str",10,,,,,,"AC","N-1"
+"#A105","Type voie","BM","A","Str",20,,,,,,"AC","N-1"
+"#A106","Nom voie","BM","A","Str",60,,,,,,"AC","N-1"
+"#A107","Code postal","BM","A","Int",5,,,,,,"AC","N-1"
+"#A108","Ville","BM","A","Str",60,,,,,,"AC","N-1"
+"#A109","Cedex","BM","A","Str",10,,"N",,,,"AC","N-1"
+"#A110","Responsable de l'établissement","BM","A","Str",60,,,,,,"AC","N-1"
+"#A111","Statut et/ou grade du responsable","BM","A","Str",60,,,,,,"AC","N-1"
+"#A112","Téléphone","BM","A","digit",10,"0xxxxxxxxx",,,,,"AC","N-1"
+"#A113","Fax","BM","A","digit",10,"0xxxxxxxxx","N",,,,"AC","N-1"
+"#A114","Courrier électronique ","BM","A","Str",60,,"N",,,,"AC","N-1"
+"#A115","Site internet","BM","A","Str",60,,"N",,,,"AC","N-1"
+"#A116","Statut site","BM","A","Boolean","Radio","Site internet propre / Page dédiée au sein du site de la collectivité","N",,,,"AC","N-1"
+"#A117","Mode de gestion de l'établissement","BM","A","Boolean","Radio"," Régie directe /  Association / Association avec convention",,,,,"AC","N-1"
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+"#C101","Nombre d'heures d'ouverture hebdomadaires",,"C","Dec","4,1",,,,,,"C",
+"#C102","Nombre de jours d'ouverture annuels",,"C","Int",3,,,,,,"C",
+"#C103","Nombre de places assises disponibles",,"C","Int",3,,,,,,"C",
+"#C104","avec possibilité de connecter un ordinateur",,"C","Int",3,,,,,,"C",
+"#C105","Nombre de postes informatiques publics",,"C","Int",3,,,,,,"C",
+"#C106","avec accès internet",,"C","Int",3,,,,,,"C",
+"#C107","Nombre de postes informatiques professionnels",,"C","Int",3,,,,,,"C",
+"#C108","avec accès internet",,"C","Int",3,,,,,,"C",
+"#C109","Nombre de photocopieurs en accès public",,"C","Int",2,,,,,,"C",
+"#C110","Nombre d'imprimantes en accès public",,"C","Int",2,,,,,,"C",
+"#C111","Appareils dédiés à la lecture de livres électroniques",,"C","Int",3,,,,,,"C",
+"#C112","Nombre de bibliobus",,"C","Int",2,,,,,,"C",
+"#C201","Le catalogue de la bibliothèque est-il informatisé ?",,"C","Boolean","Radio","Oui / Non",,,,,"C",
+"#C202","Nombre total de notices au catalogue ",,"C","Int",10,,,,,,"C",
+"#C203","Dont nombre de notices informatiques",,"C","Int",10,,,,,,"C",
+"#C204","Dont nombre de notices entrées dans l'année",,"C","Int",10,,,,,,"C",
+"#C205","Dont nombre de notices entrées par importation dans l'année",,"C","Int",10,,,,,,"C",
+"#C206","Nom et version du logiciel de gestion ",,"C","Str",60,,,,,"C201","C",
+"#C301","Surface utile nette totale",,"C","Int",5,,,,,,"C",
+"#C302","Espaces de services internes",,"C","Int",4,,,,,,"C",
+"#C303","Espaces de service public ",,"C","Int",4,,,,,,"C",
+"#C304","Espaces manifestations et animations",,"C","Int",4,,,,,,"C",
+"#C305","Espaces de magasins",,"C","Int",4,,,,,,"C",
+"#C306","Cafétérias et surfaces de détente",,"C","Int",4,,,,,,"C",
+"#C307","Totalité des fonds",,"C","Int",10,,,,,,"C",
+"#C308","dont fonds en libre accès",,"C","Int",10,,,,,,"C",
