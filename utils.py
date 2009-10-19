@@ -231,3 +231,32 @@ def reduce_generators(generators):
     for generator in generators:
         for item in generator:
             yield item
+
+
+def SI(condition, iftrue, iffalse=True):
+    if condition:
+        value = iftrue
+    else:
+        value = iffalse
+    return value
+
+
+
+def get_config_data(context):
+    server = context.server
+    target = server.target
+    return get_config(target)
+
+
+
+def parse_control(title):
+    generator = enumerate(title)
+    end = 0
+    for start, char in generator:
+        if char == '[':
+            yield False, title[end:start+1]
+            for end, char2 in generator:
+                if char2 == ']':
+                    yield True, title[start+1:end]
+                    break
+    yield False, title[end:]

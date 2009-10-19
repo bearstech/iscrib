@@ -59,8 +59,11 @@ class Scrib2009(WebSite):
                 unicode(email)
             except UnicodeDecodeError:
                 raise TypeError, '*** %s ***\n' % row[index_email]
+            users.append((login, password, email))
+        for login, password, email in users:
             # Attention l'email pourrait déjà être utilisé
-            user = users_folder.set_user(email, 'a')
+            user = users_folder.set_user(email, password)
+            user.set_property('username', login)
             user_ids.add(user.name)
         # Donne un rôle dans ce website = accès à cette année
         website.set_user_role(user_ids, 'members')
