@@ -16,28 +16,16 @@
 
 # Import from standard library
 from copy import deepcopy
-from decimal import Decimal as dec, InvalidOperation
-from pprint import pformat
-from time import time
-
-# Import from mysql
-from _mysql import OperationalError
 
 # Import from itools
-from itools.csv import CSVFile
-from itools.datatypes import is_datatype, Boolean, String, Unicode
+from itools.datatypes import Boolean, String
 from itools.gettext import MSG
-from itools.http.exceptions import Forbidden
-from itools.web import BaseView, STLView, STLForm
+from itools.html import HTMLParser
+from itools.uri import get_reference
+from itools.web import STLView, STLForm
 
 # Import from scrib
-from scrib import config
-from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from utils import get_connection, make_msg, MSG_NO_MYSQL
-from utils_views import HelpView
-
-MailResponsableBM = config.get_value('MailResponsableBM')
-MailResponsableBDP = config.get_value('MailResponsableBDP')
+from utils import SI, parse_control
 
 
 #

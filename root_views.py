@@ -17,9 +17,7 @@
 # Import from the Standard Library
 from os import getcwd
 from os.path import join
-from datetime import datetime, date
-from time import time
-from operator import itemgetter
+from datetime import datetime
 
 # Import from itools
 from itools import uri
@@ -32,16 +30,11 @@ from itools.web import BaseView, STLView, STLForm
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.user import crypt_password
 from ikaaro.resource_views import LoginView
 
 # Import from scrib
 from form import quote_namespace
-from form_bm import FormBM
-from form_bdp import FormBDP
-from forms import Forms
-from user import ScribUser
-from utils import all_bm, all_bdp, get_bm, get_connection
+from utils import get_connection
 
 
 class Root_Login(LoginView):

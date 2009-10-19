@@ -24,11 +24,9 @@ from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
 from schema_bm import schema, alertes, controles
-from form import FormHandler, Form
-from form_views import Form_View
-from form_bm_views import FormBM_PrintForm
+from form import get_schema_pages, get_controles, FormHandler, Form
+from form_views import Page_Form
 from utils import get_bm, get_adresse
-from utils_views import HelpView
 
 
 class FormBMHandler(FormHandler):

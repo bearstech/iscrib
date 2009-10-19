@@ -17,11 +17,12 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
-import datetime
-import logging
 
 # Import from itools
-from itools.datatypes import is_datatype, Unicode, Boolean, String
+from itools.core import get_abspath
+from itools.csv import CSVFile
+from itools.datatypes import Unicode, Boolean
+from itools.file import FileHandler
 from itools.handlers import File
 
 # Import from ikaaro
@@ -30,10 +31,11 @@ from ikaaro.text import Text
 from ikaaro.workflow import workflow
 
 # Import from scrib
-from datatypes import Checkboxes, Integer, EPCI_Statut, Decimal
-from utils import get_checkbox_value, bm_annexes, ua_epci
+from datatypes import Integer, Decimal, Time, ShortTime, Date, ShortDate
+from datatypes import Digit
 from form_views import Form_DownloadCSV, Form_Help, Form_Help2
-from form_views import Form_Controles, Form_View, Form_ReportCSV
+from form_views import Form_Controles, Form_ReportCSV
+from help import HelpAware
 
 
 workflow.add_state('modified', title=u"Modifié",
@@ -94,24 +96,6 @@ def get_schema_pages(path):
         elif type == 'digit':
             repr = int(repr)
             type = Digit
-        elif type == 'statut':
-            type = StatutEcole
-        elif type == 'sexe':
-            type = Sexe
-        elif type == 'type2':
-            type = Type2
-        elif type == 'statut1':
-            type = Statut1
-        elif type == 'statut2':
-            type = Statut2
-        elif type == 'cad':
-            type = Cad
-        elif type == 'dip':
-            type = Dip
-        elif type == 'disc1':
-            type = Disc1
-        elif type == 'cade':
-            type = Cade
         else:
             raise ValueError, "Type '%s' not supported in '%s'" % (type, path)
         # The page number
@@ -248,7 +232,6 @@ class Form(HelpAware, File):
     help = Form_Help()
     help2 = Form_Help2()
     downloadCSV = Form_DownloadCSV()
-    comments = Page_Form(title=u'Commentaires', n=99)
 
 
     @staticmethod
