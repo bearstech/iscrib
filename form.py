@@ -65,8 +65,8 @@ def get_schema_pages(path):
 
     schema = {}
     pages = {}
-    for (name, title, form, page_number, type, repr, vocabulary, is_mandatory,
-            fixed, somme, dependances, mdt, init) in rows:
+    for (name, title, form, page_number, type, repr, vocabulary,
+            is_mandatory, fixed, somme, dependances, abrege, init) in rows:
         # The type and representation
         type = type.strip().lower()
         if type == 'text':
@@ -131,7 +131,7 @@ def get_schema_pages(path):
         page_numbers = tuple(page_numbers)
         schema[name] = type(repr=repr, pages=page_numbers,
                                     is_mandatory=is_mandatory, somme=somme,
-                                    mdt=mdt)
+                                    abrege=abrege)
 
     return schema, pages
 
@@ -181,7 +181,8 @@ class FormHandler(FileHandler):
                     try:
                         fields[key] = datatype.decode(value)
                     except:
-                        raise ValueError, "key '%s' value '%s'" % (key, value)
+                        raise ValueError, "key '%s' value '%s'" % (key,
+                                                                   value)
         self.fields = fields
 
 
