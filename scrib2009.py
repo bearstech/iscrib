@@ -16,7 +16,6 @@
 
 # Import from itools
 from itools.core import get_abspath
-from itools.csv import CSVFile
 from itools.web import get_context
 
 # Import from ikaaro
@@ -24,9 +23,11 @@ from folder_views import Folder_BrowseContent
 from website import WebSite
 
 # Import from scrib
+from bm2009 import FormBM
 from form import Form
 from scrib_views import Scrib_Login, Scrib_PermissionsForm, Scrib_ExportForm
 from scrib_views import Scrib_Help, Scrib_ChangePassword
+from utils import UsersCSV
 
 
 class Scrib2009(WebSite):
@@ -47,26 +48,23 @@ class Scrib2009(WebSite):
         # Ici les créations annexes à l'application/année
         website = WebSite.make_resource(cls, container, name, *args, **kw)
         # Users
-        path = get_abspath('ui/users.csv')
-        handler = CSVFile(path)
-        rows =  handler.get_rows()
+        users_csv = UsersCSV(get_abspath('ui/users.csv'))
         users_folder = container.get_resource('/users')
-        # Header
-        header = rows.next()
         users = [# TODO Responsable équivalent de Marie Sotto pour Pelleas
                  ('VoirSCRIB', 'BMBDP', 'TODO')]
         user_ids = set()
-        for row in rows:
-            index_email = header.index('ADRESSEMEL')
-            email = row[index_email].strip() or 'TODO'
+        for row in users_csv.get_rows():
+            email = row.get_value('mel').strip() or 'TODO'
             # Contre les adresses avec des accents
             try:
                 unicode(email)
             except UnicodeDecodeError:
-                raise TypeError, '*** %s ***\n' % row[index_email]
+                raise TypeError, 'accent dans email : %s' % email
+            login = row.get_value('utilisateur')
+            password = row.get_value('motdepasse')
             users.append((login, password, email))
         for login, password, email in users:
-            # Attention l'email pourrait déjà être utilisé
+            # XXX l'adresse par défaut sera utilisée plusieurs fois
             user = users_folder.set_user(email, password)
             user.set_property('username', login)
             user_ids.add(user.name)
@@ -80,7 +78,15 @@ class Scrib2009(WebSite):
         # Ici les créations de l'application/année et ses sous-ressources
         WebSite._make_resource(cls, folder, name, website_languages=['fr'],
                                title={'fr': u"Scrib 2009"})
-        # TODO Créer les BM
+        # BM
+        users_csv = UsersCSV(get_abspath('ui/users.csv'))
+        rows = users_csv.search(categorie='BM')
+        for row in users_csv.get_rows(rows):
+            code = row.get_value('code')
+            title = row.get_value('nomecole')
+            departement = row.get_value('departement')
+            id = row.get_value('id')
+            FormBM._make_resource(FormBM, folder, '%s/%s' % (name, code))
         # TODO Créer les BDP
 
 
