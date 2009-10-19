@@ -42,35 +42,12 @@ class FormBM(Form):
 
     class_id = 'Form_BM'
     class_handler = FormBMHandler
-    class_views = ['page0', 'page10', 'page11', 'page1', 'page2', 'page3',
-                   'page4', 'page5', 'page6', 'page7', 'page8', 'page9',
-                   'comments'] + Form.class_views
+    class_views = ['pageA', 'pageB', 'pageC'] + Form.class_views
 
     # Views
-    page0 = Page_Form(title=u'Identité', n=0)
-    page1 = Page_Form(title=u'A-Finances', n=1)
-    page2 = Page_Form(title=u'B-Locaux', n=2)
-    page3 = Page_Form(title=u'C-Personnel', n=3)
-    page4 = Page_Form(title=u'D-Collections', n=4)
-    page5 = Page_Form(title=u'E-Acquisitions', n=5)
-    page6 = Page_Form(title=u'F-Coopération et réseau', n=6)
-    page7 = Page_Form(title=u'G-Activités', n=7)
-    page8 = Page_Form(title=u'H-Services', n=8)
-    page9 = Page_Form(title=u'I-Animations, publications et formation', n=9)
-    page10 = Page_Form(title=u'Annexes', n=10)
-    page11 = Page_Form(title=u'K-EPCI', n=11)
-    help0 = HelpView(template='/ui/scrib/FormBM_help0.xml')
-    help1 = HelpView(template='/ui/scrib/FormBM_help1.xml')
-    help2 = HelpView(template='/ui/scrib/FormBM_help2.xml')
-    help3 = HelpView(template='/ui/scrib/FormBM_help3.xml')
-    help4 = HelpView(template='/ui/scrib/FormBM_help4.xml')
-    help5 = HelpView(template='/ui/scrib/FormBM_help5.xml')
-    help6 = HelpView(template='/ui/scrib/FormBM_help6.xml')
-    help7 = HelpView(template='/ui/scrib/FormBM_help7.xml')
-    help8 = HelpView(template='/ui/scrib/FormBM_help8.xml')
-    help9 = HelpView(template='/ui/scrib/FormBM_help9.xml')
-    help11 = HelpView(template='/ui/scrib/FormBM_help11.xml')
-    print_form = FormBM_PrintForm()
+    pageA = Page_Form(title=u'Identité', n='A')
+    pageB = Page_Form(title=u'A-Finances', n='B')
+    pageC = Page_Form(title=u'B-Locaux', n='C')
 
 
     ######################################################################
