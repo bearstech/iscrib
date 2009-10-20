@@ -54,6 +54,18 @@ class BM2009(Form):
 
 
     ######################################################################
+    # Scrib API
+    @staticmethod
+    def is_BM():
+        return True
+
+
+    @staticmethod
+    def is_BDP():
+        return False
+
+
+    ######################################################################
     # Catalog API
     def _get_catalog_values(self):
         values = Form._get_catalog_values(self)
@@ -63,6 +75,5 @@ class BM2009(Form):
 
 ###########################################################################
 # Register
-###########################################################################
 register_resource_class(BM2009)
 register_field('code', String(is_indexed=True))

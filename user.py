@@ -17,7 +17,8 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.datatypes import Integer, Unicode, Boolean
+from itools.core import merge_dicts
+from itools.datatypes import Integer, Unicode, Boolean, String
 
 # Import from ikaaro
 from ikaaro.user import User
@@ -28,76 +29,44 @@ from user_views import User_Home
 from utils import get_bdp, get_bm
 
 
-class ScribUser(User):
-
-    class_version = '20080410'
+class Scrib2009User(User):
+    class_id = 'Scrib2009User'
     class_views = ['home', 'edit_password']
 
+    # Views
     home = User_Home()
 
-    def _get_catalog_values(self):
-        values = User._get_catalog_values(self)
-        values['user_town'] = self.get_user_town()
-        values['dep'] = self.get_department()
-        values['year'] = self.get_year()
-        values['stored_BDP'] = self.is_BDP()
-        values['stored_BM'] = self.is_BM()
-        return values
+
+    @classmethod
+    def get_metadata_schema(cls):
+        return merge_dicts(User.get_metadata_schema(),
+                           code=Integer,
+                           departement=String,
+                           id=String)
 
 
     def is_BM(self):
         """ patern is BMxxx"""
-        return self.name.startswith('BM')
+        return self.get_property('username').startswith('BM')
 
 
     def is_BDP(self):
         """ patern is BDPxx"""
-        return self.name.startswith('BDP')
+        return self.get_property('username').startswith('BDP')
 
 
-    def is_not_BDP_or_BM(self):
+    def is_VoirSCRIB(self):
+        return self.get_property('username') == 'VoirSCRIB'
+
+
+    def is_not_BDP_nor_BM(self):
         return not self.is_BDP() and not self.is_BM()
 
 
-    def get_department_name(self):
-        name = self.name
-        dep = self.get_department()
-        dep_name = get_bdp(dep)
-        if dep_name:
-            dep_name = dep_name.get_value('name')
-        return dep_name
-
-
-    def get_department(self):
-        name = self.name
-        dep = ''
-        if self.is_BDP():
-           dep = name.split('BDP')[-1].upper()
-        elif self.is_BM():
-            code = self.get_BM_code()
-            if code:
-                # Cf. #2617
-                bib = get_bm(code)
-                if bib:
-                    dep = bib.get_value('dep')
-                else:
-                    print "bib", code, "n'existe pas"
-        return dep
-
-
-    def get_BM_code(self):
-        """ patern is BMxxx"""
-        name = self.name
-        if self.is_BM():
-           return name.split('BM')[-1]
-        else:
-            return None
-
-
     def get_user_town(self):
-        title = ''
+        title = u""
         if self.is_BM():
-            code = self.get_BM_code()
+            code = self.get_property('code')
             if code:
                 # Cf. #2617
                 bib = get_bm(code)
@@ -108,22 +77,28 @@ class ScribUser(User):
         return title
 
 
-    def get_year(self):
-        name = self.name
-        if self.is_BDP():
-           # XXX just for 2008 ;)
-           return 2008
-        elif self.is_BM():
-           return 2008
-        return None
+    def get_department_name(self):
+        dep = self.get_property('department')
+        dep_name = get_bdp(dep)
+        if dep_name:
+            dep_name = dep_name.get_value('name')
+        return dep_name
+
+
+    def _get_catalog_values(self):
+        values = User._get_catalog_values(self)
+        values['user_town'] = self.get_user_town()
+        values['departement'] = self.get_property('departement')
+        values['is_BDP'] = self.is_BDP()
+        values['is_BM'] = self.is_BM()
+        return values
 
 
 
 ###########################################################################
 # Register
-register_resource_class(ScribUser)
+register_resource_class(Scrib2009User)
 register_field('user_town', Unicode(is_indexed=True))
-register_field('dep', Unicode(is_indexed=True, is_stored=True))
-register_field('year', Integer(is_indexed=True))
-register_field('stored_BDP', Boolean(is_stored=True))
-register_field('stored_BM', Boolean(is_stored=True))
+register_field('departement', Unicode(is_indexed=True, is_stored=True))
+register_field('is_BDP', Boolean(is_stored=True))
+register_field('is_BM', Boolean(is_stored=True))

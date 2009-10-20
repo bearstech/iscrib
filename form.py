@@ -143,7 +143,6 @@ class FormHandler(FileHandler):
 
     ######################################################################
     # Load/Save
-    ######################################################################
     def new(self, **kw):
         fields = {}
         for key in kw:
@@ -187,7 +186,6 @@ class FormHandler(FileHandler):
 
     ######################################################################
     # API (private)
-    ######################################################################
     def _get_value(self, name):
         datatype = self.schema[name]
         return self.fields.get(name, datatype.decode(datatype.default))
@@ -261,20 +259,26 @@ class Form(HelpAware, File):
         return state
 
 
+    def get_namespace(self, context):
+        # TODO
+        return {'is_ready': False}
+
+
     ######################################################################
     # Catalog API
     def _get_catalog_values(self):
         values = File._get_catalog_values(self)
         #values['user_town'] = self.get_user_town()
-        #values['dep'] = self.get_dep()
-        #values['year'] = self.get_year()
-        #values['is_BDP'] = self.is_BDP()
-        #values['is_BM'] = self.is_BM()
+        values['departement'] = self.get_property('departement')
+        values['is_BM'] = self.is_BM()
+        values['is_BDP'] = self.is_BDP()
         values['form_state'] = self.get_form_state()
         return values
 
 
 
-register_field('is_BDP', Boolean)
-register_field('is_BM', Boolean)
+###########################################################################
+# Register
+#register_field('is_BM', Boolean)
+#register_field('is_BDP', Boolean)
 register_field('form_state', Unicode(is_indexed=True, is_stored=True))

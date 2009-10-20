@@ -61,7 +61,7 @@ class Scrib2009(WebSite):
     permissions_form = Scrib_PermissionsForm()
     export_form = Scrib_ExportForm()
     help = Scrib_Help()
-    browse_content = Folder_BrowseContent(access='is_admin_or_consultant')
+    browse_content = Folder_BrowseContent(access='is_admin_or_VoirSCRIB')
     xchangepassword = Scrib_ChangePassword()
 
 
@@ -72,7 +72,9 @@ class Scrib2009(WebSite):
         # Créé les utilisateurs d'abord pour avoir user_ids
         print "Génération de la liste des utilisateurs..."
         users = [# TODO Responsable équivalent de Marie Sotto pour Pelleas
-                 ('VoirSCRIB', 'BMBDP', 'TODO')]
+                 {'username': 'VoirSCRIB',
+                  'password': crypt_password('BMBDP'),
+                  'email': 'TODO'}]
         user_ids = set()
         users_csv = UsersCSV(get_abspath('ui/users.csv'))
         for row in users_csv.get_rows():
@@ -82,9 +84,14 @@ class Scrib2009(WebSite):
                 unicode(email)
             except UnicodeDecodeError:
                 raise TypeError, 'accent dans email : %s' % email
-            username = row.get_value('utilisateur')
             password = row.get_value('motdepasse')
-            users.append((username, password, email))
+            users.append({'username': row.get_value('utilisateur'),
+                          'password': crypt_password(password),
+                          'email': email,
+                          'title': {'fr': row.get_value('nom')},
+                          'code': row.get_value('code'),
+                          'departement': row.get_value('departement'),
+                          'id': row.get_value('id')})
         print "  ", len(users), "utilisateurs"
         print "Création des utilisateurs..."
         # XXX remonte au niveau resource
@@ -95,15 +102,13 @@ class Scrib2009(WebSite):
             user_id = '1'
         print "  à partir de", user_id
         user_class =  get_resource_class('user')
-        for username, password, email in users:
+        for metadata in users:
             # Bypasse set_user car trop lent
             # FIXME l'uri de users n'est pas "...database/users"
             user_class._make_resource(user_class, folder, "users/" + user_id,
-                                      # XXX l'adresse par défaut sera utilisée
-                                      # plusieurs fois
-                                      email=email,
-                                      password=crypt_password(password),
-                                      username=username)
+                                      # XXX l'adresse par défaut sera
+                                      # utilisée plusieurs fois
+                                      **metadata)
             user_ids.add(user_id)
             user_id = str(int(user_id) + 1)
         # Maintenant les créations de l'application/année
@@ -131,17 +136,10 @@ class Scrib2009(WebSite):
 
     ########################################################################
     # Security
-    def is_consultant(self, user, resource):
+    def is_admin_or_VoirSCRIB(self, user, resource):
         if user is None:
             return False
-        return user.name == 'VoirSCRIB'
-
-
-    def is_admin_or_consultant(self, user, resource):
-        if user is None:
-            return False
-        return (self.is_admin(user, resource)
-                or self.is_consultant(user, resource))
+        return self.is_admin(user, resource) or user.is_VoirSCRIB()
 
 
     def is_allowed_to_view(self, user, resource):
@@ -152,40 +150,45 @@ class Scrib2009(WebSite):
         if self.is_admin(user, resource):
             return True
         # VoirSCRIB
-        if user.name == 'VoirSCRIB':
+        if user.is_VoirSCRIB():
             return True
         if isinstance(resource, Form):
-            # Check the year
-            if user.get_year() != resource.parent.get_year():
-                return False
-            # Check the department
+            # Check the code or department
             if user.is_BM():
-                if user.get_BM_code() != resource.name:
+                if (user.get_property('code')
+                        != resource.get_property('code')):
                     return False
             elif user.is_BDP():
-                if user.get_department() != resource.name:
+                if (user.get_property('department')
+                        != resource.get_property('department')):
                     return False
+            # Must be registered for this year
+            return self.has_user_role(user.name, 'members')
         return True
 
 
     def is_allowed_to_edit(self, user, resource):
+        # Anonymous
+        if user is None:
+            return False
         # Admin
         if self.is_admin(user, resource):
             return True
-        # Anonymous
-        if user is None or user.name == 'VoirSCRIB':
+        # VoirSCRIB
+        if user.is_VoirSCRIB():
             return False
         if isinstance(resource, Form):
-            # Check the year
-            if user.get_year() != resource.parent.get_year():
-                return False
-            # Check the department
+            # Check the code or department
             if user.is_BM():
-                if user.get_BM_code() != resource.name:
+                if (user.get_property('code')
+                        != resource.get_property('code')):
                     return False
             elif user.is_BDP():
-                if user.get_department() != resource.name:
+                if (user.get_property('department')
+                        != resource.get_property('department')):
                     return False
+            # Must be registered for this year
+            return self.has_user_role(user.name, 'members')
             # Only if 'private' -> 'Vide', 'En cours'
             return resource.get_workflow_state() == 'private'
         return False
@@ -194,14 +197,10 @@ class Scrib2009(WebSite):
     def is_allowed_to_trans(self, user, resource, name):
         if user is None:
             return False
-        context = get_context()
-        root = context.root
-        # XXX Check that !!
         if isinstance(resource, Form):
+            context = get_context()
             namespace = resource.get_namespace(context)
-            is_admin = self.is_admin(user, resource)
-
-            if is_admin:
+            if self.is_admin(user, resource):
                 if name in ['request', 'accept', 'publish']:
                     return namespace['is_ready']
                 else:
