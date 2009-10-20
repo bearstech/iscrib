@@ -53,6 +53,13 @@ class BM2009(Form):
                            id=String)
 
 
+    #def _get_catalog_values(self):
+    #    values = Form._get_catalog_values(self)
+    #    values['code'] = self.get_property('code')
+    #    values['departement'] = self.get_property('departement')
+    #    return values
+
+
     ######################################################################
     # Scrib API
     @staticmethod
@@ -65,15 +72,8 @@ class BM2009(Form):
         return False
 
 
-    ######################################################################
-    # Catalog API
-    def _get_catalog_values(self):
-        values = Form._get_catalog_values(self)
-        #values['code'] = self.get_code()
-        return values
-
-
 ###########################################################################
 # Register
 register_resource_class(BM2009)
-register_field('code', String(is_indexed=True))
+#register_field('code', Integer(is_indexed=True))
+#register_field('departement', String(is_indexed=True))

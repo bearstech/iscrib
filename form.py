@@ -232,6 +232,18 @@ class Form(HelpAware, File):
     # Views
 
 
+    #def _get_catalog_values(self):
+    #    values = File._get_catalog_values(self)
+    #    #values['user_town'] = self.get_user_town()
+    #    values['is_BM'] = self.is_BM()
+    #    values['is_BDP'] = self.is_BDP()
+    #    values['departement'] = self.get_property('departement')
+    #    values['form_state'] = self.get_form_state()
+    #    return values
+
+
+    ######################################################################
+    # Scrib API
     @staticmethod
     def is_BM():
         raise NotImplementedError
@@ -264,21 +276,10 @@ class Form(HelpAware, File):
         return {'is_ready': False}
 
 
-    ######################################################################
-    # Catalog API
-    def _get_catalog_values(self):
-        values = File._get_catalog_values(self)
-        #values['user_town'] = self.get_user_town()
-        values['departement'] = self.get_property('departement')
-        values['is_BM'] = self.is_BM()
-        values['is_BDP'] = self.is_BDP()
-        values['form_state'] = self.get_form_state()
-        return values
-
-
 
 ###########################################################################
 # Register
-#register_field('is_BM', Boolean)
-#register_field('is_BDP', Boolean)
-register_field('form_state', Unicode(is_indexed=True, is_stored=True))
+#register_field('is_BM', Boolean(is_stored=True))
+#register_field('is_BDP', Boolean(is_stored=True))
+#register_field('departement', Unicode(is_indexed=True, is_stored=True))
+#register_field('form_state', Unicode(is_indexed=True, is_stored=True))

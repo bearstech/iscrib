@@ -26,11 +26,11 @@ from ikaaro.registry import register_field, register_resource_class
 
 # Import from scrib
 from user_views import User_Home
-from utils import get_bdp, get_bm
+#from utils import get_bdp, get_bm
 
 
-class Scrib2009User(User):
-    class_id = 'Scrib2009User'
+class ScribUser2009(User):
+    class_id = 'ScribUser2009'
     class_views = ['home', 'edit_password']
 
     # Views
@@ -40,11 +40,23 @@ class Scrib2009User(User):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(User.get_metadata_schema(),
+                           title=Unicode,
                            code=Integer,
                            departement=String,
                            id=String)
 
 
+    #def _get_catalog_values(self):
+    #    values = User._get_catalog_values(self)
+    #    values['user_town'] = self.get_user_town()
+    #    values['departement'] = self.get_property('departement')
+    #    values['is_BDP'] = self.is_BDP()
+    #    values['is_BM'] = self.is_BM()
+    #    return values
+
+
+    ######################################################################
+    # Scrib API
     def is_BM(self):
         """ patern is BMxxx"""
         return self.get_property('username').startswith('BM')
@@ -85,20 +97,8 @@ class Scrib2009User(User):
         return dep_name
 
 
-    def _get_catalog_values(self):
-        values = User._get_catalog_values(self)
-        values['user_town'] = self.get_user_town()
-        values['departement'] = self.get_property('departement')
-        values['is_BDP'] = self.is_BDP()
-        values['is_BM'] = self.is_BM()
-        return values
-
-
 
 ###########################################################################
 # Register
-register_resource_class(Scrib2009User)
-register_field('user_town', Unicode(is_indexed=True))
-register_field('departement', Unicode(is_indexed=True, is_stored=True))
-register_field('is_BDP', Boolean(is_stored=True))
-register_field('is_BM', Boolean(is_stored=True))
+register_resource_class(ScribUser2009)
+#register_field('user_town', Unicode(is_indexed=True))

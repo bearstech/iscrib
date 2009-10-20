@@ -23,7 +23,7 @@ from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.registry import register_resource_class, get_resource_class
+from ikaaro.registry import register_resource_class
 from ikaaro.user import UserFolder
 from ikaaro.utils import crypt_password
 from ikaaro.website import WebSite
@@ -33,6 +33,7 @@ from bm2009 import BM2009
 from form import Form
 from scrib_views import Scrib_Login, Scrib_PermissionsForm, Scrib_ExportForm
 from scrib_views import Scrib_Help, Scrib_ChangePassword
+from user import ScribUser2009
 
 
 class UsersCSV(CSVFile):
@@ -72,6 +73,7 @@ class Scrib2009(WebSite):
         # Créé les utilisateurs d'abord pour avoir user_ids
         print "Génération de la liste des utilisateurs..."
         users = [# TODO Responsable équivalent de Marie Sotto pour Pelleas
+                 # TODO VoirSCRIB ne devrait être créé qu'une fois...
                  {'username': 'VoirSCRIB',
                   'password': crypt_password('BMBDP'),
                   'email': 'TODO'}]
@@ -101,14 +103,14 @@ class Scrib2009(WebSite):
         if user_id == '0':
             user_id = '1'
         print "  à partir de", user_id
-        user_class =  get_resource_class('user')
         for metadata in users:
             # Bypasse set_user car trop lent
             # FIXME l'uri de users n'est pas "...database/users"
-            user_class._make_resource(user_class, folder, "users/" + user_id,
-                                      # XXX l'adresse par défaut sera
-                                      # utilisée plusieurs fois
-                                      **metadata)
+            ScribUser2009._make_resource(ScribUser2009, folder,
+                                         "users/" + user_id,
+                                         # XXX l'adresse par défaut sera
+                                         # utilisée plusieurs fois
+                                         **metadata)
             user_ids.add(user_id)
             user_id = str(int(user_id) + 1)
         # Maintenant les créations de l'application/année

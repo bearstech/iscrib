@@ -15,16 +15,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from itools
+from itools.gettext import MSG
 from itools.web import STLView
 
 # Import from scrib
-from utils import get_bdp, get_bm
+#from utils import get_bdp, get_bm
+
 
 class User_Home(STLView):
-
     access = 'is_self_or_admin'
-    title  = u'Home'
+    title  = MSG(u"Home")
     template = '/ui/scrib/User_home.xml'
+
 
     def get_namespace(self, resource, context):
         root = context.root
@@ -41,12 +43,10 @@ class User_Home(STLView):
             report = root.get_resource('BDP%s/%s' % (year, department))
         else:
             report = None
-
         if report is not None:
             namespace['report_url'] = '%s/' % resource.get_pathto(report)
         else:
             namespace['report_url'] = None
-
         # The year
         namespace['year'] = year
         # The department or the BM Code
@@ -59,5 +59,4 @@ class User_Home(STLView):
             bib = get_bm(code)
             if bib:
                 namespace['dep'] = bib.get_value('name')
-
         return namespace
