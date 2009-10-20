@@ -17,6 +17,7 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.datatypes import Boolean, Integer, String, Unicode
+from itools.gettext import MSG
 from itools.xapian import PhraseQuery, AndQuery
 
 # Import from ikaaro
@@ -25,33 +26,31 @@ from ikaaro.forms import SelectWidget
 
 # Import from scrib
 from datatypes import WorkflowState
-from form_bm import FormBM
-from form_bdp import FormBDP
-from utils import get_bdp_namespace
+# déplacer le choix des classes en attribut de Scrib2009
+from bm2009 import BM2009
+from bdp2009 import BDP2009
+#from utils import get_bdp_namespace
 
 
 class Forms_SearchForm(Folder_BrowseContent):
-
-    access = 'is_admin_or_consultant'
-    title = u'Search'
-    search_template = '/ui/scrib/Forms_search.xml'
-
-
+    access = 'is_admin_or_VoirSCRIB'
+    title = MSG(u"Search")
+    context_menus = []
     query_schema = merge_dicts(
         Folder_BrowseContent.query_schema,
         sort_by=String(default='title'),
         batch_size=Integer(default=50),
         reverse=Boolean(default=False))
-
     table_actions = []
 
+
     def get_table_columns(self, resource, context):
-        columns = [('name', u"Code"),
-                   ('title', u"Ville"),
-                   ('mtime', u"Date"),
-                   ('form_state', u"État")]
+        columns = [('name', MSG(u"Code")),
+                   ('title', MSG(u"Ville")),
+                   ('mtime', MSG(u"Date")),
+                   ('form_state', MSG(u"État"))]
         if resource.is_BDP():
-            columns[1] = ('title', u"Département")
+            columns[1] = ('title', MSG(u"Département"))
         return columns
 
 
@@ -61,11 +60,9 @@ class Forms_SearchForm(Folder_BrowseContent):
         dep = context.get_form_value('dep', type=Unicode)
         code = context.get_form_value('code', type=Unicode)
         state = context.get_form_value('state')
-
         # Build the namespace
         namespace = {}
         namespace['too_long_answer'] = ''
-
         # The search form
         namespace['search_name'] = name
         namespace['departements'] = get_bdp_namespace(dep)
@@ -82,17 +79,16 @@ class Forms_SearchForm(Folder_BrowseContent):
         dep = context.get_form_value('dep', type=Unicode)
         code = context.get_form_value('code', type=Unicode)
         state = context.get_form_value('state')
-
         # Build the query
         query = []
         # The format (BM or BDP)
         if resource.is_BM():
-            query.append(PhraseQuery('format', FormBM.class_id))
+            query.append(PhraseQuery('format', BM2009.class_id))
             # The code UA
             if code:
                 query.append(PhraseQuery('code', code))
         else:
-            query.append(PhraseQuery('format', FormBDP.class_id))
+            query.append(PhraseQuery('format', BDP2009.class_id))
         # The year
         query.append(PhraseQuery('year', resource.get_year()))
         # The name of the town
@@ -108,7 +104,6 @@ class Forms_SearchForm(Folder_BrowseContent):
             form_state = WorkflowState.get_value(state)
             query.append(PhraseQuery('form_state', form_state))
         query = AndQuery(*query)
-
         # Search
         root = context.root
         return root.search(query)#.get_documents()

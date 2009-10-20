@@ -31,6 +31,7 @@ from ikaaro.website import WebSite
 # Import from scrib
 from bm2009 import BM2009
 from form import Form
+from forms import Forms
 from scrib_views import Scrib_Login, Scrib_PermissionsForm, Scrib_ExportForm
 from scrib_views import Scrib_Help, Scrib_ChangePassword
 from user import ScribUser2009
@@ -70,6 +71,9 @@ class Scrib2009(WebSite):
     # Skeleton
     @staticmethod
     def _make_resource(cls, folder, name):
+        """La création d'une application/année centralise tout ce qui peut
+        dépendre de l'année : utilisateurs, formulaires...
+        """
         # Créé les utilisateurs d'abord pour avoir user_ids
         print "Génération de la liste des utilisateurs..."
         users = [# TODO Responsable équivalent de Marie Sotto pour Pelleas
@@ -123,16 +127,20 @@ class Scrib2009(WebSite):
                                members=user_ids)
         # BM
         print "Création des BM..."
+        Forms._make_resource(Forms, folder, "%s/bm" % name,
+                             title={'fr': u"BM"})
         rows = users_csv.search(categorie='BM')
         for row in users_csv.get_rows(rows):
             code = row.get_value('code')
             title = row.get_value('nom')
             departement = row.get_value('departement')
             id = row.get_value('id')
-            BM2009._make_resource(BM2009, folder, '%s/%s' % (name, code),
+            BM2009._make_resource(BM2009, folder, '%s/bm/%s' % (name, code),
                     code=code, title={'fr': title}, departement=departement,
                     id=id)
         # TODO Créer les BDP
+        Forms._make_resource(Forms, folder, "%s/bdp" % name,
+                             title={'fr': u"BDP"})
         print "Indexation de la base..."
 
 

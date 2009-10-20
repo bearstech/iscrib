@@ -27,29 +27,31 @@ from forms_views import Forms_SearchForm
 
 
 class Forms(Folder):
-
     class_id = 'Forms'
     class_title = MSG(u'Forms')
     class_description = MSG(u'...')
     class_icon48 = 'scrib/images/form48.png'
     class_views = ['search_form']
 
+    # Views
     search_form = Forms_SearchForm()
 
+
     #########################################################################
-    # API
-    #########################################################################
+    # Scrib API
     def is_BM(self):
-        return self.name.startswith('BM')
+        return self.name == 'bm'
 
 
     def is_BDP(self):
-        return self.name.startswith('BDP')
+        return self.name == 'bdp'
 
 
     def get_year(self):
-        return int(self.name[-4:])
+        return int(self.parent.name[-4:])
 
 
 
+#########################################################################
+# Register
 register_resource_class(Forms)
