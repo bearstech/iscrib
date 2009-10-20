@@ -17,7 +17,8 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.datatypes import String
+from itools.core import merge_dicts
+from itools.datatypes import String, Integer
 
 # Import from ikaaro
 from ikaaro.registry import register_resource_class, register_field
@@ -42,6 +43,14 @@ class BM2009(Form):
     pageA = Page_Form(title=u'Identité', n='A')
     pageB = Page_Form(title=u'A-Finances', n='B')
     pageC = Page_Form(title=u'B-Locaux', n='C')
+
+
+    @classmethod
+    def get_metadata_schema(cls):
+        return merge_dicts(Form.get_metadata_schema(),
+                           code=Integer,
+                           departement=String,
+                           id=String)
 
 
     ######################################################################

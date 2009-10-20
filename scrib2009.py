@@ -22,7 +22,9 @@ from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.registry import register_resource_class
+from ikaaro.registry import register_resource_class, get_resource_class
+from ikaaro.user import UserFolder
+from ikaaro.utils import crypt_password
 from ikaaro.website import WebSite
 
 # Import from scrib
@@ -62,17 +64,16 @@ class Scrib2009(WebSite):
     xchangepassword = Scrib_ChangePassword()
 
 
+    ########################################################################
     # Skeleton
     @staticmethod
-    def make_resource(cls, container, name, *args, **kw):
-        # Ici les créations annexes à l'application/année
-        website = WebSite.make_resource(cls, container, name, *args, **kw)
-        # Users
-        users_csv = UsersCSV(get_abspath('ui/users.csv'))
-        users_folder = container.get_resource('/users')
+    def _make_resource(cls, folder, name):
+        # Créé les utilisateurs d'abord pour avoir user_ids
+        print "Génération de la liste des utilisateurs..."
         users = [# TODO Responsable équivalent de Marie Sotto pour Pelleas
                  ('VoirSCRIB', 'BMBDP', 'TODO')]
         user_ids = set()
+        users_csv = UsersCSV(get_abspath('ui/users.csv'))
         for row in users_csv.get_rows():
             email = row.get_value('mel').strip() or 'TODO'
             # Contre les adresses avec des accents
@@ -80,36 +81,54 @@ class Scrib2009(WebSite):
                 unicode(email)
             except UnicodeDecodeError:
                 raise TypeError, 'accent dans email : %s' % email
-            login = row.get_value('utilisateur')
+            username = row.get_value('utilisateur')
             password = row.get_value('motdepasse')
-            users.append((login, password, email))
-        for login, password, email in users:
-            # XXX l'adresse par défaut sera utilisée plusieurs fois
-            user = users_folder.set_user(email, password)
-            user.set_property('username', login)
-            user_ids.add(user.name)
-        # Donne un rôle dans ce website = accès à cette année
-        website.set_user_role(user_ids, 'members')
-        return website
-
-
-    @staticmethod
-    def _make_resource(cls, folder, name):
-        # Ici les créations de l'application/année et ses sous-ressources
+            users.append((username, password, email))
+        print "  ", len(users), "utilisateurs"
+        print "Création des utilisateurs..."
+        # XXX remonte au niveau resource
+        users_resource = UserFolder(folder.get_handler('users.metadata'))
+        user_id = users_resource.get_next_user_id()
+        # FIXME le init user n'est pas connu
+        if user_id == '0':
+            user_id = '1'
+        print "  à partir de", user_id
+        user_class =  get_resource_class('user')
+        for username, password, email in users:
+            # Bypasse set_user car trop lent
+            # FIXME l'uri de users n'est pas "...database/users"
+            user_class._make_resource(user_class, folder, "users/" + user_id,
+                                      # XXX l'adresse par défaut sera utilisée
+                                      # plusieurs fois
+                                      email=email,
+                                      password=crypt_password(password),
+                                      username=username)
+            user_ids.add(user_id)
+            user_id = str(int(user_id) + 1)
+        # Maintenant les créations de l'application/année
+        # et ses sous-ressources
+        print "Création de l'application..."
         WebSite._make_resource(cls, folder, name, website_languages=('fr',),
-                               title={'fr': u"Scrib 2009"})
+                               title={'fr': u"Scrib 2009"},
+                               # Donne un rôle dans ce website
+                               # = accès à cette année
+                               members=user_ids)
         # BM
-        users_csv = UsersCSV(get_abspath('ui/users.csv'))
+        print "Création des BM..."
         rows = users_csv.search(categorie='BM')
         for row in users_csv.get_rows(rows):
             code = row.get_value('code')
             title = row.get_value('nom')
             departement = row.get_value('departement')
             id = row.get_value('id')
-            BM2009._make_resource(BM2009, folder, '%s/%s' % (name, code))
+            BM2009._make_resource(BM2009, folder, '%s/%s' % (name, code),
+                    code=code, title={'fr': title}, departement=departement,
+                    id=id)
         # TODO Créer les BDP
+        print "Indexation de la base..."
 
 
+    ########################################################################
     # Security
     def is_consultant(self, user, resource):
         if user is None:
@@ -198,5 +217,4 @@ class Scrib2009(WebSite):
 
 ###########################################################################
 # Register
-###########################################################################
 register_resource_class(Scrib2009)

@@ -15,8 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from scrib
-from form_views import Form_View
-from utils import reduce_generators
-from utils_views import HelpView
+
 
 # TODO print
