@@ -18,6 +18,7 @@
 from itools.core import get_abspath
 from itools.csv import CSVFile
 from itools.datatypes import String, Unicode, Integer
+from itools.gettext import MSG
 from itools.web import get_context
 
 # Import from ikaaro
@@ -52,7 +53,7 @@ class UsersCSV(CSVFile):
 
 class Scrib2009(WebSite):
     class_id = 'Scrib2009'
-    class_title = u"Scrib 2009"
+    class_title = MSG(u"Scrib 2009")
 
     # Views
     login = Scrib_Login()

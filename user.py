@@ -118,28 +118,10 @@ class ScribUser(User):
         return None
 
 
-    #########################################################################
-    # Upgrade
-    #########################################################################
-    def update_20080407(self):
-        """bibUser obsolète.
-        """
-        self.metadata.format = "user"
-        self.metadata.set_changed()
 
-
-    def update_20080410(self):
-        """username pour compatibilité arrière.
-        """
-        self.set_property('username', self.name)
-
-
-
+###########################################################################
+# Register
 register_resource_class(ScribUser)
-# TODO remove after migration
-register_resource_class(ScribUser, format="bibUser")
-
-
 register_field('user_town', Unicode(is_indexed=True))
 register_field('dep', Unicode(is_indexed=True, is_stored=True))
 register_field('year', Integer(is_indexed=True))

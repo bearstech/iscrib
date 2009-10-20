@@ -46,9 +46,8 @@ MSG_SAUVEGARDE = MSG(
 
 
 class Page_Form(STLForm):
-
     access = 'is_allowed_to_view'
-    access = True
+
 
     def GET(self, resource, context):
         n = self.n
@@ -177,10 +176,9 @@ class Page_Form(STLForm):
 
 
 class Help_Page(STLView):
-
     access = 'is_allowed_to_view'
-
     schema = {'page': String}
+
 
     def get_template(self, resource, context):
         # avoid pelleas template
@@ -198,16 +196,16 @@ class Help_Page(STLView):
 
 
 class Print_Help(STLView):
-
     access = 'is_allowed_to_view'
     title = MSG(u"Impression du questionnaire")
     template = '/ui/pelleas/help/print.xml'
 
 
-class Print_Form(STLView):
 
+class Print_Form(STLView):
     access = 'is_allowed_to_view'
     template = '/ui/pelleas/help/template.xhtml'
+
 
     def get_namespace(self, resource, context):
         namespace = {}
@@ -235,8 +233,8 @@ class Print_Form(STLView):
         return namespace
 
 
-class Controls(STLForm):
 
+class Controls(STLForm):
     access = 'is_allowed_to_view'
     title = MSG(u"Envoi du questionnaire")
     template = '/ui/pelleas/Form_controls.xml'

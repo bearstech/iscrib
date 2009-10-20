@@ -70,7 +70,7 @@ class Scrib_Login(LoginView):
 
 class Scrib_PermissionsForm(Folder_BrowseContent):
     access = 'is_admin'
-    title = u"Utilisateurs"
+    title = MSG(u"Utilisateurs")
     search_template = '/ui/scrib/Scrib_permissions.xml'
 
     query_schema = merge_dicts(
@@ -160,7 +160,7 @@ class Scrib_PermissionsForm(Folder_BrowseContent):
 
 class Scrib_ExportForm(STLForm):
     access = 'is_admin'
-    title = u"Export"
+    title = MSG(u"Export")
     #icon = File.download_form__icon__
     template = '/ui/scrib/Scrib_export.xml'
 
@@ -296,7 +296,7 @@ class Scrib_ExportForm(STLForm):
 
 class Scrib_Help(STLView):
     access = True
-    title = u'Aide'
+    title = MSG(u"Aide")
     #icon = '/ui/icons/16x16/help.png'
     template = '/ui/scrib/Form_help.xml'
 

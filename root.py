@@ -29,7 +29,7 @@ from scrib2009 import Scrib2009
 
 class Root(BaseRoot):
     class_id = 'Culture'
-    class_title = MSG(u"Ministère de la Culture / Scrib")
+    class_title = MSG(u"Ministere de la Culture / Scrib")
 
     __fixed_handlers__ = BaseRoot.__fixed_handlers__ + [
             # Ajouter ici les applications/années successives
@@ -48,4 +48,6 @@ class Root(BaseRoot):
 
 
 
+###########################################################################
+# Register
 register_resource_class(Root)

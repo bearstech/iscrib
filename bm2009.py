@@ -40,9 +40,9 @@ class BM2009(Form):
     class_views = ['pageA', 'pageB', 'pageC'] + Form.class_views
 
     # Views
-    pageA = Page_Form(title=u'Identité', n='A')
-    pageB = Page_Form(title=u'A-Finances', n='B')
-    pageC = Page_Form(title=u'B-Locaux', n='C')
+    pageA = Page_Form(title=u"Identité", n='A')
+    pageB = Page_Form(title=u"A-Finances", n='B')
+    pageC = Page_Form(title=u"B-Locaux", n='C')
 
 
     @classmethod
