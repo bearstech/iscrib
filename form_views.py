@@ -14,15 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Import from standard library
-from copy import deepcopy
-
 # Import from itools
 from itools.datatypes import Boolean, String
 from itools.gettext import MSG
 from itools.html import HTMLParser
-from itools.uri import get_reference
-from itools.web import STLView, STLForm
+from itools.web import STLView, STLForm, INFO, ERROR
 
 # Import from scrib
 from utils import SI, parse_control
@@ -57,32 +53,29 @@ class Page_Form(STLForm):
         skip_print = (user.is_voir_scrib()) #or user.is_consultation())
         if view == 'printable':
             skip_print = True
-
         readonly = False
         statename = resource.get_statename()
-        if statename == 'sent' and (user.is_crci() or user.is_emdad()):
+        if statename == 'sent' and (user.is_bm() or user.is_bdp()):
             # 0005566
             # Si le formulaire est dans l'état terminé,
-            # une école ne peut plus le modifier
+            # une bibliothèque ne peut plus le modifier
             readonly = True
-
         return table.to_html(context, resource, n, skip_print=skip_print,
                              readonly=readonly)
 
 
     def action(self, resource, context, form):
         user = context.user
-        if user.is_voir_pelleas() or user.is_consultation():
+        if user.is_voir_scrib(): #or user.is_consultation():
             from itools.http.exceptions import Forbidden
             raise Forbidden
-
         statename = resource.get_statename()
         ac = resource.get_access_control()
         is_admin = ac.is_admin(user, resource)
         if statename == 'exported' and is_admin is False:
-            message = u'Vous ne pouvez plus modifier le questionnaire.'
-            return context.come_back(message)
-
+            context.message = ERROR(u"Vous ne pouvez plus modifier le "
+                                    u"questionnaire.")
+            return
         # Save changes
         page_number = context.get_form_value('page_number')
         page_number = int(page_number)
@@ -97,7 +90,7 @@ class Page_Form(STLForm):
                 value = value.strip()
                 if datatype.somme:
                     expected_value = handler.somme(datatype, datatype.somme,
-                                                   **context.request.get_form())
+                            **context.request.get_form())
                     if value:
                         try:
                             value = datatype.encode(datatype.decode(value))
@@ -139,37 +132,18 @@ class Page_Form(STLForm):
             # Reindex
             context.server.change_resource(resource)
 
-        # 0006035: Définition de obligatoire pour une dépendance
-        for select_name, radio_name in [('TYPE2', 'TYPE_PED'),
-                                        ('DISCCA', 'DIP2'),
-                                        ('DISCDE', 'DIP3')]:
-            if not context.has_form_value(radio_name):
-                break
-            select_value = handler._get_value(select_name)
-            radio_value = handler._get_value(radio_name)
-            if radio_value in (True, '1') and not select_value:
-                bad_type.append(select_name)
-
-        # Come back
-        goto = deepcopy(context.request.referrer)
-        goto = get_reference(goto)
         # But drop previous parameters
-        goto.query = {}
         if bad_type:
-            goto.query['bad_type'] = bad_type
-            for key in bad_type:
-                goto.query[key] = context.get_form_value(key)
-            message = MSG_ERREUR_SAUVEGARDE
+            context.request.get_form()['bad_type'] = bad_type
+            context.message = ERROR(MSG_ERREUR_SAUVEGARDE)
         else:
-            message = MSG_SAUVEGARDE
+            context.message = INFO(MSG_SAUVEGARDE)
 
         if resource.get_statename() == 'empty':
             if is_admin is False:
                 # Will notify the object changed
                 # only if the user is not an admin
                 resource.do_trans('start')
-
-        return context.come_back(message, goto=goto)
 
 
 
@@ -180,7 +154,8 @@ class Help_Page(STLView):
 
     def get_template(self, resource, context):
         # avoid skin template
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
+        context.response.set_header('Content-Type',
+                                    'text/html; charset=UTF-8')
         # Get template
         page = context.query['page']
         if page is None:
