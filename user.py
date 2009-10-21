@@ -18,10 +18,10 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import Integer, Unicode, Boolean, String
+from itools.datatypes import Integer, Unicode, String
 
 # Import from ikaaro
-from ikaaro.user import User
+from ikaaro.user import User as BaseUser
 from ikaaro.registry import register_field, register_resource_class
 
 # Import from scrib
@@ -29,7 +29,32 @@ from user_views import User_Home
 #from utils import get_bdp, get_bm
 
 
+class User(BaseUser):
+    """Ici des méthodes communes à tous les utilisateurs, quelque soit leur
+    application, pour simplifier la gestion des droits. Surtout pour l'admin
+    qui est indépendant de toute application.
+    """
+
+    ######################################################################
+    # Scrib API
+    def is_bm(self):
+        """ patern is BMxxx"""
+        return self.get_property('username').startswith('BM')
+
+
+    def is_bdp(self):
+        """ patern is BDPxx"""
+        return self.get_property('username').startswith('BDP')
+
+
+    def is_voir_scrib(self):
+        return self.get_property('username') == 'VoirSCRIB'
+
+
+
 class ScribUser2009(User):
+    """Les utilisateurs spécifiques à Scrib.
+    """
     class_id = 'ScribUser2009'
     class_views = ['home', 'edit_password']
 
@@ -57,24 +82,6 @@ class ScribUser2009(User):
 
     ######################################################################
     # Scrib API
-    def is_bm(self):
-        """ patern is BMxxx"""
-        return self.get_property('username').startswith('BM')
-
-
-    def is_bdp(self):
-        """ patern is BDPxx"""
-        return self.get_property('username').startswith('BDP')
-
-
-    def is_voir_scrib(self):
-        return self.get_property('username') == 'VoirSCRIB'
-
-
-    def is_not_bdp_nor_bm(self):
-        return not self.is_bdp() and not self.is_bm()
-
-
     def get_user_town(self):
         title = u""
         if self.is_bm():
@@ -100,5 +107,6 @@ class ScribUser2009(User):
 
 ###########################################################################
 # Register
+register_resource_class(User)
 register_resource_class(ScribUser2009)
 #register_field('user_town', Unicode(is_indexed=True))
