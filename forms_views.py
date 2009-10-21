@@ -49,7 +49,7 @@ class Forms_SearchForm(Folder_BrowseContent):
                    ('title', MSG(u"Ville")),
                    ('mtime', MSG(u"Date")),
                    ('form_state', MSG(u"État"))]
-        if resource.is_BDP():
+        if resource.is_bdp():
             columns[1] = ('title', MSG(u"Département"))
         return columns
 
@@ -69,7 +69,7 @@ class Forms_SearchForm(Folder_BrowseContent):
         namespace['search_code'] = code
         widget = SelectWidget('state')
         namespace['states'] = widget.to_html(WorkflowState, state)
-        namespace['is_BM'] = resource.is_BM()
+        namespace['is_bm'] = resource.is_bm()
         return namespace
 
 
@@ -82,7 +82,7 @@ class Forms_SearchForm(Folder_BrowseContent):
         # Build the query
         query = []
         # The format (BM or BDP)
-        if resource.is_BM():
+        if resource.is_bm():
             query.append(PhraseQuery('format', BM2009.class_id))
             # The code UA
             if code:
@@ -114,7 +114,7 @@ class Forms_SearchForm(Folder_BrowseContent):
         item_brain, item_resource = item
         if column == 'name':
             form_name = item_brain.name
-            if resource.is_BM():
+            if resource.is_bm():
                 form_name = int(form_name)
             return form_name
         elif column == 'title':

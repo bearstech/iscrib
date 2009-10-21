@@ -60,12 +60,12 @@ class BDP2009(Form):
     ######################################################################
     # Scrib API
     @staticmethod
-    def is_BM():
+    def is_bm():
         return False
 
 
     @staticmethod
-    def is_BDP():
+    def is_bdp():
         return True
 
 

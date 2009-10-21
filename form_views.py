@@ -52,11 +52,9 @@ class Page_Form(STLForm):
     def GET(self, resource, context):
         n = self.n
         view = context.get_form_value('view')
-
-        table = resource.get_resource('/ui/pelleas/Page%s.table' % n)
-
+        table = resource.get_resource('/ui/scrib/Page%s.table' % n)
         user = context.user
-        skip_print = (user.is_voir_pelleas() or user.is_consultation())
+        skip_print = (user.is_voir_scrib()) #or user.is_consultation())
         if view == 'printable':
             skip_print = True
 
@@ -181,7 +179,7 @@ class Help_Page(STLView):
 
 
     def get_template(self, resource, context):
-        # avoid pelleas template
+        # avoid skin template
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
         # Get template
         page = context.query['page']
@@ -191,20 +189,20 @@ class Help_Page(STLView):
             template = 'controls.xml'
         else:
             template = 'page%s.xml' % page
-        return self.get_resource('/ui/pelleas/help/%s' % template)
+        return self.get_resource('/ui/scrib/help/%s' % template)
 
 
 
 class Print_Help(STLView):
     access = 'is_allowed_to_view'
     title = MSG(u"Impression du questionnaire")
-    template = '/ui/pelleas/help/print.xml'
+    template = '/ui/scrib/help/print.xml'
 
 
 
 class Print_Form(STLView):
     access = 'is_allowed_to_view'
-    template = '/ui/pelleas/help/template.xhtml'
+    template = '/ui/scrib/help/template.xhtml'
 
 
     def get_namespace(self, resource, context):
@@ -218,7 +216,7 @@ class Print_Form(STLView):
                 10, 13]:
             if page not in resource.handler.pages:
                 continue
-            table = resource.get_resource('/ui/pelleas/Page%s.table' % page)
+            table = resource.get_resource('/ui/scrib/Page%s.table' % page)
             body.extend(BREAK_HEADER)
             body.extend(table.to_html(context, resource, page, skip_print=True))
             body.extend(BREAK_FOOTER)
@@ -237,7 +235,7 @@ class Print_Form(STLView):
 class Controls(STLForm):
     access = 'is_allowed_to_view'
     title = MSG(u"Envoi du questionnaire")
-    template = '/ui/pelleas/Form_controls.xml'
+    template = '/ui/scrib/Form_controls.xml'
 
 
     def get_namespace(self, resource, context):

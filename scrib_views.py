@@ -57,7 +57,7 @@ class Scrib_Login(LoginView):
             return goto
         if user.name == 'VoirSCRIB' or user.is_admin(user, resource):
             return uri.get_reference('./')
-        elif user.is_BM():
+        elif user.is_bm():
             path = 'BM%s/%s' % (user.get_year(), user.get_BM_code())
             report = resource.get_resource(path)
             return uri.get_reference('%s/' % path)
@@ -187,7 +187,7 @@ class Scrib_ExportForm(STLForm):
             names = [o.name for o in container.search_resources(state='public')]
 
             # Adresses déjà exportées
-            if container.is_BM():
+            if container.is_bm():
                 query = ("SELECT code_bib FROM adresse08 "
                          "WHERE insee is not null")
             else:

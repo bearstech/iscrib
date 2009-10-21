@@ -35,10 +35,10 @@ class User_Home(STLView):
         namespace = {}
 
         year = resource.get_year()
-        if resource.is_BM():
+        if resource.is_bm():
             code = resource.get_BM_code()
             report = root.get_resource('BM%s/%s' % (year, code))
-        elif resource.is_BDP():
+        elif resource.is_bdp():
             department = resource.get_department()
             report = root.get_resource('BDP%s/%s' % (year, department))
         else:

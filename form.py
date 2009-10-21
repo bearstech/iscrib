@@ -235,8 +235,8 @@ class Form(HelpAware, File):
     #def _get_catalog_values(self):
     #    values = File._get_catalog_values(self)
     #    #values['user_town'] = self.get_user_town()
-    #    values['is_BM'] = self.is_BM()
-    #    values['is_BDP'] = self.is_BDP()
+    #    values['is_bm'] = self.is_bm()
+    #    values['is_bdp'] = self.is_bdp()
     #    values['departement'] = self.get_property('departement')
     #    values['form_state'] = self.get_form_state()
     #    return values
@@ -245,12 +245,12 @@ class Form(HelpAware, File):
     ######################################################################
     # Scrib API
     @staticmethod
-    def is_BM():
+    def is_bm():
         raise NotImplementedError
 
 
     @staticmethod
-    def is_BDP():
+    def is_bdp():
         raise NotImplementedError
 
 
@@ -279,7 +279,7 @@ class Form(HelpAware, File):
 
 ###########################################################################
 # Register
-#register_field('is_BM', Boolean(is_stored=True))
-#register_field('is_BDP', Boolean(is_stored=True))
+#register_field('is_bm', Boolean(is_stored=True))
+#register_field('is_bdp', Boolean(is_stored=True))
 #register_field('departement', Unicode(is_indexed=True, is_stored=True))
 #register_field('form_state', Unicode(is_indexed=True, is_stored=True))

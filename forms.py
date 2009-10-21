@@ -39,11 +39,11 @@ class Forms(Folder):
 
     #########################################################################
     # Scrib API
-    def is_BM(self):
+    def is_bm(self):
         return self.name == 'bm'
 
 
-    def is_BDP(self):
+    def is_bdp(self):
         return self.name == 'bdp'
 
 

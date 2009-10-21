@@ -30,6 +30,7 @@ from ikaaro.website import WebSite
 
 # Import from scrib
 from bm2009 import BM2009
+from bdp2009 import BDP2009
 from form import Form
 from forms import Forms
 from scrib_views import Scrib_Login, Scrib_PermissionsForm, Scrib_ExportForm
@@ -56,6 +57,9 @@ class UsersCSV(CSVFile):
 class Scrib2009(WebSite):
     class_id = 'Scrib2009'
     class_title = MSG(u"Scrib 2009")
+
+    bm_class = BM2009
+    bpd_class = BDP2009
 
     # Views
     login = Scrib_Login()
@@ -135,9 +139,9 @@ class Scrib2009(WebSite):
             title = row.get_value('nom')
             departement = row.get_value('departement')
             id = row.get_value('id')
-            BM2009._make_resource(BM2009, folder, '%s/bm/%s' % (name, code),
-                    code=code, title={'fr': title}, departement=departement,
-                    id=id)
+            cls.bm_class._make_resource(cls.bm_class, folder, '%s/bm/%s' %
+                    (name, code), code=code, title={'fr': title},
+                    departement=departement, id=id)
         # TODO Créer les BDP
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})
@@ -149,7 +153,7 @@ class Scrib2009(WebSite):
     def is_admin_or_VoirSCRIB(self, user, resource):
         if user is None:
             return False
-        return self.is_admin(user, resource) or user.is_VoirSCRIB()
+        return self.is_admin(user, resource) or user.is_voir_scrib()
 
 
     def is_allowed_to_view(self, user, resource):
@@ -160,15 +164,15 @@ class Scrib2009(WebSite):
         if self.is_admin(user, resource):
             return True
         # VoirSCRIB
-        if user.is_VoirSCRIB():
+        if user.is_voir_scrib():
             return True
         if isinstance(resource, Form):
             # Check the code or department
-            if user.is_BM():
+            if user.is_bm():
                 if (user.get_property('code')
                         != resource.get_property('code')):
                     return False
-            elif user.is_BDP():
+            elif user.is_bdp():
                 if (user.get_property('department')
                         != resource.get_property('department')):
                     return False
@@ -185,15 +189,15 @@ class Scrib2009(WebSite):
         if self.is_admin(user, resource):
             return True
         # VoirSCRIB
-        if user.is_VoirSCRIB():
+        if user.is_voir_scrib():
             return False
         if isinstance(resource, Form):
             # Check the code or department
-            if user.is_BM():
+            if user.is_bm():
                 if (user.get_property('code')
                         != resource.get_property('code')):
                     return False
-            elif user.is_BDP():
+            elif user.is_bdp():
                 if (user.get_property('department')
                         != resource.get_property('department')):
                     return False

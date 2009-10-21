@@ -50,34 +50,34 @@ class ScribUser2009(User):
     #    values = User._get_catalog_values(self)
     #    values['user_town'] = self.get_user_town()
     #    values['departement'] = self.get_property('departement')
-    #    values['is_BDP'] = self.is_BDP()
-    #    values['is_BM'] = self.is_BM()
+    #    values['is_bdp'] = self.is_bdp()
+    #    values['is_bm'] = self.is_bm()
     #    return values
 
 
     ######################################################################
     # Scrib API
-    def is_BM(self):
+    def is_bm(self):
         """ patern is BMxxx"""
         return self.get_property('username').startswith('BM')
 
 
-    def is_BDP(self):
+    def is_bdp(self):
         """ patern is BDPxx"""
         return self.get_property('username').startswith('BDP')
 
 
-    def is_VoirSCRIB(self):
+    def is_voir_scrib(self):
         return self.get_property('username') == 'VoirSCRIB'
 
 
-    def is_not_BDP_nor_BM(self):
-        return not self.is_BDP() and not self.is_BM()
+    def is_not_bdp_nor_bm(self):
+        return not self.is_bdp() and not self.is_bm()
 
 
     def get_user_town(self):
         title = u""
-        if self.is_BM():
+        if self.is_bm():
             code = self.get_property('code')
             if code:
                 # Cf. #2617
