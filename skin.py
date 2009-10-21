@@ -18,28 +18,11 @@
 
 # Import from itools
 from itools.core import get_abspath
-from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.skins import Skin, register_skin
 
 
-class ScribSkin(Skin):
-
-    def get_styles(self, context):
-        styles = Skin.get_styles(self, context)
-        styles.insert(0, '/ui/aruni/style.css')
-        return styles
-
-
-    def get_template(self):
-        context = get_context()
-        if (context.has_form_value('view') and
-              context.get_form_value('view')=='printable'):
-            return self.get_resource('/ui/scrib/printable_template.xhtml')
-        return Skin.get_template(self)
-
-
 # Register interface
 path = get_abspath('ui')
-register_skin('scrib', ScribSkin(path))
+register_skin('scrib', Skin(path))
