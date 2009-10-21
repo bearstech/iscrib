@@ -60,6 +60,7 @@ class Scrib2009(WebSite):
 
     bm_class = BM2009
     bpd_class = BDP2009
+    user_class = ScribUser2009
 
     # Views
     login = Scrib_Login()
@@ -114,7 +115,7 @@ class Scrib2009(WebSite):
         for metadata in users:
             # Bypasse set_user car trop lent
             # FIXME l'uri de users n'est pas "...database/users"
-            ScribUser2009._make_resource(ScribUser2009, folder,
+            cls.user_class._make_resource(cls.user_class, folder,
                                          "users/" + user_id,
                                          # XXX l'adresse par défaut sera
                                          # utilisée plusieurs fois
