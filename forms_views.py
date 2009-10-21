@@ -30,7 +30,7 @@ from datatypes import Departements, WorkflowState
 
 class Forms_SearchForm(Folder_BrowseContent):
     access = 'is_admin_or_voir_scrib'
-    title = MSG(u"Search")
+    title = MSG(u"Rechercher un formulaire")
     context_menus = []
     query_schema = merge_dicts(Folder_BrowseContent.query_schema,
                                sort_by=String(default='title'),
@@ -123,7 +123,7 @@ class Forms_SearchForm(Folder_BrowseContent):
                 form_name = int(form_name)
             return form_name
         elif column == 'title':
-            url = '%s/;pageA' % item_brain.title
+            url = '%s/;pageA' % item_brain.name
             return (item_brain.title, url)
         elif column == 'mtime':
             mtime = item_brain.mtime
