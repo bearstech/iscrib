@@ -285,7 +285,7 @@ class Form(HelpAware, File):
 
 ###########################################################################
 # Register
-register_field('is_bm', Boolean(is_stored=True))
-register_field('is_bdp', Boolean(is_stored=True))
+register_field('is_bm', Boolean(is_indexed=True, is_stored=True))
+register_field('is_bdp', Boolean(is_indexed=True, is_stored=True))
 register_field('departement', Unicode(is_indexed=True, is_stored=True))
 register_field('form_state', Unicode(is_indexed=True, is_stored=True))

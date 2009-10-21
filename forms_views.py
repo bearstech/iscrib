@@ -90,15 +90,14 @@ class Forms_SearchForm(Folder_BrowseContent):
         # Build the query
         abspath = str(resource.get_canonical_path())
         query = [PhraseQuery('parent_path', abspath)]
-        app = resource.parent
         # The format (BM or BDP)
         if resource.is_bm():
-            query.append(PhraseQuery('format', app.bm_class.class_id))
+            query.append(PhraseQuery('is_bm', True))
             # The code UA
             if code_ua:
                 query.append(PhraseQuery('code_ua', code_ua))
         else:
-            query.append(PhraseQuery('format', app.bdp_class.class_id))
+            query.append(PhraseQuery('is_bdp', True))
         # The department
         if dep:
             query.append(PhraseQuery('departement', dep))
