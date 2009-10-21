@@ -40,7 +40,7 @@ from user import ScribUser2009
 
 class UsersCSV(CSVFile):
     schema = {'annee': Unicode,
-              'code': Integer,
+              'code_ua': Integer,
               'categorie': String(is_indexed=True),
               'nom': Unicode,
               'departement': String, # Corse « 2A » et « 2B »
@@ -48,7 +48,7 @@ class UsersCSV(CSVFile):
               'mel': String,
               'utilisateur': String,
               'motdepasse': String}
-    columns = ['annee', 'code', 'categorie', 'nom', 'departement', 'id',
+    columns = ['annee', 'code_ua', 'categorie', 'nom', 'departement', 'id',
                'mel', 'utilisateur', 'motdepasse']
     skip_header = True
 
@@ -67,7 +67,7 @@ class Scrib2009(WebSite):
     permissions_form = Scrib_PermissionsForm()
     export_form = Scrib_ExportForm()
     help = Scrib_Help()
-    browse_content = Folder_BrowseContent(access='is_admin_or_VoirSCRIB')
+    browse_content = Folder_BrowseContent(access='is_admin_or_voir_scrib')
     xchangepassword = Scrib_ChangePassword()
 
 
@@ -99,7 +99,7 @@ class Scrib2009(WebSite):
                           'password': crypt_password(password),
                           'email': email,
                           'title': {'fr': row.get_value('nom')},
-                          'code': row.get_value('code'),
+                          'code_ua': row.get_value('code_ua'),
                           'departement': row.get_value('departement'),
                           'id': row.get_value('id')})
         print "  ", len(users), "utilisateurs"
@@ -135,12 +135,12 @@ class Scrib2009(WebSite):
                              title={'fr': u"BM"})
         rows = users_csv.search(categorie='BM')
         for row in users_csv.get_rows(rows):
-            code = row.get_value('code')
+            code_ua = row.get_value('code_ua')
             title = row.get_value('nom')
             departement = row.get_value('departement')
             id = row.get_value('id')
             cls.bm_class._make_resource(cls.bm_class, folder, '%s/bm/%s' %
-                    (name, code), code=code, title={'fr': title},
+                    (name, code_ua), code_ua=code_ua, title={'fr': title},
                     departement=departement, id=id)
         # TODO Créer les BDP
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
@@ -150,7 +150,7 @@ class Scrib2009(WebSite):
 
     ########################################################################
     # Security
-    def is_admin_or_VoirSCRIB(self, user, resource):
+    def is_admin_or_voir_scrib(self, user, resource):
         if user is None:
             return False
         return self.is_admin(user, resource) or user.is_voir_scrib()
@@ -167,10 +167,10 @@ class Scrib2009(WebSite):
         if user.is_voir_scrib():
             return True
         if isinstance(resource, Form):
-            # Check the code or department
+            # Check the code UA or department
             if user.is_bm():
-                if (user.get_property('code')
-                        != resource.get_property('code')):
+                if (user.get_property('code_ua')
+                        != resource.get_property('code_ua')):
                     return False
             elif user.is_bdp():
                 if (user.get_property('department')
@@ -192,10 +192,10 @@ class Scrib2009(WebSite):
         if user.is_voir_scrib():
             return False
         if isinstance(resource, Form):
-            # Check the code or department
+            # Check the code UA or department
             if user.is_bm():
-                if (user.get_property('code')
-                        != resource.get_property('code')):
+                if (user.get_property('code_ua')
+                        != resource.get_property('code_ua')):
                     return False
             elif user.is_bdp():
                 if (user.get_property('department')

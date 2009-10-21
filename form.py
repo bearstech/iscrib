@@ -19,9 +19,9 @@
 # Import from the Standard Library
 
 # Import from itools
-from itools.core import get_abspath
+from itools.core import get_abspath, merge_dicts
 from itools.csv import CSVFile
-from itools.datatypes import Unicode, Boolean
+from itools.datatypes import String, Unicode, Boolean
 from itools.handlers import File as FileHandler
 
 # Import from ikaaro
@@ -232,14 +232,20 @@ class Form(HelpAware, File):
     # Views
 
 
-    #def _get_catalog_values(self):
-    #    values = File._get_catalog_values(self)
-    #    #values['user_town'] = self.get_user_town()
-    #    values['is_bm'] = self.is_bm()
-    #    values['is_bdp'] = self.is_bdp()
-    #    values['departement'] = self.get_property('departement')
-    #    values['form_state'] = self.get_form_state()
-    #    return values
+    @classmethod
+    def get_metadata_schema(cls):
+        return merge_dicts(File.get_metadata_schema(),
+                           departement=String)
+
+
+
+    def _get_catalog_values(self):
+        values = File._get_catalog_values(self)
+        values['is_bm'] = self.is_bm()
+        values['is_bdp'] = self.is_bdp()
+        values['departement'] = self.get_property('departement')
+        values['form_state'] = self.get_form_state()
+        return values
 
 
     ######################################################################
@@ -279,7 +285,7 @@ class Form(HelpAware, File):
 
 ###########################################################################
 # Register
-#register_field('is_bm', Boolean(is_stored=True))
-#register_field('is_bdp', Boolean(is_stored=True))
-#register_field('departement', Unicode(is_indexed=True, is_stored=True))
-#register_field('form_state', Unicode(is_indexed=True, is_stored=True))
+register_field('is_bm', Boolean(is_stored=True))
+register_field('is_bdp', Boolean(is_stored=True))
+register_field('departement', Unicode(is_indexed=True, is_stored=True))
+register_field('form_state', Unicode(is_indexed=True, is_stored=True))

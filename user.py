@@ -41,7 +41,7 @@ class ScribUser2009(User):
     def get_metadata_schema(cls):
         return merge_dicts(User.get_metadata_schema(),
                            title=Unicode,
-                           code=Integer,
+                           code_ua=Integer,
                            departement=String,
                            id=String)
 
@@ -78,14 +78,14 @@ class ScribUser2009(User):
     def get_user_town(self):
         title = u""
         if self.is_bm():
-            code = self.get_property('code')
-            if code:
+            code_ua = self.get_property('code_ua')
+            if code_ua:
                 # Cf. #2617
-                bib = get_bm(code)
+                bib = get_bm(code_ua)
                 if bib:
                     title = bib.get_value('name')
                 else:
-                    print "bib", code, "n'existe pas"
+                    print "bib", code_ua, "n'existe pas"
         return title
 
 

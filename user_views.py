@@ -31,13 +31,13 @@ class User_Home(STLView):
     def get_namespace(self, resource, context):
         root = context.root
         name = resource.name
-        department, code = '', ''
+        department, code_ua = '', ''
         namespace = {}
 
         year = resource.get_year()
         if resource.is_bm():
-            code = resource.get_BM_code()
-            report = root.get_resource('BM%s/%s' % (year, code))
+            code_ua = resource.get_bm_code()
+            report = root.get_resource('BM%s/%s' % (year, code_ua))
         elif resource.is_bdp():
             department = resource.get_department()
             report = root.get_resource('BDP%s/%s' % (year, department))
@@ -55,8 +55,8 @@ class User_Home(STLView):
             bib = get_bdp(department)
             if bib:
                 namespace['dep'] = bib.get_value('name')
-        elif code:
-            bib = get_bm(code)
+        elif code_ua:
+            bib = get_bm(code_ua)
             if bib:
                 namespace['dep'] = bib.get_value('name')
         return namespace

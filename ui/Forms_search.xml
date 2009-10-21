@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <form action="" method="get">
+    <fieldset>
+      <legend>Rechercher un formulaire</legend>
+      <stl:block if="is_bm">
+        <label for="search_title">Début du nom de la ville</label>
+        ${search_title}
+        <label for="search_code_ua">Code UA</label>
+        ${search_code_ua}
+        <br/>
+      </stl:block>
+      <label for="search_dep">Département</label>
+      ${search_dep}
+      <label for="search_state">État du formulaire</label>
+      ${search_state}
+      <input type="submit" value="OK" class="button-search"/>
+    </fieldset>
+  </form>
+
+</stl:block>

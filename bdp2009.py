@@ -45,16 +45,7 @@ class BDP2009(Form):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(Form.get_metadata_schema(),
-                           code=Integer,
-                           departement=String,
                            id=String)
-
-
-    #def _get_catalog_values(self):
-    #    values = Form._get_catalog_values(self)
-    #    values['code'] = self.get_property('code')
-    #    values['departement'] = self.get_property('departement')
-    #    return values
 
 
     ######################################################################
@@ -72,5 +63,3 @@ class BDP2009(Form):
 ###########################################################################
 # Register
 register_resource_class(BDP2009)
-#register_field('code', Integer(is_indexed=True))
-#register_field('departement', String(is_indexed=True))
