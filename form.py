@@ -32,7 +32,7 @@ from ikaaro.workflow import workflow
 
 # Import from scrib
 from datatypes import Integer, Decimal, Time, ShortTime, Date, ShortDate
-from datatypes import Digit
+from datatypes import Digit, Unicode as ScribUnicode, Boolean as ScribBool
 from help import HelpAware
 
 
@@ -46,7 +46,7 @@ def quote_namespace(namespace, schema):
         field_def = schema.get(key)
         if field_def is not None:
             ftype = field_def[0]
-            if ftype is Unicode:
+            if ftype is ScribUnicode:
                    if value is not None:
                        value = value.replace(u"€", u"eur")
                        value = value.replace(u'"', u'\\"')
@@ -81,7 +81,7 @@ def get_schema_pages(path):
             type = Text
         elif type == 'str':
             repr = int(repr)
-            type = Unicode
+            type = ScribUnicode
         elif type == 'int':
             repr = int(repr)
             type = Integer
@@ -94,7 +94,7 @@ def get_schema_pages(path):
         elif type == 'mm/aaaa':
             type = ShortDate
         elif type == 'boolean':
-            type = Boolean
+            type = ScribBool
         elif type == 'dec':
             repr = sum([ int(x) for x in repr.split(',') ]) + 1
             type = Decimal
@@ -188,7 +188,7 @@ class FormHandler(FileHandler):
     # API (private)
     def _get_value(self, name):
         datatype = self.schema[name]
-        return self.fields.get(name, datatype.decode(datatype.default))
+        return self.fields.get(name) or datatype.decode(datatype.default)
 
 
     def _set_value(self, name, value):

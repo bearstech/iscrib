@@ -57,6 +57,7 @@ class UsersCSV(CSVFile):
 class Scrib2009(WebSite):
     class_id = 'Scrib2009'
     class_title = MSG(u"Scrib 2009")
+    class_skin = 'ui/scrib'
 
     bm_class = BM2009
     bpd_class = BDP2009

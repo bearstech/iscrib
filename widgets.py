@@ -196,15 +196,15 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     elif datatype.is_mandatory and not value:
         attrs['class'] = u'mandatory'
         attrs['title'] = u'Champ obligatoire'
-    activites = form.get_activites()
-    get_value = activites.handler._get_value
+    get_value = form.handler._get_value
     # Disabled fields
-    if (datatype.mdt == 'M' and not get_value('MUSIQUE')
-        or datatype.mdt == 'D' and not get_value('DANSE')
-        or datatype.mdt == 'T' and not get_value('ARTDRAMA')):
-        attrs['disabled'] = u'disabled'
-        attrs['class'] = u'disabled'
-        attrs['value'] = u''
+    # TODO abrégé ou complet
+    #if (datatype.mdt == 'M' and not get_value('MUSIQUE')
+    #    or datatype.mdt == 'D' and not get_value('DANSE')
+    #    or datatype.mdt == 'T' and not get_value('ARTDRAMA')):
+    #    attrs['disabled'] = u'disabled'
+    #    attrs['class'] = u'disabled'
+    #    attrs['value'] = u''
     attrs = [ u'%s="%s"' % x for x in attrs.items()
               if x[1] is not None ]
     pattern = pattern % u' '.join(attrs)
@@ -229,8 +229,9 @@ class UITable(UIFile, CSVFile):
 
     ######################################################################
     # User Interface
-    def to_html(self, context, form, page, skip_print=False, readonly=False):
+    def to_html(self, context, form, view, skip_print=False, readonly=False):
         tabindex = None
+        page = view.n
         if page in [2, 3, 4]:
             tabindex = True
         user = context.user
@@ -284,7 +285,7 @@ class UITable(UIFile, CSVFile):
                                     'class': None})
                     # new table but leave the index
                     tables.append([])
-                elif column.startswith(u'='):
+                elif column.startswith(u'#'):
                     css_class = u'field-label'
                     if j > 0:
                         css_class += u' centered'
@@ -366,13 +367,10 @@ class UITable(UIFile, CSVFile):
             # new table added?
             if table_index + 1 < len(tables):
                 table_index = table_index + 1
-        if form.class_id == 'form-activites':
-            activites = form
-        else:
-            activites = form.get_activites()
         namespace = {}
-        namespace['nomecole'] = activites.handler._get_value('NOMECOLE')
-        namespace['title'] = 'XXX' # XXX form.get_page_title(page)
+        namespace['form_title'] = form.get_title()
+        # TODO namespace['year'] = ...
+        namespace['page_title'] = view.get_title(context)
         namespace['page_number'] = page
         namespace['tables'] = tables
         namespace['readonly'] = skip_print or readonly

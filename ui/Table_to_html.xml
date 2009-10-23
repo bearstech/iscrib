@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <stl:block stl:if="not skip_print">
+    <p stl:if="first_time">
+      <strong style="border: 1px solid red; background: red"><a style="color: white"
+          href=";help">Veuiller consulter l'aide générale.</a></strong>
+    </p>
+  </stl:block>
+
+  <p style="margin: 0; font-size: 10px" stl:if="not skip_print">
+    <span style="float: left" stl:if="help_onclick">
+      <a style="border: 1px solid red; color: white; background: red; text-decoration: none"
+        href="#" onclick="${help_onclick}">?</a>
+      Aide sur cette page
+    </span>
+    <span style="float:right">
+      <a href="#" onclick="window.open('?view=printable', 'xxx', 'toolbar=yes,\
+          location=no, status=no, menubar=yes, scrollbars=yes, width=800,\
+          height=600'); return false"><img
+            src="/ui/scrib/images/imprimer.gif" alt="Imprimer"
+            name="Imprimer" /></a>
+      Imprimer cette page
+    </span>
+    <br class="clear" />
+  </p>
+
+  <div class="scrib_title">
+    <strong style="float: left">${form_title}</strong>
+    <strong style="float: right">Année 2008-2009</strong>
+    <br class="clear" />
+    <h2>${page_title}</h2>
+  </div>
+
+  <form action="." method="post">
+    <input type="hidden" name="page_number" value="${page_number}" />
+    <stl:block stl:repeat="table tables">
+      <table class="scrib_table">
+        <tr stl:repeat="row table">
+          <td stl:repeat="column row" rowspan="${column/rowspan}"
+            colspan="${column/colspan}"
+            class="${column/class}">${column/body}</td>
+        </tr>
+      </table>
+    </stl:block>
+    <input type="submit" value="Enregistrer" stl:if="not readonly" />
+  </form>
+
+</stl:block>

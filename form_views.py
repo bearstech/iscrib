@@ -46,9 +46,8 @@ class Page_Form(STLForm):
 
 
     def GET(self, resource, context):
-        n = self.n
         view = context.get_form_value('view')
-        table = resource.get_resource('/ui/scrib/Page%s.table' % n)
+        table = resource.get_resource('/ui/scrib/Page%s.table' % self.n)
         user = context.user
         skip_print = (user.is_voir_scrib()) #or user.is_consultation())
         if view == 'printable':
@@ -60,7 +59,7 @@ class Page_Form(STLForm):
             # Si le formulaire est dans l'état terminé,
             # une bibliothèque ne peut plus le modifier
             readonly = True
-        return table.to_html(context, resource, n, skip_print=skip_print,
+        return table.to_html(context, resource, self, skip_print=skip_print,
                              readonly=readonly)
 
 
