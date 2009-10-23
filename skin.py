@@ -26,9 +26,29 @@ from ikaaro.skins import Skin, register_skin, map
 from widgets import UITable
 
 
+class ScribSkin(Skin):
+
+    def get_styles(self, context):
+        styles = [
+            # BackOffice style
+            '/ui/bo.css',
+            # Calendar JS Widget (http://dynarch.com/mishoo/calendar.epl)
+            '/ui/js_calendar/calendar-aruni.css',
+            # Table
+            '/ui/table/style.css',
+            # Aruni
+            '/ui/aruni/style.css',
+            # Scrib
+            '/ui/scrib/style.css']
+        # Dynamic styles
+        for style in context.styles:
+            styles.append(style)
+        return styles
+
+
+
+#############################################################################
+# Register
 map[UITable.class_mimetypes[0]] = UITable
-
-
-# Register interface
 path = get_abspath('ui')
-register_skin('scrib', Skin(path))
+register_skin('scrib', ScribSkin(path))

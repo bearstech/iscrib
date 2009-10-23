@@ -324,26 +324,9 @@ class UITable(UIFile, CSVFile):
                     css_class = u'field-label'
                     if j > 0:
                         css_class += u' centered'
-                    maybe_name = column.encode('utf_8')
-                    if maybe_name in schema:
-                        if column in (u'ECOLE', u'CATEGORI'):
-                            # Read-only
-                            datatype = schema[maybe_name]
-                            value = handler._get_value(maybe_name)
-                            column = unicode(datatype.encode(value), 'utf_8')
-                        else:
-                            datatype = schema[maybe_name]
-                            if page in datatype.pages:
-                                column = get_input_widget(maybe_name, form,
-                                        context, tabindex=tabindex,
-                                        readonly=readonly)
-                                css_class = u'centered'
-                            if not isinstance(datatype, Text):
-                                column = column.replace(u'\n', u'<br>')
-                    else:
-                        # 0004946: les balises  et  ne sont pas interprétées
-                        # -> ne pas utiliser XML.encode
-                        column = column.replace('&', '&amp;')
+                    # 0004946: les balises < et > ne sont pas interprétées
+                    # -> ne pas utiliser XML.encode
+                    column = column.replace('&', '&amp;')
                     if column == u'100%':
                         css_class += u' num'
                     columns.append({'rowspan': None, 'colspan': None,
@@ -369,7 +352,6 @@ class UITable(UIFile, CSVFile):
                 table_index = table_index + 1
         namespace = {}
         namespace['form_title'] = form.get_title()
-        # TODO namespace['year'] = ...
         namespace['page_title'] = view.get_title(context)
         namespace['page_number'] = page
         namespace['tables'] = tables
