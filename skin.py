@@ -20,7 +20,13 @@
 from itools.core import get_abspath
 
 # Import from ikaaro
-from ikaaro.skins import Skin, register_skin
+from ikaaro.skins import Skin, register_skin, map
+
+# Import from scrib
+from widgets import UITable
+
+
+map[UITable.class_mimetypes[0]] = UITable
 
 
 # Register interface

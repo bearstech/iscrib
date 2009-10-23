@@ -23,5 +23,5 @@ __version__ = get_version()
 
 # Register root
 from root import Root
-# Register skin
+# Register
 import skin
