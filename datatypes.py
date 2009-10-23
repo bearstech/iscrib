@@ -25,7 +25,6 @@ from itools.datatypes import Unicode as BaseUnicode, Enumerate
 
 
 class DataType(object):
-
     default = None
 
 
@@ -56,9 +55,11 @@ class DataType(object):
         return True
 
 
+
 class PelleasNumeric(DataType):
     """All arithmetical operations."""
     default = '0'
+
 
     def __int__(self):
         return int(self.value)
@@ -635,8 +636,8 @@ class ShortDate(Date):
 
 
 class Unicode(BaseUnicode):
-
     default = ''
+
 
     @staticmethod
     def is_valid(value, repr):
@@ -674,11 +675,11 @@ class Text(Unicode):
 
 
 class Boolean(Enumerate):
-
     options = [
         {'name': '1', 'value': u"Oui"},
         {'name': '2', 'value': u"Non"},
     ]
+
 
     @staticmethod
     def is_valid(value, repr):
@@ -877,6 +878,7 @@ class Departements(Enumerate):
         # FIXME 976
         {'name': '985', 'value': "Mayotte"},
         {'name': '988', 'value': "Nouvelle-Calédonie"}]
+
 
 
 class WorkflowState(Enumerate):
