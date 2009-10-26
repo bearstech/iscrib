@@ -48,6 +48,11 @@ class Page_Form(STLForm):
 
 
     def GET(self, resource, context):
+        try:
+            bad_types = context.bad_types
+        except AttributeError:
+            bad_types = []
+        print "bad_types", bad_types
         view = context.query['view']
         table = resource.get_resource('/ui/scrib/Page%s.table' % self.n)
         user = context.user
@@ -80,7 +85,7 @@ class Page_Form(STLForm):
         # Save changes
         page_number = form['page_number']
         handler = resource.handler
-        bad_type = []
+        bad_types = []
         for key in handler.pages[page_number]:
             datatype = handler.schema[key]
             if context.has_form_value(key):
@@ -95,14 +100,14 @@ class Page_Form(STLForm):
                             value = datatype.encode(datatype.decode(value))
                         except ValueError:
                             # got it wrong!
-                            bad_type.append(key)
+                            bad_types.append(key)
                             continue
                         # sum inputed
                         if expected_value != 'NC' and value != expected_value:
                             # not what we get
                             if expected_value is not None:
                                 # what we got was ok so blame the user
-                                bad_type.append(key)
+                                bad_types.append(key)
                                 continue
                             # else, we got it wrong anyway
                     else:
@@ -112,15 +117,15 @@ class Page_Form(STLForm):
                             value = expected_value
                         else:
                             # got it wrong!
-                            bad_type.append(key)
+                            bad_types.append(key)
                             continue
                 elif datatype.is_mandatory and not value:
-                    bad_type.append(key)
+                    bad_types.append(key)
                     continue
                 if datatype.is_valid(value, datatype.repr):
                     value = datatype.decode(value)
                 else:
-                    bad_type.append(key)
+                    bad_types.append(key)
                     continue
             elif isinstance(datatype, Boolean):
                 value = False
@@ -131,9 +136,9 @@ class Page_Form(STLForm):
             # Reindex
             context.server.change_resource(resource)
         # But drop previous parameters
-        if bad_type:
-            form['bad_type'] = bad_type
+        if bad_types:
             context.message = MSG_ERREUR_SAUVEGARDE
+            context.bad_types = bad_types
         else:
             context.message = MSG_SAUVEGARDE
         # Start workflow on first write
