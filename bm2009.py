@@ -19,6 +19,7 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.datatypes import String, Integer
+from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.registry import register_resource_class, register_field
@@ -40,9 +41,9 @@ class BM2009(Form):
     class_views = ['pageA', 'pageB', 'pageC'] + Form.class_views
 
     # Views
-    pageA = Page_Form(title=u"Identité", n='A')
-    pageB = Page_Form(title=u"A-Finances", n='B')
-    pageC = Page_Form(title=u"B-Locaux", n='C')
+    pageA = Page_Form(title=MSG(u"Identité"), n='A')
+    pageB = Page_Form(title=MSG(u"A-Finances"), n='B')
+    pageC = Page_Form(title=MSG(u"B-Locaux"), n='C')
 
 
     @classmethod

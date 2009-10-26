@@ -33,20 +33,22 @@ BREAK_FOOTER = PAGE_BREAK[1:]
 
 
 # Messages
-MSG_ERREUR_SAUVEGARDE = MSG(
+MSG_ERREUR_SAUVEGARDE = ERROR(
         u"ATTENTION ! FICHE NON ENREGISTREE : "
         u"IL Y A DES RUBRIQUES MANQUANTES ET/OU INVALIDES")
-MSG_SAUVEGARDE = MSG(
+MSG_SAUVEGARDE = INFO(
         u"La page est enregistrée, veuillez vérifier votre saisie dans : "
         u"Envoi du questionnaire")
 
 
 class Page_Form(STLForm):
     access = 'is_allowed_to_view'
+    schema = {'page_number': String}
+    query_schema = {'view': String}
 
 
     def GET(self, resource, context):
-        view = context.get_form_value('view')
+        view = context.query['view']
         table = resource.get_resource('/ui/scrib/Page%s.table' % self.n)
         user = context.user
         skip_print = (user.is_voir_scrib()) #or user.is_consultation())
@@ -76,15 +78,13 @@ class Page_Form(STLForm):
                                     u"questionnaire.")
             return
         # Save changes
-        page_number = context.get_form_value('page_number')
-        page_number = int(page_number)
+        page_number = form['page_number']
         handler = resource.handler
         bad_type = []
-
         for key in handler.pages[page_number]:
             datatype = handler.schema[key]
-
             if context.has_form_value(key):
+                # Ne pas utiliser le form schema
                 value = context.get_form_value(key)
                 value = value.strip()
                 if datatype.somme:
@@ -130,14 +130,13 @@ class Page_Form(STLForm):
             handler._set_value(key, value)
             # Reindex
             context.server.change_resource(resource)
-
         # But drop previous parameters
         if bad_type:
-            context.request.get_form()['bad_type'] = bad_type
-            context.message = ERROR(MSG_ERREUR_SAUVEGARDE)
+            form['bad_type'] = bad_type
+            context.message = MSG_ERREUR_SAUVEGARDE
         else:
-            context.message = INFO(MSG_SAUVEGARDE)
-
+            context.message = MSG_SAUVEGARDE
+        # Start workflow on first write
         if resource.get_statename() == 'empty':
             if is_admin is False:
                 # Will notify the object changed
@@ -214,23 +213,21 @@ class Controls(STLForm):
 
     def get_namespace(self, resource, context):
         user = context.user
-        view = context.get_form_value('view')
+        view = context.query['view']
         namespace = {}
-
         # Workflow - State
         state = resource.get_state()
         namespace['state'] = state['title']
-
         # Controls
         vars = {}
         vars['SI'] = SI
         for key in resource.handler.schema:
             vars[key] = resource.handler._get_value(key)
-
+        # Errors
         errors = []
         warnings = []
-        controls = resource.handler.controles
 
+        controls = resource.handler.controles
         for k, title, expr, level, page in controls:
             expr = expr.strip()
             if expr:
