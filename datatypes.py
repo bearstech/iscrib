@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from python
-from datetime import date, datetime
+from datetime import date
 from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
@@ -43,9 +43,24 @@ class DateLitterale(DataType):
 
 
 
-class PelleasNumeric(DataType):
+class Numeric(DataType):
     """All arithmetical operations."""
     default = '0'
+
+
+    @classmethod
+    def get_default(cls):
+        return cls.decode(cls.default)
+
+
+    def __new__(cls, *args, **kw):
+        return object.__new__(cls)
+
+
+    def __init__(self, **kw):
+        object.__init__(self)
+        for key, value in kw.iteritems():
+            setattr(self, key, value)
 
 
     def __int__(self):
@@ -68,7 +83,7 @@ class PelleasNumeric(DataType):
         if self.value is None:
             # NC + right = NC
             return self.__class__('NC')
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
             if right is None:
                 # left + NC = NC
@@ -87,7 +102,7 @@ class PelleasNumeric(DataType):
         if self.value is None:
             # NC - right = NC
             return self.__class__('NC')
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
             if right is None:
                 # left - NC = NC
@@ -104,7 +119,7 @@ class PelleasNumeric(DataType):
         if self.value is None:
             # left - NC = NC
             return self.__class__('NC')
-        if isinstance(left, PelleasNumeric):
+        if isinstance(left, Numeric):
             left = left.value
             if left is None:
                 # NC - right = NC
@@ -122,7 +137,7 @@ class PelleasNumeric(DataType):
         if self.value is None:
             # NC * right = NC
             return self.__class__('NC')
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
             if right is None:
                 # left * NC = NC
@@ -141,7 +156,7 @@ class PelleasNumeric(DataType):
         if self.value is None:
             # NC / right = NC
             return self.__class__('NC')
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
             if right is None:
                 # left / NC = NC
@@ -161,7 +176,7 @@ class PelleasNumeric(DataType):
         if self.value is None:
             # left / NC = NC
             return self.__class__('NC')
-        if isinstance(left, PelleasNumeric):
+        if isinstance(left, Numeric):
             left = left.value
             if left is None:
                 # NC / right = NC
@@ -179,7 +194,7 @@ class PelleasNumeric(DataType):
 
     def __gt__(self, right):
         left = self.value
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
         if right is 'NC' or right is None:
             # left > NC
@@ -193,7 +208,7 @@ class PelleasNumeric(DataType):
 
     def __ge__(self, right):
         left = self.value
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
         if right is 'NC' or right is None:
             # left >= NC
@@ -207,7 +222,7 @@ class PelleasNumeric(DataType):
 
     def __lt__(self, right):
         left = self.value
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
         if right is 'NC' or right is None:
             # left < NC
@@ -221,7 +236,7 @@ class PelleasNumeric(DataType):
 
     def __le__(self, right):
         left = self.value
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
         if right is 'NC' or right is None:
             # left <= NC
@@ -235,7 +250,7 @@ class PelleasNumeric(DataType):
 
     def __eq__(self, right):
         left = self.value
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
         if left is None:
             # NC == right
@@ -249,7 +264,7 @@ class PelleasNumeric(DataType):
 
     def __ne__(self, right):
         left = self.value
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
         if left is None:
             # NC != right
@@ -268,7 +283,7 @@ class PelleasNumeric(DataType):
 
     @classmethod
     def decode(cls, data):
-        if isinstance(data, PelleasNumeric):
+        if isinstance(data, Numeric):
             return data
         elif data is None or str(data).upper() == 'NC':
             return cls('NC')
@@ -277,7 +292,7 @@ class PelleasNumeric(DataType):
 
     @staticmethod
     def encode(value):
-        if isinstance(value, PelleasNumeric):
+        if isinstance(value, Numeric):
             value = value.value
         if value is None:
             return 'NC'
@@ -285,23 +300,21 @@ class PelleasNumeric(DataType):
 
 
 
-class Decimal(PelleasNumeric):
+class NumDecimal(Numeric):
 
     def __init__(self, value=None, **kw):
-        PelleasNumeric.__init__(self, **kw)
-
+        Numeric.__init__(self, **kw)
         if value is not None:
             if value == 'NC':
                 value = None
-            elif isinstance(value, dec):
+            elif type(value) is dec:
                 pass
             elif value == '':
                 value = dec(0)
             else:
-                if isinstance(value, str):
+                if type(value) is str:
                     value = value.replace(',', '.')
                 value = dec(str(value))
-
         self.value = value
 
 
@@ -325,30 +338,28 @@ class Decimal(PelleasNumeric):
 
     @classmethod
     def encode_sql(cls, value):
-        if isinstance(value, Decimal):
+        if isinstance(value, NumDecimal):
             if value.value is None:
                 return 'NULL'
         return cls.encode(value)
 
 
 
-class Integer(PelleasNumeric):
+class NumInteger(Numeric):
 
     def __init__(self, value=None, **kw):
-        PelleasNumeric.__init__(self, **kw)
-
+        Numeric.__init__(self, **kw)
         if value is not None:
             if value == 'NC':
                 value = None
-            elif isinstance(value, int):
+            elif type(value) is int:
                 pass
             elif value == '':
                 value = 0
             else:
-                if isinstance(value, str):
+                if type(value) is str:
                     value = ''.join([x for x in value if x.isdigit()])
                 value = int(value)
-
         self.value = value
 
 
@@ -370,28 +381,26 @@ class Integer(PelleasNumeric):
 
     @classmethod
     def encode_sql(cls, value):
-        if isinstance(value, Integer):
+        if isinstance(value, NumInteger):
             if value.value is None:
                 return 'NULL'
         return cls.encode(value)
 
 
 
-class Time(PelleasNumeric):
+class NumTime(Numeric):
 
     def __init__(self, value=None, **kw):
-        PelleasNumeric.__init__(self, **kw)
-
+        Numeric.__init__(self, **kw)
         if value is not None:
             if value == 'NC':
                 value = None
-            elif isinstance(value, int):
+            elif type(value) is int:
                 pass
             elif value == '':
                 value = 0
             else:
                 value = int(value)
-
         self.value = value
 
 
@@ -413,7 +422,7 @@ class Time(PelleasNumeric):
 
     @staticmethod
     def encode(value):
-        if isinstance(value, Time):
+        if isinstance(value, NumTime):
             value = value.value
         if value is None:
             return 'NC'
@@ -444,18 +453,18 @@ class Time(PelleasNumeric):
 
     @classmethod
     def encode_sql(cls, value):
-        if isinstance(value, Time):
+        if isinstance(value, NumTime):
             if value.value is None:
                 return 'NULL'
         return "'%s'" % cls.encode(value)
 
 
 
-class ShortTime(Time):
+class NumShortTime(NumTime):
 
     @staticmethod
     def encode(value):
-        data = Time.encode(value)
+        data = NumTime.encode(value)
         if data == '' or data == 'NC':
             return data
 
@@ -467,15 +476,14 @@ class ShortTime(Time):
 
 
 
-class Date(DataType):
+class NumDate(DataType):
 
     def __init__(self, value=None, **kw):
         DataType.__init__(self, **kw)
-
         if value is not None:
             if value == 'NC':
                 value = None
-            elif isinstance(value, date):
+            elif type(value) is date:
                 pass
             elif value == '':
                 pass
@@ -486,7 +494,6 @@ class Date(DataType):
                     parts.insert(0, 1)
                 j, m, a = parts
                 value = date(int(a), int(m), int(j))
-
         self.value = value
 
 
@@ -500,7 +507,7 @@ class Date(DataType):
 
     def __cmp__(self, right):
         left = self.value
-        if isinstance(right, PelleasNumeric):
+        if isinstance(right, Numeric):
             right = right.value
         if right is 'NC' or right is None:
             if left is None:
@@ -546,11 +553,11 @@ class Date(DataType):
 
     @staticmethod
     def encode(value):
-        if isinstance(value, Date):
+        if isinstance(value, NumDate):
             value = value.value
         if value is None:
             return 'NC'
-        elif isinstance(value, str):
+        elif type(value) is str:
             return value
 
         return value.strftime('%d/%m/%Y')
@@ -586,11 +593,11 @@ class Date(DataType):
 
 
 
-class ShortDate(Date):
+class NumShortDate(NumDate):
 
     @staticmethod
     def encode(value):
-        data = Date.encode(value)
+        data = NumDate.encode(value)
         if data == '' or data == 'NC':
             return data
 
@@ -661,7 +668,7 @@ class Text(Unicode):
 
 
 
-class Boolean(Enumerate):
+class EnumBoolean(Enumerate):
     options = [
         {'name': '1', 'value': u"Oui"},
         {'name': '2', 'value': u"Non"},
@@ -675,7 +682,7 @@ class Boolean(Enumerate):
 
     @staticmethod
     def decode(data):
-        if isinstance(data, bool):
+        if type(data) is bool:
             return data
         # 0001892: '0' est l'ancienne représentation de False
         elif data in (None, '', '0', '2'):
@@ -691,9 +698,8 @@ class Boolean(Enumerate):
     def encode(value):
         if value in (True, '1'):
             return '1'
-        elif value in (False, '2'):
+        elif value in (False, None, '', '0', '2'):
             return '2'
-
         raise ValueError, str(value)
 
 

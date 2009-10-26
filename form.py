@@ -21,7 +21,7 @@
 # Import from itools
 from itools.core import get_abspath, merge_dicts
 from itools.csv import CSVFile
-from itools.datatypes import String, Unicode, Boolean
+from itools.datatypes import String, Boolean
 from itools.handlers import File as FileHandler
 
 # Import from ikaaro
@@ -31,8 +31,8 @@ from ikaaro.text import Text
 from ikaaro.workflow import workflow
 
 # Import from scrib
-from datatypes import Integer, Decimal, Time, ShortTime, Date, ShortDate
-from datatypes import Digit, Unicode as ScribUnicode, Boolean as ScribBool
+from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, NumDate
+from datatypes import NumShortDate, Digit, Unicode, EnumBoolean
 from help import HelpAware
 
 
@@ -46,7 +46,7 @@ def quote_namespace(namespace, schema):
         field_def = schema.get(key)
         if field_def is not None:
             ftype = field_def[0]
-            if ftype is ScribUnicode:
+            if ftype is Unicode:
                    if value is not None:
                        value = value.replace(u"€", u"eur")
                        value = value.replace(u'"', u'\\"')
@@ -81,28 +81,29 @@ def get_schema_pages(path):
             type = Text
         elif type == 'str':
             repr = int(repr)
-            type = ScribUnicode
+            type = Unicode
         elif type == 'int':
             repr = int(repr)
-            type = Integer
+            type = NumInteger
         elif type == 'HHH:MM':
-            type = Time
+            type = NumTime
         elif type == 'hh:mm':
-            type = ShortTime
+            type = NumShortTime
         elif type == 'jj/mm/aaaa':
-            type = Date
+            type = NumDate
         elif type == 'mm/aaaa':
-            type = ShortDate
+            type = NumShortDate
         elif type == 'boolean':
-            type = ScribBool
+            type = EnumBoolean
         elif type == 'dec':
             repr = sum([ int(x) for x in repr.split(',') ]) + 1
-            type = Decimal
+            type = NumDecimal
         elif type == 'digit':
             repr = int(repr)
             type = Digit
         else:
-            raise ValueError, "Type '%s' not supported in '%s'" % (type, path)
+            raise ValueError, "Type '%s' not supported in '%s'" % (type,
+                                                                   path)
         # The page number
         page_number = page_number.replace('-', '')
         # allow multiple page numbers
@@ -119,9 +120,8 @@ def get_schema_pages(path):
         # Add to the schema
         page_numbers = tuple(page_numbers)
         schema[name] = type(repr=repr, pages=page_numbers,
-                                    is_mandatory=is_mandatory, somme=somme,
-                                    abrege=abrege)
-
+                            is_mandatory=is_mandatory, somme=somme,
+                            abrege=abrege)
     return schema, pages
 
 
@@ -188,7 +188,7 @@ class FormHandler(FileHandler):
     # API (private)
     def _get_value(self, name):
         datatype = self.schema[name]
-        return self.fields.get(name) or datatype.decode(datatype.default)
+        return self.fields.get(name) or datatype.get_default()
 
 
     def _set_value(self, name, value):

@@ -31,7 +31,7 @@ from itools.stl import stl
 from ikaaro.skins import UIFile
 
 # Import from scrib
-from datatypes import PelleasNumeric, Decimal, Text, Time
+from datatypes import Numeric, NumDecimal, NumTime, Text
 
 
 WHITESPACE_DIV = u'<div>%s</div>'
@@ -186,7 +186,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
                 attrs['tabindex'] = tabindex
             pattern = u'<input %s />\n'
     # Right-align numeric fields
-    if isinstance(datatype, PelleasNumeric):
+    if isinstance(datatype, Numeric):
         attrs['class'] = u'num'
     # Check for "errors"
     bad_types = context.get_form_values('bad_type')
@@ -254,8 +254,8 @@ class UITable(UIFile, CSVFile):
         for name in schema:
             value = handler._get_value(name)
             vars[name] = value
-            if isinstance(value, PelleasNumeric):
-                floating_vars[name] = Decimal(value.value)
+            if isinstance(value, Numeric):
+                floating_vars[name] = NumDecimal(value.value)
             else:
                 floating_vars[name] = value
         tables = []
@@ -307,7 +307,7 @@ class UITable(UIFile, CSVFile):
                             raise SyntaxError, repr(column)
                     if not isinstance(column, basestring):
                         css_class += u' num'
-                        if isinstance(column, Time):
+                        if isinstance(column, NumTime):
                             # 0006611 numérique mais représentation textuelle
                             column = unicode(column)
                         elif isinstance(column, int):
