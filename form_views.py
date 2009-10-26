@@ -34,7 +34,7 @@ BREAK_FOOTER = PAGE_BREAK[1:]
 
 # Messages
 MSG_ERREUR_SAUVEGARDE = ERROR(
-        u"ATTENTION ! FICHE NON ENREGISTREE : "
+        u"ATTENTION ! "
         u"IL Y A DES RUBRIQUES MANQUANTES ET/OU INVALIDES")
 MSG_SAUVEGARDE = INFO(
         u"La page est enregistrée, veuillez vérifier votre saisie dans : "
