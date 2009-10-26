@@ -14,10 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Import from the Standard Library
+from datetime import date
+
 # Import from itools
-from itools.core import get_abspath
+from itools.core import get_abspath, merge_dicts
 from itools.csv import CSVFile
-from itools.datatypes import String, Unicode, Integer
+from itools.datatypes import String, Unicode, Integer, Date
 from itools.gettext import MSG
 from itools.web import get_context
 
@@ -33,8 +36,8 @@ from bm2009 import BM2009
 from bdp2009 import BDP2009
 from form import Form
 from forms import Forms
-from scrib_views import Scrib_Login, Scrib_PermissionsForm, Scrib_ExportForm
-from scrib_views import Scrib_Help, Scrib_ChangePassword
+from scrib_views import Scrib_Login, Scrib_Edit, Scrib_PermissionsForm
+from scrib_views import Scrib_ExportForm, Scrib_Help, Scrib_ChangePassword
 from user import ScribUser2009
 
 
@@ -65,6 +68,7 @@ class Scrib2009(WebSite):
 
     # Views
     login = Scrib_Login()
+    edit = Scrib_Edit()
     unauthorized = Scrib_Login()
     permissions_form = Scrib_PermissionsForm()
     export_form = Scrib_ExportForm()
@@ -148,6 +152,15 @@ class Scrib2009(WebSite):
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})
         print "Indexation de la base..."
+
+
+    ########################################################################
+    # Metadata
+    @classmethod
+    def get_metadata_schema(cls):
+        return merge_dicts(WebSite.get_metadata_schema(),
+                           echeance_bm=Date(default=date(2010, 4, 30)),
+                           echeance_bdp=Date(default=date(2010, 9, 15)))
 
 
     ########################################################################

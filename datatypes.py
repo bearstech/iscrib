@@ -17,42 +17,29 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from python
-from datetime import date
+from datetime import date, datetime
 from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
-from itools.datatypes import Unicode as BaseUnicode, Enumerate
+from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
 
 
-class DataType(object):
-    default = None
+class DateLitterale(DataType):
+    weekdays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi',
+                'dimanche']
+    # begin at index 1
+    months = ['', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+              'juillet', 'août', 'septembre', 'octobre', 'novembre',
+              'décembre']
 
 
-    def __init__(self, **kw):
-        for key in kw:
-            setattr(self, key, kw[key])
-
-
-    @staticmethod
-    def decode(data):
-        """Deserializes the given byte string to a value with a type."""
-        raise NotImplementedError
-
-
-    @staticmethod
-    def encode(value):
-        """Serializes the given value to a byte string."""
-        raise NotImplementedError
-
-
-    @staticmethod
-    def is_valid(value):
-        """Checks whether the given value is valid.
-
-        For example, for a natural number the value will be an integer,
-        and this method will check that it is not a negative number.
-        """
-        return True
+    @classmethod
+    def encode(cls, value):
+        if not value:
+            return ''
+        return (value.strftime("# %d & %Y")
+                     .replace('#', cls.weekdays[value.weekday()])
+                     .replace('&', cls.months[value.month]))
 
 
 

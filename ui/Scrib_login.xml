@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <h2>Connexion</h2>
+
+  <p style="color: red">
+    <b>ATTENTION  !</b><br/>
+    Si vous êtes une <b>BM</b>, vous pourrez renseigner votre rapport par la
+    voie électronique jusqu'au <b>${echeance_bm}</b>.<br/>
+    Si vous êtes une <b>BDP</b>, vous pourrez renseigner votre rapport par la
+    voie électronique jusqu'au <b>${echeance_bdp}</b>.
+  </p>
+
+  <form name="loginform" action=";login" id="loginform" method="post">
+    <fieldset>
+      <legend>Connexion</legend>
+      <dl>
+        <dt><label for="username">Identifiant ou adresse de
+            courriel</label></dt>
+        <dd>
+          <input value="${username}" name="username" id="username"
+            type="text"/>
+        </dd>
+        <dt><label for="password">Mot de passe</label></dt>
+        <dd>
+          <input id="password" name="password" type="password"></input>
+          <a href="/;forgotten_password">Mot de passe oublié</a>
+        </dd>
+      </dl>
+      <input value="OK" class="button-ok" type="submit"></input>
+    </fieldset>
+  </form>
+
+  <p>
+    Pour que la connexion s'établisse correctement, il faut que le navigateur
+    accepte les <em>cookies</em>.
+  </p>
+  <p>
+    Assurez-vous que ses paramètres sont corrects&nbsp;:
+  </p>
+  <ul>
+    <li>
+      Sur <strong>Firefox</strong> (recommandé)&nbsp;:<br/>
+      Outils/Options - Vie Privée - cookies - Cocher «&nbsp;Autoriser les cookies&nbsp;»
+    </li>
+    <li>
+      Sur <strong>Internet Explorer</strong>&nbsp;:<br/>
+      Outils/Options Internet - Onglet Confidentialité - Bouton
+      «&nbsp;Avancé&nbsp;» puis «&nbsp;Accepter tous les cookies&nbsp;».
+    </li>
+  </ul>
+
+  <script language="javascript">
+    <stl:inline stl:if="not username">$("#username").focus();</stl:inline>
+    <stl:inline stl:if="username">$("#password").focus();</stl:inline>
+  </script>
+
+</stl:block>

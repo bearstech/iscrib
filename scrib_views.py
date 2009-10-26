@@ -22,7 +22,7 @@ from datetime import datetime
 # Import from itools
 from itools import uri
 from itools.core import merge_dicts
-from itools.datatypes import String, Boolean
+from itools.datatypes import String, Boolean, Date
 from itools.gettext import MSG
 from itools.xapian import PhraseQuery, AndQuery, OrQuery
 from itools.datatypes import Unicode
@@ -30,23 +30,25 @@ from itools.web import BaseView, STLView, STLForm
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.resource_views import LoginView
+from ikaaro.forms import DateWidget
+from ikaaro.resource_views import LoginView, DBResource_Edit
 
 # Import from scrib
+from datatypes import DateLitterale
 from form import quote_namespace
 from utils import get_connection
 
 
 class Scrib_Login(LoginView):
-
     template = '/ui/scrib/Scrib_login.xml'
 
+
     def get_namespace(self, resource, context):
-        namespace = {}
-        here = context.resource
-        site_root = here.get_site_root()
-        namespace['action'] = '%s/;login' % here.get_pathto(site_root)
-        namespace['username'] = context.get_form_value('username')
+        namespace = LoginView.get_namespace(self, resource, context)
+        echeance_bm = resource.get_property('echeance_bm')
+        namespace['echeance_bm'] = DateLitterale.encode(echeance_bm)
+        echeance_bdp = resource.get_property('echeance_bdp')
+        namespace['echeance_bdp'] = DateLitterale.encode(echeance_bdp)
         return namespace
 
 
@@ -55,16 +57,34 @@ class Scrib_Login(LoginView):
         user = context.user
         if user is None:
             return goto
-        if user.name == 'VoirSCRIB' or user.is_admin(user, resource):
-            return uri.get_reference('./')
+        ac =  resource.get_access_control()
+        if user.is_voir_scrib() or ac.is_admin(user, resource):
+            return goto
         elif user.is_bm():
-            path = 'BM%s/%s' % (user.get_year(), user.get_BM_code())
-            report = resource.get_resource(path)
-            return uri.get_reference('%s/' % path)
+            path = 'bm/%s/' % user.get_bm_code()
         else:
-            path = 'BDP%s/%s' % (user.get_year(), user.get_department())
-            report = resource.get_resource(path)
-            return uri.get_reference('%s/' % path)
+            path = 'bdp/%s/' % user.get_department()
+        return uri.get_reference(path)
+
+
+
+class  Scrib_Edit(DBResource_Edit):
+    schema = merge_dicts(DBResource_Edit.schema,
+                         echeance_bm=Date,
+                         echeance_bdp=Date)
+    widgets = (DBResource_Edit.widgets[:3]
+               + [DateWidget('echeance_bm',
+                             title=MSG(u"Date d'échéance des BM")),
+                  DateWidget('echeance_bdp',
+                             title=MSG(u"Date d'échéance des BDP"))]
+               + DBResource_Edit.widgets[3:])
+
+
+    def action(self, resource, context, form):
+        DBResource_Edit.action(self, resource, context, form)
+        if not context.edit_conflict:
+            resource.set_property('echeance_bm', form['echeance_bm'])
+            resource.set_property('echeance_bdp', form['echeance_bdp'])
 
 
 
