@@ -33,6 +33,7 @@ from ikaaro.workflow import workflow
 # Import from scrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, NumDate
 from datatypes import NumShortDate, Digit, Unicode, EnumBoolean
+from datatypes import WorkflowState
 from help import HelpAware
 
 
@@ -208,7 +209,6 @@ class FormHandler(FileHandler):
     @classmethod
     def somme(cls, datatype, formule, **kw):
         value = 0
-
         for terme in formule.split('+'):
             terme = terme.strip()
             try:
@@ -225,7 +225,6 @@ class FormHandler(FileHandler):
             except ValueError:
                 return None
             value += valeur
-
         return datatype.encode(value)
 
 
@@ -273,15 +272,19 @@ class Form(HelpAware, File):
         """Translate workflow state to user-friendly state.
         """
         state = self.get_workflow_state()
+        # Match the enumerate in order to search by values
+        get_value = WorkflowState.get_value
         if state == EMPTY:
-            state = u'Vide' if not self.handler.fields else u'En cours'
+            if not self.handler.fields:
+                return get_value('vide')
+            return get_value('en_cours')
         elif state == SENT:
-            state = u'Envoyé'
+            return get_value('envoye')
         elif state == EXPORTED:
-            state = u'Exporté'
+            return get_value('exporte')
         elif state == MODIFIED:
-            state = u'Modifié après export'
-        return state
+            return get_value('modifie')
+        raise NotImplementedError, state
 
 
     def get_namespace(self, context):

@@ -878,6 +878,6 @@ class WorkflowState(Enumerate):
     options = [
         {'name': 'vide', 'value': u"Vide"},
         {'name': 'en_cours', 'value': u"En cours"},
-        {'name': 'termine', 'value': u"Terminé"},
+        {'name': 'envoye', 'value': u"Envoyé"},
         {'name': 'exporte', 'value': u"Exporté"},
         {'name': 'modifie', 'value': u"Modifié après export"}]

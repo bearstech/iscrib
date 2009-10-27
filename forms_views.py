@@ -40,9 +40,9 @@ class Forms_SearchForm(Folder_BrowseContent):
     search_template = '/ui/scrib/Forms_search.xml'
     search_schema = {
         'search_title': Unicode,
-        'search_dep': String,
+        'search_dep': Departements,
         'search_code_ua': Integer,
-        'search_state': String}
+        'search_state': WorkflowState}
     # Table
     table_actions = []
 
