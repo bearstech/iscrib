@@ -715,6 +715,7 @@ class EnumBoolean(Enumerate):
 
 
 class Digit(DataType):
+    default = ''
 
     @staticmethod
     def encode(value):

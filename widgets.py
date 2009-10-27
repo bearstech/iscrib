@@ -22,7 +22,6 @@
 # Import from itools
 from itools.csv import CSVFile
 from itools.datatypes import XMLContent, XMLAttribute
-from itools.handlers import register_handler_class
 from itools.html import HTMLParser
 from itools.stl import stl
 

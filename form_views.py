@@ -52,7 +52,6 @@ class Page_Form(STLForm):
             bad_types = context.bad_types
         except AttributeError:
             bad_types = context.bad_types = []
-        print "bad_types", bad_types
         view = context.query['view']
         table = resource.get_resource(PAGE_FILENAME % self.n)
         user = context.user

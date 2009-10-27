@@ -23,7 +23,7 @@
     <hr class="clear" />
   </p>
 
-  <form action="." method="post">
+  <form method="post">
     <input type="hidden" name="page_number" value="${page_number}" />
     <stl:block stl:repeat="table tables">
       <table class="scrib-table">
