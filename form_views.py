@@ -21,6 +21,7 @@ from itools.html import HTMLParser
 from itools.web import STLView, STLForm, INFO, ERROR
 
 # Import from scrib
+from form import SENT, EXPORTED
 from utils import SI, parse_control
 
 
@@ -61,7 +62,7 @@ class Page_Form(STLForm):
             skip_print = True
         readonly = False
         statename = resource.get_statename()
-        if statename == 'sent' and (user.is_bm() or user.is_bdp()):
+        if statename == SENT and (user.is_bm() or user.is_bdp()):
             # 0005566
             # Si le formulaire est dans l'état terminé,
             # une bibliothèque ne peut plus le modifier
@@ -78,7 +79,7 @@ class Page_Form(STLForm):
         statename = resource.get_statename()
         ac = resource.get_access_control()
         is_admin = ac.is_admin(user, resource)
-        if statename == 'exported' and is_admin is False:
+        if statename == EXPORTED and is_admin is False:
             context.message = ERROR(u"Vous ne pouvez plus modifier le "
                     u"questionnaire.")
             return
@@ -143,11 +144,6 @@ class Page_Form(STLForm):
             context.bad_types = bad_types
         else:
             context.message = MSG_SAUVEGARDE
-        # Start workflow on first write
-        if statename == 'empty':
-            if is_admin is False:
-                # The admin can alter without starting the workflow
-                resource.do_trans('start')
 
 
 

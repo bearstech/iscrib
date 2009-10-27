@@ -23,12 +23,12 @@ from itools.core import get_abspath, merge_dicts
 from itools.csv import CSVFile
 from itools.datatypes import String, Boolean
 from itools.handlers import File as FileHandler
-from itools.workflow import Workflow
 
 # Import from ikaaro
 from ikaaro.file import File
 from ikaaro.registry import register_field
 from ikaaro.text import Text
+from ikaaro.workflow import workflow
 
 # Import from scrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, NumDate
@@ -39,26 +39,14 @@ from help import HelpAware
 
 ############################################################################
 # Workflow
-workflow = Workflow()
-# States
-workflow.add_state('empty', title=u"Vide",
-        description=u"Non commencé")
-workflow.add_state('draft', title=u"En cours",
-        description=u"Commencé à remplir")
-workflow.add_state('sent', title=u"Envoyé",
-        description=u"Valide et envoyé au ministère")
-workflow.add_state('exported', title=u"Exporté",
-        description=u"Exporté dans la base de données")
-workflow.add_state('modified', title=u"Modifié",
+EMPTY = 'private' # if not handler.fields
+DRAFT = 'private' # if handler.fields
+SENT = 'pending'
+EXPORTED = 'public'
+MODIFIED = 'modified'
+# Simpler that comparing publish date to modification date
+workflow.add_state(MODIFIED, title=u"Modifié",
         description=u"Modifié après export")
-# Transitions (with ACL)
-workflow.add_trans('start', 'empty', 'draft',
-        description=u"Commencer le questionnaire", access=False)
-workflow.add_trans('send', 'draft', 'sent',
-    description=u"Envoyer votre questionnaire", access='can_send')
-workflow.add_trans('export', 'sent', 'exported',
-    description=u"Exporter le questionnaire", access='can_export')
-workflow.set_initstate('empty')
 
 
 
@@ -282,18 +270,16 @@ class Form(HelpAware, File):
 
 
     def get_form_state(self):
-        # State
+        """Translate workflow state to user-friendly state.
+        """
         state = self.get_workflow_state()
-        if state == 'private':
-            if len(self.handler.fields) == 0:
-                state = u'Vide'
-            else:
-                state = u'En cours'
-        elif state == 'pending':
-            state = u'Terminé'
-        elif state == 'public':
+        if state == EMPTY:
+            state = u'Vide' if not self.handler.fields else u'En cours'
+        elif state == SENT:
+            state = u'Envoyé'
+        elif state == EXPORTED:
             state = u'Exporté'
-        elif state == 'modified':
+        elif state == MODIFIED:
             state = u'Modifié après export'
         return state
 

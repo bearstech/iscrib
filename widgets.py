@@ -32,6 +32,7 @@ from ikaaro.skins import UIFile
 
 # Import from scrib
 from datatypes import Numeric, NumDecimal, NumTime, Text
+from form import SENT, EXPORTED
 
 
 WHITESPACE_DIV = u'<div>%s</div>'
@@ -238,11 +239,11 @@ class UITable(UIFile, CSVFile):
         ac = form.get_access_control()
         if not skip_print and not ac.is_admin(user, form):
             state = form.get_statename()
-            if state == 'sent':
+            if state == SENT:
                 if page < 10 or page in (12, 14) or page > 50:
                     # Comments 11 and 13 remain available
                     readonly = True
-            elif state == 'exported':
+            elif state == EXPORTED:
                 readonly = True
         # 0005160: affiche les champs même en lecture seule
         elif skip_print:
@@ -356,7 +357,7 @@ class UITable(UIFile, CSVFile):
         namespace['page_number'] = page
         namespace['tables'] = tables
         namespace['readonly'] = skip_print or readonly
-        namespace['first_time'] = form.get_statename() == 'empty'
+        namespace['first_time'] = not form.handler.fields
         namespace['skip_print'] = skip_print
         if not skip_print:
             if page == 11:

@@ -85,9 +85,6 @@ td.field-label {
   margin: 9px;
   font-weight: bold;
 }
-#profile span.wf-empty { color: #c00; }
-#profile span.wf-draft { color: #f57900; }
-#profile span.wf-sent, #profile span.wf-ready { color: #4e9a06; }
 #profile span.wf-exported { color: #000; }
 
 input.access-False,
