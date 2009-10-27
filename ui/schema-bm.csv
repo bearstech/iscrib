@@ -19,8 +19,8 @@
 "#A113","Fax","BM","A","digit",10,"0xxxxxxxxx","N",,,,"AC","N-1"
 "#A114","Courrier électronique ","BM","A","Str",60,,"N",,,,"AC","N-1"
 "#A115","Site internet","BM","A","Str",60,,"N",,,,"AC","N-1"
-"#A116","Statut site","BM","A","Boolean","Radio","Site internet propre / Page dédiée au sein du site de la collectivité","N",,,,"AC","N-1"
-"#A117","Mode de gestion de l'établissement","BM","A","Boolean","Radio"," Régie directe /  Association / Association avec convention",,,,,"AC","N-1"
+"#A116","Statut site","BM","A","Enum","Radio","Site internet propre / Page dédiée au sein du site de la collectivité","N",,,,"AC","N-1"
+"#A117","Mode de gestion de l'établissement","BM","A","Enum","Radio"," Régie directe /  Association / Association avec convention",,,,,"AC","N-1"
 ,,,,,,,,,,,,
 ,,,,,,,,,,,,
 ,,,,,,,,,,,,

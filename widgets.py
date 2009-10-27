@@ -20,7 +20,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
-from itools.core import add_type
 from itools.csv import CSVFile
 from itools.datatypes import XMLContent, XMLAttribute
 from itools.handlers import register_handler_class
@@ -155,7 +154,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     else:
         value = form.handler.get_value(name)
 
-    repr = datatype.repr
+    repr = datatype.repr.upper()
     if repr == 'SELECT':
         return select_widget(context, form, datatype, name, value, readonly)
     elif repr == 'RADIO':
@@ -225,9 +224,6 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
 
 
 class UITable(UIFile, CSVFile):
-    class_mimetypes = ['application/x-table']
-    class_extension = 'table.csv'
-
 
     ######################################################################
     # User Interface
@@ -373,10 +369,3 @@ class UITable(UIFile, CSVFile):
                     return false""" % page
         template = self.get_resource('/ui/scrib/Table_to_html.xml')
         return stl(template, namespace)
-
-
-
-###########################################################################
-# Register
-add_type(UITable.class_mimetypes[0], '.%s' % UITable.class_extension)
-register_handler_class(UITable)

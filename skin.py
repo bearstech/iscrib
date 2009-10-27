@@ -49,6 +49,9 @@ class ScribSkin(Skin):
 
 #############################################################################
 # Register
-map[UITable.class_mimetypes[0]] = UITable
+for mimetype in UITable.class_mimetypes:
+    # XXX tous les formats CSV seront lus comme des tables
+    # TODO enregistrer ".table.csv" comme ".tar.gz"
+    map[mimetype] = UITable
 path = get_abspath('ui')
 register_skin('scrib', ScribSkin(path))

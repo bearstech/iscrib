@@ -33,7 +33,7 @@ from ikaaro.workflow import workflow
 # Import from scrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, NumDate
 from datatypes import NumShortDate, Digit, Unicode, EnumBoolean
-from datatypes import WorkflowState
+from datatypes import WorkflowState, make_enumerate
 from help import HelpAware
 
 
@@ -87,13 +87,10 @@ def get_schema_pages(path):
         # The type and representation
         type = type.strip().lower()
         if type == 'text':
-            repr = int(repr)
             type = Text
         elif type == 'str':
-            repr = int(repr)
             type = Unicode
         elif type == 'int':
-            repr = int(repr)
             type = NumInteger
         elif type == 'HHH:MM':
             type = NumTime
@@ -106,14 +103,15 @@ def get_schema_pages(path):
         elif type == 'boolean':
             type = EnumBoolean
         elif type == 'dec':
-            repr = sum([ int(x) for x in repr.split(',') ]) + 1
+            # Number of characters with the comma
+            repr = str(sum([int(x) for x in repr.split(',')]) + 1)
             type = NumDecimal
         elif type == 'digit':
-            repr = int(repr)
             type = Digit
+        elif type == 'enum':
+            type = make_enumerate(vocabulary)
         else:
-            raise ValueError, "Type '%s' not supported in '%s'" % (type,
-                                                                   path)
+            raise NotImplementedError, (type, path)
         # The page number
         page_number = page_number.replace('-', '')
         # allow multiple page numbers

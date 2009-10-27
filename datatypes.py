@@ -22,6 +22,7 @@ from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
+from itools.handlers import checkid
 
 
 class DateLitterale(DataType):
@@ -688,7 +689,6 @@ class EnumBoolean(Enumerate):
             return False
         elif data == '1':
             return True
-
         raise ValueError, str(data)
 
 
@@ -880,3 +880,13 @@ class WorkflowState(Enumerate):
         {'name': 'envoye', 'value': u"Envoyé"},
         {'name': 'exporte', 'value': u"Exporté"},
         {'name': 'modifie', 'value': u"Modifié après export"}]
+
+
+
+def make_enumerate(raw):
+    options = []
+    for value in raw.strip().split('/'):
+        value = unicode(value.strip(), 'utf8')
+        options.append({'name': checkid(value),
+                        'value': value})
+    return SqlEnumerate(options=options)
