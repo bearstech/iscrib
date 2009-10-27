@@ -135,7 +135,7 @@ class Page_Form(STLForm):
                 # Nothing to save
                 continue
             # TODO Save the value wether it is good or wrong
-            handler._set_value(key, value)
+            handler.set_value(key, value)
         # Reindex
         context.server.change_resource(resource)
         # Transmit list of errors when returning GET
@@ -224,7 +224,7 @@ class Controls(STLForm):
         vars = {}
         vars['SI'] = SI
         for key in resource.handler.schema:
-            vars[key] = resource.handler._get_value(key)
+            vars[key] = resource.handler.get_value(key)
         # Errors
         errors = []
         warnings = []

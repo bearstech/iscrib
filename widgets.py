@@ -119,7 +119,7 @@ def select_widget(context, form, datatype, name, value, readonly=False):
                                         ('DISCCA', 'DIP2'),
                                         ('DISCDE', 'DIP3')]:
             if name == select_name:
-                radio_value = form.handler._get_value(radio_name)
+                radio_value = form.handler.get_value(radio_name)
                 if radio_value not in (True, '1'):
                     select.append(u' disabled="disabled"')
                     css_class.append(u"access_False")
@@ -152,7 +152,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     if context.has_form_value(name):
         value = context.get_form_value(name)
     else:
-        value = form.handler._get_value(name)
+        value = form.handler.get_value(name)
 
     repr = datatype.repr
     if repr == 'SELECT':
@@ -197,7 +197,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     elif datatype.is_mandatory and not value:
         attrs['class'] = u'mandatory'
         attrs['title'] = u'Champ obligatoire'
-    get_value = form.handler._get_value
+    get_value = form.handler.get_value
     # Disabled fields
     # TODO abrégé ou complet
     #if (datatype.mdt == 'M' and not get_value('MUSIQUE')
@@ -253,7 +253,7 @@ class UITable(UIFile, CSVFile):
         handler = form.handler
         schema = handler.schema
         for name in schema:
-            value = handler._get_value(name)
+            value = handler.get_value(name)
             vars[name] = value
             if isinstance(value, Numeric):
                 floating_vars[name] = NumDecimal(value.value)

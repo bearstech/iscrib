@@ -195,13 +195,13 @@ class FormHandler(FileHandler):
 
 
     ######################################################################
-    # API (private)
-    def _get_value(self, name):
+    # API
+    def get_value(self, name):
         datatype = self.schema[name]
         return self.fields.get(name) or datatype.get_default()
 
 
-    def _set_value(self, name, value):
+    def set_value(self, name, value):
         self.set_changed()
         self.fields[name] = value
 
