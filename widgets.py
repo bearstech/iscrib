@@ -226,7 +226,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
 
 class UITable(UIFile, CSVFile):
     class_mimetypes = ['application/x-table']
-    class_extension = 'table'
+    class_extension = 'table.csv'
 
 
     ######################################################################

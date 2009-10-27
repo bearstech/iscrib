@@ -25,13 +25,12 @@ from form import SENT, EXPORTED
 from utils import SI, parse_control
 
 
-#
+PAGE_FILENAME = '/ui/scrib/Page%s.table.csv'
+
 # Print
-#
 PAGE_BREAK = list(HTMLParser('<div style="page-break-after: always"></div>'))
 BREAK_HEADER = PAGE_BREAK[:1]
 BREAK_FOOTER = PAGE_BREAK[1:]
-
 
 # Messages
 MSG_ERREUR_SAUVEGARDE = ERROR(
@@ -55,7 +54,7 @@ class Page_Form(STLForm):
             bad_types = []
         print "bad_types", bad_types
         view = context.query['view']
-        table = resource.get_resource('/ui/scrib/Page%s.table' % self.n)
+        table = resource.get_resource(PAGE_FILENAME % self.n)
         user = context.user
         skip_print = (user.is_voir_scrib()) #or user.is_consultation())
         if view == 'printable':
@@ -191,9 +190,10 @@ class Print_Form(STLView):
                 10, 13]:
             if page not in resource.handler.pages:
                 continue
-            table = resource.get_resource('/ui/scrib/Page%s.table' % page)
+            table = resource.get_resource(PAGE_FILENAME % page)
             body.extend(BREAK_HEADER)
-            body.extend(table.to_html(context, resource, page, skip_print=True))
+            body.extend(table.to_html(context, resource, page,
+                skip_print=True))
             body.extend(BREAK_FOOTER)
 
         namespace['body'] = body
