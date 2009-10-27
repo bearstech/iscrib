@@ -80,43 +80,43 @@ class Page_Form(STLForm):
         is_admin = ac.is_admin(user, resource)
         if statename == 'exported' and is_admin is False:
             context.message = ERROR(u"Vous ne pouvez plus modifier le "
-                                    u"questionnaire.")
+                    u"questionnaire.")
             return
         # Save changes
         page_number = form['page_number']
         handler = resource.handler
         bad_types = []
         for key in handler.pages[page_number]:
-            datatype = handler.schema[key]
+            # Can't use "if not/continue" pattern here
             if context.has_form_value(key):
-                # Ne pas utiliser le form schema
-                value = context.get_form_value(key)
-                value = value.strip()
+                # Do not use form schema, only default String
+                value = context.get_form_value(key).strip()
+                datatype = handler.schema[key]
                 if datatype.somme:
                     expected_value = handler.somme(datatype, datatype.somme,
-                            **context.request.get_form())
+                            **form)
                     if value:
                         try:
                             value = datatype.encode(datatype.decode(value))
                         except ValueError:
-                            # got it wrong!
+                            # Got it wrong!
                             bad_types.append(key)
                             continue
-                        # sum inputed
+                        # Sum inputed
                         if expected_value != 'NC' and value != expected_value:
-                            # not what we get
+                            # Not what we get
                             if expected_value is not None:
-                                # what we got was ok so blame the user
+                                # What we got was OK so blame the user
                                 bad_types.append(key)
                                 continue
-                            # else, we got it wrong anyway
+                        # Else, we got it wrong anyway
                     else:
-                        # sum computed
+                        # Sum computed
                         if expected_value is not None:
-                            # got it right!
+                            # Got it right!
                             value = expected_value
                         else:
-                            # got it wrong!
+                            # Got it wrong!
                             bad_types.append(key)
                             continue
                 elif datatype.is_mandatory and not value:
@@ -128,24 +128,25 @@ class Page_Form(STLForm):
                     bad_types.append(key)
                     continue
             elif isinstance(datatype, Boolean):
+                # Default value for missing bool
                 value = False
             else:
+                # Nothing to save
                 continue
-
+            # TODO Save the value wether it is good or wrong
             handler._set_value(key, value)
-            # Reindex
-            context.server.change_resource(resource)
-        # But drop previous parameters
+        # Reindex
+        context.server.change_resource(resource)
+        # Transmit list of errors when returning GET
         if bad_types:
             context.message = MSG_ERREUR_SAUVEGARDE
             context.bad_types = bad_types
         else:
             context.message = MSG_SAUVEGARDE
         # Start workflow on first write
-        if resource.get_statename() == 'empty':
+        if statename == 'empty':
             if is_admin is False:
-                # Will notify the object changed
-                # only if the user is not an admin
+                # The admin can alter without starting the workflow
                 resource.do_trans('start')
 
 
