@@ -35,6 +35,7 @@ from datatypes import Numeric, NumDecimal, NumTime, Text
 from form import SENT, EXPORTED
 
 
+FIELD_PREFIX = u"#"
 WHITESPACE_DIV = u'<div>%s</div>'
 BORDER_DIV = u'<div style="border: 1px solid #D7D3D7;">%s</div>'
 ENABLE = (u'''onchange="this.form.%s.disabled=false;'''
@@ -167,7 +168,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     if not isinstance(value, basestring):
         value = datatype.encode(value)
     if not isinstance(value, unicode):
-        value = unicode(value, 'utf_8')
+        value = unicode(value, 'utf8')
     if isinstance(datatype, Text):
         if readonly:
             attrs = {'style': u'white-space: pre', 'class': 'readonly'}
@@ -270,7 +271,7 @@ class UITable(UIFile, CSVFile):
                 if tabindex:
                     tabindex = j * 100 + tabindex
                 if isinstance(column, str):
-                    column = unicode(column, 'utf_8')
+                    column = unicode(column, 'utf8')
                 column = column.strip()
                 if column == u'-':
                     try:
@@ -286,16 +287,19 @@ class UITable(UIFile, CSVFile):
                                     'class': None})
                     # new table but leave the index
                     tables.append([])
-                elif column.startswith(u'#'):
+                elif column.startswith(FIELD_PREFIX):
                     css_class = u'field-label'
                     if j > 0:
                         css_class += u' centered'
                     column = column[1:]
-                    if str(column) in schema:
+                    if not column:
+                        # Just a single "#" for obscure reason
+                        pass
+                    elif str(column) in schema:
                         column = get_input_widget(column, form, context,
                                 tabindex=tabindex, readonly=readonly)
                     else:
-                        # 0004922
+                        # 0004922 Fiche école ne fonctionne plus
                         column = column.replace('\n', '')
                         try:
                             if u'/' in column:
@@ -318,9 +322,9 @@ class UITable(UIFile, CSVFile):
                             column = u'%.1f' % column
                         else:
                             column = unicode(column)
+                    body = HTMLParser(column.encode('utf8'))
                     columns.append({'rowspan': None, 'colspan': None,
-                                    'body': HTMLParser(column.encode('utf_8')),
-                                    'class': css_class})
+                                    'body': body, 'class': css_class})
                 elif column:
                     css_class = u'field-label'
                     if j > 0:
@@ -330,9 +334,9 @@ class UITable(UIFile, CSVFile):
                     column = column.replace('&', '&amp;')
                     if column == u'100%':
                         css_class += u' num'
+                    body = HTMLParser(column.encode('utf8'))
                     columns.append({'rowspan': None, 'colspan': None,
-                                    'body': HTMLParser(column.encode('utf_8')),
-                                    'class': css_class})
+                                    'body': body, 'class': css_class})
                 elif columns:
                     colspan = columns[-1]['colspan']
                     if colspan is None:

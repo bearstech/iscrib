@@ -636,10 +636,9 @@ class Unicode(BaseUnicode):
     @staticmethod
     def is_valid(value, repr):
         try:
-            unicode(value, 'utf_8')
+            unicode(value, 'utf8')
         except UnicodeDecodeError:
             return False
-
         return True
 
 
