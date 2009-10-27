@@ -69,7 +69,7 @@ def radio_widget(context, form, datatype, name, value, readonly=False):
             checked = u'checked="checked" ' if option['selected'] else u''
             input = u'<input type="radio" name="%s" value="%s" %s %s /> %s' % (
                     name, option['name'], checked, onclick, option['value'])
-            if name in context.get_form_values('bad_type'):
+            if name in context.bad_types:
                 input = u'<span class="badtype" title="%s">%s</span>' %\
                         (u'Mauvaise valeur', input)
             elif datatype.is_mandatory and not value:
@@ -92,7 +92,7 @@ def checkbox_widget(context, form, datatype, name, value, readonly=False):
             checked = u'checked="checked" ' if option['selected'] else u''
             input = u'<input type="checkbox" name="%s" value="%s" %s /> %s' % (
                     name, option['name'], checked, option['value'])
-            if name in context.get_form_values('bad_type'):
+            if name in context.bad_types:
                 input = u'<span class="badtype" title="%s">%s</span>' %\
                         (u'Mauvaise valeur', input)
             elif datatype.is_mandatory and not value:
@@ -125,7 +125,7 @@ def select_widget(context, form, datatype, name, value, readonly=False):
                     css_class.append(u"access_False")
                 break
         # Check for "errors"
-        if name in context.get_form_values('bad_type'):
+        if name in context.bad_types:
             select.append(u' title="Mauvaise valeur"')
             css_class.append(u"badtype")
         elif datatype.is_mandatory and not value:
@@ -190,8 +190,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     if isinstance(datatype, Numeric):
         attrs['class'] = u'num'
     # Check for "errors"
-    bad_types = context.get_form_values('bad_type')
-    if name in bad_types:
+    if name in context.bad_types:
         attrs['class'] = u'badtype'
         attrs['title'] = u'Mauvaise valeur'
     elif datatype.is_mandatory and not value:
