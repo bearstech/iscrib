@@ -153,15 +153,17 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     else:
         value = form.handler.get_value(name)
 
-    repr = datatype.repr.upper()
-    if repr == 'SELECT':
+    format = datatype.format.upper()
+    if format == 'SELECT':
         return select_widget(context, form, datatype, name, value, readonly)
-    elif repr == 'RADIO':
-        return radio_widget(context, form, datatype, name, datatype.encode(value), readonly)
-    elif repr == 'CHECKBOX':
-        return checkbox_widget(context, form, datatype, name, value, readonly)
+    elif format == 'RADIO':
+        return radio_widget(context, form, datatype, name,
+                datatype.encode(value), readonly)
+    elif format == 'CHECKBOX':
+        return checkbox_widget(context, form, datatype, name, value,
+                readonly)
     else:
-        size = repr
+        size = format
     # Complex representation
     if not isinstance(value, basestring):
         value = datatype.encode(value)
@@ -172,7 +174,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
             attrs = {'style': u'white-space: pre', 'class': 'readonly'}
             pattern = u'<div %s>'
         else:
-            attrs = {'name': name, 'rows': datatype.repr, 'cols': 100}
+            attrs = {'name': name, 'rows': datatype.format, 'cols': 100}
             pattern = u'<textarea %s>'
     else:
         if readonly:

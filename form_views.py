@@ -121,7 +121,7 @@ class Page_Form(STLForm):
                 elif datatype.is_mandatory and not value:
                     bad_types.append(key)
                     continue
-                if datatype.is_valid(value, datatype.repr):
+                if datatype.is_valid(value):
                     value = datatype.decode(value)
                 else:
                     bad_types.append(key)

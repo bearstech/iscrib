@@ -320,21 +320,18 @@ class NumDecimal(Numeric):
 
 
     @staticmethod
-    def is_valid(data, repr):
+    def is_valid(data):
         if data.upper() == 'NC':
             return True
         try:
             dec(str(data))
         except InvalidOperation:
             return False
-
         return True
 
 
     def get_sql_schema(self):
-        # ASSUME precision == 2
-        repr = self.repr - 3
-        return "DECIMAL(%s,2) default 0.0" % repr
+        return "DECIMAL(%s) default 0.0" % self.format
 
 
     @classmethod
@@ -365,19 +362,18 @@ class NumInteger(Numeric):
 
 
     @staticmethod
-    def is_valid(data, repr):
+    def is_valid(data):
         if data.upper() == 'NC':
             return True
         try:
             int(data)
         except ValueError:
             return False
-
         return True
 
 
     def get_sql_schema(self):
-        return "INT(%s) default 0" % self.repr
+        return "INT(%s) default 0" % self.format
 
 
     @classmethod
@@ -429,12 +425,11 @@ class NumTime(Numeric):
             return 'NC'
         elif value == '':
             return ''
-
         return '%03d:%02d' % (value / 60, value % 60)
 
 
     @staticmethod
-    def is_valid(data, repr):
+    def is_valid(data):
         if data == '' or data.upper() == 'NC':
             return True
         if data.count(':') > 1:
@@ -444,7 +439,6 @@ class NumTime(Numeric):
                 int(x)
             except ValueError:
                 return False
-
         return True
 
 
@@ -565,7 +559,7 @@ class NumDate(DataType):
 
 
     @staticmethod
-    def is_valid(data, repr):
+    def is_valid(data):
         if data.upper() == 'NC':
             return True
         if data.count('/') != 2:
@@ -580,7 +574,6 @@ class NumDate(DataType):
             date(int(a), int(m), int(j))
         except ValueError:
             return False
-
         return True
 
 
@@ -606,7 +599,7 @@ class NumShortDate(NumDate):
 
 
     @staticmethod
-    def is_valid(data, repr):
+    def is_valid(data):
         if data.upper() == 'NC':
             return True
         if data.count('/') != 1:
@@ -621,7 +614,6 @@ class NumShortDate(NumDate):
             date(int(a), int(m), 1)
         except ValueError:
             return False
-
         return True
 
 
@@ -635,7 +627,7 @@ class Unicode(BaseUnicode):
 
 
     @staticmethod
-    def is_valid(value, repr):
+    def is_valid(value):
         try:
             unicode(value, 'utf8')
         except UnicodeDecodeError:
@@ -644,7 +636,7 @@ class Unicode(BaseUnicode):
 
 
     def get_sql_schema(self):
-        return "VARCHAR(%s) NOT NULL default ''" % self.repr
+        return "VARCHAR(%s) NOT NULL default ''" % self.format
 
 
     @classmethod
@@ -676,7 +668,7 @@ class EnumBoolean(Enumerate):
 
 
     @staticmethod
-    def is_valid(value, repr):
+    def is_valid(value):
         return value in (True, False, '1', '2')
 
 
@@ -731,13 +723,14 @@ class Digit(DataType):
         return ''.join([x for x in data if x.isdigit()])
 
 
-    @staticmethod
-    def is_valid(data, repr):
-        return data.isdigit() if len(data) == repr else data == ''
+    @classmethod
+    def is_valid(cls, data):
+        format = int(cls.format)
+        return data.isdigit() if len(data) == format else data == ''
 
 
     def get_sql_schema(self):
-        return "CHAR(%s) NOT NULL default ''" % self.repr
+        return "CHAR(%s) NOT NULL default ''" % self.format
 
 
     @classmethod
@@ -749,7 +742,7 @@ class Digit(DataType):
 class SqlEnumerate(Enumerate):
 
     @classmethod
-    def is_valid(cls, data, repr):
+    def is_valid(cls, data):
         return data in [x['name'] for x in cls.options]
 
 

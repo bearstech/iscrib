@@ -50,6 +50,18 @@ workflow.add_state(MODIFIED, title=u"Modifié",
         description=u"Modifié après export")
 
 
+dt_mapping = {
+    'text': Text,
+    'str': Unicode,
+    'int': NumInteger,
+    'HHH:MM': NumTime,
+    'hh:mm': NumShortTime,
+    'jj/mm/aaaa': NumDate,
+    'mm/aaaa': NumShortDate,
+    'boolean': EnumBoolean,
+    'dec': NumDecimal,
+    'digit': Digit}
+
 
 def quote_namespace(namespace, schema):
     for key, value in namespace.items():
@@ -75,43 +87,22 @@ def get_schema_pages(path):
 
     schema = {}
     pages = {}
-    for (name, title, form, page_number, type, repr, vocabulary,
+    for (name, title, form, page_number, dt_name, format, vocabulary,
             is_mandatory, fixed, somme, dependances, abrege, init) in rows:
         # The name
         name = name.strip()
         if name == '':
-            # Ligne vide
             continue
         if name[0] == '#':
             name = name[1:]
-        # The type and representation
-        type = type.strip().lower()
-        if type == 'text':
-            type = Text
-        elif type == 'str':
-            type = Unicode
-        elif type == 'int':
-            type = NumInteger
-        elif type == 'HHH:MM':
-            type = NumTime
-        elif type == 'hh:mm':
-            type = NumShortTime
-        elif type == 'jj/mm/aaaa':
-            type = NumDate
-        elif type == 'mm/aaaa':
-            type = NumShortDate
-        elif type == 'boolean':
-            type = EnumBoolean
-        elif type == 'dec':
-            # Number of characters with the comma
-            repr = str(sum([int(x) for x in repr.split(',')]) + 1)
-            type = NumDecimal
-        elif type == 'digit':
-            type = Digit
-        elif type == 'enum':
-            type = make_enumerate(vocabulary)
+        # The datatype
+        dt_name = dt_name.strip().lower()
+        if dt_name == 'enum':
+            datatype = make_enumerate(vocabulary)
         else:
-            raise NotImplementedError, (type, path)
+            datatype = dt_mapping.get(dt_name)
+        if datatype is None:
+            raise NotImplementedError, (dt_name, path)
         # The page number
         page_number = page_number.replace('-', '')
         # allow multiple page numbers
@@ -122,14 +113,13 @@ def get_schema_pages(path):
             page_fields.add(name)
             page_numbers.append(page)
         # Mandatory
-        is_mandatory = (is_mandatory.upper() == 'OUI')
+        is_mandatory = (not is_mandatory or is_mandatory.upper() == 'OUI')
         # Sum
         somme = somme.strip()
         # Add to the schema
         page_numbers = tuple(page_numbers)
-        schema[name] = type(repr=repr, pages=page_numbers,
-                            is_mandatory=is_mandatory, somme=somme,
-                            abrege=abrege)
+        schema[name] = datatype(format=format, pages=page_numbers,
+                is_mandatory=is_mandatory, somme=somme, abrege=abrege)
     return schema, pages
 
 
