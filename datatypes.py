@@ -46,7 +46,7 @@ class DateLitterale(DataType):
 
 class Numeric(DataType):
     """All arithmetical operations."""
-    default = '0'
+    default = ''
 
 
     @classmethod
