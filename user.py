@@ -22,7 +22,7 @@ from itools.datatypes import Integer, Unicode, String
 
 # Import from ikaaro
 from ikaaro.user import User as BaseUser
-from ikaaro.registry import register_field, register_resource_class
+from ikaaro.registry import register_resource_class
 
 # Import from scrib
 from user_views import User_Home
@@ -71,42 +71,8 @@ class ScribUser2009(User):
                            id=String)
 
 
-    #def _get_catalog_values(self):
-    #    values = User._get_catalog_values(self)
-    #    values['user_town'] = self.get_user_town()
-    #    values['departement'] = self.get_property('departement')
-    #    values['is_bdp'] = self.is_bdp()
-    #    values['is_bm'] = self.is_bm()
-    #    return values
-
-
-    ######################################################################
-    # Scrib API
-    def get_user_town(self):
-        title = u""
-        if self.is_bm():
-            code_ua = self.get_property('code_ua')
-            if code_ua:
-                # Cf. #2617
-                bib = get_bm(code_ua)
-                if bib:
-                    title = bib.get_value('name')
-                else:
-                    print "bib", code_ua, "n'existe pas"
-        return title
-
-
-    def get_department_name(self):
-        dep = self.get_property('department')
-        dep_name = get_bdp(dep)
-        if dep_name:
-            dep_name = dep_name.get_value('name')
-        return dep_name
-
-
 
 ###########################################################################
 # Register
 register_resource_class(User)
 register_resource_class(ScribUser2009)
-#register_field('user_town', Unicode(is_indexed=True))

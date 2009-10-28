@@ -107,8 +107,7 @@ class Forms_SearchForm(Folder_BrowseContent):
             query.append(PhraseQuery('form_state', form_state))
         # The city
         if title:
-            # FIXME StartQuery
-            query.append(PhraseQuery('title', title))
+            query.append(StartQuery('title', title))
         query = AndQuery(*query)
         # Search
         return context.root.search(query)

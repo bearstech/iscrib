@@ -54,9 +54,8 @@ class BM2009(Form):
 
 
     def _get_catalog_values(self):
-        values = Form._get_catalog_values(self)
-        values['code_ua'] = self.get_property('code_ua')
-        return values
+        return merge_dicts(Form._get_catalog_values(self),
+                code_ua=self.get_property('code_ua'))
 
 
     ######################################################################
