@@ -22,14 +22,11 @@ from datetime import datetime
 # Import from itools
 from itools import uri
 from itools.core import merge_dicts
-from itools.datatypes import String, Boolean, Date
+from itools.datatypes import Date
 from itools.gettext import MSG
-from itools.xapian import PhraseQuery, AndQuery, OrQuery
-from itools.datatypes import Unicode
 from itools.web import BaseView, STLView, STLForm
 
 # Import from ikaaro
-from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.forms import DateWidget
 from ikaaro.resource_views import LoginView, DBResource_Edit
 
@@ -57,14 +54,14 @@ class Scrib_Login(LoginView):
         user = context.user
         if user is None:
             return goto
-        ac =  resource.get_access_control()
-        if user.is_voir_scrib() or ac.is_admin(user, resource):
-            return goto
-        elif user.is_bm():
-            path = 'bm/%s/' % user.get_bm_code()
+        if user.is_bm():
+            path = 'bm/%s' % user.get_property('code_ua')
+        elif user.is_bdp():
+            path = 'bdp/%s' % user.get_property('departement')
         else:
-            path = 'bdp/%s/' % user.get_department()
-        return uri.get_reference(path)
+            return goto
+        form = resource.get_site_root().get_resource(path)
+        return resource.get_pathto(form)
 
 
 
@@ -85,96 +82,6 @@ class  Scrib_Edit(DBResource_Edit):
         if not context.edit_conflict:
             resource.set_property('echeance_bm', form['echeance_bm'])
             resource.set_property('echeance_bdp', form['echeance_bdp'])
-
-
-
-class Scrib_PermissionsForm(Folder_BrowseContent):
-    access = 'is_admin'
-    title = MSG(u"Utilisateurs")
-    search_template = '/ui/scrib/Scrib_permissions.xml'
-
-    query_schema = merge_dicts(
-        Folder_BrowseContent.query_schema,
-        sort_by=String(default='login_name'),
-        reverse=Boolean(default=False))
-
-    table_actions = []
-    table_columns = [('user_id', u'User ID'),
-                     ('login_name', u'Login'),
-                     ('role', u'Role')]
-
-
-    def get_search_namespace(self, resource, context):
-        namespace = {}
-        # The search form
-        search_bib = context.get_form_value('bib')
-        search_ville = context.get_form_value('ville', type=Unicode)
-        search_dep = context.get_form_value('dep', default='').upper()
-        search_annee = context.get_form_value('annee')
-
-        namespace['search_admins'] = search_bib == 'admins'
-        namespace['search_bm'] = search_bib == 'bm'
-        namespace['search_bdp'] = search_bib == 'bdp'
-        namespace['search_all'] = not search_bib
-        namespace['ville'] = search_ville
-        namespace['dep'] = search_dep
-        namespace['annee'] = search_annee
-        return namespace
-
-
-    def get_items(self, resource, context):
-        search_bib = context.get_form_value('bib')
-        search_ville = context.get_form_value('ville', type=Unicode)
-        search_dep = context.get_form_value('dep', default='').upper()
-        search_annee = context.get_form_value('annee')
-        query = [PhraseQuery('format', 'user')]
-        if search_bib == 'admins':
-            any_admin = OrQuery(*[PhraseQuery('name', admin)
-                for admin in self.get_property('admins')])
-            query.append(any_admin)
-        else:
-            if search_bib == 'bm':
-                query.append(PhraseQuery('stored_BM', True))
-            elif search_bib == 'bdp':
-                query.append(PhraseQuery('stored_BDP', True))
-            if search_ville:
-                query.append(PhraseQuery('user_town', search_ville))
-            if search_dep:
-                query.append(PhraseQuery('dep', search_dep))
-            if search_annee:
-                query.append(PhraseQuery('year', search_annee))
-
-        query = AndQuery(*query)
-        return resource.search(query)
-
-
-    def get_item_value(self, resource, context, item, column):
-        user, item_resource = item
-        if column == 'user_id':
-            href = '/users/%s' % user.name
-            return user.name, href
-        elif column == 'login_name':
-            return user.username
-        elif column == 'role':
-            # Find out the user role
-            user_id = user.name
-            roles = resource.get_members_classified_by_role()
-            for role in roles:
-                if user_id in roles[role]:
-                    break
-            else:
-                role = None
-            role = resource.get_role_title(role)
-            if role is None:
-                if user.stored_BDP:
-                    return u"BDP"
-                elif user.stored_BM:
-                    return u"BM"
-                else:
-                    return u""
-            else:
-                return role
-        raise ValueError, u'Unknow column'
 
 
 

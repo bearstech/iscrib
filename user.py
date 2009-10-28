@@ -26,14 +26,26 @@ from ikaaro.registry import register_resource_class
 
 # Import from scrib
 from user_views import User_Home
-#from utils import get_bdp, get_bm
 
 
 class User(BaseUser):
-    """Ici des méthodes communes à tous les utilisateurs, quelque soit leur
-    application, pour simplifier la gestion des droits. Surtout pour l'admin
-    qui est indépendant de toute application.
+    """Les méthodes sont communes à tous les utilisateurs, quelque soit leur
+    application, pour simplifier la gestion des droits.
     """
+    class_views = ['home', 'edit_password']
+
+    # Views
+    home = User_Home() # Si besoin déplacer dans la BM/BDP
+
+
+    @classmethod
+    def get_metadata_schema(cls):
+        return merge_dicts(User.get_metadata_schema(),
+                           title=Unicode,
+                           code_ua=Integer,
+                           departement=String,
+                           id=String)
+
 
     ######################################################################
     # Scrib API
@@ -52,27 +64,6 @@ class User(BaseUser):
 
 
 
-class ScribUser2009(User):
-    """Les utilisateurs spécifiques à Scrib.
-    """
-    class_id = 'ScribUser2009'
-    class_views = ['home', 'edit_password']
-
-    # Views
-    home = User_Home()
-
-
-    @classmethod
-    def get_metadata_schema(cls):
-        return merge_dicts(User.get_metadata_schema(),
-                           title=Unicode,
-                           code_ua=Integer,
-                           departement=String,
-                           id=String)
-
-
-
 ###########################################################################
 # Register
 register_resource_class(User)
-register_resource_class(ScribUser2009)

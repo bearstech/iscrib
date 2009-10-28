@@ -98,7 +98,7 @@ class Forms_SearchForm(Folder_BrowseContent):
                 query.append(PhraseQuery('code_ua', code_ua))
         else:
             query.append(PhraseQuery('is_bdp', True))
-        # The department
+        # The departement
         if dep:
             query.append(PhraseQuery('departement', dep))
         # The state

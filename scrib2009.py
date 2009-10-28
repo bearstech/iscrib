@@ -26,7 +26,7 @@ from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.registry import register_resource_class
+from ikaaro.registry import register_resource_class, get_resource_class
 from ikaaro.user import UserFolder
 from ikaaro.utils import crypt_password
 from ikaaro.website import WebSite
@@ -36,9 +36,8 @@ from bm2009 import BM2009
 from bdp2009 import BDP2009
 from form import Form
 from forms import Forms
-from scrib_views import Scrib_Login, Scrib_Edit, Scrib_PermissionsForm
+from scrib_views import Scrib_Login, Scrib_Edit
 from scrib_views import Scrib_ExportForm, Scrib_Help, Scrib_ChangePassword
-from user import ScribUser2009
 
 
 class UsersCSV(CSVFile):
@@ -64,13 +63,11 @@ class Scrib2009(WebSite):
 
     bm_class = BM2009
     bpd_class = BDP2009
-    user_class = ScribUser2009
 
     # Views
     login = Scrib_Login()
     edit = Scrib_Edit()
     unauthorized = Scrib_Login()
-    permissions_form = Scrib_PermissionsForm()
     export_form = Scrib_ExportForm()
     help = Scrib_Help()
     browse_content = Folder_BrowseContent(access='is_admin_or_voir_scrib')
@@ -117,14 +114,15 @@ class Scrib2009(WebSite):
         if user_id == '0':
             user_id = '1'
         print "  à partir de", user_id
+        user_class = get_resource_class('user')
         for metadata in users:
             # Bypasse set_user car trop lent
             # FIXME l'uri de users n'est pas "...database/users"
-            cls.user_class._make_resource(cls.user_class, folder,
-                                         "users/" + user_id,
-                                         # XXX l'adresse par défaut sera
-                                         # utilisée plusieurs fois
-                                         **metadata)
+            user_class._make_resource(user_class, folder,
+                                      "users/" + user_id,
+                                      # XXX l'adresse par défaut sera
+                                      # utilisée plusieurs fois
+                                      **metadata)
             user_ids.add(user_id)
             user_id = str(int(user_id) + 1)
         # Maintenant les créations de l'application/année
@@ -182,14 +180,14 @@ class Scrib2009(WebSite):
         if user.is_voir_scrib():
             return True
         if isinstance(resource, Form):
-            # Check the code UA or department
+            # Check the code UA or departement
             if user.is_bm():
                 if (user.get_property('code_ua')
                         != resource.get_property('code_ua')):
                     return False
             elif user.is_bdp():
-                if (user.get_property('department')
-                        != resource.get_property('department')):
+                if (user.get_property('departement')
+                        != resource.get_property('departement')):
                     return False
             # Must be registered for this year
             return self.has_user_role(user.name, 'members')
@@ -207,14 +205,14 @@ class Scrib2009(WebSite):
         if user.is_voir_scrib():
             return False
         if isinstance(resource, Form):
-            # Check the code UA or department
+            # Check the code UA or departement
             if user.is_bm():
                 if (user.get_property('code_ua')
                         != resource.get_property('code_ua')):
                     return False
             elif user.is_bdp():
-                if (user.get_property('department')
-                        != resource.get_property('department')):
+                if (user.get_property('departement')
+                        != resource.get_property('departement')):
                     return False
             # Must be registered for this year
             return self.has_user_role(user.name, 'members')

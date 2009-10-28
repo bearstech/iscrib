@@ -4,6 +4,13 @@
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
            xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
-  <h2><stl:inline>${dep}</stl:inline>, <stl:inline>${year}</stl:inline></h2>
-  >> <a stl:if="report_url" href="${report_url}">Editer rapport</a>
+
+  <h2>${application}</h2>
+  <h3>${departement}</h3>
+  <ul>
+    <li>
+      <a stl:if="form_url" href="${form_url}">Remplir le questionnaire</a>
+    </li>
+  </ul>
+
 </stl:block>

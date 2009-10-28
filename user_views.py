@@ -19,7 +19,7 @@ from itools.gettext import MSG
 from itools.web import STLView
 
 # Import from scrib
-#from utils import get_bdp, get_bm
+from datatypes import Departements
 
 
 class User_Home(STLView):
@@ -29,34 +29,22 @@ class User_Home(STLView):
 
 
     def get_namespace(self, resource, context):
-        root = context.root
-        name = resource.name
-        department, code_ua = '', ''
         namespace = {}
-
-        year = resource.get_year()
+        app = resource.get_site_root()
+        departement = resource.get_property('departement')
         if resource.is_bm():
-            code_ua = resource.get_bm_code()
-            report = root.get_resource('BM%s/%s' % (year, code_ua))
+            code_ua = resource.get_property('code_ua')
+            form = app.get_resource('bm/%s' % code_ua)
         elif resource.is_bdp():
-            department = resource.get_department()
-            report = root.get_resource('BDP%s/%s' % (year, department))
+            form = app.get_resource('bdp/%s' % departement)
         else:
-            report = None
-        if report is not None:
-            namespace['report_url'] = '%s/' % resource.get_pathto(report)
+            form = None
+        if form is not None:
+            namespace['form_url'] = '%s/' % resource.get_pathto(form)
         else:
-            namespace['report_url'] = None
-        # The year
-        namespace['year'] = year
-        # The department or the BM Code
-        namespace['dep'] = ''
-        if department:
-            bib = get_bdp(department)
-            if bib:
-                namespace['dep'] = bib.get_value('name')
-        elif code_ua:
-            bib = get_bm(code_ua)
-            if bib:
-                namespace['dep'] = bib.get_value('name')
+            namespace['form_url'] = None
+        # The application
+        namespace['application'] = app.get_title()
+        # The departement
+        namespace['departement'] = Departements.get_value(departement)
         return namespace
