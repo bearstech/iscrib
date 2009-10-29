@@ -47,10 +47,6 @@ class Forms(Folder):
         return self.name == 'bdp'
 
 
-    def get_year(self):
-        return int(self.parent.name[-4:])
-
-
 
 #########################################################################
 # Register

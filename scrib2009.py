@@ -26,7 +26,7 @@ from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.registry import register_resource_class, get_resource_class
+from ikaaro.registry import register_resource_class
 from ikaaro.user import UserFolder
 from ikaaro.utils import crypt_password
 from ikaaro.website import WebSite
@@ -38,6 +38,7 @@ from form import Form
 from forms import Forms
 from scrib_views import Scrib_Login, Scrib_Edit
 from scrib_views import Scrib_ExportForm, Scrib_Help, Scrib_ChangePassword
+from user import User
 
 
 class UsersCSV(CSVFile):
@@ -114,22 +115,24 @@ class Scrib2009(WebSite):
         if user_id == '0':
             user_id = '1'
         print "  à partir de", user_id
-        user_class = get_resource_class('user')
         for metadata in users:
             # Bypasse set_user car trop lent
             # FIXME l'uri de users n'est pas "...database/users"
-            user_class._make_resource(user_class, folder,
-                                      "users/" + user_id,
-                                      # XXX l'adresse par défaut sera
-                                      # utilisée plusieurs fois
-                                      **metadata)
+            User._make_resource(User, folder, "users/" + user_id,
+                                # XXX l'adresse par défaut sera
+                                # utilisée plusieurs fois
+                                **metadata)
             user_ids.add(user_id)
             user_id = str(int(user_id) + 1)
         # Maintenant les créations de l'application/année
         # et ses sous-ressources
         print "Création de l'application..."
-        WebSite._make_resource(cls, folder, name, website_languages=('fr',),
+        WebSite._make_resource(cls, folder, name, annee=2009,
+                               echeance_bm=date(2010, 4, 30),
+                               echeance_bdp=date(2010, 9, 15),
                                title={'fr': u"Scrib 2009"},
+                               website_languages=('fr',),
+                               vhosts=('localhost', 'scrib2009'),
                                # Donne un rôle dans ce website
                                # = accès à cette année
                                members=user_ids)
@@ -157,8 +160,9 @@ class Scrib2009(WebSite):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(WebSite.get_metadata_schema(),
-                           echeance_bm=Date(default=date(2010, 4, 30)),
-                           echeance_bdp=Date(default=date(2010, 9, 15)))
+                           annee=Integer,
+                           echeance_bm=Date,
+                           echeance_bdp=Date)
 
 
     ########################################################################

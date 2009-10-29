@@ -20,14 +20,13 @@ from os.path import join
 from datetime import datetime
 
 # Import from itools
-from itools import uri
 from itools.core import merge_dicts
-from itools.datatypes import Date
+from itools.datatypes import Date, Integer
 from itools.gettext import MSG
 from itools.web import BaseView, STLView, STLForm
 
 # Import from ikaaro
-from ikaaro.forms import DateWidget
+from ikaaro.forms import ReadOnlyWidget, DateWidget
 from ikaaro.resource_views import LoginView, DBResource_Edit
 
 # Import from scrib
@@ -67,13 +66,16 @@ class Scrib_Login(LoginView):
 
 class  Scrib_Edit(DBResource_Edit):
     schema = merge_dicts(DBResource_Edit.schema,
-                         echeance_bm=Date,
-                         echeance_bdp=Date)
+                         annee=Integer(mandatory=True, readonly=True),
+                         echeance_bm=Date(mandatory=True),
+                         echeance_bdp=Date(mandatory=True))
     widgets = (DBResource_Edit.widgets[:3]
-               + [DateWidget('echeance_bm',
-                             title=MSG(u"Date d'échéance des BM")),
+               + [ReadOnlyWidget('annee', readonly=True,
+                      title=MSG(u"Année des données collectées")),
+                  DateWidget('echeance_bm',
+                      title=MSG(u"Date d'échéance des BM")),
                   DateWidget('echeance_bdp',
-                             title=MSG(u"Date d'échéance des BDP"))]
+                      title=MSG(u"Date d'échéance des BDP"))]
                + DBResource_Edit.widgets[3:])
 
 
