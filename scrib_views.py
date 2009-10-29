@@ -37,7 +37,7 @@ from utils import get_connection
 
 
 class Scrib_Login(LoginView):
-    template = '/ui/scrib/Scrib_login.xml'
+    template = '/ui/scrib2009/Scrib_login.xml'
 
 
     def get_namespace(self, resource, context):
@@ -87,7 +87,7 @@ class Scrib_ExportForm(STLForm):
     access = 'is_admin'
     title = MSG(u"Export")
     #icon = File.download_form__icon__
-    template = '/ui/scrib/Scrib_export.xml'
+    template = '/ui/scrib2009/Scrib_export.xml'
 
 
     def action(self, resource, context, form):
@@ -223,7 +223,7 @@ class Scrib_Help(STLView):
     access = True
     title = MSG(u"Aide")
     #icon = '/ui/icons/16x16/help.png'
-    template = '/ui/scrib/Form_help.xml'
+    template = '/ui/scrib2009/Form_help.xml'
 
 
 

@@ -39,7 +39,7 @@ class ScribSkin(Skin):
             # Aruni
             '/ui/aruni/style.css',
             # Scrib
-            '/ui/scrib/style.css']
+            '/ui/scrib2009/style.css']
         # Dynamic styles
         for style in context.styles:
             styles.append(style)
@@ -53,5 +53,5 @@ for mimetype in UITable.class_mimetypes:
     # XXX tous les formats CSV seront lus comme des tables
     # TODO enregistrer ".table.csv" comme ".tar.gz"
     map[mimetype] = UITable
-path = get_abspath('ui')
-register_skin('scrib', ScribSkin(path))
+path = get_abspath('ui/scrib2009')
+register_skin('scrib2009', ScribSkin(path))

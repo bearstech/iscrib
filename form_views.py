@@ -25,7 +25,7 @@ from form import SENT, EXPORTED
 from utils import SI, parse_control
 
 
-PAGE_FILENAME = '/ui/scrib/Page%s.table.csv'
+PAGE_FILENAME = '/ui/scrib2009/Page%s.table.csv'
 
 # Print
 PAGE_BREAK = list(HTMLParser('<div style="page-break-after: always"></div>'))
@@ -162,20 +162,20 @@ class Help_Page(STLView):
             template = 'controls.xml'
         else:
             template = 'page%s.xml' % page
-        return self.get_resource('/ui/scrib/help/%s' % template)
+        return self.get_resource('/ui/scrib2009/help/%s' % template)
 
 
 
 class Print_Help(STLView):
     access = 'is_allowed_to_view'
     title = MSG(u"Impression du questionnaire")
-    template = '/ui/scrib/help/print.xml'
+    template = '/ui/scrib2009/help/print.xml'
 
 
 
 class Print_Form(STLView):
     access = 'is_allowed_to_view'
-    template = '/ui/scrib/help/template.xhtml'
+    template = '/ui/scrib2009/help/template.xhtml'
 
 
     def get_namespace(self, resource, context):
@@ -209,7 +209,7 @@ class Print_Form(STLView):
 class Controls(STLForm):
     access = 'is_allowed_to_view'
     title = MSG(u"Envoi du questionnaire")
-    template = '/ui/scrib/Form_controls.xml'
+    template = '/ui/scrib2009/Form_controls.xml'
 
 
     def get_namespace(self, resource, context):

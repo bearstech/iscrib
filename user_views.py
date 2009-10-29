@@ -25,7 +25,7 @@ from datatypes import Departements
 class User_Home(STLView):
     access = 'is_self_or_admin'
     title  = MSG(u"Home")
-    template = '/ui/scrib/User_home.xml'
+    template = '/ui/scrib2009/User_home.xml'
 
 
     def get_namespace(self, resource, context):

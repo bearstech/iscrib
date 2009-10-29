@@ -367,5 +367,5 @@ class UITable(UIFile, CSVFile):
                     'xxx', 'toolbar=no, location=no, status=no, menubar=no,\
                     scrollbars=yes, width=440, height=540');\
                     return false""" % page
-        template = self.get_resource('/ui/scrib/Table_to_html.xml')
+        template = self.get_resource('/ui/scrib2009/Table_to_html.xml')
         return stl(template, namespace)

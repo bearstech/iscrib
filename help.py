@@ -24,7 +24,7 @@ from itools.web import STLView
 
 
 class HelpView(STLView):
-    template = '/ui/scrib/help/help.xml'
+    template = '/ui/scrib2009/help/help.xml'
     access = True
     title = MSG(u'Aide générale')
 

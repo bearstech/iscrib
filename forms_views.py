@@ -37,7 +37,7 @@ class Forms_SearchForm(Folder_BrowseContent):
                                batch_size=Integer(default=50),
                                reverse=Boolean(default=False))
     # Search form
-    search_template = '/ui/scrib/Forms_search.xml'
+    search_template = '/ui/scrib2009/Forms_search.xml'
     search_schema = {
         'search_title': Unicode,
         'search_dep': Departements,

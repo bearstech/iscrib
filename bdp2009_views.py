@@ -24,7 +24,7 @@ class Form_BDP_PrintForm(HelpView):
 
     access = 'is_allowed_to_view'
     title = u'Imprimez votre rapport '
-    template = '/ui/scrib/printable_template.xhtml'
+    template = '/ui/scrib2009/printable_template.xhtml'
 
     def get_namespace(self, resource, context):
         context.response.set_header('Content-Type',
