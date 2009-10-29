@@ -289,7 +289,7 @@ class Controls(STLForm):
         namespace['transitions'] = transitions
 
         namespace['skip_print'] = False
-        if view == 'printable' or (user.is_voir_pelleas() or
+        if view == 'printable' or (user.is_voir_scrib() or
                                    user.is_consultation()):
             namespace['skip_print'] = True
 

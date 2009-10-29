@@ -23,6 +23,7 @@ from datetime import datetime
 from itools.core import merge_dicts
 from itools.datatypes import Date, Integer
 from itools.gettext import MSG
+from itools.uri import get_reference
 from itools.web import BaseView, STLView, STLForm
 
 # Import from ikaaro
@@ -53,14 +54,9 @@ class Scrib_Login(LoginView):
         user = context.user
         if user is None:
             return goto
-        if user.is_bm():
-            path = 'bm/%s' % user.get_property('code_ua')
-        elif user.is_bdp():
-            path = 'bdp/%s' % user.get_property('departement')
-        else:
-            return goto
-        form = resource.get_site_root().get_resource(path)
-        return resource.get_pathto(form)
+        elif user.is_bm() or user.is_bdp():
+            return get_reference('/users/%s' % user.name)
+        return goto
 
 
 

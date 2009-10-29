@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Import from pelleas
+# Import from scrib
 from form_views import Form_View
 from utils import reduce_generators
 from utils_views import HelpView
