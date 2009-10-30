@@ -29,7 +29,7 @@ from scrib2009 import Scrib2009
 
 class Root(BaseRoot):
     class_id = 'Culture'
-    class_title = MSG(u"Ministere de la Culture / Scrib")
+    class_title = MSG(u"Culture")
 
     __fixed_handlers__ = BaseRoot.__fixed_handlers__ + [
             # Ajouter ici les applications/années successives
@@ -40,7 +40,9 @@ class Root(BaseRoot):
     @staticmethod
     def _make_resource(cls, folder, email, password):
         assert '@' in email
-        root = BaseRoot._make_resource(cls, folder, email, password)
+        root = BaseRoot._make_resource(cls, folder, email, password,
+                title={'fr': u"Ministère de la Culture"},
+                website_languages=('fr',))
         # La première application/année créée en dur
         # Les suivantes devront être ajoutées depuis l'interface
         Scrib2009._make_resource(Scrib2009, folder, 'scrib2009')

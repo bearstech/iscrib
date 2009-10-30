@@ -5,7 +5,7 @@
   <stl:block stl:if="not skip_print">
     <p stl:if="first_time">
       <strong style="border: 1px solid red; background: red"><a
-        style="color: white" href=";help">Veuiller consulter l'aide
+        style="color: white" href="/;aide">Veuillez consulter l'aide
           générale.</a></strong>
     </p>
   </stl:block>

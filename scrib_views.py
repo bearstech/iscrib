@@ -24,7 +24,7 @@ from itools.core import merge_dicts
 from itools.datatypes import Date, Integer
 from itools.gettext import MSG
 from itools.uri import get_reference
-from itools.web import BaseView, STLView, STLForm
+from itools.web import BaseView, STLForm
 
 # Import from ikaaro
 from ikaaro.forms import ReadOnlyWidget, DateWidget
@@ -216,14 +216,6 @@ class Scrib_ExportForm(STLForm):
 
         msg = MSG(u"Fichier exporté dans '%s'" % output_path)
         return context.come_back(msg)
-
-
-
-class Scrib_Help(STLView):
-    access = True
-    title = MSG(u"Aide")
-    #icon = '/ui/icons/16x16/help.png'
-    template = '/ui/scrib2009/Form_help.xml'
 
 
 

@@ -25,10 +25,13 @@ from itools.gettext import MSG
 from itools.web import get_context
 
 # Import from ikaaro
-from ikaaro.folder_views import Folder_BrowseContent
+from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.registry import register_resource_class
+from ikaaro.resource_views import DBResource_Backlinks
+from ikaaro.revisions_views import DBResource_LastChanges
 from ikaaro.user import UserFolder
 from ikaaro.utils import crypt_password
+from ikaaro.webpage import WebPage, WebPage_View
 from ikaaro.website import WebSite
 
 # Import from scrib
@@ -37,7 +40,7 @@ from bdp2009 import BDP2009
 from form import Form
 from forms import Forms
 from scrib_views import Scrib_Login, Scrib_Edit
-from scrib_views import Scrib_ExportForm, Scrib_Help, Scrib_ChangePassword
+from scrib_views import Scrib_ExportForm, Scrib_ChangePassword
 from user import User
 
 
@@ -61,6 +64,9 @@ class Scrib2009(WebSite):
     class_id = 'Scrib2009'
     class_title = MSG(u"Scrib 2009")
     class_skin = 'ui/scrib2009'
+    class_views = WebSite.class_views + ['aide']
+
+    __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide']
 
     bm_class = BM2009
     bpd_class = BDP2009
@@ -68,10 +74,12 @@ class Scrib2009(WebSite):
     # Views
     login = Scrib_Login()
     edit = Scrib_Edit()
-    unauthorized = Scrib_Login()
     export_form = Scrib_ExportForm()
-    help = Scrib_Help()
     browse_content = Folder_BrowseContent(access='is_admin_or_voir_scrib')
+    preview_content = Folder_PreviewContent(access='is_admin_or_voir_scrib')
+    backlinks = DBResource_Backlinks(access='is_admin_or_voir_scrib')
+    last_changes = DBResource_LastChanges(access='is_admin_or_voir_scrib')
+    aide = WebPage_View(template='aide', title=MSG(u"Aide"))
     xchangepassword = Scrib_ChangePassword()
 
 
@@ -136,6 +144,13 @@ class Scrib2009(WebSite):
                                # Donne un rôle dans ce website
                                # = accès à cette année
                                members=user_ids)
+        # Pages
+        print "Création des pages..."
+        for id, title, filename in [('aide', u"Aide", 'help.xhtml')]:
+            with open(get_abspath('ui/scrib2009/' + filename)) as file:
+                WebPage._make_resource(WebPage, folder, '/'.join((name, id)),
+                        title={'fr': title}, state='public', language='fr',
+                        body=file.read())
         # BM
         print "Création des BM..."
         Forms._make_resource(Forms, folder, "%s/bm" % name,
@@ -150,6 +165,7 @@ class Scrib2009(WebSite):
                     (name, code_ua), code_ua=code_ua, title={'fr': title},
                     departement=departement, id=id)
         # TODO Créer les BDP
+        print "Création des BDP..."
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})
         print "Indexation de la base..."
