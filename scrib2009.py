@@ -26,6 +26,7 @@ from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
+from ikaaro.forms import XHTMLBody
 from ikaaro.registry import register_resource_class
 from ikaaro.resource_views import DBResource_Backlinks
 from ikaaro.revisions_views import DBResource_LastChanges
@@ -138,6 +139,14 @@ class Scrib2009(WebSite):
         WebSite._make_resource(cls, folder, name, annee=2009,
                                echeance_bm=date(2010, 4, 30),
                                echeance_bdp=date(2010, 9, 15),
+                               adresse=XHTMLBody.decode("""\
+<p><span style="color: #000000;">Direction du livre et de la lecture</span></p>
+<p><span style="color: #000000;">Bureau des bibliothèques territoriales</span></p>
+<p><span style="color: #000000;">182, rue Saint-Honoré</span></p>
+<p><span style="color: #000000;">75033 PARIS CEDEX 01</span></p>"""),
+                               contacts=XHTMLBody.decode("""\
+<p><span style="color: #000000;">BDP : <strong><span style="color: #ffffff;"><a href="mailto:christophe.sene@culture.gouv.fr">christophe.sene@culture.gouv.fr</a></span></strong> 01 40 15 73 74</span></p>
+<p><span style="color: #000000;">BM : <strong><span style="color: #ffffff;"><a href="mailto:denis.cordazzo@culture.gouv.fr">denis.cordazzo@culture.gouv.fr</a></span></strong> 01 40 15 74 85</span></p>"""),
                                title={'fr': u"Scrib 2009"},
                                website_languages=('fr',),
                                vhosts=('localhost', 'scrib2009'),
@@ -178,7 +187,9 @@ class Scrib2009(WebSite):
         return merge_dicts(WebSite.get_metadata_schema(),
                            annee=Integer,
                            echeance_bm=Date,
-                           echeance_bdp=Date)
+                           echeance_bdp=Date,
+                           adresse=XHTMLBody,
+                           contacts=XHTMLBody)
 
 
     ########################################################################

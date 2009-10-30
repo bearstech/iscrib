@@ -27,7 +27,7 @@ from itools.uri import get_reference
 from itools.web import BaseView, STLForm
 
 # Import from ikaaro
-from ikaaro.forms import ReadOnlyWidget, DateWidget
+from ikaaro.forms import XHTMLBody, ReadOnlyWidget, DateWidget, RTEWidget
 from ikaaro.resource_views import LoginView, DBResource_Edit
 
 # Import from scrib
@@ -64,14 +64,20 @@ class  Scrib_Edit(DBResource_Edit):
     schema = merge_dicts(DBResource_Edit.schema,
                          annee=Integer(mandatory=True, readonly=True),
                          echeance_bm=Date(mandatory=True),
-                         echeance_bdp=Date(mandatory=True))
+                         echeance_bdp=Date(mandatory=True),
+                         adresse=XHTMLBody,
+                         contacts=XHTMLBody)
     widgets = (DBResource_Edit.widgets[:3]
                + [ReadOnlyWidget('annee', readonly=True,
                       title=MSG(u"Année des données collectées")),
                   DateWidget('echeance_bm',
                       title=MSG(u"Date d'échéance des BM")),
                   DateWidget('echeance_bdp',
-                      title=MSG(u"Date d'échéance des BDP"))]
+                      title=MSG(u"Date d'échéance des BDP")),
+                  RTEWidget('adresse',
+                      title=MSG("Adresse de la direction")),
+                  RTEWidget('contacts',
+                      title=MSG("Contacts BM et BDP"))]
                + DBResource_Edit.widgets[3:])
 
 
@@ -80,6 +86,8 @@ class  Scrib_Edit(DBResource_Edit):
         if not context.edit_conflict:
             resource.set_property('echeance_bm', form['echeance_bm'])
             resource.set_property('echeance_bdp', form['echeance_bdp'])
+            resource.set_property('adresse', form['adresse'])
+            resource.set_property('contacts', form['contacts'])
 
 
 

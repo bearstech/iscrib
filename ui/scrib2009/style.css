@@ -50,31 +50,37 @@ td.field-label {
 }
 
 #header {
-  padding: 40px 10px 10px 10px;
+  padding: 19px 10px 10px 90px;
   background: #729fcf url(images/logo.png) left bottom no-repeat;
+  text-align: left;
+}
+
+#top-menu {
   text-align: right;
 }
 
-#scrib-adress  {
+#scrib-adresse  {
   position: absolute;
-  top: 4px;
-  left: 200px;
-  width: 340px;
+  top: 0px;
+  left: 210px;
+  width: 240px;
   height: 80px;
   margin: 0;
   padding: 0; 
   font-size: 10px;
+  line-height: 1em;
 }
 
 #scrib-contacts  {
   position: absolute;
-  top: 4px;
-  left: 545px;
-  width: 180px;
+  top: 0px;
+  left: 450px;
+  width: 480px;
   height: 80px;
   margin: 0;
   padding: 0;
   font-size: 10px;
+  line-height: 1em;
 }
 
 .scrib-table td {
