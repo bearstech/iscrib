@@ -99,7 +99,7 @@ class Scrib2009(WebSite):
                   'password': crypt_password('BMBDP'),
                   'email': 'TODO'}]
         user_ids = set()
-        users_csv = UsersCSV(get_abspath('ui/users.csv'))
+        users_csv = UsersCSV(get_abspath('ui/scrib2009/users.csv'))
         for row in users_csv.get_rows():
             email = row.get_value('mel').strip() or 'TODO'
             # Contre les adresses avec des accents

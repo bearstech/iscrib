@@ -30,8 +30,8 @@ from form_views import Page_Form
 
 
 class BM2009Handler(FormHandler):
-    schema, pages = get_schema_pages('ui/schema-bm.csv')
-    controles = get_controls('ui/controls-bm.csv')
+    schema, pages = get_schema_pages('ui/scrib2009/schema-bm.csv')
+    controles = get_controls('ui/scrib2009/controls-bm.csv')
 
 
 
