@@ -38,12 +38,13 @@ class BM2009Handler(FormHandler):
 class BM2009(Form):
     class_id = 'BM2009'
     class_handler = BM2009Handler
-    class_views = ['pageA', 'pageB', 'pageC'] + Form.class_views
+    class_views = ['pageA', 'pageB', 'pageC', 'comments'] + Form.class_views
 
     # Views
     pageA = Page_Form(title=MSG(u"A-Identité"), n='A')
     pageB = Page_Form(title=MSG(u"B-Bibliothèques du réseau"), n='B')
     pageC = Page_Form(title=MSG(u"C-Accès et installation"), n='C')
+    comments = Page_Form(title=MSG(u"Commentaires"), n='Z')
 
 
     @classmethod

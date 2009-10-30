@@ -22,20 +22,20 @@
 from itools.core import get_abspath, merge_dicts
 from itools.csv import CSVFile
 from itools.datatypes import String, Boolean
+from itools.gettext import MSG
 from itools.handlers import File as FileHandler
 
 # Import from ikaaro
 from ikaaro.file import File
 from ikaaro.registry import register_field
 from ikaaro.text import Text
+from ikaaro.webpage import WebPage_View
 from ikaaro.workflow import workflow
 
 # Import from scrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, NumDate
 from datatypes import NumShortDate, Digit, Unicode, EnumBoolean
 from datatypes import WorkflowState, make_enumerate
-from help import HelpAware
-
 
 
 ############################################################################
@@ -217,15 +217,19 @@ class FormHandler(FileHandler):
 
 
 
-class Form(HelpAware, File):
+class Form(File):
     class_id = 'Form'
     class_handler = FormHandler
     class_icon48 = 'scrib/images/form48.png'
-    class_views = ['controles', 'report_csv', 'print_form', 'help']
+    class_views = ['controles', 'exporter', 'imprimer', 'aide']
     class_handler = FormHandler
     workflow = workflow
 
     # Views
+    controles = WebPage_View(template='../../aide', title=MSG(u"Contrôles"))
+    exporter = WebPage_View(template='../../aide', title=MSG(u"Exporter"))
+    imprimer = WebPage_View(template='../../aide', title=MSG(u"Imprimer"))
+    aide = WebPage_View(template='../../aide', title=MSG(u"Aide"))
 
 
     @classmethod
