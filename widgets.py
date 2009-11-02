@@ -245,17 +245,10 @@ class UITable(UIFile, CSVFile):
         # 0005160: affiche les champs même en lecture seule
         elif skip_print:
             readonly = True
-        vars = {}
-        floating_vars = {}
         handler = form.handler
         schema = handler.schema
-        for name in schema:
-            value = handler.get_value(name)
-            vars[name] = value
-            if isinstance(value, Numeric):
-                floating_vars[name] = NumDecimal(value.value)
-            else:
-                floating_vars[name] = value
+        vars = form.get_vars()
+        floating_vars = form.get_floating_vars()
         tables = []
         tables.append([])
         table_index = 0

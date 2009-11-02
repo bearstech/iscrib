@@ -31,8 +31,8 @@ from ikaaro.webpage import WebPage_View
 from ikaaro.workflow import workflow
 
 # Import from scrib
-from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, NumDate
-from datatypes import NumShortDate, Digit, Unicode, EnumBoolean
+from datatypes import Numeric, NumInteger, NumDecimal, NumTime, NumShortTime
+from datatypes import NumDate, NumShortDate, Digit, Unicode, EnumBoolean
 from datatypes import WorkflowState, make_enumerate
 from form_views import Controls_View
 from utils import SI
@@ -131,46 +131,38 @@ class FormHandler(FileHandler):
     ######################################################################
     # Load/Save
     def new(self, **kw):
+        """Preload with all known keys, fill the gaps with defaults.
+        """
         fields = {}
-        for key, data in kw.iteritems():
-            if key not in self.schema:
-                continue
-            datatype = self.schema[key]
+        for key, datatype in self.schema.iteritems():
+            try:
+                data = kw[key]
+            except KeyError:
+                data = datatype.get_default()
             try:
                 value = datatype.decode(data)
             except ValueError:
                 raise ValueError, "'%s': '%s'" % (key, data)
-            # XXX ?
-            if value is not None:
-                fields[key] = value
+            fields[key] = value
         self.fields = fields
 
 
     def _load_state_from_file(self, file):
-        """Only load found key/value pairs, for keeping the form empty if
-        never filled."""
-        fields = {}
+        """Load known values, the rest will be the default values.
+        """
+        kw = {}
         for line in file.readlines():
-            line = line.strip()
             if ':' not in line:
                 continue
             key, data = line.split(':', 1)
-            if key not in self.schema:
-                continue
-            data = data.strip()
-            datatype = self.schema[key]
-            try:
-                fields[key] = datatype.decode(data)
-            except:
-                raise ValueError, "'%s':'%s'" % (key, data)
-        self.fields = fields
+            kw[key.strip()] = data.strip()
+        self.new(**kw)
 
 
     def to_str(self, encoding='UTF-8'):
         fields = self.fields
         lines = []
-        for key in fields:
-            value = fields[key]
+        for key, value in fields.iteritems():
             datatype = self.schema[key]
             lines.append('%s:%s' % (key, datatype.encode(value)))
         return '\n'.join(lines)
@@ -179,13 +171,12 @@ class FormHandler(FileHandler):
     ######################################################################
     # API
     def get_value(self, name):
-        datatype = self.schema[name]
-        return self.fields.get(name) or datatype.get_default()
+        return self.fields[name]
 
 
     def set_value(self, name, value):
-        self.set_changed()
         self.fields[name] = value
+        self.set_changed()
 
 
     @classmethod
@@ -261,7 +252,7 @@ class Form(File):
         # Match the enumerate in order to search by values
         get_value = WorkflowState.get_value
         if state == EMPTY:
-            if not self.handler.fields:
+            if self.is_first_time():
                 return get_value('vide')
             return get_value('en_cours')
         elif state == SENT:
@@ -274,11 +265,22 @@ class Form(File):
 
 
     def get_vars(self):
-        vars = {'SI': SI}
-        handler = self.handler
-        for key in handler.schema:
-            vars[key] = handler.get_value(key)
+        return merge_dicts(self.handler.fields,
+                           SI=SI)
+
+
+    def get_floating_vars(self):
+        vars = {}
+        for name, value in self.handler.fields.iteritems():
+            if isinstance(value, Numeric):
+                vars[name] = NumDecimal(value.value)
+            else:
+                vars[name] = value
         return vars
+
+
+    def is_first_time(self):
+        return self.handler.timestamp is None
 
 
     def get_namespace(self, context):

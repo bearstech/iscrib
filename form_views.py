@@ -18,11 +18,11 @@
 from itools.datatypes import Boolean, String
 from itools.gettext import MSG
 from itools.html import HTMLParser
-from itools.web import BaseView, STLView, STLForm, INFO, ERROR
+from itools.web import BaseForm, STLView, STLForm, INFO, ERROR
 
 # Import from scrib
 from utils import parse_control
-from workflow import SENT, EXPORTED, SEND, EXPORT
+from workflow import SENT, SEND, EXPORT
 
 
 PAGE_FILENAME = '/ui/scrib2009/Page%s.table.csv'
@@ -41,9 +41,10 @@ MSG_SAUVEGARDE = INFO(
         u"Envoi du questionnaire")
 
 
-class Form_View(BaseView):
+class Form_View(BaseForm):
     # TODO STLView
     access = 'is_allowed_to_view'
+    access_POST = 'is_allowed_to_edit'
     schema = {'page_number': String}
     query_schema = {'view': String}
 
@@ -71,18 +72,6 @@ class Form_View(BaseView):
 
 
     def action(self, resource, context, form):
-        user = context.user
-        if user.is_voir_scrib():
-            from itools.http.exceptions import Forbidden
-            raise Forbidden
-        statename = resource.get_statename()
-        ac = resource.get_access_control()
-        is_admin = ac.is_admin(user, resource)
-        if statename == EXPORTED and is_admin is False:
-            context.message = ERROR(u"Vous ne pouvez plus modifier le "
-                    u"questionnaire.")
-            return
-        # Save changes
         page_number = form['page_number']
         handler = resource.handler
         bad_types = []
@@ -90,14 +79,15 @@ class Form_View(BaseView):
             # Can't use "if not/continue" pattern here
             if context.has_form_value(key):
                 # Do not use form schema, only default String
-                value = context.get_form_value(key).strip()
+                data = context.get_form_value(key).strip()
                 datatype = handler.schema[key]
                 if datatype.somme:
                     expected_value = handler.somme(datatype, datatype.somme,
-                            **form)
-                    if value:
+                            # Raw form, not the filtered one
+                            **context.request.get_form())
+                    if data:
                         try:
-                            value = datatype.encode(datatype.decode(value))
+                            value = datatype.encode(datatype.decode(data))
                         except ValueError:
                             # Got it wrong!
                             bad_types.append(key)
@@ -119,16 +109,16 @@ class Form_View(BaseView):
                             # Got it wrong!
                             bad_types.append(key)
                             continue
-                elif datatype.is_mandatory and not value:
+                elif datatype.is_mandatory and not data:
                     bad_types.append(key)
                     continue
-                if datatype.is_valid(value):
-                    value = datatype.decode(value)
+                if datatype.is_valid(data):
+                    value = datatype.decode(data)
                 else:
                     bad_types.append(key)
                     continue
             elif isinstance(datatype, Boolean):
-                # Default value for missing bool
+                # Default value for missing checkbox
                 value = False
             else:
                 # Nothing to save
@@ -156,7 +146,6 @@ class Controls_View(STLForm):
     def get_namespace(self, resource, context):
         user = context.user
         handler = resource.handler
-        print "resource.handler", handler.timestamp, handler.dirty
         namespace = {}
         namespace['first_time'] = first_time = resource.is_first_time()
         # Errors
