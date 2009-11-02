@@ -16,8 +16,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from the Standard Library
-
 # Import from itools
 from itools.core import get_abspath, merge_dicts
 from itools.csv import CSVFile
@@ -36,18 +34,9 @@ from ikaaro.workflow import workflow
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, NumDate
 from datatypes import NumShortDate, Digit, Unicode, EnumBoolean
 from datatypes import WorkflowState, make_enumerate
-
-
-############################################################################
-# Workflow
-EMPTY = 'private' # if not handler.fields
-DRAFT = 'private' # if handler.fields
-SENT = 'pending'
-EXPORTED = 'public'
-MODIFIED = 'modified'
-# Simpler that comparing publish date to modification date
-workflow.add_state(MODIFIED, title=u"Modifié",
-        description=u"Modifié après export")
+from form_views import Controls_View
+from utils import SI
+from workflow import EMPTY, SENT, EXPORTED, MODIFIED
 
 
 dt_mapping = {
@@ -143,32 +132,37 @@ class FormHandler(FileHandler):
     # Load/Save
     def new(self, **kw):
         fields = {}
-        for key in kw:
-            if key in self.schema:
-                datatype = self.schema[key]
-                try:
-                    value = datatype.decode(kw[key])
-                except ValueError:
-                    raise ValueError, "%s: %s" % (key, kw[key])
-                if value is not None:
-                    fields[key] = value
+        for key, data in kw.iteritems():
+            if key not in self.schema:
+                continue
+            datatype = self.schema[key]
+            try:
+                value = datatype.decode(data)
+            except ValueError:
+                raise ValueError, "'%s': '%s'" % (key, data)
+            # XXX ?
+            if value is not None:
+                fields[key] = value
         self.fields = fields
 
 
     def _load_state_from_file(self, file):
+        """Only load found key/value pairs, for keeping the form empty if
+        never filled."""
         fields = {}
         for line in file.readlines():
             line = line.strip()
-            if ':' in line:
-                key, value = line.split(':', 1)
-                if key in self.schema:
-                    value = value.strip()
-                    datatype = self.schema[key]
-                    try:
-                        fields[key] = datatype.decode(value)
-                    except:
-                        raise ValueError, "key '%s' value '%s'" % (key,
-                                                                   value)
+            if ':' not in line:
+                continue
+            key, data = line.split(':', 1)
+            if key not in self.schema:
+                continue
+            data = data.strip()
+            datatype = self.schema[key]
+            try:
+                fields[key] = datatype.decode(data)
+            except:
+                raise ValueError, "'%s':'%s'" % (key, data)
         self.fields = fields
 
 
@@ -221,12 +215,12 @@ class Form(File):
     class_id = 'Form'
     class_handler = FormHandler
     class_icon48 = 'scrib/images/form48.png'
-    class_views = ['controles', 'exporter', 'imprimer', 'aide']
+    class_views = ['envoyer', 'exporter', 'imprimer', 'aide']
     class_handler = FormHandler
     workflow = workflow
 
     # Views
-    controles = WebPage_View(template='../../aide', title=MSG(u"Contrôles"))
+    envoyer = Controls_View()
     exporter = WebPage_View(template='../../aide', title=MSG(u"Exporter"))
     imprimer = WebPage_View(template='../../aide', title=MSG(u"Imprimer"))
     aide = WebPage_View(template='../../aide', title=MSG(u"Aide"))
@@ -277,6 +271,14 @@ class Form(File):
         elif state == MODIFIED:
             return get_value('modifie')
         raise NotImplementedError, state
+
+
+    def get_vars(self):
+        vars = {'SI': SI}
+        handler = self.handler
+        for key in handler.schema:
+            vars[key] = handler.get_value(key)
+        return vars
 
 
     def get_namespace(self, context):

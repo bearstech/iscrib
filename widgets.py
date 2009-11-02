@@ -357,15 +357,12 @@ class UITable(UIFile, CSVFile):
         namespace['page_number'] = page
         namespace['tables'] = tables
         namespace['readonly'] = skip_print or readonly
-        namespace['first_time'] = not form.handler.fields
+        namespace['first_time'] = form.is_first_time()
         namespace['skip_print'] = skip_print
         if not skip_print:
             if page == 11:
                 namespace['help_onclick'] = ''
             else:
-                namespace['help_onclick'] = """window.open(';help_page?page=%s',\
-                    'xxx', 'toolbar=no, location=no, status=no, menubar=no,\
-                    scrollbars=yes, width=440, height=540');\
-                    return false""" % page
+                namespace['help_onclick'] = ";help_page?page=%s" % page
         template = self.get_resource('/ui/scrib2009/Table_to_html.xml')
         return stl(template, namespace)

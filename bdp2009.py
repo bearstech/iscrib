@@ -18,19 +18,20 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String, Integer
+from itools.datatypes import String
+from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.registry import register_resource_class, register_field
+from ikaaro.registry import register_resource_class
 
 # Import from scrib
 from form import get_schema_pages, get_controls, FormHandler, Form
-from form_views import Page_Form
+from form_views import Form_View
 
 
 class BDP2009Handler(FormHandler):
     schema, pages = get_schema_pages('ui/scrib2009/schema-bm.csv')
-    controles = get_controls('ui/scrib2009/controls-bm.csv')
+    controls = get_controls('ui/scrib2009/controls-bm.csv')
 
 
 
@@ -40,6 +41,9 @@ class BDP2009(Form):
     class_views = ['pageA', 'pageB', 'pageC'] + Form.class_views
 
     # Views
+    pageA = Form_View(title=MSG(u"A-...", n='A'))
+    pageB = Form_View(title=MSG(u"B-...", n='B'))
+    pageC = Form_View(title=MSG(u"C-...", n='C'))
 
 
     @classmethod

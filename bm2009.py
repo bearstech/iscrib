@@ -26,12 +26,12 @@ from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
 from form import get_schema_pages, get_controls, FormHandler, Form
-from form_views import Page_Form
+from form_views import Form_View
 
 
 class BM2009Handler(FormHandler):
     schema, pages = get_schema_pages('ui/scrib2009/schema-bm.csv')
-    controles = get_controls('ui/scrib2009/controls-bm.csv')
+    controls = get_controls('ui/scrib2009/controls-bm.csv')
 
 
 
@@ -41,10 +41,10 @@ class BM2009(Form):
     class_views = ['pageA', 'pageB', 'pageC', 'comments'] + Form.class_views
 
     # Views
-    pageA = Page_Form(title=MSG(u"A-Identité"), n='A')
-    pageB = Page_Form(title=MSG(u"B-Bibliothèques du réseau"), n='B')
-    pageC = Page_Form(title=MSG(u"C-Accès et installation"), n='C')
-    comments = Page_Form(title=MSG(u"Commentaires"), n='Z')
+    pageA = Form_View(title=MSG(u"A-Identité"), n='A')
+    pageB = Form_View(title=MSG(u"B-Bibliothèques du réseau"), n='B')
+    pageC = Form_View(title=MSG(u"C-Accès et installation"), n='C')
+    comments = Form_View(title=MSG(u"Commentaires"), n='Z')
 
 
     @classmethod

@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <stl:block stl:if="not skip_print">
-    <p stl:if="first_time">
-      <strong style="border: 1px solid red; background: red"><a
-        style="color: white" href="/;aide">Veuillez consulter l'aide
-          générale.</a></strong>
+    <p id="form-firsttime" stl:if="first_time">
+      <a href="/;aide">Veuillez consulter l'aide générale.</a>
     </p>
-  </stl:block>
-
-  <p style="margin: 0; font-size: 10px" stl:if="not skip_print">
-    <span style="float: left" stl:if="help_onclick">
-      <a style="border: 1px solid red; color: white; background: red; text-decoration: none"
-        href="#" onclick="${help_onclick}">Aide sur cette page</a></span>
-    <span style="float:right">
-      <a href="#" onclick="window.open('?view=printable', 'xxx', 'toolbar=yes,\
-          location=no, status=no, menubar=yes, scrollbars=yes, width=800,\
-          height=600'); return false"><img
-            src="images/imprimer.png" alt="Imprimer"
-            name="Imprimer" />Imprimer cette page</a></span>
+    <p id="form-toolbar">
+      <a id="form-help" href="${help_onclick}" title="Aide (dans une nouvelle
+        fenêtre)" onclick="popup(this.href, 440, 540)">Aide sur cette
+        page</a>
+      <a id="form-print" href="?view=printable" title="Imprimer (dans une
+        nouvelle fenêtre)" onclick="return popup(this.href, 800,
+        600)">Imprimer cette page</a>
+    </p>
     <hr class="clear" />
-  </p>
+  </stl:block>
 
   <form method="post">
     <input type="hidden" name="page_number" value="${page_number}" />

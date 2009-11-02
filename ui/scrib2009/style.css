@@ -87,13 +87,39 @@ td.field-label {
   text-align: left;
 }
 
+#form-firsttime {
+  border: 1px solid red;
+  background: red;
+  font-weight: bold;
+}
+#form-firsttime a {
+  color: white;
+}
+
+#form-toolbar {
+  margin: 0;
+  font-size: 10px;
+}
+#form-help {
+  float: left;
+  border: 1px solid red;
+  color: white;
+  background: red;
+  text-decoration: none;
+}
+#form-print {
+  float: right;
+  padding-left: 20px;
+  background: url(images/imprimer.png) top left no-repeat;
+}
+
+.form-debug {
+  font-size: 9px;
+  color: #333;
+}
+
 #profile span {
   margin: 9px;
   font-weight: bold;
 }
 #profile span.wf-exported { color: #000; }
-
-input.access-False,
-select.access-False {
-  color: #999;
-}

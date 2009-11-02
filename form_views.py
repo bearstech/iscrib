@@ -18,11 +18,11 @@
 from itools.datatypes import Boolean, String
 from itools.gettext import MSG
 from itools.html import HTMLParser
-from itools.web import STLView, STLForm, INFO, ERROR
+from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from scrib
-from form import SENT, EXPORTED
-from utils import SI, parse_control
+from utils import parse_control
+from workflow import SENT, EXPORTED, SEND, EXPORT
 
 
 PAGE_FILENAME = '/ui/scrib2009/Page%s.table.csv'
@@ -41,7 +41,8 @@ MSG_SAUVEGARDE = INFO(
         u"Envoi du questionnaire")
 
 
-class Page_Form(STLForm):
+class Form_View(BaseView):
+    # TODO STLView
     access = 'is_allowed_to_view'
     schema = {'page_number': String}
     query_schema = {'view': String}
@@ -55,7 +56,7 @@ class Page_Form(STLForm):
         view = context.query['view']
         table = resource.get_resource(PAGE_FILENAME % self.n)
         user = context.user
-        skip_print = (user.is_voir_scrib()) #or user.is_consultation())
+        skip_print = user.is_voir_scrib()
         if view == 'printable':
             skip_print = True
         readonly = False
@@ -71,7 +72,7 @@ class Page_Form(STLForm):
 
     def action(self, resource, context, form):
         user = context.user
-        if user.is_voir_scrib(): #or user.is_consultation():
+        if user.is_voir_scrib():
             from itools.http.exceptions import Forbidden
             raise Forbidden
         statename = resource.get_statename()
@@ -145,6 +146,76 @@ class Page_Form(STLForm):
 
 
 
+class Controls_View(STLForm):
+    access = 'is_allowed_to_view'
+    title = MSG(u"Envoyer")
+    template = '/ui/scrib2009/Form_controls.xml'
+    query_schema = {'view': String}
+
+
+    def get_namespace(self, resource, context):
+        user = context.user
+        handler = resource.handler
+        print "resource.handler", handler.timestamp, handler.dirty
+        namespace = {}
+        namespace['first_time'] = first_time = resource.is_first_time()
+        # Errors
+        errors = []
+        warnings = []
+        controls = resource.handler.controls
+        for number, title, expr, level, page in controls:
+            expr = expr.strip()
+            if not expr:
+                continue
+            # Le contrôle contient des formules
+            if '[' in title:
+                expanded = []
+                for is_expr, token in parse_control(title):
+                    if not is_expr:
+                        expanded.append(token)
+                    else:
+                        try:
+                            value = eval(token, resource.get_vars())
+                        except ZeroDivisionError:
+                            value = None
+                        expanded.append(str(value))
+                title = ''.join(expanded)
+            else:
+                try:
+                    value = eval(expr, resource.get_vars())
+                except ZeroDivisionError:
+                    value = None
+            # Passed
+            if value is True:
+                continue
+            # Failed
+            info = {'number': number,
+                    'title': title,
+                    'page': page.replace('-', ''),
+                    'debug': "'%s' = '%s'" % (str(expr), value)}
+            errors.append(info) if level == '2' else warnings.append(info)
+        namespace['controls'] = {'errors': errors,
+                                 'warnings': warnings}
+        # ACLs
+        ac = resource.get_access_control()
+        namespace['is_admin'] = ac.is_admin(user, resource)
+        # Workflow - State
+        namespace['statename'] = resource.get_statename()
+        namespace['form_state'] = resource.get_form_state()
+        # Workflow - Transitions
+        namespace['can_send'] = can_send = not first_time and not errors
+        namespace['SEND'] = SEND
+        namespace['can_export'] = can_send
+        namespace['EXPORT'] = EXPORT
+        # Print
+        namespace['skip_print'] = False
+        view = context.query['view']
+        if view == 'printable' or user.is_voir_scrib():
+            namespace['skip_print'] = True
+        return namespace
+
+
+
 class Help_Page(STLView):
     access = 'is_allowed_to_view'
     schema = {'page': String}
@@ -202,100 +273,4 @@ class Print_Form(STLView):
         namespace['styles'] = skin.get_styles(context)
 
         context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
-        return namespace
-
-
-
-class Controls(STLForm):
-    access = 'is_allowed_to_view'
-    title = MSG(u"Envoi du questionnaire")
-    template = '/ui/scrib2009/Form_controls.xml'
-
-
-    def get_namespace(self, resource, context):
-        user = context.user
-        view = context.query['view']
-        namespace = {}
-        # Workflow - State
-        state = resource.get_state()
-        namespace['state'] = state['title']
-        # Controls
-        vars = {}
-        vars['SI'] = SI
-        for key in resource.handler.schema:
-            vars[key] = resource.handler.get_value(key)
-        # Errors
-        errors = []
-        warnings = []
-
-        controls = resource.handler.controles
-        for k, title, expr, level, page in controls:
-            expr = expr.strip()
-            if expr:
-                try:
-                    value = eval(expr, dict(vars))
-                except ZeroDivisionError:
-                    value = None
-                if value is True:
-                    continue
-                info = {}
-                info['number'] = k
-                if '[' in title:
-                    # Le contrôle contient des formules
-                    expanded = []
-                    for is_expr, token in parse_control(title):
-                        if not is_expr:
-                            expanded.append(token)
-                        else:
-                            try:
-                                value = eval(token, dict(vars))
-                            except ZeroDivisionError:
-                                value = None
-                            expanded.append(str(value))
-                    title = ''.join(expanded)
-                info['title'] = title
-                info['page'] = page.replace('-', '')
-                #info['debug'] = "%s %s" % (str(expr), value)
-                if level == "2":
-                    errors.append(info)
-                else:
-                    warnings.append(info)
-
-        namespace['controls'] = {}
-        namespace['controls']['errors'] = errors
-        namespace['controls']['warnings'] = warnings
-
-        # ACLs
-        ac = resource.get_access_control()
-        is_admin = ac.is_admin(user, resource)
-
-        # Workflow - Transitions
-        transitions = []
-        for name, transition in state.transitions.items():
-            access = transition['access']
-            # Cache l'export à l'utilisateur
-            if access == 'can_export' and not is_admin:
-                continue
-            can_send = (access == 'can_send' and not errors)
-            can_export = (access == 'can_export' and is_admin and not errors)
-            access = (access is True or can_send or can_export)
-            transitions.append(
-                {'name': name,
-                 'title': transition['description'],
-                 'access': access,
-                 'can_send': can_send,
-                 'can_export': can_export,
-                 'disabled': not access})
-        namespace['transitions'] = transitions
-
-        namespace['skip_print'] = False
-        if view == 'printable' or (user.is_voir_scrib() or
-                                   user.is_consultation()):
-            namespace['skip_print'] = True
-
-        namespace['help_onclick'] = """window.open(';help_page?page=controls',\
-            'xxx', 'toolbar=no, location=no, status=no, menubar=no,\
-            scrollbars=yes, width=440, height=540');\
-            return false"""
-
         return namespace

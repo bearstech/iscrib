@@ -57,6 +57,7 @@ def SI(condition, iftrue, iffalse=True):
 
 
 def parse_control(title):
+    # FIXME documenter...
     generator = enumerate(title)
     end = 0
     for start, char in generator:
