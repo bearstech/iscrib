@@ -51,16 +51,19 @@ class User(BaseUser):
     # Scrib API
     def is_bm(self):
         """ patern is BMxxx"""
-        return self.get_property('username').startswith('BM')
+        username = self.get_property('username')
+        return username and username.startswith('BM')
 
 
     def is_bdp(self):
         """ patern is BDPxx"""
-        return self.get_property('username').startswith('BDP')
+        username = self.get_property('username')
+        return username and username.startswith('BDP')
 
 
     def is_voir_scrib(self):
-        return self.get_property('username') == 'VoirSCRIB'
+        username = self.get_property('username')
+        return username and username == 'VoirSCRIB'
 
 
 
