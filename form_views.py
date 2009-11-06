@@ -22,7 +22,7 @@ from itools.web import BaseForm, STLView, STLForm, INFO, ERROR
 
 # Import from scrib
 from utils import parse_control
-from workflow import SENT, SEND, EXPORT
+from workflow import SENT
 
 
 PAGE_FILENAME = '/ui/scrib2009/Page%s.table.csv'
@@ -51,9 +51,18 @@ class Form_View(BaseForm):
 
     def GET(self, resource, context):
         try:
+            # Return from POST
             bad_types = context.bad_types
         except AttributeError:
-            bad_types = context.bad_types = []
+            # Fresh GET: find from current state
+            bad_types = []
+            handler = resource.handler
+            for key, datatype in handler.schema.iteritems():
+                value = handler.get_value(key)
+                data = datatype.encode(value)
+                if not datatype.is_valid(data):
+                    bad_types.append(key)
+            context.bad_types = bad_types
         view = context.query['view']
         table = resource.get_resource(PAGE_FILENAME % self.n)
         user = context.user
@@ -81,49 +90,38 @@ class Form_View(BaseForm):
                 # Do not use form schema, only default String
                 data = context.get_form_value(key).strip()
                 datatype = handler.schema[key]
-                if datatype.somme:
-                    expected_value = handler.somme(datatype, datatype.somme,
+                try:
+                    value = datatype.decode(data)
+                except Exception:
+                    # Keep invalid values
+                    value = data
+                # Compare sums
+                if datatype.sum:
+                    expected = handler.sum(datatype, datatype.sum,
                             # Raw form, not the filtered one
                             **context.request.get_form())
-                    if data:
-                        try:
-                            value = datatype.encode(datatype.decode(data))
-                        except ValueError:
-                            # Got it wrong!
+                    # Sum inputed
+                    if data and data != expected:
+                        # What we got was OK so blame the user
+                        if expected is not None:
                             bad_types.append(key)
-                            continue
-                        # Sum inputed
-                        if expected_value != 'NC' and value != expected_value:
-                            # Not what we get
-                            if expected_value is not None:
-                                # What we got was OK so blame the user
-                                bad_types.append(key)
-                                continue
-                        # Else, we got it wrong anyway
+                    # Sum deduced
                     else:
-                        # Sum computed
-                        if expected_value is not None:
-                            # Got it right!
-                            value = expected_value
+                        # Got it right!
+                        if expected is not None:
+                            value = expected
+                        # Got it wrong!
                         else:
-                            # Got it wrong!
                             bad_types.append(key)
-                            continue
+                # Mandatory
                 elif datatype.is_mandatory and not data:
                     bad_types.append(key)
-                    continue
-                if datatype.is_valid(data):
-                    value = datatype.decode(data)
-                else:
+                # Invalid
+                elif not datatype.is_valid(data):
                     bad_types.append(key)
-                    continue
-            elif isinstance(datatype, Boolean):
-                # Default value for missing checkbox
+            # Unchecked checkboxes return no value
+            elif issubclass(datatype, Boolean):
                 value = False
-            else:
-                # Nothing to save
-                continue
-            # TODO Save the value wether it is good or wrong
             handler.set_value(key, value)
         # Reindex
         context.server.change_resource(resource)

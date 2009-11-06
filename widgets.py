@@ -29,7 +29,7 @@ from itools.stl import stl
 from ikaaro.skins import UIFile
 
 # Import from scrib
-from datatypes import Numeric, NumDecimal, NumTime, Text
+from datatypes import Numeric, NumTime, Text
 from form import SENT, EXPORTED
 
 

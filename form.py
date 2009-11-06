@@ -32,7 +32,7 @@ from ikaaro.workflow import workflow
 
 # Import from scrib
 from datatypes import Numeric, NumInteger, NumDecimal, NumTime, NumShortTime
-from datatypes import NumDate, NumShortDate, Digit, Unicode, EnumBoolean
+from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import WorkflowState, make_enumerate
 from form_views import Send_View
 from utils import SI
@@ -40,16 +40,16 @@ from workflow import EMPTY, SENT, EXPORTED, MODIFIED
 
 
 dt_mapping = {
-    'text': Text,
-    'str': Unicode,
-    'int': NumInteger,
-    'HHH:MM': NumTime,
-    'hh:mm': NumShortTime,
-    'jj/mm/aaaa': NumDate,
-    'mm/aaaa': NumShortDate,
     'boolean': EnumBoolean,
     'dec': NumDecimal,
-    'digit': Digit}
+    'digit': NumDigit,
+    'hh:mm': NumShortTime,
+    'hhh:mm': NumTime,
+    'int': NumInteger,
+    'jj/mm/aaaa': NumDate,
+    'mm/aaaa': NumShortDate,
+    'str': Unicode,
+    'text': Text}
 
 
 def quote_namespace(namespace, schema):
@@ -77,7 +77,7 @@ def get_schema_pages(path):
     schema = {}
     pages = {}
     for (name, title, form, page_number, dt_name, format, vocabulary,
-            is_mandatory, fixed, somme, dependances, abrege, init) in rows:
+            is_mandatory, fixed, sum, dependances, abrege, init) in rows:
         # The name
         name = name.strip()
         if name == '':
@@ -104,11 +104,11 @@ def get_schema_pages(path):
         # Mandatory
         is_mandatory = (not is_mandatory or is_mandatory.upper() == 'OUI')
         # Sum
-        somme = somme.strip()
+        sum = sum.strip()
         # Add to the schema
         page_numbers = tuple(page_numbers)
         schema[name] = datatype(format=format, pages=page_numbers,
-                is_mandatory=is_mandatory, somme=somme, abrege=abrege)
+                is_mandatory=is_mandatory, sum=sum, abrege=abrege)
     return schema, pages
 
 
@@ -139,10 +139,7 @@ class FormHandler(FileHandler):
                 data = kw[key]
             except KeyError:
                 data = datatype.get_default()
-            try:
-                value = datatype.decode(data)
-            except ValueError:
-                raise ValueError, "'%s': '%s'" % (key, data)
+            value = datatype.decode(data)
             fields[key] = value
         self.fields = fields
 
@@ -180,25 +177,23 @@ class FormHandler(FileHandler):
 
 
     @classmethod
-    def somme(cls, datatype, formule, **kw):
-        value = 0
-        for terme in formule.split('+'):
-            terme = terme.strip()
+    def sum(cls, datatype, formula, **kw):
+        sum = datatype(0)
+        for term in formula.split('+'):
+            term = term.strip()
             try:
-                valeur = kw[terme]
+                data = kw[term]
             except KeyError:
                 return None
-            if valeur.upper() == 'NC':
+            if data.upper() == 'NC':
                 return 'NC'
-            elif valeur == '':
-                valeur = 0
-            dt = cls.schema[terme]
+            dt = cls.schema[term]
             try:
-                valeur = dt.decode(valeur)
-            except ValueError:
+                value = dt.decode(data)
+            except Exception:
                 return None
-            value += valeur
-        return datatype.encode(value)
+            sum += value
+        return sum
 
 
 

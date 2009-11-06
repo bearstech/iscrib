@@ -44,24 +44,59 @@ class DateLitterale(DataType):
 
 
 
-class Numeric(DataType):
+class Numeric(object):
     """All arithmetical operations."""
     default = ''
 
 
+    ########################################################################
+    # DataType API
     @classmethod
     def get_default(cls):
         return cls.decode(cls.default)
 
 
-    def __new__(cls, *args, **kw):
-        return object.__new__(cls)
+    @classmethod
+    def decode(cls, data):
+        if isinstance(data, Numeric):
+            return data
+        elif data is None or str(data).upper() == 'NC':
+            return cls('NC')
+        return cls(data)
 
 
+    @classmethod
+    def encode(cls, value):
+        if isinstance(value, Numeric):
+            value = value.value
+        if value is None:
+            return 'NC'
+        return str(value)
+
+
+    @classmethod
+    def is_valid(cls, data):
+        try:
+            cls(data)
+        except Exception:
+            return False
+        return True
+
+
+    ########################################################################
+    # Numeric API
     def __init__(self, **kw):
         object.__init__(self)
         for key, value in kw.iteritems():
             setattr(self, key, value)
+
+
+    def __str__(self):
+        return self.encode(self.value)
+
+
+    def __repr__(self):
+        return "%s(%s)" % (self.__class__.__name__, vars(self))
 
 
     def __int__(self):
@@ -70,14 +105,6 @@ class Numeric(DataType):
 
     def __float__(self):
         return float(self.value)
-
-
-    def __str__(self):
-        return self.encode(self.value)
-
-
-    def __repr__(self):
-        return "%s(%s)" % (self.__class__.__name__, self.value)
 
 
     def __add__(self, right):
@@ -282,24 +309,6 @@ class Numeric(DataType):
         raise NotImplementedError
 
 
-    @classmethod
-    def decode(cls, data):
-        if isinstance(data, Numeric):
-            return data
-        elif data is None or str(data).upper() == 'NC':
-            return cls('NC')
-        return cls(data)
-
-
-    @staticmethod
-    def encode(value):
-        if isinstance(value, Numeric):
-            value = value.value
-        if value is None:
-            return 'NC'
-        return str(value)
-
-
 
 class NumDecimal(Numeric):
 
@@ -308,14 +317,15 @@ class NumDecimal(Numeric):
         if value is not None:
             if value == 'NC':
                 value = None
-            elif type(value) is dec:
+            elif type(value) is dec or value == '':
                 pass
-            elif value == '':
-                value = dec(0)
             else:
                 if type(value) is str:
-                    value = value.replace(',', '.')
-                value = dec(str(value))
+                    point = value.replace(',', '.')
+                try:
+                    value = dec(str(point))
+                except InvalidOperation:
+                    pass
         self.value = value
 
 
@@ -350,14 +360,13 @@ class NumInteger(Numeric):
         if value is not None:
             if value == 'NC':
                 value = None
-            elif type(value) is int:
+            elif type(value) is int or value == '':
                 pass
-            elif value == '':
-                value = 0
             else:
-                if type(value) is str:
-                    value = ''.join([x for x in value if x.isdigit()])
-                value = int(value)
+                try:
+                    value = int(value)
+                except ValueError:
+                    pass
         self.value = value
 
 
@@ -392,29 +401,14 @@ class NumTime(Numeric):
         if value is not None:
             if value == 'NC':
                 value = None
-            elif type(value) is int:
+            elif type(value) is int or value == '':
                 pass
-            elif value == '':
-                value = 0
+            elif ':' in value:
+                hours, minutes = value.split(':')
+                value = int(hours) * 60 + int(minutes)
             else:
                 value = int(value)
         self.value = value
-
-
-    @classmethod
-    def decode(cls, data):
-        if data is None or str(data).upper() == 'NC':
-            return cls('NC')
-        data = str(data).strip()
-        if data == '':
-            return ''
-        elif ':' in data:
-            hours, minutes = data.split(':')
-        else:
-            hours = int(data)
-            minutes = 0
-
-        return cls(int(hours) * 60 + int(minutes))
 
 
     @staticmethod
@@ -487,19 +481,17 @@ class NumDate(DataType):
                 if len(parts) == 2:
                     # Support ShortDate
                     parts.insert(0, 1)
-                j, m, a = parts
-                value = date(int(a), int(m), int(j))
+                d, m, y = [int(x) for x in parts]
+                # 2-digit year
+                if y < 10:
+                    y += 2000
+                elif y < 100:
+                    y += 1900
+                value = date(y, m, d)
         self.value = value
 
 
-    def __str__(self):
-        return self.encode(self.value)
-
-
-    def __repr__(self):
-        return "%s(%s)" % (self.__class__.__name__, self.value)
-
-
+    # XXX remove?
     def __cmp__(self, right):
         left = self.value
         if isinstance(right, Numeric):
@@ -515,35 +507,6 @@ class NumDate(DataType):
             return -1
         # cmp(left (!NC), right (!NC)
         return cmp(left, right)
-
-
-    @classmethod
-    def decode(cls, data):
-        if data is None or str(data).upper() == 'NC':
-            return cls('NC')
-        parts = data.split('/')
-        if len(parts) == 3:
-            pass
-        elif len(parts) == 2:
-            parts.insert(0, '1')
-        else:
-            return data
-        for i in range(3):
-            try:
-                parts[i] = int(parts[i])
-            except ValueError:
-                return data
-        j, m, a = parts
-        if a < 10:
-            a += 2000
-        if a < 100:
-            a += 1900
-
-        try:
-            value = cls(date(a, m, j))
-        except ValueError:
-            value = data
-        return value
 
 
     @staticmethod
@@ -562,16 +525,18 @@ class NumDate(DataType):
     def is_valid(data):
         if data.upper() == 'NC':
             return True
-        if data.count('/') != 2:
+        if data.count('/') not in (1, 2):
             return False
-        for x in data.split('/'):
-            try:
-                int(x)
-            except ValueError:
-                return False
-        j, m, a = data.split('/')
         try:
-            date(int(a), int(m), int(j))
+            parts = [int(x) for x in data.split('/')]
+        except ValueError:
+            return False
+        # NumShortDate
+        if len(parts) == 2:
+            parts.insert(0, 1)
+        d, m, y = parts
+        try:
+            date(y, m, d)
         except ValueError:
             return False
         return True
@@ -598,27 +563,36 @@ class NumShortDate(NumDate):
         return data[3:]
 
 
-    @staticmethod
-    def is_valid(data):
-        if data.upper() == 'NC':
-            return True
-        if data.count('/') != 1:
-            return False
-        for x in data.split('/'):
-            try:
-                int(x)
-            except ValueError:
-                return False
-        m, a = data.split('/')
-        try:
-            date(int(a), int(m), 1)
-        except ValueError:
-            return False
-        return True
+    def get_sql_schema(self):
+        return "CHAR(7) NOT NULL default ''"
+
+
+
+class NumDigit(Numeric):
+
+    def __init__(self, value=None, **kw):
+        Numeric.__init__(self, **kw)
+        if value is not None:
+            if value == 'NC':
+                value = None
+            else:
+                pass
+        self.value = value
+
+
+    # FIXME should be classmethod
+    def is_valid(self, data):
+        format = int(self.format)
+        return data.isdigit() if len(data) == format else data == ''
 
 
     def get_sql_schema(self):
-        return "CHAR(7) NOT NULL default ''"
+        return "CHAR(%s) NOT NULL default ''" % self.format
+
+
+    @classmethod
+    def encode_sql(cls, value):
+        return "'%s'" % cls.encode(value)
 
 
 
@@ -627,10 +601,10 @@ class Unicode(BaseUnicode):
 
 
     @staticmethod
-    def is_valid(value):
+    def is_valid(data):
         try:
-            unicode(value, 'utf8')
-        except UnicodeDecodeError:
+            unicode(data, 'utf8')
+        except Exception:
             return False
         return True
 
@@ -668,11 +642,6 @@ class EnumBoolean(Enumerate):
 
 
     @staticmethod
-    def is_valid(value):
-        return value in (True, False, '1', '2')
-
-
-    @staticmethod
     def decode(data):
         if type(data) is bool:
             return data
@@ -687,9 +656,9 @@ class EnumBoolean(Enumerate):
 
     @staticmethod
     def encode(value):
-        if value in (True, '1'):
+        if value == '1' or value is True:
             return '1'
-        elif value in (False, None, '', '0', '2'):
+        elif value == '2' or value in ('0', '', None, False):
             return '2'
         raise ValueError, str(value)
 
@@ -706,45 +675,7 @@ class EnumBoolean(Enumerate):
 
 
 
-class Digit(DataType):
-    default = ''
-
-    @staticmethod
-    def encode(value):
-        if value is None:
-            return 'NC'
-        return ''.join([x for x in value if x.isdigit()])
-
-
-    @staticmethod
-    def decode(data):
-        if data is None or str(data).upper() == 'NC':
-            return None
-        return ''.join([x for x in data if x.isdigit()])
-
-
-    @classmethod
-    def is_valid(cls, data):
-        format = int(cls.format)
-        return data.isdigit() if len(data) == format else data == ''
-
-
-    def get_sql_schema(self):
-        return "CHAR(%s) NOT NULL default ''" % self.format
-
-
-    @classmethod
-    def encode_sql(cls, value):
-        return "'%s'" % cls.encode(value)
-
-
-
 class SqlEnumerate(Enumerate):
-
-    @classmethod
-    def is_valid(cls, data):
-        return data in [x['name'] for x in cls.options]
-
 
     def get_sql_schema(self):
         return "INT(3) default NULL"
