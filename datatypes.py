@@ -759,6 +759,8 @@ class SqlEnumerate(Enumerate):
 
 
 class Departements(Enumerate):
+    """Ce sont les codes Insee, pas les codes postaux.
+    """
     options = [
         {'name': '1', 'value': "Ain"},
         {'name': '2', 'value': "Aisne"},
