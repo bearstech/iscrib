@@ -13,3 +13,21 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Import from scrib
+from form_views import Send_View
+
+
+class BMSend_View(Send_View):
+
+    def action_send(self, resource, context, form):
+        """Ce qu'il faut faire quand le formulaire BM est soumis.
+        """
+        raise NotImplementedError
+
+
+    def action_export(self, resource, context, form):
+        """Ce qu'il faut faire quand le formulaire BM est exporté.
+        """
+        raise NotImplementedError

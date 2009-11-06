@@ -34,7 +34,7 @@ from ikaaro.workflow import workflow
 from datatypes import Numeric, NumInteger, NumDecimal, NumTime, NumShortTime
 from datatypes import NumDate, NumShortDate, Digit, Unicode, EnumBoolean
 from datatypes import WorkflowState, make_enumerate
-from form_views import Controls_View
+from form_views import Send_View
 from utils import SI
 from workflow import EMPTY, SENT, EXPORTED, MODIFIED
 
@@ -211,7 +211,7 @@ class Form(File):
     workflow = workflow
 
     # Views
-    envoyer = Controls_View()
+    envoyer = Send_View()
     exporter = WebPage_View(template='../../aide', title=MSG(u"Exporter"))
     imprimer = WebPage_View(template='../../aide', title=MSG(u"Imprimer"))
     aide = WebPage_View(template='../../aide', title=MSG(u"Aide"))

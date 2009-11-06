@@ -25,6 +25,7 @@ from itools.gettext import MSG
 from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
+from bm2009_views import BMSend_View
 from form import get_schema_pages, get_controls, FormHandler, Form
 from form_views import Form_View
 
@@ -45,6 +46,7 @@ class BM2009(Form):
     pageB = Form_View(title=MSG(u"B-Bibliothèques du réseau"), n='B')
     pageC = Form_View(title=MSG(u"C-Accès et installation"), n='C')
     comments = Form_View(title=MSG(u"Commentaires"), n='Z')
+    envoyer = BMSend_View()
 
 
     @classmethod

@@ -136,10 +136,11 @@ class Form_View(BaseForm):
 
 
 
-class Controls_View(STLForm):
+class Send_View(STLForm):
     access = 'is_allowed_to_view'
+    access_POST = 'is_allowed_to_edit'
     title = MSG(u"Envoyer")
-    template = '/ui/scrib2009/Form_controls.xml'
+    template = '/ui/scrib2009/Form_send.xml'
     query_schema = {'view': String}
 
 
@@ -193,9 +194,7 @@ class Controls_View(STLForm):
         namespace['form_state'] = resource.get_form_state()
         # Workflow - Transitions
         namespace['can_send'] = can_send = not first_time and not errors
-        namespace['SEND'] = SEND
         namespace['can_export'] = can_send
-        namespace['EXPORT'] = EXPORT
         # Print
         namespace['skip_print'] = False
         view = context.query['view']
@@ -205,7 +204,7 @@ class Controls_View(STLForm):
 
 
 
-class Help_Page(STLView):
+class Help_View(STLView):
     access = 'is_allowed_to_view'
     schema = {'page': String}
 
@@ -240,26 +239,24 @@ class Print_Form(STLView):
 
     def get_namespace(self, resource, context):
         namespace = {}
-
+        pages = resource.handler.pages
         body = []
         for page in [
                 # Activités
                 1, 2, 3, 4, 5, 6, 62, 63, 7, 8, 9, 14, 11,
                 # Budget
                 10, 13]:
-            if page not in resource.handler.pages:
+            if page not in pages:
                 continue
             table = resource.get_resource(PAGE_FILENAME % page)
             body.extend(BREAK_HEADER)
             body.extend(table.to_html(context, resource, page,
                 skip_print=True))
             body.extend(BREAK_FOOTER)
-
         namespace['body'] = body
-
         root = context.root
         skin = root.get_skin()
         namespace['styles'] = skin.get_styles(context)
-
-        context.response.set_header('Content-Type', 'text/html; charset=UTF-8')
+        context.response.set_header('Content-Type',
+                                    'text/html; charset=UTF-8')
         return namespace
