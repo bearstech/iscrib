@@ -70,7 +70,7 @@ class Scrib2009(WebSite):
     __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide']
 
     bm_class = BM2009
-    bpd_class = BDP2009
+    bdp_class = BDP2009
 
     # Views
     login = Scrib_Login()
@@ -173,10 +173,17 @@ class Scrib2009(WebSite):
             cls.bm_class._make_resource(cls.bm_class, folder, '%s/bm/%s' %
                     (name, code_ua), code_ua=code_ua, title={'fr': title},
                     departement=departement, id=id)
-        # TODO Créer les BDP
         print "Création des BDP..."
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})
+        rows = users_csv.search(categorie='BDP')
+        for row in users_csv.get_rows(rows):
+            code_ua =  row.get_value('code_ua')
+            title = row.get_value('nom')
+            departement = row.get_value('departement')
+            cls.bdp_class._make_resource(cls.bdp_class, folder,
+                    '%s/bdp/%s' % (name, departement), title={'fr': title},
+                    departement=departement)
         print "Indexation de la base..."
 
 
