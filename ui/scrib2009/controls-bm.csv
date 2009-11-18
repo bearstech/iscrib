@@ -1,3 +1,5 @@
 "N° de contrôle","message d'alerte","écriture du contrôle","force du contrôle
 1=alerte, 
 2=contrôle bloquant ","page"
+1,"D104 est supérieur à D101","D104 <= D101",1,"D"
+2,"E110 n'est pas égal à E104+1107 ","E110=E104+E107",2,"E"
