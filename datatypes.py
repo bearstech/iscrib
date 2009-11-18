@@ -320,6 +320,7 @@ class NumDecimal(Numeric):
             elif type(value) is dec or value == '':
                 pass
             else:
+                point = value
                 if type(value) is str:
                     point = value.replace(',', '.')
                 try:

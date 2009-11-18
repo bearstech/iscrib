@@ -14,6 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Import from the Standard Library
+from decimal import InvalidOperation
+
 # Import from itools
 from itools.datatypes import Boolean, String
 from itools.gettext import MSG
@@ -21,6 +24,7 @@ from itools.html import HTMLParser
 from itools.web import BaseForm, STLView, STLForm, INFO, ERROR
 
 # Import from scrib
+from datatypes import Numeric
 from utils import parse_control
 from workflow import SENT
 
@@ -119,6 +123,9 @@ class Form_View(BaseForm):
                 # Invalid
                 elif not datatype.is_valid(data):
                     bad_types.append(key)
+            # Skip Scrib instance datatypes
+            elif isinstance(datatype, Numeric):
+                pass
             # Unchecked checkboxes return no value
             elif issubclass(datatype, Boolean):
                 value = False
@@ -172,6 +179,10 @@ class Send_View(STLForm):
                 try:
                     value = eval(expr, resource.get_vars())
                 except ZeroDivisionError:
+                    # Division par zéro toléré
+                    value = None
+                except InvalidOperation:
+                    # Champs vides tolérés
                     value = None
             # Passed
             if value is True:
@@ -193,6 +204,8 @@ class Send_View(STLForm):
         # Workflow - Transitions
         namespace['can_send'] = can_send = not first_time and not errors
         namespace['can_export'] = can_send
+        # Debug
+        namespace['debug'] = context.has_form_value('debug')
         # Print
         namespace['skip_print'] = False
         view = context.query['view']

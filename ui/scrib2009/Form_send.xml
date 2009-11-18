@@ -62,7 +62,7 @@
             <pre class="form-debug" stl:if="debug">${control/debug}</pre>
           </td>
           <td>
-            <a href=";page${control/page}_form">Pour corriger</a>
+            <a href=";page${control/page}">Pour corriger</a>
           </td>
         </tr>
       </tbody>
@@ -90,7 +90,7 @@
             <pre class="form-debug" stl:if="debug">${control/debug}</pre>
           </td>
           <td>
-            <a href=";page${control/page}_form">Pour corriger</a>
+            <a href=";page${control/page}">Pour corriger</a>
           </td>
         </tr>
       </tbody>
