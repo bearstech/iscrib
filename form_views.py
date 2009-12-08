@@ -21,7 +21,8 @@ from decimal import InvalidOperation
 from itools.datatypes import Boolean, String
 from itools.gettext import MSG
 from itools.html import HTMLParser
-from itools.web import BaseForm, STLView, STLForm, INFO, ERROR
+from itools.stl import set_prefix
+from itools.web import BaseView, BaseForm, STLView, STLForm, INFO, ERROR
 
 # Import from scrib
 from datatypes import Numeric
@@ -271,3 +272,25 @@ class Print_Form(STLView):
         context.response.set_header('Content-Type',
                                     'text/html; charset=UTF-8')
         return namespace
+
+
+
+class Todo_View(BaseView):
+    access = 'is_allowed_to_view'
+
+
+    def GET(self, resource, context):
+        return 'TODO'
+
+
+
+class Help_View(BaseView):
+    access = 'is_allowed_to_view'
+    title = MSG(u"Aide")
+
+
+    def GET(self, resource, context):
+        app = resource.get_site_root()
+        resource = app.get_resource('aide')
+        prefix = context.resource.get_pathto(resource)
+        return set_prefix(resource.get_html_data(), prefix)

@@ -27,14 +27,13 @@ from itools.handlers import File as FileHandler
 from ikaaro.file import File
 from ikaaro.registry import register_field
 from ikaaro.text import Text
-from ikaaro.webpage import WebPage_View
 from ikaaro.workflow import workflow
 
 # Import from scrib
 from datatypes import Numeric, NumInteger, NumDecimal, NumTime, NumShortTime
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import WorkflowState, make_enumerate
-from form_views import Send_View
+from form_views import Send_View, Todo_View, Help_View
 from utils import SI
 from workflow import EMPTY, SENT, EXPORTED, MODIFIED
 
@@ -209,9 +208,9 @@ class Form(File):
 
     # Views
     envoyer = Send_View()
-    exporter = WebPage_View(template='../../aide', title=MSG(u"Exporter"))
-    imprimer = WebPage_View(template='../../aide', title=MSG(u"Imprimer"))
-    aide = WebPage_View(template='../../aide', title=MSG(u"Aide"))
+    exporter = Todo_View(title=MSG(u"Exporter"))
+    imprimer = Todo_View(title=MSG(u"Imprimer"))
+    aide = Help_View()
 
 
     @classmethod
