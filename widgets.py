@@ -289,8 +289,11 @@ class UITable(UIFile, CSVFile):
                         css_class += u' centered'
                     column = column[1:]
                     if not column:
-                        # Just a single "#" for obscure reason
-                        pass
+                        # Un « # » seul pour préfixer les champs
+                        # Fusionne avec la cellule précédente (svt un titre)
+                        colspan = (columns[-1]['colspan'] or 1) + 1
+                        columns[-1]['colspan'] = colspan
+                        continue
                     elif str(column) in schema:
                         column = get_input_widget(column, form, context,
                                 tabindex=tabindex, readonly=readonly)
@@ -323,32 +326,41 @@ class UITable(UIFile, CSVFile):
                                     'body': body, 'class': css_class})
                 elif column:
                     # Texte simple (ou pas)
-                    if column in schema:
-                        # 0007970 CSS spécifique pour numéros de rubriques
+                    # 0007975: Gestion des titres
+                    if column[0] == u"*":
+                        new_column = column.lstrip(u"*")
+                        level = len(column) - len(new_column)
+                        column = new_column.strip()
+                        column = u"<h{level}>{column}</h{level}>".format(
+                                # <h1> est déjà pris
+                                level=int(level)+1,
+                                column=column.strip())
+                        css_class = u'section-header'
+                    # 0007970: CSS spécifique pour numéros de rubriques
+                    elif column in schema:
                         css_class = u'rubrique-label'
                     else:
                         css_class = u'field-label'
                     if j > 0:
                         css_class += u' centered'
+                    if column == u'100%':
+                        css_class += u' num'
                     # 0004946: les balises < et > ne sont pas interprétées
                     # -> ne pas utiliser XML.encode
                     column = column.replace('&', '&amp;')
-                    if column == u'100%':
-                        css_class += u' num'
                     body = HTMLParser(column.encode('utf8'))
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': body, 'class': css_class})
                 elif columns:
-                    # Étend la cellule précédente pour couvrir celle vide
+                    # Vide : fusionne avec la précédente
                     colspan = (columns[-1]['colspan'] or 1) + 1
                     columns[-1]['colspan'] = colspan
+                    continue
                 else:
                     # Ligne vraiment vide
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': '', 'class': None})
-            # Première case seule -> titre
-            if len(columns) == 1 and columns[0]['body']:
-                columns[0]['class'] = u'section-header'
+            # La ligne calculée
             tables[-1].append(columns)
 
         namespace = {}

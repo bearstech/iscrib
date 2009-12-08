@@ -45,6 +45,21 @@ td.section-header {
   color: rgb(255, 255, 255);
   text-align: left;
 }
+#content td.section-header * {
+  border-bottom: 0;
+}
+td.section-header h2 {
+  margin: 5px 0;
+  font-size: 15px;
+}
+td.section-header h3 {
+  margin: 3px 0;
+  font-size: 13px;
+}
+td.section-header h4 {
+  margin: 1px 0;
+  font-size: 11px;
+}
 td.field-label {
   background-color: rgb(211, 211, 211);
 }
