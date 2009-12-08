@@ -228,10 +228,13 @@ class UITable(UIFile, CSVFile):
     ######################################################################
     # User Interface
     def to_html(self, context, form, view, skip_print=False, readonly=False):
+        # Force l'ordre de tabulation entre les champs
         tabindex = None
         page = view.n
         if page in [2, 3, 4]:
             tabindex = True
+
+        # Lecture seule ?
         user = context.user
         ac = form.get_access_control()
         if not skip_print and not ac.is_admin(user, form):
@@ -245,13 +248,14 @@ class UITable(UIFile, CSVFile):
         # 0005160: affiche les champs même en lecture seule
         elif skip_print:
             readonly = True
+
+        # Calcul du (des) tableau(x)
         handler = form.handler
         schema = handler.schema
         vars = form.get_vars()
         floating_vars = form.get_floating_vars()
         tables = []
         tables.append([])
-        table_index = 0
         for i, row in enumerate(self.get_rows()):
             if tabindex:
                 tabindex = i + 1
@@ -263,6 +267,7 @@ class UITable(UIFile, CSVFile):
                     column = unicode(column, 'utf8')
                 column = column.strip()
                 if column == u'-':
+                    # Espace blanc insécable
                     try:
                         css_class = columns[-1]['class']
                     except IndexError:
@@ -271,12 +276,14 @@ class UITable(UIFile, CSVFile):
                                     'body': HTMLParser("&nbsp;"),
                                     'class': css_class})
                 elif column == u'%break%':
+                    # Saut de page
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': HTMLParser("&nbsp;"),
                                     'class': None})
-                    # new table but leave the index
+                    # Commence un nouveau tableau
                     tables.append([])
                 elif column.startswith(FIELD_PREFIX):
+                    # Champ à remplacer par un widget
                     css_class = u'field-label'
                     if j > 0:
                         css_class += u' centered'
@@ -315,7 +322,12 @@ class UITable(UIFile, CSVFile):
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': body, 'class': css_class})
                 elif column:
-                    css_class = u'field-label'
+                    # Texte simple (ou pas)
+                    if column in schema:
+                        # 0007970 CSS spécifique pour numéros de rubriques
+                        css_class = u'rubrique-label'
+                    else:
+                        css_class = u'field-label'
                     if j > 0:
                         css_class += u' centered'
                     # 0004946: les balises < et > ne sont pas interprétées
@@ -327,23 +339,18 @@ class UITable(UIFile, CSVFile):
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': body, 'class': css_class})
                 elif columns:
-                    colspan = columns[-1]['colspan']
-                    if colspan is None:
-                        colspan = 2
-                    else:
-                        colspan += 1
+                    # Étend la cellule précédente pour couvrir celle vide
+                    colspan = (columns[-1]['colspan'] or 1) + 1
                     columns[-1]['colspan'] = colspan
                 else:
+                    # Ligne vraiment vide
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': '', 'class': None})
-            # Section headers
+            # Première case seule -> titre
             if len(columns) == 1 and columns[0]['body']:
                 columns[0]['class'] = u'section-header'
+            tables[-1].append(columns)
 
-            tables[table_index].append(columns)
-            # new table added?
-            if table_index + 1 < len(tables):
-                table_index = table_index + 1
         namespace = {}
         namespace['form_title'] = form.get_title()
         namespace['page_title'] = view.get_title(context)
@@ -352,6 +359,7 @@ class UITable(UIFile, CSVFile):
         namespace['readonly'] = skip_print or readonly
         namespace['first_time'] = form.is_first_time()
         namespace['skip_print'] = skip_print
+        # Aide spécifique
         if not skip_print:
             if page == 11:
                 namespace['help_onclick'] = ''

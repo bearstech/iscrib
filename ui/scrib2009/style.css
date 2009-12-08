@@ -48,6 +48,10 @@ td.section-header {
 td.field-label {
   background-color: rgb(211, 211, 211);
 }
+td.rubrique-label {
+  background-color: rgb(211, 211, 211);
+  font-size: 8px;
+}
 
 #header {
   padding: 19px 10px 10px 90px;
