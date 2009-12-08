@@ -1,5 +1,6 @@
 "G - Personnel et formation","#",,,,,
 ,,,,,,
+"G1 – Personnel",,,,,,
 ,,,,,,
 ,"Personnes",,"ETPT",,,
 "Nombre total d'agents","#G101","G101","#G102","G102",,
@@ -17,6 +18,7 @@
 "dont emplois aidés","#G126","G126","#G127","G127","#G128","G128"
 "Bénévoles","#G129","G129",,,"#G130","G130"
 ,,,,,,
+"G2 – Formation",,,,,,
 ,,,,,,
 ,"Nombre d'heures",,"Nombre de personnes formées",,,
 "Formation du personnel","#G201","G201","#G202","G202",,
@@ -26,6 +28,7 @@
 "Formations dispensées par le personnel","#G207","G207",,,,
 ,,,,,,
 ,,,,,,
+"G3 – Répartition du personnel par catégories de services / fonctions",,,,,,
 ,"ETP",,,,,
 "Services au public ","#G301","G301",,,,
 "Service aux scolaires","#G302","G302",,,,

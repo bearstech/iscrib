@@ -1,6 +1,7 @@
 "E - Usages et usagers de la bibliothèque",,,,,"#",,,
 ,,,,,,,,
 ,,,,,,,,
+"E1 – Usagers",,,,,,,,
 ,,,,,,,,
 ,,,"Inscrits actifs",,"dont nouveaux inscrits",,"dont emprunteurs  actifs",
 "Particuliers",,,"#E101","E101","#E102","E102","#E103","E103"
@@ -25,7 +26,7 @@
 ,,,,,,,,
 ,,,,,,,,
 ,,,,,,,,
-,,,,,,,,
+"E2 – Prêts",,,,,,,,
 ,"Adultes",,"Enfants",,"Total",," Collectivités",
 "Livres (UM)","#E201","E201","#E202","E202","#E203","E203","#E204","E204"
 "Publications en série imprimées (fascicules)","#E205","E205","#E206","E206","#E207","E207","#E208","E208"
@@ -37,6 +38,8 @@
 "Livres électroniques seuls (TIT)","#E229","E229","#E230","E230","#E231","E231","#E232","E232"
 ,,,,,,,,
 ,,,,,,,,
+"E3 – Autres types d'usage",,,,,,,,
+,,,,,,,,
 "Consultations sur place","#E301","E301",,,,,,
 "Réservations","#E302","E302",,,,,,
 "Demandes d'informations","#E303","E303",,,,,,
@@ -46,13 +49,13 @@
 "Prêts entre bibliothèques","#E306","E306","#E307","E307",,,,
 ,,,,,,,,
 ,,,,,,,,
-,,,,,,,,
+"E4 – Orientation et formation des usagers",,,,,,,,
 ,,,,,,,,
 "Formation des usagers","#E401","E401","Participants","#E402","E402",,,
 "dont formations aux services électroniques de la bibliothèque","#E403","E403","Participants","#E404","E404",,,
 ,,,,,,,,
 ,,,,,,,,
-,,,,,,,,
+"E5 – Services et ressources électroniques proposés par la bibliothèque",,,,,,,,
 ,,,,,,,,
 ,"oui","non",,,,,,
 "Site internet","#E501","#E501","E501","Nombre de visites","Dans la bibliothèque","#E502","E502",

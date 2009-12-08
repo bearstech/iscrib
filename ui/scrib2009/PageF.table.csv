@@ -1,6 +1,7 @@
 "F – Budget ","#",,,,
 "Toutes les valeurs doivent être exprimées en euros, sans décimales.",,,,,
 ,,,,,
+"F1 – Dépenses d'investissement",,,,,
 ,,,,,
 "Total des dépenses","#F101","F101","Terrains, bâtiments","#F102","F102"
 "Informatique (matériel et logiciels)","#F103","F103","Véhicules","#F104","F104"
@@ -9,9 +10,12 @@
 "Dépenses de fonctionnement",,,,,
 ,,,,,
 ,,,,,
+"F2 – Dépenses pour le personnel",,,,,
 ,,,,,
 "Dépense totale","#F201","F201","Formation des personnels","#F202","F202"
 ,,,,,
+,,,,,
+"F3 – Dépenses d'acquisitions documentaires",,,,,
 ,,,,,
 "Documents  imprimés et sur support",,,"Collection électronique",,
 "Livres imprimés","#F301","F301","Livres électroniques","#F302","F302"
@@ -22,10 +26,13 @@
 ,,,"Fichiers informatiques","#F311","F311"
 "Total documents imprimés et sur support","#F312","F312","Total collection électronique","#F313","F313"
 ,,,,,
+"F4 – Dépenses d'entretien des collections patrimoniales",,,,,
 ,,,,,
 "Reliure, conservation préventive et curative","#F401","F401",,,
 "Conversion sur support matériel","#F402","F402","Numérisation","#F403","F403"
 ,,,,,
+,,,,,
+"F5 – Dépenses spécifiques",,,,,
 ,,,,,
 "Total","#F501","F501","Action culturelle","#F502","F502"
 "Achats de notices","#F503","F503","Dépenses informatiques","#F504","F504"
@@ -34,7 +41,7 @@
 ,,,,,
 "Recettes",,,,,
 ,,,,,
-,,,,,
+"F6 – Ressources propres et subventions",,,,,
 ,,,,,
 "Subventions d'origine publique","#F601","F601",,,
 "Autres fonds d'origine privée (sociétés, particuliers, ...)","#F602","F602",,,

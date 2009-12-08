@@ -3,7 +3,7 @@
 "C - Accès et installations",,"#",,,
 ,,,,,
 ,,,,,
-,,,,,
+"C1 - Accès et installations",,,,,
 ,,,,,
 "Nombre d'heures d'ouverture hebdomadaires","#C101","C101","Nombre de jours d'ouverture annuels","#C102","C102"
 "Nombre de places assises disponibles","#C103","C103","avec possibilité de connecter un ordinateur","#C104","C104"
@@ -13,7 +13,7 @@
 "Appareils dédiés à la lecture de livres électroniques","#C111","C111","Nombre de bibliobus","#C112","C112"
 ,,,,,
 ,,,,,
-,,,,,
+"C2 – Catalogue",,,,,
 ,,,,,
 "Le catalogue de la bibliothèque est-il informatisé ?",,,,"#C201","C201"
 "Nombre total de notices au catalogue ",,,,"#C202","C202"
@@ -23,7 +23,7 @@
 "Nom et version du logiciel de gestion ",,,,"#C206","C206"
 ,,,,,
 ,,,,,
-,,,,,
+"C3 – Surface des locaux",,,,,
 ,,,,,
 "Surface utile nette totale","#C301","C301","Espaces de services internes","#C302","C302"
 "Espaces de service public ","#C303","C303","Espaces manifestations et animations","#C304","C304"
