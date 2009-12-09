@@ -9,7 +9,7 @@
     </p>
     <p id="form-toolbar">
       <a id="form-help" href="${help_onclick}" title="Aide (dans une nouvelle
-        fenêtre)" onclick="popup(this.href, 440, 540)">Aide sur cette
+        fenêtre)" onclick="return popup(this.href, 440, 540)">Aide sur cette
         page</a>
       <a id="form-print" href="?view=printable" title="Imprimer (dans une
         nouvelle fenêtre)" onclick="return popup(this.href, 800,

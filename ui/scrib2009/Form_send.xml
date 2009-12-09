@@ -8,7 +8,7 @@
       <a href="/;aide">Veuillez consulter l'aide générale.</a>
     </p>
     <p id="form-toolbar">
-      <a id="form-help" href=";help_page?page=controls" title="Aide (dans une
+      <a id="form-help" href=";aide?page=controls" title="Aide (dans une
         nouvelle fenêtre)" onclick="return popup(this.href, 440, 540)">Aide
         sur cette page</a>
       <a id="form-print" href="?view=printable" title="Imprimer (dans une

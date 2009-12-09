@@ -290,7 +290,12 @@ class Help_View(BaseView):
 
 
     def GET(self, resource, context):
-        app = resource.get_site_root()
-        resource = app.get_resource('aide')
-        prefix = context.resource.get_pathto(resource)
-        return set_prefix(resource.get_html_data(), prefix)
+        page = context.get_query_value('page')
+        if page:
+            raise NotImplementedError
+        else:
+            # Aide générale
+            app = resource.get_site_root()
+            resource = app.get_resource('aide')
+            prefix = context.resource.get_pathto(resource)
+            return set_prefix(resource.get_html_data(), prefix)

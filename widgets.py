@@ -376,6 +376,6 @@ class UITable(UIFile, CSVFile):
             if page == 11:
                 namespace['help_onclick'] = ''
             else:
-                namespace['help_onclick'] = ";help_page?page=%s" % page
+                namespace['help_onclick'] = ";aide?page=%s" % page
         template = self.get_resource('/ui/scrib2009/Table_to_html.xml')
         return stl(template, namespace)
