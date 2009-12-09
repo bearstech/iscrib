@@ -644,24 +644,20 @@ class EnumBoolean(Enumerate):
 
     @staticmethod
     def decode(data):
-        if type(data) is bool:
-            return data
-        # 0001892: '0' est l'ancienne représentation de False
-        elif data in (None, '', '0', '2'):
-            return False
-        elif data == '1':
+        if data == '1':
             return True
-        raise ValueError, str(data)
-
+        elif data == '2':
+            return False
+        return data
 
 
     @staticmethod
     def encode(value):
-        if value == '1' or value is True:
+        if value is True:
             return '1'
-        elif value == '2' or value in ('0', '', None, False):
+        elif value is False:
             return '2'
-        raise ValueError, str(value)
+        return value
 
 
     def get_sql_schema(self):
