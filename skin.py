@@ -24,9 +24,12 @@ from ikaaro.skins import Skin, register_skin, map
 
 # Import from scrib
 from widgets import UITable
+from skin_views import ScribLocationTemplate
 
 
 class ScribSkin(Skin):
+    location_template = ScribLocationTemplate
+
 
     def get_styles(self, context):
         styles = [

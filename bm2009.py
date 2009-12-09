@@ -39,18 +39,17 @@ class BM2009Handler(FormHandler):
 class BM2009(Form):
     class_id = 'BM2009'
     class_handler = BM2009Handler
-    class_views = ['pageA', 'pageB', 'pageC', 'pageD', 'pageE', 'pageF',
-            'pageG', 'pageH'] + Form.class_views
+    class_views = ['pageA'] + Form.class_views
 
     # Views
-    pageA = Form_View(title=MSG(u"A-Identité"), n='A')
-    pageB = Form_View(title=MSG(u"B-Bibliothèques du réseau"), n='B')
-    pageC = Form_View(title=MSG(u"C-Accès et installation"), n='C')
-    pageD = Form_View(title=MSG(u"D-Collections"), n='D')
-    pageE = Form_View(title=MSG(u"E-Usages et usagers de la bib."), n='E')
-    pageF = Form_View(title=MSG(u"F-Budget"), n='F')
-    pageG = Form_View(title=MSG(u"G-Personnel et formation"), n='G')
-    pageH = Form_View(title=MSG(u"H-Action culturelle"), n='H')
+    pageA = Form_View(title=MSG(u"Saisie du rapport"), n='A')
+    pageB = Form_View(n='B')
+    pageC = Form_View(n='C')
+    pageD = Form_View(n='D')
+    pageE = Form_View(n='E')
+    pageF = Form_View(n='F')
+    pageG = Form_View(n='G')
+    pageH = Form_View(n='H')
     envoyer = BMSend_View()
 
 

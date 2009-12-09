@@ -145,7 +145,7 @@ class Form_View(BaseForm):
 class Send_View(STLForm):
     access = 'is_allowed_to_view'
     access_POST = 'is_allowed_to_edit'
-    title = MSG(u"Envoyer")
+    title = MSG(u"Contrôle de saisie")
     template = '/ui/scrib2009/Form_send.xml'
     query_schema = {'view': String}
 
@@ -286,7 +286,7 @@ class Todo_View(BaseView):
 
 class Help_View(BaseView):
     access = 'is_allowed_to_view'
-    title = MSG(u"Aide")
+    title = MSG(u"Aide à la saisie")
 
 
     def GET(self, resource, context):

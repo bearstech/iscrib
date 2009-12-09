@@ -3,6 +3,17 @@
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
+  <p>
+    <a href=";pageA">A-Identité</a> |
+    <a href=";pageB">B-Bibliothèques du réseau</a> |
+    <a href=";pageC">C-Accès et installation</a> |
+    <a href=";pageD">D-Collections</a> |
+    <a href=";pageE">E-Usages et usagers de la bib.</a> |
+    <a href=";pageF">F-Budget</a> |
+    <a href=";pageG">G-Personnel et formation</a> |
+    <a href=";pageH">H-Action culturelle</a>
+  </p>
+
   <stl:block stl:if="not skip_print">
     <p id="form-firsttime" stl:if="first_time">
       <a href="/;aide">Veuillez consulter l'aide générale.</a>

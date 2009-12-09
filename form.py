@@ -208,8 +208,8 @@ class Form(File):
 
     # Views
     envoyer = Send_View()
-    exporter = Todo_View(title=MSG(u"Exporter"))
-    imprimer = Todo_View(title=MSG(u"Imprimer"))
+    exporter = Todo_View(title=MSG(u"Import du rapport"))
+    imprimer = Todo_View(title=MSG(u"Impression du rapport"))
     aide = Help_View()
 
 
