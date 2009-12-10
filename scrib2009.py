@@ -41,6 +41,7 @@ from bdp2009 import BDP2009
 from form import Form
 from forms import Forms
 from scrib_views import Scrib_Login, Scrib_Edit
+from scrib_views import Scrib_Register, Scrib_Confirm
 from scrib_views import Scrib_ExportForm, Scrib_ChangePassword
 from user import User
 
@@ -73,7 +74,9 @@ class Scrib2009(WebSite):
     bdp_class = BDP2009
 
     # Views
-    login = Scrib_Login()
+    login = unauthorized = Scrib_Login()
+    register = Scrib_Register()
+    confirm = Scrib_Confirm()
     edit = Scrib_Edit()
     export_form = Scrib_ExportForm()
     browse_content = Folder_BrowseContent(access='is_admin_or_voir_scrib')
@@ -113,8 +116,7 @@ class Scrib2009(WebSite):
                           'email': email,
                           'title': {'fr': row.get_value('nom')},
                           'code_ua': row.get_value('code_ua'),
-                          'departement': row.get_value('departement'),
-                          'id': row.get_value('id')})
+                          'departement': row.get_value('departement')})
         print "  ", len(users), "utilisateurs"
         print "Création des utilisateurs..."
         # XXX remonte au niveau resource
@@ -169,10 +171,9 @@ class Scrib2009(WebSite):
             code_ua = row.get_value('code_ua')
             title = row.get_value('nom')
             departement = row.get_value('departement')
-            id = row.get_value('id')
             cls.bm_class._make_resource(cls.bm_class, folder, '%s/bm/%s' %
                     (name, code_ua), code_ua=code_ua, title={'fr': title},
-                    departement=departement, id=id)
+                    departement=departement)
         print "Création des BDP..."
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})

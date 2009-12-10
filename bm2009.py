@@ -18,7 +18,7 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String, Integer
+from itools.datatypes import Integer
 from itools.gettext import MSG
 
 # Import from ikaaro
@@ -56,8 +56,7 @@ class BM2009(Form):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(Form.get_metadata_schema(),
-                           code_ua=Integer,
-                           id=String)
+                           code_ua=Integer)
 
 
     def _get_catalog_values(self):

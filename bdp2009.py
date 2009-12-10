@@ -17,8 +17,6 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
-from itools.datatypes import String
 from itools.gettext import MSG
 
 # Import from ikaaro
@@ -44,12 +42,6 @@ class BDP2009(Form):
     pageA = Form_View(title=MSG(u"A-..."), n='A')
     pageB = Form_View(title=MSG(u"B-..."), n='B')
     pageC = Form_View(title=MSG(u"C-..."), n='C')
-
-
-    @classmethod
-    def get_metadata_schema(cls):
-        return merge_dicts(Form.get_metadata_schema(),
-                           id=String)
 
 
     ######################################################################

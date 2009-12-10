@@ -21,13 +21,14 @@ from datetime import datetime
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import Date, Integer
+from itools.datatypes import Date, Integer, Email
 from itools.gettext import MSG
 from itools.uri import get_reference
-from itools.web import BaseView, STLForm
+from itools.web import BaseView, STLForm, ERROR
 
 # Import from ikaaro
 from ikaaro.forms import XHTMLBody, ReadOnlyWidget, DateWidget, RTEWidget
+from ikaaro.forms import TextWidget, AutoForm
 from ikaaro.resource_views import LoginView, DBResource_Edit
 
 # Import from scrib
@@ -57,6 +58,108 @@ class Scrib_Login(LoginView):
         elif user.is_bm() or user.is_bdp():
             return get_reference('/users/%s' % user.name)
         return goto
+
+
+
+class Scrib_Register(AutoForm):
+    access = True
+    title = MSG(u"Crééz votre compte pour l'année 2009")
+    schema = {'email': Email(mandatory=True),
+              'code_ua': Integer(mandatory=True)}
+    widgets = [TextWidget('email', title=MSG(u"Adresse mél")),
+               TextWidget('code_ua', title=MSG(u"Code UA"))]
+    submit_value = MSG(u"Continuer")
+
+
+    def is_valid(self, resource, context, form):
+        email = form['email']
+        code_ua = form['code_ua']
+
+        # Do we already have a user with that email?
+        root = context.root
+        user = root.get_user_from_login(email)
+        if user is not None:
+            if not user.has_property('user_must_confirm'):
+                context.message = ERROR(u"Ce mél est déjà utilisé, essayez "
+                        u"le rappel de mot de passe")
+                return False
+
+        # Do we already have a user with that code_ua?
+        results = root.search(format='user', code_ua=code_ua)
+        if len(results):
+            brain = results.get_documents()[0]
+            user = root.get_user(brain.name)
+            if user.get_property('email') == email:
+                context.message = ERROR(u"Vous êtes déjà enregistré, "
+                        u"essayez le rappel de mot de passe.")
+                return False
+            else:
+                context.message = ERROR(u"Ce code UA est enregistré par un "
+                        u"autre utilisateur.")
+                return False
+
+        # Is the code_ua valid?
+        form = resource.get_resource('bm').get_resource(str(code_ua),
+                soft=True)
+        if form is None:
+            context.message = ERROR(u"Ce code UA est invalide.")
+            return False
+
+        return True
+
+
+    def action(self, resource, context, form):
+        if not self.is_valid(resource, context, form):
+            return
+
+        return resource.confirm.GET(resource, context)
+
+
+
+class Scrib_Confirm(STLForm):
+    access = True
+    title = MSG(u"Confirmation de création de compte")
+    template = '/ui/scrib2009/Scrib_confirm.xml'
+    schema = {'email': Email(mandatory=True),
+              'code_ua': Integer(mandatory=True)}
+
+    def get_namespace(self, resource, context):
+        code_ua = context.get_form_value('code_ua')
+        form = resource.get_resource('bm').get_resource(code_ua)
+        return {'email': context.get_form_value('email'),
+                'code_ua': code_ua,
+                'title': form.get_title()}
+
+
+    def action(self, resource, context, form):
+        if not resource.register.is_valid(resource, context, form):
+            return
+
+        # Add the user
+        email = form['email']
+        code_ua = form['code_ua']
+        user = resource.get_resource('/users').set_user(email, password=None)
+        user.set_property('username', 'BM%s' % code_ua)
+        form = resource.get_resource('bm').get_resource(str(code_ua))
+        user.set_property('title', form.get_title(), language='fr')
+        user.set_property('code_ua', code_ua)
+        user.set_property('departement', form.get_property('departement'))
+        # Set the role
+        resource.set_user_role(user.name, 'members')
+
+        # Send confirmation email
+        user.send_confirmation(context, email)
+
+        # Update "mel" field
+        form.handler.set_value('A114', email)
+
+        # Bring the user to the login form
+        message = MSG(u"Un mél de confirmation vient de vous être envoyé à "
+                u"l'adresse {email}. Suivez ses instructions pour activer "
+                u"votre compte.")
+        return message.gettext().encode('utf-8')
+        
+
 
 
 

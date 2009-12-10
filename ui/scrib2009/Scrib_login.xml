@@ -23,14 +23,15 @@
         <dd>
           <input value="${username}" name="username" id="username"
             type="text"/>
+          <a href="/;register">Crééz votre compte pour l'année 2009</a>
         </dd>
         <dt><label for="password">Mot de passe</label></dt>
         <dd>
-          <input id="password" name="password" type="password"></input>
+          <input id="password" name="password" type="password"/>
           <a href="/;forgotten_password">Mot de passe oublié</a>
         </dd>
       </dl>
-      <input value="OK" class="button-ok" type="submit"></input>
+      <input value="OK" class="button-ok" type="submit"/>
     </fieldset>
   </form>
 

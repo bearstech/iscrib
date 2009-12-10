@@ -21,14 +21,14 @@ from itools.core import merge_dicts
 from itools.datatypes import Integer, Unicode, String
 
 # Import from ikaaro
-from ikaaro.user import User as BaseUser
+from ikaaro.user import User
 from ikaaro.registry import register_resource_class
 
 # Import from scrib
 from user_views import User_Home
 
 
-class User(BaseUser):
+class ScribUser(User):
     """Les méthodes sont communes à tous les utilisateurs, quelque soit leur
     application, pour simplifier la gestion des droits.
     """
@@ -40,11 +40,15 @@ class User(BaseUser):
 
     @classmethod
     def get_metadata_schema(cls):
-        return merge_dicts(BaseUser.get_metadata_schema(),
+        return merge_dicts(User.get_metadata_schema(),
                            title=Unicode,
                            code_ua=Integer,
-                           departement=String,
-                           id=String)
+                           departement=String)
+
+
+    def _get_catalog_values(self):
+        return merge_dicts(User._get_catalog_values(self),
+                code_ua=self.get_property('code_ua'))
 
 
     ######################################################################
@@ -69,4 +73,4 @@ class User(BaseUser):
 
 ###########################################################################
 # Register
-register_resource_class(User)
+register_resource_class(ScribUser)

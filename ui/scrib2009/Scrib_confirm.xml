@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <form action=";confirm" method="post">
+    <p>
+      Je confirme être chargé de la saisie des données pour la bibliothèque
+      municipale de <strong>${title}</strong>.
+    </p>
+    <input type="hidden" name="email" value="${email}"/>
+    <input type="hidden" name="code_ua" value="${code_ua}"/>
+    <input value="Créer mon compte" class="button-ok" type="submit"/>
+  </form>
+
+</stl:block>
