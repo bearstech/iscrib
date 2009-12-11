@@ -26,13 +26,14 @@ from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
+from ikaaro.folder_views import GoToSpecificDocument
 from ikaaro.forms import XHTMLBody
 from ikaaro.registry import register_resource_class
 from ikaaro.resource_views import DBResource_Backlinks
 from ikaaro.revisions_views import DBResource_LastChanges
 from ikaaro.user import UserFolder
 from ikaaro.utils import crypt_password
-from ikaaro.webpage import WebPage, WebPage_View
+from ikaaro.webpage import WebPage
 from ikaaro.website import WebSite
 
 # Import from scrib
@@ -40,7 +41,7 @@ from bm2009 import BM2009
 from bdp2009 import BDP2009
 from form import Form
 from forms import Forms
-from scrib_views import Scrib_Login, Scrib_Edit
+from scrib_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib_views import Scrib_Register, Scrib_Confirm
 from scrib_views import Scrib_ExportForm, Scrib_ChangePassword
 from user import User
@@ -66,7 +67,7 @@ class Scrib2009(WebSite):
     class_id = 'Scrib2009'
     class_title = MSG(u"Scrib 2009")
     class_skin = 'ui/scrib2009'
-    class_views = WebSite.class_views + ['aide']
+    class_views = ['admin'] + WebSite.class_views + ['aide']
 
     __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide']
 
@@ -74,6 +75,7 @@ class Scrib2009(WebSite):
     bdp_class = BDP2009
 
     # Views
+    admin = Scrib_Admin()
     login = unauthorized = Scrib_Login()
     register = Scrib_Register()
     confirm = Scrib_Confirm()
@@ -83,7 +85,7 @@ class Scrib2009(WebSite):
     preview_content = Folder_PreviewContent(access='is_admin_or_voir_scrib')
     backlinks = DBResource_Backlinks(access='is_admin_or_voir_scrib')
     last_changes = DBResource_LastChanges(access='is_admin_or_voir_scrib')
-    aide = WebPage_View(template='aide', title=MSG(u"Aide"))
+    aide = GoToSpecificDocument(specific_document='aide', title=MSG(u"Aide"))
     xchangepassword = Scrib_ChangePassword()
 
 
@@ -97,26 +99,11 @@ class Scrib2009(WebSite):
         # Créé les utilisateurs d'abord pour avoir user_ids
         print "Génération de la liste des utilisateurs..."
         users = [# TODO Responsable équivalent de Marie Sotto pour Pelleas
-                 # TODO VoirSCRIB ne devrait être créé qu'une fois...
+                 # FIXME VoirSCRIB ne devrait être créé qu'une fois...
                  {'username': 'VoirSCRIB',
                   'password': crypt_password('BMBDP'),
                   'email': 'TODO'}]
         user_ids = set()
-        users_csv = UsersCSV(get_abspath('ui/scrib2009/users.csv'))
-        for row in users_csv.get_rows():
-            email = row.get_value('mel').strip() or 'TODO'
-            # Contre les adresses avec des accents
-            try:
-                unicode(email)
-            except UnicodeDecodeError:
-                raise TypeError, 'accent dans email : %s' % email
-            password = row.get_value('motdepasse')
-            users.append({'username': row.get_value('utilisateur'),
-                          'password': crypt_password(password),
-                          'email': email,
-                          'title': {'fr': row.get_value('nom')},
-                          'code_ua': row.get_value('code_ua'),
-                          'departement': row.get_value('departement')})
         print "  ", len(users), "utilisateurs"
         print "Création des utilisateurs..."
         # XXX remonte au niveau resource
@@ -130,8 +117,7 @@ class Scrib2009(WebSite):
             # Bypasse set_user car trop lent
             # FIXME l'uri de users n'est pas "...database/users"
             User._make_resource(User, folder, "users/" + user_id,
-                                # XXX l'adresse par défaut sera
-                                # utilisée plusieurs fois
+                                # XXX Pas de vérification de doublon d'e-mail
                                 **metadata)
             user_ids.add(user_id)
             user_id = str(int(user_id) + 1)
@@ -154,7 +140,9 @@ class Scrib2009(WebSite):
                                vhosts=('localhost', 'scrib2009'),
                                # Donne un rôle dans ce website
                                # = accès à cette année
-                               members=user_ids)
+                               members=user_ids,
+                               # Enregistrement volontaire
+                               website_is_open=True)
         # Pages
         print "Création des pages..."
         for id, title, filename in [('aide', u"Aide", 'help.xhtml')]:
@@ -166,6 +154,7 @@ class Scrib2009(WebSite):
         print "Création des BM..."
         Forms._make_resource(Forms, folder, "%s/bm" % name,
                              title={'fr': u"BM"})
+        users_csv = UsersCSV(get_abspath('ui/scrib2009/users.csv'))
         rows = users_csv.search(categorie='BM')
         for row in users_csv.get_rows(rows):
             code_ua = row.get_value('code_ua')

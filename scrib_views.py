@@ -25,16 +25,50 @@ from itools.datatypes import Date, Integer, Email
 from itools.gettext import MSG
 from itools.uri import get_reference
 from itools.web import BaseView, STLForm, ERROR
+from itools.xml import XMLParser
 
 # Import from ikaaro
 from ikaaro.forms import XHTMLBody, ReadOnlyWidget, DateWidget, RTEWidget
 from ikaaro.forms import TextWidget, AutoForm
 from ikaaro.resource_views import LoginView, DBResource_Edit
+from ikaaro.views import IconsView
 
 # Import from scrib
 from datatypes import DateLitterale
 from form import quote_namespace
 from utils import get_connection
+
+
+class Scrib_Admin(IconsView):
+    access = 'is_admin'
+    title = MSG(u"Administration de Scrib")
+    icon = 'settings.png'
+
+
+    def get_namespace(self, resource, context):
+        items = [{'icon': '/ui/icons/48x48/folder.png',
+                  'title': u"BM",
+                  'description': u"Rechercher une BM",
+                  'url': 'bm'}]
+        items.append({'icon': '/ui/icons/48x48/folder.png',
+                      'title': u"BDP",
+                      'description': u"Rechercher une BDP",
+                      'url': 'bdp'})
+        items.append({'icon': '/ui/icons/48x48/html.png',
+                      'title': u"Aide",
+                      'description': u"Modifier l'aide générale",
+                      'url': 'aide/;edit'})
+        for name in ('edit', 'browse_users', 'edit_virtual_hosts'):
+            view = resource.get_view(name)
+            items.append({
+                'icon': resource.get_method_icon(view, size='48x48'),
+                'title': view.title,
+                'description': view.description,
+                'url': ';%s' % name})
+        return {'title': self.title,
+                'batch': None,
+                'items': items}
+
 
 
 class Scrib_Login(LoginView):
@@ -77,32 +111,24 @@ class Scrib_Register(AutoForm):
 
         # Do we already have a user with that email?
         root = context.root
-        user = root.get_user_from_login(email)
-        if user is not None:
-            if not user.has_property('user_must_confirm'):
-                context.message = ERROR(u"Ce mél est déjà utilisé, essayez "
-                        u"le rappel de mot de passe")
-                return False
+        results = root.search(email=email)
+        if len(results):
+            context.message = ERROR(u"Ce mél est déjà utilisé : essayez "
+                    u"le rappel de mot de passe")
+            return False
+
+        # Is the code_ua valid?
+        form = resource.get_resource('bm/%s' % code_ua, soft=True)
+        if form is None:
+            context.message = ERROR(u"Ce code UA est invalide.")
+            return False
 
         # Do we already have a user with that code_ua?
         results = root.search(format='user', code_ua=code_ua)
         if len(results):
-            brain = results.get_documents()[0]
-            user = root.get_user(brain.name)
-            if user.get_property('email') == email:
-                context.message = ERROR(u"Vous êtes déjà enregistré, "
-                        u"essayez le rappel de mot de passe.")
-                return False
-            else:
-                context.message = ERROR(u"Ce code UA est enregistré par un "
-                        u"autre utilisateur.")
-                return False
-
-        # Is the code_ua valid?
-        form = resource.get_resource('bm').get_resource(str(code_ua),
-                soft=True)
-        if form is None:
-            context.message = ERROR(u"Ce code UA est invalide.")
+            # Same email already tested so it's another one with the code_ua
+            context.message = ERROR(u"Ce code UA est enregistré par un "
+                    u"autre utilisateur.")
             return False
 
         return True
@@ -125,7 +151,7 @@ class Scrib_Confirm(STLForm):
 
     def get_namespace(self, resource, context):
         code_ua = context.get_form_value('code_ua')
-        form = resource.get_resource('bm').get_resource(code_ua)
+        form = resource.get_resource('bm/%s' % code_ua)
         return {'email': context.get_form_value('email'),
                 'code_ua': code_ua,
                 'title': form.get_title()}
@@ -140,7 +166,7 @@ class Scrib_Confirm(STLForm):
         code_ua = form['code_ua']
         user = resource.get_resource('/users').set_user(email, password=None)
         user.set_property('username', 'BM%s' % code_ua)
-        form = resource.get_resource('bm').get_resource(str(code_ua))
+        form = resource.get_resource('bm/%s' % code_ua)
         user.set_property('title', form.get_title(), language='fr')
         user.set_property('code_ua', code_ua)
         user.set_property('departement', form.get_property('departement'))
@@ -154,16 +180,18 @@ class Scrib_Confirm(STLForm):
         form.handler.set_value('A114', email)
 
         # Bring the user to the login form
-        message = MSG(u"Un mél de confirmation vient de vous être envoyé à "
-                u"l'adresse {email}. Suivez ses instructions pour activer "
-                u"votre compte.")
-        return message.gettext().encode('utf-8')
+        message = (u"<p>Un mél de confirmation vient de vous être envoyé à "
+                u"l'adresse {email}.</p><p>Suivez ses instructions pour "
+                u"activer votre compte.</p>".format(email=email))
+        return XMLParser(message.encode('utf-8'))
         
 
 
 
 
 class  Scrib_Edit(DBResource_Edit):
+    description = MSG(u"Paramétrer Scrib")
+    icon = 'preferences.png'
     schema = merge_dicts(DBResource_Edit.schema,
                          annee=Integer(mandatory=True, readonly=True),
                          echeance_bm=Date(mandatory=True),

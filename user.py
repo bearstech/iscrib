@@ -51,6 +51,11 @@ class ScribUser(User):
                 code_ua=self.get_property('code_ua'))
 
 
+    # Affiche le nom de la ville, pas l'identifiant
+    def get_title(self, language=None):
+        return self.get_property('title', language=language)
+
+
     ######################################################################
     # Scrib API
     def is_bm(self):

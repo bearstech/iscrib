@@ -24,7 +24,7 @@ from datatypes import Departements
 
 class User_Home(STLView):
     access = 'is_self_or_admin'
-    title  = MSG(u"Home")
+    title  = MSG(u"Profil")
     template = '/ui/scrib2009/User_home.xml'
 
 
@@ -43,8 +43,8 @@ class User_Home(STLView):
             namespace['form_url'] = '%s/' % resource.get_pathto(form)
         else:
             namespace['form_url'] = None
-        # The application
         namespace['application'] = app.get_title()
-        # The departement
         namespace['departement'] = Departements.get_value(departement)
+        namespace['email'] = resource.get_property('email')
+        namespace['username'] = resource.get_property('username')
         return namespace
