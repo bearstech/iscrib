@@ -18,10 +18,18 @@
 # Import from itools
 from itools.core import get_version
 
+# Import from ikaaro
+from ikaaro.resource_ import DBResource
+
+# Import from scrib
+from scrib_views import Scrib_Login
+
 # Give a version
 __version__ = get_version()
 
-# Register root
-from root import Root
+# FIXME monkey patch
+DBResource.login = Scrib_Login()
+
 # Register
+from root import Root
 import skin

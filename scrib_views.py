@@ -23,8 +23,8 @@ from datetime import datetime
 from itools.core import merge_dicts
 from itools.datatypes import Date, Integer, Email
 from itools.gettext import MSG
-from itools.uri import get_reference
-from itools.web import BaseView, STLForm, ERROR
+from itools.uri import get_reference, get_uri_path
+from itools.web import BaseView, STLForm, INFO, ERROR
 from itools.xml import XMLParser
 
 # Import from ikaaro
@@ -55,9 +55,15 @@ class Scrib_Admin(IconsView):
                       'description': u"Rechercher une BDP",
                       'url': 'bdp'})
         items.append({'icon': '/ui/icons/48x48/html.png',
-                      'title': u"Aide",
+                      'title': u"Aide générale",
                       'description': u"Modifier l'aide générale",
                       'url': 'aide/;edit'})
+        for page in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
+            items.append({'icon': '/ui/icons/48x48/html.png',
+                          'title': u"Page %s" % page,
+                          'description': (u"Modifier l'aide de la page %s" %
+                              page),
+                          'url': 'Page%s/;edit' % page})
         for name in ('edit', 'browse_users', 'edit_virtual_hosts'):
             view = resource.get_view(name)
             items.append({
@@ -85,13 +91,41 @@ class Scrib_Login(LoginView):
 
 
     def action(self, resource, context, form):
-        goto = LoginView.action(self, resource, context, form)
-        user = context.user
-        if user is None:
-            return goto
-        elif user.is_bm() or user.is_bdp():
-            return get_reference('/users/%s' % user.name)
-        return goto
+        email = form['username'].strip()
+        password = form['password']
+        # Check the user exists
+        root = context.root
+        results = root.search(username=email)
+        if not len(results):
+            results = root.search(email=email)
+            if not len(results):
+                message = ERROR(u'The user "{username}" does not exist.',
+                                username=email)
+                context.message = message
+                return
+        user = root.get_user(results.get_documents()[0].name)
+        # Check the password is right
+        if not user.authenticate(password):
+            context.message = ERROR(u'The password is wrong.')
+            return
+        # Set cookie
+        user.set_auth_cookie(context, password)
+        # Set context
+        context.user = user
+        # Come back
+        referrer = context.request.referrer
+        if referrer is None:
+            goto = get_reference('./')
+        else:
+            if user.is_bm() or user.is_bdp():
+                goto = get_reference('/users/%s' % user.name)
+            else:
+                path = get_uri_path(referrer)
+                if path.endswith(';login'):
+                    goto = get_reference('./')
+                else:
+                    goto = referrer
+        return context.come_back(INFO(u"Welcome!"), goto)
 
 
 

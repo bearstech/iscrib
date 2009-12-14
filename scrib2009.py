@@ -145,8 +145,17 @@ class Scrib2009(WebSite):
                                website_is_open=True)
         # Pages
         print "Création des pages..."
-        for id, title, filename in [('aide', u"Aide", 'help.xhtml')]:
+        for filename, title in [('aide.xhtml', u"Aide"),
+                                ('PageA.xhtml', u"Page A"),
+                                ('PageB.xhtml', u"Page B"),
+                                ('PageC.xhtml', u"Page C"),
+                                ('PageD.xhtml', u"Page D"),
+                                ('PageE.xhtml', u"Page E"),
+                                ('PageF.xhtml', u"Page F"),
+                                ('PageG.xhtml', u"Page G"),
+                                ('PageH.xhtml', u"Page H")]:
             with open(get_abspath('ui/scrib2009/' + filename)) as file:
+                id = filename.split('.')[0]
                 WebPage._make_resource(WebPage, folder, '/'.join((name, id)),
                         title={'fr': title}, state='public', language='fr',
                         body=file.read())
