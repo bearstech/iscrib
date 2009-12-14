@@ -19,11 +19,24 @@
 "A113","Fax","BM","A","digit",10,"0xxxxxxxxx","N",,,,"AC","N-1","fax"
 "A114","Courrier électronique ","BM","A","Str",60,,"N",,,,"AC","N-1","mel"
 "A115","Site internet","BM","A","Str",60,,"N",,,,"AC","N-1","www"
-"A116","Statut site","BM","A","Enum","Radio","1=Site internet propre / 2=Page dédiée au sein du site de la collectivité","N",,,,"AC",,
-"A117","Mode de gestion de l'établissement","BM","A","Enum","Radio","1= Régie directe / 2= Association / 3=Association avec convention",,,,,"AC","N-1","gestion"
-,,,,,,,,,,,,,
-,,,,,,,,,,,,,
-,,,,,,,,,,,,,
+"A116","Statut site","BM","A","Enum","Radio","Site internet propre / Page dédiée au sein du site de la collectivité","N",,,,"AC",,
+"A117","Mode de gestion de l'établissement","BM","A","Enum","Radio","Régie directe / Association / Association avec convention",,,,,"AC","N-1","gestion"
+"B101","Nom de l'établissement",,"B","Str",60,,"N",,,,"AC","N-1",
+"B102","Libellé 1",,"B","Str",60,,"N",,,,"AC","N-1",
+"B103","Complément d'adresse",,"B","Str",60,,"N",,,,"AC","N-1",
+"B104","N°",,"B","Str",10,,"N",,,,"AC","N-1",
+"B105","Type voie",,"B","Str",20,,"N",,,,"AC","N-1",
+"B106","Nom voie",,"B","Str",60,,"N",,,,"AC","N-1",
+"B107","Code postal",,"B","digit",5,,"N",,,,"AC","N-1",
+"B108","Ville",,"B","Str",,,"N",,,,"AC","N-1",
+"B109","Cedex",,"B","Str",10,,"N",,,,"AC","N-1",
+"B110","Fonds en unités matérielles",,"B","Int",10,,"N",,,,"AC",,
+"B111","Surface utile nette totale en m²",,"B","Int",10,,"N",,,,"AC",,
+"B112","Personnel en ETPT",,"B","Int",10,,"N",,,,"AC",,
+"B113","Nombre de places assises",,"B","Int",10,,"N",,,,"AC",,
+"B114","Nombre d'heures d'ouverture hebdomadaires",,"B","Int",10,,"N",,,,"AC",,
+"B115","Nombre de jours d'ouverture annuels",,"B","Int",10,,"N",,,,"AC",,
+"B116","Nombre d'heures d'ouverture annuelles",,"B","Int",10,,"N",,,,"AC",,
 "C101","Nombre d'heures d'ouverture hebdomadaires",,"C","Dec","4,1",,,,,,"AC",,
 "C102","Nombre de jours d'ouverture annuels",,"C","Int",10,,,,,,"AC",,
 "C103","Nombre de places assises disponibles",,"C","Int",10,,,,,,"C",,
