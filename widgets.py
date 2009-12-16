@@ -264,12 +264,12 @@ class UITable(UIFile, CSVFile):
                 if isinstance(column, str):
                     column = unicode(column, 'utf8')
                 column = column.strip()
-                if column == u'-':
+                if column == u"-":
                     # Espace blanc insécable
                     try:
                         css_class = columns[-1]['class']
                     except IndexError:
-                        css_class = None
+                        css_class = u"field-label"
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': HTMLParser("&nbsp;"),
                                     'class': css_class})
