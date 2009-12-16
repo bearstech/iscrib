@@ -11,7 +11,7 @@ input {
   background-color: rgb(255, 200, 200) !important;
 }
 .badtype {
-  background-color: rgb(255, 100, 100) !important;
+  border: 3px solid #c00 !important;
 }
 .disabled {
   background-color: rgb(235, 235, 235) !important;
@@ -37,6 +37,12 @@ div.num {
   text-align: right !important;
 }
 
+td {
+  padding: 5px;
+  color: #446;
+  font-family: Verdana, Arial, Sans
+  font-weight: bold;
+}
 td.centered {
   text-align: center;
 }
@@ -57,7 +63,7 @@ td.section-header h3 {
   margin: 3px 0;
   color: #333399;
   background: #729FCF;
-  font-size: 10px;
+  font-size: 14px;
 }
 td.section-header h4 {
   margin: 1px 0;
@@ -143,7 +149,13 @@ td.rubrique-label {
   padding-left: 20px;
   background: url(images/imprimer.png) top left no-repeat;
 }
-
+#form-tables {
+  text-align: center;
+}
+#form-tables table {
+  margin: auto;
+  text-align: left;
+}
 .form-debug {
   font-size: 9px;
   color: #333;
@@ -154,3 +166,7 @@ td.rubrique-label {
   font-weight: bold;
 }
 #profile span.wf-exported { color: #000; }
+
+#message .info {
+  border-color: #729fcf;
+}

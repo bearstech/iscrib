@@ -29,13 +29,13 @@ from itools.stl import stl
 from ikaaro.skins import UIFile
 
 # Import from scrib
-from datatypes import Numeric, NumTime, Text
+from datatypes import Numeric, NumTime, Text, EnumBoolean
 from form import SENT, EXPORTED
 
 
 FIELD_PREFIX = u"#"
-WHITESPACE_DIV = u'<div>%s</div>'
-BORDER_DIV = u'<div style="border: 1px solid #D7D3D7;">%s</div>'
+WHITESPACE_DIV = u"<div>{0}</div>"
+BORDER_DIV = u'<div class="{css}">{body}</div>'
 ENABLE = (u'''onchange="this.form.%s.disabled=false;'''
           u'''this.form.%s.className=''"''')
 DISABLE = (u'''onchange="this.form.%s.disabled=true;'''
@@ -55,12 +55,12 @@ def radio_widget(context, form, datatype, name, value, readonly=False):
     html = []
 
     if readonly:
-        span = datatype.get_value(value, value)
-        if span is None:
-            span = ''
+        input = datatype.get_value(value, value)
+        if input is None:
+            input = ''
         else:
-            span = XMLContent.encode(span)
-        html.append(WHITESPACE_DIV % span)
+            input = XMLContent.encode(input)
+        html.append(WHITESPACE_DIV.format(input))
     else:
         for option in datatype.get_namespace(value):
             # 0005970: Rendre certains champs d'une fiche professeur
@@ -77,15 +77,18 @@ def radio_widget(context, form, datatype, name, value, readonly=False):
             checked = u'checked="checked" ' if option['selected'] else u''
             input = u'<input type="radio" name="%s" value="%s" %s %s /> %s' % (
                     name, option['name'], checked, onclick, option['value'])
-            if name in context.bad_types:
-                input = u'<span class="badtype" title="%s">%s</span>' %\
-                        (u'Mauvaise valeur', input)
-            elif not is_mandatory_filled(datatype, value, context):
-                input = u'<span class="mandatory" title="%s">%s</span>' %\
-                        (u'Champ obligatoire', input)
-            html.append(WHITESPACE_DIV % input)
+            if issubclass(datatype, EnumBoolean):
+                # Oui/Non sur une seule ligne
+                html.append(input)
+            else:
+                # Une option par ligne
+                html.append(WHITESPACE_DIV.format(input))
 
-    return BORDER_DIV % u''.join(html)
+    if name in context.bad_types:
+        return BORDER_DIV.format(body=u''.join(html), css=u"badtype")
+    elif not is_mandatory_filled(datatype, value, context):
+        return BORDER_DIV.format(body=u''.join(html), css=u"badtype")
+    return BORDER_DIV.format(body=u''.join(html), css=u"")
 
 
 
@@ -93,8 +96,8 @@ def checkbox_widget(context, form, datatype, name, value, readonly=False):
     html = []
 
     if readonly:
-        span = datatype.get_value(value, value)
-        html.append(WHITESPACE_DIV % span)
+        input = datatype.get_value(value, value)
+        html.append(WHITESPACE_DIV.format(input))
     else:
         for option in datatype.get_namespace(value):
             checked = u'checked="checked" ' if option['selected'] else u''
@@ -106,9 +109,9 @@ def checkbox_widget(context, form, datatype, name, value, readonly=False):
             elif not is_mandatory_filled(datatype, value, context):
                 input = u'<span class="mandatory" title="%s">%s</span>' %\
                         (u'Champ obligatoire', input)
-            html.append(WHITESPACE_DIV % input)
+            html.append(WHITESPACE_DIV.format(input))
 
-    return BORDER_DIV % u''.join(html)
+    return BORDER_DIV.format(body=u''.join(html), css=u"")
 
 
 
@@ -116,8 +119,8 @@ def select_widget(context, form, datatype, name, value, readonly=False):
     html = []
 
     if readonly:
-        span = datatype.get_value(value, value)
-        html.append(WHITESPACE_DIV % span)
+        input = datatype.get_value(value, value)
+        html.append(WHITESPACE_DIV.format(input))
     else:
         select = [u'<select name="%s"' % name]
         css_class = []
@@ -150,7 +153,8 @@ def select_widget(context, form, datatype, name, value, readonly=False):
             html.append(input)
         html.append(u'</select>')
 
-    return BORDER_DIV % (WHITESPACE_DIV % u''.join(html))
+    return BORDER_DIV.format(body=WHITESPACE_DIV.format(u''.join(html)),
+            css=u"")
 
 
 
