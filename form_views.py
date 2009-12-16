@@ -60,14 +60,7 @@ class Form_View(BaseForm):
             bad_types = context.bad_types
         except AttributeError:
             # Fresh GET: find from current state
-            bad_types = []
-            handler = resource.handler
-            for key, datatype in handler.schema.iteritems():
-                value = handler.get_value(key)
-                data = datatype.encode(value)
-                if not datatype.is_valid(data):
-                    bad_types.append(key)
-            context.bad_types = bad_types
+            context.bad_types = []
         view = context.query['view']
         table = resource.get_resource(PAGE_FILENAME % self.n)
         user = context.user
@@ -91,10 +84,10 @@ class Form_View(BaseForm):
         bad_types = []
         for key in handler.pages[page_number]:
             # Can't use "if not/continue" pattern here
+            datatype = handler.schema[key]
             if context.has_form_value(key):
                 # Do not use form schema, only default String
                 data = context.get_form_value(key).strip()
-                datatype = handler.schema[key]
                 try:
                     value = datatype.decode(data)
                 except Exception:
@@ -130,6 +123,8 @@ class Form_View(BaseForm):
             # Unchecked checkboxes return no value
             elif issubclass(datatype, Boolean):
                 value = False
+            else:
+                value = ''
             handler.set_value(key, value)
         # Reindex
         context.server.change_resource(resource)

@@ -42,6 +42,15 @@ DISABLE = (u'''onchange="this.form.%s.disabled=true;'''
           u'''this.form.%s.className='access_False'"''')
 
 
+def is_mandatory_filled(datatype, value, context):
+    if context.request.method != 'POST':
+        return True
+    if datatype.is_mandatory:
+        return bool(value)
+    return True
+
+
+
 def radio_widget(context, form, datatype, name, value, readonly=False):
     html = []
 
@@ -71,7 +80,7 @@ def radio_widget(context, form, datatype, name, value, readonly=False):
             if name in context.bad_types:
                 input = u'<span class="badtype" title="%s">%s</span>' %\
                         (u'Mauvaise valeur', input)
-            elif datatype.is_mandatory and not value:
+            elif not is_mandatory_filled(datatype, value, context):
                 input = u'<span class="mandatory" title="%s">%s</span>' %\
                         (u'Champ obligatoire', input)
             html.append(WHITESPACE_DIV % input)
@@ -94,7 +103,7 @@ def checkbox_widget(context, form, datatype, name, value, readonly=False):
             if name in context.bad_types:
                 input = u'<span class="badtype" title="%s">%s</span>' %\
                         (u'Mauvaise valeur', input)
-            elif datatype.is_mandatory and not value:
+            elif not is_mandatory_filled(datatype, value, context):
                 input = u'<span class="mandatory" title="%s">%s</span>' %\
                         (u'Champ obligatoire', input)
             html.append(WHITESPACE_DIV % input)
@@ -127,7 +136,7 @@ def select_widget(context, form, datatype, name, value, readonly=False):
         if name in context.bad_types:
             select.append(u' title="Mauvaise valeur"')
             css_class.append(u"badtype")
-        elif datatype.is_mandatory and not value:
+        elif not is_mandatory_filled(datatype, value, context):
             select.append(u' title="Champ obligatoire"')
             css_class.append(u"mandatory")
         if css_class:
@@ -192,7 +201,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     if name in context.bad_types:
         attrs['class'] = u'badtype'
         attrs['title'] = u'Mauvaise valeur'
-    elif datatype.is_mandatory and not value:
+    elif not is_mandatory_filled(datatype, value, context):
         attrs['class'] = u'mandatory'
         attrs['title'] = u'Champ obligatoire'
     get_value = form.handler.get_value
