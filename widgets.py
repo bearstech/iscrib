@@ -162,8 +162,6 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     elif format == 'CHECKBOX':
         return checkbox_widget(context, form, datatype, name, value,
                 readonly)
-    else:
-        size = format
     # Complex representation
     if not isinstance(value, basestring):
         value = datatype.encode(value)
@@ -183,7 +181,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
         else:
             attrs = {'type': u'text', 'name': name,
                      'value': XMLAttribute.encode(value),
-                     'size': size, 'maxlength': size}
+                     'size': datatype.length, 'maxlength': format}
             if tabindex:
                 attrs['tabindex'] = tabindex
             pattern = u'<input %s />\n'

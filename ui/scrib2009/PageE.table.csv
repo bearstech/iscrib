@@ -3,31 +3,31 @@
 ,,,,,,,,
 "**E1 – Usagers",,,,,,,,
 ,,,,,,,,
-,,,"Inscrits actifs",,"dont nouveaux inscrits",,"dont emprunteurs  actifs",
+"-",,,"Inscrits actifs",,"dont nouveaux inscrits",,"dont emprunteurs  actifs",
 "Particuliers",,,"#E101","E101","#E102","E102","#E103","E103"
 "dont","Enfants (de 0 à 14 ans)","H","#E104","E104","#E105","E105","#E106","E106"
-,,"F","#E107","E107","#E108","E108","#E109","E109"
-,,"Tot","#E110","E110","#E111","E111","#E112","E112"
-,"Adultes (de 15 à 64 ans)","H","#E113","E113","#E114","E114","#E115","E115"
-,,"F","#E116","E116","#E117","E117","#E118","E118"
-,,"Tot","#E119","E119","#E120","E120","#E121","E121"
-,"Adultes (de  65 ans et plus)","H","#E122","E122","#E123","E123","#E124","E124"
-,,"F","#E125","E125","#E126","E126","#E127","E127"
-,,"Tot","#E128","E128","#E129","E129","#E130","E130"
-,"Total adultes","H","#E131","E131","#E132","E132","#E133","E133"
-,,"F","#E134","E134","#E135","E135","#E136","E136"
-,,"Tot","#E137","E137","#E138","E138","#E139","E139"
+"-",,"F","#E107","E107","#E108","E108","#E109","E109"
+"-",,"Tot","#E110","E110","#E111","E111","#E112","E112"
+"-","Adultes (de 15 à 64 ans)","H","#E113","E113","#E114","E114","#E115","E115"
+"-",,"F","#E116","E116","#E117","E117","#E118","E118"
+"-",,"Tot","#E119","E119","#E120","E120","#E121","E121"
+"-","Adultes (de  65 ans et plus)","H","#E122","E122","#E123","E123","#E124","E124"
+"-",,"F","#E125","E125","#E126","E126","#E127","E127"
+"-",,"Tot","#E128","E128","#E129","E129","#E130","E130"
+"-","Total adultes","H","#E131","E131","#E132","E132","#E133","E133"
+"-",,"F","#E134","E134","#E135","E135","#E136","E136"
+"-",,"Tot","#E137","E137","#E138","E138","#E139","E139"
 "dont résidents dans la commune ou les communes adhérentes au réseau",,,"#E140","E140","#E141","E141","#E142","E142"
 "Collectivités",,,,,"#E143","E143","#E144","E144"
 "Fréquentation : entrées dans l'établissement ",,,,,"Centrale",,"#E145","E145"
-,,,,,"Réseau",,"#E146","E146"
+"-",,,,,"Réseau",,"#E146","E146"
 ,,,,,,,,
 ,,,,,,,,
 ,,,,,,,,
 ,,,,,,,,
 ,,,,,,,,
 "**E2 – Prêts",,,,,,,,
-,"Adultes",,"Enfants",,"Total",," Collectivités",
+"-","Adultes",,"Enfants",,"Total",," Collectivités",
 "Livres (UM)","#E201","E201","#E202","E202","#E203","E203","#E204","E204"
 "Publications en série imprimées (fascicules)","#E205","E205","#E206","E206","#E207","E207","#E208","E208"
 "Documents sonores : musique (UM)","#E209","E209","#E210","E210","#E211","E211","#E212","E212"
@@ -43,9 +43,9 @@
 "Consultations sur place","#E301","E301",,,,,,
 "Réservations","#E302","E302",,,,,,
 "Demandes d'informations","#E303","E303",,,,,,
-,"Par la bibliothèque",,"Par les usagers",,,,,
+"-","Par la bibliothèque",,"Par les usagers",,,,,
 "Reproductions","#E304","E304","#E305","E305",,,,
-,"Documents reçus",,"Documents fournis",,,,,
+"-","Documents reçus",,"Documents fournis",,,,,
 "Prêts entre bibliothèques","#E306","E306","#E307","E307",,,,
 ,,,,,,,,
 ,,,,,,,,
@@ -57,20 +57,19 @@
 ,,,,,,,,
 "**E5 – Services et ressources électroniques proposés par la bibliothèque",,,,,,,,
 ,,,,,,,,
-,"oui","non",,,,,,
-"Site internet","#E501","#E501","E501","Nombre de visites","Dans la bibliothèque","#E502","E502",
-,,,,,"Hors de la bibliothèque","#E503","E503",
-"Catalogue en ligne","#E504","#E504","E504","Nombre de sessions","Dans la bibliothèque","#E505","E505",
-,,,,,"Hors de la bibliothèque","#E506","E506",
-"Inscription en ligne","#E507","#E507","E507","Nombre d'inscriptions validées",,"#E508","E508",
-"Accès au compte lecteur","#E509","#E509","E509","Nombre d'accès",,"#E510","E510",
-"Réservations en ligne","#E511","#E511","E511","Nombre de transactions réalisées",,"#E512","E512",
-"Service de référence électronique","#E513","#E513","E513","Nombre de réponses",,"#E514","E514",
-"Ressources électroniques dont","#E515","#E515","E515","Nombre de total de contenus téléchargés",,"#E516","E516",
-"Publications en série électroniques","#E517","#E517","E517","Nombre de contenus téléchargés",,"#E518","E518",
-"Documents numériques","#E519","#E519","E519","Nombre de contenus téléchargés",,"#E520","E520",
-"dont textes","#E521","#E521","E521","Nombre de contenus téléchargés",,"#E522","E522",
-"dont images","#E523","#E523","E523","Nombre de contenus téléchargés",,"#E524","E524",
-"dont documents audiovisuels (sons, vidéos)","#E525","#E525","E525","Nombre de contenus téléchargés",,"#E526","E526",
-"Bases de données","#E527","#E527","E527","Nombre de sessions",,"#E528","E528",
-"Accès à internet dans la bibliothèque","#E529","#E529","E529","Nombre de sessions",,"#E530","E530",
+"Site internet","#E501","E501","Nombre de visites","Dans la bibliothèque","#E502","E502",,
+"-",,,,"Hors de la bibliothèque","#E503","E503",,
+"Catalogue en ligne","#E504","E504","Nombre de sessions","Dans la bibliothèque","#E505","E505",,
+"-",,,,"Hors de la bibliothèque","#E506","E506",,
+"Inscription en ligne","#E507","E507","Nombre d'inscriptions validées",,"#E508","E508",,
+"Accès au compte lecteur","#E509","E509","Nombre d'accès",,"#E510","E510",,
+"Réservations en ligne","#E511","E511","Nombre de transactions réalisées",,"#E512","E512",,
+"Service de référence électronique","#E513","E513","Nombre de réponses",,"#E514","E514",,
+"Ressources électroniques dont","#E515","E515","Nombre de total de contenus téléchargés",,"#E516","E516",,
+"Publications en série électroniques","#E517","E517","Nombre de contenus téléchargés",,"#E518","E518",,
+"Documents numériques","#E519","E519","Nombre de contenus téléchargés",,"#E520","E520",,
+"dont textes","#E521","E521","Nombre de contenus téléchargés",,"#E522","E522",,
+"dont images","#E523","E523","Nombre de contenus téléchargés",,"#E524","E524",,
+"dont documents audiovisuels (sons, vidéos)","#E525","E525","Nombre de contenus téléchargés",,"#E526","E526",,
+"Bases de données","#E527","E527","Nombre de sessions",,"#E528","E528",,
+"Accès à internet dans la bibliothèque","#E529","E529","Nombre de sessions",,"#E530","E530",,

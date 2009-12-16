@@ -75,8 +75,9 @@ def get_schema_pages(path):
 
     schema = {}
     pages = {}
-    for (name, title, form, page_number, dt_name, format, vocabulary,
-            is_mandatory, fixed, sum, dependances, abrege, init, sql_field) in rows:
+    for (name, title, form, page_number, dt_name, format, length, vocabulary,
+            is_mandatory, fixed, sum, dependances, abrege, init,
+            sql_field) in rows:
         # The name
         name = name.strip()
         if name == '':
@@ -107,7 +108,8 @@ def get_schema_pages(path):
         sum = sum.strip()
         # Add to the schema
         page_numbers = tuple(page_numbers)
-        schema[name] = datatype(format=format, pages=page_numbers,
+        schema[name] = datatype(format=format,
+                length=(length.strip() or format),pages=page_numbers,
                 is_mandatory=is_mandatory, sum=sum, abrege=abrege,
                 sql_field=sql_field)
     return schema, pages

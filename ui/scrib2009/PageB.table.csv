@@ -1,16 +1,16 @@
 ,,,,,,,,,,,,,
 ,,,,,,,,,,,,,
-,"*B – Les lieux du réseau",," #",,,,,,,,,,
+"*B – Les lieux du réseau",,," #",,,,,,,,,,
 ,,,,,,,,,,,,,
 ,,,,,,,,,,,,,
-,"**Bibliothèque",,,,,,,,,,,,
+"**Bibliothèque",,,,,,,,,,,,,
 ,,,,,,,,,,,,,
 "Nom"," #B101",,,,,,,,,,,,"B101"
-," #B102",,,,,,,,,,,,"B102"
-"Complément d'adresse",,,,,,,,,,,,,"B103"
-"N°/Type voie/ Nom voie","#B104",,,"B104",,,,"B105"," #B106",,,,"B106"
-"Code postal/Ville/Cedex",,,,"B107",,,,,,,"B108",,"B109"
+"-"," #B102",,,,,,,,,,,,"B102"
+"Complément d'adresse","#B103",,,,,,,,,,,,"B103"
+"N°/Type voie/ Nom voie","#B104",,,"B104","#B105",,,"B105"," #B106",,,,"B106"
+"Code postal/Ville/Cedex","#B107",,,"B107","#B108",,,,,,"B108","#B109","B109"
 "Fonds en unités matérielles",,,"Surface utile en m²",,,,"Personnel en ETP",,,,"Nombre de places assises",,
-"#B110",,"B110","#B111",,,"B111"," #B112",,,"B112",,,"B113"
+"#B110",,"B110","#B111",,,"B111"," #B112",,,"B112","#B113",,"B113"
 "Nombre d'heures d'ouverture hebdomadaires",,,"Nombre de jours d'ouverture annuels",,,,"Nombre d'heures d'ouverture annuelles",,,,,,
 "#B114",,"B114","#B115",,,"B115","#B116",,,"B116",,,
