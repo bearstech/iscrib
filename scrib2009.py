@@ -44,6 +44,7 @@ from forms import Forms
 from scrib_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib_views import Scrib_Register, Scrib_Confirm
 from scrib_views import Scrib_ExportForm, Scrib_ChangePassword
+from scrib_views import Scrib_ForgottenPassword
 from user import User
 
 
@@ -78,6 +79,7 @@ class Scrib2009(WebSite):
     admin = Scrib_Admin()
     login = unauthorized = Scrib_Login()
     register = Scrib_Register()
+    forgotten_password = Scrib_ForgottenPassword()
     confirm = Scrib_Confirm()
     edit = Scrib_Edit()
     export_form = Scrib_ExportForm()

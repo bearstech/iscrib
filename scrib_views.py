@@ -24,6 +24,7 @@ from itools.core import merge_dicts
 from itools.datatypes import Date, Integer, Email
 from itools.gettext import MSG
 from itools.uri import get_reference, get_uri_path
+from itools.stl import stl
 from itools.web import BaseView, STLForm, INFO, ERROR
 from itools.xml import XMLParser
 
@@ -32,11 +33,26 @@ from ikaaro.forms import XHTMLBody, ReadOnlyWidget, DateWidget, RTEWidget
 from ikaaro.forms import TextWidget, AutoForm
 from ikaaro.resource_views import LoginView, DBResource_Edit
 from ikaaro.views import IconsView
+from ikaaro.website_views import ForgottenPasswordForm
 
 # Import from scrib
 from datatypes import DateLitterale
 from form import quote_namespace
 from utils import get_connection
+
+
+def find_user(username, context):
+    root = context.root
+    results = root.search(username=username)
+    if not len(results):
+        results = root.search(email=username)
+        if not len(results):
+            message = ERROR(u"""L'utilisateur "{username}" n'existe """
+                    u"pas.", username=username)
+            context.message = message
+            return
+    return root.get_user(results.get_documents()[0].name)
+
 
 
 class Scrib_Admin(IconsView):
@@ -93,19 +109,12 @@ class Scrib_Login(LoginView):
 
 
     def action(self, resource, context, form):
-        email = form['username'].strip()
+        username = form['username'].strip()
         password = form['password']
         # Check the user exists
-        root = context.root
-        results = root.search(username=email)
-        if not len(results):
-            results = root.search(email=email)
-            if not len(results):
-                message = ERROR(u"""L'utilisateur "{username}" n'existe """
-                        u"pas.", username=email)
-                context.message = message
-                return
-        user = root.get_user(results.get_documents()[0].name)
+        user = find_user(username, context)
+        if user is None:
+            return
         # Check the password is right
         if not user.authenticate(password):
             context.message = ERROR(u"Le mot de passe est incorrect.")
@@ -175,6 +184,26 @@ class Scrib_Register(AutoForm):
             return
 
         return resource.confirm.GET(resource, context)
+
+
+
+class Scrib_ForgottenPassword(ForgottenPasswordForm):
+
+    def action(self, resource, context, form):
+        username = form['username'].strip()
+        username = username
+
+        # Get the user with the given login name
+        user = find_user(username, context)
+        if user is None:
+            return
+
+        # Send email of confirmation
+        email = user.get_property('email')
+        user.send_forgotten_password(context, email)
+
+        handler = resource.get_resource('/ui/website/forgotten_password.xml')
+        return stl(handler)
 
 
 
