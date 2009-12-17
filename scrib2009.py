@@ -25,6 +25,7 @@ from itools.gettext import MSG
 from itools.web import get_context
 
 # Import from ikaaro
+from ikaaro.folder import Folder
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.folder_views import GoToSpecificDocument
 from ikaaro.forms import XHTMLBody
@@ -174,6 +175,9 @@ class Scrib2009(WebSite):
             cls.bm_class._make_resource(cls.bm_class, folder, '%s/bm/%s' %
                     (name, code_ua), code_ua=code_ua, title={'fr': title},
                     departement=departement)
+            Folder._make_resource(Folder, folder, '%s/bm/%s-pageb' % (name,
+                code_ua), code_ua=code_ua, title={'fr': title},
+                departement=departement)
         print "Création des BDP..."
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})

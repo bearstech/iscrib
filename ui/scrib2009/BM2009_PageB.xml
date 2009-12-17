@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <p>
+    <a href=";pageA">A-Identité</a> |
+    <a href=";pageB">B-Bibliothèques du réseau</a> |
+    <a href=";pageC">C-Accès et installation</a> |
+    <a href=";pageD">D-Collections</a> |
+    <a href=";pageE">E-Usages et usagers de la bib.</a> |
+    <a href=";pageF">F-Budget</a> |
+    <a href=";pageG">G-Personnel et formation</a> |
+    <a href=";pageH">H-Action culturelle</a>
+  </p>
+
+  <stl:block stl:if="not skip_print">
+    <input type="hidden" name="page_number" value="${page_number}" />
+    <p id="form-firsttime" stl:if="first_time">
+      <a href="/;aide">Veuillez consulter l'aide générale.</a>
+    </p>
+    <p id="form-toolbar">
+      <a id="form-help" href="${help_onclick}"
+        title="Aide (dans une nouvelle fenêtre)"
+        onclick="return popup(this.href, 440, 540)">Aide sur cette page</a>
+      <a id="form-print" href="?view=printable" title="Imprimer (dans une
+        nouvelle fenêtre)" onclick="return popup(this.href, 800,
+        600)">Imprimer cette page</a>
+    </p>
+    <hr class="clear" />
+  </stl:block>
+
+  <h2>Bibliothèques enregistrées</h2>
+  ${table}
+
+  <h2>Ajouter une bibliothèque</h2>
+
+  <form method="post">
+    <input type="hidden" name="page_number" value="${page_number}" />
+
+    <div id="form-tables">
+      <table class="scrib-table" stl:repeat="table tables">
+        <tr stl:repeat="row table">
+          <td stl:repeat="column row" rowspan="${column/rowspan}"
+            colspan="${column/colspan}"
+            class="${column/class}">${column/body}</td>
+        </tr>
+      </table>
+      <p>
+        <input type="submit" name=";add" value="Ajouter"
+          stl:if="not readonly" class="button-ok"/>
+      </p>
+    </div>
+  </form>
+
+</stl:block>

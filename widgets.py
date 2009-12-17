@@ -23,7 +23,6 @@
 from itools.csv import CSVFile
 from itools.datatypes import XMLContent, XMLAttribute
 from itools.html import HTMLParser
-from itools.stl import stl
 
 # Import from ikaaro
 from ikaaro.skins import UIFile
@@ -236,9 +235,8 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
 
 class UITable(UIFile, CSVFile):
 
-    ######################################################################
-    # User Interface
-    def to_html(self, context, form, view, skip_print=False, readonly=False):
+    def get_namespace(self, form, view, context, skip_print=False,
+            readonly=False):
         # Force l'ordre de tabulation entre les champs
         tabindex = None
         page = view.n
@@ -388,5 +386,5 @@ class UITable(UIFile, CSVFile):
                 namespace['help_onclick'] = ''
             else:
                 namespace['help_onclick'] = ";aide?page=%s" % page
-        template = self.get_resource('/ui/scrib2009/Table_to_html.xml')
-        return stl(template, namespace)
+
+        return namespace

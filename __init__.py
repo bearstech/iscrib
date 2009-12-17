@@ -33,3 +33,4 @@ DBResource.login = Scrib_Login()
 # Register
 from root import Root
 import skin
+import bm2009_pageb

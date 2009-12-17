@@ -28,6 +28,7 @@ from ikaaro.registry import register_resource_class, register_field
 from bm2009_views import BMSend_View
 from form import get_schema_pages, get_controls, FormHandler, Form
 from form_views import Form_View
+from bm2009_pageb_views import PageB_View
 
 
 class BM2009Handler(FormHandler):
@@ -43,7 +44,7 @@ class BM2009(Form):
 
     # Views
     pageA = Form_View(title=MSG(u"Saisie du rapport"), n='A')
-    pageB = Form_View(n='B')
+    pageB = PageB_View(n='B')
     pageC = Form_View(n='C')
     pageD = Form_View(n='D')
     pageE = Form_View(n='E')

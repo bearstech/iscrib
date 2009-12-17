@@ -22,7 +22,7 @@ from itools.datatypes import Boolean, String
 from itools.gettext import MSG
 from itools.html import HTMLParser
 from itools.stl import set_prefix
-from itools.web import BaseView, BaseForm, STLView, STLForm, INFO, ERROR
+from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from scrib
 from datatypes import Numeric
@@ -44,25 +44,24 @@ MSG_SAUVEGARDE = INFO(u"La page est enregistrée, veuillez vérifier votre "
         u"saisie dans l'onglet Contrôle de saisie")
 
 
-class Form_View(BaseForm):
-    # TODO STLView
+class Form_View(STLForm):
     access = 'is_allowed_to_view'
     access_POST = 'is_allowed_to_edit'
-    schema = {'page_number': String}
+    template = '/ui/scrib2009/Table_to_html.xml'
     query_schema = {'view': String}
+    schema = {'page_number': String}
 
 
-    def GET(self, resource, context):
+    def get_namespace(self, resource, context):
         try:
             # Return from POST
             bad_types = context.bad_types
         except AttributeError:
             # Fresh GET: find from current state
             context.bad_types = []
-        view = context.query['view']
-        table = resource.get_resource(PAGE_FILENAME % self.n)
         user = context.user
         skip_print = user.is_voir_scrib()
+        view = context.query['view']
         if view == 'printable':
             skip_print = True
         readonly = False
@@ -72,8 +71,9 @@ class Form_View(BaseForm):
             # Si le formulaire est dans l'état terminé,
             # une bibliothèque ne peut plus le modifier
             readonly = True
-        return table.to_html(context, resource, self, skip_print=skip_print,
-                             readonly=readonly)
+        table = resource.get_resource(PAGE_FILENAME % self.n)
+        return table.get_namespace(resource, self, context,
+                skip_print=skip_print, readonly=readonly)
 
 
     def action(self, resource, context, form):
