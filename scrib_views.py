@@ -64,7 +64,8 @@ class Scrib_Admin(IconsView):
                           'description': (u"Modifier l'aide de la page %s" %
                               page),
                           'url': 'Page%s/;edit' % page})
-        for name in ('edit', 'browse_users', 'edit_virtual_hosts'):
+        for name in ('edit', 'browse_users', 'add_user',
+                'edit_virtual_hosts'):
             view = resource.get_view(name)
             items.append({
                 'icon': resource.get_method_icon(view, size='48x48'),
@@ -87,6 +88,7 @@ class Scrib_Login(LoginView):
         namespace['echeance_bm'] = DateLitterale.encode(echeance_bm)
         echeance_bdp = resource.get_property('echeance_bdp')
         namespace['echeance_bdp'] = DateLitterale.encode(echeance_bdp)
+        context.response.status = 403
         return namespace
 
 
@@ -99,14 +101,14 @@ class Scrib_Login(LoginView):
         if not len(results):
             results = root.search(email=email)
             if not len(results):
-                message = ERROR(u'The user "{username}" does not exist.',
-                                username=email)
+                message = ERROR(u"""L'utilisateur "{username}" n'existe """
+                        u"pas.", username=email)
                 context.message = message
                 return
         user = root.get_user(results.get_documents()[0].name)
         # Check the password is right
         if not user.authenticate(password):
-            context.message = ERROR(u'The password is wrong.')
+            context.message = ERROR(u"Le mot de passe est incorrect.")
             return
         # Set cookie
         user.set_auth_cookie(context, password)

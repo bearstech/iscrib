@@ -132,7 +132,6 @@ td.rubrique-label {
 #form-firsttime a {
   color: white;
 }
-
 #form-toolbar {
   margin: 0;
   font-size: 10px;
@@ -143,6 +142,10 @@ td.rubrique-label {
   color: white;
   background: red;
   text-decoration: none;
+}
+#form-submit {
+  float: right;
+  margin-left: 20px;
 }
 #form-print {
   float: right;
@@ -168,5 +171,5 @@ td.rubrique-label {
 #profile span.wf-exported { color: #000; }
 
 #message .info {
-  border-color: #729fcf;
+  background-color: #f1e68d;
 }

@@ -228,7 +228,7 @@ class Scrib2009(WebSite):
                     return False
             # Must be registered for this year
             return self.has_user_role(user.name, 'members')
-        return True
+        return False
 
 
     def is_allowed_to_edit(self, user, resource):

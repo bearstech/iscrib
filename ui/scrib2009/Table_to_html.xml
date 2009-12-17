@@ -14,23 +14,26 @@
     <a href=";pageH">H-Action culturelle</a>
   </p>
 
-  <stl:block stl:if="not skip_print">
-    <p id="form-firsttime" stl:if="first_time">
-      <a href="/;aide">Veuillez consulter l'aide générale.</a>
-    </p>
-    <p id="form-toolbar">
-      <a id="form-help" href="${help_onclick}" title="Aide (dans une nouvelle
-        fenêtre)" onclick="return popup(this.href, 440, 540)">Aide sur cette
-        page</a>
-      <a id="form-print" href="?view=printable" title="Imprimer (dans une
-        nouvelle fenêtre)" onclick="return popup(this.href, 800,
-        600)">Imprimer cette page</a>
-    </p>
-    <hr class="clear" />
-  </stl:block>
-
   <form method="post">
     <input type="hidden" name="page_number" value="${page_number}" />
+
+    <stl:block stl:if="not skip_print">
+      <p id="form-firsttime" stl:if="first_time">
+        <a href="/;aide">Veuillez consulter l'aide générale.</a>
+      </p>
+      <p id="form-toolbar">
+        <a id="form-help" href="${help_onclick}"
+          title="Aide (dans une nouvelle fenêtre)"
+          onclick="return popup(this.href, 440, 540)">Aide sur cette page</a>
+        <input id="form-submit" type="submit" value="Enregistrer"
+          stl:if="not readonly" class="button-ok"/>
+        <a id="form-print" href="?view=printable" title="Imprimer (dans une
+          nouvelle fenêtre)" onclick="return popup(this.href, 800,
+          600)">Imprimer cette page</a>
+      </p>
+      <hr class="clear" />
+    </stl:block>
+
     <div id="form-tables">
       <table class="scrib-table" stl:repeat="table tables">
         <tr stl:repeat="row table">
@@ -44,6 +47,7 @@
           class="button-ok"/>
       </p>
     </div>
+
   </form>
 
 </stl:block>

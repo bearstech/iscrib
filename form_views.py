@@ -38,12 +38,10 @@ BREAK_HEADER = PAGE_BREAK[:1]
 BREAK_FOOTER = PAGE_BREAK[1:]
 
 # Messages
-MSG_ERREUR_SAUVEGARDE = ERROR(
-        u"ATTENTION ! "
-        u"IL Y A DES RUBRIQUES MANQUANTES ET/OU INVALIDES")
-MSG_SAUVEGARDE = INFO(
-        u"La page est enregistrée, veuillez vérifier votre saisie dans : "
-        u"Envoi du questionnaire")
+MSG_ERREUR_SAUVEGARDE = ERROR(u"ATTENTION ! IL Y A DES RUBRIQUES MANQUANTES "
+        u"ET/OU INVALIDES")
+MSG_SAUVEGARDE = INFO(u"La page est enregistrée, veuillez vérifier votre "
+        u"saisie dans l'onglet Contrôle de saisie")
 
 
 class Form_View(BaseForm):
