@@ -72,8 +72,27 @@ class Form_View(STLForm):
             # une bibliothèque ne peut plus le modifier
             readonly = True
         table = resource.get_resource(PAGE_FILENAME % self.n)
-        return table.get_namespace(resource, self, context,
+        namespace = table.get_namespace(resource, self, context,
                 skip_print=skip_print, readonly=readonly)
+        # TODO specific to BM
+        # TODO hardcoded
+        menu = []
+        code_ua = resource.get_code_ua()
+        form = resource.get_site_root().get_resource('bm/%s' % code_ua)
+        for name, title in [('pageA', u"A-Identité"),
+                            ('pageB', u"B-Bibliothèques du réseau"),
+                            ('pageC', u"C-Accès et installation"),
+                            ('pageD', u"D-Collections"),
+                            ('pageE', u"E-Usages et usagers de la bib."),
+                            ('pageF', u"F-Budget"),
+                            ('pageG', u"G-Personnel et formation"),
+                            ('pageH', u"H-Action culturelle")]:
+            menu.append({'href': '%s/;%s' % (context.get_link(form), name),
+                         'title': title,
+                         'active': 'nav-active' if context.view_name == name
+                                                else None})
+        namespace['menu'] = menu
+        return namespace
 
 
     def action(self, resource, context, form):

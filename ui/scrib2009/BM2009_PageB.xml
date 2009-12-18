@@ -5,14 +5,9 @@
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <p>
-    <a href=";pageA">A-Identité</a> |
-    <a href=";pageB">B-Bibliothèques du réseau</a> |
-    <a href=";pageC">C-Accès et installation</a> |
-    <a href=";pageD">D-Collections</a> |
-    <a href=";pageE">E-Usages et usagers de la bib.</a> |
-    <a href=";pageF">F-Budget</a> |
-    <a href=";pageG">G-Personnel et formation</a> |
-    <a href=";pageH">H-Action culturelle</a>
+    <stl:inline stl:repeat="item menu"><a
+        href="${item/href}" class="${item/active}">${item/title}</a>&nbsp;|
+    </stl:inline>
   </p>
 
   <stl:block stl:if="not skip_print">

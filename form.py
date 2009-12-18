@@ -25,6 +25,7 @@ from itools.handlers import File as FileHandler
 from ikaaro.file import File
 from ikaaro.folder import Folder
 from ikaaro.registry import register_field
+from ikaaro.workflow import WorkflowAware
 
 # Import from scrib
 from datatypes import Numeric, NumDecimal
@@ -188,7 +189,7 @@ class Form(File):
 
 
 
-class MultipleForm(Folder):
+class MultipleForm(WorkflowAware, Folder):
     class_id = 'MultipleForm'
     workflow = workflow
 
