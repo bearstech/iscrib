@@ -18,6 +18,7 @@
 
 # Import from itools
 from itools.core import get_abspath
+from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.skins import Skin, register_skin, map
@@ -47,6 +48,13 @@ class ScribSkin(Skin):
         for style in context.styles:
             styles.append(style)
         return styles
+
+
+    def get_template(self):
+        context = get_context()
+        if context.get_form_value('view') == 'printable':
+            return self.get_resource('print.xhtml')
+        return self.get_resource('template.xhtml')
 
 
     def build_namespace(self, context):

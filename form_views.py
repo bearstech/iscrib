@@ -228,36 +228,30 @@ class Send_View(STLForm):
 
 
 
-class Help_View(STLView):
+class Help_View(BaseView):
     access = 'is_allowed_to_view'
-    schema = {'page': String}
+    title = MSG(u"Aide à la saisie")
 
 
-    def get_template(self, resource, context):
-        # avoid skin template
-        context.response.set_header('Content-Type',
-                                    'text/html; charset=UTF-8')
-        # Get template
-        page = context.query['page']
-        if page is None:
-            template = 'notice.xml'
-        elif page == 'controls':
-            template = 'controls.xml'
-        else:
-            template = 'page%s.xml' % page
-        return self.get_resource('/ui/scrib2009/help/%s' % template)
-
-
-
-class Print_Help(STLView):
-    access = 'is_allowed_to_view'
-    title = MSG(u"Impression du questionnaire")
-    template = '/ui/scrib2009/help/print.xml'
+    def GET(self, resource, context):
+        page = context.get_query_value('page')
+        app = resource.get_site_root()
+        if page:
+            # Aide spécifique
+            response = context.response
+            response.set_header('Content-Type', 'text/html; charset=UTF-8')
+            resource = app.get_resource('Page' + page)
+            return resource.handler.to_str()
+        # Aide générale
+        resource = app.get_resource('aide')
+        prefix = resource.get_pathto(resource)
+        return set_prefix(resource.get_html_data(), prefix)
 
 
 
 class Print_Form(STLView):
     access = 'is_allowed_to_view'
+    title=MSG(u"Impression du rapport")
     template = '/ui/scrib2009/help/template.xhtml'
 
 
@@ -293,24 +287,3 @@ class Todo_View(BaseView):
 
     def GET(self, resource, context):
         return 'TODO'
-
-
-
-class Help_View(BaseView):
-    access = 'is_allowed_to_view'
-    title = MSG(u"Aide à la saisie")
-
-
-    def GET(self, resource, context):
-        page = context.get_query_value('page')
-        app = resource.get_site_root()
-        if page:
-            # Aide spécifique
-            response = context.response
-            response.set_header('Content-Type', 'text/html; charset=UTF-8')
-            resource = app.get_resource('Page' + page)
-            return resource.handler.to_str()
-        # Aide générale
-        resource = app.get_resource('aide')
-        prefix = resource.get_pathto(resource)
-        return set_prefix(resource.get_html_data(), prefix)
