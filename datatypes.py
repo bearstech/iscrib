@@ -283,7 +283,7 @@ class Numeric(object):
         if left is None:
             # NC == right
             return True
-        elif right == 'NC' or right is None:
+        elif str(right).upper() == 'NC' or right is None:
             # <type> == NC
             return True
         # <type> == <type>
@@ -296,8 +296,8 @@ class Numeric(object):
             right = right.value
         if left is None:
             # NC != right
-            return right != 'NC' and right is not None
-        elif right == 'NC' or right is None:
+            return str(right).upper() != 'NC' and right is not None
+        elif str(right).upper() == 'NC' or right is None:
             # <type> != NC
             return True
         # <type> != <type>
@@ -315,7 +315,7 @@ class NumDecimal(Numeric):
     def __init__(self, value=None, **kw):
         Numeric.__init__(self, **kw)
         if value is not None:
-            if value == 'NC':
+            if str(value).upper() == 'NC':
                 value = None
             elif type(value) is dec or value == '':
                 pass
@@ -359,7 +359,7 @@ class NumInteger(Numeric):
     def __init__(self, value=None, **kw):
         Numeric.__init__(self, **kw)
         if value is not None:
-            if value == 'NC':
+            if str(value).upper() == 'NC':
                 value = None
             elif type(value) is int or value == '':
                 pass
@@ -400,7 +400,7 @@ class NumTime(Numeric):
     def __init__(self, value=None, **kw):
         Numeric.__init__(self, **kw)
         if value is not None:
-            if value == 'NC':
+            if str(value).upper() == 'NC':
                 value = None
             elif type(value) is int or value == '':
                 pass
@@ -471,7 +471,7 @@ class NumDate(DataType):
     def __init__(self, value=None, **kw):
         DataType.__init__(self, **kw)
         if value is not None:
-            if value == 'NC':
+            if str(value).upper() == 'NC':
                 value = None
             elif type(value) is date:
                 pass
@@ -574,7 +574,7 @@ class NumDigit(Numeric):
     def __init__(self, value=None, **kw):
         Numeric.__init__(self, **kw)
         if value is not None:
-            if value == 'NC':
+            if str(value).upper() == 'NC':
                 value = None
             else:
                 pass
