@@ -40,7 +40,7 @@ class User_Home(STLView):
         else:
             form = None
         if form is not None:
-            namespace['form_url'] = '%s/' % resource.get_pathto(form)
+            namespace['form_url'] = '%s/;aide' % resource.get_pathto(form)
         else:
             namespace['form_url'] = None
         namespace['application'] = app.get_title()
