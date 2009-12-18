@@ -44,7 +44,7 @@ from forms import Forms
 from scrib_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib_views import Scrib_Register, Scrib_Confirm
 from scrib_views import Scrib_ExportForm, Scrib_ChangePassword
-from scrib_views import Scrib_ForgottenPassword
+from scrib_views import Scrib_ForgottenPassword, GoToHome
 from user import User
 
 
@@ -68,7 +68,7 @@ class Scrib2009(WebSite):
     class_id = 'Scrib2009'
     class_title = MSG(u"Scrib 2009")
     class_skin = 'ui/scrib2009'
-    class_views = ['admin'] + WebSite.class_views + ['aide']
+    class_views = ['admin'] + WebSite.class_views + ['aide', 'home']
 
     __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide']
 
@@ -88,6 +88,7 @@ class Scrib2009(WebSite):
     backlinks = DBResource_Backlinks(access='is_admin_or_voir_scrib')
     last_changes = DBResource_LastChanges(access='is_admin_or_voir_scrib')
     aide = GoToSpecificDocument(specific_document='aide', title=MSG(u"Aide"))
+    home = GoToHome()
     xchangepassword = Scrib_ChangePassword()
 
 

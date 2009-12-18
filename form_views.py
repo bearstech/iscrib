@@ -81,7 +81,7 @@ class Form_View(STLForm):
         form = resource.get_site_root().get_resource('bm/%s' % code_ua)
         for name, title in [('pageA', u"A-Identité"),
                             ('pageB', u"B-Bibliothèques du réseau"),
-                            ('pageC', u"C-Accès et installation"),
+                            ('pageC', u"C-Accès et installations"),
                             ('pageD', u"D-Collections"),
                             ('pageE', u"E-Usages et usagers de la bib."),
                             ('pageF', u"F-Budget"),

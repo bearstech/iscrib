@@ -29,6 +29,7 @@ from itools.web import BaseView, STLForm, INFO, ERROR
 from itools.xml import XMLParser
 
 # Import from ikaaro
+from ikaaro.folder_views import GoToSpecificDocument
 from ikaaro.forms import XHTMLBody, ReadOnlyWidget, DateWidget, RTEWidget
 from ikaaro.forms import TextWidget, AutoForm
 from ikaaro.resource_views import LoginView, DBResource_Edit
@@ -36,7 +37,7 @@ from ikaaro.views import IconsView
 from ikaaro.website_views import ForgottenPasswordForm
 
 # Import from scrib
-from datatypes import DateLitterale
+from datatypes import DateLitterale, Identifiant
 from form import quote_namespace
 from utils import get_connection
 
@@ -144,15 +145,15 @@ class Scrib_Register(AutoForm):
     access = True
     title = MSG(u"Crééz votre compte pour l'année 2009")
     schema = {'email': Email(mandatory=True),
-              'code_ua': Integer(mandatory=True)}
+              'identifiant': Identifiant(mandatory=True)}
     widgets = [TextWidget('email', title=MSG(u"Adresse mél")),
-               TextWidget('code_ua', title=MSG(u"Code UA"))]
+               TextWidget('identifiant', title=MSG(u"Identifiant"))]
     submit_value = MSG(u"Continuer")
 
 
     def is_valid(self, resource, context, form):
         email = form['email']
-        code_ua = form['code_ua']
+        identifiant = form['identifiant']
 
         # Do we already have a user with that email?
         root = context.root
@@ -163,16 +164,17 @@ class Scrib_Register(AutoForm):
             return False
 
         # Is the code_ua valid?
+        code_ua = int(identifiant[2:])
         form = resource.get_resource('bm/%s' % code_ua, soft=True)
         if form is None:
-            context.message = ERROR(u"Ce code UA est invalide.")
+            context.message = ERROR(u"Cet identifiant est invalide.")
             return False
 
         # Do we already have a user with that code_ua?
         results = root.search(format='user', code_ua=code_ua)
         if len(results):
             # Same email already tested so it's another one with the code_ua
-            context.message = ERROR(u"Ce code UA est enregistré par un "
+            context.message = ERROR(u"Cet identifiant est enregistré par un "
                     u"autre utilisateur.")
             return False
 
@@ -212,13 +214,14 @@ class Scrib_Confirm(STLForm):
     title = MSG(u"Confirmation de création de compte")
     template = '/ui/scrib2009/Scrib_confirm.xml'
     schema = {'email': Email(mandatory=True),
-              'code_ua': Integer(mandatory=True)}
+              'identifiant': Identifiant(mandatory=True)}
 
     def get_namespace(self, resource, context):
-        code_ua = context.get_form_value('code_ua')
+        identifiant = context.get_form_value('identifiant')
+        code_ua = int(identifiant[2:])
         form = resource.get_resource('bm/%s' % code_ua)
         return {'email': context.get_form_value('email'),
-                'code_ua': code_ua,
+                'identifiant': identifiant,
                 'title': form.get_title()}
 
 
@@ -228,8 +231,9 @@ class Scrib_Confirm(STLForm):
 
         # Add the user
         email = form['email']
-        code_ua = form['code_ua']
         user = resource.get_resource('/users').set_user(email, password=None)
+        identifiant = form['identifiant']
+        code_ua = int(identifiant[2:])
         user.set_property('username', 'BM%s' % code_ua)
         form = resource.get_resource('bm/%s' % code_ua)
         user.set_property('title', form.get_title(), language='fr')
@@ -433,3 +437,11 @@ class Scrib_ChangePassword(BaseView):
         # XXX écrit sur une méthode GET
         context.commit = True
         return context.come_back(MSG(u"Done"), goto='/;browse_content')
+
+
+class GoToHome(GoToSpecificDocument):
+    access = True
+
+
+    def get_specific_document(self, resource, context):
+        return '/users/%s' % context.user.name

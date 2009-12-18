@@ -22,6 +22,7 @@ from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
+from itools.datatypes import String
 from itools.handlers import checkid
 
 
@@ -814,3 +815,15 @@ def make_enumerate(raw):
         options.append({'name': checkid(value),
                         'value': value})
     return SqlEnumerate(options=options)
+
+
+
+class Identifiant(String):
+
+    @staticmethod
+    def is_valid(value):
+        try:
+            int(value[2:])
+        except ValueError:
+            return False
+        return True

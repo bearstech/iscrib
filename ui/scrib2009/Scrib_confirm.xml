@@ -10,7 +10,7 @@
       municipale de <strong>${title}</strong>.
     </p>
     <input type="hidden" name="email" value="${email}"/>
-    <input type="hidden" name="code_ua" value="${code_ua}"/>
+    <input type="hidden" name="identifiant" value="${identifiant}"/>
     <input value="Créer mon compte" class="button-ok" type="submit"/>
   </form>
 
