@@ -17,38 +17,22 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import get_abspath, merge_dicts
-from itools.csv import CSVFile
-from itools.datatypes import String, Boolean
+from itools.core import merge_dicts
 from itools.gettext import MSG
 from itools.handlers import File as FileHandler
 
 # Import from ikaaro
 from ikaaro.file import File
+from ikaaro.folder import Folder
 from ikaaro.registry import register_field
-from ikaaro.text import Text
-from ikaaro.workflow import workflow
 
 # Import from scrib
-from datatypes import Numeric, NumInteger, NumDecimal, NumTime, NumShortTime
-from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
-from datatypes import WorkflowState, make_enumerate
+from datatypes import Numeric, NumDecimal
+from datatypes import Unicode
+from datatypes import WorkflowState
 from form_views import Send_View, Todo_View, Help_View
 from utils import SI
-from workflow import EMPTY, SENT, EXPORTED, MODIFIED
-
-
-dt_mapping = {
-    'boolean': EnumBoolean,
-    'dec': NumDecimal,
-    'digit': NumDigit,
-    'hh:mm': NumShortTime,
-    'hhh:mm': NumTime,
-    'int': NumInteger,
-    'jj/mm/aaaa': NumDate,
-    'mm/aaaa': NumShortDate,
-    'str': Unicode,
-    'text': Text}
+from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
 
 
 def quote_namespace(namespace, schema):
@@ -66,69 +50,10 @@ def quote_namespace(namespace, schema):
 
 
 
-def get_schema_pages(path):
-    path = get_abspath(path)
-    handler = CSVFile(path)
-    rows = handler.get_rows()
-    # Skip header
-    rows.next()
-
-    schema = {}
-    pages = {}
-    for (name, title, form, page_number, dt_name, format, length, vocabulary,
-            is_mandatory, fixed, sum, dependances, abrege, init,
-            sql_field) in rows:
-        # The name
-        name = name.strip()
-        if name == '':
-            continue
-        if name[0] == '#':
-            name = name[1:]
-        # The datatype
-        dt_name = dt_name.strip().lower()
-        if dt_name == 'enum':
-            datatype = make_enumerate(vocabulary)
-        else:
-            datatype = dt_mapping.get(dt_name)
-        if datatype is None:
-            raise NotImplementedError, (dt_name, path)
-        # The page number
-        page_number = page_number.replace('-', '')
-        # allow multiple page numbers
-        page_numbers = []
-        for page in page_number.split(','):
-            if not page.isalpha():
-                raise ValueError, """page "%s" n'est pas valide""" % page
-            page_fields = pages.setdefault(page, set())
-            page_fields.add(name)
-            page_numbers.append(page)
-        # Mandatory
-        is_mandatory = (not is_mandatory or is_mandatory.upper() == 'OUI')
-        # Sum
-        sum = sum.strip()
-        # Add to the schema
-        page_numbers = tuple(page_numbers)
-        schema[name] = datatype(format=format,
-                length=(length.strip() or format),pages=page_numbers,
-                is_mandatory=is_mandatory, sum=sum, abrege=abrege,
-                sql_field=sql_field)
-    return schema, pages
-
-
-
-def get_controls(path):
-    path = get_abspath(path)
-    handler = CSVFile(path)
-    rows = handler.get_rows()
-    # Skip header
-    rows.next()
-    return list(rows)
-
-
-
 class FormHandler(FileHandler):
     schema = {}
     pages = {}
+    controls = []
 
 
     ######################################################################
@@ -203,7 +128,6 @@ class FormHandler(FileHandler):
 class Form(File):
     class_id = 'Form'
     class_handler = FormHandler
-    class_icon48 = 'scrib/images/form48.png'
     class_views = ['envoyer', 'exporter', 'imprimer', 'aide']
     class_handler = FormHandler
     workflow = workflow
@@ -215,32 +139,9 @@ class Form(File):
     aide = Help_View()
 
 
-    @classmethod
-    def get_metadata_schema(cls):
-        return merge_dicts(File.get_metadata_schema(),
-                           departement=String)
-
-
-
     def _get_catalog_values(self):
-        values = File._get_catalog_values(self)
-        values['is_bm'] = self.is_bm()
-        values['is_bdp'] = self.is_bdp()
-        values['departement'] = self.get_property('departement')
-        values['form_state'] = self.get_form_state()
-        return values
-
-
-    ######################################################################
-    # Scrib API
-    @staticmethod
-    def is_bm():
-        raise NotImplementedError
-
-
-    @staticmethod
-    def is_bdp():
-        raise NotImplementedError
+        return merge_dicts(File._get_catalog_values(self),
+                form_state=self.get_form_state())
 
 
     def get_form_state(self):
@@ -287,9 +188,12 @@ class Form(File):
 
 
 
+class MultipleForm(Folder):
+    class_id = 'MultipleForm'
+    workflow = workflow
+
+
+
 ###########################################################################
 # Register
-register_field('is_bm', Boolean(is_indexed=True, is_stored=True))
-register_field('is_bdp', Boolean(is_indexed=True, is_stored=True))
-register_field('departement', Unicode(is_indexed=True, is_stored=True))
 register_field('form_state', Unicode(is_indexed=True, is_stored=True))

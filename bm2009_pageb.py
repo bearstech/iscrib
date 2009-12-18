@@ -23,11 +23,33 @@ from itools.gettext import MSG
 from ikaaro.registry import register_resource_class
 
 # Import from scrib
-from bm2009 import BM2009
+from bm2009 import BM2009Form
+from bm2009_pageb_views import GoToBM2009Form
+from form import MultipleForm
 from form_views import Form_View
 
 
-class BM2009_PageB(BM2009):
+class MultipleForm_PageB(MultipleForm):
+    class_id = 'MultipleForm_PageB'
+    class_views = ['view']
+
+    # Views
+    view = GoToBM2009Form()
+
+
+    ######################################################################
+    # Security
+    def is_bm(self):
+        return self.parent.is_bm()
+
+
+    def get_code_ua(self):
+        name = self.name.replace('-pageb', '')
+        return self.parent.get_resource(name).get_code_ua()
+
+
+
+class BM2009Form_PageB(BM2009Form):
     class_id = 'BM2009_PageB'
     class_views = ['pageB']
 
@@ -35,6 +57,36 @@ class BM2009_PageB(BM2009):
     pageB = Form_View(title=MSG(u"saisie de bibliothèque"), n='B')
 
 
+    def get_title(self, language=None):
+        return self.handler.get_value('B101') or self.name
+
+
+    ######################################################################
+    # Security
+    def is_bm(self):
+        return self.parent.is_bm()
+
+
+    def get_code_ua(self):
+        return self.parent.get_code_ua()
+
+
+    ######################################################################
+    # Workflow
+    def get_statename(self):
+        return self.parent.get_statename()
+
+
+    def get_state(self):
+        return self.parent.get_state()
+
+
+    def do_trans(self, transname, *args, **kw):
+        raise NotImplementedError
+
+
+
 ###########################################################################
 # Register
-register_resource_class(BM2009_PageB)
+register_resource_class(MultipleForm_PageB)
+register_resource_class(BM2009Form_PageB)

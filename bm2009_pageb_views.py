@@ -24,8 +24,7 @@ from itools.web import INFO, ERROR
 
 # Import from ikaaro
 from ikaaro.buttons import RemoveButton
-from ikaaro.folder import Folder
-from ikaaro.folder_views import Folder_BrowseContent
+from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 
 # Import from scrib
 from form_views import Form_View
@@ -49,10 +48,11 @@ class PageB_View(Folder_BrowseContent):
 
 
     def get_items(self, resource, context, *args):
-        name = '%s-pageb' % resource.name
+        name = '%s-pageb' % resource.get_code_ua()
         pageb = resource.parent.get_resource(name, soft=True)
         if pageb is None:
-            pageb = Folder(Folder.build_metadata())
+            from bm2009_pageb import MultipleForm_PageB
+            pageb = MultipleForm_PageB(MultipleForm_PageB.build_metadata())
             pageb.name = name
             pageb.parent = resource.parent
         return Folder_BrowseContent.get_items(self, pageb, context, *args)
@@ -77,10 +77,13 @@ class PageB_View(Folder_BrowseContent):
 
 
     def action_add(self, resource, context, form):
-        name = '%s-pageb' % resource.name
+        name = '%s-pageb' % resource.get_code_ua()
         pageb = resource.parent.get_resource(name, soft=True)
         if pageb is None:
-            pageb = Folder.make_resource(Folder, resource.parent, name)
+            from bm2009_pageb import MultipleForm_PageB
+            pageb = MultipleForm_PageB.make_resource(MultipleForm_PageB,
+                    resource.parent, name,
+                    title={'fr': resource.get_title()})
         title = context.get_form_value('B101', type=Unicode).strip()
         name = checkid(title)
         if not name:
@@ -92,8 +95,8 @@ class PageB_View(Folder_BrowseContent):
             context.commit = False
             context.message = ERROR(u"Bibliothèque déjà enregistrée.")
             return
-        from bm2009_pageb import BM2009_PageB
-        bib = BM2009_PageB.make_resource(BM2009_PageB, pageb, name,
+        from bm2009_pageb import BM2009Form_PageB
+        bib = BM2009Form_PageB.make_resource(BM2009Form_PageB, pageb, name,
                 title={'fr': title})
         Form_View(n=self.n).action(bib, context, form)
         context.bad_types = []
@@ -101,6 +104,13 @@ class PageB_View(Folder_BrowseContent):
 
 
     def action_remove(self, resource, context, form):
-        name = '%s-pageb' % resource.name
+        name = '%s-pageb' % resource.get_code_ua()
         pageb = resource.parent.get_resource(name)
         Folder_BrowseContent().action_remove(pageb, context, form)
+
+
+
+class GoToBM2009Form(GoToSpecificDocument):
+
+    def get_specific_document(self, resource, context):
+        return '../%s/;pageB' % resource.get_code_ua()

@@ -17,45 +17,55 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.gettext import MSG
+from itools.core import merge_dicts
+from itools.datatypes import String, Boolean
 
 # Import from ikaaro
-from ikaaro.registry import register_resource_class
+from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
-from form import get_schema_pages, get_controls, FormHandler, Form
-from form_views import Form_View
+from form import FormHandler, Form
 
 
 class BDP2009Handler(FormHandler):
-    schema, pages = get_schema_pages('ui/scrib2009/schema-bm.csv')
-    controls = get_controls('ui/scrib2009/controls-bm.csv')
+    pass
 
 
 
-class BDP2009(Form):
-    class_id = 'BDP2009'
+class BDP2009Form(Form):
+    class_id = 'BDP2009Form'
     class_handler = BDP2009Handler
-    class_views = ['pageA', 'pageB', 'pageC'] + Form.class_views
+    class_icon48 = 'scrib2009/images/form48.png'
+    class_views = [] + Form.class_views
 
     # Views
-    pageA = Form_View(title=MSG(u"A-..."), n='A')
-    pageB = Form_View(title=MSG(u"B-..."), n='B')
-    pageC = Form_View(title=MSG(u"C-..."), n='C')
+
+
+    @classmethod
+    def get_metadata_schema(cls):
+        return merge_dicts(Form.get_metadata_schema(),
+                departement=String)
+
+
+    def _get_catalog_values(self):
+        return merge_dicts(Form._get_catalog_values(self),
+                is_bdp=True,
+                departement=self.get_property('departement'))
 
 
     ######################################################################
-    # Scrib API
-    @staticmethod
-    def is_bm():
-        return False
+    # Security
+    def is_bdp(self):
+        return self.parent.is_bdp()
 
 
-    @staticmethod
-    def is_bdp():
-        return True
+    def get_departement(self):
+        return self.get_property('departement')
 
 
 ###########################################################################
 # Register
-register_resource_class(BDP2009)
+register_resource_class(BDP2009Form)
+# TODO remove after production
+register_resource_class(BDP2009Form, format='BDP2009')
+register_field('is_bdp', Boolean(is_indexed=True, is_stored=True))

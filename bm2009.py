@@ -17,18 +17,96 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
-from itools.datatypes import Integer
+from itools.core import get_abspath, merge_dicts
+from itools.csv import CSVFile
+from itools.datatypes import String, Integer, Boolean
 from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.registry import register_resource_class, register_field
+from ikaaro.text import Text
 
 # Import from scrib
 from bm2009_views import BMSend_View
-from form import get_schema_pages, get_controls, FormHandler, Form
+from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime
+from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
+from datatypes import make_enumerate
+from form import FormHandler, Form
 from form_views import Form_View
 from bm2009_pageb_views import PageB_View
+
+
+dt_mapping = {
+    'boolean': EnumBoolean,
+    'dec': NumDecimal,
+    'digit': NumDigit,
+    'hh:mm': NumShortTime,
+    'hhh:mm': NumTime,
+    'int': NumInteger,
+    'jj/mm/aaaa': NumDate,
+    'mm/aaaa': NumShortDate,
+    'str': Unicode,
+    'text': Text}
+
+
+def get_schema_pages(path):
+    path = get_abspath(path)
+    handler = CSVFile(path)
+    rows = handler.get_rows()
+    # Skip header
+    rows.next()
+
+    schema = {}
+    pages = {}
+    for (name, title, form, page_number, dt_name, format, length, vocabulary,
+            is_mandatory, fixed, sum, dependances, abrege, init,
+            sql_field) in rows:
+        # The name
+        name = name.strip()
+        if name == '':
+            continue
+        if name[0] == '#':
+            name = name[1:]
+        # The datatype
+        dt_name = dt_name.strip().lower()
+        if dt_name == 'enum':
+            datatype = make_enumerate(vocabulary)
+        else:
+            datatype = dt_mapping.get(dt_name)
+        if datatype is None:
+            raise NotImplementedError, (dt_name, path)
+        # The page number
+        page_number = page_number.replace('-', '')
+        # allow multiple page numbers
+        page_numbers = []
+        for page in page_number.split(','):
+            if not page.isalpha():
+                raise ValueError, """page "%s" n'est pas valide""" % page
+            page_fields = pages.setdefault(page, set())
+            page_fields.add(name)
+            page_numbers.append(page)
+        # Mandatory
+        is_mandatory = (not is_mandatory or is_mandatory.upper() == 'OUI')
+        # Sum
+        sum = sum.strip()
+        # Add to the schema
+        page_numbers = tuple(page_numbers)
+        schema[name] = datatype(format=format,
+                length=(length.strip() or format),pages=page_numbers,
+                is_mandatory=is_mandatory, sum=sum, abrege=abrege,
+                sql_field=sql_field)
+    return schema, pages
+
+
+
+def get_controls(path):
+    path = get_abspath(path)
+    handler = CSVFile(path)
+    rows = handler.get_rows()
+    # Skip header
+    rows.next()
+    return list(rows)
+
 
 
 class BM2009Handler(FormHandler):
@@ -37,9 +115,10 @@ class BM2009Handler(FormHandler):
 
 
 
-class BM2009(Form):
-    class_id = 'BM2009'
+class BM2009Form(Form):
+    class_id = 'BM2009Form'
     class_handler = BM2009Handler
+    class_icon48 = 'scrib2009/images/form48.png'
     class_views = ['pageA'] + Form.class_views
 
     # Views
@@ -57,27 +136,35 @@ class BM2009(Form):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(Form.get_metadata_schema(),
-                           code_ua=Integer)
+                code_ua=Integer,
+                # Utilisé pour la recherche, pas la sécurité
+                departement=String)
 
 
     def _get_catalog_values(self):
         return merge_dicts(Form._get_catalog_values(self),
-                code_ua=self.get_property('code_ua'))
+                is_bm=True,
+                code_ua=self.get_property('code_ua'),
+                # Utilisé pour la recherche, pas la sécurité
+                departement=self.get_property('departement'))
 
 
     ######################################################################
-    # Scrib API
-    @staticmethod
-    def is_bm():
-        return True
+    # Security
+    def is_bm(self):
+        return self.parent.is_bm()
 
 
-    @staticmethod
-    def is_bdp():
-        return False
+    def get_code_ua(self):
+        return self.get_property('code_ua')
+
 
 
 ###########################################################################
 # Register
-register_resource_class(BM2009)
+register_resource_class(BM2009Form)
+# TODO remove after production
+register_resource_class(BM2009Form, format='BM2009')
+register_field('is_bm', Boolean(is_indexed=True, is_stored=True))
 register_field('code_ua', Integer(is_indexed=True, is_stored=True))
+register_field('departement', Unicode(is_indexed=True, is_stored=True))

@@ -25,7 +25,6 @@ from itools.gettext import MSG
 from itools.web import get_context
 
 # Import from ikaaro
-from ikaaro.folder import Folder
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.folder_views import GoToSpecificDocument
 from ikaaro.forms import XHTMLBody
@@ -38,9 +37,9 @@ from ikaaro.webpage import WebPage
 from ikaaro.website import WebSite
 
 # Import from scrib
-from bm2009 import BM2009
-from bdp2009 import BDP2009
-from form import Form
+from bm2009 import BM2009Form
+from bdp2009 import BDP2009Form
+from form import Form, MultipleForm
 from forms import Forms
 from scrib_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib_views import Scrib_Register, Scrib_Confirm
@@ -73,8 +72,8 @@ class Scrib2009(WebSite):
 
     __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide']
 
-    bm_class = BM2009
-    bdp_class = BDP2009
+    bm_class = BM2009Form
+    bdp_class = BDP2009Form
 
     # Views
     admin = Scrib_Admin()
@@ -175,9 +174,6 @@ class Scrib2009(WebSite):
             cls.bm_class._make_resource(cls.bm_class, folder, '%s/bm/%s' %
                     (name, code_ua), code_ua=code_ua, title={'fr': title},
                     departement=departement)
-            Folder._make_resource(Folder, folder, '%s/bm/%s-pageb' % (name,
-                code_ua), code_ua=code_ua, title={'fr': title},
-                departement=departement)
         print "Création des BDP..."
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})
@@ -197,11 +193,11 @@ class Scrib2009(WebSite):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(WebSite.get_metadata_schema(),
-                           annee=Integer,
-                           echeance_bm=Date,
-                           echeance_bdp=Date,
-                           adresse=XHTMLBody,
-                           contacts=XHTMLBody)
+                annee=Integer,
+                echeance_bm=Date,
+                echeance_bdp=Date,
+                adresse=XHTMLBody,
+                contacts=XHTMLBody)
 
 
     ########################################################################
@@ -222,15 +218,17 @@ class Scrib2009(WebSite):
         # VoirSCRIB
         if user.is_voir_scrib():
             return True
-        if isinstance(resource, Form):
+        if isinstance(resource, (Form, MultipleForm)):
             # Check the code UA or departement
             if user.is_bm():
-                if (user.get_property('code_ua')
-                        != resource.get_property('code_ua')):
+                if not (resource.is_bm()
+                        and user.get_property('code_ua')
+                            == resource.get_code_ua()):
                     return False
             elif user.is_bdp():
-                if (user.get_property('departement')
-                        != resource.get_property('departement')):
+                if not (resource.is_bdp()
+                        and user.get_property('departement')
+                            == resource.get_departement()):
                     return False
             # Must be registered for this year
             return self.has_user_role(user.name, 'members')
@@ -250,12 +248,14 @@ class Scrib2009(WebSite):
         if isinstance(resource, Form):
             # Check the code UA or departement
             if user.is_bm():
-                if (user.get_property('code_ua')
-                        != resource.get_property('code_ua')):
+                if not (resource.is_bm()
+                        and user.get_property('code_ua')
+                            == resource.get_code_ua()):
                     return False
             elif user.is_bdp():
-                if (user.get_property('departement')
-                        != resource.get_property('departement')):
+                if not (resource.is_bdp()
+                        and user.get_property('departement')
+                            == resource.get_departement()):
                     return False
             # Must be registered for this year
             return self.has_user_role(user.name, 'members')
