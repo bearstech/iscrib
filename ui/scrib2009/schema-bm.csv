@@ -32,7 +32,7 @@
 "B109","Cedex",,"B","Str",10,,,"N",,,,"AC","N-1",
 "B110","Fonds en unités matérielles",,"B","Int",10,,,"N",,,,"AC",,
 "B111","Surface utile nette totale en m²",,"B","Int",10,,,"N",,,,"AC",,
-"B112","Personnel en ETPT",,"B","Int",10,,,"N",,,,"AC",,
+"B112","Personnel en ETPT",,"B","Dec","5,2",,,"N",,,,"AC",,
 "B113","Nombre de places assises",,"B","Int",10,,,"N",,,,"AC",,
 "B114","Nombre d'heures d'ouverture hebdomadaires",,"B","Int",10,,,"N",,,,"AC",,
 "B115","Nombre de jours d'ouverture annuels",,"B","Int",10,,,"N",,,,"AC",,
