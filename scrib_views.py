@@ -440,7 +440,7 @@ class Scrib_ChangePassword(BaseView):
 
 
 class GoToHome(GoToSpecificDocument):
-    access = True
+    access = 'is_authenticated'
 
 
     def get_specific_document(self, resource, context):
