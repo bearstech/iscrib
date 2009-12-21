@@ -27,10 +27,10 @@ from ikaaro.buttons import RemoveButton
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 
 # Import from scrib
-from bm2009_views import BMForm_View
+from bm2009_views import BM2009Form_View
 
 
-class PageB_View(Folder_BrowseContent):
+class BM2009Form_PageB_View(Folder_BrowseContent):
     template = '/ui/scrib2009/BM2009_PageB.xml'
     query_schema = {'view': String,
                     'batch_start': Integer(default=0),
@@ -65,7 +65,7 @@ class PageB_View(Folder_BrowseContent):
     def get_namespace(self, resource, context):
         namespace = Folder_BrowseContent.get_namespace(self, resource,
                 context)
-        namespace.update(BMForm_View(n=self.n).get_namespace(resource,
+        namespace.update(BM2009Form_View(n=self.n).get_namespace(resource,
             context))
         return namespace
 
@@ -86,7 +86,7 @@ class PageB_View(Folder_BrowseContent):
         from bm2009_pageb import BM2009Form_PageB
         bib = BM2009Form_PageB.make_resource(BM2009Form_PageB, pageb, name,
                 title={'fr': title})
-        BMForm_View(n=self.n).action(bib, context, form)
+        BM2009Form_View(n=self.n).action(bib, context, form)
         context.bad_types = []
         context.message = INFO(u"Bibliothèque ajoutée")
 

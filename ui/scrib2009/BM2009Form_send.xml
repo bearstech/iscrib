@@ -28,6 +28,7 @@
       <input type="submit" name=";send" value="Envoyer votre questionnaire"
         class="button-ok"/>
     </form>
+    <p stl:if="not is_ready">Il reste des champs obligatoires à remplir.</p>
     <p stl:if="not can_send">Vous devez corriger toutes les erreurs pour
       pouvoir envoyer votre questionnaire.</p>
     <stl:block stl:if="is_admin">
@@ -62,7 +63,7 @@
             <pre class="form-debug" stl:if="debug">${control/debug}</pre>
           </td>
           <td>
-            <a href=";page${control/page}">Pour corriger</a>
+            <a href="${control/href}">Pour corriger</a>
           </td>
         </tr>
       </tbody>
@@ -90,7 +91,7 @@
             <pre class="form-debug" stl:if="debug">${control/debug}</pre>
           </td>
           <td>
-            <a href=";page${control/page}">Pour corriger</a>
+            <a href="${control/href}">Pour corriger</a>
           </td>
         </tr>
       </tbody>
@@ -100,7 +101,7 @@
     </p>
   </stl:block>
 
-  <p stl:if="first_time">Vous devez au moins remplir les champs obligatoires
-    du questionnaire.</p>
+  <p stl:if="first_time">Vous devez commencer par remplir le
+    questionnaire.</p>
 
 </stl:block>

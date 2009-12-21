@@ -27,8 +27,8 @@ from ikaaro.registry import register_resource_class, register_field
 from ikaaro.text import Text
 
 # Import from scrib
-from bm2009_pageb_views import PageB_View
-from bm2009_views import BMForm_View, BMSend_View, BMPrint_View
+from bm2009_pageb_views import BM2009Form_PageB_View
+from bm2009_views import BM2009Form_View, BM2009Form_Send, BM2009Form_Print
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import make_enumerate
@@ -121,16 +121,16 @@ class BM2009Form(Form):
     class_views = ['pageA'] + Form.class_views
 
     # Views
-    pageA = BMForm_View(title=MSG(u"Saisie du rapport"), n='A')
-    pageB = PageB_View(n='B')
-    pageC = BMForm_View(n='C')
-    pageD = BMForm_View(n='D')
-    pageE = BMForm_View(n='E')
-    pageF = BMForm_View(n='F')
-    pageG = BMForm_View(n='G')
-    pageH = BMForm_View(n='H')
-    envoyer = BMSend_View()
-    imprimer = BMPrint_View()
+    pageA = BM2009Form_View(title=MSG(u"Saisie du rapport"), n='A')
+    pageB = BM2009Form_PageB_View(n='B')
+    pageC = BM2009Form_View(n='C')
+    pageD = BM2009Form_View(n='D')
+    pageE = BM2009Form_View(n='E')
+    pageF = BM2009Form_View(n='F')
+    pageG = BM2009Form_View(n='G')
+    pageH = BM2009Form_View(n='H')
+    envoyer = BM2009Form_Send()
+    imprimer = BM2009Form_Print()
 
 
     @classmethod
@@ -175,6 +175,16 @@ class BM2009Form(Form):
                         self.parent, name,
                         title={'fr': self.get_title()})
         return pageb
+
+
+    def is_first_time(self):
+        pageb = self.get_pageb()
+        return Form.is_first_time(self) and pageb.is_first_time()
+
+
+    def is_ready(self):
+        pageb = self.get_pageb()
+        return Form.is_ready(self) and pageb.is_ready()
 
 
 

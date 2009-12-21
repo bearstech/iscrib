@@ -14,9 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Import from the Standard Library
-from decimal import InvalidOperation
-
 # Import from itools
 from itools.datatypes import Boolean, String
 from itools.gettext import MSG
@@ -25,7 +22,6 @@ from itools.web import BaseView, STLForm, INFO, ERROR
 
 # Import from scrib
 from datatypes import Numeric
-from utils import parse_control
 
 
 # Messages
@@ -121,81 +117,7 @@ class Form_View(STLForm):
 
 
 
-class Send_View(STLForm):
-    access = 'is_allowed_to_view'
-    access_POST = 'is_allowed_to_edit'
-    title = MSG(u"Contrôle de saisie")
-    template = '/ui/scrib2009/Form_send.xml'
-    query_schema = {'view': String}
-
-
-    def get_namespace(self, resource, context):
-        user = context.user
-        handler = resource.handler
-        namespace = {}
-        namespace['first_time'] = first_time = resource.is_first_time()
-        # Errors
-        errors = []
-        warnings = []
-        controls = resource.handler.controls
-        for number, title, expr, level, page in controls:
-            expr = expr.strip()
-            if not expr:
-                continue
-            # Le contrôle contient des formules
-            if '[' in title:
-                expanded = []
-                for is_expr, token in parse_control(title):
-                    if not is_expr:
-                        expanded.append(token)
-                    else:
-                        try:
-                            value = eval(token, resource.get_vars())
-                        except ZeroDivisionError:
-                            value = None
-                        expanded.append(str(value))
-                title = ''.join(expanded)
-            else:
-                try:
-                    value = eval(expr, resource.get_vars())
-                except ZeroDivisionError:
-                    # Division par zéro toléré
-                    value = None
-                except InvalidOperation:
-                    # Champs vides tolérés
-                    value = None
-            # Passed
-            if value is True:
-                continue
-            # Failed
-            info = {'number': number,
-                    'title': title,
-                    'page': page.replace('-', ''),
-                    'debug': "'%s' = '%s'" % (str(expr), value)}
-            errors.append(info) if level == '2' else warnings.append(info)
-        namespace['controls'] = {'errors': errors,
-                                 'warnings': warnings}
-        # ACLs
-        ac = resource.get_access_control()
-        namespace['is_admin'] = ac.is_admin(user, resource)
-        # Workflow - State
-        namespace['statename'] = resource.get_statename()
-        namespace['form_state'] = resource.get_form_state()
-        # Workflow - Transitions
-        namespace['can_send'] = can_send = not first_time and not errors
-        namespace['can_export'] = can_send
-        # Debug
-        namespace['debug'] = context.has_form_value('debug')
-        # Print
-        namespace['skip_print'] = False
-        view = context.query['view']
-        if view == 'printable' or user.is_voir_scrib():
-            namespace['skip_print'] = True
-        return namespace
-
-
-
-class Help_View(BaseView):
+class Form_Help(BaseView):
     access = 'is_allowed_to_view'
     title = MSG(u"Aide à la saisie")
 

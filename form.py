@@ -31,7 +31,7 @@ from ikaaro.workflow import WorkflowAware
 from datatypes import Numeric, NumDecimal
 from datatypes import Unicode
 from datatypes import WorkflowState
-from form_views import Send_View, Todo_View, Help_View
+from form_views import Todo_View, Form_Help
 from utils import SI
 from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
 
@@ -134,10 +134,10 @@ class Form(File):
     workflow = workflow
 
     # Views
-    envoyer = Send_View()
+    envoyer = Todo_View(title=MSG(u"Contrôle de saisie"))
     exporter = Todo_View(title=MSG(u"Import du rapport"))
     imprimer = Todo_View(title=MSG(u"Impression du rapport"))
-    aide = Help_View()
+    aide = Form_Help()
 
 
     def _get_catalog_values(self):
@@ -183,15 +183,30 @@ class Form(File):
         return self.handler.timestamp is None
 
 
-    def get_namespace(self, context):
-        # TODO
-        return {'is_ready': False}
+    def is_ready(self):
+        schema = self.handler.schema
+        for name, value in self.handler.fields.iteritems():
+            datatype = schema[name]
+            if datatype.is_mandatory and not value:
+                return False
+        return True
 
 
 
 class MultipleForm(WorkflowAware, Folder):
     class_id = 'MultipleForm'
     workflow = workflow
+
+
+    def is_first_time(self):
+        return not len(self.get_names())
+
+
+    def is_ready(self):
+        for form in self.get_resources():
+            if not form.is_ready():
+                return False
+        return True
 
 
 

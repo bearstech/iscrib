@@ -14,15 +14,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Import from the Standard Library
+from decimal import InvalidOperation
+
 # Import from itools
+from itools.datatypes import String
 from itools.gettext import MSG
-from itools.web import STLView
+from itools.web import STLView, STLForm
 
 # Import from scrib
-from form_views import Form_View, Send_View
+from form_views import Form_View
+from utils import parse_control
 
 
-class BMForm_View(Form_View):
+class BM2009Form_View(Form_View):
     template = '/ui/scrib2009/Table_to_html.xml'
     page_template = '/ui/scrib2009/Page%s.table.csv'
 
@@ -50,7 +55,88 @@ class BMForm_View(Form_View):
 
 
 
-class BMSend_View(Send_View):
+class BM2009Form_Send(STLForm):
+    access = 'is_allowed_to_view'
+    access_POST = 'is_allowed_to_edit'
+    template = '/ui/scrib2009/BM2009Form_send.xml'
+    title = MSG(u"Contrôle de saisie")
+    query_schema = {'view': String}
+
+
+    def get_namespace(self, resource, context):
+        namespace = {}
+        namespace['first_time'] = first_time = resource.is_first_time()
+        # Errors
+        errors = []
+        warnings = []
+        handler = resource.handler
+        controls = resource.handler.controls
+        for number, title, expr, level, page in controls:
+            expr = expr.strip()
+            if not expr:
+                continue
+            if page == 'B':
+                forms = list(resource.get_pageb().get_resources())
+            else:
+                forms = [resource]
+            for form in forms:
+                # Le contrôle contient des formules
+                if '[' in title:
+                    expanded = []
+                    for is_expr, token in parse_control(title):
+                        if not is_expr:
+                            expanded.append(token)
+                        else:
+                            try:
+                                value = eval(token, form.get_vars())
+                            except ZeroDivisionError:
+                                value = None
+                            expanded.append(str(value))
+                    title = ''.join(expanded)
+                else:
+                    try:
+                        value = eval(expr, form.get_vars())
+                    except ZeroDivisionError:
+                        # Division par zéro toléré
+                        value = None
+                    except InvalidOperation:
+                        # Champs vides tolérés
+                        value = None
+                # Passed
+                if value is True:
+                    continue
+                # Failed
+                info = {'number': number,
+                        'title': title,
+                        'href': '%s/;page%s' % (context.get_link(form),
+                            page),
+                        'debug': "'%s' = '%s'" % (str(expr), value)}
+                if level == '2':
+                    errors.append(info) 
+                else:
+                    warnings.append(info)
+        namespace['controls'] = {'errors': errors,
+                                 'warnings': warnings}
+        namespace['is_ready'] = is_ready = resource.is_ready()
+        # ACLs
+        ac = resource.get_access_control()
+        user = context.user
+        namespace['is_admin'] = ac.is_admin(user, resource)
+        # Workflow - State
+        namespace['statename'] = resource.get_statename()
+        namespace['form_state'] = resource.get_form_state()
+        # Workflow - Transitions
+        namespace['can_send'] = can_send = is_ready and not errors
+        namespace['can_export'] = can_send
+        # Debug
+        namespace['debug'] = context.has_form_value('debug')
+        # Print
+        namespace['skip_print'] = False
+        view = context.query['view']
+        if view == 'printable' or user.is_voir_scrib():
+            namespace['skip_print'] = True
+        return namespace
+
 
     def action_send(self, resource, context, form):
         """Ce qu'il faut faire quand le formulaire BM est soumis.
@@ -65,7 +151,7 @@ class BMSend_View(Send_View):
 
 
 
-class BMPrint_View(STLView):
+class BM2009Form_Print(STLView):
     access = 'is_allowed_to_view'
     title=MSG(u"Impression du rapport")
     template = '/ui/scrib2009/Table_to_print.xml'
