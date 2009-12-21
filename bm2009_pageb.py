@@ -24,9 +24,9 @@ from ikaaro.registry import register_resource_class
 
 # Import from scrib
 from bm2009 import BM2009Form
+from bm2009_views import BMForm_View
 from bm2009_pageb_views import GoToBM2009Form
 from form import MultipleForm
-from form_views import Form_View
 
 
 class MultipleForm_PageB(MultipleForm):
@@ -54,7 +54,7 @@ class BM2009Form_PageB(BM2009Form):
     class_views = ['pageB']
 
     # Views
-    pageB = Form_View(title=MSG(u"saisie de bibliothèque"), n='B')
+    pageB = BMForm_View(title=MSG(u"saisie de bibliothèque"), n='B')
 
 
     def get_title(self, language=None):

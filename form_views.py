@@ -20,22 +20,13 @@ from decimal import InvalidOperation
 # Import from itools
 from itools.datatypes import Boolean, String
 from itools.gettext import MSG
-from itools.html import HTMLParser
 from itools.stl import set_prefix
-from itools.web import BaseView, STLView, STLForm, INFO, ERROR
+from itools.web import BaseView, STLForm, INFO, ERROR
 
 # Import from scrib
 from datatypes import Numeric
 from utils import parse_control
-from workflow import SENT
 
-
-PAGE_FILENAME = '/ui/scrib2009/Page%s.table.csv'
-
-# Print
-PAGE_BREAK = list(HTMLParser('<div style="page-break-after: always"></div>'))
-BREAK_HEADER = PAGE_BREAK[:1]
-BREAK_FOOTER = PAGE_BREAK[1:]
 
 # Messages
 MSG_ERREUR_SAUVEGARDE = ERROR(u"ATTENTION ! IL Y A DES RUBRIQUES MANQUANTES "
@@ -47,7 +38,6 @@ MSG_SAUVEGARDE = INFO(u"La page est enregistrée, veuillez vérifier votre "
 class Form_View(STLForm):
     access = 'is_allowed_to_view'
     access_POST = 'is_allowed_to_edit'
-    template = '/ui/scrib2009/Table_to_html.xml'
     query_schema = {'view': String}
     schema = {'page_number': String}
 
@@ -64,34 +54,11 @@ class Form_View(STLForm):
         view = context.query['view']
         if view == 'printable':
             skip_print = True
-        readonly = False
-        statename = resource.get_statename()
-        if statename == SENT and (user.is_bm() or user.is_bdp()):
-            # 0005566
-            # Si le formulaire est dans l'état terminé,
-            # une bibliothèque ne peut plus le modifier
-            readonly = True
-        table = resource.get_resource(PAGE_FILENAME % self.n)
+        ac = resource.get_access_control()
+        readonly = not ac.is_allowed_to_edit(context.user, resource)
+        table = resource.get_resource(self.page_template % self.n)
         namespace = table.get_namespace(resource, self, context,
                 skip_print=skip_print, readonly=readonly)
-        # TODO specific to BM
-        # TODO hardcoded
-        menu = []
-        code_ua = resource.get_code_ua()
-        form = resource.get_site_root().get_resource('bm/%s' % code_ua)
-        for name, title in [('pageA', u"A-Identité"),
-                            ('pageB', u"B-Bibliothèques du réseau"),
-                            ('pageC', u"C-Accès et installations"),
-                            ('pageD', u"D-Collections"),
-                            ('pageE', u"E-Usages et usagers de la bib."),
-                            ('pageF', u"F-Budget"),
-                            ('pageG', u"G-Personnel et formation"),
-                            ('pageH', u"H-Action culturelle")]:
-            menu.append({'href': '%s/;%s' % (context.get_link(form), name),
-                         'title': title,
-                         'active': 'nav-active' if context.view_name == name
-                                                else None})
-        namespace['menu'] = menu
         return namespace
 
 
@@ -246,38 +213,6 @@ class Help_View(BaseView):
         resource = app.get_resource('aide')
         prefix = resource.get_pathto(resource)
         return set_prefix(resource.get_html_data(), prefix)
-
-
-
-class Print_Form(STLView):
-    access = 'is_allowed_to_view'
-    title=MSG(u"Impression du rapport")
-    template = '/ui/scrib2009/help/template.xhtml'
-
-
-    def get_namespace(self, resource, context):
-        namespace = {}
-        pages = resource.handler.pages
-        body = []
-        for page in [
-                # Activités
-                1, 2, 3, 4, 5, 6, 62, 63, 7, 8, 9, 14, 11,
-                # Budget
-                10, 13]:
-            if page not in pages:
-                continue
-            table = resource.get_resource(PAGE_FILENAME % page)
-            body.extend(BREAK_HEADER)
-            body.extend(table.to_html(context, resource, page,
-                skip_print=True))
-            body.extend(BREAK_FOOTER)
-        namespace['body'] = body
-        root = context.root
-        skin = root.get_skin()
-        namespace['styles'] = skin.get_styles(context)
-        context.response.set_header('Content-Type',
-                                    'text/html; charset=UTF-8')
-        return namespace
 
 
 

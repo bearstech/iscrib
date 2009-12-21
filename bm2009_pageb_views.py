@@ -27,7 +27,7 @@ from ikaaro.buttons import RemoveButton
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 
 # Import from scrib
-from form_views import Form_View
+from bm2009_views import BMForm_View
 
 
 class PageB_View(Folder_BrowseContent):
@@ -48,13 +48,7 @@ class PageB_View(Folder_BrowseContent):
 
 
     def get_items(self, resource, context, *args):
-        name = '%s-pageb' % resource.get_code_ua()
-        pageb = resource.parent.get_resource(name, soft=True)
-        if pageb is None:
-            from bm2009_pageb import MultipleForm_PageB
-            pageb = MultipleForm_PageB(MultipleForm_PageB.build_metadata())
-            pageb.name = name
-            pageb.parent = resource.parent
+        pageb = resource.get_pageb()
         return Folder_BrowseContent.get_items(self, pageb, context, *args)
 
 
@@ -71,19 +65,13 @@ class PageB_View(Folder_BrowseContent):
     def get_namespace(self, resource, context):
         namespace = Folder_BrowseContent.get_namespace(self, resource,
                 context)
-        namespace.update(Form_View(n=self.n).get_namespace(resource,
+        namespace.update(BMForm_View(n=self.n).get_namespace(resource,
             context))
         return namespace
 
 
     def action_add(self, resource, context, form):
-        name = '%s-pageb' % resource.get_code_ua()
-        pageb = resource.parent.get_resource(name, soft=True)
-        if pageb is None:
-            from bm2009_pageb import MultipleForm_PageB
-            pageb = MultipleForm_PageB.make_resource(MultipleForm_PageB,
-                    resource.parent, name,
-                    title={'fr': resource.get_title()})
+        pageb = resource.get_pageb(make=True)
         title = context.get_form_value('B101', type=Unicode).strip()
         name = checkid(title)
         if not name:
@@ -98,14 +86,13 @@ class PageB_View(Folder_BrowseContent):
         from bm2009_pageb import BM2009Form_PageB
         bib = BM2009Form_PageB.make_resource(BM2009Form_PageB, pageb, name,
                 title={'fr': title})
-        Form_View(n=self.n).action(bib, context, form)
+        BMForm_View(n=self.n).action(bib, context, form)
         context.bad_types = []
         context.message = INFO(u"Bibliothèque ajoutée")
 
 
     def action_remove(self, resource, context, form):
-        name = '%s-pageb' % resource.get_code_ua()
-        pageb = resource.parent.get_resource(name)
+        pageb = resource.get_pageb()
         Folder_BrowseContent().action_remove(pageb, context, form)
 
 

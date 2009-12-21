@@ -31,7 +31,7 @@ from ikaaro.workflow import WorkflowAware
 from datatypes import Numeric, NumDecimal
 from datatypes import Unicode
 from datatypes import WorkflowState
-from form_views import Send_View, Todo_View, Help_View, Print_Form
+from form_views import Send_View, Todo_View, Help_View
 from utils import SI
 from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
 
@@ -136,7 +136,7 @@ class Form(File):
     # Views
     envoyer = Send_View()
     exporter = Todo_View(title=MSG(u"Import du rapport"))
-    imprimer = Print_Form()
+    imprimer = Todo_View(title=MSG(u"Impression du rapport"))
     aide = Help_View()
 
 

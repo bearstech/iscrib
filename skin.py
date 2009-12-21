@@ -52,7 +52,8 @@ class ScribSkin(Skin):
 
     def get_template(self):
         context = get_context()
-        if context.get_form_value('view') == 'printable':
+        if (context.query.get('view')
+                or context.get_form_value('view')) == 'printable':
             return self.get_resource('print.xhtml')
         return self.get_resource('template.xhtml')
 

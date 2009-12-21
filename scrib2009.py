@@ -259,7 +259,8 @@ class Scrib2009(WebSite):
                             == resource.get_departement()):
                     return False
             # Must be registered for this year
-            return self.has_user_role(user.name, 'members')
+            if not self.has_user_role(user.name, 'members'):
+                return False
             # Only if 'private' -> 'Vide', 'En cours'
             return resource.get_workflow_state() == 'private'
         return False

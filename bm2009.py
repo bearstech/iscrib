@@ -27,13 +27,12 @@ from ikaaro.registry import register_resource_class, register_field
 from ikaaro.text import Text
 
 # Import from scrib
-from bm2009_views import BMSend_View
+from bm2009_pageb_views import PageB_View
+from bm2009_views import BMForm_View, BMSend_View, BMPrint_View
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import make_enumerate
 from form import FormHandler, Form
-from form_views import Form_View
-from bm2009_pageb_views import PageB_View
 
 
 dt_mapping = {
@@ -122,15 +121,16 @@ class BM2009Form(Form):
     class_views = ['pageA'] + Form.class_views
 
     # Views
-    pageA = Form_View(title=MSG(u"Saisie du rapport"), n='A')
+    pageA = BMForm_View(title=MSG(u"Saisie du rapport"), n='A')
     pageB = PageB_View(n='B')
-    pageC = Form_View(n='C')
-    pageD = Form_View(n='D')
-    pageE = Form_View(n='E')
-    pageF = Form_View(n='F')
-    pageG = Form_View(n='G')
-    pageH = Form_View(n='H')
+    pageC = BMForm_View(n='C')
+    pageD = BMForm_View(n='D')
+    pageE = BMForm_View(n='E')
+    pageF = BMForm_View(n='F')
+    pageG = BMForm_View(n='G')
+    pageH = BMForm_View(n='H')
     envoyer = BMSend_View()
+    imprimer = BMPrint_View()
 
 
     @classmethod
@@ -157,6 +157,24 @@ class BM2009Form(Form):
 
     def get_code_ua(self):
         return self.get_property('code_ua')
+
+
+    def get_pageb(self, make=False):
+        from bm2009_pageb import MultipleForm_PageB
+
+        name = '%s-pageb' % self.get_code_ua()
+        pageb = self.parent.get_resource(name, soft=True)
+        if pageb is None:
+            if make is False:
+                metadata = MultipleForm_PageB.build_metadata()
+                pageb = MultipleForm_PageB(metadata)
+                pageb.name = name
+                pageb.parent = self.parent
+            else:
+                pageb = MultipleForm_PageB.make_resource(MultipleForm_PageB,
+                        self.parent, name,
+                        title={'fr': self.get_title()})
+        return pageb
 
 
 
