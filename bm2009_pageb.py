@@ -72,6 +72,20 @@ class BM2009Form_PageB(BM2009Form):
 
 
     ######################################################################
+    # API
+    def get_invalid_fields(self):
+        for result in BM2009Form.get_invalid_fields(self, pages=['B'],
+                exclude=[]):
+            yield result
+
+
+    def get_failed_controls(self):
+        for result in BM2009Form.get_failed_controls(self, pages=['B'],
+                exclude=[]):
+            yield result
+
+
+    ######################################################################
     # Workflow
     def get_statename(self):
         return self.parent.get_statename()

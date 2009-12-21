@@ -14,9 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Import from the Standard Library
-from decimal import InvalidOperation
-
 # Import from itools
 from itools.datatypes import String
 from itools.gettext import MSG
@@ -24,7 +21,6 @@ from itools.web import STLView, STLForm
 
 # Import from scrib
 from form_views import Form_View
-from utils import parse_control
 
 
 class BM2009Form_View(Form_View):
@@ -69,55 +65,50 @@ class BM2009Form_Send(STLForm):
         # Errors
         errors = []
         warnings = []
-        handler = resource.handler
-        controls = resource.handler.controls
-        for number, title, expr, level, page in controls:
-            expr = expr.strip()
-            if not expr:
-                continue
-            if page == 'B':
-                forms = list(resource.get_pageb().get_resources())
-            else:
-                forms = [resource]
-            for form in forms:
-                # Le contrôle contient des formules
-                if '[' in title:
-                    expanded = []
-                    for is_expr, token in parse_control(title):
-                        if not is_expr:
-                            expanded.append(token)
-                        else:
-                            try:
-                                value = eval(token, form.get_vars())
-                            except ZeroDivisionError:
-                                value = None
-                            expanded.append(str(value))
-                    title = ''.join(expanded)
-                else:
-                    try:
-                        value = eval(expr, form.get_vars())
-                    except ZeroDivisionError:
-                        # Division par zéro toléré
-                        value = None
-                    except InvalidOperation:
-                        # Champs vides tolérés
-                        value = None
-                # Passed
-                if value is True:
-                    continue
-                # Failed
-                info = {'number': number,
-                        'title': title,
+        # Invalid fields
+        for name, datatype in resource.get_invalid_fields():
+            info = {'number': name,
+                    'title': u"Champ %s non valide" % name,
+                    'href': ';page%s' % datatype.pages[0],
+                    'debug': str(type(datatype))}
+            if datatype.is_mandatory:
+                errors.append(info)
+            #else:
+            #    warnings.append(info)
+        pageb = resource.get_pageb()
+        for form in pageb.get_resources():
+            title = form.get_title()
+            for name, datatype in form.get_invalid_fields():
+                info = {'number': name,
+                        'title': (u"Bibliothèque %s : "
+                            u"champ %s non valide" % (title, name)),
                         'href': '%s/;page%s' % (context.get_link(form),
-                            page),
-                        'debug': "'%s' = '%s'" % (str(expr), value)}
-                if level == '2':
-                    errors.append(info) 
+                            datatype.pages[0]),
+                        'debug': str(type(datatype))}
+                #if datatype.is_mandatory:
+                #    errors.append(info)
+                #else:
+                warnings.append(info)
+        # Failed controls
+        for control in resource.get_failed_controls():
+            control['href'] = ';page%s' % control['page']
+            if control['level'] == '2':
+                errors.append(control)
+            else:
+                warnings.append(control)
+        for form in pageb.get_resources():
+            title = form.get_title()
+            for control in resource.get_failed_controls():
+                control['title'] = u"Bibliothèque %s : %s" % (title,
+                        control['title'])
+                control['href'] = '%s/;page%s' % (context.get_link(form),
+                        control['page'])
+                if control['level'] == '2':
+                    errors.append(control)
                 else:
-                    warnings.append(info)
+                    warnings.append(control)
         namespace['controls'] = {'errors': errors,
                                  'warnings': warnings}
-        namespace['is_ready'] = is_ready = resource.is_ready()
         # ACLs
         ac = resource.get_access_control()
         user = context.user
@@ -126,7 +117,7 @@ class BM2009Form_Send(STLForm):
         namespace['statename'] = resource.get_statename()
         namespace['form_state'] = resource.get_form_state()
         # Workflow - Transitions
-        namespace['can_send'] = can_send = is_ready and not errors
+        namespace['can_send'] = can_send = not errors
         namespace['can_export'] = can_send
         # Debug
         namespace['debug'] = context.has_form_value('debug')

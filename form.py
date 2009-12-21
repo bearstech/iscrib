@@ -183,15 +183,6 @@ class Form(File):
         return self.handler.timestamp is None
 
 
-    def is_ready(self):
-        schema = self.handler.schema
-        for name, value in self.handler.fields.iteritems():
-            datatype = schema[name]
-            if datatype.is_mandatory and not value:
-                return False
-        return True
-
-
 
 class MultipleForm(WorkflowAware, Folder):
     class_id = 'MultipleForm'
@@ -200,13 +191,6 @@ class MultipleForm(WorkflowAware, Folder):
 
     def is_first_time(self):
         return not len(self.get_names())
-
-
-    def is_ready(self):
-        for form in self.get_resources():
-            if not form.is_ready():
-                return False
-        return True
 
 
 

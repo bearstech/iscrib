@@ -16,8 +16,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from the Standard Library
+from decimal import InvalidOperation
+
 # Import from itools
-from itools.core import get_abspath, merge_dicts
+from itools.core import get_abspath, merge_dicts, freeze
 from itools.csv import CSVFile
 from itools.datatypes import String, Integer, Boolean
 from itools.gettext import MSG
@@ -33,6 +36,7 @@ from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import make_enumerate
 from form import FormHandler, Form
+from utils import parse_control
 
 
 dt_mapping = {
@@ -91,7 +95,7 @@ def get_schema_pages(path):
         # Add to the schema
         page_numbers = tuple(page_numbers)
         schema[name] = datatype(format=format,
-                length=(length.strip() or format),pages=page_numbers,
+                length=(length.strip() or format), pages=page_numbers,
                 is_mandatory=is_mandatory, sum=sum, abrege=abrege,
                 sql_field=sql_field)
     return schema, pages
@@ -159,6 +163,8 @@ class BM2009Form(Form):
         return self.get_property('code_ua')
 
 
+    ######################################################################
+    # API
     def get_pageb(self, make=False):
         from bm2009_pageb import MultipleForm_PageB
 
@@ -182,9 +188,71 @@ class BM2009Form(Form):
         return Form.is_first_time(self) and pageb.is_first_time()
 
 
-    def is_ready(self):
-        pageb = self.get_pageb()
-        return Form.is_ready(self) and pageb.is_ready()
+    def get_invalid_fields(self, pages=freeze([]), exclude=freeze(['B'])):
+        handler = self.handler
+        schema = handler.schema
+        fields = handler.fields
+        for name in sorted(fields):
+            if pages and name[0] not in pages:
+                continue
+            if name[0] in exclude:
+                continue
+            datatype = schema[name]
+            value = fields[name]
+            is_valid = datatype.is_valid(datatype.encode(value))
+            if datatype.is_mandatory:
+                # Vérifie toujours les champs obligatoires
+                if is_valid:
+                    continue
+            else:
+                # Vérifie seulement si quelque chose a été saisi
+                if not value:
+                    continue
+                if is_valid:
+                    continue
+            yield name, datatype
+
+
+    def get_failed_controls(self, pages=freeze([]), exclude=freeze(['B'])):
+        for number, title, expr, level, page in self.handler.controls:
+            if pages and page not in pages:
+                continue
+            if page in exclude:
+                continue
+            expr = expr.strip()
+            if not expr:
+                continue
+            # Le contrôle contient des formules
+            if '[' in title:
+                expanded = []
+                for is_expr, token in parse_control(title):
+                    if not is_expr:
+                        expanded.append(token)
+                    else:
+                        try:
+                            value = eval(token, self.get_vars())
+                        except ZeroDivisionError:
+                            value = None
+                        expanded.append(str(value))
+                title = ''.join(expanded)
+            else:
+                try:
+                    value = eval(expr, self.get_vars())
+                except ZeroDivisionError:
+                    # Division par zéro toléré
+                    value = None
+                except InvalidOperation:
+                    # Champs vides tolérés
+                    value = None
+            # Passed
+            if value is True:
+                continue
+            yield {'number': number,
+                   'title': unicode(title, 'utf8'),
+                   'expr': expr,
+                   'level': level,
+                   'page': page,
+                   'debug': "'%s' = '%s'" % (str(expr), value)}
 
 
 

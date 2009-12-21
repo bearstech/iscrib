@@ -28,7 +28,6 @@
       <input type="submit" name=";send" value="Envoyer votre questionnaire"
         class="button-ok"/>
     </form>
-    <p stl:if="not is_ready">Il reste des champs obligatoires à remplir.</p>
     <p stl:if="not can_send">Vous devez corriger toutes les erreurs pour
       pouvoir envoyer votre questionnaire.</p>
     <stl:block stl:if="is_admin">

@@ -31,7 +31,7 @@ from bm2009_views import BM2009Form_View
 
 
 class BM2009Form_PageB_View(Folder_BrowseContent):
-    template = '/ui/scrib2009/BM2009_PageB.xml'
+    template = '/ui/scrib2009/BM2009Form_PageB_view.xml'
     query_schema = {'view': String,
                     'batch_start': Integer(default=0),
                     'batch_size': Integer(default=0),
