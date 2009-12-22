@@ -94,8 +94,8 @@ class Form_View(STLForm):
                 # Mandatory
                 elif datatype.is_mandatory and not data:
                     bad_types.append(key)
-                # Invalid
-                elif not datatype.is_valid(data):
+                # Invalid (0008102 and mandatory -> and filled)
+                elif data and not datatype.is_valid(data):
                     bad_types.append(key)
             # Skip Scrib instance datatypes
             elif isinstance(datatype, Numeric):
