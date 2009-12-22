@@ -117,11 +117,11 @@ class BM2009Form_Send(STLForm):
         user = context.user
         namespace['is_admin'] = ac.is_admin(user, resource)
         # Workflow - State
-        namespace['statename'] = resource.get_statename()
+        namespace['statename'] = statename = resource.get_statename()
         namespace['form_state'] = resource.get_form_state()
         # Workflow - Transitions
-        namespace['can_send'] = can_send = not errors
-        namespace['can_export'] = can_send
+        namespace['can_send'] = statename == 'private' and not errors
+        namespace['can_export'] = not errors
         # Debug
         namespace['debug'] = context.has_form_value('debug')
         # Print
