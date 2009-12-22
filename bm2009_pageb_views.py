@@ -87,8 +87,12 @@ class BM2009Form_PageB_View(Folder_BrowseContent):
         bib = BM2009Form_PageB.make_resource(BM2009Form_PageB, pageb, name,
                 title={'fr': title})
         BM2009Form_View(n=self.n).action(bib, context, form)
-        context.bad_types = []
-        context.message = INFO(u"Bibliothèque ajoutée")
+        if isinstance(context.message, ERROR):
+            context.commit = False
+            return
+
+        # 0007651 vide les champs
+        return context.come_back(context.message)
 
 
     def action_remove(self, resource, context, form):
