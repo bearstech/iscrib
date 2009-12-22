@@ -197,7 +197,11 @@ class Scrib2009(WebSite):
                 echeance_bm=Date,
                 echeance_bdp=Date,
                 adresse=XHTMLBody,
-                contacts=XHTMLBody)
+                contacts=XHTMLBody,
+                responsable_bm=Unicode(default=(u'Denis Cordazzo '
+                    u'<denis.cordazzo@culture.gouv.fr>')),
+                responsable_bdp=Unicode(default=(u'Christophe Sene '
+                                 u'<christophe.sene@culture.gouv.fr>')))
 
 
     ########################################################################

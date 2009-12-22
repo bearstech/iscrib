@@ -21,7 +21,7 @@ from datetime import datetime
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import Date, Integer, Email
+from itools.datatypes import Date, Integer, Email, Unicode
 from itools.gettext import MSG
 from itools.uri import get_reference, get_uri_path
 from itools.stl import stl
@@ -265,6 +265,8 @@ class  Scrib_Edit(DBResource_Edit):
                          annee=Integer(mandatory=True, readonly=True),
                          echeance_bm=Date(mandatory=True),
                          echeance_bdp=Date(mandatory=True),
+                         responsable_bm=Unicode(mandatory=True),
+                         responsable_bdp=Unicode(mandatory=True),
                          adresse=XHTMLBody,
                          contacts=XHTMLBody)
     widgets = (DBResource_Edit.widgets[:3]
@@ -274,10 +276,16 @@ class  Scrib_Edit(DBResource_Edit):
                       title=MSG(u"Date d'échéance des BM")),
                   DateWidget('echeance_bdp',
                       title=MSG(u"Date d'échéance des BDP")),
+                  TextWidget('responsable_bm', title=MSG(u"Mél d'envoi "
+                      u"des accusés de réception au responsable BM "
+                      u"(format « Nom <mél> »)")),
+                  TextWidget('responsable_bdp', title=MSG(u"Mél d'envoi "
+                      u"des accusés de réception au responsable BDP "
+                      u"(format « Nom <mél> »)")),
                   RTEWidget('adresse',
-                      title=MSG("Adresse de la direction")),
+                      title=MSG("Bandeau : adresse de la direction")),
                   RTEWidget('contacts',
-                      title=MSG("Contacts BM et BDP"))]
+                      title=MSG("Bandeau : contacts BM et BDP"))]
                + DBResource_Edit.widgets[3:])
 
 
@@ -286,6 +294,8 @@ class  Scrib_Edit(DBResource_Edit):
         if not context.edit_conflict:
             resource.set_property('echeance_bm', form['echeance_bm'])
             resource.set_property('echeance_bdp', form['echeance_bdp'])
+            resource.set_property('responsable_bm', form['responsable_bm'])
+            resource.set_property('responsable_bdp', form['responsable_bdp'])
             resource.set_property('adresse', form['adresse'])
             resource.set_property('contacts', form['contacts'])
 

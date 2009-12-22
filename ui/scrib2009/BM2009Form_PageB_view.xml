@@ -29,24 +29,26 @@
   <h2>Bibliothèques enregistrées</h2>
   ${table}
 
-  <h2>Ajouter une bibliothèque</h2>
+  <stl:block stl:if="not readonly">
+    <h2>Ajouter une bibliothèque</h2>
 
-  <form method="post">
-    <input type="hidden" name="page_number" value="${page_number}" />
+    <form method="post">
+      <input type="hidden" name="page_number" value="${page_number}" />
 
-    <div id="form-tables">
-      <table class="scrib-table" stl:repeat="table tables">
-        <tr stl:repeat="row table">
-          <td stl:repeat="column row" rowspan="${column/rowspan}"
-            colspan="${column/colspan}"
-            class="${column/class}">${column/body}</td>
-        </tr>
-      </table>
-      <p>
-        <input type="submit" name=";add" value="Ajouter"
-          stl:if="not readonly" class="button-ok"/>
-      </p>
-    </div>
-  </form>
+      <div id="form-tables">
+        <table class="scrib-table" stl:repeat="table tables">
+          <tr stl:repeat="row table">
+            <td stl:repeat="column row" rowspan="${column/rowspan}"
+              colspan="${column/colspan}"
+              class="${column/class}">${column/body}</td>
+          </tr>
+        </table>
+        <p>
+          <input type="submit" name=";add" value="Ajouter"
+            class="button-ok"/>
+        </p>
+      </div>
+    </form>
+  </stl:block>
 
 </stl:block>

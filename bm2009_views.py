@@ -17,7 +17,7 @@
 # Import from itools
 from itools.datatypes import String
 from itools.gettext import MSG
-from itools.web import STLView, STLForm
+from itools.web import STLView, STLForm, INFO, ERROR
 
 # Import from scrib
 from form_views import Form_View
@@ -135,7 +135,43 @@ class BM2009Form_Send(STLForm):
     def action_send(self, resource, context, form):
         """Ce qu'il faut faire quand le formulaire BM est soumis.
         """
-        raise NotImplementedError
+        # D'abord les actions annulables
+        wf_form = {'transition': 'request', 'comments': u""}
+        resource.edit_state.action(resource, context, wf_form)
+        if isinstance(context.message, ERROR):
+            context.commit = False
+            return
+        pageb = resource.get_pageb(make=True)
+        pageb.edit_state.action(pageb, context, wf_form)
+        if isinstance(context.message, ERROR):
+            context.commit = False
+            return
+
+        # Envoi mail responsable
+        app = resource.get_site_root()
+        responsable_bm = app.get_property('responsable_bm')
+        to_addr = responsable_bm
+        code_ua = resource.get_property('code_ua')
+        departement = resource.get_property('departement')
+        subject = u'SCRIB-BM : %s (%s)' % (code_ua, departement)
+        text = (u"La Bibliothèque %s (%s), du département %s, a terminé son "
+                u"formulaire." % (code_ua, resource.get_title(),
+                    departement))
+        root = context.root
+        root.send_email(to_addr, subject, text=text)
+
+        # Envoi accusé réception
+        user = context.user
+        to_addr = (user.get_title(), user.get_property('email'))
+        subject = u"Accusé de réception DLL"
+        text = (u"Votre rapport annuel a bien été reçu par votre "
+                u"correspondant à la DLL.\n\nNous vous remercions de votre "
+                u"envoi.\n\nCordialement.")
+        root.send_email(to_addr, subject, from_addr=responsable_bm,
+                text=text, return_receipt=True)
+
+        context.message = INFO(u"Terminé, un mél est envoyé à votre "
+                u"correspondant DLL.")
 
 
     def action_export(self, resource, context, form):
