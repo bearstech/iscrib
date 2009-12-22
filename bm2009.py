@@ -210,7 +210,7 @@ class BM2009Form(Form):
                     continue
             else:
                 # Vérifie seulement si quelque chose a été saisi
-                if not value:
+                if not datatype.encode(value):
                     continue
                 if is_valid:
                     continue
