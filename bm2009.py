@@ -24,6 +24,7 @@ from itools.core import get_abspath, merge_dicts, freeze
 from itools.csv import CSVFile
 from itools.datatypes import String, Integer, Boolean
 from itools.gettext import MSG
+from itools.uri import resolve_uri
 
 # Import from ikaaro
 from ikaaro.registry import register_resource_class, register_field
@@ -173,6 +174,9 @@ class BM2009Form(Form):
         if pageb is None:
             if make is False:
                 metadata = MultipleForm_PageB.build_metadata()
+                metadata.uri = resolve_uri(self.metadata.uri,
+                        '%s.metadata' % name)
+                metadata.database = self.metadata.database
                 pageb = MultipleForm_PageB(metadata)
                 pageb.name = name
                 pageb.parent = self.parent
