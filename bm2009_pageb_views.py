@@ -91,7 +91,7 @@ class BM2009Form_PageB_View(Folder_BrowseContent):
             context.commit = False
             return
 
-        # 0007651 vide les champs
+        # 0008087 vide les champs
         return context.come_back(context.message)
 
 
