@@ -30,6 +30,7 @@ class BM2009Form_View(Form_View):
 
     def get_namespace(self, resource, context):
         namespace = Form_View.get_namespace(self, resource, context)
+        namespace['code_ua'] = resource.get_code_ua()
         # TODO hardcoded
         menu = []
         code_ua = resource.get_code_ua()
@@ -69,12 +70,12 @@ class BM2009Form_Send(STLForm):
         for name, datatype in resource.get_invalid_fields():
             info = {'number': name,
                     'title': u"Champ %s non valide" % name,
-                    'href': ';page%s' % datatype.pages[0],
+                    'href': ';page%s#field_%s' % (datatype.pages[0], name),
                     'debug': str(type(datatype))}
             if datatype.is_mandatory:
                 errors.append(info)
-            #else:
-            #    warnings.append(info)
+            else:
+                warnings.append(info)
         pageb = resource.get_pageb()
         for form in pageb.get_resources():
             title = form.get_title()
@@ -82,27 +83,29 @@ class BM2009Form_Send(STLForm):
                 info = {'number': name,
                         'title': (u"Bibliothèque %s : "
                             u"champ %s non valide" % (title, name)),
-                        'href': '%s/;page%s' % (context.get_link(form),
-                            datatype.pages[0]),
+                        'href': '%s/;page%s#field_%s' % (
+                            context.get_link(form), datatype.pages[0], name),
                         'debug': str(type(datatype))}
-                #if datatype.is_mandatory:
-                #    errors.append(info)
-                #else:
-                warnings.append(info)
+                if datatype.is_mandatory:
+                    errors.append(info)
+                else:
+                    warnings.append(info)
         # Failed controls
         for control in resource.get_failed_controls():
-            control['href'] = ';page%s' % control['page']
+            control['href'] = ';page%s#field_%s' % (control['page'],
+                    control['title'].split()[0])
             if control['level'] == '2':
                 errors.append(control)
             else:
                 warnings.append(control)
         for form in pageb.get_resources():
             title = form.get_title()
-            for control in resource.get_failed_controls():
+            for control in form.get_failed_controls():
                 control['title'] = u"Bibliothèque %s : %s" % (title,
                         control['title'])
-                control['href'] = '%s/;page%s' % (context.get_link(form),
-                        control['page'])
+                control['href'] = '%s/;page%s#field_%s' % (
+                        context.get_link(form), control['page'],
+                        control['title'].split()[0])
                 if control['level'] == '2':
                     errors.append(control)
                 else:

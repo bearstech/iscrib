@@ -74,8 +74,9 @@ def radio_widget(context, form, datatype, name, value, readonly=False):
                     else:
                         onclick = DISABLE % (select_name, select_name)
             checked = u'checked="checked" ' if option['selected'] else u''
-            input = u'<input type="radio" name="%s" value="%s" %s %s /> %s' % (
-                    name, option['name'], checked, onclick, option['value'])
+            input = (u'<input type="radio" id="field_%s" name="%s" '
+                    u'value="%s" %s %s /> %s' % (name, name, option['name'],
+                        checked, onclick, option['value']))
             if issubclass(datatype, EnumBoolean):
                 # Oui/Non sur une seule ligne
                 html.append(input)
@@ -100,8 +101,9 @@ def checkbox_widget(context, form, datatype, name, value, readonly=False):
     else:
         for option in datatype.get_namespace(value):
             checked = u'checked="checked" ' if option['selected'] else u''
-            input = u'<input type="checkbox" name="%s" value="%s" %s /> %s' % (
-                    name, option['name'], checked, option['value'])
+            input = (u'<input type="checkbox" id="field_%s" name="%s" '
+                    u'value="%s" %s /> %s' % (name, name, option['name'],
+                        checked, option['value']))
             if name in context.bad_types:
                 input = u'<span class="badtype" title="%s">%s</span>' %\
                         (u'Mauvaise valeur', input)
@@ -191,7 +193,7 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
             attrs = {'class': 'readonly'}
             pattern = u'<div %s>'
         else:
-            attrs = {'type': u'text', 'name': name,
+            attrs = {'type': u'text', 'id': 'field_%s' % name, 'name': name,
                      'value': XMLAttribute.encode(value),
                      'size': datatype.length, 'maxlength': format}
             if tabindex:

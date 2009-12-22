@@ -9,8 +9,9 @@
     </stl:inline>
   </p>
 
-  <form method="post">
+  <form method="post" action=";page${page_number}">
     <input type="hidden" name="page_number" value="${page_number}" />
+    <input type="hidden" name="A100" value="${code_ua}" />
 
     <stl:block stl:if="not skip_print">
       <p id="form-firsttime" stl:if="first_time">
