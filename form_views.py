@@ -43,7 +43,7 @@ class Form_View(STLForm):
             # Return from POST
             bad_types = context.bad_types
         except AttributeError:
-            # Fresh GET: find from current state
+            # Fresh GET: not bad yet
             context.bad_types = []
         user = context.user
         skip_print = user.is_voir_scrib()
