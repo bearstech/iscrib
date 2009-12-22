@@ -101,8 +101,7 @@ class Scrib2009(WebSite):
         """
         # Créé les utilisateurs d'abord pour avoir user_ids
         print "Génération de la liste des utilisateurs..."
-        users = [# TODO Responsable équivalent de Marie Sotto pour Pelleas
-                 # FIXME VoirSCRIB ne devrait être créé qu'une fois...
+        users = [# FIXME VoirSCRIB ne devrait être créé qu'une fois...
                  {'username': 'VoirSCRIB',
                   'password': crypt_password('BMBDP'),
                   'email': 'TODO'}]
