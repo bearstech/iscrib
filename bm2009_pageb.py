@@ -85,20 +85,6 @@ class BM2009Form_PageB(BM2009Form):
             yield result
 
 
-    ######################################################################
-    # Workflow
-    def get_statename(self):
-        return self.parent.get_statename()
-
-
-    def get_state(self):
-        return self.parent.get_state()
-
-
-    def do_trans(self, transname, *args, **kw):
-        raise NotImplementedError
-
-
 
 ###########################################################################
 # Register

@@ -25,7 +25,7 @@ from itools.handlers import File as FileHandler
 from ikaaro.file import File
 from ikaaro.folder import Folder
 from ikaaro.registry import register_field
-from ikaaro.workflow import WorkflowAware
+from ikaaro.workflow import StateForm
 
 # Import from scrib
 from datatypes import Numeric, NumDecimal
@@ -48,6 +48,24 @@ def quote_namespace(namespace, schema):
                        value = value.replace(u"&quot;", u'\\"')
                        value = value.replace(u"'", u"\\'")
                    namespace[key] = value
+
+
+
+class MultipleForm_StateForm(StateForm):
+
+    def action(self, resource, context, form):
+        for form in resource.get_resources():
+            form.state_form.action(self, resource, context, form)
+
+
+
+class MultipleForm(Folder):
+    class_id = 'MultipleForm'
+    edit_state = MultipleForm_StateForm()
+
+
+    def is_first_time(self):
+        return not len(self.get_names())
 
 
 
@@ -181,16 +199,6 @@ class Form(File):
 
     def is_first_time(self):
         return self.handler.timestamp is None
-
-
-
-class MultipleForm(WorkflowAware, Folder):
-    class_id = 'MultipleForm'
-    workflow = workflow
-
-
-    def is_first_time(self):
-        return not len(self.get_names())
 
 
 
