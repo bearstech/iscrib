@@ -108,9 +108,7 @@ class Scrib2009(WebSite):
                 # Faux contexte de icms-init
                 config.append_comment('\nScrib MySQL')
                 for arg, default in [('host', 'localhost'), ('port', 3306),
-                        ('db', 'scrib'), ('user', 'scrib'),
-                        # XXX REMOVE
-                        ('passwd', 'chili')]:
+                        ('db', 'scrib'), ('user', 'scrib'), ('passwd', '')]:
                     stdout.write("sql-%s = [%s] " % (arg, default))
                     value = stdin.readline().strip() or default
                     config.set_value('sql-%s' % arg, value)
