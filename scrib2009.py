@@ -20,7 +20,7 @@ from datetime import date
 # Import from itools
 from itools.core import get_abspath, merge_dicts
 from itools.csv import CSVFile
-from itools.datatypes import String, Unicode, Integer, Date
+from itools.datatypes import String, Unicode, Integer, Date, Boolean, Tokens
 from itools.gettext import MSG
 from itools.web import get_context
 
@@ -31,7 +31,6 @@ from ikaaro.forms import XHTMLBody
 from ikaaro.registry import register_resource_class
 from ikaaro.resource_views import DBResource_Backlinks
 from ikaaro.revisions_views import DBResource_LastChanges
-from ikaaro.user import UserFolder
 from ikaaro.utils import crypt_password
 from ikaaro.webpage import WebPage
 from ikaaro.website import WebSite
@@ -49,18 +48,14 @@ from user import User
 
 
 class UsersCSV(CSVFile):
+    skip_header = True
     schema = {'annee': Unicode,
               'code_ua': Integer,
               'categorie': String(is_indexed=True),
               'nom': Unicode,
               'departement': String, # Corse « 2A » et « 2B »
-              'id': String, # Corse « 2A004 »
-              'mel': String,
-              'utilisateur': String,
-              'motdepasse': String}
-    columns = ['annee', 'code_ua', 'categorie', 'nom', 'departement', 'id',
-               'mel', 'utilisateur', 'motdepasse']
-    skip_header = True
+              'id': String} # Corse « 2A004 »
+    columns = ['annee', 'code_ua', 'categorie', 'nom', 'departement', 'id']
 
 
 
@@ -96,57 +91,20 @@ class Scrib2009(WebSite):
     # Skeleton
     @staticmethod
     def _make_resource(cls, folder, name):
-        """La création d'une application/année centralise tout ce qui peut
-        dépendre de l'année : utilisateurs, formulaires...
+        """Création de l'application/année et ses sous-ressources
         """
-        # Créé les utilisateurs d'abord pour avoir user_ids
-        print "Génération de la liste des utilisateurs..."
-        users = [# FIXME VoirSCRIB ne devrait être créé qu'une fois...
-                 {'username': 'VoirSCRIB',
-                  'password': crypt_password('BMBDP'),
-                  'email': 'TODO'}]
-        user_ids = set()
-        print "  ", len(users), "utilisateurs"
-        print "Création des utilisateurs..."
-        # XXX remonte au niveau resource
-        users_resource = UserFolder(folder.get_handler('users.metadata'))
-        user_id = users_resource.get_next_user_id()
-        # FIXME le init user n'est pas connu
-        if user_id == '0':
-            user_id = '1'
-        print "  à partir de", user_id
-        for metadata in users:
-            # Bypasse set_user car trop lent
-            # FIXME l'uri de users n'est pas "...database/users"
-            User._make_resource(User, folder, "users/" + user_id,
-                                # XXX Pas de vérification de doublon d'e-mail
-                                **metadata)
-            user_ids.add(user_id)
-            user_id = str(int(user_id) + 1)
-        # Maintenant les créations de l'application/année
-        # et ses sous-ressources
         print "Création de l'application..."
-        WebSite._make_resource(cls, folder, name, annee=2009,
-                               echeance_bm=date(2010, 4, 30),
-                               echeance_bdp=date(2010, 9, 15),
-                               adresse=XHTMLBody.decode("""\
-<p><span style="color: #000000;">Direction du livre et de la lecture</span></p>
-<p><span style="color: #000000;">Bureau des bibliothèques territoriales</span></p>
-<p><span style="color: #000000;">182, rue Saint-Honoré</span></p>
-<p><span style="color: #000000;">75033 PARIS CEDEX 01</span></p>"""),
-                               contacts=XHTMLBody.decode("""\
-<p><span style="color: #000000;">BDP : <strong><span style="color: #ffffff;"><a href="mailto:christophe.sene@culture.gouv.fr">christophe.sene@culture.gouv.fr</a></span></strong> 01 40 15 73 74</span></p>
-<p><span style="color: #000000;">BM : <strong><span style="color: #ffffff;"><a href="mailto:denis.cordazzo@culture.gouv.fr">denis.cordazzo@culture.gouv.fr</a></span></strong> 01 40 15 74 85</span></p>"""),
-                               title={'fr': u"Scrib 2009"},
-                               website_languages=('fr',),
-                               vhosts=('localhost', 'scrib2009'),
-                               # Donne un rôle dans ce website
-                               # = accès à cette année
-                               members=user_ids,
-                               # Enregistrement volontaire
-                               website_is_open=True)
+        WebSite._make_resource(cls, folder, name,
+                title={'fr': u"Scrib 2009"},
+                vhosts=('localhost', 'scrib2009'),
+                # Le compte VoirSCRIB est toujours le suivant après l'admin
+                members=('1',),
+                # Spécifique à l'année
+                annee=2009,
+                echeance_bm=date(2010, 4, 30),
+                echeance_bdp=date(2010, 9, 15))
         # Pages
-        print "Création des pages..."
+        print "Création des pages d'aide..."
         for filename, title in [('aide.xhtml', u"Aide"),
                                 ('PageA.xhtml', u"Page A"),
                                 ('PageB.xhtml', u"Page B"),
@@ -158,7 +116,7 @@ class Scrib2009(WebSite):
                                 ('PageH.xhtml', u"Page H")]:
             with open(get_abspath('ui/scrib2009/' + filename)) as file:
                 id = filename.split('.')[0]
-                WebPage._make_resource(WebPage, folder, '/'.join((name, id)),
+                WebPage._make_resource(WebPage, folder, '%s/%s' % (name, id),
                         title={'fr': title}, state='public', language='fr',
                         body=file.read())
         # BM
@@ -166,26 +124,36 @@ class Scrib2009(WebSite):
         Forms._make_resource(Forms, folder, "%s/bm" % name,
                              title={'fr': u"BM"})
         users_csv = UsersCSV(get_abspath('ui/scrib2009/users.csv'))
-        rows = users_csv.search(categorie='BM')
-        for row in users_csv.get_rows(rows):
+        for row in users_csv.get_rows(users_csv.search(categorie='BM')):
             code_ua = row.get_value('code_ua')
             title = row.get_value('nom')
             departement = row.get_value('departement')
+            # TODO 0008082 handler avec données de la base ADRESSE 09
             cls.bm_class._make_resource(cls.bm_class, folder, '%s/bm/%s' %
                     (name, code_ua), code_ua=code_ua, title={'fr': title},
                     departement=departement)
         print "Création des BDP..."
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})
-        rows = users_csv.search(categorie='BDP')
-        for row in users_csv.get_rows(rows):
+        for row in users_csv.get_rows(users_csv.search(categorie='BDP')):
             code_ua =  row.get_value('code_ua')
             title = row.get_value('nom')
             departement = row.get_value('departement')
             cls.bdp_class._make_resource(cls.bdp_class, folder,
                     '%s/bdp/%s' % (name, departement), title={'fr': title},
                     departement=departement)
-        print "Indexation de la base..."
+        # Compte spécial VoirSCRIB
+        print "Création du compte VoirSCRIB..."
+        try:
+            users_handler = folder.get_handler('users')
+        except LookupError:
+            # Dans icms-init, on est les premiers à créer le compte
+            User._make_resource(User, folder, "users/1",
+                    username='VoirSCRIB', password=crypt_password('BMBDP'),
+                    email='VoirSCRIB')
+        else:
+            print "  Déjà créé."
+        print "Indexation de la base... (long)"
 
 
     ########################################################################
@@ -193,11 +161,22 @@ class Scrib2009(WebSite):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(WebSite.get_metadata_schema(),
+                # Surcharge de Website commune à toutes les années
+                website_languages=Tokens(default=('fr',)),
+                website_is_open=Boolean(default=True),
+                # Spécifique à chaque année
                 annee=Integer,
                 echeance_bm=Date,
                 echeance_bdp=Date,
-                adresse=XHTMLBody,
-                contacts=XHTMLBody,
+                # Spécifique à toutes les années
+                adresse=XHTMLBody(default=XHTMLBody.decode("""\
+<p><span style="color: #000000;">Direction du livre et de la lecture</span></p>
+<p><span style="color: #000000;">Bureau des bibliothèques territoriales</span></p>
+<p><span style="color: #000000;">182, rue Saint-Honoré</span></p>
+<p><span style="color: #000000;">75033 PARIS CEDEX 01</span></p>""")),
+                contacts=XHTMLBody(default=XHTMLBody.decode("""\
+<p><span style="color: #000000;">BDP : <strong><span style="color: #ffffff;"><a href="mailto:christophe.sene@culture.gouv.fr">christophe.sene@culture.gouv.fr</a></span></strong> 01 40 15 73 74</span></p>
+<p><span style="color: #000000;">BM : <strong><span style="color: #ffffff;"><a href="mailto:denis.cordazzo@culture.gouv.fr">denis.cordazzo@culture.gouv.fr</a></span></strong> 01 40 15 74 85</span></p>""")),
                 responsable_bm=Unicode(default=(u'Denis Cordazzo '
                     u'<denis.cordazzo@culture.gouv.fr>')),
                 responsable_bdp=Unicode(default=(u'Christophe Sene '
