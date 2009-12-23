@@ -63,7 +63,7 @@ def get_schema_pages(path):
     schema = {}
     pages = {}
     for (name, title, form, page_number, dt_name, format, length, vocabulary,
-            is_mandatory, fixed, sum, dependances, abrege, init,
+            is_mandatory, readonly, sum, dependances, abrege, init,
             sql_field) in rows:
         # 0007651 formulaires abrégés abandonnés
         if abrege == 'A':
@@ -100,7 +100,8 @@ def get_schema_pages(path):
         page_numbers = tuple(page_numbers)
         schema[name] = datatype(format=format,
                 length=(length.strip() or format), pages=page_numbers,
-                is_mandatory=is_mandatory, sum=sum, sql_field=sql_field)
+                is_mandatory=is_mandatory, readonly=readonly, sum=sum,
+                sql_field=sql_field)
     return schema, pages
 
 

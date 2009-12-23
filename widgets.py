@@ -161,6 +161,7 @@ def select_widget(context, form, datatype, name, value, readonly=False):
 
 def get_input_widget(name, form, context, tabindex=None, readonly=False):
     datatype = form.handler.schema[name]
+    readonly =  readonly or datatype.readonly
     # take data from the request or from the form
     if context.has_form_value(name):
         value = context.get_form_value(name)
