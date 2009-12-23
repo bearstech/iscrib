@@ -41,9 +41,9 @@ class ScribUser(User):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(User.get_metadata_schema(),
-                           title=Unicode,
-                           code_ua=Integer,
-                           departement=String)
+                title=Unicode,
+                code_ua=Integer,
+                departement=String)
 
 
     def _get_catalog_values(self):

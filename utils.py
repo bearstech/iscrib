@@ -17,34 +17,61 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from mysql
-#from MySQLdb import connect
+from MySQLdb import connect
+from MySQLdb.cursors import DictCursor
 
 # Import from itools
-from itools.datatypes import Integer
+from itools.core import merge_dicts
+from itools.datatypes import Integer, String
 
 # Import from ikaaro
-from ikaaro.server import get_config
+from ikaaro.config import ServerConfig
 
 
-MSG_NO_MYSQL = u"La connexion à MySql ne s'est pas faite"
-MSG_NO_ADRESSE = u"La bibliothèque n'existe pas dans la base SQL : %r"
+class ScribServerConfig(ServerConfig):
+    schema = merge_dicts(ServerConfig.schema, **{
+            'sql-host': String,
+            'sql-port': Integer,
+            'sql-db': String,
+            'sql-user': String,
+            'sql-passwd': String})
 
 
-def get_config_data(context):
-    server = context.server
-    target = server.target
-    return get_config(target)
+
+def get_config(context=None, target=None):
+    if target is None:
+        target = context.server.target
+    return ScribServerConfig('%s/config.conf' % target)
 
 
 
-def get_connection(context, **kw):
-    config = get_config_data(context)
-    host = config.get_value('sql_host')
-    db = config.get_value('sql_database')
-    user = config.get_value('sql_user')
-    passwd = config.get_value('sql_passwd')
-    port = config.get_value('sql_port', type=Integer)
-    return connect(db=db, host=host, port=port, user=user, passwd=passwd)
+def get_connection(context=None, target=None):
+    config = get_config(context=context, target=target)
+    kw = {}
+    for arg in ('host', 'port', 'db', 'user', 'passwd'):
+        value = config.get_value('sql-%s' % arg)
+        if value is None:
+            raise ValueError, "%s: sql-%s undefined" % (config.uri, arg)
+        kw[arg] = value
+    return connect(**kw)
+
+
+
+def get_adresse(code_ua, table, context=None, target=None):
+    connection = get_connection(context=context, target=target)
+    cursor = connection.cursor(DictCursor)
+    cursor.execute('select * from %s where code_ua=%s' % (table, code_ua))
+    results = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    if not len(results):
+        raise KeyError, "pas de code_ua '%s' dans '%s'" % (code_ua, table)
+    adresse = results[0]
+    for key, value in adresse.iteritems():
+        if value is None:
+            adresse[key] = ''
+    return adresse
+
 
 
 def SI(condition, iftrue, iffalse=True):
