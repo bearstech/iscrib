@@ -163,6 +163,12 @@ class Form(File):
                 form_state=self.get_form_state())
 
 
+    ######################################################################
+    # Security
+    def is_ready(self):
+        raise NotImplementedError
+
+
     def get_form_state(self):
         """Translate workflow state to user-friendly state.
         """

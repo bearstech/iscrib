@@ -297,16 +297,14 @@ class Scrib2009(WebSite):
         if user is None:
             return False
         if isinstance(resource, Form):
-            context = get_context()
-            namespace = resource.get_namespace(context)
             if self.is_admin(user, resource):
                 if name in ['request', 'accept', 'publish']:
-                    return namespace['is_ready']
+                    return resource.is_ready()
                 else:
                     return True
             else:
                 if name in ['request']:
-                    return namespace['is_ready']
+                    return resource.is_ready()
                 elif name in ['unrequest']:
                     return True
                 else:

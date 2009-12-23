@@ -167,6 +167,24 @@ class BM2009Form(Form):
         return self.get_property('code_ua')
 
 
+    def is_ready(self):
+        invalid_fields = [name
+                for name, datatype in self.get_invalid_fields()
+                if datatype.is_mandatory]
+        for form in self.get_pageb().get_resources():
+            invalid_fields += [name
+                    for name, datatype in form.get_invalid_fields(
+                        pages=['B'], exclude=[])
+                    if datatype.is_mandatory]
+        failed_controls = [control for control in self.get_failed_controls()
+                if control['level'] == '2']
+        for form in self.get_pageb().get_resources():
+            failed_controls = [control
+                    for control in form.get_failed_controls()
+                    if control['level'] == '2']
+        return not invalid_fields and not control
+
+
     ######################################################################
     # API
     def get_pageb(self, make=False):
