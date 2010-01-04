@@ -124,7 +124,7 @@ class Form_Help(BaseView):
 
     def GET(self, resource, context):
         page = context.get_query_value('page')
-        app = resource.get_site_root()
+        app = context.site_root
         if page:
             # Aide spécifique
             response = context.response

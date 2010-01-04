@@ -30,7 +30,7 @@ class User_Home(STLView):
 
     def get_namespace(self, resource, context):
         namespace = {}
-        app = resource.get_site_root()
+        app = context.site_root
         departement = resource.get_property('departement')
         if resource.is_bm():
             code_ua = resource.get_property('code_ua')

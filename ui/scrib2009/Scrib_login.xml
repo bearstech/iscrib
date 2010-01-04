@@ -6,16 +6,8 @@
 
   <h2>Connexion</h2>
 
-  <p style="color: red">
-    <b>ATTENTION  !</b><br/>
-    Si vous êtes une <b>BM</b>, vous pourrez renseigner votre rapport par la
-    voie électronique jusqu'au <b>${echeance_bm}</b>.<br/>
-    Si vous êtes une <b>BDP</b>, vous pourrez renseigner votre rapport par la
-    voie électronique jusqu'au <b>${echeance_bdp}</b>.
-  </p>
-
   <form name="loginform" action=";login" id="loginform" method="post">
-    <fieldset>
+    <fieldset style="width:40%;">
       <legend>Connexion</legend>
       <dl>
         <dt><label for="username">Identifiant ou adresse de
@@ -23,8 +15,7 @@
         <dd>
           <input value="${username}" name="username" id="username"
             type="text"/>
-          <a href="/;register">Crééz votre compte pour l'année 2009</a>
-        </dd>
+         </dd>
         <dt><label for="password">Mot de passe</label></dt>
         <dd>
           <input id="password" name="password" type="password"/>
@@ -33,7 +24,23 @@
       </dl>
       <input value="OK" class="button-ok" type="submit"/>
     </fieldset>
+    <fieldset style="width:40%;">
+     <legend>Inscription</legend>
+      <dl>
+        <dd>
+          <a href="/;register">Créez votre compte pour l'année 2009</a>
+        </dd>
+     </dl>
+    </fieldset>
   </form>
+
+   <p style="color: red">
+    <b>ATTENTION  !</b><br/>
+    Si vous êtes une <b>BM</b>, vous pourrez renseigner votre rapport par la
+    voie électronique jusqu'au <b>${echeance_bm}</b>.<br/>
+    Si vous êtes une <b>BDP</b>, vous pourrez renseigner votre rapport par la
+    voie électronique jusqu'au <b>${echeance_bdp}</b>.
+  </p>
 
   <p>
     Pour que la connexion s'établisse correctement, il faut que le navigateur

@@ -60,7 +60,7 @@ class ScribSkin(Skin):
 
     def build_namespace(self, context):
         namespace = Skin.build_namespace(self, context)
-        app = self.get_site_root()
+        app = context.site_root
         namespace['application_title'] = app.get_title()
         namespace['application_address'] = app.get_property('adresse')
         namespace['application_contacts'] = app.get_property('contacts')

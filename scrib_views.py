@@ -101,9 +101,12 @@ class Scrib_Login(LoginView):
 
     def get_namespace(self, resource, context):
         namespace = LoginView.get_namespace(self, resource, context)
-        echeance_bm = resource.get_property('echeance_bm')
+        # La page n'apparaît pas forcément sur le site_root
+        site_root = context.site_root
+        echeance_bm = site_root.get_property('echeance_bm')
+        print "echeance_bm", echeance_bm
         namespace['echeance_bm'] = DateLitterale.encode(echeance_bm)
-        echeance_bdp = resource.get_property('echeance_bdp')
+        echeance_bdp = site_root.get_property('echeance_bdp')
         namespace['echeance_bdp'] = DateLitterale.encode(echeance_bdp)
         context.response.status = 403
         return namespace

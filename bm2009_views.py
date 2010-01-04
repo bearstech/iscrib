@@ -37,7 +37,7 @@ class BM2009Form_View(Form_View):
         # TODO hardcoded
         menu = []
         code_ua = resource.get_code_ua()
-        form = resource.get_site_root().get_resource('bm/%s' % code_ua)
+        form = context.site_root.get_resource('bm/%s' % code_ua)
         for name, title in [('pageA', u"A-Identité"),
                             ('pageB', u"B-Bibliothèques du réseau"),
                             ('pageC', u"C-Accès et installations"),
@@ -156,7 +156,7 @@ class BM2009Form_Send(STLForm):
             return
 
         # Envoi mail responsable
-        app = resource.get_site_root()
+        app = context.site_root
         responsable_bm = app.get_property('responsable_bm')
         to_addr = responsable_bm
         code_ua = resource.get_property('code_ua')
