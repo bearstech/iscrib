@@ -19,6 +19,9 @@ from itools.datatypes import String
 from itools.gettext import MSG
 from itools.web import STLView, STLForm, INFO, ERROR
 
+# Import from ikaaro
+from ikaaro.access import is_admin
+
 # Import from scrib
 from form_views import Form_View
 
@@ -49,6 +52,12 @@ class BM2009Form_View(Form_View):
                                                 else None})
         namespace['menu'] = menu
         return namespace
+
+
+    def action(self, resource, context, form):
+        Form_View.action(self, resource, context, form)
+        if not is_admin(context.user, resource):
+            resource.set_property('is_first_time', False)
 
 
 
@@ -113,9 +122,8 @@ class BM2009Form_Send(STLForm):
         namespace['controls'] = {'errors': errors,
                                  'warnings': warnings}
         # ACLs
-        ac = resource.get_access_control()
         user = context.user
-        namespace['is_admin'] = ac.is_admin(user, resource)
+        namespace['is_admin'] = is_admin(user, resource)
         # Workflow - State
         namespace['statename'] = statename = resource.get_statename()
         namespace['form_state'] = resource.get_form_state()

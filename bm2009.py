@@ -146,7 +146,9 @@ class BM2009Form(Form):
         return merge_dicts(Form.get_metadata_schema(),
                 code_ua=Integer,
                 # Utilisé pour la recherche, pas la sécurité
-                departement=String)
+                departement=String,
+                # 0008120 marquage manuel
+                is_first_time=Boolean(default=True))
 
 
     def _get_catalog_values(self):
@@ -210,7 +212,8 @@ class BM2009Form(Form):
 
     def is_first_time(self):
         pageb = self.get_pageb()
-        return Form.is_first_time(self) and pageb.is_first_time()
+        # 0008120 Le handler est prérempli donc marquage manuel
+        return self.get_property('is_first_time') and pageb.is_first_time()
 
 
     def get_invalid_fields(self, pages=freeze([]), exclude=freeze(['B'])):

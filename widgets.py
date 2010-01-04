@@ -25,6 +25,7 @@ from itools.datatypes import XMLContent, XMLAttribute
 from itools.html import HTMLParser
 
 # Import from ikaaro
+from ikaaro.access import is_admin
 from ikaaro.skins import UIFile
 
 # Import from scrib
@@ -247,9 +248,7 @@ class UITable(UIFile, CSVFile):
             tabindex = True
 
         # Lecture seule ?
-        user = context.user
-        ac = form.get_access_control()
-        if not skip_print and not ac.is_admin(user, form):
+        if not skip_print and not is_admin(context.user, form):
             state = form.get_statename()
             if state == SENT:
                 if page < 10 or page in (12, 14) or page > 50:
