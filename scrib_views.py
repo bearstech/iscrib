@@ -104,7 +104,6 @@ class Scrib_Login(LoginView):
         # La page n'apparaît pas forcément sur le site_root
         site_root = context.site_root
         echeance_bm = site_root.get_property('echeance_bm')
-        print "echeance_bm", echeance_bm
         namespace['echeance_bm'] = DateLitterale.encode(echeance_bm)
         echeance_bdp = site_root.get_property('echeance_bdp')
         namespace['echeance_bdp'] = DateLitterale.encode(echeance_bdp)
