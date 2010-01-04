@@ -55,7 +55,7 @@ class MultipleForm_StateForm(StateForm):
 
     def action(self, resource, context, form):
         for form in resource.get_resources():
-            form.state_form.action(self, resource, context, form)
+            form.edit_state.action(self, resource, context, form)
 
 
 

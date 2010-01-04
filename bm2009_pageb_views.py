@@ -20,7 +20,7 @@
 from itools.datatypes import String, Integer, Boolean, Unicode
 from itools.gettext import MSG
 from itools.handlers import checkid
-from itools.web import INFO, ERROR
+from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.buttons import RemoveButton
