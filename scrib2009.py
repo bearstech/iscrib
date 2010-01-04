@@ -171,7 +171,8 @@ class Scrib2009(WebSite):
                         A107=adresse['CPBIBLIO'], A108=adresse['ville'],
                         A109=adresse['CEDEXB'], A110=adresse['DIRECTEU'],
                         A111=adresse['st_dir'], A112=adresse['TELE'],
-                        A113=adresse['FAX'], A115=adresse['WWW'])
+                        A113=adresse['FAX'], A115=adresse['WWW'],
+                        encoding='latin1')
                 folder.set_handler('%s/bm/%s' % (name, code_ua), handler)
             percent = i * 100 / len(rows)
             if percent % 10 == 0 and percent != last_percent:

@@ -77,7 +77,7 @@ class FormHandler(FileHandler):
 
     ######################################################################
     # Load/Save
-    def new(self, **kw):
+    def new(self, encoding='UTF-8', **kw):
         """Preload with all known keys, fill the gaps with defaults.
         """
         fields = {}
@@ -86,7 +86,11 @@ class FormHandler(FileHandler):
                 data = kw[key]
             except KeyError:
                 data = datatype.get_default()
-            value = datatype.decode(data)
+            # pas de issubclass
+            try:
+                value = datatype.decode(data, encoding=encoding)
+            except TypeError:
+                value = datatype.decode(data)
             fields[key] = value
         self.fields = fields
 
