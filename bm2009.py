@@ -94,7 +94,7 @@ def get_schema_pages(path):
             page_fields.add(name)
             page_numbers.append(page)
         # Mandatory
-        is_mandatory = (not is_mandatory or is_mandatory.upper() == 'OUI')
+        is_mandatory = (not is_mandatory.strip() or is_mandatory.upper() == 'OUI')
         # Sum
         sum = sum.strip()
         # Add to the schema
