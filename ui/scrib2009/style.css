@@ -8,13 +8,13 @@ input {
   text-align: right !important;
 }
 .mandatory {
-  background-color: rgb(255, 200, 200) !important;
+  background-color: #ffc8c8 !important;
 }
 .badtype {
   border: 3px solid #c00 !important;
 }
 .disabled {
-  background-color: rgb(235, 235, 235) !important;
+  background-color: #d3d3d3 !important;
 }
 
 /* readonly widgets */
@@ -79,10 +79,10 @@ td.section-header h5 {
   font-variant: italic;
 }
 td.field-label {
-  background-color: rgb(211, 211, 211);
+  background-color: #d3d3d3;
 }
 td.rubrique-label {
-  background-color: rgb(211, 211, 211);
+  background-color: #d3d3d3;
   font-size: 8px;
 }
 
