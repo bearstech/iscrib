@@ -10,8 +10,8 @@
 "A104","N°","BM","A","Str",10,,,"N",,,,"AC","N-1","voie_num"
 "A105","Type voie","BM","A","Str",20,34,,"N",,,,"AC","N-1","voie_type"
 "A106","Nom voie","BM","A","Str",60,,,"N",,,,"AC","N-1","voie_nom"
-"A107","Code postal","BM","A","digit",5,10,," ",,,,"AC","N-1","cpbiblio"
-"A108","Ville","BM","A","Str",60,40,," ",,,,"AC","N-1","ville"
+"A107","Code postal","BM","A","digit",5,10,,,,,,"AC","N-1","cpbiblio"
+"A108","Ville","BM","A","Str",60,40,,,,,,"AC","N-1","ville"
 "A109","Cedex","BM","A","Str",10,,,"N",,,,"AC","N-1","cedexb"
 "A110","Responsable de l'établissement","BM","A","Str",60,,,,,,,"AC","N-1","directeu"
 "A111","Statut et/ou grade du responsable","BM","A","Str",60,,,,,,,"AC","N-1","st_dir"
@@ -21,22 +21,22 @@
 "A115","Site internet","BM","A","Str",60,,,"N",,,,"AC","N-1","www"
 "A116","Statut site","BM","A","Enum","Radio",,"Site internet propre / Page dédiée au sein du site de la collectivité","N",,,,"AC",,
 "A117","Mode de gestion de l'établissement","BM","A","Enum","Radio",,"Régie directe / Association / Association avec convention",,,,,"AC","N-1","gestion"
-"B101","Nom de l'établissement",,"B","Str",60,,," ",,,,"AC","N-1",
+"B101","Nom de l'établissement",,"B","Str",60,,,,,,,"AC","N-1",
 "B102","Libellé 1",,"B","Str",60,," ","N",,,,"AC","N-1",
 "B103","Complément d'adresse",,"B","Str",60,,,"N",,,,"AC","N-1",
 "B104","N°",,"B","Str",10,,,"N",,,,"AC","N-1",
 "B105","Type voie",,"B","Str",20,,,"N",,,,"AC","N-1",
 "B106","Nom voie",,"B","Str",60,,,"N",,,,"AC","N-1",
-"B107","Code postal",,"B","digit",5,10,," ",,,,"AC","N-1",
-"B108","Ville",,"B","Str",60,,," ",,,,"AC","N-1",
+"B107","Code postal",,"B","digit",5,10,,,,,,"AC","N-1",
+"B108","Ville",,"B","Str",60,,,,,,,"AC","N-1",
 "B109","Cedex",,"B","Str",10,,,"N",,,,"AC","N-1",
-"B110","Fonds en unités matérielles",,"B","Int",10,,," ",,,,"AC",,
-"B111","Surface utile nette totale en m²",,"B","Int",10,,," ",,,,"AC",,
-"B112","Personnel en ETPT",,"B","Dec","5,2",,," ",,,,"AC",,
-"B113","Nombre de places assises",,"B","Int",10,,," ",,,,"AC",,
-"B114","Nombre d'heures d'ouverture hebdomadaires",,"B","Int",10,,," ",,,,"AC",,
-"B115","Nombre de jours d'ouverture annuels",,"B","Int",10,,," ",,,,"AC",,
-"B116","Nombre d'heures d'ouverture annuelles",,"B","Int",10,,," ",,,,"AC",,
+"B110","Fonds en unités matérielles",,"B","Int",10,,,,,,,"AC",,
+"B111","Surface utile nette totale en m²",,"B","Int",10,,,,,,,"AC",,
+"B112","Personnel en ETPT",,"B","Dec","5,2",,,,,,,"AC",,
+"B113","Nombre de places assises",,"B","Int",10,,,,,,,"AC",,
+"B114","Nombre d'heures d'ouverture hebdomadaires",,"B","Int",10,,,,,,,"AC",,
+"B115","Nombre de jours d'ouverture annuels",,"B","Int",10,,,,,,,"AC",,
+"B116","Nombre d'heures d'ouverture annuelles",,"B","Int",10,,,,,,,"AC",,
 "C101","Nombre d'heures d'ouverture hebdomadaires",,"C","Dec","4,1",10,,,,,,"AC",,
 "C102","Nombre de jours d'ouverture annuels",,"C","Int",10,,,,,,,"AC",,
 "C103","Nombre de places assises disponibles",,"C","Int",10,,,,,,,"C",,
@@ -292,7 +292,7 @@
 "E519",,,"E","Boolean","Radio",,"Oui / Non","N",,,"E515","C",,
 "E520",,,"E","Int",10,,,"N",,,"E519","C",,
 "E521",,,"E","Boolean","Radio",,"Oui / Non","N",,,"E519","C",,
-"E522",,,"E","Int",10,,,"N",,,"E522","C",,
+"E522",,,"E","Int",10,,,"N",,,"E521","C",,
 "E523",,,"E","Boolean","Radio",,"Oui / Non","N",,,"E519","C",,
 "E524",,,"E","Int",10,,,"N",,,"E523","C",,
 "E525",,,"E","Boolean","Radio",,"Oui / Non","N",,,"E519","C",,
