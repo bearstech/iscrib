@@ -33,6 +33,7 @@ from ikaaro.text import Text
 # Import from scrib
 from bm2009_pageb_views import BM2009Form_PageB_View
 from bm2009_views import BM2009Form_View, BM2009Form_Send, BM2009Form_Print
+from bm2009_views import BM2009Form_Edit
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import make_enumerate
@@ -139,6 +140,7 @@ class BM2009Form(Form):
     pageH = BM2009Form_View(n='H')
     envoyer = BM2009Form_Send()
     imprimer = BM2009Form_Print()
+    edit = BM2009Form_Edit()
 
 
     @classmethod
@@ -287,8 +289,6 @@ class BM2009Form(Form):
 ###########################################################################
 # Register
 register_resource_class(BM2009Form)
-# TODO remove after production
-register_resource_class(BM2009Form, format='BM2009')
 register_field('is_bm', Boolean(is_indexed=True, is_stored=True))
 register_field('code_ua', Integer(is_indexed=True, is_stored=True))
 register_field('departement', Unicode(is_indexed=True, is_stored=True))

@@ -15,12 +15,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from itools
-from itools.datatypes import String
+from itools.core import merge_dicts
+from itools.datatypes import String, Integer, Boolean
 from itools.gettext import MSG
 from itools.web import STLView, STLForm, INFO, ERROR
 
 # Import from ikaaro
 from ikaaro.access import is_admin
+from ikaaro.forms import TextWidget, BooleanRadio, MultilineWidget
+from ikaaro.resource_views import DBResource_Edit
 
 # Import from scrib
 from form_views import Form_View
@@ -215,3 +218,35 @@ class BM2009Form_Print(STLView):
         namespace = {}
         namespace['forms'] = forms
         return namespace
+
+
+
+class BM2009Form_Edit(DBResource_Edit):
+    access = 'is_admin'
+    schema = merge_dicts(DBResource_Edit.schema,
+            code_ua=Integer(mandatory=True),
+            departement=String(mandatory=True),
+            is_first_time=Boolean(mandatory=True),
+            content=String(mandatory=True))
+    widgets = (DBResource_Edit.widgets
+            + [TextWidget('code_ua', title=MSG(u"Code UA")),
+                TextWidget('departement', title=MSG(u"Département")),
+                BooleanRadio('is_first_time', title=MSG(u"Formulaire vide")),
+                MultilineWidget('content', cols=100, rows=20,
+                    title=MSG(u"Contenu brut /!\\ DANGEREUX /!\\ Toujours "
+                        u"insérer une liste complète"))])
+
+
+    def get_value(self, resource, context, name, datatype):
+        if name == 'content':
+            return resource.handler.to_str()
+        return DBResource_Edit.get_value(self, resource, context, name, datatype)
+
+
+    def action(self, resource, context, form):
+        DBResource_Edit.action(self, resource, context, form)
+        if not context.edit_conflict:
+            resource.set_property('code_ua', form['code_ua'])
+            resource.set_property('departement', form['departement'])
+            resource.set_property('is_first_time', form['is_first_time'])
+            resource.handler.load_state_from_string(form['content'])

@@ -260,35 +260,35 @@ class Scrib_Confirm(STLForm):
 
 
 
-class  Scrib_Edit(DBResource_Edit):
+class Scrib_Edit(DBResource_Edit):
     description = MSG(u"Paramétrer Scrib")
     icon = 'preferences.png'
     schema = merge_dicts(DBResource_Edit.schema,
-                         annee=Integer(mandatory=True, readonly=True),
-                         echeance_bm=Date(mandatory=True),
-                         echeance_bdp=Date(mandatory=True),
-                         responsable_bm=Unicode(mandatory=True),
-                         responsable_bdp=Unicode(mandatory=True),
-                         adresse=XHTMLBody,
-                         contacts=XHTMLBody)
+            annee=Integer(mandatory=True, readonly=True),
+            echeance_bm=Date(mandatory=True),
+            echeance_bdp=Date(mandatory=True),
+            responsable_bm=Unicode(mandatory=True),
+            responsable_bdp=Unicode(mandatory=True),
+            adresse=XHTMLBody,
+            contacts=XHTMLBody)
     widgets = (DBResource_Edit.widgets[:3]
-               + [ReadOnlyWidget('annee', readonly=True,
-                      title=MSG(u"Année des données collectées")),
-                  DateWidget('echeance_bm',
-                      title=MSG(u"Date d'échéance des BM")),
-                  DateWidget('echeance_bdp',
-                      title=MSG(u"Date d'échéance des BDP")),
-                  TextWidget('responsable_bm', title=MSG(u"Mél d'envoi "
-                      u"des accusés de réception au responsable BM "
-                      u"(format « Nom <mél> »)")),
-                  TextWidget('responsable_bdp', title=MSG(u"Mél d'envoi "
-                      u"des accusés de réception au responsable BDP "
-                      u"(format « Nom <mél> »)")),
-                  RTEWidget('adresse',
+            + [ReadOnlyWidget('annee', readonly=True,
+                    title=MSG(u"Année des données collectées")),
+                DateWidget('echeance_bm',
+                    title=MSG(u"Date d'échéance des BM")),
+                DateWidget('echeance_bdp',
+                    title=MSG(u"Date d'échéance des BDP")),
+                TextWidget('responsable_bm', title=MSG(u"Mél d'envoi "
+                    u"des accusés de réception au responsable BM "
+                    u"(format « Nom <mél> »)")),
+                TextWidget('responsable_bdp', title=MSG(u"Mél d'envoi "
+                    u"des accusés de réception au responsable BDP "
+                    u"(format « Nom <mél> »)")),
+                RTEWidget('adresse',
                       title=MSG("Bandeau : adresse de la direction")),
-                  RTEWidget('contacts',
-                      title=MSG("Bandeau : contacts BM et BDP"))]
-               + DBResource_Edit.widgets[3:])
+                RTEWidget('contacts',
+                    title=MSG("Bandeau : contacts BM et BDP"))]
+             + DBResource_Edit.widgets[3:])
 
 
     def action(self, resource, context, form):
