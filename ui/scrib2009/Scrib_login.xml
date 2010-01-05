@@ -4,14 +4,21 @@
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
-  <h2>Connexion</h2>
+  <h2>Pour accéder à votre formulaire</h2>
 
   <form name="loginform" action=";login" id="loginform" method="post">
-    <fieldset style="width:40%;">
-      <legend>Connexion</legend>
+     <fieldset style="width:40%;">
+     <legend>Inscription</legend>
       <dl>
-        <dt><label for="username">Identifiant ou adresse de
-            courriel</label></dt>
+        <dd>
+          <a href="/;register">Créez votre compte pour l'année 2009</a>
+        </dd>
+     </dl>
+    </fieldset>
+     <fieldset style="width:40%;">
+    <legend>Connexion</legend>
+      <dl>
+        <dt><label for="username">Adresse mél</label></dt>
         <dd>
           <input value="${username}" name="username" id="username"
             type="text"/>
@@ -23,14 +30,6 @@
         </dd>
       </dl>
       <input value="OK" class="button-ok" type="submit"/>
-    </fieldset>
-    <fieldset style="width:40%;">
-     <legend>Inscription</legend>
-      <dl>
-        <dd>
-          <a href="/;register">Créez votre compte pour l'année 2009</a>
-        </dd>
-     </dl>
     </fieldset>
   </form>
 

@@ -9,6 +9,10 @@
       Je confirme être chargé de la saisie des données pour la bibliothèque
       municipale de <strong>${title}</strong>.
     </p>
+    <p>
+      Je vais recevoir les instructions pour me connecter à l'adresse
+      <strong>${email}</strong>.
+    </p>
     <input type="hidden" name="email" value="${email}"/>
     <input type="hidden" name="identifiant" value="${identifiant}"/>
     <input value="Créer mon compte" class="button-ok" type="submit"/>

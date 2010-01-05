@@ -252,8 +252,8 @@ class Scrib_Confirm(STLForm):
 
         # Bring the user to the login form
         message = (u"<p>Un mél de confirmation vient de vous être envoyé à "
-                u"l'adresse {email}.</p><p>Suivez ses instructions pour "
-                u"activer votre compte.</p>".format(email=email))
+                u"l'adresse <strong>{email}</strong>.</p><p>Suivez ses "
+                u"instructions pour activer votre compte.</p>".format(email=email))
         return XMLParser(message.encode('utf-8'))
         
 
