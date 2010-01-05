@@ -28,13 +28,12 @@ from itools.uri import resolve_uri
 
 # Import from ikaaro
 from ikaaro.registry import register_resource_class, register_field
-from ikaaro.text import Text
 
 # Import from scrib
 from bm2009_pageb_views import BM2009Form_PageB_View
 from bm2009_views import BM2009Form_View, BM2009Form_Send, BM2009Form_Print
 from bm2009_views import BM2009Form_Edit
-from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime
+from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import make_enumerate
 from form import FormHandler, Form
@@ -63,9 +62,9 @@ def get_schema_pages(path):
 
     schema = {}
     pages = {}
-    for (name, title, form, page_number, dt_name, format, length, vocabulary,
-            is_mandatory, readonly, sum, dependances, abrege, init,
-            sql_field) in rows:
+    for (name, title, form, page_number, dt_name, representation, length,
+            vocabulary, is_mandatory, readonly, sum, dependances, abrege,
+            init, sql_field) in rows:
         # 0007651 formulaires abrégés abandonnés
         if abrege == 'A':
             continue
@@ -94,15 +93,17 @@ def get_schema_pages(path):
             page_fields.add(name)
             page_numbers.append(page)
         # Mandatory
-        is_mandatory = (not is_mandatory.strip() or is_mandatory.upper() == 'OUI')
+        is_mandatory = (not is_mandatory.strip()
+                or is_mandatory.upper() == 'OUI')
         # Sum
         sum = sum.strip()
         # Add to the schema
         page_numbers = tuple(page_numbers)
-        schema[name] = datatype(format=format,
-                length=(length.strip() or format), pages=page_numbers,
-                is_mandatory=is_mandatory, readonly=readonly, sum=sum,
-                dependances=dependances, sql_field=sql_field)
+        schema[name] = datatype(representation=representation,
+                length=(length.strip() or representation),
+                pages=page_numbers, is_mandatory=is_mandatory,
+                readonly=readonly, sum=sum, dependances=dependances,
+                sql_field=sql_field)
     return schema, pages
 
 
@@ -140,6 +141,7 @@ class BM2009Handler(FormHandler):
                 if dep_datatype.dependances == name]
 
 
+
 class BM2009Form(Form):
     class_id = 'BM2009Form'
     class_handler = BM2009Handler
@@ -155,6 +157,7 @@ class BM2009Form(Form):
     pageF = BM2009Form_View(n='F')
     pageG = BM2009Form_View(n='G')
     pageH = BM2009Form_View(n='H')
+    pageI = BM2009Form_View(n='I')
     envoyer = BM2009Form_Send()
     imprimer = BM2009Form_Print()
     edit = BM2009Form_Edit()

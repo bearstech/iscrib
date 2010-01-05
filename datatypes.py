@@ -626,12 +626,14 @@ class Text(Unicode):
     @staticmethod
     def decode(data):
         data = Unicode.decode(data)
+        # Restaure les retours chariot
         return data.replace(u'\\r\\n', u'\r\n')
 
 
     @staticmethod
     def encode(value):
         value = Unicode.encode(value)
+        # Stocke tout sur une ligne
         return value.replace('\r\n', '\\r\\n')
 
 

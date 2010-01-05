@@ -48,7 +48,8 @@ class BM2009Form_View(Form_View):
                             ('pageE', u"E-Usages et usagers de la bib."),
                             ('pageF', u"F-Budget"),
                             ('pageG', u"G-Personnel et formation"),
-                            ('pageH', u"H-Action culturelle")]:
+                            ('pageH', u"H-Action culturelle"),
+                            ('pageI', u"I-Commentaires")]:
             menu.append({'href': '%s/;%s' % (context.get_link(form), name),
                          'title': title,
                          'active': 'nav-active' if context.view_name == name

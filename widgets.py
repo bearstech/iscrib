@@ -177,14 +177,16 @@ def textarea_widget(context, form, datatype, name, value, readonly):
         content = XMLContent.encode(value)
         return make_element(u"div", attributes, content)
 
-    attributes = {u"name": name, u"rows": datatype.format, u"cols": 100}
+    attributes = {u"name": name, u"rows": u"15",
+            u"cols": datatype.representation}
     # special case for 'value'
-    content = XMLContent.encode(value).replace(u"\\r\\n", u"\r\n")
+    content = XMLContent.encode(value)
     return make_element(u"textarea", attributes, content)
 
 
 
-def text_widget(context, form, datatype, name, value, readonly, tabindex=None):
+def text_widget(context, form, datatype, name, value, readonly,
+        tabindex=None):
     value = unicode(datatype.encode(value), 'utf8')
     if readonly:
         tagname = u"div"
@@ -194,7 +196,8 @@ def text_widget(context, form, datatype, name, value, readonly, tabindex=None):
         tagname = u"input"
         attributes = {u"type": u"text", u"id": u"field_%s" % name,
                 u"name": name, u"value": XMLAttribute.encode(value),
-                u"size": datatype.length, u"maxlength": datatype.format}
+                u"size": datatype.length,
+                u"maxlength": datatype.representation}
         if tabindex:
             attributes[u"tabindex"] = tabindex
         content = u""
@@ -224,16 +227,17 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
         value = context.get_form_value(name)
     else:
         value = handler.get_value(name)
-    format = datatype.format.upper()
-    if format == 'SELECT':
+    representation = datatype.representation.upper()
+    if representation == 'SELECT':
         return select_widget(context, form, datatype, name, value, readonly)
-    elif format == 'RADIO':
+    elif representation == 'RADIO':
         return radio_widget(context, form, datatype, name, value, readonly)
-    elif format == 'CHECKBOX':
-        return checkbox_widget(context, form, datatype, name, value, readonly)
-    # Textarea
-    elif isinstance(datatype, Text):
-        return textarea_widget(context, form, datatype, name, value, readonly)
+    elif representation == 'CHECKBOX':
+        return checkbox_widget(context, form, datatype, name, value,
+                readonly)
+    elif issubclass(datatype, Text):
+        return textarea_widget(context, form, datatype, name, value,
+                readonly)
     # Basic text input
     return text_widget(context, form, datatype, name, value, readonly,
             tabindex)
