@@ -102,7 +102,7 @@ def get_schema_pages(path):
         schema[name] = datatype(format=format,
                 length=(length.strip() or format), pages=page_numbers,
                 is_mandatory=is_mandatory, readonly=readonly, sum=sum,
-                sql_field=sql_field)
+                dependances=dependances, sql_field=sql_field)
     return schema, pages
 
 

@@ -63,6 +63,7 @@ class Form_View(STLForm):
         handler = resource.handler
         bad_types = []
         for key in handler.pages[page_number]:
+            value = ''
             # Can't use "if not/continue" pattern here
             datatype = handler.schema[key]
             if context.has_form_value(key):
@@ -97,14 +98,12 @@ class Form_View(STLForm):
                 # Invalid (0008102 and mandatory -> and filled)
                 elif data and not datatype.is_valid(data):
                     bad_types.append(key)
-            # Skip Scrib instance datatypes
+            # Skip instance datatypes: TypeError: issubclass() arg 1 must be a class
             elif isinstance(datatype, Numeric):
                 pass
             # Unchecked checkboxes return no value
             elif issubclass(datatype, Boolean):
                 value = False
-            else:
-                value = ''
             handler.set_value(key, value)
         # Reindex
         context.server.change_resource(resource)

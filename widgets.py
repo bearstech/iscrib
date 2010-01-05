@@ -34,12 +34,6 @@ from form import SENT, EXPORTED
 
 
 FIELD_PREFIX = u"#"
-WHITESPACE_DIV = u"<div>{0}</div>"
-BORDER_DIV = u'<div class="{css}">{body}</div>'
-ENABLE = (u'''onchange="this.form.%s.disabled=false;'''
-          u'''this.form.%s.className=''"''')
-DISABLE = (u'''onchange="this.form.%s.disabled=true;'''
-          u'''this.form.%s.className='access_False'"''')
 
 
 def is_mandatory_filled(datatype, value, context):
@@ -51,189 +45,199 @@ def is_mandatory_filled(datatype, value, context):
 
 
 
-def radio_widget(context, form, datatype, name, value, readonly=False):
+def make_element(tagname, attributes={}, content=u""):
+    element = [u"<", tagname]
+    for key, value in attributes.iteritems():
+        if isinstance(value, list):
+            value = u" ".join(value)
+        element.extend((u" ", key, u'="', value, u'"'))
+    if tagname == 'input':
+        element.extend((u"/>", content))
+    else:
+        element.extend((u">", content, u"</", tagname, u">"))
+    return u"".join(element)
+
+
+
+def radio_widget(context, form, datatype, name, value, readonly):
     html = []
 
+    # True -> '1' ; False -> '2'
+    value = datatype.encode(value)
     if readonly:
         input = datatype.get_value(value, value)
         if input is None:
-            input = ''
+            input = u""
         else:
             input = XMLContent.encode(input)
-        html.append(WHITESPACE_DIV.format(input))
+        html.append(make_element(u"div", content=input))
     else:
         for option in datatype.get_namespace(value):
+            attributes = {u"type": u"radio", u"id": u"field_%s" % name,
+                    u"name": name, u"value": option['name']}
+            if option['selected']:
+                attributes[u"checked"] = u"checked"
             # 0005970: Rendre certains champs d'une fiche professeur
             # accessible suivant une condition oui/non (E5)
-            onclick = u""
-            for radio_name, select_name in [('TYPE_PED', u'TYPE2'),
-                                            ('DIP2', u'DISCCA'),
-                                            ('DIP3', u'DISCDE')]:
-                if name == radio_name:
-                    if option['name'] == '1':
-                        onclick = ENABLE % (select_name, select_name)
-                    else:
-                        onclick = DISABLE % (select_name, select_name)
-            checked = u'checked="checked" ' if option['selected'] else u''
-            input = (u'<input type="radio" id="field_%s" name="%s" '
-                    u'value="%s" %s %s /> %s' % (name, name, option['name'],
-                        checked, onclick, option['value']))
+            if option['name'] == '1':
+                disabled = u"false"
+                css_class = u""
+            else:
+                disabled = u"true"
+                css_class = u"disabled"
+            dependances = datatype.dependances
+            dep_names = [dep_name
+                    for dep_name, dep_datatype in form.handler.schema.iteritems()
+                    if dep_datatype.dependances == name]
+            for dep_name in dep_names:
+                attributes.setdefault(u"onchange", []).append(
+                    u"this.form.%s.disabled=%s;"
+                    u"this.form.%s.className='%s';" % (dep_name, disabled,
+                        dep_name, css_class))
+            # 0005970 fin
+            input = make_element(u"input", attributes, option['value'])
             if issubclass(datatype, EnumBoolean):
                 # Oui/Non sur une seule ligne
                 html.append(input)
             else:
                 # Une option par ligne
-                html.append(WHITESPACE_DIV.format(input))
+                html.append(make_element(u"div", content=input))
 
+    attributes = {}
     if name in context.bad_types:
-        return BORDER_DIV.format(body=u''.join(html), css=u"badtype")
+        attributes[u"class"] = u"badtype"
     elif not is_mandatory_filled(datatype, value, context):
-        return BORDER_DIV.format(body=u''.join(html), css=u"badtype")
-    return BORDER_DIV.format(body=u''.join(html), css=u"")
+        attributes[u"class"] = u"mandatory"
+    return make_element(u"div", attributes, u"".join(html))
 
 
 
-def checkbox_widget(context, form, datatype, name, value, readonly=False):
-    html = []
-
+def checkbox_widget(context, form, datatype, name, value, readonly):
     if readonly:
-        input = datatype.get_value(value, value)
-        html.append(WHITESPACE_DIV.format(input))
-    else:
-        for option in datatype.get_namespace(value):
-            checked = u'checked="checked" ' if option['selected'] else u''
-            input = (u'<input type="checkbox" id="field_%s" name="%s" '
-                    u'value="%s" %s /> %s' % (name, name, option['name'],
-                        checked, option['value']))
-            if name in context.bad_types:
-                input = u'<span class="badtype" title="%s">%s</span>' %\
-                        (u'Mauvaise valeur', input)
-            elif not is_mandatory_filled(datatype, value, context):
-                input = u'<span class="mandatory" title="%s">%s</span>' %\
-                        (u'Champ obligatoire', input)
-            html.append(WHITESPACE_DIV.format(input))
+        return make_element(u"div", content=datatype.get_value(value, value))
 
-    return BORDER_DIV.format(body=u''.join(html), css=u"")
-
-
-
-def select_widget(context, form, datatype, name, value, readonly=False):
     html = []
-
-    if readonly:
-        input = datatype.get_value(value, value)
-        html.append(WHITESPACE_DIV.format(input))
-    else:
-        select = [u'<select name="%s"' % name]
-        css_class = []
-        # 0005970: Rendre certains champs d'une fiche professeur
-        # accessible suivant une condition oui/non (E5)
-        for select_name, radio_name in [('TYPE2', 'TYPE_PED'),
-                                        ('DISCCA', 'DIP2'),
-                                        ('DISCDE', 'DIP3')]:
-            if name == select_name:
-                radio_value = form.handler.get_value(radio_name)
-                if radio_value not in (True, '1'):
-                    select.append(u' disabled="disabled"')
-                    css_class.append(u"access_False")
-                break
-        # Check for "errors"
+    for option in datatype.get_namespace(value):
+        attributes = {u"type": u"checkbox",  u"id": u"field_%s" % name,
+                u"name": name, u"value": option['name']}
+        if option['selected']:
+            attributes[u"checked"] = u"checked"
+        input = make_element(u"input", attributes, option['value'])
         if name in context.bad_types:
-            select.append(u' title="Mauvaise valeur"')
-            css_class.append(u"badtype")
+            input = (u'<span class="badtype" title="Mauvaise valeur">'
+                    + input + u"</span>")
         elif not is_mandatory_filled(datatype, value, context):
-            select.append(u' title="Champ obligatoire"')
-            css_class.append(u"mandatory")
-        if css_class:
-            select.append(u' class="%s"' % u" ".join(css_class))
-        select.append(u">")
-        html.append(u"".join(select))
-        for option in datatype.get_namespace(value):
-            checked = u'selected="selected" ' if option['selected'] else u''
-            input = u'<option value="%s" %s>%s</option>' % (
-                    option['name'], checked, option['value'])
-            html.append(input)
-        html.append(u'</select>')
+            input = (u'<span class="mandatory" title="Champ obligatoire">'
+                    + input + u"</span>")
+        html.append(input)
+    return u"".join(html)
 
-    return BORDER_DIV.format(body=WHITESPACE_DIV.format(u''.join(html)),
-            css=u"")
+
+
+def select_widget(context, form, datatype, name, value, readonly):
+    if readonly:
+        return make_element(u"div", content=datatype.get_value(value, value))
+
+    options = []
+    for option in datatype.get_namespace(value):
+        attributes = {u"value": option['name']}
+        if option['selected']:
+            attributes[u"selected"] = u"selected"
+        options.append(make_element(u"option", attributes, option['value']))
+    options = u"\n".join(options)
+    attributes = {u"name": name}
+    # Check for "errors"
+    if name in context.bad_types:
+        attributes[u"title"] = u"Mauvaise valeur"
+        attributes[u"class"] = u"badtype"
+    elif not is_mandatory_filled(datatype, value, context):
+        attributes[u"title"] = u"Champ obligatoire"
+        attributes[u"class"] = u"mandatory"
+    # 0005970: Rendre certains champs d'une fiche professeur
+    # accessible suivant une condition oui/non (E5)
+    dep_name = datatype.dependances
+    if dep_name:
+        radio_value = form.handler.get_value(dep_name)
+        if radio_value not in (True, '1'):
+            attributes[u"disabled"] = u"disabled"
+            attributes.setdefault(u"class", []).append(u"disabled")
+    # 0005970 fin
+    return make_element(u"select", attributes, options)
+
+
+
+def textarea_widget(context, form, datatype, name, value, readonly):
+    if readonly:
+        attributes = {u"style": u"white-space: pre", u"class": u"readonly"}
+        content = XMLContent.encode(value)
+        return make_element(u"div", attributes, content)
+
+    attributes = {u"name": name, u"rows": datatype.format, u"cols": 100}
+    # special case for 'value'
+    content = XMLContent.encode(value).replace(u"\\r\\n", u"\r\n")
+    return make_element(u"textarea", attributes, content)
+
+
+
+def text_widget(context, form, datatype, name, value, readonly, tabindex=None):
+    value = unicode(datatype.encode(value), 'utf8')
+    if readonly:
+        tagname = u"div"
+        attributes = {u"class": u"readonly"}
+        content = XMLContent.encode(value)
+    else:
+        tagname = u"input"
+        attributes = {u"type": u"text", u"id": u"field_%s" % name,
+                u"name": name, u"value": XMLAttribute.encode(value),
+                u"size": datatype.length, u"maxlength": datatype.format}
+        if tabindex:
+            attributes[u"tabindex"] = tabindex
+        content = u""
+    # Right-align numeric fields
+    if isinstance(datatype, Numeric):
+        attributes[u"class"] = [u"num"]
+    # Check for errors
+    if name in context.bad_types:
+        attributes.setdefault(u"class", []).append(u"badtype")
+        attributes[u"title"] = u"Mauvaise valeur"
+    elif not is_mandatory_filled(datatype, value, context):
+        attributes.setdefault(u"class", []).append(u"mandatory")
+        attributes[u"title"] = u"Champ obligatoire"
+    # 0005970: Rendre certains champs d'une fiche professeur
+    # accessible suivant une condition oui/non (E5)
+    dep_name = datatype.dependances
+    if dep_name:
+        radio_value = form.handler.get_value(dep_name)
+        if radio_value not in (True, '1'):
+            attributes[u"disabled"] = u"disabled"
+            attributes.setdefault(u"class", []).append(u"disabled")
+    # 0005970 fin
+    return make_element(tagname, attributes, content)
 
 
 
 def get_input_widget(name, form, context, tabindex=None, readonly=False):
-    datatype = form.handler.schema[name]
+    handler = form.handler
+    datatype = handler.schema[name]
     readonly =  readonly or datatype.readonly
-    # take data from the request or from the form
+    # Take data from the request or from the form
     if context.has_form_value(name):
         value = context.get_form_value(name)
     else:
-        value = form.handler.get_value(name)
-
+        value = handler.get_value(name)
     format = datatype.format.upper()
     if format == 'SELECT':
         return select_widget(context, form, datatype, name, value, readonly)
     elif format == 'RADIO':
-        return radio_widget(context, form, datatype, name,
-                datatype.encode(value), readonly)
+        return radio_widget(context, form, datatype, name, value, readonly)
     elif format == 'CHECKBOX':
-        return checkbox_widget(context, form, datatype, name, value,
-                readonly)
-    # Complex representation
-    if not isinstance(value, basestring):
-        value = datatype.encode(value)
-    if not isinstance(value, unicode):
-        value = unicode(value, 'utf8')
-    if isinstance(datatype, Text):
-        if readonly:
-            attrs = {'style': u'white-space: pre', 'class': 'readonly'}
-            pattern = u'<div %s>'
-        else:
-            attrs = {'name': name, 'rows': datatype.format, 'cols': 100}
-            pattern = u'<textarea %s>'
-    else:
-        if readonly:
-            attrs = {'class': 'readonly'}
-            pattern = u'<div %s>'
-        else:
-            attrs = {'type': u'text', 'id': 'field_%s' % name, 'name': name,
-                     'value': XMLAttribute.encode(value),
-                     'size': datatype.length, 'maxlength': format}
-            if tabindex:
-                attrs['tabindex'] = tabindex
-            pattern = u'<input %s />\n'
-    # Right-align numeric fields
-    if isinstance(datatype, Numeric):
-        attrs['class'] = u'num'
-    # Check for "errors"
-    if name in context.bad_types:
-        attrs['class'] = u'badtype'
-        attrs['title'] = u'Mauvaise valeur'
-    elif not is_mandatory_filled(datatype, value, context):
-        attrs['class'] = u'mandatory'
-        attrs['title'] = u'Champ obligatoire'
-    get_value = form.handler.get_value
-    # Disabled fields
-    # TODO abrégé ou complet
-    #if (datatype.mdt == 'M' and not get_value('MUSIQUE')
-    #    or datatype.mdt == 'D' and not get_value('DANSE')
-    #    or datatype.mdt == 'T' and not get_value('ARTDRAMA')):
-    #    attrs['disabled'] = u'disabled'
-    #    attrs['class'] = u'disabled'
-    #    attrs['value'] = u''
-    attrs = [ u'%s="%s"' % x for x in attrs.items()
-              if x[1] is not None ]
-    pattern = pattern % u' '.join(attrs)
-    if isinstance(datatype, Text):
-        if readonly:
-            pattern =  pattern + XMLContent.encode(value) + u'</div>\n'
-        else:
-            # special case for 'value'
-            pattern = (pattern + XMLContent.encode(value).replace(u'\\r\\n', u'\r\n')
-                    + u'</textarea>\n')
-    elif readonly:
-        # close element
-        pattern =  pattern + XMLContent.encode(value) + u'</div>\n'
-    return pattern
+        return checkbox_widget(context, form, datatype, name, value, readonly)
+    # Textarea
+    elif isinstance(datatype, Text):
+        return textarea_widget(context, form, datatype, name, value, readonly)
+    # Basic text input
+    return text_widget(context, form, datatype, name, value, readonly,
+            tabindex)
 
 
 
@@ -261,8 +265,7 @@ class UITable(UIFile, CSVFile):
             readonly = True
 
         # Calcul du (des) tableau(x)
-        handler = form.handler
-        schema = handler.schema
+        schema = form.handler.schema
         vars = form.get_vars()
         floating_vars = form.get_floating_vars()
         tables = []
@@ -286,7 +289,7 @@ class UITable(UIFile, CSVFile):
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': HTMLParser("&nbsp;"),
                                     'class': css_class})
-                elif column == u'%break%':
+                elif column == u"%break%":
                     # Saut de page
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': HTMLParser("&nbsp;"),
@@ -295,9 +298,9 @@ class UITable(UIFile, CSVFile):
                     tables.append([])
                 elif column.startswith(FIELD_PREFIX):
                     # Champ à remplacer par un widget
-                    css_class = u'field-label'
+                    css_class = u"field-label"
                     if j > 0:
-                        css_class += u' centered'
+                        css_class += u" centered"
                     column = column[1:]
                     if not column:
                         # Un « # » seul pour préfixer les champs
@@ -312,24 +315,24 @@ class UITable(UIFile, CSVFile):
                         # 0004922 Fiche école ne fonctionne plus
                         column = column.replace('\n', '')
                         try:
-                            if u'/' in column:
+                            if u"/" in column:
                                 column = eval(column, floating_vars)
                             else:
                                 column = eval(column, vars)
                         except ZeroDivisionError:
-                            column = u'(division par 0)'
+                            column = u"(division par 0)"
                         except SyntaxError:
                             raise SyntaxError, repr(column)
                     if not isinstance(column, basestring):
-                        css_class += u' num'
+                        css_class += u" num"
                         if isinstance(column, NumTime):
                             # 0006611 numérique mais représentation textuelle
                             column = unicode(column)
                         elif isinstance(column, int):
                             # l'opération était préfixée par int
-                            column = u'%d' % column
+                            column = u"%d" % column
                         elif str(column) != 'NC':
-                            column = u'%.1f' % column
+                            column = u"%.1f" % column
                         else:
                             column = unicode(column)
                     body = HTMLParser(column.encode('utf8'))
@@ -346,16 +349,16 @@ class UITable(UIFile, CSVFile):
                                 # <h1> est déjà pris
                                 level=int(level)+1,
                                 column=column.strip())
-                        css_class = u'section-header'
+                        css_class = u"section-header"
                     # 0007970: CSS spécifique pour numéros de rubriques
                     elif column in schema:
-                        css_class = u'rubrique-label'
+                        css_class = u"rubrique-label"
                     else:
-                        css_class = u'field-label'
+                        css_class = u"field-label"
                     if j > 0:
-                        css_class += u' centered'
-                    if column == u'100%':
-                        css_class += u' num'
+                        css_class += u" centered"
+                    if column == u"100%":
+                        css_class += u" num"
                     # 0004946: les balises < et > ne sont pas interprétées
                     # -> ne pas utiliser XML.encode
                     column = column.replace('&', '&amp;')
