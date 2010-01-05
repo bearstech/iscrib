@@ -72,28 +72,31 @@ def radio_widget(context, form, datatype, name, value, readonly):
             input = XMLContent.encode(input)
         html.append(make_element(u"div", content=input))
     else:
+        handler = form.handler
         for option in datatype.get_namespace(value):
             attributes = {u"type": u"radio", u"id": u"field_%s" % name,
                     u"name": name, u"value": option['name']}
             if option['selected']:
                 attributes[u"checked"] = u"checked"
-            # 0005970: Rendre certains champs d'une fiche professeur
-            # accessible suivant une condition oui/non (E5)
+            if handler.is_disabled_by_dependency(name):
+                attributes[u"disabled"] = u"disabled"
+                attributes.setdefault(u"class", []).append(u"disabled")
+            # 0005970: Le Javascript pour (dés)activer les autres champs
             if option['name'] == '1':
                 disabled = u"false"
-                css_class = u""
+                toggle_class = u"removeClass"
             else:
                 disabled = u"true"
-                css_class = u"disabled"
-            dependances = datatype.dependances
-            dep_names = [dep_name
-                    for dep_name, dep_datatype in form.handler.schema.iteritems()
-                    if dep_datatype.dependances == name]
-            for dep_name in dep_names:
+                toggle_class = u"addClass"
+            for dep_name in handler.get_reverse_dependencies(name):
                 attributes.setdefault(u"onchange", []).append(
-                    u"this.form.%s.disabled=%s;"
-                    u"this.form.%s.className='%s';" % (dep_name, disabled,
-                        dep_name, css_class))
+                    u"$('[name=%s]').attr('disabled', %s).%s('disabled');" % (
+                        dep_name, disabled, toggle_class))
+                # Second level
+                for dep_dep_name in handler.get_reverse_dependencies(dep_name):
+                    attributes.setdefault(u"onchange", []).append(
+                        u"$('[name=%s]').attr('disabled', %s).%s('disabled');" % (
+                            dep_dep_name, disabled, toggle_class))
             # 0005970 fin
             input = make_element(u"input", attributes, option['value'])
             if issubclass(datatype, EnumBoolean):
@@ -117,11 +120,15 @@ def checkbox_widget(context, form, datatype, name, value, readonly):
         return make_element(u"div", content=datatype.get_value(value, value))
 
     html = []
+    handler = form.handler
     for option in datatype.get_namespace(value):
         attributes = {u"type": u"checkbox",  u"id": u"field_%s" % name,
                 u"name": name, u"value": option['name']}
         if option['selected']:
             attributes[u"checked"] = u"checked"
+        if handler.is_disabled_by_dependency(name):
+            attributes[u"disabled"] = u"disabled"
+            attributes.setdefault(u"class", []).append(u"disabled")
         input = make_element(u"input", attributes, option['value'])
         if name in context.bad_types:
             input = (u'<span class="badtype" title="Mauvaise valeur">'
@@ -149,19 +156,13 @@ def select_widget(context, form, datatype, name, value, readonly):
     # Check for "errors"
     if name in context.bad_types:
         attributes[u"title"] = u"Mauvaise valeur"
-        attributes[u"class"] = u"badtype"
+        attributes[u"class"] = [u"badtype"]
     elif not is_mandatory_filled(datatype, value, context):
         attributes[u"title"] = u"Champ obligatoire"
-        attributes[u"class"] = u"mandatory"
-    # 0005970: Rendre certains champs d'une fiche professeur
-    # accessible suivant une condition oui/non (E5)
-    dep_name = datatype.dependances
-    if dep_name:
-        radio_value = form.handler.get_value(dep_name)
-        if radio_value not in (True, '1'):
-            attributes[u"disabled"] = u"disabled"
-            attributes.setdefault(u"class", []).append(u"disabled")
-    # 0005970 fin
+        attributes[u"class"] = [u"mandatory"]
+    if form.handler.is_disabled_by_dependency(name):
+        attributes[u"disabled"] = u"disabled"
+        attributes.setdefault(u"class", []).append(u"disabled")
     return make_element(u"select", attributes, options)
 
 
@@ -203,15 +204,9 @@ def text_widget(context, form, datatype, name, value, readonly, tabindex=None):
     elif not is_mandatory_filled(datatype, value, context):
         attributes.setdefault(u"class", []).append(u"mandatory")
         attributes[u"title"] = u"Champ obligatoire"
-    # 0005970: Rendre certains champs d'une fiche professeur
-    # accessible suivant une condition oui/non (E5)
-    dep_name = datatype.dependances
-    if dep_name:
-        radio_value = form.handler.get_value(dep_name)
-        if radio_value not in (True, '1'):
-            attributes[u"disabled"] = u"disabled"
-            attributes.setdefault(u"class", []).append(u"disabled")
-    # 0005970 fin
+    if form.handler.is_disabled_by_dependency(name):
+        attributes[u"disabled"] = u"disabled"
+        attributes.setdefault(u"class", []).append(u"disabled")
     return make_element(tagname, attributes, content)
 
 

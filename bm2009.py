@@ -122,6 +122,23 @@ class BM2009Handler(FormHandler):
     controls = get_controls('ui/scrib2009/controls-bm.csv')
 
 
+    def is_disabled_by_dependency(self, name):
+        dep_name = self.schema[name].dependances
+        if not dep_name:
+            return False
+        if self.get_value(dep_name) is not True:
+            return True
+        # Second level
+        dep_dep_name = self.schema[dep_name].dependances
+        if not dep_dep_name:
+            return False
+        return self.get_value(dep_dep_name) is not True
+
+
+    def get_reverse_dependencies(self, name):
+        return [dep_name for dep_name, dep_datatype in self.schema.iteritems()
+                if dep_datatype.dependances == name]
+
 
 class BM2009Form(Form):
     class_id = 'BM2009Form'
