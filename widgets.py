@@ -88,15 +88,19 @@ def radio_widget(context, form, datatype, name, value, readonly):
             else:
                 disabled = u"true"
                 toggle_class = u"addClass"
+            dep_names = []
             for dep_name in handler.get_reverse_dependencies(name):
+                dep_names.append(dep_name)
+                # Second level
+                for dep_name in handler.get_reverse_dependencies(dep_name):
+                    dep_names.append(dep_name)
+                    # Third level
+                    for dep_name in handler.get_reverse_dependencies(dep_name):
+                        dep_names.append(dep_name)
+            for dep_name in dep_names:
                 attributes.setdefault(u"onchange", []).append(
                     u"$('[name=%s]').attr('disabled', %s).%s('disabled');" % (
                         dep_name, disabled, toggle_class))
-                # Second level
-                for dep_dep_name in handler.get_reverse_dependencies(dep_name):
-                    attributes.setdefault(u"onchange", []).append(
-                        u"$('[name=%s]').attr('disabled', %s).%s('disabled');" % (
-                            dep_dep_name, disabled, toggle_class))
             # 0005970 fin
             input = make_element(u"input", attributes, option['value'])
             if issubclass(datatype, EnumBoolean):

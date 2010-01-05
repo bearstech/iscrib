@@ -255,8 +255,6 @@ class Scrib_Confirm(STLForm):
                 u"l'adresse <strong>{email}</strong>.</p><p>Suivez ses "
                 u"instructions pour activer votre compte.</p>".format(email=email))
         return XMLParser(message.encode('utf-8'))
-        
-
 
 
 
@@ -449,6 +447,7 @@ class Scrib_ChangePassword(BaseView):
         # XXX écrit sur une méthode GET
         context.commit = True
         return context.come_back(MSG(u"Done"), goto='/;browse_content')
+
 
 
 class GoToHome(GoToSpecificDocument):
