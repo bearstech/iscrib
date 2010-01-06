@@ -235,6 +235,9 @@ def get_input_widget(name, form, context, tabindex=None, readonly=False):
     elif representation == 'CHECKBOX':
         return checkbox_widget(context, form, datatype, name, value,
                 readonly)
+    # Skip instance datatypes: TypeError: issubclass() arg 1 must be a class
+    elif  isinstance(datatype, Numeric):
+        pass
     elif issubclass(datatype, Text):
         return textarea_widget(context, form, datatype, name, value,
                 readonly)
