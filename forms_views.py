@@ -104,6 +104,7 @@ class Forms_SearchForm(Folder_BrowseContent):
             query.append(PhraseQuery('form_state', form_state))
         # The city
         if title:
+            # 0008125: trier sur title ne marche plus
             query.append(PhraseQuery('title_fr', title))
         if len(query) == 1:
             query = query[0]
