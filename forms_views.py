@@ -16,7 +16,7 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import Boolean, Integer, String, Unicode
+from itools.datatypes import Integer, String, Unicode
 from itools.gettext import MSG
 from itools.xapian import PhraseQuery, StartQuery, AndQuery
 
@@ -33,27 +33,26 @@ class Forms_SearchForm(Folder_BrowseContent):
     title = MSG(u"Rechercher un formulaire")
     context_menus = []
     query_schema = merge_dicts(Folder_BrowseContent.query_schema,
-                               sort_by=String(default='title'),
-                               batch_size=Integer(default=50),
-                               reverse=Boolean(default=False))
+            sort_by=String(default='title_fr'),
+            batch_size=Integer(default=50))
     # Search form
     search_template = '/ui/scrib2009/Forms_search.xml'
     search_schema = {
-        'search_title': Unicode,
-        'search_dep': Departements,
-        'search_code_ua': Integer,
-        'search_state': WorkflowState}
+            'search_title': Unicode,
+            'search_dep': Departements,
+            'search_code_ua': Integer,
+            'search_state': WorkflowState}
     # Table
     table_actions = []
 
 
     def get_table_columns(self, resource, context):
         columns = [('code_ua', MSG(u"Code ua")),
-                   ('title', MSG(u"Ville")),
+                   ('title_fr', MSG(u"Ville")),
                    ('mtime', MSG(u"Date")),
                    ('form_state', MSG(u"État"))]
         if resource.is_bdp():
-            columns[1] = ('title', MSG(u"Département"))
+            columns[1] = ('title_fr', MSG(u"Département"))
         return columns
 
 
@@ -65,18 +64,16 @@ class Forms_SearchForm(Folder_BrowseContent):
         state = context.query['search_state']
         # Build the namespace
         namespace = {}
-        namespace['too_long_answer'] = ''
-        # The search form
         search_title = TextWidget('search_title', size=30)
         namespace['search_title'] = search_title.to_html(Unicode, title)
         search_dep = SelectWidget('search_dep')
         namespace['search_dep'] = search_dep.to_html(Departements, dep)
         search_code_ua = TextWidget('search_code_ua', size=6)
         namespace['search_code_ua'] = search_code_ua.to_html(Unicode,
-                                                             code_ua)
+                code_ua)
         search_state = SelectWidget('search_state')
         namespace['search_state'] = search_state.to_html(WorkflowState,
-                                                         state)
+                state)
         namespace['is_bm'] = resource.is_bm()
         return namespace
 
@@ -107,8 +104,11 @@ class Forms_SearchForm(Folder_BrowseContent):
             query.append(PhraseQuery('form_state', form_state))
         # The city
         if title:
-            query.append(StartQuery('title', title))
-        query = AndQuery(*query)
+            query.append(PhraseQuery('title_fr', title))
+        if len(query) == 1:
+            query = query[0]
+        else:
+            query = AndQuery(*query)
         # Search
         return context.root.search(query)
 
@@ -117,11 +117,8 @@ class Forms_SearchForm(Folder_BrowseContent):
         root = context.root
         item_brain, item_resource = item
         if column == 'code_ua':
-            form_name = item_brain.code_ua
-            if item_brain.is_bm:
-                form_name = int(form_name)
-            return form_name
-        elif column == 'title':
+            return item_brain.code_ua
+        elif column == 'title_fr':
             url = '%s/;pageA' % item_brain.name
             return (item_brain.title, url)
         elif column == 'mtime':
