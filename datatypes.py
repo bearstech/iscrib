@@ -696,15 +696,16 @@ class Departements(Enumerate):
     """Ce sont les codes Insee, pas les codes postaux.
     """
     options = [
-        {'name': '1', 'value': "Ain"},
-        {'name': '2', 'value': "Aisne"},
-        {'name': '3', 'value': "Allier"},
-        {'name': '4', 'value': "Alpes-de-Haute-Provence"},
-        {'name': '5', 'value': "Hautes-Alpes"},
-        {'name': '6', 'value': "Alpes maritimes"},
-        {'name': '7', 'value': "Ardèche"},
-        {'name': '8', 'value': "Ardennes"},
-        {'name': '9', 'value': "Ariège"},
+        # 0008124 '1' -> '01'
+        {'name': '01', 'value': "Ain"},
+        {'name': '02', 'value': "Aisne"},
+        {'name': '03', 'value': "Allier"},
+        {'name': '04', 'value': "Alpes-de-Haute-Provence"},
+        {'name': '05', 'value': "Hautes-Alpes"},
+        {'name': '06', 'value': "Alpes maritimes"},
+        {'name': '07', 'value': "Ardèche"},
+        {'name': '08', 'value': "Ardennes"},
+        {'name': '09', 'value': "Ariège"},
         {'name': '10', 'value': "Aube"},
         {'name': '11', 'value': "Aude"},
         {'name': '12', 'value': "Aveyron"},
