@@ -151,8 +151,8 @@ class FormHandler(FileHandler):
 class Form(File):
     class_id = 'Form'
     class_handler = FormHandler
+    class_title = MSG(u"Formulaire")
     class_views = ['envoyer', 'exporter', 'imprimer', 'aide']
-    class_handler = FormHandler
     workflow = workflow
 
     # Views

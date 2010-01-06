@@ -95,12 +95,13 @@ def radio_widget(context, form, datatype, name, value, readonly):
                 for dep_name in handler.get_reverse_dependencies(dep_name):
                     dep_names.append(dep_name)
                     # Third level
-                    for dep_name in handler.get_reverse_dependencies(dep_name):
+                    for dep_name in handler.get_reverse_dependencies(
+                            dep_name):
                         dep_names.append(dep_name)
             for dep_name in dep_names:
                 attributes.setdefault(u"onchange", []).append(
-                    u"$('[name=%s]').attr('disabled', %s).%s('disabled');" % (
-                        dep_name, disabled, toggle_class))
+                    u"$('[name=%s]').attr('disabled', %s)"
+                    u".%s('disabled');" % (dep_name, disabled, toggle_class))
             # 0005970 fin
             input = make_element(u"input", attributes, option['value'])
             if issubclass(datatype, EnumBoolean):
@@ -351,10 +352,10 @@ class UITable(UIFile, CSVFile):
                         new_column = column.lstrip(u"*")
                         level = len(column) - len(new_column)
                         column = new_column.strip()
-                        column = u"<h{level}>{column}</h{level}>".format(
+                        column = make_element(
                                 # <h1> est déjà pris
-                                level=int(level)+1,
-                                column=column.strip())
+                                u"h%d" % (int(level) + 1),
+                                content=column.strip()) 
                         css_class = u"section-header"
                     # 0007970: CSS spécifique pour numéros de rubriques
                     elif column in schema:

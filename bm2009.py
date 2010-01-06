@@ -145,6 +145,7 @@ class BM2009Handler(FormHandler):
 class BM2009Form(Form):
     class_id = 'BM2009Form'
     class_handler = BM2009Handler
+    class_title = MSG(u"Formulaire BM")
     class_icon48 = 'scrib2009/images/form48.png'
     class_views = ['pageA'] + Form.class_views
 

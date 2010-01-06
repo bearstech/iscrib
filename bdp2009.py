@@ -19,6 +19,7 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.datatypes import String, Boolean
+from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.registry import register_resource_class, register_field
@@ -35,6 +36,7 @@ class BDP2009Handler(FormHandler):
 class BDP2009Form(Form):
     class_id = 'BDP2009Form'
     class_handler = BDP2009Handler
+    class_title = MSG(u"Formulaire BDP")
     class_icon48 = 'scrib2009/images/form48.png'
     class_views = [] + Form.class_views
 
