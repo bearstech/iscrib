@@ -188,7 +188,12 @@ def textarea_widget(context, form, datatype, name, value, readonly):
 
 def text_widget(context, form, datatype, name, value, readonly,
         tabindex=None):
-    value = unicode(datatype.encode(value), 'utf8')
+    # Reçoit des int en GET
+    if not isinstance(value, basestring):
+        value = datatype.encode(value)
+    # Reçoit des str en POST
+    if not type(value) is unicode:
+        value = unicode(value, 'utf8')
     if readonly:
         tagname = u"div"
         attributes = {u"class": u"readonly"}
