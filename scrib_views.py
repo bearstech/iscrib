@@ -14,18 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Import from the Standard Library
-from os import getcwd
-from os.path import join
-from datetime import datetime
-
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import Date, Integer, Email, Unicode
+from itools.datatypes import Date, Integer, Email, Unicode, Boolean
 from itools.gettext import MSG
 from itools.uri import get_reference, get_uri_path
 from itools.stl import stl
 from itools.web import BaseView, STLForm, INFO, ERROR
+from itools.xapian import AndQuery, OrQuery, PhraseQuery
 from itools.xml import XMLParser
 
 # Import from ikaaro
@@ -38,8 +34,7 @@ from ikaaro.website_views import ForgottenPasswordForm
 
 # Import from scrib
 from datatypes import DateLitterale, Identifiant
-from form import quote_namespace
-from utils import get_connection
+from utils import get_connection, execute
 
 
 def find_user(username, context):
@@ -59,7 +54,6 @@ def find_user(username, context):
 class Scrib_Admin(IconsView):
     access = 'is_admin'
     title = MSG(u"Administration de Scrib")
-    icon = 'settings.png'
 
 
     def get_namespace(self, resource, context):
@@ -82,7 +76,7 @@ class Scrib_Admin(IconsView):
                               page),
                           'url': 'Page%s/;edit' % page})
         for name in ('edit', 'browse_users', 'add_user',
-                'edit_virtual_hosts'):
+                'edit_virtual_hosts', 'export_sql'):
             view = resource.get_view(name)
             items.append({
                 'icon': resource.get_method_icon(view, size='48x48'),
@@ -301,139 +295,108 @@ class Scrib_Edit(DBResource_Edit):
 
 
 
-class Scrib_ExportForm(STLForm):
+class Scrib_ExportSql(STLForm):
     access = 'is_admin'
-    title = MSG(u"Export")
-    #icon = File.download_form__icon__
-    template = '/ui/scrib2009/Scrib_export.xml'
+    template = '/ui/scrib2009/Scrib_export_sql.xml'
+    title = MSG(u"Export SQL")
+    description = MSG(u"Export global et création des tables.")
+    icon = 'excel.png'
+    schema = {'confirm': Boolean}
 
 
-    def action(self, resource, context, form):
-
-        __cache__ = {}
-
-        def get_form_and_namespace(container, name):
-            if name not in __cache__:
-                form = container.get_resource(name)
-                schema = form.get_scrib_schema()
-                namespace = form.get_namespace(context)
-                quote_namespace(namespace, schema)
-                __cache__[name] = (form, namespace)
-
-            return __cache__[name]
+    def get_namespace(self, resource, context):
+        return {'year': context.site_root.get_year_suffix()}
 
 
-        def export_adr(container, output, context):
-            """Ajout ALP - 27 nov 2007
-            """
-            folder = container.handler
-            names = [o.name for o in container.search_resources(state='public')]
+    def action_bm(self, resource, context, form):
+        year = context.site_root.get_year_suffix()
+        schema = resource.bm_class.class_handler.schema
+        # Ensure field order consistency
+        keys = sorted([key for key in schema.keys() if key[0] != 'B'])
+        values = ["  `%s` %s," % (key, schema[key].get_sql_schema())
+                for key in keys]
+        values = "\n".join(values)
+        query = []
+        if form['confirm']:
+            query.append("drop table if exists `bm%s`;" % year)
+        query.extend(["create table `bm%s` (" % year,
+            "  `code_ua` int(10) unsigned not null,",
+            values,
+            "  primary key (`code_ua`)",
+            ") default charset=utf8 collate=utf8_swedish_ci;"])
+        query = "\n".join(query)
+        try:
+            execute(query, context)
+        except Exception:
+            return
 
-            # Adresses déjà exportées
-            if container.is_bm():
-                query = ("SELECT code_bib FROM adresse08 "
-                         "WHERE insee is not null")
-            else:
-                query = ("SELECT dept FROM adresse08 "
-                         "WHERE type_adr='3' and code_ua is not null")
-            connexion = get_connection()
-            cursor = connexion.cursor()
-            cursor.execute(query)
-            results = cursor.fetchall()
-            adresses_connues = []
-            for result in results:
+        context.message = INFO(u"Table bm{year} créée.", year=year)
+
+
+
+    def action_annexes(self, resource, context, form):
+        year = context.site_root.get_year_suffix()
+        schema = resource.bm_class.class_handler.schema
+        # Ensure field order consistency
+        keys = sorted([key for key in schema.keys() if key[0] == 'B'])
+        values = ["  `%s` %s," % (key, schema[key].get_sql_schema())
+                for key in keys]
+        values = "\n".join(values)
+        query = []
+        if form['confirm']:
+            query.append("drop table if exists `annexes%s`;" % year)
+        query.extend(["create table `annexes%s` (" % year,
+            "  `code_ua` int(10) unsigned not null,",
+            values[:-1], # remove trailing ","
+            ") default charset=utf8 collate=utf8_swedish_ci;"])
+        query = "\n".join(query)
+        try:
+            execute(query, context)
+        except Exception:
+            return
+
+        context.message = INFO(u"Table annexes{year} créée.", year=year)
+
+
+    def action_export(self, resource, context, form):
+        root = context.root
+        query = AndQuery(PhraseQuery('format', resource.bm_class.class_id),
+                OrQuery(
+                    # Formulaires envoyés mais pas encore exportés
+                    PhraseQuery('workflow_state', 'pending'),
+                    # Formulaires déjà exportés mais écrase
+                    PhraseQuery('workflow_state', 'public')))
+        results = root.search(query)
+        year = resource.get_year_suffix()
+        table_bm = "bm%s" % year
+        table_annexes = "annexes%s" % year
+        query = []
+        done = []
+        for brain in results.get_documents(sort_by='name'):
+            query.append("delete from `%s` where `code_ua`=%s;" % (table_bm,
+                brain.code_ua))
+            bm = root.get_resource(brain.abspath)
+            query.append(bm.get_export_query(table_bm))
+            query.append("delete from `%s` where `code_ua`=%s;" % (
+                table_annexes, brain.code_ua))
+            pageb = bm.get_pageb()
+            for form in pageb.get_resources():
+                query.append(form.get_export_query(table_annexes,
+                    pages=['B'], exclude=[]))
+            done.append(int(bm.name))
+            print bm.name
+            #1153 "Got a packet bigger than 'max_allowed_packet' bytes"
+            if len(done) % 250 == 0:
                 try:
-                    value = str(int(result[0]))
-                except ValueError:
-                    # Corse
-                    value = str(result[0])
-                adresses_connues.append(value)
-            cursor.close()
-            connexion.close()
-
-            for name in names:
-                form, namespace = get_form_and_namespace(container, name)
-                namespace['myname'] = name
-                if name in adresses_connues:
-                    query = (u'UPDATE adresse08 SET libelle1="%(field1)s",'
-                             u'libelle2="%(field2)s",local="%(field30)s",'
-                             u'voie_num="%(field31)s",voie_type="%(field32)s",'
-                             u'voie_nom="%(field33)s",cpbiblio="%(field4)s",'
-                             u'ville="%(field5)s",cedexb="%(field6)s",'
-                             u'directeu="%(field7)s",st_dir="%(field8)s",'
-                             u'tele="%(field9)s",fax="%(field10)s",'
-                             u'mel="%(field11)s",www="%(field12)s",'
-                             u'intercom="%(field13)s",gestion="%(field14)s",'
-                             u'gestion_autre="%(field15)s" '
-                             u'where code_bib=%(myname)s;\n')
-                else:
-                    # N'est pas censé être utilisé dans 99 % des cas
-                    query = (u'INSERT INTO adresse08 (insee,type_adr,mel,'
-                             u'directeu,region,dept,libelle1,libelle2,local,'
-                             u'cpbiblio,cedexb,fax,tele,www,code_bib,'
-                             u'code_ua,ville,st_dir,type,intercom,gestion,'
-                             u'gestion_autre,voie_num,voie_type,voie_nom,'
-                             u'commune,minitel) VALUES ("%(insee)s",'
-                             u'"%(type_adr)s","%(field11)s","%(field7)s",'
-                             u'"%(region)s","%(dept)s","%(field1)s",'
-                             u'"%(field2)s","%(field30)s","%(field4)s",'
-                             u'"%(field6)s","%(field10)s","%(field9)s",'
-                             u'"%(field12)s","%(myname)s","%(code_ua)s",'
-                             u'"%(field5)s","%(field8)s","%(type)s",'
-                             u'"%(field13)s","%(field14)s","%(field15)s",'
-                             u'"%(field31)s","%(field32)s","%(field33)s",'
-                             u'"%(commune)s","%(minitel)s");\n')
-                query = query % namespace
-                output.write(query.encode('latin1') + '\n')
+                    execute("\n".join(query), context)
+                except Exception:
+                    return
+                query = []
 
 
-        def export_bib(container, ouput, context):
-            """ (bm|bdp)08
-            """
-            folder = container.handler
-            names = [o.name for o in container.search_resources(state='public')]
-            if len(names) == 0:
-                output.write(u'-- aucune bibliothèque exportée'.encode('latin1'))
-                return
-
-            for name in names:
-                form, namespace = get_form_and_namespace(container, name)
-                query = form.get_export_query(namespace)
-                output.write(query.encode('latin1') + '\n')
-
-        output_path = join(getcwd(), 'exportscrib.sql')
-        output = open(output_path, 'w')
-        output.write(u'-- Généré le %s\n'.encode('latin1') % datetime.now())
-        output.write('\n')
-
-        output.write(u'-- Réinitialisation'.encode('latin1'))
-        output.write('\n')
-        # 0006036 ne pas effacer cette table, on ne la gère pas
-        #output.write('DELETE FROM adresse08;\n')
-        output.write('DELETE FROM bm08;\n')
-        output.write('DELETE FROM bdp08;\n')
-        output.write('\n')
-
-        BM2008 = resource.get_resource('BM2008')
-        BDP2008 = resource.get_resource('BDP2008')
-        output.write('-- ADRESSE\n')
-        output.write('\n')
-        export_adr(BM2008, output, context)
-        export_adr(BDP2008, output, context)
-
-        output.write('-- BM2008\n')
-        output.write('\n')
-        export_bib(BM2008, output, context)
-
-        output.write('\n')
-        output.write('-- BDP2008\n')
-        output.write('\n')
-        export_bib(BDP2008, output, context)
-
-        output.close()
-
-        msg = MSG(u"Fichier exporté dans '%s'" % output_path)
-        return context.come_back(msg)
+        context.message = INFO(u"Les formulaires terminés ont été exportés : "
+                u"codes UA {done}.",
+                done=u", ".join([unicode(x) for x in sorted(done)]))
 
 
 

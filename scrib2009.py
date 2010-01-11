@@ -44,7 +44,7 @@ from form import Form, MultipleForm
 from forms import Forms
 from scrib_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib_views import Scrib_Register, Scrib_Confirm
-from scrib_views import Scrib_ExportForm, Scrib_ChangePassword
+from scrib_views import Scrib_ExportSql, Scrib_ChangePassword
 from scrib_views import Scrib_ForgottenPassword, GoToHome
 from user import ScribUser
 from utils import get_config, get_adresse
@@ -81,7 +81,7 @@ class Scrib2009(WebSite):
     forgotten_password = Scrib_ForgottenPassword()
     confirm = Scrib_Confirm()
     edit = Scrib_Edit()
-    export_form = Scrib_ExportForm()
+    export_sql = Scrib_ExportSql()
     browse_content = Folder_BrowseContent(access='is_admin_or_voir_scrib')
     preview_content = Folder_PreviewContent(access='is_admin_or_voir_scrib')
     backlinks = DBResource_Backlinks(access='is_admin_or_voir_scrib')
@@ -311,6 +311,13 @@ class Scrib2009(WebSite):
                 else:
                     return False
         return WebSite.is_allowed_to_trans(self, user, resource, name)
+
+
+    ########################################################################
+    # API
+    def get_year_suffix(self):
+        # int(2009) -> '09'
+        return str(self.get_property('annee'))[-2:]
 
 
 ###########################################################################

@@ -58,6 +58,15 @@ class Numeric(object):
 
 
     @classmethod
+    def is_valid(cls, data):
+        try:
+            cls(data)
+        except Exception:
+            return False
+        return True
+
+
+    @classmethod
     def decode(cls, data):
         if isinstance(data, Numeric):
             return data
@@ -76,12 +85,11 @@ class Numeric(object):
 
 
     @classmethod
-    def is_valid(cls, data):
-        try:
-            cls(data)
-        except Exception:
-            return False
-        return True
+    def encode_sql(cls, value):
+        if isinstance(value, cls):
+            if value.value is None or value.value == '':
+                return 'null'
+        return cls.encode(value)
 
 
     ########################################################################
@@ -343,15 +351,7 @@ class NumDecimal(Numeric):
 
 
     def get_sql_schema(self):
-        return "DECIMAL(%s) default 0.0" % self.representation
-
-
-    @classmethod
-    def encode_sql(cls, value):
-        if isinstance(value, NumDecimal):
-            if value.value is None:
-                return 'NULL'
-        return cls.encode(value)
+        return "decimal(%s) default 0.0" % self.representation
 
 
 
@@ -384,15 +384,7 @@ class NumInteger(Numeric):
 
 
     def get_sql_schema(self):
-        return "INT(%s) default 0" % self.representation
-
-
-    @classmethod
-    def encode_sql(cls, value):
-        if isinstance(value, NumInteger):
-            if value.value is None:
-                return 'NULL'
-        return cls.encode(value)
+        return "int(%s) default 0" % self.representation
 
 
 
@@ -439,15 +431,7 @@ class NumTime(Numeric):
 
 
     def get_sql_schema(self):
-        return "CHAR(6) default '000:00'"
-
-
-    @classmethod
-    def encode_sql(cls, value):
-        if isinstance(value, NumTime):
-            if value.value is None:
-                return 'NULL'
-        return "'%s'" % cls.encode(value)
+        return "char(6) default '000:00'"
 
 
 
@@ -463,7 +447,7 @@ class NumShortTime(NumTime):
 
 
     def get_sql_schema(self):
-        return "CHAR(5) default '00:00'"
+        return "char(5) default '00:00'"
 
 
 
@@ -545,12 +529,7 @@ class NumDate(DataType):
 
 
     def get_sql_schema(self):
-        return "CHAR(10) NOT NULL default ''"
-
-
-    @classmethod
-    def encode_sql(cls, value):
-        return "'%s'" % cls.encode(value)
+        return "char(10) default null"
 
 
 
@@ -566,7 +545,7 @@ class NumShortDate(NumDate):
 
 
     def get_sql_schema(self):
-        return "CHAR(7) NOT NULL default ''"
+        return "char(7) default null"
 
 
 
@@ -589,12 +568,7 @@ class NumDigit(Numeric):
 
 
     def get_sql_schema(self):
-        return "CHAR(%s) NOT NULL default ''" % self.representation
-
-
-    @classmethod
-    def encode_sql(cls, value):
-        return "'%s'" % cls.encode(value)
+        return "char(%s) default null" % self.representation
 
 
 
@@ -611,12 +585,15 @@ class Unicode(BaseUnicode):
         return True
 
 
-    def get_sql_schema(self):
-        return "VARCHAR(%s) NOT NULL default ''" % self.representation
+    @classmethod
+    def get_sql_schema(cls):
+        return "varchar(%s) default null" % cls.representation
 
 
     @classmethod
     def encode_sql(cls, value):
+        if value is None:
+            return 'null'
         return '"%s"' % cls.encode(value).replace('"', r'\"')
 
 
@@ -664,14 +641,15 @@ class EnumBoolean(Enumerate):
         return value
 
 
-    def get_sql_schema(self):
-        return "TINYINT NOT NULL default 0"
+    @classmethod
+    def get_sql_schema(cls):
+        return "tinyint default null"
 
 
     @classmethod
     def encode_sql(cls, value):
-        if value is None:
-            value = False
+        if value is None or value == '':
+            return 'null'
         return cls.encode(value)
 
 
@@ -680,15 +658,16 @@ class SqlEnumerate(Enumerate):
     default = ''
 
 
-    def get_sql_schema(self):
-        return "INT(3) default NULL"
+    @classmethod
+    def get_sql_schema(cls):
+        return "varchar(20) default null"
 
 
     @classmethod
     def encode_sql(cls, value):
         if value is None or value == '':
-            return 'NULL'
-        return cls.encode(value)
+            return 'null'
+        return "'%s'" % cls.encode(value)
 
 
 
@@ -798,7 +777,6 @@ class Departements(Enumerate):
         {'name': '973', 'value': "Guyane"},
         {'name': '974', 'value': "La Réunion"},
         {'name': '975', 'value': "Saint-Pierre-et-Miquelon"},
-        # FIXME 976
         {'name': '985', 'value': "Mayotte"},
         {'name': '988', 'value': "Nouvelle-Calédonie"}]
 
@@ -829,6 +807,7 @@ class Identifiant(String):
     @staticmethod
     def is_valid(value):
         try:
+            # 'BM123' -> 123
             int(value[2:])
         except ValueError:
             return False

@@ -27,6 +27,7 @@ from ikaaro.resource_views import DBResource_Edit
 
 # Import from scrib
 from form_views import Form_View
+from utils import execute
 
 
 class BM2009Form_View(Form_View):
@@ -160,8 +161,7 @@ class BM2009Form_Send(STLForm):
             return
 
         # Envoi mail responsable
-        app = context.site_root
-        responsable_bm = app.get_property('responsable_bm')
+        responsable_bm = context.site_root.get_property('responsable_bm')
         to_addr = responsable_bm
         code_ua = resource.get_property('code_ua')
         departement = resource.get_property('departement')
@@ -189,7 +189,44 @@ class BM2009Form_Send(STLForm):
     def action_export(self, resource, context, form):
         """Ce qu'il faut faire quand le formulaire BM est exporté.
         """
-        raise NotImplementedError
+        # D'abord les actions annulables (TODO factoriser avec action_send)
+        if resource.get_workflow_state() == 'pending':
+            wf_form = {'transition': 'accept', 'comments': u""}
+            resource.edit_state.action(resource, context, wf_form)
+            if isinstance(context.message, ERROR):
+                context.commit = False
+                return
+            pageb = resource.get_pageb(make=True)
+            pageb.edit_state.action(pageb, context, wf_form)
+            if isinstance(context.message, ERROR):
+                context.commit = False
+                return
+
+        # Export dans bm09
+        year = context.site_root.get_year_suffix()
+        table = "bm%s" % year
+        query = ["delete from `%s` where `code_ua`=%s;" % (table,
+                resource.get_code_ua()),
+            resource.get_export_query(table)]
+        try:
+            execute("\n".join(query), context)
+        except Exception:
+            return
+
+        # Export dans annexes09
+        table = "annexes%s" % year
+        query = ["delete from `%s` where `code_ua`=%s;" % (table,
+                resource.get_code_ua())]
+        pageb = resource.get_pageb()
+        for form in pageb.get_resources():
+            query.append(form.get_export_query(table, pages=['B'],
+                exclude=[]))
+        try:
+            execute("\n".join(query), context)
+        except Exception:
+            return
+
+        context.message = INFO(u"Le formulaire a été exporté.")
 
 
 

@@ -23,6 +23,7 @@ from MySQLdb.cursors import DictCursor
 # Import from itools
 from itools.core import merge_dicts
 from itools.datatypes import Integer, String
+from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.config import ServerConfig
@@ -39,6 +40,7 @@ class ScribServerConfig(ServerConfig):
 
 
 def get_config(context=None, target=None):
+    assert context or target
     if target is None:
         target = context.server.target
     return ScribServerConfig('%s/config.conf' % target)
@@ -46,6 +48,7 @@ def get_config(context=None, target=None):
 
 
 def get_connection(context=None, target=None):
+    assert context or target
     config = get_config(context=context, target=target)
     kw = {}
     for arg in ('host', 'port', 'db', 'user', 'passwd'):
@@ -54,6 +57,27 @@ def get_connection(context=None, target=None):
             raise ValueError, "%s: sql-%s undefined" % (config.uri, arg)
         kw[arg] = value
     return connect(**kw)
+
+
+
+def execute(query, context):
+    try:
+        connection = get_connection(context)
+        cursor = connection.cursor()
+        cursor.execute(query)
+        # 2014 "Commands out of sync; you can't run this command now"
+        cursor.close()
+        cursor = connection.cursor()
+        cursor.execute('commit')
+    except Exception, e:
+        context.commit = False
+        context.message = ERROR(unicode(str(e), 'utf8'))
+        print "query", query
+        print "*" * 78
+        raise
+    finally:
+        cursor.close()
+        connection.close()
 
 
 

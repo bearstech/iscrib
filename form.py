@@ -36,18 +36,10 @@ from utils import SI
 from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
 
 
-def quote_namespace(namespace, schema):
-    for key, value in namespace.items():
-        field_def = schema.get(key)
-        if field_def is not None:
-            ftype = field_def[0]
-            if ftype is Unicode:
-                   if value is not None:
-                       value = value.replace(u"€", u"eur")
-                       value = value.replace(u'"', u'\\"')
-                       value = value.replace(u"&quot;", u'\\"')
-                       value = value.replace(u"'", u"\\'")
-                   namespace[key] = value
+
+def quote_sql(value):
+    return (value.replace(u"€", u"eur").replace(u'"', u'\\"')
+            .replace(u"&quot;", u'\\"').replace(u"'", u"\\'"))
 
 
 
