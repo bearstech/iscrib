@@ -20,20 +20,22 @@ from itools.datatypes import Date, Integer, Email, Unicode, Boolean
 from itools.gettext import MSG
 from itools.uri import get_reference, get_uri_path
 from itools.stl import stl
+from itools.vfs import FileName
 from itools.web import BaseView, STLForm, INFO, ERROR
 from itools.xapian import AndQuery, OrQuery, PhraseQuery
 from itools.xml import XMLParser
 
 # Import from ikaaro
+from ikaaro.datatypes import FileDataType
 from ikaaro.forms import XHTMLBody, ReadOnlyWidget, DateWidget, RTEWidget
-from ikaaro.forms import TextWidget, AutoForm
+from ikaaro.forms import TextWidget, AutoForm, FileWidget
 from ikaaro.resource_views import LoginView, DBResource_Edit
 from ikaaro.views import IconsView
 from ikaaro.website_views import ForgottenPasswordForm
 
 # Import from scrib
 from datatypes import DateLitterale, Identifiant
-from utils import execute
+from utils import UsersCSV, execute
 
 
 def find_user(username, context):
@@ -56,11 +58,11 @@ class Scrib_Admin(IconsView):
 
 
     def get_namespace(self, resource, context):
-        items = [{'icon': '/ui/icons/48x48/folder.png',
+        items = [{'icon': '/ui/scrib2009/images/form48.png',
                   'title': u"BM",
                   'description': u"Rechercher une BM / Ajouter une BM",
                   'url': 'bm'}]
-        items.append({'icon': '/ui/icons/48x48/folder.png',
+        items.append({'icon': '/ui/scrib2009/images/form48.png',
                       'title': u"BDP",
                       'description': u"Rechercher une BDP",
                       'url': 'bdp'})
@@ -75,7 +77,7 @@ class Scrib_Admin(IconsView):
                               page),
                           'url': 'Page%s/;edit' % page})
         for name in ('edit', 'browse_users', 'add_user',
-                'edit_virtual_hosts', 'export_sql'):
+                'edit_virtual_hosts', 'export_sql', 'importer'):
             view = resource.get_view(name)
             items.append({
                 'icon': resource.get_method_icon(view, size='48x48'),
@@ -401,9 +403,48 @@ class Scrib_ExportSql(STLForm):
                 query = []
 
 
-        context.message = INFO(u"Les formulaires terminés ont été exportés : "
-                u"codes UA {done}.",
+        context.message = INFO(u"Les formulaires terminés ont été exportés "
+                u": codes UA {done}.",
                 done=u", ".join([unicode(x) for x in sorted(done)]))
+
+
+
+class Scrib_Importer(AutoForm):
+    access = 'is_admin'
+    title = MSG(u"Importer")
+    description = MSG(u"Importer des BM ou BDP")
+    icon = 'excel.png'
+    schema = {'file': FileDataType(mandatory=True)}
+    widgets = [FileWidget('file', title=MSG(u"Format "
+        u"« ANNEE,CODE,CATEGORIE,NOM,DEPARTEMENT,ID »"), size=35)]
+    submit_value = MSG(u"Importer")
+
+
+    def action(self, resource, context, form):
+        filename, mimetype, body = form['file']
+        name, type, language = FileName.decode(filename)
+        if mimetype not in ('text/csv', 'text/comma-separated-values'):
+            context.message = ERROR(u"Fichier CSV attendu.")
+            context.commit = False
+            return
+        users_csv = UsersCSV(string=body)
+        # TODO Import des BDP
+        # Import des BDP
+        forms = resource.get_resource('bdp')
+        done_bdp = []
+        for row in users_csv.get_rows(users_csv.search(categorie='BDP')):
+            code_ua = row.get_value('code_ua')
+            name = str(code_ua)
+            if resource.get_resource(name, soft=True) is not None:
+                continue
+            resource.bdp_class.make_resource(resource.bdp_class, forms,
+                    name, title={'fr': row.get_value('nom')},
+                    code_ua=code_ua,
+                    departement=row.get_value('departement'))
+            done_bdp.append(name)
+
+        context.message = INFO(u"BDP importées : {done_bdp}.",
+                done_bdp=u", ".join(done_bdp))
 
 
 

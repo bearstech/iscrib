@@ -22,11 +22,24 @@ from MySQLdb.cursors import DictCursor
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import Integer, String
+from itools.csv import CSVFile
+from itools.datatypes import Integer, String, Unicode
 from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.config import ServerConfig
+
+
+class UsersCSV(CSVFile):
+    skip_header = True
+    schema = {'annee': Unicode,
+              'code_ua': Integer,
+              'categorie': String(is_indexed=True),
+              'nom': Unicode,
+              'departement': String, # Corse « 2A » et « 2B »
+              'id': String} # Corse « 2A004 »
+    columns = ['annee', 'code_ua', 'categorie', 'nom', 'departement', 'id']
+
 
 
 class ScribServerConfig(ServerConfig):

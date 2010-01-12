@@ -18,7 +18,7 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String, Boolean
+from itools.datatypes import String, Boolean, Integer
 from itools.gettext import MSG
 
 # Import from ikaaro
@@ -46,19 +46,29 @@ class BDP2009Form(Form):
     @classmethod
     def get_metadata_schema(cls):
         return merge_dicts(Form.get_metadata_schema(),
-                departement=String)
+                departement=String,
+                # Utilisé pour la recherche, pas la sécurité
+                code_ua=Integer,
+                is_first_time=Boolean(default=True))
 
 
     def _get_catalog_values(self):
         return merge_dicts(Form._get_catalog_values(self),
                 is_bdp=True,
-                departement=self.get_property('departement'))
+                departement=self.get_property('departement'),
+                # Utilisé pour la recherche, pas la sécurité
+                code_ua=self.get_property('code_ua'))
 
 
     ######################################################################
     # Security
     def is_bdp(self):
         return self.parent.is_bdp()
+
+
+    def is_ready(self):
+        # TODO
+        return False
 
 
     def get_departement(self):
@@ -68,6 +78,4 @@ class BDP2009Form(Form):
 ###########################################################################
 # Register
 register_resource_class(BDP2009Form)
-# TODO remove after production
-register_resource_class(BDP2009Form, format='BDP2009')
 register_field('is_bdp', Boolean(is_indexed=True, is_stored=True))

@@ -20,8 +20,7 @@ from sys import stdout, stdin
 
 # Import from itools
 from itools.core import get_abspath, merge_dicts
-from itools.csv import CSVFile
-from itools.datatypes import String, Unicode, Integer, Date, Boolean, Tokens
+from itools.datatypes import Unicode, Integer, Date, Boolean, Tokens
 from itools.gettext import MSG
 from itools.uri import resolve_uri2
 from itools.web import get_context
@@ -44,21 +43,9 @@ from forms import Forms
 from scrib2009_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib2009_views import Scrib_Register, Scrib_Confirm
 from scrib2009_views import Scrib_ExportSql, Scrib_ChangePassword
-from scrib2009_views import Scrib_ForgottenPassword
+from scrib2009_views import Scrib_ForgottenPassword, Scrib_Importer
 from user import ScribUser
-from utils import get_config, get_adresse
-
-
-class UsersCSV(CSVFile):
-    skip_header = True
-    schema = {'annee': Unicode,
-              'code_ua': Integer,
-              'categorie': String(is_indexed=True),
-              'nom': Unicode,
-              'departement': String, # Corse « 2A » et « 2B »
-              'id': String} # Corse « 2A004 »
-    columns = ['annee', 'code_ua', 'categorie', 'nom', 'departement', 'id']
-
+from utils import UsersCSV, get_config, get_adresse
 
 
 class Scrib2009(WebSite):
@@ -81,6 +68,7 @@ class Scrib2009(WebSite):
     confirm = Scrib_Confirm()
     edit = Scrib_Edit()
     export_sql = Scrib_ExportSql()
+    importer = Scrib_Importer()
     browse_content = Folder_BrowseContent(access='is_admin_or_voir_scrib')
     preview_content = Folder_PreviewContent(access='is_admin_or_voir_scrib')
     backlinks = DBResource_Backlinks(access='is_admin_or_voir_scrib')
@@ -172,11 +160,12 @@ class Scrib2009(WebSite):
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})
         for row in users_csv.get_rows(users_csv.search(categorie='BDP')):
-            code_ua =  row.get_value('code_ua')
+            code_ua = row.get_value('code_ua')
             title = row.get_value('nom')
             departement = row.get_value('departement')
             cls.bdp_class._make_resource(cls.bdp_class, folder,
                     '%s/bdp/%s' % (name, code_ua), title={'fr': title},
+                    code_ua=code_ua,
                     departement=departement)
         # Compte spécial VoirSCRIB
         print "Création du compte VoirSCRIB..."
