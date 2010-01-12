@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from itools
+from itools.csv import CSVFile
 from itools.datatypes import Boolean, String
 from itools.gettext import MSG
 from itools.stl import set_prefix
@@ -117,6 +118,41 @@ class Form_View(STLForm):
 
 
 
+class Form_Export(BaseView):
+    access = 'is_allowed_to_view'
+    title = MSG(u"Exportez votre rapport")
+
+
+    def GET(self, resource, context):
+        if not resource.is_ready():
+            return u"Votre rapport n'est pas encore terminé.".encode('utf8')
+
+        # construct the csv
+        csv = CSVFile()
+        csv.add_row(["Chapitre du formulaire", "rubrique", "valeur"])
+        handler = resource.handler
+        schema = handler.schema
+        for name, datatype in sorted(schema.iteritems()):
+            value = handler.get_value(name)
+            try:
+                value = datatype.encode(value, 'cp1252')
+            except TypeError:
+                value = datatype.encode(value)
+            if not isinstance(value, str):
+                raise "pas encode", str(type(datatype))
+            csv.add_row([datatype.pages[0], name, value])
+
+        response = context.response
+        response.set_header('Content-Type', 'text/comma-separated-values')
+        response.set_header('Content-Disposition',
+                'attachment; filename="scrib%s_BM_%s.csv"' % (
+                    context.site_root.get_property('year'),
+                    resource.get_code_ua()))
+
+        return csv.to_str(separator=';')
+
+
+
 class Form_Help(BaseView):
     access = 'is_allowed_to_view'
     title = MSG(u"Aide à la saisie")
@@ -135,12 +171,3 @@ class Form_Help(BaseView):
         resource = app.get_resource('aide')
         prefix = resource.get_pathto(resource)
         return set_prefix(resource.get_html_data(), prefix)
-
-
-
-class Todo_View(BaseView):
-    access = 'is_allowed_to_view'
-
-
-    def GET(self, resource, context):
-        return 'TODO'

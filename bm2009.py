@@ -207,7 +207,7 @@ class BM2009Form(Form):
             failed_controls = [control
                     for control in form.get_failed_controls()
                     if control['level'] == '2']
-        return not invalid_fields and not control
+        return not invalid_fields and not failed_controls
 
 
     ######################################################################
