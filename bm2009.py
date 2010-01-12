@@ -35,7 +35,7 @@ from bm2009_views import BM2009Form_View, BM2009Form_Send, BM2009Form_Print
 from bm2009_views import BM2009Form_Edit
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
-from datatypes import make_enumerate, Numeric
+from datatypes import make_enumerate
 from form import quote_sql, FormHandler, Form
 from utils import parse_control
 
@@ -323,7 +323,8 @@ class BM2009Form(Form):
                 continue
             names.append(key)
             datatype = schema[key]
-            values.append(datatype.encode_sql(handler.get_value(key)))
+            value = quote_sql(datatype.encode_sql(handler.get_value(key)))
+            values.append(value)
 
         return "INSERT INTO `%s` (%s) VALUES (%s);" % (table,
                 ','.join(names), ','.join(values))
