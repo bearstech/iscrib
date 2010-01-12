@@ -410,12 +410,3 @@ class Scrib_ChangePassword(BaseView):
         # XXX écrit sur une méthode GET
         context.commit = True
         return context.come_back(MSG(u"Done"), goto='/;browse_content')
-
-
-
-class GoToHome(GoToSpecificDocument):
-    access = 'is_authenticated'
-
-
-    def get_specific_document(self, resource, context):
-        return '/users/%s' % context.user.name

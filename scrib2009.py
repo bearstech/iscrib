@@ -28,7 +28,6 @@ from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
-from ikaaro.folder_views import GoToSpecificDocument
 from ikaaro.forms import XHTMLBody
 from ikaaro.registry import register_resource_class
 from ikaaro.resource_views import DBResource_Backlinks
@@ -45,7 +44,7 @@ from forms import Forms
 from scrib_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib_views import Scrib_Register, Scrib_Confirm
 from scrib_views import Scrib_ExportSql, Scrib_ChangePassword
-from scrib_views import Scrib_ForgottenPassword, GoToHome
+from scrib_views import Scrib_ForgottenPassword
 from user import ScribUser
 from utils import get_config, get_adresse
 
@@ -66,7 +65,7 @@ class Scrib2009(WebSite):
     class_id = 'Scrib2009'
     class_title = MSG(u"Scrib 2009")
     class_skin = 'ui/scrib2009'
-    class_views = ['admin'] + WebSite.class_views + ['aide', 'home']
+    class_views = ['admin'] + WebSite.class_views
 
     __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide']
 
@@ -86,8 +85,6 @@ class Scrib2009(WebSite):
     preview_content = Folder_PreviewContent(access='is_admin_or_voir_scrib')
     backlinks = DBResource_Backlinks(access='is_admin_or_voir_scrib')
     last_changes = DBResource_LastChanges(access='is_admin_or_voir_scrib')
-    aide = GoToSpecificDocument(specific_document='aide', title=MSG(u"Aide"))
-    home = GoToHome()
     xchangepassword = Scrib_ChangePassword()
 
 
