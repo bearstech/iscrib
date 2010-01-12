@@ -186,7 +186,7 @@ class Scrib2009(WebSite):
             title = row.get_value('nom')
             departement = row.get_value('departement')
             cls.bdp_class._make_resource(cls.bdp_class, folder,
-                    '%s/bdp/%s' % (name, departement), title={'fr': title},
+                    '%s/bdp/%s' % (name, code_ua), title={'fr': title},
                     departement=departement)
         # Compte spécial VoirSCRIB
         print "Création du compte VoirSCRIB..."
