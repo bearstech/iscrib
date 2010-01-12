@@ -34,7 +34,7 @@ from ikaaro.website_views import ForgottenPasswordForm
 
 # Import from scrib
 from datatypes import DateLitterale, Identifiant
-from utils import get_connection, execute
+from utils import execute
 
 
 def find_user(username, context):
