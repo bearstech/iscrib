@@ -145,8 +145,8 @@ class Form_Export(BaseView):
         response = context.response
         response.set_header('Content-Type', 'text/comma-separated-values')
         response.set_header('Content-Disposition',
-                'attachment; filename="scrib%s_BM_%s.csv"' % (
-                    context.site_root.get_property('year'),
+                'attachment; filename="scrib%s_BM%s.csv"' % (
+                    context.site_root.get_property('annee'),
                     resource.get_code_ua()))
 
         return csv.to_str(separator=';')
