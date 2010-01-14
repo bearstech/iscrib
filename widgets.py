@@ -196,7 +196,7 @@ def text_widget(context, form, datatype, name, value, readonly,
         value = unicode(value, 'utf8')
     if readonly:
         tagname = u"div"
-        attributes = {u"class": u"readonly"}
+        attributes = {u"class": [u"readonly"]}
         content = XMLContent.encode(value)
     else:
         tagname = u"input"
