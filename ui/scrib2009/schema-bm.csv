@@ -219,7 +219,6 @@
 "E144","Usagers – Collectivités – dont emprunteurs actifs",,"E","Int",10,,,,,,,"AC",,
 "E145","Usagers – Fréquentation : entrées dans l'établissement – Centrale",,"E","Int",10,,,,,,,"C",,
 "E146","Usagers – Fréquentation : entrées dans l'établissement – Réseau",,"E","Int",10,,,,,,,"C",,
-"E147","Usagers – Fréquentation : entrées dans l'établissement – Total",,"E","Int",10,,,,,,,"AC",,
 "E201",,,"E","Int",10,,,,,,,"AC",,
 "E202",,,"E","Int",10,,,,,,,"AC",,
 "E203",,,"E","Int",10,,,,,,,"AC",,
