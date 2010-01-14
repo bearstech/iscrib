@@ -120,7 +120,7 @@ class Form_View(STLForm):
 
 class Form_Export(BaseView):
     access = 'is_allowed_to_view'
-    title = MSG(u"Exportez votre rapport")
+    title = MSG(u"Téléchargement du rapport")
 
 
     def GET(self, resource, context):
