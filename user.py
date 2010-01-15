@@ -22,6 +22,7 @@ from itools.datatypes import Integer, Unicode, String
 
 # Import from ikaaro
 from ikaaro.user import User
+from ikaaro.user_views import User_EditAccount
 from ikaaro.registry import register_resource_class
 
 # Import from scrib
@@ -32,10 +33,11 @@ class ScribUser(User):
     """Les méthodes sont communes à tous les utilisateurs, quelque soit leur
     application, pour simplifier la gestion des droits.
     """
-    class_views = ['home', 'edit_password']
+    class_views = ['home', 'edit_password', 'edit_account']
 
     # Views
     home = User_Home() # Si besoin déplacer dans la BM/BDP
+    edit_account = User_EditAccount(access='is_admin')
 
 
     @classmethod
