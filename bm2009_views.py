@@ -61,8 +61,7 @@ class BM2009Form_View(Form_View):
 
     def action(self, resource, context, form):
         Form_View.action(self, resource, context, form)
-        if not is_admin(context.user, resource):
-            resource.set_property('is_first_time', False)
+        resource.set_property('is_first_time', False)
 
 
 
