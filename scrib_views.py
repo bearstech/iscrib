@@ -143,7 +143,8 @@ class Scrib_Register(AutoForm):
     schema = {'email': Email(mandatory=True),
               'identifiant': Identifiant(mandatory=True)}
     widgets = [TextWidget('email', title=MSG(u"Adresse mél")),
-               TextWidget('identifiant', title=MSG(u"Identifiant"))]
+               TextWidget('identifiant',
+                   title=MSG(u"Identifiant (ex. BM4987)"))]
     submit_value = MSG(u"Continuer")
 
 
