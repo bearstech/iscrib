@@ -198,8 +198,7 @@ class BM2009Form(Form):
                 if datatype.is_mandatory]
         for form in self.get_pageb().get_resources():
             invalid_fields += [name
-                    for name, datatype in form.get_invalid_fields(
-                        pages=['B'], exclude=[])
+                    for name, datatype in form.get_invalid_fields()
                     if datatype.is_mandatory]
         failed_controls = [control for control in self.get_failed_controls()
                 if control['level'] == '2']
