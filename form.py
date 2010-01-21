@@ -46,8 +46,8 @@ def quote_sql(value):
 class MultipleForm_StateForm(StateForm):
 
     def action(self, resource, context, form):
-        for form in resource.get_resources():
-            form.edit_state.action(resource, context, form)
+        for resource in resource.get_resources():
+            resource.edit_state.action(resource, context, form)
 
 
 
