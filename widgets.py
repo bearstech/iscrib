@@ -22,10 +22,11 @@
 # Import from itools
 from itools.csv import CSVFile
 from itools.datatypes import XMLContent, XMLAttribute
-from itools.html import HTMLParser
+from itools.xml import XMLParser
 
 # Import from ikaaro
 from ikaaro.access import is_admin
+from ikaaro.forms import xhtml_namespaces
 from ikaaro.skins import UIFile
 
 # Import from scrib
@@ -33,6 +34,7 @@ from datatypes import Numeric, NumTime, Text, EnumBoolean
 from form import SENT, EXPORTED
 
 
+NBSP = u"\u00a0".encode('utf8')
 FIELD_PREFIX = u"#"
 
 
@@ -299,12 +301,12 @@ class UITable(UIFile, CSVFile):
                     except IndexError:
                         css_class = u"field-label"
                     columns.append({'rowspan': None, 'colspan': None,
-                                    'body': HTMLParser("&nbsp;"),
+                                    'body': XMLParser(NBSP),
                                     'class': css_class})
                 elif column == u"%break%":
                     # Saut de page
                     columns.append({'rowspan': None, 'colspan': None,
-                                    'body': HTMLParser("&nbsp;"),
+                                    'body': XMLParser(NBSP),
                                     'class': None})
                     # Commence un nouveau tableau
                     tables.append([])
@@ -347,7 +349,8 @@ class UITable(UIFile, CSVFile):
                             column = u"%.1f" % column
                         else:
                             column = unicode(column)
-                    body = HTMLParser(column.encode('utf8'))
+                    body = XMLParser(column.encode('utf8'),
+                            namespaces=xhtml_namespaces)
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': body, 'class': css_class})
                 elif column:
@@ -374,7 +377,8 @@ class UITable(UIFile, CSVFile):
                     # 0004946: les balises < et > ne sont pas interprétées
                     # -> ne pas utiliser XML.encode
                     column = column.replace('&', '&amp;')
-                    body = HTMLParser(column.encode('utf8'))
+                    body = XMLParser(column.encode('utf8'),
+                            namespaces=xhtml_namespaces)
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': body, 'class': css_class})
                 elif columns:
