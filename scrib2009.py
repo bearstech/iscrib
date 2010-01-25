@@ -41,10 +41,10 @@ from bm2009 import BM2009Handler, BM2009Form
 from bdp2009 import BDP2009Form
 from form import Form, MultipleForm
 from forms import Forms
-from scrib_views import Scrib_Admin, Scrib_Login, Scrib_Edit
-from scrib_views import Scrib_Register, Scrib_Confirm
-from scrib_views import Scrib_ExportSql, Scrib_ChangePassword
-from scrib_views import Scrib_ForgottenPassword
+from scrib2009_views import Scrib_Admin, Scrib_Login, Scrib_Edit
+from scrib2009_views import Scrib_Register, Scrib_Confirm
+from scrib2009_views import Scrib_ExportSql, Scrib_ChangePassword
+from scrib2009_views import Scrib_ForgottenPassword
 from user import ScribUser
 from utils import get_config, get_adresse
 

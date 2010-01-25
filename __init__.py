@@ -22,7 +22,7 @@ from itools.core import get_version
 from ikaaro.resource_ import DBResource
 
 # Import from scrib
-from scrib_views import Scrib_Login
+from scrib2009_views import Scrib_Login
 
 # Give a version
 __version__ = get_version()
