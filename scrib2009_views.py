@@ -144,7 +144,8 @@ class Scrib_Register(AutoForm):
               'identifiant': Identifiant(mandatory=True)}
     widgets = [TextWidget('email', title=MSG(u"Adresse mél")),
                TextWidget('identifiant',
-                   title=MSG(u"Identifiant (ex. BM4987)"))]
+                   title=MSG(u"Identifiant "
+                       u"(tel que porté dans le courrier postal adressé)"))]
     submit_value = MSG(u"Continuer")
 
 
