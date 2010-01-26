@@ -35,7 +35,7 @@ from utils import execute, get_adresse
 
 class BM2009Form_View(Form_View):
     template = '/ui/scrib2009/Table_to_html.xml'
-    page_template = '/ui/scrib2009/Page%s.table.csv'
+    page_template = '/ui/scrib2009/bm/Page%s.table.csv'
 
 
     def get_namespace(self, resource, context):
@@ -234,7 +234,7 @@ class BM2009Form_Print(STLView):
     access = 'is_allowed_to_view'
     title=MSG(u"Impression du rapport")
     template = '/ui/scrib2009/Table_to_print.xml'
-    page_template = '/ui/scrib2009/Page%s.table.csv'
+    page_template = '/ui/scrib2009/bm/Page%s.table.csv'
 
 
     def get_namespace(self, resource, context):

@@ -119,8 +119,8 @@ def get_controls(path):
 
 
 class BM2009Handler(FormHandler):
-    schema, pages = get_schema_pages('ui/scrib2009/schema-bm.csv')
-    controls = get_controls('ui/scrib2009/controls-bm.csv')
+    schema, pages = get_schema_pages('ui/scrib2009/bm/schema.csv')
+    controls = get_controls('ui/scrib2009/bm/controls.csv')
 
 
     def is_disabled_by_dependency(self, name):

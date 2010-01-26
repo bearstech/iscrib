@@ -116,16 +116,16 @@ class Scrib2009(WebSite):
         print "Création des pages d'aide..."
         base_path = 'ui/scrib%s' % annee
         for filename, title in [('aide.xhtml', u"Aide"),
-                                ('PageA.xhtml', u"Page A"),
-                                ('PageB.xhtml', u"Page B"),
-                                ('PageC.xhtml', u"Page C"),
-                                ('PageD.xhtml', u"Page D"),
-                                ('PageE.xhtml', u"Page E"),
-                                ('PageF.xhtml', u"Page F"),
-                                ('PageG.xhtml', u"Page G"),
-                                ('PageH.xhtml', u"Page H")]:
+                                ('bm/PageA.xhtml', u"Page A"),
+                                ('bm/PageB.xhtml', u"Page B"),
+                                ('bm/PageC.xhtml', u"Page C"),
+                                ('bm/PageD.xhtml', u"Page D"),
+                                ('bm/PageE.xhtml', u"Page E"),
+                                ('bm/PageF.xhtml', u"Page F"),
+                                ('bm/PageG.xhtml', u"Page G"),
+                                ('bm/PageH.xhtml', u"Page H")]:
             with open(get_abspath('%s/%s' % (base_path, filename))) as file:
-                id = filename.split('.')[0]
+                id = filename[filename.rfind('/') + 1:filename.rfind('.')]
                 WebPage._make_resource(WebPage, folder, '%s/%s' % (name, id),
                         title={'fr': title}, state='public', language='fr',
                         body=file.read())
