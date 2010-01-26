@@ -15,3 +15,30 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from scrib
+from bm2009_views import BM2009Form_View
+
+
+class BDP2009Form_View(BM2009Form_View):
+    page_template = '/ui/scrib2009/bdp/Page%s.table.csv'
+
+
+    def get_scrib_menu(self, resource, context):
+        menu = []
+        code_ua = resource.get_code_ua()
+        form = context.site_root.get_resource('bdp/%s' % code_ua)
+        for name, title in [('page0', u"Identité"),
+                            ('pageA', u"A-Finances"),
+                            ('pageB', u"B-Locaux"),
+                            ('pageC', u"C-Personnel"),
+                            ('pageD', u"D-Collections"),
+                            ('pageE', u"E-Acquisitions"),
+                            ('pageF', u"F-Réseau tout public"),
+                            ('pageG', u"G-Réseau spécifique"),
+                            ('pageH', u"H-Services"),
+                            ('pageI', u"I-Actions culturelles"),
+                            ('pageL', u"L-Commentaires")]:
+            menu.append({'href': '%s/;%s' % (context.get_link(form), name),
+                         'title': title,
+                         'active': 'nav-active' if context.view_name == name
+                                                else None})
+        return menu

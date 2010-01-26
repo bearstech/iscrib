@@ -87,7 +87,7 @@ def get_schema_pages(path):
         # allow multiple page numbers
         page_numbers = []
         for page in page_number.split(','):
-            if not page.isalpha():
+            if not (page.isalpha() or page == '0'): # FIXME
                 raise ValueError, """page "%s" n'est pas valide""" % page
             page_fields = pages.setdefault(page, set())
             page_fields.add(name)

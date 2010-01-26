@@ -25,11 +25,15 @@ from itools.gettext import MSG
 from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
-from form import FormHandler, Form
+from bdp2009_views import BDP2009Form_View
+from bm2009 import get_schema_pages, get_controls, BM2009Handler
+from bm2009_views import BM2009Form_Print, BM2009Form_Edit
+from form import Form
 
 
-class BDP2009Handler(FormHandler):
-    pass
+class BDP2009Handler(BM2009Handler):
+    schema, pages = get_schema_pages('ui/scrib2009/bdp/schema.csv')
+    controls = get_controls('ui/scrib2009/bdp/controls.csv')
 
 
 
@@ -38,9 +42,22 @@ class BDP2009Form(Form):
     class_handler = BDP2009Handler
     class_title = MSG(u"Formulaire BDP")
     class_icon48 = 'scrib2009/images/form48.png'
-    class_views = [] + Form.class_views
+    class_views = ['page0'] + Form.class_views
 
     # Views
+    Page0 = BDP2009Form_View(title=MSG(u"Saisie du rapport"), n='0')
+    PageA = BDP2009Form_View(n='A')
+    PageB = BDP2009Form_View(n='B')
+    PageC = BDP2009Form_View(n='C')
+    PageD = BDP2009Form_View(n='D')
+    PageE = BDP2009Form_View(n='E')
+    PageF = BDP2009Form_View(n='F')
+    PageG = BDP2009Form_View(n='G')
+    PageH = BDP2009Form_View(n='H')
+    PageI = BDP2009Form_View(n='I')
+    PageL = BDP2009Form_View(n='L')
+    imprimer = BM2009Form_Print()
+    edit = BM2009Form_Edit()
 
 
     @classmethod

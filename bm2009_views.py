@@ -38,10 +38,7 @@ class BM2009Form_View(Form_View):
     page_template = '/ui/scrib2009/bm/Page%s.table.csv'
 
 
-    def get_namespace(self, resource, context):
-        namespace = Form_View.get_namespace(self, resource, context)
-        namespace['code_ua'] = resource.get_code_ua()
-        # TODO hardcoded
+    def get_scrib_menu(self, resource, context):
         menu = []
         code_ua = resource.get_code_ua()
         form = context.site_root.get_resource('bm/%s' % code_ua)
@@ -58,7 +55,13 @@ class BM2009Form_View(Form_View):
                          'title': title,
                          'active': 'nav-active' if context.view_name == name
                                                 else None})
-        namespace['menu'] = menu
+        return menu
+
+
+    def get_namespace(self, resource, context):
+        namespace = Form_View.get_namespace(self, resource, context)
+        namespace['code_ua'] = resource.get_code_ua()
+        namespace['menu'] = self.get_scrib_menu(resource, context)
         return namespace
 
 
