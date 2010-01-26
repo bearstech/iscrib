@@ -1,0 +1,21 @@
+"*A- ÉLÉMENTS FINANCIERS ( en euros, sans décimales) ",,
+,,
+"**A.1 DÉPENSES PROPRES A LA BDP",,
+"Pour le personnel : salaires et charges,","#A11","A11"
+"Pour les acquisitions de tous documents et abonnements","#A12","A12"
+"Pour la reliure et l'équipement des documents","#A13","A13"
+"Pour la maintenance informatique","#A14","A14"
+"Pour l'animation (communication, impression, défraiement, intervenants…) ","#A15","A15"
+"Pour la formation des agents de la BDP","#A16","A16"
+"Pour la formation dispensée au réseau","#A18","A18"
+"TOTAL (A11 à A18)","#A17","A17"
+,,
+"**A.2 DÉPENSES D'INVESTISSEMENT POUR LA BDP (hors documents) : construction, équipement, informatisation",,
+"Pour les bâtiments de la BDP, centrale et annexes (construction, agrandissement, rénovation)","#A21","A21"
+"Pour le mobilier et le matériel (y compris achat de véhicules)","#A22","A22"
+"Pour l'informatique (logiciel et matériel)","#A23","A23"
+"TOTAL (A21à A23)","#A24","A24"
+,,
+"**A.3 RECETTES PROPRES A LA BIBLIOTHÈQUE",,
+"Montant total des droits d'inscription (prêts directs, cotisations des communes) perçus dans l'année sur budget départemental (hors association)","#A31","A31"
+"Montant total des autres recettes (inscription aux formations, droits de location)","#A32","A32"
