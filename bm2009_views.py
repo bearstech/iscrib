@@ -15,26 +15,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from itools
-from itools.core import merge_dicts
-from itools.datatypes import String, Integer, Boolean, Unicode
-from itools.gettext import MSG
-from itools.web import STLView, STLForm, INFO, ERROR
-
-# Import from ikaaro
-from ikaaro.access import is_admin
-from ikaaro.forms import TextWidget, BooleanRadio, MultilineWidget
-from ikaaro.messages import MSG_NEW_RESOURCE
-from ikaaro.registry import get_resource_class
-from ikaaro.resource_views import DBResource_Edit
-from ikaaro.views_new import NewInstance
+from itools.web import INFO, ERROR
 
 # Import from scrib
-from form_views import Form_View
-from utils import execute, get_adresse
+from base2009_views import Base2009Form_View, Base2009Form_Send
+from utils import execute
 
 
-class BM2009Form_View(Form_View):
-    template = '/ui/scrib2009/Table_to_html.xml'
+class BM2009Form_View(Base2009Form_View):
     page_template = '/ui/scrib2009/bm/Page%s.table.csv'
 
 
@@ -58,46 +46,17 @@ class BM2009Form_View(Form_View):
         return menu
 
 
-    def get_namespace(self, resource, context):
-        namespace = Form_View.get_namespace(self, resource, context)
-        namespace['code_ua'] = resource.get_code_ua()
-        namespace['menu'] = self.get_scrib_menu(resource, context)
-        return namespace
 
-
-    def action(self, resource, context, form):
-        Form_View.action(self, resource, context, form)
-        resource.set_property('is_first_time', False)
-
-
-
-class BM2009Form_Send(STLForm):
-    access = 'is_allowed_to_view'
-    access_POST = 'is_allowed_to_edit'
-    template = '/ui/scrib2009/BM2009Form_send.xml'
-    title = MSG(u"Contrôle de saisie")
-    query_schema = {'view': String}
-
+class BM2009Form_Send(Base2009Form_Send):
 
     def get_namespace(self, resource, context):
-        namespace = {}
-        namespace['first_time'] = first_time = resource.is_first_time()
-        # Errors
-        errors = []
-        warnings = []
-        # Invalid fields
-        for name, datatype in resource.get_invalid_fields():
-            info = {'number': name,
-                    'title': u"Champ %s non valide" % name,
-                    'href': ';page%s#field_%s' % (datatype.pages[0], name),
-                    'debug': str(type(datatype))}
-            if datatype.is_mandatory:
-                errors.append(info)
-            else:
-                warnings.append(info)
+        namespace = Base2009Form_Send.get_namespace(self, resource, context)
+        errors = namespace['errors']
+        warnings = namespace['warnings']
         pageb = resource.get_pageb()
         for form in pageb.get_resources():
             title = form.get_title()
+            # Invalid fields
             for name, datatype in form.get_invalid_fields():
                 info = {'number': name,
                         'title': (u"Bibliothèque %s : "
@@ -109,16 +68,7 @@ class BM2009Form_Send(STLForm):
                     errors.append(info)
                 else:
                     warnings.append(info)
-        # Failed controls
-        for control in resource.get_failed_controls():
-            control['href'] = ';page%s#field_%s' % (control['page'],
-                    control['title'].split()[0])
-            if control['level'] == '2':
-                errors.append(control)
-            else:
-                warnings.append(control)
-        for form in pageb.get_resources():
-            title = form.get_title()
+            # Failed controls
             for control in form.get_failed_controls():
                 control['href'] = '%s/;page%s#field_%s' % (
                         context.get_link(form), control['page'],
@@ -127,24 +77,6 @@ class BM2009Form_Send(STLForm):
                     errors.append(control)
                 else:
                     warnings.append(control)
-        namespace['controls'] = {'errors': errors,
-                                 'warnings': warnings}
-        # ACLs
-        user = context.user
-        namespace['is_admin'] = is_admin(user, resource)
-        # Workflow - State
-        namespace['statename'] = statename = resource.get_statename()
-        namespace['form_state'] = resource.get_form_state()
-        # Workflow - Transitions
-        namespace['can_send'] = statename == 'private' and not errors
-        namespace['can_export'] = not errors
-        # Debug
-        namespace['debug'] = context.has_form_value('debug')
-        # Print
-        namespace['skip_print'] = False
-        view = context.query['view']
-        if view == 'printable' or user.is_voir_scrib():
-            namespace['skip_print'] = True
         return namespace
 
 
@@ -230,95 +162,3 @@ class BM2009Form_Send(STLForm):
             return
 
         context.message = INFO(u"Le formulaire a été exporté.")
-
-
-
-class BM2009Form_Print(STLView):
-    access = 'is_allowed_to_view'
-    title=MSG(u"Impression du rapport")
-    template = '/ui/scrib2009/Table_to_print.xml'
-    page_template = '/ui/scrib2009/bm/Page%s.table.csv'
-
-
-    def get_namespace(self, resource, context):
-        context.query['view'] = 'printable'
-        context.bad_types = []
-        forms = []
-        for page in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
-            table = resource.get_resource(self.page_template % page)
-            if page == 'B':
-                pageb = resource.get_pageb()
-                for form in pageb.get_resources():
-                    view = form.pageB
-                    forms.append(table.get_namespace(form, view, context,
-                        skip_print=True))
-            else:
-                view = getattr(resource, 'page%s' % page)
-                forms.append(table.get_namespace(resource, view, context,
-                    skip_print=True))
-        namespace = {}
-        namespace['forms'] = forms
-        return namespace
-
-
-
-class BM2009Form_Edit(DBResource_Edit):
-    access = 'is_admin'
-    schema = merge_dicts(DBResource_Edit.schema,
-            code_ua=Integer(mandatory=True),
-            departement=String(mandatory=True),
-            is_first_time=Boolean(mandatory=True),
-            content=String(mandatory=True))
-    widgets = (DBResource_Edit.widgets
-            + [TextWidget('code_ua', title=MSG(u"Code UA")),
-                TextWidget('departement', title=MSG(u"Département")),
-                BooleanRadio('is_first_time', title=MSG(u"Formulaire vide")),
-                MultilineWidget('content', cols=100, rows=20,
-                    title=MSG(u"Contenu brut /!\\ DANGEREUX /!\\ Toujours "
-                        u"insérer une liste complète"))])
-
-
-    def get_value(self, resource, context, name, datatype):
-        if name == 'content':
-            return resource.handler.to_str()
-        return DBResource_Edit.get_value(self, resource, context, name, datatype)
-
-
-    def action(self, resource, context, form):
-        DBResource_Edit.action(self, resource, context, form)
-        if not context.edit_conflict:
-            resource.set_property('code_ua', form['code_ua'])
-            resource.set_property('departement', form['departement'])
-            resource.set_property('is_first_time', form['is_first_time'])
-            resource.handler.load_state_from_string(form['content'])
-
-
-
-class BM2009Form_New(NewInstance):
-    schema = merge_dicts(NewInstance.schema, title=Unicode(mandatory=True),
-            code_ua=Integer(mandatory=True),
-            departement=Integer(mandatory=True))
-    widgets = [TextWidget('title', title=MSG(u"Nom de la ville")),
-            TextWidget('code_ua', title=MSG(u"Code UA")),
-            TextWidget('departement', title=MSG(u"Département"))]
-
-
-    def action(self, resource, context, form):
-        cls = get_resource_class(context.query['type'])
-        code_ua = form['code_ua']
-        name = str(code_ua)
-        app = context.site_root
-        year = app.get_year_suffix()
-        adresse = get_adresse(code_ua, 'adresse%s' % year, context=context)
-        handler = cls.class_handler(A100=code_ua, **adresse)
-        try:
-            child = cls.make_resource(cls, resource, name,
-                    body=handler.to_str(), code_ua=code_ua,
-                    departement=str(form['departement']),
-                    title={'fr': form['title']})
-        except RuntimeError, e:
-            if str(e).endswith('busy.'):
-                context.message = ERROR(u"Code UA déjà pris")
-                return
-            raise
-        return context.come_back(MSG_NEW_RESOURCE, goto='./%s/' % name)

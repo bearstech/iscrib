@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, freeze
 from itools.datatypes import Boolean
 from itools.gettext import MSG
 from itools.uri import resolve_uri
@@ -28,9 +28,10 @@ from ikaaro.registry import register_resource_class, register_field
 # Import from scrib
 from base2009 import get_schema_pages, get_controls
 from base2009 import Base2009Handler, Base2009Form
+from base2009_views import Base2009Form_Print, Base2009Form_Edit
 from bm2009_pageb_views import BM2009Form_PageB_View
-from bm2009_views import BM2009Form_View, BM2009Form_Send, BM2009Form_Print
-from bm2009_views import BM2009Form_Edit,  BM2009Form_New
+from bm2009_views import BM2009Form_View, BM2009Form_Send
+from bm2009_views import BM2009Form_New
 from form import Form
 
 
@@ -57,8 +58,8 @@ class BM2009Form(Base2009Form):
     pageH = BM2009Form_View(n='H')
     pageI = BM2009Form_View(n='I')
     envoyer = BM2009Form_Send()
-    imprimer = BM2009Form_Print()
-    edit = BM2009Form_Edit()
+    imprimer = Base2009Form_Print()
+    edit = Base2009Form_Edit()
     new_instance = BM2009Form_New()
 
 
@@ -116,16 +117,20 @@ class BM2009Form(Base2009Form):
         return pageb.is_first_time()
 
 
-    def get_invalid_fields(self):
-        return Base2009Form.get_invalid_fields(exclude=['B'])
+    def get_invalid_fields(self, pages=freeze([]), exclude=freeze(['B'])):
+        return Base2009Form.get_invalid_fields(self, pages=pages,
+                exclude=exclude)
 
 
-    def get_failed_controls(self):
-        return Base2009Form.get_failed_controls(exclude=['B'])
+    def get_failed_controls(self, pages=freeze([]), exclude=freeze(['B'])):
+        return Base2009Form.get_failed_controls(self, pages=pages,
+                exclude=exclude)
 
     
-    def get_export_query(self, table):
-        return Base2009Form.get_export_query(table, exclude=['B'])
+    def get_export_query(self, table, pages=freeze([]),
+            exclude=freeze(['B'])):
+        return Base2009Form.get_export_query(self, table, pages=pages,
+                exclude=exclude)
 
 
 

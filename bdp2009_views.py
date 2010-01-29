@@ -15,10 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from scrib
-from bm2009_views import BM2009Form_View, BM2009Form_Send
+from base2009_views import Base2009Form_View, Base2009Form_Send
 
 
-class BDP2009Form_View(BM2009Form_View):
+class BDP2009Form_View(Base2009Form_View):
     page_template = '/ui/scrib2009/bdp/Page%s.table.csv'
 
 
@@ -45,5 +45,5 @@ class BDP2009Form_View(BM2009Form_View):
 
 
 
-class BDP2009Form_Send(BM2009Form_Send):
+class BDP2009Form_Send(Base2009Form_Send):
     pass
