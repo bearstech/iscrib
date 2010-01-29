@@ -193,20 +193,20 @@ class BM2009Form(Form):
 
 
     def is_ready(self):
-        invalid_fields = [name
-                for name, datatype in self.get_invalid_fields()
-                if datatype.is_mandatory]
+        for name, datatype in self.get_invalid_fields():
+            if datatype.is_mandatory:
+                return False
+        for control in self.get_failed_controls():
+            if control['level'] == '2':
+                return False
         for form in self.get_pageb().get_resources():
-            invalid_fields += [name
-                    for name, datatype in form.get_invalid_fields()
-                    if datatype.is_mandatory]
-        failed_controls = [control for control in self.get_failed_controls()
-                if control['level'] == '2']
-        for form in self.get_pageb().get_resources():
-            failed_controls = [control
-                    for control in form.get_failed_controls()
-                    if control['level'] == '2']
-        return not invalid_fields and not failed_controls
+            for name, datatype in form.get_invalid_fields():
+                if datatype.is_mandatory:
+                    return False
+            for control in form.get_failed_controls():
+                if control['level'] == '2':
+                    return False
+        return True
 
 
     ######################################################################
