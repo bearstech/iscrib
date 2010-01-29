@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from scrib
-from bm2009_views import BM2009Form_View
+from bm2009_views import BM2009Form_View, BM2009Form_Send
 
 
 class BDP2009Form_View(BM2009Form_View):
@@ -42,3 +42,8 @@ class BDP2009Form_View(BM2009Form_View):
                          'active': 'nav-active' if context.view_name == name
                                                 else None})
         return menu
+
+
+
+class BDP2009Form_Send(BM2009Form_Send):
+    pass

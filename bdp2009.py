@@ -25,7 +25,7 @@ from itools.gettext import MSG
 from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
-from bdp2009_views import BDP2009Form_View
+from bdp2009_views import BDP2009Form_View, BDP2009Form_Send
 from bm2009 import get_schema_pages, get_controls, BM2009Handler
 from bm2009_views import BM2009Form_Print, BM2009Form_Edit
 from form import Form
@@ -45,17 +45,18 @@ class BDP2009Form(Form):
     class_views = ['page0'] + Form.class_views
 
     # Views
-    Page0 = BDP2009Form_View(title=MSG(u"Saisie du rapport"), n='0')
-    PageA = BDP2009Form_View(n='A')
-    PageB = BDP2009Form_View(n='B')
-    PageC = BDP2009Form_View(n='C')
-    PageD = BDP2009Form_View(n='D')
-    PageE = BDP2009Form_View(n='E')
-    PageF = BDP2009Form_View(n='F')
-    PageG = BDP2009Form_View(n='G')
-    PageH = BDP2009Form_View(n='H')
-    PageI = BDP2009Form_View(n='I')
-    PageL = BDP2009Form_View(n='L')
+    page0 = BDP2009Form_View(title=MSG(u"Saisie du rapport"), n='0')
+    pageA = BDP2009Form_View(n='A')
+    pageB = BDP2009Form_View(n='B')
+    pageC = BDP2009Form_View(n='C')
+    pageD = BDP2009Form_View(n='D')
+    pageE = BDP2009Form_View(n='E')
+    pageF = BDP2009Form_View(n='F')
+    pageG = BDP2009Form_View(n='G')
+    pageH = BDP2009Form_View(n='H')
+    pageI = BDP2009Form_View(n='I')
+    pageL = BDP2009Form_View(n='L')
+    envoyer = BDP2009Form_Send()
     imprimer = BM2009Form_Print()
     edit = BM2009Form_Edit()
 
@@ -90,6 +91,13 @@ class BDP2009Form(Form):
 
     def get_departement(self):
         return self.get_property('departement')
+
+
+    ######################################################################
+    # API
+    def get_code_ua(self):
+        return self.get_property('code_ua')
+
 
 
 ###########################################################################

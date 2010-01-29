@@ -120,7 +120,7 @@ class Forms_SearchForm(Folder_BrowseContent):
         if column == 'code_ua':
             return item_brain.code_ua
         elif column == 'title_fr':
-            url = '%s/;pageA' % item_brain.name
+            url = item_brain.name
             return (item_brain.title, url)
         elif column == 'mtime':
             mtime = item_brain.mtime
