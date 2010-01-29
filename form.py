@@ -18,7 +18,6 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.gettext import MSG
 from itools.handlers import File as FileHandler
 
 # Import from ikaaro
@@ -141,9 +140,6 @@ class FormHandler(FileHandler):
 
 
 class Form(File):
-    class_id = 'Form'
-    class_handler = FormHandler
-    class_title = MSG(u"Formulaire")
     class_views = ['envoyer', 'exporter', 'imprimer', 'aide']
     workflow = workflow
 
