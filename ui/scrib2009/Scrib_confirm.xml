@@ -6,12 +6,18 @@
 
   <form action=";confirm" method="post">
     <p>
-      Je confirme être chargé de la saisie des données pour la bibliothèque
-      municipale de <strong>${title}</strong>.
+      <input type="checkbox" name="confirm_identifiant" value="1"/>Oui, je
+      confirme que mon identifiant est <strong>${identifiant}</strong> et que
+      je suis chargé de la saisie des données pour la bibliothèque municipale
+      de <strong>${title}</strong>.
     </p>
     <p>
-      Je vais recevoir les instructions pour me connecter à l'adresse
-      <strong>${email}</strong>.
+      <input type="checkbox" name="confirm_email" value="1"/>Oui, je
+      confirme que mon adresse mél est <strong>${email}</strong>.
+    </p>
+    <p>
+      Vous recevrez les instructions pour créer votre compte à votre adresse
+      mél ${email}.
     </p>
     <input type="hidden" name="email" value="${email}"/>
     <input type="hidden" name="identifiant" value="${identifiant}"/>

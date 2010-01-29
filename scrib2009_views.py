@@ -25,7 +25,6 @@ from itools.xapian import AndQuery, OrQuery, PhraseQuery
 from itools.xml import XMLParser
 
 # Import from ikaaro
-from ikaaro.folder_views import GoToSpecificDocument
 from ikaaro.forms import XHTMLBody, ReadOnlyWidget, DateWidget, RTEWidget
 from ikaaro.forms import TextWidget, AutoForm
 from ikaaro.resource_views import LoginView, DBResource_Edit
@@ -139,6 +138,7 @@ class Scrib_Login(LoginView):
 
 class Scrib_Register(AutoForm):
     access = True
+    template = '/ui/scrib2009/Scrib_register.xml'
     title = MSG(u"Crééz votre compte pour l'année 2009")
     schema = {'email': Email(mandatory=True),
               'identifiant': Identifiant(mandatory=True)}
@@ -212,7 +212,9 @@ class Scrib_Confirm(STLForm):
     title = MSG(u"Confirmation de création de compte")
     template = '/ui/scrib2009/Scrib_confirm.xml'
     schema = {'email': Email(mandatory=True),
-              'identifiant': Identifiant(mandatory=True)}
+              'identifiant': Identifiant(mandatory=True),
+              'confirm_identifiant': Boolean(mandatory=True),
+              'confirm_email': Boolean(mandatory=True)}
 
     def get_namespace(self, resource, context):
         identifiant = context.get_form_value('identifiant')

@@ -22,11 +22,10 @@ from itools.datatypes import Integer, Unicode, String
 
 # Import from ikaaro
 from ikaaro.user import User
-from ikaaro.user_views import User_EditAccount
 from ikaaro.registry import register_resource_class
 
 # Import from scrib
-from user_views import User_Home
+from user_views import User_Home, ScribUser_EditAccount
 
 
 class ScribUser(User):
@@ -37,7 +36,7 @@ class ScribUser(User):
 
     # Views
     home = User_Home() # Si besoin déplacer dans la BM/BDP
-    edit_account = User_EditAccount(access='is_admin')
+    edit_account = ScribUser_EditAccount(access='is_admin')
 
 
     @classmethod

@@ -6,34 +6,53 @@
 
   <h2>Pour accéder à votre formulaire</h2>
 
-  <form name="loginform" action=";login" id="loginform" method="post">
-     <fieldset style="width:40%;">
-     <legend>Inscription</legend>
-      <dl>
-        <dd>
-          <a href="/;register">Créez votre compte pour l'année 2009</a>
-        </dd>
-     </dl>
-    </fieldset>
-     <fieldset style="width:40%;">
-    <legend>Connexion</legend>
-      <dl>
-        <dt><label for="username">Adresse mél</label></dt>
-        <dd>
-          <input value="${username}" name="username" id="username"
-            type="text"/>
-         </dd>
-        <dt><label for="password">Mot de passe</label></dt>
-        <dd>
-          <input id="password" name="password" type="password"/>
-          <a href="/;forgotten_password">Mot de passe oublié</a>
-        </dd>
-      </dl>
-      <input value="OK" class="button-ok" type="submit"/>
-    </fieldset>
-  </form>
+  <p>
+    Si vous arrivez pour la première fois sur cette page vous devez d'abord
+    vous inscrire, dans le pavé conçu à cet effet. L'inscription s'effectue
+    par l'opération de création de compte «&nbsp;Créer votre compte pour
+    l'année 2009&nbsp;». Cette opération est un préalable nécessaire et
+    indispensable à toute connexion ultérieure. Elle a pour but de veiller à
+    la sécurité de vos informations.
+  </p>
 
-   <p style="color: red">
+  <table border="0">
+    <tr>
+      <td width="50%" valign="top">
+        <fieldset style="height: 100%">
+          <legend>Inscription</legend>
+          <dl>
+            <dd>Si vous n'avez pas encore créé votre compte&nbsp;:</dd>
+            <dd>
+              <a href="/;register">Créez votre compte pour l'année 2009</a>
+            </dd>
+          </dl>
+        </fieldset>
+      </td>
+      <td width="50%" valign="top">
+        <form name="loginform" action=";login" id="loginform" method="post">
+          <fieldset>
+          <legend>Connexion</legend>
+            <dl>
+              <dd>Si vous avez déjà créé votre compte&nbsp;:</dd>
+              <dt><label for="username">Adresse mél</label></dt>
+              <dd>
+                <input value="${username}" name="username" id="username"
+                  type="text"/>
+               </dd>
+              <dt><label for="password">Mot de passe</label></dt>
+              <dd>
+                <input id="password" name="password" type="password"/>
+                <a href="/;forgotten_password">Mot de passe oublié</a>
+              </dd>
+            </dl>
+            <input value="OK" class="button-ok" type="submit"/>
+          </fieldset>
+        </form>
+      </td>
+    </tr>
+  </table>
+
+  <p style="color: red">
     <b>ATTENTION  !</b><br/>
     Si vous êtes une <b>BM</b>, vous pourrez renseigner votre rapport par la
     voie électronique jusqu'au <b>${echeance_bm}</b>.<br/>
