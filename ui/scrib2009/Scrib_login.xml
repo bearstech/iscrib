@@ -55,9 +55,9 @@
   <p style="color: red">
     <b>ATTENTION  !</b><br/>
     Si vous êtes une <b>BM</b>, vous pourrez renseigner votre rapport par la
-    voie électronique jusqu'au <b>${echeance_bm}</b>.<br/>
+    voie électronique jusqu'au <b>${echeance_bm}</b> 17&nbsp;h.<br/>
     Si vous êtes une <b>BDP</b>, vous pourrez renseigner votre rapport par la
-    voie électronique jusqu'au <b>${echeance_bdp}</b>.
+    voie électronique jusqu'au <b>${echeance_bdp}</b> 17&nbsp;h.
   </p>
 
   <p>
