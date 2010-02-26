@@ -29,9 +29,9 @@ from ikaaro.registry import register_resource_class, register_field
 from base2009 import get_schema_pages, get_controls
 from base2009 import Base2009Handler, Base2009Form
 from base2009_views import Base2009Form_Print, Base2009Form_Edit
+from base2009_views import Base2009Form_New
 from bm2009_pageb_views import BM2009Form_PageB_View
 from bm2009_views import BM2009Form_View, BM2009Form_Send
-from bm2009_views import BM2009Form_New
 from form import Form
 
 
@@ -60,7 +60,7 @@ class BM2009Form(Base2009Form):
     envoyer = BM2009Form_Send()
     imprimer = Base2009Form_Print()
     edit = Base2009Form_Edit()
-    new_instance = BM2009Form_New()
+    new_instance = Base2009Form_New()
 
 
     def _get_catalog_values(self):

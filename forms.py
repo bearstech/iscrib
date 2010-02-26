@@ -31,10 +31,18 @@ class Forms(Folder):
     class_title = MSG(u'Forms')
     class_description = MSG(u'...')
     class_icon48 = 'scrib/images/form48.png'
-    class_views = ['search_form', 'new_resource?type=BM2009Form']
+    class_views = ['search_form', 'new_resource?type=xxx']
 
     # Views
     search_form = Forms_SearchForm()
+
+
+    def get_views(self):
+        app = self.parent
+        year = app.get_property('annee')
+        type = ('BM%sForm' if self.is_bm() else 'BDP%sForm') % year
+        for name, view in Folder.get_views(self):
+            yield name.replace('xxx', type), view
 
 
     ########################################################################
