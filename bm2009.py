@@ -32,7 +32,7 @@ from ikaaro.registry import register_resource_class, register_field
 # Import from scrib
 from bm2009_pageb_views import BM2009Form_PageB_View
 from bm2009_views import BM2009Form_View, BM2009Form_Send, BM2009Form_Print
-from bm2009_views import BM2009Form_Edit
+from bm2009_views import BM2009Form_Edit, BM2009Form_New
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import make_enumerate
@@ -162,6 +162,7 @@ class BM2009Form(Form):
     envoyer = BM2009Form_Send()
     imprimer = BM2009Form_Print()
     edit = BM2009Form_Edit()
+    new_instance = BM2009Form_New()
 
 
     @classmethod

@@ -16,7 +16,7 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String, Integer, Boolean
+from itools.datatypes import String, Integer, Boolean, Unicode
 from itools.gettext import MSG
 from itools.web import STLView, STLForm, INFO, ERROR
 
@@ -24,6 +24,7 @@ from itools.web import STLView, STLForm, INFO, ERROR
 from ikaaro.access import is_admin
 from ikaaro.forms import TextWidget, BooleanRadio, MultilineWidget
 from ikaaro.resource_views import DBResource_Edit
+from ikaaro.views_new import NewInstance
 
 # Import from scrib
 from form_views import Form_View
@@ -287,3 +288,26 @@ class BM2009Form_Edit(DBResource_Edit):
             resource.set_property('departement', form['departement'])
             resource.set_property('is_first_time', form['is_first_time'])
             resource.handler.load_state_from_string(form['content'])
+
+
+
+class BM2009Form_New(NewInstance):
+    schema = merge_dicts(NewInstance.schema, title=Unicode(mandatory=True),
+            code_ua=Integer(mandatory=True),
+            departement=Integer(mandatory=True))
+    widgets = [TextWidget('title', title=MSG(u"Nom de la ville")),
+            TextWidget('code_ua', title=MSG(u"Code UA")),
+            TextWidget('departement', title=MSG(u"Département"))]
+
+
+    def get_new_resource_name(self, form):
+        return str(form['code_ua'])
+
+
+    def action(self, resource, context, form):
+        goto = NewInstance.action(self, resource, context, form)
+        name = self.get_new_resource_name(form)
+        child = resource.get_resource(name)
+        child.set_property('code_ua', form['code_ua'])
+        child.set_property('departement', str(form['departement']))
+        return goto

@@ -31,7 +31,7 @@ class Forms(Folder):
     class_title = MSG(u'Forms')
     class_description = MSG(u'...')
     class_icon48 = 'scrib/images/form48.png'
-    class_views = ['search_form']
+    class_views = ['search_form', 'new_resource?type=BM2009Form']
 
     # Views
     search_form = Forms_SearchForm()

@@ -58,7 +58,7 @@ class Scrib_Admin(IconsView):
     def get_namespace(self, resource, context):
         items = [{'icon': '/ui/icons/48x48/folder.png',
                   'title': u"BM",
-                  'description': u"Rechercher une BM",
+                  'description': u"Rechercher une BM / Ajouter une BM",
                   'url': 'bm'}]
         items.append({'icon': '/ui/icons/48x48/folder.png',
                       'title': u"BDP",
@@ -217,7 +217,9 @@ class Scrib_Confirm(STLForm):
               'confirm_email': Boolean(mandatory=True)}
 
     def get_namespace(self, resource, context):
+        # TODO BM is hard-coded
         identifiant = context.get_form_value('identifiant')
+        assert identifiant[:2] == 'BM'
         code_ua = int(identifiant[2:])
         form = resource.get_resource('bm/%s' % code_ua)
         return {'email': context.get_form_value('email'),
@@ -233,6 +235,7 @@ class Scrib_Confirm(STLForm):
         email = form['email']
         user = resource.get_resource('/users').set_user(email, password=None)
         identifiant = form['identifiant']
+        assert identifiant[:2] == 'BM'
         code_ua = int(identifiant[2:])
         user.set_property('username', 'BM%s' % code_ua)
         form = resource.get_resource('bm/%s' % code_ua)
