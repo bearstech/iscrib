@@ -3,7 +3,7 @@
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
-  <p>
+  <p stl:if="not skip_print">
     <stl:inline stl:repeat="item menu"><a
         href="${item/href}" class="${item/active}">${item/title}</a>&nbsp;|
     </stl:inline>
