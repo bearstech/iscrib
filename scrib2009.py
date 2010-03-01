@@ -105,7 +105,8 @@ class Scrib2009(WebSite):
                 # Faux contexte de icms-init
                 config.append_comment('\nScrib MySQL')
                 for arg, default in [('host', 'localhost'), ('port', 3306),
-                        ('db', 'scrib'), ('user', 'scrib'), ('passwd', '')]:
+                        ('db', 'scrib'), ('user', 'scrib'), ('passwd', ''),
+                        ('encoding', 'latin1')]:
                     stdout.write("sql-%s = [%s] " % (arg, default))
                     value = stdin.readline().strip() or default
                     config.set_value('sql-%s' % arg, value)
@@ -161,15 +162,7 @@ class Scrib2009(WebSite):
             except KeyError, e:
                 print str(e)
             else:
-                handler = cls.bm_handler(A100=code_ua,
-                        A101=adresse['libelle1'], A102=adresse['libelle2'],
-                        A103=adresse['local'], A104=adresse['voie_num'],
-                        A105=adresse['voie_type'], A106=adresse['voie_nom'],
-                        A107=adresse['CPBIBLIO'], A108=adresse['ville'],
-                        A109=adresse['CEDEXB'], A110=adresse['DIRECTEU'],
-                        A111=adresse['st_dir'], A112=adresse['TELE'],
-                        A113=adresse['FAX'], A115=adresse['WWW'],
-                        encoding='latin1')
+                handler = cls.bm_handler(A100=code_ua, **adresse)
                 folder.set_handler('%s/bm/%s' % (name, code_ua), handler)
             percent = i * 100 / len(rows)
             if percent % 10 == 0 and percent != last_percent:

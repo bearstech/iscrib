@@ -56,7 +56,10 @@ def get_connection(context=None, target=None):
         if value is None:
             raise ValueError, "%s: sql-%s undefined" % (config.uri, arg)
         kw[arg] = value
-    return connect(**kw)
+    connection = connect(**kw)
+    encoding = config.get_value('sql-encoding', default='latin1')
+    connection.scrib_encoding = encoding
+    return connection
 
 
 
@@ -94,6 +97,13 @@ def get_adresse(code_ua, table, context=None, target=None):
     for key, value in adresse.iteritems():
         if value is None:
             adresse[key] = ''
+    encoding = connection.scrib_encoding
+    for new, old in [('A101', 'libelle1'), ('A102', 'libelle2'),
+            ('A103', 'local'), ('A104', 'voie_num'), ('A105', 'voie_type'),
+            ('A106', 'voie_nom'), ('A107', 'CPBIBLIO'), ('A108', 'ville'),
+            ('A109', 'CEDEXB'), ('A110', 'DIRECTEU'), ('A111', 'st_dir'),
+            ('A112', 'TELE'), ('A113', 'FAX'), ('A115', 'WWW')]:
+        adresse[new] = unicode(adresse.pop(old), encoding).encode('utf8')
     return adresse
 
 

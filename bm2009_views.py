@@ -23,12 +23,14 @@ from itools.web import STLView, STLForm, INFO, ERROR
 # Import from ikaaro
 from ikaaro.access import is_admin
 from ikaaro.forms import TextWidget, BooleanRadio, MultilineWidget
+from ikaaro.messages import MSG_NEW_RESOURCE
+from ikaaro.registry import get_resource_class
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views_new import NewInstance
 
 # Import from scrib
 from form_views import Form_View
-from utils import execute
+from utils import execute, get_adresse
 
 
 class BM2009Form_View(Form_View):
@@ -298,14 +300,22 @@ class BM2009Form_New(NewInstance):
             TextWidget('departement', title=MSG(u"Département"))]
 
 
-    def get_new_resource_name(self, form):
-        return str(form['code_ua'])
-
-
     def action(self, resource, context, form):
-        goto = NewInstance.action(self, resource, context, form)
-        name = self.get_new_resource_name(form)
-        child = resource.get_resource(name)
-        child.set_property('code_ua', form['code_ua'])
-        child.set_property('departement', str(form['departement']))
-        return goto
+        cls = get_resource_class(context.query['type'])
+        code_ua = form['code_ua']
+        name = str(code_ua)
+        app = context.site_root
+        year = app.get_year_suffix()
+        adresse = get_adresse(code_ua, 'adresse%s' % year, context=context)
+        handler = cls.class_handler(A100=code_ua, **adresse)
+        try:
+            child = cls.make_resource(cls, resource, name,
+                    body=handler.to_str(), code_ua=code_ua,
+                    departement=str(form['departement']),
+                    title={'fr': form['title']})
+        except RuntimeError, e:
+            if str(e).endswith('busy.'):
+                context.message = ERROR(u"Code UA déjà pris")
+                return
+            raise
+        return context.come_back(MSG_NEW_RESOURCE, goto='./%s/' % name)
