@@ -278,14 +278,14 @@ class BM2009Form(Form):
                 expanded = []
                 for is_expr, token in parse_control(title):
                     if not is_expr:
-                        expanded.append(token)
+                        expanded.append(unicode(token, 'utf8'))
                     else:
                         try:
                             value = eval(token, self.get_vars())
                         except ZeroDivisionError:
                             value = None
-                        expanded.append(str(value))
-                title = ''.join(expanded)
+                        expanded.append(unicode(value))
+                title = u"".join(expanded)
             else:
                 try:
                     value = eval(expr, self.get_vars())
@@ -295,15 +295,13 @@ class BM2009Form(Form):
                 except InvalidOperation:
                     # Champs vides tolérés
                     value = None
+                title = unicode(title, 'utf8')
             # Passed
             if value is True:
                 continue
-            yield {'number': number,
-                   'title': unicode(title, 'utf8'),
-                   'expr': expr,
-                   'level': level,
-                   'page': page,
-                   'debug': "'%s' = '%s'" % (str(expr), value)}
+            yield {'number': number, 'title': title, 'expr': expr,
+                    'level': level, 'page': page,
+                    'debug': u"'%s' = '%s'" % (unicode(expr, 'utf8'), value)}
 
 
     def get_export_query(self, table, pages=freeze([]),

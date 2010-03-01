@@ -115,8 +115,6 @@ class BM2009Form_Send(STLForm):
         for form in pageb.get_resources():
             title = form.get_title()
             for control in form.get_failed_controls():
-                control['title'] = u"Bibliothèque %s : %s" % (title,
-                        control['title'])
                 control['href'] = '%s/;page%s#field_%s' % (
                         context.get_link(form), control['page'],
                         control['title'].split()[0])
