@@ -184,6 +184,7 @@ class Base2009Form_Edit(DBResource_Edit):
 
 
 class Base2009Form_New(NewInstance):
+    title = MSG(u"Nouvelle bibliothèque")
     schema = merge_dicts(NewInstance.schema, title=Unicode(mandatory=True),
             code_ua=Integer(mandatory=True),
             departement=Integer(mandatory=True))
@@ -193,13 +194,18 @@ class Base2009Form_New(NewInstance):
 
 
     def action(self, resource, context, form):
-        cls = get_resource_class(context.query['type'])
         code_ua = form['code_ua']
         name = str(code_ua)
         app = context.site_root
         year = app.get_year_suffix()
-        adresse = get_adresse(code_ua, 'adresse%s' % year, context=context)
-        handler = cls.class_handler(A100=code_ua, **adresse)
+        if resource.is_bm():
+            cls = app.bm_class
+            kw = get_adresse(code_ua, 'adresse%s' % year, context=context)
+            kw['A100'] = code_ua
+        else:
+            cls = app.bdp_class
+            kw = {'0': code_ua}
+        handler = cls.class_handler(**kw)
         try:
             cls.make_resource(cls, resource, name, body=handler.to_str(),
                     code_ua=code_ua, departement=str(form['departement']),

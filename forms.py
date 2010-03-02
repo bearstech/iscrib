@@ -23,6 +23,7 @@ from ikaaro.registry import register_resource_class
 from ikaaro.folder import Folder
 
 # Import from scrib
+from base2009_views import Base2009Form_New
 from forms_views import Forms_SearchForm
 
 
@@ -31,18 +32,11 @@ class Forms(Folder):
     class_title = MSG(u'Forms')
     class_description = MSG(u'...')
     class_icon48 = 'scrib/images/form48.png'
-    class_views = ['search_form', 'new_resource?type=xxx']
+    class_views = ['search_form', 'new_form']
 
     # Views
     search_form = Forms_SearchForm()
-
-
-    def get_views(self):
-        app = self.parent
-        year = app.get_property('annee')
-        type = ('BM%sForm' if self.is_bm() else 'BDP%sForm') % year
-        for name, view in Folder.get_views(self):
-            yield name.replace('xxx', type), view
+    new_form = Base2009Form_New()
 
 
     ########################################################################

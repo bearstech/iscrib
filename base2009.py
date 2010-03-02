@@ -29,6 +29,7 @@ from ikaaro.registry import register_field
 
 
 # Import from scrib
+from base2009_views import Base2009Form_New
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import EnumCV, make_enumerate
@@ -139,6 +140,9 @@ class Base2009Handler(FormHandler):
 
 class Base2009Form(Form):
     class_icon48 = 'scrib2009/images/form48.png'
+
+    # Views
+    new_instance = Base2009Form_New()
 
 
     @classmethod
