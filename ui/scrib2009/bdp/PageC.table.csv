@@ -21,13 +21,13 @@
 "dont personnels qualifiés",,"#C34S","#C34T","#C34U","#CV","#C34W","#C34X","#C34Y","#C34Z","C34"
 ,,,,,,,,,,
 "**C.4 BENEVOLES",,,,,,,,,,
-"Bénévoles qualifiés (3)",,"#C41S","#C41T","#C41U","#CV","#C41W","#C41X","#C41Y","#C41Z","C41"
-"Bénévoles non formés",,"#C42S","#C42T","#C42U","#CV","#C42W","#C42X","#C42Y","#C42Z","C42"
+"Bénévoles qualifiés (3)",,"#C41S",,"#C41U","#CV","#C41W",,"#C41Y","#C41Z","C41"
+"Bénévoles non formés",,"#C42S",,,"#CV","#C42W",,,"#C42Z","C42"
 ,,,,,,,,,,
 "**TOTAL PERSONNEL EN POSTE",,,,,,,,,,
 "TOTAL (C11 à C42)",,"#C43S","#C43T","#C43U",,"#C43W","#C43X","#C43Y","#C43Z","C43"
 ,,,,,,,,,,
-"NOMBRE TOTAL DE PERSONNES AYANT SUIVI UNE FIA (formation initiale d'application)",,,,,,,,,"#C51","C51"
+"NOMBRE TOTAL DE PERSONNES AYANT SUIVI UNE FIA (formation initiale d'application)",,,,,,,,,"#C51Z","C51"
 ,,,,,,,,,,
 "(1) ETP : Equivalent temps plein (Exemle : 2.5) ",,,,,,,,,,
 "(2) cocher la case correspondante",,,,,,,,,,
