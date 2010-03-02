@@ -30,6 +30,21 @@ from itools.web import ERROR
 from ikaaro.config import ServerConfig
 
 
+class ProgressMeter(object):
+    last_percent = 0
+
+    def __init__(self, max):
+        self.max = max
+
+
+    def show(self, i):
+        percent = i * 100 / self.max
+        if percent % 10 == 0 and percent != self.last_percent:
+            print "  %s %%" % percent
+            self.last_percent = percent
+
+
+
 class UsersCSV(CSVFile):
     skip_header = True
     schema = {'annee': Unicode,

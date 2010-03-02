@@ -36,7 +36,7 @@ from ikaaro.webpage import WebPage
 from ikaaro.website import WebSite
 
 # Import from scrib
-from bm2009 import BM2009Handler, BM2009Form
+from bm2009 import BM2009Form
 from bdp2009 import BDP2009Form
 from form import Form, MultipleForm
 from forms import Forms
@@ -45,7 +45,7 @@ from scrib2009_views import Scrib_Register, Scrib_Confirm
 from scrib2009_views import Scrib_ExportSql, Scrib_ChangePassword
 from scrib2009_views import Scrib_ForgottenPassword, Scrib_Importer
 from user import ScribUser
-from utils import UsersCSV, get_config, get_adresse
+from utils import UsersCSV, get_config, get_adresse, ProgressMeter
 
 
 class Scrib2009(WebSite):
@@ -57,7 +57,6 @@ class Scrib2009(WebSite):
     __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide']
 
     bm_class = BM2009Form
-    bm_handler = BM2009Handler
     bdp_class = BDP2009Form
 
     # Views
@@ -135,38 +134,41 @@ class Scrib2009(WebSite):
                              title={'fr': u"BM"})
         users_csv = UsersCSV(get_abspath('%s/users.csv' % base_path))
         rows = users_csv.search(categorie='BM')
-        last_percent = 0
+        meter = ProgressMeter(len(rows))
         for i, row in enumerate(users_csv.get_rows(rows)):
             code_ua = row.get_value('code_ua')
             title = row.get_value('nom')
             departement = row.get_value('departement')
-            cls.bm_class._make_resource(cls.bm_class, folder, '%s/bm/%s' %
-                    (name, code_ua), code_ua=code_ua, title={'fr': title},
-                    departement=departement)
+            bm_class = cls.bm_class
             # 0008082 handler avec données de la table adresse09
             try:
                 adresse = get_adresse(code_ua, 'adresse%s' % str(annee)[-2:],
                         target=target)
             except KeyError, e:
                 print str(e)
-            else:
-                handler = cls.bm_handler(A100=code_ua, **adresse)
-                folder.set_handler('%s/bm/%s' % (name, code_ua), handler)
-            percent = i * 100 / len(rows)
-            if percent % 10 == 0 and percent != last_percent:
-                print "  %s %%" % percent
-                last_percent = percent
+                adresse = {}
+            handler = bm_class.class_handler(A100=code_ua, **adresse)
+            bm_class._make_resource(cls.bm_class, folder,
+                    '%s/bm/%s' % (name, code_ua), body=handler.to_str(),
+                    code_ua=code_ua, departement=departement,
+                    title={'fr': title})
+            meter.show(i)
         print "Création des BDP..."
         Forms._make_resource(Forms, folder, "%s/bdp" % name,
                              title={'fr': u"BDP"})
-        for row in users_csv.get_rows(users_csv.search(categorie='BDP')):
+        rows = users_csv.search(categorie='BDP')
+        meter = ProgressMeter(len(rows))
+        for i, row in enumerate(users_csv.get_rows(rows)):
             code_ua = row.get_value('code_ua')
             title = row.get_value('nom')
             departement = row.get_value('departement')
-            cls.bdp_class._make_resource(cls.bdp_class, folder,
-                    '%s/bdp/%s' % (name, code_ua), title={'fr': title},
-                    code_ua=code_ua,
-                    departement=departement)
+            bdp_class = cls.bdp_class
+            handler = bdp_class.class_handler(**{'0': code_ua})
+            bdp_class._make_resource(cls.bdp_class, folder,
+                    '%s/bdp/%s' % (name, code_ua), body=handler.to_str(),
+                    code_ua=code_ua, departement=departement,
+                    title={'fr': title})
+            meter.show(i)
         # Compte spécial VoirSCRIB
         print "Création du compte VoirSCRIB..."
         try:
