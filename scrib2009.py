@@ -130,13 +130,13 @@ class Scrib2009(WebSite):
                         body=file.read())
         # BM et BDP
         users_csv = UsersCSV(get_abspath('%s/users.csv' % base_path))
-        for kind, form_class in [('BM', cls.bm_class),
+        for categorie, form_class in [('BM', cls.bm_class),
                 ('BDP', cls.bdp_class)]:
-            path = kind.lower()
-            print "Création des %s..." % kind
+            path = categorie.lower()
+            print "Création des %s..." % categorie
             Forms._make_resource(Forms, folder, "%s/%s" % (name, path),
-                                 title={'fr': unicode(kind)})
-            rows = users_csv.search(categorie=kind)
+                                 title={'fr': unicode(categorie)})
+            rows = users_csv.search(categorie=categorie)
             meter = ProgressMeter(len(rows))
             for i, row in enumerate(users_csv.get_rows(rows)):
                 code_ua = row.get_value('code_ua')
@@ -149,7 +149,7 @@ class Scrib2009(WebSite):
                 except KeyError, e:
                     print str(e)
                     kw = {}
-                if kind == 'BM':
+                if categorie == 'BM':
                     kw['A100'] = code_ua
                 else:
                     kw['0'] = code_ua

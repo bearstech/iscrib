@@ -35,7 +35,7 @@ from ikaaro.website_views import ForgottenPasswordForm
 
 # Import from scrib
 from datatypes import DateLitterale, Identifiant
-from utils import UsersCSV, execute
+from utils import UsersCSV, execute, get_adresse
 
 
 def find_user(username, context):
@@ -427,23 +427,37 @@ class Scrib_Importer(AutoForm):
             context.message = ERROR(u"Fichier CSV attendu.")
             context.commit = False
             return
+        year = resource.get_year_suffix()
         users_csv = UsersCSV(string=body)
-        # TODO Import des BDP
-        # Import des BDP
-        forms = resource.get_resource('bdp')
+        done_bm = []
         done_bdp = []
-        for row in users_csv.get_rows(users_csv.search(categorie='BDP')):
-            code_ua = row.get_value('code_ua')
-            name = str(code_ua)
-            if resource.get_resource(name, soft=True) is not None:
-                continue
-            resource.bdp_class.make_resource(resource.bdp_class, forms,
-                    name, title={'fr': row.get_value('nom')},
-                    code_ua=code_ua,
-                    departement=row.get_value('departement'))
-            done_bdp.append(name)
+        for categorie, form_class, done in [
+                ('BM', resource.bm_class, done_bm),
+                ('BDP', resource.bdp_class, done_bdp)]:
+            forms = resource.get_resource(categorie.lower())
+            rows = users_csv.search(categorie=categorie)
+            for row in users_csv.get_rows(rows):
+                code_ua = row.get_value('code_ua')
+                name = str(code_ua)
+                if forms.get_resource(name, soft=True) is not None:
+                    continue
+                kw = get_adresse(code_ua, 'adresse%s' % year,
+                        context=context)
+                if categorie == 'BM':
+                    kw['A100'] = code_ua
+                else:
+                    kw['0'] = code_ua
+                handler = form_class.class_handler(**kw)
+                form_class.make_resource(form_class, forms, name,
+                        body=handler.to_str(), code_ua=code_ua,
+                        departement=row.get_value('departement'),
+                        title={'fr': row.get_value('nom')})
+                done.append(name)
 
-        context.message = INFO(u"BDP importées : {done_bdp}.",
+        done_bm = done_bm or [u"aucune"]
+        done_bdp = done_bdp or [u"aucune"]
+        context.message = INFO(u"BM importées : {done_bm} ; "
+                u"BDP importées : {done_bdp}.", done_bm=u", ".join(done_bm),
                 done_bdp=u", ".join(done_bdp))
 
 
