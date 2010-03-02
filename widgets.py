@@ -278,10 +278,15 @@ class UITable(UIFile, CSVFile):
         elif skip_print:
             readonly = True
 
-        # Calcul du (des) tableau(x)
         schema = form.handler.schema
         vars = form.get_vars()
         floating_vars = form.get_floating_vars()
+
+        # EnumCV est un générateur, repartir de 1
+        if 'CV' in schema:
+            schema['CV'].reset()
+
+        # Calcul du (des) tableau(x)
         tables = []
         tables.append([])
         for i, row in enumerate(self.get_rows()):

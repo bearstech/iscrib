@@ -160,7 +160,7 @@
 "C43Y",,"BDP","C","Int",8,,,,,"C11Y+C12Y+C13Y+C14Y+C17Y+C21Y+C22Y+C23Y+C31Y+C33Y+C41Y",,,,
 "C43Z",,"BDP","C","Int",8,,,,,"C11Z+C12Z+C13Z+C14Z+C17Z+C21Z+C22Z+C23Z+C31Z+C33Z+C41Z+C42Z",,,,
 "C51Z",,"BDP","C","Int",8,,,,,,,,,
-"CV",,"BDP","C","Enum","Radio",,,,,,,,,
+"CV",,"BDP","C","EnumCV","Radio",,,,,,,,,
 "D11X",,"BDP","D","Int",,,,,,,,,,
 "D11Y",,"BDP","D","Int",,,,,,,,,,
 "D11Z",,"BDP","D","Int",,,,,,"D11X+D11Y",,,,

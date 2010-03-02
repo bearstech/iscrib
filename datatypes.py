@@ -23,6 +23,7 @@ from decimal import Decimal as dec, InvalidOperation
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
 from itools.datatypes import String
+from itools.datatypes.primitive import enumerate_get_namespace
 from itools.handlers import checkid
 
 
@@ -654,6 +655,40 @@ class EnumBoolean(Enumerate):
 
 
 
+class EnumCV(Enumerate):
+    default = ''
+    counter = 1
+
+    @classmethod
+    def get_options(cls):
+        yield {'name': str(cls.counter), 'value': unicode(cls.counter)}
+        cls.counter += 1
+        if cls.counter == 6:
+            cls.counter = 7
+
+
+    @classmethod
+    def is_valid(cls, name):
+        return name.isdigit()
+
+
+    @classmethod
+    def get_value(cls, name, default=None):
+        return unicode(name)
+
+
+    @classmethod
+    def get_namespace(cls, name):
+        options = list(cls.get_options())
+        return enumerate_get_namespace(options, name)
+
+
+    @classmethod
+    def reset(cls):
+        cls.counter = 1
+
+
+
 class SqlEnumerate(Enumerate):
     default = ''
 
@@ -806,6 +841,8 @@ class Identifiant(String):
 
     @staticmethod
     def is_valid(value):
+        if not value[:2] == 'BM':
+            return False
         try:
             # 'BM123' -> 123
             int(value[2:])

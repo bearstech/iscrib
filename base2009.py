@@ -31,7 +31,7 @@ from ikaaro.registry import register_field
 # Import from scrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
-from datatypes import make_enumerate
+from datatypes import EnumCV, make_enumerate
 from form import quote_sql, FormHandler, Form
 from utils import parse_control
 
@@ -46,7 +46,8 @@ dt_mapping = {
     'jj/mm/aaaa': NumDate,
     'mm/aaaa': NumShortDate,
     'str': Unicode,
-    'text': Text}
+    'text': Text,
+    'enumcv': EnumCV}
 
 
 def get_schema_pages(path):
