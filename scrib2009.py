@@ -128,47 +128,37 @@ class Scrib2009(WebSite):
                 WebPage._make_resource(WebPage, folder, '%s/%s' % (name, id),
                         title={'fr': title}, state='public', language='fr',
                         body=file.read())
-        # BM
-        print "Création des BM..."
-        Forms._make_resource(Forms, folder, "%s/bm" % name,
-                             title={'fr': u"BM"})
+        # BM et BDP
         users_csv = UsersCSV(get_abspath('%s/users.csv' % base_path))
-        rows = users_csv.search(categorie='BM')
-        meter = ProgressMeter(len(rows))
-        for i, row in enumerate(users_csv.get_rows(rows)):
-            code_ua = row.get_value('code_ua')
-            title = row.get_value('nom')
-            departement = row.get_value('departement')
-            bm_class = cls.bm_class
-            # 0008082 handler avec données de la table adresse09
-            try:
-                adresse = get_adresse(code_ua, 'adresse%s' % str(annee)[-2:],
-                        target=target)
-            except KeyError, e:
-                print str(e)
-                adresse = {}
-            handler = bm_class.class_handler(A100=code_ua, **adresse)
-            bm_class._make_resource(cls.bm_class, folder,
-                    '%s/bm/%s' % (name, code_ua), body=handler.to_str(),
-                    code_ua=code_ua, departement=departement,
-                    title={'fr': title})
-            meter.show(i)
-        print "Création des BDP..."
-        Forms._make_resource(Forms, folder, "%s/bdp" % name,
-                             title={'fr': u"BDP"})
-        rows = users_csv.search(categorie='BDP')
-        meter = ProgressMeter(len(rows))
-        for i, row in enumerate(users_csv.get_rows(rows)):
-            code_ua = row.get_value('code_ua')
-            title = row.get_value('nom')
-            departement = row.get_value('departement')
-            bdp_class = cls.bdp_class
-            handler = bdp_class.class_handler(**{'0': code_ua})
-            bdp_class._make_resource(cls.bdp_class, folder,
-                    '%s/bdp/%s' % (name, code_ua), body=handler.to_str(),
-                    code_ua=code_ua, departement=departement,
-                    title={'fr': title})
-            meter.show(i)
+        for kind, form_class in [('BM', cls.bm_class),
+                ('BDP', cls.bdp_class)]:
+            path = kind.lower()
+            print "Création des %s..." % kind
+            Forms._make_resource(Forms, folder, "%s/%s" % (name, path),
+                                 title={'fr': unicode(kind)})
+            rows = users_csv.search(categorie=kind)
+            meter = ProgressMeter(len(rows))
+            for i, row in enumerate(users_csv.get_rows(rows)):
+                code_ua = row.get_value('code_ua')
+                title = row.get_value('nom')
+                departement = row.get_value('departement')
+                # 0008082 handler avec données de la table adresse09
+                try:
+                    kw = get_adresse(code_ua,
+                            'adresse%s' % str(annee)[-2:], target=target)
+                except KeyError, e:
+                    print str(e)
+                    kw = {}
+                if kind == 'BM':
+                    kw['A100'] = code_ua
+                else:
+                    kw['0'] = code_ua
+                handler = form_class.class_handler(**kw)
+                form_class._make_resource(form_class, folder,
+                    '%s/%s/%s' % (name, path, code_ua),
+                    body=handler.to_str(), code_ua=code_ua,
+                    departement=departement, title={'fr': title})
+                meter.show(i)
         # Compte spécial VoirSCRIB
         print "Création du compte VoirSCRIB..."
         try:

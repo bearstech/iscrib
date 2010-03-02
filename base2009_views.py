@@ -198,9 +198,9 @@ class Base2009Form_New(NewInstance):
         name = str(code_ua)
         app = context.site_root
         year = app.get_year_suffix()
+        kw = get_adresse(code_ua, 'adresse%s' % year, context=context)
         if resource.is_bm():
             cls = app.bm_class
-            kw = get_adresse(code_ua, 'adresse%s' % year, context=context)
             kw['A100'] = code_ua
         else:
             cls = app.bdp_class
