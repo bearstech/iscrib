@@ -51,8 +51,8 @@ class BM2009Form_Send(Base2009Form_Send):
 
     def get_namespace(self, resource, context):
         namespace = Base2009Form_Send.get_namespace(self, resource, context)
-        errors = namespace['errors']
-        warnings = namespace['warnings']
+        errors = namespace['controls']['errors']
+        warnings = namespace['controls']['warnings']
         pageb = resource.get_pageb()
         for form in pageb.get_resources():
             title = form.get_title()
