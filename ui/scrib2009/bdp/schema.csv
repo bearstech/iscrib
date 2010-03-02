@@ -1,4 +1,5 @@
 "Variable","Titre","Formulaire (par défaut BM)","page","type","Représentation (par défaut INPUT TEXT)","Taille de champs de saisie (par défaut identique à Représentation)","valeurs autorisées / modalités","Obligatoire (par défaut OUI)","Non Modifiable (par défaut NON)","SOMME","DEPENDANCES","Abrégé (A) / Complet (C) / Les deux (AC) (AC par défaut)","initialisation  (par défaut aucune)","Nom variable n-1 dans ADRESSE08"
+0,"Copie de code UA pour affichage page 0","BDP",0,"Int",,,,,"OUI",,,,"code_ua",
 1,"Nom ","BDP",0,"Str",,,,,,,,,,
 2,"Nom (suite)","BDP",0,"Str",,,,,,,,,,
 3,"?","BDP",0,"Str",,,,,,,,,,
