@@ -31,7 +31,7 @@ from ikaaro.skins import UIFile
 
 # Import from scrib
 from datatypes import Numeric, NumTime, Text, EnumBoolean
-from form import SENT, EXPORTED
+from workflow import SENT, EXPORTED
 
 
 NBSP = u"\u00a0".encode('utf8')
@@ -228,13 +228,10 @@ def text_widget(context, form, datatype, name, value, readonly,
 
 def get_input_widget(name, form, context, tabindex=None, readonly=False):
     handler = form.handler
+    # Always take data from the handler, we store wrong values anyway
+    value = handler.get_value(name)
     datatype = handler.schema[name]
     readonly =  readonly or datatype.readonly
-    # Take data from the request or from the form
-    if context.has_form_value(name):
-        value = context.get_form_value(name)
-    else:
-        value = handler.get_value(name)
     representation = datatype.representation.upper()
     if representation == 'SELECT':
         return select_widget(context, form, datatype, name, value, readonly)

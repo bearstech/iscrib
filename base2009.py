@@ -238,7 +238,7 @@ class Base2009Form(Form):
                 except ZeroDivisionError:
                     # Division par zéro toléré
                     value = None
-                except InvalidOperation:
+                except (InvalidOperation, ValueError):
                     # Champs vides tolérés
                     value = None
                 title = unicode(title, 'utf8')

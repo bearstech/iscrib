@@ -319,6 +319,19 @@ class Numeric(object):
         raise NotImplementedError
 
 
+    def __bool__(self):
+        # FIXME seulement dans Python 3 ?
+        raise NotImplementedError
+
+
+    def __nonzero__(self):
+        return bool(self.value)
+
+
+    def __len__(self):
+        raise NotImplementedError
+
+
 
 class NumDecimal(Numeric):
 

@@ -120,12 +120,14 @@ class FormHandler(FileHandler):
 
     @classmethod
     def sum(cls, datatype, formula, **kw):
-        sum = datatype(0)
+        sum = datatype.decode(0)
         for term in formula.split('+'):
             term = term.strip()
             try:
                 data = kw[term]
             except KeyError:
+                return None
+            if not data:
                 return None
             if data.upper() == 'NC':
                 return 'NC'

@@ -81,7 +81,7 @@ class Form_View(STLForm):
                             # Raw form, not the filtered one
                             **context.request.get_form())
                     # Sum inputed
-                    if data and data != expected:
+                    if data and value != expected:
                         # What we got was OK so blame the user
                         if expected is not None:
                             bad_types.append(key)
