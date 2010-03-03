@@ -22,7 +22,6 @@ from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
-from itools.datatypes import String
 from itools.datatypes.primitive import enumerate_get_namespace
 from itools.handlers import checkid
 
@@ -850,15 +849,23 @@ def make_enumerate(raw):
 
 
 
-class Identifiant(String):
+class Identifiant(DataType):
+
+    @staticmethod
+    def encode(value):
+        if value is None:
+            return ''
+        return '%s%s' % value
+
+
+    @staticmethod
+    def decode(data):
+        if data[:2] == 'BM':
+            return data[:2], int(data[2:])
+        return data[:3], int(data[3:])
+
 
     @staticmethod
     def is_valid(value):
-        if not value[:2] == 'BM':
-            return False
-        try:
-            # 'BM123' -> 123
-            int(value[2:])
-        except ValueError:
-            return False
-        return True
+        categorie, code_ua = value
+        return categorie in ('BM', 'BDP')

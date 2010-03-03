@@ -153,7 +153,7 @@ class Scrib_Register(AutoForm):
 
     def is_valid(self, resource, context, form):
         email = form['email']
-        identifiant = form['identifiant']
+        categorie, code_ua = form['identifiant']
 
         # Do we already have a user with that email?
         root = context.root
@@ -164,8 +164,8 @@ class Scrib_Register(AutoForm):
             return False
 
         # Is the code_ua valid?
-        code_ua = int(identifiant[2:])
-        form = resource.get_resource('bm/%s' % code_ua, soft=True)
+        form = resource.get_resource('%s/%s' % (categorie.lower(), code_ua),
+                soft=True)
         if form is None:
             context.message = ERROR(u"Cet identifiant est invalide.")
             return False
@@ -219,13 +219,15 @@ class Scrib_Confirm(STLForm):
               'confirm_email': Boolean(mandatory=True)}
 
     def get_namespace(self, resource, context):
-        # TODO BM is hard-coded
-        identifiant = context.get_form_value('identifiant')
-        assert identifiant[:2] == 'BM'
-        code_ua = int(identifiant[2:])
-        form = resource.get_resource('bm/%s' % code_ua)
-        return {'email': context.get_form_value('email'),
-                'identifiant': identifiant,
+        categorie, code_ua = context.get_form_value('identifiant',
+                type=Identifiant)
+        form = resource.get_resource('%s/%s' % (categorie.lower(), code_ua))
+        adjectif = (u"municipale" if categorie == 'BM'
+                else u"départementale de prêt")
+        return {'email': context.get_form_value('email', type=Email),
+                'categorie': categorie,
+                'code_ua': code_ua,
+                'adjectif': adjectif,
                 'title': form.get_title()}
 
 
@@ -236,11 +238,9 @@ class Scrib_Confirm(STLForm):
         # Add the user
         email = form['email']
         user = resource.get_resource('/users').set_user(email, password=None)
-        identifiant = form['identifiant']
-        assert identifiant[:2] == 'BM'
-        code_ua = int(identifiant[2:])
-        user.set_property('username', 'BM%s' % code_ua)
-        form = resource.get_resource('bm/%s' % code_ua)
+        categorie, code_ua = form['identifiant']
+        user.set_property('username', '%s%s' % (categorie, code_ua))
+        form = resource.get_resource('%s/%s' % (categorie.lower(), code_ua))
         user.set_property('title', form.get_title(), language='fr')
         user.set_property('code_ua', code_ua)
         user.set_property('departement', form.get_property('departement'))
@@ -251,7 +251,11 @@ class Scrib_Confirm(STLForm):
         user.send_confirmation(context, email)
 
         # Update "mel" field
-        form.handler.set_value('A114', email)
+        handler = form.handler
+        if categorie == 'BM':
+            handler.set_value('A114', email)
+        else:
+            handler.set_value('11', email)
 
         # Bring the user to the login form
         message = (u"<p>Un mél de confirmation vient de vous être envoyé à "

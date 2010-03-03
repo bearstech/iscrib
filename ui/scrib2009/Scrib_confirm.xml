@@ -7,9 +7,10 @@
   <form action=";confirm" method="post">
     <p>
       <input type="checkbox" name="confirm_identifiant" value="1"/>Oui, je
-      confirme que mon identifiant est <strong>${identifiant}</strong> et que
-      je suis chargé de la saisie des données pour la bibliothèque municipale
-      de <strong>${title}</strong>.
+      confirme que mon identifiant est
+      <strong>${categorie}${code_ua}</strong> et que je suis chargé de la
+      saisie des données pour la bibliothèque ${adjectif} de
+      <strong>${title}</strong>.
     </p>
     <p>
       <input type="checkbox" name="confirm_email" value="1"/>Oui, je
@@ -20,7 +21,7 @@
       mél ${email}.
     </p>
     <input type="hidden" name="email" value="${email}"/>
-    <input type="hidden" name="identifiant" value="${identifiant}"/>
+    <input type="hidden" name="identifiant" value="${categorie}${code_ua}"/>
     <input value="Créer mon compte" class="button-ok" type="submit"/>
   </form>
 
