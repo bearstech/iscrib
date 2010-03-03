@@ -146,7 +146,14 @@ def SI(condition, iftrue, iffalse=True):
 
 
 def parse_control(title):
-    # FIXME documenter...
+    """Découpe le titre du contrôle pour remplacer les patterns du type ::
+
+        « A123 : mauvaise valeur [A123] »
+
+    par ::
+
+        « A123 : mauvaise valeur [toto] »
+    """
     generator = enumerate(title)
     end = 0
     for start, char in generator:
