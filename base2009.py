@@ -216,10 +216,22 @@ class Base2009Form(Form):
                 continue
             if page in exclude:
                 continue
-            expr = expr.strip()
+            # Risque d'espaces insécables autour des guillemets
+            expr = expr.replace(' ', ' ').strip()
             if not expr:
                 continue
-            # Le contrôle contient des formules
+            try:
+                value = eval(expr, self.get_vars())
+            except ZeroDivisionError:
+                # Division par zéro toléré
+                value = None
+            except (InvalidOperation, ValueError):
+                # Champs vides tolérés
+                value = None
+            # Passed
+            if value is True:
+                continue
+            # Le titre contient des formules
             if '[' in title:
                 expanded = []
                 for is_expr, token in parse_control(title):
@@ -233,18 +245,7 @@ class Base2009Form(Form):
                         expanded.append(unicode(value))
                 title = u"".join(expanded)
             else:
-                try:
-                    value = eval(expr, self.get_vars())
-                except ZeroDivisionError:
-                    # Division par zéro toléré
-                    value = None
-                except (InvalidOperation, ValueError):
-                    # Champs vides tolérés
-                    value = None
                 title = unicode(title, 'utf8')
-            # Passed
-            if value is True:
-                continue
             yield {'number': number, 'title': title, 'expr': expr, 'level':
                     level, 'page': page,
                     'debug': u"'%s' = '%s'" % (unicode(expr, 'utf8'), value)}

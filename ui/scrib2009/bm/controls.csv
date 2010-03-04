@@ -93,4 +93,4 @@
 90,"B113 est obligatoire pour la bibliothèque [B101] ","SI( B101 !=  """"  , B113 != """" )",2,"B"
 91,"B114 est obligatoire pour la bibliothèque [B101] ","SI( B101 !=  """"  , B114 != """" )",2,"B"
 92,"B115 est obligatoire pour la bibliothèque [B101] ","SI( B101 !=   """"  , B115 != """" )",2,"B"
-93,"B116 est obligatoire pour la bibliothèque [B101] ","SI( B101 !=  """" , B116 != """" ')",2,"B"
+93,"B116 est obligatoire pour la bibliothèque [B101] ","SI( B101 !=  """" , B116 != """" )",2,"B"
