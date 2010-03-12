@@ -37,12 +37,11 @@ class User_Home(STLView):
     def get_namespace(self, resource, context):
         namespace = {}
         app = context.site_root
-        departement = resource.get_property('departement')
+        code_ua = resource.get_property('code_ua')
         if resource.is_bm():
-            code_ua = resource.get_property('code_ua')
             form = app.get_resource('bm/%s' % code_ua)
         elif resource.is_bdp():
-            form = app.get_resource('bdp/%s' % departement)
+            form = app.get_resource('bdp/%s' % code_ua)
         else:
             form = None
         if form is not None:
@@ -50,6 +49,7 @@ class User_Home(STLView):
         else:
             namespace['form_url'] = None
         namespace['application'] = app.get_title()
+        departement = resource.get_property('departement')
         namespace['departement'] = Departements.get_value(departement)
         namespace['email'] = resource.get_property('email')
         namespace['username'] = resource.get_property('username')

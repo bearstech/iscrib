@@ -90,11 +90,11 @@ class Forms_SearchForm(Folder_BrowseContent):
         # The format (BM or BDP)
         if resource.is_bm():
             query.append(PhraseQuery('is_bm', True))
-            # The code UA
-            if code_ua:
-                query.append(PhraseQuery('code_ua', code_ua))
         else:
             query.append(PhraseQuery('is_bdp', True))
+        # The code UA
+        if code_ua:
+            query.append(PhraseQuery('code_ua', code_ua))
         # The departement
         if dep:
             query.append(PhraseQuery('departement', dep))

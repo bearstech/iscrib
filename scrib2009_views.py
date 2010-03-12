@@ -153,7 +153,7 @@ class Scrib_Register(AutoForm):
 
     def is_valid(self, resource, context, form):
         email = form['email']
-        categorie, code_ua = form['identifiant']
+        categorie, identifiant = form['identifiant']
 
         # Do we already have a user with that email?
         root = context.root
@@ -163,17 +163,15 @@ class Scrib_Register(AutoForm):
                     u"le rappel de mot de passe")
             return False
 
-        # Is the code_ua valid?
-        form = resource.get_resource('%s/%s' % (categorie.lower(), code_ua),
-                soft=True)
-        if form is None:
+        # Is the identifiant valid?
+        if resource.get_scrib_form(categorie, identifiant, context) is None:
             context.message = ERROR(u"Cet identifiant est invalide.")
             return False
 
-        # Do we already have a user with that code_ua?
-        results = root.search(format='user', code_ua=code_ua)
-        if len(results):
-            # Same email already tested so it's another one with the code_ua
+        # Do we already have a user with that identifiant?
+        if (resource.get_scrib_user(categorie, identifiant, context)
+                is not None):
+            # Same email already tested so it's another one
             context.message = ERROR(u"Cet identifiant est enregistré par un "
                     u"autre utilisateur.")
             return False
@@ -219,16 +217,16 @@ class Scrib_Confirm(STLForm):
               'confirm_email': Boolean(mandatory=True)}
 
     def get_namespace(self, resource, context):
-        categorie, code_ua = context.get_form_value('identifiant',
+        categorie, identifiant = context.get_form_value('identifiant',
                 type=Identifiant)
-        form = resource.get_resource('%s/%s' % (categorie.lower(), code_ua))
+        form = resource.get_scrib_form(categorie, identifiant, context)
         adjectif = (u"municipale" if categorie == 'BM'
                 else u"départementale de prêt")
         return {'email': context.get_form_value('email', type=Email),
                 'categorie': categorie,
-                'code_ua': code_ua,
+                'identifiant': identifiant,
                 'adjectif': adjectif,
-                'title': form.get_title()}
+                'title': form.title_fr}
 
 
     def action(self, resource, context, form):
@@ -238,29 +236,31 @@ class Scrib_Confirm(STLForm):
         # Add the user
         email = form['email']
         user = resource.get_resource('/users').set_user(email, password=None)
-        categorie, code_ua = form['identifiant']
-        user.set_property('username', '%s%s' % (categorie, code_ua))
-        form = resource.get_resource('%s/%s' % (categorie.lower(), code_ua))
-        user.set_property('title', form.get_title(), language='fr')
-        user.set_property('code_ua', code_ua)
-        user.set_property('departement', form.get_property('departement'))
+        categorie, identifiant = form['identifiant']
+        user.set_property('username', '%s%s' % (categorie, identifiant))
+        brain = resource.get_scrib_form(categorie, identifiant, context)
+        user.set_property('title', brain.title_fr, language='fr')
+        user.set_property('code_ua', brain.code_ua)
+        user.set_property('departement', brain.departement)
         # Set the role
         resource.set_user_role(user.name, 'members')
 
-        # Send confirmation email
-        user.send_confirmation(context, email)
-
         # Update "mel" field
+        form = context.root.get_resource(brain.abspath)
         handler = form.handler
         if categorie == 'BM':
             handler.set_value('A114', email)
         else:
             handler.set_value('11', email)
 
+        # Send confirmation email
+        user.send_confirmation(context, email)
+
         # Bring the user to the login form
         message = (u"<p>Un mél de confirmation vient de vous être envoyé à "
                 u"l'adresse <strong>{email}</strong>.</p><p>Suivez ses "
-                u"instructions pour activer votre compte.</p>".format(email=email))
+                u"instructions pour activer votre "
+                u"compte.</p>".format(email=email))
         return XMLParser(message.encode('utf-8'))
 
 
@@ -344,7 +344,6 @@ class Scrib_ExportSql(STLForm):
             return
 
         context.message = INFO(u"Table bm{year} créée.", year=year)
-
 
 
     def action_annexes(self, resource, context, form):

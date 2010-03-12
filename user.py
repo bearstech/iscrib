@@ -37,6 +37,7 @@ class ScribUser(User):
     # Views
     home = User_Home() # Si besoin déplacer dans la BM/BDP
     edit_account = ScribUser_EditAccount(access='is_admin')
+    edit = None
 
 
     @classmethod
@@ -49,7 +50,8 @@ class ScribUser(User):
 
     def _get_catalog_values(self):
         return merge_dicts(User._get_catalog_values(self),
-                code_ua=self.get_property('code_ua'))
+                code_ua=self.get_property('code_ua'),
+                departement=self.get_property('departement'))
 
 
     # Affiche le nom de la ville, pas l'identifiant

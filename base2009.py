@@ -278,4 +278,4 @@ class Base2009Form(Form):
 ###########################################################################
 # Register
 register_field('code_ua', Integer(is_indexed=True, is_stored=True))
-register_field('departement', Unicode(is_indexed=True, is_stored=True))
+register_field('departement', String(is_indexed=True, is_stored=True))

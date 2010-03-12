@@ -828,6 +828,14 @@ class Departements(Enumerate):
         {'name': '988', 'value': "Nouvelle-Calédonie"}]
 
 
+    @staticmethod
+    def decode(data):
+        if len(data) == 1:
+            # "1" -> "01"
+            return '0' + data
+        return data
+
+
 
 class WorkflowState(Enumerate):
     options = [
@@ -861,8 +869,14 @@ class Identifiant(DataType):
     @staticmethod
     def decode(data):
         if data[:2] == 'BM':
+            # ('BM', code_ua)
             return data[:2], int(data[2:])
-        return data[:3], int(data[3:])
+        # ('BDP', departement)
+        departement = data[3:]
+        if len(departement) == 1:
+            # "1" -> "01"
+            departement = '0' + departement
+        return data[:3], departement
 
 
     @staticmethod

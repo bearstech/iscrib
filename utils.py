@@ -29,6 +29,9 @@ from itools.web import ERROR
 # Import from ikaaro
 from ikaaro.config import ServerConfig
 
+# Import from scrib
+from datatypes import Departements
+
 
 class ProgressMeter(object):
     last_percent = 0
@@ -51,7 +54,7 @@ class UsersCSV(CSVFile):
               'code_ua': Integer,
               'categorie': String(is_indexed=True),
               'nom': Unicode,
-              'departement': String, # Corse « 2A » et « 2B »
+              'departement': Departements,
               'id': String} # Corse « 2A004 »
     columns = ['annee', 'code_ua', 'categorie', 'nom', 'departement', 'id']
 

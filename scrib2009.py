@@ -291,6 +291,29 @@ class Scrib2009(WebSite):
         return str(self.get_property('annee'))[-2:]
 
 
+    def get_scrib_user(self, categorie, identifiant, context):
+        if categorie == 'BM':
+            results = context.root.search(format='user', code_ua=identifiant)
+        else:
+            results = context.root.search(format='user',
+                    departement=identifiant)
+        if len(results):
+            return results.get_documents()[0]
+        return None
+
+
+    def get_scrib_form(self, categorie, identifiant, context):
+        if categorie == 'BM':
+            results = context.root.search(format=self.bm_class.class_id,
+                    code_ua=identifiant)
+        else:
+            results = context.root.search(format=self.bdp_class.class_id,
+                    departement=identifiant)
+        if len(results):
+            return results.get_documents()[0]
+        return None
+
+
 ###########################################################################
 # Register
 register_resource_class(Scrib2009)

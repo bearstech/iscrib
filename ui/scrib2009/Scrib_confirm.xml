@@ -8,7 +8,7 @@
     <p>
       <input type="checkbox" name="confirm_identifiant" value="1"/>Oui, je
       confirme que mon identifiant est
-      <strong>${categorie}${code_ua}</strong> et que je suis chargé de la
+      <strong>${categorie}${identifiant}</strong> et que je suis chargé de la
       saisie des données pour la bibliothèque ${adjectif} de
       <strong>${title}</strong>.
     </p>
@@ -21,7 +21,8 @@
       mél ${email}.
     </p>
     <input type="hidden" name="email" value="${email}"/>
-    <input type="hidden" name="identifiant" value="${categorie}${code_ua}"/>
+    <input type="hidden" name="identifiant"
+      value="${categorie}${identifiant}"/>
     <input value="Créer mon compte" class="button-ok" type="submit"/>
   </form>
 
