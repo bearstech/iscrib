@@ -1,7 +1,7 @@
 "*G- RÉSEAU SPÉCIFIQUE ",,,,,,
 ,,,,,,
 "**G.1 / 2 DÉPÔTS DANS LES COLLECTIVITÉS (Public spécifique)",,,,,,
-,"Nb de collectivités V","Nb de documents déposés dans l'année W","Nb de documents en dépôt au 31.12.08 X","Nb d'inscrits Y","Nb de prêts (1) Z",
+,"Nb de collectivités V","Nb de documents déposés dans l'année W","Nb de documents en dépôt au 31.12.09 X","Population touchée estimée Y","Nb de prêts (1) Z",
 "Ecoles","#G11V","#G11W","#G11X","#G11Y","#G11Z","G11"
 "Collèges","#G12V","#G12W","#G12X","#G12Y","#G12Z","G12"
 "Lycées","#G13V","#G13W","#G13X","#G13Y","#G13Z","G13"
@@ -16,7 +16,7 @@
 "TOTAL (G11 à G21)","#G22V","#G22W","#G22X","#G22Y","#G22Z","G22"
 ,,,,,,
 "**G. 3 / 4 PRÊT DIRECT (Public spécifique)",,,,,,
-,,,"Nb de lieux de stationnement X","Nb d'inscrits Y","Nb de prêts Z",
+,,,"Nb de lieux de stationnement X","Population touchée estimée Y","Nb de prêts Z",
 "Ecoles",,,"#G31X","#G31Y","#G31Z","G31"
 "Collèges",,,"#G32X","#G32Y","#G32Z","G32"
 "Lycées",,,"#G33X","#G33Y","#G33Z","G33"

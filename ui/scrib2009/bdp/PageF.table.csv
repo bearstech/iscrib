@@ -18,12 +18,12 @@
 "communes desservies par plusieurs modes de desserte (ex BM + prêt direct)",,,,,"F21"
 ,,,,,
 "**F. 3 DÉPÔTS DE LA BDP",,,,,
-,,,"Nombre de documents déposés dans l'année Y","Nombre de documents en dépôt au 31.12.08 Z",
+,,,"Nombre de documents déposés dans l'année Y","Nombre de documents en dépôt au 31.12.09 Z",
 "Imprimés adultes",,,"#F31Y","#F31Z","F31"
 "Imprimés enfants",,,"#F32Y","#F32Z","F32"
 "TOTAL ( F31 + F32)",,,"#F33Y","#F33Z","F33"
-"Phonogrammes",,,"#F34Y","#F34Z","F34"
-"Vidéogrammes",,,"#F35Y","#F35Z","F35"
+"Documents sonores",,,"#F34Y","#F34Z","F34"
+"Vidéos",,,"#F35Y","#F35Z","F35"
 "Cédéroms",,,"#F36Y","#F36Z","F36"
 "Autres documents",,,"#F37Y","#F37Z","F37"
 "TOTAL (F33 à F37 )",,,"#F38Y","#F38Z","F38"
@@ -37,17 +37,19 @@
 "Dépôts tous publics","#F45W","#F45X","#F45Y",,"F45"
 "TOTAL (F41 à F45 )","#F46W","#F46X","#F46Y",,"F46"
 ,,,,,
-"**F. 5 ACTIVITÉS DU RÉSEAU TOUS PUBLICS : INSCRITS",,,,,
-"Nombre d'inscrits enfants",,,,,
+"**F. 5 ACTIVITÉS DU RÉSEAU TOUS PUBLICS : INSCRITS ACTIFS",,,,,
+,,,,,
+"***Nombre d'inscrits actifs enfants",,,,,
 ,"BDP/Annexes ouvertes à tous publics W","Bibliobus de prêts direct X","Réseau public Y","Total Z",
 "0-14 ans","#F51W","#F51X","#F51Y","#F51Z","F51"
-"Nombre d'inscrits adultes",,,,,
+,,,,,
+"***Nombre d'inscrits actifs adultes",,,,,
 ,"BDP/Annexes ouvertes à tous publics W","Bibliobus de prêts direct X","Réseau public Y","Total Z",
-"15-24 ans","#F52W","#F52X","#F52Y","#F52Z","F52"
-"25-59 ans","#F53W","#F53X","#F53Y","#F53Z","F53"
-"60 ans et +","#F54W","#F54X","#F54Y","#F54Z","F54"
-"TOTAL Adultes","#F55W","#F55X","#F55Y","#F55Z","F55"
-"TOTAL DES INSCRITS (F51 + F55)","#F56W","#F56X","#F56Y","#F56Z","F56"
+"15-64 ans","#F57W","#F57X","#F57Y","#F57Z","F57"
+"65 ans et +","#F58W","#F58X","#F58Y","#F58Z","F58"
+"TOTAL Adultes actifs","#F55W","#F55X","#F55Y","#F55Z","F55"
+,,,,,
+"TOTAL DES INSCRITS ACTIFS (F51 + F55)","#F56W","#F56X","#F56Y","#F56Z","F56"
 ,,,,,
 "**F. 6 ACTIVITÉS DU RÉSEAU TOUS PUBLICS : NOMBRE DE PRÊTS (1)",,,,,
 ,"BDP/Annexes ouvertes à tous publics W","Bibliobus de prêts direct X","Réseau public Y","Total Z",
@@ -55,8 +57,8 @@
 "Prêts de livres enfants","#F62W","#F62X","#F62Y","#F62Z","F62"
 "TOTAL (F61+F62)","#F63W","#F63X","#F63Y","#F63Z","F63"
 "Prêts de périodiques","#F64W","#F64X","#F64Y","#F64Z","F64"
-"Prêts de phonogrammes","#F65W","#F65X","#F65Y","#F65Z","F65"
-"Prêts de vidéogrammes","#F66W","#F66X","#F66Y","#F66Z","F66"
+"Prêts de documents sonores","#F65W","#F65X","#F65Y","#F65Z","F65"
+"Prêts de vidéos","#F66W","#F66X","#F66Y","#F66Z","F66"
 "Prêts de cédéroms","#F67W","#F67X","#F67Y","#F67Z","F67"
 "Prêts d'autres documents","#F68W","#F68X","#F68Y","#F68Z","F68"
 "TOTAL DES PRÊTS (F63 à F68)","#F69W","#F69X","#F69Y","#F69Z","F69"

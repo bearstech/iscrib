@@ -1,15 +1,17 @@
 "*H. SERVICES ",,,,,,,
 ,,,,,,,
 "**H. 1 SERVICES À DISTANCE POUR LES BIBLIOTHÈQUES DU RÉSEAU",,,,,,,
-"La bibliothèque a-t-elle un site Web?:",,,,,,"#H11","H11"
-"Si oui : adresse URL à préciser en 1ère page",,,,,,,
+"La bibliothèque a-t-elle un site Internet?:",,,,,,"#H11","H11"
 "Ce site donne-t-il accès au catalogue de la bibliothèque?",,,,,,"#H12","H12"
-"Quels services sont offerts aux bibliothèques du réseau sur le site web? (cocher les cases)",,,,,,,
-"consultation du catalogue",,,,,,"#H13","H13"
+,,,,,,,
+"***Quels services sont offerts aux bibliothèques du réseau sur le site Internet? (cocher les cases)",,,,,,,
+"Consultation du catalogue",,,,,,"#H13","H13"
 "Réservation en ligne",,,,,,"#H14","H14"
 "Consultation du compte lecteur",,,,,,"#H15","H15"
 "Autres",,,,,,"#H16","H16"
 "Si autres, préciser",,,,,,"#H19","H19"
+,,,,,,,
+"***Consultation du site : ",,,,,,,
 "Nb de sessions/an (à distance)",,,,,,"#H17","H17"
 "Nb de pages vues/an (à distance)",,,,,,"#H18","H18"
 ,,,,,,,
@@ -39,7 +41,7 @@
 ,"Informatique",,,,,,"H78"
 ,,,,,,,
 "Acquisition de documents ","Imprimés","#H35V","#H35W","#H35X","#H35Y","#H35Z","H35"
-,"Phonogrammes","#H36V","#H36W","#H36X","#H36Y","#H36Z","H36"
+,"Documents sonores","#H36V","#H36W","#H36X","#H36Y","#H36Z","H36"
 ,"Multimédia","#H37V","#H37W","#H37X","#H37Y","#H37Z","H37"
 ,,,,,,,
 "Animation",,"#H38V","#H38W","#H38X","#H38Y","#H38Z","H38"
@@ -53,7 +55,7 @@
 "Equipement multimédia",,,,"#H44X","#H44Y","#H44Z","H44"
 ,,,,,,,
 "Acquisition de documents","Imprimés",,,"#H45X","#H45Y","#H45Z","H45"
-,"Phonogrammes",,,"#H46X","#H46Y","#H46Z","H46"
+,"Documents sonores",,,"#H46X","#H46Y","#H46Z","H46"
 ,"Multimédia",,,"#H47X","#H47Y","#H47Z","H47"
 ,,,,,,,
 "Conservation de collections",,,,,,,"H79"
@@ -68,7 +70,7 @@
 "Nb de demandes reçues",,,,,,"#H52","H52"
 "Nb de demandes satisfaites",,,,,,"#H53","H53"
 "Portage de documents par navette",,,,,,"#H54","H54"
-"Prêt Inter Bibliothèques",,,,,,"#H55","H55"
+"Prêt entre Bibliothèques",,,,,,"#H55","H55"
 "Si oui",,,,,,,
 "Nb de demandes reçues",,,,,,"#H56","H56"
 "Nb de demandes satisfaites",,,,,,"#H57","H57"

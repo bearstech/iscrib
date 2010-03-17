@@ -1,7 +1,7 @@
 "*IDENTITÉ",,,,,,
 "Code","#0",,,,,
 "Nom ","#1",1,,,,
-,"#2",2,,,,
+"Complément de nom","#2",2,,,,
 "Complément d'adresse","#30",30,,,,
 "N°/Type voie/Nom voie","#31",31,"#32",32,"#33",33
 "Code postal / Ville ","#4",4,"#5",5,,
@@ -9,6 +9,6 @@
 "Nom et prénom du directeur ou du directeur par intérim","#7",7,,,,
 "Statut et Grade du Directeur ou du directeur par intérim","#8",8,,,,
 "Téléphone","#9",9,,,,
-"Télécopie","#10",10,,,,
+"Fax","#10",10,,,,
 "Courriel","#11",11,,,,
-"Site Web","#12",12,,,,
+"Site Internet","#12",12,,,,

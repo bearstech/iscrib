@@ -1,6 +1,6 @@
 "*B LOCAUX - VÉHICULES - ÉQUIPEMENT INFORMATIQUE ",,,,
 ,,,,
-"**B.1 LOCAUX : BDP et réseau (surface en m² SHON- hors oeuvre nette)",,,,
+"**B.1 LOCAUX : BDP et réseau (surface utile en m²)",,,,
 ,"Centrale X","Annexes Y","Total Z",
 "Surface de la BDP (services publics et intérieurs confondus)","#B11X","#B11Y","#B11Z","B11"
 "Nombre de bâtiments de la BDP","#B16X","#B16Y","#B16Z","B16"

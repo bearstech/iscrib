@@ -1,14 +1,14 @@
-"*C - PERSONNEL EN POSTE AU 31 DECEMBRE 2008 ",,,,,,,,,,
+"*C - PERSONNEL EN POSTE AU 31 DECEMBRE 2009 ",,,,,,,,,,
 ,,,,,,,,,,
 "**C.1 FONCTION PUBLIQUE : FILIERE CULTURELLE",,,,,,,,,,
 ,,"BDP",,,,"RESEAU PUBLIC",,,,
-,,"Nb de personnes","Nb d'emplois d'ETP (1) (ex: 2.5)","Nb de personnes ayant suivi une formation dans l'année","Responsable de la bibliothèque ? (2)","Nb de personnes","Nb d'emplois d'ETP (1) (ex: 2.5)","Nb de personnes ayant suivi une formation dans l'année","Nb de responsables par statut",
+,,"Nb de personnes","Nb d'emplois d'ETPT (1) (ex: 2.5)","Nb de personnes ayant suivi une formation dans l'année","Responsable de la bibliothèque ? (2)","Nb de personnes","Nb d'emplois d'ETPT (1) (ex: 2.5)","Nb de personnes ayant suivi une formation dans l'année","Nb de responsables par statut",
 ,,"S","T","U","V","W","X","Y","Z",
 "Conservateurs",,"#C11S","#C11T","#C11U","#CV","#C11W","#C11X","#C11Y","#C11Z","C11"
-"Bibliothécaires",,"#C12S","#C12T","#C12U","#CV","#C12W","#C12X","#C12Y","#C12Z","C12"
+"Bibliothécaires et attachés de conservation",,"#C12S","#C12T","#C12U","#CV","#C12W","#C12X","#C12Y","#C12Z","C12"
 "Assistants qualifiés de conservation",,"#C13S","#C13T","#C13U","#CV","#C13W","#C13X","#C13Y","#C13Z","C13"
 "Assistants de conservation",,"#C14S","#C14T","#C14U","#CV","#C14W","#C14X","#C14Y","#C14Z","C14"
-"Adjoints territorial du patrimoine",,"#C17S","#C17T","#C17U","#CV","#C17W","#C17X","#C17Y","#C17Z","C17"
+"Adjoints territoriaux du patrimoine",,"#C17S","#C17T","#C17U","#CV","#C17W","#C17X","#C17Y","#C17Z","C17"
 ,,,,,,,,,,
 "**C.2 FONCTION PUBLIQUE : AUTRE FILIERE",,,,,,,,,,
 "Personnels d'autres filières (administrative, technique, sociale...)","Cat. A","#C21S","#C21T","#C21U","#CV","#C21W","#C21X","#C21Y","#C21Z","C21"
@@ -27,8 +27,7 @@
 "**TOTAL PERSONNEL EN POSTE",,,,,,,,,,
 "TOTAL (C11 à C42)",,"#C43S","#C43T","#C43U",,"#C43W","#C43X","#C43Y","#C43Z","C43"
 ,,,,,,,,,,
-"NOMBRE TOTAL DE PERSONNES AYANT SUIVI UNE FIA (formation initiale d'application)",,,,,,,,,"#C51Z","C51"
 ,,,,,,,,,,
-"(1) ETP : Equivalent temps plein (Exemle : 2.5) ",,,,,,,,,,
+"(1) ETP : Equivalent temps plein (Exemple : 2.5) ",,,,,,,,,,
 "(2) cocher la case correspondante",,,,,,,,,,
 "(3) PERSONNELS OU BENEVOLES QUALIFIES : personnes ayant suivi des formations (exemple : ABF, BDP, etc)",,,,,,,,,,
