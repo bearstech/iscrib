@@ -45,7 +45,8 @@ from scrib2009_views import Scrib_Register, Scrib_Confirm
 from scrib2009_views import Scrib_ExportSql, Scrib_ChangePassword
 from scrib2009_views import Scrib_ForgottenPassword, Scrib_Importer
 from user import ScribUser
-from utils import UsersCSV, get_config, get_adresse, ProgressMeter
+from utils import UsersCSV, get_config, get_adresse_bm, get_adresse_bdp
+from utils import ProgressMeter
 
 
 class Scrib2009(WebSite):
@@ -143,9 +144,13 @@ class Scrib2009(WebSite):
                 title = row.get_value('nom')
                 departement = row.get_value('departement')
                 # 0008082 handler avec données de la table adresse09
+                if categorie == 'BM':
+                    get_adresse = get_adresse_bm
+                else:
+                    get_adresse = get_adresse_bdp
+                table = 'adresse%s' % str(annee)[-2:]
                 try:
-                    kw = get_adresse(code_ua,
-                            'adresse%s' % str(annee)[-2:], target=target)
+                    kw = get_adresse(code_ua, table, target=target)
                 except KeyError, e:
                     print str(e)
                     kw = {}

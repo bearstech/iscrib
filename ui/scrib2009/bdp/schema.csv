@@ -1,20 +1,20 @@
-"Variable","Titre","Formulaire (par défaut BM)","page","type","Représentation (par défaut INPUT TEXT)","Taille de champs de saisie (par défaut identique à Représentation)","valeurs autorisées / modalités","Obligatoire (par défaut OUI)","Non Modifiable (par défaut NON)","SOMME","DEPENDANCES","Abrégé (A) / Complet (C) / Les deux (AC) (AC par défaut)","initialisation  (par défaut aucune)","Nom variable n-1 dans ADRESSE08"
-0,"Copie de code UA pour affichage page 0","BDP",0,"Int",10,,,,"OUI",,,,,"code_ua"
-1,"Nom ","BDP",0,"Str",60,,,,,,,,,
-2,"Nom (suite)","BDP",0,"Str",60,,,,,,,,,
-30,"Complément d'adresse","BDP",0,"Str",60,,,,,,,,,
-31,"N°","BDP",0,"Str",10,,,,,,,,,
-32,"Type voie","BDP",0,"Str",20,,,,,,,,,
-33,"Nom voie","BDP",0,"Str",60,,,,,,,,,
-4,"Code postal","BDP",0,"digit",5,,,,,,,,,
-5,"Ville","BDP",0,"Str",60,,,,,,,,,
-6,"Cedex","BDP",0,"Str",10,,,,,,,,,
-7,"Nom et prénom du directeur ou du directeur par intérim","BDP",0,"Str",60,,,,,,,,,
-8,"Statut et Grade du Directeur ou du directeur par intérim","BDP",0,"Str",60,,,,,,,,,
-9,"Téléphone","BDP",0,"digit",10,,,,,,,,,
-10,"Fax","BDP",0,"digit",10,,,,,,,,,
+"Variable","Titre","Formulaire (par défaut BM)","page","type","Représentation (par défaut INPUT TEXT)","Taille de champs de saisie (par défaut identique à Représentation)","valeurs autorisées / modalités","Obligatoire (par défaut OUI)","Non Modifiable (par défaut NON)","SOMME","DEPENDANCES","Abrégé (A) / Complet (C) / Les deux (AC) (AC par défaut)","initialisation  (par défaut aucune)","Nom variable n-1 dans ADRESSE09"
+0,"Copie de code UA pour affichage page 0","BDP",0,"Int",10,,,,"OUI",,,,"n-1","code_bib"
+1,"Nom ","BDP",0,"Str",60,,,,,,,,"n-1","libelle1"
+2,"Nom (suite)","BDP",0,"Str",60,,,"N",,,,,"n-1","libelle2"
+30,"Complément d'adresse","BDP",0,"Str",60,,,"N",,,,,"n-1","local "
+31,"N°","BDP",0,"Str",10,,,"N",,,,,"n-1","voie_num"
+32,"Type voie","BDP",0,"Str",20,34,,"N",,,,,"n-1","voie_type"
+33,"Nom voie","BDP",0,"Str",60,,,"N",,,,,"n-1","voie_nom"
+4,"Code postal","BDP",0,"digit",5,10,," ",,,,,"n-1","cpbiblio"
+5,"Ville","BDP",0,"Str",60,40,," ",,,,,"n-1","ville"
+6,"Cedex","BDP",0,"Str",10,,,"N",,,,,"n-1","cedexb"
+7,"Nom et prénom du directeur ou du directeur par intérim","BDP",0,"Str",60,,,,,,,,"n-1","directeu"
+8,"Statut et Grade du Directeur ou du directeur par intérim","BDP",0,"Str",60,,,,,,,,"n-1","st_dir"
+9,"Téléphone","BDP",0,"digit",10,,"0xxxxxxxxx",,,,,,"n-1","tele"
+10,"Fax","BDP",0,"digit",10,,"0xxxxxxxxx",,,,,,"n-1","fax"
 11,"Courriel","BDP",0,"Str",60,,,,,,,,,
-12,"Site Internet","BDP",0,"Str",60,,,,,,,,,
+12,"Site Internet","BDP",0,"Str",60,,,,,,,,"n-1","www"
 "A11",,"BDP","A","Int",10,,,,,,,,,
 "A12",,"BDP","A","Int",10,,,,,,,,,
 "A13",,"BDP","A","Int",10,,,,,,,,,

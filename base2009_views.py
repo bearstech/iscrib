@@ -24,13 +24,12 @@ from itools.web import STLView, STLForm, ERROR
 from ikaaro.access import is_admin
 from ikaaro.forms import TextWidget, BooleanRadio, MultilineWidget
 from ikaaro.messages import MSG_NEW_RESOURCE
-from ikaaro.registry import get_resource_class
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views_new import NewInstance
 
 # Import from scrib
 from form_views import Form_View
-from utils import get_adresse
+from utils import get_adresse_bm, get_adresse_bdp
 
 
 class Base2009Form_View(Form_View):
@@ -198,6 +197,10 @@ class Base2009Form_New(NewInstance):
         name = str(code_ua)
         app = context.site_root
         year = app.get_year_suffix()
+        if resource.is_bm():
+            get_adresse = get_adresse_bm
+        else:
+            get_adresse = get_adresse_bdp
         kw = get_adresse(code_ua, 'adresse%s' % year, context=context)
         if resource.is_bm():
             cls = app.bm_class
