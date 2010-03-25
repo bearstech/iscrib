@@ -100,7 +100,7 @@ def get_schema_pages(path):
         schema[name] = datatype(representation=representation,
                 length=(length.strip() or representation),
                 pages=page_numbers, is_mandatory=is_mandatory,
-                readonly=readonly, sum=sum, dependances=dependances,
+                readonly=readonly, sum=sum, dependances=dependances.split(),
                 sql_field=sql_field)
     return schema, pages
 
@@ -119,22 +119,20 @@ def get_controls(path):
 class Base2009Handler(FormHandler):
 
     def is_disabled_by_dependency(self, name):
-        dep_name = self.schema[name].dependances
-        if not dep_name:
-            return False
-        if self.get_value(dep_name) is not True:
-            return True
-        # Second level
-        dep_dep_name = self.schema[dep_name].dependances
-        if not dep_dep_name:
-            return False
-        return self.get_value(dep_dep_name) is not True
+        for dep_name in self.schema[name].dependances:
+            if self.get_value(dep_name) is not True:
+                return True
+            # Second level
+            for dep_dep_name in self.schema[dep_name].dependances:
+                if self.get_value(dep_dep_name) is not True:
+                    return True
+        return False
 
 
     def get_reverse_dependencies(self, name):
         return [dep_name
                 for dep_name, dep_datatype in self.schema.iteritems()
-                if dep_datatype.dependances == name]
+                if name in dep_datatype.dependances]
 
 
 
