@@ -125,7 +125,8 @@ class Numeric(object):
             if right is None:
                 # left + NC = NC
                 return self.__class__('NC')
-        elif right == '':
+        # 0008535 pas de "elif" pour réévaluer right.value
+        if right == '':
             right = 0
         left = dec(str(self.value))
         right = dec(str(right))
@@ -144,7 +145,7 @@ class Numeric(object):
             if right is None:
                 # left - NC = NC
                 return self.__class__('NC')
-        elif right == '':
+        if right == '':
             right = 0
         left = dec(str(self.value))
         right = dec(str(right))
@@ -179,7 +180,7 @@ class Numeric(object):
             if right is None:
                 # left * NC = NC
                 return self.__class__('NC')
-        elif right == '':
+        if right == '':
             right = 0
         left = dec(str(self.value))
         right = dec(str(right))
@@ -198,7 +199,7 @@ class Numeric(object):
             if right is None:
                 # left / NC = NC
                 return self.__class__('NC')
-        elif right == '':
+        if right == '':
             right = 0
         if right == 0:
             # Pas de division par zéro !
