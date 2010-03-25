@@ -6,4 +6,4 @@
 "E","E91X / E19X = prix moyen d'un vidéogramme","E91X / E19X",1,"E"
 "F","E94X / E22X = prix moyen d'un cédérom","E94X / E22X",1,"E"
 "G","E98X - 10% <= A12 <= E98X +10 % : variation  +/- 10 % des dépenses documentaires","int(E98X) * 0.9 < A12 < int(E98X) * 1.1",2,"E"
-"H","12 URL du site web","SI(H11, locals()['12'].strip() != '')",1,0
+"H","12 L'adresse du site Internet doit être renseigné","SI(H11, locals()['12'].strip() != '''')",1,0
