@@ -18,6 +18,7 @@
 from itools.core import merge_dicts
 from itools.datatypes import Integer, String, Unicode
 from itools.gettext import MSG
+from itools.web import get_context
 from itools.xapian import PhraseQuery, StartQuery, AndQuery
 
 # Import from ikaaro
@@ -44,16 +45,25 @@ class Forms_SearchForm(Folder_BrowseContent):
             'search_state': WorkflowState}
     # Table
     table_actions = []
+    table_columns = [('code_ua', MSG(u"Code ua")),
+                     ('title_fr', MSG(u"Ville")),
+                     ('mtime', MSG(u"Date")),
+                     ('form_state', MSG(u"État"))]
+
+
+    def get_query_schema(self):
+        query_schema = Folder_BrowseContent.get_query_schema(self)
+        if get_context().resource.is_bdp():
+            query_schema['sort_by'] = String(default='departement')
+        return query_schema
 
 
     def get_table_columns(self, resource, context):
-        columns = [('code_ua', MSG(u"Code ua")),
-                   ('title_fr', MSG(u"Ville")),
-                   ('mtime', MSG(u"Date")),
-                   ('form_state', MSG(u"État"))]
-        if resource.is_bdp():
-            columns[1] = ('title_fr', MSG(u"Département"))
-        return columns
+        if resource.is_bm():
+            return self.table_columns
+        return (self.table_columns[:1]
+                + [('departement', MSG(u"Département"))]
+                + self.table_columns[2:])
 
 
     def get_search_namespace(self, resource, context):
@@ -122,6 +132,9 @@ class Forms_SearchForm(Folder_BrowseContent):
         elif column == 'title_fr':
             url = item_brain.name
             return (item_brain.title, url)
+        elif column == 'departement':
+            url = item_brain.name
+            return (Departements.get_value(item_brain.departement), url)
         elif column == 'mtime':
             mtime = item_brain.mtime
             return mtime.strftime('%d-%m-%Y %Hh%M')
