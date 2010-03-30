@@ -15,7 +15,7 @@
 "communes de + 10 000 habitants",,"#F19X","#F19Y",,"F19"
 "groupements de communes de + 10 000 habitants",,"#F20X","#F20Y",,"F20"
 ,,"Nombre de communes X","Population desservie Y",,
-"communes desservies par plusieurs modes de desserte (ex BM + prêt direct)",,,,,"F21"
+"communes desservies par plusieurs modes de desserte (ex BM + prêt direct)",,"#F21X","#F21Y",,"F21"
 ,,,,,
 "**F. 3 DÉPÔTS DE LA BDP",,,,,
 ,,,"Nombre de documents déposés dans l'année Y","Nombre de documents en dépôt au 31.12.09 Z",

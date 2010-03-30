@@ -29,16 +29,16 @@
 "Si autres, préciser",,,,,,"#H30","H30"
 ,,,,,,,
 "**H. 3 SUBVENTIONS DÉPARTEMENTALES AUX COLLECTIVITÉS DANS L'ANNÉE",,,,,,,
-"Un plan départemental de développement de la lecture publique a-t-il été mis en place ?",,,,,,,"H75"
-"Si oui, en quelle année a-t-il été voté par le Conseil général ?",,,,,,,"H76"
+"Un plan départemental de développement de la lecture publique a-t-il été mis en place ?",,,,,,"#H75","H75"
+"Si oui, en quelle année a-t-il été voté par le Conseil général ?",,,,,,"#H76","H76"
 ,,"Subventions du conseil général V","Nb de communes aidées inf. à 10000h W","Montant des aides versées X","Nombre de communes aidées sup. à 10000h Y","Montant des aides versées Z",
 "Construction",,"#H31V","#H31W","#H31X","#H31Y","#H31Z","H31"
 "Aménagement",,"#H32V","#H32W","#H32X","#H32Y","#H32Z","H32"
 "Informatisation",,"#H33V","#H33W","#H33X","#H33Y","#H33Z","H33"
 "Equipement multimedia",,"#H34V","#H34W","#H34X","#H34Y","#H34Z","H34"
 ,,,,,,,
-"Dépôt de matériels dans les bibliothèques du réseau ","Mobilier ",,,,,,"H77"
-,"Informatique",,,,,,"H78"
+"Dépôt de matériels dans les bibliothèques du réseau ","Mobilier ","#H77V","#H77W","#H77X","#H77Y","#H77Z","H77"
+,"Informatique","#H78V","#H78W","#H78X","#H78Y","#H78Z","H78"
 ,,,,,,,
 "Acquisition de documents ","Imprimés","#H35V","#H35W","#H35X","#H35Y","#H35Z","H35"
 ,"Documents sonores","#H36V","#H36W","#H36X","#H36Y","#H36Z","H36"
@@ -58,9 +58,9 @@
 ,"Documents sonores",,,"#H46X","#H46Y","#H46Z","H46"
 ,"Multimédia",,,"#H47X","#H47Y","#H47Z","H47"
 ,,,,,,,
-"Conservation de collections",,,,,,,"H79"
-"Animation",,,,,,,"H48"
-"Emplois",,,,,,,"H49"
+"Conservation de collections",,,,"#H79X","#H79Y","#H79Z","H79"
+"Animation",,,,"#H48X","#H48Y","#H48Z","H48"
+"Emplois",,,,"#H49X","#H49Y","#H49Z","H49"
 ,,,,,,,
 "**H. 5 - SERVICES AU RÉSEAU (réseau public et spécifique)",,,,,,,
 "***Services particuliers au réseau",,,,,,,
@@ -82,7 +82,7 @@
 "Autre",,,,,,"#H63","H63"
 "Si oui, préciser",,,,,,"#H74","H74"
 "***Formations pour les partenaires du réseau dans l'année",,,,,,,
-"Nombre de thèmes formations différents proposés",,,,,,,"H64"
+"Nombre de thèmes formations différents proposés",,,,,,"#H64","H64"
 "Formations organisées par la BDP",,,,,,,
 ,,,,,"Nombre de participants Y","Nb de journées Z",
 "Formation de base BDP",,,,,"#H65Y","#H65Z","H65"
