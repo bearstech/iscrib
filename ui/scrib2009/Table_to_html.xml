@@ -54,7 +54,7 @@
     fragment = window.location.hash;
     if (fragment.substr(0, 7) == "#field_") {
       id = fragment.substr(0, 11);
-      $(id).addClass('badtype');
+      $(id).addClass('badtype').focus();
     }
     //-->
   </script>

@@ -192,18 +192,24 @@ class Base2009Form(Form):
                 continue
             if name[0] in exclude:
                 continue
+            if handler.is_disabled_by_dependency(name):
+                continue
             datatype = schema[name]
             value = fields[name]
             is_valid = datatype.is_valid(datatype.encode(value))
+            is_sum_valid = True
+            if datatype.sum:
+                sum = handler.sum(datatype, datatype.sum, **fields)
+                is_sum_valid = (sum is None or sum == value)
             if datatype.is_mandatory:
                 # Vérifie toujours les champs obligatoires
-                if is_valid:
+                if is_valid and is_sum_valid:
                     continue
             else:
                 # Vérifie seulement si quelque chose a été saisi
                 if not datatype.encode(value):
                     continue
-                if is_valid:
+                if is_valid and is_sum_valid:
                     continue
             yield name, datatype
 

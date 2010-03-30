@@ -38,12 +38,14 @@ NBSP = u"\u00a0".encode('utf8')
 FIELD_PREFIX = u"#"
 
 
-def is_mandatory_filled(datatype, value, context):
+def is_mandatory_filled(datatype, name, value, context):
     if context.request.method != 'POST':
         return True
-    if datatype.is_mandatory:
-        return bool(value)
-    return True
+    if context.resource.handler.is_disabled_by_dependency(name):
+        return True
+    if not datatype.is_mandatory:
+        return True
+    return bool(value)
 
 
 
@@ -116,7 +118,7 @@ def radio_widget(context, form, datatype, name, value, readonly):
     attributes = {}
     if name in context.bad_types:
         attributes[u"class"] = u"badtype"
-    elif not is_mandatory_filled(datatype, value, context):
+    elif not is_mandatory_filled(datatype, name, value, context):
         attributes[u"class"] = u"mandatory"
     return make_element(u"div", attributes, u"".join(html))
 
@@ -140,7 +142,7 @@ def checkbox_widget(context, form, datatype, name, value, readonly):
         if name in context.bad_types:
             input = (u'<span class="badtype" title="Mauvaise valeur">'
                     + input + u"</span>")
-        elif not is_mandatory_filled(datatype, value, context):
+        elif not is_mandatory_filled(datatype, name, value, context):
             input = (u'<span class="mandatory" title="Champ obligatoire">'
                     + input + u"</span>")
         html.append(input)
@@ -164,7 +166,7 @@ def select_widget(context, form, datatype, name, value, readonly):
     if name in context.bad_types:
         attributes[u"title"] = u"Mauvaise valeur"
         attributes[u"class"] = [u"badtype"]
-    elif not is_mandatory_filled(datatype, value, context):
+    elif not is_mandatory_filled(datatype, name, value, context):
         attributes[u"title"] = u"Champ obligatoire"
         attributes[u"class"] = [u"mandatory"]
     if form.handler.is_disabled_by_dependency(name):
@@ -216,7 +218,7 @@ def text_widget(context, form, datatype, name, value, readonly,
     if name in context.bad_types:
         attributes.setdefault(u"class", []).append(u"badtype")
         attributes[u"title"] = u"Mauvaise valeur"
-    elif not is_mandatory_filled(datatype, value, context):
+    elif not is_mandatory_filled(datatype, name, value, context):
         attributes.setdefault(u"class", []).append(u"mandatory")
         attributes[u"title"] = u"Champ obligatoire"
     if form.handler.is_disabled_by_dependency(name):

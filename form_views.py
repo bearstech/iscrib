@@ -16,13 +16,14 @@
 
 # Import from itools
 from itools.csv import CSVFile
-from itools.datatypes import Boolean, String
+from itools.datatypes import String
 from itools.gettext import MSG
 from itools.stl import set_prefix
 from itools.web import BaseView, STLForm, INFO, ERROR
 
 # Import from scrib
-from datatypes import Numeric
+from datatypes import Numeric, EnumBoolean
+from widgets import is_mandatory_filled
 
 
 # Messages
@@ -99,13 +100,14 @@ class Form_View(STLForm):
                 # Invalid (0008102 and mandatory -> and filled)
                 elif data and not datatype.is_valid(data):
                     bad_types.append(key)
-            # Skip instance datatypes: TypeError: issubclass() arg 1 must be
-            # a class
+            # First skip instance datatypes:
+            #   TypeError: issubclass() arg 1 must be a class
             elif isinstance(datatype, Numeric):
                 pass
-            # Unchecked checkboxes return no value
-            elif issubclass(datatype, Boolean):
-                value = False
+            # Now detect unchecked checkboxes
+            elif issubclass(datatype, EnumBoolean):
+                if not is_mandatory_filled(datatype, key, value, context):
+                    bad_types.append(key)
             handler.set_value(key, value)
         # Reindex
         context.server.change_resource(resource)

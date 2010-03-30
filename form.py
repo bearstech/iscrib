@@ -129,7 +129,7 @@ class FormHandler(FileHandler):
                 return None
             if not data:
                 return None
-            if data.upper() == 'NC':
+            if str(data).upper() == 'NC':
                 return 'NC'
             dt = cls.schema[term]
             try:
