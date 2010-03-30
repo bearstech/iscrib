@@ -357,8 +357,8 @@ class UITable(UIFile, CSVFile):
                                     'body': body, 'class': css_class})
                 elif column:
                     # Texte simple (ou pas)
-                    # 0007975: Gestion des titres
                     if column[0] == u"*":
+                        # 0007975: Gestion des titres
                         new_column = column.lstrip(u"*")
                         level = len(column) - len(new_column)
                         column = new_column.strip()
@@ -367,8 +367,12 @@ class UITable(UIFile, CSVFile):
                                 u"h%d" % (int(level) + 1),
                                 content=column.strip()) 
                         css_class = u"section-header"
-                    # 0007970: CSS spécifique pour numéros de rubriques
-                    elif column in schema:
+                    elif (  # 0007970: CSS spécifique pour numéros de
+                            # rubriques
+                            column in schema
+                            # 0008569: BDP : les numéros de rubrique ne sont
+                            # pas tous de la même taille
+                            or j + 1 == len(row)):
                         css_class = u"rubrique-label"
                     else:
                         css_class = u"field-label"
