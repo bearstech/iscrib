@@ -89,7 +89,7 @@ class Numeric(object):
         if isinstance(value, cls):
             if value.value is None or value.value == '':
                 return 'null'
-        return cls.encode(value)
+        return cls.encode(value).replace('"', '\\"').replace("'", "\\'")
 
 
     ########################################################################
@@ -664,12 +664,28 @@ class EnumBoolean(Enumerate):
     def encode_sql(cls, value):
         if value is None or value == '':
             return 'null'
-        return cls.encode(value)
+        return cls.encode(value).replace('"', '\\"').replace("'", "\\'")
 
 
 
-class EnumCV(Enumerate):
+class SqlEnumerate(Enumerate):
     default = ''
+
+
+    @classmethod
+    def get_sql_schema(cls):
+        return "varchar(20) default null"
+
+
+    @classmethod
+    def encode_sql(cls, value):
+        if value is None or value == '':
+            return 'null'
+        return "'%s'" % cls.encode(value).replace("'", "\\'")
+
+
+
+class EnumCV(SqlEnumerate):
     counter = 1
 
     @classmethod
@@ -699,23 +715,6 @@ class EnumCV(Enumerate):
     @classmethod
     def reset(cls):
         cls.counter = 1
-
-
-
-class SqlEnumerate(Enumerate):
-    default = ''
-
-
-    @classmethod
-    def get_sql_schema(cls):
-        return "varchar(20) default null"
-
-
-    @classmethod
-    def encode_sql(cls, value):
-        if value is None or value == '':
-            return 'null'
-        return "'%s'" % cls.encode(value)
 
 
 

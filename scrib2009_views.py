@@ -325,7 +325,7 @@ class Scrib_ExportSql(STLForm):
         year = context.site_root.get_year_suffix()
         schema = resource.bm_class.class_handler.schema
         # Ensure field order consistency
-        keys = sorted([key for key in schema.keys() if key[0] != 'B'])
+        keys = sorted([key for key in schema.iterkeys() if key[0] != 'B'])
         values = ["  `%s` %s," % (key, schema[key].get_sql_schema())
                 for key in keys]
         values = "\n".join(values)
@@ -346,11 +346,36 @@ class Scrib_ExportSql(STLForm):
         context.message = INFO(u"Table bm{year} créée.", year=year)
 
 
+    def action_bdp(self, resource, context, form):
+        year = context.site_root.get_year_suffix()
+        schema = resource.bdp_class.class_handler.schema
+        # Ensure field order consistency
+        keys = sorted(schema.iterkeys())
+        values = ["  `%s` %s," % (key, schema[key].get_sql_schema())
+                for key in keys]
+        values = "\n".join(values)
+        query = []
+        if form['confirm']:
+            query.append("drop table if exists `bdp%s`;" % year)
+        query.extend(["create table `bdp%s` (" % year,
+            "  `code_ua` int(10) unsigned not null,",
+            values,
+            "  primary key (`code_ua`)",
+            ") default charset=utf8 collate=utf8_swedish_ci;"])
+        query = "\n".join(query)
+        try:
+            execute(query, context)
+        except Exception:
+            return
+
+        context.message = INFO(u"Table bdp{year} créée.", year=year)
+
+
     def action_annexes(self, resource, context, form):
         year = context.site_root.get_year_suffix()
         schema = resource.bm_class.class_handler.schema
         # Ensure field order consistency
-        keys = sorted([key for key in schema.keys() if key[0] == 'B'])
+        keys = sorted([key for key in schema.iterkeys() if key[0] == 'B'])
         values = ["  `%s` %s," % (key, schema[key].get_sql_schema())
                 for key in keys]
         values = "\n".join(values)

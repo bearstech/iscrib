@@ -37,8 +37,7 @@ from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
 
 
 def quote_sql(value):
-    return (value.replace(u"€", u"eur").replace(u'"', u'\\"')
-            .replace(u"&quot;", u'\\"').replace(u"'", u"\\'"))
+    return value.replace(u"€", u"eur")
 
 
 

@@ -44,4 +44,17 @@
     </fieldset>
   </form>
 
+  <form action="" method="post">
+    <fieldset>
+      <legend>Créer la table bdp${year}</legend>
+      <p>
+        <input type="checkbox" name="confirm" value="1"/>Oui, je veux
+        effacer la table précédemment exportée.
+      </p>
+      <p>
+        <input type="submit" name=";bdp" value="Créér bdp${year}"/>
+      </p>
+    </fieldset>
+  </form>
+
 </stl:block>

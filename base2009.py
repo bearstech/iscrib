@@ -270,7 +270,7 @@ class Base2009Form(Form):
                 continue
             if page in exclude:
                 continue
-            names.append(key)
+            names.append('`%s`' % key)
             datatype = schema[key]
             value = quote_sql(datatype.encode_sql(handler.get_value(key)))
             values.append(value)
