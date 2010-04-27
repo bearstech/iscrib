@@ -38,6 +38,7 @@ from ikaaro.website import WebSite
 # Import from scrib
 from bm2009 import BM2009Form
 from bdp2009 import BDP2009Form
+from datatypes import Departements
 from form import Form, MultipleForm
 from forms import Forms
 from scrib2009_views import Scrib_Admin, Scrib_Login, Scrib_Edit
@@ -141,12 +142,13 @@ class Scrib2009(WebSite):
             meter = ProgressMeter(len(rows))
             for i, row in enumerate(users_csv.get_rows(rows)):
                 code_ua = row.get_value('code_ua')
-                title = row.get_value('nom')
                 departement = row.get_value('departement')
                 # 0008082 handler avec données de la table adresse09
                 if categorie == 'BM':
+                    title = row.get_value('nom')
                     get_adresse = get_adresse_bm
                 else:
+                    title = Departements.get_value(departement)
                     get_adresse = get_adresse_bdp
                 table = 'adresse%s' % str(annee)[-2:]
                 try:

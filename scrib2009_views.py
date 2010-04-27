@@ -34,7 +34,7 @@ from ikaaro.views import IconsView
 from ikaaro.website_views import ForgottenPasswordForm
 
 # Import from scrib
-from datatypes import DateLitterale, Identifiant
+from datatypes import DateLitterale, Identifiant, Departements
 from utils import UsersCSV, execute, get_adresse_bm, get_adresse_bdp
 
 
@@ -450,7 +450,7 @@ class Scrib_Importer(AutoForm):
 
     def action(self, resource, context, form):
         filename, mimetype, body = form['file']
-        name, type, language = FileName.decode(filename)
+        name, extension, language = FileName.decode(filename)
         if mimetype not in ('text/csv', 'text/comma-separated-values'):
             context.message = ERROR(u"Fichier CSV attendu.")
             context.commit = False
@@ -467,11 +467,14 @@ class Scrib_Importer(AutoForm):
             for row in users_csv.get_rows(rows):
                 code_ua = row.get_value('code_ua')
                 name = str(code_ua)
+                departement = row.get_value('departement')
                 if forms.get_resource(name, soft=True) is not None:
                     continue
                 if categorie == 'BM':
+                    title = row.get_value('nom')
                     get_adresse = get_adresse_bm
                 else:
+                    title = Departements.get_value(departement)
                     get_adresse = get_adresse_bdp
                 kw = get_adresse(code_ua, 'adresse%s' % year, context=context)
                 if categorie == 'BM':
@@ -481,8 +484,7 @@ class Scrib_Importer(AutoForm):
                 handler = form_class.class_handler(**kw)
                 form_class.make_resource(form_class, forms, name,
                         body=handler.to_str(), code_ua=code_ua,
-                        departement=row.get_value('departement'),
-                        title={'fr': row.get_value('nom')})
+                        departement=departement, title={'fr': title})
                 done.append(name)
 
         done_bm = done_bm or [u"aucune"]

@@ -30,6 +30,7 @@ from base2009 import Base2009Handler, Base2009Form
 from base2009_views import Base2009Form_Print, Base2009Form_Edit
 from base2009_views import Base2009Form_New
 from bdp2009_views import BDP2009Form_View, BDP2009Form_Send
+from datatypes import Departements
 from form import Form
 
 
@@ -41,6 +42,7 @@ class BDP2009Handler(Base2009Handler):
 
 class BDP2009Form(Base2009Form):
     class_id = 'BDP2009Form'
+    class_version = '20090123'
     class_handler = BDP2009Handler
     class_title = MSG(u"Formulaire BDP")
     class_views = ['page0'] + Form.class_views
@@ -72,6 +74,15 @@ class BDP2009Form(Base2009Form):
     # Security
     def is_bdp(self):
         return self.parent.is_bdp()
+
+
+    def update_20090123(self):
+        """0008687: BDP : l'en-tête du formulaire fait aparaître le nom de la
+        ville où se situe la BDP au lieu du département.
+        """
+        departement = self.get_property('departement')
+        title = Departements.get_value(departement)
+        self.set_property('title', title)
 
 
 
