@@ -15,7 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Import from itools
-from itools.web import INFO, ERROR
+from itools.gettext import MSG
+from itools.web import STLView, INFO, ERROR
 
 # Import from scrib
 from base2009_views import Base2009Form_View, Base2009Form_Send
@@ -162,3 +163,33 @@ class BM2009Form_Send(Base2009Form_Send):
             return
 
         context.message = INFO(u"Le formulaire a été exporté.")
+
+
+
+class BM2009Form_Print(STLView):
+    access = 'is_allowed_to_view'
+    title=MSG(u"Impression du rapport")
+    template = '/ui/scrib2009/Table_to_print.xml'
+    page_template = '/ui/scrib2009/bm/Page%s.table.csv'
+    pages = []
+
+
+    def get_namespace(self, resource, context):
+        context.query['view'] = 'printable'
+        context.bad_types = []
+        forms = []
+        for page in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
+            table = resource.get_resource(self.page_template % page)
+            if page == 'B':
+                pageb = resource.get_pageb()
+                for form in pageb.get_resources():
+                    view = form.pageB
+                    forms.append(table.get_namespace(form, view, context,
+                        skip_print=True))
+            else:
+                view = getattr(resource, 'page%s' % page)
+                forms.append(table.get_namespace(resource, view, context,
+                    skip_print=True))
+        namespace = {}
+        namespace['forms'] = forms
+        return namespace

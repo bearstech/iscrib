@@ -18,7 +18,7 @@
 from itools.core import merge_dicts
 from itools.datatypes import String, Integer, Boolean, Unicode
 from itools.gettext import MSG
-from itools.web import STLView, STLForm, ERROR
+from itools.web import STLForm, ERROR
 
 # Import from ikaaro
 from ikaaro.access import is_admin
@@ -117,36 +117,6 @@ class Base2009Form_Send(STLForm):
         """Ce qu'il faut faire quand le formulaire est exporté.
         """
         raise NotImplementedError
-
-
-
-class Base2009Form_Print(STLView):
-    access = 'is_allowed_to_view'
-    title=MSG(u"Impression du rapport")
-    template = '/ui/scrib2009/Table_to_print.xml'
-    page_template = '/ui/scrib2009/bm/Page%s.table.csv'
-    pages = []
-
-
-    def get_namespace(self, resource, context):
-        context.query['view'] = 'printable'
-        context.bad_types = []
-        forms = []
-        for page in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
-            table = resource.get_resource(self.page_template % page)
-            if page == 'B':
-                pageb = resource.get_pageb()
-                for form in pageb.get_resources():
-                    view = form.pageB
-                    forms.append(table.get_namespace(form, view, context,
-                        skip_print=True))
-            else:
-                view = getattr(resource, 'page%s' % page)
-                forms.append(table.get_namespace(resource, view, context,
-                    skip_print=True))
-        namespace = {}
-        namespace['forms'] = forms
-        return namespace
 
 
 

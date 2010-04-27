@@ -27,9 +27,10 @@ from ikaaro.registry import register_resource_class, register_field
 # Import from scrib
 from base2009 import get_schema_pages, get_controls
 from base2009 import Base2009Handler, Base2009Form
-from base2009_views import Base2009Form_Print, Base2009Form_Edit
+from base2009_views import Base2009Form_Edit
 from base2009_views import Base2009Form_New
 from bdp2009_views import BDP2009Form_View, BDP2009Form_Send
+from bdp2009_views import BDP2009Form_Print
 from datatypes import Departements
 from form import Form
 
@@ -60,7 +61,7 @@ class BDP2009Form(Base2009Form):
     pageI = BDP2009Form_View(n='I')
     pageL = BDP2009Form_View(n='L')
     envoyer = BDP2009Form_Send()
-    imprimer = Base2009Form_Print()
+    imprimer = BDP2009Form_Print()
     edit = Base2009Form_Edit()
     new_instance = Base2009Form_New()
 
