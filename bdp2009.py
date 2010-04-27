@@ -73,10 +73,6 @@ class BDP2009Form(Base2009Form):
 
     ######################################################################
     # Security
-    def is_bdp(self):
-        return self.parent.is_bdp()
-
-
     def update_20090123(self):
         """0008687: BDP : l'en-tête du formulaire fait aparaître le nom de la
         ville où se situe la BDP au lieu du département.

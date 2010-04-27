@@ -60,22 +60,24 @@ class Scrib_Admin(IconsView):
     def get_namespace(self, resource, context):
         items = [{'icon': '/ui/scrib2009/images/form48.png',
                   'title': u"BM",
-                  'description': u"Rechercher une BM / Ajouter une BM",
+                  'description': u"Rechercher / Ajouter une BM",
                   'url': 'bm'}]
         items.append({'icon': '/ui/scrib2009/images/form48.png',
                       'title': u"BDP",
-                      'description': u"Rechercher une BDP",
+                      'description': u"Rechercher / Ajouter une BDP",
                       'url': 'bdp'})
         items.append({'icon': '/ui/icons/48x48/html.png',
                       'title': u"Aide générale",
                       'description': u"Modifier l'aide générale",
                       'url': 'aide/;edit'})
-        for page in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
-            items.append({'icon': '/ui/icons/48x48/html.png',
-                          'title': u"Page %s" % page,
-                          'description': (u"Modifier l'aide de la page %s" %
-                              page),
-                          'url': 'Page%s/;edit' % page})
+        items.append({'icon': '/ui/icons/48x48/html.png',
+                      'title': u"Aide BM",
+                      'description': u"Modifier l'aide des BM",
+                      'url': 'aide_bm'})
+        items.append({'icon': '/ui/icons/48x48/html.png',
+                      'title': u"Aide BDP",
+                      'description': u"Modifier l'aide des BDP",
+                      'url': 'aide_bdp'})
         for name in ('edit', 'browse_users', 'add_user',
                 'edit_virtual_hosts', 'export_sql', 'importer'):
             view = resource.get_view(name)

@@ -18,7 +18,8 @@
 from itools.core import merge_dicts
 from itools.datatypes import String, Integer, Boolean, Unicode
 from itools.gettext import MSG
-from itools.web import STLForm, ERROR
+from itools.stl import set_prefix
+from itools.web import BaseView, STLForm, ERROR
 
 # Import from ikaaro
 from ikaaro.access import is_admin
@@ -189,3 +190,28 @@ class Base2009Form_New(NewInstance):
                 return
             raise
         return context.come_back(MSG_NEW_RESOURCE, goto='./%s/' % name)
+
+
+
+class Base2009Form_Help(BaseView):
+    access = 'is_allowed_to_view'
+    title = MSG(u"Aide à la saisie")
+
+
+    def GET(self, resource, context):
+        page = context.get_query_value('page')
+        app = context.site_root
+        if page:
+            # Aide spécifique
+            response = context.response
+            response.set_header('Content-Type', 'text/html; charset=UTF-8')
+            if resource.is_bm():
+                folder = app.get_resource('aide_bm')
+            else:
+                folder = app.get_resource('aide_bdp')
+            resource = folder.get_resource('Page' + page)
+            return resource.handler.to_str()
+        # Aide générale
+        resource = app.get_resource('aide')
+        prefix = resource.get_pathto(resource)
+        return set_prefix(resource.get_html_data(), prefix)

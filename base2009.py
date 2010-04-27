@@ -29,7 +29,7 @@ from ikaaro.registry import register_field
 
 
 # Import from scrib
-from base2009_views import Base2009Form_New
+from base2009_views import Base2009Form_New, Base2009Form_Help
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import EnumCV, make_enumerate
@@ -141,6 +141,7 @@ class Base2009Form(Form):
 
     # Views
     new_instance = Base2009Form_New()
+    aide = Base2009Form_Help()
 
 
     @classmethod
@@ -166,6 +167,14 @@ class Base2009Form(Form):
 
     def get_departement(self):
         return self.get_property('departement')
+
+
+    def is_bm(self):
+        return self.parent.is_bm()
+
+
+    def is_bdp(self):
+        return self.parent.is_bdp()
 
 
     def is_ready(self):

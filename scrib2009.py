@@ -26,6 +26,7 @@ from itools.uri import resolve_uri2
 from itools.web import get_context
 
 # Import from ikaaro
+from ikaaro.folder import Folder
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.forms import XHTMLBody
 from ikaaro.registry import register_resource_class
@@ -52,11 +53,13 @@ from utils import ProgressMeter
 
 class Scrib2009(WebSite):
     class_id = 'Scrib2009'
+    class_version = '20071217'
     class_title = MSG(u"Scrib 2009")
     class_skin = 'ui/scrib2009'
     class_views = ['admin'] + WebSite.class_views
 
-    __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide']
+    __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide',
+            'aide_bm', 'aide_bdp']
 
     bm_class = BM2009Form
     bdp_class = BDP2009Form
@@ -115,18 +118,31 @@ class Scrib2009(WebSite):
                 echeance_bdp=date(2010, 9, 15))
         # Pages
         print "Création des pages d'aide..."
+        Folder._make_resource(Folder, folder, '%s/aide_bm' % name)
+        Folder._make_resource(Folder, folder, '%s/aide_bdp' % name)
         base_path = 'ui/scrib%s' % annee
-        for filename, title in [('aide.xhtml', u"Aide"),
-                                ('bm/PageA.xhtml', u"Page A"),
-                                ('bm/PageB.xhtml', u"Page B"),
-                                ('bm/PageC.xhtml', u"Page C"),
-                                ('bm/PageD.xhtml', u"Page D"),
-                                ('bm/PageE.xhtml', u"Page E"),
-                                ('bm/PageF.xhtml', u"Page F"),
-                                ('bm/PageG.xhtml', u"Page G"),
-                                ('bm/PageH.xhtml', u"Page H")]:
+        for filename, id, title in [
+                ('aide.xhtml', 'aide', u"Aide"),
+                ('bm/PageA.xhtml', 'aide_bm/PageA', u"Page A"),
+                ('bm/PageB.xhtml', 'aide_bm/PageB', u"Page B"),
+                ('bm/PageC.xhtml', 'aide_bm/PageC', u"Page C"),
+                ('bm/PageD.xhtml', 'aide_bm/PageD', u"Page D"),
+                ('bm/PageE.xhtml', 'aide_bm/PageE', u"Page E"),
+                ('bm/PageF.xhtml', 'aide_bm/PageF', u"Page F"),
+                ('bm/PageG.xhtml', 'aide_bm/PageG', u"Page G"),
+                ('bm/PageH.xhtml', 'aide_bm/PageH', u"Page H"),
+                ('bdp/Page0.xhtml', 'aide_bdp/Page0', u"Page 0"),
+                ('bdp/PageA.xhtml', 'aide_bdp/PageA', u"Page A"),
+                ('bdp/PageB.xhtml', 'aide_bdp/PageB', u"Page B"),
+                ('bdp/PageC.xhtml', 'aide_bdp/PageC', u"Page C"),
+                ('bdp/PageD.xhtml', 'aide_bdp/PageD', u"Page D"),
+                ('bdp/PageE.xhtml', 'aide_bdp/PageE', u"Page E"),
+                ('bdp/PageF.xhtml', 'aide_bdp/PageF', u"Page F"),
+                ('bdp/PageG.xhtml', 'aide_bdp/PageG', u"Page G"),
+                ('bdp/PageH.xhtml', 'aide_bdp/PageH', u"Page H"),
+                ('bdp/PageI.xhtml', 'aide_bdp/PageI', u"Page I"),
+                ('bdp/PageL.xhtml', 'aide_bdp/PageL', u"Page L")]:
             with open(get_abspath('%s/%s' % (base_path, filename))) as file:
-                id = filename[filename.rfind('/') + 1:filename.rfind('.')]
                 WebPage._make_resource(WebPage, folder, '%s/%s' % (name, id),
                         title={'fr': title}, state='public', language='fr',
                         body=file.read())
@@ -319,6 +335,29 @@ class Scrib2009(WebSite):
         if len(results):
             return results.get_documents()[0]
         return None
+
+
+    ########################################################################
+    # Update
+    def update_20071216(self):
+        Folder.make_resource(Folder, self, 'aide_bm',
+                title={'fr': u"Aide BM"})
+        Folder.make_resource(Folder, self, 'aide_bdp',
+                title={'fr': u"Aide BDP"})
+        for page in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
+            self.move_resource('Page%s' % page, 'aide_bm/Page%s' % page)
+
+
+    def update_20071217(self):
+        base_path = 'ui/scrib%s/bdp' % self.get_property('annee')
+        for page in ('0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L'):
+            name = 'Page%s' % page
+            path = get_abspath('%s/%s.xhtml' % (base_path, name))
+            with open(path) as file:
+                WebPage.make_resource(WebPage, self, 'aide_bdp/%s' % name,
+                        title={'fr': u"Page %s" % page}, state='public',
+                        language='fr', body = file.read())
+
 
 
 ###########################################################################

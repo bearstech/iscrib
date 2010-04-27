@@ -30,7 +30,7 @@ from ikaaro.workflow import StateForm
 from datatypes import Numeric, NumDecimal
 from datatypes import Unicode
 from datatypes import WorkflowState
-from form_views import Form_Export, Form_Help
+from form_views import Form_Export
 from utils import SI
 from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
 
@@ -146,7 +146,6 @@ class Form(File):
 
     # Views
     exporter = Form_Export()
-    aide = Form_Help()
 
 
     def _get_catalog_values(self):

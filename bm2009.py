@@ -67,10 +67,6 @@ class BM2009Form(Base2009Form):
 
     ######################################################################
     # Security
-    def is_bm(self):
-        return self.parent.is_bm()
-
-
     def is_ready(self):
         if not Base2009Form.is_ready(self):
             return False

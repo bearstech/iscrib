@@ -18,7 +18,6 @@
 from itools.csv import CSVFile
 from itools.datatypes import String
 from itools.gettext import MSG
-from itools.stl import set_prefix
 from itools.web import BaseView, STLForm, INFO, ERROR
 
 # Import from scrib
@@ -152,24 +151,3 @@ class Form_Export(BaseView):
                     resource.get_code_ua()))
 
         return csv.to_str(separator=';')
-
-
-
-class Form_Help(BaseView):
-    access = 'is_allowed_to_view'
-    title = MSG(u"Aide à la saisie")
-
-
-    def GET(self, resource, context):
-        page = context.get_query_value('page')
-        app = context.site_root
-        if page:
-            # Aide spécifique
-            response = context.response
-            response.set_header('Content-Type', 'text/html; charset=UTF-8')
-            resource = app.get_resource('Page' + page)
-            return resource.handler.to_str()
-        # Aide générale
-        resource = app.get_resource('aide')
-        prefix = resource.get_pathto(resource)
-        return set_prefix(resource.get_html_data(), prefix)
