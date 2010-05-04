@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
+  <!--
   <img src="/ui/scrib2009/images/courrier.jpg" style="float: right"/>
+  -->
 
   <form stl:omit-tag="not submit_value" name="autoform" enctype="multipart/form-data" method="post" id="autoform" action="${action}">
     <fieldset>
@@ -35,7 +37,7 @@
 
   <p style="color: red">
     <b>ATTENTION  !</b><br/>
-    Saisissez votre identifiant de type <strong>BMxxx</strong> tel que porté
+    Saisissez votre identifiant de type <strong>BDPxxx</strong> tel que porté
     dans le courrier postal adressé.
   </p>
   <p>
