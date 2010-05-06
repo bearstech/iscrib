@@ -103,6 +103,38 @@
     <p stl:if="not controls/warnings">
       Aucun avertissement détecté.
     </p>
+
+    <h2>Informations</h2>
+    <em>Pour information, en l'état actuel du remplissage.</em>
+    <table border="1" width="100%" cellpadding="1" cellspacing="1"
+      stl:if="controls/infos">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Contrôle</th>
+          <th>Valeur</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr stl:repeat="control controls/infos">
+          <td>${control/number}</td>
+          <td>
+            <span>${control/title}</span>
+            <pre class="form-debug" stl:if="debug">${control/debug}</pre>
+          </td>
+          <td>
+            ${control/value}
+          </td>
+          <td>
+            <a href="${control/href}">Pour modifier</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p stl:if="not controls/infos">
+      Aucune information disponible.
+    </p>
   </stl:block>
 
 </stl:block>

@@ -223,8 +223,11 @@ class Base2009Form(Form):
             yield name, datatype
 
 
-    def get_failed_controls(self, pages=freeze([]), exclude=freeze([''])):
+    def _get_controls(self, levels=freeze([]), pages=freeze([]),
+            exclude=freeze([''])):
         for number, title, expr, level, page in self.handler.controls:
+            if level not in levels:
+                continue
             if pages and page not in pages:
                 continue
             if page in exclude:
@@ -242,7 +245,7 @@ class Base2009Form(Form):
                 # Champs vides tolérés
                 value = None
             # Passed
-            if value is True:
+            if value is True and '0' not in levels:
                 continue
             # Le titre contient des formules
             if '[' in title:
@@ -259,9 +262,24 @@ class Base2009Form(Form):
                 title = u"".join(expanded)
             else:
                 title = unicode(title, 'utf8')
+            value = (u"Vrai" if value is True else
+                    u"Faux" if value is False else value)
             yield {'number': number, 'title': title, 'expr': expr, 'level':
-                    level, 'page': page,
+                    level, 'page': page, 'value': value,
                     'debug': u"'%s' = '%s'" % (unicode(expr, 'utf8'), value)}
+
+
+    def get_info_controls(self, pages=freeze([]), exclude=freeze([''])):
+        # 0008709 Contrôles purement informatifs
+        for control in self._get_controls(levels=['0'], pages=pages,
+                exclude=exclude):
+            yield control
+
+
+    def get_failed_controls(self, pages=freeze([]), exclude=freeze([''])):
+        for control in self._get_controls(levels=['1', '2'], pages=pages,
+                exclude=exclude):
+            yield control
 
 
     def get_export_query(self, table, pages=freeze([]),

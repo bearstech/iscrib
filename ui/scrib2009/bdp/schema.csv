@@ -611,7 +611,7 @@
 "H27",,"BDP","H","Boolean","Radio",,,,,,,,,
 "H28",,"BDP","H","Boolean","Radio",,,,,,"H27",,,
 "H29",,"BDP","H","Boolean","Radio",,,,,,"H27",,,
-"H30",,"BDP","H","Str",60,,,,,,,,,
+"H30",,"BDP","H","Str",60,,,,,,"H27",,,
 "H31V",,"BDP","H","Boolean","Radio",,,,,,,,,
 "H31W",,"BDP","H","Int",10,,,,,,"H31V",,,
 "H31X",,"BDP","H","Int",10,,,,,,"H31V",,,

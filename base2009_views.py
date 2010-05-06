@@ -69,6 +69,7 @@ class Base2009Form_Send(STLForm):
         # Errors
         errors = []
         warnings = []
+        infos = []
         # Invalid fields
         for name, datatype in resource.get_invalid_fields():
             info = {'number': name,
@@ -87,8 +88,13 @@ class Base2009Form_Send(STLForm):
                 errors.append(control)
             else:
                 warnings.append(control)
-        namespace['controls'] = {'errors': errors,
-                                 'warnings': warnings}
+        # Informative controls
+        for control in resource.get_info_controls():
+            control['href'] = ';page%s#field_%s' % (control['page'],
+                    control['title'].split()[0])
+            infos.append(control)
+        namespace['controls'] = {'errors': errors, 'warnings': warnings,
+                'infos': infos}
         # ACLs
         user = context.user
         namespace['is_admin'] = is_admin(user, resource)

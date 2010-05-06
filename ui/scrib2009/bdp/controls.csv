@@ -1,9 +1,9 @@
 "N° de contrôle","message d'alerte","écriture du contrôle","force du contrôle
 1=alerte, 
 2=contrôle bloquant ","page"
-"C","E85X / E13X = prix moyen d'un livre","E85X / E13X",1,"E"
-"D","E88X / E16X  = prix moyen d'un phonogramme","E88X / E16X",1,"E"
-"E","E91X / E19X = prix moyen d'un vidéogramme","E91X / E19X",1,"E"
-"F","E94X / E22X = prix moyen d'un cédérom","E94X / E22X",1,"E"
-"G","E98X - 10% <= A12 <= E98X +10 % : variation  +/- 10 % des dépenses documentaires","int(E98X) * 0.9 < A12 < int(E98X) * 1.1",2,"E"
-"H","12 L'adresse du site Internet doit être renseigné","SI(H11, locals()['12'].strip() != '')",1,0
+"C","E85X / E13X = prix moyen d'un livre","E85X / E13X",0,"E"
+"D","E88X / E16X  = prix moyen d'un phonogramme","E88X / E16X",0,"E"
+"E","E91X / E19X = prix moyen d'un vidéogramme","E91X / E19X",0,"E"
+"F","E94X / E22X = prix moyen d'un cédérom","E94X / E22X",0,"E"
+"G","E98X - 10% <= A12 <= E98X +10 % : variation  +/- 10 % des dépenses documentaires","int(E98X) * 0.9 < A12 < int(E98X) * 1.1",0,"E"
+"H","12 : L'adresse du site Internet doit être renseigné","SI(H11, locals()['12'] != '')",1,"Z"
