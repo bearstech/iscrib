@@ -239,7 +239,8 @@ class Scrib_Confirm(STLForm):
         email = form['email']
         user = resource.get_resource('/users').set_user(email, password=None)
         categorie, identifiant = form['identifiant']
-        user.set_property('username', '%s%s' % (categorie, identifiant))
+        user.set_property('username', Identifiant.encode((categorie,
+            identifiant)))
         brain = resource.get_scrib_form(categorie, identifiant, context)
         user.set_property('title', brain.title_fr, language='fr')
         user.set_property('code_ua', brain.code_ua)

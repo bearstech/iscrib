@@ -39,7 +39,7 @@ from ikaaro.website import WebSite
 # Import from scrib
 from bm2009 import BM2009Form
 from bdp2009 import BDP2009Form
-from datatypes import Departements
+from datatypes import Departements, Identifiant
 from form import Form, MultipleForm
 from forms import Forms
 from scrib2009_views import Scrib_Admin, Scrib_Login, Scrib_Edit
@@ -315,11 +315,10 @@ class Scrib2009(WebSite):
 
 
     def get_scrib_user(self, categorie, identifiant, context):
-        if categorie == 'BM':
-            results = context.root.search(format='user', code_ua=identifiant)
-        else:
-            results = context.root.search(format='user',
-                    departement=identifiant)
+        username = Identifiant.encode((categorie, identifiant))
+        # 8744 on cherchait les BDP par département mais ce n'est pas fiable
+        # car les BM aussi ont un département.
+        results = context.root.search(format='user', username=username)
         if len(results):
             return results.get_documents()[0]
         return None
