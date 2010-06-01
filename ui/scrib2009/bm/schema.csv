@@ -21,6 +21,7 @@
 "A115","Site internet","BM","A","Str",60,,,"N",,,,"AC","N-1","www"
 "A116","Statut site","BM","A","Enum","Radio",,"Site internet propre / Page dédiée au sein du site de la collectivité","N",,,,"AC",,
 "A117","Mode de gestion de l'établissement","BM","A","Enum","Radio",,"Régie directe / Association / Association avec convention",,,,,"AC","N-1","gestion"
+"A200","Population concernée","BM","A","Int",10,,,,"Oui",,,"AC","N-1","popula dans table UA09"
 "B101","Nom de l'établissement",,"B","Str",60,,," ",,,,"AC","N-1",
 "B102","Libellé 1",,"B","Str",60,," ","N",,,,"AC","N-1",
 "B103","Complément d'adresse",,"B","Str",60,,,"N",,,,"AC","N-1",
