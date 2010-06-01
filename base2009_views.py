@@ -73,7 +73,7 @@ class Base2009Form_Send(STLForm):
         # Invalid fields
         for name, datatype in resource.get_invalid_fields():
             info = {'number': name,
-                    'title': u"Champ %s non valide" % name,
+                    'title': u"%s n'est pas égal à %s" % (name, datatype.sum),
                     'href': ';page%s#field_%s' % (datatype.pages[0], name),
                     'debug': str(type(datatype))}
             if datatype.is_mandatory:
