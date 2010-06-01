@@ -25,6 +25,7 @@ from utils import execute
 
 class BDP2009Form_View(Base2009Form_View):
     page_template = '/ui/scrib2009/bdp/Page%s.table.csv'
+    hidden_fields = ['0']
 
 
     def get_scrib_menu(self, resource, context):

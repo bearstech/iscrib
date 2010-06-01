@@ -91,8 +91,10 @@ def get_schema_pages(path):
             page_fields.add(name)
             page_numbers.append(page)
         # Mandatory
-        is_mandatory = (not is_mandatory.strip()
-                or is_mandatory.upper() == 'OUI')
+        is_mandatory = is_mandatory.strip()
+        is_mandatory = not is_mandatory or is_mandatory.upper() == 'OUI'
+        # Read-only
+        readonly = readonly.strip().upper() == 'OUI'
         # Sum
         sum = sum.strip()
         # Add to the schema

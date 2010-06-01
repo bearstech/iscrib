@@ -37,6 +37,13 @@ class Form_View(STLForm):
     access_POST = 'is_allowed_to_edit'
     query_schema = {'view': String}
     schema = {'page_number': String}
+    hidden_fields = []
+
+
+    def get_hidden_fields(self, resource):
+        handler = resource.handler
+        return [{'name': field, 'value': handler.get_value(field)}
+                for field in self.hidden_fields]
 
 
     def get_namespace(self, resource, context):
@@ -56,6 +63,7 @@ class Form_View(STLForm):
         table = resource.get_resource(self.page_template % self.n)
         namespace = table.get_namespace(resource, self, context,
                 skip_print=skip_print, readonly=readonly)
+        namespace['hidden_fields'] = self.get_hidden_fields(resource)
         return namespace
 
 
@@ -65,8 +73,11 @@ class Form_View(STLForm):
         bad_types = []
         for key in handler.pages[page_number]:
             value = ''
-            # Can't use "if not/continue" pattern here
             datatype = handler.schema[key]
+            # Can't use because they need to be stored
+            #if datatype.readonly:
+            #    continue
+            # Can't use "if not/continue" pattern here
             if context.has_form_value(key):
                 # Do not use form schema, only default String
                 data = context.get_form_value(key).strip()

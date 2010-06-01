@@ -44,7 +44,6 @@ class Base2009Form_View(Form_View):
 
     def get_namespace(self, resource, context):
         namespace = Form_View.get_namespace(self, resource, context)
-        namespace['code_ua'] = resource.get_code_ua()
         namespace['menu'] = self.get_scrib_menu(resource, context)
         return namespace
 
