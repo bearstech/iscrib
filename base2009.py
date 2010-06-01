@@ -239,7 +239,12 @@ class Base2009Form(Form):
             if not expr:
                 continue
             try:
-                value = eval(expr, self.get_vars())
+                # Précision pour les informations statistiques
+                if level == '0':
+                    vars = self.get_floating_vars()
+                else:
+                    vars = self.get_vars()
+                value = eval(expr, vars)
             except ZeroDivisionError:
                 # Division par zéro toléré
                 value = None
@@ -256,8 +261,12 @@ class Base2009Form(Form):
                     if not is_expr:
                         expanded.append(unicode(token, 'utf8'))
                     else:
+                        if level == '0':
+                            vars = self.get_floating_vars()
+                        else:
+                            vars = self.get_vars()
                         try:
-                            value = eval(token, self.get_vars())
+                            value = eval(token, vars)
                         except ZeroDivisionError:
                             value = None
                         expanded.append(unicode(value))
@@ -266,8 +275,8 @@ class Base2009Form(Form):
                 title = unicode(title, 'utf8')
             value = (u"Vrai" if value is True else
                     u"Faux" if value is False else value)
-            yield {'number': number, 'title': title, 'expr': expr, 'level':
-                    level, 'page': page, 'value': value,
+            yield {'number': number, 'title': title, 'expr': expr,
+                    'level': level, 'page': page, 'value': value,
                     'debug': u"'%s' = '%s'" % (unicode(expr, 'utf8'), value)}
 
 
