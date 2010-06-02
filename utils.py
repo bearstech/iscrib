@@ -47,6 +47,9 @@ BDP_TRANSLATE = [('0', 'code_bib'), ('1', 'libelle1'), ('2', 'libelle2'),
         ('10', 'FAX'), ('12', 'WWW')]
 
 
+UA_TRANSLATE = [('A200', 'popula')]
+
+
 class ProgressMeter(object):
     last_percent = 0
 
@@ -154,6 +157,12 @@ def get_adresse_bm(code_ua, table, context=None, target=None,
 def get_adresse_bdp(code_bib, table, context=None, target=None):
     return get_adresse_bm(code_bib, table, context=context, target=target,
             _key='code_bib', _translate=BDP_TRANSLATE)
+
+
+
+def get_ua(code_ua, table, context=None, target=None):
+    return get_adresse_bm(code_ua, table, context=context, target=target,
+            _translate=UA_TRANSLATE)
 
 
 

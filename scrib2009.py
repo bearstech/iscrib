@@ -48,12 +48,12 @@ from scrib2009_views import Scrib_ExportSql, Scrib_ChangePassword
 from scrib2009_views import Scrib_ForgottenPassword, Scrib_Importer
 from user import ScribUser
 from utils import UsersCSV, get_config, get_adresse_bm, get_adresse_bdp
-from utils import ProgressMeter
+from utils import ProgressMeter, get_ua, get_connection
 
 
 class Scrib2009(WebSite):
     class_id = 'Scrib2009'
-    class_version = '20071217'
+    class_version = '20071218'
     class_title = MSG(u"Scrib 2009")
     class_skin = 'ui/scrib2009'
     class_views = ['admin'] + WebSite.class_views
@@ -166,7 +166,8 @@ class Scrib2009(WebSite):
                 else:
                     title = Departements.get_value(departement)
                     get_adresse = get_adresse_bdp
-                table = 'adresse%s' % str(annee)[-2:]
+                year = str(annee)[-2:]
+                table = 'adresse%s' % year
                 try:
                     kw = get_adresse(code_ua, table, target=target)
                 except KeyError, e:
@@ -174,6 +175,8 @@ class Scrib2009(WebSite):
                     kw = {}
                 if categorie == 'BM':
                     kw['A100'] = code_ua
+                    ua = get_ua(code_ua, 'ua%s' % year, target=target)
+                    kw['A200'] = ua['A200']
                 else:
                     kw['0'] = code_ua
                 handler = form_class.class_handler(**kw)
@@ -356,6 +359,36 @@ class Scrib2009(WebSite):
                 WebPage.make_resource(WebPage, self, 'aide_bdp/%s' % name,
                         title={'fr': u"Page %s" % page}, state='public',
                         language='fr', body = file.read())
+
+
+    def update_20071218(self):
+        from MySQLdb.cursors import DictCursor
+
+        context = get_context()
+        connection = get_connection(context=context)
+        cursor = connection.cursor(DictCursor)
+        cursor.execute('select code_ua,popula from ua09')
+        results = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        bm = self.get_resource('bm')
+        code_ua2popula = {}
+        for result in results:
+            code_ua = str(result['code_ua'])
+            try:
+                popula = int(result['popula'])
+            except TypeError:
+                print "code_ua", code_ua, "popula vide"
+                popula = 0
+            code_ua2popula[code_ua] = popula
+        for resource in bm.search_resources(cls=BM2009Form):
+            code_ua = resource.name
+            try:
+                popula = code_ua2popula[code_ua]
+            except KeyError:
+                print "code_ua", code_ua, "popula manquant"
+                popula = 0
+            resource.handler.set_value('A200', popula)
 
 
 

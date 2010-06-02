@@ -30,7 +30,7 @@ from ikaaro.views_new import NewInstance
 
 # Import from scrib
 from form_views import Form_View
-from utils import get_adresse_bm, get_adresse_bdp
+from utils import get_adresse_bm, get_adresse_bdp, get_ua
 
 
 class Base2009Form_View(Form_View):
@@ -185,6 +185,8 @@ class Base2009Form_New(NewInstance):
         if resource.is_bm():
             cls = app.bm_class
             kw['A100'] = code_ua
+            ua = get_ua(code_ua, 'ua%s' % year, context=context)
+            kw['A200'] = ua['A200']
         else:
             cls = app.bdp_class
             kw = {'0': code_ua}

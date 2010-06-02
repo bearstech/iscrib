@@ -35,7 +35,7 @@ from ikaaro.website_views import ForgottenPasswordForm
 
 # Import from scrib
 from datatypes import DateLitterale, Identifiant, Departements
-from utils import UsersCSV, execute, get_adresse_bm, get_adresse_bdp
+from utils import UsersCSV, execute, get_adresse_bm, get_adresse_bdp, get_ua
 
 
 def find_user(username, context):
@@ -482,6 +482,8 @@ class Scrib_Importer(AutoForm):
                 kw = get_adresse(code_ua, 'adresse%s' % year, context=context)
                 if categorie == 'BM':
                     kw['A100'] = code_ua
+                    ua = get_ua(code_ua, 'ua%s' % year, context=context)
+                    kw['A200'] = ua['A200']
                 else:
                     kw['0'] = code_ua
                 handler = form_class.class_handler(**kw)
