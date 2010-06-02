@@ -273,8 +273,12 @@ class Base2009Form(Form):
                 title = u"".join(expanded)
             else:
                 title = unicode(title, 'utf8')
-            value = (u"Vrai" if value is True else
-                    u"Faux" if value is False else value)
+            if value is True:
+                value = u"Vrai"
+            elif value is False:
+                value = u"Faux"
+            elif isinstance(value, NumDecimal):
+                value = str(value.round()).replace('.', ',')
             yield {'number': number, 'title': title, 'expr': expr,
                     'level': level, 'page': page, 'value': value,
                     'debug': u"'%s' = '%s'" % (unicode(expr, 'utf8'), value)}

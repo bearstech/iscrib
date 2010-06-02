@@ -353,6 +353,14 @@ class NumDecimal(Numeric):
         self.value = value
 
 
+    def round(self, digits=2):
+        value = self.value
+        if value is None or type(value) is str:
+            return value
+        places = dec('10') ** -digits
+        return value.quantize(places)
+
+
     @staticmethod
     def is_valid(data):
         if data.upper() == 'NC':
