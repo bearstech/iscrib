@@ -36,11 +36,6 @@ from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
 
 
 
-def quote_sql(value):
-    return value.replace(u"€", u"eur")
-
-
-
 class MultipleForm_StateForm(StateForm):
 
     def action(self, resource, context, form):

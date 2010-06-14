@@ -194,3 +194,9 @@ def parse_control(title):
                     yield True, title[start+1:end]
                     break
     yield False, title[end:]
+
+
+
+def quote_sql(value):
+    # 0008134 déjà encodé
+    return value.replace("€", "eur")

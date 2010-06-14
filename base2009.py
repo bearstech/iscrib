@@ -33,8 +33,8 @@ from base2009_views import Base2009Form_New, Base2009Form_Help
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import EnumCV, make_enumerate
-from form import quote_sql, FormHandler, Form
-from utils import parse_control
+from form import FormHandler, Form
+from utils import parse_control, quote_sql
 
 
 dt_mapping = {
