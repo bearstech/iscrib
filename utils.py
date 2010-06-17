@@ -123,6 +123,7 @@ def execute(query, context):
     except Exception, e:
         context.commit = False
         context.message = ERROR(unicode(str(e), 'utf8'))
+        print "erreur", type(e), str(e)
         print "query", query
         print "*" * 78
         raise
