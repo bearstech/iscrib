@@ -34,3 +34,6 @@ DBResource.login = Scrib_Login()
 from root import Root
 import skin
 import bm2009_pageb
+
+# Silent Pyflakes
+Root, skin, bm2009_pageb
