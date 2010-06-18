@@ -36,6 +36,7 @@ from ikaaro.website_views import ForgottenPasswordForm
 # Import from scrib
 from datatypes import DateLitterale, Identifiant, Departements
 from utils import UsersCSV, execute, get_adresse_bm, get_adresse_bdp, get_ua
+from utils import get_connection, execute_only
 
 
 def find_user(username, context):
@@ -410,29 +411,30 @@ class Scrib_ExportSql(STLForm):
         year = resource.get_year_suffix()
         table_bm = "bm%s" % year
         table_annexes = "annexes%s" % year
-        query = []
+        # Ne pas utiliser execute : 2014, "Commands out of sync; [...]"
+        connection = get_connection(context)
+        cursor = connection.cursor()
         done = []
         for brain in results.get_documents(sort_by='name'):
-            query.append("delete from `%s` where `code_ua`=%s;" % (table_bm,
-                brain.code_ua))
+            # Imprime le nom avant pour savoir laquelle plante
+            print brain.name
+            query = "delete from `%s` where `code_ua`=%s;" % (table_bm,
+                    brain.code_ua)
+            execute_only(cursor, query, context)
             bm = root.get_resource(brain.abspath)
-            query.append(bm.get_export_query(table_bm))
-            query.append("delete from `%s` where `code_ua`=%s;" % (
-                table_annexes, brain.code_ua))
+            execute_only(cursor, bm.get_export_query(table_bm), context)
+            query = "delete from `%s` where `code_ua`=%s;" % (table_annexes,
+                    brain.code_ua)
+            execute_only(cursor, query, context)
             pageb = bm.get_pageb()
             for form in pageb.get_resources():
-                query.append(form.get_export_query(table_annexes,
-                    pages=['B'], exclude=[]))
+                query = form.get_export_query(table_annexes, pages=['B'],
+                        exclude=[])
+                execute_only(cursor, query, context)
+            execute_only(cursor, "commit", context)
             done.append(int(bm.name))
-            print bm.name
-            #1153 "Got a packet bigger than 'max_allowed_packet' bytes"
-            if len(done) % 250 == 0:
-                try:
-                    execute("\n".join(query), context)
-                except Exception:
-                    return
-                query = []
-
+        cursor.close()
+        connection.close()
 
         context.message = INFO(u"Les formulaires terminés ont été exportés "
                 u": codes UA {done}.",

@@ -26,6 +26,15 @@ from itools.datatypes.primitive import enumerate_get_namespace
 from itools.handlers import checkid
 
 
+def quote_integer(data):
+    return data.replace('"', '\\"').replace("'", "\\'")
+
+
+def quote_string(data):
+    return '"%s"' % data.replace('"', '\\"').replace("'", "\\'")
+
+
+
 class DateLitterale(DataType):
     weekdays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi',
                 'dimanche']
@@ -89,7 +98,7 @@ class Numeric(object):
         if isinstance(value, cls):
             if value.value is None or value.value == '':
                 return 'null'
-        return cls.encode(value).replace('"', '\\"').replace("'", "\\'")
+        return quote_integer(cls.encode(value))
 
 
     ########################################################################
@@ -593,6 +602,14 @@ class NumDigit(Numeric):
         return "char(%s) default null" % self.representation
 
 
+    @classmethod
+    def encode_sql(cls, value):
+        if isinstance(value, cls):
+            if value.value is None or value.value == '':
+                return 'null'
+        return quote_string(cls.encode(value))
+
+
 
 class Unicode(BaseUnicode):
     default = ''
@@ -616,7 +633,7 @@ class Unicode(BaseUnicode):
     def encode_sql(cls, value):
         if value is None:
             return 'null'
-        return '"%s"' % cls.encode(value).replace('"', r'\"')
+        return quote_string(cls.encode(value))
 
 
 
@@ -672,7 +689,7 @@ class EnumBoolean(Enumerate):
     def encode_sql(cls, value):
         if value is None or value == '':
             return 'null'
-        return cls.encode(value).replace('"', '\\"').replace("'", "\\'")
+        return quote_integer(cls.encode(value))
 
 
 
@@ -689,7 +706,7 @@ class SqlEnumerate(Enumerate):
     def encode_sql(cls, value):
         if value is None or value == '':
             return 'null'
-        return "'%s'" % cls.encode(value).replace("'", "\\'")
+        return quote_string(cls.encode(value))
 
 
 

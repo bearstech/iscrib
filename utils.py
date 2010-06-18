@@ -132,6 +132,19 @@ def execute(query, context):
         connection.close()
 
 
+def execute_only(cursor, query, context):
+    try:
+        cursor.execute(query)
+    except Exception, e:
+        context.commit = False
+        context.message = ERROR(unicode(str(e), 'utf8'))
+        print "erreur", type(e), str(e)
+        print "query", query
+        print "*" * 78
+        cursor.close()
+        raise
+
+
 
 def get_adresse_bm(code_ua, table, context=None, target=None,
         _key='code_ua', _translate=BM_TRANSLATE):
@@ -199,5 +212,5 @@ def parse_control(title):
 
 
 def quote_sql(value):
-    # 0008134 déjà encodé
+    # 0008134 pas de unicode, déjà encodé
     return value.replace("€", "eur")
