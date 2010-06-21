@@ -112,6 +112,8 @@ def get_connection(context=None, target=None):
 
 
 def execute(query, context):
+    if type(query) is not str:
+        raise TypeError, 'str expected, not "%s"' % type(query)
     try:
         connection = get_connection(context)
         cursor = connection.cursor()
@@ -133,6 +135,8 @@ def execute(query, context):
 
 
 def execute_only(cursor, query, context):
+    if type(query) is not str:
+        raise TypeError, 'str expected, not "%s"' % type(query)
     try:
         cursor.execute(query)
     except Exception, e:

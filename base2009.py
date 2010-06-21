@@ -304,7 +304,7 @@ class Base2009Form(Form):
         code_ua = self.get_code_ua()
         values = ["'%s'" % item for item in [code_ua]]
         handler = self.handler
-        schema = self.handler.schema
+        schema = handler.schema
         # Ensure order consistency
         for key in sorted(schema.keys()):
             page = key[0]
@@ -315,6 +315,9 @@ class Base2009Form(Form):
             names.append('`%s`' % key)
             datatype = schema[key]
             value = quote_sql(datatype.encode_sql(handler.get_value(key)))
+            if type(value) is unicode:
+                message = 'form "%s" field "%s" of type "%s"failed to encode'
+                raise TypeError, message % (self.name, key, datatype)
             values.append(value)
         return "INSERT INTO `%s` (%s) VALUES (%s);" % (table,
                 ','.join(names), ','.join(values))
