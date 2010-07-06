@@ -29,27 +29,10 @@ from ikaaro.registry import register_field
 
 # Import from scrib
 from base2009_views import Base2009Form_New, Base2009Form_Help
-from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
-from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
-from datatypes import EnumCV, make_enumerate
+from datatypes import NumDecimal
 from form import Form
 from formpage import FormPage
 from utils import parse_control
-
-
-dt_mapping = {
-    'boolean': EnumBoolean,
-    'dec': NumDecimal,
-    'digit': NumDigit,
-    'hh:mm': NumShortTime,
-    'hhh:mm': NumTime,
-    'int': NumInteger,
-    'jj/mm/aaaa': NumDate,
-    'mm/aaaa': NumShortDate,
-    'str': Unicode,
-    'text': Text,
-    'enumcv': EnumCV}
-
 
 
 class Base2009Form(Form):
@@ -84,6 +67,11 @@ class Base2009Form(Form):
         return self.get_site_root().get_resource(path)
 
 
+    def get_schema_pages(self):
+        handler = self.get_schema_resource().handler
+        return handler.get_schema_pages()
+
+
     def get_schema(self):
         schema, pages = self.get_schema_pages()
         return schema
@@ -95,12 +83,8 @@ class Base2009Form(Form):
 
 
     def get_controls(self):
-        resource = self.get_controls_resource()
-        handler = resource.handler
-        rows = handler.get_rows()
-        # Skip header
-        rows.next()
-        return list(rows)
+        handler = self.get_controls_resource().handler
+        return handler.get_controls()
 
 
     def get_page_numbers(self):
@@ -118,64 +102,6 @@ class Base2009Form(Form):
 
     ######################################################################
     # Scrib API
-
-    def get_schema_pages(self):
-        resource = self.get_schema_resource()
-        handler = resource.handler
-        rows = handler.get_rows()
-        # Skip header
-        rows.next()
-
-        schema = {}
-        pages = {}
-        for (name, title, form, page_number, dt_name, representation, length,
-                vocabulary, is_mandatory, readonly, sum, dependances, abrege,
-                init, sql_field) in rows:
-            # 0007651 formulaires abrégés abandonnés
-            if abrege == 'A':
-                continue
-            # The name
-            name = name.strip()
-            if name == '':
-                continue
-            if name[0] == '#':
-                name = name[1:]
-            # The datatype
-            dt_name = dt_name.strip().lower()
-            if dt_name == 'enum':
-                datatype = make_enumerate(vocabulary)
-            else:
-                datatype = dt_mapping.get(dt_name)
-            if datatype is None:
-                raise NotImplementedError, (dt_name,
-                        str(resource.get_abspath()))
-            # The page number
-            page_number = page_number.replace('-', '')
-            # allow multiple page numbers
-            page_numbers = []
-            for page in page_number.split(','):
-                if not (page.isalpha() or page == '0'): # FIXME
-                    raise ValueError, """page "%s" n'est pas valide""" % page
-                page_fields = pages.setdefault(page, set())
-                page_fields.add(name)
-                page_numbers.append(page)
-            # Mandatory
-            is_mandatory = is_mandatory.strip()
-            is_mandatory = not is_mandatory or is_mandatory.upper() == 'OUI'
-            # Read-only
-            readonly = readonly.strip().upper() == 'OUI'
-            # Sum
-            sum = sum.strip()
-            # Add to the schema
-            page_numbers = tuple(page_numbers)
-            schema[name] = datatype(representation=representation,
-                    length=(length.strip() or representation),
-                    pages=page_numbers, is_mandatory=is_mandatory,
-                    readonly=readonly, sum=sum,
-                    dependances=dependances.split(), sql_field=sql_field)
-        return schema, pages
-
-
     def get_code_ua(self):
         return self.get_property('code_ua')
 

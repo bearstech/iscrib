@@ -896,9 +896,8 @@ class WorkflowState(Enumerate):
 def make_enumerate(raw):
     options = []
     for value in raw.strip().split('/'):
-        value = unicode(value.strip(), 'utf8')
         options.append({'name': checkid(value),
-                        'value': value})
+                        'value': value.strip()})
     return SqlEnumerate(options=options)
 
 

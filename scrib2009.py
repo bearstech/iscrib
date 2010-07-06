@@ -43,10 +43,12 @@ from ikaaro.website import WebSite
 # Import from scrib
 from bm2009 import BM2009Form
 from bdp2009 import BDP2009Form
+from controls2009 import Controls2009
 from datatypes import Departements, Identifiant
 from form import Form, MultipleForm
 from forms import Forms
 from formpage import FormPage
+from schema2009 import Schema2009
 from scrib2009_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib2009_views import Scrib_Register, Scrib_Confirm
 from scrib2009_views import Scrib_ExportSql, Scrib_ChangePassword
@@ -132,7 +134,8 @@ class Scrib2009(WebSite):
             ods = odf_get_document(path)
             body = ods.get_body()
             tables = iter(ods.get_table_list())
-            for id in ('controls', 'schema'):
+            for id, cls in [('controls', Controls2009),
+                    ('schema', Schema2009)]:
                 table = tables.next()
                 body = table.export_to_csv()
                 title = table.get_table_name()
@@ -431,9 +434,12 @@ class Scrib2009(WebSite):
                 if not name.endswith('.csv'):
                     continue
                 name = name[:name.index('.')].lower()
-                cls = FormPage
-                if name in ('schema', 'controls'):
-                    cls = CSV
+                if name == 'schema':
+                    cls = Schema2009
+                elif name == 'controls':
+                    cls = Controls2009
+                else:
+                    cls = FormPage
                 cls.make_resource(cls, folder, name,
                         body=handler.to_str(),
                         title={'fr': unicode(name.capitalize())})
