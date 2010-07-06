@@ -67,6 +67,14 @@ class Scrib_Admin(IconsView):
                       'title': u"BDP",
                       'description': u"Rechercher / Ajouter une BDP",
                       'url': 'bdp'})
+        items.append({'icon': '/ui/icons/48x48/folder.png',
+                      'title': u"Paramétrage BM",
+                      'description': u"Modifier le paramétrage des BM",
+                      'url': 'param_bm'})
+        items.append({'icon': '/ui/icons/48x48/folder.png',
+                      'title': u"Paramétrage BDP",
+                      'description': u"Modifier le paramétrage des BDP",
+                      'url': 'param_bdp'})
         items.append({'icon': '/ui/icons/48x48/html.png',
                       'title': u"Aide générale",
                       'description': u"Modifier l'aide générale",
@@ -99,8 +107,8 @@ class Scrib_Login(LoginView):
 
     def get_namespace(self, resource, context):
         namespace = LoginView.get_namespace(self, resource, context)
-        # La page n'apparaît pas forcément sur le site_root
-        site_root = context.site_root
+        # Toutes les ressources ont cette vue
+        site_root = resource.get_site_root()
         echeance_bm = site_root.get_property('echeance_bm')
         namespace['echeance_bm'] = DateLitterale.encode(echeance_bm)
         echeance_bdp = site_root.get_property('echeance_bdp')
@@ -251,11 +259,12 @@ class Scrib_Confirm(STLForm):
 
         # Update "mel" field
         form = context.root.get_resource(brain.abspath)
+        schema = form.get_schema()
         handler = form.handler
         if categorie == 'BM':
-            handler.set_value('A114', email)
+            handler.set_value('A114', email, schema)
         else:
-            handler.set_value('11', email)
+            handler.set_value('11', email, schema)
 
         # Send confirmation email
         user.send_confirmation(context, email)
@@ -322,12 +331,13 @@ class Scrib_ExportSql(STLForm):
 
 
     def get_namespace(self, resource, context):
-        return {'year': context.site_root.get_year_suffix()}
+        return {'year': resource.get_year_suffix()}
 
 
     def action_bm(self, resource, context, form):
-        year = context.site_root.get_year_suffix()
-        schema = resource.bm_class.class_handler.schema
+        year = resource.get_year_suffix()
+        bm = resource.get_resource('bm/1')
+        schema = bm.get_schema()
         # Ensure field order consistency
         keys = sorted([key for key in schema.iterkeys() if key[0] != 'B'])
         values = ["  `%s` %s," % (key, schema[key].get_sql_schema())
@@ -351,8 +361,9 @@ class Scrib_ExportSql(STLForm):
 
 
     def action_bdp(self, resource, context, form):
-        year = context.site_root.get_year_suffix()
-        schema = resource.bdp_class.class_handler.schema
+        year = resource.get_year_suffix()
+        bdp = resource.get_resource('bdp/9')
+        schema = bdp.get_schema()
         # Ensure field order consistency
         keys = sorted(schema.iterkeys())
         values = [u"  `%s` %s," % (key, schema[key].get_sql_schema())
@@ -376,8 +387,9 @@ class Scrib_ExportSql(STLForm):
 
 
     def action_annexes(self, resource, context, form):
-        year = context.site_root.get_year_suffix()
-        schema = resource.bm_class.class_handler.schema
+        year = resource.get_year_suffix()
+        bm = resource.get_resource('bm/1')
+        schema = bm.get_schema()
         # Ensure field order consistency
         keys = sorted([key for key in schema.iterkeys() if key[0] == 'B'])
         values = ["  `%s` %s," % (key, schema[key].get_sql_schema())

@@ -21,10 +21,9 @@ from itools.core import get_abspath
 from itools.web import get_context
 
 # Import from ikaaro
-from ikaaro.skins import Skin, register_skin, map
+from ikaaro.skins import Skin, register_skin
 
 # Import from scrib
-from widgets import UITable
 from skin_views import ScribLocationTemplate
 
 
@@ -71,9 +70,5 @@ class ScribSkin(Skin):
 
 #############################################################################
 # Register
-for mimetype in UITable.class_mimetypes:
-    # XXX tous les formats CSV seront lus comme des tables
-    # TODO enregistrer ".table.csv" comme ".tar.gz"
-    map[mimetype] = UITable
 path = get_abspath('ui/scrib2009')
 register_skin('scrib2009', ScribSkin(path))

@@ -35,11 +35,21 @@ from utils import get_adresse_bm, get_adresse_bdp, get_ua
 
 class Base2009Form_View(Form_View):
     template = '/ui/scrib2009/Table_to_html.xml'
-    page_template = '/ui/scrib2009/bm/Page%s.table.csv'
 
 
     def get_scrib_menu(self, resource, context):
-        raise NotImplementedError
+        menu = []
+        code_ua = resource.get_code_ua()
+        form = resource.get_form()
+        link = context.get_link(form)
+        for page_number in resource.get_page_numbers():
+            name = 'page%s' % page_number
+            page = resource.get_formpage(page_number)
+            menu.append({'href': '%s/;%s' % (link, name),
+                         'title': page.get_title(),
+                         'active': 'nav-active' if context.view_name == name
+                                                else None})
+        return menu
 
 
     def get_namespace(self, resource, context):

@@ -24,28 +24,7 @@ from utils import execute
 
 
 class BM2009Form_View(Base2009Form_View):
-    page_template = '/ui/scrib2009/bm/Page%s.table.csv'
     hidden_fields = ['A100', 'A200']
-
-
-    def get_scrib_menu(self, resource, context):
-        menu = []
-        code_ua = resource.get_code_ua()
-        form = context.site_root.get_resource('bm/%s' % code_ua)
-        for name, title in [('pageA', u"A-Identité"),
-                            ('pageB', u"B-Bibliothèques du réseau"),
-                            ('pageC', u"C-Accès et installations"),
-                            ('pageD', u"D-Collections"),
-                            ('pageE', u"E-Usages et usagers de la bib."),
-                            ('pageF', u"F-Budget"),
-                            ('pageG', u"G-Personnel et formation"),
-                            ('pageH', u"H-Action culturelle"),
-                            ('pageI', u"I-Commentaires")]:
-            menu.append({'href': '%s/;%s' % (context.get_link(form), name),
-                         'title': title,
-                         'active': 'nav-active' if context.view_name == name
-                                                else None})
-        return menu
 
 
 
@@ -171,7 +150,6 @@ class BM2009Form_Print(STLView):
     access = 'is_allowed_to_view'
     title=MSG(u"Impression du rapport")
     template = '/ui/scrib2009/Table_to_print.xml'
-    page_template = '/ui/scrib2009/bm/Page%s.table.csv'
     pages = []
 
 
@@ -179,17 +157,17 @@ class BM2009Form_Print(STLView):
         context.query['view'] = 'printable'
         context.bad_types = []
         forms = []
-        for page in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
-            table = resource.get_resource(self.page_template % page)
-            if page == 'B':
+        for page_number in resource.get_page_numbers():
+            formpage = resource.get_formpage(page_number)
+            if page_number == 'B':
                 pageb = resource.get_pageb()
                 for form in pageb.get_resources():
                     view = form.pageB
-                    forms.append(table.get_namespace(form, view, context,
+                    forms.append(formpage.get_namespace(form, view, context,
                         skip_print=True))
             else:
-                view = getattr(resource, 'page%s' % page)
-                forms.append(table.get_namespace(resource, view, context,
+                view = getattr(resource, 'page%s' % page_number)
+                forms.append(formpage.get_namespace(resource, view, context,
                     skip_print=True))
         namespace = {}
         namespace['forms'] = forms

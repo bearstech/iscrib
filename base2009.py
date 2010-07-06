@@ -20,8 +20,7 @@
 from decimal import InvalidOperation
 
 # Import from itools
-from itools.core import get_abspath, merge_dicts, freeze
-from itools.csv import CSVFile
+from itools.core import merge_dicts, freeze
 from itools.datatypes import String, Boolean, Integer
 
 # Import from ikaaro
@@ -33,7 +32,8 @@ from base2009_views import Base2009Form_New, Base2009Form_Help
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import EnumCV, make_enumerate
-from form import FormHandler, Form
+from form import Form
+from formpage import FormPage
 from utils import parse_control
 
 
@@ -49,92 +49,6 @@ dt_mapping = {
     'str': Unicode,
     'text': Text,
     'enumcv': EnumCV}
-
-
-def get_schema_pages(path):
-    path = get_abspath(path)
-    handler = CSVFile(path)
-    rows = handler.get_rows()
-    # Skip header
-    rows.next()
-
-    schema = {}
-    pages = {}
-    for (name, title, form, page_number, dt_name, representation, length,
-            vocabulary, is_mandatory, readonly, sum, dependances, abrege,
-            init, sql_field) in rows:
-        # 0007651 formulaires abrégés abandonnés
-        if abrege == 'A':
-            continue
-        # The name
-        name = name.strip()
-        if name == '':
-            continue
-        if name[0] == '#':
-            name = name[1:]
-        # The datatype
-        dt_name = dt_name.strip().lower()
-        if dt_name == 'enum':
-            datatype = make_enumerate(vocabulary)
-        else:
-            datatype = dt_mapping.get(dt_name)
-        if datatype is None:
-            raise NotImplementedError, (dt_name, path)
-        # The page number
-        page_number = page_number.replace('-', '')
-        # allow multiple page numbers
-        page_numbers = []
-        for page in page_number.split(','):
-            if not (page.isalpha() or page == '0'): # FIXME
-                raise ValueError, """page "%s" n'est pas valide""" % page
-            page_fields = pages.setdefault(page, set())
-            page_fields.add(name)
-            page_numbers.append(page)
-        # Mandatory
-        is_mandatory = is_mandatory.strip()
-        is_mandatory = not is_mandatory or is_mandatory.upper() == 'OUI'
-        # Read-only
-        readonly = readonly.strip().upper() == 'OUI'
-        # Sum
-        sum = sum.strip()
-        # Add to the schema
-        page_numbers = tuple(page_numbers)
-        schema[name] = datatype(representation=representation,
-                length=(length.strip() or representation),
-                pages=page_numbers, is_mandatory=is_mandatory,
-                readonly=readonly, sum=sum, dependances=dependances.split(),
-                sql_field=sql_field)
-    return schema, pages
-
-
-
-def get_controls(path):
-    path = get_abspath(path)
-    handler = CSVFile(path)
-    rows = handler.get_rows()
-    # Skip header
-    rows.next()
-    return list(rows)
-
-
-
-class Base2009Handler(FormHandler):
-
-    def is_disabled_by_dependency(self, name):
-        for dep_name in self.schema[name].dependances:
-            if self.get_value(dep_name) is not True:
-                return True
-            # Second level
-            for dep_dep_name in self.schema[dep_name].dependances:
-                if self.get_value(dep_dep_name) is not True:
-                    return True
-        return False
-
-
-    def get_reverse_dependencies(self, name):
-        return [dep_name
-                for dep_name, dep_datatype in self.schema.iteritems()
-                if name in dep_datatype.dependances]
 
 
 
@@ -161,7 +75,106 @@ class Base2009Form(Form):
 
 
     ######################################################################
-    # API
+    # Form API
+    def get_param_folder(self):
+        if self.is_bm():
+            path = 'param_bm'
+        else:
+            path = 'param_bdp'
+        return self.get_site_root().get_resource(path)
+
+
+    def get_schema(self):
+        schema, pages = self.get_schema_pages()
+        return schema
+
+
+    def get_pages(self):
+        schema, pages = self.get_schema_pages()
+        return pages
+
+
+    def get_controls(self):
+        resource = self.get_controls_resource()
+        handler = resource.handler
+        rows = handler.get_rows()
+        # Skip header
+        rows.next()
+        return list(rows)
+
+
+    def get_page_numbers(self):
+        folder = self.get_param_folder()
+        page_numbers = []
+        for page in folder.search_resources(cls=FormPage):
+            page_numbers.append(page.name[4:].upper())
+        return sorted(page_numbers)
+
+
+    def get_formpage(self, pagenum):
+        name = 'page%s' % pagenum.lower()
+        return self.get_param_folder().get_resource(name)
+
+
+    ######################################################################
+    # Scrib API
+
+    def get_schema_pages(self):
+        resource = self.get_schema_resource()
+        handler = resource.handler
+        rows = handler.get_rows()
+        # Skip header
+        rows.next()
+
+        schema = {}
+        pages = {}
+        for (name, title, form, page_number, dt_name, representation, length,
+                vocabulary, is_mandatory, readonly, sum, dependances, abrege,
+                init, sql_field) in rows:
+            # 0007651 formulaires abrégés abandonnés
+            if abrege == 'A':
+                continue
+            # The name
+            name = name.strip()
+            if name == '':
+                continue
+            if name[0] == '#':
+                name = name[1:]
+            # The datatype
+            dt_name = dt_name.strip().lower()
+            if dt_name == 'enum':
+                datatype = make_enumerate(vocabulary)
+            else:
+                datatype = dt_mapping.get(dt_name)
+            if datatype is None:
+                raise NotImplementedError, (dt_name,
+                        str(resource.get_abspath()))
+            # The page number
+            page_number = page_number.replace('-', '')
+            # allow multiple page numbers
+            page_numbers = []
+            for page in page_number.split(','):
+                if not (page.isalpha() or page == '0'): # FIXME
+                    raise ValueError, """page "%s" n'est pas valide""" % page
+                page_fields = pages.setdefault(page, set())
+                page_fields.add(name)
+                page_numbers.append(page)
+            # Mandatory
+            is_mandatory = is_mandatory.strip()
+            is_mandatory = not is_mandatory or is_mandatory.upper() == 'OUI'
+            # Read-only
+            readonly = readonly.strip().upper() == 'OUI'
+            # Sum
+            sum = sum.strip()
+            # Add to the schema
+            page_numbers = tuple(page_numbers)
+            schema[name] = datatype(representation=representation,
+                    length=(length.strip() or representation),
+                    pages=page_numbers, is_mandatory=is_mandatory,
+                    readonly=readonly, sum=sum,
+                    dependances=dependances.split(), sql_field=sql_field)
+        return schema, pages
+
 
     def get_code_ua(self):
         return self.get_property('code_ua')
@@ -194,23 +207,41 @@ class Base2009Form(Form):
         return self.get_property('is_first_time')
 
 
+    @staticmethod
+    def is_disabled_by_dependency(name, schema, fields):
+        for dep_name in schema[name].dependances:
+            if fields[dep_name] is not True:
+                return True
+            # Second level
+            for dep_dep_name in schema[dep_name].dependances:
+                if fields[dep_dep_name] is not True:
+                    return True
+        return False
+
+
+    @staticmethod
+    def get_reverse_dependencies(name, schema):
+        return [dep_name
+                for dep_name, dep_datatype in schema.iteritems()
+                if name in dep_datatype.dependances]
+
+
     def get_invalid_fields(self, pages=freeze([]), exclude=freeze([''])):
-        handler = self.handler
-        schema = handler.schema
-        fields = handler.fields
+        schema = self.get_schema()
+        fields = self.get_fields(schema)
         for name in sorted(fields):
             if pages and name[0] not in pages:
                 continue
             if name[0] in exclude:
                 continue
-            if handler.is_disabled_by_dependency(name):
+            if self.is_disabled_by_dependency(name, schema, fields):
                 continue
             datatype = schema[name]
             value = fields[name]
             is_valid = datatype.is_valid(datatype.encode(value))
             is_sum_valid = True
             if datatype.sum:
-                sum = handler.sum(datatype, datatype.sum, **fields)
+                sum = self.sum(datatype, datatype.sum, schema, fields)
                 is_sum_valid = (sum is None or sum == value)
             if datatype.is_mandatory:
                 # Vérifie toujours les champs obligatoires
@@ -227,7 +258,10 @@ class Base2009Form(Form):
 
     def _get_controls(self, levels=freeze([]), pages=freeze([]),
             exclude=freeze([''])):
-        for number, title, expr, level, page in self.handler.controls:
+        schema = self.get_schema()
+        fields = self.get_fields(schema)
+        controls = self.get_controls()
+        for number, title, expr, level, page in controls:
             if level not in levels:
                 continue
             if pages and page not in pages:
@@ -241,9 +275,9 @@ class Base2009Form(Form):
             try:
                 # Précision pour les informations statistiques
                 if level == '0':
-                    vars = self.get_floating_vars()
+                    vars = self.get_floating_vars(fields)
                 else:
-                    vars = self.get_vars()
+                    vars = self.get_vars(fields)
                 value = eval(expr, vars)
             except ZeroDivisionError:
                 # Division par zéro toléré
@@ -262,9 +296,9 @@ class Base2009Form(Form):
                         expanded.append(unicode(token, 'utf8'))
                     else:
                         if level == '0':
-                            vars = self.get_floating_vars()
+                            vars = self.get_floating_vars(fields)
                         else:
-                            vars = self.get_vars()
+                            vars = self.get_vars(fields)
                         try:
                             value = eval(token, vars)
                         except ZeroDivisionError:
@@ -304,7 +338,7 @@ class Base2009Form(Form):
         code_ua = self.get_code_ua()
         values = [u"'%s'" % item for item in [code_ua]]
         handler = self.handler
-        schema = handler.schema
+        schema = self.get_schema()
         # Ensure order consistency
         for key in sorted(schema.keys()):
             page = key[0]

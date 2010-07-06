@@ -38,6 +38,13 @@ class MultipleForm_PageB(MultipleForm):
 
 
     ######################################################################
+    # API
+    def get_form(self):
+        name, _ = self.name.split('-pageb')
+        return self.parent.get_resource(name)
+
+
+    ######################################################################
     # Security
     def is_bm(self):
         return self.parent.is_bm()
@@ -54,11 +61,12 @@ class BM2009Form_PageB(BM2009Form):
     class_views = ['pageB']
 
     # Views
-    pageB = BM2009Form_View(title=MSG(u"saisie de bibliothèque"), n='B')
+    pageB = BM2009Form_View(title=MSG(u"saisie de bibliothèque"), pagenum='B')
 
 
     def get_title(self, language=None):
-        return self.handler.get_value('B101') or self.name
+        schema = self.get_schema()
+        return self.handler.get_value('B101', schema) or self.name
 
 
     ######################################################################
@@ -73,6 +81,10 @@ class BM2009Form_PageB(BM2009Form):
 
     ######################################################################
     # API
+    def get_form(self):
+        return self.parent.get_form()
+
+
     def get_invalid_fields(self):
         for result in BM2009Form.get_invalid_fields(self, pages=['B'],
                 exclude=[]):

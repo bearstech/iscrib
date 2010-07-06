@@ -343,6 +343,25 @@ class Numeric(object):
         raise NotImplementedError
 
 
+    @classmethod
+    def sum(cls, formula, schema, fields):
+        sum = cls.decode(0)
+        for term in formula.split('+'):
+            term = term.strip()
+            data = fields.get(term)
+            if not data:
+                return None
+            if str(data).upper() == 'NC':
+                return 'NC'
+            datatype = schema[term]
+            try:
+                value = datatype.decode(data)
+            except Exception:
+                return None
+            sum += value
+        return sum
+
+
 
 class NumDecimal(Numeric):
 

@@ -55,88 +55,61 @@ class MultipleForm(Folder):
 
 
 class FormHandler(FileHandler):
-    schema = {}
-    pages = {}
-    controls = []
-
 
     ######################################################################
     # Load/Save
-    def new(self, encoding='UTF-8', **kw):
-        """Preload with all known keys, fill the gaps with defaults.
-        """
-        fields = {}
-        for key, datatype in self.schema.iteritems():
-            try:
-                data = kw[key]
-            except KeyError:
-                data = datatype.get_default()
-            # pas de issubclass
-            try:
-                value = datatype.decode(data, encoding=encoding)
-            except TypeError:
-                value = datatype.decode(data)
-            fields[key] = value
-        self.fields = fields
+    def new(self, encoding='UTF-8', **raw_fields):
+        self._raw_fields = raw_fields
 
 
     def _load_state_from_file(self, file):
         """Load known values, the rest will be the default values.
         """
-        kw = {}
+        raw_fields = {}
         for line in file.readlines():
             if ':' not in line:
                 continue
             key, data = line.split(':', 1)
-            kw[key.strip()] = data.strip()
-        self.new(**kw)
+            raw_fields[key.strip()] = data.strip()
+        self._raw_fields = raw_fields
 
 
     def to_str(self, encoding='UTF-8'):
-        fields = self.fields
         lines = []
-        for key, value in fields.iteritems():
-            datatype = self.schema[key]
-            lines.append('%s:%s' % (key, datatype.encode(value)))
+        for key, value in self._raw_fields.iteritems():
+            lines.append('%s:%s' % (key, value))
         return '\n'.join(lines)
 
 
     ######################################################################
     # API
-    def get_value(self, name):
-        return self.fields[name]
+    def get_value(self, name, schema):
+        datatype = schema[name]
+        data = self._raw_fields.get(name)
+        if data is None:
+            return datatype.get_default()
+        try:
+            value = datatype.decode(data)
+        except ValueError:
+            value = data
+        return value
 
 
-    def set_value(self, name, value):
-        self.fields[name] = value
+    def set_value(self, name, value, schema):
+        datatype = schema[name]
+        try:
+            data = datatype.encode(value)
+        except ValueError:
+            # XXX
+            data = unicode(value).encode('UTF-8')
+        self._raw_fields[name] = data
         self.set_changed()
-
-
-    @classmethod
-    def sum(cls, datatype, formula, **kw):
-        sum = datatype.decode(0)
-        for term in formula.split('+'):
-            term = term.strip()
-            try:
-                data = kw[term]
-            except KeyError:
-                return None
-            if not data:
-                return None
-            if str(data).upper() == 'NC':
-                return 'NC'
-            dt = cls.schema[term]
-            try:
-                value = dt.decode(data)
-            except Exception:
-                return None
-            sum += value
-        return sum
 
 
 
 class Form(File):
     class_views = ['envoyer', 'exporter', 'imprimer', 'aide']
+    class_handler = FormHandler
     workflow = workflow
 
     # Views
@@ -146,6 +119,78 @@ class Form(File):
     def _get_catalog_values(self):
         return merge_dicts(File._get_catalog_values(self),
                 form_state=self.get_form_state())
+
+
+    ######################################################################
+    # API
+    def get_param_folder(self):
+        """Return the folder resource where parameters are stored.
+        """
+        raise NotImplementedError
+
+
+    def get_schema_resource(self):
+        """Return the CSV schema resource.
+        """
+        return self.get_param_folder().get_resource('schema')
+
+
+    def get_schema(self):
+        """Load the schema from the CSV.
+        """
+        raise NotImplementedError
+
+
+    def get_fields(self, schema):
+        handler = self.handler
+        fields = {}
+        for name in schema:
+            fields[name] = handler.get_value(name, schema)
+        return fields
+
+
+    def get_vars(self, fields):
+        return merge_dicts(fields, SI=SI)
+
+
+    def get_floating_vars(self, fields):
+        vars = {}
+        for name, value in fields.iteritems():
+            if isinstance(value, Numeric):
+                vars[name] = NumDecimal(value.value)
+            else:
+                vars[name] = value
+        return vars
+
+
+    def get_controls_resource(self):
+        """Return the CSV controls resource.
+        """
+        return self.get_param_folder().get_resource('controls')
+
+
+    def get_controls(self):
+        """Load the controls from the CSV.
+        """
+        raise NotImplementedError
+
+
+    def get_page_numbers(self):
+        """Return the ordered list of form page numbers.
+        """
+        raise NotImplementedError
+
+
+    def get_formpage(self, pagenum):
+        """Return the FormPage resource for this number of page.
+        """
+        raise NotImplementedError
+
+
+    def get_form(self):
+        """Shortcut to find the root form in MultipleForm.
+        """
+        return self
 
 
     ######################################################################
@@ -171,21 +216,6 @@ class Form(File):
         elif state == MODIFIED:
             return get_value('modifie')
         raise NotImplementedError, state
-
-
-    def get_vars(self):
-        return merge_dicts(self.handler.fields,
-                           SI=SI)
-
-
-    def get_floating_vars(self):
-        vars = {}
-        for name, value in self.handler.fields.iteritems():
-            if isinstance(value, Numeric):
-                vars[name] = NumDecimal(value.value)
-            else:
-                vars[name] = value
-        return vars
 
 
     def is_first_time(self):

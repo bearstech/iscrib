@@ -20,8 +20,8 @@ from ikaaro.workflow import workflow
 
 
 # States
-EMPTY = 'private' # if not handler.fields
-DRAFT = 'private' # if handler.fields
+EMPTY = 'private' # if first_time
+DRAFT = 'private' # if not first_time
 SENT = 'pending'
 EXPORTED = 'public'
 MODIFIED = 'modified'

@@ -20,28 +20,22 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
-from itools.csv import CSVFile
 from itools.datatypes import XMLContent, XMLAttribute
-from itools.xml import XMLParser
 
 # Import from ikaaro
-from ikaaro.access import is_admin
-from ikaaro.forms import xhtml_namespaces
-from ikaaro.skins import UIFile
 
 # Import from scrib
-from datatypes import Numeric, NumTime, Text, EnumBoolean
-from workflow import SENT, EXPORTED
+from datatypes import Numeric, Text, EnumBoolean
 
 
 NBSP = u"\u00a0".encode('utf8')
 FIELD_PREFIX = u"#"
 
 
-def is_mandatory_filled(datatype, name, value, context):
+def is_mandatory_filled(datatype, name, value, schema, fields, context):
     if context.request.method != 'POST':
         return True
-    if context.resource.handler.is_disabled_by_dependency(name):
+    if context.resource.is_disabled_by_dependency(name, schema, fields):
         return True
     if not datatype.is_mandatory:
         return True
@@ -63,7 +57,8 @@ def make_element(tagname, attributes={}, content=u""):
 
 
 
-def radio_widget(context, form, datatype, name, value, readonly):
+def radio_widget(context, form, datatype, name, value, schema, fields,
+        readonly):
     html = []
 
     # True -> '1' ; False -> '2'
@@ -76,13 +71,12 @@ def radio_widget(context, form, datatype, name, value, readonly):
             input = XMLContent.encode(input)
         html.append(make_element(u"div", content=input))
     else:
-        handler = form.handler
         for option in datatype.get_namespace(value):
             attributes = {u"type": u"radio", u"id": u"field_%s" % name,
                     u"name": name, u"value": option['name']}
             if option['selected']:
                 attributes[u"checked"] = u"checked"
-            if handler.is_disabled_by_dependency(name):
+            if form.is_disabled_by_dependency(name, schema, fields):
                 attributes[u"disabled"] = u"disabled"
                 attributes.setdefault(u"class", []).append(u"disabled")
             # 0005970: Le Javascript pour (dés)activer les autres champs
@@ -93,14 +87,15 @@ def radio_widget(context, form, datatype, name, value, readonly):
                 disabled = u"true"
                 toggle_class = u"addClass"
             dep_names = []
-            for dep_name in handler.get_reverse_dependencies(name):
+            for dep_name in form.get_reverse_dependencies(name, schema):
                 dep_names.append(dep_name)
                 # Second level
-                for dep_name in handler.get_reverse_dependencies(dep_name):
+                for dep_name in form.get_reverse_dependencies(dep_name,
+                        schema):
                     dep_names.append(dep_name)
                     # Third level
-                    for dep_name in handler.get_reverse_dependencies(
-                            dep_name):
+                    for dep_name in form.get_reverse_dependencies(dep_name,
+                            schema):
                         dep_names.append(dep_name)
             for dep_name in dep_names:
                 attributes.setdefault(u"onchange", []).append(
@@ -118,31 +113,33 @@ def radio_widget(context, form, datatype, name, value, readonly):
     attributes = {}
     if name in context.bad_types:
         attributes[u"class"] = u"badtype"
-    elif not is_mandatory_filled(datatype, name, value, context):
+    elif not is_mandatory_filled(datatype, name, value, schema, fields,
+            context):
         attributes[u"class"] = u"mandatory"
     return make_element(u"div", attributes, u"".join(html))
 
 
 
-def checkbox_widget(context, form, datatype, name, value, readonly):
+def checkbox_widget(context, form, datatype, name, value, schema, fields,
+        readonly):
     if readonly:
         return make_element(u"div", content=datatype.get_value(value, value))
 
     html = []
-    handler = form.handler
     for option in datatype.get_namespace(value):
         attributes = {u"type": u"checkbox",  u"id": u"field_%s" % name,
                 u"name": name, u"value": option['name']}
         if option['selected']:
             attributes[u"checked"] = u"checked"
-        if handler.is_disabled_by_dependency(name):
+        if form.is_disabled_by_dependency(name, schema, fields):
             attributes[u"disabled"] = u"disabled"
             attributes.setdefault(u"class", []).append(u"disabled")
         input = make_element(u"input", attributes, option['value'])
         if name in context.bad_types:
             input = (u'<span class="badtype" title="Mauvaise valeur">'
                     + input + u"</span>")
-        elif not is_mandatory_filled(datatype, name, value, context):
+        elif not is_mandatory_filled(datatype, name, value, schema, fields,
+                context):
             input = (u'<span class="mandatory" title="Champ obligatoire">'
                     + input + u"</span>")
         html.append(input)
@@ -150,7 +147,8 @@ def checkbox_widget(context, form, datatype, name, value, readonly):
 
 
 
-def select_widget(context, form, datatype, name, value, readonly):
+def select_widget(context, form, datatype, name, value, schema, fields,
+        readonly):
     if readonly:
         return make_element(u"div", content=datatype.get_value(value, value))
 
@@ -166,17 +164,19 @@ def select_widget(context, form, datatype, name, value, readonly):
     if name in context.bad_types:
         attributes[u"title"] = u"Mauvaise valeur"
         attributes[u"class"] = [u"badtype"]
-    elif not is_mandatory_filled(datatype, name, value, context):
+    elif not is_mandatory_filled(datatype, name, value, schema, fields,
+            context):
         attributes[u"title"] = u"Champ obligatoire"
         attributes[u"class"] = [u"mandatory"]
-    if form.handler.is_disabled_by_dependency(name):
+    if form.is_disabled_by_dependency(name, schema, fields):
         attributes[u"disabled"] = u"disabled"
         attributes.setdefault(u"class", []).append(u"disabled")
     return make_element(u"select", attributes, options)
 
 
 
-def textarea_widget(context, form, datatype, name, value, readonly):
+def textarea_widget(context, form, datatype, name, value, schema, fields,
+        readonly):
     if readonly:
         attributes = {u"style": u"white-space: pre", u"class": u"readonly"}
         content = XMLContent.encode(value)
@@ -190,8 +190,8 @@ def textarea_widget(context, form, datatype, name, value, readonly):
 
 
 
-def text_widget(context, form, datatype, name, value, readonly,
-        tabindex=None):
+def text_widget(context, form, datatype, name, value, schema, fields,
+        readonly, tabindex=None):
     # Reçoit des int en GET
     if not isinstance(value, basestring):
         value = datatype.encode(value)
@@ -218,202 +218,39 @@ def text_widget(context, form, datatype, name, value, readonly,
     if name in context.bad_types:
         attributes.setdefault(u"class", []).append(u"badtype")
         attributes[u"title"] = u"Mauvaise valeur"
-    elif not is_mandatory_filled(datatype, name, value, context):
+    elif not is_mandatory_filled(datatype, name, value, schema, fields,
+            context):
         attributes.setdefault(u"class", []).append(u"mandatory")
         attributes[u"title"] = u"Champ obligatoire"
-    if form.handler.is_disabled_by_dependency(name):
+    if form.is_disabled_by_dependency(name, schema, fields):
         attributes[u"disabled"] = u"disabled"
         attributes.setdefault(u"class", []).append(u"disabled")
     return make_element(tagname, attributes, content)
 
 
 
-def get_input_widget(name, form, context, tabindex=None, readonly=False):
-    handler = form.handler
+def get_input_widget(name, form, schema, fields, context, tabindex=None,
+        readonly=False):
     # Always take data from the handler, we store wrong values anyway
-    value = handler.get_value(name)
-    datatype = handler.schema[name]
+    value = form.handler.get_value(name, schema)
+    datatype = schema[name]
     readonly =  readonly or datatype.readonly
     representation = datatype.representation.upper()
     if representation == 'SELECT':
-        return select_widget(context, form, datatype, name, value, readonly)
+        return select_widget(context, form, datatype, name, value, schema,
+                fields, readonly)
     elif representation == 'RADIO':
-        return radio_widget(context, form, datatype, name, value, readonly)
+        return radio_widget(context, form, datatype, name, value, schema,
+                fields, readonly)
     elif representation == 'CHECKBOX':
-        return checkbox_widget(context, form, datatype, name, value,
-                readonly)
+        return checkbox_widget(context, form, datatype, name, value, schema,
+                fields, readonly)
     # Skip instance datatypes: TypeError: issubclass() arg 1 must be a class
     elif  isinstance(datatype, Numeric):
         pass
     elif issubclass(datatype, Text):
-        return textarea_widget(context, form, datatype, name, value,
-                readonly)
+        return textarea_widget(context, form, datatype, name, value, schema,
+                fields, readonly)
     # Basic text input
-    return text_widget(context, form, datatype, name, value, readonly,
-            tabindex)
-
-
-
-class UITable(UIFile, CSVFile):
-
-    def get_namespace(self, form, view, context, skip_print=False,
-            readonly=False):
-        # Force l'ordre de tabulation entre les champs
-        tabindex = None
-        page = view.n
-        if page in [2, 3, 4]:
-            tabindex = True
-
-        # Lecture seule ?
-        if not skip_print and not is_admin(context.user, form):
-            state = form.get_statename()
-            if state == SENT:
-                if page < 10 or page in (12, 14) or page > 50:
-                    # Comments 11 and 13 remain available
-                    readonly = True
-            elif state == EXPORTED:
-                readonly = True
-        # 0005160: affiche les champs même en lecture seule
-        elif skip_print:
-            readonly = True
-
-        schema = form.handler.schema
-        vars = form.get_vars()
-        floating_vars = form.get_floating_vars()
-
-        # EnumCV est un générateur, repartir de 1
-        if 'CV' in schema:
-            schema['CV'].reset()
-
-        # Calcul du (des) tableau(x)
-        tables = []
-        tables.append([])
-        for i, row in enumerate(self.get_rows()):
-            if tabindex:
-                tabindex = i + 1
-            columns = []
-            for j, column in enumerate(row):
-                if tabindex:
-                    tabindex = j * 100 + tabindex
-                if isinstance(column, str):
-                    column = unicode(column, 'utf8')
-                column = column.strip()
-                if column == u"-":
-                    # Espace blanc insécable
-                    try:
-                        css_class = columns[-1]['class']
-                    except IndexError:
-                        css_class = u"field-label"
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': XMLParser(NBSP),
-                                    'class': css_class})
-                elif column == u"%break%":
-                    # Saut de page
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': XMLParser(NBSP),
-                                    'class': None})
-                    # Commence un nouveau tableau
-                    tables.append([])
-                elif column.startswith(FIELD_PREFIX):
-                    # Champ à remplacer par un widget
-                    css_class = u"field-label"
-                    if j > 0:
-                        css_class += u" centered"
-                    column = column[1:]
-                    if not column:
-                        # Un « # » seul pour préfixer les champs
-                        # Fusionne avec la cellule précédente (svt un titre)
-                        colspan = (columns[-1]['colspan'] or 1) + 1
-                        columns[-1]['colspan'] = colspan
-                        continue
-                    elif str(column) in schema:
-                        column = get_input_widget(column, form, context,
-                                tabindex=tabindex, readonly=readonly)
-                    else:
-                        # 0004922 Fiche école ne fonctionne plus
-                        column = column.replace('\n', '')
-                        try:
-                            if u"/" in column:
-                                column = eval(column, floating_vars)
-                            else:
-                                column = eval(column, vars)
-                        except ZeroDivisionError:
-                            column = u"(division par 0)"
-                        except SyntaxError:
-                            raise SyntaxError, repr(column)
-                    if not isinstance(column, basestring):
-                        css_class += u" num"
-                        if isinstance(column, NumTime):
-                            # 0006611 numérique mais représentation textuelle
-                            column = unicode(column)
-                        elif isinstance(column, int):
-                            # l'opération était préfixée par int
-                            column = u"%d" % column
-                        elif str(column) != 'NC':
-                            column = u"%.1f" % column
-                        else:
-                            column = unicode(column)
-                    body = XMLParser(column.encode('utf8'),
-                            namespaces=xhtml_namespaces)
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': body, 'class': css_class})
-                elif column:
-                    # Texte simple (ou pas)
-                    if column[0] == u"*":
-                        # 0007975: Gestion des titres
-                        new_column = column.lstrip(u"*")
-                        level = len(column) - len(new_column)
-                        column = new_column.strip()
-                        column = make_element(
-                                # <h1> est déjà pris
-                                u"h%d" % (int(level) + 1),
-                                content=column.strip()) 
-                        css_class = u"section-header"
-                    elif (  # 0007970: CSS spécifique pour numéros de
-                            # rubriques
-                            column in schema
-                            # 0008569: BDP : les numéros de rubrique ne sont
-                            # pas tous de la même taille
-                            or j + 1 == len(row)):
-                        css_class = u"rubrique-label"
-                    else:
-                        css_class = u"field-label"
-                    if j > 0:
-                        css_class += u" centered"
-                    if column == u"100%":
-                        css_class += u" num"
-                    # 0004946: les balises < et > ne sont pas interprétées
-                    # -> ne pas utiliser XML.encode
-                    column = column.replace('&', '&amp;')
-                    body = XMLParser(column.encode('utf8'),
-                            namespaces=xhtml_namespaces)
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': body, 'class': css_class})
-                elif columns:
-                    # Vide : fusionne avec la précédente
-                    colspan = (columns[-1]['colspan'] or 1) + 1
-                    columns[-1]['colspan'] = colspan
-                    continue
-                else:
-                    # Ligne vraiment vide
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': '', 'class': None})
-            # La ligne calculée
-            tables[-1].append(columns)
-
-        namespace = {}
-        namespace['form_title'] = form.get_title()
-        namespace['page_title'] = view.get_title(context)
-        namespace['page_number'] = page
-        namespace['tables'] = tables
-        namespace['readonly'] = skip_print or readonly
-        namespace['first_time'] = form.is_first_time()
-        namespace['skip_print'] = skip_print
-        # Aide spécifique
-        if not skip_print:
-            if page == 11:
-                namespace['help_onclick'] = ''
-            else:
-                namespace['help_onclick'] = ";aide?page=%s" % page
-
-        return namespace
+    return text_widget(context, form, datatype, name, value, schema, fields,
+            readonly, tabindex)

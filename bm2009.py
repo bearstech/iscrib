@@ -26,36 +26,20 @@ from itools.uri import resolve_uri
 from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
-from base2009 import get_schema_pages, get_controls
-from base2009 import Base2009Handler, Base2009Form
+from base2009 import Base2009Form
 from base2009_views import Base2009Form_Edit
 from bm2009_pageb_views import BM2009Form_PageB_View
 from bm2009_views import BM2009Form_View, BM2009Form_Send, BM2009Form_Print
 from form import Form
 
 
-class BM2009Handler(Base2009Handler):
-    schema, pages = get_schema_pages('ui/scrib2009/bm/schema.csv')
-    controls = get_controls('ui/scrib2009/bm/controls.csv')
-
-
-
 class BM2009Form(Base2009Form):
     class_id = 'BM2009Form'
-    class_handler = BM2009Handler
     class_title = MSG(u"Formulaire BM")
     class_views = ['pageA'] + Form.class_views
 
     # Views
-    pageA = BM2009Form_View(title=MSG(u"Saisie du rapport"), n='A')
-    pageB = BM2009Form_PageB_View(n='B')
-    pageC = BM2009Form_View(n='C')
-    pageD = BM2009Form_View(n='D')
-    pageE = BM2009Form_View(n='E')
-    pageF = BM2009Form_View(n='F')
-    pageG = BM2009Form_View(n='G')
-    pageH = BM2009Form_View(n='H')
-    pageI = BM2009Form_View(n='I')
+    pageA = BM2009Form_View(title=MSG(u"Saisie du rapport"), pagenum='A')
     envoyer = BM2009Form_Send()
     imprimer = BM2009Form_Print()
     edit = Base2009Form_Edit()
@@ -63,6 +47,19 @@ class BM2009Form(Base2009Form):
     def _get_catalog_values(self):
         return merge_dicts(Base2009Form._get_catalog_values(self),
                 is_bm=True)
+
+
+    def __getattr__(self, name):
+        print "BM2009Form.__getattr__", name
+        pagenum = name[-1]
+        assert pagenum in self.get_page_numbers()
+        if name == 'pageB':
+            view = BM2009Form_PageB_View(pagenum=pagenum)
+        else:
+            view = BM2009Form_View(pagenum=pagenum)
+        # XXX marche pas
+        self.__dict__[name] = view
+        return view
 
 
     ######################################################################

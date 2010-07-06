@@ -18,6 +18,9 @@
 from datetime import date
 from sys import stdout, stdin
 
+# Import from lpOD
+from lpod.document import odf_get_document
+
 # Import from itools
 from itools.core import get_abspath, merge_dicts
 from itools.datatypes import Unicode, Integer, Date, Boolean, Tokens
@@ -32,6 +35,7 @@ from ikaaro.forms import XHTMLBody
 from ikaaro.registry import register_resource_class
 from ikaaro.resource_views import DBResource_Backlinks
 from ikaaro.revisions_views import DBResource_LastChanges
+from ikaaro.text import CSV
 from ikaaro.utils import crypt_password
 from ikaaro.webpage import WebPage
 from ikaaro.website import WebSite
@@ -42,6 +46,7 @@ from bdp2009 import BDP2009Form
 from datatypes import Departements, Identifiant
 from form import Form, MultipleForm
 from forms import Forms
+from formpage import FormPage
 from scrib2009_views import Scrib_Admin, Scrib_Login, Scrib_Edit
 from scrib2009_views import Scrib_Register, Scrib_Confirm
 from scrib2009_views import Scrib_ExportSql, Scrib_ChangePassword
@@ -53,13 +58,13 @@ from utils import ProgressMeter, get_ua, get_connection
 
 class Scrib2009(WebSite):
     class_id = 'Scrib2009'
-    class_version = '20071218'
+    class_version = '20071219'
     class_title = MSG(u"Scrib 2009")
     class_skin = 'ui/scrib2009'
     class_views = ['admin'] + WebSite.class_views
 
     __fixed_handlers__ = WebSite.__fixed_handlers__ + ['bm', 'bdp', 'aide',
-            'aide_bm', 'aide_bdp']
+            'aide_bm', 'aide_bdp', 'param_bm', 'param_bdp']
 
     bm_class = BM2009Form
     bdp_class = BDP2009Form
@@ -116,11 +121,33 @@ class Scrib2009(WebSite):
                 annee=annee,
                 echeance_bm=date(2010, 4, 30),
                 echeance_bdp=date(2010, 9, 15))
-        # Pages
+        # Paramétrage
+        print "Création du paramétrage..."
+        Folder._make_resource(Folder, folder, '%s/param_bm' % name)
+        Folder._make_resource(Folder, folder, '%s/param_bdp' % name)
+        base_path = 'ui/scrib%s' % annee
+        for categorie in ('bm', 'bdp'):
+            path = get_abspath('%s/%s/paramétrage.ods' % (base_path,
+                categorie))
+            ods = odf_get_document(path)
+            body = ods.get_body()
+            tables = iter(ods.get_table_list())
+            for id in ('controls', 'schema'):
+                table = tables.next()
+                body = table.export_to_csv()
+                title = table.get_table_name()
+                CSV._make_resource(CSV, folder, '%s/param_%s/%s' % (name,
+                    categorie, id), body=body, title={'fr': title})
+            for table in tables:
+                title = table.get_table_name()
+                id = 'page%s' % title[0]
+                body = table.export_to_csv()
+                FormPage._make_resource(FormPage, folder, '%s/param_%s/%s' %
+                        (name, categorie, id), body=body, title={'fr': title})
+        # Aides
         print "Création des pages d'aide..."
         Folder._make_resource(Folder, folder, '%s/aide_bm' % name)
         Folder._make_resource(Folder, folder, '%s/aide_bdp' % name)
-        base_path = 'ui/scrib%s' % annee
         for filename, id, title in [
                 ('aide.xhtml', 'aide', u"Aide"),
                 ('bm/PageA.xhtml', 'aide_bm/PageA', u"Page A"),
@@ -388,7 +415,28 @@ class Scrib2009(WebSite):
             except KeyError:
                 print "code_ua", code_ua, "popula manquant"
                 popula = 0
-            resource.handler.set_value('A200', popula)
+            schema = resource.get_schema()
+            resource.handler.set_value('A200', popula, schema)
+
+
+    def update_20071219(self):
+        for categorie in ('bm', 'bdp'):
+            name = 'param_' + categorie
+            title = u"Paramétrage " + categorie.upper()
+            folder = Folder.make_resource(Folder, self, name,
+                    title={'fr': title})
+            prefix = '/ui/scrib2009/' + categorie
+            for handler in self.get_resources(prefix):
+                name = handler.name
+                if not name.endswith('.csv'):
+                    continue
+                name = name[:name.index('.')].lower()
+                cls = FormPage
+                if name in ('schema', 'controls'):
+                    cls = CSV
+                cls.make_resource(cls, folder, name,
+                        body=handler.to_str(),
+                        title={'fr': unicode(name.capitalize())})
 
 
 

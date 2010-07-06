@@ -24,30 +24,7 @@ from utils import execute
 
 
 class BDP2009Form_View(Base2009Form_View):
-    page_template = '/ui/scrib2009/bdp/Page%s.table.csv'
     hidden_fields = ['0']
-
-
-    def get_scrib_menu(self, resource, context):
-        menu = []
-        code_ua = resource.get_code_ua()
-        form = context.site_root.get_resource('bdp/%s' % code_ua)
-        for name, title in [('page0', u"Identité"),
-                            ('pageA', u"A-Finances"),
-                            ('pageB', u"B-Locaux"),
-                            ('pageC', u"C-Personnel"),
-                            ('pageD', u"D-Collections"),
-                            ('pageE', u"E-Acquisitions"),
-                            ('pageF', u"F-Réseau tout public"),
-                            ('pageG', u"G-Réseau spécifique"),
-                            ('pageH', u"H-Services"),
-                            ('pageI', u"I-Actions culturelles"),
-                            ('pageL', u"L-Commentaires")]:
-            menu.append({'href': '%s/;%s' % (context.get_link(form), name),
-                         'title': title,
-                         'active': 'nav-active' if context.view_name == name
-                                                else None})
-        return menu
 
 
 
@@ -119,7 +96,6 @@ class BDP2009Form_Print(STLView):
     access = 'is_allowed_to_view'
     title=MSG(u"Impression du rapport")
     template = '/ui/scrib2009/Table_to_print.xml'
-    page_template = '/ui/scrib2009/bdp/Page%s.table.csv'
     pages = []
 
 
@@ -127,10 +103,11 @@ class BDP2009Form_Print(STLView):
         context.query['view'] = 'printable'
         context.bad_types = []
         forms = []
-        for page in ('0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L'):
-            table = resource.get_resource(self.page_template % page)
-            view = getattr(resource, 'page%s' % page)
-            forms.append(table.get_namespace(resource, view, context,
+        for pagenum in ('0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+                'L'):
+            formpage = resource.get_formpage(pagenum)
+            view = getattr(resource, 'page%s' % pagenum)
+            forms.append(formpage.get_namespace(resource, view, context,
                 skip_print=True))
         namespace = {}
         namespace['forms'] = forms

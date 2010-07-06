@@ -41,8 +41,9 @@ class Form_View(STLForm):
 
 
     def get_hidden_fields(self, resource):
+        schema = resource.get_schema()
         handler = resource.handler
-        return [{'name': field, 'value': handler.get_value(field)}
+        return [{'name': field, 'value': handler.get_value(field, schema)}
                 for field in self.hidden_fields]
 
 
@@ -60,20 +61,22 @@ class Form_View(STLForm):
             skip_print = True
         ac = resource.get_access_control()
         readonly = not ac.is_allowed_to_edit(context.user, resource)
-        table = resource.get_resource(self.page_template % self.n)
-        namespace = table.get_namespace(resource, self, context,
+        formpage = resource.get_formpage(self.pagenum)
+        namespace = formpage.get_namespace(resource, self, context,
                 skip_print=skip_print, readonly=readonly)
         namespace['hidden_fields'] = self.get_hidden_fields(resource)
         return namespace
 
 
     def action(self, resource, context, form):
+        schema, pages = resource.get_schema_pages()
+        fields = resource.get_fields(schema)
         page_number = form['page_number']
         handler = resource.handler
         bad_types = []
-        for key in handler.pages[page_number]:
+        for key in pages[page_number]:
             value = ''
-            datatype = handler.schema[key]
+            datatype = schema[key]
             # Can't use because they need to be stored
             #if datatype.readonly:
             #    continue
@@ -88,9 +91,9 @@ class Form_View(STLForm):
                     value = data
                 # Compare sums
                 if datatype.sum:
-                    expected = handler.sum(datatype, datatype.sum,
+                    expected = datatype.sum(datatype.sum, schema,
                             # Raw form, not the filtered one
-                            **context.request.get_form())
+                            context.request.get_form())
                     # Sum inputed
                     if data and value != expected:
                         # What we got was OK so blame the user
@@ -116,9 +119,11 @@ class Form_View(STLForm):
                 pass
             # Now detect unchecked checkboxes
             elif issubclass(datatype, EnumBoolean):
-                if not is_mandatory_filled(datatype, key, value, context):
+                if not is_mandatory_filled(datatype, key, value, schema,
+                        fields, context):
                     bad_types.append(key)
-            handler.set_value(key, value)
+            handler.set_value(key, value, schema)
+            fields[key] = value
         # Reindex
         context.server.change_resource(resource)
         # Transmit list of errors when returning GET
@@ -142,10 +147,10 @@ class Form_Export(BaseView):
         # construct the csv
         csv = CSVFile()
         csv.add_row(["Chapitre du formulaire", "rubrique", "valeur"])
+        schema = resource.get_schema()
         handler = resource.handler
-        schema = handler.schema
         for name, datatype in sorted(schema.iteritems()):
-            value = handler.get_value(name)
+            value = handler.get_value(name, schema)
             try:
                 value = datatype.encode(value, 'cp1252')
             except TypeError:

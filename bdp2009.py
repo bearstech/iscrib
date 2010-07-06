@@ -25,8 +25,7 @@ from itools.gettext import MSG
 from ikaaro.registry import register_resource_class, register_field
 
 # Import from scrib
-from base2009 import get_schema_pages, get_controls
-from base2009 import Base2009Handler, Base2009Form
+from base2009 import Base2009Form
 from base2009_views import Base2009Form_Edit
 from base2009_views import Base2009Form_New
 from bdp2009_views import BDP2009Form_View, BDP2009Form_Send
@@ -35,35 +34,28 @@ from datatypes import Departements
 from form import Form
 
 
-class BDP2009Handler(Base2009Handler):
-    schema, pages = get_schema_pages('ui/scrib2009/bdp/schema.csv')
-    controls = get_controls('ui/scrib2009/bdp/controls.csv')
-
-
-
 class BDP2009Form(Base2009Form):
     class_id = 'BDP2009Form'
     class_version = '20090123'
-    class_handler = BDP2009Handler
     class_title = MSG(u"Formulaire BDP")
     class_views = ['page0'] + Form.class_views
 
     # Views
-    page0 = BDP2009Form_View(title=MSG(u"Saisie du rapport"), n='0')
-    pageA = BDP2009Form_View(n='A')
-    pageB = BDP2009Form_View(n='B')
-    pageC = BDP2009Form_View(n='C')
-    pageD = BDP2009Form_View(n='D')
-    pageE = BDP2009Form_View(n='E')
-    pageF = BDP2009Form_View(n='F')
-    pageG = BDP2009Form_View(n='G')
-    pageH = BDP2009Form_View(n='H')
-    pageI = BDP2009Form_View(n='I')
-    pageL = BDP2009Form_View(n='L')
+    page0 = BDP2009Form_View(title=MSG(u"Saisie du rapport"), pagenum='0')
     envoyer = BDP2009Form_Send()
     imprimer = BDP2009Form_Print()
     edit = Base2009Form_Edit()
     new_instance = Base2009Form_New()
+
+
+    def __getattr__(self, name):
+        print "BDP2009Form.__getattr__", name
+        pagenum = name[-1]
+        assert pagenum in self.get_page_numbers()
+        view = BDP2009Form_View(pagenum=pagenum)
+        # XXX marche pas
+        self.__dict__[name] = view
+        return view
 
 
     def _get_catalog_values(self):

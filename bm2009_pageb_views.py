@@ -65,8 +65,8 @@ class BM2009Form_PageB_View(Folder_BrowseContent):
     def get_namespace(self, resource, context):
         namespace = Folder_BrowseContent.get_namespace(self, resource,
                 context)
-        namespace.update(BM2009Form_View(n=self.n).get_namespace(resource,
-            context))
+        namespace.update(BM2009Form_View(pagenum=self.pagenum).get_namespace(
+            resource, context))
         return namespace
 
 
@@ -86,7 +86,7 @@ class BM2009Form_PageB_View(Folder_BrowseContent):
         from bm2009_pageb import BM2009Form_PageB
         bib = BM2009Form_PageB.make_resource(BM2009Form_PageB, pageb, name,
                 title={'fr': title})
-        BM2009Form_View(n=self.n).action(bib, context, form)
+        BM2009Form_View(pagenum=self.pagenum).action(bib, context, form)
         if isinstance(context.message, ERROR):
             context.commit = False
             return
