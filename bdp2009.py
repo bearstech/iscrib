@@ -49,9 +49,12 @@ class BDP2009Form(Base2009Form):
 
 
     def __getattr__(self, name):
-        print "BDP2009Form.__getattr__", name
-        pagenum = name[-1]
-        assert pagenum in self.get_page_numbers()
+        if not name.startswith('page'):
+            return super(BDP2009Form, self).__getattr__(name)
+        _, pagenum = name.split('page')
+        if not pagenum in self.get_page_numbers():
+            return super(BDP2009Form, self).__getattr__(name)
+        _, pagenum = name.split('page')
         view = BDP2009Form_View(pagenum=pagenum)
         # XXX marche pas
         self.__dict__[name] = view

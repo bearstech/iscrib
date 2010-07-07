@@ -215,7 +215,7 @@ class Base2009Form(Form):
             if value is True and '0' not in levels:
                 continue
             # Le titre contient des formules
-            if '[' in title:
+            if u'[' in title:
                 expanded = []
                 for is_expr, token in parse_control(title):
                     if not is_expr:
@@ -231,8 +231,6 @@ class Base2009Form(Form):
                             value = None
                         expanded.append(unicode(value))
                 title = u"".join(expanded)
-            else:
-                title = unicode(title, 'utf8')
             if value is True:
                 value = u"Vrai"
             elif value is False:

@@ -35,7 +35,6 @@ from ikaaro.forms import XHTMLBody
 from ikaaro.registry import register_resource_class
 from ikaaro.resource_views import DBResource_Backlinks
 from ikaaro.revisions_views import DBResource_LastChanges
-from ikaaro.text import CSV
 from ikaaro.utils import crypt_password
 from ikaaro.webpage import WebPage
 from ikaaro.website import WebSite
@@ -124,25 +123,30 @@ class Scrib2009(WebSite):
                 echeance_bdp=date(2010, 9, 15))
         # Paramétrage
         print "Création du paramétrage..."
-        Folder._make_resource(Folder, folder, '%s/param_bm' % name)
-        Folder._make_resource(Folder, folder, '%s/param_bdp' % name)
+        Param2009._make_resource(Param2009, folder, '%s/param_bm' % name)
+        Param2009._make_resource(Param2009, folder, '%s/param_bdp' % name)
         base_path = 'ui/scrib%s' % annee
         for categorie in ('bm', 'bdp'):
-            path = get_abspath('%s/%s/paramétrage.ods' % (base_path,
+            path = get_abspath('%s/%s/parametrage.ods' % (base_path,
                 categorie))
             ods = odf_get_document(path)
             body = ods.get_body()
-            tables = iter(ods.get_table_list())
-            for id, cls in [('controls', Param2009.controls_class),
+            tables = iter(body.get_table_list())
+            for id, schema_class in [('controls', Param2009.controls_class),
                     ('schema', Param2009.schema_class)]:
                 table = tables.next()
+                table.rstrip_table(aggressive=True)
+                table.delete_row(0)
                 body = table.export_to_csv()
                 title = table.get_table_name()
-                CSV._make_resource(CSV, folder, '%s/param_%s/%s' % (name,
-                    categorie, id), body=body, title={'fr': title})
+                schema_class._make_resource(schema_class, folder,
+                        '%s/param_%s/%s' % (name, categorie, id), body=body,
+                        title={'fr': title})
             for table in tables:
+                table.rstrip_table(aggressive=True)
                 title = table.get_table_name()
-                id = 'page%s' % title[0]
+                page_number, _ = title.split(u" ", 1)
+                id = 'page' + page_number.lower().encode()
                 body = table.export_to_csv()
                 FormPage._make_resource(FormPage, folder, '%s/param_%s/%s' %
                         (name, categorie, id), body=body, title={'fr': title})
@@ -425,7 +429,7 @@ class Scrib2009(WebSite):
         for categorie in ('bm', 'bdp'):
             name = 'param_' + categorie
             title = u"Paramétrage " + categorie.upper()
-            folder = Folder.make_resource(Folder, self, name,
+            folder = Param2009.make_resource(Param2009, self, name,
                     title={'fr': title})
             prefix = '/ui/scrib2009/' + categorie
             for handler in self.get_resources(prefix):

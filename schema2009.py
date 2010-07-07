@@ -165,8 +165,7 @@ class Schema2009Handler(CSVFile):
             else:
                 datatype = dt_mapping.get(dt_name)
             if datatype is None:
-                raise NotImplementedError, (dt_name,
-                        str(self.get_abspath()))
+                raise NotImplementedError, (dt_name, str(self.get_abspath()))
             # The page number
             page_number = row.get_value('page_number').replace('-', '')
             # allow multiple page numbers
@@ -178,7 +177,7 @@ class Schema2009Handler(CSVFile):
                 pages.setdefault(page_number, set()).add(name)
                 page_numbers.append(page_number)
             # Add to the datatype
-            representation = row.get_value('representation'),
+            representation = row.get_value('representation')
             length = row.get_value('length') or representation
             page_numbers = tuple(page_numbers)
             is_mandatory = row.get_value('mandatory').strip()
@@ -188,7 +187,7 @@ class Schema2009Handler(CSVFile):
             dependances = row.get_value('dependencies').split()
             sql_field = row.get_value('sql_field')
             schema[name] = datatype(representation=representation,
-                    length=length, pages=page_numbers,
+                    length=str(length), pages=page_numbers,
                     is_mandatory=is_mandatory, readonly=readonly, sum=sum,
                     dependances=dependances, sql_field=sql_field)
         return schema, pages

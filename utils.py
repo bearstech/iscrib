@@ -214,10 +214,10 @@ def parse_control(title):
     generator = enumerate(title)
     end = 0
     for start, char in generator:
-        if char == '[':
+        if char == u'[':
             yield False, title[end:start+1]
             for end, char2 in generator:
-                if char2 == ']':
-                    yield True, title[start+1:end]
+                if char2 == u']':
+                    yield True, title[start + 1:end]
                     break
     yield False, title[end:]

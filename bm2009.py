@@ -50,9 +50,11 @@ class BM2009Form(Base2009Form):
 
 
     def __getattr__(self, name):
-        print "BM2009Form.__getattr__", name
-        pagenum = name[-1]
-        assert pagenum in self.get_page_numbers()
+        if not name.startswith('page'):
+            return super(BM2009Form, self).__getattr__(name)
+        _, pagenum = name.split('page')
+        if not pagenum in self.get_page_numbers():
+            return super(BM2009Form, self).__getattr__(name)
         if name == 'pageB':
             view = BM2009Form_PageB_View(pagenum=pagenum)
         else:

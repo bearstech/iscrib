@@ -70,7 +70,9 @@ class Param2009_Import(AutoForm):
             return
         stringio = StringIO(body)
         document = odf_get_document(stringio)
-        assert document.get_type() == 'spreadsheet'
+        if document.get_type() != 'spreadsheet':
+            context.message = ERROR(u"not an ODS file")
+            return
         tables = iter(document.get_body().get_table_list())
         server = context.server
         for name in ('controls', 'schema'):
@@ -88,8 +90,9 @@ class Param2009_Import(AutoForm):
         for table in tables:
             table.rstrip_table(aggressive=True)
             csv = table.export_to_csv()
-            page_number, title = table.get_table_name().split(u" ", 1)
-            name = 'page%s' % page_number.lower().encode()
+            title = table.get_table_name()
+            page_number, _ = title.split(u" ", 1)
+            name = 'page' + page_number.lower().encode()
             formpage = resource.get_resource(name)
             formpage.set_property('title', title)
             try:
