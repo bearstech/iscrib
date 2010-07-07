@@ -206,9 +206,14 @@ class Scrib2009(WebSite):
                 except KeyError, e:
                     print str(e)
                     kw = {}
+                except NameError:
+                    kw = {}
                 if categorie == 'BM':
                     kw['A100'] = code_ua
-                    ua = get_ua(code_ua, 'ua%s' % year, target=target)
+                    try:
+                        ua = get_ua(code_ua, 'ua%s' % year, target=target)
+                    except NameError, e:
+                        ua =  {'A200': 1234}
                     kw['A200'] = ua['A200']
                 else:
                     kw['0'] = code_ua
