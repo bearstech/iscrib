@@ -42,6 +42,7 @@ FIELD_PREFIX = u"#"
 class FormPage(CSV):
     class_id = 'FormPage'
     class_title = MSG(u"Page de formulaire")
+    class_icon48 = 'icons/48x48/tasks.png'
 
 
     def get_namespace(self, form, view, context, skip_print=False,

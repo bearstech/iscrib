@@ -20,47 +20,32 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
-from itools.csv import CSVFile
-from itools.datatypes import Enumerate, String
 from itools.gettext import MSG
 
 # Import from ikaaro
+from ikaaro.folder import Folder
 from ikaaro.registry import register_resource_class
-from ikaaro.text import CSV
 
 # Import from scrib
-from datatypes import Unicode
-from schema2009 import PageNumber
+from controls2009 import Controls2009
+from schema2009 import Schema2009
+from param2009_views import Param2009_View, Param2009_Import
 
 
-class ControlLevel(Enumerate):
-    options = [
-        {'name': '0', 'value': u"Informatif"},
-        {'name': '1', 'value': u"Avertissement"},
-        {'name': '2', 'value': u"Bloquant"}]
+class Param2009(Folder):
+    class_id = 'Param2009'
+    class_title = MSG(u"Paramétrage 2009")
+    class_views = (Folder.class_views[:2]
+            + ['importer']
+            + Folder.class_views[3:])
 
+    schema_class = Schema2009
+    controls_class = Controls2009
 
-
-class Controls2009Handler(CSVFile):
-    schema = {'number': String(mandatory=True, title=MSG(u"Numéro")),
-              'title': Unicode(mandatory=True, title=MSG(u"Titre")),
-              'expr': String(mandatory=True, title=MSG(u"Expression")),
-              'level': ControlLevel(mandatory=True, title=MSG(u"Niveau")),
-              'page': PageNumber(mandatory=True, title=MSG(u"Page"))}
-    columns = ['number', 'title', 'expr', 'level', 'page']
-
-
-    def get_controls(self):
-        return list(self.get_rows())
+    # Views
+    view = Param2009_View()
+    importer = Param2009_Import()
 
 
 
-class Controls2009(CSV):
-    class_id = 'Controls2009'
-    class_title = MSG(u"Contrôles 2009")
-    class_handler = Controls2009Handler
-    class_icon48 = 'icons/48x48/excel.png'
-
-
-
-register_resource_class(Controls2009)
+register_resource_class(Param2009)

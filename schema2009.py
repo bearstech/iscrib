@@ -199,6 +199,7 @@ class Schema2009(CSV):
     class_id = 'Schema2009'
     class_title = MSG(u"Schéma 2009")
     class_handler = Schema2009Handler
+    class_icon48 = 'icons/48x48/excel.png'
 
 
 
