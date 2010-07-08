@@ -32,7 +32,7 @@ from itools.web import get_context
 from ikaaro.folder import Folder
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.forms import XHTMLBody
-from ikaaro.registry import register_resource_class
+from ikaaro.registry import register_resource_class, register_document_type
 from ikaaro.resource_views import DBResource_Backlinks
 from ikaaro.revisions_views import DBResource_LastChanges
 from ikaaro.utils import crypt_password
@@ -457,3 +457,4 @@ class Scrib2009(WebSite):
 ###########################################################################
 # Register
 register_resource_class(Scrib2009)
+register_document_type(Scrib2009, WebSite.class_id)
