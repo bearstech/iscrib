@@ -118,7 +118,9 @@ def get_connection(context=None, target=None):
 
 def execute(query, context):
     if type(query) is not unicode:
-        raise TypeError, 'unicode expected, not "%s"' % type(query)
+        context.commit = False
+        context.message = ERROR(u'unicode expected, not "%s"' % type(query))
+        return
     try:
         connection = get_connection(context)
         cursor = connection.cursor()
@@ -141,7 +143,9 @@ def execute(query, context):
 
 def execute_only(cursor, query, context):
     if type(query) is not unicode:
-        raise TypeError, 'unicode expected, not "%s"' % type(query)
+        context.commit = False
+        context.message = ERROR(u'unicode expected, not "%s"' % type(query))
+        return
     try:
         cursor.execute(query)
     except Exception, e:

@@ -335,13 +335,13 @@ class Scrib_ExportSql(STLForm):
         values = "\n".join(values)
         query = []
         if form['confirm']:
-            query.append("drop table if exists `bm%s`;" % year)
-        query.extend(["create table `bm%s` (" % year,
-            "  `code_ua` int(10) unsigned not null,",
+            query.append(u"drop table if exists `bm%s`;" % year)
+        query.extend([u"create table `bm%s` (" % year,
+            u"  `code_ua` int(10) unsigned not null,",
             values,
-            "  primary key (`code_ua`)",
-            ") default charset=utf8 collate=utf8_swedish_ci;"])
-        query = "\n".join(query)
+            u"  primary key (`code_ua`)",
+            u") default charset=utf8 collate=utf8_swedish_ci;"])
+        query = u"\n".join(query)
         try:
             execute(query, context)
         except Exception:
@@ -355,18 +355,18 @@ class Scrib_ExportSql(STLForm):
         schema = resource.bdp_class.class_handler.schema
         # Ensure field order consistency
         keys = sorted(schema.iterkeys())
-        values = ["  `%s` %s," % (key, schema[key].get_sql_schema())
+        values = [u"  `%s` %s," % (key, schema[key].get_sql_schema())
                 for key in keys]
         values = "\n".join(values)
         query = []
         if form['confirm']:
-            query.append("drop table if exists `bdp%s`;" % year)
-        query.extend(["create table `bdp%s` (" % year,
-            "  `code_ua` int(10) unsigned not null,",
+            query.append(u"drop table if exists `bdp%s`;" % year)
+        query.extend([u"create table `bdp%s` (" % year,
+            u"  `code_ua` int(10) unsigned not null,",
             values,
-            "  primary key (`code_ua`)",
-            ") default charset=utf8 collate=utf8_swedish_ci;"])
-        query = "\n".join(query)
+            u"  primary key (`code_ua`)",
+            u") default charset=utf8 collate=utf8_swedish_ci;"])
+        query = u"\n".join(query)
         try:
             execute(query, context)
         except Exception:
@@ -385,8 +385,8 @@ class Scrib_ExportSql(STLForm):
         values = "\n".join(values)
         query = []
         if form['confirm']:
-            query.append("drop table if exists `annexes%s`;" % year)
-        query.extend(["create table `annexes%s` (" % year,
+            query.append(u"drop table if exists `annexes%s`;" % year)
+        query.extend([u"create table `annexes%s` (" % year,
             "  `code_ua` int(10) unsigned not null,",
             values[:-1], # remove trailing ","
             ") default charset=utf8 collate=utf8_swedish_ci;"])
