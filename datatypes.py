@@ -27,11 +27,13 @@ from itools.handlers import checkid
 
 
 def quote_integer(data):
-    return data.replace('"', '\\"').replace("'", "\\'")
+    data = unicode(data, 'utf8')
+    return data.replace(u'"', u'\\"').replace(u"'", u"\\'")
 
 
 def quote_string(data):
-    return '"%s"' % data.replace('"', '\\"').replace("'", "\\'")
+    data = unicode(data, 'utf8')
+    return u'"%s"' % data.replace(u'"', u'\\"').replace(u"'", u"\\'")
 
 
 
@@ -97,7 +99,7 @@ class Numeric(object):
     def encode_sql(cls, value):
         if isinstance(value, cls):
             if value.value is None or value.value == '':
-                return 'null'
+                return u"null"
         return quote_integer(cls.encode(value))
 
 
@@ -606,7 +608,7 @@ class NumDigit(Numeric):
     def encode_sql(cls, value):
         if isinstance(value, cls):
             if value.value is None or value.value == '':
-                return 'null'
+                return u"null"
         return quote_string(cls.encode(value))
 
 
@@ -632,7 +634,7 @@ class Unicode(BaseUnicode):
     @classmethod
     def encode_sql(cls, value):
         if value is None:
-            return 'null'
+            return u"null"
         return quote_string(cls.encode(value))
 
 
@@ -688,7 +690,7 @@ class EnumBoolean(Enumerate):
     @classmethod
     def encode_sql(cls, value):
         if value is None or value == '':
-            return 'null'
+            return u"null"
         return quote_integer(cls.encode(value))
 
 
@@ -705,7 +707,7 @@ class SqlEnumerate(Enumerate):
     @classmethod
     def encode_sql(cls, value):
         if value is None or value == '':
-            return 'null'
+            return u"null"
         return quote_string(cls.encode(value))
 
 

@@ -418,12 +418,12 @@ class Scrib_ExportSql(STLForm):
         for brain in results.get_documents(sort_by='name'):
             # Imprime le nom avant pour savoir laquelle plante
             print brain.name
-            query = "delete from `%s` where `code_ua`=%s;" % (table_bm,
+            query = u"delete from `%s` where `code_ua`=%s;" % (table_bm,
                     brain.code_ua)
             execute_only(cursor, query, context)
             bm = root.get_resource(brain.abspath)
             execute_only(cursor, bm.get_export_query(table_bm), context)
-            query = "delete from `%s` where `code_ua`=%s;" % (table_annexes,
+            query = u"delete from `%s` where `code_ua`=%s;" % (table_annexes,
                     brain.code_ua)
             execute_only(cursor, query, context)
             pageb = bm.get_pageb()
@@ -431,7 +431,7 @@ class Scrib_ExportSql(STLForm):
                 query = form.get_export_query(table_annexes, pages=['B'],
                         exclude=[])
                 execute_only(cursor, query, context)
-            execute_only(cursor, "commit", context)
+            execute_only(cursor, u"commit", context)
             done.append(int(bm.name))
         cursor.close()
         connection.close()

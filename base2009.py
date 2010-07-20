@@ -34,7 +34,7 @@ from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import EnumCV, make_enumerate
 from form import FormHandler, Form
-from utils import parse_control, quote_sql
+from utils import parse_control
 
 
 dt_mapping = {
@@ -300,9 +300,9 @@ class Base2009Form(Form):
     def get_export_query(self, table, pages=freeze([]),
             exclude=freeze([''])):
         # Primary key first
-        names = ['code_ua']
+        names = [u'code_ua']
         code_ua = self.get_code_ua()
-        values = ["'%s'" % item for item in [code_ua]]
+        values = [u"'%s'" % item for item in [code_ua]]
         handler = self.handler
         schema = handler.schema
         # Ensure order consistency
@@ -312,15 +312,15 @@ class Base2009Form(Form):
                 continue
             if page in exclude:
                 continue
-            names.append('`%s`' % key)
+            names.append(u'`%s`' % key)
             datatype = schema[key]
-            value = quote_sql(datatype.encode_sql(handler.get_value(key)))
-            if type(value) is unicode:
+            value = datatype.encode_sql(handler.get_value(key))
+            if type(value) is not unicode:
                 message = 'form "%s" field "%s" of type "%s"failed to encode'
                 raise TypeError, message % (self.name, key, datatype)
             values.append(value)
-        return "INSERT INTO `%s` (%s) VALUES (%s);" % (table,
-                ','.join(names), ','.join(values))
+        return u"INSERT INTO `%s` (%s) VALUES (%s);" % (table,
+                u",".join(names), u",".join(values))
 
 
 

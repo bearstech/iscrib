@@ -105,6 +105,11 @@ def get_connection(context=None, target=None):
             raise ValueError, "%s: sql-%s undefined" % (config.uri, arg)
         kw[arg] = value
     connection = connect(**kw)
+    # 0008134 Force UTF-8 (la seule méthode qui marche)
+    cursor = connection.cursor()
+    cursor.execute(u"set names utf8")
+    cursor.close()
+    # Utilisé pour la lecture dans adresse09
     encoding = config.get_value('sql-encoding', default='latin1')
     connection.scrib_encoding = encoding
     return connection
@@ -112,8 +117,8 @@ def get_connection(context=None, target=None):
 
 
 def execute(query, context):
-    if type(query) is not str:
-        raise TypeError, 'str expected, not "%s"' % type(query)
+    if type(query) is not unicode:
+        raise TypeError, 'unicode expected, not "%s"' % type(query)
     try:
         connection = get_connection(context)
         cursor = connection.cursor()
@@ -121,7 +126,7 @@ def execute(query, context):
         # 2014 "Commands out of sync; you can't run this command now"
         cursor.close()
         cursor = connection.cursor()
-        cursor.execute('commit')
+        cursor.execute(u"commit")
     except Exception, e:
         context.commit = False
         context.message = ERROR(unicode(str(e), 'utf8'))
@@ -135,8 +140,8 @@ def execute(query, context):
 
 
 def execute_only(cursor, query, context):
-    if type(query) is not str:
-        raise TypeError, 'str expected, not "%s"' % type(query)
+    if type(query) is not unicode:
+        raise TypeError, 'unicode expected, not "%s"' % type(query)
     try:
         cursor.execute(query)
     except Exception, e:
@@ -212,9 +217,3 @@ def parse_control(title):
                     yield True, title[start+1:end]
                     break
     yield False, title[end:]
-
-
-
-def quote_sql(value):
-    # 0008134 pas de unicode, déjà encodé
-    return value.replace("€", "eur")
