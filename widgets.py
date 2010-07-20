@@ -2,7 +2,7 @@
 # Copyright (C) 2005  <jdavid@favela.(none)>
 # Copyright (C) 2006 J. David Ibanez <jdavid@itaapy.com>
 # Copyright (C) 2006 luis <luis@lucifer.localdomain>
-# Copyright (C) 2006-2008 Hervé Cauwelier <herve@itaapy.com>
+# Copyright (C) 2006-2010 Hervé Cauwelier <herve@itaapy.com>
 # Copyright (C) 2008 Henry Obein <henry@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
