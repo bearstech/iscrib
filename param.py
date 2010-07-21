@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright (C) 2006, 2008-2010 Hervé Cauwelier <herve@itaapy.com>
-# Copyright (C) 2009 Taverne Sylvain <sylvain@itaapy.com>
+# Copyright (C) 2010 Hervé Cauwelier <herve@itaapy.com>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,18 +16,33 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import get_version
+from itools.gettext import MSG
 
 # Import from ikaaro
+from ikaaro.folder import Folder
+from ikaaro.registry import register_resource_class, register_document_type
 
-# Import from scrib
+# Import from iscrib
+from controls import Controls
+from param_views import Param_NewInstance, Param_View
+from schema import Schema
 
-# Give a version
-__version__ = get_version()
 
-# Register
-from root import Root
-import param
 
-# Silent Pyflakes
-Root, param
+class Param(Folder):
+    class_id = 'Param'
+    class_title = MSG(u"Form")
+    class_description = MSG(u"Create a form from an ODS of parameters")
+    class_icon16 = 'icons/16x16/tasks.png'
+    class_icon48 = 'icons/48x48/tasks.png'
+    
+    schema_class = Schema
+    controls_class = Controls
+
+    # Views
+    new_instance = Param_NewInstance()
+    view = Param_View()
+
+
+register_resource_class(Param)
+register_document_type(Param)

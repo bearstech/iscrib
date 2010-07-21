@@ -49,14 +49,6 @@ dt_mapping = {
 
 
 
-class FormType(Enumerate):
-    default = 'BM'
-    options = [
-        {'name': 'BM', 'value': u"BM"},
-        {'name': 'BDP', 'value': u"BDP"}]
-
-
-
 class PageNumber(Enumerate):
     options = [
         {'name': '0', 'value': u"0"},
@@ -106,19 +98,9 @@ class ReadOnly(Enumerate):
 
 
 
-class Abrege(Enumerate):
-    default = 'AC'
-    options = [
-        {'name': 'A', 'value': u"Abrégé"},
-        {'name': 'C', 'value': u"Complet"},
-        {'name': 'AC', 'value': u"Les deux"}]
-
-
-
-class Schema2009Handler(CSVFile):
+class SchemaHandler(CSVFile):
     schema = {'name': String(mandatory=True, title=MSG(u"Variable")),
               'title': Unicode(mandatory=True, title=MSG(u"Titre")),
-              'form': FormType(mandatory=True, title=MSG(u"Formulaire")),
               'page_number': PageNumber(mandatory=True, title=MSG(u"Page")),
               'type': Type(mandatory=True, title=MSG(u"Type")),
               'representation': String(mandatory=True,
@@ -132,26 +114,16 @@ class Schema2009Handler(CSVFile):
               'readonly': ReadOnly(mandatory=True, title=MSG(u"Non "
                   u"modifiable (par défaut Non)")),
               'sum': String(title=MSG(u"Somme")),
-              'dependencies': String(title=MSG(u"Champs dépendants")),
-              'abrege': Abrege(mandatory=True, title=MSG(u"Formulaire "
-                  u"abrégé, complet ou les deux (par défaut)")),
-              'initialisation': String(mandatory=True,
-                  title=MSG(u"Initialisation (par défaut aucune)")),
-              'sql_field': String(mandatory=True, title=MSG(u"Nom variable "
-                  u"n-1 dans ADRESSE08"))}
-    columns = ['name', 'title', 'form', 'page_number', 'type',
-            'representation', 'length', 'vocabulary', 'mandatory',
-            'readonly', 'sum', 'dependencies', 'abrege', 'initialisation',
-            'sql_field']
+              'dependencies': String(title=MSG(u"Champs dépendants"))}
+    columns = ['name', 'title', 'page_number', 'type', 'representation',
+            'length', 'vocabulary', 'mandatory', 'readonly', 'sum',
+            'dependencies']
 
 
     def get_schema_pages(self):
         schema = {}
         pages = {}
         for row in self.get_rows():
-            # 0007651 formulaires abrégés abandonnés
-            if row.get_value('abrege') == 'A':
-                continue
             # The name
             name = row.get_value('name').strip()
             if name == '':
@@ -185,21 +157,21 @@ class Schema2009Handler(CSVFile):
             readonly = row.get_value('readonly').strip().upper() == 'OUI'
             sum = row.get_value('sum').strip()
             dependances = row.get_value('dependencies').split()
-            sql_field = row.get_value('sql_field')
             schema[name] = datatype(representation=representation,
                     length=str(length), pages=page_numbers,
                     is_mandatory=is_mandatory, readonly=readonly, sum=sum,
-                    dependances=dependances, sql_field=sql_field)
+                    dependances=dependances)
         return schema, pages
 
 
 
-class Schema2009(CSV):
-    class_id = 'Schema2009'
-    class_title = MSG(u"Schéma 2009")
-    class_handler = Schema2009Handler
+class Schema(CSV):
+    class_id = 'Schema'
+    class_title = MSG(u"Schema")
+    class_handler = SchemaHandler
+    class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
 
 
 
-register_resource_class(Schema2009)
+register_resource_class(Schema)

@@ -30,22 +30,22 @@ from ikaaro.text import CSV
 
 # Import from scrib
 from datatypes import Unicode
-from schema2009 import PageNumber
+from schema import PageNumber
 
 
 class ControlLevel(Enumerate):
     options = [
-        {'name': '0', 'value': u"Informatif"},
-        {'name': '1', 'value': u"Avertissement"},
-        {'name': '2', 'value': u"Bloquant"}]
+        {'name': '0', 'value': u"Informative"},
+        {'name': '1', 'value': u"Warning"},
+        {'name': '2', 'value': u"Error"}]
 
 
 
-class Controls2009Handler(CSVFile):
-    schema = {'number': String(mandatory=True, title=MSG(u"Numéro")),
-              'title': Unicode(mandatory=True, title=MSG(u"Titre")),
+class ControlsHandler(CSVFile):
+    schema = {'number': String(mandatory=True, title=MSG(u"Number")),
+              'title': Unicode(mandatory=True, title=MSG(u"Title")),
               'expr': String(mandatory=True, title=MSG(u"Expression")),
-              'level': ControlLevel(mandatory=True, title=MSG(u"Niveau")),
+              'level': ControlLevel(mandatory=True, title=MSG(u"Level")),
               'page': PageNumber(mandatory=True, title=MSG(u"Page"))}
     columns = ['number', 'title', 'expr', 'level', 'page']
 
@@ -55,12 +55,13 @@ class Controls2009Handler(CSVFile):
 
 
 
-class Controls2009(CSV):
-    class_id = 'Controls2009'
-    class_title = MSG(u"Contrôles 2009")
-    class_handler = Controls2009Handler
+class Controls(CSV):
+    class_id = 'Controls'
+    class_title = MSG(u"Controls")
+    class_handler = ControlsHandler
+    class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
 
 
 
-register_resource_class(Controls2009)
+register_resource_class(Controls)
