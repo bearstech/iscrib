@@ -19,6 +19,7 @@
 
 # Import from ikaaro
 from ikaaro.registry import register_resource_class
+from ikaaro.folder_views import GoToSpecificDocument
 
 # Import from iscrib
 from form import Form
@@ -31,14 +32,7 @@ class ParamForm(Param, Form):
     class_id = 'Param'
     
     # Views
-    @property
-    def class_views(self):
-        class_views = []
-        for page_number in self.get_page_numbers():
-            class_views.append('page' + page_number)
-        class_views.extend(Param.class_views)
-        print "class_views", class_views
-        return class_views
+    view = GoToSpecificDocument(specific_document='.', specific_view='pageA')
 
 
     def __getattr__(self, name):

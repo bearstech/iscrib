@@ -23,6 +23,7 @@ from itools.web import BaseView, STLForm, INFO, ERROR
 
 # Import from iscrib
 from datatypes import Numeric, EnumBoolean
+from utils import get_page_number
 from widgets import is_mandatory_filled
 
 
@@ -44,7 +45,7 @@ class Form_View(STLForm):
 
     def get_hidden_fields(self, resource, context):
         schema = resource.get_schema()
-        handler = resource.handler
+        handler = resource.get_form_handler()
         return [{'name': field, 'value': handler.get_value(field, schema)}
                 for field in self.hidden_fields]
 
@@ -55,8 +56,8 @@ class Form_View(STLForm):
         view_name = view_name.lower()
         for formpage in resource.get_formpages():
             menu.append({'title': formpage.get_title(),
-                'href': context.get_link(formpage),
-                'active': 'active' if resource.name == view_name else None})
+                'href': ';page%s' % get_page_number(formpage.name),
+                'active': 'active' if formpage.name == view_name else None})
         return menu
 
 
@@ -91,7 +92,7 @@ class Form_View(STLForm):
         schema, pages = resource.get_schema_pages()
         fields = resource.get_fields(schema)
         page_number = form['page_number']
-        handler = resource.handler
+        handler = resource.get_form_handler()
         bad_types = []
         for key in pages[page_number]:
             value = ''
@@ -100,7 +101,7 @@ class Form_View(STLForm):
             #if datatype.readonly:
             #    continue
             # Can't use "if not/continue" pattern here
-            if context.has_form_value(key):
+            if context.get_form_value(key) is not None:
                 # Do not use form schema, only default String
                 data = context.get_form_value(key).strip()
                 try:
@@ -144,7 +145,7 @@ class Form_View(STLForm):
             handler.set_value(key, value, schema)
             fields[key] = value
         # Reindex
-        context.server.change_resource(resource)
+        context.database.change_resource(resource)
         # Transmit list of errors when returning GET
         if bad_types:
             context.message = MSG_ERREUR_SAUVEGARDE
@@ -167,7 +168,7 @@ class Form_Export(BaseView):
         csv = CSVFile()
         csv.add_row(["Chapitre du formulaire", "rubrique", "valeur"])
         schema = resource.get_schema()
-        handler = resource.handler
+        handler = resource.get_form_handler()
         for name, datatype in sorted(schema.iteritems()):
             value = handler.get_value(name, schema)
             try:
