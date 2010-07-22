@@ -33,7 +33,7 @@ FIELD_PREFIX = u"#"
 
 
 def is_mandatory_filled(datatype, name, value, schema, fields, context):
-    if context.request.method != 'POST':
+    if context.method != 'POST':
         return True
     if context.resource.is_disabled_by_dependency(name, schema, fields):
         return True
@@ -232,7 +232,7 @@ def text_widget(context, form, datatype, name, value, schema, fields,
 def get_input_widget(name, form, schema, fields, context, tabindex=None,
         readonly=False):
     # Always take data from the handler, we store wrong values anyway
-    value = form.handler.get_value(name, schema)
+    value = form.get_form_handler().get_value(name, schema)
     datatype = schema[name]
     readonly =  readonly or datatype.readonly
     representation = datatype.representation.upper()

@@ -16,38 +16,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from mysql
-from MySQLdb import connect
-from MySQLdb.cursors import DictCursor
-
 # Import from itools
-from itools.core import merge_dicts
 from itools.csv import CSVFile
 from itools.datatypes import Integer, String, Unicode
-from itools.web import ERROR
 
 # Import from ikaaro
-from ikaaro.config import ServerConfig
 
 # Import from scrib
 from datatypes import Departements
-
-
-BM_TRANSLATE = [('A101', 'libelle1'), ('A102', 'libelle2'),
-        ('A103', 'local'), ('A104', 'voie_num'), ('A105', 'voie_type'),
-        ('A106', 'voie_nom'), ('A107', 'CPBIBLIO'), ('A108', 'ville'),
-        ('A109', 'CEDEXB'), ('A110', 'DIRECTEU'), ('A111', 'st_dir'),
-        ('A112', 'TELE'), ('A113', 'FAX'), ('A115', 'WWW')]
-
-
-BDP_TRANSLATE = [('0', 'code_bib'), ('1', 'libelle1'), ('2', 'libelle2'),
-        ('30', 'local'), ('31', 'voie_num'), ('32', 'voie_type'),
-        ('33', 'voie_nom'), ('4', 'CPBIBLIO'), ('5', 'ville'),
-        ('6', 'CEDEXB'), ('7', 'DIRECTEU'), ('8', 'st_dir'), ('9', 'TELE'),
-        ('10', 'FAX'), ('12', 'WWW')]
-
-
-UA_TRANSLATE = [('A200', 'popula')]
 
 
 class ProgressMeter(object):
@@ -77,119 +53,9 @@ class UsersCSV(CSVFile):
 
 
 
-class ScribServerConfig(ServerConfig):
-    schema = merge_dicts(ServerConfig.schema, **{
-            'sql-host': String,
-            'sql-port': Integer,
-            'sql-db': String,
-            'sql-user': String,
-            'sql-passwd': String})
-
-
-
-def get_config(context=None, target=None):
-    assert context or target
-    if target is None:
-        target = context.server.target
-    return ScribServerConfig('%s/config.conf' % target)
-
-
-
-def get_connection(context=None, target=None):
-    assert context or target
-    config = get_config(context=context, target=target)
-    kw = {}
-    for arg in ('host', 'port', 'db', 'user', 'passwd'):
-        value = config.get_value('sql-%s' % arg)
-        if value is None:
-            raise ValueError, "%s: sql-%s undefined" % (config.uri, arg)
-        kw[arg] = value
-    connection = connect(**kw)
-    # 0008134 Force UTF-8 (la seule méthode qui marche)
-    cursor = connection.cursor()
-    cursor.execute(u"set names utf8")
-    cursor.close()
-    # Utilisé pour la lecture dans adresse09
-    encoding = config.get_value('sql-encoding', default='latin1')
-    connection.scrib_encoding = encoding
-    return connection
-
-
-
-def execute(query, context):
-    if type(query) is not unicode:
-        context.commit = False
-        context.message = ERROR(u'unicode expected, not "%s"' % type(query))
-        return
-    try:
-        connection = get_connection(context)
-        cursor = connection.cursor()
-        cursor.execute(query)
-        # 2014 "Commands out of sync; you can't run this command now"
-        cursor.close()
-        cursor = connection.cursor()
-        cursor.execute(u"commit")
-    except Exception, e:
-        context.commit = False
-        context.message = ERROR(unicode(str(e), 'utf8'))
-        print "erreur", type(e), str(e)
-        print "query", query
-        print "*" * 78
-        raise
-    finally:
-        cursor.close()
-        connection.close()
-
-
-def execute_only(cursor, query, context):
-    if type(query) is not unicode:
-        context.commit = False
-        context.message = ERROR(u'unicode expected, not "%s"' % type(query))
-        return
-    try:
-        cursor.execute(query)
-    except Exception, e:
-        context.commit = False
-        context.message = ERROR(unicode(str(e), 'utf8'))
-        print "erreur", type(e), str(e)
-        print "query", query
-        print "*" * 78
-        cursor.close()
-        raise
-
-
-
-def get_adresse_bm(code_ua, table, context=None, target=None,
-        _key='code_ua', _translate=BM_TRANSLATE):
-    connection = get_connection(context=context, target=target)
-    cursor = connection.cursor(DictCursor)
-    cursor.execute('select * from %s where %s=%s' % (table, _key, code_ua))
-    results = cursor.fetchall()
-    cursor.close()
-    connection.close()
-    if not len(results):
-        raise KeyError, "pas de %s '%s' dans '%s'" % (_key, code_ua, table)
-    adresse = results[0]
-    for key, value in adresse.iteritems():
-        if value is None:
-            adresse[key] = ''
-    encoding = connection.scrib_encoding
-    for new, old in _translate:
-        value = str(adresse.pop(old))
-        adresse[new] = unicode(value, encoding).encode('utf8')
-    return adresse
-
-
-
-def get_adresse_bdp(code_bib, table, context=None, target=None):
-    return get_adresse_bm(code_bib, table, context=context, target=target,
-            _key='code_bib', _translate=BDP_TRANSLATE)
-
-
-
-def get_ua(code_ua, table, context=None, target=None):
-    return get_adresse_bm(code_ua, table, context=context, target=target,
-            _translate=UA_TRANSLATE)
+def get_page_number(name):
+    _, page_number = name.split('page')
+    return page_number.upper()
 
 
 

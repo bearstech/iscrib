@@ -30,11 +30,12 @@ from itools.web import ERROR
 # Import from ikaaro
 from ikaaro.autoform import FileWidget
 from ikaaro.datatypes import FileDataType
-from ikaaro.text import CSV
 from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 
 # Import from iscrib
+from form import Form
+from formpage import FormPage
 
 
 class Param_NewInstance(NewInstance):
@@ -56,7 +57,7 @@ class Param_NewInstance(NewInstance):
             context.message = ERROR(u"not an ODS file")
             return
         tables = iter(document.get_body().get_table_list())
-        server = context.server
+        # Controls and Schema
         for name, cls in [('controls', child.controls_class),
                           ('schema', child.schema_class)]:
             table = tables.next()
@@ -65,6 +66,7 @@ class Param_NewInstance(NewInstance):
             child.make_resource(name, cls,
                     title={'fr': table.get_table_name()},
                     body=table.export_to_csv())
+        # Pages
         for table in tables:
             table.rstrip_table(aggressive=True)
             title = table.get_table_name()
@@ -77,11 +79,14 @@ class Param_NewInstance(NewInstance):
             name = 'page' + page_number.lower().encode()
             body = table.export_to_csv()
             try:
-                child.make_resource(name, CSV, title={'fr': title}, body=body)
+                child.make_resource(name, FormPage, title={'fr': title},
+                        body=body)
             except Exception, e:
                 context.commit = False
                 context.message = ERROR(unicode(e))
                 return
+        # Initial form
+        child.make_resource('0', Form)
         return goto
 
 

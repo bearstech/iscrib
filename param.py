@@ -44,5 +44,9 @@ class Param(Folder):
     view = Param_View()
 
 
+    def get_param_folder(self):
+        return self
+
+
 register_resource_class(Param)
 register_document_type(Param)

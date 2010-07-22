@@ -21,7 +21,7 @@ from itools.datatypes import String
 from itools.gettext import MSG
 from itools.web import BaseView, STLForm, INFO, ERROR
 
-# Import from scrib
+# Import from iscrib
 from datatypes import Numeric, EnumBoolean
 from widgets import is_mandatory_filled
 
@@ -36,16 +36,32 @@ MSG_SAUVEGARDE = INFO(u"La page est enregistrée, veuillez vérifier votre "
 class Form_View(STLForm):
     access = 'is_allowed_to_view'
     access_POST = 'is_allowed_to_edit'
+    template = '/ui/iscrib/form_view.xml'
     query_schema = {'view': String}
     schema = {'page_number': String}
     hidden_fields = []
 
 
-    def get_hidden_fields(self, resource):
+    def get_hidden_fields(self, resource, context):
         schema = resource.get_schema()
         handler = resource.handler
         return [{'name': field, 'value': handler.get_value(field, schema)}
                 for field in self.hidden_fields]
+
+
+    def get_menu(self, resource, context):
+        menu = []
+        view_name = context.view_name or 'pageA'
+        view_name = view_name.lower()
+        for formpage in resource.get_formpages():
+            menu.append({'title': formpage.get_title(),
+                'href': context.get_link(formpage),
+                'active': 'active' if resource.name == view_name else None})
+        return menu
+
+
+    def is_skip_print(self, resource, context):
+        return False
 
 
     def get_namespace(self, resource, context):
@@ -56,16 +72,18 @@ class Form_View(STLForm):
             # Fresh GET: not bad yet
             context.bad_types = []
         user = context.user
-        skip_print = user.is_voir_scrib()
+        skip_print = self.is_skip_print(resource, context)
         view = context.query['view']
         if view == 'printable':
             skip_print = True
         ac = resource.get_access_control()
         readonly = not ac.is_allowed_to_edit(context.user, resource)
-        formpage = resource.get_formpage(self.pagenum)
+        formpage = resource.get_formpage(self.page_number)
         namespace = formpage.get_namespace(resource, self, context,
                 skip_print=skip_print, readonly=readonly)
-        namespace['hidden_fields'] = self.get_hidden_fields(resource)
+        namespace['hidden_fields'] = self.get_hidden_fields(resource,
+                context)
+        namespace['menu'] = self.get_menu(resource, context)
         return namespace
 
 

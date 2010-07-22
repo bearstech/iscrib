@@ -17,9 +17,10 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import get_version
+from itools.core import get_version, get_abspath
 
 # Import from ikaaro
+from ikaaro.skins import register_skin
 
 # Import from scrib
 
@@ -27,8 +28,9 @@ from itools.core import get_version
 __version__ = get_version()
 
 # Register
-from root import Root
-import param
+import param, demo
+
+register_skin('iscrib', get_abspath('ui'))
 
 # Silent Pyflakes
-Root, param
+param, demo

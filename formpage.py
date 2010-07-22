@@ -25,7 +25,7 @@ from itools.xml import XMLParser
 
 # Import from ikaaro
 from ikaaro.access import is_admin
-from ikaaro.forms import xhtml_namespaces
+from ikaaro.autoform import xhtml_namespaces
 from ikaaro.registry import register_resource_class
 from ikaaro.text import CSV
 
@@ -45,21 +45,22 @@ class FormPage(CSV):
     class_icon48 = 'icons/48x48/tasks.png'
 
 
+    def get_page_number(self):
+        _, page_number = self.name.split('page')
+        return page_number.upper()
+
+
     def get_namespace(self, form, view, context, skip_print=False,
             readonly=False):
         # Force l'ordre de tabulation entre les champs
         tabindex = None
-        pagenum = view.pagenum
-        if pagenum in [2, 3, 4]:
-            tabindex = True
+        page_number = self.get_page_number()
 
         # Lecture seule ?
         if not skip_print and not is_admin(context.user, form):
             state = form.get_statename()
             if state == SENT:
-                if pagenum < 10 or pagenum in (12, 14) or pagenum > 50:
-                    # Comments 11 and 13 remain available
-                    readonly = True
+                readonly = True
             elif state == EXPORTED:
                 readonly = True
         # 0005160: affiche les champs même en lecture seule
@@ -191,18 +192,11 @@ class FormPage(CSV):
         namespace = {}
         namespace['form_title'] = form.get_title()
         namespace['page_title'] = view.get_title(context)
-        namespace['page_number'] = pagenum
+        namespace['page_number'] = page_number
         namespace['tables'] = tables
         namespace['readonly'] = skip_print or readonly
         namespace['first_time'] = form.is_first_time()
         namespace['skip_print'] = skip_print
-        # Aide spécifique
-        if not skip_print:
-            if pagenum == 11:
-                namespace['help_onclick'] = ''
-            else:
-                namespace['help_onclick'] = ";aide?page=%s" % pagenum
-
         return namespace
 
 

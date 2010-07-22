@@ -18,36 +18,27 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, freeze
+from itools.gettext import MSG
 from itools.handlers import File as FileHandler
 
 # Import from ikaaro
 from ikaaro.file import File
 from ikaaro.folder import Folder
 from ikaaro.registry import register_field
-from ikaaro.workflow import StateForm
 
-# Import from scrib
-from datatypes import Numeric, NumDecimal
-from datatypes import Unicode
+# Import from iscrib
+from datatypes import Numeric, NumDecimal, Unicode
 from datatypes import WorkflowState
 from form_views import Form_Export
-from utils import SI
+from formpage import FormPage
+from utils import SI, get_page_number
 from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
-
-
-
-class MultipleForm_StateForm(StateForm):
-
-    def action(self, resource, context, form):
-        for resource in resource.get_resources():
-            resource.edit_state.action(resource, context, form)
 
 
 
 class MultipleForm(Folder):
     class_id = 'MultipleForm'
-    edit_state = MultipleForm_StateForm()
 
 
     def is_first_time(self):
@@ -109,6 +100,8 @@ class FormHandler(FileHandler):
 
 
 class Form(File):
+    class_id = 'Form'
+    class_title = MSG(u"Form")
     class_views = ['envoyer', 'exporter', 'imprimer', 'aide']
     class_handler = FormHandler
     workflow = workflow
@@ -136,14 +129,29 @@ class Form(File):
         return self.get_param_folder().get_resource('schema')
 
 
-    def get_schema(self):
+    def get_schema_pages(self):
         """Load the schema from the CSV.
         """
-        raise NotImplementedError
+        handler = self.get_schema_resource().handler
+        return handler.get_schema_pages()
+
+
+    def get_schema(self):
+        schema, pages = self.get_schema_pages()
+        return schema
+
+
+    def get_pages(self):
+        schema, pages = self.get_schema_pages()
+        return pages
+
+
+    def get_form_handler(self):
+        return self.handler
 
 
     def get_fields(self, schema):
-        handler = self.handler
+        handler = self.get_form_handler()
         fields = {}
         for name in schema:
             fields[name] = handler.get_value(name, schema)
@@ -173,19 +181,35 @@ class Form(File):
     def get_controls(self):
         """Load the controls from the CSV.
         """
-        raise NotImplementedError
+        handler = self.get_controls_resource().handler
+        return handler.get_controls()
+
+
+    def get_formpages(self):
+        folder = self.get_param_folder()
+        root = self.get_root()
+        results = root.search(format=FormPage.class_id,
+                parent_path=str(folder.get_canonical_path()))
+        for brain in results.get_documents(sort_by='name'):
+            formpage = root.get_resource(brain.abspath)
+            yield formpage
 
 
     def get_page_numbers(self):
         """Return the ordered list of form page numbers.
         """
-        raise NotImplementedError
+        page_numbers = []
+        for formpage in self.get_formpages():
+            page_number = get_page_number(formpage.name)
+            page_numbers.append(page_number)
+        return page_numbers
 
 
-    def get_formpage(self, pagenum):
+    def get_formpage(self, page_number):
         """Return the FormPage resource for this number of page.
         """
-        raise NotImplementedError
+        name = 'page%s' % page_number.lower()
+        return self.get_param_folder().get_resource(name, soft=True)
 
 
     def get_form(self):
@@ -220,7 +244,56 @@ class Form(File):
 
 
     def is_first_time(self):
-        return self.handler.timestamp is None
+        return self.get_form_handler().timestamp is None
+
+
+    @staticmethod
+    def is_disabled_by_dependency(name, schema, fields):
+        for dep_name in schema[name].dependances:
+            if fields[dep_name] is not True:
+                return True
+            # Second level
+            for dep_dep_name in schema[dep_name].dependances:
+                if fields[dep_dep_name] is not True:
+                    return True
+        return False
+
+
+    @staticmethod
+    def get_reverse_dependencies(name, schema):
+        return [dep_name
+                for dep_name, dep_datatype in schema.iteritems()
+                if name in dep_datatype.dependances]
+
+
+    def get_invalid_fields(self, pages=freeze([]), exclude=freeze([''])):
+        schema = self.get_schema()
+        fields = self.get_fields(schema)
+        for name in sorted(fields):
+            if pages and name[0] not in pages:
+                continue
+            if name[0] in exclude:
+                continue
+            if self.is_disabled_by_dependency(name, schema, fields):
+                continue
+            datatype = schema[name]
+            value = fields[name]
+            is_valid = datatype.is_valid(datatype.encode(value))
+            is_sum_valid = True
+            if datatype.sum:
+                sum = self.sum(datatype, datatype.sum, schema, fields)
+                is_sum_valid = (sum is None or sum == value)
+            if datatype.is_mandatory:
+                # Vérifie toujours les champs obligatoires
+                if is_valid and is_sum_valid:
+                    continue
+            else:
+                # Vérifie seulement si quelque chose a été saisi
+                if not datatype.encode(value):
+                    continue
+                if is_valid and is_sum_valid:
+                    continue
+            yield name, datatype
 
 
 
