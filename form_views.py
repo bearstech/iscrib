@@ -113,7 +113,7 @@ class Form_View(STLForm):
                 if datatype.sum:
                     expected = datatype.sum(datatype.sum, schema,
                             # Raw form, not the filtered one
-                            context.request.get_form())
+                            context.get_form())
                     # Sum inputed
                     if data and value != expected:
                         # What we got was OK so blame the user
@@ -179,11 +179,8 @@ class Form_Export(BaseView):
                 raise "pas encode", str(type(datatype))
             csv.add_row([datatype.pages[0], name, value])
 
-        response = context.response
-        response.set_header('Content-Type', 'text/comma-separated-values')
-        response.set_header('Content-Disposition',
-                'attachment; filename="scrib%s_BM%s.csv"' % (
-                    context.site_root.get_property('annee'),
-                    resource.get_code_ua()))
+        context.set_content_type('text/comma-separated-values')
+        context.set_content_disposition('attachment',
+                filename="%s.csv" % (resource.name))
 
         return csv.to_str(separator=';')

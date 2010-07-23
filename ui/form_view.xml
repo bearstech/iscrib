@@ -19,8 +19,9 @@
         <a href="/;aide">Veuillez consulter l'aide générale.</a>
       </p>
       <p id="form-toolbar">
-        <input id="form-submit" type="submit" value="Enregistrer"
-          stl:if="not readonly" class="button-ok"/>
+        <button id="form-submit" stl:if="not readonly" class="button-ok">
+          Enregistrer
+        </button>
         <a id="form-print" href="?view=printable" title="Imprimer (dans une
           nouvelle fenêtre)" onclick="return popup(this.href, 800,
           600)">Imprimer cette page</a>
@@ -37,8 +38,9 @@
         </tr>
       </table>
       <p>
-        <input type="submit" value="Enregistrer" stl:if="not readonly"
-          class="button-ok"/>
+        <button stl:if="not readonly" class="button-ok">
+          Enregistrer
+        </button>
       </p>
     </div>
 
