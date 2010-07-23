@@ -20,7 +20,7 @@ from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.folder import Folder
-from ikaaro.registry import register_resource_class, register_document_type
+from ikaaro.registry import register_document_type
 
 # Import from iscrib
 from controls import Controls
@@ -48,5 +48,4 @@ class Param(Folder):
         return self
 
 
-register_resource_class(Param)
 register_document_type(Param)

@@ -26,7 +26,6 @@ from itools.xml import XMLParser
 # Import from ikaaro
 from ikaaro.access import is_admin
 from ikaaro.autoform import xhtml_namespaces
-from ikaaro.registry import register_resource_class
 from ikaaro.text import CSV
 
 # Import from scrib
@@ -198,7 +197,3 @@ class FormPage(CSV):
         namespace['first_time'] = form.is_first_time()
         namespace['skip_print'] = skip_print
         return namespace
-
-
-
-register_resource_class(FormPage)

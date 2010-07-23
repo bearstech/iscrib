@@ -25,7 +25,6 @@ from itools.datatypes import Enumerate, String
 from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.registry import register_resource_class
 from ikaaro.text import CSV
 
 # Import from scrib
@@ -61,7 +60,3 @@ class Controls(CSV):
     class_handler = ControlsHandler
     class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
-
-
-
-register_resource_class(Controls)

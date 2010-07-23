@@ -18,7 +18,6 @@
 # Import from itools
 
 # Import from ikaaro
-from ikaaro.registry import register_resource_class
 from ikaaro.folder_views import GoToSpecificDocument
 
 # Import from iscrib
@@ -53,7 +52,3 @@ class ParamForm(Param, Form):
 
     def get_form_handler(self):
         return self.get_resource('0').handler
-
-
-
-register_resource_class(ParamForm)
