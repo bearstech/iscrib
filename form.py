@@ -19,13 +19,13 @@
 
 # Import from itools
 from itools.core import merge_dicts, freeze
+from itools.database import register_field
 from itools.gettext import MSG
 from itools.handlers import File as FileHandler
 
 # Import from ikaaro
 from ikaaro.file import File
 from ikaaro.folder import Folder
-from ikaaro.registry import register_field
 
 # Import from iscrib
 from datatypes import Numeric, NumDecimal, Unicode
@@ -110,8 +110,8 @@ class Form(File):
     exporter = Form_Export()
 
 
-    def _get_catalog_values(self):
-        return merge_dicts(File._get_catalog_values(self),
+    def get_catalog_values(self):
+        return merge_dicts(File.get_catalog_values(self),
                 form_state=self.get_form_state())
 
 
