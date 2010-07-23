@@ -299,4 +299,4 @@ class Form(File):
 
 ###########################################################################
 # Register
-register_field('form_state', Unicode(is_indexed=True, is_stored=True))
+register_field('form_state', Unicode(indexed=True, stored=True))

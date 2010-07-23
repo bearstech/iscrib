@@ -41,18 +41,6 @@ class ProgressMeter(object):
 
 
 
-class UsersCSV(CSVFile):
-    skip_header = True
-    schema = {'annee': Unicode,
-              'code_ua': Integer,
-              'categorie': String(is_indexed=True),
-              'nom': Unicode,
-              'departement': Departements,
-              'id': String} # Corse « 2A004 »
-    columns = ['annee', 'code_ua', 'categorie', 'nom', 'departement', 'id']
-
-
-
 def get_page_number(name):
     _, page_number = name.split('page')
     return page_number.upper()
