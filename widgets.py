@@ -24,7 +24,7 @@ from itools.datatypes import XMLContent, XMLAttribute
 
 # Import from ikaaro
 
-# Import from scrib
+# Import from iscrib
 from datatypes import Numeric, Text, EnumBoolean
 
 

@@ -16,9 +16,9 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
+from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.folder_views import GoToSpecificDocument
 
 # Import from iscrib
 from form import Form
@@ -29,22 +29,20 @@ from utils import get_page_number
 
 class ParamForm(Param, Form):
     class_id = 'Param'
+    class_views = ['pageA'] + Form.class_views
     
     # Views
-    view = GoToSpecificDocument(specific_document='.', specific_view='pageA')
 
 
     def __getattr__(self, name):
-        print "ParamForm.__getattr__", name
         page_number = get_page_number(name)
-        print "page_number", page_number
         page = self.get_formpage(page_number)
         if page is None:
-            print "pas une page"
             return super(ParamForm, self).__getattr__(name)
+        hidden_fields = ['A100', 'A200'] if name == 'pageA' else []
         view = Form_View(page_number=page.get_page_number(),
-                title=page.get_title())
-        print "view", view
+                hidden_fields=hidden_fields,
+                title=MSG(u"Commencer la saisie"))
         # TODO make it lazy
         self.__dict__[name] = view
         return view
@@ -52,3 +50,7 @@ class ParamForm(Param, Form):
 
     def get_form_handler(self):
         return self.get_resource('0').handler
+
+
+    def is_ready(self):
+        return self.get_workflow_state() == 'pending'

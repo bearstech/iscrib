@@ -22,7 +22,7 @@ from itools.core import get_version, get_abspath
 # Import from ikaaro
 from ikaaro.skins import register_skin
 
-# Import from scrib
+# Import from iscrib
 
 # Give a version
 __version__ = get_version()

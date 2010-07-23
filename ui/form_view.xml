@@ -4,8 +4,9 @@
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <p stl:if="not skip_print">
-    <stl:inline stl:repeat="item menu"><a
-        href="${item/href}" class="${item/active}">${item/title}</a>&nbsp;|
+    <stl:inline stl:repeat="item menu">
+      <a href="${item/href}" class="${item/active}">${item/title}</a>
+      <stl:inline stl:if="not repeat/item/end">|</stl:inline>
     </stl:inline>
   </p>
 
@@ -15,9 +16,6 @@
       stl:repeat="field hidden_fields"/>
 
     <stl:block stl:if="not skip_print">
-      <p id="form-firsttime" stl:if="first_time">
-        <a href="/;aide">Veuillez consulter l'aide générale.</a>
-      </p>
       <p id="form-toolbar">
         <button id="form-submit" stl:if="not readonly" class="button-ok">
           Enregistrer
@@ -30,7 +28,7 @@
     </stl:block>
 
     <div id="form-tables">
-      <table class="scrib-table" stl:repeat="table tables">
+      <table class="iscrib-table" stl:repeat="table tables">
         <tr stl:repeat="row table">
           <td stl:repeat="column row" rowspan="${column/rowspan}"
             colspan="${column/colspan}"

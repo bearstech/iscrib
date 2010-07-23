@@ -17,6 +17,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from the Standard Library
+from decimal import InvalidOperation
+
 # Import from itools
 from itools.core import merge_dicts, freeze
 from itools.database import register_field
@@ -30,9 +33,9 @@ from ikaaro.folder import Folder
 # Import from iscrib
 from datatypes import Numeric, NumDecimal, Unicode
 from datatypes import WorkflowState
-from form_views import Form_Export
+from form_views import Form_Send, Form_Export, Form_Print
 from formpage import FormPage
-from utils import SI, get_page_number
+from utils import SI, get_page_number, parse_control
 from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
 
 
@@ -102,12 +105,14 @@ class FormHandler(FileHandler):
 class Form(File):
     class_id = 'Form'
     class_title = MSG(u"Form")
-    class_views = ['envoyer', 'exporter', 'imprimer', 'aide']
+    class_views = ['envoyer', 'exporter', 'imprimer']
     class_handler = FormHandler
     workflow = workflow
 
     # Views
+    envoyer = Form_Send()
     exporter = Form_Export()
+    imprimer = Form_Print()
 
 
     def get_catalog_values(self):
@@ -208,6 +213,8 @@ class Form(File):
     def get_formpage(self, page_number):
         """Return the FormPage resource for this number of page.
         """
+        if page_number is None:
+            return None
         name = 'page%s' % page_number.lower()
         return self.get_param_folder().get_resource(name, soft=True)
 
@@ -294,6 +301,78 @@ class Form(File):
                 if is_valid and is_sum_valid:
                     continue
             yield name, datatype
+
+
+    def get_controls_namespace(self, levels=freeze([]), pages=freeze([]),
+            exclude=freeze([''])):
+        schema = self.get_schema()
+        fields = self.get_fields(schema)
+        controls = self.get_controls()
+        for number, title, expr, level, page in controls:
+            if level not in levels:
+                continue
+            if pages and page not in pages:
+                continue
+            if page in exclude:
+                continue
+            # Risque d'espaces insécables autour des guillemets
+            expr = expr.replace(' ', ' ').strip()
+            if not expr:
+                continue
+            try:
+                # Précision pour les informations statistiques
+                if level == '0':
+                    vars = self.get_floating_vars(fields)
+                else:
+                    vars = self.get_vars(fields)
+                value = eval(expr, vars)
+            except ZeroDivisionError:
+                # Division par zéro toléré
+                value = None
+            except (InvalidOperation, ValueError):
+                # Champs vides tolérés
+                value = None
+            # Passed
+            if value is True and '0' not in levels:
+                continue
+            # Le titre contient des formules
+            if u'[' in title:
+                expanded = []
+                for is_expr, token in parse_control(title):
+                    if not is_expr:
+                        expanded.append(unicode(token, 'utf8'))
+                    else:
+                        if level == '0':
+                            vars = self.get_floating_vars(fields)
+                        else:
+                            vars = self.get_vars(fields)
+                        try:
+                            value = eval(token, vars)
+                        except ZeroDivisionError:
+                            value = None
+                        expanded.append(unicode(value))
+                title = u"".join(expanded)
+            if value is True:
+                value = u"Vrai"
+            elif value is False:
+                value = u"Faux"
+            elif isinstance(value, NumDecimal):
+                value = str(value.round()).replace('.', ',')
+            yield {'number': number, 'title': title, 'expr': expr,
+                    'level': level, 'page': page, 'value': value,
+                    'debug': u"'%s' = '%s'" % (unicode(expr, 'utf8'), value)}
+
+
+    def get_info_controls(self, pages=freeze([]), exclude=freeze([''])):
+        for control in self.get_controls_namespace(levels=['0'], pages=pages,
+                exclude=exclude):
+            yield control
+
+
+    def get_failed_controls(self, pages=freeze([]), exclude=freeze([''])):
+        for control in self.get_controls_namespace(levels=['1', '2'],
+                pages=pages, exclude=exclude):
+            yield control
 
 
 

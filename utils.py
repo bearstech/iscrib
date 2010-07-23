@@ -17,13 +17,10 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.csv import CSVFile
-from itools.datatypes import Integer, String, Unicode
 
 # Import from ikaaro
 
-# Import from scrib
-from datatypes import Departements
+# Import from iscrib
 
 
 class ProgressMeter(object):
@@ -42,7 +39,10 @@ class ProgressMeter(object):
 
 
 def get_page_number(name):
-    _, page_number = name.split('page')
+    try:
+        _, page_number = name.split('page')
+    except ValueError:
+        return None
     return page_number.upper()
 
 

@@ -28,7 +28,7 @@ from ikaaro.access import is_admin
 from ikaaro.autoform import xhtml_namespaces
 from ikaaro.text import CSV
 
-# Import from scrib
+# Import from iscrib
 from datatypes import NumTime
 from workflow import SENT, EXPORTED
 from widgets import get_input_widget, make_element

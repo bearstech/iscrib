@@ -19,7 +19,10 @@
 from itools.csv import CSVFile
 from itools.datatypes import String
 from itools.gettext import MSG
-from itools.web import BaseView, STLForm, INFO, ERROR
+from itools.web import BaseView, STLView, STLForm, INFO, ERROR
+
+# Import from ikaaro
+from ikaaro.access import is_admin
 
 # Import from iscrib
 from datatypes import Numeric, EnumBoolean
@@ -155,6 +158,81 @@ class Form_View(STLForm):
 
 
 
+class Form_Send(STLForm):
+    access = 'is_allowed_to_view'
+    access_POST = 'is_allowed_to_edit'
+    template = '/ui/iscrib/form_send.xml'
+    title = MSG(u"Contrôle de saisie")
+    query_schema = {'view': String}
+
+
+    def get_namespace(self, resource, context):
+        namespace = {}
+        namespace['first_time'] = resource.is_first_time()
+        # Errors
+        errors = []
+        warnings = []
+        infos = []
+        # Invalid fields
+        for name, datatype in resource.get_invalid_fields():
+            if datatype.sum:
+                title = u"%s n'est pas égal à %s" % (name, datatype.sum)
+            else:
+                title = u"%s non valide" % name
+            info = {'number': name,
+                    'title': title,
+                    'href': ';page%s#field_%s' % (datatype.pages[0], name),
+                    'debug': str(type(datatype))}
+            if datatype.is_mandatory:
+                errors.append(info)
+            else:
+                warnings.append(info)
+        # Failed controls
+        for control in resource.get_failed_controls():
+            control['href'] = ';page%s#field_%s' % (control['page'],
+                    control['title'].split()[0])
+            if control['level'] == '2':
+                errors.append(control)
+            else:
+                warnings.append(control)
+        # Informative controls
+        for control in resource.get_info_controls():
+            control['href'] = ';page%s#field_%s' % (control['page'],
+                    control['title'].split()[0])
+            infos.append(control)
+        namespace['controls'] = {'errors': errors, 'warnings': warnings,
+                'infos': infos}
+        # ACLs
+        user = context.user
+        namespace['is_admin'] = is_admin(user, resource)
+        # Workflow - State
+        namespace['statename'] = statename = resource.get_statename()
+        namespace['form_state'] = resource.get_form_state()
+        # Workflow - Transitions
+        namespace['can_send'] = statename == 'private' and not errors
+        namespace['can_export'] = not errors
+        # Debug
+        namespace['debug'] = context.get_form_value('debug')
+        # Print
+        namespace['skip_print'] = False
+        if context.query['view'] == 'printable':
+            namespace['skip_print'] = True
+        return namespace
+
+
+    def action_send(self, resource, context, form):
+        """Ce qu'il faut faire quand le formulaire est soumis.
+        """
+        raise NotImplementedError
+
+
+    def action_export(self, resource, context, form):
+        """Ce qu'il faut faire quand le formulaire est exporté.
+        """
+        raise NotImplementedError
+
+
+
 class Form_Export(BaseView):
     access = 'is_allowed_to_view'
     title = MSG(u"Téléchargement du rapport")
@@ -184,3 +262,25 @@ class Form_Export(BaseView):
                 filename="%s.csv" % (resource.name))
 
         return csv.to_str(separator=';')
+
+
+
+class Form_Print(STLView):
+    access = 'is_allowed_to_view'
+    title=MSG(u"Impression du rapport")
+    template = '/ui/iscrib/form_print.xml'
+    pages = []
+
+
+    def get_namespace(self, resource, context):
+        context.query['view'] = 'printable'
+        context.bad_types = []
+        forms = []
+        for page_number in resource.get_page_numbers():
+            formpage = resource.get_formpage(page_number)
+            view = getattr(resource, 'page%s' % page_number)
+            forms.append(formpage.get_namespace(resource, view, context,
+                skip_print=True))
+        namespace = {}
+        namespace['forms'] = forms
+        return namespace

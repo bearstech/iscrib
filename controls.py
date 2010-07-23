@@ -27,7 +27,7 @@ from itools.gettext import MSG
 # Import from ikaaro
 from ikaaro.text import CSV
 
-# Import from scrib
+# Import from iscrib
 from datatypes import Unicode
 from schema import PageNumber
 

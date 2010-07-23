@@ -27,7 +27,7 @@ from itools.gettext import MSG
 # Import from ikaaro
 from ikaaro.text import CSV
 
-# Import from scrib
+# Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import EnumCV, make_enumerate
