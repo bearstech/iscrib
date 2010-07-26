@@ -32,7 +32,7 @@ from schema import Schema
 class Param(Folder):
     class_id = 'Param'
     class_title = MSG(u"Form")
-    class_description = MSG(u"Create a form from an ODS of parameters")
+    class_description = MSG(u"Create from an OpenDocument Spreadsheet file")
     class_icon16 = 'icons/16x16/tasks.png'
     class_icon48 = 'icons/48x48/tasks.png'
     
