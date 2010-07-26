@@ -23,6 +23,8 @@
         <a id="form-print" href="?view=printable" title="Imprimer (dans une
           nouvelle fenêtre)" onclick="return popup(this.href, 800,
           600)">Imprimer cette page</a>
+        <a id="form-source" href="parameters/;download" title="Voir le fichier
+          source de ce formulaire">Voir le source</a>
       </p>
       <hr class="clear" />
     </stl:block>
