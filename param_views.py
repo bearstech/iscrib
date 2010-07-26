@@ -30,6 +30,7 @@ from itools.web import ERROR
 # Import from ikaaro
 from ikaaro.autoform import FileWidget
 from ikaaro.datatypes import FileDataType
+from ikaaro.file import ODS
 from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 
@@ -51,6 +52,9 @@ class Param_NewInstance(NewInstance):
         if mimetype != ODF_SPREADSHEET:
             context.message = ERROR(u"not an ODS file")
             return
+        # Save file used
+        ods = child.make_resource('parameters', ODS, body=body,
+                title={'fr': u"Parameters"})
         stringio = StringIO(body)
         document = odf_get_document(stringio)
         if document.get_mimetype() != ODF_SPREADSHEET:
