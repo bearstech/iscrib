@@ -54,7 +54,7 @@ class Param_NewInstance(NewInstance):
             return
         # Save file used
         ods = child.make_resource('parameters', ODS, body=body,
-                title={'fr': u"Parameters"})
+                filename=filename, title={'fr': u"Parameters"})
         stringio = StringIO(body)
         document = odf_get_document(stringio)
         if document.get_mimetype() != ODF_SPREADSHEET:
