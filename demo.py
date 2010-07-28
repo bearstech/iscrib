@@ -19,6 +19,8 @@
 from itools.gettext import MSG
 
 # Import from ikaaro
+from ikaaro.folder import Folder
+from ikaaro.folder_views import Folder_BrowseContent
 
 # Import from iscrib
 from form import Form
@@ -54,3 +56,8 @@ class ParamForm(Param, Form):
 
     def is_ready(self):
         return self.get_workflow_state() == 'pending'
+
+
+
+Folder.browse_content = Folder_BrowseContent(
+        template='/ui/iscrib/folder_browse_content.xml')
