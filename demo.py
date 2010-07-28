@@ -19,7 +19,7 @@
 from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.folder import Folder
+from ikaaro.root import Root
 from ikaaro.folder_views import Folder_BrowseContent
 
 # Import from iscrib
@@ -59,5 +59,5 @@ class ParamForm(Param, Form):
 
 
 
-Folder.browse_content = Folder_BrowseContent(
+Root.browse_content = Folder_BrowseContent(
         template='/ui/iscrib/folder_browse_content.xml')
