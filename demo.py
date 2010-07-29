@@ -16,6 +16,9 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
+from itools.core import merge_dicts
+from itools.datatypes import String, DateTime
+from itools.database import PhraseQuery
 from itools.gettext import MSG
 from itools.web import INFO
 
@@ -52,8 +55,12 @@ class ParamForm_Send(Form_Send):
 
 class ParamForm(Param, Form):
     class_id = 'Param'
+    class_title = MSG(u"Application de collecte")
     class_views = ['pageA'] + Form.class_views
-    
+    class_schema = merge_dicts(Form.class_schema, Param.class_schema,
+            author=String(source='metadata', indexed=False, stored=True),
+            ctime=DateTime(source='metadata', indexed=False, stored=True))
+
     # Views
     envoyer = ParamForm_Send()
 
@@ -80,6 +87,52 @@ class ParamForm(Param, Form):
         return self.get_workflow_state() == 'pending'
 
 
+    def get_catalog_values(self):
+        author = (self.get_property('author')
+                or self.get_property('last_author'))
+        ctime = self.get_property('ctime') or self.get_property('mtime')
+        return merge_dicts(Param.get_catalog_values(self),
+                Form.get_catalog_values(self), author=author, ctime=ctime)
 
-Root.browse_content = Folder_BrowseContent(
-        template='/ui/iscrib/folder_browse_content.xml')
+
+
+
+class Root_BrowseContent(Folder_BrowseContent):
+    template = '/ui/iscrib/root_view.xml'
+    title = MSG(u"Voir")
+
+    table_columns = [
+            ('form', MSG(u"Formulaire")),
+            ('file', MSG(u"Fichier")),
+            ('author', MSG(u"Auteur")),
+            ('ctime', MSG(u"Date de création"))]
+    table_actions = []
+
+    search_schema = merge_dicts(Folder_BrowseContent.search_schema,
+            search_type=String(default=ParamForm.class_id))
+
+
+    def get_items(self, resource, context, *args):
+        return Folder_BrowseContent.get_items(self, resource, context,
+                PhraseQuery('format', ParamForm.class_id), *args)
+
+
+    def get_item_value(self, resource, context, item, column):
+        brain, item_resource = item
+        if column == 'form':
+            return brain.title, brain.name
+        elif column == 'file':
+            ods = item_resource.get_resource('parameters')
+            return (ods.get_property('filename'),
+                    '%s/parameters/;download' % brain.name)
+        elif column == 'author':
+            author =  brain.author
+            return context.root.get_user_title(author) if author else None
+        elif column == 'ctime':
+            return context.format_datetime(brain.ctime)
+        return Folder_BrowseContent.get_item_value(self, resource, context,
+                item, column)
+
+
+
+Root.view = Root_BrowseContent()
