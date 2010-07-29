@@ -1,10 +1,10 @@
 "Use Case","Cost","Sprint","Progress (%)","Issues"," (1, 2, 3, 5, 8, 13, 21, 34, 55, 89)"
 "Garder l'ods utilisé avec un titre en référence au nom du formulaire",1,1,100,,
 "vue principale qui liste les derniers formulaires créés:
-Formulaire | Fichier | Auteur | Date de création",3,1,,,
+Formulaire | Fichier | Auteur | Date de création",3,1,100,,
 "Au-dessus de cette vue, un bandeau à deux icônes :
 - télécharger gabarit ODS
-- Créer un formulaire à partir de votre ODS",1,1,,,
+- Créer un formulaire à partir de votre ODS",1,1,100,,
 "Depuis un formulaire cliquer pour voir l'ODS utilisé (= voir le source)",1,1,100,,
 "Donner une couleur de fond à tous les niveaux de titre",1,1,100,,
 "Supprimer la taille fixe du template",2,1,100,,
