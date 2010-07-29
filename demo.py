@@ -17,6 +17,7 @@
 
 # Import from itools
 from itools.gettext import MSG
+from itools.web import INFO
 
 # Import from ikaaro
 from ikaaro.root import Root
@@ -24,9 +25,29 @@ from ikaaro.folder_views import Folder_BrowseContent
 
 # Import from iscrib
 from form import Form
-from form_views import Form_View
+from form_views import Form_View, Form_Send
 from param import Param
 from utils import get_page_number
+
+
+class ParamForm_Send(Form_Send):
+
+    def get_namespace(self, resource, context):
+        # FIXME
+        namespace = Form_Send.get_namespace(self, resource, context)
+        namespace['first_time'] = resource.is_first_time()
+        return namespace
+
+
+    def action_send(self, resource, context, form):
+        message = INFO(u"Votre rapport a bien été envoyé.")
+        context.message = message
+
+
+    def action_export(self, resource, context, form):
+        message = INFO(u"Votre rapport a bien été exporté.")
+        context.message = message
+
 
 
 class ParamForm(Param, Form):
@@ -34,6 +55,7 @@ class ParamForm(Param, Form):
     class_views = ['pageA'] + Form.class_views
     
     # Views
+    envoyer = ParamForm_Send()
 
 
     def __getattr__(self, name):

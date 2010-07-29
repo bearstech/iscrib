@@ -4,13 +4,7 @@
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <stl:block stl:if="not skip_print">
-    <p id="form-firsttime" stl:if="first_time">
-      <a href="/;aide">Veuillez consulter l'aide générale.</a>
-    </p>
     <p id="form-toolbar">
-      <a id="form-help" href=";aide?page=controls" title="Aide (dans une
-        nouvelle fenêtre)" onclick="return popup(this.href, 440, 540)">Aide
-        sur cette page</a>
       <a id="form-print" href="?view=printable" title="Imprimer (dans une
         nouvelle fenêtre)" onclick="return popup(this.href, 800,
         600)">Imprimer cette page</a>
@@ -28,8 +22,8 @@
     <form action="" method="post" stl:if="can_send">
       <p>Si vous avez terminé votre saisie, vous pouvez cliquer sur le bouton
       «&nbsp;Envoyer votre questionnaire&nbsp;».</p>
-      <input type="submit" name=";send" value="Envoyer votre questionnaire"
-        class="button-ok"/>
+      <button type="submit" name="action" value="send"
+        class="button-ok">Envoyer votre questionnaire</button>
     </form>
 
     <p stl:if="controls/errors">Vous devez corriger toutes les erreurs pour
@@ -39,8 +33,8 @@
       <form action="" method="post" stl:if="can_export">
         <p>Le formulaire est valide, vous pouvez l'exporter dans la base de
           données.</p>
-        <input type="submit" name=";export" value="Exporter"
-          class="button-ok"/>
+        <button type="submit" name="action" value="export"
+          class="button-ok">Exporter</button>
       </form>
       <p stl:if="not can_export">Vous ne pouvez pas exporter le formulaire
         tant qu'il n'est pas valide.</p>
