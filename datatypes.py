@@ -503,10 +503,10 @@ class NumShortTime(NumTime):
 
 
 
-class NumDate(DataType):
+class NumDate(Numeric):
 
     def __init__(self, value=None, **kw):
-        DataType.__init__(self, **kw)
+        Numeric.__init__(self, **kw)
         if value is not None:
             if str(value).upper() == 'NC':
                 value = None
@@ -527,24 +527,6 @@ class NumDate(DataType):
                     y += 1900
                 value = date(y, m, d)
         self.value = value
-
-
-    # XXX remove?
-    def __cmp__(self, right):
-        left = self.value
-        if isinstance(right, Numeric):
-            right = right.value
-        if right is 'NC' or right is None:
-            if left is None:
-                # NC == NC
-                return 0
-            # left (!NC) > NC
-            return 1
-        elif left is None:
-            # NC < right (!NC)
-            return -1
-        # cmp(left (!NC), right (!NC)
-        return cmp(left, right)
 
 
     @staticmethod
