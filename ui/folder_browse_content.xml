@@ -5,13 +5,13 @@
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <p id="folder-banner">
-    <a href="/template/;download" id="download-template">
+    <a href="/gabarit/;download" id="download-template">
       <img src="/ui/iscrib/images/blank.png"/>
       <span>Télécharger le gabarit ODS</span>
     </a>
     <a href="/;new_resource?type=Param" id="upload-param">
       <img src="/ui/iscrib/images/blank.png"/>
-      <span>Créer un formulaire à partir de votre ODS</span>
+      <span>Créer une application de collecte à partir de votre ODS</span>
     </a>
     <div class="clear"></div>
   </p>
