@@ -128,7 +128,7 @@ class ParamForm(Param, Form):
 
 
 
-class Root_BrowseContent(Folder_BrowseContent):
+class WebSite_BrowseContent(Folder_BrowseContent):
     access = 'is_allowed_to_view'
     template = '/ui/iscrib/root_view.xml'
     title = MSG(u"Voir")
@@ -145,7 +145,7 @@ class Root_BrowseContent(Folder_BrowseContent):
 
 
     def get_items(self, resource, context, *args):
-        return super(Root_BrowseContent, self).get_items(resource, context,
+        return super(WebSite_BrowseContent, self).get_items(resource, context,
                 PhraseQuery('format', ParamForm.class_id), *args)
 
 
@@ -190,12 +190,12 @@ class Root_BrowseContent(Folder_BrowseContent):
             return context.root.get_user_title(author) if author else None
         elif column == 'ctime':
             return context.format_datetime(brain.ctime)
-        return super(Root_BrowseContent, self).get_item_value(resource,
+        return super(WebSite_BrowseContent, self).get_item_value(resource,
                 context, item, column)
 
 
 
-class Root_Register(BaseRegisterForm):
+class WebSite_Register(BaseRegisterForm):
     schema = merge_dicts(BaseRegisterForm.schema,
         company=Unicode(mandatory=True))
     widgets = (BaseRegisterForm.widgets[:2]
@@ -204,7 +204,7 @@ class Root_Register(BaseRegisterForm):
 
 
     def action(self, resource, context, form):
-        goto = super(Root_Register, self).action(resource, context, form)
+        goto = super(WebSite_Register, self).action(resource, context, form)
         # FIXME get user
         users = resource.get_resource('users')
         next_user_id = users.get_next_user_id()
@@ -236,8 +236,8 @@ class User(BaseUser):
 
 class WebSite(BaseWebSite):
     # Views
-    view = Root_BrowseContent()
-    register = Root_Register()
+    view = WebSite_BrowseContent()
+    register = WebSite_Register()
 
 
 
