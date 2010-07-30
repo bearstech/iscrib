@@ -26,9 +26,9 @@ from itools.web import INFO
 # Import from ikaaro
 from ikaaro.autoform import TextWidget
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.root import Root as BaseRoot
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
+from ikaaro.website import WebSite as BaseWebSite
 from ikaaro.website_views import RegisterForm as BaseRegisterForm
 
 # Import from iscrib
@@ -234,7 +234,7 @@ class User(BaseUser):
 
 
 
-class Root(BaseRoot):
+class WebSite(BaseWebSite):
     # Views
     view = Root_BrowseContent()
     register = Root_Register()
@@ -244,4 +244,4 @@ class Root(BaseRoot):
 # FIXME
 from ikaaro.registry import register_resource_class
 register_resource_class(User)
-register_resource_class(Root)
+register_resource_class(WebSite)
