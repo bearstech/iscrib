@@ -17,27 +17,60 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String, DateTime
+from itools.datatypes import String, DateTime, Unicode
 from itools.database import PhraseQuery
 from itools.gettext import MSG
+from itools.uri import get_reference
 from itools.web import INFO
 
 # Import from ikaaro
-from ikaaro.root import Root
+from ikaaro.autoform import TextWidget
 from ikaaro.folder_views import Folder_BrowseContent
+from ikaaro.root import Root as BaseRoot
+from ikaaro.user import User as BaseUser
+from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
+from ikaaro.website_views import RegisterForm as BaseRegisterForm
 
 # Import from iscrib
 from form import Form
 from form_views import Form_View, Form_Send
 from param import Param
+from param_views import Param_NewInstance
 from utils import get_page_number
+
+
+class ParamForm_NewInstance(Param_NewInstance):
+    access = True
+
+
+    def GET(self, resource, context):
+        ac = resource.get_access_control()
+        class_id = context.get_query_value('type')
+        if (class_id != ParamForm.class_id
+                or ac.is_allowed_to_add(context.user, resource)):
+            return super(ParamForm_NewInstance, self).GET(resource, context)
+        return get_reference('/;register')
+
+
+
+class ParamForm_View(Form_View):
+    access = True
+
+
+    def GET(self, resource, context):
+        ac = resource.get_access_control()
+        if ac.is_allowed_to_view(context.user, resource):
+            return super(ParamForm_View, self).GET(resource, context)
+        return get_reference('/;register')
+
 
 
 class ParamForm_Send(Form_Send):
 
     def get_namespace(self, resource, context):
         # FIXME
-        namespace = Form_Send.get_namespace(self, resource, context)
+        namespace = super(ParamForm_Send, self).get_namespace(resource,
+                context)
         namespace['first_time'] = resource.is_first_time()
         return namespace
 
@@ -62,6 +95,7 @@ class ParamForm(Param, Form):
             ctime=DateTime(source='metadata', indexed=False, stored=True))
 
     # Views
+    new_instance = ParamForm_NewInstance()
     envoyer = ParamForm_Send()
 
 
@@ -71,7 +105,7 @@ class ParamForm(Param, Form):
         if page is None:
             return super(ParamForm, self).__getattr__(name)
         hidden_fields = ['A100', 'A200'] if name == 'pageA' else []
-        view = Form_View(page_number=page.get_page_number(),
+        view = ParamForm_View(page_number=page.get_page_number(),
                 hidden_fields=hidden_fields,
                 title=MSG(u"Commencer la saisie"))
         # TODO make it lazy
@@ -96,8 +130,8 @@ class ParamForm(Param, Form):
 
 
 
-
 class Root_BrowseContent(Folder_BrowseContent):
+    access = 'is_allowed_to_view'
     template = '/ui/iscrib/root_view.xml'
     title = MSG(u"Voir")
 
@@ -113,8 +147,36 @@ class Root_BrowseContent(Folder_BrowseContent):
 
 
     def get_items(self, resource, context, *args):
-        return Folder_BrowseContent.get_items(self, resource, context,
+        return super(Root_BrowseContent, self).get_items(resource, context,
                 PhraseQuery('format', ParamForm.class_id), *args)
+
+
+    def sort_and_batch(self, resource, context, results):
+        start = context.query['batch_start']
+        size = context.query['batch_size']
+        sort_by = context.query['sort_by']
+        reverse = context.query['reverse']
+        items = results.get_documents(sort_by=sort_by, reverse=reverse,
+                                      start=start, size=size)
+
+        # FIXME This must be done in the catalog.
+        if sort_by == 'title':
+            items.sort(cmp=lambda x,y: cmp(x.title, y.title))
+            if reverse:
+                items.reverse()
+
+        # Access Control (FIXME this should be done before batch)
+        user = context.user
+        root = context.root
+        allowed_items = []
+        for item in items:
+            resource = root.get_resource(item.abspath)
+            # On regarde mais sans toucher
+            #ac = resource.get_access_control()
+            #if ac.is_allowed_to_view(user, resource):
+            allowed_items.append((item, resource))
+
+        return allowed_items
 
 
     def get_item_value(self, resource, context, item, column):
@@ -130,9 +192,58 @@ class Root_BrowseContent(Folder_BrowseContent):
             return context.root.get_user_title(author) if author else None
         elif column == 'ctime':
             return context.format_datetime(brain.ctime)
-        return Folder_BrowseContent.get_item_value(self, resource, context,
-                item, column)
+        return super(Root_BrowseContent, self).get_item_value(resource,
+                context, item, column)
 
 
 
-Root.view = Root_BrowseContent()
+class Root_Register(BaseRegisterForm):
+    schema = merge_dicts(BaseRegisterForm.schema,
+        company=Unicode(mandatory=True))
+    widgets = (BaseRegisterForm.widgets[:2]
+        + [TextWidget('company', title=MSG(u"Société"))]
+        + BaseRegisterForm.widgets[2:])
+
+
+    def action(self, resource, context, form):
+        goto = super(Root_Register, self).action(resource, context, form)
+        # FIXME get user
+        users = resource.get_resource('users')
+        next_user_id = users.get_next_user_id()
+        user_id = str(int(next_user_id) - 1)
+        user = users.get_resource(user_id)
+        # Set company
+        user.set_property('company', form['company'].strip())
+        return goto
+
+
+
+class User_EditAccount(BaseUser_EditAccount):
+    schema = merge_dicts(BaseUser_EditAccount.schema,
+        company=Unicode(mandatory=True))
+    widgets = (BaseUser_EditAccount.widgets[:2]
+        + [TextWidget('company', title=MSG(u"Société"))]
+        + BaseUser_EditAccount.widgets[2:])
+
+
+
+class User(BaseUser):
+    class_schema = merge_dicts(BaseUser.class_schema,
+            company=Unicode(source='metadata'))
+
+    # Views
+    edit_account = User_EditAccount()
+
+
+
+class Root(BaseRoot):
+    # Views
+    view = Root_BrowseContent()
+    register = Root_Register()
+
+
+
+# FIXME
+from ikaaro.registry import register_resource_class
+register_resource_class(User)
+register_resource_class(Root)
