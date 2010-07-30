@@ -340,7 +340,7 @@ class Form(File):
                 expanded = []
                 for is_expr, token in parse_control(title):
                     if not is_expr:
-                        expanded.append(unicode(token, 'utf8'))
+                        expanded.append(token)
                     else:
                         if level == '0':
                             vars = self.get_floating_vars(fields)

@@ -104,9 +104,7 @@ class ParamForm(Param, Form):
         page = self.get_formpage(page_number)
         if page is None:
             return super(ParamForm, self).__getattr__(name)
-        hidden_fields = ['A100', 'A200'] if name == 'pageA' else []
         view = ParamForm_View(page_number=page.get_page_number(),
-                hidden_fields=hidden_fields,
                 title=MSG(u"Commencer la saisie"))
         # TODO make it lazy
         self.__dict__[name] = view
