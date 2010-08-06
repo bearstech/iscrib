@@ -235,10 +235,13 @@ class User(BaseUser):
 
 
 class WebSite(BaseWebSite):
+    class_views = ['view']
     # Views
     view = WebSite_BrowseContent()
     register = WebSite_Register()
 
+    def get_document_types(self):
+        return [Param]
 
 
 # FIXME
