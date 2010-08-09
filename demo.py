@@ -236,6 +236,7 @@ class User(BaseUser):
 
 class WebSite(BaseWebSite):
     class_views = ['view']
+    class_skin = 'ui/iscrib'
     # Views
     view = WebSite_BrowseContent()
     register = WebSite_Register()
