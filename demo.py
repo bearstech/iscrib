@@ -135,7 +135,6 @@ class WebSite_BrowseContent(Folder_BrowseContent):
     table_columns = [
             ('form', MSG(u"Formulaire")),
             ('file', MSG(u"Fichier")),
-            ('author', MSG(u"Auteur")),
             ('ctime', MSG(u"Date de création"))]
     table_actions = []
 
@@ -184,9 +183,6 @@ class WebSite_BrowseContent(Folder_BrowseContent):
             ods = item_resource.get_resource('parameters')
             return (ods.get_property('filename'),
                     '%s/parameters/;download' % brain.name)
-        elif column == 'author':
-            author =  brain.author
-            return context.root.get_user_title(author) if author else None
         elif column == 'ctime':
             return context.format_datetime(brain.ctime)
         return super(WebSite_BrowseContent, self).get_item_value(resource,
