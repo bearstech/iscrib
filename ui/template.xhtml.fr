@@ -27,20 +27,16 @@
     <!-- Header -->
     <div id="header">
       <div id="links">
-        <stl:block stl:if="not user/info">
-          <a href="${login}" title="Log in" id="links-menu-login">Log in</a>
-          <stl:block stl:if="user/joinisopen">
-            <a href="/;register" id="links-menu-register"
-              stl:if="user/joinisopen">Register</a>
-          </stl:block>
+        <stl:block stl:if="not user">
+          <a href="${login}" title="Sign in" id="links-menu-login">Sign in</a>
         </stl:block>
-        <stl:block stl:if="user/info">
-          <a href="${user/info/home}" title="${user/info/title}"
-             id="links-menu-profile">${user/info/title}</a>
+        <stl:block stl:if="user">
+          <a href="${user/home}" title="${user/title}"
+             id="links-menu-profile">${user/title}</a>
           <a href="${logout}" title="Log out" id="links-menu-logout"
             >Log out</a>
-          <a href="${container_uri}/;new_resource" id="links-menu-new"
-            >Add content</a>
+          <a stl:if="new_resource_allowed" href="${container_uri}/;new_resource"
+             id="links-menu-new">Add content</a>
         </stl:block>
       </div>
       <!-- Languages & Searchbar -->

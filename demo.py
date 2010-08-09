@@ -29,7 +29,6 @@ from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
 from ikaaro.website import WebSite as BaseWebSite
-from ikaaro.website_views import RegisterForm as BaseRegisterForm
 
 # Import from iscrib
 from form import Form
@@ -195,24 +194,24 @@ class WebSite_BrowseContent(Folder_BrowseContent):
 
 
 
-class WebSite_Register(BaseRegisterForm):
-    schema = merge_dicts(BaseRegisterForm.schema,
-        company=Unicode(mandatory=True))
-    widgets = (BaseRegisterForm.widgets[:2]
-        + [TextWidget('company', title=MSG(u"Société"))]
-        + BaseRegisterForm.widgets[2:])
-
-
-    def action(self, resource, context, form):
-        goto = super(WebSite_Register, self).action(resource, context, form)
-        # FIXME get user
-        users = resource.get_resource('users')
-        next_user_id = users.get_next_user_id()
-        user_id = str(int(next_user_id) - 1)
-        user = users.get_resource(user_id)
-        # Set company
-        user.set_property('company', form['company'].strip())
-        return goto
+#class WebSite_Register(BaseRegisterForm):
+#    schema = merge_dicts(BaseRegisterForm.schema,
+#        company=Unicode(mandatory=True))
+#    widgets = (BaseRegisterForm.widgets[:2]
+#        + [TextWidget('company', title=MSG(u"Société"))]
+#        + BaseRegisterForm.widgets[2:])
+#
+#
+#    def action(self, resource, context, form):
+#        goto = super(WebSite_Register, self).action(resource, context, form)
+#        # FIXME get user
+#        users = resource.get_resource('users')
+#        next_user_id = users.get_next_user_id()
+#        user_id = str(int(next_user_id) - 1)
+#        user = users.get_resource(user_id)
+#        # Set company
+#        user.set_property('company', form['company'].strip())
+#        return goto
 
 
 
@@ -239,7 +238,6 @@ class WebSite(BaseWebSite):
     class_skin = 'ui/iscrib'
     # Views
     view = WebSite_BrowseContent()
-    register = WebSite_Register()
 
     def get_document_types(self):
         return [Param]
