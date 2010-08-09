@@ -4,6 +4,38 @@
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
+  <p id="introduction">
+    Ceci est une démonstration du générateur d'interface de saisie.<br/>
+    Une simple feuille de tableur permet de concevoir ce qui en un clic devindra votre
+    application de collecte d'information en ligne:<br/>
+      <ul>
+        <li>
+        Le générateur permet de spécifier les champs de saisie format, type, etc.
+        </li>
+        <li>
+        Il permet de spécifier des contraintes et des test de validités
+        </li>
+        <li>
+        Les champs conditionnels sont également géré.
+        </li>
+      </ul>
+
+    Les équipes d'Itaapy sont en messure de:
+
+    <ul>
+      <li>
+        D'intégrer cette application à votre SI.
+      </li>
+      <li>
+        D'injecter les données collectées dans les base de donnée de votre choix
+      </li>
+      <li>
+        De connecter l'application à un référenciel utilisateur (gestion des
+            login/password/envois de mail) pour collecter l'information auprès de milliers d'utilisateurs.
+      </li>
+    </ul>
+  </p>
+
   <p id="folder-banner">
     <a href="/gabarit/;download" id="download-template">
       <img src="/ui/iscrib/images/blank.png"/>
