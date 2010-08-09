@@ -48,7 +48,7 @@ class ParamForm_NewInstance(Param_NewInstance):
         if (class_id != ParamForm.class_id
                 or ac.is_allowed_to_add(context.user, resource)):
             return super(ParamForm_NewInstance, self).GET(resource, context)
-        return get_reference('/;register')
+        return get_reference('/;login')
 
 
 
@@ -60,7 +60,7 @@ class ParamForm_View(Form_View):
         ac = resource.get_access_control()
         if ac.is_allowed_to_view(context.user, resource):
             return super(ParamForm_View, self).GET(resource, context)
-        return get_reference('/;register')
+        return get_reference('/;login')
 
 
 
