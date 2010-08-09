@@ -1,0 +1,1107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-08-09 16:08+CET\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../formpage.py:107
+#: ../formpage.py:169
+msgid " centered"
+msgstr ""
+
+#: ../formpage.py:132
+#: ../formpage.py:171
+msgid " num"
+msgstr ""
+
+#: ../widgets.py:51
+#: ../datatypes.py:31
+#: ../datatypes.py:36
+msgid "\""
+msgstr ""
+
+#: ../datatypes.py:36
+msgid "\"%s\""
+msgstr ""
+
+#: ../formpage.py:38
+#: ../widgets.py:32
+msgid "#"
+msgstr ""
+
+#: ../widgets.py:102
+msgid "$('[name=%s]').attr('disabled', %s).%s('disabled');"
+msgstr ""
+
+#: ../formpage.py:140
+msgid "%.1f"
+msgstr ""
+
+#: ../formpage.py:96
+msgid "%break%"
+msgstr ""
+
+#: ../formpage.py:138
+msgid "%d"
+msgstr ""
+
+#: ../form_views.py:179
+msgid "%s n'est pas égal à %s"
+msgstr ""
+
+#: ../form_views.py:181
+msgid "%s non valide"
+msgstr ""
+
+#: ../datatypes.py:31
+#: ../datatypes.py:36
+msgid "'"
+msgstr ""
+
+#: ../form.py:363
+msgid "'%s' = '%s'"
+msgstr ""
+
+#: ../formpage.py:128
+msgid "(division par 0)"
+msgstr ""
+
+#: ../schema.py:80
+msgid "(réservé variable CV)"
+msgstr ""
+
+#: ../formpage.py:149
+#: ../formpage.py:151
+msgid "*"
+msgstr ""
+
+#: ../formpage.py:87
+msgid "-"
+msgstr ""
+
+#: ../formpage.py:123
+msgid "/"
+msgstr ""
+
+#: ../widgets.py:53
+msgid "/>"
+msgstr ""
+
+#: ../schema.py:53
+msgid "0"
+msgstr ""
+
+#: ../schema.py:71
+msgid "00000"
+msgstr ""
+
+#: ../formpage.py:170
+msgid "100%"
+msgstr ""
+
+#: ../widgets.py:185
+msgid "15"
+msgstr ""
+
+#: ../widgets.py:47
+msgid "<"
+msgstr ""
+
+#: ../widgets.py:55
+msgid "</"
+msgstr ""
+
+#: ../widgets.py:140
+#: ../widgets.py:144
+msgid "</span>"
+msgstr ""
+
+#: ../widgets.py:139
+msgid "<span class=\"badtype\" title=\"Mauvaise valeur\">"
+msgstr ""
+
+#: ../widgets.py:143
+msgid "<span class=\"mandatory\" title=\"Champ obligatoire\">"
+msgstr ""
+
+#: ../widgets.py:51
+msgid "=\""
+msgstr ""
+
+#: ../widgets.py:55
+#: ../widgets.py:55
+msgid ">"
+msgstr ""
+
+#: ../schema.py:54
+msgid "A"
+msgstr ""
+
+#: ../form_views.py:34
+msgid "ATTENTION ! IL Y A DES RUBRIQUES MANQUANTES ET/OU INVALIDES"
+msgstr ""
+
+#: ../datatypes.py:754
+msgid "Ain"
+msgstr ""
+
+#: ../datatypes.py:755
+msgid "Aisne"
+msgstr ""
+
+#: ../datatypes.py:756
+msgid "Allier"
+msgstr ""
+
+#: ../datatypes.py:759
+msgid "Alpes maritimes"
+msgstr ""
+
+#: ../datatypes.py:757
+msgid "Alpes-de-Haute-Provence"
+msgstr ""
+
+#: ../demo.py:91
+msgid "Application de collecte"
+msgstr ""
+
+#: ../datatypes.py:761
+msgid "Ardennes"
+msgstr ""
+
+#: ../datatypes.py:760
+msgid "Ardèche"
+msgstr ""
+
+#: ../datatypes.py:762
+msgid "Ariège"
+msgstr ""
+
+#: ../datatypes.py:763
+msgid "Aube"
+msgstr ""
+
+#: ../datatypes.py:764
+msgid "Aude"
+msgstr ""
+
+#: ../demo.py:139
+msgid "Auteur"
+msgstr ""
+
+#: ../datatypes.py:765
+msgid "Aveyron"
+msgstr ""
+
+#: ../schema.py:55
+msgid "B"
+msgstr ""
+
+#: ../datatypes.py:821
+msgid "Bas-Rhin"
+msgstr ""
+
+#: ../schema.py:69
+msgid "Booléen"
+msgstr ""
+
+#: ../datatypes.py:766
+msgid "Bouches-du-Rhône"
+msgstr ""
+
+#: ../schema.py:56
+msgid "C"
+msgstr ""
+
+#: ../datatypes.py:767
+msgid "Calvados"
+msgstr ""
+
+#: ../datatypes.py:768
+msgid "Cantal"
+msgstr ""
+
+#: ../widgets.py:169
+#: ../widgets.py:224
+msgid "Champ obligatoire"
+msgstr ""
+
+#: ../schema.py:116
+msgid "Champs dépendants"
+msgstr ""
+
+#: ../datatypes.py:769
+msgid "Charente"
+msgstr ""
+
+#: ../datatypes.py:770
+msgid "Charente-Maritime"
+msgstr ""
+
+#: ../schema.py:77
+msgid "Chaîne"
+msgstr ""
+
+#: ../datatypes.py:771
+msgid "Cher"
+msgstr ""
+
+#: ../demo.py:108
+msgid "Commencer la saisie"
+msgstr ""
+
+#: ../controls.py:59
+msgid "Controls"
+msgstr ""
+
+#: ../form_views.py:165
+msgid "Contrôle de saisie"
+msgstr ""
+
+#: ../datatypes.py:772
+msgid "Corrèze"
+msgstr ""
+
+#: ../datatypes.py:773
+msgid "Corse-du-Sud"
+msgstr ""
+
+#: ../param.py:35
+msgid "Create from an OpenDocument Spreadsheet file"
+msgstr ""
+
+#: ../datatypes.py:777
+msgid "Creuse"
+msgstr ""
+
+#: ../datatypes.py:775
+msgid "Côte-d'Or"
+msgstr ""
+
+#: ../datatypes.py:776
+msgid "Côtes-d'Armor"
+msgstr ""
+
+#: ../schema.py:57
+#: ../schema.py:58
+msgid "D"
+msgstr ""
+
+#: ../demo.py:140
+msgid "Date de création"
+msgstr ""
+
+#: ../datatypes.py:833
+msgid "Deux-Sèvres"
+msgstr ""
+
+#: ../datatypes.py:778
+msgid "Dordogne"
+msgstr ""
+
+#: ../datatypes.py:779
+msgid "Doubs"
+msgstr ""
+
+#: ../datatypes.py:780
+msgid "Drôme"
+msgstr ""
+
+#: ../schema.py:70
+msgid "Décimal"
+msgstr ""
+
+#: ../schema.py:59
+msgid "E"
+msgstr ""
+
+#: ../datatypes.py:871
+msgid "En cours"
+msgstr ""
+
+#: ../schema.py:74
+msgid "Entier"
+msgstr ""
+
+#: ../datatypes.py:872
+msgid "Envoyé"
+msgstr ""
+
+#: ../controls.py:39
+msgid "Error"
+msgstr ""
+
+#: ../datatypes.py:845
+msgid "Essonne"
+msgstr ""
+
+#: ../datatypes.py:781
+msgid "Eure"
+msgstr ""
+
+#: ../datatypes.py:782
+msgid "Eure-et-Loir"
+msgstr ""
+
+#: ../datatypes.py:873
+msgid "Exporté"
+msgstr ""
+
+#: ../controls.py:46
+msgid "Expression"
+msgstr ""
+
+#: ../schema.py:60
+msgid "F"
+msgstr ""
+
+#: ../form.py:358
+msgid "Faux"
+msgstr ""
+
+#: ../demo.py:138
+msgid "Fichier"
+msgstr ""
+
+#: ../datatypes.py:783
+msgid "Finistère"
+msgstr ""
+
+#: ../param.py:34
+#: ../form.py:107
+msgid "Form"
+msgstr ""
+
+#: ../demo.py:137
+msgid "Formulaire"
+msgstr ""
+
+#: ../schema.py:61
+msgid "G"
+msgstr ""
+
+#: ../datatypes.py:784
+msgid "Gard"
+msgstr ""
+
+#: ../datatypes.py:786
+msgid "Gers"
+msgstr ""
+
+#: ../datatypes.py:787
+msgid "Gironde"
+msgstr ""
+
+#: ../datatypes.py:850
+msgid "Guadeloupe"
+msgstr ""
+
+#: ../datatypes.py:852
+msgid "Guyane"
+msgstr ""
+
+#: ../schema.py:62
+msgid "H"
+msgstr ""
+
+#: ../schema.py:72
+msgid "HH:MM"
+msgstr ""
+
+#: ../schema.py:73
+msgid "HHH:MM"
+msgstr ""
+
+#: ../datatypes.py:822
+msgid "Haut-Rhin"
+msgstr ""
+
+#: ../datatypes.py:774
+msgid "Haute-Corse"
+msgstr ""
+
+#: ../datatypes.py:785
+msgid "Haute-Garonne"
+msgstr ""
+
+#: ../datatypes.py:797
+msgid "Haute-Loire"
+msgstr ""
+
+#: ../datatypes.py:806
+msgid "Haute-Marne"
+msgstr ""
+
+#: ../datatypes.py:828
+msgid "Haute-Savoie"
+msgstr ""
+
+#: ../datatypes.py:824
+msgid "Haute-Saône"
+msgstr ""
+
+#: ../datatypes.py:841
+msgid "Haute-Vienne"
+msgstr ""
+
+#: ../datatypes.py:758
+msgid "Hautes-Alpes"
+msgstr ""
+
+#: ../datatypes.py:819
+msgid "Hautes-Pyrénées"
+msgstr ""
+
+#: ../datatypes.py:846
+msgid "Hauts-de-Seine"
+msgstr ""
+
+#: ../datatypes.py:788
+msgid "Hérault"
+msgstr ""
+
+#: ../schema.py:63
+msgid "I"
+msgstr ""
+
+#: ../datatypes.py:789
+msgid "Ille-et-Vilaine"
+msgstr ""
+
+#: ../form_views.py:270
+msgid "Impression du rapport"
+msgstr ""
+
+#: ../datatypes.py:790
+msgid "Indre"
+msgstr ""
+
+#: ../datatypes.py:791
+msgid "Indre-et-Loire"
+msgstr ""
+
+#: ../controls.py:37
+msgid "Informative"
+msgstr ""
+
+#: ../datatypes.py:792
+msgid "Isère"
+msgstr ""
+
+#: ../schema.py:75
+msgid "JJ/MM/AAAA"
+msgstr ""
+
+#: ../datatypes.py:793
+msgid "Jura"
+msgstr ""
+
+#: ../datatypes.py:853
+msgid "La Réunion"
+msgstr ""
+
+#: ../form_views.py:36
+msgid "La page est enregistrée, veuillez vérifier votre saisie dans l'onglet Contrôle de saisie"
+msgstr ""
+
+#: ../datatypes.py:794
+msgid "Landes"
+msgstr ""
+
+#: ../controls.py:47
+msgid "Level"
+msgstr ""
+
+#: ../schema.py:79
+msgid "Liste de valeurs"
+msgstr ""
+
+#: ../datatypes.py:795
+msgid "Loir-et-Cher"
+msgstr ""
+
+#: ../datatypes.py:796
+msgid "Loire"
+msgstr ""
+
+#: ../datatypes.py:798
+msgid "Loire-Atlantique"
+msgstr ""
+
+#: ../datatypes.py:799
+msgid "Loiret"
+msgstr ""
+
+#: ../datatypes.py:800
+msgid "Lot"
+msgstr ""
+
+#: ../datatypes.py:801
+msgid "Lot-et-Garonne"
+msgstr ""
+
+#: ../datatypes.py:802
+msgid "Lozère"
+msgstr ""
+
+#: ../schema.py:76
+msgid "MM/AAAA"
+msgstr ""
+
+#: ../datatypes.py:803
+msgid "Maine-et-Loire"
+msgstr ""
+
+#: ../datatypes.py:804
+msgid "Manche"
+msgstr ""
+
+#: ../datatypes.py:805
+msgid "Marne"
+msgstr ""
+
+#: ../datatypes.py:851
+msgid "Martinique"
+msgstr ""
+
+#: ../widgets.py:165
+#: ../widgets.py:220
+msgid "Mauvaise valeur"
+msgstr ""
+
+#: ../datatypes.py:807
+msgid "Mayenne"
+msgstr ""
+
+#: ../datatypes.py:855
+msgid "Mayotte"
+msgstr ""
+
+#: ../datatypes.py:808
+msgid "Meurthe-et-Moselle"
+msgstr ""
+
+#: ../datatypes.py:809
+msgid "Meuse"
+msgstr ""
+
+#: ../workflow.py:34
+msgid "Modifié"
+msgstr ""
+
+#: ../workflow.py:35
+#: ../datatypes.py:874
+msgid "Modifié après export"
+msgstr ""
+
+#: ../datatypes.py:810
+msgid "Morbihan"
+msgstr ""
+
+#: ../datatypes.py:811
+msgid "Moselle"
+msgstr ""
+
+#: ../datatypes.py:812
+msgid "Nièvre"
+msgstr ""
+
+#: ../schema.py:88
+#: ../schema.py:96
+#: ../datatypes.py:664
+msgid "Non"
+msgstr ""
+
+#: ../schema.py:113
+msgid "Non modifiable (par défaut Non)"
+msgstr ""
+
+#: ../datatypes.py:813
+msgid "Nord"
+msgstr ""
+
+#: ../datatypes.py:856
+msgid "Nouvelle-Calédonie"
+msgstr ""
+
+#: ../controls.py:44
+msgid "Number"
+msgstr ""
+
+#: ../param_views.py:45
+msgid "ODS File"
+msgstr ""
+
+#: ../schema.py:111
+msgid "Obligatoire (par défaut Oui)"
+msgstr ""
+
+#: ../datatypes.py:814
+msgid "Oise"
+msgstr ""
+
+#: ../datatypes.py:815
+msgid "Orne"
+msgstr ""
+
+#: ../schema.py:87
+#: ../schema.py:95
+#: ../datatypes.py:663
+msgid "Oui"
+msgstr ""
+
+#: ../schema.py:103
+#: ../controls.py:48
+msgid "Page"
+msgstr ""
+
+#: ../formpage.py:43
+msgid "Page de formulaire"
+msgstr ""
+
+#: ../param_views.py:79
+msgid "Page names must be in the form \"C Title...\""
+msgstr ""
+
+#: ../param_views.py:57
+msgid "Parameters"
+msgstr ""
+
+#: ../datatypes.py:829
+msgid "Paris"
+msgstr ""
+
+#: ../datatypes.py:816
+msgid "Pas-de-Calais"
+msgstr ""
+
+#: ../datatypes.py:817
+msgid "Puy-de-Dôme"
+msgstr ""
+
+#: ../datatypes.py:818
+msgid "Pyrénées-Atlantiques"
+msgstr ""
+
+#: ../datatypes.py:820
+msgid "Pyrénées-Orientales"
+msgstr ""
+
+#: ../schema.py:106
+msgid "Représentation (par défaut INPUT TEXT)"
+msgstr ""
+
+#: ../datatypes.py:823
+msgid "Rhône"
+msgstr ""
+
+#: ../datatypes.py:854
+msgid "Saint-Pierre-et-Miquelon"
+msgstr ""
+
+#: ../datatypes.py:826
+msgid "Sarthe"
+msgstr ""
+
+#: ../datatypes.py:827
+msgid "Savoie"
+msgstr ""
+
+#: ../datatypes.py:825
+msgid "Saône-et-Loire"
+msgstr ""
+
+#: ../schema.py:169
+msgid "Schema"
+msgstr ""
+
+#: ../datatypes.py:830
+msgid "Seine-Maritime"
+msgstr ""
+
+#: ../datatypes.py:847
+msgid "Seine-Saint-Denis"
+msgstr ""
+
+#: ../datatypes.py:831
+msgid "Seine-et-Marne"
+msgstr ""
+
+#: ../demo.py:202
+#: ../demo.py:223
+msgid "Société"
+msgstr ""
+
+#: ../schema.py:115
+#: ../datatypes.py:834
+msgid "Somme"
+msgstr ""
+
+#: ../schema.py:107
+msgid "Taille de champs de saisie (par défaut identique à Représentation)"
+msgstr ""
+
+#: ../datatypes.py:835
+msgid "Tarn"
+msgstr ""
+
+#: ../datatypes.py:836
+msgid "Tarn-et-Garonne"
+msgstr ""
+
+#: ../datatypes.py:844
+msgid "Territoire de Belfort"
+msgstr ""
+
+#: ../schema.py:78
+msgid "Texte"
+msgstr ""
+
+#: ../controls.py:45
+msgid "Title"
+msgstr ""
+
+#: ../schema.py:102
+msgid "Titre"
+msgstr ""
+
+#: ../schema.py:104
+msgid "Type"
+msgstr ""
+
+#: ../form_views.py:238
+msgid "Téléchargement du rapport"
+msgstr ""
+
+#: ../datatypes.py:849
+msgid "Val-d'Oise"
+msgstr ""
+
+#: ../datatypes.py:848
+msgid "Val-de-Marne"
+msgstr ""
+
+#: ../schema.py:109
+msgid "Valeurs autorisées / modalités"
+msgstr ""
+
+#: ../datatypes.py:837
+msgid "Var"
+msgstr ""
+
+#: ../schema.py:101
+msgid "Variable"
+msgstr ""
+
+#: ../datatypes.py:838
+msgid "Vaucluse"
+msgstr ""
+
+#: ../datatypes.py:839
+msgid "Vendée"
+msgstr ""
+
+#: ../datatypes.py:870
+msgid "Vide"
+msgstr ""
+
+#: ../datatypes.py:840
+msgid "Vienne"
+msgstr ""
+
+#: ../param_views.py:100
+msgid "View"
+msgstr ""
+
+#: ../demo.py:134
+msgid "Voir"
+msgstr ""
+
+#: ../datatypes.py:842
+msgid "Vosges"
+msgstr ""
+
+#: ../demo.py:79
+msgid "Votre rapport a bien été envoyé."
+msgstr ""
+
+#: ../demo.py:84
+msgid "Votre rapport a bien été exporté."
+msgstr ""
+
+#: ../form_views.py:243
+msgid "Votre rapport n'est pas encore terminé."
+msgstr ""
+
+#: ../form.py:356
+msgid "Vrai"
+msgstr ""
+
+#: ../controls.py:38
+msgid "Warning"
+msgstr ""
+
+#: ../datatypes.py:843
+msgid "Yonne"
+msgstr ""
+
+#: ../datatypes.py:832
+msgid "Yvelines"
+msgstr ""
+
+#: ../utils.py:71
+#: ../form.py:339
+msgid "["
+msgstr ""
+
+#: ../datatypes.py:31
+#: ../datatypes.py:36
+msgid "\\""
+msgstr ""
+
+#: ../datatypes.py:31
+#: ../datatypes.py:36
+msgid "\'"
+msgstr ""
+
+#: ../datatypes.py:649
+msgid "\r\n"
+msgstr ""
+
+#: ../utils.py:74
+msgid "]"
+msgstr ""
+
+#: ../widgets.py:88
+msgid "addClass"
+msgstr ""
+
+#: ../widgets.py:115
+#: ../widgets.py:166
+#: ../widgets.py:219
+msgid "badtype"
+msgstr ""
+
+#: ../widgets.py:130
+msgid "checkbox"
+msgstr ""
+
+#: ../widgets.py:78
+#: ../widgets.py:78
+#: ../widgets.py:133
+#: ../widgets.py:133
+msgid "checked"
+msgstr ""
+
+#: ../widgets.py:81
+#: ../widgets.py:115
+#: ../widgets.py:118
+#: ../widgets.py:136
+#: ../widgets.py:166
+#: ../widgets.py:170
+#: ../widgets.py:173
+#: ../widgets.py:181
+#: ../widgets.py:203
+#: ../widgets.py:216
+#: ../widgets.py:219
+#: ../widgets.py:223
+#: ../widgets.py:227
+msgid "class"
+msgstr ""
+
+#: ../widgets.py:186
+msgid "cols"
+msgstr ""
+
+#: ../widgets.py:80
+#: ../widgets.py:80
+#: ../widgets.py:81
+#: ../widgets.py:135
+#: ../widgets.py:135
+#: ../widgets.py:136
+#: ../widgets.py:172
+#: ../widgets.py:172
+#: ../widgets.py:173
+#: ../widgets.py:226
+#: ../widgets.py:226
+#: ../widgets.py:227
+msgid "disabled"
+msgstr ""
+
+#: ../widgets.py:72
+#: ../widgets.py:111
+#: ../widgets.py:119
+#: ../widgets.py:126
+#: ../widgets.py:153
+#: ../widgets.py:183
+#: ../widgets.py:202
+msgid "div"
+msgstr ""
+
+#: ../widgets.py:84
+msgid "false"
+msgstr ""
+
+#: ../formpage.py:92
+#: ../formpage.py:105
+#: ../formpage.py:167
+msgid "field-label"
+msgstr ""
+
+#: ../widgets.py:75
+#: ../widgets.py:130
+#: ../widgets.py:207
+msgid "field_%s"
+msgstr ""
+
+#: ../formpage.py:156
+msgid "h%d"
+msgstr ""
+
+#: ../widgets.py:75
+#: ../widgets.py:130
+#: ../widgets.py:207
+msgid "id"
+msgstr ""
+
+#: ../widgets.py:105
+#: ../widgets.py:137
+#: ../widgets.py:206
+msgid "input"
+msgstr ""
+
+#: ../widgets.py:118
+#: ../widgets.py:170
+#: ../widgets.py:223
+msgid "mandatory"
+msgstr ""
+
+#: ../widgets.py:210
+msgid "maxlength"
+msgstr ""
+
+#: ../widgets.py:76
+#: ../widgets.py:131
+#: ../widgets.py:162
+#: ../widgets.py:185
+#: ../widgets.py:208
+msgid "name"
+msgstr ""
+
+#: ../param_views.py:53
+#: ../param_views.py:61
+msgid "not an ODS file"
+msgstr ""
+
+#: ../datatypes.py:102
+#: ../datatypes.py:612
+#: ../datatypes.py:638
+#: ../datatypes.py:694
+#: ../datatypes.py:711
+msgid "null"
+msgstr ""
+
+#: ../widgets.py:216
+msgid "num"
+msgstr ""
+
+#: ../widgets.py:101
+msgid "onchange"
+msgstr ""
+
+#: ../widgets.py:160
+msgid "option"
+msgstr ""
+
+#: ../widgets.py:75
+msgid "radio"
+msgstr ""
+
+#: ../widgets.py:181
+#: ../widgets.py:203
+msgid "readonly"
+msgstr ""
+
+#: ../widgets.py:85
+msgid "removeClass"
+msgstr ""
+
+#: ../widgets.py:185
+msgid "rows"
+msgstr ""
+
+#: ../formpage.py:165
+msgid "rubrique-label"
+msgstr ""
+
+#: ../formpage.py:158
+msgid "section-header"
+msgstr ""
+
+#: ../widgets.py:174
+msgid "select"
+msgstr ""
+
+#: ../widgets.py:159
+#: ../widgets.py:159
+msgid "selected"
+msgstr ""
+
+#: ../widgets.py:209
+msgid "size"
+msgstr ""
+
+#: ../widgets.py:181
+msgid "style"
+msgstr ""
+
+#: ../widgets.py:212
+msgid "tabindex"
+msgstr ""
+
+#: ../widgets.py:207
+msgid "text"
+msgstr ""
+
+#: ../widgets.py:189
+msgid "textarea"
+msgstr ""
+
+#: ../widgets.py:165
+#: ../widgets.py:169
+#: ../widgets.py:220
+#: ../widgets.py:224
+msgid "title"
+msgstr ""
+
+#: ../widgets.py:87
+msgid "true"
+msgstr ""
+
+#: ../widgets.py:75
+#: ../widgets.py:130
+#: ../widgets.py:207
+msgid "type"
+msgstr ""
+
+#: ../widgets.py:76
+#: ../widgets.py:131
+#: ../widgets.py:157
+#: ../widgets.py:208
+msgid "value"
+msgstr ""
+
+#: ../widgets.py:181
+msgid "white-space: pre"
+msgstr ""
