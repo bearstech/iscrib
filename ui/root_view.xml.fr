@@ -68,7 +68,7 @@
       </td>
       <td>
         <a href="/;contact" id="contact-us">
-          <img src="http://contactus.oetker.ca/images/icon.contact.us2.jpg" width="145" height="145"/>
+          <img src="/ui/iscrib/images/contact.png" width="145" height="145"/>
           <table cellpadding="0" cellspacing="0">
             <tr>
               <td>
