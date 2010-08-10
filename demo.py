@@ -139,6 +139,11 @@ class WebSite_BrowseContent(Folder_BrowseContent):
             ('ctime', MSG(u"Date de création"))]
     table_actions = []
 
+
+    def get_page_title(self, resource, context):
+        return None
+
+
     def get_items(self, resource, context, *args):
         return super(WebSite_BrowseContent, self).get_items(resource, context,
                 PhraseQuery('format', ParamForm.class_id), *args)

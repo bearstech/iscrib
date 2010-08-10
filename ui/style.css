@@ -108,6 +108,13 @@ div#page {
   left: 8px;
 }
 
+#header #logo-title {
+  position: absolute;
+  bottom: 0px;
+  left: 8px;
+  font-size: 22px;
+}
+
 /* header toolbar */
 #header .header-toolbar {
   float: right;
@@ -162,6 +169,7 @@ div#page {
 
 #content {
   width: 100%;
+  padding: 0 5px;
 }
 
 #right {
@@ -252,6 +260,7 @@ div#page {
 }
 
 #download-template,
+#contact-us,
 #upload-param {
   float: left;
   display: block;
@@ -278,6 +287,7 @@ div#page {
 }
 
 #download-template span,
+#contact-us span,
 #upload-param span {
   font-weight:bold;
 }
@@ -436,3 +446,18 @@ td.rubrique-label {
   background-color: #f1e68d;
 }
 
+.number{
+  color: #FFF;
+  font-size: 45px;
+  -moz-border-radius: 50px;
+  text-align: center;
+  width: 45px;
+  display:block;
+  padding: 0;
+  background-color: #074CB4;
+}
+
+h1.title-home{
+  padding: 0px;
+  margin: 0px;
+}
