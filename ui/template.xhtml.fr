@@ -43,12 +43,6 @@
       <table cellpadding="0" cellspacing="0" class="header-toolbar">
         <tr>
           <td class="languages">${languages}</td>
-          <td class="search">
-            <form action="/;browse_content" method="get">
-              <input name="search_text" type="text" value="" size="15"/>
-              <button class="button-search" type="submit">Search</button>
-            </form>
-          </td>
         </tr>
       </table>
       <!-- Menu -->
