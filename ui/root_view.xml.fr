@@ -7,20 +7,20 @@
   <table cellpadding="0" cellspacing="0">
     <tr>
       <td style="width:450px;vertical-align:top;">
-        Ceci est une démonstration de "Iscrib", l'application de génération d'interface de saisie.
-        Une simple feuille de tableur permet de concevoir une application de collecte d'information en ligne.<br/>
+        Ceci est une démonstration de "iScrib".
+        Une simple feuille de tableur permet de concevoir une application de collecte d'informations en ligne.<br/>
       </td>
       <td>
-        Le générateur de formulaire permet:
-          <ul>
+        Cette feuille de tableur sert à:
+          <ul style="margin-bottom:0">
             <li>
-            De spécifier les champs de saisie (format, type, etc.)
+            Spécifier les champs de saisie (format, type, etc.)
             </li>
             <li>
-            De spécifier des contraintes et des test de validités.
+            Spécifier des contraintes et des tests de validités.
             </li>
             <li>
-            De gérer les champs conditionnels.
+            Gérer les champs conditionnels.
             </li>
           </ul>
       </td>
@@ -92,7 +92,7 @@
         Cela générera en un seul clic votre application de collecte d'informations.
       </td>
       <td>
-        Les équipes d'Itaapy sont en messure:
+        Les équipes d'<a href="http://www.itaapy.com/nos-solutions/iscrib-dematerialisation-de-formulaires">Itaapy</a> sont en mesure:
         <ul>
           <li>
             D'intégrer cette application à votre SI.
