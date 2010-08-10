@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import freeze, merge_dicts
 from itools.datatypes import String, DateTime, Unicode
 from itools.database import PhraseQuery
 from itools.gettext import MSG
@@ -24,7 +24,8 @@ from itools.uri import get_reference
 from itools.web import INFO
 
 # Import from ikaaro
-from ikaaro.autoform import TextWidget
+from ikaaro import messages
+from ikaaro.autoform import AutoForm, HiddenWidget, TextWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
@@ -36,31 +37,6 @@ from form_views import Form_View, Form_Send
 from param import Param
 from param_views import Param_NewInstance
 from utils import get_page_number
-
-
-class ParamForm_NewInstance(Param_NewInstance):
-    access = True
-
-
-    def GET(self, resource, context):
-        ac = resource.get_access_control()
-        class_id = context.get_query_value('type')
-        if (class_id != ParamForm.class_id
-                or ac.is_allowed_to_add(context.user, resource)):
-            return super(ParamForm_NewInstance, self).GET(resource, context)
-        return get_reference('/;login')
-
-
-
-class ParamForm_View(Form_View):
-    access = True
-
-
-    def GET(self, resource, context):
-        ac = resource.get_access_control()
-        if ac.is_allowed_to_view(context.user, resource):
-            return super(ParamForm_View, self).GET(resource, context)
-        return get_reference('/;login')
 
 
 
@@ -94,7 +70,6 @@ class ParamForm(Param, Form):
             ctime=DateTime(source='metadata', indexed=False, stored=True))
 
     # Views
-    new_instance = ParamForm_NewInstance()
     envoyer = ParamForm_Send()
 
 
@@ -103,7 +78,7 @@ class ParamForm(Param, Form):
         page = self.get_formpage(page_number)
         if page is None:
             return super(ParamForm, self).__getattr__(name)
-        view = ParamForm_View(page_number=page.get_page_number(),
+        view = Form_View(page_number=page.get_page_number(),
                 title=MSG(u"Commencer la saisie"))
         # TODO make it lazy
         self.__dict__[name] = view
@@ -192,24 +167,70 @@ class WebSite_BrowseContent(Folder_BrowseContent):
 
 
 
-#class WebSite_Register(BaseRegisterForm):
-#    schema = merge_dicts(BaseRegisterForm.schema,
-#        company=Unicode(mandatory=True))
-#    widgets = (BaseRegisterForm.widgets[:2]
-#        + [TextWidget('company', title=MSG(u"Société"))]
-#        + BaseRegisterForm.widgets[2:])
-#
-#
-#    def action(self, resource, context, form):
-#        goto = super(WebSite_Register, self).action(resource, context, form)
-#        # FIXME get user
-#        users = resource.get_resource('users')
-#        next_user_id = users.get_next_user_id()
-#        user_id = str(int(next_user_id) - 1)
-#        user = users.get_resource(user_id)
-#        # Set company
-#        user.set_property('company', form['company'].strip())
-#        return goto
+class User_ConfirmRegistration(AutoForm):
+
+    access = True
+    title = MSG(u'Choisir votre mot de passe')
+
+    schema = {
+        'key': String(mandatory=True),
+        'company': Unicode(mandatory=True),
+        'newpass': String(mandatory=True),
+        'newpass2': String(mandatory=True)}
+
+    widgets = [HiddenWidget('key', title=None),
+               TextWidget('company', title=MSG(u'Société')),
+               TextWidget('newpass', title=MSG(u'Mot de passe')),
+               TextWidget('newpass2', title=MSG(u'Répêter votre mot de passe'))]
+
+
+    def get_namespace(self, resource, context):
+        # Check register key
+        must_confirm = resource.get_property('user_must_confirm')
+        username = context.get_form_value('username', default='')
+        if must_confirm is None:
+            return context.come_back(messages.MSG_REGISTERED,
+                    goto='/;login?username=%s' % username)
+        elif context.get_form_value('key') != must_confirm:
+            return context.come_back(messages.MSG_BAD_KEY,
+                    goto='/;login?username=%s' % username)
+        return AutoForm.get_namespace(self, resource, context)
+
+
+    def get_value(self, resource, context, name, datatype):
+        if name == 'key':
+            return resource.get_property('user_must_confirm')
+        return AutoForm.get_value(self, resource, context, name, datatype)
+
+
+    def action(self, resource, context, form):
+        # Check register key
+        must_confirm = resource.get_property('user_must_confirm')
+        if form['key'] != must_confirm:
+            context.message = messages.MSG_BAD_KEY
+            return
+
+        # Check passwords
+        password = form['newpass']
+        password2 = form['newpass2']
+        if password != password2:
+            context.message = messages.MSG_PASSWORD_MISMATCH
+            return
+
+        # Set user
+        resource.set_password(password)
+        resource.del_property('user_must_confirm')
+
+        # Company
+        resource.set_property('company', form['company'])
+
+        # Set cookie
+        resource.set_auth_cookie(context, password)
+
+        # Ok
+        message = INFO(u"Votre compte a été crée ! " + \
+          u"Vous pouvez créer une application de collecte d'informations")
+        return context.come_back(message, goto='/')
 
 
 
@@ -228,12 +249,15 @@ class User(BaseUser):
 
     # Views
     edit_account = User_EditAccount()
+    confirm_registration = User_ConfirmRegistration()
 
 
 
 class WebSite(BaseWebSite):
     class_views = ['view']
     class_skin = 'ui/iscrib'
+    class_roles = freeze(['members', 'admins'])
+
     # Views
     view = WebSite_BrowseContent()
 
