@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <p id="introduction">
+    Ceci est une démonstration de "Iscrib", l'application de génération d'interface de saisie.<br/>
+    Une simple feuille de tableur permet de concevoir une application de collecte d'information en ligne.<br/>
+    Le générateur de formulaire permet:
+      <ul>
+        <li>
+        De spécifier les champs de saisie (format, type, etc.)
+        </li>
+        <li>
+        De spécifier des contraintes et des test de validités.
+        </li>
+        <li>
+        De gérer les champs conditionnels.
+        </li>
+      </ul>
+  </p>
+
+  <p id="folder-banner">
+    <a href="/gabarit/;download" id="download-template">
+      <img src="/ui/iscrib/images/blank.png"/>
+      <span>Télécharger le gabarit ODS</span>
+    </a>
+    <a href="/;new_resource?type=Param" id="upload-param">
+      <img src="/ui/iscrib/images/blank.png"/>
+      <span>Créer une application de collecte à partir de votre ODS</span>
+    </a>
+    <div class="clear"></div>
+  </p>
+
+  <p>
+    Les équipes d'Itaapy sont en messure:
+
+    <ul>
+      <li>
+        D'intégrer cette application à votre SI.
+      </li>
+      <li>
+        D'injecter les données collectées dans les base de donnée de votre choix
+      </li>
+      <li>
+        De connecter l'application à un référenciel utilisateur (gestion des
+            login/password/envois de mail) pour collecter l'information auprès de milliers d'utilisateurs.
+      </li>
+    </ul>
+  </p>
+
+  <h1>Liste des formulaires générés</h1>
+
+  <!-- Batch -->
+  ${batch}
+
+  <!-- Table -->
+  ${table}
+
+</stl:block>
