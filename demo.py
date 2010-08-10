@@ -130,6 +130,7 @@ class ParamForm(Param, Form):
 class WebSite_BrowseContent(Folder_BrowseContent):
     access = 'is_allowed_to_view'
     template = '/ui/iscrib/root_view.xml'
+    search_template = None
     title = MSG(u"Voir")
 
     table_columns = [
@@ -137,10 +138,6 @@ class WebSite_BrowseContent(Folder_BrowseContent):
             ('file', MSG(u"Fichier")),
             ('ctime', MSG(u"Date de création"))]
     table_actions = []
-
-    search_schema = merge_dicts(Folder_BrowseContent.search_schema,
-            search_type=String(default=ParamForm.class_id))
-
 
     def get_items(self, resource, context, *args):
         return super(WebSite_BrowseContent, self).get_items(resource, context,
