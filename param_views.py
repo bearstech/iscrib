@@ -65,15 +65,15 @@ class Param_NewInstance(NewInstance):
         for name, cls in [('controls', child.controls_class),
                           ('schema', child.schema_class)]:
             table = tables.next()
-            table.rstrip_table(aggressive=True)
+            table.rstrip(aggressive=True)
             table.delete_row(0)
             child.make_resource(name, cls,
-                    title={'fr': table.get_table_name()},
-                    body=table.export_to_csv())
+                    title={'fr': table.get_name()},
+                    body=table.to_csv())
         # Pages
         for table in tables:
-            table.rstrip_table(aggressive=True)
-            title = table.get_table_name()
+            table.rstrip(aggressive=True)
+            title = table.get_name()
             if title[1] != u" ":
                 context.commit = False
                 message = u'Page names must be in the form "C Title..."'
@@ -81,7 +81,7 @@ class Param_NewInstance(NewInstance):
                 return
             page_number, _ = title.split(u" ", 1)
             name = 'page' + page_number.lower().encode()
-            body = table.export_to_csv()
+            body = table.to_csv()
             try:
                 child.make_resource(name, FormPage, title={'fr': title},
                         body=body)
