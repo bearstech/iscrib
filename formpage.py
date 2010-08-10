@@ -20,6 +20,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
+from itools.datatypes import XMLAttribute
 from itools.gettext import MSG
 from itools.xml import XMLParser
 
@@ -145,6 +146,7 @@ class FormPage(CSV):
                     columns.append({'rowspan': None, 'colspan': None,
                                     'body': body, 'class': css_class})
                 elif column:
+                    column = XMLAttribute.encode(column)
                     # Texte simple (ou pas)
                     if column[0] == u"*":
                         # 0007975: Gestion des titres
@@ -154,7 +156,7 @@ class FormPage(CSV):
                         column = make_element(
                                 # <h1> est déjà pris
                                 u"h%d" % (int(level) + 1),
-                                content=column.strip()) 
+                                content=column.strip())
                         css_class = u"section-header"
                     elif (  # 0007970: CSS spécifique pour numéros de
                             # rubriques
@@ -169,9 +171,6 @@ class FormPage(CSV):
                         css_class += u" centered"
                     if column == u"100%":
                         css_class += u" num"
-                    # 0004946: les balises < et > ne sont pas interprétées
-                    # -> ne pas utiliser XML.encode
-                    column = column.replace('&', '&amp;')
                     body = XMLParser(column.encode('utf8'),
                             namespaces=xhtml_namespaces)
                     columns.append({'rowspan': None, 'colspan': None,
