@@ -461,3 +461,7 @@ h1.title-home{
   padding: 0px;
   margin: 0px;
 }
+
+.active{
+  font-weight: bold;
+}
