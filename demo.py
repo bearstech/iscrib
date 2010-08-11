@@ -25,7 +25,7 @@ from itools.web import INFO
 
 # Import from ikaaro
 from ikaaro import messages
-from ikaaro.autoform import AutoForm, HiddenWidget, TextWidget
+from ikaaro.autoform import AutoForm, HiddenWidget, PasswordWidget, TextWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
@@ -178,10 +178,11 @@ class User_ConfirmRegistration(AutoForm):
         'newpass': String(mandatory=True),
         'newpass2': String(mandatory=True)}
 
-    widgets = [HiddenWidget('key', title=None),
-               TextWidget('company', title=MSG(u'Société')),
-               TextWidget('newpass', title=MSG(u'Mot de passe')),
-               TextWidget('newpass2', title=MSG(u'Répêter votre mot de passe'))]
+    widgets = [
+        HiddenWidget('key', title=None),
+        TextWidget('company', title=MSG(u'Société')),
+        PasswordWidget('newpass', title=MSG(u'Mot de passe')),
+        PasswordWidget('newpass2', title=MSG(u'Répêter votre mot de passe'))]
 
 
     def get_namespace(self, resource, context):
