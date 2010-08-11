@@ -25,7 +25,8 @@ from itools.web import INFO
 
 # Import from ikaaro
 from ikaaro import messages
-from ikaaro.autoform import AutoForm, HiddenWidget, PasswordWidget, TextWidget
+from ikaaro.autoform import AutoForm, HiddenWidget, PasswordWidget, RTEWidget
+from ikaaro.autoform import TextWidget, XHTMLBody
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
@@ -37,6 +38,7 @@ from form_views import Form_View, Form_Send
 from param import Param
 from param_views import Param_NewInstance
 from utils import get_page_number
+from utils_views import AutomaticEditView
 
 
 
@@ -117,6 +119,12 @@ class WebSite_BrowseContent(Folder_BrowseContent):
 
     def get_page_title(self, resource, context):
         return None
+
+
+    def get_namespace(self, resource, context):
+        return merge_dicts(
+            Folder_BrowseContent.get_namespace(self, resource, context),
+            homepage=resource.get_property('homepage'))
 
 
     def get_items(self, resource, context, *args):
@@ -254,12 +262,22 @@ class User(BaseUser):
 
 
 class WebSite(BaseWebSite):
-    class_views = ['view']
+    class_views = ['view', 'edit']
     class_skin = 'ui/iscrib'
     class_roles = freeze(['members', 'admins'])
 
+    class_schema = merge_dicts(BaseWebSite.class_schema,
+            homepage=XHTMLBody(source='metadata', indexed=False, stored=False,
+                           multilingual=True))
+
     # Views
     view = WebSite_BrowseContent()
+
+    # Edit view
+    edit_show_meta = True
+    edit_schema = {'homepage': XHTMLBody(multilingual=True)}
+    edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]
+    edit = AutomaticEditView(access='is_admin')
 
     def get_document_types(self):
         return [Param]
