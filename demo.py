@@ -109,8 +109,8 @@ class WebSite_BrowseContent(Folder_BrowseContent):
     title = MSG(u"Voir")
 
     table_columns = [
-            ('form', MSG(u"Formulaire")),
-            ('file', MSG(u"Fichier")),
+            ('form', MSG(u"Application")),
+            ('file', MSG(u"Fichier ODF Source")),
             ('ctime', MSG(u"Date de création"))]
     table_actions = []
 
@@ -157,8 +157,7 @@ class WebSite_BrowseContent(Folder_BrowseContent):
         if column == 'form':
             return brain.title, brain.name
         elif column == 'file':
-            ods = item_resource.get_resource('parameters')
-            return (ods.get_property('filename'),
+            return (u'Source de %s' % brain.title,
                     '%s/parameters/;download' % brain.name)
         elif column == 'ctime':
             return context.format_datetime(brain.ctime)

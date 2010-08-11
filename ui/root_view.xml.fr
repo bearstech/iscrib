@@ -111,7 +111,7 @@
     </tr>
   </table>
 
-  <h1 class="title-home">Liste des formulaires générés</h1>
+  <h1 class="title-home">Liste des application générés</h1>
 
   <!-- Batch -->
   ${batch}
