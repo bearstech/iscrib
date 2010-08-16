@@ -52,7 +52,7 @@
       </ul>
       <!-- Logo -->
       <a href="/" id="logo-title">
-        iScrib -- Huge multi source dataflow with complex data control
+        ${title}
       </a>
       <a href="/" stl:if="logo_href" id="logo">
         <img src="${logo_href}"/>
