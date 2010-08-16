@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import freeze, merge_dicts
+from itools.core import freeze, get_abspath, merge_dicts
 from itools.datatypes import String, DateTime, Unicode
 from itools.database import PhraseQuery
 from itools.gettext import MSG
@@ -28,6 +28,7 @@ from ikaaro import messages
 from ikaaro.autoform import AutoForm, HiddenWidget, PasswordWidget, RTEWidget
 from ikaaro.autoform import TextWidget, XHTMLBody
 from ikaaro.folder_views import Folder_BrowseContent
+from ikaaro.skins import Skin, register_skin
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
 from ikaaro.website import WebSite as BaseWebSite
@@ -283,6 +284,14 @@ class WebSite(BaseWebSite):
         return [Param]
 
 
+
+class Website_Skin(Skin):
+
+    def build_namespace(self, context):
+        return merge_dicts(Skin.build_namespace(self, context),
+                  website_title=context.site_root.get_property('title'))
+
+register_skin('iscrib', Website_Skin(get_abspath('ui')))
 # FIXME
 from ikaaro.registry import register_resource_class
 register_resource_class(User)

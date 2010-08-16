@@ -52,7 +52,7 @@
       </ul>
       <!-- Logo -->
       <a href="/" id="logo-title">
-        ${title}
+        ${website_title}
       </a>
       <a href="/" stl:if="logo_href" id="logo">
         <img src="${logo_href}"/>

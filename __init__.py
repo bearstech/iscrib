@@ -19,9 +19,6 @@
 # Import from itools
 from itools.core import get_version, get_abspath
 
-# Import from ikaaro
-from ikaaro.skins import register_skin
-
 # Import from iscrib
 
 # Give a version
@@ -29,8 +26,6 @@ __version__ = get_version()
 
 # Register
 import param, demo
-
-register_skin('iscrib', get_abspath('ui'))
 
 # Silent Pyflakes
 param, demo
