@@ -236,21 +236,24 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     datatype = schema[name]
     readonly =  readonly or datatype.readonly
     representation = datatype.representation.upper()
+    widget = None
     if representation == 'SELECT':
-        return select_widget(context, form, datatype, name, value, schema,
+        widget = select_widget(context, form, datatype, name, value, schema,
                 fields, readonly)
     elif representation == 'RADIO':
-        return radio_widget(context, form, datatype, name, value, schema,
+        widget = radio_widget(context, form, datatype, name, value, schema,
                 fields, readonly)
     elif representation == 'CHECKBOX':
-        return checkbox_widget(context, form, datatype, name, value, schema,
+        widget = checkbox_widget(context, form, datatype, name, value, schema,
                 fields, readonly)
     # Skip instance datatypes: TypeError: issubclass() arg 1 must be a class
     elif  isinstance(datatype, Numeric):
         pass
     elif issubclass(datatype, Text):
-        return textarea_widget(context, form, datatype, name, value, schema,
+        widget = textarea_widget(context, form, datatype, name, value, schema,
                 fields, readonly)
     # Basic text input
-    return text_widget(context, form, datatype, name, value, schema, fields,
+    if widget is None:
+        widget = text_widget(context, form, datatype, name, value, schema, fields,
             readonly, tabindex)
+    return widget + '<span title="%s">[?]</span>' % datatype.title

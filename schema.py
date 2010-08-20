@@ -157,6 +157,7 @@ class SchemaHandler(CSVFile):
             sum = row.get_value('sum').strip()
             dependances = row.get_value('dependencies').split()
             schema[name] = datatype(representation=representation,
+                    title=row.get_value('title'),
                     length=str(length), pages=page_numbers,
                     is_mandatory=is_mandatory, readonly=readonly, sum=sum,
                     dependances=dependances)
