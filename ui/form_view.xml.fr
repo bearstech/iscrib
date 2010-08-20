@@ -15,19 +15,21 @@
     <input type="hidden" name="${field/name}" value="${field/value}"
       stl:repeat="field hidden_fields"/>
 
-    <stl:block stl:if="not skip_print">
-      <p id="form-toolbar">
-        <button id="form-submit" stl:if="not readonly" class="button-ok">
-          Enregistrer
-        </button>
-        <a id="form-print" href="?view=printable" title="Imprimer (dans une
-          nouvelle fenêtre)" onclick="return popup(this.href, 800,
-          600)">Imprimer cette page</a>
-        <a id="form-source" href="parameters/;download" title="Voir le fichier
-          source de ce formulaire">Voir le source</a>
-      </p>
-      <hr class="clear" />
-    </stl:block>
+    <a id="form-source" href="parameters/;download" title="Voir le fichier
+      source de ce formulaire" stl:if="not skip_print">Voir le source</a>
+
+    <p id="form-toolbar" stl:if="not skip_print">
+      <a id="button-control" href=";envoyer" class="button button-control">
+        Contrôle de saisie
+      </a>
+      <a id="form-print" href="?view=printable" title="Imprimer (dans une
+        nouvelle fenêtre)" onclick="return popup(this.href, 800,
+        600)" class="button button-print">Imprimer cette page</a>
+      <button id="form-submit" stl:if="not readonly" class="button-ok">
+        Enregistrer
+      </button>
+    </p>
+    <div class="clear"/>
 
     <div id="form-tables">
       <table class="iscrib-table" stl:repeat="table tables">

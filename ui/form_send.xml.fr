@@ -6,10 +6,10 @@
   <stl:block stl:if="not skip_print">
     <p id="form-toolbar">
       <a id="form-print" href="?view=printable" title="Imprimer (dans une
-        nouvelle fenêtre)" onclick="return popup(this.href, 800,
+        nouvelle fenêtre)" class="button button-print" onclick="return popup(this.href, 800,
         600)">Imprimer cette page</a>
     </p>
-    <hr class="clear" />
+    <div class="clear" />
   </stl:block>
 
   <h1>État du formulaire&nbsp;: <span

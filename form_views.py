@@ -23,6 +23,7 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from ikaaro
 from ikaaro.access import is_admin
+from ikaaro.forms import XHTMLBody
 
 # Import from iscrib
 from datatypes import Numeric, EnumBoolean
@@ -34,7 +35,7 @@ from widgets import is_mandatory_filled
 MSG_ERREUR_SAUVEGARDE = ERROR(u"ATTENTION ! IL Y A DES RUBRIQUES MANQUANTES "
         u"ET/OU INVALIDES")
 MSG_SAUVEGARDE = INFO(u"La page est enregistrée, veuillez vérifier votre "
-        u"saisie dans l'onglet Contrôle de saisie")
+        u"saisie dans l'onglet <a href=';envoyer'>Contrôle de saisie</a>")
 
 
 class Form_View(STLForm):
@@ -154,7 +155,8 @@ class Form_View(STLForm):
             context.message = MSG_ERREUR_SAUVEGARDE
             context.bad_types = bad_types
         else:
-            context.message = MSG_SAUVEGARDE
+            message = MSG_SAUVEGARDE.gettext().encode('utf8')
+            context.message = [XHTMLBody.decode(message)]
 
 
 

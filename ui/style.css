@@ -407,6 +407,7 @@ td.rubrique-label {
 #form-toolbar {
   margin: 0;
   font-size: 10px;
+  float: right;
 }
 #form-help {
   float: left;
@@ -414,15 +415,6 @@ td.rubrique-label {
   color: white;
   background: red;
   text-decoration: none;
-}
-#form-submit {
-  float: right;
-  margin-left: 20px;
-}
-#form-print {
-  float: right;
-  padding-left: 20px;
-  background: url(images/imprimer.png) top left no-repeat;
 }
 #form-tables {
   text-align: center;
@@ -464,4 +456,36 @@ h1.title-home{
 
 .active{
   font-weight: bold;
+}
+
+/* Buttons */
+button, .button{
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  background-color: #FFF;
+  border:1px solid #CCCCCC;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 12px;
+  -moz-box-shadow:0 0 3px #CCCCCC;
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
+  padding-left: 24px !important;
+  text-decoration: none;
+  margin: 3px;
+}
+
+.button-control {
+  background-image: url(/ui/icons/16x16/settings.png);
+  padding-left: 16px;
+}
+
+.button-print {
+  background-image: url(/ui/iscrib/images/printer.png);
+  padding-left: 16px;
+}
+
+#message a{
+  border: 0;
+  padding: 0;
 }
