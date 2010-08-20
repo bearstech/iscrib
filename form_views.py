@@ -22,8 +22,8 @@ from itools.gettext import MSG
 from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from ikaaro
+from ikaaro.autoform import XHTMLBody
 from ikaaro.access import is_admin
-from ikaaro.forms import XHTMLBody
 
 # Import from iscrib
 from datatypes import Numeric, EnumBoolean
