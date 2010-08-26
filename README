@@ -1,0 +1,40 @@
+Dependencies
+=====================
+
+  - itools
+  - ikaaro
+  - lpod-python
+
+Installation
+=====================
+
+ $ python setup.py install
+
+
+Create a new instance
+=======================
+
+Initialize instance:
+
+  $ icms-init.py iscrib.localhost
+
+Set iscrib as a module
+
+  $ vi iscrib.localhost/config.conf
+
+    > + modules = iscrib
+    > - modules =
+
+Start instance:
+
+  $ icms-start.py iscrib.localhost
+
+Open firefox
+
+  $ firefox http://localhost:8080/
+
+Add a website
+
+  $ firefox http://localhost:8080/;new_resource?type=WebSite
+
+Your website is the demo website.
