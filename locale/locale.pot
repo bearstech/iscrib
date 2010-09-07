@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-09-07 14:09+CET\n"
+"POT-Creation-Date: 2010-09-07 15:09+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,6 +191,10 @@ msgstr ""
 msgid "Decimal"
 msgstr ""
 
+#: ../form_views.py:241
+msgid "Download report"
+msgstr ""
+
 #: ../schema.py:58
 msgid "E"
 msgstr ""
@@ -250,10 +254,6 @@ msgstr ""
 
 #: ../schema.py:62
 msgid "I"
-msgstr ""
-
-#: ../form_views.py:273
-msgid "Impression du rapport"
 msgstr ""
 
 #: ../controls.py:37
@@ -348,6 +348,10 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
+#: ../form_views.py:273
+msgid "Print report"
+msgstr ""
+
 #: ../demo.py:191
 msgid "Repeat your password"
 msgstr ""
@@ -381,7 +385,7 @@ msgid "Source de %s"
 msgstr ""
 
 #: ../demo.py:83
-msgid "Start reporting"
+msgid "Start filling"
 msgstr ""
 
 #: ../schema.py:76
@@ -410,10 +414,6 @@ msgstr ""
 
 #: ../schema.py:102
 msgid "Type"
-msgstr ""
-
-#: ../form_views.py:241
-msgid "Téléchargement du rapport"
 msgstr ""
 
 #: ../schema.py:107
@@ -701,11 +701,6 @@ msgstr ""
 msgid "{name} is not equal to {sum}"
 msgstr ""
 
-#: ../ui/form_view.xml.en:31
-msgctxt "button"
-msgid "Enregistrer"
-msgstr ""
-
 #: ../ui/form_send.xml.en:21
 msgctxt "button"
 msgid "Envoyer votre questionnaire"
@@ -714,6 +709,11 @@ msgstr ""
 #: ../ui/form_send.xml.en:29
 msgctxt "button"
 msgid "Exporter"
+msgstr ""
+
+#: ../ui/form_view.xml.en:38
+msgctxt "button"
+msgid "Save"
 msgstr ""
 
 #: ../ui/form_send.xml.en:37
@@ -741,14 +741,14 @@ msgctxt "heading"
 msgid "Erreurs"
 msgstr ""
 
+#: ../ui/form_send.xml.en:14
+msgctxt "heading"
+msgid "Form State:"
+msgstr ""
+
 #: ../ui/form_send.xml.en:90
 msgctxt "heading"
 msgid "Informations"
-msgstr ""
-
-#: ../ui/form_send.xml.en:14
-msgctxt "heading"
-msgid "État du formulaire :"
 msgstr ""
 
 #: ../ui/template.xhtml.en:25
@@ -766,14 +766,14 @@ msgctxt "link"
 msgid "<g id='18'>Conditions d'utilisation</g>  <g id='19'>Contact</g>"
 msgstr ""
 
-#: ../ui/form_view.xml.en:7
+#: ../ui/form_view.xml.en:8
 msgctxt "link"
 msgid "<g id='2'>${item/title}</g>  <g id='3'>|</g>"
 msgstr ""
 
-#: ../ui/form_view.xml.en:17
+#: ../ui/form_view.xml.en:21
 msgctxt "link"
-msgid "<g id='7'> Contrôle de saisie </g>  <g id='8'>Imprimer cette page</g>  <g id='9'> Enregistrer </g>"
+msgid "<g id='7'>Input Control</g>  <g id='8'>Print this page</g>  <g id='9'>Save</g>"
 msgstr ""
 
 #: ../ui/form_send.xml.en:9
@@ -792,14 +792,14 @@ msgctxt "link"
 msgid "Pour modifier"
 msgstr ""
 
+#: ../ui/form_view.xml.en:18
+msgctxt "link"
+msgid "See source"
+msgstr ""
+
 #: ../ui/template.xhtml.en:22
 msgctxt "link"
 msgid "Sign in"
-msgstr ""
-
-#: ../ui/form_view.xml.en:14
-msgctxt "link"
-msgid "Voir le source"
 msgstr ""
 
 #: ../ui/form_send.xml.en:87
@@ -827,11 +827,6 @@ msgctxt "paragraph"
 msgid "Si vous avez terminé votre saisie, vous pouvez cliquer sur le bouton « Envoyer votre questionnaire »."
 msgstr ""
 
-#: ../ui/form_send.xml.en:16
-msgctxt "paragraph"
-msgid "Vous devez commencer par remplir le questionnaire."
-msgstr ""
-
 #: ../ui/form_send.xml.en:24
 msgctxt "paragraph"
 msgid "Vous devez corriger toutes les erreurs pour pouvoir envoyer votre questionnaire."
@@ -840,6 +835,11 @@ msgstr ""
 #: ../ui/form_send.xml.en:31
 msgctxt "paragraph"
 msgid "Vous ne pouvez pas exporter le formulaire tant qu'il n'est pas valide."
+msgstr ""
+
+#: ../ui/form_send.xml.en:16
+msgctxt "paragraph"
+msgid "You must start by filling the form."
 msgstr ""
 
 #: ../ui/form_send.xml.en:42
@@ -854,7 +854,6 @@ msgctxt "table cell"
 msgid "Valeur"
 msgstr ""
 
-#: ../ui/form_view.xml.en:17
 #: ../ui/form_send.xml.en:7
 msgctxt "title attribute"
 msgid "Imprimer (dans une\n        nouvelle fenêtre)"
@@ -865,12 +864,17 @@ msgctxt "title attribute"
 msgid "Log out"
 msgstr ""
 
+#: ../ui/form_view.xml.en:23
+msgctxt "title attribute"
+msgid "Print (in a new window)"
+msgstr ""
+
+#: ../ui/form_view.xml.en:17
+msgctxt "title attribute"
+msgid "See source file of\n      this form"
+msgstr ""
+
 #: ../ui/template.xhtml.en:22
 msgctxt "title attribute"
 msgid "Sign in"
-msgstr ""
-
-#: ../ui/form_view.xml.en:13
-msgctxt "title attribute"
-msgid "Voir le fichier\n      source de ce formulaire"
 msgstr ""

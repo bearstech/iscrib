@@ -80,7 +80,7 @@ class ParamForm(Param, Form):
         if page is None:
             return super(ParamForm, self).__getattr__(name)
         view = Form_View(page_number=page.get_page_number(),
-                title=MSG(u"Start reporting"))
+                title=MSG(u"Start filling"))
         # TODO make it lazy
         self.__dict__[name] = view
         return view
@@ -111,7 +111,7 @@ class WebSite_BrowseContent(Folder_BrowseContent):
 
     table_columns = [
             ('form', MSG(u"Application")),
-            ('file', MSG(u"Source ODF File")),
+            ('file', MSG(u"Source ODS File")),
             ('ctime', MSG(u"Creation Date"))]
     table_actions = []
 

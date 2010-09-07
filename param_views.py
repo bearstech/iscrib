@@ -19,7 +19,7 @@
 from cStringIO import StringIO
 
 # Import from lpod
-from lpod.container import ODF_SPREADSHEET
+from lpod import ODF_SPREADSHEET
 from lpod.document import odf_get_document
 
 # Import from itools

@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <p stl:if="not skip_print">
     <stl:inline stl:repeat="item menu">
-      <a href="${item/href}" class="${item/active}">${item/title}</a>  <stl:inline stl:if="not repeat/item/end">|</stl:inline>
+      <a href="${item/href}" class="${item/active}">${item/title}</a>
+      <stl:inline stl:if="not repeat/item/end">|</stl:inline>
     </stl:inline>
   </p>
 
   <form action=";page${page_number}" method="post">
-    <input value="${page_number}" name="page_number" type="hidden"></input>
-    <input value="${field/value}" stl:repeat="field hidden_fields" name="${field/name}" type="hidden"></input>  <a href="parameters/;download" id="form-source" title="Voir le fichier
-      source de ce formulaire" stl:if="not skip_print">Voir le source</a>
+    <input value="${page_number}" name="page_number" type="hidden"/>
+    <input value="${field/value}" stl:repeat="field hidden_fields"
+      name="${field/name}" type="hidden"/>
+    <a href="parameters/;download" id="form-source" title="See source file of
+      this form" stl:if="not skip_print">See source</a>
 
     <p id="form-toolbar" stl:if="not skip_print">
-      <a id="button-control" href=";envoyer" class="button button-control"> Contrôle de saisie </a>  <a onclick="return popup(this.href, 800,
-        600)" href="?view=printable" class="button button-print" title="Imprimer (dans une
-        nouvelle fenêtre)" id="form-print">Imprimer cette page</a>  <button id="form-submit" class="button-ok" stl:if="not readonly"> Enregistrer </button>
+      <a id="button-control" href=";envoyer" class="button
+        button-control">Input Control</a>
+      <a onclick="return popup(this.href, 800, 600)" href="?view=printable"
+        class="button button-print" title="Print (in a new window)"
+        id="form-print">Print this page</a>
+      <button id="form-submit" class="button-ok" stl:if="not
+        readonly">Save</button>
     </p>
     <div class="clear"></div>
 
@@ -27,9 +35,7 @@
         </tr>
       </table>
       <p>
-        <button class="button-ok" stl:if="not readonly">
-          Enregistrer
-        </button>
+        <button class="button-ok" stl:if="not readonly">Save</button>
       </p>
     </div>
 

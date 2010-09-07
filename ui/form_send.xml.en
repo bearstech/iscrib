@@ -11,9 +11,9 @@
     <div class="clear"></div>
   </stl:block>
 
-  <h1>État du formulaire : <span class="wf-${statename}">${form_state}</span></h1>
+  <h1>Form State: <span class="wf-${statename}">${form_state}</span></h1>
 
-  <p stl:if="first_time">Vous devez commencer par remplir le questionnaire.</p>
+  <p stl:if="first_time">You must start by filling the form.</p>
 
   <stl:block stl:if="not first_time">
     <form action="" method="post" stl:if="can_send">
