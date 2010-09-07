@@ -28,12 +28,14 @@ from itools.handlers import checkid
 
 def quote_integer(data):
     data = unicode(data, 'utf8')
-    return data.replace(u'"', u'\\"').replace(u"'", u"\\'")
+    # FIXME restore unicode
+    return data.replace('"', '\\"').replace("'", "\\'")
 
 
 def quote_string(data):
     data = unicode(data, 'utf8')
-    return u'"%s"' % data.replace(u'"', u'\\"').replace(u"'", u"\\'")
+    # FIXME restore unicode
+    return '"%s"' % data.replace('"', '\\"').replace("'", "\\'")
 
 
 
@@ -646,13 +648,15 @@ class Text(Unicode):
     def decode(data):
         data = Unicode.decode(data)
         # Restaure les retours chariot
-        return data.replace(u'\\r\\n', u'\r\n')
+        # FIXME restore unicode
+        return data.replace('\\r\\n', '\r\n')
 
 
     @staticmethod
     def encode(value):
         value = Unicode.encode(value)
         # Stocke tout sur une ligne
+        # FIXME restore unicode
         return value.replace('\r\n', '\\r\\n')
 
 
@@ -746,132 +750,13 @@ class EnumCV(SqlEnumerate):
 
 
 
-class Departements(Enumerate):
-    """Ce sont les codes Insee, pas les codes postaux.
-    """
-    options = [
-        # 0008124 '1' -> '01'
-        {'name': '01', 'value': u"Ain"},
-        {'name': '02', 'value': u"Aisne"},
-        {'name': '03', 'value': u"Allier"},
-        {'name': '04', 'value': u"Alpes-de-Haute-Provence"},
-        {'name': '05', 'value': u"Hautes-Alpes"},
-        {'name': '06', 'value': u"Alpes maritimes"},
-        {'name': '07', 'value': u"Ardèche"},
-        {'name': '08', 'value': u"Ardennes"},
-        {'name': '09', 'value': u"Ariège"},
-        {'name': '10', 'value': u"Aube"},
-        {'name': '11', 'value': u"Aude"},
-        {'name': '12', 'value': u"Aveyron"},
-        {'name': '13', 'value': u"Bouches-du-Rhône"},
-        {'name': '14', 'value': u"Calvados"},
-        {'name': '15', 'value': u"Cantal"},
-        {'name': '16', 'value': u"Charente"},
-        {'name': '17', 'value': u"Charente-Maritime"},
-        {'name': '18', 'value': u"Cher"},
-        {'name': '19', 'value': u"Corrèze"},
-        {'name': '2A', 'value': u"Corse-du-Sud"},
-        {'name': '2B', 'value': u"Haute-Corse"},
-        {'name': '21', 'value': u"Côte-d'Or"},
-        {'name': '22', 'value': u"Côtes-d'Armor"},
-        {'name': '23', 'value': u"Creuse"},
-        {'name': '24', 'value': u"Dordogne"},
-        {'name': '25', 'value': u"Doubs"},
-        {'name': '26', 'value': u"Drôme"},
-        {'name': '27', 'value': u"Eure"},
-        {'name': '28', 'value': u"Eure-et-Loir"},
-        {'name': '29', 'value': u"Finistère"},
-        {'name': '30', 'value': u"Gard"},
-        {'name': '31', 'value': u"Haute-Garonne"},
-        {'name': '32', 'value': u"Gers"},
-        {'name': '33', 'value': u"Gironde"},
-        {'name': '34', 'value': u"Hérault"},
-        {'name': '35', 'value': u"Ille-et-Vilaine"},
-        {'name': '36', 'value': u"Indre"},
-        {'name': '37', 'value': u"Indre-et-Loire"},
-        {'name': '38', 'value': u"Isère"},
-        {'name': '39', 'value': u"Jura"},
-        {'name': '40', 'value': u"Landes"},
-        {'name': '41', 'value': u"Loir-et-Cher"},
-        {'name': '42', 'value': u"Loire"},
-        {'name': '43', 'value': u"Haute-Loire"},
-        {'name': '44', 'value': u"Loire-Atlantique"},
-        {'name': '45', 'value': u"Loiret"},
-        {'name': '46', 'value': u"Lot"},
-        {'name': '47', 'value': u"Lot-et-Garonne"},
-        {'name': '48', 'value': u"Lozère"},
-        {'name': '49', 'value': u"Maine-et-Loire"},
-        {'name': '50', 'value': u"Manche"},
-        {'name': '51', 'value': u"Marne"},
-        {'name': '52', 'value': u"Haute-Marne"},
-        {'name': '53', 'value': u"Mayenne"},
-        {'name': '54', 'value': u"Meurthe-et-Moselle"},
-        {'name': '55', 'value': u"Meuse"},
-        {'name': '56', 'value': u"Morbihan"},
-        {'name': '57', 'value': u"Moselle"},
-        {'name': '58', 'value': u"Nièvre"},
-        {'name': '59', 'value': u"Nord"},
-        {'name': '60', 'value': u"Oise"},
-        {'name': '61', 'value': u"Orne"},
-        {'name': '62', 'value': u"Pas-de-Calais"},
-        {'name': '63', 'value': u"Puy-de-Dôme"},
-        {'name': '64', 'value': u"Pyrénées-Atlantiques"},
-        {'name': '65', 'value': u"Hautes-Pyrénées"},
-        {'name': '66', 'value': u"Pyrénées-Orientales"},
-        {'name': '67', 'value': u"Bas-Rhin"},
-        {'name': '68', 'value': u"Haut-Rhin"},
-        {'name': '69', 'value': u"Rhône"},
-        {'name': '70', 'value': u"Haute-Saône"},
-        {'name': '71', 'value': u"Saône-et-Loire"},
-        {'name': '72', 'value': u"Sarthe"},
-        {'name': '73', 'value': u"Savoie"},
-        {'name': '74', 'value': u"Haute-Savoie"},
-        {'name': '75', 'value': u"Paris"},
-        {'name': '76', 'value': u"Seine-Maritime"},
-        {'name': '77', 'value': u"Seine-et-Marne"},
-        {'name': '78', 'value': u"Yvelines"},
-        {'name': '79', 'value': u"Deux-Sèvres"},
-        {'name': '80', 'value': u"Somme"},
-        {'name': '81', 'value': u"Tarn"},
-        {'name': '82', 'value': u"Tarn-et-Garonne"},
-        {'name': '83', 'value': u"Var"},
-        {'name': '84', 'value': u"Vaucluse"},
-        {'name': '85', 'value': u"Vendée"},
-        {'name': '86', 'value': u"Vienne"},
-        {'name': '87', 'value': u"Haute-Vienne"},
-        {'name': '88', 'value': u"Vosges"},
-        {'name': '89', 'value': u"Yonne"},
-        {'name': '90', 'value': u"Territoire de Belfort"},
-        {'name': '91', 'value': u"Essonne"},
-        {'name': '92', 'value': u"Hauts-de-Seine"},
-        {'name': '93', 'value': u"Seine-Saint-Denis"},
-        {'name': '94', 'value': u"Val-de-Marne"},
-        {'name': '95', 'value': u"Val-d'Oise"},
-        {'name': '971', 'value': u"Guadeloupe"},
-        {'name': '972', 'value': u"Martinique"},
-        {'name': '973', 'value': u"Guyane"},
-        {'name': '974', 'value': u"La Réunion"},
-        {'name': '975', 'value': u"Saint-Pierre-et-Miquelon"},
-        {'name': '985', 'value': u"Mayotte"},
-        {'name': '988', 'value': u"Nouvelle-Calédonie"}]
-
-
-    @staticmethod
-    def decode(data):
-        if len(data) == 1:
-            # "1" -> "01"
-            return '0' + data
-        return data
-
-
-
 class WorkflowState(Enumerate):
     options = [
-        {'name': 'vide', 'value': u"Vide"},
-        {'name': 'en_cours', 'value': u"En cours"},
-        {'name': 'envoye', 'value': u"Envoyé"},
-        {'name': 'exporte', 'value': u"Exporté"},
-        {'name': 'modifie', 'value': u"Modifié après export"}]
+        {'name': 'vide', 'value': u"Empty"},
+        {'name': 'en_cours', 'value': u"Pending"},
+        {'name': 'envoye', 'value': u"Sent"},
+        {'name': 'exporte', 'value': u"Exported"},
+        {'name': 'modifie', 'value': u"Modified after export"}]
 
 
 

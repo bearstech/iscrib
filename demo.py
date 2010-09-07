@@ -20,7 +20,6 @@ from itools.core import freeze, get_abspath, merge_dicts
 from itools.datatypes import String, DateTime, Unicode
 from itools.database import PhraseQuery
 from itools.gettext import MSG
-from itools.uri import get_reference
 from itools.web import INFO
 
 # Import from ikaaro
@@ -37,7 +36,6 @@ from ikaaro.website import WebSite as BaseWebSite
 from form import Form
 from form_views import Form_View, Form_Send
 from param import Param
-from param_views import Param_NewInstance
 from utils import get_page_number
 from utils_views import AutomaticEditView
 
@@ -54,19 +52,19 @@ class ParamForm_Send(Form_Send):
 
 
     def action_send(self, resource, context, form):
-        message = INFO(u"Votre rapport a bien été envoyé.")
+        message = INFO(u"Your report was successfully sent.")
         context.message = message
 
 
     def action_export(self, resource, context, form):
-        message = INFO(u"Votre rapport a bien été exporté.")
+        message = INFO(u"Your report was successfully exported.")
         context.message = message
 
 
 
 class ParamForm(Param, Form):
     class_id = 'Param'
-    class_title = MSG(u"Application de collecte")
+    class_title = MSG(u"Collection Application")
     class_views = ['pageA'] + Form.class_views
     class_schema = merge_dicts(Form.class_schema, Param.class_schema,
             author=String(source='metadata', indexed=False, stored=True),
@@ -82,7 +80,7 @@ class ParamForm(Param, Form):
         if page is None:
             return super(ParamForm, self).__getattr__(name)
         view = Form_View(page_number=page.get_page_number(),
-                title=MSG(u"Commencer la saisie"))
+                title=MSG(u"Start reporting"))
         # TODO make it lazy
         self.__dict__[name] = view
         return view
@@ -109,12 +107,12 @@ class WebSite_BrowseContent(Folder_BrowseContent):
     access = 'is_allowed_to_view'
     template = '/ui/iscrib/root_view.xml'
     search_template = None
-    title = MSG(u"Voir")
+    title = MSG(u"View")
 
     table_columns = [
             ('form', MSG(u"Application")),
-            ('file', MSG(u"Fichier ODF Source")),
-            ('ctime', MSG(u"Date de création"))]
+            ('file', MSG(u"Source ODF File")),
+            ('ctime', MSG(u"Creation Date"))]
     table_actions = []
 
 
@@ -178,7 +176,7 @@ class WebSite_BrowseContent(Folder_BrowseContent):
 class User_ConfirmRegistration(AutoForm):
 
     access = True
-    title = MSG(u'Choisir votre mot de passe')
+    title = MSG(u'Choose your password')
 
     schema = {
         'key': String(mandatory=True),
@@ -188,9 +186,9 @@ class User_ConfirmRegistration(AutoForm):
 
     widgets = [
         HiddenWidget('key', title=None),
-        TextWidget('company', title=MSG(u'Société')),
-        PasswordWidget('newpass', title=MSG(u'Mot de passe')),
-        PasswordWidget('newpass2', title=MSG(u'Répêter votre mot de passe'))]
+        TextWidget('company', title=MSG(u'Company')),
+        PasswordWidget('newpass', title=MSG(u'Password')),
+        PasswordWidget('newpass2', title=MSG(u'Repeat your password'))]
 
 
     def get_namespace(self, resource, context):
@@ -237,8 +235,8 @@ class User_ConfirmRegistration(AutoForm):
         resource.set_auth_cookie(context, password)
 
         # Ok
-        message = INFO(u"Votre compte a été crée ! " + \
-          u"Vous pouvez créer une application de collecte d'informations")
+        message = INFO(u"Your account was created! You can create a "
+                u"collection application.")
         return context.come_back(message, goto='/')
 
 

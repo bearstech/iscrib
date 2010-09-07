@@ -136,11 +136,11 @@ def checkbox_widget(context, form, datatype, name, value, schema, fields,
             attributes.setdefault(u"class", []).append(u"disabled")
         input = make_element(u"input", attributes, option['value'])
         if name in context.bad_types:
-            input = (u'<span class="badtype" title="Mauvaise valeur">'
+            input = (u'<span class="badtype" title="Bad value">'
                     + input + u"</span>")
         elif not is_mandatory_filled(datatype, name, value, schema, fields,
                 context):
-            input = (u'<span class="mandatory" title="Champ obligatoire">'
+            input = (u'<span class="mandatory" title="Mandatory field">'
                     + input + u"</span>")
         html.append(input)
     return u"".join(html)
@@ -162,11 +162,11 @@ def select_widget(context, form, datatype, name, value, schema, fields,
     attributes = {u"name": name}
     # Check for "errors"
     if name in context.bad_types:
-        attributes[u"title"] = u"Mauvaise valeur"
+        attributes[u"title"] = u"Bad value"
         attributes[u"class"] = [u"badtype"]
     elif not is_mandatory_filled(datatype, name, value, schema, fields,
             context):
-        attributes[u"title"] = u"Champ obligatoire"
+        attributes[u"title"] = u"Mandatory field"
         attributes[u"class"] = [u"mandatory"]
     if form.is_disabled_by_dependency(name, schema, fields):
         attributes[u"disabled"] = u"disabled"
@@ -217,11 +217,11 @@ def text_widget(context, form, datatype, name, value, schema, fields,
     # Check for errors
     if name in context.bad_types:
         attributes.setdefault(u"class", []).append(u"badtype")
-        attributes[u"title"] = u"Mauvaise valeur"
+        attributes[u"title"] = u"Bad value"
     elif not is_mandatory_filled(datatype, name, value, schema, fields,
             context):
         attributes.setdefault(u"class", []).append(u"mandatory")
-        attributes[u"title"] = u"Champ obligatoire"
+        attributes[u"title"] = u"Mandatory field"
     if form.is_disabled_by_dependency(name, schema, fields):
         attributes[u"disabled"] = u"disabled"
         attributes.setdefault(u"class", []).append(u"disabled")

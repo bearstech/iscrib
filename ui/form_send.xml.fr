@@ -1,51 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<stl:block xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+<stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <stl:block stl:if="not skip_print">
     <p id="form-toolbar">
-      <a id="form-print" href="?view=printable" title="Imprimer (dans une
-        nouvelle fenêtre)" class="button button-print" onclick="return popup(this.href, 800,
+      <a id="form-print" href="?view=printable" class="button button-print" title="Imprimer (dans une
+        nouvelle fenêtre)" onclick="return popup(this.href, 800,
         600)">Imprimer cette page</a>
     </p>
-    <div class="clear" />
+    <div class="clear"></div>
   </stl:block>
 
-  <h1>État du formulaire&nbsp;: <span
-      class="wf-${statename}">${form_state}</span></h1>
+  <h1>État du formulaire : <span class="wf-${statename}">${form_state}</span></h1>
 
-  <p stl:if="first_time">Vous devez commencer par remplir le
-    questionnaire.</p>
+  <p stl:if="first_time">Vous devez commencer par remplir le questionnaire.</p>
 
   <stl:block stl:if="not first_time">
     <form action="" method="post" stl:if="can_send">
-      <p>Si vous avez terminé votre saisie, vous pouvez cliquer sur le bouton
-      «&nbsp;Envoyer votre questionnaire&nbsp;».</p>
-      <button type="submit" name="action" value="send"
-        class="button-ok">Envoyer votre questionnaire</button>
+      <p>Si vous avez terminé votre saisie, vous pouvez cliquer sur le bouton « Envoyer votre questionnaire ».</p>
+      <button value="send" class="button-ok" name="action" type="submit">Envoyer votre questionnaire</button>
     </form>
 
-    <p stl:if="controls/errors">Vous devez corriger toutes les erreurs pour
-    pouvoir envoyer votre questionnaire.</p>
+    <p stl:if="controls/errors">Vous devez corriger toutes les erreurs pour pouvoir envoyer votre questionnaire.</p>
 
     <stl:block stl:if="is_admin">
       <form action="" method="post" stl:if="can_export">
-        <p>Le formulaire est valide, vous pouvez l'exporter dans la base de
-          données.</p>
-        <button type="submit" name="action" value="export"
-          class="button-ok">Exporter</button>
+        <p>Le formulaire est valide, vous pouvez l'exporter dans la base de données.</p>
+        <button value="export" class="button-ok" name="action" type="submit">Exporter</button>
       </form>
-      <p stl:if="not can_export">Vous ne pouvez pas exporter le formulaire
-        tant qu'il n'est pas valide.</p>
+      <p stl:if="not can_export">Vous ne pouvez pas exporter le formulaire tant qu'il n'est pas valide.</p>
     </stl:block>
 
     <hr/>
 
     <h2>Erreurs</h2>
     <em>Ces erreurs doivent être impérativement corrigées.</em>
-    <table border="1" width="100%" cellpadding="1" cellspacing="1"
-      stl:if="controls/errors">
+    <table width="100%" border="1" cellpadding="1" cellspacing="1" stl:if="controls/errors">
       <thead>
         <tr>
           <th></th>
@@ -72,8 +62,7 @@
 
     <h2>Avertissements</h2>
     <em>Merci de vérifier la cohérence de ces données.</em>
-    <table border="1" width="100%" cellpadding="1" cellspacing="1"
-      stl:if="controls/warnings">
+    <table width="100%" border="1" cellpadding="1" cellspacing="1" stl:if="controls/warnings">
       <thead>
         <tr>
           <th></th>
@@ -100,8 +89,7 @@
 
     <h2>Informations</h2>
     <em>Pour information, en l'état actuel du remplissage.</em>
-    <table border="1" width="100%" cellpadding="1" cellspacing="1"
-      stl:if="controls/infos">
+    <table width="100%" border="1" cellpadding="1" cellspacing="1" stl:if="controls/infos">
       <thead>
         <tr>
           <th></th>

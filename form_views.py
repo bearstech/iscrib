@@ -32,10 +32,10 @@ from widgets import is_mandatory_filled
 
 
 # Messages
-MSG_ERREUR_SAUVEGARDE = ERROR(u"ATTENTION ! IL Y A DES RUBRIQUES MANQUANTES "
-        u"ET/OU INVALIDES")
-MSG_SAUVEGARDE = INFO(u"La page est enregistrée, veuillez vérifier votre "
-        u"saisie dans l'onglet <a href=';envoyer'>Contrôle de saisie</a>")
+MSG_ERREUR_SAUVEGARDE = ERROR(u"WARNING! There are missing or invalid "
+        u"fields.")
+MSG_SAUVEGARDE = INFO(u"The page is saved. Check your input in the "
+        u"<a href=';envoyer'>Input Control</a> tab.")
 
 
 class Form_View(STLForm):
@@ -164,7 +164,7 @@ class Form_Send(STLForm):
     access = 'is_allowed_to_view'
     access_POST = 'is_allowed_to_edit'
     template = '/ui/iscrib/form_send.xml'
-    title = MSG(u"Contrôle de saisie")
+    title = MSG(u"Input Control")
     query_schema = {'view': String}
 
 
@@ -178,9 +178,10 @@ class Form_Send(STLForm):
         # Invalid fields
         for name, datatype in resource.get_invalid_fields():
             if datatype.sum:
-                title = u"%s n'est pas égal à %s" % (name, datatype.sum)
+                title = u"{name} is not equal to {sum}".format(name=name,
+                        sum=datatype.sum)
             else:
-                title = u"%s non valide" % name
+                title = u"{name} invalid" % name
             info = {'number': name,
                     'title': title,
                     'href': ';page%s#field_%s' % (datatype.pages[0], name),
@@ -242,7 +243,7 @@ class Form_Export(BaseView):
 
     def GET(self, resource, context):
         if not resource.is_ready():
-            return u"Votre rapport n'est pas encore terminé.".encode('utf8')
+            return u"Your report is not finished yet.".encode('utf8')
 
         # construct the csv
         csv = CSVFile()

@@ -41,7 +41,7 @@ FIELD_PREFIX = u"#"
 
 class FormPage(CSV):
     class_id = 'FormPage'
-    class_title = MSG(u"Page de formulaire")
+    class_title = MSG(u"Form Page")
     class_icon48 = 'icons/48x48/tasks.png'
 
 
@@ -126,7 +126,7 @@ class FormPage(CSV):
                             else:
                                 column = eval(column, vars)
                         except ZeroDivisionError:
-                            column = u"(division par 0)"
+                            column = u"(division by 0)"
                         except SyntaxError:
                             raise SyntaxError, repr(column)
                     if not isinstance(column, basestring):

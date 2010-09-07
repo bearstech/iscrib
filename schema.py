@@ -30,7 +30,7 @@ from ikaaro.text import CSV
 # Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
-from datatypes import EnumCV, make_enumerate
+from datatypes import make_enumerate
 
 
 dt_mapping = {
@@ -43,8 +43,7 @@ dt_mapping = {
     'jj/mm/aaaa': NumDate,
     'mm/aaaa': NumShortDate,
     'str': Unicode,
-    'text': Text,
-    'enumcv': EnumCV}
+    'text': Text}
 
 
 
@@ -66,26 +65,25 @@ class PageNumber(Enumerate):
 
 class Type(Enumerate):
     options = [
-        {'name': 'boolean', 'value': u"Booléen"},
-        {'name': 'dec', 'value': u"Décimal"},
+        {'name': 'boolean', 'value': u"Boolean"},
+        {'name': 'dec', 'value': u"Decimal"},
         {'name': 'digit', 'value': u"00000"},
         {'name': 'hh:mm', 'value': u"HH:MM"},
         {'name': 'hhh:mm', 'value': u"HHH:MM"},
-        {'name': 'int', 'value': u"Entier"},
-        {'name': 'jj/mm/aaaa', 'value': u"JJ/MM/AAAA"},
-        {'name': 'mm/aaaa', 'value': u"MM/AAAA"},
-        {'name': 'str', 'value': u"Chaîne"},
-        {'name': 'text', 'value': u"Texte"},
-        {'name': 'enum', 'value': u"Liste de valeurs"},
-        {'name': 'enumCV', 'value': u"(réservé variable CV)"}]
+        {'name': 'int', 'value': u"Integer"},
+        {'name': 'jj/mm/aaaa', 'value': u"DD/MM/YYYY"},
+        {'name': 'mm/aaaa', 'value': u"MM/YYYY"},
+        {'name': 'str', 'value': u"String"},
+        {'name': 'text', 'value': u"Text"},
+        {'name': 'enum', 'value': u"List of values"}]
 
 
 
 class Mandatory(Enumerate):
     default = ''
     options = [
-        {'name': '', 'value': u"Oui"},
-        {'name': 'Non', 'value': u"Non"}]
+        {'name': '', 'value': u"Yes"},
+        {'name': 'Non', 'value': u"No"}]
 
 
 
