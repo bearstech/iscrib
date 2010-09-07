@@ -18,11 +18,15 @@
 
 # Import from itools
 from itools.core import get_version, get_abspath
+from itools.gettext import register_domain
 
 # Import from iscrib
 
 # Give a version
 __version__ = get_version()
+
+# Give a language
+register_domain('iscrib', get_abspath('locale'))
 
 # Register
 import param, demo
