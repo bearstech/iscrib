@@ -35,7 +35,7 @@
 
     <h2>Erreurs</h2>
     <em>Ces erreurs doivent être impérativement corrigées.</em>
-    <table width="100%" border="1" cellpadding="1" cellspacing="1" stl:if="controls/errors">
+    <table width="100%" cellpadding="1" stl:if="controls/errors" cellspacing="1" border="1">
       <thead>
         <tr>
           <th></th>
@@ -62,7 +62,7 @@
 
     <h2>Avertissements</h2>
     <em>Merci de vérifier la cohérence de ces données.</em>
-    <table width="100%" border="1" cellpadding="1" cellspacing="1" stl:if="controls/warnings">
+    <table width="100%" cellpadding="1" stl:if="controls/warnings" cellspacing="1" border="1">
       <thead>
         <tr>
           <th></th>
@@ -89,7 +89,7 @@
 
     <h2>Informations</h2>
     <em>Pour information, en l'état actuel du remplissage.</em>
-    <table width="100%" border="1" cellpadding="1" cellspacing="1" stl:if="controls/infos">
+    <table width="100%" cellpadding="1" stl:if="controls/infos" cellspacing="1" border="1">
       <thead>
         <tr>
           <th></th>

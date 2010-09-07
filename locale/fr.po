@@ -36,6 +36,10 @@ msgstr ""
 msgid "$('[name=%s]').attr('disabled', %s).%s('disabled');"
 msgstr ""
 
+#: ../ui/root_view.xml.en:5
+msgid "${homepage} <x id='1'/> ${batch} <x id='2'/> ${table}"
+msgstr ""
+
 #: ../formpage.py:141
 msgid "%.1f"
 msgstr ""
@@ -100,6 +104,33 @@ msgstr ""
 msgid "</span>"
 msgstr ""
 
+#: ../ui/template.xhtml.en:25
+msgctxt "link"
+msgid "<g id='10'>${user/title}</g>  <g id='11'>Log out</g>"
+msgstr ""
+
+#: ../ui/template.xhtml.en:41
+msgctxt "link"
+msgid "<g id='13'> ${website_title} </g>  <g id='14'>  <x id='15'/>  </g>"
+msgstr ""
+
+#: ../ui/template.xhtml.en:66
+msgctxt "link"
+msgid "<g id='18'>Conditions d'utilisation</g>  <g id='19'>Contact</g>"
+msgstr ""
+
+#: ../ui/form_view.xml.en:7
+msgctxt "link"
+msgid "<g id='2'>${item/title}</g>  <g id='3'>|</g>"
+msgstr ""
+
+#: ../ui/form_view.xml.en:17
+msgctxt "link"
+msgid ""
+"<g id='7'> Contrôle de saisie </g>  <g id='8'>Imprimer cette page</g>  <g "
+"id='9'> Enregistrer </g>"
+msgstr ""
+
 #: ../widgets.py:139
 msgid "<span class=\"badtype\" title=\"Bad value\">"
 msgstr "<span class=\"badtype\" title=\"Mauvaise valeur\">"
@@ -124,6 +155,26 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
+#: ../ui/form_send.xml.en:87
+msgctxt "paragraph"
+msgid "Aucun avertissement détecté."
+msgstr ""
+
+#: ../ui/form_send.xml.en:60
+msgctxt "paragraph"
+msgid "Aucune erreur détectée."
+msgstr ""
+
+#: ../ui/form_send.xml.en:118
+msgctxt "paragraph"
+msgid "Aucune information disponible."
+msgstr ""
+
+#: ../ui/form_send.xml.en:63
+msgctxt "heading"
+msgid "Avertissements"
+msgstr ""
+
 #: ../schema.py:54
 msgid "B"
 msgstr ""
@@ -138,6 +189,11 @@ msgstr ""
 
 #: ../schema.py:55
 msgid "C"
+msgstr ""
+
+#: ../ui/form_send.xml.en:37
+msgctxt "emphasis"
+msgid "Ces erreurs doivent être impérativement corrigées."
 msgstr ""
 
 #: ../schema.py:114
@@ -158,6 +214,12 @@ msgstr ""
 
 #: ../controls.py:59
 msgid "Controls"
+msgstr ""
+
+#: ../ui/form_send.xml.en:42 ../ui/form_send.xml.en:69
+#: ../ui/form_send.xml.en:96
+msgctxt "table cell"
+msgid "Contrôle"
 msgstr ""
 
 #: ../param.py:35
@@ -188,12 +250,32 @@ msgstr ""
 msgid "Empty"
 msgstr ""
 
+#: ../ui/form_view.xml.en:31
+msgctxt "button"
+msgid "Enregistrer"
+msgstr ""
+
+#: ../ui/form_send.xml.en:21
+msgctxt "button"
+msgid "Envoyer votre questionnaire"
+msgstr ""
+
+#: ../ui/form_send.xml.en:36
+msgctxt "heading"
+msgid "Erreurs"
+msgstr ""
+
 #: ../controls.py:39
 msgid "Error"
 msgstr ""
 
 #: ../datatypes.py:758
 msgid "Exported"
+msgstr ""
+
+#: ../ui/form_send.xml.en:29
+msgctxt "button"
+msgid "Exporter"
 msgstr ""
 
 #: ../controls.py:46
@@ -244,6 +326,23 @@ msgstr ""
 msgid "Impression du rapport"
 msgstr ""
 
+#: ../ui/form_view.xml.en:17 ../ui/form_send.xml.en:7
+msgctxt "title attribute"
+msgid ""
+"Imprimer (dans une\n"
+"        nouvelle fenêtre)"
+msgstr ""
+
+#: ../ui/form_send.xml.en:9
+msgctxt "link"
+msgid "Imprimer cette page"
+msgstr ""
+
+#: ../ui/form_send.xml.en:90
+msgctxt "heading"
+msgid "Informations"
+msgstr ""
+
 #: ../controls.py:37
 msgid "Informative"
 msgstr ""
@@ -256,6 +355,12 @@ msgstr "Contrôle de saisie"
 msgid "Integer"
 msgstr ""
 
+#: ../ui/form_send.xml.en:28
+msgctxt "paragraph"
+msgid ""
+"Le formulaire est valide, vous pouvez l'exporter dans la base de données."
+msgstr ""
+
 #: ../controls.py:47
 msgid "Level"
 msgstr ""
@@ -264,12 +369,22 @@ msgstr ""
 msgid "List of values"
 msgstr ""
 
+#: ../ui/template.xhtml.en:25
+msgctxt "title attribute"
+msgid "Log out"
+msgstr ""
+
 #: ../schema.py:75
 msgid "MM/YYYY"
 msgstr ""
 
 #: ../widgets.py:169 ../widgets.py:224
 msgid "Mandatory field"
+msgstr ""
+
+#: ../ui/form_send.xml.en:64
+msgctxt "emphasis"
+msgid "Merci de vérifier la cohérence de ces données."
 msgstr ""
 
 #: ../datatypes.py:759
@@ -332,6 +447,21 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
+#: ../ui/form_send.xml.en:54 ../ui/form_send.xml.en:81
+msgctxt "link"
+msgid "Pour corriger"
+msgstr ""
+
+#: ../ui/form_send.xml.en:91
+msgctxt "emphasis"
+msgid "Pour information, en l'état actuel du remplissage."
+msgstr ""
+
+#: ../ui/form_send.xml.en:112
+msgctxt "link"
+msgid "Pour modifier"
+msgstr ""
+
 #: ../demo.py:191
 msgid "Repeat your password"
 msgstr "Répéter le mot de passe"
@@ -346,6 +476,23 @@ msgstr ""
 
 #: ../datatypes.py:757
 msgid "Sent"
+msgstr ""
+
+#: ../ui/form_send.xml.en:20
+msgctxt "paragraph"
+msgid ""
+"Si vous avez terminé votre saisie, vous pouvez cliquer sur le bouton "
+"« Envoyer votre questionnaire »."
+msgstr ""
+
+#: ../ui/template.xhtml.en:22
+msgctxt "link"
+msgid "Sign in"
+msgstr ""
+
+#: ../ui/template.xhtml.en:22
+msgctxt "title attribute"
+msgid "Sign in"
 msgstr ""
 
 #: ../demo.py:248
@@ -384,9 +531,9 @@ msgstr ""
 msgid ""
 "The page is saved. Check your input in the <a href=';envoyer'>Input Control</"
 "a> tab."
-msgstr "La page est enregistrée. Vérifiez votre saisie dans l'onglet "
-"<a href=';envoyer'>Contrôle de saisie</a>."
-
+msgstr ""
+"La page est enregistrée. Vérifiez votre saisie dans l'onglet <a href=';"
+"envoyer'>Contrôle de saisie</a>."
 
 #: ../controls.py:45
 msgid "Title"
@@ -404,6 +551,11 @@ msgstr ""
 msgid "Téléchargement du rapport"
 msgstr ""
 
+#: ../ui/form_send.xml.en:97
+msgctxt "table cell"
+msgid "Valeur"
+msgstr ""
+
 #: ../schema.py:107
 msgid "Valeurs autorisées / modalités"
 msgstr ""
@@ -414,6 +566,35 @@ msgstr ""
 
 #: ../param_views.py:100 ../demo.py:110
 msgid "View"
+msgstr ""
+
+#: ../ui/form_view.xml.en:13
+msgctxt "title attribute"
+msgid ""
+"Voir le fichier\n"
+"      source de ce formulaire"
+msgstr ""
+
+#: ../ui/form_view.xml.en:14
+msgctxt "link"
+msgid "Voir le source"
+msgstr ""
+
+#: ../ui/form_send.xml.en:16
+msgctxt "paragraph"
+msgid "Vous devez commencer par remplir le questionnaire."
+msgstr ""
+
+#: ../ui/form_send.xml.en:24
+msgctxt "paragraph"
+msgid ""
+"Vous devez corriger toutes les erreurs pour pouvoir envoyer votre "
+"questionnaire."
+msgstr ""
+
+#: ../ui/form_send.xml.en:31
+msgctxt "paragraph"
+msgid "Vous ne pouvez pas exporter le formulaire tant qu'il n'est pas valide."
 msgstr ""
 
 #: ../form.py:356
@@ -632,6 +813,11 @@ msgstr "{name} invalide"
 #: ../form_views.py:181
 msgid "{name} is not equal to {sum}"
 msgstr "{name} n'est pas égal à {sum}"
+
+#: ../ui/form_send.xml.en:14
+msgctxt "heading"
+msgid "État du formulaire :"
+msgstr ""
 
 #~ msgid "Champ obligatoire"
 #~ msgstr "Mandatory field"

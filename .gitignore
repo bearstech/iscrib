@@ -4,6 +4,8 @@ build
 dist
 .*.swp
 *.pyc
-*.en
+*.fr
 *.zh
 *.pt
+*.no
+*.*~
