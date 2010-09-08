@@ -276,7 +276,7 @@ msgstr ""
 
 #: ../datatypes.py:758
 msgid "Exported"
-msgstr ""
+msgstr "Exporté"
 
 #: ../ui/form_send.xml.en:29
 msgctxt "button"
@@ -395,7 +395,7 @@ msgstr ""
 
 #: ../datatypes.py:759
 msgid "Modified after export"
-msgstr ""
+msgstr "Modifié après export"
 
 #: ../workflow.py:34
 msgid "Modifié"
@@ -451,12 +451,12 @@ msgstr ""
 
 #: ../datatypes.py:756
 msgid "Pending"
-msgstr ""
+msgstr "En cours"
 
 #: ../ui/form_send.xml.en:54 ../ui/form_send.xml.en:81
 msgctxt "link"
-msgid "Pour corriger"
-msgstr ""
+msgid "To correct"
+msgstr "Pour corriger"
 
 #: ../ui/form_send.xml.en:91
 msgctxt "emphasis"
@@ -508,7 +508,7 @@ msgstr "Voir le fichier source de ce formulaire"
 
 #: ../datatypes.py:757
 msgid "Sent"
-msgstr ""
+msgstr "Envoyé"
 
 #: ../ui/form_send.xml.en:20
 msgctxt "paragraph"

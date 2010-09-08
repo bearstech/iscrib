@@ -178,10 +178,10 @@ class Form_Send(STLForm):
         # Invalid fields
         for name, datatype in resource.get_invalid_fields():
             if datatype.sum:
-                title = u"{name} is not equal to {sum}".format(name=name,
-                        sum=datatype.sum)
+                title = MSG(u"{name} is not equal to {sum}".gettext(
+                    name=name, sum=datatype.sum))
             else:
-                title = u"{name} invalid".format(name=name)
+                title = MSG(u"{name} invalid").gettext(name=name)
             info = {'number': name,
                     'title': title,
                     'href': ';page{page}#field_{name}'.format(
