@@ -60,16 +60,22 @@ class Param_NewInstance(NewInstance):
         if document.get_mimetype() != ODF_SPREADSHEET:
             context.message = ERROR(u"not an ODS file")
             return
-        tables = iter(document.get_body().get_table_list())
+        tables = iter(document.get_body().get_tables())
         # Controls and Schema
         for name, cls in [('controls', child.controls_class),
                           ('schema', child.schema_class)]:
             table = tables.next()
             table.rstrip(aggressive=True)
             table.delete_row(0)
-            child.make_resource(name, cls,
-                    title={'fr': table.get_name()},
-                    body=table.to_csv())
+            try:
+                child.make_resource(name, cls,
+                        title={'fr': table.get_name()},
+                        body=table.to_csv())
+            except ValueError, e:
+                context.commit = False
+                message = ERROR(unicode(e))
+                context.message = message
+                return
         # Pages
         for table in tables:
             table.rstrip(aggressive=True)
