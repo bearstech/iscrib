@@ -181,10 +181,11 @@ class Form_Send(STLForm):
                 title = u"{name} is not equal to {sum}".format(name=name,
                         sum=datatype.sum)
             else:
-                title = u"{name} invalid" % name
+                title = u"{name} invalid".format(name=name)
             info = {'number': name,
                     'title': title,
-                    'href': ';page%s#field_%s' % (datatype.pages[0], name),
+                    'href': ';page{page}#field_{name}'.format(
+                        page=datatype.pages[0], name=name),
                     'debug': str(type(datatype))}
             if datatype.is_mandatory:
                 errors.append(info)

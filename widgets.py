@@ -72,7 +72,8 @@ def radio_widget(context, form, datatype, name, value, schema, fields,
         html.append(make_element(u"div", content=input))
     else:
         for option in datatype.get_namespace(value):
-            attributes = {u"type": u"radio", u"id": u"field_%s" % name,
+            attributes = {u"type": u"radio",
+                    u"id": u"field_{name}".format(name=name),
                     u"name": name, u"value": option['name']}
             if option['selected']:
                 attributes[u"checked"] = u"checked"
@@ -99,8 +100,9 @@ def radio_widget(context, form, datatype, name, value, schema, fields,
                         dep_names.append(dep_name)
             for dep_name in dep_names:
                 attributes.setdefault(u"onchange", []).append(
-                    u"$('[name=%s]').attr('disabled', %s)"
-                    u".%s('disabled');" % (dep_name, disabled, toggle_class))
+                    u"$('[name={name}]').attr('disabled', {disabled})"
+                    u".{method}('disabled');".format(name=dep_name,
+                        disabled=disabled, method=toggle_class))
             # 0005970 fin
             input = make_element(u"input", attributes, option['value'])
             if issubclass(datatype, EnumBoolean):
@@ -127,7 +129,8 @@ def checkbox_widget(context, form, datatype, name, value, schema, fields,
 
     html = []
     for option in datatype.get_namespace(value):
-        attributes = {u"type": u"checkbox",  u"id": u"field_%s" % name,
+        attributes = {u"type": u"checkbox",
+                u"id": u"field_{name}".format(name=name),
                 u"name": name, u"value": option['name']}
         if option['selected']:
             attributes[u"checked"] = u"checked"
@@ -204,7 +207,8 @@ def text_widget(context, form, datatype, name, value, schema, fields,
         content = XMLContent.encode(value)
     else:
         tagname = u"input"
-        attributes = {u"type": u"text", u"id": u"field_%s" % name,
+        attributes = {u"type": u"text",
+                u"id": u"field_{name}".format(name=name),
                 u"name": name, u"value": XMLAttribute.encode(value),
                 u"size": datatype.length,
                 u"maxlength": datatype.representation}
@@ -256,4 +260,4 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     if widget is None:
         widget = text_widget(context, form, datatype, name, value, schema, fields,
             readonly, tabindex)
-    return widget + '<span title="%s">[?]</span>' % datatype.title
+    return widget + u'<span title="{title}">[?]</span>'.format(title=datatype.title)
