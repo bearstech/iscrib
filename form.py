@@ -319,7 +319,7 @@ class Form(File):
             if page in exclude:
                 continue
             # Risque d'espaces insécables autour des guillemets
-            expr = expr.replace(' ', ' ').strip()
+            expr = expr.replace(u' ', u' ').strip()
             if not expr:
                 continue
             try:
@@ -363,7 +363,7 @@ class Form(File):
                 value = str(value.round()).replace('.', ',')
             yield {'number': number, 'title': title, 'expr': expr,
                     'level': level, 'page': page, 'value': value,
-                    'debug': u"'%s' = '%s'" % (unicode(expr, 'utf8'), value)}
+                    'debug': u"'%s' = '%s'" % (expr, value)}
 
 
     def get_info_controls(self, pages=freeze([]), exclude=freeze([''])):

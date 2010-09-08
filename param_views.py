@@ -40,9 +40,10 @@ from formpage import FormPage
 
 
 class Param_NewInstance(NewInstance):
-    schema = merge_dicts(NewInstance.schema, file=FileDataType)
-    widgets = NewInstance.widgets + [FileWidget('file',
-        title=MSG(u"ODS File"))]
+    schema = merge_dicts(NewInstance.schema,
+            file=FileDataType(mandatory=True))
+    widgets = (NewInstance.widgets
+            + [FileWidget('file', title=MSG(u"ODS File"))])
 
 
     def action(self, resource, context, form):
@@ -68,8 +69,7 @@ class Param_NewInstance(NewInstance):
             table.rstrip(aggressive=True)
             table.delete_row(0)
             try:
-                child.make_resource(name, cls,
-                        title={'fr': table.get_name()},
+                child.make_resource(name, cls, title={'fr': table.get_name()},
                         body=table.to_csv())
             except ValueError, e:
                 context.commit = False

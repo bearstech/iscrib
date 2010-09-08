@@ -43,7 +43,7 @@ class ControlLevel(Enumerate):
 class ControlsHandler(CSVFile):
     schema = {'number': String(mandatory=True, title=MSG(u"Number")),
               'title': Unicode(mandatory=True, title=MSG(u"Title")),
-              'expr': String(mandatory=True, title=MSG(u"Expression")),
+              'expr': Unicode(mandatory=True, title=MSG(u"Expression")),
               'level': ControlLevel(mandatory=True, title=MSG(u"Level")),
               'page': PageNumber(mandatory=True, title=MSG(u"Page"))}
     columns = ['number', 'title', 'expr', 'level', 'page']
