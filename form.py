@@ -239,15 +239,18 @@ class Form(File):
         get_value = WorkflowState.get_value
         if state == EMPTY:
             if self.is_first_time():
-                return get_value('vide')
-            return get_value('en_cours')
+                value = get_value('vide')
+            else:
+                value = get_value('en_cours')
         elif state == SENT:
-            return get_value('envoye')
+            value = get_value('envoye')
         elif state == EXPORTED:
-            return get_value('exporte')
+            value = get_value('exporte')
         elif state == MODIFIED:
-            return get_value('modifie')
-        raise NotImplementedError, state
+            value = get_value('modifie')
+        else:
+            raise NotImplementedError, state
+        return value
 
 
     def is_first_time(self):

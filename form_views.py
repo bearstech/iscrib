@@ -211,7 +211,7 @@ class Form_Send(STLForm):
         namespace['is_admin'] = is_admin(user, resource)
         # Workflow - State
         namespace['statename'] = statename = resource.get_statename()
-        namespace['form_state'] = resource.get_form_state()
+        namespace['form_state'] = MSG(resource.get_form_state())
         # Workflow - Transitions
         namespace['can_send'] = statename == 'private' and not errors
         namespace['can_export'] = not errors

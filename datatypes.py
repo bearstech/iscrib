@@ -23,7 +23,6 @@ from decimal import Decimal as dec, InvalidOperation
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
 from itools.datatypes.primitive import enumerate_get_namespace
-from itools.gettext import MSG
 from itools.handlers import checkid
 
 
@@ -753,11 +752,11 @@ class EnumCV(SqlEnumerate):
 
 class WorkflowState(Enumerate):
     options = [
-        {'name': 'vide', 'value': MSG(u"Empty")},
-        {'name': 'en_cours', 'value': MSG(u"Pending")},
-        {'name': 'envoye', 'value': MSG(u"Sent")},
-        {'name': 'exporte', 'value': MSG(u"Exported")},
-        {'name': 'modifie', 'value': MSG(u"Modified after export")}]
+        {'name': 'vide', 'value': u"Empty"},
+        {'name': 'en_cours', 'value': u"Pending"},
+        {'name': 'envoye', 'value': u"Sent"},
+        {'name': 'exporte', 'value': u"Exported"},
+        {'name': 'modifie', 'value': u"Modified after export"}]
 
 
 
