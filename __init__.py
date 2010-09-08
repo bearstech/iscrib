@@ -20,16 +20,19 @@
 from itools.core import get_version, get_abspath
 from itools.gettext import register_domain
 
+# Import from ikaaro
+from ikaaro.skins import register_skin
+
 # Import from iscrib
+from demo import Website_Skin
+import param
 
 # Give a version
 __version__ = get_version()
 
 # Give a language
 register_domain('iscrib', get_abspath('locale'))
-
-# Register
-import param, demo
+register_skin('iscrib', Website_Skin(get_abspath('ui')))
 
 # Silent Pyflakes
-param, demo
+param

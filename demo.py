@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import freeze, get_abspath, merge_dicts
+from itools.core import freeze, merge_dicts
 from itools.datatypes import String, DateTime, Unicode
 from itools.database import PhraseQuery
 from itools.gettext import MSG
@@ -27,7 +27,9 @@ from ikaaro import messages
 from ikaaro.autoform import AutoForm, HiddenWidget, PasswordWidget, RTEWidget
 from ikaaro.autoform import TextWidget, XHTMLBody
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.skins import Skin, register_skin
+from ikaaro.resource_ import DBResource
+from ikaaro.resource_views import LoginView as BaseLoginView
+from ikaaro.skins import Skin
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
 from ikaaro.website import WebSite as BaseWebSite
@@ -100,76 +102,6 @@ class ParamForm(Param, Form):
         ctime = self.get_property('ctime') or self.get_property('mtime')
         return merge_dicts(Param.get_catalog_values(self),
                 Form.get_catalog_values(self), author=author, ctime=ctime)
-
-
-
-class WebSite_BrowseContent(Folder_BrowseContent):
-    access = 'is_allowed_to_view'
-    template = '/ui/iscrib/root_view.xml'
-    search_template = None
-    title = MSG(u"View")
-
-    table_columns = [
-            ('form', MSG(u"Application")),
-            ('file', MSG(u"Source ODS File")),
-            ('ctime', MSG(u"Creation Date"))]
-    table_actions = []
-
-
-    def get_page_title(self, resource, context):
-        return None
-
-
-    def get_namespace(self, resource, context):
-        return merge_dicts(
-            Folder_BrowseContent.get_namespace(self, resource, context),
-            homepage=resource.get_property('homepage'))
-
-
-    def get_items(self, resource, context, *args):
-        return super(WebSite_BrowseContent, self).get_items(resource, context,
-                PhraseQuery('format', ParamForm.class_id), *args)
-
-
-    def sort_and_batch(self, resource, context, results):
-        start = context.query['batch_start']
-        size = context.query['batch_size']
-        sort_by = context.query['sort_by']
-        reverse = context.query['reverse']
-        items = results.get_documents(sort_by=sort_by, reverse=reverse,
-                                      start=start, size=size)
-
-        # FIXME This must be done in the catalog.
-        if sort_by == 'title':
-            items.sort(cmp=lambda x,y: cmp(x.title, y.title))
-            if reverse:
-                items.reverse()
-
-        # Access Control (FIXME this should be done before batch)
-        user = context.user
-        root = context.root
-        allowed_items = []
-        for item in items:
-            resource = root.get_resource(item.abspath)
-            # On regarde mais sans toucher
-            #ac = resource.get_access_control()
-            #if ac.is_allowed_to_view(user, resource):
-            allowed_items.append((item, resource))
-
-        return allowed_items
-
-
-    def get_item_value(self, resource, context, item, column):
-        brain, item_resource = item
-        if column == 'form':
-            return brain.title, brain.name
-        elif column == 'file':
-            return (u'Source de %s' % brain.title,
-                    '%s/parameters/;download' % brain.name)
-        elif column == 'ctime':
-            return context.format_datetime(brain.ctime)
-        return super(WebSite_BrowseContent, self).get_item_value(resource,
-                context, item, column)
 
 
 
@@ -260,6 +192,82 @@ class User(BaseUser):
 
 
 
+class LoginView(BaseLoginView):
+    #template = '/ui/iscrib/login.xml'
+    pass
+
+
+
+class WebSite_BrowseContent(Folder_BrowseContent):
+    access = 'is_allowed_to_view'
+    template = '/ui/iscrib/root_view.xml'
+    search_template = None
+    title = MSG(u"View")
+
+    table_columns = [
+            ('form', MSG(u"Application")),
+            ('file', MSG(u"Source ODS File")),
+            ('ctime', MSG(u"Creation Date"))]
+    table_actions = []
+
+
+    def get_page_title(self, resource, context):
+        return None
+
+
+    def get_namespace(self, resource, context):
+        return merge_dicts(
+            Folder_BrowseContent.get_namespace(self, resource, context),
+            homepage=resource.get_property('homepage'))
+
+
+    def get_items(self, resource, context, *args):
+        return super(WebSite_BrowseContent, self).get_items(resource, context,
+                PhraseQuery('format', ParamForm.class_id), *args)
+
+
+    def sort_and_batch(self, resource, context, results):
+        start = context.query['batch_start']
+        size = context.query['batch_size']
+        sort_by = context.query['sort_by']
+        reverse = context.query['reverse']
+        items = results.get_documents(sort_by=sort_by, reverse=reverse,
+                                      start=start, size=size)
+
+        # FIXME This must be done in the catalog.
+        if sort_by == 'title':
+            items.sort(cmp=lambda x,y: cmp(x.title, y.title))
+            if reverse:
+                items.reverse()
+
+        # Access Control (FIXME this should be done before batch)
+        user = context.user
+        root = context.root
+        allowed_items = []
+        for item in items:
+            resource = root.get_resource(item.abspath)
+            # On regarde mais sans toucher
+            #ac = resource.get_access_control()
+            #if ac.is_allowed_to_view(user, resource):
+            allowed_items.append((item, resource))
+
+        return allowed_items
+
+
+    def get_item_value(self, resource, context, item, column):
+        brain, item_resource = item
+        if column == 'form':
+            return brain.title, brain.name
+        elif column == 'file':
+            return (u'Source de %s' % brain.title,
+                    '%s/parameters/;download' % brain.name)
+        elif column == 'ctime':
+            return context.format_datetime(brain.ctime)
+        return super(WebSite_BrowseContent, self).get_item_value(resource,
+                context, item, column)
+
+
+
 class WebSite(BaseWebSite):
     class_views = ['view', 'edit']
     class_skin = 'ui/iscrib'
@@ -271,6 +279,7 @@ class WebSite(BaseWebSite):
 
     # Views
     view = WebSite_BrowseContent()
+    unauthorized = LoginView()
 
     # Edit view
     edit_show_meta = True
@@ -289,8 +298,9 @@ class Website_Skin(Skin):
         return merge_dicts(Skin.build_namespace(self, context),
                   website_title=context.site_root.get_property('title'))
 
-register_skin('iscrib', Website_Skin(get_abspath('ui')))
-# FIXME
+
+
 from ikaaro.registry import register_resource_class
 register_resource_class(User)
 register_resource_class(WebSite)
+DBResource.login = LoginView()
