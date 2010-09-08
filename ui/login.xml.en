@@ -5,7 +5,7 @@
   <div>
     <div id="login-form" style="float: left; width: 25em; padding-right: 10px; border-right: 1px solid #d3d7cf">
       <h2>Login</h2>
-      <form id="loginform" name="loginform" method="post">
+      <form id="loginform" name="loginform" method="post" action=";login">
         <fieldset>
           <legend>Your Account</legend>
           <table>
@@ -45,7 +45,8 @@
     </div>
     <div id="register-form" style="float: left; width: 25em; padding-left: 10px">
       <h2>Register</h2>
-      <form id="registerform" name="registerform" method="post">
+      <form id="registerform" name="registerform" method="post"
+        action=";login">
         <fieldset>
           <legend>New Account or Forgotten Password</legend>
           <table>
