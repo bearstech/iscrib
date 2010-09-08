@@ -4,6 +4,7 @@ build
 dist
 .*.swp
 *.pyc
+*.mo
 *.fr
 *.zh
 *.pt
