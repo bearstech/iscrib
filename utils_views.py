@@ -16,47 +16,28 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.csv import Property
-from itools.datatypes import DateTime, Unicode
 
 # Import from ikaaro
-from ikaaro import messages
-from ikaaro.autoform import title_widget, description_widget, subject_widget
-from ikaaro.autoform import timestamp_widget
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.workflow import state_widget, WorkflowAware, StateEnumerate
 
 
 class AutomaticEditView(DBResource_Edit):
+    base_schema = DBResource_Edit.schema
 
-    base_schema = {'title': Unicode(multilingual=True),
-                   'timestamp': DateTime(readonly=True, ignore=True)}
-
-    # Add timestamp_widget in get_widgets method
-    base_widgets = [title_widget]
-
-
-    def get_schema(self, resource, context):
-        schema = {}
+    def _get_schema(self, resource, context):
+        schema = merge_dicts(DBResource_Edit.schema, resource.edit_schema)
         if isinstance(resource, WorkflowAware):
             schema['state'] = StateEnumerate(resource=resource,
-                                             context=context)
-        if getattr(resource, 'edit_show_meta', False) is True:
-            schema['description'] = Unicode(multilingual=True)
-            schema['subject'] = Unicode(multilingual=True)
-        return merge_dicts(self.base_schema, schema, resource.edit_schema)
+                    context=context)
+        return schema
 
 
-    def get_widgets(self, resource, context):
-        widgets = []
-        if getattr(resource, 'edit_show_meta', False) is True:
-            widgets.extend([description_widget, subject_widget])
-        widgets = self.base_widgets + widgets + resource.edit_widgets
+    def _get_widgets(self, resource, context):
+        widgets = self.widgets + resource.edit_widgets
         # Add state widget in bottom
         if isinstance(resource, WorkflowAware):
             widgets.append(state_widget)
-        # Add timestamp_widget
-        widgets.append(timestamp_widget)
         return widgets
 
 
@@ -64,23 +45,12 @@ class AutomaticEditView(DBResource_Edit):
         if name == 'state':
             return resource.get_workflow_state()
         return DBResource_Edit.get_value(self, resource, context, name,
-                                         datatype)
+                datatype)
 
 
-    def action(self, resource, context, form):
-        self.check_edit_conflict(resource, context, form)
-        # Check edit conflict
-        if context.edit_conflict:
-            return
-        # Save changes
-        language = resource.get_content_language(context)
-        for key, datatype in self.get_schema(resource, context).items():
-            if getattr(datatype, 'ignore', False) is True:
-                continue
-            elif getattr(datatype, 'multilingual', False) is True:
-                p_value = Property(form[key], lang=language)
-                resource.set_property(key, p_value)
-            else:
-                resource.set_property(key, form[key])
-        # Ok
-        context.message = messages.MSG_CHANGES_SAVED
+    def set_value(self, resource, context, name, form):
+        schema = self.get_schema(resource, context)
+        datatype = schema[name]
+        if getattr(datatype, 'ignore', False) is True:
+            return False
+        return DBResource_Edit.set_value(self, resource, context, name, form)

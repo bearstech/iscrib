@@ -329,18 +329,18 @@ class WebSite(BaseWebSite):
     class_roles = freeze(['members', 'admins'])
 
     class_schema = merge_dicts(BaseWebSite.class_schema,
-            homepage=XHTMLBody(source='metadata', indexed=False, stored=False,
-                           multilingual=True))
+            homepage=XHTMLBody(source='metadata', multilingual=True,
+                parameters_schema = {'lang': String}))
 
     # Views
     view = WebSite_BrowseContent()
     unauthorized = LoginView()
 
     # Edit view
-    edit_show_meta = True
     edit_schema = {'homepage': XHTMLBody(multilingual=True)}
     edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]
     edit = AutomaticEditView(access='is_admin')
+
 
     def get_document_types(self):
         return [Param]
