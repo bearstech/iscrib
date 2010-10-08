@@ -16,11 +16,12 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
+from itools.core import merge_dicts
+from itools.datatypes import String, DateTime
 from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.folder import Folder
-from ikaaro.registry import register_document_type
 
 # Import from iscrib
 from controls import Controls
@@ -31,21 +32,34 @@ from schema import Schema
 
 class Param(Folder):
     class_id = 'Param'
-    class_title = MSG(u"Form")
+    class_title = MSG(u"Collection Application")
     class_description = MSG(u"Create from an OpenDocument Spreadsheet file")
     class_icon16 = 'icons/16x16/tasks.png'
     class_icon48 = 'icons/48x48/tasks.png'
+    class_schema = merge_dicts(Folder.class_schema,
+            author=String(source='metadata', indexed=False, stored=True),
+            ctime=DateTime(source='metadata', indexed=False, stored=True))
     
     schema_class = Schema
     controls_class = Controls
+    default_form = '0'
 
     # Views
     new_instance = Param_NewInstance()
     view = Param_View()
 
 
+    def get_form(self):
+        return self.get_resource(self.default_form, soft=True)
+
+
     def get_param_folder(self):
         return self
 
 
-register_document_type(Param)
+    def get_catalog_values(self):
+        author = (self.get_property('author')
+                or self.get_property('last_author'))
+        ctime = self.get_property('ctime') or self.get_property('mtime')
+        return merge_dicts(Folder.get_catalog_values(self),
+                author=author, ctime=ctime)

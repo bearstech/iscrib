@@ -41,7 +41,7 @@ MSG_SAUVEGARDE = INFO(u"The page is saved. Check your input in the "
 class Form_View(STLForm):
     access = 'is_allowed_to_view'
     access_POST = 'is_allowed_to_edit'
-    template = '/ui/iscrib/form_view.xml'
+    template = '/ui/iscrib/form/view.xml'
     query_schema = {'view': String}
     schema = {'page_number': String}
     hidden_fields = []
@@ -49,7 +49,7 @@ class Form_View(STLForm):
 
     def get_hidden_fields(self, resource, context):
         schema = resource.get_schema()
-        handler = resource.get_form_handler()
+        handler = resource.get_form().handler
         return [{'name': field, 'value': handler.get_value(field, schema)}
                 for field in self.hidden_fields]
 
@@ -96,7 +96,7 @@ class Form_View(STLForm):
         schema, pages = resource.get_schema_pages()
         fields = resource.get_fields(schema)
         page_number = form['page_number']
-        handler = resource.get_form_handler()
+        handler = resource.get_form().handler
         bad_types = []
         for key in pages[page_number]:
             value = ''
@@ -163,7 +163,7 @@ class Form_View(STLForm):
 class Form_Send(STLForm):
     access = 'is_allowed_to_view'
     access_POST = 'is_allowed_to_edit'
-    template = '/ui/iscrib/form_send.xml'
+    template = '/ui/iscrib/form/send.xml'
     title = MSG(u"Input Control")
     query_schema = {'view': String}
 
@@ -251,7 +251,7 @@ class Form_Export(BaseView):
         csv = CSVFile()
         csv.add_row(["Chapitre du formulaire", "rubrique", "valeur"])
         schema = resource.get_schema()
-        handler = resource.get_form_handler()
+        handler = resource.get_form().handler
         for name, datatype in sorted(schema.iteritems()):
             value = handler.get_value(name, schema)
             try:
@@ -273,7 +273,7 @@ class Form_Export(BaseView):
 class Form_Print(STLView):
     access = 'is_allowed_to_view'
     title=MSG(u"Print report")
-    template = '/ui/iscrib/form_print.xml'
+    template = '/ui/iscrib/form/print.xml'
     pages = []
 
 

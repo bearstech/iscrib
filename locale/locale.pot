@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-09-08 08:09+CET\n"
+"POT-Creation-Date: 2010-10-08 15:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "$('[name={name}]').attr('disabled', {disabled}).{method}('disabled');"
 msgstr ""
 
-#: ../ui/root_view.xml.en:5
+#: ../ui/application/view.xml.en:5
 msgid "${homepage} <x id='1'/> ${batch} <x id='2'/> ${table}"
 msgstr ""
 
@@ -133,8 +133,12 @@ msgstr ""
 msgid "A"
 msgstr ""
 
-#: ../demo.py:208
+#: ../application_views.py:35
 msgid "Application"
+msgstr ""
+
+#: ../application.py:37
+msgid "Application client iScrib"
 msgstr ""
 
 #: ../schema.py:54
@@ -158,15 +162,15 @@ msgstr ""
 msgid "Champs dépendants"
 msgstr ""
 
-#: ../demo.py:111
+#: ../user.py:37
 msgid "Choose your password"
 msgstr ""
 
-#: ../demo.py:69
+#: ../param.py:34
 msgid "Collection Application"
 msgstr ""
 
-#: ../demo.py:121
+#: ../user.py:47
 msgid "Company"
 msgstr ""
 
@@ -178,7 +182,7 @@ msgstr ""
 msgid "Create from an OpenDocument Spreadsheet file"
 msgstr ""
 
-#: ../demo.py:210
+#: ../application_views.py:37
 msgid "Creation Date"
 msgstr ""
 
@@ -227,7 +231,6 @@ msgstr ""
 msgid "Faux"
 msgstr ""
 
-#: ../param.py:34
 #: ../form.py:107
 msgid "Form"
 msgstr ""
@@ -252,7 +255,7 @@ msgstr ""
 msgid "HHH:MM"
 msgstr ""
 
-#: ../demo.py:287
+#: ../application.py:46
 msgid "Homepage"
 msgstr ""
 
@@ -318,7 +321,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../param_views.py:45
+#: ../param_views.py:46
 msgid "ODS File"
 msgstr ""
 
@@ -340,11 +343,11 @@ msgstr ""
 msgid "Page names must be in the form \"C Title...\""
 msgstr ""
 
-#: ../param_views.py:57
+#: ../param_views.py:58
 msgid "Parameters"
 msgstr ""
 
-#: ../demo.py:122
+#: ../user.py:48
 msgid "Password"
 msgstr ""
 
@@ -356,7 +359,7 @@ msgstr ""
 msgid "Print report"
 msgstr ""
 
-#: ../demo.py:123
+#: ../user.py:49
 msgid "Repeat your password"
 msgstr ""
 
@@ -372,7 +375,11 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: ../demo.py:180
+#: ../demo.py:168
+msgid "Site de démo iScrib"
+msgstr ""
+
+#: ../user.py:106
 msgid "Société"
 msgstr ""
 
@@ -380,15 +387,15 @@ msgstr ""
 msgid "Somme"
 msgstr ""
 
-#: ../demo.py:209
+#: ../application_views.py:90
+msgid "Source"
+msgstr ""
+
+#: ../application_views.py:36
 msgid "Source ODS File"
 msgstr ""
 
-#: ../demo.py:262
-msgid "Source de %s"
-msgstr ""
-
-#: ../demo.py:85
+#: ../demo.py:82
 msgid "Start filling"
 msgstr ""
 
@@ -402,6 +409,14 @@ msgstr ""
 
 #: ../schema.py:77
 msgid "Text"
+msgstr ""
+
+#: ../demo.py:118
+msgid "The email or the password is incorrect."
+msgstr ""
+
+#: ../demo.py:143
+msgid "The given username is not an email address."
 msgstr ""
 
 #: ../form_views.py:37
@@ -429,7 +444,7 @@ msgid "Variable"
 msgstr ""
 
 #: ../param_views.py:106
-#: ../demo.py:205
+#: ../demo.py:173
 msgid "View"
 msgstr ""
 
@@ -445,11 +460,23 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
+#: ../application.py:50
+msgid "Welcome to iScrib"
+msgstr ""
+
+#: ../demo.py:137
+msgid "Welcome!"
+msgstr ""
+
 #: ../schema.py:85
 msgid "Yes"
 msgstr ""
 
-#: ../demo.py:170
+#: ../demo.py:153
+msgid "You are not allowed to register."
+msgstr ""
+
+#: ../user.py:96
 msgid "Your account was created! You can create a collection application."
 msgstr ""
 
@@ -457,11 +484,11 @@ msgstr ""
 msgid "Your report is not finished yet."
 msgstr ""
 
-#: ../demo.py:62
+#: ../demo.py:58
 msgid "Your report was successfully exported."
 msgstr ""
 
-#: ../demo.py:57
+#: ../demo.py:53
 msgid "Your report was successfully sent."
 msgstr ""
 
@@ -590,8 +617,8 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: ../param_views.py:53
-#: ../param_views.py:61
+#: ../param_views.py:54
+#: ../param_views.py:62
 msgid "not an ODS file"
 msgstr ""
 
@@ -676,10 +703,6 @@ msgstr ""
 msgid "title"
 msgstr ""
 
-#: ../ui/login.xml.en:5
-msgid "toto"
-msgstr ""
-
 #: ../widgets.py:88
 msgid "true"
 msgstr ""
@@ -709,54 +732,100 @@ msgstr ""
 msgid "{name} is not equal to {sum}"
 msgstr ""
 
-#: ../ui/form_send.xml.en:21
+#: ../ui/form/send.xml.en:21
 msgctxt "button"
 msgid "Envoyer votre questionnaire"
 msgstr ""
 
-#: ../ui/form_send.xml.en:29
+#: ../ui/form/send.xml.en:29
 msgctxt "button"
 msgid "Exporter"
 msgstr ""
 
-#: ../ui/form_view.xml.en:38
+#: ../ui/login.xml.en:41
+#: ../ui/login.xml.en:72
+msgctxt "button"
+msgid "Ok"
+msgstr ""
+
+#: ../ui/form/view.xml.en:38
 msgctxt "button"
 msgid "Save"
 msgstr ""
 
-#: ../ui/form_send.xml.en:37
+#: ../ui/form/send.xml.en:37
 msgctxt "emphasis"
 msgid "Ces erreurs doivent être impérativement corrigées."
 msgstr ""
 
-#: ../ui/form_send.xml.en:64
+#: ../ui/form/send.xml.en:64
 msgctxt "emphasis"
 msgid "Merci de vérifier la cohérence de ces données."
 msgstr ""
 
-#: ../ui/form_send.xml.en:91
+#: ../ui/form/send.xml.en:91
 msgctxt "emphasis"
 msgid "Pour information, en l'état actuel du remplissage."
 msgstr ""
 
-#: ../ui/form_send.xml.en:63
+#: ../ui/login.xml.en:68
+msgctxt "emphasis"
+msgid "You can also use this form if you forgot your password."
+msgstr ""
+
+#: ../ui/form/send.xml.en:63
 msgctxt "heading"
 msgid "Avertissements"
 msgstr ""
 
-#: ../ui/form_send.xml.en:36
+#: ../ui/form/send.xml.en:36
 msgctxt "heading"
 msgid "Erreurs"
 msgstr ""
 
-#: ../ui/form_send.xml.en:14
+#: ../ui/form/send.xml.en:14
 msgctxt "heading"
 msgid "Form State:"
 msgstr ""
 
-#: ../ui/form_send.xml.en:90
+#: ../ui/form/send.xml.en:90
 msgctxt "heading"
 msgid "Informations"
+msgstr ""
+
+#: ../ui/login.xml.en:7
+msgctxt "heading"
+msgid "Login"
+msgstr ""
+
+#: ../ui/login.xml.en:47
+msgctxt "heading"
+msgid "Register"
+msgstr ""
+
+#: ../ui/login.xml.en:14
+msgctxt "label"
+msgid "<g id='1'>E-mail Address</g>  <g id='2'>* </g>  <x id='3'/>  <g id='4'>${username/error}<x id='5'/></g>"
+msgstr ""
+
+#: ../ui/login.xml.en:55
+msgctxt "label"
+msgid "<g id='14'>E-mail Address</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>${username/error}<x id='18'/></g>"
+msgstr ""
+
+#: ../ui/login.xml.en:27
+msgctxt "label"
+msgid "<g id='7'>Password</g>  <g id='8'>* </g>  <x id='9'/>  <g id='10'>${password/error}<x id='11'/></g>"
+msgstr ""
+
+#: ../ui/login.xml.en:51
+msgctxt "legend"
+msgid "New Account or Forgotten Password"
+msgstr ""
+
+#: ../ui/login.xml.en:10
+msgctxt "legend"
+msgid "Your Account"
 msgstr ""
 
 #: ../ui/template.xhtml.en:25
@@ -774,33 +843,27 @@ msgctxt "link"
 msgid "<g id='18'>Conditions d'utilisation</g>  <g id='19'>Contact</g>"
 msgstr ""
 
-#: ../ui/form_view.xml.en:8
+#: ../ui/form/view.xml.en:8
 msgctxt "link"
 msgid "<g id='2'>${item/title}</g>  <g id='3'>|</g>"
 msgstr ""
 
-#: ../ui/form_view.xml.en:21
+#: ../ui/form/view.xml.en:21
 msgctxt "link"
 msgid "<g id='7'>Input Control</g>  <g id='8'>Print this page</g>  <g id='9'>Save</g>"
 msgstr ""
 
-#: ../ui/form_send.xml.en:9
+#: ../ui/form/send.xml.en:9
 msgctxt "link"
 msgid "Imprimer cette page"
 msgstr ""
 
-#: ../ui/form_send.xml.en:54
-#: ../ui/form_send.xml.en:81
-msgctxt "link"
-msgid "Pour corriger"
-msgstr ""
-
-#: ../ui/form_send.xml.en:112
+#: ../ui/form/send.xml.en:112
 msgctxt "link"
 msgid "Pour modifier"
 msgstr ""
 
-#: ../ui/form_view.xml.en:18
+#: ../ui/form/view.xml.en:18
 msgctxt "link"
 msgid "See source"
 msgstr ""
@@ -810,59 +873,65 @@ msgctxt "link"
 msgid "Sign in"
 msgstr ""
 
-#: ../ui/form_send.xml.en:87
+#: ../ui/form/send.xml.en:54
+#: ../ui/form/send.xml.en:81
+msgctxt "link"
+msgid "To correct"
+msgstr ""
+
+#: ../ui/form/send.xml.en:87
 msgctxt "paragraph"
 msgid "Aucun avertissement détecté."
 msgstr ""
 
-#: ../ui/form_send.xml.en:60
+#: ../ui/form/send.xml.en:60
 msgctxt "paragraph"
 msgid "Aucune erreur détectée."
 msgstr ""
 
-#: ../ui/form_send.xml.en:118
+#: ../ui/form/send.xml.en:118
 msgctxt "paragraph"
 msgid "Aucune information disponible."
 msgstr ""
 
-#: ../ui/form_send.xml.en:28
+#: ../ui/form/send.xml.en:28
 msgctxt "paragraph"
 msgid "Le formulaire est valide, vous pouvez l'exporter dans la base de données."
 msgstr ""
 
-#: ../ui/form_send.xml.en:20
+#: ../ui/form/send.xml.en:20
 msgctxt "paragraph"
 msgid "Si vous avez terminé votre saisie, vous pouvez cliquer sur le bouton « Envoyer votre questionnaire »."
 msgstr ""
 
-#: ../ui/form_send.xml.en:24
+#: ../ui/form/send.xml.en:24
 msgctxt "paragraph"
 msgid "Vous devez corriger toutes les erreurs pour pouvoir envoyer votre questionnaire."
 msgstr ""
 
-#: ../ui/form_send.xml.en:31
+#: ../ui/form/send.xml.en:31
 msgctxt "paragraph"
 msgid "Vous ne pouvez pas exporter le formulaire tant qu'il n'est pas valide."
 msgstr ""
 
-#: ../ui/form_send.xml.en:16
+#: ../ui/form/send.xml.en:16
 msgctxt "paragraph"
 msgid "You must start by filling the form."
 msgstr ""
 
-#: ../ui/form_send.xml.en:42
-#: ../ui/form_send.xml.en:69
-#: ../ui/form_send.xml.en:96
+#: ../ui/form/send.xml.en:42
+#: ../ui/form/send.xml.en:69
+#: ../ui/form/send.xml.en:96
 msgctxt "table cell"
 msgid "Contrôle"
 msgstr ""
 
-#: ../ui/form_send.xml.en:97
+#: ../ui/form/send.xml.en:97
 msgctxt "table cell"
 msgid "Valeur"
 msgstr ""
 
-#: ../ui/form_send.xml.en:7
+#: ../ui/form/send.xml.en:7
 msgctxt "title attribute"
 msgid "Imprimer (dans une\n        nouvelle fenêtre)"
 msgstr ""
@@ -872,12 +941,12 @@ msgctxt "title attribute"
 msgid "Log out"
 msgstr ""
 
-#: ../ui/form_view.xml.en:23
+#: ../ui/form/view.xml.en:23
 msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr ""
 
-#: ../ui/form_view.xml.en:17
+#: ../ui/form/view.xml.en:17
 msgctxt "title attribute"
 msgid "See source file of\n      this form"
 msgstr ""
@@ -885,4 +954,11 @@ msgstr ""
 #: ../ui/template.xhtml.en:22
 msgctxt "title attribute"
 msgid "Sign in"
+msgstr ""
+
+#: ../ui/login.xml.en:15
+#: ../ui/login.xml.en:28
+#: ../ui/login.xml.en:56
+msgctxt "title attribute"
+msgid "This field is\n                  required"
 msgstr ""

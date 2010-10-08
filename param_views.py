@@ -55,7 +55,7 @@ class Param_NewInstance(NewInstance):
             return
         # Save file used
         ods = child.make_resource('parameters', ODS, body=body,
-                filename=filename, title={'fr': u"Parameters"})
+                filename=filename, title={'en': u"Parameters"})
         stringio = StringIO(body)
         document = odf_get_document(stringio)
         if document.get_mimetype() != ODF_SPREADSHEET:
@@ -69,8 +69,8 @@ class Param_NewInstance(NewInstance):
             table.rstrip(aggressive=True)
             table.delete_row(0)
             try:
-                child.make_resource(name, cls, title={'fr': table.get_name()},
-                        body=table.to_csv())
+                child.make_resource(name, cls,
+                        title={'en': table.get_name()}, body=table.to_csv())
             except ValueError, e:
                 context.commit = False
                 message = ERROR(unicode(e))
@@ -89,14 +89,15 @@ class Param_NewInstance(NewInstance):
             name = 'page' + page_number.lower().encode()
             body = table.to_csv()
             try:
-                child.make_resource(name, FormPage, title={'fr': title},
+                child.make_resource(name, FormPage, title={'en': title},
                         body=body)
             except Exception, e:
                 context.commit = False
                 context.message = ERROR(unicode(e))
                 return
         # Initial form
-        child.make_resource('0', Form)
+        child.make_resource(child.default_form, Form,
+                title={'en': u"Test Form"})
         return goto
 
 

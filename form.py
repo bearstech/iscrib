@@ -33,7 +33,7 @@ from ikaaro.folder import Folder
 # Import from iscrib
 from datatypes import Numeric, NumDecimal, Unicode
 from datatypes import WorkflowState
-from form_views import Form_Send, Form_Export, Form_Print
+from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from formpage import FormPage
 from utils import SI, get_page_number, parse_control
 from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
@@ -105,7 +105,7 @@ class FormHandler(FileHandler):
 class Form(File):
     class_id = 'Form'
     class_title = MSG(u"Form")
-    class_views = ['envoyer', 'exporter', 'imprimer']
+    class_views = ['pageA', 'envoyer', 'exporter', 'imprimer']
     class_handler = FormHandler
     workflow = workflow
 
@@ -113,6 +113,20 @@ class Form(File):
     envoyer = Form_Send()
     exporter = Form_Export()
     imprimer = Form_Print()
+
+
+    def __getattr__(self, name):
+        """Vues des pages du formulaire dynamiques
+        """
+        page_number = get_page_number(name)
+        page = self.get_formpage(page_number)
+        if page is None:
+            return super(Form, self).__getattr__(name)
+        view = Form_View(page_number=page.get_page_number(),
+                title=MSG(u"Start filling"))
+        # FIXME make it lazy
+        self.__dict__[name] = view
+        return view
 
 
     def get_catalog_values(self):
@@ -125,7 +139,7 @@ class Form(File):
     def get_param_folder(self):
         """Return the folder resource where parameters are stored.
         """
-        raise NotImplementedError
+        return self.parent
 
 
     def get_schema_resource(self):
@@ -151,12 +165,8 @@ class Form(File):
         return pages
 
 
-    def get_form_handler(self):
-        return self.handler
-
-
     def get_fields(self, schema):
-        handler = self.get_form_handler()
+        handler = self.get_form().handler
         fields = {}
         for name in schema:
             fields[name] = handler.get_value(name, schema)
@@ -228,7 +238,7 @@ class Form(File):
     ######################################################################
     # Security
     def is_ready(self):
-        raise NotImplementedError
+        return self.get_workflow_state() == 'pending'
 
 
     def get_form_state(self):
@@ -254,7 +264,7 @@ class Form(File):
 
 
     def is_first_time(self):
-        return self.get_form_handler().timestamp is None
+        return self.get_form().handler.timestamp is None
 
 
     @staticmethod

@@ -24,15 +24,17 @@ from itools.gettext import register_domain
 from ikaaro.skins import register_skin
 
 # Import from iscrib
-from demo import Website_Skin
-import param
+from demo import Demo_Skin
+import application
+import user
 
 # Give a version
 __version__ = get_version()
 
 # Give a language
 register_domain('iscrib', get_abspath('locale'))
-register_skin('iscrib', Website_Skin(get_abspath('ui')))
+register_skin('iscrib', Demo_Skin(get_abspath('ui')))
 
 # Silent Pyflakes
-param
+application
+user

@@ -236,7 +236,7 @@ def text_widget(context, form, datatype, name, value, schema, fields,
 def get_input_widget(name, form, schema, fields, context, tabindex=None,
         readonly=False):
     # Always take data from the handler, we store wrong values anyway
-    value = form.get_form_handler().get_value(name, schema)
+    value = form.get_form().handler.get_value(name, schema)
     datatype = schema[name]
     readonly =  readonly or datatype.readonly
     representation = datatype.representation.upper()
