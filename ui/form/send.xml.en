@@ -11,7 +11,7 @@
     <div class="clear"></div>
   </stl:block>
 
-  <h1>Form State: <span class="wf-${statename}">${form_state}</span></h1>
+  <h2>Form State: <span class="wf-${statename}">${form_state}</span></h2>
 
   <p stl:if="first_time">You must start by filling the form.</p>
 

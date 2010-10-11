@@ -54,7 +54,7 @@ class Application(WebSite):
     def init_resource(self, **kw):
         WebSite.init_resource(self, **kw)
         value = self.class_schema['homepage'].decode("""
-              <h1>Welcome to your iScrib Application!</h1>
+              <h2>Welcome to your iScrib Application!</h2>
               <p>This is where you post your form and people will answer
                   it.</p>
               <p>Things you can do:</p>

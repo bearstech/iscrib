@@ -27,14 +27,15 @@ from itools.core import merge_dicts
 from itools.datatypes import Integer
 from itools.gettext import MSG
 from itools.web import ERROR
+from itools.database import PhraseQuery, AndQuery, NotQuery
 
 # Import from ikaaro
 from ikaaro.access import is_admin
 from ikaaro.autoform import FileWidget, TextWidget
 from ikaaro.datatypes import FileDataType
 from ikaaro.file import ODS
+from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.resource_views import DBResource_Edit
-from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 
 # Import from iscrib
@@ -105,35 +106,72 @@ class Param_NewInstance(NewInstance):
 
 
 
-class Param_View(IconsView):
+class Param_View(Folder_BrowseContent):
     access = 'is_allowed_to_edit'
     title = MSG(u"View")
+    template = '/ui/iscrib/param/view.xml'
+    search_template = None
 
-    
+    table_columns = [
+            ('name', MSG(u"Form")),
+            ('user', MSG(u"User")),
+            ('email', MSG(u"E-mail")),
+            ('state', MSG(u"State"))]
+    table_actions = []
+
+
+    def get_items(self, resource, context, *args):
+        items = super(Param_View, self).get_items(resource, context,
+                AndQuery(PhraseQuery('format', Form.class_id),
+                    NotQuery(PhraseQuery('name', resource.default_form))),
+                *args)
+        # XXX
+        context.n_forms = len(items)
+        return items
+
+
+    def get_item_value(self, resource, context, item, column):
+        brain, item_resource = item
+        if column in ('user', 'email'):
+            user = context.root.get_user(brain.name)
+            if user is None:
+                return brain.name
+            if column == 'user':
+                return user.get_title()
+            email = user.get_property('email')
+            return (email, 'mailto:{0}'.format(email))
+        elif column == 'state':
+            return (item_resource.get_form_state(),
+                    '{0}/;envoyer'.format(context.get_link(item_resource)))
+        return super(Param_View, self).get_item_value(resource, context, item,
+                column)
+
+
     def get_namespace(self, resource, context):
-        items = []
-        for name in sorted(resource.get_names()):
-            item = resource.get_resource(name)
-            items.append({'icon': '/ui/' + item.class_icon48,
-                'title': item.get_title(),
-                'description': None,
-                'url': context.get_link(item)})
-        return {'batch': None, 'items': items}
+        namespace = super(Param_View, self).get_namespace( resource, context)
+        # XXX
+        n_forms = context.n_forms
+        namespace['n_forms'] = n_forms
+        max_users = resource.get_property('max_users')
+        namespace['max_users'] = max_users
+        namespace['more_allowed'] = n_forms < max_users if max_users else True
+        return namespace
 
 
 
 class Param_Edit(DBResource_Edit):
 
     def _get_schema(self, resource, context):
-        schema = DBResource_Edit._get_schema(self, resource, context)
+        schema = super(Param_Edit, self)._get_schema(self, resource, context)
         if is_admin(context.user, resource):
             schema['max_users'] = Integer
         return schema
 
 
     def _get_widgets(self, resource, context):
-        widgets = DBResource_Edit._get_widgets(self, resource, context)
+        widgets = super(Param_Edit, self)._get_widgets(self, resource,
+                context)
         if is_admin(context.user, resource):
             widgets.append(TextWidget('max_users',
-                title=MSG(u"Maximum form users")))
+                title=MSG(u"Maximum form users (0 = unlimited)")))
         return widgets

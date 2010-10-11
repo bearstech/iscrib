@@ -43,8 +43,8 @@ class Application_BrowseContent(Folder_BrowseContent):
 
 
     def get_namespace(self, resource, context):
-        return merge_dicts(
-            Folder_BrowseContent.get_namespace(self, resource, context),
+        return merge_dicts(super(Application_BrowseContent,
+            self).get_namespace(resource, context),
             homepage=resource.get_property('homepage'))
 
 
