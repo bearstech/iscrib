@@ -24,13 +24,16 @@ from lpod.document import odf_get_document
 
 # Import from itools
 from itools.core import merge_dicts
+from itools.datatypes import Integer
 from itools.gettext import MSG
 from itools.web import ERROR
 
 # Import from ikaaro
-from ikaaro.autoform import FileWidget
+from ikaaro.access import is_admin
+from ikaaro.autoform import FileWidget, TextWidget
 from ikaaro.datatypes import FileDataType
 from ikaaro.file import ODS
+from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 
@@ -116,3 +119,21 @@ class Param_View(IconsView):
                 'description': None,
                 'url': context.get_link(item)})
         return {'batch': None, 'items': items}
+
+
+
+class Param_Edit(DBResource_Edit):
+
+    def _get_schema(self, resource, context):
+        schema = DBResource_Edit._get_schema(self, resource, context)
+        if is_admin(context.user, resource):
+            schema['max_users'] = Integer
+        return schema
+
+
+    def _get_widgets(self, resource, context):
+        widgets = DBResource_Edit._get_widgets(self, resource, context)
+        if is_admin(context.user, resource):
+            widgets.append(TextWidget('max_users',
+                title=MSG(u"Maximum form users")))
+        return widgets
