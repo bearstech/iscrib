@@ -2,75 +2,73 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
-  <div>
-    <div id="login-form" style="float: left; width: 30em; padding-right: 10px; border-right: 1px solid #d3d7cf">
-      <h2>Login</h2>
-      <form id="loginform" name="loginform" method="post" action=";login">
-        <fieldset>
-          <legend>Your Account</legend>
-          <table>
-            <tr>
-              <td>
-                <label for="username">E-mail Address</label>
-                <span class="field-is-missing" title="This field is
-                  required">*
-                </span>
-                <br/>
-                <span stl:if="username/error"
-                  class="field-error">${username/error}<br/></span>
-                <input type="text" id="username" name="username"
-                  value="${username/value}" size="40" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="password">Password</label>
-                <span class="field-is-missing" title="This field is
-                  required">*
-                </span>
-                <br/>
-                <span stl:if="password/error"
-                  class="field-error">${password/error}<br/></span>
-                <input type="password" id="password" name="password"
-                  size="40"/>
-              </td>
-            </tr>
-          </table>
-          <p>
-            <button type="submit" name="action" value="login"
-              class="button-ok">Ok</button>
-          </p>
-        </fieldset>
-      </form>
-    </div>
-    <div id="register-form" style="float: left; width: 25em; padding-left: 10px">
-      <h2>Register</h2>
-      <form id="registerform" name="registerform" method="post"
-        action=";login">
-        <fieldset>
-          <legend>Your E-mail Address</legend>
-          <table>
-            <tr>
-              <td>
-                <label for="username">E-mail Address</label>
-                <span class="field-is-missing" title="This field is
-                  required">*
-                </span>
-                <br/>
-                <span stl:if="username/error"
-                  class="field-error">${username/error}<br/></span>
-                <input type="text" id="username" name="username"
-                  value="${username/value}" size="40" />
-              </td>
-            </tr>
-          </table>
-          <p>
-            <button type="submit" name="action" value="register"
-              class="button-ok">Ok</button>
-          </p>
-        </fieldset>
-      </form>
-    </div>
+  <div id="login-form">
+    <h2>Login</h2>
+    <form id="loginform" name="loginform" method="post" action=";login">
+      <p style="margin-left: 15em">Please enter your e-mail address to access
+      the form:</p>
+      <p style="margin-left: 15em">
+        <label for="username">E-mail Address</label>
+        <span class="field-is-missing" title="This field is
+          required">*
+        </span>
+        <br/>
+        <span stl:if="username/error"
+          class="field-error">${username/error}<br/></span>
+        <input type="text" id="username" name="username"
+          value="${username/value}" size="40" />
+      </p>
+      <table>
+        <tr>
+          <td valign="top">
+            <fieldset>
+              <legend>Create Your Account</legend>
+              <label for="newpass">Password</label>
+              <span class="field-is-missing" title="This field is
+                required">*
+              </span>
+              <br/>
+              <span stl:if="password/error"
+                class="field-error">${password/error}<br/></span>
+              <input type="password" id="newpass" name="password"
+                size="40"/>
+              <br/>
+              <label for="newpass2">Repeat Password</label>
+              <span class="field-is-missing" title="This field is
+                required">*
+              </span>
+              <br/>
+              <span stl:if="password2/error"
+                class="field-error">${password2/error}<br/></span>
+              <input type="password" id="newpass2" name="password2"
+                size="40"/>
+              <p>
+                <button type="submit" name="action" value="register"
+                  class="button-ok">Register</button>
+              </p>
+            </fieldset>
+          </td>
+          <td valign="top">
+            <fieldset>
+              <legend>Already Have an Account</legend>
+              <label for="password">Password</label>
+              <span class="field-is-missing" title="This field is
+                required">*
+              </span>
+              <br/>
+              <span stl:if="password/error"
+                class="field-error">${password/error}<br/></span>
+              <input type="password" id="password" name="password"
+                size="40"/>
+              <p>
+                <button type="submit" name="action" value="login"
+                  class="button-ok">Login</button>
+              </p>
+            </fieldset>
+          </td>
+        </tr>
+      </table>
+    </form>
   </div>
 
 </stl:block>

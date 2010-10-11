@@ -27,9 +27,8 @@ from lpod.document import odf_get_document
 from itools.core import merge_dicts
 from itools.csv import CSVFile
 from itools.database import PhraseQuery, AndQuery, NotQuery
-from itools.datatypes import Integer, Unicode, Email
+from itools.datatypes import Integer, Unicode, Email, String
 from itools.gettext import MSG
-from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
 from itools.web import INFO, ERROR, BaseView
 
@@ -39,6 +38,7 @@ from ikaaro.autoform import FileWidget, TextWidget
 from ikaaro.datatypes import FileDataType
 from ikaaro.file import ODS
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
+from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views_new import NewInstance
 
@@ -120,6 +120,7 @@ class Param_View(Folder_BrowseContent):
     table_columns = [
             ('name', MSG(u"Form")),
             ('state', MSG(u"State")),
+            ('mtime', MSG(u"Last Modified")),
             ('user', MSG(u"User")),
             ('email', MSG(u"E-mail")),
             ('registered', MSG(u"Registered"))]
@@ -300,7 +301,11 @@ class Param_Edit(DBResource_Edit):
 
 class Param_Login(LoginView):
     template = '/ui/iscrib/param/login.xml'
-    
+    schema = merge_dicts(LoginView.schema,
+            password=String(mandatory=True),
+            password2=String)
+
+
     def action_register(self, resource, context, form):
         email = form['username'].strip()
         if not Email.is_valid(email):
@@ -310,28 +315,31 @@ class Param_Login(LoginView):
 
         user = context.root.get_user_from_login(email)
 
-        # Case 1: Register
+        # Is allowed?
         if user is None:
-            if context.site_root.is_allowed_to_register():
-                return self._register(resource, context, email)
             error = u"You are not allowed to register."
             context.message = ERROR(error)
             return
 
-        # Case 2: Automatic register
-        email = user.get_property('email')
-        password = user.get_property('password')
-        if password is not None:
-            # Forgotten password
-            user.send_forgotten_password(context, email)
-            path = '/ui/website/forgotten_password.xml'
-            handler = resource.get_resource(path)
-            return stl(handler)
+        # Is already registered?
+        if user.get_property('password') is not None:
+            message = (u"You are already registered. "
+                    u"Log in using your password.")
+            context.message = ERROR(message)
+            return
 
-        # Send generated password
+        # Register
+        password = form['password']
+        password2 = form['password2']
+        if password != password2:
+            context.message = MSG_PASSWORD_MISMATCH
+            return
+
+        user.set_password(password)
+
+        # Send e-mail with login
         site_uri = context.uri.resolve(';login')
-        password = user.send_autoregistration(context, email,
-                site_uri=site_uri)
+        user.send_autoregistration(context, email, site_uri, password)
 
         # Automatic login
         user.set_auth_cookie(context, password)
