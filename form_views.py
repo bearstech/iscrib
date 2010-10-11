@@ -242,7 +242,7 @@ class Form_Export(BaseView):
     title = MSG(u"Download report")
 
 
-    def GET(self, resource, context):
+    def GET(self, resource, context, encoding='cp1252'):
         if not resource.is_ready():
             return MSG(u"Your report is not finished "
                     u"yet.").gettext().encode('utf8')
@@ -255,11 +255,11 @@ class Form_Export(BaseView):
         for name, datatype in sorted(schema.iteritems()):
             value = handler.get_value(name, schema)
             try:
-                value = datatype.encode(value, 'cp1252')
+                value = datatype.encode(value, encoding)
             except TypeError:
                 value = datatype.encode(value)
-            if not isinstance(value, str):
-                raise "pas encode", str(type(datatype))
+            if type(value) is not str:
+                raise ValueError, str(type(datatype))
             csv.add_row([datatype.pages[0], name, value])
 
         context.set_content_type('text/comma-separated-values')

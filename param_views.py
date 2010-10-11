@@ -24,9 +24,10 @@ from lpod.document import odf_get_document
 
 # Import from itools
 from itools.core import merge_dicts
+from itools.csv import CSVFile
 from itools.datatypes import Integer
 from itools.gettext import MSG
-from itools.web import ERROR
+from itools.web import ERROR, BaseView
 from itools.database import PhraseQuery, AndQuery, NotQuery
 
 # Import from ikaaro
@@ -157,6 +158,50 @@ class Param_View(Folder_BrowseContent):
         allowed_users = (max_users - n_forms) if max_users else 20
         namespace['allowed_users'] = allowed_users
         return namespace
+
+
+
+class Param_Export(BaseView):
+    access = 'is_allowed_to_edit'
+    title = MSG(u"Export Collected Data")
+
+
+    def GET(self, resource, context, encoding='cp1252'):
+        csv = CSVFile()
+        header = ["Form", "User", "E-mail", "State"]
+        handler = resource.get_resource('schema').handler
+        schema, pages = handler.get_schema_pages()
+        for name in sorted(schema):
+            header.append(name)
+        csv.add_row(header)
+        users = resource.get_resource('/users')
+        for form in resource.get_forms():
+            user = users.get_resource(form.name, soft=True)
+            if user:
+                email = user.get_property('email')
+                user = user.get_title()
+            else:
+                email = ""
+                user = form.name
+            state = form.get_form_state().encode(encoding)
+            row = [form.name, user, email, state]
+            handler = form.handler
+            for name, datatype in sorted(schema.iteritems()):
+                value = handler.get_value(name, schema)
+                try:
+                    value = datatype.encode(value, encoding)
+                except TypeError:
+                    value = datatype.encode(value)
+                if type(value) is not str:
+                    raise ValueError, str(type(header))
+                row.append(value)
+            csv.add_row(row)
+
+        context.set_content_type('text/comma-separated-values')
+        context.set_content_disposition('attachment',
+                filename="%s.csv" % (resource.name))
+
+        return csv.to_str(separator=';')
 
 
 

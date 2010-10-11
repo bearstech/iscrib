@@ -25,8 +25,9 @@ from ikaaro.folder import Folder
 
 # Import from iscrib
 from controls import Controls
+from form import Form
 from param_views import Param_NewInstance, Param_View, Param_Edit
-from param_views import Param_Register
+from param_views import Param_Export, Param_Register
 from schema import Schema
 
 
@@ -50,11 +51,18 @@ class Param(Folder):
     new_instance = Param_NewInstance()
     view = Param_View()
     edit = Param_Edit()
+    export = Param_Export()
     register = Param_Register()
 
 
     def get_form(self):
         return self.get_resource(self.default_form, soft=True)
+
+
+    def get_forms(self):
+        for form in self.search_resources(cls=Form):
+            if form.name != self.default_form:
+                yield form
 
 
     def get_param_folder(self):
