@@ -29,6 +29,7 @@ from ikaaro.autoform import TextWidget
 from ikaaro.registry import register_resource_class
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
+from ikaaro.utils import generate_password
 
 
 class User_ConfirmRegistration(AutoForm):
@@ -115,6 +116,29 @@ class User(BaseUser):
     # Views
     edit_account = User_EditAccount()
     confirm_registration = User_ConfirmRegistration()
+
+    autoregistration_subject = BaseUser.registration_subject
+    autoregistration_text = MSG(u"""You are now registered as a user of {site_name}.
+
+You can follow this link {site_uri} to access the site.
+
+Your e-mail ${email} is your identifier.
+
+Your password: ${password}""")
+
+
+    def send_autoregistration(self, context, email, site_uri=None):
+        site_name = context.site_root.get_title()
+        if site_uri is None:
+            site_uri = context.uri.resolve2('/')
+        password = generate_password()
+        self.set_password(password)
+        text = self.autoregistration_text.gettext(site_name=site_name,
+                site_uri=site_uri, email=email, password=password)
+        context.root.send_email(email, self.registration_subject.gettext(),
+                                text=text)
+        return password
+
 
 
 

@@ -48,7 +48,7 @@
       <form id="registerform" name="registerform" method="post"
         action=";login">
         <fieldset>
-          <legend>New Account or Forgotten Password</legend>
+          <legend>Your E-mail Address</legend>
           <table>
             <tr>
               <td>
@@ -64,9 +64,6 @@
               </td>
             </tr>
           </table>
-          <p>
-            <em>You can also use this form if you forgot your password.</em>
-          </p>
           <p>
             <button type="submit" name="action" value="register"
               class="button-ok">Ok</button>

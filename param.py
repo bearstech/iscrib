@@ -27,9 +27,8 @@ from ikaaro.folder import Folder
 from controls import Controls
 from form import Form
 from param_views import Param_NewInstance, Param_View, Param_Edit
-from param_views import Param_Export, Param_Register
+from param_views import Param_Export, Param_Register, Param_Login
 from schema import Schema
-
 
 
 class Param(Folder):
@@ -54,6 +53,7 @@ class Param(Folder):
     edit = Param_Edit()
     export = Param_Export()
     register = Param_Register()
+    login = Param_Login()
 
 
     def get_form(self):
