@@ -38,7 +38,7 @@ from ikaaro.access import is_admin
 from ikaaro.autoform import FileWidget, TextWidget
 from ikaaro.datatypes import FileDataType
 from ikaaro.file import ODS
-from ikaaro.folder_views import Folder_BrowseContent
+from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views_new import NewInstance
 
@@ -119,9 +119,10 @@ class Param_View(Folder_BrowseContent):
 
     table_columns = [
             ('name', MSG(u"Form")),
+            ('state', MSG(u"State")),
             ('user', MSG(u"User")),
             ('email', MSG(u"E-mail")),
-            ('state', MSG(u"State"))]
+            ('registered', MSG(u"Registered"))]
     table_actions = []
 
 
@@ -139,19 +140,23 @@ class Param_View(Folder_BrowseContent):
         brain, item_resource = item
         if column == 'name':
             return (brain.name, context.get_link(item_resource))
-        if column in ('user', 'email'):
-            user = context.root.get_user(brain.name)
-            if user is None:
-                return brain.name
-            if column == 'user':
-                return user.get_title()
-            email = user.get_property('email')
-            return (email, 'mailto:{0}'.format(email))
         elif column == 'state':
             return (item_resource.get_form_state(),
                     '{0}/;envoyer'.format(context.get_link(item_resource)))
-        return super(Param_View, self).get_item_value(resource, context, item,
-                column)
+        if column in ('user', 'email', 'registered'):
+            user = context.root.get_user(brain.name)
+            if column == 'user':
+                if user is None:
+                    return brain.name
+                return user.get_title()
+            elif column == 'email':
+                email = user.get_property('email')
+                return (email, 'mailto:{0}'.format(email))
+            elif column == 'registered':
+                password = user.get_property('password')
+                return u"Yes" if password else u"No"
+        return super(Param_View, self).get_item_value(resource, context,
+                item, column)
 
 
     def get_namespace(self, resource, context):
@@ -344,3 +349,16 @@ class Param_Login(LoginView):
                 goto = referrer
 
         return context.come_back(INFO(u"Welcome!"), goto)
+
+
+
+class Param_RedirectToForm(GoToSpecificDocument):
+    title = MSG(u"Show Form")
+
+    def get_specific_document(sef, resource, context):
+        access = resource.get_access_control()
+        if access.is_allowed_to_edit(context.user, resource):
+            specific_document = resource.default_form
+        else:
+            specific_document = context.user.name
+        return specific_document

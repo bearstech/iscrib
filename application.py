@@ -21,6 +21,7 @@ from itools.datatypes import String
 from itools.gettext import MSG
 
 # Import from ikaaro
+from ikaaro.access import is_admin
 from ikaaro.autoform import RTEWidget
 from ikaaro.autoform import XHTMLBody
 from ikaaro.registry import register_document_type
@@ -28,6 +29,7 @@ from ikaaro.website import WebSite
 
 # Import from iscrib
 from application_views import Application_BrowseContent
+from form import Form
 from param import Param
 from utils_views import AutomaticEditView
 
@@ -52,7 +54,7 @@ class Application(WebSite):
 
 
     def init_resource(self, **kw):
-        WebSite.init_resource(self, **kw)
+        super(Application, self).init_resource(**kw)
         value = self.class_schema['homepage'].decode("""
               <h2>Welcome to your iScrib Application!</h2>
               <p>This is where you post your form and people will answer
@@ -79,6 +81,34 @@ class Application(WebSite):
 
     def get_document_types(self):
         return [Param]
+
+
+    def is_allowed_to_add_form(self, user, resource):
+        print "is_allowed_to_add_form"
+        return is_admin(user, resource)
+
+
+    def is_allowed_to_view(self, user, resource):
+        if isinstance(resource, (Param, Form)):
+            if user is None:
+                return False
+            if is_admin(user, resource):
+                return True
+            if isinstance(resource, Param):
+                return True
+            # Form
+            return user.name == resource.name
+        return super(Application, self).is_allowed_to_view(user, resource)
+
+
+    def is_allowed_to_edit(self, user, resource):
+        if isinstance(resource, Form):
+            if user is None:
+                return False
+            if is_admin(user, resource):
+                return True
+            return resource.name == user.name
+        return super(Application, self).is_allowed_to_edit(user, resource)
 
 
 

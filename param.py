@@ -28,6 +28,7 @@ from controls import Controls
 from form import Form
 from param_views import Param_NewInstance, Param_View, Param_Edit
 from param_views import Param_Export, Param_Register, Param_Login
+from param_views import Param_RedirectToForm
 from schema import Schema
 
 
@@ -41,7 +42,7 @@ class Param(Folder):
             author=String(source='metadata', indexed=False, stored=True),
             ctime=DateTime(source='metadata', indexed=False, stored=True),
             max_users=Integer(source='metadata', default=10))
-    class_views = ['view', 'edit', 'export', 'register']
+    class_views = ['view', 'edit', 'export', 'register', 'redirect_to_form']
     
     schema_class = Schema
     controls_class = Controls
@@ -54,6 +55,7 @@ class Param(Folder):
     export = Param_Export()
     register = Param_Register()
     login = Param_Login()
+    redirect_to_form = Param_RedirectToForm()
 
 
     def get_form(self):

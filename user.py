@@ -122,9 +122,9 @@ class User(BaseUser):
 
 You can follow this link {site_uri} to access the site.
 
-Your e-mail ${email} is your identifier.
+Your e-mail address {email} is your identifier.
 
-Your password: ${password}""")
+Your password: {password}""")
 
 
     def send_autoregistration(self, context, email, site_uri=None):
