@@ -17,6 +17,7 @@
 
 # Import from the Standard Library
 from cStringIO import StringIO
+from email.utils import parseaddr
 
 # Import from lpod
 from lpod import ODF_SPREADSHEET
@@ -25,9 +26,9 @@ from lpod.document import odf_get_document
 # Import from itools
 from itools.core import merge_dicts
 from itools.csv import CSVFile
-from itools.datatypes import Integer
+from itools.datatypes import Integer, Unicode
 from itools.gettext import MSG
-from itools.web import ERROR, BaseView
+from itools.web import INFO, ERROR, BaseView
 from itools.database import PhraseQuery, AndQuery, NotQuery
 
 # Import from ikaaro
@@ -133,6 +134,8 @@ class Param_View(Folder_BrowseContent):
 
     def get_item_value(self, resource, context, item, column):
         brain, item_resource = item
+        if column == 'name':
+            return (brain.name, context.get_link(item_resource))
         if column in ('user', 'email'):
             user = context.root.get_user(brain.name)
             if user is None:
@@ -210,6 +213,8 @@ class Param_Register(Param_View):
     title = MSG(u"Register Users")
     template = '/ui/iscrib/param/register.xml'
 
+    schema = {'new_users': Unicode}
+
     table_columns = [
             ('user', MSG(u"User")),
             ('email', MSG(u"E-mail"))]
@@ -219,24 +224,65 @@ class Param_Register(Param_View):
         namespace = super(Param_Register, self).get_namespace(resource,
                 context)
         namespace['title'] = self.title
+        namespace['new_users'] = context.get_form_value('new_users')
         namespace['url_user'] = context.uri.resolve(';login')
         namespace['url_admin'] = context.uri.resolve(';view')
         return namespace
+
+
+    def action(self, resource, context, form):
+        new_users = form['new_users'].strip()
+        users = resource.get_resource('/users')
+        root = context.root
+        site_root = resource.get_site_root()
+        added = []
+        for lineno, line in enumerate(new_users.splitlines()):
+            lastname, email = parseaddr(line)
+            if not lastname or not email:
+                context.commit = False
+                message = u"Unrecognized line {lineno}: {line}"
+                context.message = ERROR(message, lineno=lineno, line=line)
+                return
+            # Is the user already known?
+            user = root.get_user_from_login(email)
+            if user is None:
+                # Register the user
+                user = users.set_user(email, None)
+                user.set_property('lastname', lastname)
+            username = user.name
+            # Add the role
+            role = site_root.get_user_role(username)
+            if role is None:
+                site_root.set_user_role([username], 'guests')
+            # Add the form
+            if resource.get_resource(username, soft=True) is not None:
+                continue
+            resource.make_resource(username, Form,
+                    title={'en': unicode(lastname)})
+            added.append(username)
+
+        if not added:
+            context.message = ERROR(u"No user added.")
+            return
+
+        context.body['new_users'] = u""
+
+        message = u"{n} users added. See below to send them the form URL"
+        context.message = INFO(message, n=len(added))
 
 
 
 class Param_Edit(DBResource_Edit):
 
     def _get_schema(self, resource, context):
-        schema = super(Param_Edit, self)._get_schema(self, resource, context)
+        schema = super(Param_Edit, self)._get_schema(resource, context)
         if is_admin(context.user, resource):
             schema['max_users'] = Integer
         return schema
 
 
     def _get_widgets(self, resource, context):
-        widgets = super(Param_Edit, self)._get_widgets(self, resource,
-                context)
+        widgets = super(Param_Edit, self)._get_widgets(resource, context)
         if is_admin(context.user, resource):
             widgets.append(TextWidget('max_users',
                 title=MSG(u"Maximum form users (0 = unlimited)")))

@@ -42,6 +42,7 @@ class Param(Folder):
             author=String(source='metadata', indexed=False, stored=True),
             ctime=DateTime(source='metadata', indexed=False, stored=True),
             max_users=Integer(source='metadata', default=10))
+    class_views = ['view', 'edit', 'export', 'register']
     
     schema_class = Schema
     controls_class = Controls

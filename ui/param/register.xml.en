@@ -7,15 +7,17 @@
   <table>
     <tbody>
       <tr>
-        <th>New Users</th>
+        <th>New Users (${allowed_users} allowed)</th>
         <th>Registered Users</th>
       </tr>
       <tr>
-        <td width="50%" align="left" valign="top">
-          <em>1 user per line, format "User Name" &lt;e-mail&gt;</em><br/>
-          <em>e.g. "John Doe" &lt;john.doe@example.com&gt;</em>
+        <td width="50%" align="left" valign="top"
+          style="border-right: 1px solid #ccc">
           <form action="" method="post" stl:if="allowed_users">
-            <textarea name="new_users" cols="50" rows="20"/>
+            <em>1 user per line, format "User Name" &lt;e-mail&gt;</em><br/>
+            <em>e.g. "John Doe" &lt;john.doe@example.com&gt;</em>
+            <textarea name="new_users" cols="50"
+              rows="20">${new_users}</textarea>
             <button type="submit" name="add_users" class="button-ok">Add
               Users</button>
           </form>
@@ -23,7 +25,8 @@
           users. Contact <a href="http://www.itaapy.com/contact">Itaapy</a>
           for more.</p>
         </td>
-        <td width="50%" align="left" valign="top">
+        <td width="50%" align="left" valign="top"
+          style="border-left: 1px solid #ccc">
           ${batch}
           ${table}
         </td>
