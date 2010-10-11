@@ -22,7 +22,6 @@ from decimal import InvalidOperation
 
 # Import from itools
 from itools.core import merge_dicts, freeze
-from itools.database import register_field
 from itools.gettext import MSG
 from itools.handlers import File as FileHandler
 
@@ -108,6 +107,9 @@ class Form(File):
     class_title = MSG(u"Form")
     class_views = ['pageA', 'envoyer', 'exporter', 'imprimer']
     class_handler = FormHandler
+    class_schema = merge_dicts(File.class_schema,
+            form_state=Unicode(indexed=True, stored=True))
+
     workflow = workflow
 
     # Views
@@ -388,9 +390,3 @@ class Form(File):
         for control in self.get_controls_namespace(levels=['1', '2'],
                 pages=pages, exclude=exclude):
             yield control
-
-
-
-###########################################################################
-# Register
-register_field('form_state', Unicode(indexed=True, stored=True))
