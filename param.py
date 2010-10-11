@@ -26,6 +26,7 @@ from ikaaro.folder import Folder
 # Import from iscrib
 from controls import Controls
 from param_views import Param_NewInstance, Param_View, Param_Edit
+from param_views import Param_Register
 from schema import Schema
 
 
@@ -39,7 +40,7 @@ class Param(Folder):
     class_schema = merge_dicts(Folder.class_schema,
             author=String(source='metadata', indexed=False, stored=True),
             ctime=DateTime(source='metadata', indexed=False, stored=True),
-            max_users=Integer(source='metadata', default=20))
+            max_users=Integer(source='metadata', default=10))
     
     schema_class = Schema
     controls_class = Controls
@@ -49,6 +50,7 @@ class Param(Folder):
     new_instance = Param_NewInstance()
     view = Param_View()
     edit = Param_Edit()
+    register = Param_Register()
 
 
     def get_form(self):

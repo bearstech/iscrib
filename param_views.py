@@ -154,7 +154,28 @@ class Param_View(Folder_BrowseContent):
         namespace['n_forms'] = n_forms
         max_users = resource.get_property('max_users')
         namespace['max_users'] = max_users
-        namespace['more_allowed'] = n_forms < max_users if max_users else True
+        allowed_users = (max_users - n_forms) if max_users else 20
+        namespace['allowed_users'] = allowed_users
+        return namespace
+
+
+
+class Param_Register(Param_View):
+    access = 'is_allowed_to_edit'
+    title = MSG(u"Register Users")
+    template = '/ui/iscrib/param/register.xml'
+
+    table_columns = [
+            ('user', MSG(u"User")),
+            ('email', MSG(u"E-mail"))]
+
+
+    def get_namespace(self, resource, context):
+        namespace = super(Param_Register, self).get_namespace(resource,
+                context)
+        namespace['title'] = self.title
+        namespace['url_user'] = context.uri.resolve(';login')
+        namespace['url_admin'] = context.uri.resolve(';view')
         return namespace
 
 

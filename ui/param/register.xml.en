@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <h2>${title}</h2>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>New Users</th>
+        <th>Registered Users</th>
+      </tr>
+      <tr>
+        <td width="50%" align="left" valign="top">
+          <em>1 user per line, format "User Name" &lt;e-mail&gt;</em><br/>
+          <em>e.g. "John Doe" &lt;john.doe@example.com&gt;</em>
+          <form action="" method="post" stl:if="allowed_users">
+            <textarea name="new_users" cols="50" rows="20"/>
+            <button type="submit" name="add_users" class="button-ok">Add
+              Users</button>
+          </form>
+          <p stl:if="not allowed_users">You have reached the maximum allowed
+          users. Contact <a href="http://www.itaapy.com/contact">Itaapy</a>
+          for more.</p>
+        </td>
+        <td width="50%" align="left" valign="top">
+          ${batch}
+          ${table}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>You can send this URL to your users: <a
+    href="${url_user}">${url_user}</a></p>
+
+  <p>You can collect data at this URL: <a
+    href="${url_admin}">${url_admin}</a></p>
+
+</stl:block>
