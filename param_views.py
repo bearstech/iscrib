@@ -48,6 +48,10 @@ from form import Form
 from formpage import FormPage
 
 
+ERR_BAD_PAGE = (u'In schema, line {line}, page "{page}" does not match '
+        u'variable "{name}".')
+
+
 class Param_NewInstance(NewInstance):
     access = 'is_allowed_to_add_param'
     schema = merge_dicts(NewInstance.schema,
@@ -77,7 +81,18 @@ class Param_NewInstance(NewInstance):
                           ('schema', child.schema_class)]:
             table = tables.next()
             table.rstrip(aggressive=True)
+            # Remove header
             table.delete_row(0)
+            # Consistency check
+            for y, row in table.get_rows():
+                if name == 'schema':
+                    varname = row.get_cell(0).get_value()
+                    varpage = row.get_cell(2).get_value()
+                    if varname[0] != varpage:
+                        context.commit = False
+                        context.message = ERROR(ERR_BAD_PAGE, line=y+1,
+                                page=varpage, name=varname)
+                        return
             try:
                 child.make_resource(name, cls,
                         title={'en': table.get_name()}, body=table.to_csv())
