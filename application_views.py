@@ -19,6 +19,7 @@
 from itools.core import merge_dicts
 from itools.database import PhraseQuery
 from itools.gettext import MSG
+from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
@@ -106,4 +107,5 @@ class Application_RedirectToParam(GoToSpecificDocument):
             for form in param.get_forms():
                 if form.name == user.name:
                     return '{0}/{1}'.format(param.name, form.name)
+        context.message = ERROR(u"No application found.")
         return ''

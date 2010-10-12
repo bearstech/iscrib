@@ -17,6 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
+from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.views import IconsView
@@ -27,6 +28,7 @@ from application import Application
 
 class Root_View(IconsView):
     access = 'is_authenticated'
+    title = MSG(u"Clients")
 
     
     def get_namespace(self, resource, context):

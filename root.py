@@ -27,7 +27,7 @@ from root_views import Root_View
 
 class Root(BaseRoot):
     class_id = 'iScrib'
-    class_views = ['view'] + BaseRoot.class_views
+    class_views = BaseRoot.class_views
 
     # Views
     view = Root_View()
