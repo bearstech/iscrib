@@ -138,10 +138,12 @@ class Application(WebSite):
             return False
         if is_admin(user, resource):
             return True
+        role = self.get_user_role(user.name)
         if isinstance(resource, (Application, Param)):
-            role = self.get_user_role(user.name)
             return role in ('members', 'reviewers')
         elif isinstance(resource, Form):
+            if resource.name == resource.parent.default_form:
+                return role in ('members', 'reviewers')
             return resource.name == user.name
         return super(Application, self).is_allowed_to_edit(user, resource)
 
