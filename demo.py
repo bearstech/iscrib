@@ -89,12 +89,4 @@ class Demo(Application):
 
 
 
-class Demo_Skin(Skin):
-
-    def build_namespace(self, context):
-        return merge_dicts(Skin.build_namespace(self, context),
-                  website_title=context.site_root.get_property('title'))
-
-
-
 register_document_type(Demo, WebSite.class_id)
