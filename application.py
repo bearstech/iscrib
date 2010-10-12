@@ -80,12 +80,13 @@ class Application(WebSite):
 
 
     def get_document_types(self):
-        return [Param]
+        return super(Application, self).get_document_types() + [Param]
 
 
-    def is_allowed_to_add_form(self, user, resource):
-        print "is_allowed_to_add_form"
-        return is_admin(user, resource)
+    def is_allowed_to_add(self, user, resource):
+        if isinstance(resource, (Param, Form)):
+            return is_admin(user, resource)
+        return super(Application, self).is_allowed_to_add(user, resource)
 
 
     def is_allowed_to_view(self, user, resource):

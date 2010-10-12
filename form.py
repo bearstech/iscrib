@@ -27,7 +27,6 @@ from itools.handlers import File as FileHandler
 
 # Import from ikaaro
 from ikaaro.file import File
-from ikaaro.file_views import File_NewInstance
 from ikaaro.folder import Folder
 
 # Import from iscrib
@@ -113,7 +112,6 @@ class Form(File):
     workflow = workflow
 
     # Views
-    new_instance = File_NewInstance(access='is_allowed_to_add_form')
     envoyer = Form_Send()
     exporter = Form_Export()
     imprimer = Form_Print()
