@@ -90,10 +90,10 @@ class Application(WebSite):
         return super(Application, self).get_document_types() + [Param]
 
 
-    def is_allowed_to_add_param(self, user, resource):
-        # XXX
-        #return is_admin(user, resource)
-        return super(Application, self).is_allowed_to_add(user, resource)
+    # XXX
+    #def is_allowed_to_add_param(self, user, resource):
+    #    return is_admin(user, resource)
+    is_allowed_to_add_param = WebSite.is_allowed_to_add
 
 
     def is_allowed_to_add_form(self, user, resource):
