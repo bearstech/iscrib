@@ -48,6 +48,7 @@ class Application(WebSite):
     class_schema = merge_dicts(WebSite.class_schema,
             homepage=XHTMLBody(source='metadata', multilingual=True,
                 parameters_schema = {'lang': String}))
+    class_skin = 'ui/iscrib'
 
     edit_schema = {'homepage': XHTMLBody(multilingual=True)}
     edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]

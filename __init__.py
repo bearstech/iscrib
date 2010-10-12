@@ -24,8 +24,9 @@ from itools.gettext import register_domain
 from ikaaro.skins import register_skin
 
 # Import from iscrib
-from demo import Demo_Skin
 from root import Root
+from skin import Skin
+import demo
 import user
 
 # Give a version
@@ -33,8 +34,9 @@ __version__ = get_version()
 
 # Give a language
 register_domain('iscrib', get_abspath('locale'))
-register_skin('iscrib', Demo_Skin(get_abspath('ui')))
+register_skin('iscrib', Skin(get_abspath('ui')))
 
 # Silent Pyflakes
 Root
+demo
 user

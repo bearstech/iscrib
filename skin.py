@@ -16,23 +16,21 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
+from itools.core import merge_dicts
 
 # Import from ikaaro
-from ikaaro.root import Root as BaseRoot
+from ikaaro.access import is_admin
+from ikaaro.skins import Skin as BaseSkin
 
 # Import from iscrib
-from application import Application
-from root_views import Root_View
 
 
-class Root(BaseRoot):
-    class_id = 'iScrib'
-    class_views = BaseRoot.class_views
-    class_skin = 'ui/iscrib'
+class Skin(BaseSkin):
 
-    # Views
-    view = Root_View()
-
-
-    def get_document_types(self):
-        return super(Root, self).get_document_types() + [Application]
+    def build_namespace(self, context):
+        resource = context.resource
+        website_title = resource.get_site_root().get_title()
+        new_resource_allowed = is_admin(context.user, resource)
+        return merge_dicts(BaseSkin.build_namespace(self, context),
+                  website_title=website_title,
+                  new_resource_allowed=new_resource_allowed)

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="${language}" xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="${language}"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
   <head>
     <title>${title}</title>
-    <base href="${base_uri}"/>
+    <base href="${base_uri}" />
     <!-- Meta -->
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
-    <meta name="${meta/name}" content="${meta/content}" stl:repeat="meta meta_tags" lang="${meta/lang}"></meta>  <!-- Canonical URL for search engines -->  <link rel="canonical" href="${canonical_uri}"></link>  <!-- CSS -->  <link rel="stylesheet" href="${style}" stl:repeat="style styles" type="text/css"></link>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta stl:repeat="meta meta_tags" name="${meta/name}" lang="${meta/lang}"
+      content="${meta/content}" />
+    <!-- Canonical URL for search engines -->
+    <link rel="canonical" href="${canonical_uri}" />
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" stl:repeat="style styles"
+      href="${style}" />
     <!-- JavaScript -->
-    <script src="${script}" stl:repeat="script scripts" type="text/javascript"></script>
+    <script type="text/javascript" stl:repeat="script scripts" src="${script}"
+      />
     <!-- Icon -->
-    <link rel="shortcut icon" href="${favicon_href}" type="${favicon_type}"></link>
+    <link rel="shortcut icon" href="${favicon_href}" type="${favicon_type}" />
   </head>
   <body>
   <div id="page">
@@ -19,27 +28,38 @@
     <div id="header">
       <div id="links">
         <stl:block stl:if="not user">
-          <a href="${login}" id="links-menu-login" title="Sign in">Sign in</a>
+          <a href="${login}" title="Sign in" id="links-menu-login">Sign in</a>
         </stl:block>
         <stl:block stl:if="user">
-          <a href="${user/home}" id="links-menu-profile" title="${user/title}">${user/title}</a>  <a href="${logout}" id="links-menu-logout" title="Log out">Log out</a>
+          <a href="${user/home}" title="${user/title}"
+             id="links-menu-profile">${user/title}</a>
+          <a href="${logout}" title="Log out" id="links-menu-logout"
+            >Log out</a>
+          <a stl:if="new_resource_allowed" href="${container_uri}/;new_resource"
+             id="links-menu-new">Add content</a>
         </stl:block>
       </div>
       <!-- Languages & Searchbar -->
-      <table cellpadding="0" class="header-toolbar" cellspacing="0">
+      <table cellpadding="0" cellspacing="0" class="header-toolbar">
         <tr>
           <td class="languages">${languages}</td>
         </tr>
       </table>
       <!-- Menu -->
-      <ul id="menu" stl:if="menu/items">
+      <ul stl:if="menu/items" id="menu">
         <li stl:repeat="menu menu/items" class="${menu/class}">
-          <a id="${menu/id}" href="${menu/path}" target="${menu/target}" title="${menu/title}">${menu/title}</a>
+          <a href="${menu/path}" id="${menu/id}" target="${menu/target}"
+             title="${menu/title}">${menu/title}</a>
         </li>
       </ul>
       <!-- Logo -->
-      <a href="/" id="logo-title"> ${website_title} </a>  <a href="/" id="logo" stl:if="logo_href">  <img src="${logo_href}"></img>  </a>
-      <div class="clear"></div>
+      <a href="/" id="logo-title">
+        ${website_title}
+      </a>
+      <a href="/" stl:if="logo_href" id="logo">
+        <img src="${logo_href}"/>
+      </a>
+      <div class="clear" />
     </div>
 
     <!-- Location & Views-->
@@ -49,13 +69,13 @@
     <div id="body">
       <h1 stl:if="page_title">${page_title}</h1>
       ${message}
-      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%">
         <tr>
           <td id="content" valign="top">
             ${body}
           </td>
           <td id="right" valign="top" stl:if="context_menus">
-            <stl:block stl:repeat="menu context_menus">${menu}<br></br></stl:block>
+            <stl:block stl:repeat="menu context_menus">${menu}</stl:block>
           </td>
         </tr>
       </table>
@@ -63,7 +83,8 @@
 
     <!-- Footer -->
     <div id="footer">
-      <a href="/terms-and-conditions/">Conditions d'utilisation</a>  <a href="/;contact">Contact</a>
+      <a href="/terms-and-conditions/">Conditions d'utilisation</a>
+      <a href="/;contact">Contact</a>
     </div>
   </div>
 
