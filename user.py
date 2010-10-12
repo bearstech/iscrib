@@ -29,7 +29,6 @@ from ikaaro.autoform import TextWidget
 from ikaaro.registry import register_resource_class
 from ikaaro.user import User as BaseUser
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
-from ikaaro.utils import generate_password
 
 
 class User_ConfirmRegistration(AutoForm):

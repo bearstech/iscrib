@@ -17,24 +17,25 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import get_version, get_abspath
-from itools.gettext import register_domain
 
 # Import from ikaaro
-from ikaaro.skins import register_skin
+from ikaaro.views import IconsView
 
 # Import from iscrib
-from demo import Demo_Skin
-from root import Root
-import user
+from application import Application
 
-# Give a version
-__version__ = get_version()
 
-# Give a language
-register_domain('iscrib', get_abspath('locale'))
-register_skin('iscrib', Demo_Skin(get_abspath('ui')))
+class Root_View(IconsView):
+    access = 'is_authenticated'
 
-# Silent Pyflakes
-Root
-user
+    
+    def get_namespace(self, resource, context):
+        items = []
+        for application in resource.search_resources(cls=Application):
+            if not application.is_allowed_to_view(context.user, application):
+                continue
+            items.append({'icon': '/ui/' + application.class_icon48,
+                'title': application.get_title(),
+                'description': application.get_property('description'),
+                'url': context.get_link(application)})
+        return {'batch': None, 'items': items}

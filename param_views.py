@@ -49,6 +49,7 @@ from formpage import FormPage
 
 
 class Param_NewInstance(NewInstance):
+    access = 'is_allowed_to_add_param'
     schema = merge_dicts(NewInstance.schema,
             file=FileDataType(mandatory=True))
     widgets = (NewInstance.widgets
@@ -364,8 +365,8 @@ class Param_RedirectToForm(GoToSpecificDocument):
     title = MSG(u"Show Form")
 
     def get_specific_document(sef, resource, context):
-        access = resource.get_access_control()
-        if access.is_allowed_to_edit(context.user, resource):
+        ac = resource.get_access_control()
+        if ac.is_allowed_to_edit(context.user, resource):
             specific_document = resource.default_form
         else:
             specific_document = context.user.name

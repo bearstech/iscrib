@@ -57,6 +57,7 @@ class LoginView(BaseLoginView):
                 goto = get_reference('./')
             else:
                 goto = referrer
+        print "goto", goto
 
         return context.come_back(INFO(u"Welcome!"), goto)
 

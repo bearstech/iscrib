@@ -21,7 +21,7 @@ from itools.database import PhraseQuery
 from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.folder_views import Folder_BrowseContent
+from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 
 # Import from iscrib
 from param import Param
@@ -93,3 +93,17 @@ class Application_BrowseContent(Folder_BrowseContent):
             return context.format_datetime(brain.ctime)
         return super(Application_BrowseContent,
                 self).get_item_value(resource, context, item, column)
+
+
+
+class Application_RedirectToParam(GoToSpecificDocument):
+    title = MSG(u"Show Application")
+
+    def get_specific_document(self, resource, context):
+        user = context.user
+        ac = resource.get_access_control()
+        for param in resource.search_resources(cls=Param):
+            for form in param.get_forms():
+                if form.name == user.name:
+                    return '{0}/{1}'.format(param.name, form.name)
+        return ''

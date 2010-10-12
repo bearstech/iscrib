@@ -24,11 +24,14 @@ from itools.gettext import MSG
 from ikaaro.access import is_admin
 from ikaaro.autoform import RTEWidget
 from ikaaro.autoform import XHTMLBody
+from ikaaro.folder import Folder
+from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.registry import register_document_type
 from ikaaro.website import WebSite
 
 # Import from iscrib
 from application_views import Application_BrowseContent
+from application_views import Application_RedirectToParam
 from form import Form
 from param import Param
 from utils_views import AutomaticEditView
@@ -37,9 +40,7 @@ from utils_views import AutomaticEditView
 class Application(WebSite):
     class_id = 'Application'
     class_title = MSG(u"Application client iScrib")
-    class_views = ['view', 'edit', 'control_panel']
-    # Rôle par défaut members au lieu de guests
-    class_roles = WebSite.class_roles[1:]
+    class_views = ['view', 'edit', 'redirect_to_param']
     class_schema = merge_dicts(WebSite.class_schema,
             homepage=XHTMLBody(source='metadata', multilingual=True,
                 parameters_schema = {'lang': String}))
@@ -49,8 +50,9 @@ class Application(WebSite):
 
     # Views
     view = Application_BrowseContent(access='is_allowed_to_edit',
-            title=MSG(u"Welcome to iScrib"))
-    edit = AutomaticEditView(access='is_admin')
+            title=MSG(u"Welcome"))
+    edit = AutomaticEditView()
+    redirect_to_param = Application_RedirectToParam()
 
 
     def init_resource(self, **kw):
@@ -61,8 +63,6 @@ class Application(WebSite):
                   it.</p>
               <p>Things you can do:</p>
               <ul>
-                <li><a href="theme/;edit">Set your logo in the top
-                    banner;</a></li>
                 <li><a
                     href="http://iscrib.demo.itaapy.com/gabarit/;download">Download
                     the ODS template;</a></li>
@@ -83,34 +83,43 @@ class Application(WebSite):
         return super(Application, self).get_document_types() + [Param]
 
 
-    def is_allowed_to_add(self, user, resource):
-        if isinstance(resource, (Param, Form)):
-            return is_admin(user, resource)
-        return super(Application, self).is_allowed_to_add(user, resource)
+    def is_allowed_to_add_param(self, user, resource):
+        return is_admin(user, resource)
+
+
+    def is_allowed_to_add_form(self, user, resource):
+        return is_admin(user, resource)
 
 
     def is_allowed_to_view(self, user, resource):
-        if isinstance(resource, (Param, Form)):
-            if user is None:
-                return False
-            if is_admin(user, resource):
-                return True
-            if isinstance(resource, Param):
-                return True
-            # Form
-            return user.name == resource.name
+        if user is None:
+            return False
+        if is_admin(user, resource):
+            return True
+        role = self.get_user_role(user.name)
+        if isinstance(resource, Param):
+            return role in ('members', 'reviewers')
+        elif isinstance(resource, Form):
+            return (role in ('members', 'reviewers')
+                    or user.name == resource.name)
         return super(Application, self).is_allowed_to_view(user, resource)
 
 
     def is_allowed_to_edit(self, user, resource):
-        if isinstance(resource, Form):
-            if user is None:
-                return False
-            if is_admin(user, resource):
-                return True
+        if user is None:
+            return False
+        if is_admin(user, resource):
+            return True
+        if isinstance(resource, (Application, Param)):
+            role = self.get_user_role(user.name)
+            return role in ('members', 'reviewers')
+        elif isinstance(resource, Form):
             return resource.name == user.name
         return super(Application, self).is_allowed_to_edit(user, resource)
 
 
+# Security
+Folder.browse_content = Folder_BrowseContent(access='is_admin')
+Folder.preview_content = Folder_PreviewContent(access='is_admin')
 
 register_document_type(Application, WebSite.class_id)

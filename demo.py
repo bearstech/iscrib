@@ -80,6 +80,8 @@ class Demo(Application):
     class_id = 'Demo'
     class_title = MSG(u"Site de démo iScrib")
     class_skin = 'ui/iscrib'
+    # Rôle par défaut members au lieu de guests
+    class_roles = WebSite.class_roles[1:]
 
     # Views
     view = Application_BrowseContent(access='is_allowed_to_view',
