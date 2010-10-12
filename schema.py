@@ -33,6 +33,10 @@ from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import make_enumerate
 
 
+ERR_BAD_PAGE = (u'In schema, line {line}, page "{page}" does not match '
+        u'variable "{name}".')
+
+
 dt_mapping = {
     'boolean': EnumBoolean,
     'dec': NumDecimal,
@@ -169,3 +173,17 @@ class Schema(CSV):
     class_handler = SchemaHandler
     class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
+
+
+    def init_resource(self, body=None, filename=None, extension=None, **kw):
+        super(Schema, self).init_resource(body=body, filename=filename,
+                extension=extension, **kw)
+        handler = self.handler
+        # Consistency check
+        for lineno, row in enumerate(handler.get_rows()):
+            name = row.get_value('name')
+            page = row.get_value('page_number')
+            pages = page.split(',')
+            if name[0] not in pages:
+                raise ValueError, ERR_BAD_PAGE.format(line=lineno+1,
+                        page=page, name=name)
