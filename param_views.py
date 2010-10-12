@@ -248,12 +248,15 @@ class Param_Register(Param_View):
         added = []
         for lineno, line in enumerate(new_users.splitlines()):
             lastname, email = parseaddr(line)
+            try:
+                email = email.encode('ascii')
+            except UnicodeEncodeError:
+                email = None
             if not email:
                 context.commit = False
                 message = u"Unrecognized line {lineno}: {line}"
-                context.message = ERROR(message, lineno=lineno, line=line+1)
+                context.message = ERROR(message, lineno=lineno+1, line=line)
                 return
-            lastname = unicode(lastname, 'utf8')
             # Is the user already known?
             user = root.get_user_from_login(email)
             if user is None:
