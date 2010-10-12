@@ -7,7 +7,8 @@
   <table>
     <tbody>
       <tr>
-        <th>New Users (${allowed_users} allowed)</th>
+        <th>New Users<stl:inline stl:if="max_users"> (${allowed_users}
+          allowed)</stl:inline></th>
         <th>Registered Users</th>
       </tr>
       <tr>
