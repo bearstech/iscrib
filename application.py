@@ -24,9 +24,13 @@ from itools.gettext import MSG
 from ikaaro.access import is_admin
 from ikaaro.autoform import RTEWidget
 from ikaaro.autoform import XHTMLBody
+from ikaaro.control_panel import ControlPanel
 from ikaaro.folder import Folder
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.registry import register_document_type
+from ikaaro.resource_ import DBResource
+from ikaaro.resource_views import DBResource_Links, DBResource_Backlinks
+from ikaaro.revisions_views import DBResource_CommitLog
 from ikaaro.website import WebSite
 
 # Import from iscrib
@@ -40,7 +44,7 @@ from utils_views import AutomaticEditView
 class Application(WebSite):
     class_id = 'Application'
     class_title = MSG(u"Application client iScrib")
-    class_views = ['view', 'edit', 'redirect_to_param']
+    class_views = WebSite.class_views + ['redirect_to_param']
     class_schema = merge_dicts(WebSite.class_schema,
             homepage=XHTMLBody(source='metadata', multilingual=True,
                 parameters_schema = {'lang': String}))
@@ -53,6 +57,8 @@ class Application(WebSite):
             title=MSG(u"Welcome"))
     edit = AutomaticEditView()
     redirect_to_param = Application_RedirectToParam()
+    # Security
+    control_panel = ControlPanel(access='is_admin')
 
 
     def init_resource(self, **kw):
@@ -84,11 +90,32 @@ class Application(WebSite):
 
 
     def is_allowed_to_add_param(self, user, resource):
-        return is_admin(user, resource)
+        # XXX
+        #return is_admin(user, resource)
+        return super(Application, self).is_allowed_to_add(user, resource)
 
 
     def is_allowed_to_add_form(self, user, resource):
         return is_admin(user, resource)
+
+
+    def is_allowed_to_view_application(self, user, resource):
+        if user is None:
+            return False
+        if is_admin(user, resource):
+            return True
+        param_name = resource.redirect_to_param.get_param_name(user,
+                resource)
+        return param_name is not None
+
+
+    def is_allowed_to_view_param(self, user, resource):
+        if user is None:
+            return False
+        if is_admin(user, resource):
+            return True
+        form_name = resource.redirect_to_form.get_form_name(user, resource)
+        return form_name is not None
 
 
     def is_allowed_to_view(self, user, resource):
@@ -121,5 +148,8 @@ class Application(WebSite):
 # Security
 Folder.browse_content = Folder_BrowseContent(access='is_admin')
 Folder.preview_content = Folder_PreviewContent(access='is_admin')
+DBResource.links = DBResource_Links(access='is_admin')
+DBResource.backlinks = DBResource_Backlinks(access='is_admin')
+DBResource.commit_log = DBResource_CommitLog(access='is_admin')
 
 register_document_type(Application, WebSite.class_id)

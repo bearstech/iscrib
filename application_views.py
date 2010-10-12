@@ -98,14 +98,20 @@ class Application_BrowseContent(Folder_BrowseContent):
 
 
 class Application_RedirectToParam(GoToSpecificDocument):
+    access = 'is_allowed_to_view_application'
     title = MSG(u"Show Application")
 
-    def get_specific_document(self, resource, context):
-        user = context.user
+
+    def get_param_name(self, user, resource):
         ac = resource.get_access_control()
         for param in resource.search_resources(cls=Param):
+            if ac.is_allowed_to_edit(user, param):
+                return param.name
             for form in param.get_forms():
                 if form.name == user.name:
-                    return '{0}/{1}'.format(param.name, form.name)
-        context.message = ERROR(u"No application found.")
-        return ''
+                    return param.name
+        return None
+
+
+    def get_specific_document(self, resource, context):
+        return self.get_param_name(context.user, resource)

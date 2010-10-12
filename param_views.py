@@ -362,12 +362,18 @@ class Param_Login(LoginView):
 
 
 class Param_RedirectToForm(GoToSpecificDocument):
+    access = 'is_allowed_to_view_param'
     title = MSG(u"Show Form")
 
-    def get_specific_document(sef, resource, context):
+
+    def get_form_name(self, user, resource):
         ac = resource.get_access_control()
-        if ac.is_allowed_to_edit(context.user, resource):
-            specific_document = resource.default_form
-        else:
-            specific_document = context.user.name
-        return specific_document
+        if ac.is_allowed_to_edit(user, resource):
+            return resource.default_form
+        if resource.get_resource(user.name, soft=True) is not None:
+            return user.name
+        return None
+
+
+    def get_specific_document(self, resource, context):
+        return self.get_form_name(context.user, resource)
