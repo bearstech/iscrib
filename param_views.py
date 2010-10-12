@@ -248,11 +248,12 @@ class Param_Register(Param_View):
         added = []
         for lineno, line in enumerate(new_users.splitlines()):
             lastname, email = parseaddr(line)
-            if not lastname or not email:
+            if not email:
                 context.commit = False
                 message = u"Unrecognized line {lineno}: {line}"
-                context.message = ERROR(message, lineno=lineno, line=line)
+                context.message = ERROR(message, lineno=lineno, line=line+1)
                 return
+            lastname = unicode(lastname, 'utf8')
             # Is the user already known?
             user = root.get_user_from_login(email)
             if user is None:
@@ -268,7 +269,7 @@ class Param_Register(Param_View):
             if resource.get_resource(username, soft=True) is not None:
                 continue
             resource.make_resource(username, Form,
-                    title={'en': unicode(lastname)})
+                    title={'en': lastname})
             added.append(username)
 
         if not added:
