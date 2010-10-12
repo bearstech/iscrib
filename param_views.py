@@ -281,7 +281,7 @@ class Param_Register(Param_View):
 
         context.body['new_users'] = u""
 
-        message = u"{n} users added. See below to send them the form URL"
+        message = u"{n} users added. See below to send them the form URL."
         context.message = INFO(message, n=len(added))
 
 

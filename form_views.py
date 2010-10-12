@@ -47,6 +47,11 @@ class Form_View(STLForm):
     hidden_fields = []
 
 
+    def get_page_title(self, resource, context):
+        return u"{0}: {1}".format(resource.parent.get_title(),
+                resource.get_title())
+
+
     def get_hidden_fields(self, resource, context):
         schema = resource.get_schema()
         handler = resource.get_form().handler

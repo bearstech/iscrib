@@ -127,7 +127,7 @@ Your password: {password}""")
 
 
     def send_autoregistration(self, context, email, site_uri, password):
-        site_name = context.site_root.get_title()
+        site_name = context.resource.get_site_root().get_title()
         text = self.autoregistration_text.gettext(site_name=site_name,
                 site_uri=site_uri, email=email, password=password)
         context.root.send_email(email, self.registration_subject.gettext(),
