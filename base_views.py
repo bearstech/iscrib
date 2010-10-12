@@ -16,6 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
+from itools.core import merge_dicts
 from itools.datatypes import Email
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
@@ -23,9 +24,45 @@ from itools.web import INFO, ERROR
 
 # Import from ikaaro
 from ikaaro.resource_ import DBResource
-from ikaaro.resource_views import LoginView as BaseLoginView
+from ikaaro.resource_views import DBResource_Edit, LoginView as BaseLoginView
+from ikaaro.workflow import state_widget, WorkflowAware, StateEnumerate
 
 # Import from iscrib
+
+
+class AutomaticEditView(DBResource_Edit):
+    base_schema = DBResource_Edit.schema
+
+    def _get_schema(self, resource, context):
+        schema = merge_dicts(DBResource_Edit.schema, resource.edit_schema)
+        if isinstance(resource, WorkflowAware):
+            schema['state'] = StateEnumerate(resource=resource,
+                    context=context)
+        return schema
+
+
+    def _get_widgets(self, resource, context):
+        widgets = self.widgets + resource.edit_widgets
+        # Add state widget in bottom
+        if isinstance(resource, WorkflowAware):
+            widgets.append(state_widget)
+        return widgets
+
+
+    def get_value(self, resource, context, name, datatype):
+        if name == 'state':
+            return resource.get_workflow_state()
+        return DBResource_Edit.get_value(self, resource, context, name,
+                datatype)
+
+
+    def set_value(self, resource, context, name, form):
+        schema = self.get_schema(resource, context)
+        datatype = schema[name]
+        if getattr(datatype, 'ignore', False) is True:
+            return False
+        return DBResource_Edit.set_value(self, resource, context, name, form)
+
 
 
 # Pas d'héritage pour pas de méthode "action"

@@ -19,7 +19,6 @@
 from itools.core import merge_dicts
 from itools.database import PhraseQuery
 from itools.gettext import MSG
-from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
@@ -29,7 +28,9 @@ from param import Param
 
 
 class Application_BrowseContent(Folder_BrowseContent):
+    access = 'is_allowed_to_edit'
     template = '/ui/iscrib/application/view.xml'
+    title = MSG(u"View")
     search_template = None
 
     table_columns = [

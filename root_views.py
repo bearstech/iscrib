@@ -18,6 +18,7 @@
 
 # Import from itools
 from itools.gettext import MSG
+from itools.web import BaseView
 
 # Import from ikaaro
 from ikaaro.views import IconsView
@@ -26,7 +27,21 @@ from ikaaro.views import IconsView
 from application import Application
 
 
-class Root_View(IconsView):
+class Root_View(BaseView):
+    access = True
+    title = MSG(u"View")
+
+
+    def GET(self, resource, context):
+        homepage = resource.get_property('homepage')
+        if homepage is None:
+            # Avoid response abort
+            return ''
+        return homepage
+
+
+
+class Root_Clients(IconsView):
     access = 'is_authenticated'
     title = MSG(u"Clients")
 

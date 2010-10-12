@@ -22,7 +22,6 @@ from itools.web import INFO
 
 # Import from ikaaro
 from ikaaro.registry import register_document_type
-from ikaaro.skins import Skin
 from ikaaro.website import WebSite
 
 # Import from iscrib

@@ -48,6 +48,9 @@ from form import Form
 from formpage import FormPage
 
 
+ERR_PAGE_NAME = u'Page names must be in the form "C Title..."'
+
+
 class Param_NewInstance(NewInstance):
     access = 'is_allowed_to_add_param'
     schema = merge_dicts(NewInstance.schema,
@@ -92,8 +95,7 @@ class Param_NewInstance(NewInstance):
             title = table.get_name()
             if title[1] != u" ":
                 context.commit = False
-                message = u'Page names must be in the form "C Title..."'
-                context.message = ERROR(message)
+                context.message = ERROR(ERR_PAGE_NAME)
                 return
             page_number, _ = title.split(u" ", 1)
             name = 'page' + page_number.lower().encode()

@@ -22,8 +22,7 @@ from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.access import is_admin
-from ikaaro.autoform import RTEWidget
-from ikaaro.autoform import XHTMLBody
+from ikaaro.autoform import XHTMLBody, RTEWidget
 from ikaaro.control_panel import ControlPanel
 from ikaaro.folder import Folder
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
@@ -36,9 +35,9 @@ from ikaaro.website import WebSite
 # Import from iscrib
 from application_views import Application_BrowseContent
 from application_views import Application_RedirectToParam
+from base_views import AutomaticEditView
 from form import Form
 from param import Param
-from utils_views import AutomaticEditView
 
 
 class Application(WebSite):
@@ -54,8 +53,7 @@ class Application(WebSite):
     edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]
 
     # Views
-    view = Application_BrowseContent(access='is_allowed_to_edit',
-            title=MSG(u"Welcome"))
+    view = Application_BrowseContent()
     edit = AutomaticEditView()
     redirect_to_param = Application_RedirectToParam()
     # Security

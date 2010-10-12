@@ -16,22 +16,45 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
+from itools.core import merge_dicts
+from itools.datatypes import String
+from itools.gettext import MSG
 
 # Import from ikaaro
+from ikaaro.autoform import XHTMLBody, RTEWidget
 from ikaaro.root import Root as BaseRoot
 
 # Import from iscrib
 from application import Application
-from root_views import Root_View
+from base_views import AutomaticEditView
+from root_views import Root_View, Root_Clients
 
 
 class Root(BaseRoot):
     class_id = 'iScrib'
-    class_views = BaseRoot.class_views
+    class_schema = merge_dicts(BaseRoot.class_schema,
+            homepage=XHTMLBody(source='metadata', multilingual=True,
+                parameters_schema = {'lang': String}))
+    class_views = BaseRoot.class_views + ['clients']
     class_skin = 'ui/iscrib'
+
+    edit_schema = {'homepage': XHTMLBody(multilingual=True)}
+    edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]
 
     # Views
     view = Root_View()
+    edit = AutomaticEditView()
+    clients = Root_Clients()
+
+
+    def init_resource(self, email, password, admins=('0',)):
+        super(Root, self).init_resource(email, password, admins=admins)
+        value = self.class_schema['homepage'].decode("""
+                <h2>Welcome to iScrib!</h2>""")
+        self.set_property('homepage', value, language='en')
+        theme = self.get_resource('theme')
+        # Laisse voir le nom du website
+        theme.set_property('logo', None)
 
 
     def get_document_types(self):
