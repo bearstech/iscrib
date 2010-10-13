@@ -786,9 +786,10 @@ msgstr "Pour corriger"
 
 #: ../form_views.py:41
 msgid ""
-"To export to a database, contact <a href=\"http://www.itaapy.com/contact"
+"To export to a SQL database, contact <a href=\"http://www.itaapy.com/contact"
 "\">Itaapy</a>"
-msgstr ""
+msgstr "Pour exporter dans une base de données SQL, contactez <a "
+"href=\"http://www.itaapy.com/contact\">Itaapy</a>"
 
 #: ../schema.py:106
 msgid "Type"

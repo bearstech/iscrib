@@ -23,7 +23,6 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from ikaaro
 from ikaaro.autoform import XHTMLBody
-from ikaaro.access import is_admin
 
 # Import from iscrib
 from datatypes import Numeric, EnumBoolean
@@ -38,7 +37,7 @@ MSG_SAVED_ERROR = ERROR(u"WARNING! There are missing or invalid "
 MSG_SAVED = INFO(u"The page is saved. Check your input in the "
         u'<a href=";send">Input Control</a> tab.')
 MSG_SENT = INFO(u"Your form was successfully sent.")
-MSG_EXPORTED_ITAAPY = ERROR(u'To export to a database, contact <a '
+MSG_EXPORTED_ITAAPY = ERROR(u'To export to a SQL database, contact <a '
         u'href="http://www.itaapy.com/contact">Itaapy</a>')
 
 
@@ -218,13 +217,15 @@ class Form_Send(STLForm):
                 'infos': infos}
         # ACLs
         user = context.user
-        namespace['is_admin'] = is_admin(user, resource)
+        ac = resource.get_access_control()
+        is_allowed_to_export = ac.is_allowed_to_export(user, resource)
+        namespace['is_allowed_to_export'] = is_allowed_to_export
         # State
         namespace['statename'] = statename = resource.get_statename()
         namespace['form_state'] = MSG(resource.get_form_state())
         # Transitions
         namespace['can_send'] = statename == DRAFT and not errors
-        namespace['can_export'] = not errors
+        namespace['can_export'] = is_allowed_to_export and not errors
         # Debug
         namespace['debug'] = context.get_form_value('debug')
         # Print

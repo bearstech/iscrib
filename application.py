@@ -38,6 +38,7 @@ from application_views import Application_RedirectToParam
 from base_views import AutomaticEditView
 from form import Form
 from param import Param
+from workflow import SENT, EXPORTED, MODIFIED
 
 
 class Application(WebSite):
@@ -144,6 +145,18 @@ class Application(WebSite):
                 return role in ('members', 'reviewers')
             return resource.name == user.name
         return super(Application, self).is_allowed_to_edit(user, resource)
+
+
+    def is_allowed_to_export(self, user, resource):
+        if user is None:
+            return False
+        if is_admin(user, resource):
+            return True
+        state = resource.get_workflow_state()
+        if state not in (SENT, EXPORTED, MODIFIED):
+            return False
+        role = self.get_user_role(user.name)
+        return role in ('members', 'reviewers')
 
 
 # Security
