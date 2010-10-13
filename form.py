@@ -243,7 +243,7 @@ class Form(File):
     ######################################################################
     # Security
     def is_ready(self):
-        return self.get_workflow_state() == 'pending'
+        return self.get_workflow_state() == SENT
 
 
     def get_form_state(self):

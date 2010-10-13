@@ -324,7 +324,7 @@ msgstr ""
 msgid "Decimal"
 msgstr ""
 
-#: ../form_views.py:247
+#: ../form_views.py:257
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:172
+#: ../form_views.py:177
 msgid "Input Control"
 msgstr "Contrôle de saisie"
 
@@ -484,11 +484,11 @@ msgstr "Champ obligatoire"
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
-#: ../workflow.py:34
+#: ../workflow.py:30
 msgid "Modified"
 msgstr "Modifié"
 
-#: ../workflow.py:35 ../datatypes.py:759
+#: ../workflow.py:31 ../datatypes.py:759
 msgid "Modified after export"
 msgstr "Modifié après export"
 
@@ -589,7 +589,7 @@ msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr "Imprimer (dans une nouvelle fenêtre)"
 
-#: ../form_views.py:280
+#: ../form_views.py:290
 msgid "Print form"
 msgstr "Impression du formulaire"
 
@@ -643,10 +643,10 @@ msgstr "Enregistrer"
 msgid "Schema"
 msgstr ""
 
-#: ../ui/form/send.xml.en:22
+#: ../ui/form/send.xml.en:23
 msgctxt "button"
-msgid "Send your form"
-msgstr "Envoyer votre formulaire"
+msgid "Send"
+msgstr "Envoyer"
 
 #: ../datatypes.py:757
 msgid "Sent"
@@ -729,7 +729,7 @@ msgstr ""
 msgid "The given username is not an e-mail address."
 msgstr "Le nom donné n'est pas une adresse de courriel valide."
 
-#: ../form_views.py:37
+#: ../form_views.py:38
 msgid ""
 "The page is saved. Check your input in the <a href=\";send\">Input Control</"
 "a> tab."
@@ -784,6 +784,12 @@ msgctxt "link"
 msgid "To correct"
 msgstr "Pour corriger"
 
+#: ../form_views.py:41
+msgid ""
+"To export to a database, contact <a href=\"http://www.itaapy.com/contact"
+"\">Itaapy</a>"
+msgstr ""
+
 #: ../schema.py:106
 msgid "Type"
 msgstr ""
@@ -818,7 +824,7 @@ msgstr "Voir"
 msgid "Vrai"
 msgstr ""
 
-#: ../form_views.py:35
+#: ../form_views.py:36
 msgid "WARNING! There are missing or invalid fields."
 msgstr "ATTENTION ! Il y a des champs manquants ou invalides."
 
@@ -838,11 +844,10 @@ msgstr "Bienvenue !"
 #: ../ui/form/send.xml.en:20
 msgctxt "paragraph"
 msgid ""
-"When you have finished filling the form, you can click the button \"Send "
-"your form\"."
+"When you have finished filling the form, you can click the \"Send\" button."
 msgstr ""
 "Quand vous avez terminé votre saisie, vous pouvez cliquer sur le bouton « "
-"Envoyer votre formulaire »."
+"Envoyer »."
 
 #: ../param_views.py:161 ../schema.py:89
 msgid "Yes"
@@ -927,7 +932,7 @@ msgstr ""
 "Votre compte a été créé ! Vous pouvez créer une application de collecte "
 "d'informations"
 
-#: ../form_views.py:252
+#: ../form_views.py:262
 msgid "Your form is not finished yet."
 msgstr "Votre formulaire n'est pas encore terminé."
 
@@ -935,7 +940,7 @@ msgstr "Votre formulaire n'est pas encore terminé."
 msgid "Your form was successfully exported."
 msgstr "Votre formulaire a bien été exporté."
 
-#: ../demo.py:47
+#: ../form_views.py:40 ../demo.py:47
 msgid "Your form was successfully sent."
 msgstr "Votre formulaire a bien été envoyé."
 
@@ -1114,15 +1119,15 @@ msgstr ""
 msgid "white-space: pre"
 msgstr ""
 
-#: ../form_views.py:51
+#: ../form_views.py:56
 msgid "{0}: {1}"
 msgstr ""
 
-#: ../form_views.py:189
+#: ../form_views.py:194
 msgid "{name} invalid"
 msgstr "{name} invalide"
 
-#: ../form_views.py:186
+#: ../form_views.py:191
 msgid "{name} is not equal to {sum}"
 msgstr "{name} n'est pas égal à {sum}"
 
@@ -1144,3 +1149,7 @@ msgstr ""
 #~ "See source file of\n"
 #~ "      this form"
 #~ msgstr "Voir le fichier source de ce formulaire"
+
+#~ msgctxt "button"
+#~ msgid "Send your form"
+#~ msgstr "Envoyer votre formulaire"

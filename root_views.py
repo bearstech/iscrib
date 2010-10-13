@@ -45,7 +45,7 @@ class Root_Clients(IconsView):
     access = 'is_authenticated'
     title = MSG(u"Clients")
 
-    
+
     def get_namespace(self, resource, context):
         items = []
         for application in resource.search_resources(cls=Application):

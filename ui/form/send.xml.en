@@ -17,10 +17,10 @@
 
   <stl:block stl:if="not first_time">
     <form action="" method="post" stl:if="can_send">
-      <p>When you have finished filling the form, you can click the button
-      "Send your form".</p>
-      <button value="send" class="button-ok" name="action" type="submit">Send
-      your form</button>
+      <p>When you have finished filling the form, you can click the "Send"
+      button.</p>
+      <button value="send" class="button-ok" name="action"
+      type="submit">Send</button>
     </form>
 
     <p stl:if="controls/errors">You must correct all of the errors below to

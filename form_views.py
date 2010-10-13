@@ -29,13 +29,18 @@ from ikaaro.access import is_admin
 from datatypes import Numeric, EnumBoolean
 from utils import get_page_number
 from widgets import is_mandatory_filled
+from workflow import DRAFT, SENT#, EXPORTED
 
 
 # Messages
-MSG_ERREUR_SAUVEGARDE = ERROR(u"WARNING! There are missing or invalid "
+MSG_SAVED_ERROR = ERROR(u"WARNING! There are missing or invalid "
         u"fields.")
-MSG_SAUVEGARDE = INFO(u"The page is saved. Check your input in the "
+MSG_SAVED = INFO(u"The page is saved. Check your input in the "
         u'<a href=";send">Input Control</a> tab.')
+MSG_SENT = INFO(u"Your form was successfully sent.")
+MSG_EXPORTED_ITAAPY = ERROR(u'To export to a database, contact <a '
+        u'href="http://www.itaapy.com/contact">Itaapy</a>')
+
 
 
 class Form_View(STLForm):
@@ -157,10 +162,10 @@ class Form_View(STLForm):
         context.database.change_resource(resource)
         # Transmit list of errors when returning GET
         if bad_types:
-            context.message = MSG_ERREUR_SAUVEGARDE
+            context.message = MSG_SAVED_ERROR
             context.bad_types = bad_types
         else:
-            message = MSG_SAUVEGARDE.gettext().encode('utf8')
+            message = MSG_SAVED.gettext().encode('utf8')
             context.message = [XHTMLBody.decode(message)]
 
 
@@ -214,11 +219,11 @@ class Form_Send(STLForm):
         # ACLs
         user = context.user
         namespace['is_admin'] = is_admin(user, resource)
-        # Workflow - State
+        # State
         namespace['statename'] = statename = resource.get_statename()
         namespace['form_state'] = MSG(resource.get_form_state())
-        # Workflow - Transitions
-        namespace['can_send'] = statename == 'private' and not errors
+        # Transitions
+        namespace['can_send'] = statename == DRAFT and not errors
         namespace['can_export'] = not errors
         # Debug
         namespace['debug'] = context.get_form_value('debug')
@@ -232,13 +237,18 @@ class Form_Send(STLForm):
     def action_send(self, resource, context, form):
         """Ce qu'il faut faire quand le formulaire est soumis.
         """
-        raise NotImplementedError
+        resource.set_workflow_state(SENT)
+
+        context.message = MSG_SENT
 
 
     def action_export(self, resource, context, form):
         """Ce qu'il faut faire quand le formulaire est exporté.
         """
-        raise NotImplementedError
+        #resource.set_workflow_state(EXPORTED)
+
+        message = MSG_EXPORTED_ITAAPY.gettext().encode('utf8')
+        context.message = [XHTMLBody.decode(message)]
 
 
 

@@ -26,10 +26,6 @@ SENT = 'pending'
 EXPORTED = 'public'
 MODIFIED = 'modified'
 
-# Transitions
-SEND = 'request'
-EXPORT = 'accept'
-
-# Simpler that comparing publish date to modification date
+# Simpler than comparing publish date to modification date
 workflow.add_state(MODIFIED, title=u"Modified",
         description=u"Modified after export")
