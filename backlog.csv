@@ -1,21 +1,3 @@
 "Use Case";"Cost";"Sprint";"Progress (%)";"Issues";" (1, 2, 3, 5, 8, 13, 21, 34, 55, 89)"
-"Garder l'ods utilisé avec un titre en référence au nom du formulaire";1;1;100;;
-"vue principale qui liste les derniers formulaires créés:
-Formulaire | Fichier | Auteur | Date de création";3;1;100;;
-"Au-dessus de cette vue, un bandeau à deux icônes :
-- télécharger gabarit ODS
-- Créer un formulaire à partir de votre ODS";1;1;100;;
-"Depuis un formulaire cliquer pour voir l'ODS utilisé (= voir le source)";1;1;100;;
-"Donner une couleur de fond à tous les niveaux de titre";1;1;100;;
-"Supprimer la taille fixe du template";2;1;100;;
-"Couleur et style colonnes pour onglets dico et contrôles du gabarit.ods ";;1;;;
-"Faire que la vue actuelle soit visible sans authentification ";1;1;100;;
-"Faire que la génération d'appli et vue des appli générés déclanche un enregistrement ";5;1;100;;
-"Cacher le footer (CSS)";;;100;"#973";
-"Ajouter homepage description marketting";;;50;;
-"Mettre en français (prévoir aussi portugais et chinois)";;;100;;
-"après validation du compte, rediriger sur la home";;;;;
-"Cacher les tabs à anonyme";;;100;;
-"donner rôle member par défaut";;;;;
-"Ajouter google analytics";;;100;"#975";
-"Faire un logo";;;;;
+"virer ;contact dans footer template";;;;;
+"corriger export param";;;;;
