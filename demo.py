@@ -44,12 +44,12 @@ class ParamForm_Send(Form_Send):
 
 
     def action_send(self, resource, context, form):
-        message = INFO(u"Your report was successfully sent.")
+        message = INFO(u"Your form was successfully sent.")
         context.message = message
 
 
     def action_export(self, resource, context, form):
-        message = INFO(u"Your report was successfully exported.")
+        message = INFO(u"Your form was successfully exported.")
         context.message = message
 
 

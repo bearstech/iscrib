@@ -14,8 +14,6 @@
     <input value="${page_number}" name="page_number" type="hidden"/>
     <input value="${field/value}" stl:repeat="field hidden_fields"
       name="${field/name}" type="hidden"/>
-    <a href="parameters/;download" id="form-source" title="See source file of
-      this form" stl:if="not skip_print">See source</a>
 
     <p id="form-toolbar" stl:if="not skip_print">
       <a id="button-control" href=";envoyer" class="button

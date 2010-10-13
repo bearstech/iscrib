@@ -31,5 +31,5 @@ SEND = 'request'
 EXPORT = 'accept'
 
 # Simpler that comparing publish date to modification date
-workflow.add_state(MODIFIED, title=u"Modifié",
-        description=u"Modifié après export")
+workflow.add_state(MODIFIED, title=u"Modified",
+        description=u"Modified after export")

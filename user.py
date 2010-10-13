@@ -119,7 +119,7 @@ class User(BaseUser):
     autoregistration_subject = BaseUser.registration_subject
     autoregistration_text = MSG(u"""You are now registered as a user of {site_name}.
 
-You can follow this link {site_uri} to access the form.
+You can follow this link <{site_uri}> to access the form.
 
 Your e-mail address {email} is your identifier.
 
@@ -133,7 +133,6 @@ Your password: {password}""")
         context.root.send_email(email, self.registration_subject.gettext(),
                                 text=text)
         return password
-
 
 
 

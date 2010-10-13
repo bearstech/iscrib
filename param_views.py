@@ -312,7 +312,7 @@ class Param_Login(LoginView):
     def action_register(self, resource, context, form):
         email = form['username'].strip()
         if not Email.is_valid(email):
-            message = u'The given username is not an email address.'
+            message = u'The given username is not an e-mail address.'
             context.message = ERROR(message)
             return
 

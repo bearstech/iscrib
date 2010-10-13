@@ -76,7 +76,7 @@ class LoginView(BaseLoginView):
 
         user = context.root.get_user_from_login(email)
         if user is None or not user.authenticate(password, clear=True):
-            message = u'The email or the password is incorrect.'
+            message = u'The e-mail or the password is incorrect.'
             context.message = ERROR(message)
             return
 
@@ -102,7 +102,7 @@ class LoginView(BaseLoginView):
     def action_register(self, resource, context, form):
         email = form['username'].strip()
         if not Email.is_valid(email):
-            message = u'The given username is not an email address.'
+            message = u'The given username is not an e-mail address.'
             context.message = ERROR(message)
             return
 

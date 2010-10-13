@@ -244,12 +244,12 @@ class Form_Send(STLForm):
 
 class Form_Export(BaseView):
     access = 'is_allowed_to_view'
-    title = MSG(u"Download report")
+    title = MSG(u"Download form")
 
 
     def GET(self, resource, context, encoding='cp1252'):
         if not resource.is_ready():
-            return MSG(u"Your report is not finished "
+            return MSG(u"Your form is not finished "
                     u"yet.").gettext().encode('utf8')
 
         # construct the csv
@@ -277,7 +277,7 @@ class Form_Export(BaseView):
 
 class Form_Print(STLView):
     access = 'is_allowed_to_view'
-    title=MSG(u"Print report")
+    title=MSG(u"Print form")
     template = '/ui/iscrib/form/print.xml'
     pages = []
 
