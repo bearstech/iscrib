@@ -269,7 +269,10 @@ class Form(File):
 
 
     def is_first_time(self):
-        return self.get_form().handler.timestamp is None
+        handler = self.get_form().handler
+        # Force loading
+        handler._raw_fields
+        return handler.timestamp is None
 
 
     @staticmethod

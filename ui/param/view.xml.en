@@ -8,8 +8,8 @@
   of ${max_users} allowed</stl:inline>.</p>
 
   <ul>
-    <li><a href=";export">Export collected data</a></li>
     <li stl:if="allowed_users"><a href=";register">Register users</a></li>
+    <li><a href=";export">Export collected data</a></li>
   </ul>
 
   <!-- Batch -->

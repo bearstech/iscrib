@@ -30,15 +30,13 @@
           style="border-left: 1px solid #ccc">
           ${batch}
           ${table}
+          <p>You can send this URL to your users: <a
+            href="${url_user}">${url_user}</a></p>
+          <p>You can collect data at this URL: <a
+            href="${url_admin}">${url_admin}</a></p>
         </td>
       </tr>
     </tbody>
   </table>
-
-  <p>You can send this URL to your users: <a
-    href="${url_user}">${url_user}</a></p>
-
-  <p>You can collect data at this URL: <a
-    href="${url_admin}">${url_admin}</a></p>
 
 </stl:block>

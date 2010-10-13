@@ -259,6 +259,8 @@ class Param_Register(Param_View):
                 message = u"Unrecognized line {lineno}: {line}"
                 context.message = ERROR(message, lineno=lineno+1, line=line)
                 return
+            if type(lastname) is str:
+                lastname = unicode(lastname)
             # Is the user already known?
             user = root.get_user_from_login(email)
             if user is None:
@@ -269,8 +271,7 @@ class Param_Register(Param_View):
             # Add the form
             if resource.get_resource(username, soft=True) is not None:
                 continue
-            resource.make_resource(username, Form,
-                    title={'en': lastname})
+            resource.make_resource(username, Form, title={'en': lastname})
             added.append(username)
 
         if not added:
@@ -279,7 +280,7 @@ class Param_Register(Param_View):
 
         context.body['new_users'] = u""
 
-        message = u"{n} users added. See below to send them the form URL."
+        message = u"{n} user(s) added. See below to send them the form URL."
         context.message = INFO(message, n=len(added))
 
 

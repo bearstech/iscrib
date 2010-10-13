@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-13 12:10+CET\n"
+"POT-Creation-Date: 2010-10-13 13:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "%d"
 msgstr ""
 
-#: ../form.py:381
+#: ../form.py:384
 msgid "'%s' = '%s'"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
-#: ../application.py:45
+#: ../application.py:46
 msgid "Application client iScrib"
 msgstr ""
 
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Decimal"
 msgstr ""
 
-#: ../form_views.py:257
+#: ../form_views.py:258
 msgid "Download form"
 msgstr ""
 
@@ -244,7 +244,7 @@ msgstr ""
 msgid "F"
 msgstr ""
 
-#: ../form.py:376
+#: ../form.py:379
 msgid "Faux"
 msgstr ""
 
@@ -274,7 +274,7 @@ msgid "HHH:MM"
 msgstr ""
 
 #: ../root.py:42
-#: ../application.py:53
+#: ../application.py:54
 msgid "Homepage"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgstr ""
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:177
+#: ../form_views.py:176
 msgid "Input Control"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
-#: ../form_views.py:290
+#: ../form_views.py:291
 msgid "Print form"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgstr ""
 msgid "The given username is not an e-mail address."
 msgstr ""
 
-#: ../form_views.py:38
+#: ../form_views.py:37
 msgid "The page is saved. Check your input in the <a href=\";send\">Input Control</a> tab."
 msgstr ""
 
@@ -489,8 +489,8 @@ msgstr ""
 msgid "Titre"
 msgstr ""
 
-#: ../form_views.py:41
-msgid "To export to a database, contact <a href=\"http://www.itaapy.com/contact\">Itaapy</a>"
+#: ../form_views.py:40
+msgid "To export to a SQL database, contact <a href=\"http://www.itaapy.com/contact\">Itaapy</a>"
 msgstr ""
 
 #: ../schema.py:106
@@ -521,11 +521,11 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../form.py:374
+#: ../form.py:377
 msgid "Vrai"
 msgstr ""
 
-#: ../form_views.py:36
+#: ../form_views.py:35
 msgid "WARNING! There are missing or invalid fields."
 msgstr ""
 
@@ -560,7 +560,7 @@ msgstr ""
 msgid "Your account was created! You can create a collection application."
 msgstr ""
 
-#: ../form_views.py:262
+#: ../form_views.py:263
 msgid "Your form is not finished yet."
 msgstr ""
 
@@ -568,13 +568,13 @@ msgstr ""
 msgid "Your form was successfully exported."
 msgstr ""
 
-#: ../form_views.py:40
+#: ../form_views.py:39
 #: ../demo.py:47
 msgid "Your form was successfully sent."
 msgstr ""
 
 #: ../utils.py:71
-#: ../form.py:357
+#: ../form.py:360
 msgid "["
 msgstr ""
 
@@ -805,20 +805,20 @@ msgstr ""
 msgid "white-space: pre"
 msgstr ""
 
-#: ../form_views.py:56
+#: ../form_views.py:55
 msgid "{0}: {1}"
 msgstr ""
 
-#: ../form_views.py:194
+#: ../form_views.py:193
 msgid "{name} invalid"
 msgstr ""
 
-#: ../form_views.py:191
+#: ../form_views.py:190
 msgid "{name} is not equal to {sum}"
 msgstr ""
 
 #: ../param_views.py:282
-msgid "{n} users added. See below to send them the form URL."
+msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 
 #: ../ui/form/send.xml.en:33
@@ -984,7 +984,7 @@ msgctxt "link"
 msgid "<g id='6'>Input Control</g>  <g id='7'>Print this page</g>  <g id='8'>Save</g>"
 msgstr ""
 
-#: ../ui/param/view.xml.en:11
+#: ../ui/param/view.xml.en:12
 msgctxt "link"
 msgid "Export collected data"
 msgstr ""
@@ -994,7 +994,7 @@ msgctxt "link"
 msgid "Print this page"
 msgstr ""
 
-#: ../ui/param/view.xml.en:12
+#: ../ui/param/view.xml.en:11
 msgctxt "link"
 msgid "Register users"
 msgstr ""
