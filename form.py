@@ -18,6 +18,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
+from __future__ import print_function
 from decimal import InvalidOperation
 
 # Import from itools
@@ -105,7 +106,7 @@ class FormHandler(FileHandler):
 class Form(File):
     class_id = 'Form'
     class_title = MSG(u"Form")
-    class_views = ['pageA', 'envoyer', 'exporter', 'imprimer']
+    class_views = ['pageA', 'send', 'export', 'print']
     class_handler = FormHandler
     class_schema = merge_dicts(File.class_schema,
             form_state=Unicode(indexed=True, stored=True))
@@ -114,9 +115,9 @@ class Form(File):
 
     # Views
     new_instance = File_NewInstance(access='is_allowed_to_add_form')
-    envoyer = Form_Send()
-    exporter = Form_Export()
-    imprimer = Form_Print()
+    send = Form_Send()
+    export = Form_Export()
+    print = Form_Print()
 
 
     def __getattr__(self, name):

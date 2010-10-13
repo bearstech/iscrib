@@ -146,7 +146,7 @@ class Param_View(Folder_BrowseContent):
             return (brain.name, context.get_link(item_resource))
         elif column == 'state':
             return (item_resource.get_form_state(),
-                    '{0}/;envoyer'.format(context.get_link(item_resource)))
+                    '{0}/;send'.format(context.get_link(item_resource)))
         if column in ('user', 'email', 'registered'):
             user = context.root.get_user(brain.name)
             if column == 'user':

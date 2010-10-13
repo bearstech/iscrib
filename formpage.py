@@ -116,7 +116,7 @@ class FormPage(CSV):
                     elif str(column) in schema:
                         column = get_input_widget(column, form, schema,
                                 fields, context, tabindex=tabindex,
-                                readonly=readonly)
+                                readonly=readonly, skip_print=skip_print)
                     else:
                         # 0004922 Fiche école ne fonctionne plus
                         column = column.replace('\n', '')

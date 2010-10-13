@@ -35,7 +35,7 @@ from widgets import is_mandatory_filled
 MSG_ERREUR_SAUVEGARDE = ERROR(u"WARNING! There are missing or invalid "
         u"fields.")
 MSG_SAUVEGARDE = INFO(u"The page is saved. Check your input in the "
-        u"<a href=';envoyer'>Input Control</a> tab.")
+        u'<a href=";send">Input Control</a> tab.')
 
 
 class Form_View(STLForm):

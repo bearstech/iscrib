@@ -16,7 +16,7 @@
       name="${field/name}" type="hidden"/>
 
     <p id="form-toolbar" stl:if="not skip_print">
-      <a id="button-control" href=";envoyer" class="button
+      <a id="button-control" href=";send" class="button
         button-control">Input Control</a>
       <a onclick="return popup(this.href, 800, 600)" href="?view=printable"
         class="button button-print" title="Print (in a new window)"

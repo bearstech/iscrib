@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-13 09:10+CET\n"
+"POT-Creation-Date: 2010-10-13 11:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "%d"
 msgstr ""
 
-#: ../form.py:380
+#: ../form.py:381
 msgid "'%s' = '%s'"
 msgstr ""
 
@@ -195,7 +195,7 @@ msgstr ""
 msgid "<span class=\"mandatory\" title=\"Mandatory field\">"
 msgstr ""
 
-#: ../widgets.py:263
+#: ../widgets.py:264
 msgid "<span title=\"{title}\">[?]</span>"
 msgstr ""
 
@@ -356,7 +356,7 @@ msgstr ""
 msgid "F"
 msgstr ""
 
-#: ../form.py:375
+#: ../form.py:376
 msgid "Faux"
 msgstr ""
 
@@ -365,7 +365,7 @@ msgctxt "emphasis"
 msgid "For your information, with the given data."
 msgstr ""
 
-#: ../param_views.py:124 ../form.py:107
+#: ../param_views.py:124 ../form.py:108
 msgid "Form"
 msgstr ""
 
@@ -669,7 +669,7 @@ msgstr ""
 msgid "Source ODS File"
 msgstr ""
 
-#: ../form.py:130
+#: ../form.py:131
 msgid "Start filling"
 msgstr ""
 
@@ -708,7 +708,7 @@ msgstr ""
 
 #: ../form_views.py:37
 msgid ""
-"The page is saved. Check your input in the <a href=';envoyer'>Input Control</"
+"The page is saved. Check your input in the <a href=\";send\">Input Control</"
 "a> tab."
 msgstr ""
 
@@ -783,7 +783,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../form.py:373
+#: ../form.py:374
 msgid "Vrai"
 msgstr ""
 
@@ -892,7 +892,7 @@ msgstr ""
 msgid "Your form was successfully sent."
 msgstr ""
 
-#: ../utils.py:71 ../form.py:356
+#: ../utils.py:71 ../form.py:357
 msgid "["
 msgstr ""
 

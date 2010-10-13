@@ -62,7 +62,7 @@ class ParamForm(Param, Form):
     class_schema = merge_dicts(Form.class_schema, Param.class_schema)
 
     # Views
-    envoyer = ParamForm_Send()
+    send = ParamForm_Send()
 
 
     def get_catalog_values(self):

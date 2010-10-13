@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-13 09:10+CET\n"
+"POT-Creation-Date: 2010-10-13 11:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "%d"
 msgstr ""
 
-#: ../form.py:380
+#: ../form.py:381
 msgid "'%s' = '%s'"
 msgstr ""
 
@@ -214,7 +214,7 @@ msgstr "<span class=\"badtype\" title=\"Mauvaise valeur\">"
 msgid "<span class=\"mandatory\" title=\"Mandatory field\">"
 msgstr "<span class=\"mandatory\" title=\"Champ obligatoire\">"
 
-#: ../widgets.py:263
+#: ../widgets.py:264
 msgid "<span title=\"{title}\">[?]</span>"
 msgstr ""
 
@@ -375,7 +375,7 @@ msgstr ""
 msgid "F"
 msgstr ""
 
-#: ../form.py:375
+#: ../form.py:376
 msgid "Faux"
 msgstr ""
 
@@ -384,7 +384,7 @@ msgctxt "emphasis"
 msgid "For your information, with the given data."
 msgstr "Pour votre information, avec les données actuelles."
 
-#: ../param_views.py:124 ../form.py:107
+#: ../param_views.py:124 ../form.py:108
 msgid "Form"
 msgstr "Formulaire"
 
@@ -690,7 +690,7 @@ msgstr "Fichier source"
 msgid "Source ODS File"
 msgstr "Fichier ODS source"
 
-#: ../form.py:130
+#: ../form.py:131
 msgid "Start filling"
 msgstr "Commencer la saisie"
 
@@ -731,11 +731,11 @@ msgstr "Le nom donné n'est pas une adresse de courriel valide."
 
 #: ../form_views.py:37
 msgid ""
-"The page is saved. Check your input in the <a href=';envoyer'>Input Control</"
+"The page is saved. Check your input in the <a href=\";send\">Input Control</"
 "a> tab."
 msgstr ""
 "La page est enregistrée. Vérifiez votre saisie dans l'onglet <a href=';"
-"envoyer'>Contrôle de saisie</a>."
+"send'>Contrôle de saisie</a>."
 
 #: ../ui/form/send.xml.en:42
 msgctxt "emphasis"
@@ -814,7 +814,7 @@ msgstr ""
 msgid "View"
 msgstr "Voir"
 
-#: ../form.py:373
+#: ../form.py:374
 msgid "Vrai"
 msgstr ""
 
@@ -939,7 +939,7 @@ msgstr "Votre formulaire a bien été exporté."
 msgid "Your form was successfully sent."
 msgstr "Votre formulaire a bien été envoyé."
 
-#: ../utils.py:71 ../form.py:356
+#: ../utils.py:71 ../form.py:357
 msgid "["
 msgstr ""
 

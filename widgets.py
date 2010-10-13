@@ -234,7 +234,7 @@ def text_widget(context, form, datatype, name, value, schema, fields,
 
 
 def get_input_widget(name, form, schema, fields, context, tabindex=None,
-        readonly=False):
+        readonly=False, skip_print=False):
     # Always take data from the handler, we store wrong values anyway
     value = form.get_form().handler.get_value(name, schema)
     datatype = schema[name]
@@ -258,6 +258,9 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
                 fields, readonly)
     # Basic text input
     if widget is None:
-        widget = text_widget(context, form, datatype, name, value, schema, fields,
-            readonly, tabindex)
-    return widget + u'<span title="{title}">[?]</span>'.format(title=datatype.title)
+        widget = text_widget(context, form, datatype, name, value, schema,
+                fields, readonly, tabindex)
+    if skip_print is False:
+        widget += u'<span title="{title}">[?]</span>'.format(
+                title=datatype.title)
+    return widget
