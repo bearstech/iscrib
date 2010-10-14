@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-13 13:10+CET\n"
+"POT-Creation-Date: 2010-10-14 08:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "%d"
 msgstr ""
 
-#: ../form.py:384
+#: ../form.py:369
 msgid "'%s' = '%s'"
 msgstr ""
 
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Decimal"
 msgstr ""
 
-#: ../form_views.py:258
+#: ../form_views.py:267
 msgid "Download form"
 msgstr ""
 
@@ -215,12 +215,12 @@ msgstr ""
 msgid "E"
 msgstr ""
 
-#: ../param_views.py:128
-#: ../param_views.py:232
+#: ../param_views.py:130
+#: ../param_views.py:234
 msgid "E-mail"
 msgstr ""
 
-#: ../datatypes.py:755
+#: ../workflow.py:34
 msgid "Empty"
 msgstr ""
 
@@ -228,11 +228,11 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ../param_views.py:181
+#: ../param_views.py:183
 msgid "Export Collected Data"
 msgstr ""
 
-#: ../datatypes.py:758
+#: ../workflow.py:37
 msgid "Exported"
 msgstr ""
 
@@ -244,12 +244,12 @@ msgstr ""
 msgid "F"
 msgstr ""
 
-#: ../form.py:379
+#: ../form.py:364
 msgid "Faux"
 msgstr ""
 
-#: ../param_views.py:124
-#: ../form.py:108
+#: ../param_views.py:126
+#: ../form.py:107
 msgid "Form"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgstr ""
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:176
+#: ../form_views.py:178
 msgid "Input Control"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 msgid "Integer"
 msgstr ""
 
-#: ../param_views.py:126
+#: ../param_views.py:128
 msgid "Last Modified"
 msgstr ""
 
@@ -319,25 +319,20 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../param_views.py:300
+#: ../param_views.py:303
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
-#: ../workflow.py:30
-msgid "Modified"
-msgstr ""
-
-#: ../workflow.py:31
-#: ../datatypes.py:759
+#: ../workflow.py:38
 msgid "Modified after export"
 msgstr ""
 
-#: ../param_views.py:161
+#: ../param_views.py:163
 #: ../schema.py:90
 msgid "No"
 msgstr ""
 
-#: ../param_views.py:277
+#: ../param_views.py:280
 msgid "No user added."
 msgstr ""
 
@@ -354,7 +349,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../param_views.py:59
+#: ../param_views.py:61
 msgid "ODS File"
 msgstr ""
 
@@ -372,11 +367,11 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#: ../param_views.py:51
+#: ../param_views.py:53
 msgid "Page names must be in the form \"C Title...\""
 msgstr ""
 
-#: ../param_views.py:71
+#: ../param_views.py:73
 msgid "Parameters"
 msgstr ""
 
@@ -384,19 +379,19 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: ../datatypes.py:756
+#: ../workflow.py:35
 msgid "Pending"
 msgstr ""
 
-#: ../form_views.py:291
+#: ../form_views.py:300
 msgid "Print form"
 msgstr ""
 
-#: ../param_views.py:225
+#: ../param_views.py:227
 msgid "Register Users"
 msgstr ""
 
-#: ../param_views.py:129
+#: ../param_views.py:131
 msgid "Registered"
 msgstr ""
 
@@ -412,7 +407,7 @@ msgstr ""
 msgid "Schema"
 msgstr ""
 
-#: ../datatypes.py:757
+#: ../workflow.py:36
 msgid "Sent"
 msgstr ""
 
@@ -420,7 +415,7 @@ msgstr ""
 msgid "Show Application"
 msgstr ""
 
-#: ../param_views.py:368
+#: ../param_views.py:371
 msgid "Show Form"
 msgstr ""
 
@@ -444,11 +439,11 @@ msgstr ""
 msgid "Source ODS File"
 msgstr ""
 
-#: ../form.py:131
+#: ../form.py:130
 msgid "Start filling"
 msgstr ""
 
-#: ../param_views.py:125
+#: ../param_views.py:127
 msgid "State"
 msgstr ""
 
@@ -460,7 +455,7 @@ msgstr ""
 msgid "Taille de champs de saisie (par défaut identique à Représentation)"
 msgstr ""
 
-#: ../param_views.py:112
+#: ../param_views.py:114
 msgid "Test Form"
 msgstr ""
 
@@ -472,7 +467,7 @@ msgstr ""
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
-#: ../param_views.py:315
+#: ../param_views.py:318
 #: ../base_views.py:105
 msgid "The given username is not an e-mail address."
 msgstr ""
@@ -497,12 +492,12 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../param_views.py:259
+#: ../param_views.py:261
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
-#: ../param_views.py:127
-#: ../param_views.py:231
+#: ../param_views.py:129
+#: ../param_views.py:233
 msgid "User"
 msgstr ""
 
@@ -515,13 +510,13 @@ msgid "Variable"
 msgstr ""
 
 #: ../application_views.py:33
-#: ../param_views.py:119
+#: ../param_views.py:121
 #: ../root_views.py:32
 #: ../demo.py:86
 msgid "View"
 msgstr ""
 
-#: ../form.py:377
+#: ../form.py:362
 msgid "Vrai"
 msgstr ""
 
@@ -533,21 +528,21 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: ../param_views.py:362
+#: ../param_views.py:365
 #: ../base_views.py:99
 msgid "Welcome!"
 msgstr ""
 
-#: ../param_views.py:161
+#: ../param_views.py:163
 #: ../schema.py:89
 msgid "Yes"
 msgstr ""
 
-#: ../param_views.py:329
+#: ../param_views.py:332
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../param_views.py:323
+#: ../param_views.py:326
 #: ../base_views.py:115
 msgid "You are not allowed to register."
 msgstr ""
@@ -560,7 +555,7 @@ msgstr ""
 msgid "Your account was created! You can create a collection application."
 msgstr ""
 
-#: ../form_views.py:263
+#: ../form_views.py:272
 msgid "Your form is not finished yet."
 msgstr ""
 
@@ -574,7 +569,7 @@ msgid "Your form was successfully sent."
 msgstr ""
 
 #: ../utils.py:71
-#: ../form.py:360
+#: ../form.py:345
 msgid "["
 msgstr ""
 
@@ -698,8 +693,8 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: ../param_views.py:67
-#: ../param_views.py:75
+#: ../param_views.py:69
+#: ../param_views.py:77
 msgid "not an ODS file"
 msgstr ""
 
@@ -805,19 +800,19 @@ msgstr ""
 msgid "white-space: pre"
 msgstr ""
 
-#: ../form_views.py:55
-msgid "{0}: {1}"
+#: ../form.py:246
+msgid "{application}: {form}"
 msgstr ""
 
-#: ../form_views.py:193
+#: ../form_views.py:199
 msgid "{name} invalid"
 msgstr ""
 
-#: ../form_views.py:190
+#: ../form_views.py:196
 msgid "{name} is not equal to {sum}"
 msgstr ""
 
-#: ../param_views.py:282
+#: ../param_views.py:285
 msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 
@@ -1046,12 +1041,12 @@ msgctxt "paragraph"
 msgid "When you have finished filling the form, you can click the \"Send\" button."
 msgstr ""
 
-#: ../ui/param/register.xml.en:41
+#: ../ui/param/register.xml.en:35
 msgctxt "paragraph"
 msgid "You can collect data at this URL:"
 msgstr ""
 
-#: ../ui/param/register.xml.en:38
+#: ../ui/param/register.xml.en:33
 msgctxt "paragraph"
 msgid "You can send this URL to your users:"
 msgstr ""

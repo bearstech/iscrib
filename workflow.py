@@ -15,17 +15,30 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from ikaaro
-from ikaaro.workflow import workflow
+# Import from itools
+from itools.datatypes import Enumerate
+from itools.gettext import MSG
+from itools.workflow import Workflow
 
 
 # States
-EMPTY = 'private' # if first_time
-DRAFT = 'private' # if not first_time
-SENT = 'pending'
-EXPORTED = 'public'
+EMPTY = 'private'
+PENDING = 'pending'
+SENT = 'public'
+EXPORTED = 'exported'
 MODIFIED = 'modified'
 
-# Simpler than comparing publish date to modification date
-workflow.add_state(MODIFIED, title=u"Modified",
-        description=u"Modified after export")
+
+class WorkflowState(Enumerate):
+    options = [
+        {'name': EMPTY, 'value': MSG(u"Empty")},
+        {'name': PENDING, 'value': MSG(u"Pending")},
+        {'name': SENT, 'value': MSG(u"Sent")},
+        {'name': EXPORTED, 'value': MSG(u"Exported")},
+        {'name': MODIFIED, 'value': MSG(u"Modified after export")}]
+
+
+
+workflow = Workflow()
+for option in WorkflowState.get_options():
+    workflow.add_state(option['name'], title=option['value'])

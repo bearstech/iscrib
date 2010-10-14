@@ -485,7 +485,10 @@ button, .button{
   padding-left: 16px;
 }
 
-#message a{
+#message a {
   border: 0;
   padding: 0;
 }
+
+.wf-exported { color: #75507b; }
+.wf-modified { color: #3465a4; }

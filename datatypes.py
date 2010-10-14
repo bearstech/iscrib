@@ -750,16 +750,6 @@ class EnumCV(SqlEnumerate):
 
 
 
-class WorkflowState(Enumerate):
-    options = [
-        {'name': 'vide', 'value': u"Empty"},
-        {'name': 'en_cours', 'value': u"Pending"},
-        {'name': 'envoye', 'value': u"Sent"},
-        {'name': 'exporte', 'value': u"Exported"},
-        {'name': 'modifie', 'value': u"Modified after export"}]
-
-
-
 def make_enumerate(raw):
     options = []
     for value in raw.strip().split('/'):

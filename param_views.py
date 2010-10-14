@@ -41,11 +41,13 @@ from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views_new import NewInstance
+from ikaaro.workflow import get_workflow_preview
 
 # Import from iscrib
 from base import LoginView
 from form import Form
 from formpage import FormPage
+from workflow import WorkflowState
 
 
 ERR_PAGE_NAME = u'Page names must be in the form "C Title..."'
@@ -145,7 +147,7 @@ class Param_View(Folder_BrowseContent):
         if column == 'name':
             return (brain.name, context.get_link(item_resource))
         elif column == 'state':
-            return (item_resource.get_form_state(),
+            return (get_workflow_preview(item_resource, context),
                     '{0}/;send'.format(context.get_link(item_resource)))
         if column in ('user', 'email', 'registered'):
             user = context.root.get_user(brain.name)
@@ -158,7 +160,7 @@ class Param_View(Folder_BrowseContent):
                 return (email, 'mailto:{0}'.format(email))
             elif column == 'registered':
                 password = user.get_property('password')
-                return u"Yes" if password else u"No"
+                return MSG(u"Yes") if password else MSG(u"No")
         return super(Param_View, self).get_item_value(resource, context,
                 item, column)
 
@@ -198,7 +200,7 @@ class Param_Export(BaseView):
             else:
                 email = ""
                 user = form.name
-            state = form.get_form_state().encode(encoding)
+            state = WorkflowState.get_value(form.get_workflow_state())
             row = [form.name, user, email, state]
             handler = form.handler
             for name, datatype in sorted(schema.iteritems()):

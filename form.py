@@ -33,11 +33,10 @@ from ikaaro.folder import Folder
 
 # Import from iscrib
 from datatypes import Numeric, NumDecimal, Unicode
-from datatypes import WorkflowState
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from formpage import FormPage
 from utils import SI, get_page_number, parse_control
-from workflow import workflow, EMPTY, SENT, EXPORTED, MODIFIED
+from workflow import workflow, SENT
 
 
 
@@ -132,11 +131,6 @@ class Form(File):
         # FIXME make it lazy
         self.__dict__[name] = view
         return view
-
-
-    def get_catalog_values(self):
-        return merge_dicts(File.get_catalog_values(self),
-                form_state=self.get_form_state())
 
 
     ######################################################################
@@ -240,32 +234,23 @@ class Form(File):
         return self
 
 
+    def get_form_title(self):
+        form_title = None
+        param = self.get_param_folder()
+        if self.name != param.default_form:
+            user = self.get_resource('/users/' + self.name, soft=True)
+            if user is not None:
+                form_title = user.get_title()
+        if form_title is None:
+            form_title = self.get_title()
+        return MSG(u"{application}: {form}").gettext(
+                application=param.get_title(), form=form_title)
+
+
     ######################################################################
     # Security
     def is_ready(self):
         return self.get_workflow_state() == SENT
-
-
-    def get_form_state(self):
-        """Translate workflow state to user-friendly state.
-        """
-        state = self.get_workflow_state()
-        # Match the enumerate in order to search by values
-        get_value = WorkflowState.get_value
-        if state == EMPTY:
-            if self.is_first_time():
-                value = get_value('vide')
-            else:
-                value = get_value('en_cours')
-        elif state == SENT:
-            value = get_value('envoye')
-        elif state == EXPORTED:
-            value = get_value('exporte')
-        elif state == MODIFIED:
-            value = get_value('modifie')
-        else:
-            raise NotImplementedError, state
-        return value
 
 
     def is_first_time(self):

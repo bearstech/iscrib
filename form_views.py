@@ -28,7 +28,7 @@ from ikaaro.autoform import XHTMLBody
 from datatypes import Numeric, EnumBoolean
 from utils import get_page_number
 from widgets import is_mandatory_filled
-from workflow import DRAFT, SENT#, EXPORTED
+from workflow import WorkflowState, EMPTY, PENDING, SENT, EXPORTED
 
 
 # Messages
@@ -52,8 +52,7 @@ class Form_View(STLForm):
 
 
     def get_page_title(self, resource, context):
-        return u"{0}: {1}".format(resource.parent.get_title(),
-                resource.get_title())
+        return resource.get_form_title()
 
 
     def get_hidden_fields(self, resource, context):
@@ -167,6 +166,9 @@ class Form_View(STLForm):
             message = MSG_SAVED.gettext().encode('utf8')
             context.message = [XHTMLBody.decode(message)]
 
+        if resource.get_workflow_state() == EMPTY:
+            resource.set_workflow_state(PENDING)
+
 
 
 class Form_Send(STLForm):
@@ -175,6 +177,10 @@ class Form_Send(STLForm):
     template = '/ui/iscrib/form/send.xml'
     title = MSG(u"Input Control")
     query_schema = {'view': String}
+
+
+    def get_page_title(self, resource, context):
+        return resource.get_form_title()
 
 
     def get_namespace(self, resource, context):
@@ -222,9 +228,10 @@ class Form_Send(STLForm):
         namespace['is_allowed_to_export'] = is_allowed_to_export
         # State
         namespace['statename'] = statename = resource.get_statename()
-        namespace['form_state'] = MSG(resource.get_form_state())
+        namespace['form_state'] = WorkflowState.get_value(
+                resource.get_workflow_state())
         # Transitions
-        namespace['can_send'] = statename == DRAFT and not errors
+        namespace['can_send'] = statename == PENDING and not errors
         namespace['can_export'] = is_allowed_to_export and not errors
         # Debug
         namespace['debug'] = context.get_form_value('debug')
@@ -246,10 +253,12 @@ class Form_Send(STLForm):
     def action_export(self, resource, context, form):
         """Ce qu'il faut faire quand le formulaire est exporté.
         """
-        #resource.set_workflow_state(EXPORTED)
+        resource.set_workflow_state(EXPORTED)
 
+        # XXX
         message = MSG_EXPORTED_ITAAPY.gettext().encode('utf8')
         context.message = [XHTMLBody.decode(message)]
+        context.commit = False
 
 
 
@@ -291,6 +300,10 @@ class Form_Print(STLView):
     title=MSG(u"Print form")
     template = '/ui/iscrib/form/print.xml'
     pages = []
+
+
+    def get_page_title(self, resource, context):
+        return resource.get_form_title()
 
 
     def get_namespace(self, resource, context):
