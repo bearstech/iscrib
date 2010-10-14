@@ -50,7 +50,8 @@ from formpage import FormPage
 from workflow import WorkflowState
 
 
-ERR_PAGE_NAME = u'Page names must be in the form "C Title..."'
+MSG_ERR_PAGE_NAME = ERROR(u'Page names must be in the form "C Title..."')
+MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 
 
 class Param_NewInstance(NewInstance):
@@ -97,7 +98,7 @@ class Param_NewInstance(NewInstance):
             title = table.get_name()
             if title[1] != u" ":
                 context.commit = False
-                context.message = ERROR(ERR_PAGE_NAME)
+                context.message = MSG_ERR_PAGE_NAME
                 return
             page_number, _ = title.split(u" ", 1)
             name = 'page' + page_number.lower().encode()
@@ -192,33 +193,40 @@ class Param_Export(BaseView):
             header.append(name)
         csv.add_row(header)
         users = resource.get_resource('/users')
-        for form in resource.get_forms():
-            user = users.get_resource(form.name, soft=True)
-            if user:
-                email = user.get_property('email')
-                user = user.get_title()
-            else:
-                email = ""
-                user = form.name
-            state = WorkflowState.get_value(form.get_workflow_state())
-            row = [form.name, user, email, state]
-            handler = form.handler
-            for name, datatype in sorted(schema.iteritems()):
-                value = handler.get_value(name, schema)
-                try:
-                    value = datatype.encode(value, encoding)
-                except TypeError:
-                    value = datatype.encode(value)
-                if type(value) is not str:
-                    raise ValueError, str(type(header))
-                row.append(value)
-            csv.add_row(row)
+
+        try:
+            for form in resource.get_forms():
+                user = users.get_resource(form.name, soft=True)
+                if user:
+                    email = user.get_property('email')
+                    user = user.get_title().encode(encoding)
+                else:
+                    email = ""
+                    user = form.name
+                state = WorkflowState.get_value(form.get_workflow_state())
+                state = state.gettext().encode(encoding)
+                row = [form.name, user, email, state]
+                handler = form.handler
+                for name, datatype in sorted(schema.iteritems()):
+                    value = handler.get_value(name, schema)
+                    try:
+                        value = datatype.encode(value, encoding)
+                    except TypeError:
+                        value = datatype.encode(value)
+                    row.append(value)
+                csv.add_row(row)
+
+            csv = csv.to_str(separator=';')
+            if type(csv) is not str:
+                raise TypeError, str(type(csv))
+        except Exception:
+            return context.come_back(MSG_EXPORT_ERROR)
 
         context.set_content_type('text/comma-separated-values')
         context.set_content_disposition('attachment',
                 filename="%s.csv" % (resource.name))
 
-        return csv.to_str(separator=';')
+        return csv
 
 
 
