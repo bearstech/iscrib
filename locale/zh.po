@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-14 08:10+CET\n"
+"POT-Creation-Date: 2010-10-14 12:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,11 +139,6 @@ msgid ""
 "${username/error}<x id='18'/></g>"
 msgstr ""
 
-#: ../ui/template.xhtml.en:86
-msgctxt "link"
-msgid "<g id='18'>Terms and Conditions</g>  <g id='19'>Contact</g>"
-msgstr ""
-
 #: ../ui/form/view.xml.en:8
 msgctxt "link"
 msgid "<g id='2'>${item/title}</g>  <g id='3'>|</g>"
@@ -225,7 +220,7 @@ msgctxt "heading"
 msgid "Application Status"
 msgstr ""
 
-#: ../application.py:46
+#: ../application.py:45
 msgid "Application client iScrib"
 msgstr ""
 
@@ -251,10 +246,6 @@ msgstr ""
 
 #: ../user.py:37
 msgid "Choose your password"
-msgstr ""
-
-#: ../root_views.py:46
-msgid "Clients"
 msgstr ""
 
 #: ../param.py:37
@@ -394,7 +385,7 @@ msgstr ""
 msgid "HHH:MM"
 msgstr ""
 
-#: ../root.py:42 ../application.py:54
+#: ../root.py:42 ../application.py:53
 msgid "Homepage"
 msgstr ""
 
@@ -627,12 +618,16 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: ../application_views.py:103
-msgid "Show Application"
+#: ../application.py:58
+msgid "Show Application(s)"
 msgstr ""
 
 #: ../param_views.py:371
 msgid "Show Form"
+msgstr ""
+
+#: ../root.py:47
+msgid "Show Workgroup(s)"
 msgstr ""
 
 #: ../ui/template.xhtml.en:31
@@ -681,6 +676,11 @@ msgstr ""
 msgid "Taille de champs de saisie (par défaut identique à Représentation)"
 msgstr ""
 
+#: ../ui/template.xhtml.en:86
+msgctxt "link"
+msgid "Terms and Conditions"
+msgstr ""
+
 #: ../param_views.py:114
 msgid "Test Form"
 msgstr ""
@@ -689,7 +689,7 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ../base_views.py:79
+#: ../base_views.py:80
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
@@ -698,7 +698,7 @@ msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
 
-#: ../param_views.py:318 ../base_views.py:105
+#: ../param_views.py:318 ../base_views.py:106
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -780,7 +780,7 @@ msgstr ""
 msgid "Variable"
 msgstr ""
 
-#: ../application_views.py:33 ../param_views.py:121 ../root_views.py:32
+#: ../application_views.py:33 ../param_views.py:121 ../root_views.py:30
 #: ../demo.py:86
 msgid "View"
 msgstr ""
@@ -802,7 +802,7 @@ msgctxt "heading"
 msgid "Warnings"
 msgstr ""
 
-#: ../param_views.py:365 ../base_views.py:99
+#: ../param_views.py:365 ../base_views.py:100
 msgid "Welcome!"
 msgstr ""
 
@@ -820,7 +820,7 @@ msgstr ""
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../param_views.py:326 ../base_views.py:115
+#: ../param_views.py:326 ../base_views.py:116
 msgid "You are not allowed to register."
 msgstr ""
 

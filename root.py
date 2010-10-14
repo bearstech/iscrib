@@ -26,8 +26,8 @@ from ikaaro.root import Root as BaseRoot
 
 # Import from iscrib
 from application import Application
-from base_views import AutomaticEditView
-from root_views import Root_View, Root_Clients
+from base_views import AutomaticEditView, FrontView
+from root_views import Root_View
 
 
 class Root(BaseRoot):
@@ -35,7 +35,7 @@ class Root(BaseRoot):
     class_schema = merge_dicts(BaseRoot.class_schema,
             homepage=XHTMLBody(source='metadata', multilingual=True,
                 parameters_schema = {'lang': String}))
-    class_views = BaseRoot.class_views + ['clients']
+    class_views = BaseRoot.class_views + ['show']
     class_skin = 'ui/iscrib'
 
     edit_schema = {'homepage': XHTMLBody(multilingual=True)}
@@ -44,7 +44,7 @@ class Root(BaseRoot):
     # Views
     view = Root_View()
     edit = AutomaticEditView()
-    clients = Root_Clients()
+    show = FrontView(title=MSG(u"Show Workgroup(s)"), cls=Application)
 
 
     def init_resource(self, email, password, admins=('0',)):

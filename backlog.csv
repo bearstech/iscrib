@@ -2,6 +2,6 @@
 "afficher le logo de l'application une fois dedans",2,,100,,
 "virer ;contact dans footer template",1,,100,,
 "corriger export param",1,,,,
-";clients redirige vers première application",1,,,,
+";clients redirige vers première application",1,,100,,
 "un anonyme ou inscrit s'incrit et créé son application",5,,,,
 "user formulaire : cacher tout ce qui n'est pas nécessaire à la saisie : onglets (boutons à la place), menu, langues...",3,,,,

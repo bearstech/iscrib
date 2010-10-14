@@ -25,6 +25,7 @@ from itools.web import INFO, ERROR
 # Import from ikaaro
 from ikaaro.resource_ import DBResource
 from ikaaro.resource_views import DBResource_Edit, LoginView as BaseLoginView
+from ikaaro.views import IconsView
 from ikaaro.workflow import state_widget, WorkflowAware, StateEnumerate
 
 # Import from iscrib
@@ -122,6 +123,27 @@ class LoginView(BaseLoginView):
         path = '/ui/website/forgotten_password.xml'
         handler = resource.get_resource(path)
         return stl(handler)
+
+
+
+class FrontView(IconsView):
+    access = 'is_authenticated'
+    cls = None
+
+
+    def get_namespace(self, resource, context):
+        items = []
+        for child in resource.search_resources(cls=self.cls):
+            ac = child.get_access_control()
+            if not ac.is_allowed_to_view(context.user, child):
+                continue
+            items.append({'icon': '/ui/' + child.class_icon48,
+                'title': child.get_title(),
+                'description': child.get_property('description'),
+                'url': context.get_link(child)})
+        if len(items) == 1:
+            return get_reference(items[-1]['url'])
+        return {'batch': None, 'items': items}
 
 
 

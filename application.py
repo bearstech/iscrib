@@ -34,8 +34,7 @@ from ikaaro.website import WebSite
 
 # Import from iscrib
 from application_views import Application_BrowseContent
-from application_views import Application_RedirectToParam
-from base_views import AutomaticEditView
+from base_views import AutomaticEditView, FrontView
 from form import Form
 from param import Param
 from workflow import SENT, EXPORTED, MODIFIED
@@ -44,7 +43,7 @@ from workflow import SENT, EXPORTED, MODIFIED
 class Application(WebSite):
     class_id = 'Application'
     class_title = MSG(u"Application client iScrib")
-    class_views = WebSite.class_views + ['redirect_to_param']
+    class_views = WebSite.class_views + ['show']
     class_schema = merge_dicts(WebSite.class_schema,
             homepage=XHTMLBody(source='metadata', multilingual=True,
                 parameters_schema = {'lang': String}))
@@ -56,7 +55,7 @@ class Application(WebSite):
     # Views
     view = Application_BrowseContent()
     edit = AutomaticEditView()
-    redirect_to_param = Application_RedirectToParam()
+    show = FrontView(title=MSG(u"Show Application(s)"), cls=Param)
     # Security
     control_panel = ControlPanel(access='is_admin')
 
@@ -73,11 +72,8 @@ class Application(WebSite):
                     href="http://iscrib.demo.itaapy.com/gabarit/;download">Download
                     the ODS template;</a></li>
                 <li><a href=";new_resource?type=Param">Create a data
-                    collection application.</a></li>
-                <!--
-                <li><a href=";xxx">Send an invitation to users;</a></li>
-                <li><a href=";xxx">Follow the filling of the form by the users.</a></li>
-                -->
+                    collection application;</a></li>
+                <li><a href="theme/;edit">Upload your logo.</a></li>
               </ul>""")
         self.set_property('homepage', value, language='en')
         theme = self.get_resource('theme')
@@ -114,7 +110,7 @@ class Application(WebSite):
             return False
         if is_admin(user, resource):
             return True
-        form_name = resource.redirect_to_form.get_form_name(user, resource)
+        form_name = resource.show.get_form_name(user, resource)
         return form_name is not None
 
 
@@ -157,6 +153,7 @@ class Application(WebSite):
             return False
         role = self.get_user_role(user.name)
         return role in ('members', 'reviewers')
+
 
 
 # Security

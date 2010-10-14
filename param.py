@@ -42,8 +42,7 @@ class Param(Folder):
             author=String(source='metadata', indexed=False, stored=True),
             ctime=DateTime(source='metadata', indexed=False, stored=True),
             max_users=Integer(source='metadata', default=10))
-    class_views = Folder.class_views + ['export', 'register',
-            'redirect_to_form']
+    class_views = Folder.class_views + ['export', 'register', 'show']
 
     schema_class = Schema
     controls_class = Controls
@@ -56,7 +55,7 @@ class Param(Folder):
     export = Param_Export()
     register = Param_Register()
     login = Param_Login()
-    redirect_to_form = Param_RedirectToForm()
+    show = Param_RedirectToForm()
 
 
     def get_form(self):

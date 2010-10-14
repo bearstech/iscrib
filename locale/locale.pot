@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-14 08:10+CET\n"
+"POT-Creation-Date: 2010-10-14 12:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,7 +141,7 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
-#: ../application.py:46
+#: ../application.py:45
 msgid "Application client iScrib"
 msgstr ""
 
@@ -168,10 +168,6 @@ msgstr ""
 
 #: ../user.py:37
 msgid "Choose your password"
-msgstr ""
-
-#: ../root_views.py:46
-msgid "Clients"
 msgstr ""
 
 #: ../param.py:37
@@ -274,7 +270,7 @@ msgid "HHH:MM"
 msgstr ""
 
 #: ../root.py:42
-#: ../application.py:54
+#: ../application.py:53
 msgid "Homepage"
 msgstr ""
 
@@ -411,12 +407,16 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: ../application_views.py:103
-msgid "Show Application"
+#: ../application.py:58
+msgid "Show Application(s)"
 msgstr ""
 
 #: ../param_views.py:371
 msgid "Show Form"
+msgstr ""
+
+#: ../root.py:47
+msgid "Show Workgroup(s)"
 msgstr ""
 
 #: ../demo.py:80
@@ -463,12 +463,12 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ../base_views.py:79
+#: ../base_views.py:80
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
 #: ../param_views.py:318
-#: ../base_views.py:105
+#: ../base_views.py:106
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -511,7 +511,7 @@ msgstr ""
 
 #: ../application_views.py:33
 #: ../param_views.py:121
-#: ../root_views.py:32
+#: ../root_views.py:30
 #: ../demo.py:86
 msgid "View"
 msgstr ""
@@ -529,7 +529,7 @@ msgid "Warning"
 msgstr ""
 
 #: ../param_views.py:365
-#: ../base_views.py:99
+#: ../base_views.py:100
 msgid "Welcome!"
 msgstr ""
 
@@ -543,7 +543,7 @@ msgid "You are already registered. Log in using your password."
 msgstr ""
 
 #: ../param_views.py:326
-#: ../base_views.py:115
+#: ../base_views.py:116
 msgid "You are not allowed to register."
 msgstr ""
 
@@ -964,11 +964,6 @@ msgctxt "link"
 msgid "<g id='14'> ${website_title} </g>  <g id='15'>  <x id='16'/>  </g>"
 msgstr ""
 
-#: ../ui/template.xhtml.en:86
-msgctxt "link"
-msgid "<g id='18'>Terms and Conditions</g>  <g id='19'>Contact</g>"
-msgstr ""
-
 #: ../ui/form/view.xml.en:8
 msgctxt "link"
 msgid "<g id='2'>${item/title}</g>  <g id='3'>|</g>"
@@ -997,6 +992,11 @@ msgstr ""
 #: ../ui/template.xhtml.en:31
 msgctxt "link"
 msgid "Sign in"
+msgstr ""
+
+#: ../ui/template.xhtml.en:86
+msgctxt "link"
+msgid "Terms and Conditions"
 msgstr ""
 
 #: ../ui/form/send.xml.en:60

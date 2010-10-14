@@ -21,10 +21,8 @@ from itools.gettext import MSG
 from itools.web import BaseView
 
 # Import from ikaaro
-from ikaaro.views import IconsView
 
 # Import from iscrib
-from application import Application
 
 
 class Root_View(BaseView):
@@ -38,21 +36,3 @@ class Root_View(BaseView):
             # Avoid response abort
             return ''
         return homepage
-
-
-
-class Root_Clients(IconsView):
-    access = 'is_authenticated'
-    title = MSG(u"Clients")
-
-
-    def get_namespace(self, resource, context):
-        items = []
-        for application in resource.search_resources(cls=Application):
-            if not application.is_allowed_to_view(context.user, application):
-                continue
-            items.append({'icon': '/ui/' + application.class_icon48,
-                'title': application.get_title(),
-                'description': application.get_property('description'),
-                'url': context.get_link(application)})
-        return {'batch': None, 'items': items}
