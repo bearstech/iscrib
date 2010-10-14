@@ -28,6 +28,20 @@ from ikaaro.skins import Skin as BaseSkin
 class Skin(BaseSkin):
 
 
+    def get_styles(self, context):
+        styles = BaseSkin.get_styles(self, context)
+        # Replace root style by website style
+        if styles[-1].endswith('theme/style/;download'):
+            del styles[-1]
+        site_root = context.resource.get_site_root()
+        style = site_root.get_resource('theme/style')
+        ac = style.get_access_control()
+        if ac.is_allowed_to_view(context.user, style):
+            styles.append('{0}/;download'.format(
+                context.get_link(style)))
+        return styles
+
+
     def build_namespace(self, context):
         resource = context.resource
         site_root = resource.get_site_root()

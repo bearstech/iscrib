@@ -23,6 +23,7 @@ from itools.gettext import MSG
 # Import from ikaaro
 from ikaaro.autoform import XHTMLBody, RTEWidget
 from ikaaro.root import Root as BaseRoot
+from ikaaro.workflow import WorkflowAware
 
 # Import from iscrib
 from application import Application
@@ -59,3 +60,14 @@ class Root(BaseRoot):
 
     def get_document_types(self):
         return super(Root, self).get_document_types() + [Application]
+
+
+    def is_allowed_to_view(self, user, resource):
+        if str(resource.get_abspath()).startswith('/theme'):
+            if isinstance(resource, WorkflowAware):
+                state = resource.get_workflow_state()
+            else:
+                state = 'public'
+            if state == 'public':
+                return True
+        return super(Root, self).is_allowed_to_view(user, resource)
