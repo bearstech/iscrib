@@ -29,8 +29,21 @@ class Skin(BaseSkin):
 
     def build_namespace(self, context):
         resource = context.resource
-        website_title = resource.get_site_root().get_title()
-        new_resource_allowed = is_admin(context.user, resource)
+        site_root = resource.get_site_root()
+        website_title = site_root.get_title()
+        user = context.user
+        theme = site_root.get_resource('theme')
+        logo_href = None
+        logo_path = theme.get_property('logo')
+        if logo_path:
+            logo = theme.get_resource(logo_path, soft=True)
+            if logo:
+                ac = logo.get_access_control()
+                if ac.is_allowed_to_view(user, logo):
+                    logo_href = '{0}/;download'.format(
+                            context.get_link(logo))
+        new_resource_allowed = is_admin(user, resource)
         return merge_dicts(BaseSkin.build_namespace(self, context),
                   website_title=website_title,
+                  logo_href=logo_href,
                   new_resource_allowed=new_resource_allowed)
