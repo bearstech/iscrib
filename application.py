@@ -95,25 +95,6 @@ class Application(WebSite):
         return is_admin(user, resource)
 
 
-    def is_allowed_to_view_application(self, user, resource):
-        if user is None:
-            return False
-        if is_admin(user, resource):
-            return True
-        param_name = resource.redirect_to_param.get_param_name(user,
-                resource)
-        return param_name is not None
-
-
-    def is_allowed_to_view_param(self, user, resource):
-        if user is None:
-            return False
-        if is_admin(user, resource):
-            return True
-        form_name = resource.show.get_form_name(user, resource)
-        return form_name is not None
-
-
     def is_allowed_to_view(self, user, resource):
         if user is None:
             return False
@@ -121,7 +102,9 @@ class Application(WebSite):
             return True
         role = self.get_user_role(user.name)
         if isinstance(resource, Param):
-            return role in ('members', 'reviewers')
+            if role in ('members', 'reviewers'):
+                return True
+            return resource.show.get_form_name(user, resource) is not None
         elif isinstance(resource, Form):
             return (role in ('members', 'reviewers')
                     or user.name == resource.name)

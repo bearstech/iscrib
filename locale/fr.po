@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-14 12:10+CET\n"
+"POT-Creation-Date: 2010-10-14 14:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,6 +113,11 @@ msgstr ""
 msgid "</span>"
 msgstr ""
 
+#: ../ui/form/send.xml.en:7
+msgctxt "link"
+msgid "<g id='1'>Back to Form</g>  <g id='2'>Print this page</g>"
+msgstr "<g id='1'>Retour au formulaire</g>  <g id='2'>Imprimer cette page</g>"
+
 #: ../ui/param/login.xml.en:11 ../ui/login.xml.en:14
 msgctxt "label"
 msgid ""
@@ -131,7 +136,7 @@ msgstr ""
 "<g id='10'>${user/title}</g>  <g id='11'>Déconnexion</g>  <g id='12'>Ajouter "
 "du contenu</g>"
 
-#: ../ui/template.xhtml.en:56
+#: ../ui/template.xhtml.en:57
 msgctxt "link"
 msgid "<g id='14'> ${website_title} </g>  <g id='15'>  <x id='16'/>  </g>"
 msgstr ""
@@ -173,11 +178,11 @@ msgstr ""
 #: ../ui/form/view.xml.en:19
 msgctxt "link"
 msgid ""
-"<g id='6'>Input Control</g>  <g id='7'>Print this page</g>  <g id='8'>Save</"
-"g>"
+"<g id='6'>Input Control</g>  <g id='7'>Print this page</g>  <g id='8'>Print "
+"Form</g>  <g id='9'>Save</g>"
 msgstr ""
 "<g id='6'>Contrôle de saisie</g>  <g id='7'>Imprimer cette page</g>  <g "
-"id='8'>Enregistrer</g>"
+"id='8'>Imprimer le formulaire</g>  <g id='9'>Enregistrer</g>"
 
 #: ../ui/login.xml.en:27
 msgctxt "label"
@@ -271,6 +276,11 @@ msgstr "Choisir votre mot de passe"
 msgid "Collection Application"
 msgstr "Application de collecte"
 
+#: ../ui/form/send.xml.en:7
+msgctxt "title attribute"
+msgid "Come back to the form"
+msgstr ""
+
 #: ../user.py:47
 msgid "Company"
 msgstr ""
@@ -280,8 +290,8 @@ msgctxt "paragraph"
 msgid "Contact <g id='7'>Itaapy</g> for more."
 msgstr "Veuillez contacter <g id='7'>Itaapy</g> pour en ajouter."
 
-#: ../ui/form/send.xml.en:48 ../ui/form/send.xml.en:76
-#: ../ui/form/send.xml.en:104
+#: ../ui/form/send.xml.en:50 ../ui/form/send.xml.en:78
+#: ../ui/form/send.xml.en:106
 msgctxt "table cell"
 msgid "Control"
 msgstr "Contrôle de saisie"
@@ -323,7 +333,7 @@ msgstr "Téléchargement du formulaire"
 msgid "E"
 msgstr ""
 
-#: ../param_views.py:130 ../param_views.py:234
+#: ../param_views.py:131 ../param_views.py:242
 msgid "E-mail"
 msgstr ""
 
@@ -335,19 +345,23 @@ msgstr "Vide"
 msgid "Error"
 msgstr "Erreur"
 
-#: ../ui/form/send.xml.en:41
+#: ../ui/form/send.xml.en:43
 msgctxt "heading"
 msgid "Errors"
 msgstr "Erreurs"
 
-#: ../ui/form/send.xml.en:33
+#: ../ui/form/send.xml.en:35
 msgctxt "button"
 msgid "Export"
 msgstr "Exporter"
 
-#: ../param_views.py:183
+#: ../param_views.py:184
 msgid "Export Collected Data"
 msgstr "Exporter les données collectées"
+
+#: ../param_views.py:54
+msgid "Export Failed. Please contact the administrator."
+msgstr ""
 
 #: ../ui/param/view.xml.en:12
 msgctxt "link"
@@ -370,12 +384,12 @@ msgstr ""
 msgid "Faux"
 msgstr ""
 
-#: ../ui/form/send.xml.en:98
+#: ../ui/form/send.xml.en:100
 msgctxt "emphasis"
 msgid "For your information, with the given data."
 msgstr "Pour votre information, avec les données actuelles."
 
-#: ../param_views.py:126 ../form.py:107
+#: ../param_views.py:127 ../form.py:107
 msgid "Form"
 msgstr "Formulaire"
 
@@ -383,7 +397,7 @@ msgstr "Formulaire"
 msgid "Form Page"
 msgstr "Page de formulaire"
 
-#: ../ui/form/send.xml.en:14
+#: ../ui/form/send.xml.en:16
 msgctxt "heading"
 msgid "Form State:"
 msgstr "État du formulaire :"
@@ -419,7 +433,7 @@ msgstr ""
 "Onglet schéma, ligne {line}, la page \"{page}\" ne correspond pas à la "
 "variable \"{name}\"."
 
-#: ../ui/form/send.xml.en:97
+#: ../ui/form/send.xml.en:99
 msgctxt "heading"
 msgid "Information"
 msgstr ""
@@ -436,7 +450,7 @@ msgstr "Contrôle de saisie"
 msgid "Integer"
 msgstr ""
 
-#: ../param_views.py:128
+#: ../param_views.py:129
 msgid "Last Modified"
 msgstr "Dernière modification"
 
@@ -471,7 +485,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr "Champ obligatoire"
 
-#: ../param_views.py:303
+#: ../param_views.py:313
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -489,25 +503,25 @@ msgctxt "table cell"
 msgid "New Users<g id='1'> (${allowed_users} allowed)</g>"
 msgstr "Nouveaux utilisateurs<g id='1'> (${allowed_users} autorisés)</g>"
 
-#: ../param_views.py:163 ../schema.py:90
+#: ../param_views.py:164 ../schema.py:90
 msgid "No"
 msgstr "Non"
 
-#: ../ui/form/send.xml.en:66
+#: ../ui/form/send.xml.en:68
 msgctxt "paragraph"
 msgid "No error detected."
 msgstr "Aucune erreur détectée"
 
-#: ../ui/form/send.xml.en:126
+#: ../ui/form/send.xml.en:128
 msgctxt "paragraph"
 msgid "No information available."
 msgstr "Aucune information disponible."
 
-#: ../param_views.py:280
+#: ../param_views.py:290
 msgid "No user added."
 msgstr "Aucun utilisateur ajouté"
 
-#: ../ui/form/send.xml.en:94
+#: ../ui/form/send.xml.en:96
 msgctxt "paragraph"
 msgid "No warning detected."
 msgstr "Aucun avertissement détecté."
@@ -524,7 +538,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../param_views.py:61
+#: ../param_views.py:62
 msgid "ODS File"
 msgstr ""
 
@@ -549,7 +563,7 @@ msgstr ""
 msgid "Page names must be in the form \"C Title...\""
 msgstr "Les onglets de pages doivent être nommés \"C Titre...\""
 
-#: ../param_views.py:73
+#: ../param_views.py:74
 msgid "Parameters"
 msgstr "Paramètres"
 
@@ -566,12 +580,13 @@ msgctxt "paragraph"
 msgid "Please enter your e-mail address to access the form:"
 msgstr "Veuillez entrer votre adresse de courriel pour accéder au formulaire :"
 
-#: ../ui/form/send.xml.en:70
+#: ../ui/form/send.xml.en:72
 msgctxt "emphasis"
 msgid "Please verify the consistency of these data."
 msgstr "Veuillez vérifier la cohérence des données."
 
-#: ../ui/form/view.xml.en:21 ../ui/form/send.xml.en:7
+#: ../ui/form/view.xml.en:21 ../ui/form/view.xml.en:24
+#: ../ui/form/send.xml.en:9
 msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr "Imprimer (dans une nouvelle fenêtre)"
@@ -579,11 +594,6 @@ msgstr "Imprimer (dans une nouvelle fenêtre)"
 #: ../form_views.py:300
 msgid "Print form"
 msgstr "Impression du formulaire"
-
-#: ../ui/form/send.xml.en:9
-msgctxt "link"
-msgid "Print this page"
-msgstr "Imprimer cette page"
 
 #: ../ui/param/login.xml.en:47
 msgctxt "button"
@@ -595,7 +605,7 @@ msgctxt "heading"
 msgid "Register"
 msgstr "Inscription"
 
-#: ../param_views.py:227
+#: ../param_views.py:235
 msgid "Register Users"
 msgstr "Inscrire des utilisateurs"
 
@@ -604,7 +614,7 @@ msgctxt "link"
 msgid "Register users"
 msgstr "Inscrire des utilisateurs"
 
-#: ../param_views.py:131
+#: ../param_views.py:132
 msgid "Registered"
 msgstr "Inscrit"
 
@@ -621,7 +631,7 @@ msgstr "Répéter le mot de passe"
 msgid "Représentation (par défaut INPUT TEXT)"
 msgstr ""
 
-#: ../ui/form/view.xml.en:36
+#: ../ui/form/view.xml.en:39
 msgctxt "button"
 msgid "Save"
 msgstr "Enregistrer"
@@ -630,7 +640,7 @@ msgstr "Enregistrer"
 msgid "Schema"
 msgstr ""
 
-#: ../ui/form/send.xml.en:23
+#: ../ui/form/send.xml.en:25
 msgctxt "button"
 msgid "Send"
 msgstr "Envoyer"
@@ -643,7 +653,7 @@ msgstr "Envoyé"
 msgid "Show Application(s)"
 msgstr "Voir la (les) application(s)"
 
-#: ../param_views.py:371
+#: ../param_views.py:381
 msgid "Show Form"
 msgstr "Voir le formulaire"
 
@@ -685,7 +695,7 @@ msgstr "Fichier ODS source"
 msgid "Start filling"
 msgstr "Commencer la saisie"
 
-#: ../param_views.py:127
+#: ../param_views.py:128
 msgid "State"
 msgstr "État du formulaire"
 
@@ -697,12 +707,12 @@ msgstr ""
 msgid "Taille de champs de saisie (par défaut identique à Représentation)"
 msgstr ""
 
-#: ../ui/template.xhtml.en:86
+#: ../ui/template.xhtml.en:87
 msgctxt "link"
 msgid "Terms and Conditions"
 msgstr ""
 
-#: ../param_views.py:114
+#: ../param_views.py:115
 msgid "Test Form"
 msgstr "Formulaire de test"
 
@@ -714,14 +724,14 @@ msgstr ""
 msgid "The e-mail or the password is incorrect."
 msgstr "L'adresse de courriel ou le mot de passe sont incorrects."
 
-#: ../ui/form/send.xml.en:31
+#: ../ui/form/send.xml.en:33
 msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
 "Le formulaire est valide, vous pouvez l'exporter dans une base de données "
 "SQL."
 
-#: ../param_views.py:318 ../base_views.py:106
+#: ../param_views.py:328 ../base_views.py:106
 msgid "The given username is not an e-mail address."
 msgstr "Le nom donné n'est pas une adresse de courriel valide."
 
@@ -733,7 +743,7 @@ msgstr ""
 "La page est enregistrée. Vérifiez votre saisie dans l'onglet <a href=';"
 "send'>Contrôle de saisie</a>."
 
-#: ../ui/form/send.xml.en:42
+#: ../ui/form/send.xml.en:44
 msgctxt "emphasis"
 msgid "These errors must absolutely be corrected."
 msgstr "Ces erreurs doivent obligatoirement être corrigées."
@@ -774,8 +784,8 @@ msgstr "Titre"
 msgid "Titre"
 msgstr ""
 
-#: ../ui/form/send.xml.en:60 ../ui/form/send.xml.en:88
-#: ../ui/form/send.xml.en:120
+#: ../ui/form/send.xml.en:62 ../ui/form/send.xml.en:90
+#: ../ui/form/send.xml.en:122
 msgctxt "link"
 msgid "To correct"
 msgstr "Pour corriger"
@@ -792,11 +802,11 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../param_views.py:261
+#: ../param_views.py:269
 msgid "Unrecognized line {lineno}: {line}"
 msgstr "Ligne {lineno} incorrecte : {line}"
 
-#: ../param_views.py:129 ../param_views.py:233
+#: ../param_views.py:130 ../param_views.py:241
 msgid "User"
 msgstr "Utilisateur"
 
@@ -804,7 +814,7 @@ msgstr "Utilisateur"
 msgid "Valeurs autorisées / modalités"
 msgstr ""
 
-#: ../ui/form/send.xml.en:105
+#: ../ui/form/send.xml.en:107
 msgctxt "table cell"
 msgid "Value"
 msgstr "Valeur"
@@ -813,7 +823,7 @@ msgstr "Valeur"
 msgid "Variable"
 msgstr ""
 
-#: ../application_views.py:33 ../param_views.py:121 ../root_views.py:30
+#: ../application_views.py:33 ../param_views.py:122 ../root_views.py:30
 #: ../demo.py:86
 msgid "View"
 msgstr "Voir"
@@ -830,16 +840,16 @@ msgstr "ATTENTION ! Il y a des champs manquants ou invalides."
 msgid "Warning"
 msgstr "Avertissement"
 
-#: ../ui/form/send.xml.en:69
+#: ../ui/form/send.xml.en:71
 msgctxt "heading"
 msgid "Warnings"
 msgstr "Avertissements"
 
-#: ../param_views.py:365 ../base_views.py:100
+#: ../param_views.py:375 ../base_views.py:100
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
-#: ../ui/form/send.xml.en:20
+#: ../ui/form/send.xml.en:22
 msgctxt "paragraph"
 msgid ""
 "When you have finished filling the form, you can click the \"Send\" button."
@@ -847,15 +857,15 @@ msgstr ""
 "Quand vous avez terminé votre saisie, vous pouvez cliquer sur le bouton « "
 "Envoyer »."
 
-#: ../param_views.py:163 ../schema.py:89
+#: ../param_views.py:164 ../schema.py:89
 msgid "Yes"
 msgstr "Oui"
 
-#: ../param_views.py:332
+#: ../param_views.py:342
 msgid "You are already registered. Log in using your password."
 msgstr "Vous êtes déjà inscrit. Connectez-vous avec votre mot de passe."
 
-#: ../param_views.py:326 ../base_views.py:116
+#: ../param_views.py:336 ../base_views.py:116
 msgid "You are not allowed to register."
 msgstr "Les inscriptions sont fermées."
 
@@ -908,13 +918,13 @@ msgstr ""
 "Vous avez inscrit ${n_forms} utilisateurs<g id='1'> sur ${max_users} "
 "autorisés</g>."
 
-#: ../ui/form/send.xml.en:26
+#: ../ui/form/send.xml.en:28
 msgctxt "paragraph"
 msgid "You must correct all of the errors below to send your form."
 msgstr ""
 "Vous devez corriger les erreurs suivantes pour envoyer votre formulaire."
 
-#: ../ui/form/send.xml.en:16
+#: ../ui/form/send.xml.en:18
 msgctxt "paragraph"
 msgid "You must start by filling the form."
 msgstr "Vous devez commencer par remplir le formulaire."
@@ -1024,7 +1034,7 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: ../param_views.py:69 ../param_views.py:77
+#: ../param_views.py:70 ../param_views.py:78
 msgid "not an ODS file"
 msgstr "Ce fichier n'est pas un fichier ODS"
 
@@ -1129,7 +1139,7 @@ msgstr "{name} invalide"
 msgid "{name} is not equal to {sum}"
 msgstr "{name} n'est pas égal à {sum}"
 
-#: ../param_views.py:285
+#: ../param_views.py:295
 msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 "{n} utilisateur(s) ajouté(s). Voir ci-dessous pour leur envoyer l'adresse du "
@@ -1144,6 +1154,10 @@ msgstr ""
 
 #~ msgid "Modified"
 #~ msgstr "Modifié"
+
+#~ msgctxt "link"
+#~ msgid "Print this page"
+#~ msgstr "Imprimer cette page"
 
 #~ msgctxt "link"
 #~ msgid "See source"

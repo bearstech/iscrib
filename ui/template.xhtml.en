@@ -40,7 +40,8 @@
         </stl:block>
       </div>
       <!-- Languages & Searchbar -->
-      <table cellpadding="0" cellspacing="0" class="header-toolbar">
+      <table cellpadding="0" cellspacing="0" class="header-toolbar"
+        stl:if="languages">
         <tr>
           <td class="languages">${languages}</td>
         </tr>
@@ -56,7 +57,7 @@
       <a href="/" id="logo-title">
         ${website_title}
       </a>
-      <a href="/" stl:if="logo_href" id="logo">
+      <a href="${website_href}" stl:if="logo_href" id="logo">
         <img src="${logo_href}"/>
       </a>
       <div class="clear" />

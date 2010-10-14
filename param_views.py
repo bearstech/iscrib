@@ -278,6 +278,8 @@ class Param_Register(Param_View):
                 user = users.set_user(email, None)
                 user.set_property('lastname', lastname)
             username = user.name
+            # Give the role "guests" to see public resources (logo, etc.)
+            site_root.set_user_role(username, 'guests')
             # Add the form
             if resource.get_resource(username, soft=True) is not None:
                 continue
@@ -375,7 +377,7 @@ class Param_Login(LoginView):
 
 
 class Param_RedirectToForm(GoToSpecificDocument):
-    access = 'is_allowed_to_view_param'
+    access = 'is_allowed_to_view'
     title = MSG(u"Show Form")
 
 

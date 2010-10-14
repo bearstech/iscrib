@@ -27,10 +27,12 @@ from ikaaro.skins import Skin as BaseSkin
 
 class Skin(BaseSkin):
 
+
     def build_namespace(self, context):
         resource = context.resource
         site_root = resource.get_site_root()
         website_title = site_root.get_title()
+        website_href = context.get_link(site_root)
         user = context.user
         theme = site_root.get_resource('theme')
         logo_href = None
@@ -43,7 +45,15 @@ class Skin(BaseSkin):
                     logo_href = '{0}/;download'.format(
                             context.get_link(logo))
         new_resource_allowed = is_admin(user, resource)
-        return merge_dicts(BaseSkin.build_namespace(self, context),
-                  website_title=website_title,
-                  logo_href=logo_href,
-                  new_resource_allowed=new_resource_allowed)
+        namespace = merge_dicts(BaseSkin.build_namespace(self, context),
+            website_title=website_title, website_href=website_href,
+            logo_href=logo_href,
+            new_resource_allowed=new_resource_allowed)
+        # Hide as much as possible to form user
+        if user is not None:
+            role = site_root.get_user_role(user.name)
+            if role == 'guests':
+                namespace['location'] = None
+                namespace['languages'] = None
+                namespace['menu']['items'] = None
+        return namespace

@@ -4,6 +4,8 @@
 
   <stl:block stl:if="not skip_print">
     <p id="form-toolbar">
+      <a id="form-fill" href="." class="button button-control"
+      title="Come back to the form">Back to Form</a>
       <a id="form-print" href="?view=printable" class="button button-print"
       title="Print (in a new window)"
       onclick="return popup(this.href, 800, 600)">Print this page</a>
