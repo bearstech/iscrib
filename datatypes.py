@@ -23,7 +23,6 @@ from decimal import Decimal as dec, InvalidOperation
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
 from itools.datatypes.primitive import enumerate_get_namespace
-from itools.handlers import checkid
 
 
 def quote_integer(data):
@@ -747,15 +746,6 @@ class EnumCV(SqlEnumerate):
     @classmethod
     def reset(cls):
         cls.counter = 1
-
-
-
-def make_enumerate(raw):
-    options = []
-    for value in raw.strip().split('/'):
-        options.append({'name': checkid(value),
-                        'value': value.strip()})
-    return SqlEnumerate(options=options)
 
 
 

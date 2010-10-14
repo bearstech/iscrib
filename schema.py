@@ -23,6 +23,7 @@
 from itools.csv import CSVFile
 from itools.datatypes import Enumerate, String, Integer
 from itools.gettext import MSG
+from itools.handlers import checkid
 
 # Import from ikaaro
 from ikaaro.text import CSV
@@ -30,25 +31,11 @@ from ikaaro.text import CSV
 # Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
-from datatypes import make_enumerate
+from datatypes import SqlEnumerate
 
 
 ERR_BAD_PAGE = (u'In schema, line {line}, page "{page}" does not match '
         u'variable "{name}".')
-
-
-dt_mapping = {
-    'boolean': EnumBoolean,
-    'dec': NumDecimal,
-    'digit': NumDigit,
-    'hh:mm': NumShortTime,
-    'hhh:mm': NumTime,
-    'int': NumInteger,
-    'jj/mm/aaaa': NumDate,
-    'mm/aaaa': NumShortDate,
-    'str': Unicode,
-    'text': Text}
-
 
 
 class PageNumber(Enumerate):
@@ -69,17 +56,24 @@ class PageNumber(Enumerate):
 
 class Type(Enumerate):
     options = [
-        {'name': 'boolean', 'value': u"Boolean"},
-        {'name': 'dec', 'value': u"Decimal"},
-        {'name': 'digit', 'value': u"00000"},
-        {'name': 'hh:mm', 'value': u"HH:MM"},
-        {'name': 'hhh:mm', 'value': u"HHH:MM"},
-        {'name': 'int', 'value': u"Integer"},
-        {'name': 'jj/mm/aaaa', 'value': u"DD/MM/YYYY"},
-        {'name': 'mm/aaaa', 'value': u"MM/YYYY"},
-        {'name': 'str', 'value': u"String"},
-        {'name': 'text', 'value': u"Text"},
-        {'name': 'enum', 'value': u"List of values"}]
+        {'name': 'boolean', 'value': u"Boolean", 'type': EnumBoolean},
+        {'name': 'dec', 'value': u"Decimal", 'type': NumDecimal},
+        {'name': 'digit', 'value': u"00000", 'type': NumDigit},
+        {'name': 'hh:mm', 'value': u"HH:MM", 'type': NumShortTime},
+        {'name': 'hhh:mm', 'value': u"HHH:MM", 'type': NumTime},
+        {'name': 'int', 'value': u"Integer", 'type': NumInteger},
+        {'name': 'jj/mm/aaaa', 'value': u"DD/MM/YYYY", 'type': NumDate},
+        {'name': 'mm/aaaa', 'value': u"MM/YYYY", 'type': NumShortDate},
+        {'name': 'str', 'value': u"String", 'type': Unicode},
+        {'name': 'text', 'value': u"Text", 'type': Text},
+        {'name': 'enum', 'value': u"List of values", 'type': SqlEnumerate}]
+
+
+    def get_type(cls, name, default=None):
+        for option in cls.get_options():
+            if option['name'] == name:
+                return option['type']
+        return default
 
 
 
@@ -133,10 +127,14 @@ class SchemaHandler(CSVFile):
                 name = name[1:]
             # The datatype
             dt_name = row.get_value('type').strip().lower()
+            datatype = Type.get_type(dt_name)
             if dt_name == 'enum':
-                datatype = make_enumerate(row.get_value('vocabulary'))
-            else:
-                datatype = dt_mapping.get(dt_name)
+                vocabulary = row.get_value('vocabulary')
+                options = []
+                for value in vocabulary.strip().split('/'):
+                    options.append({'name': checkid(value),
+                                    'value': value.strip()})
+                datatype.options = options
             if datatype is None:
                 raise NotImplementedError, (dt_name, str(self.get_abspath()))
             # The page number

@@ -17,7 +17,7 @@
 
 # Import from itools
 from itools.csv import CSVFile
-from itools.datatypes import String
+from itools.datatypes import String, Enumerate
 from itools.gettext import MSG
 from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
@@ -25,7 +25,7 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 from ikaaro.autoform import XHTMLBody
 
 # Import from iscrib
-from datatypes import Numeric, EnumBoolean
+from datatypes import Numeric
 from utils import get_page_number
 from widgets import is_mandatory_filled
 from workflow import WorkflowState, EMPTY, PENDING, SENT, EXPORTED
@@ -150,7 +150,7 @@ class Form_View(STLForm):
             elif isinstance(datatype, Numeric):
                 pass
             # Now detect unchecked checkboxes
-            elif issubclass(datatype, EnumBoolean):
+            elif issubclass(datatype, Enumerate):
                 if not is_mandatory_filled(datatype, key, value, schema,
                         fields, context):
                     bad_types.append(key)
