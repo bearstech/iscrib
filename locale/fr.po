@@ -659,7 +659,7 @@ msgstr "Voir le formulaire"
 
 #: ../root.py:47
 msgid "Show Workgroup(s)"
-msgstr ""
+msgstr "Voir le(s) groupe(s) de travail"
 
 #: ../ui/template.xhtml.en:31
 msgctxt "link"
