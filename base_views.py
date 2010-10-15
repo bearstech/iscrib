@@ -77,6 +77,13 @@ class LoginView(BaseLoginView):
     template = '/ui/iscrib/login.xml'
 
 
+    def get_namespace(self, resource, context):
+        is_allowed_to_register = context.site_root.is_allowed_to_register()
+        return merge_dicts(super(LoginView, self).get_namespace(resource,
+            context),
+            is_allowed_to_register=is_allowed_to_register)
+
+
     def action_login(self, resource, context, form):
         email = form['username'].strip()
         password = form['password']
