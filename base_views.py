@@ -23,8 +23,14 @@ from itools.uri import get_reference, get_uri_path
 from itools.web import INFO, ERROR
 
 # Import from ikaaro
+from ikaaro.folder import Folder
+from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.resource_ import DBResource
-from ikaaro.resource_views import DBResource_Edit, LoginView as BaseLoginView
+from ikaaro.resource_views import DBResource_Edit
+from ikaaro.resource_views import DBResource_Links, DBResource_Backlinks
+from ikaaro.resource_views import LoginView as BaseLoginView
+from ikaaro.resource_views import LogoutView as BaseLogoutView
+from ikaaro.revisions_views import DBResource_CommitLog
 from ikaaro.views import IconsView
 from ikaaro.workflow import state_widget, WorkflowAware, StateEnumerate
 
@@ -126,6 +132,15 @@ class LoginView(BaseLoginView):
 
 
 
+class LogoutView(BaseLogoutView):
+
+    def GET(self, resource, context):
+        goto = super(LogoutView, self).GET(resource, context)
+        goto.path = goto.path.resolve('/')
+        return goto
+
+
+
 class FrontView(IconsView):
     access = 'is_authenticated'
     cls = None
@@ -148,3 +163,10 @@ class FrontView(IconsView):
 
 
 DBResource.login = LoginView()
+DBResource.logout = LogoutView()
+# Security
+DBResource.links = DBResource_Links(access='is_admin')
+DBResource.backlinks = DBResource_Backlinks(access='is_admin')
+DBResource.commit_log = DBResource_CommitLog(access='is_admin')
+Folder.browse_content = Folder_BrowseContent(access='is_admin')
+Folder.preview_content = Folder_PreviewContent(access='is_admin')
