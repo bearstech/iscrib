@@ -33,8 +33,8 @@ from ikaaro.folder import Folder
 
 # Import from iscrib
 from datatypes import Numeric, NumDecimal, Unicode
-from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from formpage import FormPage
+from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control
 from workflow import workflow, SENT
 

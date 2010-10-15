@@ -26,18 +26,17 @@ from ikaaro.website import WebSite
 
 # Import from iscrib
 from application import Application
-from application_views import Application_BrowseContent
-from base import LoginView
 from form import Form
 from form_views import Form_Send
-from param import Param
+from workgroup import Workgroup
+from workgroup_views import Workgroup_BrowseContent
 
 
-class ParamForm_Send(Form_Send):
+class ApplicationForm_Send(Form_Send):
 
     def get_namespace(self, resource, context):
         # FIXME
-        namespace = super(ParamForm_Send, self).get_namespace(resource,
+        namespace = super(ApplicationForm_Send, self).get_namespace(resource,
                 context)
         namespace['first_time'] = resource.is_first_time()
         return namespace
@@ -54,15 +53,15 @@ class ParamForm_Send(Form_Send):
 
 
 
-class ParamForm(Param, Form):
+class ApplicationForm(Application, Form):
     """Application avec un seul formulaire en proxy
     """
-    class_id = 'ParamForm'
+    class_id = 'ApplicationForm'
     class_views = ['pageA'] + Form.class_views
-    class_schema = merge_dicts(Form.class_schema, Param.class_schema)
+    class_schema = merge_dicts(Form.class_schema, Application.class_schema)
 
     # Views
-    send = ParamForm_Send()
+    send = ApplicationForm_Send()
 
 
     def get_catalog_values(self):
@@ -71,20 +70,19 @@ class ParamForm(Param, Form):
             values = Form.get_catalog_values(self)
         else:
             values = {}
-        return merge_dicts(values, Param.get_catalog_values(self))
+        return merge_dicts(values, Application.get_catalog_values(self))
 
 
 
-class Demo(Application):
+class Demo(Workgroup):
     class_id = 'Demo'
     class_title = MSG(u"Site de démo iScrib")
     # Rôle par défaut members au lieu de guests
     class_roles = WebSite.class_roles[1:]
 
     # Views
-    view = Application_BrowseContent(access='is_allowed_to_view',
+    view = Workgroup_BrowseContent(access='is_allowed_to_view',
             title=MSG(u"View"))
-    unauthorized = LoginView()
 
 
 

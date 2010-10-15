@@ -31,8 +31,8 @@ from ikaaro.text import CSV
 
 # Import from iscrib
 from datatypes import NumTime
-from workflow import SENT, EXPORTED
 from widgets import get_input_widget, make_element
+from workflow import SENT, EXPORTED
 
 
 NBSP = u"\u00a0".encode('utf8')

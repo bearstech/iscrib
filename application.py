@@ -17,133 +17,65 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String
+from itools.datatypes import String, DateTime, Integer
 from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.access import is_admin
-from ikaaro.autoform import XHTMLBody, RTEWidget
-from ikaaro.control_panel import ControlPanel
 from ikaaro.folder import Folder
-from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
-from ikaaro.registry import register_document_type
-from ikaaro.resource_ import DBResource
-from ikaaro.resource_views import DBResource_Links, DBResource_Backlinks
-from ikaaro.revisions_views import DBResource_CommitLog
-from ikaaro.website import WebSite
 
 # Import from iscrib
-from application_views import Application_BrowseContent
-from base_views import AutomaticEditView, FrontView
+from application_views import Application_Edit, Application_Export
+from application_views import Application_NewInstance, Application_View
+from application_views import Application_RedirectToForm
+from application_views import Application_Register, Application_Login
+from controls import Controls
 from form import Form
-from param import Param
-from workflow import SENT, EXPORTED, MODIFIED
+from schema import Schema
 
 
-class Application(WebSite):
+class Application(Folder):
     class_id = 'Application'
-    class_title = MSG(u"Application client iScrib")
-    class_views = WebSite.class_views + ['show']
-    class_schema = merge_dicts(WebSite.class_schema,
-            homepage=XHTMLBody(source='metadata', multilingual=True,
-                parameters_schema = {'lang': String}))
-    class_skin = 'ui/iscrib'
+    class_title = MSG(u"Collection Application")
+    class_description = MSG(u"Create from an OpenDocument Spreadsheet file")
+    class_icon16 = 'icons/16x16/tasks.png'
+    class_icon48 = 'icons/48x48/tasks.png'
+    class_schema = merge_dicts(Folder.class_schema,
+            author=String(source='metadata', indexed=False, stored=True),
+            ctime=DateTime(source='metadata', indexed=False, stored=True),
+            max_users=Integer(source='metadata', default=10))
+    class_views = Folder.class_views + ['export', 'register', 'show']
 
-    edit_schema = {'homepage': XHTMLBody(multilingual=True)}
-    edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]
+    schema_class = Schema
+    controls_class = Controls
+    default_form = '0'
 
     # Views
-    view = Application_BrowseContent()
-    edit = AutomaticEditView()
-    show = FrontView(title=MSG(u"Show Application(s)"), cls=Param)
-    # Security
-    control_panel = ControlPanel(access='is_admin')
+    new_instance = Application_NewInstance()
+    view = Application_View()
+    edit = Application_Edit()
+    export = Application_Export()
+    register = Application_Register()
+    login = Application_Login()
+    show = Application_RedirectToForm()
 
 
-    def init_resource(self, **kw):
-        super(Application, self).init_resource(**kw)
-        value = self.class_schema['homepage'].decode("""
-              <h2>Welcome to your iScrib Application!</h2>
-              <p>This is where you post your form and people will answer
-                  it.</p>
-              <p>Things you can do:</p>
-              <ul>
-                <li><a
-                    href="http://iscrib.demo.itaapy.com/gabarit/;download">Download
-                    the ODS template;</a></li>
-                <li><a href=";new_resource?type=Param">Create a data
-                    collection application;</a></li>
-                <li><a href="theme/;edit">Upload your logo.</a></li>
-              </ul>""")
-        self.set_property('homepage', value, language='en')
-        theme = self.get_resource('theme')
-        # Laisse voir le nom du website
-        theme.set_property('logo', None)
+    def get_form(self):
+        return self.get_resource(self.default_form, soft=True)
 
 
-    def get_document_types(self):
-        return super(Application, self).get_document_types() + [Param]
+    def get_forms(self):
+        for form in self.search_resources(cls=Form):
+            if form.name != self.default_form:
+                yield form
 
 
-    # XXX
-    #def is_allowed_to_add_param(self, user, resource):
-    #    return is_admin(user, resource)
-    is_allowed_to_add_param = WebSite.is_allowed_to_add
+    def get_param_folder(self):
+        return self
 
 
-    def is_allowed_to_add_form(self, user, resource):
-        return is_admin(user, resource)
-
-
-    def is_allowed_to_view(self, user, resource):
-        if user is None:
-            return False
-        if is_admin(user, resource):
-            return True
-        role = self.get_user_role(user.name)
-        if isinstance(resource, Param):
-            if role in ('members', 'reviewers'):
-                return True
-            return resource.show.get_form_name(user, resource) is not None
-        elif isinstance(resource, Form):
-            return (role in ('members', 'reviewers')
-                    or user.name == resource.name)
-        return super(Application, self).is_allowed_to_view(user, resource)
-
-
-    def is_allowed_to_edit(self, user, resource):
-        if user is None:
-            return False
-        if is_admin(user, resource):
-            return True
-        role = self.get_user_role(user.name)
-        if isinstance(resource, (Application, Param)):
-            return role in ('members', 'reviewers')
-        elif isinstance(resource, Form):
-            if resource.name == resource.parent.default_form:
-                return role in ('members', 'reviewers')
-            return resource.name == user.name
-        return super(Application, self).is_allowed_to_edit(user, resource)
-
-
-    def is_allowed_to_export(self, user, resource):
-        if user is None:
-            return False
-        if is_admin(user, resource):
-            return True
-        state = resource.get_workflow_state()
-        if state not in (SENT, EXPORTED, MODIFIED):
-            return False
-        role = self.get_user_role(user.name)
-        return role in ('members', 'reviewers')
-
-
-
-# Security
-Folder.browse_content = Folder_BrowseContent(access='is_admin')
-Folder.preview_content = Folder_PreviewContent(access='is_admin')
-DBResource.links = DBResource_Links(access='is_admin')
-DBResource.backlinks = DBResource_Backlinks(access='is_admin')
-DBResource.commit_log = DBResource_CommitLog(access='is_admin')
-
-register_document_type(Application, WebSite.class_id)
+    def get_catalog_values(self):
+        author = (self.get_property('author')
+                or self.get_property('last_author'))
+        ctime = self.get_property('ctime') or self.get_property('mtime')
+        return merge_dicts(Folder.get_catalog_values(self),
+                author=author, ctime=ctime)

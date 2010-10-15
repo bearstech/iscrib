@@ -26,9 +26,9 @@ from ikaaro.root import Root as BaseRoot
 from ikaaro.workflow import WorkflowAware
 
 # Import from iscrib
-from application import Application
-from base_views import AutomaticEditView, FrontView
+from base_views import AutomaticEditView, FrontView, LoginView
 from root_views import Root_View
+from workgroup import Workgroup
 
 
 class Root(BaseRoot):
@@ -45,7 +45,9 @@ class Root(BaseRoot):
     # Views
     view = Root_View()
     edit = AutomaticEditView()
-    show = FrontView(title=MSG(u"Show Workgroup(s)"), cls=Application)
+    show = FrontView(title=MSG(u"Show Workgroup(s)"), cls=Workgroup)
+    # Security
+    unauthorized = LoginView()
 
 
     def init_resource(self, email, password, admins=('0',)):
@@ -59,7 +61,7 @@ class Root(BaseRoot):
 
 
     def get_document_types(self):
-        return super(Root, self).get_document_types() + [Application]
+        return super(Root, self).get_document_types() + [Workgroup]
 
 
     def is_allowed_to_view(self, user, resource):

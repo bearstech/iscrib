@@ -42,3 +42,4 @@ class WorkflowState(Enumerate):
 workflow = Workflow()
 for option in WorkflowState.get_options():
     workflow.add_state(option['name'], title=option['value'])
+workflow.set_initstate(EMPTY)
