@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-15 12:10+CET\n"
+"POT-Creation-Date: 2010-10-15 15:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,7 +137,7 @@ msgctxt "link"
 msgid "<g id='14'> ${website_title} </g>  <g id='15'>  <x id='16'/>  </g>"
 msgstr ""
 
-#: ../ui/login.xml.en:55
+#: ../ui/login.xml.en:60
 msgctxt "label"
 msgid ""
 "<g id='14'>E-mail Address</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>"
@@ -216,7 +216,7 @@ msgctxt "legend"
 msgid "Already Have an Account"
 msgstr ""
 
-#: ../workgroup_views.py:37
+#: ../workgroup_views.py:117
 msgid "Application"
 msgstr ""
 
@@ -245,7 +245,7 @@ msgstr ""
 msgid "Champs dépendants"
 msgstr ""
 
-#: ../user.py:37
+#: ../user_views.py:35
 msgid "Choose your password"
 msgstr ""
 
@@ -258,7 +258,7 @@ msgctxt "title attribute"
 msgid "Come back to the form"
 msgstr ""
 
-#: ../user.py:47
+#: ../user_views.py:45 ../user_views.py:104 ../workgroup_views.py:61
 msgid "Company"
 msgstr ""
 
@@ -286,7 +286,7 @@ msgstr ""
 msgid "Create from an OpenDocument Spreadsheet file"
 msgstr ""
 
-#: ../workgroup_views.py:39
+#: ../workgroup_views.py:119
 msgid "Creation Date"
 msgstr ""
 
@@ -310,7 +310,7 @@ msgstr ""
 msgid "E"
 msgstr ""
 
-#: ../application_views.py:131 ../application_views.py:242
+#: ../application_views.py:130 ../application_views.py:241
 msgid "E-mail"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgctxt "button"
 msgid "Export"
 msgstr ""
 
-#: ../application_views.py:184
+#: ../application_views.py:183
 msgid "Export Collected Data"
 msgstr ""
 
@@ -361,12 +361,21 @@ msgstr ""
 msgid "Faux"
 msgstr ""
 
+#: ../workgroup_views.py:59
+msgid "First Name"
+msgstr ""
+
 #: ../ui/form/send.xml.en:100
 msgctxt "emphasis"
 msgid "For your information, with the given data."
 msgstr ""
 
-#: ../application_views.py:127 ../form.py:107
+#: ../ui/login.xml.en:55
+msgctxt "legend"
+msgid "Forgotten Password"
+msgstr ""
+
+#: ../application_views.py:126 ../form.py:107
 msgid "Form"
 msgstr ""
 
@@ -395,7 +404,7 @@ msgstr ""
 msgid "HHH:MM"
 msgstr ""
 
-#: ../root.py:43 ../workgroup.py:53
+#: ../root.py:43 ../workgroup.py:49
 msgid "Homepage"
 msgstr ""
 
@@ -425,8 +434,12 @@ msgstr ""
 msgid "Integer"
 msgstr ""
 
-#: ../application_views.py:129
+#: ../application_views.py:128
 msgid "Last Modified"
+msgstr ""
+
+#: ../workgroup_views.py:60
+msgid "Last Name"
 msgstr ""
 
 #: ../controls.py:47
@@ -452,6 +465,11 @@ msgctxt "heading"
 msgid "Login"
 msgstr ""
 
+#: ../ui/login.xml.en:49
+msgctxt "heading"
+msgid "Lost Password"
+msgstr ""
+
 #: ../schema.py:66
 msgid "MM/YYYY"
 msgstr ""
@@ -460,7 +478,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:313
+#: ../application_views.py:312
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -468,7 +486,7 @@ msgstr ""
 msgid "Modified after export"
 msgstr ""
 
-#: ../ui/login.xml.en:51
+#: ../ui/login.xml.en:53
 msgctxt "legend"
 msgid "New Account or Forgotten Password"
 msgstr ""
@@ -478,7 +496,7 @@ msgctxt "table cell"
 msgid "New Users<g id='1'> (${allowed_users} allowed)</g>"
 msgstr ""
 
-#: ../application_views.py:164 ../schema.py:84
+#: ../application_views.py:163 ../schema.py:84
 msgid "No"
 msgstr ""
 
@@ -492,7 +510,7 @@ msgctxt "paragraph"
 msgid "No information available."
 msgstr ""
 
-#: ../application_views.py:290
+#: ../application_views.py:289
 msgid "No user added."
 msgstr ""
 
@@ -513,7 +531,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../application_views.py:62
+#: ../application_views.py:61
 msgid "ODS File"
 msgstr ""
 
@@ -521,7 +539,7 @@ msgstr ""
 msgid "Obligatoire (par défaut Oui)"
 msgstr ""
 
-#: ../ui/login.xml.en:41 ../ui/login.xml.en:72
+#: ../ui/login.xml.en:41 ../ui/login.xml.en:77
 msgctxt "button"
 msgid "Ok"
 msgstr ""
@@ -538,11 +556,11 @@ msgstr ""
 msgid "Page names must be in the form \"C Title...\""
 msgstr ""
 
-#: ../application_views.py:74
+#: ../application_views.py:73
 msgid "Parameters"
 msgstr ""
 
-#: ../user.py:48
+#: ../user_views.py:46 ../workgroup_views.py:62
 msgid "Password"
 msgstr ""
 
@@ -570,17 +588,21 @@ msgstr ""
 msgid "Print form"
 msgstr ""
 
+#: ../workgroup.py:40
+msgid "Private workgroup with logo, users and collection applications"
+msgstr ""
+
 #: ../ui/application/login.xml.en:47
 msgctxt "button"
 msgid "Register"
 msgstr ""
 
-#: ../ui/login.xml.en:47
+#: ../ui/login.xml.en:48
 msgctxt "heading"
 msgid "Register"
 msgstr ""
 
-#: ../application_views.py:235
+#: ../application_views.py:234
 msgid "Register Users"
 msgstr ""
 
@@ -589,7 +611,7 @@ msgctxt "link"
 msgid "Register users"
 msgstr ""
 
-#: ../application_views.py:132
+#: ../application_views.py:131
 msgid "Registered"
 msgstr ""
 
@@ -598,7 +620,11 @@ msgctxt "table cell"
 msgid "Registered Users"
 msgstr ""
 
-#: ../user.py:49
+#: ../workgroup_views.py:63
+msgid "Repeat Password"
+msgstr ""
+
+#: ../user_views.py:47
 msgid "Repeat your password"
 msgstr ""
 
@@ -624,11 +650,11 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: ../workgroup.py:58
+#: ../workgroup.py:55
 msgid "Show Application(s)"
 msgstr ""
 
-#: ../application_views.py:381
+#: ../application_views.py:380
 msgid "Show Form"
 msgstr ""
 
@@ -646,23 +672,19 @@ msgctxt "title attribute"
 msgid "Sign in"
 msgstr ""
 
-#: ../demo.py:80
+#: ../demo.py:79
 msgid "Site de démo iScrib"
-msgstr ""
-
-#: ../user.py:106
-msgid "Société"
 msgstr ""
 
 #: ../schema.py:111
 msgid "Somme"
 msgstr ""
 
-#: ../workgroup_views.py:92
+#: ../workgroup_views.py:172
 msgid "Source"
 msgstr ""
 
-#: ../workgroup_views.py:38
+#: ../workgroup_views.py:118
 msgid "Source ODS File"
 msgstr ""
 
@@ -670,7 +692,7 @@ msgstr ""
 msgid "Start filling"
 msgstr ""
 
-#: ../application_views.py:128
+#: ../application_views.py:127
 msgid "State"
 msgstr ""
 
@@ -687,7 +709,7 @@ msgctxt "link"
 msgid "Terms and Conditions"
 msgstr ""
 
-#: ../application_views.py:115
+#: ../application_views.py:114
 msgid "Test Form"
 msgstr ""
 
@@ -695,7 +717,7 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ../base_views.py:80
+#: ../base_views.py:93
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
@@ -704,7 +726,7 @@ msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
 
-#: ../application_views.py:328 ../base_views.py:106
+#: ../application_views.py:327 ../base_views.py:119
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -719,7 +741,7 @@ msgctxt "emphasis"
 msgid "These errors must absolutely be corrected."
 msgstr ""
 
-#: ../ui/login.xml.en:15 ../ui/login.xml.en:28 ../ui/login.xml.en:56
+#: ../ui/login.xml.en:15 ../ui/login.xml.en:28 ../ui/login.xml.en:61
 msgctxt "title attribute"
 msgid ""
 "This field is\n"
@@ -765,11 +787,11 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../application_views.py:269
+#: ../application_views.py:268
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
-#: ../application_views.py:130 ../application_views.py:241
+#: ../application_views.py:129 ../application_views.py:240
 msgid "User"
 msgstr ""
 
@@ -786,8 +808,8 @@ msgstr ""
 msgid "Variable"
 msgstr ""
 
-#: ../application_views.py:122 ../root_views.py:30 ../workgroup_views.py:33
-#: ../demo.py:86
+#: ../application_views.py:121 ../root_views.py:30 ../workgroup_views.py:113
+#: ../demo.py:85
 msgid "View"
 msgstr ""
 
@@ -808,7 +830,7 @@ msgctxt "heading"
 msgid "Warnings"
 msgstr ""
 
-#: ../application_views.py:375 ../base_views.py:100
+#: ../application_views.py:374 ../base_views.py:113
 msgid "Welcome!"
 msgstr ""
 
@@ -818,34 +840,41 @@ msgid ""
 "When you have finished filling the form, you can click the \"Send\" button."
 msgstr ""
 
-#: ../workgroup.py:45
-msgid "Workgroup client iScrib"
-msgstr ""
-
-#: ../application_views.py:164 ../schema.py:83
+#: ../application_views.py:163 ../schema.py:83
 msgid "Yes"
 msgstr ""
 
-#: ../application_views.py:342
+#: ../application_views.py:341
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../application_views.py:336 ../base_views.py:116
+#: ../application_views.py:335 ../base_views.py:129
 msgid "You are not allowed to register."
 msgstr ""
 
-#: ../user.py:126
+#: ../user.py:45
 msgid ""
 "You are now registered as a user of {site_name}.\n"
 "\n"
-"You can follow this link <{site_uri}> to access the form.\n"
+"You can follow this link <{site_uri}> to access your form.\n"
 "\n"
 "Your e-mail address {email} is your identifier.\n"
 "\n"
 "Your password: {password}"
 msgstr ""
 
-#: ../ui/login.xml.en:68
+#: ../user.py:53
+msgid ""
+"You are now registered as a user of {site_name}.\n"
+"\n"
+"You can follow this link <{site_uri}> to access your workgroup.\n"
+"\n"
+"Your e-mail address {email} is your identifier.\n"
+"\n"
+"Your password: {password}"
+msgstr ""
+
+#: ../ui/login.xml.en:73
 msgctxt "emphasis"
 msgid "You can also use this form if you forgot your password."
 msgstr ""
@@ -887,19 +916,23 @@ msgctxt "legend"
 msgid "Your Account"
 msgstr ""
 
-#: ../user.py:96
+#: ../user_views.py:94
 msgid "Your account was created! You can create a collection application."
+msgstr ""
+
+#: ../workgroup_views.py:58
+msgid "Your e-mail address"
 msgstr ""
 
 #: ../form_views.py:272
 msgid "Your form is not finished yet."
 msgstr ""
 
-#: ../demo.py:52
+#: ../demo.py:51
 msgid "Your form was successfully exported."
 msgstr ""
 
-#: ../form_views.py:39 ../demo.py:47
+#: ../form_views.py:39 ../demo.py:46
 msgid "Your form was successfully sent."
 msgstr ""
 
@@ -972,6 +1005,14 @@ msgstr ""
 msgid "h%d"
 msgstr ""
 
+#: ../root.py:55
+msgid "iScrib"
+msgstr ""
+
+#: ../workgroup.py:39
+msgid "iScrib Workgroup"
+msgstr ""
+
 #: ../widgets.py:76 ../widgets.py:133 ../widgets.py:211
 msgid "id"
 msgstr ""
@@ -993,7 +1034,7 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: ../application_views.py:70 ../application_views.py:78
+#: ../application_views.py:69 ../application_views.py:77
 msgid "not an ODS file"
 msgstr ""
 
@@ -1098,6 +1139,6 @@ msgstr ""
 msgid "{name} is not equal to {sum}"
 msgstr ""
 
-#: ../application_views.py:295
+#: ../application_views.py:294
 msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
