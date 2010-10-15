@@ -52,11 +52,18 @@ class Root(BaseRoot):
 
     def init_resource(self, email, password, admins=('0',)):
         super(Root, self).init_resource(email, password, admins=admins)
+        self.set_property('title', u"iScrib", language='en')
         value = self.class_schema['homepage'].decode("""
-                <h2>Welcome to iScrib!</h2>""")
+                <h2>Welcome to iScrib!</h2>
+                <ul>
+                  <li><a href=";new_resource?type=Workgroup">Create a
+                  workgroup</a>;</li>
+                  <li><a href=";show">Your workgroups (authenticated users
+                  only)</a>.</li>
+                </ul>""")
         self.set_property('homepage', value, language='en')
-        theme = self.get_resource('theme')
         # Laisse voir le nom du website
+        theme = self.get_resource('theme')
         theme.set_property('logo', None)
 
 

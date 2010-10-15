@@ -55,7 +55,6 @@ MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 
 
 class Application_NewInstance(NewInstance):
-    access = 'is_allowed_to_add_param'
     schema = merge_dicts(NewInstance.schema,
             file=FileDataType(mandatory=True))
     widgets = (NewInstance.widgets
@@ -355,7 +354,7 @@ class Application_Login(LoginView):
 
         # Send e-mail with login
         site_uri = context.uri.resolve(';login')
-        user.send_autoregistration(context, email, site_uri, password)
+        user.send_form_registration(context, email, site_uri, password)
 
         # Automatic login
         user.set_auth_cookie(context, password)

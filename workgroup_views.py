@@ -18,13 +18,93 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.database import PhraseQuery
+from itools.datatypes import Unicode, Email, String
 from itools.gettext import MSG
 
 # Import from ikaaro
+from ikaaro.autoform import TextWidget
 from ikaaro.folder_views import Folder_BrowseContent
+from ikaaro.messages import MSG_PASSWORD_MISMATCH
+from ikaaro.views_new import NewInstance
 
 # Import from iscrib
 from application import Application
+
+
+class Workgroup_NewInstance(NewInstance):
+    access = True
+    schema = merge_dicts(NewInstance.schema, title=Unicode(mandatory=True))
+    widgets = NewInstance.widgets[:-1]
+
+
+    def get_schema(self, resource, context):
+        schema = self.schema.copy()
+        user = context.user
+        if user is None:
+            schema['email'] = Email(mandatory=True)
+            schema['firstname'] = Unicode
+            schema['lastname'] = Unicode
+            schema['company'] = Unicode
+            schema['password'] = String(mandatory=True)
+            schema['password2'] = String(mandatory=True)
+        return schema
+
+    
+    def get_widgets(self, resource, context):
+        widgets = self.widgets[:]
+        user = context.user
+        if user is None:
+            widgets.extend([
+                TextWidget('email', title=MSG(u"Your e-mail address")),
+                TextWidget('firstname', title=MSG(u"First Name")),
+                TextWidget('lastname', title=MSG(u"Last Name")),
+                TextWidget('company', title=MSG(u"Company")),
+                TextWidget('password', title=MSG(u"Password")),
+                TextWidget('password2', title=MSG(u"Repeat Password"))])
+        return widgets
+
+
+    def action(self, resource, context, form):
+        goto = super(Workgroup_NewInstance, self).action(resource, context,
+                form)
+        workgroup = resource.get_resource(form['name'])
+        # Create the user if necessary
+        user_was_created = False
+        user = context.user
+        if user is None:
+            email = form['email']
+            root = context.root
+            user = root.get_user_from_login(email)
+            password = form['password']
+            if user is None:
+                # Create user
+                if password != form['password2']:
+                    context.message = MSG_PASSWORD_MISMATCH
+                    context.commit = False
+                    return
+                users = resource.get_resource('/users')
+                user = users.set_user(email, password)
+                # Send e-mail with login
+                wg_path = '{0}/;login'.format(context.get_link(workgroup))
+                site_uri = context.uri.resolve(wg_path)
+                user.send_workgroup_registration(context, email, site_uri,
+                        password)
+            else:
+                # XXX existing user but new password
+                pass
+            # Automatic login
+            user.set_auth_cookie(context, password)
+            context.user = user
+        # Update user info
+        for key in ('firstname', 'lastname', 'company'):
+            if form[key]:
+                user.set_property(key, form[key])
+        # Set the user as workgroup member
+        username = user.name
+        workgroup.set_user_role(username, 'members')
+        # Come back
+        return goto
+
 
 
 class Workgroup_BrowseContent(Folder_BrowseContent):

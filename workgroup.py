@@ -24,11 +24,6 @@ from itools.gettext import MSG
 from ikaaro.access import is_admin
 from ikaaro.autoform import XHTMLBody, RTEWidget
 from ikaaro.control_panel import ControlPanel
-from ikaaro.folder import Folder
-from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
-from ikaaro.resource_ import DBResource
-from ikaaro.resource_views import DBResource_Links, DBResource_Backlinks
-from ikaaro.revisions_views import DBResource_CommitLog
 from ikaaro.website import WebSite
 
 # Import from iscrib
@@ -36,14 +31,14 @@ from application import Application
 from base_views import AutomaticEditView, FrontView, LoginView
 from form import Form
 from workflow import SENT, EXPORTED, MODIFIED
-from workgroup_views import Workgroup_BrowseContent
+from workgroup_views import Workgroup_NewInstance, Workgroup_BrowseContent
 
 
 class Workgroup(WebSite):
     class_id = 'Workgroup'
     class_title = MSG(u"iScrib Workgroup")
-    class_description = MSG(u"Restricted Workgroup with logo, users and "
-            u"applications")
+    class_description = MSG(u"Private workgroup with logo, users and "
+            u"collection applications")
     class_views = WebSite.class_views + ['show']
     class_schema = merge_dicts(WebSite.class_schema,
             homepage=XHTMLBody(source='metadata', multilingual=True,
@@ -54,6 +49,7 @@ class Workgroup(WebSite):
     edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]
 
     # Views
+    new_instance = Workgroup_NewInstance()
     view = Workgroup_BrowseContent()
     edit = AutomaticEditView()
     show = FrontView(title=MSG(u"Show Application(s)"), cls=Application)
@@ -71,10 +67,10 @@ class Workgroup(WebSite):
               <ul>
                 <li><a
                     href="http://iscrib.demo.itaapy.com/gabarit/;download">Download
-                    the ODS template;</a></li>
+                    the ODS template</a>;</li>
                 <li><a href=";new_resource?type=Application">Create a data
-                    collection application;</a></li>
-                <li><a href="theme/;edit">Upload your logo.</a></li>
+                    collection application</a>;</li>
+                <li><a href="theme/;edit">Upload your logo</a>.</li>
               </ul>""")
         self.set_property('homepage', value, language='en')
         theme = self.get_resource('theme')
@@ -84,12 +80,6 @@ class Workgroup(WebSite):
 
     def get_document_types(self):
         return super(Workgroup, self).get_document_types() + [Application]
-
-
-    # XXX
-    #def is_allowed_to_add_param(self, user, resource):
-    #    return is_admin(user, resource)
-    is_allowed_to_add_param = WebSite.is_allowed_to_add
 
 
     def is_allowed_to_add_form(self, user, resource):
@@ -137,12 +127,3 @@ class Workgroup(WebSite):
             return False
         role = self.get_user_role(user.name)
         return role in ('members', 'reviewers')
-
-
-
-# Security
-Folder.browse_content = Folder_BrowseContent(access='is_admin')
-Folder.preview_content = Folder_PreviewContent(access='is_admin')
-DBResource.links = DBResource_Links(access='is_admin')
-DBResource.backlinks = DBResource_Backlinks(access='is_admin')
-DBResource.commit_log = DBResource_CommitLog(access='is_admin')
