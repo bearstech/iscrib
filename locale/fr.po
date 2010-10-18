@@ -279,7 +279,7 @@ msgstr ""
 
 #: ../user_views.py:45 ../user_views.py:104 ../workgroup_views.py:61
 msgid "Company"
-msgstr ""
+msgstr "Société"
 
 #: ../ui/application/register.xml.en:26
 msgctxt "paragraph"
@@ -382,7 +382,7 @@ msgstr ""
 
 #: ../workgroup_views.py:59
 msgid "First Name"
-msgstr ""
+msgstr "Prénom"
 
 #: ../ui/form/send.xml.en:100
 msgctxt "emphasis"
@@ -461,7 +461,7 @@ msgstr "Dernière modification"
 
 #: ../workgroup_views.py:60
 msgid "Last Name"
-msgstr ""
+msgstr "Nom"
 
 #: ../controls.py:47
 msgid "Level"
@@ -978,7 +978,7 @@ msgstr ""
 
 #: ../workgroup_views.py:58
 msgid "Your e-mail address"
-msgstr ""
+msgstr "Adresse de courriel"
 
 #: ../form_views.py:272
 msgid "Your form is not finished yet."
