@@ -72,7 +72,8 @@ class Root(BaseRoot):
 
 
     def is_allowed_to_view(self, user, resource):
-        if str(resource.get_abspath()).startswith('/theme'):
+        abspath = resource.get_abspath()
+        if abspath and abspath[0] == 'theme':
             if isinstance(resource, WorkflowAware):
                 state = resource.get_workflow_state()
             else:

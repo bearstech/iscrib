@@ -99,6 +99,8 @@ class Workgroup(WebSite):
         elif isinstance(resource, Form):
             return (role in ('members', 'reviewers')
                     or user.name == resource.name)
+        elif resource.get_abspath()[1] == 'theme':
+            return role in ('guests', 'members', 'reviewers')
         return super(Workgroup, self).is_allowed_to_view(user, resource)
 
 
@@ -114,6 +116,8 @@ class Workgroup(WebSite):
             if resource.name == resource.parent.default_form:
                 return role in ('members', 'reviewers')
             return resource.name == user.name
+        elif resource.get_abspath()[1] == 'theme':
+            return role in ('members', 'reviewers')
         return super(Workgroup, self).is_allowed_to_edit(user, resource)
 
 
