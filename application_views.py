@@ -157,7 +157,15 @@ class Application_View(Folder_BrowseContent):
                 return user.get_title()
             elif column == 'email':
                 email = user.get_property('email')
-                return (email, 'mailto:{0}'.format(email))
+                application_title = resource.get_title()
+                subject = MSG(u'{workgroup}, form "{application}"').gettext()
+                subject = subject.format(
+                        workgroup=resource.parent.get_title(),
+                        application=application_title)
+                body = MSG(u'Please fill in the form "{application}".')
+                body = body.gettext().format(application=application_title)
+                return (email, 'mailto:{0}?subject={1}&amp;body={2}'.format(
+                    email, subject.encode('utf8'), body.encode('utf8')))
             elif column == 'registered':
                 password = user.get_property('password')
                 return MSG(u"Yes") if password else MSG(u"No")
