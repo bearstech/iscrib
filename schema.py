@@ -20,13 +20,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
-from itools.csv import CSVFile
-from itools.datatypes import Enumerate, String, Integer
+from itools.csv import Table as TableFile
+from itools.datatypes import Enumerate, String, Integer, Boolean
 from itools.gettext import MSG
 from itools.handlers import checkid
 
 # Import from ikaaro
-from ikaaro.text import CSV
+from ikaaro.table import Table
 
 # Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
@@ -34,30 +34,43 @@ from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import SqlEnumerate
 
 
+ERR_EMPTY_NAME = u'In schema, line {line}, variable name is missing.'
+ERR_DUPLICATE_NAME = (u'In schema, line {line}, variable name "{name}" is '
+        u'duplicated.')
 ERR_BAD_TYPE = u'In schema, line {line}, type "{type}" is unknown.'
-ERR_BAD_PAGE = (u'In schema, line {line}, page "{page}" does not match '
-        u'variable "{name}".')
+ERR_BAD_MANDATORY = (u'In schema, line {line}, mandatory "{mandatory}" is '
+        u'unknown.')
+ERR_BAD_SUM = (u'In schema, line {line}, in sum variable name "{name}" is '
+        u'unknown.')
+ERR_BAD_DEPENDENCY = (u'In schema, line {line}, dependency variable name '
+        u'"{name}" is unknown.')
 
 
-class PageNumber(Enumerate):
-    options = [
-        {'name': '0', 'value': u"0"},
-        {'name': 'A', 'value': u"A"},
-        {'name': 'B', 'value': u"B"},
-        {'name': 'C', 'value': u"C"},
-        {'name': 'D', 'value': u"D"},
-        {'name': 'D', 'value': u"D"},
-        {'name': 'E', 'value': u"E"},
-        {'name': 'F', 'value': u"F"},
-        {'name': 'G', 'value': u"G"},
-        {'name': 'H', 'value': u"H"},
-        {'name': 'I', 'value': u"I"}]
+class Variable(String):
+
+    @staticmethod
+    def decode(data):
+        value = String.decode(data).strip().upper()
+        if value[0] == '#':
+            value = value[1:]
+        return value
+
+
+    @staticmethod
+    def get_page_number(value):
+        page_number = ''
+        for char in value:
+            if char.isalpha():
+                page_number += char
+            else:
+                break
+        return page_number
 
 
 
 class Type(Enumerate):
     options = [
-        {'name': 'boolean', 'value': u"Boolean", 'type': EnumBoolean},
+        {'name': 'bool', 'value': u"Boolean", 'type': EnumBoolean},
         {'name': 'dec', 'value': u"Decimal", 'type': NumDecimal},
         {'name': 'digit', 'value': u"00000", 'type': NumDigit},
         {'name': 'hh:mm', 'value': u"HH:MM", 'type': NumShortTime},
@@ -70,6 +83,11 @@ class Type(Enumerate):
         {'name': 'enum', 'value': u"List of values", 'type': SqlEnumerate}]
 
 
+    @staticmethod
+    def decode(data):
+        return Enumerate.decode(data).strip().lower()
+
+
     def get_type(cls, name, default=None):
         for option in cls.get_options():
             if option['name'] == name:
@@ -78,114 +96,163 @@ class Type(Enumerate):
 
 
 
-class Mandatory(Enumerate):
-    default = ''
-    options = [
-        {'name': '', 'value': u"Yes"},
-        {'name': 'Non', 'value': u"No"}]
+class Representation(String):
+
+    @staticmethod
+    def decode(data):
+        return String.decode(data).strip().lower()
+
+
+    @staticmethod
+    def is_valid(value):
+        return value.isdigit() or value == 'radio'
 
 
 
-class ReadOnly(Enumerate):
-    default = 'Non'
-    options = [
-        {'name': 'Oui', 'value': u"Oui"},
-        {'name': '', 'value': u"Non"}]
+class Mandatory(Boolean):
+
+    @staticmethod
+    def decode(data):
+        data = data.strip().upper()
+        if data in ('', 'O', 'OUI', '1'):
+            return True
+        elif data in ('N', 'NON', '0'):
+            return False
+        raise ValueError
 
 
 
-class SchemaHandler(CSVFile):
-    schema = {'name': String(mandatory=True, title=MSG(u"Variable")),
-              'title': Unicode(mandatory=True, title=MSG(u"Titre")),
-              'page_number': PageNumber(mandatory=True, title=MSG(u"Page")),
-              'type': Type(mandatory=True, title=MSG(u"Type")),
-              'representation': String(mandatory=True,
-                  title=MSG(u"Représentation (par défaut INPUT TEXT)")),
-              'length': Integer(default=0, title=MSG(u"Taille de champs "
-                  u"de saisie (par défaut identique à Représentation)")),
-              'vocabulary': Unicode(title=MSG(u"Valeurs autorisées / "
-                  u"modalités")),
-              'mandatory': Mandatory(title=MSG(u"Obligatoire "
-                  u"(par défaut Oui)")),
-              'readonly': ReadOnly(mandatory=True, title=MSG(u"Non "
-                  u"modifiable (par défaut Non)")),
-              'sum': String(title=MSG(u"Somme")),
-              'dependencies': String(title=MSG(u"Champs dépendants"))}
-    columns = ['name', 'title', 'page_number', 'type', 'representation',
-            'length', 'vocabulary', 'mandatory', 'readonly', 'sum',
-            'dependencies']
+class Sum(String):
+
+    @staticmethod
+    def decode(data):
+        value = String.decode(data).strip().upper()
+        return ''.join(term.strip() for term in value.split('+'))
+
+
+    @staticmethod
+    def is_valid(value, known_variables):
+        if not value:
+            return True
+        for name in value.split('+'):
+            if name not in known_variables:
+                raise ValueError, name
+        return True
+
+
+
+class Dependency(String):
+
+    @staticmethod
+    def decode(data):
+        return String.decode(data).strip().upper()
+
+
+    @staticmethod
+    def is_valid(value, known_variables):
+        return value and value in known_variables or True
+
+
+
+class SchemaHandler(TableFile):
+    record_properties = {
+        'name': Variable(mandatory=True, title=MSG(u"Variable")),
+        'title': Unicode(mandatory=True, title=MSG(u"Title")),
+        'help': Unicode(mandatory=True, title=MSG(u"Online Help")),
+        'type': Type(mandatory=True, title=MSG(u"Type")),
+        'representation': Representation(mandatory=True,
+            title=MSG(u"Representation")),
+        'length': Integer(default=0, title=MSG(u"Length")),
+        'vocabulary': Unicode(title=MSG(u"Vocabulary")),
+        'mandatory': Mandatory(title=MSG(u"Mandatory")),
+        'sum': Sum(title=MSG(u"Sum")),
+        'dependency': Dependency(title=MSG(u"Dependent Field"))}
 
 
     def get_schema_pages(self):
         schema = {}
         pages = {}
-        for row in self.get_rows():
+        get_record_value = self.get_record_value
+        for record in self.get_records():
             # The name
-            name = row.get_value('name').strip()
-            if name == '':
-                continue
-            if name[0] == '#':
-                name = name[1:]
+            name = get_record_value(record, 'name')
             # The datatype
-            dt_name = row.get_value('type').strip().lower()
+            dt_name = get_record_value(record, 'type')
             datatype = Type.get_type(dt_name)
             if dt_name == 'enum':
-                vocabulary = row.get_value('vocabulary')
+                vocabulary = get_record_value(record, 'vocabulary')
                 options = []
                 for value in vocabulary.strip().split('/'):
                     options.append({'name': checkid(value),
                                     'value': value.strip()})
                 datatype.options = options
-            # The page number
-            page_number = row.get_value('page_number').replace('-', '')
-            # allow multiple page numbers
+            # The page number (now automatic)
+            page_number = Variable.get_page_number(name)
+            pages.setdefault(page_number, set()).add(name)
             page_numbers = []
-            for page_number in page_number.split(','):
-                if not (page_number.isalpha() or page_number == '0'): # FIXME
-                    message = """page "%s" n'est pas valide""" % page_number
-                    raise ValueError, message
-                pages.setdefault(page_number, set()).add(name)
-                page_numbers.append(page_number)
+            page_numbers.append(page_number)
             # Add to the datatype
-            representation = row.get_value('representation')
-            length = row.get_value('length') or representation
-            page_numbers = tuple(page_numbers)
-            is_mandatory = row.get_value('mandatory').strip()
-            is_mandatory = not is_mandatory or is_mandatory.upper() == 'OUI'
-            readonly = row.get_value('readonly').strip().upper() == 'OUI'
-            sum = row.get_value('sum').strip()
-            dependances = row.get_value('dependencies').split()
+            representation = get_record_value(record, 'representation')
+            length = get_record_value(record, 'length') or representation
+            is_mandatory = get_record_value(record, 'mandatory')
+            sum = get_record_value(record, 'sum')
+            dependency = get_record_value(record, 'dependency')
             schema[name] = datatype(representation=representation,
-                    title=row.get_value('title'),
-                    length=str(length), pages=page_numbers,
-                    is_mandatory=is_mandatory, readonly=readonly, sum=sum,
-                    dependances=dependances)
+                    help=get_record_value(record, 'help'),
+                    length=str(length), pages=tuple(page_numbers),
+                    is_mandatory=is_mandatory, sum=sum,
+                    dependency=dependency)
         return schema, pages
 
 
 
-class Schema(CSV):
+class Schema(Table):
     class_id = 'Schema'
     class_title = MSG(u"Schema")
     class_handler = SchemaHandler
     class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
 
+    # XXX To import from CSV
+    columns = ['name', 'title', 'help', 'type', 'representation', 'length',
+            'vocabulary', 'mandatory', 'sum', 'dependency']
+
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):
-        super(Schema, self).init_resource(body=body, filename=filename,
+        super(Schema, self).init_resource(filename=filename,
                 extension=extension, **kw)
         handler = self.handler
+        handler.update_from_csv(body, self.columns)
         # Consistency check
-        for lineno, row in enumerate(handler.get_rows()):
-            dt_name = row.get_value('type').strip().lower()
-            datatype = Type.get_type(dt_name)
-            if datatype is None:
+        get_record_value = handler.get_record_value
+        # First round on variables
+        known_variables = []
+        for lineno, record in enumerate(handler.get_records()):
+            name = get_record_value(record, 'name').strip().upper()
+            if not name:
+                raise ValueError, ERR_EMPTY_NAME.format(line=lineno+1)
+            if name in known_variables:
+                raise ValueError, ERR_DUPLICATE_NAME.format(line=lineno+1,
+                        name=name)
+            dt_name = get_record_value(record, 'type')
+            if not Type.is_valid(dt_name):
                 raise ValueError, ERR_BAD_TYPE.format(line=lineno+1,
                         type=dt_name)
-            name = row.get_value('name')
-            page = row.get_value('page_number')
-            pages = page.split(',')
-            if name[0] not in pages:
-                raise ValueError, ERR_BAD_PAGE.format(line=lineno+1,
-                        page=page, name=name)
+            try:
+                mandatory = get_record_value(record, 'mandatory')
+            except ValueError:
+                raise ValueError, ERR_BAD_MANDATORY.format(line=lineno+1,
+                        mandatory=mandatory)
+            known_variables.append(name)
+        # Second round on references
+        for lineno, record in enumerate(handler.get_records()):
+            sum = get_record_value(record, 'sum')
+            try:
+                Sum.is_valid(sum, known_variables)
+            except ValueError, name:
+                raise ValueError, ERR_BAD_SUM.format(line=lineno+1,
+                        name=name)
+            dependency = get_record_value(record, 'dependency')
+            if not Dependency.is_valid(dependency, known_variables):
+                raise ValueError, ERR_BAD_DEPENDENCY.format(line=lineno+1,
+                        name=dependency)

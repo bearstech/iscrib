@@ -65,9 +65,8 @@ class Workgroup(WebSite):
               <p>This is where you create collection applications.</p>
               <p>Things you can do:</p>
               <ul>
-                <li><a
-                    href="http://iscrib.demo.itaapy.com/gabarit/;download">Download
-                    the ODS template</a>;</li>
+                <li><a href="/gabarit/;download">Download the ODS
+                    template</a>;</li>
                 <li><a href=";new_resource?type=Application">Create a data
                     collection application</a>;</li>
                 <li><a href="theme/;edit">Upload your logo</a>.</li>

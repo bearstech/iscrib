@@ -24,6 +24,7 @@ from decimal import InvalidOperation
 # Import from itools
 from itools.core import merge_dicts, freeze
 from itools.gettext import MSG
+from itools.i18n import format_number
 from itools.handlers import File as FileHandler
 
 # Import from ikaaro
@@ -36,6 +37,7 @@ from datatypes import Numeric, NumDecimal, Unicode
 from formpage import FormPage
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control
+from schema import Variable
 from workflow import workflow, SENT
 
 
@@ -195,8 +197,7 @@ class Form(File):
     def get_controls(self):
         """Load the controls from the CSV.
         """
-        handler = self.get_controls_resource().handler
-        return handler.get_controls()
+        return self.get_controls_resource().handler
 
 
     def get_formpages(self):
@@ -262,21 +263,25 @@ class Form(File):
 
     @staticmethod
     def is_disabled_by_dependency(name, schema, fields):
-        for dep_name in schema[name].dependances:
-            if fields[dep_name] is not True:
-                return True
-            # Second level
-            for dep_dep_name in schema[dep_name].dependances:
-                if fields[dep_dep_name] is not True:
-                    return True
+        dep_name = schema[name].dependency
+        if not dep_name:
+            return False
+        if fields[dep_name] is not True:
+            return True
+        # Second level
+        dep_dep_name = schema[dep_name].dependency
+        if not dep_dep_name:
+            return False
+        if fields[dep_dep_name] is not True:
+            return True
         return False
 
 
     @staticmethod
-    def get_reverse_dependencies(name, schema):
+    def get_reverse_dependency(name, schema):
         return [dep_name
                 for dep_name, dep_datatype in schema.iteritems()
-                if name in dep_datatype.dependances]
+                if name == dep_datatype.dependency]
 
 
     def get_invalid_fields(self, pages=freeze([]), exclude=freeze([''])):
@@ -314,24 +319,25 @@ class Form(File):
         schema = self.get_schema()
         fields = self.get_fields(schema)
         controls = self.get_controls()
-        for number, title, expr, level, page in controls:
+        get_record_value = controls.get_record_value
+        for record in controls.get_records():
+            level = get_record_value(record, 'level')
             if level not in levels:
                 continue
+            variable = get_record_value(record, 'variable')
+            page = Variable.get_page_number(variable)
             if pages and page not in pages:
                 continue
             if page in exclude:
                 continue
-            # Risque d'espaces insécables autour des guillemets
-            expr = expr.replace(u' ', u' ').strip()
-            if not expr:
-                continue
+            expression = get_record_value(record, 'expression')
             try:
                 # Précision pour les informations statistiques
                 if level == '0':
                     vars = self.get_floating_vars(fields)
                 else:
                     vars = self.get_vars(fields)
-                value = eval(expr, vars)
+                value = eval(expression, vars)
             except ZeroDivisionError:
                 # Division par zéro toléré
                 value = None
@@ -342,6 +348,7 @@ class Form(File):
             if value is True and '0' not in levels:
                 continue
             # Le titre contient des formules
+            title = get_record_value(record, 'title')
             if u'[' in title:
                 expanded = []
                 for is_expr, token in parse_control(title):
@@ -359,14 +366,15 @@ class Form(File):
                         expanded.append(unicode(value))
                 title = u"".join(expanded)
             if value is True:
-                value = u"Vrai"
+                value = MSG(u"True")
             elif value is False:
-                value = u"Faux"
+                value = MSG(u"False")
             elif isinstance(value, NumDecimal):
-                value = str(value.round()).replace('.', ',')
-            yield {'number': number, 'title': title, 'expr': expr,
-                    'level': level, 'page': page, 'value': value,
-                    'debug': u"'%s' = '%s'" % (expr, value)}
+                value = format_number(value.value)
+            number = get_record_value(record, 'number')
+            yield {'number': number, 'title': title, 'level': level,
+                    'variable': variable, 'page': page,
+                    'debug': u"'%s' = '%s'" % (expression, value)}
 
 
     def get_info_controls(self, pages=freeze([]), exclude=freeze([''])):

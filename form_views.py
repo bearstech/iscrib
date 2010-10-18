@@ -209,7 +209,7 @@ class Form_Send(STLForm):
         # Failed controls
         for control in resource.get_failed_controls():
             control['href'] = ';page%s#field_%s' % (control['page'],
-                    control['title'].split()[0])
+                    control['variable'])
             if control['level'] == '2':
                 errors.append(control)
             else:
@@ -217,7 +217,7 @@ class Form_Send(STLForm):
         # Informative controls
         for control in resource.get_info_controls():
             control['href'] = ';page%s#field_%s' % (control['page'],
-                    control['title'].split()[0])
+                    control['variable'])
             infos.append(control)
         namespace['controls'] = {'errors': errors, 'warnings': warnings,
                 'infos': infos}

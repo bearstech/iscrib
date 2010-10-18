@@ -88,14 +88,14 @@ def radio_widget(context, form, datatype, name, value, schema, fields,
                 disabled = u"true"
                 toggle_class = u"addClass"
             dep_names = []
-            for dep_name in form.get_reverse_dependencies(name, schema):
+            for dep_name in form.get_reverse_dependency(name, schema):
                 dep_names.append(dep_name)
                 # Second level
-                for dep_name in form.get_reverse_dependencies(dep_name,
+                for dep_name in form.get_reverse_dependency(dep_name,
                         schema):
                     dep_names.append(dep_name)
                     # Third level
-                    for dep_name in form.get_reverse_dependencies(dep_name,
+                    for dep_name in form.get_reverse_dependency(dep_name,
                             schema):
                         dep_names.append(dep_name)
             for dep_name in dep_names:
@@ -238,7 +238,6 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     # Always take data from the handler, we store wrong values anyway
     value = form.get_form().handler.get_value(name, schema)
     datatype = schema[name]
-    readonly =  readonly or datatype.readonly
     representation = datatype.representation.upper()
     widget = None
     if representation == 'SELECT':
@@ -261,6 +260,7 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
         widget = text_widget(context, form, datatype, name, value, schema,
                 fields, readonly, tabindex)
     if skip_print is False:
-        widget += u'<span title="{title}">[?]</span>'.format(
-                title=datatype.title)
+        help = datatype.help
+        if help:
+            widget += u'<span title="{help}">[?]</span>'.format(help=help)
     return widget

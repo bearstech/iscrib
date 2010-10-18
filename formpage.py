@@ -46,6 +46,7 @@ class FormPage(CSV):
 
 
     def get_page_number(self):
+        # Let error raise
         _, page_number = self.name.split('page')
         return page_number.upper()
 

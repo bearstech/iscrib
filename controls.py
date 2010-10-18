@@ -20,16 +20,60 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
-from itools.csv import CSVFile
-from itools.datatypes import Enumerate, String
+from itools.csv import Table as TableFile
+from itools.datatypes import Enumerate
 from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.text import CSV
+from ikaaro.table import Table
 
 # Import from iscrib
 from datatypes import Unicode
-from schema import PageNumber
+from utils import SI
+from schema import Variable
+
+
+ERR_EMPTY_TITLE = u'In controls, line {line}, title is missing.'
+ERR_EMPTY_EXPRESSION = u'In controls, line {line}, expression is missing.'
+ERR_BAD_EXPRESSION = (u'In controls, line {line}, syntax error in '
+        u'expression: {err}')
+ERR_BAD_LEVEL = u'In controls, line {line}, unexpected level "{level}".'
+ERR_EMPTY_VARIABLE = u'In controls, line {line}, variable is missing.'
+
+
+class ZeroDict(dict):
+
+    def __getitem__(self, key):
+        try:
+            value = super(ZeroDict, self).__getitem__(key)
+        except KeyError:
+            value = 0
+        return value
+
+
+
+class Expression(Unicode):
+
+    @staticmethod
+    def decode(data):
+        # Risque d'espaces insécables autour des guillemets
+        # Ni upper() ni lower() !
+        return Unicode.decode(data).replace(u' ', u' ').strip()
+
+
+    @staticmethod
+    def is_valid(value):
+        vars = ZeroDict()
+        vars['SI'] = SI
+        try:
+            eval(value, vars)
+        except ZeroDivisionError:
+            pass
+        except Exception, err:
+            # Let error raise with message
+            raise
+        return True
+
 
 
 class ControlLevel(Enumerate):
@@ -39,24 +83,54 @@ class ControlLevel(Enumerate):
         {'name': '2', 'value': u"Error"}]
 
 
-
-class ControlsHandler(CSVFile):
-    schema = {'number': String(mandatory=True, title=MSG(u"Number")),
-              'title': Unicode(mandatory=True, title=MSG(u"Title")),
-              'expr': Unicode(mandatory=True, title=MSG(u"Expression")),
-              'level': ControlLevel(mandatory=True, title=MSG(u"Level")),
-              'page': PageNumber(mandatory=True, title=MSG(u"Page"))}
-    columns = ['number', 'title', 'expr', 'level', 'page']
-
-
-    def get_controls(self):
-        return list(self.get_rows())
+    @staticmethod
+    def decode(data):
+        return Enumerate.decode(data).strip()
 
 
 
-class Controls(CSV):
+class ControlsHandler(TableFile):
+    record_properties = {'number': Unicode(mandatory=True,
+            title=MSG(u"Number")),
+        'title': Unicode(mandatory=True, title=MSG(u"Title")),
+        'expression': Expression(mandatory=True, title=MSG(u"Expression")),
+        'level': ControlLevel(mandatory=True, title=MSG(u"Level")),
+        'variable': Variable(mandatory=True, title=MSG(u"Main Variable"))}
+    columns = ['number', 'title', 'expression', 'level', 'variable']
+
+
+
+class Controls(Table):
     class_id = 'Controls'
     class_title = MSG(u"Controls")
     class_handler = ControlsHandler
     class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
+
+
+    def init_resource(self, body=None, filename=None, extension=None, **kw):
+        super(Controls, self).init_resource(filename=filename,
+                extension=extension, **kw)
+        handler = self.handler
+        handler.update_from_csv(body, handler.columns)
+        # Consistency check
+        get_record_value = handler.get_record_value
+        for lineno, record in enumerate(handler.get_records()):
+            title = get_record_value(record, 'title').strip()
+            if not title:
+                raise ValueError, ERR_EMPTY_TITLE.format(line=lineno+1)
+            expression = get_record_value(record, 'expression')
+            if not expression:
+                raise ValueError, ERR_EMPTY_EXPRESSION.format(line=lineno+1)
+            try:
+                Expression.is_valid(expression)
+            except Exception, err:
+                raise ValueError, ERR_BAD_EXPRESSION.format(line=lineno+1,
+                        err=err)
+            level = get_record_value(record, 'level')
+            if not ControlLevel.is_valid(level):
+                raise ValueError, ERR_BAD_LEVEL.format(line=lineno+1,
+                        level=level)
+            variable = get_record_value(record, 'variable')
+            if not variable:
+                raise ValueError, ERR_EMPTY_VARIABLE.format(line=lineno+1)
