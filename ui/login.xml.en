@@ -45,14 +45,14 @@
     </div>
     <div id="register-form"
       style="float: left; width: 25em; padding-left: 10px">
-      <h2 stl:if="is_allowed_to_register">Register</h2>
-      <h2 stl:if="not is_allowed_to_register">Lost Password</h2>
+      <h2 stl:if="register">Register</h2>
+      <h2 stl:if="not register">Lost Password</h2>
       <form id="registerform" name="registerform" method="post"
         action=";login">
         <fieldset>
-          <legend stl:if="is_allowed_to_register">New Account or Forgotten
+          <legend stl:if="register">New Account or Forgotten
             Password</legend>
-          <legend stl:if="not is_allowed_to_register">Forgotten
+          <legend stl:if="not register">Forgotten
             Password</legend>
           <table>
             <tr>
@@ -69,7 +69,7 @@
               </td>
             </tr>
           </table>
-          <p stl:if="is_allowed_to_register">
+          <p stl:if="register">
             <em>You can also use this form if you forgot your password.</em>
           </p>
           <p>
