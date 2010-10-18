@@ -82,7 +82,7 @@ class Application(Folder):
         base_url = context.uri.resolve(self.get_abspath())
         user_url = base_url.resolve2(';login')
         if email is not None:
-            user_url.query['email'] = email
+            user_url.query['username'] = email
         return user_url
 
 
