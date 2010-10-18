@@ -34,6 +34,7 @@ from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import SqlEnumerate
 
 
+ERR_BAD_TYPE = u'In schema, line {line}, type "{type}" is unknown.'
 ERR_BAD_PAGE = (u'In schema, line {line}, page "{page}" does not match '
         u'variable "{name}".')
 
@@ -135,8 +136,6 @@ class SchemaHandler(CSVFile):
                     options.append({'name': checkid(value),
                                     'value': value.strip()})
                 datatype.options = options
-            if datatype is None:
-                raise NotImplementedError, (dt_name, str(self.get_abspath()))
             # The page number
             page_number = row.get_value('page_number').replace('-', '')
             # allow multiple page numbers
@@ -179,6 +178,11 @@ class Schema(CSV):
         handler = self.handler
         # Consistency check
         for lineno, row in enumerate(handler.get_rows()):
+            dt_name = row.get_value('type').strip().lower()
+            datatype = Type.get_type(dt_name)
+            if datatype is None:
+                raise ValueError, ERR_BAD_TYPE.format(line=lineno+1,
+                        type=dt_name)
             name = row.get_value('name')
             page = row.get_value('page_number')
             pages = page.split(',')
