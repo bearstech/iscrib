@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-18 12:10+CET\n"
+"POT-Creation-Date: 2010-10-18 13:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -544,6 +544,10 @@ msgctxt "paragraph"
 msgid "No warning detected."
 msgstr "Aucun avertissement détecté."
 
+#: ../base_views.py:44
+msgid "No {class_title} available."
+msgstr "Aucun {class_title} disponible."
+
 #: ../schema.py:93 ../datatypes.py:667
 msgid "Non"
 msgstr ""
@@ -602,7 +606,9 @@ msgstr "Veuillez entrer votre adresse de courriel pour accéder au formulaire :"
 msgid ""
 "Please fill in the form \"{application_title}\" available here: <"
 "{application_url}>."
-msgstr "Merci de remplir le formulaire \"{application_title}\" disponible ici : <{application_url}>."
+msgstr ""
+"Merci de remplir le formulaire \"{application_title}\" disponible ici : <"
+"{application_url}>."
 
 #: ../ui/form/send.xml.en:72
 msgctxt "emphasis"
@@ -748,7 +754,7 @@ msgstr "Formulaire de test"
 msgid "Text"
 msgstr ""
 
-#: ../base_views.py:97
+#: ../base_views.py:93
 msgid "The e-mail or the password is incorrect."
 msgstr "L'adresse de courriel ou le mot de passe sont incorrects."
 
@@ -759,7 +765,7 @@ msgstr ""
 "Le formulaire est valide, vous pouvez l'exporter dans une base de données "
 "SQL."
 
-#: ../application_views.py:342 ../base_views.py:129
+#: ../application_views.py:342 ../base_views.py:125
 msgid "The given username is not an e-mail address."
 msgstr "Le nom donné n'est pas une adresse de courriel valide."
 
@@ -873,7 +879,7 @@ msgctxt "heading"
 msgid "Warnings"
 msgstr "Avertissements"
 
-#: ../application_views.py:389 ../base_views.py:123
+#: ../application_views.py:389 ../base_views.py:119
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
@@ -893,7 +899,7 @@ msgstr "Oui"
 msgid "You are already registered. Log in using your password."
 msgstr "Vous êtes déjà inscrit. Connectez-vous avec votre mot de passe."
 
-#: ../application_views.py:350 ../base_views.py:139
+#: ../application_views.py:350 ../base_views.py:135
 msgid "You are not allowed to register."
 msgstr "Les inscriptions sont fermées."
 

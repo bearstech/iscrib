@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-18 12:10+CET\n"
+"POT-Creation-Date: 2010-10-18 14:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -346,6 +346,10 @@ msgstr ""
 msgid "No user added."
 msgstr ""
 
+#: ../base_views.py:44
+msgid "No {class_title} available."
+msgstr ""
+
 #: ../schema.py:93
 #: ../datatypes.py:667
 msgid "Non"
@@ -486,12 +490,12 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ../base_views.py:97
+#: ../base_views.py:93
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
 #: ../application_views.py:342
-#: ../base_views.py:129
+#: ../base_views.py:125
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -552,7 +556,7 @@ msgid "Warning"
 msgstr ""
 
 #: ../application_views.py:389
-#: ../base_views.py:123
+#: ../base_views.py:119
 msgid "Welcome!"
 msgstr ""
 
@@ -566,7 +570,7 @@ msgid "You are already registered. Log in using your password."
 msgstr ""
 
 #: ../application_views.py:350
-#: ../base_views.py:139
+#: ../base_views.py:135
 msgid "You are not allowed to register."
 msgstr ""
 

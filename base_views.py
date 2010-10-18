@@ -41,6 +41,9 @@ from ikaaro.workflow import state_widget, WorkflowAware, StateEnumerate
 # Import from iscrib
 
 
+MSG_NO_RESOURCE = ERROR(u'No {class_title} available.')
+
+
 class AutomaticEditView(DBResource_Edit):
     base_schema = DBResource_Edit.schema
 
@@ -166,7 +169,11 @@ class FrontView(IconsView):
                 'title': child.get_title(),
                 'description': child.get_property('description'),
                 'url': context.get_link(child)})
-        if len(items) == 1:
+        if not items:
+            class_title = self.cls.class_title.gettext()
+            return context.come_back(MSG_NO_RESOURCE,
+                class_title=class_title)
+        elif len(items) == 1:
             return get_reference(items[-1]['url'])
         items.sort(key=itemgetter('title'))
         return {'batch': None, 'items': items}
