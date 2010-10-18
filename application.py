@@ -73,6 +73,19 @@ class Application(Folder):
         return self
 
 
+    def get_admin_url(self, context):
+        base_url = context.uri.resolve(self.get_abspath())
+        return base_url.resolve2(';view')
+
+
+    def get_user_url(self, context, email=None):
+        base_url = context.uri.resolve(self.get_abspath())
+        user_url = base_url.resolve2(';login')
+        if email is not None:
+            user_url.query['email'] = email
+        return user_url
+
+
     def get_catalog_values(self):
         author = (self.get_property('author')
                 or self.get_property('last_author'))

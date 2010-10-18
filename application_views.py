@@ -53,6 +53,10 @@ from workflow import WorkflowState
 MSG_ERR_PAGE_NAME = ERROR(u'Page names must be in the form "C Title..."')
 MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 
+MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
+MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
+        u'here: <{application_url}>.')
+
 
 class Application_NewInstance(NewInstance):
     schema = merge_dicts(NewInstance.schema,
@@ -158,14 +162,16 @@ class Application_View(Folder_BrowseContent):
             elif column == 'email':
                 email = user.get_property('email')
                 application_title = resource.get_title()
-                subject = MSG(u'{workgroup}, form "{application}"').gettext()
-                subject = subject.format(
-                        workgroup=resource.parent.get_title(),
-                        application=application_title)
-                body = MSG(u'Please fill in the form "{application}".')
-                body = body.gettext().format(application=application_title)
-                return (email, 'mailto:{0}?subject={1}&amp;body={2}'.format(
-                    email, subject.encode('utf8'), body.encode('utf8')))
+                subject = MAILTO_SUBJECT.gettext().format(
+                        workgroup_title=resource.parent.get_title(),
+                        application_title=application_title)
+                application_url = resource.get_user_url(context, email)
+                body = MAILTO_BODY.gettext().format(
+                        application_title=application_title,
+                        application_url=application_url)
+                url = 'mailto:{0}?subject={1}&body={2}'.format(email,
+                        subject.encode('utf8'), body.encode('utf8'))
+                return (email, url)
             elif column == 'registered':
                 password = user.get_property('password')
                 return MSG(u"Yes") if password else MSG(u"No")
@@ -254,8 +260,8 @@ class Application_Register(Application_View):
                 context)
         namespace['title'] = self.title
         namespace['new_users'] = context.get_form_value('new_users')
-        namespace['url_user'] = context.uri.resolve(';login')
-        namespace['url_admin'] = context.uri.resolve(';view')
+        namespace['url_user'] = resource.get_admin_url(context)
+        namespace['url_admin'] = resource.get_user_url(context)
         return namespace
 
 
