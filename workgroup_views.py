@@ -33,27 +33,28 @@ from application import Application
 
 class Workgroup_NewInstance(NewInstance):
     access = True
-    schema = merge_dicts(NewInstance.schema, title=Unicode(mandatory=True))
+    schema = merge_dicts(NewInstance.schema,
+            title=Unicode(mandatory=True),
+            email=Email,
+            firstname=Unicode,
+            lastname=Unicode,
+            company=Unicode,
+            password=String,
+            password2=String)
     widgets = NewInstance.widgets[:-1]
 
 
     def get_schema(self, resource, context):
         schema = self.schema.copy()
-        user = context.user
-        if user is None:
-            schema['email'] = Email(mandatory=True)
-            schema['firstname'] = Unicode
-            schema['lastname'] = Unicode
-            schema['company'] = Unicode
-            schema['password'] = String(mandatory=True)
-            schema['password2'] = String(mandatory=True)
+        if context.user is None:
+            for key in ('email', 'password', 'password2'):
+                schema[key] = schema[key](mandatory=True)
         return schema
 
     
     def get_widgets(self, resource, context):
         widgets = self.widgets[:]
-        user = context.user
-        if user is None:
+        if context.user is None:
             widgets.extend([
                 TextWidget('email', title=MSG(u"Your e-mail address")),
                 TextWidget('firstname', title=MSG(u"First Name")),
