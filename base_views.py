@@ -26,6 +26,7 @@ from itools.uri import get_reference, get_uri_path
 from itools.web import INFO, ERROR
 
 # Import from ikaaro
+from ikaaro.access import is_admin
 from ikaaro.folder import Folder
 from ikaaro.folder_views import Folder_BrowseContent, Folder_PreviewContent
 from ikaaro.resource_ import DBResource
@@ -111,8 +112,14 @@ class LoginView(BaseLoginView):
                 goto = get_reference('./')
             else:
                 goto = referrer
-        print "goto", goto
 
+        # At the root, redirect to the workgroup or application
+        if resource.get_abspath().resolve(goto.path) == '/':
+            if not is_admin(user, resource):
+                goto = '/;show'
+
+        # FIXME avoid redirecting to user home
+        print "goto", goto
         return context.come_back(INFO(u"Welcome!"), goto)
 
 
