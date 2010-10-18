@@ -15,6 +15,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from the Standard Library
+from operator import itemgetter
+
 # Import from itools
 from itools.core import merge_dicts
 from itools.datatypes import Email
@@ -165,6 +168,7 @@ class FrontView(IconsView):
                 'url': context.get_link(child)})
         if len(items) == 1:
             return get_reference(items[-1]['url'])
+        items.sort(key=itemgetter('title'))
         return {'batch': None, 'items': items}
 
 
