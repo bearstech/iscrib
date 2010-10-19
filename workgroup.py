@@ -22,7 +22,6 @@ from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.access import is_admin
-from ikaaro.autoform import XHTMLBody, RTEWidget
 from ikaaro.control_panel import ControlPanel
 from ikaaro.website import WebSite
 
@@ -41,12 +40,8 @@ class Workgroup(WebSite):
             u"collection applications")
     class_views = WebSite.class_views + ['show']
     class_schema = merge_dicts(WebSite.class_schema,
-            homepage=XHTMLBody(source='metadata', multilingual=True,
-                parameters_schema = {'lang': String}))
+            logo=PathDataType(source='metadata', default=''))
     class_skin = 'ui/iscrib'
-
-    edit_schema = {'homepage': XHTMLBody(multilingual=True)}
-    edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]
 
     # Views
     new_instance = Workgroup_NewInstance()
@@ -60,18 +55,6 @@ class Workgroup(WebSite):
 
     def init_resource(self, **kw):
         super(Workgroup, self).init_resource(**kw)
-        value = self.class_schema['homepage'].decode("""
-              <h2>Welcome to your iScrib Workgroup!</h2>
-              <p>This is where you create collection applications.</p>
-              <p>Things you can do:</p>
-              <ul>
-                <li><a href="/gabarit/;download">Download the ODS
-                    template</a>;</li>
-                <li><a href=";new_resource?type=Application">Create a data
-                    collection application</a>;</li>
-                <li><a href="theme/;edit">Upload your logo</a>.</li>
-              </ul>""")
-        self.set_property('homepage', value, language='en')
         theme = self.get_resource('theme')
         # Laisse voir le nom du website
         theme.set_property('logo', None)

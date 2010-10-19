@@ -125,12 +125,6 @@ class Workgroup_BrowseContent(Folder_BrowseContent):
         return None
 
 
-    def get_namespace(self, resource, context):
-        return merge_dicts(super(Workgroup_BrowseContent,
-            self).get_namespace(resource, context),
-            homepage=resource.get_property('homepage'))
-
-
     def get_items(self, resource, context, *args):
         return super(Workgroup_BrowseContent, self).get_items(resource,
                 context, PhraseQuery('format', Application.class_id), *args)
