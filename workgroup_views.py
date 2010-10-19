@@ -116,6 +116,7 @@ class Workgroup_BrowseContent(Folder_BrowseContent):
 
     table_columns = [
             ('form', MSG(u"Application")),
+            ('subscribed', MSG(u"Users Subscribed")),
             ('file', MSG(u"Source ODS File")),
             ('ctime', MSG(u"Creation Date"))]
     table_actions = []
@@ -162,10 +163,12 @@ class Workgroup_BrowseContent(Folder_BrowseContent):
         brain, item_resource = item
         if column == 'form':
             return brain.title, brain.name
+        elif column == 'subscribed':
+            return len(list(item_resource.get_forms()))
         elif column == 'file':
             parameters = item_resource.get_resource('parameters')
             return (parameters.get_property('filename') or u"Source",
-                    '%s/;download' % context.get_link(parameters))
+                    '{0}/;download'.format(context.get_link(parameters)))
         elif column == 'ctime':
             return context.format_datetime(brain.ctime)
         return super(Workgroup_BrowseContent,
