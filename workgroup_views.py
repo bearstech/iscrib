@@ -18,13 +18,15 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.database import PhraseQuery
-from itools.datatypes import Unicode, Email, String
+from itools.datatypes import Unicode, Email, String, PathDataType
 from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.autoform import TextWidget
+from ikaaro.autoform import TextWidget, ImageSelectorWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
+from ikaaro.resource_views import DBResource_Edit
+from ikaaro.theme_views import Theme_Edit
 from ikaaro.views_new import NewInstance
 
 # Import from iscrib
@@ -173,3 +175,44 @@ class Workgroup_BrowseContent(Folder_BrowseContent):
             return context.format_datetime(brain.ctime)
         return super(Workgroup_BrowseContent,
                 self).get_item_value(resource, context, item, column)
+
+
+
+class Workgroup_Edit(Theme_Edit, DBResource_Edit):
+    schema = merge_dicts(DBResource_Edit.schema,
+            favicon=PathDataType,
+            logo=PathDataType)
+    widgets = DBResource_Edit.widgets + ([
+                ImageSelectorWidget('logo', action='add_logo',
+                    title=MSG(u'Replace logo file')) ])
+
+
+    def get_value(self, resource, context, name, datatype):
+        if name == 'favicon':
+            return ''
+        elif name == 'logo':
+            theme = resource.get_resource('theme')
+            path = theme.get_property(name)
+            if path in ('', '.'):
+                return ''
+            logo = theme.get_resource(path)
+            return resource.get_pathto(logo)
+        return super(Workgroup_Edit, self).get_value(resource, context, name,
+                datatype)
+
+
+    def set_value(self, resource, context, name, form):
+        if name == 'favicon':
+            return False
+        elif name == 'logo':
+            path = form[name]
+            theme = resource.get_resource('theme')
+            if path in ('', '.'):
+                theme.set_property(name, '')
+                return False
+            logo = resource.get_resource(path)
+            logo.set_workflow_state('public')
+            theme.set_property(name, theme.get_pathto(logo))
+            return False
+        return super(Workgroup_Edit, self).set_value(resource, context, name,
+                form)

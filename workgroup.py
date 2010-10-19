@@ -17,20 +17,22 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String
+from itools.datatypes import PathDataType
 from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.access import is_admin
 from ikaaro.control_panel import ControlPanel
+from ikaaro.theme_views import Theme_AddFavIcon, Theme_AddLogo
 from ikaaro.website import WebSite
 
 # Import from iscrib
 from application import Application
-from base_views import AutomaticEditView, FrontView, LoginView
+from base_views import FrontView, LoginView
 from form import Form
 from workflow import SENT, EXPORTED, MODIFIED
 from workgroup_views import Workgroup_NewInstance, Workgroup_BrowseContent
+from workgroup_views import Workgroup_Edit
 
 
 class Workgroup(WebSite):
@@ -46,8 +48,10 @@ class Workgroup(WebSite):
     # Views
     new_instance = Workgroup_NewInstance()
     view = Workgroup_BrowseContent()
-    edit = AutomaticEditView()
+    edit = Workgroup_Edit()
     show = FrontView(title=MSG(u"Show Application(s)"), cls=Application)
+    add_favicon = Theme_AddFavIcon()
+    add_logo = Theme_AddLogo()
     # Security
     control_panel = ControlPanel(access='is_admin')
     unauthorized = LoginView()
