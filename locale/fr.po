@@ -697,7 +697,7 @@ msgstr "Voir le formulaire"
 
 #: ../root.py:48
 msgid "Show Workgroup(s)"
-msgstr "Voir le(s) groupe(s) de travail"
+msgstr "Voir le(s) espace(s) client"
 
 #: ../ui/template.xhtml.en:31
 msgctxt "link"
@@ -933,8 +933,8 @@ msgid ""
 msgstr ""
 "Vous êtes maintenant inscrit comme utilisateur de {site_name}.\n"
 "\n"
-"Vous pouvez suivre ce lien <{site_uri}> pour accéder à votre espace de "
-"travail.\n"
+"Vous pouvez suivre ce lien <{site_uri}> pour accéder à votre espace "
+"client.\n"
 "\n"
 "Votre adresse de courriel {email} est votre identifiant.\n"
 "\n"
@@ -1076,7 +1076,7 @@ msgstr ""
 
 #: ../workgroup.py:39
 msgid "iScrib Workgroup"
-msgstr "Groupe de travail iScrib"
+msgstr "Espace client iScrib"
 
 #: ../widgets.py:76 ../widgets.py:133 ../widgets.py:211
 msgid "id"
