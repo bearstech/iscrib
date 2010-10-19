@@ -39,10 +39,11 @@ class Application(Folder):
     class_description = MSG(u"Create from an OpenDocument Spreadsheet file")
     class_icon16 = 'icons/16x16/tasks.png'
     class_icon48 = 'icons/48x48/tasks.png'
+    allowed_users = 10
     class_schema = merge_dicts(Folder.class_schema,
             author=String(source='metadata', indexed=False, stored=True),
             ctime=DateTime(source='metadata', indexed=False, stored=True),
-            max_users=Integer(source='metadata', default=10))
+            max_users=Integer(source='metadata', default=allowed_users))
     class_views = Folder.class_views + ['export', 'register', 'show']
 
     schema_class = Schema
@@ -69,8 +70,18 @@ class Application(Folder):
                 yield form
 
 
+    def get_n_forms(self):
+        return len(list(self.get_forms()))
+
+
     def get_param_folder(self):
         return self
+
+
+    def get_allowed_users(self):
+        max_users = self.get_property('max_users')
+        n_forms = self.get_n_forms()
+        return (max_users - n_forms) if max_users else self.allowed_users
 
 
     def get_admin_url(self, context):

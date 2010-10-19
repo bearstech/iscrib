@@ -40,6 +40,7 @@ from ikaaro.file import ODS
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
+from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 from ikaaro.workflow import get_workflow_preview
 
@@ -120,6 +121,25 @@ class Application_NewInstance(NewInstance):
 
 
 
+class Application_Menu(IconsView):
+
+    def get_namespace(self, resource, context):
+        items = []
+        max_users = resource.get_property('max_users')
+        allowed_users = resource.get_allowed_users()
+        if allowed_users:
+            items.append({'icon': '/ui/iscrib/images/register48.png',
+                'title': MSG(u"Register Users"),
+                'description': None,
+                'url': ';register'})
+        items.append({'icon': '/ui/iscrib/images/export48.png',
+              'title': MSG(u"Export Collected Data"),
+              'description': None,
+              'url': ';export'})
+        return {'batch': None, 'items': items}
+
+
+
 class Application_View(Folder_BrowseContent):
     access = 'is_allowed_to_edit'
     title = MSG(u"View")
@@ -137,13 +157,10 @@ class Application_View(Folder_BrowseContent):
 
 
     def get_items(self, resource, context, *args):
-        items = super(Application_View, self).get_items(resource, context,
-                AndQuery(PhraseQuery('format', Form.class_id),
-                    NotQuery(PhraseQuery('name', resource.default_form))),
-                *args)
-        # XXX
-        context.n_forms = len(items)
-        return items
+        query = AndQuery(PhraseQuery('format', Form.class_id),
+                    NotQuery(PhraseQuery('name', resource.default_form)))
+        return super(Application_View, self).get_items(resource, context,
+                query, *args)
 
 
     def get_item_value(self, resource, context, item, column):
@@ -175,19 +192,16 @@ class Application_View(Folder_BrowseContent):
             elif column == 'registered':
                 password = user.get_property('password')
                 return MSG(u"Yes") if password else MSG(u"No")
-        return super(Application_View, self).get_item_value(resource, context,
-                item, column)
+        return super(Application_View, self).get_item_value(resource,
+                context, item, column)
 
 
     def get_namespace(self, resource, context):
-        namespace = super(Application_View, self).get_namespace( resource, context)
-        # XXX
-        n_forms = context.n_forms
-        namespace['n_forms'] = n_forms
-        max_users = resource.get_property('max_users')
-        namespace['max_users'] = max_users
-        allowed_users = (max_users - n_forms) if max_users else 20
-        namespace['allowed_users'] = allowed_users
+        namespace = super(Application_View, self).get_namespace( resource,
+                context)
+        namespace['menu'] = Application_Menu().GET(resource, context)
+        namespace['n_forms'] = resource.get_n_forms()
+        namespace['max_users'] = resource.get_property('max_users')
         return namespace
 
 
@@ -259,9 +273,10 @@ class Application_Register(Application_View):
         namespace = super(Application_Register, self).get_namespace(resource,
                 context)
         namespace['title'] = self.title
+        namespace['allowed_users'] = resource.get_allowed_users()
         namespace['new_users'] = context.get_form_value('new_users')
-        namespace['url_user'] = resource.get_admin_url(context)
-        namespace['url_admin'] = resource.get_user_url(context)
+        namespace['url_user'] = resource.get_user_url(context)
+        namespace['url_admin'] = resource.get_admin_url(context)
         return namespace
 
 

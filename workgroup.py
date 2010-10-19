@@ -31,7 +31,7 @@ from application import Application
 from base_views import FrontView, LoginView
 from form import Form
 from workflow import SENT, EXPORTED, MODIFIED
-from workgroup_views import Workgroup_NewInstance, Workgroup_BrowseContent
+from workgroup_views import Workgroup_NewInstance, Workgroup_View
 from workgroup_views import Workgroup_Edit
 
 
@@ -47,7 +47,7 @@ class Workgroup(WebSite):
 
     # Views
     new_instance = Workgroup_NewInstance()
-    view = Workgroup_BrowseContent()
+    view = Workgroup_View()
     edit = Workgroup_Edit()
     show = FrontView(title=MSG(u"Show Application(s)"), cls=Application)
     add_favicon = Theme_AddFavIcon()

@@ -29,7 +29,7 @@ from application import Application
 from form import Form
 from form_views import Form_Send
 from workgroup import Workgroup
-from workgroup_views import Workgroup_BrowseContent
+from workgroup_views import Workgroup_View
 
 
 class ApplicationForm_Send(Form_Send):
@@ -81,8 +81,7 @@ class Demo(Workgroup):
     class_roles = WebSite.class_roles[1:]
 
     # Views
-    view = Workgroup_BrowseContent(access='is_allowed_to_view',
-            title=MSG(u"View"))
+    view = Workgroup_View(access='is_allowed_to_view', title=MSG(u"View"))
 
 
 

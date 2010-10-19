@@ -27,6 +27,7 @@ from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.theme_views import Theme_Edit
+from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 
 # Import from iscrib
@@ -110,7 +111,28 @@ class Workgroup_NewInstance(NewInstance):
 
 
 
-class Workgroup_BrowseContent(Folder_BrowseContent):
+class Workgroup_Menu(IconsView):
+
+    items = [{'icon': '/ui/iscrib/images/download48.png',
+              'title': MSG(u"Download the ODS Template"),
+              'description': None,
+              'url': '/gabarit/;download'},
+             {'icon': '/ui/iscrib/images/upload48.png',
+              'title': MSG(u"Create a Data Collection Application"),
+              'description': None,
+              'url': ';new_resource?type=Application'},
+             {'icon': '/ui/iscrib/images/logo48.png',
+              'title': MSG(u"Edit Title, Logo..."),
+              'description': None,
+              'url': ';edit'}]
+
+
+    def get_namespace(self, resource, context):
+        return {'batch': None, 'items': self.items}
+
+
+
+class Workgroup_View(Folder_BrowseContent):
     access = 'is_allowed_to_edit'
     template = '/ui/iscrib/workgroup/view.xml'
     title = MSG(u"View")
@@ -124,13 +146,18 @@ class Workgroup_BrowseContent(Folder_BrowseContent):
     table_actions = []
 
 
-    def get_page_title(self, resource, context):
-        return None
+    def get_namespace(self, resource, context):
+        namespace = super(Workgroup_View, self).get_namespace(resource,
+                context)
+        theme = resource.get_resource('theme')
+        namespace['menu'] = Workgroup_Menu().GET(resource, context)
+        return namespace
 
 
     def get_items(self, resource, context, *args):
-        return super(Workgroup_BrowseContent, self).get_items(resource,
-                context, PhraseQuery('format', Application.class_id), *args)
+        query = PhraseQuery('format', Application.class_id)
+        return super(Workgroup_View, self).get_items(resource, context,
+                query, *args)
 
 
     def sort_and_batch(self, resource, context, results):
@@ -173,8 +200,8 @@ class Workgroup_BrowseContent(Folder_BrowseContent):
                     '{0}/;download'.format(context.get_link(parameters)))
         elif column == 'ctime':
             return context.format_datetime(brain.ctime)
-        return super(Workgroup_BrowseContent,
-                self).get_item_value(resource, context, item, column)
+        return super(Workgroup_View, self).get_item_value(resource, context,
+                item, column)
 
 
 
