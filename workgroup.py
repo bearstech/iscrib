@@ -19,6 +19,7 @@
 from itools.core import merge_dicts
 from itools.datatypes import PathDataType
 from itools.gettext import MSG
+from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.access import is_admin
@@ -66,6 +67,18 @@ class Workgroup(WebSite):
 
     def get_document_types(self):
         return super(Workgroup, self).get_document_types() + [Application]
+
+
+    def get_class_icon(self, size=16):
+        context = get_context()
+        if context is not None:
+            theme = self.get_resource('theme')
+            logo_path = theme.get_property('logo')
+            if logo_path not in ('', '.'):
+                logo = theme.get_resource(logo_path)
+                return '{0}/;thumb?width={1}&height={1}'.format(
+                        context.resource.get_pathto(logo), size)
+        return super(Workgroup, self).get_class_icon(size=size)
 
 
     def is_allowed_to_add_form(self, user, resource):
