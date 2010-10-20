@@ -73,7 +73,7 @@ class Root(BaseRoot):
 
     def is_allowed_to_view(self, user, resource):
         abspath = resource.get_abspath()
-        if abspath and abspath[0] == 'theme':
+        if abspath and abspath[0] in ('gabarit', 'theme'):
             if isinstance(resource, WorkflowAware):
                 state = resource.get_workflow_state()
             else:
