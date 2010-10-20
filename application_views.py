@@ -18,6 +18,7 @@
 # Import from the Standard Library
 from cStringIO import StringIO
 from email.utils import parseaddr
+from urllib import quote
 
 # Import from lpod
 from lpod import ODF_SPREADSHEET
@@ -56,7 +57,8 @@ MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
-        u'here: <{application_url}>.')
+        u'here:\r\n'
+        u'<{application_url}>.\r\n')
 
 
 class Application_NewInstance(NewInstance):
@@ -188,12 +190,14 @@ class Application_View(Folder_BrowseContent):
                 subject = MAILTO_SUBJECT.gettext().format(
                         workgroup_title=resource.parent.get_title(),
                         application_title=application_title)
+                subject = quote(subject.encode('utf8'))
                 application_url = resource.get_user_url(context, email)
                 body = MAILTO_BODY.gettext().format(
                         application_title=application_title,
                         application_url=application_url)
+                body = quote(body.encode('utf8'))
                 url = 'mailto:{0}?subject={1}&body={2}'.format(email,
-                        subject.encode('utf8'), body.encode('utf8'))
+                        subject, body)
                 return (email, url)
             elif column == 'registered':
                 password = user.get_property('password')
