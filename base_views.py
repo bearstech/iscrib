@@ -22,7 +22,7 @@ from operator import itemgetter
 from itools.core import merge_dicts
 from itools.datatypes import Email
 from itools.stl import stl
-from itools.uri import get_reference, get_uri_path
+from itools.uri import get_reference, get_uri_path, Reference
 from itools.web import INFO, ERROR
 
 # Import from ikaaro
@@ -110,9 +110,11 @@ class LoginView(BaseLoginView):
                 goto = referrer
 
         # At the root, redirect to the workgroup or application
+        if type(goto) is not Reference:
+            goto = get_reference(goto)
         if resource.get_abspath().resolve(goto.path) == '/':
             if not is_admin(user, resource):
-                goto = '/;show'
+                goto = get_reference('/;show')
 
         # FIXME avoid redirecting to user home
         print "goto", goto
