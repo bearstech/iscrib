@@ -492,3 +492,7 @@ button, .button{
 
 .wf-exported { color: #75507b; }
 .wf-modified { color: #3465a4; }
+
+.online-help {
+  vertical-align: top;
+}

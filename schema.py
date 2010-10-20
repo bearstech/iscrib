@@ -158,7 +158,7 @@ class SchemaHandler(TableFile):
     record_properties = {
         'name': Variable(mandatory=True, title=MSG(u"Variable")),
         'title': Unicode(mandatory=True, title=MSG(u"Title")),
-        'help': Unicode(mandatory=True, title=MSG(u"Online Help")),
+        'help': Unicode(title=MSG(u"Online Help")),
         'type': Type(mandatory=True, title=MSG(u"Type")),
         'representation': Representation(mandatory=True,
             title=MSG(u"Representation")),

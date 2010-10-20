@@ -262,5 +262,6 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     if skip_print is False:
         help = datatype.help
         if help:
-            widget += u'<span title="{help}">[?]</span>'.format(help=help)
+            widget += (u'<img src="/ui/icons/16x16/help.png" '
+                    u'title="{help}" class="online-help"/>'.format(help=help))
     return widget
