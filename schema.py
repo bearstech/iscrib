@@ -35,12 +35,12 @@ from datatypes import SqlEnumerate
 
 
 ERR_EMPTY_NAME = u'In schema, line {line}, variable name is missing.'
-ERR_DUPLICATE_NAME = (u'In schema, line {line}, variable name "{name}" is '
+ERR_DUPLICATE_NAME = (u'In schema, line {line}, variable "{name}" is '
         u'duplicated.')
 ERR_BAD_TYPE = u'In schema, line {line}, type "{type}" is unknown.'
 ERR_BAD_MANDATORY = (u'In schema, line {line}, mandatory "{mandatory}" is '
         u'unknown.')
-ERR_BAD_SUM = (u'In schema, line {line}, in sum variable name "{name}" is '
+ERR_BAD_SUM = (u'In schema, line {line}, in sum, variable "{name}" is '
         u'unknown.')
 ERR_BAD_DEPENDENCY = (u'In schema, line {line}, dependency variable name '
         u'"{name}" is unknown.')
@@ -51,7 +51,7 @@ class Variable(String):
     @staticmethod
     def decode(data):
         value = String.decode(data).strip().upper()
-        if value[0] == '#':
+        if value and value[0] == '#':
             value = value[1:]
         return value
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-18 13:10+CET\n"
+"POT-Creation-Date: 2010-10-20 12:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../formpage.py:108 ../formpage.py:171
+#: ../formpage.py:109 ../formpage.py:172
 msgid " centered"
 msgstr ""
 
-#: ../formpage.py:133 ../formpage.py:173
+#: ../formpage.py:134 ../formpage.py:174
 msgid " num"
 msgstr ""
 
@@ -36,48 +36,48 @@ msgstr ""
 msgid "$('[name={name}]').attr('disabled', {disabled}).{method}('disabled');"
 msgstr ""
 
+#: ../ui/workgroup/view.xml.en:11
+msgid "${batch} ${table}"
+msgstr ""
+
 #: ../ui/application/register.xml.en:31
 msgctxt "table cell"
 msgid "${batch} ${table}"
 msgstr ""
 
-#: ../ui/application/view.xml.en:16
-msgid "${batch} <x id='4'/> ${table}"
+#: ../ui/application/view.xml.en:15
+msgid "${batch} <x id='2'/> ${table}"
 msgstr ""
 
-#: ../ui/workgroup/view.xml.en:5
-msgid "${homepage} <x id='1'/> ${batch} <x id='2'/> ${table}"
-msgstr ""
-
-#: ../formpage.py:141
+#: ../formpage.py:142
 msgid "%.1f"
 msgstr ""
 
-#: ../formpage.py:97
+#: ../formpage.py:98
 msgid "%break%"
 msgstr ""
 
-#: ../formpage.py:139
+#: ../formpage.py:140
 msgid "%d"
 msgstr ""
 
-#: ../form.py:369
+#: ../form.py:377
 msgid "'%s' = '%s'"
 msgstr ""
 
-#: ../formpage.py:129
+#: ../formpage.py:130
 msgid "(division by 0)"
 msgstr "(division par 0)"
 
-#: ../formpage.py:151 ../formpage.py:153
+#: ../formpage.py:152 ../formpage.py:154
 msgid "*"
 msgstr ""
 
-#: ../formpage.py:88
+#: ../formpage.py:89
 msgid "-"
 msgstr ""
 
-#: ../formpage.py:124
+#: ../formpage.py:125
 msgid "/"
 msgstr ""
 
@@ -85,15 +85,11 @@ msgstr ""
 msgid "/>"
 msgstr ""
 
-#: ../schema.py:44
-msgid "0"
-msgstr ""
-
-#: ../schema.py:62
+#: ../schema.py:75
 msgid "00000"
 msgstr ""
 
-#: ../formpage.py:172
+#: ../formpage.py:173
 msgid "100%"
 msgstr ""
 
@@ -206,6 +202,12 @@ msgstr ""
 "id='14'>Répéter le mot de passe</g>  <g id='15'>* </g>  <x id='16'/>  <g "
 "id='17'>${password2/error}<x id='18'/></g>"
 
+#: ../widgets.py:265
+msgid ""
+"<img src=\"/ui/icons/16x16/help.png\" title=\"{help}\" class=\"online-help\"/"
+">"
+msgstr ""
+
 #: ../widgets.py:142
 msgid "<span class=\"badtype\" title=\"Bad value\">"
 msgstr "<span class=\"badtype\" title=\"Mauvaise valeur\">"
@@ -213,10 +215,6 @@ msgstr "<span class=\"badtype\" title=\"Mauvaise valeur\">"
 #: ../widgets.py:146
 msgid "<span class=\"mandatory\" title=\"Mandatory field\">"
 msgstr "<span class=\"mandatory\" title=\"Champ obligatoire\">"
-
-#: ../widgets.py:264
-msgid "<span title=\"{title}\">[?]</span>"
-msgstr ""
 
 #: ../widgets.py:51
 msgid "=\""
@@ -226,42 +224,31 @@ msgstr ""
 msgid ">"
 msgstr ""
 
-#: ../schema.py:45
-msgid "A"
-msgstr ""
-
 #: ../ui/application/login.xml.en:53
 msgctxt "legend"
 msgid "Already Have an Account"
 msgstr "Déjà enregistré"
 
-#: ../workgroup_views.py:117
+#: ../workgroup_views.py:142
 msgid "Application"
 msgstr ""
 
 #: ../ui/application/view.xml.en:5
 msgctxt "heading"
-msgid "Application Status"
+msgid "Application Dashboard"
 msgstr "Tableau de bord"
 
-#: ../schema.py:46
-msgid "B"
-msgstr ""
+#: ../ui/application/view.xml.en:9
+msgctxt "heading"
+msgid "Application Status"
+msgstr "Suivi de l'application"
 
 #: ../widgets.py:168 ../widgets.py:224
 msgid "Bad value"
 msgstr "Mauvaise valeur"
 
-#: ../schema.py:60
+#: ../schema.py:73
 msgid "Boolean"
-msgstr ""
-
-#: ../schema.py:47
-msgid "C"
-msgstr ""
-
-#: ../schema.py:113
-msgid "Champs dépendants"
 msgstr ""
 
 #: ../user_views.py:35
@@ -277,7 +264,7 @@ msgctxt "title attribute"
 msgid "Come back to the form"
 msgstr ""
 
-#: ../user_views.py:45 ../user_views.py:104 ../workgroup_views.py:61
+#: ../user_views.py:45 ../user_views.py:104 ../workgroup_views.py:65
 msgid "Company"
 msgstr "Société"
 
@@ -292,7 +279,7 @@ msgctxt "table cell"
 msgid "Control"
 msgstr "Contrôle de saisie"
 
-#: ../controls.py:59
+#: ../controls.py:105
 msgid "Controls"
 msgstr "Contrôles"
 
@@ -301,43 +288,51 @@ msgctxt "legend"
 msgid "Create Your Account"
 msgstr "Créer votre compte"
 
+#: ../workgroup_views.py:121
+msgid "Create a Data Collection Application"
+msgstr "Créer une application de collecte"
+
 #: ../application.py:39
 msgid "Create from an OpenDocument Spreadsheet file"
 msgstr "Création à partir d'une feuille de calcul OpenDocument"
 
-#: ../workgroup_views.py:119
+#: ../workgroup_views.py:145
 msgid "Creation Date"
 msgstr "Date de création"
 
-#: ../schema.py:48 ../schema.py:49
-msgid "D"
-msgstr ""
-
-#: ../schema.py:66
+#: ../schema.py:79
 msgid "DD/MM/YYYY"
 msgstr ""
 
-#: ../schema.py:61
+#: ../schema.py:74
 msgid "Decimal"
+msgstr ""
+
+#: ../schema.py:169
+msgid "Dependent Field"
 msgstr ""
 
 #: ../form_views.py:267
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
 
-#: ../schema.py:50
-msgid "E"
+#: ../workgroup_views.py:117
+msgid "Download the ODS Template"
 msgstr ""
 
-#: ../application_views.py:134 ../application_views.py:255
+#: ../application_views.py:154 ../application_views.py:269
 msgid "E-mail"
+msgstr ""
+
+#: ../workgroup_views.py:125
+msgid "Edit Title, Logo..."
 msgstr ""
 
 #: ../workflow.py:34
 msgid "Empty"
 msgstr "Vide"
 
-#: ../controls.py:39
+#: ../controls.py:83
 msgid "Error"
 msgstr "Erreur"
 
@@ -351,36 +346,27 @@ msgctxt "button"
 msgid "Export"
 msgstr "Exporter"
 
-#: ../application_views.py:197
+#: ../application_views.py:136 ../application_views.py:211
 msgid "Export Collected Data"
 msgstr "Exporter les données collectées"
 
-#: ../application_views.py:54
+#: ../application_views.py:55
 msgid "Export Failed. Please contact the administrator."
 msgstr ""
-
-#: ../ui/application/view.xml.en:12
-msgctxt "link"
-msgid "Export collected data"
-msgstr "Exporter les données collectées"
 
 #: ../workflow.py:37
 msgid "Exported"
 msgstr "Exporté"
 
-#: ../controls.py:46
+#: ../controls.py:96
 msgid "Expression"
 msgstr ""
 
-#: ../schema.py:51
-msgid "F"
+#: ../form.py:371
+msgid "False"
 msgstr ""
 
-#: ../form.py:364
-msgid "Faux"
-msgstr ""
-
-#: ../workgroup_views.py:59
+#: ../workgroup_views.py:63
 msgid "First Name"
 msgstr "Prénom"
 
@@ -394,7 +380,7 @@ msgctxt "legend"
 msgid "Forgotten Password"
 msgstr "Mot de passe oublié"
 
-#: ../application_views.py:130 ../form.py:107
+#: ../application_views.py:150 ../form.py:109
 msgid "Form"
 msgstr "Formulaire"
 
@@ -407,47 +393,68 @@ msgctxt "heading"
 msgid "Form State:"
 msgstr "État du formulaire :"
 
-#: ../schema.py:52
-msgid "G"
-msgstr ""
-
-#: ../schema.py:53
-msgid "H"
-msgstr ""
-
-#: ../schema.py:63
+#: ../schema.py:76
 msgid "HH:MM"
 msgstr ""
 
-#: ../schema.py:64
+#: ../schema.py:77
 msgid "HHH:MM"
 msgstr ""
 
-#: ../root.py:43 ../workgroup.py:49
+#: ../root.py:43
 msgid "Homepage"
 msgstr ""
 
-#: ../schema.py:54
-msgid "I"
+#: ../controls.py:37
+msgid "In controls, line {line}, expression is missing."
 msgstr ""
 
-#: ../schema.py:38
-msgid ""
-"In schema, line {line}, page \"{page}\" does not match variable \"{name}\"."
+#: ../controls.py:38
+msgid "In controls, line {line}, syntax error in expression: {err}"
 msgstr ""
-"Onglet schéma, ligne {line}, la page \"{page}\" ne correspond pas à la "
-"variable \"{name}\"."
 
-#: ../schema.py:37
+#: ../controls.py:36
+msgid "In controls, line {line}, title is missing."
+msgstr "Onglet contrôles, ligne {line}, il manque le titre."
+
+#: ../controls.py:40
+msgid "In controls, line {line}, unexpected level \"{level}\"."
+msgstr "Onglet contrôles, ligne {line}, niveau « {level} » inconnu."
+
+#: ../controls.py:41
+msgid "In controls, line {line}, variable is missing."
+msgstr "Onglet contrôles, ligne {line}, il manque la variable."
+
+#: ../schema.py:45
+msgid "In schema, line {line}, dependency variable name \"{name}\" is unknown."
+msgstr "Onglet schéma, ligne {line}, la variable de dépendance « {name} » est inconnue."
+
+#: ../schema.py:43
+msgid "In schema, line {line}, in sum, variable \"{name}\" is unknown."
+msgstr "Onglet schéma, ligne {line}, dans la somme, la variable « {name} » est inconnue."
+
+#: ../schema.py:41
+msgid "In schema, line {line}, mandatory \"{mandatory}\" is unknown."
+msgstr "Onglet schéma, ligne {line}, obligatoire « {mandatory} » est inconnu."
+
+#: ../schema.py:40
 msgid "In schema, line {line}, type \"{type}\" is unknown."
 msgstr "Onglet schéma, ligne {line}, le type \"{type}\" est inconnu."
+
+#: ../schema.py:38
+msgid "In schema, line {line}, variable \"{name}\" is duplicated."
+msgstr "Onglet schéma, ligne {line}, la variable « {name} » est inconnu."
+
+#: ../schema.py:37
+msgid "In schema, line {line}, variable name is missing."
+msgstr "Onglet schéma, ligne {line}, il manque le nom de variable."
 
 #: ../ui/form/send.xml.en:99
 msgctxt "heading"
 msgid "Information"
 msgstr ""
 
-#: ../controls.py:37
+#: ../controls.py:81
 msgid "Informative"
 msgstr ""
 
@@ -455,23 +462,27 @@ msgstr ""
 msgid "Input Control"
 msgstr "Contrôle de saisie"
 
-#: ../schema.py:65
+#: ../schema.py:78
 msgid "Integer"
 msgstr ""
 
-#: ../application_views.py:132
+#: ../application_views.py:152
 msgid "Last Modified"
 msgstr "Dernière modification"
 
-#: ../workgroup_views.py:60
+#: ../workgroup_views.py:64
 msgid "Last Name"
 msgstr "Nom"
 
-#: ../controls.py:47
+#: ../schema.py:165
+msgid "Length"
+msgstr ""
+
+#: ../controls.py:97
 msgid "Level"
 msgstr "Niveau"
 
-#: ../schema.py:70
+#: ../schema.py:83
 msgid "List of values"
 msgstr ""
 
@@ -495,15 +506,23 @@ msgctxt "heading"
 msgid "Lost Password"
 msgstr "Mot de passe oublié"
 
-#: ../schema.py:67
+#: ../schema.py:80
 msgid "MM/YYYY"
 msgstr ""
+
+#: ../controls.py:98
+msgid "Main Variable"
+msgstr ""
+
+#: ../schema.py:167
+msgid "Mandatory"
+msgstr "Obligatoire"
 
 #: ../widgets.py:172 ../widgets.py:228
 msgid "Mandatory field"
 msgstr "Champ obligatoire"
 
-#: ../application_views.py:327
+#: ../application_views.py:342
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -521,7 +540,7 @@ msgctxt "table cell"
 msgid "New Users<g id='1'> (${allowed_users} allowed)</g>"
 msgstr "Nouveaux utilisateurs<g id='1'> (${allowed_users} autorisés)</g>"
 
-#: ../application_views.py:177 ../schema.py:85
+#: ../application_views.py:194
 msgid "No"
 msgstr "Non"
 
@@ -535,7 +554,7 @@ msgctxt "paragraph"
 msgid "No information available."
 msgstr "Aucune information disponible."
 
-#: ../application_views.py:304
+#: ../application_views.py:319
 msgid "No user added."
 msgstr "Aucun utilisateur ajouté"
 
@@ -548,24 +567,16 @@ msgstr "Aucun avertissement détecté."
 msgid "No {class_title} available."
 msgstr "Aucun {class_title} disponible."
 
-#: ../schema.py:93 ../datatypes.py:667
+#: ../datatypes.py:667
 msgid "Non"
 msgstr ""
 
-#: ../schema.py:110
-msgid "Non modifiable (par défaut Non)"
-msgstr ""
-
-#: ../controls.py:44
+#: ../controls.py:94
 msgid "Number"
 msgstr ""
 
-#: ../application_views.py:65
+#: ../application_views.py:66
 msgid "ODS File"
-msgstr ""
-
-#: ../schema.py:108
-msgid "Obligatoire (par défaut Oui)"
 msgstr ""
 
 #: ../ui/login.xml.en:41 ../ui/login.xml.en:77
@@ -573,23 +584,23 @@ msgctxt "button"
 msgid "Ok"
 msgstr ""
 
-#: ../schema.py:92 ../datatypes.py:666
+#: ../schema.py:161
+msgid "Online Help"
+msgstr ""
+
+#: ../datatypes.py:666
 msgid "Oui"
 msgstr ""
 
-#: ../schema.py:100 ../controls.py:48
-msgid "Page"
-msgstr ""
-
-#: ../application_views.py:53
+#: ../application_views.py:54
 msgid "Page names must be in the form \"C Title...\""
 msgstr "Les onglets de pages doivent être nommés \"C Titre...\""
 
-#: ../application_views.py:77
+#: ../application_views.py:78
 msgid "Parameters"
 msgstr "Paramètres"
 
-#: ../user_views.py:46 ../workgroup_views.py:62
+#: ../user_views.py:46 ../workgroup_views.py:66
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -602,7 +613,7 @@ msgctxt "paragraph"
 msgid "Please enter your e-mail address to access the form:"
 msgstr "Veuillez entrer votre adresse de courriel pour accéder au formulaire :"
 
-#: ../application_views.py:57
+#: ../application_views.py:58
 msgid ""
 "Please fill in the form \"{application_title}\" available here: <"
 "{application_url}>."
@@ -625,7 +636,7 @@ msgstr "Imprimer (dans une nouvelle fenêtre)"
 msgid "Print form"
 msgstr "Impression du formulaire"
 
-#: ../workgroup.py:40
+#: ../workgroup.py:41
 msgid "Private workgroup with logo, users and collection applications"
 msgstr ""
 
@@ -639,16 +650,11 @@ msgctxt "heading"
 msgid "Register"
 msgstr "Inscription"
 
-#: ../application_views.py:248
+#: ../application_views.py:132 ../application_views.py:262
 msgid "Register Users"
 msgstr "Inscrire des utilisateurs"
 
-#: ../ui/application/view.xml.en:11
-msgctxt "link"
-msgid "Register users"
-msgstr "Inscrire des utilisateurs"
-
-#: ../application_views.py:135
+#: ../application_views.py:155
 msgid "Registered"
 msgstr "Inscrit"
 
@@ -657,7 +663,7 @@ msgctxt "table cell"
 msgid "Registered Users"
 msgstr "Utilisateurs inscrits"
 
-#: ../workgroup_views.py:63
+#: ../workgroup_views.py:67
 msgid "Repeat Password"
 msgstr "Répéter le mot de passe"
 
@@ -665,8 +671,12 @@ msgstr "Répéter le mot de passe"
 msgid "Repeat your password"
 msgstr "Répéter le mot de passe"
 
-#: ../schema.py:103
-msgid "Représentation (par défaut INPUT TEXT)"
+#: ../workgroup_views.py:214
+msgid "Replace logo file"
+msgstr ""
+
+#: ../schema.py:164
+msgid "Representation"
 msgstr ""
 
 #: ../ui/form/view.xml.en:39
@@ -674,7 +684,7 @@ msgctxt "button"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: ../schema.py:169
+#: ../schema.py:211
 msgid "Schema"
 msgstr ""
 
@@ -687,11 +697,11 @@ msgstr "Envoyer"
 msgid "Sent"
 msgstr "Envoyé"
 
-#: ../workgroup.py:55
+#: ../workgroup.py:52
 msgid "Show Application(s)"
 msgstr "Voir la (les) application(s)"
 
-#: ../application_views.py:395
+#: ../application_views.py:410
 msgid "Show Form"
 msgstr "Voir le formulaire"
 
@@ -713,32 +723,28 @@ msgstr ""
 msgid "Site de démo iScrib"
 msgstr ""
 
-#: ../schema.py:112
-msgid "Somme"
-msgstr ""
-
-#: ../workgroup_views.py:172
+#: ../workgroup_views.py:199
 msgid "Source"
 msgstr "Fichier source"
 
-#: ../workgroup_views.py:118
+#: ../workgroup_views.py:144
 msgid "Source ODS File"
 msgstr "Fichier ODS source"
 
-#: ../form.py:130
+#: ../form.py:132
 msgid "Start filling"
 msgstr "Commencer la saisie"
 
-#: ../application_views.py:131
+#: ../application_views.py:151
 msgid "State"
 msgstr "État du formulaire"
 
-#: ../schema.py:68
+#: ../schema.py:81
 msgid "String"
 msgstr ""
 
-#: ../schema.py:104
-msgid "Taille de champs de saisie (par défaut identique à Représentation)"
+#: ../schema.py:168
+msgid "Sum"
 msgstr ""
 
 #: ../ui/template.xhtml.en:87
@@ -746,11 +752,11 @@ msgctxt "link"
 msgid "Terms and Conditions"
 msgstr ""
 
-#: ../application_views.py:118
+#: ../application_views.py:119
 msgid "Test Form"
 msgstr "Formulaire de test"
 
-#: ../schema.py:69
+#: ../schema.py:82
 msgid "Text"
 msgstr ""
 
@@ -765,7 +771,7 @@ msgstr ""
 "Le formulaire est valide, vous pouvez l'exporter dans une base de données "
 "SQL."
 
-#: ../application_views.py:342 ../base_views.py:125
+#: ../application_views.py:357 ../base_views.py:127
 msgid "The given username is not an e-mail address."
 msgstr "Le nom donné n'est pas une adresse de courriel valide."
 
@@ -810,13 +816,9 @@ msgstr ""
 "Champ\n"
 "                  obligatoire"
 
-#: ../controls.py:45
+#: ../schema.py:160 ../controls.py:95
 msgid "Title"
 msgstr "Titre"
-
-#: ../schema.py:99
-msgid "Titre"
-msgstr ""
 
 #: ../ui/form/send.xml.en:62 ../ui/form/send.xml.en:90
 #: ../ui/form/send.xml.en:122
@@ -832,20 +834,24 @@ msgstr ""
 "Pour exporter dans une base de données SQL, contactez <a href=\"http://www."
 "itaapy.com/contact\">Itaapy</a>"
 
-#: ../schema.py:101
+#: ../form.py:369
+msgid "True"
+msgstr ""
+
+#: ../schema.py:162
 msgid "Type"
 msgstr ""
 
-#: ../application_views.py:282
+#: ../application_views.py:297
 msgid "Unrecognized line {lineno}: {line}"
 msgstr "Ligne {lineno} incorrecte : {line}"
 
-#: ../application_views.py:133 ../application_views.py:254
+#: ../application_views.py:153 ../application_views.py:268
 msgid "User"
 msgstr "Utilisateur"
 
-#: ../schema.py:106
-msgid "Valeurs autorisées / modalités"
+#: ../workgroup_views.py:143
+msgid "Users Subscribed"
 msgstr ""
 
 #: ../ui/form/send.xml.en:107
@@ -853,24 +859,24 @@ msgctxt "table cell"
 msgid "Value"
 msgstr "Valeur"
 
-#: ../schema.py:98
+#: ../schema.py:159
 msgid "Variable"
 msgstr ""
 
-#: ../application_views.py:125 ../root_views.py:30 ../workgroup_views.py:113
-#: ../demo.py:85
+#: ../application_views.py:145 ../root_views.py:30 ../workgroup_views.py:138
+#: ../demo.py:84
 msgid "View"
 msgstr "Voir"
 
-#: ../form.py:362
-msgid "Vrai"
+#: ../schema.py:166
+msgid "Vocabulary"
 msgstr ""
 
 #: ../form_views.py:35
 msgid "WARNING! There are missing or invalid fields."
 msgstr "ATTENTION ! Il y a des champs manquants ou invalides."
 
-#: ../controls.py:38
+#: ../controls.py:82
 msgid "Warning"
 msgstr "Avertissement"
 
@@ -879,7 +885,12 @@ msgctxt "heading"
 msgid "Warnings"
 msgstr "Avertissements"
 
-#: ../application_views.py:389 ../base_views.py:119
+#: ../ui/workgroup/view.xml.en:5
+msgctxt "heading"
+msgid "Welcome to Your iScrib Space"
+msgstr ""
+
+#: ../application_views.py:404 ../base_views.py:121
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
@@ -891,15 +902,15 @@ msgstr ""
 "Quand vous avez terminé votre saisie, vous pouvez cliquer sur le bouton « "
 "Envoyer »."
 
-#: ../application_views.py:177 ../schema.py:84
+#: ../application_views.py:194
 msgid "Yes"
 msgstr "Oui"
 
-#: ../application_views.py:356
+#: ../application_views.py:371
 msgid "You are already registered. Log in using your password."
 msgstr "Vous êtes déjà inscrit. Connectez-vous avec votre mot de passe."
 
-#: ../application_views.py:350 ../base_views.py:135
+#: ../application_views.py:365 ../base_views.py:137
 msgid "You are not allowed to register."
 msgstr "Les inscriptions sont fermées."
 
@@ -933,8 +944,7 @@ msgid ""
 msgstr ""
 "Vous êtes maintenant inscrit comme utilisateur de {site_name}.\n"
 "\n"
-"Vous pouvez suivre ce lien <{site_uri}> pour accéder à votre espace "
-"client.\n"
+"Vous pouvez suivre ce lien <{site_uri}> pour accéder à votre espace client.\n"
 "\n"
 "Votre adresse de courriel {email} est votre identifiant.\n"
 "\n"
@@ -962,7 +972,7 @@ msgctxt "paragraph"
 msgid "You have reached the maximum allowed users."
 msgstr "Vous avez atteint le nombre maximum d'utilisateurs autorisés."
 
-#: ../ui/application/view.xml.en:7
+#: ../ui/application/view.xml.en:11
 msgctxt "paragraph"
 msgid ""
 "You have subscribed ${n_forms} users<g id='1'> out of ${max_users} allowed</"
@@ -987,13 +997,18 @@ msgctxt "legend"
 msgid "Your Account"
 msgstr "Votre compte"
 
+#: ../ui/workgroup/view.xml.en:9
+msgctxt "heading"
+msgid "Your Collection Applications"
+msgstr "Votre application de collecte"
+
 #: ../user_views.py:94
 msgid "Your account was created! You can create a collection application."
 msgstr ""
 "Votre compte a été créé ! Vous pouvez créer une application de collecte "
 "d'informations"
 
-#: ../workgroup_views.py:58
+#: ../workgroup_views.py:62
 msgid "Your e-mail address"
 msgstr "Adresse de courriel"
 
@@ -1009,7 +1024,7 @@ msgstr "Votre formulaire a bien été exporté."
 msgid "Your form was successfully sent."
 msgstr "Votre formulaire a bien été envoyé."
 
-#: ../utils.py:71 ../form.py:345
+#: ../utils.py:71 ../form.py:352
 msgid "["
 msgstr ""
 
@@ -1058,7 +1073,7 @@ msgstr ""
 msgid "false"
 msgstr ""
 
-#: ../formpage.py:93 ../formpage.py:106 ../formpage.py:169
+#: ../formpage.py:94 ../formpage.py:107 ../formpage.py:170
 msgid "field-label"
 msgstr ""
 
@@ -1066,7 +1081,7 @@ msgstr ""
 msgid "field_{name}"
 msgstr ""
 
-#: ../formpage.py:158
+#: ../formpage.py:159
 msgid "h%d"
 msgstr ""
 
@@ -1074,7 +1089,7 @@ msgstr ""
 msgid "iScrib"
 msgstr ""
 
-#: ../workgroup.py:39
+#: ../workgroup.py:40
 msgid "iScrib Workgroup"
 msgstr "Espace client iScrib"
 
@@ -1099,7 +1114,7 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: ../application_views.py:73 ../application_views.py:81
+#: ../application_views.py:74 ../application_views.py:82
 msgid "not an ODS file"
 msgstr "Ce fichier n'est pas un fichier ODS"
 
@@ -1136,11 +1151,11 @@ msgstr ""
 msgid "rows"
 msgstr ""
 
-#: ../formpage.py:167
+#: ../formpage.py:168
 msgid "rubrique-label"
 msgstr ""
 
-#: ../formpage.py:160
+#: ../formpage.py:161
 msgid "section-header"
 msgstr ""
 
@@ -1192,7 +1207,7 @@ msgstr ""
 msgid "white-space: pre"
 msgstr ""
 
-#: ../form.py:246
+#: ../form.py:247
 msgid "{application}: {form}"
 msgstr "{application} : {form}"
 
@@ -1204,13 +1219,13 @@ msgstr "{name} invalide"
 msgid "{name} is not equal to {sum}"
 msgstr "{name} n'est pas égal à {sum}"
 
-#: ../application_views.py:309
+#: ../application_views.py:324
 msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 "{n} utilisateur(s) ajouté(s). Voir ci-dessous pour leur envoyer l'adresse du "
 "formulaire."
 
-#: ../application_views.py:56
+#: ../application_views.py:57
 msgid "{workgroup_title}, form \"{application_title}\""
 msgstr "{workgroup_title}, formulaire \"{application_title}\""
 
@@ -1221,12 +1236,27 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 #~ msgid "Champ obligatoire"
 #~ msgstr "Mandatory field"
 
+#~ msgctxt "link"
+#~ msgid "Export collected data"
+#~ msgstr "Exporter les données collectées"
+
+#~ msgid ""
+#~ "In schema, line {line}, page \"{page}\" does not match variable "
+#~ "\"{name}\"."
+#~ msgstr ""
+#~ "Onglet schéma, ligne {line}, la page \"{page}\" ne correspond pas à la "
+#~ "variable \"{name}\"."
+
 #~ msgid "Modified"
 #~ msgstr "Modifié"
 
 #~ msgctxt "link"
 #~ msgid "Print this page"
 #~ msgstr "Imprimer cette page"
+
+#~ msgctxt "link"
+#~ msgid "Register users"
+#~ msgstr "Inscrire des utilisateurs"
 
 #~ msgctxt "link"
 #~ msgid "See source"
