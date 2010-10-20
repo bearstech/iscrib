@@ -496,3 +496,7 @@ button, .button{
 .online-help {
   vertical-align: top;
 }
+
+.new-resource-thumb a {
+  text-decoration: none;
+}

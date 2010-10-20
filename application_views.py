@@ -122,20 +122,26 @@ class Application_NewInstance(NewInstance):
 
 
 class Application_Menu(IconsView):
-
-    def get_namespace(self, resource, context):
-        items = []
-        max_users = resource.get_property('max_users')
-        allowed_users = resource.get_allowed_users()
-        if allowed_users:
-            items.append({'icon': '/ui/iscrib/images/register48.png',
-                'title': MSG(u"Register Users"),
-                'description': None,
-                'url': ';register'})
-        items.append({'icon': '/ui/iscrib/images/export48.png',
+    items = [{'icon': '/ui/iscrib/images/register48.png',
+              'title': MSG(u"Register Users"),
+              'description': None,
+              'url': ';register'},
+             {'icon': '/ui/iscrib/images/export48.png',
               'title': MSG(u"Export Collected Data"),
               'description': None,
-              'url': ';export'})
+              'url': ';export'},
+             {'icon': '/ui/iscrib/images/form48.png',
+              'title': MSG(u"Show Test Form"),
+              'description': None,
+              'url': ';show'}]
+
+
+    def get_namespace(self, resource, context):
+        items = self.items
+        max_users = resource.get_property('max_users')
+        allowed_users = resource.get_allowed_users()
+        if not allowed_users:
+            items = items[1:]
         return {'batch': None, 'items': items}
 
 

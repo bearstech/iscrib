@@ -301,7 +301,7 @@ msgstr ""
 msgid "Download the ODS Template"
 msgstr ""
 
-#: ../application_views.py:154 ../application_views.py:269
+#: ../application_views.py:160 ../application_views.py:275
 msgid "E-mail"
 msgstr ""
 
@@ -327,7 +327,7 @@ msgctxt "button"
 msgid "Export"
 msgstr ""
 
-#: ../application_views.py:136 ../application_views.py:211
+#: ../application_views.py:130 ../application_views.py:217
 msgid "Export Collected Data"
 msgstr ""
 
@@ -361,7 +361,7 @@ msgctxt "legend"
 msgid "Forgotten Password"
 msgstr ""
 
-#: ../application_views.py:150 ../form.py:109
+#: ../application_views.py:156 ../form.py:109
 msgid "Form"
 msgstr ""
 
@@ -411,7 +411,7 @@ msgid "In schema, line {line}, dependency variable name \"{name}\" is unknown."
 msgstr ""
 
 #: ../schema.py:43
-msgid "In schema, line {line}, in sum variable name \"{name}\" is unknown."
+msgid "In schema, line {line}, in sum, variable \"{name}\" is unknown."
 msgstr ""
 
 #: ../schema.py:41
@@ -423,7 +423,7 @@ msgid "In schema, line {line}, type \"{type}\" is unknown."
 msgstr ""
 
 #: ../schema.py:38
-msgid "In schema, line {line}, variable name \"{name}\" is duplicated."
+msgid "In schema, line {line}, variable \"{name}\" is duplicated."
 msgstr ""
 
 #: ../schema.py:37
@@ -447,7 +447,7 @@ msgstr ""
 msgid "Integer"
 msgstr ""
 
-#: ../application_views.py:152
+#: ../application_views.py:158
 msgid "Last Modified"
 msgstr ""
 
@@ -503,7 +503,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:342
+#: ../application_views.py:348
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -521,7 +521,7 @@ msgctxt "table cell"
 msgid "New Users<g id='1'> (${allowed_users} allowed)</g>"
 msgstr ""
 
-#: ../application_views.py:194
+#: ../application_views.py:200
 msgid "No"
 msgstr ""
 
@@ -535,7 +535,7 @@ msgctxt "paragraph"
 msgid "No information available."
 msgstr ""
 
-#: ../application_views.py:319
+#: ../application_views.py:325
 msgid "No user added."
 msgstr ""
 
@@ -629,11 +629,11 @@ msgctxt "heading"
 msgid "Register"
 msgstr ""
 
-#: ../application_views.py:132 ../application_views.py:262
+#: ../application_views.py:126 ../application_views.py:268
 msgid "Register Users"
 msgstr ""
 
-#: ../application_views.py:155
+#: ../application_views.py:161
 msgid "Registered"
 msgstr ""
 
@@ -680,8 +680,12 @@ msgstr ""
 msgid "Show Application(s)"
 msgstr ""
 
-#: ../application_views.py:410
+#: ../application_views.py:416
 msgid "Show Form"
+msgstr ""
+
+#: ../application_views.py:134
+msgid "Show Test Form"
 msgstr ""
 
 #: ../root.py:48
@@ -714,7 +718,7 @@ msgstr ""
 msgid "Start filling"
 msgstr ""
 
-#: ../application_views.py:151
+#: ../application_views.py:157
 msgid "State"
 msgstr ""
 
@@ -748,7 +752,7 @@ msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
 
-#: ../application_views.py:357 ../base_views.py:127
+#: ../application_views.py:363 ../base_views.py:127
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -809,11 +813,11 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../application_views.py:297
+#: ../application_views.py:303
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
-#: ../application_views.py:153 ../application_views.py:268
+#: ../application_views.py:159 ../application_views.py:274
 msgid "User"
 msgstr ""
 
@@ -830,7 +834,7 @@ msgstr ""
 msgid "Variable"
 msgstr ""
 
-#: ../application_views.py:145 ../root_views.py:30 ../workgroup_views.py:138
+#: ../application_views.py:151 ../root_views.py:30 ../workgroup_views.py:138
 #: ../demo.py:84
 msgid "View"
 msgstr ""
@@ -857,7 +861,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr ""
 
-#: ../application_views.py:404 ../base_views.py:121
+#: ../application_views.py:410 ../base_views.py:121
 msgid "Welcome!"
 msgstr ""
 
@@ -867,15 +871,15 @@ msgid ""
 "When you have finished filling the form, you can click the \"Send\" button."
 msgstr ""
 
-#: ../application_views.py:194
+#: ../application_views.py:200
 msgid "Yes"
 msgstr ""
 
-#: ../application_views.py:371
+#: ../application_views.py:377
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../application_views.py:365 ../base_views.py:137
+#: ../application_views.py:371 ../base_views.py:137
 msgid "You are not allowed to register."
 msgstr ""
 
@@ -1171,7 +1175,7 @@ msgstr ""
 msgid "{name} is not equal to {sum}"
 msgstr ""
 
-#: ../application_views.py:324
+#: ../application_views.py:330
 msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 
