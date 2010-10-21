@@ -20,6 +20,7 @@ from itools.core import merge_dicts
 from itools.database import PhraseQuery
 from itools.datatypes import Unicode, Email, String, PathDataType
 from itools.gettext import MSG
+from itools.stl import stl
 
 # Import from ikaaro
 from ikaaro.autoform import TextWidget, ImageSelectorWidget, PasswordWidget
@@ -114,16 +115,16 @@ class Workgroup_NewInstance(NewInstance):
 class Workgroup_Menu(IconsView):
 
     items = [{'icon': '/ui/iscrib/images/download48.png',
-              'title': MSG(u"Download the ODS Template"),
-              'description': None,
+              'title': MSG(u"Download the Template"),
+              'description': MSG(u"Download this template and use it to define to design your form."),
               'url': '/gabarit/;download'},
              {'icon': '/ui/iscrib/images/upload48.png',
               'title': MSG(u"Create a Data Collection Application"),
-              'description': None,
+              'description': MSG(u"Uploading this spreadsheet file in iScrib will generate in one click your data collection application."),
               'url': ';new_resource?type=Application'},
              {'icon': '/ui/iscrib/images/logo48.png',
-              'title': MSG(u"Edit Title, Logo..."),
-              'description': None,
+              'title': MSG(u"Edit Title and Logo"),
+              'description': MSG(u"Configure your client space"),
               'url': ';edit'}]
 
 
@@ -135,7 +136,7 @@ class Workgroup_Menu(IconsView):
 class Workgroup_View(Folder_BrowseContent):
     access = 'is_allowed_to_edit'
     template = '/ui/iscrib/workgroup/view.xml'
-    title = MSG(u"View")
+    title = MSG(u"Manage your client space")
     search_template = None
 
     table_columns = [
@@ -147,11 +148,29 @@ class Workgroup_View(Folder_BrowseContent):
 
 
     def get_namespace(self, resource, context):
-        namespace = super(Workgroup_View, self).get_namespace(resource,
-                context)
+        # Menu
         theme = resource.get_resource('theme')
-        namespace['menu'] = Workgroup_Menu().GET(resource, context)
-        return namespace
+        menu = Workgroup_Menu().GET(resource, context)
+
+        # Batch
+        batch = None
+        items = self.get_items(resource, context)
+        if items and self.batch_template is not None:
+            template = resource.get_resource(self.batch_template)
+            namespace = self.get_batch_namespace(resource, context, items)
+            batch = stl(template, namespace)
+
+        # Table
+        table = None
+        if batch:
+            if self.table_template is not None:
+                items = self.sort_and_batch(resource, context, items)
+                template = resource.get_resource(self.table_template)
+                namespace = self.get_table_namespace(resource, context,
+                        items)
+                table = stl(template, namespace)
+
+        return {'menu': menu, 'batch': batch, 'table': table}
 
 
     def get_items(self, resource, context, *args):
@@ -206,6 +225,7 @@ class Workgroup_View(Folder_BrowseContent):
 
 
 class Workgroup_Edit(Theme_Edit, DBResource_Edit):
+    title = MSG(u"Edit Title and Logo")
     schema = merge_dicts(DBResource_Edit.schema,
             favicon=PathDataType,
             logo=PathDataType)
@@ -218,6 +238,7 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
         if name == 'favicon':
             return ''
         elif name == 'logo':
+            # Path must be resolved relative to here
             theme = resource.get_resource('theme')
             path = theme.get_property(name)
             if path in ('', '.'):
@@ -232,6 +253,7 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
         if name == 'favicon':
             return False
         elif name == 'logo':
+            # Path must be saved relative to the theme
             path = form[name]
             theme = resource.get_resource('theme')
             if path in ('', '.'):
@@ -240,6 +262,7 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
             logo = resource.get_resource(path)
             logo.set_workflow_state('public')
             theme.set_property(name, theme.get_pathto(logo))
+            # TODO detect first time logo and call set_neutral_header()
             return False
         return super(Workgroup_Edit, self).set_value(resource, context, name,
                 form)

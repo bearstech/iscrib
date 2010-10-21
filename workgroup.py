@@ -50,7 +50,8 @@ class Workgroup(WebSite):
     new_instance = Workgroup_NewInstance()
     view = Workgroup_View()
     edit = Workgroup_Edit()
-    show = FrontView(title=MSG(u"Show Application(s)"), cls=Application)
+    show = FrontView(title=MSG(u"Your Collection Applications"),
+            cls=Application)
     add_favicon = Theme_AddFavIcon()
     add_logo = Theme_AddLogo()
     # Security
@@ -79,6 +80,10 @@ class Workgroup(WebSite):
                 return '{0}/;thumb?width={1}&height={1}'.format(
                         context.resource.get_pathto(logo), size)
         return super(Workgroup, self).get_class_icon(size=size)
+
+
+    def set_neutral_header(self):
+        raise NotImplementedError
 
 
     def is_allowed_to_add_form(self, user, resource):

@@ -30,6 +30,7 @@ from itools.csv import CSVFile
 from itools.database import PhraseQuery, AndQuery, NotQuery
 from itools.datatypes import Integer, Unicode, Email, String
 from itools.gettext import MSG
+from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
 from itools.web import INFO, ERROR, BaseView
 
@@ -208,12 +209,31 @@ class Application_View(Folder_BrowseContent):
 
 
     def get_namespace(self, resource, context):
-        namespace = super(Application_View, self).get_namespace( resource,
-                context)
-        namespace['menu'] = Application_Menu().GET(resource, context)
-        namespace['n_forms'] = resource.get_n_forms()
-        namespace['max_users'] = resource.get_property('max_users')
-        return namespace
+        # Menu
+        menu = Application_Menu().GET(resource, context)
+        n_forms = resource.get_n_forms()
+        max_users = resource.get_property('max_users')
+
+        # Batch
+        batch = None
+        items = self.get_items(resource, context)
+        if items and self.batch_template is not None:
+            template = resource.get_resource(self.batch_template)
+            namespace = self.get_batch_namespace(resource, context, items)
+            batch = stl(template, namespace)
+
+        # Table
+        table = None
+        if batch:
+            if self.table_template is not None:
+                items = self.sort_and_batch(resource, context, items)
+                template = resource.get_resource(self.table_template)
+                namespace = self.get_table_namespace(resource, context,
+                        items)
+                table = stl(template, namespace)
+
+        return {'menu': menu, 'n_forms': n_forms, 'max_users': max_users,
+                'batch': batch, 'table': table}
 
 
 
@@ -418,7 +438,7 @@ class Application_Login(LoginView):
 
 class Application_RedirectToForm(GoToSpecificDocument):
     access = 'is_allowed_to_view'
-    title = MSG(u"Show Form")
+    title = MSG(u"Show Test Form")
 
 
     def get_form_name(self, user, resource):

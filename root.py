@@ -45,7 +45,7 @@ class Root(BaseRoot):
     # Views
     view = Root_View()
     edit = AutomaticEditView()
-    show = FrontView(title=MSG(u"Show Workgroup(s)"), cls=Workgroup)
+    show = FrontView(title=MSG(u"Your Client Space"), cls=Workgroup)
     # Security
     unauthorized = LoginView()
 

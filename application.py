@@ -44,7 +44,7 @@ class Application(Folder):
             author=String(source='metadata', indexed=False, stored=True),
             ctime=DateTime(source='metadata', indexed=False, stored=True),
             max_users=Integer(source='metadata', default=allowed_users))
-    class_views = Folder.class_views + ['export', 'register', 'show']
+    class_views = Folder.class_views + ['show']
 
     schema_class = Schema
     controls_class = Controls

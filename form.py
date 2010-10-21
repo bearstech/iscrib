@@ -31,6 +31,7 @@ from itools.handlers import File as FileHandler
 from ikaaro.file import File
 from ikaaro.file_views import File_NewInstance
 from ikaaro.folder import Folder
+from ikaaro.folder_views import GoToSpecificDocument
 
 # Import from iscrib
 from datatypes import Numeric, NumDecimal, Unicode
@@ -107,7 +108,7 @@ class FormHandler(FileHandler):
 class Form(File):
     class_id = 'Form'
     class_title = MSG(u"Form")
-    class_views = ['pageA', 'send', 'export', 'print']
+    class_views = ['pageA', 'export', 'show']
     class_handler = FormHandler
     class_schema = merge_dicts(File.class_schema,
             form_state=Unicode(indexed=True, stored=True))
@@ -119,6 +120,9 @@ class Form(File):
     send = Form_Send()
     export = Form_Export()
     print = Form_Print()
+    show = GoToSpecificDocument(access='is_allowed_to_edit',
+            title=MSG(u"Back to Your Application"), specific_document='..',
+            specific_view='view')
 
 
     def __getattr__(self, name):
