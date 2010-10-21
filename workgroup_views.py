@@ -22,7 +22,7 @@ from itools.datatypes import Unicode, Email, String, PathDataType
 from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.autoform import TextWidget, ImageSelectorWidget
+from ikaaro.autoform import TextWidget, ImageSelectorWidget, PasswordWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
@@ -63,8 +63,8 @@ class Workgroup_NewInstance(NewInstance):
                 TextWidget('firstname', title=MSG(u"First Name")),
                 TextWidget('lastname', title=MSG(u"Last Name")),
                 TextWidget('company', title=MSG(u"Company")),
-                TextWidget('password', title=MSG(u"Password")),
-                TextWidget('password2', title=MSG(u"Repeat Password"))])
+                PasswordWidget('password', title=MSG(u"Password")),
+                PasswordWidget('password2', title=MSG(u"Repeat Password"))])
         return widgets
 
 
