@@ -31,7 +31,7 @@ from ikaaro.table import Table
 # Import from iscrib
 from datatypes import Unicode
 from utils import SI
-from schema import Variable
+from schema import FormatError, Variable
 
 
 ERR_EMPTY_TITLE = ERROR(u'In controls, line {line}, title is missing.')
@@ -123,22 +123,22 @@ class Controls(Table):
             lineno += 2
             title = get_record_value(record, 'title').strip()
             if not title:
-                raise ValueError, ERR_EMPTY_TITLE(line=lineno)
+                raise FormatError, ERR_EMPTY_TITLE(line=lineno)
             expression = get_record_value(record, 'expression')
             if not expression:
-                raise ValueError, ERR_EMPTY_EXPRESSION(line=lineno)
+                raise FormatError, ERR_EMPTY_EXPRESSION(line=lineno)
             try:
                 Expression.is_valid(expression)
             except Exception, err:
-                raise ValueError, ERR_BAD_EXPRESSION(line=lineno,
+                raise FormatError, ERR_BAD_EXPRESSION(line=lineno,
                         err=err)
             level = get_record_value(record, 'level')
             if not ControlLevel.is_valid(level):
-                raise ValueError, ERR_BAD_LEVEL(line=lineno,
+                raise FormatError, ERR_BAD_LEVEL(line=lineno,
                         level=level)
             variable = get_record_value(record, 'variable')
             if not variable:
-                raise ValueError, ERR_EMPTY_VARIABLE(line=lineno)
+                raise FormatError, ERR_EMPTY_VARIABLE(line=lineno)
 
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):

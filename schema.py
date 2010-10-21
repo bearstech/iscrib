@@ -47,6 +47,18 @@ ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, dependency variable '
         u'name "{name}" is unknown.')
 
 
+class FormatError(ValueError):
+
+    def __init__(self, message, *args, **kw):
+        super(FormatError, self).__init__(message, *args, **kw)
+        self._message = message
+
+    def __unicode__(self):
+        # gettext already called
+        return self._message.message
+
+
+
 class Variable(String):
 
     @staticmethod
@@ -231,18 +243,18 @@ class Schema(Table):
             lineno += 2
             name = get_record_value(record, 'name').strip().upper()
             if not name:
-                raise ValueError, ERR_EMPTY_NAME(line=lineno)
+                raise FormatError, ERR_EMPTY_NAME(line=lineno)
             if name in known_variables:
-                raise ValueError, ERR_DUPLICATE_NAME(line=lineno,
+                raise FormatError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
             dt_name = get_record_value(record, 'type')
             if not Type.is_valid(dt_name):
-                raise ValueError, ERR_BAD_TYPE(line=lineno,
+                raise FormatError, ERR_BAD_TYPE(line=lineno,
                         type=dt_name)
             try:
                 mandatory = get_record_value(record, 'mandatory')
             except ValueError:
-                raise ValueError, ERR_BAD_MANDATORY(line=lineno,
+                raise FormatError, ERR_BAD_MANDATORY(line=lineno,
                         mandatory=mandatory)
             known_variables.append(name)
         # Second round on references
@@ -251,11 +263,11 @@ class Schema(Table):
             try:
                 Sum.is_valid(sum, known_variables)
             except ValueError, name:
-                raise ValueError, ERR_BAD_SUM(line=lineno,
+                raise FormatError, ERR_BAD_SUM(line=lineno,
                         name=name)
             dependency = get_record_value(record, 'dependency')
             if not Dependency.is_valid(dependency, known_variables):
-                raise ValueError, ERR_BAD_DEPENDENCY(line=lineno,
+                raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
                         name=dependency)
 
 

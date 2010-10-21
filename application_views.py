@@ -97,10 +97,7 @@ class Application_NewInstance(NewInstance):
                         body=table.to_csv())
             except ValueError, exception:
                 context.commit = False
-                if isinstance(exception.message, ERROR):
-                    context.message = exception.message
-                else:
-                    context.message = ERROR(unicode(exception))
+                context.message = ERROR(unicode(exception))
                 return
         # Pages
         for table in tables:
