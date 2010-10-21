@@ -60,6 +60,10 @@ class Application(Folder):
     show = Application_RedirectToForm()
 
 
+    def get_logo_icon(self, size=48):
+        return self.get_class_icon(size=size)
+
+
     def get_form(self):
         return self.get_resource(self.default_form, soft=True)
 

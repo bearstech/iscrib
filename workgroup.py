@@ -69,7 +69,7 @@ class Workgroup(WebSite):
         return super(Workgroup, self).get_document_types() + [Application]
 
 
-    def get_class_icon(self, size=16):
+    def get_logo_icon(self, size=48):
         context = get_context()
         if context is not None:
             theme = self.get_resource('theme')

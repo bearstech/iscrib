@@ -167,7 +167,7 @@ class FrontView(IconsView):
             ac = child.get_access_control()
             if not ac.is_allowed_to_view(context.user, child):
                 continue
-            items.append({'icon': child.get_class_icon(size=48),
+            items.append({'icon': child.get_logo_icon(),
                 'title': child.get_title(),
                 'description': child.get_property('description'),
                 'url': context.get_link(child)})
