@@ -24,6 +24,7 @@ from itools.csv import Table as TableFile
 from itools.datatypes import Enumerate, String, Integer, Boolean
 from itools.gettext import MSG
 from itools.handlers import checkid
+from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.table import Table
@@ -34,16 +35,16 @@ from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import SqlEnumerate
 
 
-ERR_EMPTY_NAME = u'In schema, line {line}, variable name is missing.'
-ERR_DUPLICATE_NAME = (u'In schema, line {line}, variable "{name}" is '
+ERR_EMPTY_NAME = ERROR(u'In schema, line {line}, variable name is missing.')
+ERR_DUPLICATE_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
         u'duplicated.')
-ERR_BAD_TYPE = u'In schema, line {line}, type "{type}" is unknown.'
-ERR_BAD_MANDATORY = (u'In schema, line {line}, mandatory "{mandatory}" is '
+ERR_BAD_TYPE = ERROR(u'In schema, line {line}, type "{type}" is unknown.')
+ERR_BAD_MANDATORY = ERROR(u'In schema, line {line}, mandatory "{mandatory}" '
+        u'is unknown.')
+ERR_BAD_SUM = ERROR(u'In schema, line {line}, in sum, variable "{name}" is '
         u'unknown.')
-ERR_BAD_SUM = (u'In schema, line {line}, in sum, variable "{name}" is '
-        u'unknown.')
-ERR_BAD_DEPENDENCY = (u'In schema, line {line}, dependency variable name '
-        u'"{name}" is unknown.')
+ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, dependency variable '
+        u'name "{name}" is unknown.')
 
 
 class Variable(String):
@@ -213,35 +214,35 @@ class Schema(Table):
     class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
 
-    # XXX To import from CSV
+    # To import from CSV
     columns = ['name', 'title', 'help', 'type', 'representation', 'length',
             'vocabulary', 'mandatory', 'sum', 'dependency']
 
 
-    def init_resource(self, body=None, filename=None, extension=None, **kw):
-        super(Schema, self).init_resource(filename=filename,
-                extension=extension, **kw)
+    def _load_from_csv(self, body, columns):
         handler = self.handler
-        handler.update_from_csv(body, self.columns)
+        handler.update_from_csv(body, columns)
         # Consistency check
         get_record_value = handler.get_record_value
         # First round on variables
         known_variables = []
         for lineno, record in enumerate(handler.get_records()):
+            # Starting from 0 + header
+            lineno += 2
             name = get_record_value(record, 'name').strip().upper()
             if not name:
-                raise ValueError, ERR_EMPTY_NAME.format(line=lineno+1)
+                raise ValueError, ERR_EMPTY_NAME(line=lineno)
             if name in known_variables:
-                raise ValueError, ERR_DUPLICATE_NAME.format(line=lineno+1,
+                raise ValueError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
             dt_name = get_record_value(record, 'type')
             if not Type.is_valid(dt_name):
-                raise ValueError, ERR_BAD_TYPE.format(line=lineno+1,
+                raise ValueError, ERR_BAD_TYPE(line=lineno,
                         type=dt_name)
             try:
                 mandatory = get_record_value(record, 'mandatory')
             except ValueError:
-                raise ValueError, ERR_BAD_MANDATORY.format(line=lineno+1,
+                raise ValueError, ERR_BAD_MANDATORY(line=lineno,
                         mandatory=mandatory)
             known_variables.append(name)
         # Second round on references
@@ -250,9 +251,15 @@ class Schema(Table):
             try:
                 Sum.is_valid(sum, known_variables)
             except ValueError, name:
-                raise ValueError, ERR_BAD_SUM.format(line=lineno+1,
+                raise ValueError, ERR_BAD_SUM(line=lineno,
                         name=name)
             dependency = get_record_value(record, 'dependency')
             if not Dependency.is_valid(dependency, known_variables):
-                raise ValueError, ERR_BAD_DEPENDENCY.format(line=lineno+1,
+                raise ValueError, ERR_BAD_DEPENDENCY(line=lineno,
                         name=dependency)
+
+
+    def init_resource(self, body=None, filename=None, extension=None, **kw):
+        super(Schema, self).init_resource(filename=filename,
+                extension=extension, **kw)
+        self._load_from_csv(body, self.columns)

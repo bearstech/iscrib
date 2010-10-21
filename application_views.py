@@ -92,11 +92,15 @@ class Application_NewInstance(NewInstance):
             # Remove header
             table.delete_row(0)
             try:
-                child.make_resource(name, cls,
-                        title={'en': table.get_name()}, body=table.to_csv())
-            except ValueError, e:
+                child.make_resource(name, cls, title={'en': table.get_name()},
+                        # cls va transformer le CSV en table
+                        body=table.to_csv())
+            except ValueError, exception:
                 context.commit = False
-                context.message = ERROR(unicode(e))
+                if isinstance(exception.message, ERROR):
+                    context.message = exception.message
+                else:
+                    context.message = ERROR(unicode(exception))
                 return
         # Pages
         for table in tables:
@@ -112,9 +116,9 @@ class Application_NewInstance(NewInstance):
             try:
                 child.make_resource(name, FormPage, title={'en': title},
                         body=body)
-            except Exception, e:
+            except Exception, exception:
                 context.commit = False
-                context.message = ERROR(unicode(e))
+                context.message = ERROR(unicode(exception))
                 return
         # Initial form
         child.make_resource(child.default_form, Form,

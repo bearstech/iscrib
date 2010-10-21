@@ -23,6 +23,7 @@
 from itools.csv import Table as TableFile
 from itools.datatypes import Enumerate
 from itools.gettext import MSG
+from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.table import Table
@@ -33,12 +34,14 @@ from utils import SI
 from schema import Variable
 
 
-ERR_EMPTY_TITLE = u'In controls, line {line}, title is missing.'
-ERR_EMPTY_EXPRESSION = u'In controls, line {line}, expression is missing.'
-ERR_BAD_EXPRESSION = (u'In controls, line {line}, syntax error in '
+ERR_EMPTY_TITLE = ERROR(u'In controls, line {line}, title is missing.')
+ERR_EMPTY_EXPRESSION = ERROR(u'In controls, line {line}, expression is '
+        u'missing.')
+ERR_BAD_EXPRESSION = ERROR(u'In controls, line {line}, syntax error in '
         u'expression: {err}')
-ERR_BAD_LEVEL = u'In controls, line {line}, unexpected level "{level}".'
-ERR_EMPTY_VARIABLE = u'In controls, line {line}, variable is missing.'
+ERR_BAD_LEVEL = ERROR(u'In controls, line {line}, unexpected level '
+        u'"{level}".')
+ERR_EMPTY_VARIABLE = ERROR(u'In controls, line {line}, variable is missing.')
 
 
 class ZeroDict(dict):
@@ -96,7 +99,6 @@ class ControlsHandler(TableFile):
         'expression': Expression(mandatory=True, title=MSG(u"Expression")),
         'level': ControlLevel(mandatory=True, title=MSG(u"Level")),
         'variable': Variable(mandatory=True, title=MSG(u"Main Variable"))}
-    columns = ['number', 'title', 'expression', 'level', 'variable']
 
 
 
@@ -107,30 +109,39 @@ class Controls(Table):
     class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
 
+    # To import from CSV
+    columns = ['number', 'title', 'expression', 'level', 'variable']
+
+
+    def _load_from_csv(self, body, columns):
+        handler = self.handler
+        handler.update_from_csv(body, columns)
+        # Consistency check
+        get_record_value = handler.get_record_value
+        for lineno, record in enumerate(handler.get_records()):
+            # Starting from 0 + header
+            lineno += 2
+            title = get_record_value(record, 'title').strip()
+            if not title:
+                raise ValueError, ERR_EMPTY_TITLE(line=lineno)
+            expression = get_record_value(record, 'expression')
+            if not expression:
+                raise ValueError, ERR_EMPTY_EXPRESSION(line=lineno)
+            try:
+                Expression.is_valid(expression)
+            except Exception, err:
+                raise ValueError, ERR_BAD_EXPRESSION(line=lineno,
+                        err=err)
+            level = get_record_value(record, 'level')
+            if not ControlLevel.is_valid(level):
+                raise ValueError, ERR_BAD_LEVEL(line=lineno,
+                        level=level)
+            variable = get_record_value(record, 'variable')
+            if not variable:
+                raise ValueError, ERR_EMPTY_VARIABLE(line=lineno)
+
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):
         super(Controls, self).init_resource(filename=filename,
                 extension=extension, **kw)
-        handler = self.handler
-        handler.update_from_csv(body, handler.columns)
-        # Consistency check
-        get_record_value = handler.get_record_value
-        for lineno, record in enumerate(handler.get_records()):
-            title = get_record_value(record, 'title').strip()
-            if not title:
-                raise ValueError, ERR_EMPTY_TITLE.format(line=lineno+1)
-            expression = get_record_value(record, 'expression')
-            if not expression:
-                raise ValueError, ERR_EMPTY_EXPRESSION.format(line=lineno+1)
-            try:
-                Expression.is_valid(expression)
-            except Exception, err:
-                raise ValueError, ERR_BAD_EXPRESSION.format(line=lineno+1,
-                        err=err)
-            level = get_record_value(record, 'level')
-            if not ControlLevel.is_valid(level):
-                raise ValueError, ERR_BAD_LEVEL.format(line=lineno+1,
-                        level=level)
-            variable = get_record_value(record, 'variable')
-            if not variable:
-                raise ValueError, ERR_EMPTY_VARIABLE.format(line=lineno+1)
+        self._load_from_csv(body, self.columns)
