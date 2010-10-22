@@ -592,7 +592,7 @@ msgstr "Aucune information disponible."
 
 #: ../application_views.py:361
 msgid "No user added."
-msgstr "Aucun utilisateur ajouté"
+msgstr "Aucun utilisateur ajouté."
 
 #: ../ui/application/view.xml.en:20
 msgctxt "paragraph"
@@ -606,7 +606,7 @@ msgstr "Aucun avertissement détecté."
 
 #: ../base_views.py:44
 msgid "No {class_title} available."
-msgstr "Aucun {class_title} disponible."
+msgstr "Aucun(e) {class_title} disponible."
 
 #: ../datatypes.py:667
 msgid "Non"
