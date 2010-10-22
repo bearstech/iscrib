@@ -236,7 +236,7 @@ msgstr "Déjà enregistré"
 
 #: ../workgroup_views.py:165
 msgid "Application"
-msgstr ""
+msgstr "Application"
 
 #: ../application_views.py:155
 msgid "Application Dashboard"
@@ -890,7 +890,7 @@ msgstr "Utilisateur"
 
 #: ../workgroup_views.py:166
 msgid "Users Subscribed"
-msgstr ""
+msgstr "Utilisateurs inscrits"
 
 #: ../ui/form/send.xml.en:107
 msgctxt "table cell"
