@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-22 08:10+CET\n"
+"POT-Creation-Date: 2010-10-22 09:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
-#: ../application_views.py:155
+#: ../application_views.py:156
 msgid "Application Dashboard"
 msgstr ""
 
@@ -205,8 +205,8 @@ msgstr ""
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 
-#: ../application_views.py:164
-#: ../application_views.py:300
+#: ../application_views.py:165
+#: ../application_views.py:309
 msgid "E-mail"
 msgstr ""
 
@@ -223,8 +223,8 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ../application_views.py:134
-#: ../application_views.py:242
+#: ../application_views.py:135
+#: ../application_views.py:243
 msgid "Export Collected Data"
 msgstr ""
 
@@ -248,7 +248,7 @@ msgstr ""
 msgid "First Name"
 msgstr ""
 
-#: ../application_views.py:160
+#: ../application_views.py:161
 #: ../form.py:110
 msgid "Form"
 msgstr ""
@@ -325,7 +325,7 @@ msgstr ""
 msgid "Integer"
 msgstr ""
 
-#: ../application_views.py:162
+#: ../application_views.py:163
 msgid "Last Modified"
 msgstr ""
 
@@ -366,7 +366,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:373
+#: ../application_views.py:382
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -374,11 +374,15 @@ msgstr ""
 msgid "Modified after export"
 msgstr ""
 
-#: ../application_views.py:206
+#: ../application_views.py:207
 msgid "No"
 msgstr ""
 
-#: ../application_views.py:350
+#: ../application_views.py:58
+msgid "No data to collect for now."
+msgstr ""
+
+#: ../application_views.py:359
 msgid "No user added."
 msgstr ""
 
@@ -394,7 +398,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../application_views.py:69
+#: ../application_views.py:70
 msgid "ODS File"
 msgstr ""
 
@@ -410,7 +414,7 @@ msgstr ""
 msgid "Page names must be in the form \"C Title...\""
 msgstr ""
 
-#: ../application_views.py:81
+#: ../application_views.py:82
 msgid "Parameters"
 msgstr ""
 
@@ -423,7 +427,7 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
-#: ../application_views.py:60
+#: ../application_views.py:61
 msgid "Please fill in the form \"{application_title}\" available here:\r\n<{application_url}>.\r\n"
 msgstr ""
 
@@ -435,12 +439,12 @@ msgstr ""
 msgid "Private workgroup with logo, users and collection applications"
 msgstr ""
 
-#: ../application_views.py:130
-#: ../application_views.py:293
+#: ../application_views.py:131
+#: ../application_views.py:302
 msgid "Register Users"
 msgstr ""
 
-#: ../application_views.py:165
+#: ../application_views.py:166
 msgid "Registered"
 msgstr ""
 
@@ -468,8 +472,8 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: ../application_views.py:138
-#: ../application_views.py:441
+#: ../application_views.py:139
+#: ../application_views.py:450
 msgid "Show Test Form"
 msgstr ""
 
@@ -489,7 +493,7 @@ msgstr ""
 msgid "Start filling"
 msgstr ""
 
-#: ../application_views.py:161
+#: ../application_views.py:162
 msgid "State"
 msgstr ""
 
@@ -501,7 +505,7 @@ msgstr ""
 msgid "Sum"
 msgstr ""
 
-#: ../application_views.py:123
+#: ../application_views.py:124
 msgid "Test Form"
 msgstr ""
 
@@ -513,7 +517,7 @@ msgstr ""
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
-#: ../application_views.py:388
+#: ../application_views.py:397
 #: ../base_views.py:127
 msgid "The given username is not an e-mail address."
 msgstr ""
@@ -539,7 +543,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../application_views.py:328
+#: ../application_views.py:337
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
@@ -547,8 +551,8 @@ msgstr ""
 msgid "Uploading this spreadsheet file in iScrib will generate in one click your data collection application."
 msgstr ""
 
-#: ../application_views.py:163
-#: ../application_views.py:299
+#: ../application_views.py:164
+#: ../application_views.py:308
 msgid "User"
 msgstr ""
 
@@ -577,20 +581,20 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: ../application_views.py:435
+#: ../application_views.py:444
 #: ../base_views.py:121
 msgid "Welcome!"
 msgstr ""
 
-#: ../application_views.py:206
+#: ../application_views.py:207
 msgid "Yes"
 msgstr ""
 
-#: ../application_views.py:402
+#: ../application_views.py:411
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../application_views.py:396
+#: ../application_views.py:405
 #: ../base_views.py:137
 msgid "You are not allowed to register."
 msgstr ""
@@ -769,8 +773,8 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: ../application_views.py:77
-#: ../application_views.py:85
+#: ../application_views.py:78
+#: ../application_views.py:86
 msgid "not an ODS file"
 msgstr ""
 
@@ -888,11 +892,11 @@ msgstr ""
 msgid "{name} is not equal to {sum}"
 msgstr ""
 
-#: ../application_views.py:355
+#: ../application_views.py:364
 msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 
-#: ../application_views.py:59
+#: ../application_views.py:60
 msgid "{workgroup_title}, form \"{application_title}\""
 msgstr ""
 

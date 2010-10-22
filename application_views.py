@@ -55,6 +55,7 @@ from workflow import WorkflowState
 
 MSG_ERR_PAGE_NAME = ERROR(u'Page names must be in the form "C Title..."')
 MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
+MSG_NO_DATA = ERROR(u"No data to collect for now.")
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
@@ -243,6 +244,14 @@ class Application_Export(BaseView):
 
 
     def GET(self, resource, context, encoding='cp1252'):
+        for form in resource.get_forms():
+            state = form.get_workflow_state()
+            print "form", form, "state", state
+            if state != 'private':
+                break
+        else:
+            return context.come_back(MSG_NO_DATA)
+
         csv = CSVFile()
         header = ["Form", "User", "E-mail", "State"]
         handler = resource.get_resource('schema').handler
