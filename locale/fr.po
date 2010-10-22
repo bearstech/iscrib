@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-21 16:10+CET\n"
+"POT-Creation-Date: 2010-10-22 08:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,8 +148,8 @@ msgid ""
 "<g id='18'>Terms and Conditions</g> | <g id='19'>Un service Itaapy</g> | <g "
 "id='20'>Download OpenOffice.org</g>"
 msgstr ""
-"<g id='18'>Conditions d'utilisation</g> | <g id='19'>Un service Itaapy</g> | <g "
-"id='20'>Download OpenOffice.org</g>"
+"<g id='18'>Conditions d'utilisation</g> | <g id='19'>Un service Itaapy</g> | "
+"<g id='20'>Download OpenOffice.org</g>"
 
 #: ../ui/form/view.xml.en:8
 msgctxt "link"
@@ -234,9 +234,13 @@ msgctxt "legend"
 msgid "Already Have an Account"
 msgstr "Déjà enregistré"
 
-#: ../workgroup_views.py:143
+#: ../workgroup_views.py:157
 msgid "Application"
 msgstr ""
+
+#: ../application_views.py:155
+msgid "Application Dashboard"
+msgstr "Tableau de bord"
 
 #: ../ui/application/view.xml.en:5
 msgctxt "heading"
@@ -277,7 +281,7 @@ msgstr ""
 msgid "Company"
 msgstr "Société"
 
-#: ../workgroup_views.py:127
+#: ../workgroup_views.py:141
 msgid "Configure your client space"
 msgstr "Vous pouvez configurer votre espace client"
 
@@ -301,7 +305,7 @@ msgctxt "legend"
 msgid "Create Your Account"
 msgstr "Créer votre compte"
 
-#: ../workgroup_views.py:122
+#: ../workgroup_views.py:136
 msgid "Create a Data Collection Application"
 msgstr "Créer une application de collecte"
 
@@ -309,7 +313,7 @@ msgstr "Créer une application de collecte"
 msgid "Create from an OpenDocument Spreadsheet file"
 msgstr "Création à partir d'une feuille de calcul OpenDocument"
 
-#: ../workgroup_views.py:146
+#: ../workgroup_views.py:160
 msgid "Creation Date"
 msgstr "Date de création"
 
@@ -329,11 +333,11 @@ msgstr ""
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
 
-#: ../workgroup_views.py:118
+#: ../workgroup_views.py:132
 msgid "Download the Template"
 msgstr ""
 
-#: ../workgroup_views.py:119
+#: ../workgroup_views.py:133
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 "Téléchargez ce gabarit qui vous servira d'exemple pour créer votre "
@@ -343,7 +347,7 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
-#: ../workgroup_views.py:126 ../workgroup_views.py:228
+#: ../workgroup_views.py:140 ../workgroup_views.py:242
 msgid "Edit Title and Logo"
 msgstr "Modifier titre et logo"
 
@@ -537,7 +541,7 @@ msgstr ""
 msgid "Main Variable"
 msgstr ""
 
-#: ../workgroup_views.py:139
+#: ../workgroup_views.py:153
 msgid "Manage your client space"
 msgstr "Configurer votre espace client"
 
@@ -710,7 +714,7 @@ msgstr "Répéter le mot de passe"
 msgid "Repeat your password"
 msgstr "Répéter le mot de passe"
 
-#: ../workgroup_views.py:234
+#: ../workgroup_views.py:248
 msgid "Replace logo file"
 msgstr ""
 
@@ -754,11 +758,11 @@ msgstr ""
 msgid "Site de démo iScrib"
 msgstr ""
 
-#: ../workgroup_views.py:218
+#: ../workgroup_views.py:232
 msgid "Source"
 msgstr "Fichier source"
 
-#: ../workgroup_views.py:145
+#: ../workgroup_views.py:159
 msgid "Source ODS File"
 msgstr "Fichier ODS source"
 
@@ -872,7 +876,7 @@ msgstr ""
 msgid "Unrecognized line {lineno}: {line}"
 msgstr "Ligne {lineno} incorrecte : {line}"
 
-#: ../workgroup_views.py:123
+#: ../workgroup_views.py:137
 msgid ""
 "Uploading this spreadsheet file in iScrib will generate in one click your "
 "data collection application."
@@ -884,7 +888,7 @@ msgstr ""
 msgid "User"
 msgstr "Utilisateur"
 
-#: ../workgroup_views.py:144
+#: ../workgroup_views.py:158
 msgid "Users Subscribed"
 msgstr ""
 
@@ -897,7 +901,7 @@ msgstr "Valeur"
 msgid "Variable"
 msgstr ""
 
-#: ../application_views.py:155 ../root_views.py:30 ../demo.py:84
+#: ../root_views.py:30 ../demo.py:84
 msgid "View"
 msgstr "Voir"
 
