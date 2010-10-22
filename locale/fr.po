@@ -335,7 +335,7 @@ msgstr "Téléchargement du formulaire"
 
 #: ../workgroup_views.py:140
 msgid "Download the Template"
-msgstr ""
+msgstr "Télécharger le gabarit"
 
 #: ../workgroup_views.py:141
 msgid "Download this template and use it to define to design your form."
