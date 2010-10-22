@@ -522,7 +522,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:384
+#: ../application_views.py:385
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -675,6 +675,10 @@ msgctxt "table cell"
 msgid "Registered Users"
 msgstr ""
 
+#: ../application_views.py:372
+msgid "Rename Application"
+msgstr ""
+
 #: ../workgroup_views.py:72
 msgid "Repeat Password"
 msgstr ""
@@ -709,7 +713,7 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: ../application_views.py:141 ../application_views.py:452
+#: ../application_views.py:141 ../application_views.py:453
 msgid "Show Test Form"
 msgstr ""
 
@@ -768,7 +772,7 @@ msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
 
-#: ../application_views.py:399 ../base_views.py:127
+#: ../application_views.py:400 ../base_views.py:127
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -882,7 +886,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr ""
 
-#: ../application_views.py:446 ../base_views.py:121
+#: ../application_views.py:447 ../base_views.py:121
 msgid "Welcome!"
 msgstr ""
 
@@ -896,11 +900,11 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: ../application_views.py:413
+#: ../application_views.py:414
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../application_views.py:407 ../base_views.py:137
+#: ../application_views.py:408 ../base_views.py:137
 msgid "You are not allowed to register."
 msgstr ""
 

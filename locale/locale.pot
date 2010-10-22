@@ -363,7 +363,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:384
+#: ../application_views.py:385
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -445,6 +445,10 @@ msgstr ""
 msgid "Registered"
 msgstr ""
 
+#: ../application_views.py:372
+msgid "Rename Application"
+msgstr ""
+
 #: ../workgroup_views.py:72
 msgid "Repeat Password"
 msgstr ""
@@ -470,7 +474,7 @@ msgid "Sent"
 msgstr ""
 
 #: ../application_views.py:141
-#: ../application_views.py:452
+#: ../application_views.py:453
 msgid "Show Test Form"
 msgstr ""
 
@@ -514,7 +518,7 @@ msgstr ""
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
-#: ../application_views.py:399
+#: ../application_views.py:400
 #: ../base_views.py:127
 msgid "The given username is not an e-mail address."
 msgstr ""
@@ -578,7 +582,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: ../application_views.py:446
+#: ../application_views.py:447
 #: ../base_views.py:121
 msgid "Welcome!"
 msgstr ""
@@ -587,11 +591,11 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: ../application_views.py:413
+#: ../application_views.py:414
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../application_views.py:407
+#: ../application_views.py:408
 #: ../base_views.py:137
 msgid "You are not allowed to register."
 msgstr ""

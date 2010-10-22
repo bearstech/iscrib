@@ -369,6 +369,7 @@ class Application_Register(Application_View):
 
 
 class Application_Edit(DBResource_Edit):
+    title = MSG(u"Rename Application")
 
     def _get_schema(self, resource, context):
         schema = super(Application_Edit, self)._get_schema(resource, context)
