@@ -24,7 +24,7 @@ from itools.web import get_context
 # Import from ikaaro
 from ikaaro.access import is_admin
 from ikaaro.control_panel import ControlPanel
-from ikaaro.theme_views import Theme_AddFavIcon, Theme_AddLogo
+from ikaaro.theme_views import Theme_AddFavIcon
 from ikaaro.website import WebSite
 
 # Import from iscrib
@@ -33,7 +33,7 @@ from base_views import FrontView, LoginView
 from form import Form
 from workflow import SENT, EXPORTED, MODIFIED
 from workgroup_views import Workgroup_NewInstance, Workgroup_View
-from workgroup_views import Workgroup_Edit
+from workgroup_views import Workgroup_Edit, Workgroup_AddLogo
 
 
 class Workgroup(WebSite):
@@ -46,6 +46,8 @@ class Workgroup(WebSite):
             logo=PathDataType(source='metadata', default=''))
     class_skin = 'ui/iscrib'
 
+    logo_height = 70
+
     # Views
     new_instance = Workgroup_NewInstance()
     view = Workgroup_View()
@@ -53,7 +55,7 @@ class Workgroup(WebSite):
     show = FrontView(title=MSG(u"Your Collection Applications"),
             cls=Application)
     add_favicon = Theme_AddFavIcon()
-    add_logo = Theme_AddLogo()
+    add_logo = Workgroup_AddLogo()
     # Security
     control_panel = ControlPanel(access='is_admin')
     unauthorized = LoginView()

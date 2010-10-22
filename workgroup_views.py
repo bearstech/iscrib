@@ -17,18 +17,22 @@
 
 # Import from itools
 from itools.core import merge_dicts
+from itools.csv import Property
 from itools.database import PhraseQuery
 from itools.datatypes import Unicode, Email, String, PathDataType
+from itools.fs import FileName
 from itools.gettext import MSG
+from itools.handlers import checkid
 from itools.stl import stl
-from itools.web import INFO
+from itools.web import INFO, ERROR
 
 # Import from ikaaro
+from ikaaro import messages
 from ikaaro.autoform import TextWidget, ImageSelectorWidget, PasswordWidget
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.messages import MSG_PASSWORD_MISMATCH
+from ikaaro.registry import get_resource_class
 from ikaaro.resource_views import DBResource_Edit
-from ikaaro.theme_views import Theme_Edit
+from ikaaro.theme_views import Theme_Edit, Theme_AddLogo
 from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 
@@ -37,6 +41,7 @@ from application import Application
 
 
 MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
+MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
 
 
 class Workgroup_NewInstance(NewInstance):
@@ -59,7 +64,7 @@ class Workgroup_NewInstance(NewInstance):
                 schema[key] = schema[key](mandatory=True)
         return schema
 
-    
+
     def get_widgets(self, resource, context):
         widgets = self.widgets[:]
         if context.user is None:
@@ -105,7 +110,7 @@ class Workgroup_NewInstance(NewInstance):
             if user is None:
                 # Create user
                 if password != form['password2']:
-                    context.message = MSG_PASSWORD_MISMATCH
+                    context.message = messages.MSG_PASSWORD_MISMATCH
                     context.commit = False
                     return
                 users = resource.get_resource('/users')
@@ -243,6 +248,68 @@ class Workgroup_View(Folder_BrowseContent):
             return context.format_datetime(brain.ctime)
         return super(Workgroup_View, self).get_item_value(resource, context,
                 item, column)
+
+
+
+class Workgroup_AddLogo(Theme_AddLogo):
+
+    # XXX copy-paste
+    def action_upload(self, resource, context, form):
+        filename, mimetype, body = form['file']
+        name, type, language = FileName.decode(filename)
+
+        # Check the filename is good
+        title = form['title'].strip()
+        name = checkid(title) or checkid(name)
+        if name is None:
+            context.message = messages.MSG_BAD_NAME
+            return
+
+        # Get the container
+        container = context.root.get_resource(form['target_path'])
+
+        # Check the name is free
+        if container.get_resource(name, soft=True) is not None:
+            context.message = messages.MSG_NAME_CLASH
+            return
+
+        # Check it is of the expected type
+        cls = get_resource_class(mimetype)
+        if not self.can_upload(cls):
+            error = u'The given file is not of the expected type.'
+            context.message = ERROR(error)
+            return
+
+        # Add the image to the resource
+        child = container.make_resource(name, cls, body=body,
+                format=mimetype, filename=filename, extension=type)
+
+        # XXX Begin
+        handler = child.handler
+        width, height = handler.get_size()
+        if height > resource.logo_height:
+            height = resource.logo_height
+        thumbnail, format = handler.get_thumbnail(width, height)
+        if thumbnail is None:
+            context.commit = False
+            context.message = MSG_ERR_NOT_IMAGE
+            return
+        handler.set_data(thumbnail)
+        # XXX End
+
+        # The title
+        language = resource.get_edit_languages(context)[0]
+        title = Property(title, lang=language)
+        child.metadata.set_property('title', title)
+        # Get the path
+        path = resource.get_pathto(child)
+        action = self.get_resource_action(context)
+        if action:
+            path = '%s%s' % (path, action)
+        # Return javascript
+        scripts = self.get_scripts(context)
+        context.add_script(*scripts)
+        return self.get_javascript_return(context, path)
 
 
 
