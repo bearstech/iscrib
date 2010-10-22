@@ -121,8 +121,8 @@ class Form(File):
     export = Form_Export()
     print = Form_Print()
     show = GoToSpecificDocument(access='is_allowed_to_edit',
-            title=MSG(u"Back to Your Application"), specific_document='..',
-            specific_view='view')
+            title=MSG(u"Manage your Data Collection Application"),
+            specific_document='..', specific_view='view')
 
 
     def __getattr__(self, name):

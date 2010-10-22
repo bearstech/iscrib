@@ -130,14 +130,6 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
-#: ../application_views.py:156
-msgid "Application Dashboard"
-msgstr ""
-
-#: ../form.py:124
-msgid "Back to Your Application"
-msgstr ""
-
 #: ../widgets.py:168
 #: ../widgets.py:224
 msgid "Bad value"
@@ -351,6 +343,11 @@ msgstr ""
 
 #: ../controls.py:101
 msgid "Main Variable"
+msgstr ""
+
+#: ../application_views.py:156
+#: ../form.py:124
+msgid "Manage your Data Collection Application"
 msgstr ""
 
 #: ../workgroup_views.py:161

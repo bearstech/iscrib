@@ -153,7 +153,7 @@ class Application_Menu(IconsView):
 
 class Application_View(Folder_BrowseContent):
     access = 'is_allowed_to_edit'
-    title = MSG(u"Application Dashboard")
+    title = MSG(u"Manage your Data Collection Application")
     template = '/ui/iscrib/application/view.xml'
     search_template = None
 

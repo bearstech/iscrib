@@ -217,10 +217,6 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
-#: ../application_views.py:156
-msgid "Application Dashboard"
-msgstr ""
-
 #: ../ui/application/view.xml.en:5
 msgctxt "heading"
 msgid "Application Dashboard"
@@ -229,10 +225,6 @@ msgstr ""
 #: ../ui/application/view.xml.en:9
 msgctxt "heading"
 msgid "Application Status"
-msgstr ""
-
-#: ../form.py:124
-msgid "Back to Your Application"
 msgstr ""
 
 #: ../widgets.py:168 ../widgets.py:224
@@ -512,6 +504,10 @@ msgstr ""
 
 #: ../controls.py:101
 msgid "Main Variable"
+msgstr ""
+
+#: ../application_views.py:156 ../form.py:124
+msgid "Manage your Data Collection Application"
 msgstr ""
 
 #: ../workgroup_views.py:161

@@ -238,10 +238,6 @@ msgstr "Déjà enregistré"
 msgid "Application"
 msgstr "Application"
 
-#: ../application_views.py:156
-msgid "Application Dashboard"
-msgstr "Tableau de bord"
-
 #: ../ui/application/view.xml.en:5
 msgctxt "heading"
 msgid "Application Dashboard"
@@ -251,10 +247,6 @@ msgstr "Tableau de bord"
 msgctxt "heading"
 msgid "Application Status"
 msgstr "Suivi de l'application"
-
-#: ../form.py:124
-msgid "Back to Your Application"
-msgstr "Retour à votre application"
 
 #: ../widgets.py:168 ../widgets.py:224
 msgid "Bad value"
@@ -540,6 +532,10 @@ msgstr ""
 #: ../controls.py:101
 msgid "Main Variable"
 msgstr ""
+
+#: ../application_views.py:156 ../form.py:124
+msgid "Manage your Data Collection Application"
+msgstr "Gérer votre application de collecte de données"
 
 #: ../workgroup_views.py:161
 msgid "Manage your client space"
@@ -1281,6 +1277,12 @@ msgstr ""
 #: ../application_views.py:60
 msgid "{workgroup_title}, form \"{application_title}\""
 msgstr "{workgroup_title}, formulaire \"{application_title}\""
+
+#~ msgid "Application Dashboard"
+#~ msgstr "Tableau de bord"
+
+#~ msgid "Back to Your Application"
+#~ msgstr "Retour à votre application"
 
 #~ msgid "Champ obligatoire"
 #~ msgstr "Mandatory field"
