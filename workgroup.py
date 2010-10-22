@@ -82,10 +82,6 @@ class Workgroup(WebSite):
         return super(Workgroup, self).get_class_icon(size=size)
 
 
-    def set_neutral_header(self):
-        raise NotImplementedError
-
-
     def is_allowed_to_add_form(self, user, resource):
         return is_admin(user, resource)
 

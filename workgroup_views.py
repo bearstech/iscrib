@@ -73,6 +73,23 @@ class Workgroup_NewInstance(NewInstance):
         goto = super(Workgroup_NewInstance, self).action(resource, context,
                 form)
         workgroup = resource.get_resource(form['name'])
+        # Set neutral banner
+        theme = workgroup.get_resource('theme')
+        style = theme.get_resource('style')
+        style.handler.set_data("""/* CSS */
+#header {
+  min-height: 90px;
+  background-color: #ccc;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+#header #links a,
+#header #languages a {
+  color: #333;
+}
+#header #logo-title {
+  color: #000;
+}""")
         # Create the user if necessary
         user_was_created = False
         user = context.user
@@ -262,7 +279,6 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
             logo = resource.get_resource(path)
             logo.set_workflow_state('public')
             theme.set_property(name, theme.get_pathto(logo))
-            # TODO detect first time logo and call set_neutral_header()
             return False
         return super(Workgroup_Edit, self).set_value(resource, context, name,
                 form)
