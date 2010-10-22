@@ -71,6 +71,10 @@ class Root(BaseRoot):
         return super(Root, self).get_document_types() + [Workgroup]
 
 
+    def get_page_title(self):
+        return None
+
+
     def is_allowed_to_view(self, user, resource):
         abspath = resource.get_abspath()
         if abspath and abspath[0] in ('gabarit', 'terms-and-conditions',
