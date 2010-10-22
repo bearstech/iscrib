@@ -56,6 +56,8 @@ from workflow import WorkflowState
 MSG_ERR_PAGE_NAME = ERROR(u'Page names must be in the form "C Title..."')
 MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 MSG_NO_DATA = ERROR(u"No data to collect for now.")
+MSG_NEW_APPLICATION = INFO(u'Your application is created. Now register '
+        u'users.')
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
@@ -122,7 +124,7 @@ class Application_NewInstance(NewInstance):
         # Initial form
         child.make_resource(child.default_form, Form,
                 title={'en': u"Test Form"})
-        return goto
+        return context.come_back(MSG_NEW_APPLICATION, goto)
 
 
 

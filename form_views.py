@@ -22,11 +22,10 @@ from itools.gettext import MSG
 from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from ikaaro
-from ikaaro.autoform import XHTMLBody
 
 # Import from iscrib
 from datatypes import Numeric
-from utils import get_page_number
+from utils import get_page_number, set_html_message
 from widgets import is_mandatory_filled
 from workflow import WorkflowState, EMPTY, PENDING, SENT, EXPORTED
 
@@ -163,9 +162,7 @@ class Form_View(STLForm):
             context.message = MSG_SAVED_ERROR
             context.bad_types = bad_types
         else:
-            message = MSG_SAVED.gettext().encode('utf8')
-            context.message = [XHTMLBody.decode(message)]
-
+            set_html_message(MSG_SAVED, context)
         if resource.get_workflow_state() == EMPTY:
             resource.set_workflow_state(PENDING)
 
@@ -256,9 +253,8 @@ class Form_Send(STLForm):
         resource.set_workflow_state(EXPORTED)
 
         # XXX
-        message = MSG_EXPORTED_ITAAPY.gettext().encode('utf8')
-        context.message = [XHTMLBody.decode(message)]
         context.commit = False
+        set_html_message(MSG_EXPORTED_ITAAPY, context)
 
 
 
