@@ -17,22 +17,19 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.csv import Property
 from itools.database import PhraseQuery
 from itools.datatypes import Unicode, Email, String, PathDataType
-from itools.fs import FileName
 from itools.gettext import MSG
-from itools.handlers import checkid
 from itools.stl import stl
 from itools.web import INFO, ERROR
 
 # Import from ikaaro
 from ikaaro import messages
 from ikaaro.autoform import TextWidget, ImageSelectorWidget, PasswordWidget
+from ikaaro.autoform import MultilineWidget
 from ikaaro.folder_views import Folder_BrowseContent
-from ikaaro.registry import get_resource_class
 from ikaaro.resource_views import DBResource_Edit
-from ikaaro.theme_views import Theme_Edit, Theme_AddLogo
+from ikaaro.theme_views import Theme_Edit
 from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 
@@ -150,7 +147,7 @@ class Workgroup_Menu(IconsView):
               'description': MSG(u"Uploading this spreadsheet file in iScrib will generate in one click your data collection application."),
               'url': ';new_resource?type=Application'},
              {'icon': '/ui/iscrib/images/logo48.png',
-              'title': MSG(u"Edit Title and Logo"),
+              'title': MSG(u"Edit Title, Logo and CSS"),
               'description': MSG(u"Configure your client space"),
               'url': ';edit'}]
 
@@ -252,13 +249,16 @@ class Workgroup_View(Folder_BrowseContent):
 
 
 class Workgroup_Edit(Theme_Edit, DBResource_Edit):
-    title = MSG(u"Edit Title and Logo")
+    title = MSG(u"Edit Title, Logo and CSS")
     schema = merge_dicts(DBResource_Edit.schema,
             favicon=PathDataType,
-            logo=PathDataType)
+            logo=PathDataType,
+            style=String)
     widgets = DBResource_Edit.widgets + ([
                 ImageSelectorWidget('logo', action='add_logo',
-                    title=MSG(u'Replace logo file')) ])
+                    title=MSG(u'Replace logo file')),
+                MultilineWidget('style', title=MSG(u"CSS"), rows=19,
+                    cols=69)])
 
 
     def get_value(self, resource, context, name, datatype):
@@ -272,6 +272,10 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
                 return ''
             logo = theme.get_resource(path)
             return resource.get_pathto(logo)
+        elif name == 'style':
+            style = resource.get_resource('theme/style')
+            # FIXME links
+            return style.handler.to_str()
         return super(Workgroup_Edit, self).get_value(resource, context, name,
                 datatype)
 
@@ -289,6 +293,11 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
             logo = resource.get_resource(path)
             logo.set_workflow_state('public')
             theme.set_property(name, theme.get_pathto(logo))
+            return False
+        elif name == 'style':
+            style = resource.get_resource('theme/style')
+            # FIXME links
+            style.handler.set_data(form['style'])
             return False
         return super(Workgroup_Edit, self).set_value(resource, context, name,
                 form)
