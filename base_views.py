@@ -159,6 +159,7 @@ class LogoutView(BaseLogoutView):
 class FrontView(IconsView):
     access = 'is_authenticated'
     cls = None
+    size = 48
 
 
     def get_namespace(self, resource, context):
@@ -167,17 +168,19 @@ class FrontView(IconsView):
             ac = child.get_access_control()
             if not ac.is_allowed_to_view(context.user, child):
                 continue
-            items.append({'icon': child.get_logo_icon(),
-                'title': child.get_title(),
+            title = child.get_title()
+            items.append({'icon': child.get_logo_icon(size=self.size),
+                'title': title,
                 'description': child.get_property('description'),
-                'url': context.get_link(child)})
+                'url': context.get_link(child),
+                'sort': title.lower()})
         if not items:
             class_title = self.cls.class_title.gettext()
             return context.come_back(MSG_NO_RESOURCE,
                 class_title=class_title)
         elif len(items) == 1:
             return get_reference(items[-1]['url'])
-        items.sort(key=itemgetter('title'))
+        items.sort(key=itemgetter('sort'))
         return {'batch': None, 'items': items}
 
 

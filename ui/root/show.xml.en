@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <!-- Batch -->
+  ${batch}
+
+  <table width="100%" cellpadding="5" cellspacing="5">
+    <tbody>
+      <stl:block stl:repeat="row items">
+        <tr>
+          <td align="center" valign="bottom" stl:repeat="item row">
+            <a href="${item/url}"><img alt="" src="${item/icon}" /></a><br/>
+            <a href="${item/url}">${item/title}</a>
+          </td>
+        </tr>
+      </stl:block>
+    </tbody>
+  </table>
+
+</stl:block>

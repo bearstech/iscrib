@@ -26,8 +26,8 @@ from ikaaro.root import Root as BaseRoot
 from ikaaro.workflow import WorkflowAware
 
 # Import from iscrib
-from base_views import AutomaticEditView, FrontView, LoginView
-from root_views import Root_View
+from base_views import AutomaticEditView, LoginView
+from root_views import Root_View, Root_Show
 from workgroup import Workgroup
 
 
@@ -45,7 +45,7 @@ class Root(BaseRoot):
     # Views
     view = Root_View()
     edit = AutomaticEditView()
-    show = FrontView(title=MSG(u"Your Client Space"), cls=Workgroup)
+    show = Root_Show()
     # Security
     unauthorized = LoginView()
 

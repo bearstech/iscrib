@@ -251,68 +251,6 @@ class Workgroup_View(Folder_BrowseContent):
 
 
 
-class Workgroup_AddLogo(Theme_AddLogo):
-
-    # XXX copy-paste
-    def action_upload(self, resource, context, form):
-        filename, mimetype, body = form['file']
-        name, type, language = FileName.decode(filename)
-
-        # Check the filename is good
-        title = form['title'].strip()
-        name = checkid(title) or checkid(name)
-        if name is None:
-            context.message = messages.MSG_BAD_NAME
-            return
-
-        # Get the container
-        container = context.root.get_resource(form['target_path'])
-
-        # Check the name is free
-        if container.get_resource(name, soft=True) is not None:
-            context.message = messages.MSG_NAME_CLASH
-            return
-
-        # Check it is of the expected type
-        cls = get_resource_class(mimetype)
-        if not self.can_upload(cls):
-            error = u'The given file is not of the expected type.'
-            context.message = ERROR(error)
-            return
-
-        # Add the image to the resource
-        child = container.make_resource(name, cls, body=body,
-                format=mimetype, filename=filename, extension=type)
-
-        # XXX Begin
-        handler = child.handler
-        width, height = handler.get_size()
-        if height > resource.logo_height:
-            height = resource.logo_height
-        thumbnail, format = handler.get_thumbnail(width, height)
-        if thumbnail is None:
-            context.commit = False
-            context.message = MSG_ERR_NOT_IMAGE
-            return
-        handler.set_data(thumbnail)
-        # XXX End
-
-        # The title
-        language = resource.get_edit_languages(context)[0]
-        title = Property(title, lang=language)
-        child.metadata.set_property('title', title)
-        # Get the path
-        path = resource.get_pathto(child)
-        action = self.get_resource_action(context)
-        if action:
-            path = '%s%s' % (path, action)
-        # Return javascript
-        scripts = self.get_scripts(context)
-        context.add_script(*scripts)
-        return self.get_javascript_return(context, path)
-
-
-
 class Workgroup_Edit(Theme_Edit, DBResource_Edit):
     title = MSG(u"Edit Title and Logo")
     schema = merge_dicts(DBResource_Edit.schema,

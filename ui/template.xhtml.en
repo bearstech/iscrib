@@ -84,8 +84,9 @@
 
     <!-- Footer -->
     <div id="footer">
-      <a href="/terms-and-conditions/">Terms and Conditions</a>&nbsp;|
-      <a href="http://www.itaapy.com/iscrib">Un service Itaapy</a>&nbsp;|
+      <a href="http://www.itaapy.com/iscrib">An Itaapy Service</a>&nbsp;|
+      <a href="/samples">Samples</a>&nbsp;|
+      <a href="/terms-and-conditions">Terms and Conditions</a>&nbsp;|
       <a href="http://download.openoffice.org/ ">Download OpenOffice.org</a>
     </div>
   </div>

@@ -23,6 +23,8 @@ from itools.web import BaseView
 # Import from ikaaro
 
 # Import from iscrib
+from base_views import FrontView
+from workgroup import Workgroup
 
 
 class Root_View(BaseView):
@@ -36,3 +38,29 @@ class Root_View(BaseView):
             # Avoid response abort
             return ''
         return homepage
+
+
+
+class Root_Show(FrontView):
+    template = '/ui/iscrib/root/show.xml'
+    title = MSG(u"Your Client Space")
+    cls = Workgroup
+    size = 128
+    cols = 5
+
+
+    def get_namespace(self, resource, context):
+        namespace = super(Root_Show, self).get_namespace(resource, context)
+        rows = []
+        row = []
+        for item in namespace['items']:
+            if item['icon'] is None:
+                item['icon'] = self.cls.get_class_icon(size=48)
+            row.append(item)
+            if len(row) == self.cols:
+                rows.append(row)
+                row = []
+        if row:
+            rows.append(row)
+        namespace['items'] = rows
+        return namespace
