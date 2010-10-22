@@ -213,7 +213,7 @@ msgctxt "legend"
 msgid "Already Have an Account"
 msgstr ""
 
-#: ../workgroup_views.py:157
+#: ../workgroup_views.py:165
 msgid "Application"
 msgstr ""
 
@@ -256,11 +256,11 @@ msgctxt "title attribute"
 msgid "Come back to the form"
 msgstr ""
 
-#: ../user_views.py:45 ../user_views.py:104 ../workgroup_views.py:66
+#: ../user_views.py:45 ../user_views.py:104 ../workgroup_views.py:70
 msgid "Company"
 msgstr ""
 
-#: ../workgroup_views.py:141
+#: ../workgroup_views.py:149
 msgid "Configure your client space"
 msgstr ""
 
@@ -284,7 +284,7 @@ msgctxt "legend"
 msgid "Create Your Account"
 msgstr ""
 
-#: ../workgroup_views.py:136
+#: ../workgroup_views.py:144
 msgid "Create a Data Collection Application"
 msgstr ""
 
@@ -292,7 +292,7 @@ msgstr ""
 msgid "Create from an OpenDocument Spreadsheet file"
 msgstr ""
 
-#: ../workgroup_views.py:160
+#: ../workgroup_views.py:168
 msgid "Creation Date"
 msgstr ""
 
@@ -312,11 +312,11 @@ msgstr ""
 msgid "Download form"
 msgstr ""
 
-#: ../workgroup_views.py:132
+#: ../workgroup_views.py:140
 msgid "Download the Template"
 msgstr ""
 
-#: ../workgroup_views.py:133
+#: ../workgroup_views.py:141
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 
@@ -324,7 +324,7 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
-#: ../workgroup_views.py:140 ../workgroup_views.py:242
+#: ../workgroup_views.py:148 ../workgroup_views.py:250
 msgid "Edit Title and Logo"
 msgstr ""
 
@@ -366,7 +366,7 @@ msgstr ""
 msgid "False"
 msgstr ""
 
-#: ../workgroup_views.py:64
+#: ../workgroup_views.py:68
 msgid "First Name"
 msgstr ""
 
@@ -470,7 +470,7 @@ msgstr ""
 msgid "Last Modified"
 msgstr ""
 
-#: ../workgroup_views.py:65
+#: ../workgroup_views.py:69
 msgid "Last Name"
 msgstr ""
 
@@ -514,7 +514,7 @@ msgstr ""
 msgid "Main Variable"
 msgstr ""
 
-#: ../workgroup_views.py:153
+#: ../workgroup_views.py:161
 msgid "Manage your client space"
 msgstr ""
 
@@ -614,7 +614,7 @@ msgstr ""
 msgid "Parameters"
 msgstr ""
 
-#: ../user_views.py:46 ../workgroup_views.py:67
+#: ../user_views.py:46 ../workgroup_views.py:71
 msgid "Password"
 msgstr ""
 
@@ -675,7 +675,7 @@ msgctxt "table cell"
 msgid "Registered Users"
 msgstr ""
 
-#: ../workgroup_views.py:68
+#: ../workgroup_views.py:72
 msgid "Repeat Password"
 msgstr ""
 
@@ -683,7 +683,7 @@ msgstr ""
 msgid "Repeat your password"
 msgstr ""
 
-#: ../workgroup_views.py:248
+#: ../workgroup_views.py:256
 msgid "Replace logo file"
 msgstr ""
 
@@ -727,11 +727,11 @@ msgstr ""
 msgid "Site de démo iScrib"
 msgstr ""
 
-#: ../workgroup_views.py:232
+#: ../workgroup_views.py:240
 msgid "Source"
 msgstr ""
 
-#: ../workgroup_views.py:159
+#: ../workgroup_views.py:167
 msgid "Source ODS File"
 msgstr ""
 
@@ -833,7 +833,7 @@ msgstr ""
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
-#: ../workgroup_views.py:137
+#: ../workgroup_views.py:145
 msgid ""
 "Uploading this spreadsheet file in iScrib will generate in one click your "
 "data collection application."
@@ -843,7 +843,7 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: ../workgroup_views.py:158
+#: ../workgroup_views.py:166
 msgid "Users Subscribed"
 msgstr ""
 
@@ -985,7 +985,11 @@ msgstr ""
 msgid "Your account was created! You can create a collection application."
 msgstr ""
 
-#: ../workgroup_views.py:63
+#: ../workgroup_views.py:39
+msgid "Your client space \"{title}\" is created."
+msgstr ""
+
+#: ../workgroup_views.py:67
 msgid "Your e-mail address"
 msgstr ""
 

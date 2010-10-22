@@ -21,6 +21,7 @@ from itools.database import PhraseQuery
 from itools.datatypes import Unicode, Email, String, PathDataType
 from itools.gettext import MSG
 from itools.stl import stl
+from itools.web import INFO
 
 # Import from ikaaro
 from ikaaro.autoform import TextWidget, ImageSelectorWidget, PasswordWidget
@@ -33,6 +34,9 @@ from ikaaro.views_new import NewInstance
 
 # Import from iscrib
 from application import Application
+
+
+MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
 
 
 class Workgroup_NewInstance(NewInstance):
@@ -125,7 +129,8 @@ class Workgroup_NewInstance(NewInstance):
         username = user.name
         workgroup.set_user_role(username, 'members')
         # Come back
-        return goto
+        message = MSG_NEW_WORKGROUP(title=form['title'])
+        return context.come_back(message, goto)
 
 
 
