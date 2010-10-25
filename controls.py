@@ -115,7 +115,7 @@ class Controls(Table):
 
     def _load_from_csv(self, body, columns):
         handler = self.handler
-        handler.update_from_csv(body, columns)
+        handler.update_from_csv(body, columns, skip_header=True)
         # Consistency check
         get_record_value = handler.get_record_value
         for lineno, record in enumerate(handler.get_records()):

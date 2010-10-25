@@ -234,7 +234,7 @@ class Schema(Table):
 
     def _load_from_csv(self, body, columns):
         handler = self.handler
-        handler.update_from_csv(body, columns)
+        handler.update_from_csv(body, columns, skip_header=True)
         # Consistency check
         get_record_value = handler.get_record_value
         # First round on variables

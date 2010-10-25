@@ -93,8 +93,6 @@ class Application_NewInstance(NewInstance):
                           ('schema', child.schema_class)]:
             table = tables.next()
             table.rstrip(aggressive=True)
-            # Remove header
-            table.delete_row(0)
             try:
                 child.make_resource(name, cls, title={'en': table.get_name()},
                         # cls va transformer le CSV en table
