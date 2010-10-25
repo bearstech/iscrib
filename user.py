@@ -58,7 +58,7 @@ Your password: {password}""")
         text = self.form_registration_text.gettext(site_name=site_name,
                 site_uri=site_uri, email=email, password=password)
         context.root.send_email(email, self.registration_subject.gettext(),
-                                text=text)
+                                text=text, encoding='ISO-8859-1')
 
 
     def send_workgroup_registration(self, context, email, site_uri,
@@ -67,7 +67,7 @@ Your password: {password}""")
         text = self.workgroup_registration_text.gettext(site_name=site_name,
                 site_uri=site_uri, email=email, password=password)
         context.root.send_email(email, self.registration_subject.gettext(),
-                                text=text)
+                                text=text, encoding='ISO-8859-1')
 
 
 
