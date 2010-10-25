@@ -89,12 +89,13 @@ class Application_NewInstance(NewInstance):
             return
         tables = iter(document.get_body().get_tables())
         # Controls and Schema
-        for name, cls in [('controls', child.controls_class),
-                          ('schema', child.schema_class)]:
+        for name, title, cls in [
+                ('controls', u"Controls", child.controls_class),
+                ('schema', u"Schema", child.schema_class)]:
             table = tables.next()
             table.rstrip(aggressive=True)
             try:
-                child.make_resource(name, cls, title={'en': table.get_name()},
+                child.make_resource(name, cls, title={'en': title},
                         # cls va transformer le CSV en table
                         body=table.to_csv())
             except ValueError, exception:
