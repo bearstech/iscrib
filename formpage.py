@@ -19,9 +19,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+# Import from the Standard Library
+from csv import reader as read_csv
+
 # Import from itools
-from itools.datatypes import XMLAttribute
+from itools.csv import CSVFile, parse
+from itools.datatypes import XMLAttribute, Unicode
 from itools.gettext import MSG
+from itools.handlers import guess_encoding
+from itools.web import ERROR
 from itools.xml import XMLParser
 
 # Import from ikaaro
@@ -31,6 +37,7 @@ from ikaaro.text import CSV
 
 # Import from iscrib
 from datatypes import NumTime
+from schema import FormatError
 from widgets import get_input_widget, make_element
 from workflow import SENT, EXPORTED
 
@@ -67,6 +74,30 @@ class FormPage(CSV):
     class_id = 'FormPage'
     class_title = MSG(u"Form Page")
     class_icon48 = 'icons/48x48/tasks.png'
+    class_handler = FormPageHandler
+
+
+    def _load_from_csv(self, body):
+        title = self.get_title()
+        handler = self.handler
+        handler.load_state_from_string(body)
+        schema_resource = self.parent.get_resource('schema')
+        schema, pages = schema_resource.handler.get_schema_pages()
+        # Consistency check
+        for lineno, row in enumerate(handler.get_rows()):
+            lineno += 1
+            for column in row:
+                if column.startswith(FIELD_PREFIX):
+                    name = column[1:]
+                    if name not in schema:
+                        raise FormatError, ERR_BAD_NAME(title=title,
+                                line=lineno, name=name)
+
+
+    def init_resource(self, body=None, filename=None, extension=None, **kw):
+        super(FormPage, self).init_resource(filename=filename,
+                extension=extension, **kw)
+        self._load_from_csv(body)
 
 
     def get_page_number(self):
