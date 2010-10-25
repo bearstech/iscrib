@@ -37,6 +37,30 @@ from workflow import SENT, EXPORTED
 
 NBSP = u"\u00a0".encode('utf8')
 FIELD_PREFIX = u"#"
+ERR_BAD_NAME = ERROR(u'In "{title}" sheet, line {line}, variable name {name} '
+        u'is unknown.')
+
+
+class FormPageHandler(CSVFile):
+    schema = {'null': Unicode}
+
+
+    def _load_state_from_file(self, file):
+        # Read the data, and find out the encoding
+        data = file.read()
+        self.encoding = guess_encoding(data)
+
+        # Sniff number of columns
+        lines = data.splitlines(True)
+        reader = read_csv(lines)
+        line = reader.next()
+        self.columns = columns = ['null'] * len(line)
+
+        for line in parse(data, columns, self.schema,
+                guess=self.class_csv_guess, skip_header=self.skip_header,
+                encoding=self.encoding):
+            self._add_row(line)
+
 
 
 class FormPage(CSV):
@@ -83,8 +107,6 @@ class FormPage(CSV):
             for j, column in enumerate(row):
                 if tabindex:
                     tabindex = j * 100 + tabindex
-                if isinstance(column, str):
-                    column = unicode(column, 'utf8')
                 column = column.strip()
                 if column == u"-":
                     # Espace blanc insécable
@@ -135,7 +157,7 @@ class FormPage(CSV):
                         if isinstance(column, NumTime):
                             # 0006611 numérique mais représentation textuelle
                             column = unicode(column)
-                        elif isinstance(column, int):
+                        elif type(column) is int:
                             # l'opération était préfixée par int
                             column = u"%d" % column
                         elif str(column) != 'NC':

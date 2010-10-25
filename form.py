@@ -156,8 +156,7 @@ class Form(File):
     def get_schema_pages(self):
         """Load the schema from the CSV.
         """
-        handler = self.get_schema_resource().handler
-        return handler.get_schema_pages()
+        return self.get_schema_resource().handler.get_schema_pages()
 
 
     def get_schema(self):
