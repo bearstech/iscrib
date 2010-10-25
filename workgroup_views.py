@@ -18,15 +18,16 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.database import PhraseQuery
-from itools.datatypes import Unicode, Email, String, PathDataType
+from itools.datatypes import Unicode, Email, String
 from itools.gettext import MSG
 from itools.stl import stl
 from itools.web import INFO, ERROR
 
 # Import from ikaaro
 from ikaaro import messages
-from ikaaro.autoform import TextWidget, ImageSelectorWidget, PasswordWidget
-from ikaaro.autoform import MultilineWidget
+from ikaaro.autoform import TextWidget, MultilineWidget, PasswordWidget
+from ikaaro.autoform import ImageSelectorWidget as BaseImageSelectorWidget
+from ikaaro.autoform import Widget, make_stl_template
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.theme_views import Theme_Edit
@@ -35,10 +36,43 @@ from ikaaro.views_new import NewInstance
 
 # Import from iscrib
 from application import Application
+from datatypes import ImagePathDataType
 
 
 MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
 MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
+
+
+# XXX move to Widget or CMSTemplate
+class MultilingualWidget(Widget):
+
+    def get_template(self):
+        # Get the template
+        template = self.template
+        if template is None:
+            msg = "%s is missing the 'template' variable"
+            raise NotImplementedError, msg % repr(self)
+
+        return make_stl_template(template.gettext().encode('utf8'))
+
+
+
+class ImageSelectorWidget(MultilingualWidget, BaseImageSelectorWidget):
+    template = MSG(u"""
+    <input type="text" id="selector-${id}" size="${size}" name="${name}"
+      value="${value}" />
+    <button id="selector-button-${id}" class="button-selector"
+      name="selector_button_${name}"
+      onclick="return popup(';${action}?target_id=selector-${id}&amp;mode=input', 640, 480);">Browse...</button>
+    <button id="erase-button-${id}" class="button-delete"
+    name="erase_button_${name}"
+      onclick="$('#selector-${id}').attr('value', ''); return false">Erase</button>
+    <br/>
+    ${workflow_state}
+    <br/>
+    <img src="${value}/;thumb?width=${width}&amp;height=${height}"
+    stl:if="value"/>""")
+
 
 
 class Workgroup_NewInstance(NewInstance):
@@ -251,14 +285,16 @@ class Workgroup_View(Folder_BrowseContent):
 class Workgroup_Edit(Theme_Edit, DBResource_Edit):
     title = MSG(u"Edit Title, Logo and CSS")
     schema = merge_dicts(DBResource_Edit.schema,
-            favicon=PathDataType,
-            logo=PathDataType,
+            favicon=ImagePathDataType,
+            logo=ImagePathDataType,
             style=String)
-    widgets = DBResource_Edit.widgets + ([
-                ImageSelectorWidget('logo', action='add_logo',
-                    title=MSG(u'Replace logo file')),
-                MultilineWidget('style', title=MSG(u"CSS"), rows=19,
-                    cols=69)])
+    widgets = ([DBResource_Edit.widgets[0]]
+                + [DBResource_Edit.widgets[1](title=MSG(u"Title (shown in "
+                    u"the banner if no logo)"))]
+                + [ImageSelectorWidget('logo', action='add_logo',
+                        title=MSG(u'Logo (shown in the banner)')),
+                    MultilineWidget('style', title=MSG(u"CSS"), rows=19,
+                        cols=69)])
 
 
     def get_value(self, resource, context, name, datatype):
@@ -268,7 +304,7 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
             # Path must be resolved relative to here
             theme = resource.get_resource('theme')
             path = theme.get_property(name)
-            if path in ('', '.'):
+            if path == '':
                 return ''
             logo = theme.get_resource(path)
             return resource.get_pathto(logo)
@@ -287,7 +323,7 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
             # Path must be saved relative to the theme
             path = form[name]
             theme = resource.get_resource('theme')
-            if path in ('', '.'):
+            if path == '':
                 theme.set_property(name, '')
                 return False
             logo = resource.get_resource(path)

@@ -22,7 +22,13 @@ from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
+from itools.datatypes import PathDataType
 from itools.datatypes.primitive import enumerate_get_namespace
+from itools.uri import Path
+from itools.web import get_context
+
+# Import from ikaaro
+from ikaaro.file import Image
 
 
 def quote_integer(data):
@@ -749,29 +755,38 @@ class EnumCV(SqlEnumerate):
 
 
 
-class Identifiant(DataType):
+# Shamelessly taken from shop.datatypes
+class ImagePathDataType(PathDataType):
+    """
+    -> We check that the path correspond to an image
+    -> Default value is 'None' not '.'.
+    """
 
-    @staticmethod
-    def encode(value):
-        if value is None:
-            return ''
-        return '%s%s' % value
-
-
-    @staticmethod
-    def decode(data):
-        if data[:2] == 'BM':
-            # ('BM', code_ua)
-            return data[:2], int(data[2:])
-        # ('BDP', departement)
-        departement = data[3:]
-        if len(departement) == 1:
-            # "1" -> "01"
-            departement = '0' + departement
-        return data[:3], departement
-
+    default = None
 
     @staticmethod
     def is_valid(value):
-        categorie, code_ua = value
-        return categorie in ('BM', 'BDP')
+        if not value:
+            return True
+        context = get_context()
+        resource = context.resource
+        image = resource.get_resource(value, soft=True)
+        if image is None:
+            return False
+        if not isinstance(image, Image):
+            return False
+        return True
+
+
+    @staticmethod
+    def decode(value):
+        if not value:
+            return ''
+        return Path(value)
+
+
+    @staticmethod
+    def encode(value):
+        if not value:
+            return ''
+        return str(value)
