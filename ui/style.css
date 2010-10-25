@@ -12,6 +12,9 @@ legend {
   font-weight: bold;
 }
 
+#autoform input, #autoform textarea {
+  width: auto;
+}
 
 /**************************************************************************
  * ui/aruni/template.xhtml.en
@@ -482,6 +485,11 @@ button, .button{
 
 .button-print {
   background-image: url(/ui/iscrib/images/printer.png);
+  padding-left: 16px;
+}
+
+.button-selector {
+  background-image: url(/ui/icons/16x16/folder.png);
   padding-left: 16px;
 }
 
