@@ -248,18 +248,25 @@ class Application_Export(BaseView):
     def GET(self, resource, context, encoding='cp1252'):
         for form in resource.get_forms():
             state = form.get_workflow_state()
-            print "form", form, "state", state
             if state != 'private':
                 break
         else:
             return context.come_back(MSG_NO_DATA)
 
         csv = CSVFile()
-        header = ["Form", "User", "E-mail", "State"]
         handler = resource.get_resource('schema').handler
         schema, pages = handler.get_schema_pages()
+        # Main header
+        header = [title.gettext().encode(encoding)
+                for title in (MSG(u"Form"), MSG(u"First Name"),
+                    MSG(u"Last Name"), MSG(u"E-mail"), MSG(u"State"))]
         for name in sorted(schema):
             header.append(name)
+        csv.add_row(header)
+        # Subheader with titles
+        header = [""] * 5
+        for name, datatype in sorted(schema.iteritems()):
+            header.append(datatype.title.encode(encoding))
         csv.add_row(header)
         users = resource.get_resource('/users')
 
@@ -267,14 +274,17 @@ class Application_Export(BaseView):
             for form in resource.get_forms():
                 user = users.get_resource(form.name, soft=True)
                 if user:
-                    email = user.get_property('email')
-                    user = user.get_title().encode(encoding)
+                    get_property = user.get_property
+                    email = get_property('email')
+                    firstname = get_property('firstname').encode(encoding)
+                    lastname = get_property('lastname').encode(encoding)
                 else:
                     email = ""
-                    user = form.name
+                    firstname = ""
+                    lastname = form.name
                 state = WorkflowState.get_value(form.get_workflow_state())
                 state = state.gettext().encode(encoding)
-                row = [form.name, user, email, state]
+                row = [form.name, firstname, lastname, email, state]
                 handler = form.handler
                 for name, datatype in sorted(schema.iteritems()):
                     value = handler.get_value(name, schema)

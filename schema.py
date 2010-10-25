@@ -211,6 +211,7 @@ class SchemaHandler(TableFile):
             sum = get_record_value(record, 'sum')
             dependency = get_record_value(record, 'dependency')
             schema[name] = datatype(representation=representation,
+                    title=get_record_value(record, 'title'),
                     help=get_record_value(record, 'help'),
                     length=str(length), pages=tuple(page_numbers),
                     is_mandatory=is_mandatory, sum=sum,
