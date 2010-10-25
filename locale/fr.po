@@ -570,7 +570,7 @@ msgstr "Connexion"
 
 #: ../workgroup_views.py:287
 msgid "Logo (shown in the banner)"
-msgstr ""
+msgstr "Logo (apparaît dans la bannière)"
 
 #: ../ui/login.xml.en:49
 msgctxt "heading"
@@ -908,7 +908,7 @@ msgstr "Titre"
 
 #: ../workgroup_views.py:284
 msgid "Title (shown in the banner if no logo)"
-msgstr ""
+msgstr "Titre (apparaît dans la bannière s'il n'y a pas de logo)"
 
 #: ../ui/form/send.xml.en:62 ../ui/form/send.xml.en:90
 #: ../ui/form/send.xml.en:122
