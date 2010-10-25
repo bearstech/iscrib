@@ -53,7 +53,8 @@ from formpage import FormPage
 from workflow import WorkflowState
 
 
-MSG_ERR_PAGE_NAME = ERROR(u'Page names must be in the form "C Title..."')
+MSG_ERR_PAGE_NAME = ERROR(u'In the "${name}" sheet, page "${page}" is not '
+        u'related to any variable in the schema.')
 MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 MSG_NO_DATA = ERROR(u"No data to collect for now.")
 MSG_NEW_APPLICATION = INFO(u'Your application is created. Now register '
@@ -102,21 +103,42 @@ class Application_NewInstance(NewInstance):
                 context.commit = False
                 context.message = ERROR(unicode(exception))
                 return
+        handler = child.get_resource('schema').handler
+        schema, pages = handler.get_schema_pages()
         # Pages
         for table in tables:
             table.rstrip(aggressive=True)
-            title = table.get_name()
-            if title[1] != u" ":
+            name = table.get_name().split(None, 1)
+            # Page number
+            if len(name) == 1:
+                page_number = name[0]
+                title = None
+            else:
+                page_number, title = name
+            if page_number not in pages:
                 context.commit = False
-                context.message = MSG_ERR_PAGE_NAME
+                context.message = MSG_ERR_PAGE_NAME(name=name,
+                        page=page_number)
                 return
-            page_number, _ = title.split(u" ", 1)
+            # Name
             name = 'page' + page_number.lower().encode()
-            body = table.to_csv()
+            # Title
+            if title is None:
+                # Find a "*Title"
+                for values in table.iter_values():
+                    for value in values:
+                        value = value.strip() if value is not None else u""
+                        if value.startswith(u'**'):
+                            continue
+                        elif value.startswith(u"*"):
+                            title = value[1:].strip()
+                            break
+                else:
+                    title = u"Page {0}".format(page_number)
             try:
                 child.make_resource(name, FormPage, title={'en': title},
-                        body=body)
-            except Exception, exception:
+                        body=table.to_csv())
+            except ValueError, exception:
                 context.commit = False
                 context.message = ERROR(unicode(exception))
                 return
