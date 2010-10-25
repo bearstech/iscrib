@@ -18,6 +18,7 @@
 
 # Import from itools
 from itools.gettext import MSG
+from itools.uri import Reference
 from itools.web import BaseView
 
 # Import from ikaaro
@@ -51,6 +52,8 @@ class Root_Show(FrontView):
 
     def get_namespace(self, resource, context):
         namespace = super(Root_Show, self).get_namespace(resource, context)
+        if isinstance(namespace, Reference):
+            return namespace
         rows = []
         row = []
         for item in namespace['items']:
