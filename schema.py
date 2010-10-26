@@ -122,7 +122,12 @@ class Representation(String):
 
     @staticmethod
     def is_valid(value):
-        return value.isdigit() or value in ('radio', 'checkbox')
+        if not value:
+            return True
+        if u"." in value:
+            integer, decimal = value.split(u".")
+            return integer.isdigit() and decimal.isdigit()
+        return value.isdigit() or value in ("radio", "checkbox")
 
 
 

@@ -516,7 +516,8 @@ msgstr "Feuille schéma, ligne {line}, la valeur obligatoire « {mandatory} » e
 
 #: ../schema.py:42
 msgid "In schema, line {line}, representation \"{representation}\" is unknown."
-msgstr "Feuille schéma, ligne {line}, la représentation « {représentation} » est inconnu."
+msgstr "Feuille schéma, ligne {line}, la représentation « {representation} "
+"» est inconnue."
 
 #: ../schema.py:41
 msgid "In schema, line {line}, type \"{type}\" is unknown."
