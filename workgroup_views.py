@@ -26,8 +26,6 @@ from itools.web import INFO, ERROR
 # Import from ikaaro
 from ikaaro import messages
 from ikaaro.autoform import TextWidget, MultilineWidget, PasswordWidget
-from ikaaro.autoform import ImageSelectorWidget as BaseImageSelectorWidget
-from ikaaro.autoform import Widget, make_stl_template
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.theme_views import Theme_Edit
@@ -36,43 +34,12 @@ from ikaaro.views_new import NewInstance
 
 # Import from iscrib
 from application import Application
+from autoform import ImageSelectorWidget, RecaptchaDatatype, RecaptchaWidget
 from datatypes import ImagePathDataType
 
 
 MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
 MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
-
-
-# XXX move to Widget or CMSTemplate
-class MultilingualWidget(Widget):
-
-    def get_template(self):
-        # Get the template
-        template = self.template
-        if template is None:
-            msg = "%s is missing the 'template' variable"
-            raise NotImplementedError, msg % repr(self)
-
-        return make_stl_template(template.gettext().encode('utf8'))
-
-
-
-class ImageSelectorWidget(MultilingualWidget, BaseImageSelectorWidget):
-    template = MSG(u"""
-    <input type="text" id="selector-${id}" size="${size}" name="${name}"
-      value="${value}" />
-    <button id="selector-button-${id}" class="button-selector"
-      name="selector_button_${name}"
-      onclick="return popup(';${action}?target_id=selector-${id}&amp;mode=input', 640, 480);">Browse...</button>
-    <button id="erase-button-${id}" class="button-delete"
-    name="erase_button_${name}"
-      onclick="$('#selector-${id}').attr('value', ''); return false">Erase</button>
-    <br/>
-    ${workflow_state}
-    <br/>
-    <img src="${value}/;thumb?width=${width}&amp;height=${height}"
-    stl:if="value"/>""")
-
 
 
 class Workgroup_NewInstance(NewInstance):
@@ -84,14 +51,15 @@ class Workgroup_NewInstance(NewInstance):
             lastname=Unicode,
             company=Unicode,
             password=String,
-            password2=String)
+            password2=String,
+            recaptcha=RecaptchaDatatype)
     widgets = NewInstance.widgets[:-1]
 
 
     def get_schema(self, resource, context):
         schema = self.schema.copy()
         if context.user is None:
-            for key in ('email', 'password', 'password2'):
+            for key in ('email', 'password', 'password2', 'recaptcha'):
                 schema[key] = schema[key](mandatory=True)
         return schema
 
@@ -105,7 +73,9 @@ class Workgroup_NewInstance(NewInstance):
                 TextWidget('lastname', title=MSG(u"Last Name")),
                 TextWidget('company', title=MSG(u"Company")),
                 PasswordWidget('password', title=MSG(u"Password")),
-                PasswordWidget('password2', title=MSG(u"Repeat Password"))])
+                PasswordWidget('password2', title=MSG(u"Repeat Password")),
+                RecaptchaWidget('recaptcha',
+                    title=MSG(u"Please type the two words"))])
         return widgets
 
 
