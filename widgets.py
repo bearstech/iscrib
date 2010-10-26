@@ -57,8 +57,8 @@ def make_element(tagname, attributes={}, content=u""):
 
 
 
-def radio_widget(context, form, datatype, name, value, schema, fields,
-        readonly):
+def _choice_widget(context, form, datatype, name, value, schema, fields,
+        readonly, input_type):
     html = []
 
     # True -> '1' ; False -> '2'
@@ -72,7 +72,7 @@ def radio_widget(context, form, datatype, name, value, schema, fields,
         html.append(make_element(u"div", content=input))
     else:
         for option in datatype.get_namespace(value):
-            attributes = {u"type": u"radio",
+            attributes = {u"type": input_type,
                     u"id": u"field_{name}".format(name=name),
                     u"name": name, u"value": option['name']}
             if option['selected']:
@@ -87,17 +87,7 @@ def radio_widget(context, form, datatype, name, value, schema, fields,
             else:
                 disabled = u"true"
                 toggle_class = u"addClass"
-            dep_names = []
-            for dep_name in form.get_reverse_dependency(name, schema):
-                dep_names.append(dep_name)
-                # Second level
-                for dep_name in form.get_reverse_dependency(dep_name,
-                        schema):
-                    dep_names.append(dep_name)
-                    # Third level
-                    for dep_name in form.get_reverse_dependency(dep_name,
-                            schema):
-                        dep_names.append(dep_name)
+            dep_names = form.get_dep_names(name, schema)
             for dep_name in dep_names:
                 attributes.setdefault(u"onchange", []).append(
                     u"$('[name={name}]').attr('disabled', {disabled})"
@@ -122,31 +112,17 @@ def radio_widget(context, form, datatype, name, value, schema, fields,
 
 
 
+def radio_widget(context, form, datatype, name, value, schema, fields,
+        readonly):
+    return _choice_widget(context, form, datatype, name, value, schema,
+            fields, readonly, input_type=u"radio")
+
+
+
 def checkbox_widget(context, form, datatype, name, value, schema, fields,
         readonly):
-    if readonly:
-        return make_element(u"div", content=datatype.get_value(value, value))
-
-    html = []
-    for option in datatype.get_namespace(value):
-        attributes = {u"type": u"checkbox",
-                u"id": u"field_{name}".format(name=name),
-                u"name": name, u"value": option['name']}
-        if option['selected']:
-            attributes[u"checked"] = u"checked"
-        if form.is_disabled_by_dependency(name, schema, fields):
-            attributes[u"disabled"] = u"disabled"
-            attributes.setdefault(u"class", []).append(u"disabled")
-        input = make_element(u"input", attributes, option['value'])
-        if name in context.bad_types:
-            input = (u'<span class="badtype" title="Bad value">'
-                    + input + u"</span>")
-        elif not is_mandatory_filled(datatype, name, value, schema, fields,
-                context):
-            input = (u'<span class="mandatory" title="Mandatory field">'
-                    + input + u"</span>")
-        html.append(input)
-    return u"".join(html)
+    return _choice_widget(context, form, datatype, name, value, schema,
+            fields, readonly, input_type=u"checkbox")
 
 
 
@@ -238,17 +214,17 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     # Always take data from the handler, we store wrong values anyway
     value = form.get_form().handler.get_value(name, schema)
     datatype = schema[name]
-    representation = datatype.representation.upper()
+    representation = datatype.representation
     widget = None
-    if representation == 'SELECT':
+    if representation == 'select':
         widget = select_widget(context, form, datatype, name, value, schema,
                 fields, readonly)
-    elif representation == 'RADIO':
+    elif representation == 'radio':
         widget = radio_widget(context, form, datatype, name, value, schema,
                 fields, readonly)
-    elif representation == 'CHECKBOX':
-        widget = checkbox_widget(context, form, datatype, name, value, schema,
-                fields, readonly)
+    elif representation == 'checkbox':
+        widget = checkbox_widget(context, form, datatype, name, value,
+                schema, fields, readonly)
     # Skip instance datatypes: TypeError: issubclass() arg 1 must be a class
     elif  isinstance(datatype, Numeric):
         pass

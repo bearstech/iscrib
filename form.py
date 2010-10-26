@@ -287,6 +287,16 @@ class Form(File):
                 if name == dep_datatype.dependency]
 
 
+    def get_dep_names(self, name, schema, iteration=0, max_dep_names=3):
+        dep_names = []
+        for dep_name in self.get_reverse_dependency(name, schema):
+            dep_names.append(dep_name)
+            if iteration < max_dep_names:
+                dep_names.extend(self.get_dep_names(dep_name, schema,
+                    iteration=iteration+1))
+        return dep_names
+
+
     def get_invalid_fields(self, pages=freeze([]), exclude=freeze([''])):
         schema = self.get_schema()
         fields = self.get_fields(schema)
