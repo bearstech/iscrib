@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-26 08:10+CET\n"
+"POT-Creation-Date: 2010-10-26 09:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../autoform.py:63
+#: ../autoform.py:103
 msgid ""
 "\n"
 "    <input type=\"text\" id=\"selector-${id}\" size=\"${size}\" name="
@@ -106,7 +106,7 @@ msgstr ""
 msgid "/>"
 msgstr ""
 
-#: ../schema.py:88
+#: ../schema.py:90
 msgid "00000"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgstr ""
 msgid "Bad value"
 msgstr ""
 
-#: ../schema.py:86
+#: ../schema.py:88
 msgid "Boolean"
 msgstr ""
 
@@ -322,15 +322,15 @@ msgstr ""
 msgid "Creation Date"
 msgstr ""
 
-#: ../schema.py:92
+#: ../schema.py:94
 msgid "DD/MM/YYYY"
 msgstr ""
 
-#: ../schema.py:87
+#: ../schema.py:89
 msgid "Decimal"
 msgstr ""
 
-#: ../schema.py:182
+#: ../schema.py:184
 msgid "Dependent Field"
 msgstr ""
 
@@ -420,11 +420,11 @@ msgctxt "heading"
 msgid "Form State:"
 msgstr ""
 
-#: ../schema.py:89
+#: ../schema.py:91
 msgid "HH:MM"
 msgstr ""
 
-#: ../schema.py:90
+#: ../schema.py:92
 msgid "HHH:MM"
 msgstr ""
 
@@ -456,16 +456,20 @@ msgstr ""
 msgid "In controls, line {line}, variable is missing."
 msgstr ""
 
-#: ../schema.py:46
+#: ../schema.py:48
 msgid "In schema, line {line}, dependency variable name \"{name}\" is unknown."
 msgstr ""
 
-#: ../schema.py:44
+#: ../schema.py:46
 msgid "In schema, line {line}, in sum, variable \"{name}\" is unknown."
 msgstr ""
 
-#: ../schema.py:42
+#: ../schema.py:44
 msgid "In schema, line {line}, mandatory \"{mandatory}\" is unknown."
+msgstr ""
+
+#: ../schema.py:42
+msgid "In schema, line {line}, representation \"{representation}\" is unknown."
 msgstr ""
 
 #: ../schema.py:41
@@ -499,7 +503,7 @@ msgstr ""
 msgid "Input Control"
 msgstr ""
 
-#: ../schema.py:91
+#: ../schema.py:93
 msgid "Integer"
 msgstr ""
 
@@ -511,7 +515,7 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: ../schema.py:178
+#: ../schema.py:180
 msgid "Length"
 msgstr ""
 
@@ -519,7 +523,7 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-#: ../schema.py:96
+#: ../schema.py:98
 msgid "List of values"
 msgstr ""
 
@@ -547,7 +551,7 @@ msgctxt "heading"
 msgid "Lost Password"
 msgstr ""
 
-#: ../schema.py:93
+#: ../schema.py:95
 msgid "MM/YYYY"
 msgstr ""
 
@@ -563,7 +567,7 @@ msgstr ""
 msgid "Manage your client space"
 msgstr ""
 
-#: ../schema.py:180
+#: ../schema.py:182
 msgid "Mandatory"
 msgstr ""
 
@@ -630,7 +634,7 @@ msgstr ""
 msgid "No {class_title} available."
 msgstr ""
 
-#: ../datatypes.py:673
+#: ../datatypes.py:667
 msgid "Non"
 msgstr ""
 
@@ -651,11 +655,11 @@ msgctxt "button"
 msgid "Ok"
 msgstr ""
 
-#: ../schema.py:174
+#: ../schema.py:176
 msgid "Online Help"
 msgstr ""
 
-#: ../datatypes.py:672
+#: ../datatypes.py:666
 msgid "Oui"
 msgstr ""
 
@@ -744,7 +748,7 @@ msgstr ""
 msgid "Repeat your password"
 msgstr ""
 
-#: ../schema.py:177
+#: ../schema.py:179
 msgid "Representation"
 msgstr ""
 
@@ -753,7 +757,7 @@ msgctxt "button"
 msgid "Save"
 msgstr ""
 
-#: ../application_views.py:107 ../schema.py:225
+#: ../application_views.py:107 ../schema.py:227
 msgid "Schema"
 msgstr ""
 
@@ -800,11 +804,11 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: ../schema.py:94
+#: ../schema.py:96
 msgid "String"
 msgstr ""
 
-#: ../schema.py:181
+#: ../schema.py:183
 msgid "Sum"
 msgstr ""
 
@@ -812,7 +816,7 @@ msgstr ""
 msgid "Test Form"
 msgstr ""
 
-#: ../schema.py:95
+#: ../schema.py:97
 msgid "Text"
 msgstr ""
 
@@ -862,7 +866,7 @@ msgid ""
 "          required"
 msgstr ""
 
-#: ../schema.py:173 ../controls.py:98
+#: ../schema.py:175 ../controls.py:98
 msgid "Title"
 msgstr ""
 
@@ -886,7 +890,7 @@ msgstr ""
 msgid "True"
 msgstr ""
 
-#: ../schema.py:175
+#: ../schema.py:177
 msgid "Type"
 msgstr ""
 
@@ -913,7 +917,7 @@ msgctxt "table cell"
 msgid "Value"
 msgstr ""
 
-#: ../schema.py:172
+#: ../schema.py:174
 msgid "Variable"
 msgstr ""
 
@@ -921,7 +925,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../schema.py:179
+#: ../schema.py:181
 msgid "Vocabulary"
 msgstr ""
 
@@ -1164,8 +1168,8 @@ msgstr ""
 msgid "not an ODS file"
 msgstr ""
 
-#: ../datatypes.py:109 ../datatypes.py:619 ../datatypes.py:645
-#: ../datatypes.py:703 ../datatypes.py:720
+#: ../datatypes.py:103 ../datatypes.py:613 ../datatypes.py:639
+#: ../datatypes.py:697 ../datatypes.py:714
 msgid "null"
 msgstr ""
 

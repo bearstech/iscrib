@@ -39,6 +39,8 @@ ERR_EMPTY_NAME = ERROR(u'In schema, line {line}, variable name is missing.')
 ERR_DUPLICATE_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
         u'duplicated.')
 ERR_BAD_TYPE = ERROR(u'In schema, line {line}, type "{type}" is unknown.')
+ERR_BAD_REPRESENTATION = ERROR(u'In schema, line {line}, representation '
+        u'"{representation}" is unknown.')
 ERR_BAD_MANDATORY = ERROR(u'In schema, line {line}, mandatory "{mandatory}" '
         u'is unknown.')
 ERR_BAD_SUM = ERROR(u'In schema, line {line}, in sum, variable "{name}" is '
@@ -118,7 +120,7 @@ class Representation(String):
 
     @staticmethod
     def is_valid(value):
-        return value.isdigit() or value == 'radio'
+        return value.isdigit() or value in ('radio', 'checkbox')
 
 
 
@@ -252,6 +254,10 @@ class Schema(Table):
             if not Type.is_valid(dt_name):
                 raise FormatError, ERR_BAD_TYPE(line=lineno,
                         type=dt_name)
+            representation = get_record_value(record, 'representation')
+            if not Representation.is_valid(representation):
+                raise FormatError, ERR_BAD_REPRESENTATION(line=lineno,
+                        representation=representation)
             try:
                 mandatory = get_record_value(record, 'mandatory')
             except ValueError:
