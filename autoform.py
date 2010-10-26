@@ -19,16 +19,56 @@
 import urllib, urllib2
 
 # Import from itools
-from itools.datatypes import String
+from itools.datatypes import String, PathDataType
 from itools.gettext import MSG
+from itools.uri import Path
 from itools.web import get_context
 from itools.xml import XMLParser
 
 # Import from ikaaro
 from ikaaro.autoform import ImageSelectorWidget as BaseImageSelectorWidget
 from ikaaro.autoform import Widget, make_stl_template, stl_namespaces
+from ikaaro.file import Image
 
 # Import from iscrib
+
+
+# Shamelessly taken from shop.datatypes
+class ImagePathDataType(PathDataType):
+    """
+    -> We check that the path correspond to an image
+    -> Default value is 'None' not '.'.
+    """
+
+    default = None
+
+    @staticmethod
+    def is_valid(value):
+        if not value:
+            return True
+        context = get_context()
+        resource = context.resource
+        image = resource.get_resource(value, soft=True)
+        if image is None:
+            return False
+        if not isinstance(image, Image):
+            return False
+        return True
+
+
+    @staticmethod
+    def decode(value):
+        if not value:
+            return ''
+        return Path(value)
+
+
+    @staticmethod
+    def encode(value):
+        if not value:
+            return ''
+        return str(value)
+
 
 
 # TODO move to Widget or CMSTemplate

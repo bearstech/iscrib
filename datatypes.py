@@ -22,13 +22,7 @@ from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
-from itools.datatypes import PathDataType
 from itools.datatypes.primitive import enumerate_get_namespace
-from itools.uri import Path
-from itools.web import get_context
-
-# Import from ikaaro
-from ikaaro.file import Image
 
 
 def quote_integer(data):
@@ -752,41 +746,3 @@ class EnumCV(SqlEnumerate):
     @classmethod
     def reset(cls):
         cls.counter = 1
-
-
-
-# Shamelessly taken from shop.datatypes
-class ImagePathDataType(PathDataType):
-    """
-    -> We check that the path correspond to an image
-    -> Default value is 'None' not '.'.
-    """
-
-    default = None
-
-    @staticmethod
-    def is_valid(value):
-        if not value:
-            return True
-        context = get_context()
-        resource = context.resource
-        image = resource.get_resource(value, soft=True)
-        if image is None:
-            return False
-        if not isinstance(image, Image):
-            return False
-        return True
-
-
-    @staticmethod
-    def decode(value):
-        if not value:
-            return ''
-        return Path(value)
-
-
-    @staticmethod
-    def encode(value):
-        if not value:
-            return ''
-        return str(value)

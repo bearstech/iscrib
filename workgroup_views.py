@@ -34,8 +34,8 @@ from ikaaro.views_new import NewInstance
 
 # Import from iscrib
 from application import Application
-from autoform import ImageSelectorWidget, RecaptchaDatatype, RecaptchaWidget
-from datatypes import ImagePathDataType
+from autoform import ImagePathDataType, ImageSelectorWidget
+from autoform import RecaptchaDatatype, RecaptchaWidget
 
 
 MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
