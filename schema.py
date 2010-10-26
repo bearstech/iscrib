@@ -215,7 +215,7 @@ class SchemaHandler(TableFile):
                 for value in vocabulary.strip().split('/'):
                     options.append({'name': checkid(value),
                                     'value': value.strip()})
-                datatype.options = options
+                datatype = datatype(options=options)
             # The page number (now automatic)
             page_number = Variable.get_page_number(name)
             pages.setdefault(page_number, set()).add(name)
