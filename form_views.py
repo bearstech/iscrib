@@ -40,7 +40,7 @@ MSG_EXPORTED_ITAAPY = ERROR(u'To export to a SQL database, contact <a '
         u'href="http://www.itaapy.com/contact">Itaapy</a>')
 
 
-class Generic(String):
+class Single(String):
 
     @classmethod
     def decode(cls, data):
@@ -49,7 +49,7 @@ class Generic(String):
         return data
 
 
-Multiple = Generic(multiple=True)
+Multiple = Single(multiple=True)
 
 
 
@@ -125,11 +125,12 @@ class Form_View(STLForm):
             #    continue
             # Can't use "if not/continue" pattern here
             if context.get_form_value(key) is not None:
-                # Do not use form schema, only default String
+                # First the raw data
                 if datatype.multiple:
                     data = context.get_form_value(key, type=Multiple)
                 else:
-                    data = context.get_form_value(key, type=Generic)
+                    data = context.get_form_value(key, type=Single)
+                # Then the decoded value
                 try:
                     value = datatype.decode(data)
                 except Exception:
