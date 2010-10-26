@@ -66,6 +66,18 @@ MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
         u'<{application_url}>.\r\n')
 
 
+def find_title(table):
+    for values in table.iter_values():
+        for value in values:
+            value = value.strip() if value is not None else u""
+            if value.startswith(u'**'):
+                continue
+            elif value.startswith(u"*"):
+                return value[1:].strip()
+    return None
+
+
+
 class Application_NewInstance(NewInstance):
     schema = merge_dicts(NewInstance.schema,
             file=FileDataType(mandatory=True))
@@ -125,15 +137,9 @@ class Application_NewInstance(NewInstance):
             # Title
             if title is None:
                 # Find a "*Title"
-                for values in table.iter_values():
-                    for value in values:
-                        value = value.strip() if value is not None else u""
-                        if value.startswith(u'**'):
-                            continue
-                        elif value.startswith(u"*"):
-                            title = value[1:].strip()
-                            break
-                else:
+                title = find_title(table)
+                if title is None:
+                    raise ValueError
                     title = u"Page {0}".format(page_number)
             try:
                 child.make_resource(name, FormPage, title={'en': title},
