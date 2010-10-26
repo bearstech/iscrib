@@ -41,6 +41,8 @@ ERR_DUPLICATE_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
 ERR_BAD_TYPE = ERROR(u'In schema, line {line}, type "{type}" is unknown.')
 ERR_BAD_REPRESENTATION = ERROR(u'In schema, line {line}, representation '
         u'"{representation}" is unknown.')
+ERR_BAD_LENGTH = ERROR(u'In schema, line {line}, length "{length}" is '
+        u'unknown.')
 ERR_BAD_MANDATORY = ERROR(u'In schema, line {line}, mandatory "{mandatory}" '
         u'is unknown.')
 ERR_BAD_SUM = ERROR(u'In schema, line {line}, in sum, variable "{name}" is '
@@ -124,6 +126,14 @@ class Representation(String):
 
 
 
+class Length(Integer):
+
+    @staticmethod
+    def is_valid(value):
+        return value is None or type(value) is int
+
+
+
 class Mandatory(Boolean):
 
     @staticmethod
@@ -177,7 +187,7 @@ class SchemaHandler(TableFile):
         'type': Type(mandatory=True, title=MSG(u"Type")),
         'representation': Representation(mandatory=True,
             title=MSG(u"Representation")),
-        'length': Integer(default=0, title=MSG(u"Length")),
+        'length': Length(default=0, title=MSG(u"Length")),
         'vocabulary': Unicode(title=MSG(u"Vocabulary")),
         'mandatory': Mandatory(title=MSG(u"Mandatory")),
         'sum': Sum(title=MSG(u"Sum")),
@@ -258,6 +268,12 @@ class Schema(Table):
             if not Representation.is_valid(representation):
                 raise FormatError, ERR_BAD_REPRESENTATION(line=lineno,
                         representation=representation)
+            try:
+                length = get_record_value(record, 'length')
+                if not Length.is_valid(length):
+                    raise ValueError
+            except ValueError:
+                raise FormatError, ERR_BAD_LENGTH(line=lineno, length=length)
             try:
                 mandatory = get_record_value(record, 'mandatory')
             except ValueError:
