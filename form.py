@@ -86,6 +86,15 @@ class FormHandler(FileHandler):
         data = self._raw_fields.get(name)
         if data is None:
             return datatype.get_default()
+        if datatype.multiple:
+            values = []
+            for data in data.split():
+                try:
+                    value = datatype.decode(data)
+                except ValueError:
+                    value = data
+                values.append(value)
+            return values
         try:
             value = datatype.decode(data)
         except ValueError:
@@ -95,11 +104,22 @@ class FormHandler(FileHandler):
 
     def set_value(self, name, value, schema):
         datatype = schema[name]
-        try:
-            data = datatype.encode(value)
-        except ValueError:
-            # XXX
-            data = unicode(value).encode('UTF-8')
+        if datatype.multiple:
+            datas = []
+            for value in value:
+                try:
+                    data = datatype.encode(value)
+                except ValueError:
+                    # XXX
+                    data = unicode(value).encode('UTF-8')
+                datas.append(value)
+            data = ' '.join(datas)
+        else:
+            try:
+                data = datatype.encode(value)
+            except ValueError:
+                # XXX
+                data = unicode(value).encode('UTF-8')
         self._raw_fields[name] = data
         self.set_changed()
 
@@ -311,8 +331,8 @@ class Form(File):
             value = fields[name]
             is_valid = datatype.is_valid(datatype.encode(value))
             is_sum_valid = True
-            if datatype.sum:
-                sum = self.sum(datatype, datatype.sum, schema, fields)
+            if datatype.formula:
+                sum = datatype.sum(datatype.formula, schema, fields)
                 is_sum_valid = (sum is None or sum == value)
             if datatype.is_mandatory:
                 # Vérifie toujours les champs obligatoires

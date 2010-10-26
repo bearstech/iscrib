@@ -45,8 +45,8 @@ ERR_BAD_LENGTH = ERROR(u'In schema, line {line}, length "{length}" is '
         u'unknown.')
 ERR_BAD_MANDATORY = ERROR(u'In schema, line {line}, mandatory "{mandatory}" '
         u'is unknown.')
-ERR_BAD_SUM = ERROR(u'In schema, line {line}, in sum, variable "{name}" is '
-        u'unknown.')
+ERR_BAD_FORMULA = ERROR(u'In schema, line {line}, in sum formula, variable '
+        u'"{name}" is ' u'unknown.')
 ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, dependency variable '
         u'name "{name}" is unknown.')
 
@@ -152,7 +152,7 @@ class Mandatory(Boolean):
 
 
 
-class Sum(String):
+class Formula(String):
 
     @staticmethod
     def decode(data):
@@ -195,7 +195,7 @@ class SchemaHandler(TableFile):
         'length': Length(default=0, title=MSG(u"Length")),
         'vocabulary': Unicode(title=MSG(u"Vocabulary")),
         'mandatory': Mandatory(title=MSG(u"Mandatory")),
-        'sum': Sum(title=MSG(u"Sum")),
+        'formula': Formula(title=MSG(u"formula")),
         'dependency': Dependency(title=MSG(u"Dependent Field"))}
 
 
@@ -223,15 +223,19 @@ class SchemaHandler(TableFile):
             page_numbers.append(page_number)
             # Add to the datatype
             representation = get_record_value(record, 'representation')
+            multiple = representation == 'checkbox'
             length = get_record_value(record, 'length') or representation
             is_mandatory = get_record_value(record, 'mandatory')
-            sum = get_record_value(record, 'sum')
+            formula = get_record_value(record, 'formula')
             dependency = get_record_value(record, 'dependency')
-            schema[name] = datatype(representation=representation,
+            schema[name] = datatype(pages=tuple(page_numbers),
                     title=get_record_value(record, 'title'),
                     help=get_record_value(record, 'help'),
-                    length=str(length), pages=tuple(page_numbers),
-                    is_mandatory=is_mandatory, sum=sum,
+                    representation=representation,
+                    multiple=multiple,
+                    length=str(length),
+                    is_mandatory=is_mandatory,
+                    formula=formula,
                     dependency=dependency)
         return schema, pages
 
@@ -246,7 +250,7 @@ class Schema(Table):
 
     # To import from CSV
     columns = ['name', 'title', 'help', 'type', 'representation', 'length',
-            'vocabulary', 'mandatory', 'sum', 'dependency']
+            'vocabulary', 'mandatory', 'formula', 'dependency']
 
 
     def _load_from_csv(self, body, columns):
@@ -287,9 +291,9 @@ class Schema(Table):
             known_variables.append(name)
         # Second round on references
         for lineno, record in enumerate(handler.get_records()):
-            sum = get_record_value(record, 'sum')
+            formula = get_record_value(record, 'formula')
             try:
-                Sum.is_valid(sum, known_variables)
+                formula.is_valid(formula, known_variables)
             except ValueError, name:
                 raise FormatError, ERR_BAD_SUM(line=lineno,
                         name=name)

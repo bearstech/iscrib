@@ -40,6 +40,18 @@ MSG_EXPORTED_ITAAPY = ERROR(u'To export to a SQL database, contact <a '
         u'href="http://www.itaapy.com/contact">Itaapy</a>')
 
 
+class Generic(String):
+
+    @classmethod
+    def decode(cls, data):
+        if data:
+            return data.strip()
+        return data
+
+
+Multiple = Generic(multiple=True)
+
+
 
 class Form_View(STLForm):
     access = 'is_allowed_to_view'
@@ -114,15 +126,18 @@ class Form_View(STLForm):
             # Can't use "if not/continue" pattern here
             if context.get_form_value(key) is not None:
                 # Do not use form schema, only default String
-                data = context.get_form_value(key).strip()
+                if datatype.multiple:
+                    data = context.get_form_value(key, type=Multiple)
+                else:
+                    data = context.get_form_value(key, type=Generic)
                 try:
                     value = datatype.decode(data)
                 except Exception:
                     # Keep invalid values
                     value = data
                 # Compare sums
-                if datatype.sum:
-                    expected = datatype.sum(datatype.sum, schema,
+                if datatype.formula:
+                    expected = datatype.sum(datatype.formula, schema,
                             # Raw form, not the filtered one
                             context.get_form())
                     # Sum inputed
@@ -189,9 +204,9 @@ class Form_Send(STLForm):
         infos = []
         # Invalid fields
         for name, datatype in resource.get_invalid_fields():
-            if datatype.sum:
-                title = MSG(u"{name} is not equal to {sum}".gettext(
-                    name=name, sum=datatype.sum))
+            if datatype.formula:
+                title = MSG(u"{name} is not equal to {formula}".gettext(
+                    name=name, formula=datatype.formula))
             else:
                 title = MSG(u"{name} invalid").gettext(name=name)
             info = {'number': name,
