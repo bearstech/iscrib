@@ -3,13 +3,6 @@
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
-  <p stl:if="not skip_print">
-    <stl:inline stl:repeat="item menu">
-      <a href="${item/href}" class="${item/active}">${item/title}</a>
-      <stl:inline stl:if="not repeat/item/end">|</stl:inline>
-    </stl:inline>
-  </p>
-
   <form action=";page${page_number}" method="post">
     <input value="${page_number}" name="page_number" type="hidden"/>
     <input value="${field/value}" stl:repeat="field hidden_fields"
@@ -29,10 +22,21 @@
     </p>
     <div class="clear"></div>
 
+    <div id="pages-menu" stl:if="not skip_print">
+      <ul stl:if="menu">
+        <li stl:repeat="item menu" class="${item/class}">
+          <a href="${item/href}">${item/title}</a>
+        </li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+
     <div id="form-tables">
       <table stl:repeat="table tables" class="iscrib-table">
         <tr stl:repeat="row table">
-          <td colspan="${column/colspan}" rowspan="${column/rowspan}" stl:repeat="column row" class="${column/class}">${column/body}</td>
+          <td colspan="${column/colspan}" rowspan="${column/rowspan}"
+            class="${column/class}"
+            stl:repeat="column row">${column/body}</td>
         </tr>
       </table>
       <p>

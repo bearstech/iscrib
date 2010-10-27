@@ -30,15 +30,20 @@ class Skin(BaseSkin):
 
     def get_styles(self, context):
         styles = BaseSkin.get_styles(self, context)
+        # Restore Aruni
+        if '/ui/aruni/style.css' not in styles:
+            styles.insert(-2, '/ui/aruni/style.css')
+        print "styles", styles
         # Replace root style by website style
-        if styles[-1].endswith('theme/style/;download'):
-            del styles[-1]
-        site_root = context.resource.get_site_root()
-        style = site_root.get_resource('theme/style')
-        ac = style.get_access_control()
-        if ac.is_allowed_to_view(context.user, style):
-            styles.append('{0}/;download'.format(
-                context.get_link(style)))
+        if styles[-1] == '/theme/style/;download':
+            site_root = context.resource.get_site_root()
+            if site_root != context.root:
+                style = site_root.get_resource('theme/style')
+                ac = style.get_access_control()
+                if ac.is_allowed_to_view(context.user, style):
+                    del styles[-1]
+                    styles.append('{0}/;download'.format(
+                        context.get_link(style)))
         return styles
 
 
