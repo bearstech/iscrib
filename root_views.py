@@ -17,13 +17,19 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
+from itools.core import merge_dicts
+from itools.datatypes import String
 from itools.gettext import MSG
 from itools.uri import Reference
 from itools.web import BaseView
 
 # Import from ikaaro
+from ikaaro.autoform import TextWidget
+from ikaaro.control_panel import CPEditContactOptions
+from ikaaro.website_views import ContactForm
 
 # Import from iscrib
+from autoform import RecaptchaDatatype, RecaptchaWidget
 from base_views import FrontView
 from workgroup import Workgroup
 
@@ -67,3 +73,40 @@ class Root_Show(FrontView):
             rows.append(row)
         namespace['items'] = rows
         return namespace
+
+
+
+class Root_Contact(ContactForm):
+
+    def get_schema(self, resource, context):
+        schema = super(Root_Contact, self).get_schema(resource, context)
+        return merge_dicts(schema, captcha=RecaptchaDatatype(mandatory=True))
+
+
+    def get_widgets(self, resource, context):
+        widgets = super(Root_Contact, self).get_widgets(resource, context)
+        return widgets[:-1] + [RecaptchaWidget('captcha')]
+
+
+
+class Root_EditContactOptions(CPEditContactOptions):
+    recaptcha_schema = {'recaptcha_private_key': String(mandatory=True),
+            'recaptcha_public_key': String(mandatory=True)}
+    recaptcha_widgets = [TextWidget('recaptcha_private_key',
+            title=MSG(u"ReCaptcha Private Key")),
+        TextWidget('recaptcha_public_key',
+            title=MSG(u"ReCaptcha Public Key"))]
+
+
+    def _get_schema(self, resource, context):
+        schema = super(Root_EditContactOptions, self)._get_schema(resource,
+                context)
+        del schema['captcha_question']
+        del schema['captcha_answer']
+        return merge_dicts(schema, self.recaptcha_schema)
+
+
+    def _get_widgets(self, resource, context):
+        widgets = super(Root_EditContactOptions, self)._get_widgets(resource,
+                context)[:-2]
+        return widgets + self.recaptcha_widgets

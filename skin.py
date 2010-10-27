@@ -33,7 +33,6 @@ class Skin(BaseSkin):
         # Restore Aruni
         if '/ui/aruni/style.css' not in styles:
             styles.insert(-2, '/ui/aruni/style.css')
-        print "styles", styles
         # Replace root style by website style
         if styles[-1] == '/theme/style/;download':
             site_root = context.resource.get_site_root()

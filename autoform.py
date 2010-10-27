@@ -106,12 +106,12 @@ class ImageSelectorWidget(MultilingualWidget, BaseImageSelectorWidget):
 
 # TODO reuse shop modules
 class RecaptchaDatatype(String):
-    # XXX hardcoded
-    private_key = '6LehLb4SAAAAAAfRGDvbQ4BQ270UGE82WFOWuf8o'
 
     @classmethod
     def is_valid(cls, value):
+        print "RecaptchaDatatype.is_valid", repr(value), type(value)
         context = get_context()
+        private_key = context.root.get_property('recaptcha_private_key')
         remote_ip = context.get_remote_ip() or '127.0.0.1'
         # Get Captcha fields
         recaptcha_challenge_field = context.get_form_value(
@@ -120,7 +120,7 @@ class RecaptchaDatatype(String):
             'recaptcha_response_field', type=String)
         # Test if captcha value is valid
         params = urllib.urlencode({
-            'privatekey': cls.private_key,
+            'privatekey': private_key,
             'remoteip' :  remote_ip,
             'challenge':  recaptcha_challenge_field,
             'response' :  recaptcha_response_field})
@@ -132,7 +132,7 @@ class RecaptchaDatatype(String):
                     'Content-type': "application/x-www-form-urlencoded",
                     'User-agent': "reCAPTCHA Python"})
         httpresp = urllib2.urlopen(request)
-        return_values = httpresp.read().splitlines ();
+        return_values = httpresp.read().splitlines();
         httpresp.close();
         return_code = return_values[0]
         return return_code == 'true'
@@ -141,9 +141,8 @@ class RecaptchaDatatype(String):
 
 # TODO reuse shop modules
 class RecaptchaWidget(Widget):
-    # XXX hardcoded
-    public_key = '6LehLb4SAAAAANVJcthfw9cBR-G5SZfw7i2fFEU3'
-    theme = ('red', 'white', 'blackglass', 'clean')
+    title = MSG(u"Please type the two words")
+    themes = ('red', 'white', 'blackglass', 'clean')
 
     template = list(XMLParser(
         """
@@ -166,8 +165,10 @@ class RecaptchaWidget(Widget):
         stl_namespaces))
 
 
-    def get_namespace(self, datatype, value):
+    def theme(self):
+        return self.themes[1]
+
+
+    def public_key(self):
         context = get_context()
-        return {'name': self.name,
-                'public_key': self.public_key,
-                'theme': self.theme}
+        return context.root.get_property('recaptcha_public_key')

@@ -52,14 +52,14 @@ class Workgroup_NewInstance(NewInstance):
             company=Unicode,
             password=String,
             password2=String,
-            recaptcha=RecaptchaDatatype)
+            captcha=RecaptchaDatatype)
     widgets = NewInstance.widgets[:-1]
 
 
     def get_schema(self, resource, context):
         schema = self.schema.copy()
         if context.user is None:
-            for key in ('email', 'password', 'password2', 'recaptcha'):
+            for key in ('email', 'password', 'password2', 'captcha'):
                 schema[key] = schema[key](mandatory=True)
         return schema
 
@@ -74,8 +74,7 @@ class Workgroup_NewInstance(NewInstance):
                 TextWidget('company', title=MSG(u"Company")),
                 PasswordWidget('password', title=MSG(u"Password")),
                 PasswordWidget('password2', title=MSG(u"Repeat Password")),
-                RecaptchaWidget('recaptcha',
-                    title=MSG(u"Please type the two words"))])
+                RecaptchaWidget('captcha')])
         return widgets
 
 

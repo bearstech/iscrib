@@ -27,7 +27,8 @@ from ikaaro.workflow import WorkflowAware
 
 # Import from iscrib
 from base_views import AutomaticEditView, LoginView
-from root_views import Root_View, Root_Show
+from root_views import Root_View, Root_Show, Root_Contact
+from root_views import Root_EditContactOptions
 from workgroup import Workgroup
 
 
@@ -35,7 +36,9 @@ class Root(BaseRoot):
     class_id = 'iScrib'
     class_schema = merge_dicts(BaseRoot.class_schema,
             homepage=XHTMLBody(source='metadata', multilingual=True,
-                parameters_schema = {'lang': String}))
+                parameters_schema = {'lang': String}),
+            recaptcha_private_key=String(source='metadata'),
+            recaptcha_public_key=String(source='metadata'))
     class_views = BaseRoot.class_views + ['show']
     class_skin = 'ui/iscrib'
 
@@ -46,6 +49,8 @@ class Root(BaseRoot):
     view = Root_View()
     edit = AutomaticEditView()
     show = Root_Show()
+    contact = Root_Contact()
+    edit_contact_options = Root_EditContactOptions()
     # Security
     unauthorized = LoginView()
 
