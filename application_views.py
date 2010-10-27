@@ -80,6 +80,7 @@ def find_title(table):
 
 class Application_NewInstance(NewInstance):
     schema = merge_dicts(NewInstance.schema,
+            title=Unicode(mandatory=True),
             file=FileDataType(mandatory=True))
     widgets = (NewInstance.widgets
             + [FileWidget('file', title=MSG(u"ODS File"))])
