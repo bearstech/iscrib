@@ -293,9 +293,9 @@ class Schema(Table):
         for lineno, record in enumerate(handler.get_records()):
             formula = get_record_value(record, 'formula')
             try:
-                formula.is_valid(formula, known_variables)
+                Formula.is_valid(formula, known_variables)
             except ValueError, name:
-                raise FormatError, ERR_BAD_SUM(line=lineno,
+                raise FormatError, ERR_BAD_FORMULA(line=lineno,
                         name=name)
             dependency = get_record_value(record, 'dependency')
             if not Dependency.is_valid(dependency, known_variables):
