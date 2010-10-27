@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-26 09:10+CET\n"
+"POT-Creation-Date: 2010-10-27 09:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "#"
 msgstr ""
 
-#: ../widgets.py:103
+#: ../widgets.py:93
 msgid "$('[name={name}]').attr('disabled', {disabled}).{method}('disabled');"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "%d"
 msgstr ""
 
-#: ../form.py:380
+#: ../form.py:410
 msgid "'%s' = '%s'"
 msgstr ""
 
@@ -98,6 +98,10 @@ msgstr ""
 msgid "-"
 msgstr ""
 
+#: ../schema.py:127 ../schema.py:128
+msgid "."
+msgstr ""
+
 #: ../formpage.py:178
 msgid "/"
 msgstr ""
@@ -106,7 +110,7 @@ msgstr ""
 msgid "/>"
 msgstr ""
 
-#: ../schema.py:90
+#: ../schema.py:92
 msgid "00000"
 msgstr ""
 
@@ -114,7 +118,7 @@ msgstr ""
 msgid "100%"
 msgstr ""
 
-#: ../widgets.py:188
+#: ../widgets.py:164
 msgid "15"
 msgstr ""
 
@@ -124,10 +128,6 @@ msgstr ""
 
 #: ../widgets.py:55
 msgid "</"
-msgstr ""
-
-#: ../widgets.py:143 ../widgets.py:147
-msgid "</span>"
 msgstr ""
 
 #: ../ui/root/show.xml.en:15
@@ -173,11 +173,6 @@ msgid ""
 "and Conditions</g> | <g id='21'>Download OpenOffice.org</g>"
 msgstr ""
 
-#: ../ui/form/view.xml.en:8
-msgctxt "link"
-msgid "<g id='2'>${item/title}</g>  <g id='3'>|</g>"
-msgstr ""
-
 #: ../ui/application/register.xml.en:18
 msgctxt "emphasis"
 msgid ""
@@ -193,11 +188,11 @@ msgid ""
 "${password/error}<x id='25'/></g>"
 msgstr ""
 
-#: ../ui/form/view.xml.en:19
+#: ../ui/form/view.xml.en:12
 msgctxt "link"
 msgid ""
-"<g id='6'>Input Control</g>  <g id='7'>Print this page</g>  <g id='8'>Print "
-"Form</g>  <g id='9'>Save</g>"
+"<g id='3'>Input Control</g>  <g id='4'>Print this page</g>  <g id='5'>Print "
+"Form</g>  <g id='6'>Save</g>"
 msgstr ""
 
 #: ../ui/login.xml.en:27
@@ -216,18 +211,10 @@ msgid ""
 "<x id='18'/></g>"
 msgstr ""
 
-#: ../widgets.py:265
+#: ../widgets.py:241
 msgid ""
 "<img src=\"/ui/icons/16x16/help.png\" title=\"{help}\" class=\"online-help\"/"
 ">"
-msgstr ""
-
-#: ../widgets.py:142
-msgid "<span class=\"badtype\" title=\"Bad value\">"
-msgstr ""
-
-#: ../widgets.py:146
-msgid "<span class=\"mandatory\" title=\"Mandatory field\">"
 msgstr ""
 
 #: ../widgets.py:51
@@ -257,11 +244,11 @@ msgctxt "heading"
 msgid "Application Status"
 msgstr ""
 
-#: ../widgets.py:168 ../widgets.py:224
+#: ../widgets.py:144 ../widgets.py:200
 msgid "Bad value"
 msgstr ""
 
-#: ../schema.py:88
+#: ../schema.py:90
 msgid "Boolean"
 msgstr ""
 
@@ -322,19 +309,19 @@ msgstr ""
 msgid "Creation Date"
 msgstr ""
 
-#: ../schema.py:94
+#: ../schema.py:96
 msgid "DD/MM/YYYY"
 msgstr ""
 
-#: ../schema.py:89
+#: ../schema.py:91
 msgid "Decimal"
 msgstr ""
 
-#: ../schema.py:184
+#: ../schema.py:199
 msgid "Dependent Field"
 msgstr ""
 
-#: ../form_views.py:263
+#: ../form_views.py:279
 msgid "Download form"
 msgstr ""
 
@@ -389,7 +376,7 @@ msgstr ""
 msgid "Expression"
 msgstr ""
 
-#: ../form.py:374
+#: ../form.py:404
 msgid "False"
 msgstr ""
 
@@ -407,7 +394,7 @@ msgctxt "legend"
 msgid "Forgotten Password"
 msgstr ""
 
-#: ../application_views.py:190 ../application_views.py:288 ../form.py:110
+#: ../application_views.py:190 ../application_views.py:288 ../form.py:130
 msgid "Form"
 msgstr ""
 
@@ -420,11 +407,11 @@ msgctxt "heading"
 msgid "Form State:"
 msgstr ""
 
-#: ../schema.py:91
+#: ../schema.py:93
 msgid "HH:MM"
 msgstr ""
 
-#: ../schema.py:92
+#: ../schema.py:94
 msgid "HHH:MM"
 msgstr ""
 
@@ -456,15 +443,19 @@ msgstr ""
 msgid "In controls, line {line}, variable is missing."
 msgstr ""
 
-#: ../schema.py:48
+#: ../schema.py:50
 msgid "In schema, line {line}, dependency variable name \"{name}\" is unknown."
 msgstr ""
 
-#: ../schema.py:46
-msgid "In schema, line {line}, in sum, variable \"{name}\" is unknown."
+#: ../schema.py:48
+msgid "In schema, line {line}, in sum formula, variable \"{name}\" is unknown."
 msgstr ""
 
 #: ../schema.py:44
+msgid "In schema, line {line}, length \"{length}\" is unknown."
+msgstr ""
+
+#: ../schema.py:46
 msgid "In schema, line {line}, mandatory \"{mandatory}\" is unknown."
 msgstr ""
 
@@ -499,11 +490,11 @@ msgstr ""
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:175
+#: ../form_views.py:191
 msgid "Input Control"
 msgstr ""
 
-#: ../schema.py:93
+#: ../schema.py:95
 msgid "Integer"
 msgstr ""
 
@@ -515,7 +506,7 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: ../schema.py:180
+#: ../schema.py:195
 msgid "Length"
 msgstr ""
 
@@ -523,7 +514,7 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-#: ../schema.py:98
+#: ../schema.py:100
 msgid "List of values"
 msgstr ""
 
@@ -551,7 +542,7 @@ msgctxt "heading"
 msgid "Lost Password"
 msgstr ""
 
-#: ../schema.py:95
+#: ../schema.py:97
 msgid "MM/YYYY"
 msgstr ""
 
@@ -559,7 +550,7 @@ msgstr ""
 msgid "Main Variable"
 msgstr ""
 
-#: ../application_views.py:185 ../form.py:124
+#: ../application_views.py:185 ../form.py:144
 msgid "Manage your Data Collection Application"
 msgstr ""
 
@@ -567,11 +558,11 @@ msgstr ""
 msgid "Manage your client space"
 msgstr ""
 
-#: ../schema.py:182
+#: ../schema.py:197
 msgid "Mandatory"
 msgstr ""
 
-#: ../widgets.py:172 ../widgets.py:228
+#: ../widgets.py:148 ../widgets.py:204
 msgid "Mandatory field"
 msgstr ""
 
@@ -655,7 +646,7 @@ msgctxt "button"
 msgid "Ok"
 msgstr ""
 
-#: ../schema.py:176
+#: ../schema.py:191
 msgid "Online Help"
 msgstr ""
 
@@ -699,13 +690,13 @@ msgctxt "emphasis"
 msgid "Please verify the consistency of these data."
 msgstr ""
 
-#: ../ui/form/view.xml.en:21 ../ui/form/view.xml.en:24
+#: ../ui/form/view.xml.en:14 ../ui/form/view.xml.en:17
 #: ../ui/form/send.xml.en:9
 msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr ""
 
-#: ../form_views.py:296
+#: ../form_views.py:312
 msgid "Print form"
 msgstr ""
 
@@ -748,16 +739,16 @@ msgstr ""
 msgid "Repeat your password"
 msgstr ""
 
-#: ../schema.py:179
+#: ../schema.py:194
 msgid "Representation"
 msgstr ""
 
-#: ../ui/form/view.xml.en:39
+#: ../ui/form/view.xml.en:43
 msgctxt "button"
 msgid "Save"
 msgstr ""
 
-#: ../application_views.py:107 ../schema.py:227
+#: ../application_views.py:107 ../schema.py:246
 msgid "Schema"
 msgstr ""
 
@@ -796,7 +787,7 @@ msgstr ""
 msgid "Source ODS File"
 msgstr ""
 
-#: ../form.py:136
+#: ../form.py:156
 msgid "Start filling"
 msgstr ""
 
@@ -804,19 +795,15 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: ../schema.py:96
+#: ../schema.py:98
 msgid "String"
-msgstr ""
-
-#: ../schema.py:183
-msgid "Sum"
 msgstr ""
 
 #: ../application_views.py:153
 msgid "Test Form"
 msgstr ""
 
-#: ../schema.py:97
+#: ../schema.py:99
 msgid "Text"
 msgstr ""
 
@@ -866,7 +853,7 @@ msgid ""
 "          required"
 msgstr ""
 
-#: ../schema.py:175 ../controls.py:98
+#: ../schema.py:190 ../controls.py:98
 msgid "Title"
 msgstr ""
 
@@ -886,11 +873,11 @@ msgid ""
 "\">Itaapy</a>"
 msgstr ""
 
-#: ../form.py:372
+#: ../form.py:402
 msgid "True"
 msgstr ""
 
-#: ../schema.py:177
+#: ../schema.py:192
 msgid "Type"
 msgstr ""
 
@@ -917,7 +904,7 @@ msgctxt "table cell"
 msgid "Value"
 msgstr ""
 
-#: ../schema.py:174
+#: ../schema.py:189
 msgid "Variable"
 msgstr ""
 
@@ -925,7 +912,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../schema.py:181
+#: ../schema.py:196
 msgid "Vocabulary"
 msgstr ""
 
@@ -1062,7 +1049,7 @@ msgstr ""
 msgid "Your e-mail address"
 msgstr ""
 
-#: ../form_views.py:268
+#: ../form_views.py:284
 msgid "Your form is not finished yet."
 msgstr ""
 
@@ -1074,7 +1061,7 @@ msgstr ""
 msgid "Your form was successfully sent."
 msgstr ""
 
-#: ../utils.py:72 ../form.py:355
+#: ../utils.py:72 ../form.py:385
 msgid "["
 msgstr ""
 
@@ -1086,36 +1073,35 @@ msgstr ""
 msgid "addClass"
 msgstr ""
 
-#: ../widgets.py:117 ../widgets.py:169 ../widgets.py:223
+#: ../widgets.py:107 ../widgets.py:145 ../widgets.py:199
 msgid "badtype"
 msgstr ""
 
-#: ../widgets.py:132
+#: ../widgets.py:125
 msgid "checkbox"
 msgstr ""
 
-#: ../widgets.py:79 ../widgets.py:136
+#: ../widgets.py:79
 msgid "checked"
 msgstr ""
 
-#: ../widgets.py:82 ../widgets.py:117 ../widgets.py:120 ../widgets.py:139
-#: ../widgets.py:169 ../widgets.py:173 ../widgets.py:176 ../widgets.py:184
-#: ../widgets.py:206 ../widgets.py:220 ../widgets.py:223 ../widgets.py:227
-#: ../widgets.py:231
+#: ../widgets.py:82 ../widgets.py:107 ../widgets.py:110 ../widgets.py:145
+#: ../widgets.py:149 ../widgets.py:152 ../widgets.py:160 ../widgets.py:182
+#: ../widgets.py:196 ../widgets.py:199 ../widgets.py:203 ../widgets.py:207
 msgid "class"
 msgstr ""
 
-#: ../widgets.py:189
+#: ../widgets.py:165
 msgid "cols"
 msgstr ""
 
-#: ../widgets.py:81 ../widgets.py:82 ../widgets.py:138 ../widgets.py:139
-#: ../widgets.py:175 ../widgets.py:176 ../widgets.py:230 ../widgets.py:231
+#: ../widgets.py:81 ../widgets.py:82 ../widgets.py:151 ../widgets.py:152
+#: ../widgets.py:206 ../widgets.py:207
 msgid "disabled"
 msgstr ""
 
-#: ../widgets.py:72 ../widgets.py:113 ../widgets.py:121 ../widgets.py:128
-#: ../widgets.py:156 ../widgets.py:186 ../widgets.py:205
+#: ../widgets.py:72 ../widgets.py:103 ../widgets.py:111 ../widgets.py:132
+#: ../widgets.py:162 ../widgets.py:181
 msgid "div"
 msgstr ""
 
@@ -1127,8 +1113,12 @@ msgstr ""
 msgid "field-label"
 msgstr ""
 
-#: ../widgets.py:76 ../widgets.py:133 ../widgets.py:211
+#: ../widgets.py:76 ../widgets.py:187
 msgid "field_{name}"
+msgstr ""
+
+#: ../schema.py:198
+msgid "formula"
 msgstr ""
 
 #: ../formpage.py:212
@@ -1143,24 +1133,23 @@ msgstr ""
 msgid "iScrib Workgroup"
 msgstr ""
 
-#: ../widgets.py:76 ../widgets.py:133 ../widgets.py:211
+#: ../widgets.py:76 ../widgets.py:187
 msgid "id"
 msgstr ""
 
-#: ../widgets.py:107 ../widgets.py:140 ../widgets.py:209
+#: ../widgets.py:97 ../widgets.py:185
 msgid "input"
 msgstr ""
 
-#: ../widgets.py:120 ../widgets.py:173 ../widgets.py:227
+#: ../widgets.py:110 ../widgets.py:149 ../widgets.py:203
 msgid "mandatory"
 msgstr ""
 
-#: ../widgets.py:214
+#: ../widgets.py:190
 msgid "maxlength"
 msgstr ""
 
-#: ../widgets.py:77 ../widgets.py:134 ../widgets.py:165 ../widgets.py:188
-#: ../widgets.py:212
+#: ../widgets.py:77 ../widgets.py:141 ../widgets.py:164 ../widgets.py:188
 msgid "name"
 msgstr ""
 
@@ -1173,23 +1162,23 @@ msgstr ""
 msgid "null"
 msgstr ""
 
-#: ../widgets.py:220
+#: ../widgets.py:196
 msgid "num"
 msgstr ""
 
-#: ../widgets.py:102
+#: ../widgets.py:92
 msgid "onchange"
 msgstr ""
 
-#: ../widgets.py:163
+#: ../widgets.py:139
 msgid "option"
 msgstr ""
 
-#: ../widgets.py:75
+#: ../widgets.py:118
 msgid "radio"
 msgstr ""
 
-#: ../widgets.py:184 ../widgets.py:206
+#: ../widgets.py:160 ../widgets.py:182
 msgid "readonly"
 msgstr ""
 
@@ -1197,7 +1186,7 @@ msgstr ""
 msgid "removeClass"
 msgstr ""
 
-#: ../widgets.py:188
+#: ../widgets.py:164
 msgid "rows"
 msgstr ""
 
@@ -1209,35 +1198,35 @@ msgstr ""
 msgid "section-header"
 msgstr ""
 
-#: ../widgets.py:177
+#: ../widgets.py:153
 msgid "select"
 msgstr ""
 
-#: ../widgets.py:162
+#: ../widgets.py:138
 msgid "selected"
 msgstr ""
 
-#: ../widgets.py:213
+#: ../widgets.py:189
 msgid "size"
 msgstr ""
 
-#: ../widgets.py:184
+#: ../widgets.py:160
 msgid "style"
 msgstr ""
 
-#: ../widgets.py:216
+#: ../widgets.py:192
 msgid "tabindex"
 msgstr ""
 
-#: ../widgets.py:210
+#: ../widgets.py:186
 msgid "text"
 msgstr ""
 
-#: ../widgets.py:192
+#: ../widgets.py:168
 msgid "textarea"
 msgstr ""
 
-#: ../widgets.py:168 ../widgets.py:172 ../widgets.py:224 ../widgets.py:228
+#: ../widgets.py:144 ../widgets.py:148 ../widgets.py:200 ../widgets.py:204
 msgid "title"
 msgstr ""
 
@@ -1245,28 +1234,28 @@ msgstr ""
 msgid "true"
 msgstr ""
 
-#: ../widgets.py:75 ../widgets.py:132 ../widgets.py:210
+#: ../widgets.py:75 ../widgets.py:186
 msgid "type"
 msgstr ""
 
-#: ../widgets.py:77 ../widgets.py:134 ../widgets.py:160 ../widgets.py:212
+#: ../widgets.py:77 ../widgets.py:136 ../widgets.py:188
 msgid "value"
 msgstr ""
 
-#: ../widgets.py:184
+#: ../widgets.py:160
 msgid "white-space: pre"
 msgstr ""
 
-#: ../form.py:250
+#: ../form.py:270
 msgid "{application}: {form}"
 msgstr ""
 
-#: ../form_views.py:196
+#: ../form_views.py:212
 msgid "{name} invalid"
 msgstr ""
 
-#: ../form_views.py:193
-msgid "{name} is not equal to {sum}"
+#: ../form_views.py:209
+msgid "{name} is not equal to {formula}"
 msgstr ""
 
 #: ../application_views.py:403
