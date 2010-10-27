@@ -109,8 +109,9 @@ class RecaptchaDatatype(String):
 
     @classmethod
     def is_valid(cls, value):
-        print "RecaptchaDatatype.is_valid", repr(value), type(value)
         context = get_context()
+        if getattr(context, 'recaptcha_return_code', None) == 'true':
+            return True
         private_key = context.root.get_property('recaptcha_private_key')
         remote_ip = context.get_remote_ip() or '127.0.0.1'
         # Get Captcha fields
@@ -118,6 +119,9 @@ class RecaptchaDatatype(String):
             'recaptcha_challenge_field', type=String)
         recaptcha_response_field = context.get_form_value(
             'recaptcha_response_field', type=String)
+        if not recaptcha_response_field.strip():
+            # Don't bother to contact server
+            return False
         # Test if captcha value is valid
         params = urllib.urlencode({
             'privatekey': private_key,
@@ -134,7 +138,7 @@ class RecaptchaDatatype(String):
         httpresp = urllib2.urlopen(request)
         return_values = httpresp.read().splitlines();
         httpresp.close();
-        return_code = return_values[0]
+        context.recaptcha_return_code = return_code = return_values[0]
         return return_code == 'true'
 
 

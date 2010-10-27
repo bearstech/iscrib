@@ -181,7 +181,9 @@ button, .button {
   padding: 5px;
   padding-left: 24px !important;
   text-decoration: none;
+  box-shadow: 0 0 3px #CCCCCC;
   -moz-box-shadow: 0 0 3px #CCCCCC;
+  -webkit-box-shadow: 0 0 3px #CCCCCC;
 }
 
 .button-control {
@@ -246,4 +248,32 @@ button, .button {
   background: #fff;
   color: #339;
   border-color: #339;
+}
+
+#contact-form {
+  border-collapse: collapse;
+  background: url(images/contact-bg.png) top right repeat-y;
+  box-shadow: 5px 5px 5px 0 #777;
+  -moz-box-shadow: 5px 5px 5px 0 #777;
+  -webkit-box-shadow: 5px 5px 5px 0 #777;
+}
+#contact-form h2 {
+  border: 0;
+  color: #777;
+  margin: 0;
+  padding: 0;
+}
+#contact-form td {
+  vertical-align: top;
+  padding: 5px;
+}
+#contact-form p {
+  margin: 0;
+}
+#contact-form input,
+#contact-form textarea {
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }

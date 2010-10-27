@@ -77,6 +77,7 @@ class Root_Show(FrontView):
 
 
 class Root_Contact(ContactForm):
+    template = '/ui/iscrib/root/contact.xml'
 
     def get_schema(self, resource, context):
         schema = super(Root_Contact, self).get_schema(resource, context)
