@@ -103,8 +103,13 @@ class Workgroup_NewInstance(NewInstance):
 }
 
 /* Form titles / Titres dans les formulaires */
-.iscrib-table td.section-header h4 { background-color:#339; }
-.iscrib-table td.section-header h2 { background-color:#339; }""")
+.iscrib-table td.section-header h2,
+.iscrib-table td.section-header h3,
+.iscrib-table td.section-header h4 {
+  color: #fff;
+  background-color: #339;
+}
+""")
         # Create the user if necessary
         user_was_created = False
         user = context.user
@@ -308,7 +313,7 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
         elif name == 'style':
             style = resource.get_resource('theme/style')
             # FIXME links
-            style.handler.set_data(form['style'])
+            style.handler.load_state_from_string(form['style'])
             return False
         return super(Workgroup_Edit, self).set_value(resource, context, name,
                 form)
