@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-29 15:10+CET\n"
+"POT-Creation-Date: 2010-10-29 16:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,25 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../autoform.py:103
+#: ../autoform.py:88
 msgid ""
 "\n"
 "    <input type=\"text\" id=\"selector-${id}\" size=\"${size}\" name="
 "\"${name}\"\n"
-"      value=\"${value}\" />\n"
+"      value=\"${value}\"/>\n"
 "    <button id=\"selector-button-${id}\" class=\"button-selector\"\n"
-"      name=\"selector_button_${name}\"\n"
 "      onclick=\"return popup(';${action}?target_id=selector-${id}&amp;"
-"mode=input', 640, 480);\">Browse...</button>\n"
+"mode=input', 640, 480);\"\n"
+"      name=\"selector_button_${name}\">Browse...</button>\n"
 "    <button id=\"erase-button-${id}\" class=\"button-delete\"\n"
-"    name=\"erase_button_${name}\"\n"
-"      onclick=\"$('#selector-${id}').attr('value', ''); return false"
-"\">Erase</button>\n"
+"      onclick=\"$('#selector-${id}').attr('value', ''); return false\"\n"
+"      name=\"erase_button_${name}\">Erase</button>\n"
 "    <br/>\n"
 "    ${workflow_state}\n"
 "    <br/>\n"
 "    <img src=\"${value}/;thumb?width=${width}&amp;height=${height}\"\n"
 "    stl:if=\"value\"/>"
+msgstr ""
+
+#: ../application_views.py:177
+msgid ""
+"\n"
+"<div id=\"choose-format\">\n"
+"  <span><a href=\"#\" title=\"Close\"\n"
+"    onclick=\"$('#choose-format').hide()\">X</a></span>\n"
+"  <ul>\n"
+"    <li>Download <a href=\";export\">ODS Version</a></li>\n"
+"    <li>Download XLS Version (soon)</li>\n"
+"  </ul>\n"
+"</div>\n"
+"              "
 msgstr ""
 
 #: ../formpage.py:162 ../formpage.py:225
@@ -705,7 +718,7 @@ msgid ""
 "<{application_url}>.\r\n"
 msgstr ""
 
-#: ../autoform.py:148
+#: ../autoform.py:133
 msgid "Please type the two words"
 msgstr ""
 
@@ -1102,11 +1115,11 @@ msgstr ""
 msgid "Your form was successfully sent."
 msgstr ""
 
-#: ../utils.py:80 ../form.py:385
+#: ../utils.py:78 ../form.py:385
 msgid "["
 msgstr ""
 
-#: ../utils.py:83
+#: ../utils.py:81
 msgid "]"
 msgstr ""
 

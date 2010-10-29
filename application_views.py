@@ -165,9 +165,9 @@ class Application_Menu(IconsView):
               'onclick': None},
              {'icon': '/ui/iscrib/images/export48.png',
               'title': MSG(u"Export Collected Data"),
-              'description': MSG("""
+              'description': MSG(u"""
 <div id="choose-format">
-  <span><a href="#" title="Hide"
+  <span><a href="#" title="Close"
     onclick="$('#choose-format').hide()">X</a></span>
   <ul>
     <li>Download <a href=";export">ODS Version</a></li>

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-29 15:10+CET\n"
+"POT-Creation-Date: 2010-10-29 16:10+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,20 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../autoform.py:103
+#: ../autoform.py:88
 msgid ""
 "\n"
 "    <input type=\"text\" id=\"selector-${id}\" size=\"${size}\" name="
 "\"${name}\"\n"
-"      value=\"${value}\" />\n"
+"      value=\"${value}\"/>\n"
 "    <button id=\"selector-button-${id}\" class=\"button-selector\"\n"
-"      name=\"selector_button_${name}\"\n"
 "      onclick=\"return popup(';${action}?target_id=selector-${id}&amp;"
-"mode=input', 640, 480);\">Browse...</button>\n"
+"mode=input', 640, 480);\"\n"
+"      name=\"selector_button_${name}\">Browse...</button>\n"
 "    <button id=\"erase-button-${id}\" class=\"button-delete\"\n"
-"    name=\"erase_button_${name}\"\n"
-"      onclick=\"$('#selector-${id}').attr('value', ''); return false"
-"\">Erase</button>\n"
+"      onclick=\"$('#selector-${id}').attr('value', ''); return false\"\n"
+"      name=\"erase_button_${name}\">Erase</button>\n"
 "    <br/>\n"
 "    ${workflow_state}\n"
 "    <br/>\n"
@@ -39,20 +38,43 @@ msgstr ""
 "\n"
 "    <input type=\"text\" id=\"selector-${id}\" size=\"${size}\" name="
 "\"${name}\"\n"
-"      value=\"${value}\" />\n"
+"      value=\"${value}\"/>\n"
 "    <button id=\"selector-button-${id}\" class=\"button-selector\"\n"
-"      name=\"selector_button_${name}\"\n"
 "      onclick=\"return popup(';${action}?target_id=selector-${id}&amp;"
-"mode=input', 640, 480);\">Parcourir...</button>\n"
+"mode=input', 640, 480);\"\n"
+"      name=\"selector_button_${name}\">Parcourir...</button>\n"
 "    <button id=\"erase-button-${id}\" class=\"button-delete\"\n"
-"    name=\"erase_button_${name}\"\n"
-"      onclick=\"$('#selector-${id}').attr('value', ''); return false"
-"\">Effacer</button>\n"
+"      onclick=\"$('#selector-${id}').attr('value', ''); return false\"\n"
+"      name=\"erase_button_${name}\">Effacer</button>\n"
 "    <br/>\n"
 "    ${workflow_state}\n"
 "    <br/>\n"
 "    <img src=\"${value}/;thumb?width=${width}&amp;height=${height}\"\n"
 "    stl:if=\"value\"/>"
+
+#: ../application_views.py:177
+msgid ""
+"\n"
+"<div id=\"choose-format\">\n"
+"  <span><a href=\"#\" title=\"Close\"\n"
+"    onclick=\"$('#choose-format').hide()\">X</a></span>\n"
+"  <ul>\n"
+"    <li>Download <a href=\";export\">ODS Version</a></li>\n"
+"    <li>Download XLS Version (soon)</li>\n"
+"  </ul>\n"
+"</div>\n"
+"              "
+msgstr ""
+"\n"
+"<div id=\"choose-format\">\n"
+"  <span><a href=\"#\" title=\"Fermer\"\n"
+"    onclick=\"$('#choose-format').hide()\">X</a></span>\n"
+"  <ul>\n"
+"    <li>Télécharger la <a href=\";export\">version ODS</a></li>\n"
+"    <li>Télécharger la version XLS (prochainement)</li>\n"
+"  </ul>\n"
+"</div>\n"
+"              "
 
 #: ../formpage.py:162 ../formpage.py:225
 msgid " centered"
@@ -153,12 +175,9 @@ msgid "</"
 msgstr ""
 
 #: ../ui/root/contact.xml.en:22
-#, fuzzy
 msgctxt "label"
 msgid "<g id='1'>${widget/title}</g>  <g id='2'>(?)</g>"
-msgstr ""
-"<g id='10'>${user/title}</g>  <g id='11'>Déconnexion</g>  <g id='12'>Ajouter "
-"du contenu</g>"
+msgstr "<g id='1'>${widget/title}</g>  <g id='2'>(?)</g>"
 
 #: ../ui/root/show.xml.en:15
 msgctxt "table cell"
@@ -233,10 +252,9 @@ msgstr ""
 "${password/error}<x id='25'/></g>"
 
 #: ../ui/icons_view.xml.en:17
-#, fuzzy
 msgctxt "link"
 msgid "<g id='3'>${item/title}</g>  <x id='4'/> ${item/description}"
-msgstr "<g id='1'><x id='2'/></g><x id='3'/>  <g id='4'>${item/title}</g>"
+msgstr "<g id='3'>${item/title}</g>  <x id='4'/> ${item/description}"
 
 #: ../ui/form/view.xml.en:12
 msgctxt "link"
@@ -248,10 +266,9 @@ msgstr ""
 "id='5'>Imprimer le formulaire</g>  <g id='6'>Enregistrer</g>"
 
 #: ../ui/root/contact.xml.en:42
-#, fuzzy
 msgctxt "button"
 msgid "<g id='6'>${action/title}</g>  <g id='7'>${action/title}</g>"
-msgstr "<g id='1'><x id='2'/></g><x id='3'/>  <g id='4'>${item/title}</g>"
+msgstr "<g id='6'>${action/title}</g>  <g id='7'>${action/title}</g>"
 
 #: ../ui/login.xml.en:27
 msgctxt "label"
@@ -764,7 +781,7 @@ msgstr ""
 "Merci de remplir le formulaire \"{application_title}\" disponible ici :\r\n"
 "<{application_url}>.\r\n"
 
-#: ../autoform.py:148
+#: ../autoform.py:133
 msgid "Please type the two words"
 msgstr "Veuillez saisir les deux mots"
 
@@ -957,12 +974,9 @@ msgstr ""
 "                  obligatoire"
 
 #: ../ui/root/contact.xml.en:32
-#, fuzzy
 msgctxt "title attribute"
 msgid "This field is required"
-msgstr ""
-"Champ\n"
-"                  obligatoire"
+msgstr "Champ obligatoire"
 
 #: ../schema.py:190 ../controls.py:98
 msgid "Title"
@@ -1204,11 +1218,11 @@ msgstr "Votre formulaire a bien été exporté."
 msgid "Your form was successfully sent."
 msgstr "Votre formulaire a bien été envoyé."
 
-#: ../utils.py:80 ../form.py:385
+#: ../utils.py:78 ../form.py:385
 msgid "["
 msgstr ""
 
-#: ../utils.py:83
+#: ../utils.py:81
 msgid "]"
 msgstr ""
 
