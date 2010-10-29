@@ -54,12 +54,14 @@
         </li>
       </ul>
       <!-- Logo -->
-      <a href="/" id="logo-title" stl:if="not logo_href">
-        ${website_title}
-      </a>
-      <a href="${website_href}" stl:if="logo_href" id="logo">
-        <img src="${logo_href}"/>
-      </a>
+      <div id="logo">
+        <a href="/" id="logo-title" stl:if="not logo_href">
+          ${website_title}
+        </a>
+        <a href="${website_href}" stl:if="logo_href" id="logo-image">
+          <img src="${logo_href}"/>
+        </a>
+      </div>
       <div class="clear" />
     </div>
 

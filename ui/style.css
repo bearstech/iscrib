@@ -281,3 +281,10 @@ button, .button {
 #choose-format {
   display: none;
 }
+
+#header #logo {
+  bottom: 3px;
+}
+#header #logo-title {
+  font-size: 2em;
+}
