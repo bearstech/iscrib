@@ -36,7 +36,7 @@ from itools.web import INFO, ERROR, BaseView
 
 # Import from ikaaro
 from ikaaro.access import is_admin
-from ikaaro.autoform import FileWidget, TextWidget
+from ikaaro.autoform import FileWidget, TextWidget, make_stl_template
 from ikaaro.datatypes import FileDataType
 from ikaaro.file import ODS
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
@@ -157,14 +157,23 @@ class Application_NewInstance(NewInstance):
 
 
 class Application_Menu(IconsView):
+    template = '/ui/iscrib/icons_view.xml'
     items = [{'icon': '/ui/iscrib/images/register48.png',
               'title': MSG(u"Register Users"),
               'description': None,
               'url': ';register'},
              {'icon': '/ui/iscrib/images/export48.png',
               'title': MSG(u"Export Collected Data"),
-              'description': None,
-              'url': ';export'},
+              'description': make_stl_template("""
+<div id="choose-format">
+<ul>
+  <li>Download <a href=";export_ods">ODS Version</a></li>
+  <li>Download <a href=";export_xls">XLS Version</a></li>
+</ul>
+</div>
+              """),
+              'url': '#',
+              'onclick': 'javascript:$("#choose-format").show(); null;'},
              {'icon': '/ui/iscrib/images/form48.png',
               'title': MSG(u"Show Test Form"),
               'description': None,

@@ -277,3 +277,7 @@ button, .button {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
+
+#choose-format {
+  display: none;
+}
