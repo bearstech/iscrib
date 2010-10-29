@@ -27,8 +27,7 @@ from socket import gethostname
 
 
 # XXX heuristic
-def is_production():
-    return gethostname() == 'fidel'
+is_production = (gethostname() == 'fidel')
 
 
 class ProgressMeter(object):
