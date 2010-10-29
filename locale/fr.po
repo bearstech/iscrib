@@ -780,8 +780,8 @@ msgstr "Impression du formulaire"
 #: ../workgroup.py:42
 msgid "Private workgroup with logo, users and collection applications"
 msgstr ""
-"créez votre propre espace privé pour créer vos applications de collecte que "
-"vous pourrez soumettre aux personnes de votre choix."
+"Créez votre espace client où vous pourrez ajouter vos applications de "
+"collecte et les soumettre aux personnes de votre choix."
 
 #: ../root_views.py:97
 msgid "ReCaptcha Private Key"
