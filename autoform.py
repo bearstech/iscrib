@@ -74,13 +74,13 @@ class ImagePathDataType(PathDataType):
 class ImageSelectorWidget(BaseImageSelectorWidget):
     template = MSG(u"""
     <input type="text" id="selector-${id}" size="${size}" name="${name}"
-      value="${value}" />
+      value="${value}"/>
     <button id="selector-button-${id}" class="button-selector"
-      name="selector_button_${name}"
-      onclick="return popup(';${action}?target_id=selector-${id}&amp;mode=input', 640, 480);">Browse...</button>
+      onclick="return popup(';${action}?target_id=selector-${id}&amp;mode=input', 640, 480);"
+      name="selector_button_${name}">Browse...</button>
     <button id="erase-button-${id}" class="button-delete"
-    name="erase_button_${name}"
-      onclick="$('#selector-${id}').attr('value', ''); return false">Erase</button>
+      onclick="$('#selector-${id}').attr('value', ''); return false"
+      name="erase_button_${name}">Erase</button>
     <br/>
     ${workflow_state}
     <br/>
