@@ -16,6 +16,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from the Standard Library
+from socket import gethostname
+
 # Import from itools
 
 # Import from ikaaro
@@ -24,9 +27,9 @@ from ikaaro.autoform import XHTMLBody
 # Import from iscrib
 
 
+# XXX heuristic
 def is_production():
-    hostname = gethostname()
-    return hostname == 'fidel'
+    return gethostname() == 'fidel'
 
 
 class ProgressMeter(object):
