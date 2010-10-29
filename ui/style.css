@@ -280,7 +280,13 @@ button, .button {
 
 #choose-format {
   display: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
+#choose-format span {
+  float: right;
 
 #header #logo {
   bottom: 3px;
