@@ -89,20 +89,22 @@ class Workgroup_NewInstance(NewInstance):
         # Set neutral banner
         theme = workgroup.get_resource('theme')
         style = theme.get_resource('style')
-        style.handler.set_data("""/* CSS */
-#header {
-  min-height: 90px;
-  background-color: #ccc;
-  background-position: right;
-  background-repeat: no-repeat;
+        style.handler.load_state_from_string("""/* Header colors / Couleurs de la bannière */
+#header { background-color: #ccc; }
+#header #links a, #header #languages a { color: #333; }
+#header #logo-title { color: #000; }
+
+/* Form pages menu / Menu des pages du formulaire */
+#pages-menu { border-bottom: 1px solid #339; }
+#pages-menu ul li a { background: #339; }
+#pages-menu ul li a:hover, #pages-menu ul li.active a {
+  color: #339;
+  border-color: #339;
 }
-#header #links a,
-#header #languages a {
-  color: #333;
-}
-#header #logo-title {
-  color: #000;
-}""")
+
+/* Form titles / Titres dans les formulaires */
+.iscrib-table td.section-header h4 { background-color:#339; }
+.iscrib-table td.section-header h2 { background-color:#339; }""")
         # Create the user if necessary
         user_was_created = False
         user = context.user
