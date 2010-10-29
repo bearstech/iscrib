@@ -22,7 +22,6 @@ from socket import gethostname
 # Import from itools
 
 # Import from ikaaro
-from ikaaro.autoform import XHTMLBody
 
 # Import from iscrib
 
@@ -84,9 +83,3 @@ def parse_control(title):
                     yield True, title[start + 1:end]
                     break
     yield False, title[end:]
-
-
-
-def set_html_message(message, context):
-    message = message.gettext().encode('utf8')
-    context.message = [XHTMLBody.decode(message)]

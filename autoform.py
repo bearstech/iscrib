@@ -23,11 +23,10 @@ from itools.datatypes import String, PathDataType
 from itools.gettext import MSG
 from itools.uri import Path
 from itools.web import get_context
-from itools.xml import XMLParser
 
 # Import from ikaaro
 from ikaaro.autoform import ImageSelectorWidget as BaseImageSelectorWidget
-from ikaaro.autoform import Widget, make_stl_template, stl_namespaces
+from ikaaro.autoform import Widget, make_stl_template
 from ikaaro.file import Image
 
 # Import from iscrib
@@ -71,22 +70,8 @@ class ImagePathDataType(PathDataType):
 
 
 
-# TODO move to Widget or CMSTemplate
-class MultilingualWidget(Widget):
-
-    def get_template(self):
-        # Get the template
-        template = self.template
-        if template is None:
-            msg = "%s is missing the 'template' variable"
-            raise NotImplementedError, msg % repr(self)
-
-        return make_stl_template(template.gettext().encode('utf8'))
-
-
-
 # TODO merge with shop or ikaaro
-class ImageSelectorWidget(MultilingualWidget, BaseImageSelectorWidget):
+class ImageSelectorWidget(BaseImageSelectorWidget):
     template = MSG(u"""
     <input type="text" id="selector-${id}" size="${size}" name="${name}"
       value="${value}" />
@@ -100,7 +85,7 @@ class ImageSelectorWidget(MultilingualWidget, BaseImageSelectorWidget):
     ${workflow_state}
     <br/>
     <img src="${value}/;thumb?width=${width}&amp;height=${height}"
-    stl:if="value"/>""")
+    stl:if="value"/>""", html=True)
 
 
 
@@ -148,8 +133,7 @@ class RecaptchaWidget(Widget):
     title = MSG(u"Please type the two words")
     themes = ('red', 'white', 'blackglass', 'clean')
 
-    template = list(XMLParser(
-        """
+    template = make_stl_template("""
         <input type="hidden" name="${name}" value="Check"/>
         <script type="text/javascript">
         var RecaptchaOptions = {
@@ -165,8 +149,7 @@ class RecaptchaWidget(Widget):
           <input type='hidden' name='recaptcha_response_field'
               value='manual_challenge'/>
         </noscript>
-        """,
-        stl_namespaces))
+        """)
 
 
     def theme(self):

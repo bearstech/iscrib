@@ -36,7 +36,7 @@ from itools.web import INFO, ERROR, BaseView
 
 # Import from ikaaro
 from ikaaro.access import is_admin
-from ikaaro.autoform import FileWidget, TextWidget, make_stl_template
+from ikaaro.autoform import FileWidget, TextWidget
 from ikaaro.datatypes import FileDataType
 from ikaaro.file import ODS
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
@@ -165,7 +165,7 @@ class Application_Menu(IconsView):
               'onclick': None},
              {'icon': '/ui/iscrib/images/export48.png',
               'title': MSG(u"Export Collected Data"),
-              'description': make_stl_template("""
+              'description': MSG("""
 <div id="choose-format">
   <span><a href="#" title="Hide"
     onclick="$('#choose-format').hide()">X</a></span>
@@ -174,7 +174,7 @@ class Application_Menu(IconsView):
     <li>Download XLS Version (soon)</li>
   </ul>
 </div>
-              """),
+              """, html=True),
               'url': '#',
               'onclick': '$("#choose-format").show(); return false'},
              {'icon': '/ui/iscrib/images/form48.png',

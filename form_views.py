@@ -25,7 +25,7 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from iscrib
 from datatypes import Numeric
-from utils import get_page_number, set_html_message
+from utils import get_page_number
 from widgets import is_mandatory_filled
 from workflow import WorkflowState, EMPTY, PENDING, SENT, EXPORTED
 
@@ -34,10 +34,10 @@ from workflow import WorkflowState, EMPTY, PENDING, SENT, EXPORTED
 MSG_SAVED_ERROR = ERROR(u"WARNING! There are missing or invalid "
         u"fields.")
 MSG_SAVED = INFO(u"The page is saved. Check your input in the "
-        u'<a href=";send">Input Control</a> tab.')
+        u'<a href=";send">Input Control</a> tab.', html=True)
 MSG_SENT = INFO(u"Your form was successfully sent.")
 MSG_EXPORTED_ITAAPY = ERROR(u'To export to a SQL database, contact <a '
-        u'href="http://www.itaapy.com/contact">Itaapy</a>')
+        u'href="http://www.itaapy.com/contact">Itaapy</a>', html=True)
 
 
 class Single(String):
@@ -178,7 +178,7 @@ class Form_View(STLForm):
             context.message = MSG_SAVED_ERROR
             context.bad_types = bad_types
         else:
-            set_html_message(MSG_SAVED, context)
+            context.message = MSG_SAVED
         if resource.get_workflow_state() == EMPTY:
             resource.set_workflow_state(PENDING)
 
@@ -270,7 +270,7 @@ class Form_Send(STLForm):
 
         # XXX
         context.commit = False
-        set_html_message(MSG_EXPORTED_ITAAPY, context)
+        context.message = MSG_EXPORTED_ITAAPY
 
 
 
