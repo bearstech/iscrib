@@ -26,6 +26,7 @@ from itools.web import INFO, ERROR
 # Import from ikaaro
 from ikaaro import messages
 from ikaaro.autoform import TextWidget, MultilineWidget, PasswordWidget
+from ikaaro.autoform import ReadOnlyWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.theme_views import Theme_Edit
@@ -53,7 +54,10 @@ class Workgroup_NewInstance(NewInstance):
             password=String,
             password2=String,
             captcha=RecaptchaDatatype)
-    widgets = NewInstance.widgets[:-1]
+    widgets = [ReadOnlyWidget('cls_description'),
+            TextWidget('title', title=MSG(u'Name of your client space'),
+                tip=MSG(u'You can type the name of your company or '
+                    u'organization'))]
 
 
     def get_schema(self, resource, context):

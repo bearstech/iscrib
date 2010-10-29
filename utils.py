@@ -24,6 +24,11 @@ from ikaaro.autoform import XHTMLBody
 # Import from iscrib
 
 
+def is_production():
+    hostname = gethostname()
+    return hostname == 'fidel'
+
+
 class ProgressMeter(object):
     last_percent = 0
 
