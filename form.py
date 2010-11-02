@@ -112,7 +112,7 @@ class FormHandler(FileHandler):
                 except ValueError:
                     # XXX
                     data = unicode(value).encode('UTF-8')
-                datas.append(value)
+                datas.append(data)
             data = ' '.join(datas)
         else:
             try:

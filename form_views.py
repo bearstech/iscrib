@@ -24,7 +24,7 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 # Import from ikaaro
 
 # Import from iscrib
-from datatypes import Numeric
+from datatypes import Numeric, Unicode
 from utils import get_page_number
 from widgets import is_mandatory_filled
 from workflow import WorkflowState, EMPTY, PENDING, SENT, EXPORTED
@@ -291,13 +291,29 @@ class Form_Export(BaseView):
         handler = resource.get_form().handler
         for name, datatype in sorted(schema.iteritems()):
             value = handler.get_value(name, schema)
-            try:
-                value = datatype.encode(value, encoding)
-            except TypeError:
-                value = datatype.encode(value)
-            if type(value) is not str:
+            if datatype.multiple:
+                datas = []
+                for value in value:
+                    try:
+                        data = datatype.encode(value)
+                    except ValueError:
+                        data = unicode(value).encode(encoding)
+                    datas.append(data)
+                data = ' '.join(datas)
+            else:
+                try:
+                    #   TypeError: issubclass() arg 1 must be a class
+                    if isinstance(datatype, Numeric):
+                        data = datatype.encode(value)
+                    elif issubclass(datatype, Unicode):
+                        data = datatype.encode(value, encoding)
+                    else:
+                        data = datatype.encode(value)
+                except ValueError:
+                    data = unicode(value).encode(encoding)
+            if type(data) is not str:
                 raise ValueError, str(type(datatype))
-            csv.add_row([datatype.pages[0], name, value])
+            csv.add_row([datatype.pages[0], name, data])
 
         context.set_content_type('text/comma-separated-values')
         context.set_content_disposition('attachment',

@@ -644,16 +644,16 @@ class Unicode(BaseUnicode):
 class Text(Unicode):
 
     @staticmethod
-    def decode(data):
-        data = Unicode.decode(data)
+    def decode(data, encoding='UTF-8'):
+        value = Unicode.decode(data, encoding=encoding)
         # Restaure les retours chariot
         # FIXME restore unicode
-        return data.replace('\\r\\n', '\r\n')
+        return value.replace(u'\\r\\n', u'\r\n')
 
 
     @staticmethod
-    def encode(value):
-        value = Unicode.encode(value)
+    def encode(value, encoding='UTF-8'):
+        value = Unicode.encode(value, encoding=encoding)
         # Stocke tout sur une ligne
         # FIXME restore unicode
         return value.replace('\r\n', '\\r\\n')
