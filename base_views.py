@@ -163,17 +163,20 @@ class FrontView(BaseIconsView):
 
 
     def get_namespace(self, resource, context):
+        user = context.user
         items = []
         for child in resource.search_resources(cls=self.cls):
             ac = child.get_access_control()
-            if not ac.is_allowed_to_view(context.user, child):
+            if not ac.is_allowed_to_view(user, child):
                 continue
             title = child.get_title()
             items.append({'icon': child.get_logo_icon(size=self.size),
                 'title': title,
                 'description': child.get_property('description'),
                 'url': context.get_link(child),
-                'sort': title.lower()})
+                'sort': title.lower(),
+                # XXX Utilisé par Root_Show
+                'role': ac.get_user_role(user.name)})
         if not items:
             class_title = self.cls.class_title.gettext()
             return context.come_back(MSG_NO_RESOURCE,

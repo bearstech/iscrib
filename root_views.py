@@ -60,18 +60,23 @@ class Root_Show(FrontView):
         namespace = super(Root_Show, self).get_namespace(resource, context)
         if isinstance(namespace, Reference):
             return namespace
-        rows = []
-        row = []
+
+        members = []
+        guests = []
         for item in namespace['items']:
             if item['icon'] is None:
                 item['icon'] = self.cls.get_class_icon(size=48)
-            row.append(item)
-            if len(row) == self.cols:
-                rows.append(row)
-                row = []
-        if row:
-            rows.append(row)
-        namespace['items'] = rows
+            if item['role'] == 'members':
+                rows = members
+            else:
+                rows = guests
+            if not rows:
+                rows.append([])
+            rows[-1].append(item)
+            if len(rows[-1]) == self.cols:
+                rows.append([])
+        namespace['members'] = members
+        namespace['guests'] = guests
         return namespace
 
 
