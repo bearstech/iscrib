@@ -26,7 +26,6 @@ from ikaaro.skins import register_skin
 # Import from iscrib
 from root import Root
 from skin import Skin
-import demo
 import user
 
 # Give a version
@@ -38,5 +37,4 @@ register_skin('iscrib', Skin(get_abspath('ui')))
 
 # Silent Pyflakes
 Root
-demo
 user
