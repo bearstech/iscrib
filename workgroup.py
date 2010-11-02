@@ -123,6 +123,8 @@ class Workgroup(WebSite):
 
 
     def is_allowed_to_export(self, user, resource):
+        # XXX
+        return False
         if user is None:
             return False
         if is_admin(user, resource):
