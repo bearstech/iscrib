@@ -32,7 +32,7 @@ from itools.datatypes import Integer, Unicode, Email, String
 from itools.gettext import MSG
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
-from itools.web import INFO, ERROR, BaseView
+from itools.web import INFO, ERROR, BaseView, FormError
 
 # Import from ikaaro
 from ikaaro.access import is_admin
@@ -58,6 +58,7 @@ MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 MSG_NO_DATA = ERROR(u"No data to collect for now.")
 MSG_NEW_APPLICATION = INFO(u'Your application is created. Now register '
         u'users.')
+MSG_PASSWORD_MISSING = ERROR(u"The password is missing.")
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
@@ -441,8 +442,15 @@ class Application_Edit(DBResource_Edit):
 class Application_Login(LoginView):
     template = '/ui/iscrib/application/login.xml'
     schema = merge_dicts(LoginView.schema,
-            password=String(mandatory=True),
-            password2=String)
+            newpass=String,
+            newpass2=String)
+
+
+    def _get_form(self, resource, context):
+        form = super(Application_Login, self)._get_form(resource, context)
+        if not (form['password'].strip() or form['newpass'].strip()):
+            raise FormError, MSG_PASSWORD_MISSING
+        return form
 
 
     def action_register(self, resource, context, form):

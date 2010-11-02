@@ -28,9 +28,9 @@
                 required">*
               </span>
               <br/>
-              <span stl:if="password/error"
-                class="field-error">${password/error}<br/></span>
-              <input type="password" id="newpass" name="password"
+              <span stl:if="newpass/error"
+                class="field-error">${newpass/error}<br/></span>
+              <input type="password" id="newpass" name="newpass"
                 size="40"/>
               <br/>
               <label for="newpass2">Repeat Password</label>
@@ -38,9 +38,9 @@
                 required">*
               </span>
               <br/>
-              <span stl:if="password2/error"
-                class="field-error">${password2/error}<br/></span>
-              <input type="password" id="newpass2" name="password2"
+              <span stl:if="newpass2/error"
+                class="field-error">${newpass2/error}<br/></span>
+              <input type="password" id="newpass2" name="newpass2"
                 size="40"/>
               <p>
                 <button type="submit" name="action" value="register"

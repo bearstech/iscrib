@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-02 16:11+CET\n"
+"POT-Creation-Date: 2010-11-02 17:11+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "\n    <input type=\"text\" id=\"selector-${id}\" size=\"${size}\" name=\"${name}\"\n      value=\"${value}\"/>\n    <button id=\"selector-button-${id}\" class=\"button-selector\"\n      onclick=\"return popup(';${action}?target_id=selector-${id}&amp;mode=input', 640, 480);\"\n      name=\"selector_button_${name}\">Browse...</button>\n    <button id=\"erase-button-${id}\" class=\"button-delete\"\n      onclick=\"$('#selector-${id}').attr('value', ''); return false\"\n      name=\"erase_button_${name}\">Erase</button>\n    <br/>\n    ${workflow_state}\n    <br/>\n    <img src=\"${value}/;thumb?width=${width}&amp;height=${height}\"\n    stl:if=\"value\"/>"
 msgstr ""
 
-#: ../application_views.py:173
+#: ../application_views.py:174
 msgid "\n<div id=\"choose-format\">\n  <span><a href=\"#\" title=\"Close\"\n    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n  <ul>\n    <li>Download <a href=\";export\">ODS Version</a></li>\n    <li>Download XLS Version (soon)</li>\n  </ul>\n</div>"
 msgstr ""
 
@@ -71,13 +71,13 @@ msgstr ""
 msgid "(division by 0)"
 msgstr ""
 
-#: ../application_views.py:74
+#: ../application_views.py:75
 #: ../formpage.py:205
 #: ../formpage.py:207
 msgid "*"
 msgstr ""
 
-#: ../application_views.py:72
+#: ../application_views.py:73
 msgid "**"
 msgstr ""
 
@@ -166,7 +166,7 @@ msgstr ""
 msgid "Configure your client space"
 msgstr ""
 
-#: ../application_views.py:106
+#: ../application_views.py:107
 #: ../controls.py:107
 msgid "Controls"
 msgstr ""
@@ -207,9 +207,9 @@ msgstr ""
 msgid "Download this template and use it to\ndefine to design your form.\n<div id=\"choose-format\">\n  <span><a href=\"#\" title=\"Close\"\n    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n  <ul>\n    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n    <li>Download XLS Version (soon)</li>\n  </ul>\n</div>"
 msgstr ""
 
-#: ../application_views.py:208
-#: ../application_views.py:303
-#: ../application_views.py:362
+#: ../application_views.py:209
+#: ../application_views.py:304
+#: ../application_views.py:363
 msgid "E-mail"
 msgstr ""
 
@@ -226,8 +226,8 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ../application_views.py:164
-#: ../application_views.py:286
+#: ../application_views.py:165
+#: ../application_views.py:287
 msgid "Export Collected Data"
 msgstr ""
 
@@ -247,13 +247,13 @@ msgstr ""
 msgid "False"
 msgstr ""
 
-#: ../application_views.py:302
+#: ../application_views.py:303
 #: ../workgroup_views.py:76
 msgid "First Name"
 msgstr ""
 
-#: ../application_views.py:204
-#: ../application_views.py:302
+#: ../application_views.py:205
+#: ../application_views.py:303
 #: ../form.py:130
 msgid "Form"
 msgstr ""
@@ -346,11 +346,11 @@ msgstr ""
 msgid "Integer"
 msgstr ""
 
-#: ../application_views.py:206
+#: ../application_views.py:207
 msgid "Last Modified"
 msgstr ""
 
-#: ../application_views.py:303
+#: ../application_views.py:304
 #: ../workgroup_views.py:77
 msgid "Last Name"
 msgstr ""
@@ -379,7 +379,7 @@ msgstr ""
 msgid "Main Variable"
 msgstr ""
 
-#: ../application_views.py:199
+#: ../application_views.py:200
 #: ../form.py:144
 msgid "Manage your Data Collection Application"
 msgstr ""
@@ -397,7 +397,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:436
+#: ../application_views.py:437
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -409,7 +409,7 @@ msgstr ""
 msgid "Name of your client space"
 msgstr ""
 
-#: ../application_views.py:250
+#: ../application_views.py:251
 msgid "No"
 msgstr ""
 
@@ -417,7 +417,7 @@ msgstr ""
 msgid "No data to collect for now."
 msgstr ""
 
-#: ../application_views.py:412
+#: ../application_views.py:413
 msgid "No user added."
 msgstr ""
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../application_views.py:85
+#: ../application_views.py:86
 msgid "ODS File"
 msgstr ""
 
@@ -449,11 +449,11 @@ msgstr ""
 msgid "Oui"
 msgstr ""
 
-#: ../application_views.py:143
+#: ../application_views.py:144
 msgid "Page {0}"
 msgstr ""
 
-#: ../application_views.py:97
+#: ../application_views.py:98
 msgid "Parameters"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
-#: ../application_views.py:63
+#: ../application_views.py:64
 msgid "Please fill in the form \"{application_title}\" available here:\r\n<{application_url}>.\r\n"
 msgstr ""
 
@@ -482,24 +482,24 @@ msgstr ""
 msgid "Private workgroup with logo, users and collection applications"
 msgstr ""
 
-#: ../root_views.py:100
+#: ../root_views.py:102
 msgid "ReCaptcha Private Key"
 msgstr ""
 
-#: ../root_views.py:102
+#: ../root_views.py:104
 msgid "ReCaptcha Public Key"
 msgstr ""
 
-#: ../application_views.py:160
-#: ../application_views.py:355
+#: ../application_views.py:161
+#: ../application_views.py:356
 msgid "Register Users"
 msgstr ""
 
-#: ../application_views.py:209
+#: ../application_views.py:210
 msgid "Registered"
 msgstr ""
 
-#: ../application_views.py:423
+#: ../application_views.py:424
 msgid "Rename Application"
 msgstr ""
 
@@ -515,7 +515,7 @@ msgstr ""
 msgid "Representation"
 msgstr ""
 
-#: ../application_views.py:107
+#: ../application_views.py:108
 #: ../schema.py:248
 msgid "Schema"
 msgstr ""
@@ -524,8 +524,8 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: ../application_views.py:178
-#: ../application_views.py:504
+#: ../application_views.py:179
+#: ../application_views.py:512
 msgid "Show Test Form"
 msgstr ""
 
@@ -545,8 +545,8 @@ msgstr ""
 msgid "Start filling"
 msgstr ""
 
-#: ../application_views.py:205
-#: ../application_views.py:303
+#: ../application_views.py:206
+#: ../application_views.py:304
 msgid "State"
 msgstr ""
 
@@ -562,13 +562,17 @@ msgstr ""
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
-#: ../application_views.py:451
+#: ../application_views.py:459
 #: ../base_views.py:127
 msgid "The given username is not an e-mail address."
 msgstr ""
 
 #: ../form_views.py:36
 msgid "The page is saved. Check your input in the <a href=\";send\">Input Control</a> tab."
+msgstr ""
+
+#: ../application_views.py:61
+msgid "The password is missing."
 msgstr ""
 
 #: ../schema.py:192
@@ -592,7 +596,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../application_views.py:390
+#: ../application_views.py:391
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
@@ -600,8 +604,8 @@ msgstr ""
 msgid "Uploading this spreadsheet file in iScrib will generate in one click your data collection application."
 msgstr ""
 
-#: ../application_views.py:207
-#: ../application_views.py:361
+#: ../application_views.py:208
+#: ../application_views.py:362
 msgid "User"
 msgstr ""
 
@@ -630,20 +634,20 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: ../application_views.py:498
+#: ../application_views.py:506
 #: ../base_views.py:121
 msgid "Welcome!"
 msgstr ""
 
-#: ../application_views.py:250
+#: ../application_views.py:251
 msgid "Yes"
 msgstr ""
 
-#: ../application_views.py:465
+#: ../application_views.py:473
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../application_views.py:459
+#: ../application_views.py:467
 #: ../base_views.py:137
 msgid "You are not allowed to register."
 msgstr ""
@@ -827,8 +831,8 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: ../application_views.py:93
-#: ../application_views.py:101
+#: ../application_views.py:94
+#: ../application_views.py:102
 msgid "not an ODS file"
 msgstr ""
 
@@ -948,11 +952,11 @@ msgstr ""
 msgid "{name} is not equal to {formula}"
 msgstr ""
 
-#: ../application_views.py:417
+#: ../application_views.py:418
 msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 
-#: ../application_views.py:62
+#: ../application_views.py:63
 msgid "{workgroup_title}, form \"{application_title}\""
 msgstr ""
 
@@ -1104,14 +1108,14 @@ msgctxt "label"
 msgid "<g id='21'>Password</g>  <g id='22'>* </g>  <x id='23'/>  <g id='24'>${password/error}<x id='25'/></g>"
 msgstr ""
 
+#: ../ui/application/login.xml.en:26
+msgctxt "label"
+msgid "<g id='7'>Password</g>  <g id='8'>* </g>  <x id='9'/>  <g id='10'>${newpass/error}<x id='11'/></g>  <x id='12'/>  <x id='13'/>  <g id='14'>Repeat Password</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>${newpass2/error}<x id='18'/></g>"
+msgstr ""
+
 #: ../ui/base/login.xml.en:27
 msgctxt "label"
 msgid "<g id='7'>Password</g>  <g id='8'>* </g>  <x id='9'/>  <g id='10'>${password/error}<x id='11'/></g>"
-msgstr ""
-
-#: ../ui/application/login.xml.en:26
-msgctxt "label"
-msgid "<g id='7'>Password</g>  <g id='8'>* </g>  <x id='9'/>  <g id='10'>${password/error}<x id='11'/></g>  <x id='12'/>  <x id='13'/>  <g id='14'>Repeat Password</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>${password2/error}<x id='18'/></g>"
 msgstr ""
 
 #: ../ui/application/login.xml.en:53
