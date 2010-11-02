@@ -180,7 +180,9 @@ class Dependency(String):
 
     @staticmethod
     def is_valid(value, known_variables):
-        return value and value in known_variables or True
+        if not value:
+            return True
+        return value in known_variables
 
 
 
