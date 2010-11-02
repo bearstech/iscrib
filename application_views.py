@@ -386,7 +386,7 @@ class Application_Register(Application_View):
                 email = email.encode('ascii')
             except UnicodeEncodeError:
                 email = None
-            if not email:
+            if not email or not Email.is_valid(email):
                 context.commit = False
                 message = u"Unrecognized line {lineno}: {line}"
                 context.message = ERROR(message, lineno=lineno+1, line=line)
