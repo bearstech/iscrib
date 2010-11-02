@@ -24,7 +24,7 @@ from itools.workflow import Workflow
 # States
 EMPTY = 'private'
 PENDING = 'pending'
-SENT = 'public'
+FINISHED = 'public'
 EXPORTED = 'exported'
 MODIFIED = 'modified'
 
@@ -33,7 +33,7 @@ class WorkflowState(Enumerate):
     options = [
         {'name': EMPTY, 'value': MSG(u"Empty")},
         {'name': PENDING, 'value': MSG(u"Pending")},
-        {'name': SENT, 'value': MSG(u"Sent")},
+        {'name': FINISHED, 'value': MSG(u"Finished")},
         {'name': EXPORTED, 'value': MSG(u"Exported")},
         {'name': MODIFIED, 'value': MSG(u"Modified after export")}]
 

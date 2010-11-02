@@ -195,7 +195,7 @@ msgstr ""
 msgid "Dependent Field"
 msgstr ""
 
-#: ../form_views.py:279
+#: ../form_views.py:280
 msgid "Download form"
 msgstr ""
 
@@ -245,6 +245,10 @@ msgstr ""
 
 #: ../form.py:406
 msgid "False"
+msgstr ""
+
+#: ../workflow.py:36
+msgid "Finished"
 msgstr ""
 
 #: ../application_views.py:303
@@ -338,7 +342,7 @@ msgstr ""
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:191
+#: ../form_views.py:192
 msgid "Input Control"
 msgstr ""
 
@@ -474,7 +478,7 @@ msgstr ""
 msgid "Please type the two words"
 msgstr ""
 
-#: ../form_views.py:328
+#: ../form_views.py:329
 msgid "Print form"
 msgstr ""
 
@@ -520,17 +524,9 @@ msgstr ""
 msgid "Schema"
 msgstr ""
 
-#: ../workflow.py:36
-msgid "Sent"
-msgstr ""
-
 #: ../application_views.py:179
 #: ../application_views.py:512
 msgid "Show Test Form"
-msgstr ""
-
-#: ../demo.py:79
-msgid "Site de démo iScrib"
 msgstr ""
 
 #: ../workgroup_views.py:262
@@ -584,7 +580,7 @@ msgstr ""
 msgid "Title (shown in the banner if no logo)"
 msgstr ""
 
-#: ../form_views.py:39
+#: ../form_views.py:40
 msgid "To export to a SQL database, contact <a href=\"http://www.itaapy.com/contact\">Itaapy</a>"
 msgstr ""
 
@@ -618,7 +614,6 @@ msgid "Variable"
 msgstr ""
 
 #: ../root_views.py:39
-#: ../demo.py:84
 msgid "View"
 msgstr ""
 
@@ -688,17 +683,12 @@ msgstr ""
 msgid "Your e-mail address"
 msgstr ""
 
-#: ../form_views.py:284
-msgid "Your form is not finished yet."
-msgstr ""
-
-#: ../demo.py:51
-msgid "Your form was successfully exported."
-msgstr ""
-
 #: ../form_views.py:38
-#: ../demo.py:46
-msgid "Your form was successfully sent."
+msgid "Your form is finished. Your correspondent has been informed."
+msgstr ""
+
+#: ../form_views.py:285
+msgid "Your form is not finished yet."
 msgstr ""
 
 #: ../utils.py:78
@@ -944,11 +934,11 @@ msgstr ""
 msgid "{application}: {form}"
 msgstr ""
 
-#: ../form_views.py:212
+#: ../form_views.py:213
 msgid "{name} invalid"
 msgstr ""
 
-#: ../form_views.py:209
+#: ../form_views.py:210
 msgid "{name} is not equal to {formula}"
 msgstr ""
 
@@ -970,6 +960,11 @@ msgctxt "button"
 msgid "Export"
 msgstr ""
 
+#: ../ui/form/send.xml.en:25
+msgctxt "button"
+msgid "Finish"
+msgstr ""
+
 #: ../ui/application/login.xml.en:65
 msgctxt "button"
 msgid "Login"
@@ -989,11 +984,6 @@ msgstr ""
 #: ../ui/form/view.xml.en:43
 msgctxt "button"
 msgid "Save"
-msgstr ""
-
-#: ../ui/form/send.xml.en:25
-msgctxt "button"
-msgid "Send"
 msgstr ""
 
 #: ../ui/application/register.xml.en:18
@@ -1227,7 +1217,7 @@ msgstr ""
 
 #: ../ui/form/send.xml.en:22
 msgctxt "paragraph"
-msgid "When you have finished filling the form, you can click the \"Send\" button."
+msgid "When you have finished filling the form, you can click the \"Finish\" button."
 msgstr ""
 
 #: ../ui/application/register.xml.en:35
@@ -1252,7 +1242,7 @@ msgstr ""
 
 #: ../ui/form/send.xml.en:28
 msgctxt "paragraph"
-msgid "You must correct all of the errors below to send your form."
+msgid "You must correct all of the errors below to finish your form."
 msgstr ""
 
 #: ../ui/form/send.xml.en:18

@@ -31,7 +31,7 @@ from ikaaro.website import WebSite
 from application import Application
 from base_views import FrontView, LoginView
 from form import Form
-from workflow import SENT, EXPORTED, MODIFIED
+from workflow import FINISHED, EXPORTED, MODIFIED
 from workgroup_views import Workgroup_NewInstance, Workgroup_View
 from workgroup_views import Workgroup_Edit
 
@@ -130,7 +130,7 @@ class Workgroup(WebSite):
         if is_admin(user, resource):
             return True
         state = resource.get_workflow_state()
-        if state not in (SENT, EXPORTED, MODIFIED):
+        if state not in (FINISHED, EXPORTED, MODIFIED):
             return False
         role = self.get_user_role(user.name)
         return role in ('members', 'reviewers')

@@ -39,7 +39,7 @@ from formpage import FormPage
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control
 from schema import Variable
-from workflow import workflow, SENT
+from workflow import workflow, FINISHED
 
 
 
@@ -276,7 +276,7 @@ class Form(File):
     ######################################################################
     # Security
     def is_ready(self):
-        return self.get_workflow_state() == SENT
+        return self.get_workflow_state() == FINISHED
 
 
     def is_first_time(self):

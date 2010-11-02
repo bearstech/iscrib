@@ -27,7 +27,7 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 from datatypes import Numeric, Unicode
 from utils import get_page_number
 from widgets import is_mandatory_filled
-from workflow import WorkflowState, EMPTY, PENDING, SENT, EXPORTED
+from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
 
 
 # Messages
@@ -35,7 +35,8 @@ MSG_SAVED_ERROR = ERROR(u"WARNING! There are missing or invalid "
         u"fields.")
 MSG_SAVED = INFO(u"The page is saved. Check your input in the "
         u'<a href=";send">Input Control</a> tab.', html=True)
-MSG_SENT = INFO(u"Your form was successfully sent.")
+MSG_FINISHED = INFO(u"Your form is finished. "
+        u"Your correspondent has been informed.")
 MSG_EXPORTED_ITAAPY = ERROR(u'To export to a SQL database, contact <a '
         u'href="http://www.itaapy.com/contact">Itaapy</a>', html=True)
 
@@ -258,9 +259,9 @@ class Form_Send(STLForm):
     def action_send(self, resource, context, form):
         """Ce qu'il faut faire quand le formulaire est soumis.
         """
-        resource.set_workflow_state(SENT)
+        resource.set_workflow_state(FINISHED)
 
-        context.message = MSG_SENT
+        context.message = MSG_FINISHED
 
 
     def action_export(self, resource, context, form):

@@ -19,14 +19,14 @@
 
   <stl:block stl:if="not first_time">
     <form action="" method="post" stl:if="can_send">
-      <p>When you have finished filling the form, you can click the "Send"
+      <p>When you have finished filling the form, you can click the "Finish"
       button.</p>
       <button value="send" class="button-ok" name="action"
-      type="submit">Send</button>
+      type="submit">Finish</button>
     </form>
 
     <p stl:if="controls/errors">You must correct all of the errors below to
-    send your form.</p>
+    finish your form.</p>
 
     <stl:block stl:if="is_allowed_to_export">
       <form action="" method="post" stl:if="can_export">

@@ -286,10 +286,10 @@ msgid ""
 "Password</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>${newpass2/error}"
 "<x id='18'/></g>"
 msgstr ""
-"<g id='7'>Mot de passe</g>  <g id='8'>* </g>  <x id='9'/>  <g id='10'>${newpass/"
-"error}<x id='11'/></g>  <x id='12'/>  <x id='13'/>  <g id='14'>Répéter "
-"le mot de passe</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>${newpass2/error}"
-"<x id='18'/></g>"
+"<g id='7'>Mot de passe</g>  <g id='8'>* </g>  <x id='9'/>  <g id='10'>"
+"${newpass/error}<x id='11'/></g>  <x id='12'/>  <x id='13'/>  <g "
+"id='14'>Répéter le mot de passe</g>  <g id='15'>* </g>  <x id='16'/>  <g "
+"id='17'>${newpass2/error}<x id='18'/></g>"
 
 #: ../ui/base/login.xml.en:27
 msgctxt "label"
@@ -415,7 +415,7 @@ msgstr ""
 msgid "Dependent Field"
 msgstr ""
 
-#: ../form_views.py:279
+#: ../form_views.py:280
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
 
@@ -494,6 +494,15 @@ msgstr ""
 #: ../form.py:406
 msgid "False"
 msgstr ""
+
+#: ../ui/form/send.xml.en:25
+msgctxt "button"
+msgid "Finish"
+msgstr "Terminer"
+
+#: ../workflow.py:36
+msgid "Finished"
+msgstr "Terminé"
 
 #: ../application_views.py:303 ../workgroup_views.py:76
 msgid "First Name"
@@ -616,7 +625,7 @@ msgstr ""
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:191
+#: ../form_views.py:192
 msgid "Input Control"
 msgstr "Contrôle de saisie"
 
@@ -828,7 +837,7 @@ msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr "Imprimer (dans une nouvelle fenêtre)"
 
-#: ../form_views.py:328
+#: ../form_views.py:329
 msgid "Print form"
 msgstr "Impression du formulaire"
 
@@ -894,15 +903,6 @@ msgstr "Enregistrer"
 msgid "Schema"
 msgstr "Schéma"
 
-#: ../ui/form/send.xml.en:25
-msgctxt "button"
-msgid "Send"
-msgstr "Envoyer"
-
-#: ../workflow.py:36
-msgid "Sent"
-msgstr "Envoyé"
-
 #: ../application_views.py:179 ../application_views.py:512
 msgid "Show Test Form"
 msgstr "Voir le formulaire de test"
@@ -916,10 +916,6 @@ msgstr "Connexion"
 msgctxt "title attribute"
 msgid "Sign in"
 msgstr "Connexion"
-
-#: ../demo.py:79
-msgid "Site de démo iScrib"
-msgstr ""
 
 #: ../workgroup_views.py:262
 msgid "Source"
@@ -1025,7 +1021,7 @@ msgctxt "link"
 msgid "To correct"
 msgstr "Pour corriger"
 
-#: ../form_views.py:39
+#: ../form_views.py:40
 msgid ""
 "To export to a SQL database, contact <a href=\"http://www.itaapy.com/contact"
 "\">Itaapy</a>"
@@ -1070,7 +1066,7 @@ msgstr "Valeur"
 msgid "Variable"
 msgstr ""
 
-#: ../root_views.py:39 ../demo.py:84
+#: ../root_views.py:39
 msgid "View"
 msgstr "Voir"
 
@@ -1103,10 +1099,11 @@ msgstr "Bienvenue !"
 #: ../ui/form/send.xml.en:22
 msgctxt "paragraph"
 msgid ""
-"When you have finished filling the form, you can click the \"Send\" button."
+"When you have finished filling the form, you can click the \"Finish\" button."
 msgstr ""
-"Quand vous avez terminé votre saisie, vous pouvez cliquer sur le bouton « "
-"Envoyer »."
+"Vous pouvez cliquer sur le bouton « Terminer » pour prévenir votre "
+"correspondant que votre saisie est terminée.<br/>"
+"Vous ne pourrez alors plus modifier le formulaire."
 
 #: ../application_views.py:251
 msgid "Yes"
@@ -1193,9 +1190,9 @@ msgstr ""
 
 #: ../ui/form/send.xml.en:28
 msgctxt "paragraph"
-msgid "You must correct all of the errors below to send your form."
+msgid "You must correct all of the errors below to finish your form."
 msgstr ""
-"Vous devez corriger les erreurs suivantes pour envoyer votre formulaire."
+"Vous devez corriger les erreurs suivantes pour terminer votre formulaire."
 
 #: ../ui/form/send.xml.en:18
 msgctxt "paragraph"
@@ -1244,17 +1241,13 @@ msgstr "Votre espace client « {title} » est créé."
 msgid "Your e-mail address"
 msgstr "Adresse de courriel"
 
-#: ../form_views.py:284
+#: ../form_views.py:38
+msgid "Your form is finished. Your correspondent has been informed."
+msgstr "Votre saisie est terminée. Votre correspondant a été averti."
+
+#: ../form_views.py:285
 msgid "Your form is not finished yet."
 msgstr "Votre formulaire n'est pas encore terminé."
-
-#: ../demo.py:51
-msgid "Your form was successfully exported."
-msgstr "Votre formulaire a bien été exporté."
-
-#: ../form_views.py:38 ../demo.py:46
-msgid "Your form was successfully sent."
-msgstr "Votre formulaire a bien été envoyé."
 
 #: ../utils.py:78 ../form.py:387
 msgid "["
@@ -1449,11 +1442,11 @@ msgstr "{application} : <em>Formulaire de test</em>"
 msgid "{application}: {form}"
 msgstr "{application} : {form}"
 
-#: ../form_views.py:212
+#: ../form_views.py:213
 msgid "{name} invalid"
 msgstr "{name} invalide"
 
-#: ../form_views.py:209
+#: ../form_views.py:210
 msgid "{name} is not equal to {formula}"
 msgstr "{name} n'est pas égal à {formula}"
 
@@ -1536,6 +1529,12 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 
 #~ msgid "Your Forms"
 #~ msgstr "Vos formulaires"
+
+#~ msgid "Your form was successfully exported."
+#~ msgstr "Votre formulaire a bien été exporté."
+
+#~ msgid "Your form was successfully sent."
+#~ msgstr "Votre formulaire a bien été envoyé."
 
 #~ msgid "{0}: {1}"
 #~ msgstr "{0} : {1}"

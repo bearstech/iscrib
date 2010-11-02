@@ -367,7 +367,7 @@ msgstr ""
 msgid "Dependent Field"
 msgstr ""
 
-#: ../form_views.py:279
+#: ../form_views.py:280
 msgid "Download form"
 msgstr ""
 
@@ -434,6 +434,15 @@ msgstr ""
 
 #: ../form.py:406
 msgid "False"
+msgstr ""
+
+#: ../ui/form/send.xml.en:25
+msgctxt "button"
+msgid "Finish"
+msgstr ""
+
+#: ../workflow.py:36
+msgid "Finished"
 msgstr ""
 
 #: ../application_views.py:303 ../workgroup_views.py:76
@@ -546,7 +555,7 @@ msgstr ""
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:191
+#: ../form_views.py:192
 msgid "Input Control"
 msgstr ""
 
@@ -756,7 +765,7 @@ msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr ""
 
-#: ../form_views.py:328
+#: ../form_views.py:329
 msgid "Print form"
 msgstr ""
 
@@ -820,15 +829,6 @@ msgstr ""
 msgid "Schema"
 msgstr ""
 
-#: ../ui/form/send.xml.en:25
-msgctxt "button"
-msgid "Send"
-msgstr ""
-
-#: ../workflow.py:36
-msgid "Sent"
-msgstr ""
-
 #: ../application_views.py:179 ../application_views.py:512
 msgid "Show Test Form"
 msgstr ""
@@ -841,10 +841,6 @@ msgstr ""
 #: ../ui/template.xhtml.en:31
 msgctxt "title attribute"
 msgid "Sign in"
-msgstr ""
-
-#: ../demo.py:79
-msgid "Site de démo iScrib"
 msgstr ""
 
 #: ../workgroup_views.py:262
@@ -941,7 +937,7 @@ msgctxt "link"
 msgid "To correct"
 msgstr ""
 
-#: ../form_views.py:39
+#: ../form_views.py:40
 msgid ""
 "To export to a SQL database, contact <a href=\"http://www.itaapy.com/contact"
 "\">Itaapy</a>"
@@ -982,7 +978,7 @@ msgstr ""
 msgid "Variable"
 msgstr ""
 
-#: ../root_views.py:39 ../demo.py:84
+#: ../root_views.py:39
 msgid "View"
 msgstr ""
 
@@ -1015,7 +1011,7 @@ msgstr ""
 #: ../ui/form/send.xml.en:22
 msgctxt "paragraph"
 msgid ""
-"When you have finished filling the form, you can click the \"Send\" button."
+"When you have finished filling the form, you can click the \"Finish\" button."
 msgstr ""
 
 #: ../application_views.py:251
@@ -1085,7 +1081,7 @@ msgstr ""
 
 #: ../ui/form/send.xml.en:28
 msgctxt "paragraph"
-msgid "You must correct all of the errors below to send your form."
+msgid "You must correct all of the errors below to finish your form."
 msgstr ""
 
 #: ../ui/form/send.xml.en:18
@@ -1132,16 +1128,12 @@ msgstr ""
 msgid "Your e-mail address"
 msgstr ""
 
-#: ../form_views.py:284
+#: ../form_views.py:38
+msgid "Your form is finished. Your correspondent has been informed."
+msgstr ""
+
+#: ../form_views.py:285
 msgid "Your form is not finished yet."
-msgstr ""
-
-#: ../demo.py:51
-msgid "Your form was successfully exported."
-msgstr ""
-
-#: ../form_views.py:38 ../demo.py:46
-msgid "Your form was successfully sent."
 msgstr ""
 
 #: ../utils.py:78 ../form.py:387
@@ -1349,11 +1341,11 @@ msgstr ""
 msgid "{application}: {form}"
 msgstr ""
 
-#: ../form_views.py:212
+#: ../form_views.py:213
 msgid "{name} invalid"
 msgstr ""
 
-#: ../form_views.py:209
+#: ../form_views.py:210
 msgid "{name} is not equal to {formula}"
 msgstr ""
 

@@ -39,7 +39,7 @@ from ikaaro.text import CSV
 from datatypes import NumTime
 from schema import FormatError
 from widgets import get_input_widget, make_element
-from workflow import SENT, EXPORTED
+from workflow import FINISHED, EXPORTED
 
 
 NBSP = u"\u00a0".encode('utf8')
@@ -115,7 +115,7 @@ class FormPage(CSV):
         # Lecture seule ?
         if not skip_print and not is_admin(context.user, form):
             state = form.get_statename()
-            if state == SENT:
+            if state == FINISHED:
                 readonly = True
             elif state == EXPORTED:
                 readonly = True
