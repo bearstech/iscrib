@@ -35,7 +35,7 @@ from ikaaro.resource_views import DBResource_Links, DBResource_Backlinks
 from ikaaro.resource_views import LoginView as BaseLoginView
 from ikaaro.resource_views import LogoutView as BaseLogoutView
 from ikaaro.revisions_views import DBResource_CommitLog
-from ikaaro.views import IconsView
+from ikaaro.views import IconsView as BaseIconsView
 from ikaaro.workflow import state_widget, WorkflowAware, StateEnumerate
 
 # Import from iscrib
@@ -81,7 +81,7 @@ class AutomaticEditView(DBResource_Edit):
 
 # Pas d'héritage pour pas de méthode "action"
 class LoginView(BaseLoginView):
-    template = '/ui/iscrib/login.xml'
+    template = '/ui/iscrib/base/login.xml'
 
 
     def action_login(self, resource, context, form):
@@ -156,7 +156,7 @@ class LogoutView(BaseLogoutView):
 
 
 
-class FrontView(IconsView):
+class FrontView(BaseIconsView):
     access = 'is_authenticated'
     cls = None
     size = 48
@@ -181,6 +181,38 @@ class FrontView(IconsView):
         elif len(items) == 1:
             return get_reference(items[-1]['url'])
         items.sort(key=itemgetter('sort'))
+        return {'batch': None, 'items': items}
+
+
+
+class IconsView(BaseIconsView):
+    template = '/ui/iscrib/base/icons_view.xml'
+    item_keys = ('icon', 'title', 'description', 'url', 'onclick', 'access')
+
+
+    @classmethod
+    def make_item(cls, **kw):
+        item = {}
+        for key in cls.item_keys:
+            if key in kw:
+                item[key] = kw[key]
+            else:
+                item[key] = None
+        return item
+
+
+    def get_namespace(self, resource, context):
+        items = []
+        for item in self.items:
+            method_name = item['access']
+            if method_name:
+                method = getattr(self, method_name)
+                item = item.copy()
+                if not method(item, resource, context):
+                    item['url'] = None
+                    item['onclick'] = None
+                    item['icon'] = item['icon'].replace('.png', '-grey.png')
+            items.append(item)
         return {'batch': None, 'items': items}
 
 

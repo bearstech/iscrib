@@ -42,15 +42,14 @@ from ikaaro.file import ODS
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
-from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 from ikaaro.workflow import get_workflow_preview
 
 # Import from iscrib
-from base_views import LoginView
+from base_views import LoginView, IconsView
 from form import Form
 from formpage import FormPage
-from workflow import WorkflowState
+from workflow import WorkflowState, EMPTY
 
 
 MSG_ERR_PAGE_NAME = ERROR(u'In the "${name}" sheet, page "${page}" is not '
@@ -157,40 +156,42 @@ class Application_NewInstance(NewInstance):
 
 
 class Application_Menu(IconsView):
-    template = '/ui/iscrib/icons_view.xml'
-    items = [{'icon': '/ui/iscrib/images/register48.png',
-              'title': MSG(u"Register Users"),
-              'description': None,
-              'url': ';register',
-              'onclick': None},
-             {'icon': '/ui/iscrib/images/export48.png',
-              'title': MSG(u"Export Collected Data"),
-              'description': MSG(u"""
+    make_item = IconsView.make_item
+    items = [make_item(icon='/ui/iscrib/images/register48.png',
+              title=MSG(u"Register Users"),
+              url=';register',
+              access='is_allowed_to_register'),
+             make_item(icon='/ui/iscrib/images/export48.png',
+              title=MSG(u"Export Collected Data"),
+              description=MSG(u"""
 <div id="choose-format">
   <span><a href="#" title="Close"
-    onclick="$('#choose-format').hide()">X</a></span>
+    onclick="$('#choose-format').hide(); return false">X</a></span>
   <ul>
     <li>Download <a href=";export">ODS Version</a></li>
     <li>Download XLS Version (soon)</li>
   </ul>
-</div>
-              """, html=True),
-              'url': '#',
-              'onclick': '$("#choose-format").show(); return false'},
-             {'icon': '/ui/iscrib/images/form48.png',
-              'title': MSG(u"Show Test Form"),
-              'description': None,
-              'url': ';show',
-              'onclick': None}]
+</div>""", html=True),
+              url='#',
+              onclick='$("#choose-format").show(); return false',
+              access='is_allowed_to_export'),
+             make_item(icon='/ui/iscrib/images/form48.png',
+              title=MSG(u"Show Test Form"),
+              url=';show')]
 
 
-    def get_namespace(self, resource, context):
-        items = self.items
+    def is_allowed_to_register(self, item, resource, context):
         max_users = resource.get_property('max_users')
         allowed_users = resource.get_allowed_users()
-        if not allowed_users:
-            items = items[1:]
-        return {'batch': None, 'items': items}
+        return bool(allowed_users)
+
+
+    def is_allowed_to_export(self, item, resource, context):
+        for form in resource.get_forms():
+            if form.get_workflow_state() != EMPTY:
+                return True
+        item['title'] = MSG_NO_DATA
+        return False
 
 
 

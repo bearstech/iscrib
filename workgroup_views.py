@@ -30,13 +30,13 @@ from ikaaro.autoform import ReadOnlyWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.theme_views import Theme_Edit
-from ikaaro.views import IconsView
 from ikaaro.views_new import NewInstance
 
 # Import from iscrib
 from application import Application
 from autoform import ImagePathDataType, ImageSelectorWidget
 from autoform import RecaptchaDatatype, RecaptchaWidget
+from base_views import IconsView
 
 
 MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
@@ -151,23 +151,29 @@ class Workgroup_NewInstance(NewInstance):
 
 
 class Workgroup_Menu(IconsView):
-
-    items = [{'icon': '/ui/iscrib/images/download48.png',
-              'title': MSG(u"Download the Template"),
-              'description': MSG(u"Download this template and use it to define to design your form."),
-              'url': '/gabarit/;download'},
-             {'icon': '/ui/iscrib/images/upload48.png',
-              'title': MSG(u"Create a Data Collection Application"),
-              'description': MSG(u"Uploading this spreadsheet file in iScrib will generate in one click your data collection application."),
-              'url': ';new_resource?type=Application'},
-             {'icon': '/ui/iscrib/images/logo48.png',
-              'title': MSG(u"Edit Title, Logo and CSS"),
-              'description': MSG(u"Configure your client space"),
-              'url': ';edit'}]
-
-
-    def get_namespace(self, resource, context):
-        return {'batch': None, 'items': self.items}
+    make_item = IconsView.make_item
+    items = [make_item(icon='/ui/iscrib/images/download48.png',
+              title=MSG(u"Download the Template"),
+              description=MSG(u"""Download this template and use it to
+define to design your form.
+<div id="choose-format">
+  <span><a href="#" title="Close"
+    onclick="$('#choose-format').hide(); return false">X</a></span>
+  <ul>
+    <li>Download <a href="/gabarit/;download">ODS Version</a></li>
+    <li>Download XLS Version (soon)</li>
+  </ul>
+</div>""", html=True),
+              url='#',
+              onclick='$("#choose-format").show(); return false'),
+             make_item(icon='/ui/iscrib/images/upload48.png',
+              title=MSG(u"Create a Data Collection Application"),
+              description=MSG(u"Uploading this spreadsheet file in iScrib will generate in one click your data collection application."),
+              url=';new_resource?type=Application'),
+             make_item(icon='/ui/iscrib/images/logo48.png',
+              title=MSG(u"Edit Title, Logo and CSS"),
+              description=MSG(u"Configure your client space"),
+              url=';edit')]
 
 
 
