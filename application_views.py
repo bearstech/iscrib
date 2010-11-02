@@ -149,8 +149,7 @@ class Application_NewInstance(NewInstance):
                 context.message = ERROR(unicode(exception))
                 return
         # Initial form
-        child.make_resource(child.default_form, Form,
-                title={'en': u"Test Form"})
+        child.make_resource(child.default_form, Form)
         return context.come_back(MSG_NEW_APPLICATION, goto)
 
 

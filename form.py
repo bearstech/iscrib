@@ -259,12 +259,14 @@ class Form(File):
 
 
     def get_form_title(self):
-        form_title = None
         param = self.get_param_folder()
-        if self.name != param.default_form:
-            user = self.get_resource('/users/' + self.name, soft=True)
-            if user is not None:
-                form_title = user.get_title()
+        if self.name == param.default_form:
+            return MSG(u"{application}: <em>Test Form</em>",
+                    html=True).gettext(application=param.get_title())
+        form_title = None
+        user = self.get_resource('/users/' + self.name, soft=True)
+        if user is not None:
+            form_title = user.get_title()
         if form_title is None:
             form_title = self.get_title()
         return MSG(u"{application}: {form}").gettext(
