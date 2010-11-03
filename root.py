@@ -16,12 +16,14 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, get_abspath
 from itools.datatypes import String
+from itools.fs import FileName
 from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.autoform import XHTMLBody, RTEWidget
+from ikaaro.file import Image
 from ikaaro.root import Root as BaseRoot
 from ikaaro.workflow import WorkflowAware
 
@@ -70,6 +72,14 @@ class Root(BaseRoot):
         # Laisse voir le nom du website
         theme = self.get_resource('theme')
         theme.set_property('logo', None)
+        # Favicon à utiliser partout
+        filename = 'itaapy-favicon.ico'
+        with open(get_abspath('ui/' + filename)) as file:
+            body = file.read()
+        name, extension, _ = FileName.decode(filename)
+        theme.make_resource(name, Image, body=body, filename=filename,
+                extension=extension, state='public', format='image/x-icon')
+        theme.set_property('favicon', name)
 
 
     def get_document_types(self):
