@@ -84,8 +84,10 @@ class Application(Folder):
 
     def get_allowed_users(self):
         max_users = self.get_property('max_users')
+        if not max_users:
+            return float('inf')
         n_forms = self.get_n_forms()
-        return (max_users - n_forms) if max_users else self.allowed_users
+        return (max_users - n_forms)
 
 
     def get_admin_url(self, context):

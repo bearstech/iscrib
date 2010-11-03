@@ -384,6 +384,7 @@ class Application_Register(Application_View):
         root = context.root
         site_root = resource.get_site_root()
         added = []
+        allowed = resource.get_allowed_users()
         for lineno, line in enumerate(new_users.splitlines()):
             lastname, email = parseaddr(line)
             try:
@@ -414,6 +415,8 @@ class Application_Register(Application_View):
                 continue
             resource.make_resource(username, Form, title={'en': lastname})
             added.append(username)
+            if len(added) == allowed:
+                break
 
         if not added:
             context.message = ERROR(u"No user added.")
