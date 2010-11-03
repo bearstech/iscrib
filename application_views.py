@@ -405,7 +405,9 @@ class Application_Register(Application_View):
                 user.set_property('lastname', lastname)
             username = user.name
             # Give the role "guests" to see public resources (logo, etc.)
-            if site_root.get_user_role(username) is None:
+            if (site_root.get_user_role(username) is None
+                    # Except to top-level admins
+                    and not site_root.is_admin(user, resource)):
                 site_root.set_user_role(username, 'guests')
             # Add the form
             if resource.get_resource(username, soft=True) is not None:
