@@ -24,6 +24,7 @@ from socket import gethostname
 # Import from ikaaro
 
 # Import from iscrib
+from datatypes import Numeric, Unicode
 
 
 # XXX heuristic
@@ -82,3 +83,18 @@ def parse_control(title):
                     yield True, title[start + 1:end]
                     break
     yield False, title[end:]
+
+
+
+def force_encode(value, datatype, encoding):
+    if datatype.multiple:
+        return ' '.join(value)
+    try:
+        # TypeError: issubclass() arg 1 must be a class
+        if isinstance(datatype, Numeric):
+            return datatype.encode(value)
+        elif issubclass(datatype, Unicode):
+            return datatype.encode(value, encoding)
+        return datatype.encode(value)
+    except ValueError:
+        return unicode(value).encode(encoding)

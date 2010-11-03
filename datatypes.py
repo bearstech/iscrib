@@ -715,6 +715,11 @@ class SqlEnumerate(Enumerate):
         return quote_string(cls.encode(value))
 
 
+    @classmethod
+    def get_values(cls, value):
+        return (cls.get_value(value, value) for value in value)
+
+
 
 class EnumCV(SqlEnumerate):
     counter = 1

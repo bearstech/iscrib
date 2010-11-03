@@ -30,6 +30,7 @@ from itools.csv import CSVFile
 from itools.database import PhraseQuery, AndQuery, NotQuery
 from itools.datatypes import Integer, Unicode, Email, String
 from itools.gettext import MSG
+from itools.log import log_error
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
 from itools.web import INFO, ERROR, BaseView, FormError
@@ -49,6 +50,7 @@ from ikaaro.workflow import get_workflow_preview
 from base_views import LoginView, IconsView
 from form import Form
 from formpage import FormPage
+from utils import force_encode
 from workflow import WorkflowState, EMPTY
 
 
@@ -330,17 +332,19 @@ class Application_Export(BaseView):
                 handler = form.handler
                 for name, datatype in sorted(schema.iteritems()):
                     value = handler.get_value(name, schema)
-                    try:
-                        value = datatype.encode(value, encoding)
-                    except TypeError:
-                        value = datatype.encode(value)
-                    row.append(value)
+                    if datatype.multiple:
+                        data = '\n'.join(value.encode(encoding) for value in
+                                datatype.get_values(value))
+                    else:
+                        data = force_encode(value, datatype, encoding)
+                    row.append(data)
                 csv.add_row(row)
 
             csv = csv.to_str(separator=';')
             if type(csv) is not str:
                 raise TypeError, str(type(csv))
-        except Exception:
+        except Exception, e:
+            log_error(e)
             return context.come_back(MSG_EXPORT_ERROR)
 
         context.set_content_type('text/comma-separated-values')

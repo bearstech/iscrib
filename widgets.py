@@ -62,13 +62,13 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
     html = []
 
     # True -> '1' ; False -> '2'
-    data = datatype.encode(value)
     if readonly:
         if datatype.multiple:
-            input = u"\n".join(make_element(u"div",
-                content=datatype.get_value(data)) for data in data)
+            input = u"\n".join(make_element(u"div", content=value)
+                for value in datatype.get_values(value))
         else:
             # '1' -> u"Oui" ; '2' -> u"Non"
+            data = datatype.encode(value)
             input = datatype.get_value(data, value)
             input = XMLContent.encode(input)
         html.append(make_element(u"div", content=input))
@@ -231,8 +231,8 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     elif  isinstance(datatype, Numeric):
         pass
     elif issubclass(datatype, Text):
-        widget = textarea_widget(context, form, datatype, name, value, schema,
-                fields, readonly)
+        widget = textarea_widget(context, form, datatype, name, value,
+                schema, fields, readonly)
     # Basic text input
     if widget is None:
         widget = text_widget(context, form, datatype, name, value, schema,
