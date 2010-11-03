@@ -62,12 +62,14 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
     html = []
 
     # True -> '1' ; False -> '2'
-    value = datatype.encode(value)
+    data = datatype.encode(value)
     if readonly:
-        input = datatype.get_value(value, value)
-        if input is None:
-            input = u""
+        if datatype.multiple:
+            input = u"\n".join(make_element(u"div",
+                content=datatype.get_value(data)) for data in data)
         else:
+            # '1' -> u"Oui" ; '2' -> u"Non"
+            input = datatype.get_value(data, value)
             input = XMLContent.encode(input)
         html.append(make_element(u"div", content=input))
     else:
