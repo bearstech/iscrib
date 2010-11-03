@@ -39,8 +39,8 @@ from workgroup_views import Workgroup_Edit
 class Workgroup(WebSite):
     class_id = 'Workgroup'
     class_title = MSG(u"iScrib Workgroup")
-    class_description = MSG(u"Private workgroup with logo, users and "
-            u"collection applications")
+    class_description = MSG(u"Create your client space to manage collection "
+            u"applications and submit them.")
     class_schema = merge_dicts(WebSite.class_schema,
             logo=PathDataType(source='metadata', default=''))
     class_views = WebSite.class_views + ['show']

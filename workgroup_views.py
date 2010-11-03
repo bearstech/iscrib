@@ -46,6 +46,7 @@ MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
 class Workgroup_NewInstance(NewInstance):
     access = True
     schema = merge_dicts(NewInstance.schema,
+            already_client=String,
             title=Unicode(mandatory=True),
             email=Email,
             firstname=Unicode,
@@ -55,9 +56,20 @@ class Workgroup_NewInstance(NewInstance):
             password2=String,
             captcha=RecaptchaDatatype)
     widgets = [ReadOnlyWidget('cls_description'),
+            ReadOnlyWidget('already_client'),
             TextWidget('title', title=MSG(u'Name of your client space'),
                 tip=MSG(u'You can type the name of your company or '
                     u'organization'))]
+
+
+    def get_value(self, resource, context, name, datatype):
+        if name == 'already_client':
+            return MSG(u"""<p id="already-client">Already registered and you
+            want to log in your client space? <a href="/;login">Click
+            here</a>.</p>""", html=True).gettext()
+        return super(Workgroup_NewInstance, self).get_value(resource,
+                context, name, datatype)
+
 
 
     def get_schema(self, resource, context):
