@@ -476,9 +476,8 @@ class Application_Login(LoginView):
             return
 
         # Register
-        password = form['password']
-        password2 = form['password2']
-        if password != password2:
+        password = form['newpass']
+        if password != form['newpass2']:
             context.message = MSG_PASSWORD_MISMATCH
             return
 
