@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-03 13:11+CET\n"
+"POT-Creation-Date: 2010-11-03 14:11+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -219,10 +219,10 @@ msgstr ""
 msgctxt "label"
 msgid ""
 "<g id='14'>E-mail Address</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>"
-"${username/error}<x id='18'/></g>"
+"${email/error}<x id='18'/></g>"
 msgstr ""
 "<g id='14'>Adresse de courriel</g>  <g id='15'>* </g>  <x id='16'/>  <g "
-"id='17'>${username/error}<x id='18'/></g>"
+"id='17'>${email/error}<x id='18'/></g>"
 
 #: ../ui/template.xhtml.en:89
 msgctxt "link"
@@ -355,10 +355,6 @@ msgstr ""
 msgid "CSS"
 msgstr ""
 
-#: ../user_views.py:35
-msgid "Choose your password"
-msgstr "Choisir votre mot de passe"
-
 #: ../ui/root/show.xml.en:24
 msgctxt "heading"
 msgid "Client Spaces with forms you have to fill in"
@@ -373,7 +369,7 @@ msgctxt "title attribute"
 msgid "Come back to the form"
 msgstr ""
 
-#: ../user_views.py:45 ../user_views.py:104 ../workgroup_views.py:90
+#: ../user_views.py:37 ../user_views.py:65 ../workgroup_views.py:90
 msgid "Company"
 msgstr "Société"
 
@@ -806,6 +802,10 @@ msgstr ""
 msgid "Online Help"
 msgstr ""
 
+#: ../user_views.py:50
+msgid "Operation successful! Welcome."
+msgstr ""
+
 #: ../datatypes.py:666
 msgid "Oui"
 msgstr ""
@@ -818,7 +818,7 @@ msgstr ""
 msgid "Parameters"
 msgstr "Paramètres"
 
-#: ../user_views.py:46 ../workgroup_views.py:91
+#: ../workgroup_views.py:91
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -897,10 +897,6 @@ msgstr "Renommer l'application"
 msgid "Repeat Password"
 msgstr "Répéter le mot de passe"
 
-#: ../user_views.py:47
-msgid "Repeat your password"
-msgstr "Répéter le mot de passe"
-
 #: ../schema.py:196
 msgid "Representation"
 msgstr "Représentation"
@@ -952,7 +948,7 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ../base_views.py:93
+#: ../base_views.py:97
 msgid "The e-mail or the password is incorrect."
 msgstr "L'adresse de courriel ou le mot de passe sont incorrects."
 
@@ -963,7 +959,7 @@ msgstr ""
 "Le formulaire est valide, vous pouvez l'exporter dans une base de données "
 "SQL."
 
-#: ../application_views.py:463 ../base_views.py:127
+#: ../application_views.py:463 ../base_views.py:131
 msgid "The given username is not an e-mail address."
 msgstr "Le nom donné n'est pas une adresse de courriel valide."
 
@@ -1103,7 +1099,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr "Bienvenue dans votre espace iScrib"
 
-#: ../application_views.py:509 ../base_views.py:121
+#: ../application_views.py:509 ../base_views.py:125
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
@@ -1124,11 +1120,11 @@ msgstr "Oui"
 msgid "You are already registered. Log in using your password."
 msgstr "Vous êtes déjà inscrit. Connectez-vous avec votre mot de passe."
 
-#: ../application_views.py:471 ../base_views.py:137
+#: ../application_views.py:471 ../base_views.py:141
 msgid "You are not allowed to register."
 msgstr "Les inscriptions sont fermées."
 
-#: ../user.py:45
+#: ../user.py:47
 msgid ""
 "You are now registered as a user of {site_name}.\n"
 "\n"
@@ -1146,7 +1142,7 @@ msgstr ""
 "\n"
 "Votre mot de passe : {password}"
 
-#: ../user.py:53
+#: ../user.py:55
 msgid ""
 "You are now registered as a user of {site_name}.\n"
 "\n"
@@ -1233,12 +1229,6 @@ msgctxt "heading"
 msgid "Your Collection Applications"
 msgstr "Vos applications de collecte"
 
-#: ../user_views.py:94
-msgid "Your account was created! You can create a collection application."
-msgstr ""
-"Votre compte a été créé ! Vous pouvez créer une application de collecte "
-"d'informations"
-
 #: ../application_views.py:61
 msgid "Your application is created. Now register users."
 msgstr ""
@@ -1324,7 +1314,7 @@ msgstr ""
 msgid "h%d"
 msgstr ""
 
-#: ../root.py:62
+#: ../root.py:63
 msgid "iScrib"
 msgstr ""
 
@@ -1486,6 +1476,9 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 #~ msgid "Champ obligatoire"
 #~ msgstr "Mandatory field"
 
+#~ msgid "Choose your password"
+#~ msgstr "Choisir votre mot de passe"
+
 #~ msgid "Download this template and use it to define to design your form."
 #~ msgstr ""
 #~ "Téléchargez ce gabarit qui vous servira d'exemple pour créer votre "
@@ -1508,6 +1501,9 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 #~ msgctxt "link"
 #~ msgid "Register users"
 #~ msgstr "Inscrire des utilisateurs"
+
+#~ msgid "Repeat your password"
+#~ msgstr "Répéter le mot de passe"
 
 #~ msgctxt "link"
 #~ msgid "See source"
@@ -1540,6 +1536,11 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 
 #~ msgid "Your Forms"
 #~ msgstr "Vos formulaires"
+
+#~ msgid "Your account was created! You can create a collection application."
+#~ msgstr ""
+#~ "Votre compte a été créé ! Vous pouvez créer une application de collecte "
+#~ "d'informations"
 
 #~ msgid "Your form was successfully exported."
 #~ msgstr "Votre formulaire a bien été exporté."

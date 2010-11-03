@@ -57,15 +57,15 @@
           <table>
             <tr>
               <td>
-                <label for="username">E-mail Address</label>
+                <label for="email">E-mail Address</label>
                 <span class="field-is-missing" title="This field is
                   required">*
                 </span>
                 <br/>
-                <span stl:if="username/error"
-                  class="field-error">${username/error}<br/></span>
-                <input type="text" id="username" name="username"
-                  value="${username/value}" size="40" />
+                <span stl:if="email/error"
+                  class="field-error">${email/error}<br/></span>
+                <input type="text" id="email" name="email"
+                  value="${email/value}" size="40" />
               </td>
             </tr>
           </table>

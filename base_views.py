@@ -20,7 +20,7 @@ from operator import itemgetter
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import Email
+from itools.datatypes import Email, String
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path, Reference
 from itools.web import INFO, ERROR
@@ -82,6 +82,10 @@ class AutomaticEditView(DBResource_Edit):
 # Pas d'héritage pour pas de méthode "action"
 class LoginView(BaseLoginView):
     template = '/ui/iscrib/base/login.xml'
+    schema = {
+        'username': String,
+        'password': String,
+        'email': String}
 
 
     def action_login(self, resource, context, form):
@@ -122,7 +126,7 @@ class LoginView(BaseLoginView):
 
 
     def action_register(self, resource, context, form):
-        email = form['username'].strip()
+        email = form['email'].strip()
         if not Email.is_valid(email):
             message = u'The given username is not an e-mail address.'
             context.message = ERROR(message)

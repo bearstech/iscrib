@@ -54,6 +54,7 @@ class Root(BaseRoot):
     contact = Root_Contact()
     edit_contact_options = Root_EditContactOptions()
     # Security
+    login = LoginView()
     unauthorized = LoginView()
 
 

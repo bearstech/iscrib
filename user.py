@@ -26,6 +26,7 @@ from ikaaro.user import User as BaseUser
 
 # Import from iscrib
 from user_views import User_EditAccount, User_ConfirmRegistration
+from user_views import User_ChangePasswordForgotten
 
 
 class User(BaseUser):
@@ -35,6 +36,7 @@ class User(BaseUser):
     # Views
     edit_account = User_EditAccount()
     confirm_registration = User_ConfirmRegistration()
+    change_password_forgotten = User_ChangePasswordForgotten()
 
     form_registration_text = MSG(u"""You are now registered as a user of {site_name}.
 

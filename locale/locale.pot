@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-03 13:11+CET\n"
+"POT-Creation-Date: 2010-11-03 14:11+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,16 +152,12 @@ msgstr ""
 msgid "CSS"
 msgstr ""
 
-#: ../user_views.py:35
-msgid "Choose your password"
-msgstr ""
-
 #: ../application.py:38
 msgid "Collection Application"
 msgstr ""
 
-#: ../user_views.py:45
-#: ../user_views.py:104
+#: ../user_views.py:37
+#: ../user_views.py:65
 #: ../workgroup_views.py:90
 msgid "Company"
 msgstr ""
@@ -457,6 +453,10 @@ msgstr ""
 msgid "Online Help"
 msgstr ""
 
+#: ../user_views.py:50
+msgid "Operation successful! Welcome."
+msgstr ""
+
 #: ../datatypes.py:666
 msgid "Oui"
 msgstr ""
@@ -469,7 +469,6 @@ msgstr ""
 msgid "Parameters"
 msgstr ""
 
-#: ../user_views.py:46
 #: ../workgroup_views.py:91
 msgid "Password"
 msgstr ""
@@ -515,10 +514,6 @@ msgstr ""
 msgid "Repeat Password"
 msgstr ""
 
-#: ../user_views.py:47
-msgid "Repeat your password"
-msgstr ""
-
 #: ../schema.py:196
 msgid "Representation"
 msgstr ""
@@ -558,12 +553,12 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: ../base_views.py:93
+#: ../base_views.py:97
 msgid "The e-mail or the password is incorrect."
 msgstr ""
 
 #: ../application_views.py:463
-#: ../base_views.py:127
+#: ../base_views.py:131
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -634,7 +629,7 @@ msgid "Warning"
 msgstr ""
 
 #: ../application_views.py:509
-#: ../base_views.py:121
+#: ../base_views.py:125
 msgid "Welcome!"
 msgstr ""
 
@@ -647,15 +642,15 @@ msgid "You are already registered. Log in using your password."
 msgstr ""
 
 #: ../application_views.py:471
-#: ../base_views.py:137
+#: ../base_views.py:141
 msgid "You are not allowed to register."
 msgstr ""
 
-#: ../user.py:45
+#: ../user.py:47
 msgid "You are now registered as a user of {site_name}.\n\nYou can follow this link <{site_uri}> to access your form.\n\nYour e-mail address {email} is your identifier.\n\nYour password: {password}"
 msgstr ""
 
-#: ../user.py:53
+#: ../user.py:55
 msgid "You are now registered as a user of {site_name}.\n\nYou can follow this link <{site_uri}> to access your workgroup.\n\nYour e-mail address {email} is your identifier.\n\nYour password: {password}"
 msgstr ""
 
@@ -669,10 +664,6 @@ msgstr ""
 
 #: ../workgroup.py:53
 msgid "Your Collection Applications"
-msgstr ""
-
-#: ../user_views.py:94
-msgid "Your account was created! You can create a collection application."
 msgstr ""
 
 #: ../application_views.py:61
@@ -791,7 +782,7 @@ msgstr ""
 msgid "h%d"
 msgstr ""
 
-#: ../root.py:62
+#: ../root.py:63
 msgid "iScrib"
 msgstr ""
 
@@ -1095,7 +1086,7 @@ msgstr ""
 
 #: ../ui/base/login.xml.en:60
 msgctxt "label"
-msgid "<g id='14'>E-mail Address</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>${username/error}<x id='18'/></g>"
+msgid "<g id='14'>E-mail Address</g>  <g id='15'>* </g>  <x id='16'/>  <g id='17'>${email/error}<x id='18'/></g>"
 msgstr ""
 
 #: ../ui/application/login.xml.en:54
