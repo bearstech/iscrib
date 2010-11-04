@@ -22,18 +22,26 @@
             <button type="submit" name="add_users" class="button-ok">Add
               Users</button>
           </form>
-          <p stl:if="not allowed_users">You have reached the maximum allowed
-          users. Contact <a href="http://www.itaapy.com/contact">Itaapy</a>
-          for more.</p>
+          <p stl:if="not allowed_users">${MSG_NO_MORE_ALLOWED}</p>
         </td>
         <td width="50%" align="left" valign="top"
           style="border-left: 1px solid #ccc">
-          ${batch}
-          ${table}
-          <p>You can send this URL to your users: <a
-            href="${url_user}">${url_user}</a></p>
-          <p>You can collect data at this URL: <a
-            href="${url_admin}">${url_admin}</a></p>
+          <p>You have subscribed ${n_forms} users<stl:inline
+          stl:if="max_users"> out of ${max_users} allowed</stl:inline>:</p>
+          <ul>
+            <li>${unconfirmed_users} did not subscribe;</li>
+            <li>${empty_forms} subscribed but did not start the form;</li>
+            <li>${pending_forms} started filling the form;</li>
+            <li>${finished_forms} finished the form.</li>
+          </ul>
+          <ul>
+            <li>You can send this URL to your users:<br/>
+              <a href="${url_user}">${url_user}</a></li>
+            <li>You can collect data at this URL:<br/>
+              <a href="${url_admin}">${url_admin}</a></li>
+            <li>You can manage users at this URL:<br/>
+              <a href="${url_admin}#users">${url_admin}#users</a></li>
+          </ul>
         </td>
       </tr>
     </tbody>

@@ -51,13 +51,16 @@ from base_views import LoginView, IconsView
 from form import Form
 from formpage import FormPage
 from utils import force_encode
-from workflow import WorkflowState, EMPTY
+from workflow import WorkflowState, EMPTY, PENDING, FINISHED
 
 
 MSG_ERR_PAGE_NAME = ERROR(u'In the "${name}" sheet, page "${page}" is not '
         u'related to any variable in the schema.')
 MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 MSG_NO_DATA = ERROR(u"No data to collect for now.")
+MSG_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
+        u'Contact <a href="http://www.itaapy.com/contact">Itaapy</a> for '
+        u"more.", html=True)
 MSG_NEW_APPLICATION = INFO(u'Your application is created. Now register '
         u'users.')
 MSG_PASSWORD_MISSING = ERROR(u"The password is missing.")
@@ -183,9 +186,11 @@ class Application_Menu(IconsView):
 
 
     def is_allowed_to_register(self, item, resource, context):
-        max_users = resource.get_property('max_users')
         allowed_users = resource.get_allowed_users()
-        return bool(allowed_users)
+        if not bool(allowed_users):
+            item['title'] = MSG_NO_MORE_ALLOWED
+            return False
+        return True
 
 
     def is_allowed_to_export(self, item, resource, context):
@@ -227,7 +232,7 @@ class Application_View(Folder_BrowseContent):
         elif column == 'state':
             return (get_workflow_preview(item_resource, context),
                     '{0}/;send'.format(context.get_link(item_resource)))
-        if column in ('user', 'email', 'registered'):
+        elif column in ('user', 'email', 'registered'):
             user = context.root.get_user(brain.name)
             if column == 'user':
                 if user is None:
@@ -253,6 +258,40 @@ class Application_View(Folder_BrowseContent):
                 return MSG(u"Yes") if password else MSG(u"No")
         return super(Application_View, self).get_item_value(resource,
                 context, item, column)
+
+
+
+    def get_key_sorted_by_name(self, resource, context, item):
+        return int(item.name)
+
+
+    def get_key_sorted_by_state(self, resource, context, item):
+        state = item.workflow_state
+        value = WorkflowState.get_value(state)
+        return value.gettext().lower()
+
+
+    def get_key_sorted_by_user(self, resource, context, item):
+        user = context.root.get_user(item.name)
+        if user is None:
+            return None
+        return user.get_title().lower()
+
+
+    def get_key_sorted_by_email(self, resource, context, item):
+        user = context.root.get_user(item.name)
+        if user is None:
+            return None
+        return user.get_property('email').lower()
+
+
+    def get_key_sorted_by_registered(self, resource, context, item):
+        user = context.root.get_user(item.name)
+        if user is None:
+            return None
+        password = user.get_property('password')
+        registered = MSG(u"yes") if password else MSG(u"No")
+        return registered.gettext().lower()
 
 
     def get_namespace(self, resource, context):
@@ -372,7 +411,27 @@ class Application_Register(Application_View):
                 context)
         namespace['title'] = self.title
         namespace['allowed_users'] = resource.get_allowed_users()
+        namespace['MSG_NO_MORE_ALLOWED'] = MSG_NO_MORE_ALLOWED
         namespace['new_users'] = context.get_form_value('new_users')
+        namespace['registered_users'] = 0
+        namespace['unconfirmed_users'] = 0
+        namespace['empty_forms'] = 0
+        namespace['pending_forms'] = 0
+        namespace['finished_forms'] = 0
+        users = resource.get_resource('/users')
+        for form in resource.get_forms():
+            namespace['registered_users'] += 1
+            user = users.get_resource(form.name)
+            if user.get_property('password') is None:
+                namespace['unconfirmed_users'] += 1
+            else:
+                state = form.get_workflow_state()
+                if state == EMPTY:
+                    namespace['empty_forms'] += 1
+                elif state == PENDING:
+                    namespace['pending_forms'] += 1
+                elif state == FINISHED:
+                    namespace['finished_forms'] += 1
         namespace['url_user'] = resource.get_user_url(context)
         namespace['url_admin'] = resource.get_admin_url(context)
         return namespace
