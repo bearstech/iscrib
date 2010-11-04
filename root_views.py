@@ -18,7 +18,7 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String
+from itools.datatypes import String, Unicode
 from itools.gettext import MSG
 from itools.uri import Reference
 from itools.web import BaseView
@@ -86,12 +86,19 @@ class Root_Contact(ContactForm):
 
     def get_schema(self, resource, context):
         schema = super(Root_Contact, self).get_schema(resource, context)
-        return merge_dicts(schema, captcha=RecaptchaDatatype(mandatory=True))
+        return merge_dicts(schema, societe=Unicode, fonction=Unicode,
+                phone=Unicode(mandatory=True),
+                captcha=RecaptchaDatatype(mandatory=True))
 
 
     def get_widgets(self, resource, context):
         widgets = super(Root_Contact, self).get_widgets(resource, context)
-        return widgets[:-1] + [RecaptchaWidget('captcha')]
+        return (widgets[:2]
+                + [TextWidget('societe', title=MSG(u"Company/Organization")),
+                    TextWidget('fonction', title=MSG(u"Function")),
+                    TextWidget('phone', title=MSG(u"Phone Number"))]
+                + widgets[2:-1]
+                + [RecaptchaWidget('captcha')])
 
 
 

@@ -402,6 +402,10 @@ msgstr ""
 msgid "Company"
 msgstr "Société"
 
+#: ../root_views.py:97
+msgid "Company/Organization"
+msgstr "Société/Organisme"
+
 #: ../workgroup_views.py:187
 msgid "Configure your client space"
 msgstr "Vous pouvez configurer votre espace client"
@@ -568,6 +572,10 @@ msgstr "Page de formulaire"
 msgctxt "heading"
 msgid "Form State:"
 msgstr "État du formulaire :"
+
+#: ../root_views.py:98
+msgid "Function"
+msgstr "Fonction"
 
 #: ../schema.py:93
 msgid "HH:MM"
@@ -848,6 +856,10 @@ msgstr "Mot de passe"
 msgid "Pending"
 msgstr "En cours"
 
+#: ../root_views.py:99
+msgid "Phone Number"
+msgstr "Téléphone"
+
 #: ../ui/application/login.xml.en:8
 msgctxt "paragraph"
 msgid "Please enter your e-mail address to access the form:"
@@ -880,11 +892,11 @@ msgstr "Imprimer (dans une nouvelle fenêtre)"
 msgid "Print form"
 msgstr "Impression du formulaire"
 
-#: ../root_views.py:102
+#: ../root_views.py:109
 msgid "ReCaptcha Private Key"
 msgstr ""
 
-#: ../root_views.py:104
+#: ../root_views.py:111
 msgid "ReCaptcha Public Key"
 msgstr ""
 

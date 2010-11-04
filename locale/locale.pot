@@ -165,6 +165,10 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
+#: ../root_views.py:97
+msgid "Company/Organization"
+msgstr ""
+
 #: ../workgroup_views.py:187
 msgid "Configure your client space"
 msgstr ""
@@ -272,6 +276,10 @@ msgstr ""
 
 #: ../formpage.py:75
 msgid "Form Page"
+msgstr ""
+
+#: ../root_views.py:98
+msgid "Function"
 msgstr ""
 
 #: ../schema.py:93
@@ -478,6 +486,10 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
+#: ../root_views.py:99
+msgid "Phone Number"
+msgstr ""
+
 #: ../application_views.py:72
 msgid "Please fill in the form \"{application_title}\" available here:\r\n<{application_url}>.\r\n"
 msgstr ""
@@ -490,11 +502,11 @@ msgstr ""
 msgid "Print form"
 msgstr ""
 
-#: ../root_views.py:102
+#: ../root_views.py:109
 msgid "ReCaptcha Private Key"
 msgstr ""
 
-#: ../root_views.py:104
+#: ../root_views.py:111
 msgid "ReCaptcha Public Key"
 msgstr ""
 
