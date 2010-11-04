@@ -22,6 +22,7 @@ from itools.workflow import Workflow
 
 
 # States
+NOT_REGISTERED = 'not_registered'
 EMPTY = 'private'
 PENDING = 'pending'
 FINISHED = 'public'
@@ -31,11 +32,13 @@ MODIFIED = 'modified'
 
 class WorkflowState(Enumerate):
     options = [
+        {'name': NOT_REGISTERED, 'value': MSG(u"Not Registered")},
         {'name': EMPTY, 'value': MSG(u"Empty")},
         {'name': PENDING, 'value': MSG(u"Pending")},
         {'name': FINISHED, 'value': MSG(u"Finished")},
-        {'name': EXPORTED, 'value': MSG(u"Exported")},
-        {'name': MODIFIED, 'value': MSG(u"Modified after export")}]
+        #{'name': EXPORTED, 'value': MSG(u"Exported")},
+        #{'name': MODIFIED, 'value': MSG(u"Modified after export")},
+    ]
 
 
 

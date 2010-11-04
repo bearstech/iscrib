@@ -27,22 +27,25 @@ from lpod.document import odf_get_document
 # Import from itools
 from itools.core import merge_dicts
 from itools.csv import CSVFile
-from itools.database import PhraseQuery, AndQuery, NotQuery
+from itools.database import PhraseQuery, TextQuery, StartQuery, AndQuery
+from itools.database import OrQuery, NotQuery
 from itools.datatypes import Integer, Unicode, Email, String
 from itools.gettext import MSG
 from itools.log import log_error
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
-from itools.web import INFO, ERROR, BaseView, FormError
+from itools.web import INFO, ERROR, BaseView, FormError, STLForm
 
 # Import from ikaaro
 from ikaaro.access import is_admin
-from ikaaro.autoform import FileWidget, TextWidget
+from ikaaro.autoform import FileWidget, TextWidget, SelectWidget
+from ikaaro.buttons import BrowseButton
 from ikaaro.datatypes import FileDataType
 from ikaaro.file import ODS
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
+from ikaaro.views import SearchForm
 from ikaaro.views_new import NewInstance
 from ikaaro.workflow import get_workflow_preview
 
@@ -51,7 +54,7 @@ from base_views import LoginView, IconsView
 from form import Form
 from formpage import FormPage
 from utils import force_encode
-from workflow import WorkflowState, EMPTY, PENDING, FINISHED
+from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
 MSG_ERR_PAGE_NAME = ERROR(u'In the "${name}" sheet, page "${page}" is not '
@@ -80,6 +83,23 @@ def find_title(table):
             elif value.startswith(u"*"):
                 return value[1:].strip()
     return None
+
+
+
+def get_users_query(query, context):
+    """Filter forms from users list with same name.
+    """
+    query = AndQuery(PhraseQuery('format', 'user'), query)
+    results = context.root.search(query)
+    users = (brain.name for brain in results.get_documents())
+    return (PhraseQuery('name', user) for user in users)
+
+
+
+class ExportButton(BrowseButton):
+    access = 'is_allowed_to_edit'
+    name = 'export'
+    title = MSG(u"Export this List")
 
 
 
@@ -206,21 +226,54 @@ class Application_View(Folder_BrowseContent):
     access = 'is_allowed_to_edit'
     title = MSG(u"Manage your Data Collection Application")
     template = '/ui/iscrib/application/view.xml'
-    search_template = None
 
+    schema = {}
+
+    # Search Form
+    search_schema = merge_dicts(Folder_BrowseContent.search_schema,
+            SearchForm.search_schema,
+            search_state=String)
+    search_fields = []
+    search_template = '/ui/iscrib/application/search.xml'
+
+    # Table
     table_columns = [
             ('name', MSG(u"Form")),
             ('state', MSG(u"State")),
             ('mtime', MSG(u"Last Modified")),
-            ('user', MSG(u"User")),
-            ('email', MSG(u"E-mail")),
-            ('registered', MSG(u"Registered"))]
-    table_actions = []
+            ('firstname', MSG(u"First Name")),
+            ('lastname', MSG(u"Last Name")),
+            ('email', MSG(u"E-mail"))]
+    table_actions = [ExportButton]
 
 
     def get_items(self, resource, context, *args):
-        query = AndQuery(PhraseQuery('format', Form.class_id),
-                    NotQuery(PhraseQuery('name', resource.default_form)))
+        query = PhraseQuery('format', Form.class_id)
+        # Filter on state
+        search_state = context.query['search_state']
+        if search_state:
+            if search_state == NOT_REGISTERED:
+                search_query = PhraseQuery('has_password', False)
+                users_query = get_users_query(search_query, context)
+                query = AndQuery(query, OrQuery(*users_query))
+            else:
+                search_query = PhraseQuery('has_password', True)
+                users_query = get_users_query(search_query, context)
+                state_query = PhraseQuery('workflow_state', search_state)
+                query = AndQuery(query, state_query, OrQuery(*users_query))
+        # Filter on user properties
+        search_term = context.query['search_term'].strip()
+        if search_term:
+            search_query = OrQuery(
+                TextQuery('lastname', search_term),
+                TextQuery('firstname', search_term),
+                StartQuery('username', search_term),
+                StartQuery('email_domain', search_term))
+            users_query = get_users_query(search_query, context)
+            query = AndQuery(query, OrQuery(*users_query))
+        # Filter out default form
+        default_form_query = PhraseQuery('name', resource.default_form)
+        query = AndQuery(query, NotQuery(default_form_query))
         return super(Application_View, self).get_items(resource, context,
                 query, *args)
 
@@ -229,15 +282,17 @@ class Application_View(Folder_BrowseContent):
         brain, item_resource = item
         if column == 'name':
             return (brain.name, context.get_link(item_resource))
-        elif column == 'state':
-            return (get_workflow_preview(item_resource, context),
-                    '{0}/;send'.format(context.get_link(item_resource)))
-        elif column in ('user', 'email', 'registered'):
+        elif column in ('state', 'firstname', 'lastname', 'email'):
             user = context.root.get_user(brain.name)
-            if column == 'user':
+            if column == 'state':
+                if user is not None and not user.get_property('password'):
+                    return WorkflowState.get_value(NOT_REGISTERED)
+                return (get_workflow_preview(item_resource, context),
+                        '{0}/;send'.format(context.get_link(item_resource)))
+            elif column in ('firstname', 'lastname'):
                 if user is None:
-                    return brain.name
-                return user.get_title()
+                    return u""
+                return user.get_property(column)
             elif column == 'email':
                 email = user.get_property('email')
                 application_title = resource.get_title()
@@ -253,9 +308,6 @@ class Application_View(Folder_BrowseContent):
                 url = 'mailto:{0}?subject={1}&body={2}'.format(email,
                         subject, body)
                 return (email, url)
-            elif column == 'registered':
-                password = user.get_property('password')
-                return MSG(u"Yes") if password else MSG(u"No")
         return super(Application_View, self).get_item_value(resource,
                 context, item, column)
 
@@ -266,7 +318,11 @@ class Application_View(Folder_BrowseContent):
 
 
     def get_key_sorted_by_state(self, resource, context, item):
-        state = item.workflow_state
+        user = context.root.get_user(item.name)
+        if user is not None and not user.get_property('password'):
+            state = NOT_REGISTERED
+        else:
+            state = item.workflow_state
         value = WorkflowState.get_value(state)
         return value.gettext().lower()
 
@@ -285,41 +341,50 @@ class Application_View(Folder_BrowseContent):
         return user.get_property('email').lower()
 
 
-    def get_key_sorted_by_registered(self, resource, context, item):
-        user = context.root.get_user(item.name)
-        if user is None:
-            return None
-        password = user.get_property('password')
-        registered = MSG(u"yes") if password else MSG(u"No")
-        return registered.gettext().lower()
+    def get_search_namespace(self, resource, context):
+        namespace = SearchForm.get_search_namespace(self, resource, context)
+        namespace['state_widget'] = SelectWidget('search_state',
+                datatype=WorkflowState, value=context.query['search_state'])
+        return namespace
 
 
     def get_namespace(self, resource, context):
-        # Menu
-        menu = Application_Menu().GET(resource, context)
-        n_forms = resource.get_n_forms()
-        max_users = resource.get_property('max_users')
+        namespace = {}
+        namespace['menu'] = Application_Menu().GET(resource, context)
+        namespace['n_forms'] = resource.get_n_forms()
+        namespace['max_users'] = resource.get_property('max_users')
+
+        # Search
+        search_template = resource.get_resource(self.search_template)
+        search_namespace = self.get_search_namespace(resource, context)
+        namespace['search'] = stl(search_template, search_namespace)
 
         # Batch
-        batch = None
         items = self.get_items(resource, context)
-        if items and self.batch_template is not None:
+        query = context.query
+        if items or query['search_state'] or query['search_term']:
             template = resource.get_resource(self.batch_template)
-            namespace = self.get_batch_namespace(resource, context, items)
-            batch = stl(template, namespace)
+            batch_namespace = self.get_batch_namespace(resource, context,
+                    items)
+            namespace['batch'] = stl(template, batch_namespace)
+        else:
+            namespace['batch'] = None
 
         # Table
-        table = None
-        if batch:
-            if self.table_template is not None:
-                items = self.sort_and_batch(resource, context, items)
-                template = resource.get_resource(self.table_template)
-                namespace = self.get_table_namespace(resource, context,
-                        items)
-                table = stl(template, namespace)
+        if items:
+            items = self.sort_and_batch(resource, context, items)
+            template = resource.get_resource(self.table_template)
+            table_namespace = self.get_table_namespace(resource, context,
+                    items)
+            namespace['table'] = stl(template, table_namespace)
+        else:
+            namespace['table'] = None
 
-        return {'menu': menu, 'n_forms': n_forms, 'max_users': max_users,
-                'batch': batch, 'table': table}
+        return namespace
+
+
+    def action_export(self, resource, context, form):
+        raise NotImplementedError
 
 
 
@@ -394,7 +459,7 @@ class Application_Export(BaseView):
 
 
 
-class Application_Register(Application_View):
+class Application_Register(STLForm):
     access = 'is_allowed_to_edit'
     title = MSG(u"Register Users")
     template = '/ui/iscrib/application/register.xml'
@@ -410,6 +475,8 @@ class Application_Register(Application_View):
         namespace = super(Application_Register, self).get_namespace(resource,
                 context)
         namespace['title'] = self.title
+        namespace['max_users'] = resource.get_property('max_users')
+        namespace['n_forms'] = resource.get_n_forms()
         namespace['allowed_users'] = resource.get_allowed_users()
         namespace['MSG_NO_MORE_ALLOWED'] = MSG_NO_MORE_ALLOWED
         namespace['new_users'] = context.get_form_value('new_users')

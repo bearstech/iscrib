@@ -17,7 +17,7 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import Unicode
+from itools.datatypes import Unicode, Boolean
 from itools.gettext import MSG
 
 # Import from ikaaro
@@ -31,7 +31,8 @@ from user_views import User_ChangePasswordForgotten
 
 class User(BaseUser):
     class_schema = merge_dicts(BaseUser.class_schema,
-            company=Unicode(source='metadata'))
+            company=Unicode(source='metadata'),
+            has_password=Boolean(indexed=True))
 
     # Views
     edit_account = User_EditAccount()
@@ -53,6 +54,12 @@ You can follow this link <{site_uri}> to access your workgroup.
 Your e-mail address {email} is your identifier.
 
 Your password: {password}""")
+
+
+    def get_catalog_values(self):
+        values = super(User, self).get_catalog_values()
+        values['has_password'] = self.get_property('password') is not None
+        return values
 
 
     def send_form_registration(self, context, email, site_uri, password):
