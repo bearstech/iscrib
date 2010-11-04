@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-04 15:11+CET\n"
+"POT-Creation-Date: 2010-11-04 16:11+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,14 @@ msgstr ""
 #: ../datatypes.py:651
 msgid "\r\n"
 msgstr ""
+
+#: ../root_views.py:111
+msgid ""
+"\r\n"
+"{body}"
+msgstr ""
+"\r\n"
+"{body}"
 
 #: ../formpage.py:162 ../formpage.py:225
 msgid " centered"
@@ -402,7 +410,7 @@ msgstr ""
 msgid "Company"
 msgstr "Société"
 
-#: ../root_views.py:97
+#: ../root_views.py:98
 msgid "Company/Organization"
 msgstr "Société/Organisme"
 
@@ -573,7 +581,7 @@ msgctxt "heading"
 msgid "Form State:"
 msgstr "État du formulaire :"
 
-#: ../root_views.py:98
+#: ../root_views.py:99
 msgid "Function"
 msgstr "Fonction"
 
@@ -856,7 +864,7 @@ msgstr "Mot de passe"
 msgid "Pending"
 msgstr "En cours"
 
-#: ../root_views.py:99
+#: ../root_views.py:100
 msgid "Phone Number"
 msgstr "Téléphone"
 
@@ -892,11 +900,11 @@ msgstr "Imprimer (dans une nouvelle fenêtre)"
 msgid "Print form"
 msgstr "Impression du formulaire"
 
-#: ../root_views.py:109
+#: ../root_views.py:131
 msgid "ReCaptcha Private Key"
 msgstr ""
 
-#: ../root_views.py:111
+#: ../root_views.py:133
 msgid "ReCaptcha Public Key"
 msgstr ""
 
@@ -1118,7 +1126,7 @@ msgstr "Valeur"
 msgid "Variable"
 msgstr ""
 
-#: ../root_views.py:39
+#: ../root_views.py:40
 msgid "View"
 msgstr "Voir"
 
@@ -1269,7 +1277,7 @@ msgctxt "legend"
 msgid "Your Account"
 msgstr "Votre compte"
 
-#: ../root_views.py:53
+#: ../root_views.py:54
 msgid "Your Client Space"
 msgstr "Votre espace client"
 
@@ -1515,6 +1523,14 @@ msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 "{n} utilisateur(s) ajouté(s). Voir ci-dessous pour leur envoyer l'adresse du "
 "formulaire."
+
+#: ../root_views.py:118
+msgid ""
+"{title}: {value}\r\n"
+"{body}"
+msgstr ""
+"{title} : {value}\r\n"
+"{body}"
 
 #: ../application_views.py:71
 msgid "{workgroup_title}, form \"{application_title}\""

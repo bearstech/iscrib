@@ -31,6 +31,7 @@ from ikaaro.website_views import ContactForm
 # Import from iscrib
 from autoform import RecaptchaDatatype, RecaptchaWidget
 from base_views import FrontView
+from utils import is_production
 from workgroup import Workgroup
 
 
@@ -86,19 +87,40 @@ class Root_Contact(ContactForm):
 
     def get_schema(self, resource, context):
         schema = super(Root_Contact, self).get_schema(resource, context)
-        return merge_dicts(schema, societe=Unicode, fonction=Unicode,
+        return merge_dicts(schema, company=Unicode, function=Unicode,
                 phone=Unicode(mandatory=True),
-                captcha=RecaptchaDatatype(mandatory=True))
+                captcha=RecaptchaDatatype(mandatory=is_production))
 
 
     def get_widgets(self, resource, context):
         widgets = super(Root_Contact, self).get_widgets(resource, context)
-        return (widgets[:2]
-                + [TextWidget('societe', title=MSG(u"Company/Organization")),
-                    TextWidget('fonction', title=MSG(u"Function")),
+        widgets = (widgets[:2]
+                + [TextWidget('company', title=MSG(u"Company/Organization")),
+                    TextWidget('function', title=MSG(u"Function")),
                     TextWidget('phone', title=MSG(u"Phone Number"))]
-                + widgets[2:-1]
-                + [RecaptchaWidget('captcha')])
+                + widgets[2:-1])
+        if is_production:
+            widgets += [RecaptchaWidget('captcha')]
+        return widgets
+
+
+    def _get_form(self, resource, context):
+        form = super(Root_Contact, self)._get_form(resource, context)
+
+        body = form['message_body']
+        body = MSG(u"\r\n{body}").gettext(body=body)
+        for name in ('phone', 'function', 'company'):
+            title = None
+            for widget in self.get_widgets(resource, context):
+                if widget.name == name:
+                    title = widget.title.gettext()
+            value = form[name]
+            body = MSG(u"{title}: {value}\r\n{body}").gettext(title=title,
+                    value=value, body=body)
+        form['message_body'] = body
+
+        return form
+
 
 
 
