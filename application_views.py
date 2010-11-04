@@ -183,7 +183,7 @@ class Application_NewInstance(NewInstance):
 class Application_Menu(IconsView):
     make_item = IconsView.make_item
     items = [make_item(icon='/ui/iscrib/images/register48.png',
-              title=MSG(u"Register Users"),
+              title=MSG(u"Subscribe Users"),
               url=';register',
               access='is_allowed_to_register'),
              make_item(icon='/ui/iscrib/images/export48.png',
@@ -502,7 +502,7 @@ class Application_Export(BaseView):
 
 class Application_Register(STLForm):
     access = 'is_allowed_to_edit'
-    title = MSG(u"Register Users")
+    title = MSG(u"Subscribe Users")
     template = '/ui/iscrib/application/register.xml'
 
     schema = {'new_users': Unicode}

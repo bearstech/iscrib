@@ -9,7 +9,7 @@
       <tr>
         <th>New Users<stl:inline stl:if="max_users"> (${allowed_users}
           allowed)</stl:inline></th>
-        <th>Registered Users</th>
+        <th>Subscribed Users</th>
       </tr>
       <tr>
         <td width="50%" align="left" valign="top"

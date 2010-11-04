@@ -197,7 +197,7 @@ class Workgroup_View(Folder_BrowseContent):
 
     table_columns = [
             ('form', MSG(u"Application")),
-            ('subscribed', MSG(u"Users Subscribed")),
+            ('subscribed', MSG(u"Subscribed Users")),
             ('file', MSG(u"Source ODS File")),
             ('ctime', MSG(u"Creation Date"))]
     table_actions = []
