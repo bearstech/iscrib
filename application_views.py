@@ -360,19 +360,19 @@ class Application_View(Folder_BrowseContent):
         namespace['search'] = stl(search_template, search_namespace)
 
         # Batch
-        items = self.get_items(resource, context)
+        results = self.get_items(resource, context)
         query = context.query
-        if items or query['search_state'] or query['search_term']:
+        if results or query['search_state'] or query['search_term']:
             template = resource.get_resource(self.batch_template)
             batch_namespace = self.get_batch_namespace(resource, context,
-                    items)
+                    results)
             namespace['batch'] = stl(template, batch_namespace)
         else:
             namespace['batch'] = None
 
         # Table
-        if items:
-            items = self.sort_and_batch(resource, context, items)
+        if results:
+            items = self.sort_and_batch(resource, context, results)
             template = resource.get_resource(self.table_template)
             table_namespace = self.get_table_namespace(resource, context,
                     items)
@@ -383,8 +383,49 @@ class Application_View(Folder_BrowseContent):
         return namespace
 
 
-    def action_export(self, resource, context, form):
-        raise NotImplementedError
+    def action_export(self, resource, context, form, encoding='cp1252'):
+        csv = CSVFile()
+        header = [title.gettext().encode(encoding)
+                for column, title in self.table_columns]
+        csv.add_row(header)
+        results = self.get_items(resource, context)
+        for item in self.sort_and_batch(resource, context, results):
+            row = []
+            for column, title in self.table_columns:
+                if column == 'state':
+                    item_brain, item_resource = item
+                    user = context.root.get_user(item_brain.name)
+                    if (user is not None
+                            and user.get_property('password') is None):
+                        state = NOT_REGISTERED
+                    else:
+                        state = item_brain.workflow_state
+                    value = WorkflowState.get_value(state)
+                else:
+                    value = self.get_item_value(resource, context, item,
+                            column)
+                if type(value) is tuple:
+                    value = value[0]
+                elif type(value) is MSG:
+                    value = value.gettext()
+                if type(value) is unicode:
+                    value = value.encode(encoding)
+                elif type(value) is str:
+                    pass
+                else:
+                    raise NotImplementedError, str(type(value))
+                row.append(value)
+            csv.add_row(row)
+
+        csv = csv.to_str(separator=';')
+        if type(csv) is not str:
+            raise TypeError, str(type(csv))
+
+        context.set_content_type('text/comma-separated-values')
+        context.set_content_disposition('attachment',
+                filename="%s-users.csv" % (resource.name))
+
+        return csv
 
 
 
