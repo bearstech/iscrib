@@ -183,12 +183,12 @@ class Application_NewInstance(NewInstance):
 class Application_Menu(IconsView):
     make_item = IconsView.make_item
     items = [make_item(icon='/ui/iscrib/images/register48.png',
-              title=MSG(u"Subscribe Users"),
-              url=';register',
-              access='is_allowed_to_register'),
+                title=MSG(u"Subscribe Users"),
+                url=';register',
+                access='is_allowed_to_register'),
              make_item(icon='/ui/iscrib/images/export48.png',
-              title=MSG(u"Export Collected Data"),
-              description=MSG(u"""
+                title=MSG(u"Export Collected Data"),
+                description=MSG(u"""
 <div id="choose-format">
   <span><a href="#" title="Close"
     onclick="$('#choose-format').hide(); return false">X</a></span>
@@ -197,12 +197,16 @@ class Application_Menu(IconsView):
     <li>Download XLS Version (soon)</li>
   </ul>
 </div>""", html=True),
-              url='#',
-              onclick='$("#choose-format").show(); return false',
-              access='is_allowed_to_export'),
+                url='#',
+                onclick='$("#choose-format").show(); return false',
+                access='is_allowed_to_export'),
              make_item(icon='/ui/iscrib/images/form48.png',
-              title=MSG(u"Show Test Form"),
-              url=';show')]
+                title=MSG(u"Show Test Form"),
+                url=';show'),
+             make_item(icon='/ui/iscrib/images/edit48.png',
+                title=MSG(u"Edit Title"),
+                description=MSG(u"Configure your application"),
+                url=';edit')]
 
 
     def is_allowed_to_register(self, item, resource, context):
@@ -601,7 +605,6 @@ class Application_Register(STLForm):
 
 
 class Application_Edit(DBResource_Edit):
-    title = MSG(u"Rename Application")
 
     def _get_schema(self, resource, context):
         schema = super(Application_Edit, self)._get_schema(resource, context)
@@ -611,7 +614,8 @@ class Application_Edit(DBResource_Edit):
 
 
     def _get_widgets(self, resource, context):
-        widgets = super(Application_Edit, self)._get_widgets(resource, context)
+        widgets = super(Application_Edit, self)._get_widgets(resource,
+                context)
         if is_admin(context.user, resource):
             widgets.append(TextWidget('max_users',
                 title=MSG(u"Maximum form users (0 = unlimited)")))
