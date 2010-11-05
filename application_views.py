@@ -51,6 +51,7 @@ from ikaaro.workflow import get_workflow_preview
 
 # Import from iscrib
 from base_views import LoginView, IconsView
+from datatypes import Subscription
 from form import Form
 from formpage import FormPage
 from utils import force_encode
@@ -67,6 +68,11 @@ MSG_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
 MSG_NEW_APPLICATION = INFO(u'Your application is created. Now register '
         u'users.')
 MSG_PASSWORD_MISSING = ERROR(u"The password is missing.")
+MSG_BAD_EMAIL = ERROR(u"The given username is not an e-mail address.")
+MSG_SUBSCRIPTION_FULL = ERROR(u"No more users are allowed to register.")
+MSG_NOT_ALLOWED = ERROR(u"You are not allowed to register.")
+MSG_ALREADY_REGISTERED = ERROR(u"You are already registered. "
+        u"Log in using your password.")
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
@@ -579,17 +585,8 @@ class Application_Register(STLForm):
                 # Register the user
                 user = users.set_user(email, None)
                 user.set_property('lastname', lastname)
-            username = user.name
-            # Give the role "guests" to see public resources (logo, etc.)
-            if (site_root.get_user_role(username) is None
-                    # Except to top-level admins
-                    and not site_root.is_admin(user, resource)):
-                site_root.set_user_role(username, 'guests')
-            # Add the form
-            if resource.get_resource(username, soft=True) is not None:
-                continue
-            resource.make_resource(username, Form, title={'en': lastname})
-            added.append(username)
+            resource.subscribe_user(user, lastname)
+            added.append(user.name)
             if len(added) == allowed:
                 break
 
@@ -605,11 +602,20 @@ class Application_Register(STLForm):
 
 
 class Application_Edit(DBResource_Edit):
+    admin_schema = {
+            'max_users': Integer(mandatory=True),
+            'subscription': Subscription(mandatory=True)}
+    admin_widgets = [
+            TextWidget('max_users',
+                title=MSG(u"Maximum form users (0 = unlimited)")),
+            SelectWidget('subscription', has_empty_option=False,
+                title=MSG(u"Subscription Mode"))]
+
 
     def _get_schema(self, resource, context):
         schema = super(Application_Edit, self)._get_schema(resource, context)
         if is_admin(context.user, resource):
-            schema['max_users'] = Integer
+            schema = merge_dicts(schema, self.admin_schema)
         return schema
 
 
@@ -617,8 +623,7 @@ class Application_Edit(DBResource_Edit):
         widgets = super(Application_Edit, self)._get_widgets(resource,
                 context)
         if is_admin(context.user, resource):
-            widgets.append(TextWidget('max_users',
-                title=MSG(u"Maximum form users (0 = unlimited)")))
+            widgets.extend(self.admin_widgets)
         return widgets
 
 
@@ -640,23 +645,29 @@ class Application_Login(LoginView):
     def action_register(self, resource, context, form):
         email = form['username'].strip()
         if not Email.is_valid(email):
-            message = u'The given username is not an e-mail address.'
-            context.message = ERROR(message)
+            context.message = MSG_BAD_EMAIL
             return
 
         user = context.root.get_user_from_login(email)
 
-        # Is allowed?
+        # New user?
         if user is None:
-            error = u"You are not allowed to register."
-            context.message = ERROR(error)
-            return
+            subscription = resource.get_property('subscription')
+            if subscription == 'open':
+                # subscribe on the fly
+                if not resource.get_allowed_users():
+                    context.message = MSG_SUBSCRIPTION_FULL
+                    return
+                users = context.root.get_resource('users')
+                user = users.set_user(email, None)
+                resource.subscribe_user(user, unicode(email))
+            else:
+                context.message = MSG_NOT_ALLOWED
+                return
 
         # Is already registered?
         if user.get_property('password') is not None:
-            message = (u"You are already registered. "
-                    u"Log in using your password.")
-            context.message = ERROR(message)
+            context.message = MSG_ALREADY_REGISTERED
             return
 
         # Register

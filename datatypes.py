@@ -23,6 +23,7 @@ from decimal import Decimal as dec, InvalidOperation
 # Import from itools
 from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
 from itools.datatypes.primitive import enumerate_get_namespace
+from itools.gettext import MSG
 
 
 def quote_integer(data):
@@ -751,3 +752,12 @@ class EnumCV(SqlEnumerate):
     @classmethod
     def reset(cls):
         cls.counter = 1
+
+
+
+class Subscription(Enumerate):
+    options = [
+            {'name': 'restricted',
+                'value': MSG(u"Restricted (users must be subscribed)")},
+            {'name': 'open',
+                'value': MSG(u"Open (accounts are created on demand)")}]

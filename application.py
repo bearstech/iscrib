@@ -29,6 +29,7 @@ from application_views import Application_NewInstance, Application_View
 from application_views import Application_RedirectToForm
 from application_views import Application_Register, Application_Login
 from controls import Controls
+from datatypes import Subscription
 from form import Form
 from schema import Schema
 
@@ -43,7 +44,9 @@ class Application(Folder):
     class_schema = merge_dicts(Folder.class_schema,
             author=String(source='metadata', indexed=False, stored=True),
             ctime=DateTime(source='metadata', indexed=False, stored=True),
-            max_users=Integer(source='metadata', default=allowed_users))
+            max_users=Integer(source='metadata', default=allowed_users),
+            subscription=Subscription(source='metadata',
+                default='restricted'))
     class_views = Folder.class_views + ['show']
 
     schema_class = Schema
@@ -101,6 +104,20 @@ class Application(Folder):
         if email is not None:
             user_url.query['username'] = email
         return user_url
+
+
+    def subscribe_user(self, user, form_title):
+        site_root = self.get_site_root()
+        username = user.name
+        # Give the role "guests" to see public resources (logo, etc.)
+        if (site_root.get_user_role(username) is None
+                # Except to top-level admins
+                and not site_root.is_admin(user, self)):
+            site_root.set_user_role(username, 'guests')
+        # Add the form
+        if self.get_resource(username, soft=True) is not None:
+            return
+        self.make_resource(username, Form, title={'en': form_title})
 
 
     def get_catalog_values(self):
