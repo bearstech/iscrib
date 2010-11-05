@@ -31,7 +31,7 @@ from user_views import User_ChangePasswordForgotten
 
 class User(BaseUser):
     class_schema = merge_dicts(BaseUser.class_schema,
-            company=Unicode(source='metadata'),
+            company=Unicode(source='metadata', indexed=True, stored=True),
             has_password=Boolean(indexed=True))
 
     # Views

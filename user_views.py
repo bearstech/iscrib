@@ -34,7 +34,7 @@ class User_ConfirmRegistration(BaseUser_ConfirmRegistration):
     schema = merge_dicts(BaseUser_ConfirmRegistration.schema,
         company=Unicode(mandatory=True))
     widgets = (BaseUser_ConfirmRegistration.widgets[:2]
-            + [TextWidget('company', title=MSG(u'Company'))]
+            + [TextWidget('company', title=MSG(u'Company/Organization'))]
             + BaseUser_ConfirmRegistration.widgets[2:])
 
 
@@ -61,6 +61,6 @@ class User_ChangePasswordForgotten(BaseUser_ChangePasswordForgotten,
 class User_EditAccount(BaseUser_EditAccount):
     schema = merge_dicts(BaseUser_EditAccount.schema,
         company=Unicode(mandatory=True))
-    widgets = (BaseUser_EditAccount.widgets[:2]
-        + [TextWidget('company', title=MSG(u"Company"))]
-        + BaseUser_EditAccount.widgets[2:])
+    widgets = (BaseUser_EditAccount.widgets[:3]
+        + [TextWidget('company', title=MSG(u"Company/Organization"))]
+        + BaseUser_EditAccount.widgets[3:])

@@ -243,6 +243,7 @@ class Application_View(Folder_BrowseContent):
             ('mtime', MSG(u"Last Modified")),
             ('firstname', MSG(u"First Name")),
             ('lastname', MSG(u"Last Name")),
+            ('company', MSG(u"Company/Organization")),
             ('email', MSG(u"E-mail"))]
     table_actions = [ExportButton]
 
@@ -265,8 +266,9 @@ class Application_View(Folder_BrowseContent):
         search_term = context.query['search_term'].strip()
         if search_term:
             search_query = OrQuery(
-                TextQuery('lastname', search_term),
                 TextQuery('firstname', search_term),
+                TextQuery('lastname', search_term),
+                TextQuery('company', search_term),
                 StartQuery('username', search_term),
                 StartQuery('email_domain', search_term))
             users_query = get_users_query(search_query, context)
@@ -282,14 +284,15 @@ class Application_View(Folder_BrowseContent):
         brain, item_resource = item
         if column == 'name':
             return (brain.name, context.get_link(item_resource))
-        elif column in ('state', 'firstname', 'lastname', 'email'):
+        elif column in ('state', 'firstname', 'lastname', 'company',
+                'email'):
             user = context.root.get_user(brain.name)
             if column == 'state':
                 if user is not None and not user.get_property('password'):
                     return WorkflowState.get_value(NOT_REGISTERED)
                 return (get_workflow_preview(item_resource, context),
                         '{0}/;send'.format(context.get_link(item_resource)))
-            elif column in ('firstname', 'lastname'):
+            elif column in ('firstname', 'lastname', 'company'):
                 if user is None:
                     return u""
                 return user.get_property(column)
