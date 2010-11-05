@@ -585,7 +585,7 @@ class Application_Register(STLForm):
                 # Register the user
                 user = users.set_user(email, None)
                 user.set_property('lastname', lastname)
-            resource.subscribe_user(user, lastname)
+            resource.subscribe_user(user)
             added.append(user.name)
             if len(added) == allowed:
                 break
@@ -649,18 +649,17 @@ class Application_Login(LoginView):
             return
 
         user = context.root.get_user_from_login(email)
+        subscription = resource.get_property('subscription')
 
         # New user?
         if user is None:
-            subscription = resource.get_property('subscription')
             if subscription == 'open':
-                # subscribe on the fly
+                # Create the user
                 if not resource.get_allowed_users():
                     context.message = MSG_SUBSCRIPTION_FULL
                     return
                 users = context.root.get_resource('users')
                 user = users.set_user(email, None)
-                resource.subscribe_user(user, unicode(email))
             else:
                 context.message = MSG_NOT_ALLOWED
                 return
@@ -670,12 +669,15 @@ class Application_Login(LoginView):
             context.message = MSG_ALREADY_REGISTERED
             return
 
+        # Create the form if necessary
+        if subscription == 'open':
+            resource.subscribe_user(user)
+
         # Register
         password = form['newpass']
         if password != form['newpass2']:
             context.message = MSG_PASSWORD_MISMATCH
             return
-
         user.set_password(password)
 
         # Send e-mail with login
@@ -698,6 +700,19 @@ class Application_Login(LoginView):
                 goto = referrer
 
         return context.come_back(INFO(u"Welcome!"), goto)
+
+
+    def action_login(self, resource, context, form):
+        goto = super(Application_Login, self).action_login(resource, context,
+                form)
+
+        if type(context.message) is not ERROR:
+            # Create the form if necessary
+            if resource.get_property('subscription') == 'open':
+                user = context.user
+                resource.subscribe_user(user)
+
+        return goto
 
 
 

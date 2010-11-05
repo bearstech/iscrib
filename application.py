@@ -106,7 +106,7 @@ class Application(Folder):
         return user_url
 
 
-    def subscribe_user(self, user, form_title):
+    def subscribe_user(self, user):
         site_root = self.get_site_root()
         username = user.name
         # Give the role "guests" to see public resources (logo, etc.)
@@ -115,9 +115,9 @@ class Application(Folder):
                 and not site_root.is_admin(user, self)):
             site_root.set_user_role(username, 'guests')
         # Add the form
-        if self.get_resource(username, soft=True) is not None:
-            return
-        self.make_resource(username, Form, title={'en': form_title})
+        if self.get_resource(username, soft=True) is None:
+            self.make_resource(username, Form,
+                    title={'en': user.get_title()})
 
 
     def get_catalog_values(self):
