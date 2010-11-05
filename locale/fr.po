@@ -942,7 +942,7 @@ msgstr "Schéma"
 #: ../ui/application/search.xml.en:7
 msgctxt "legend"
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
 #: ../application_views.py:204 ../application_views.py:687
 msgid "Show Test Form"

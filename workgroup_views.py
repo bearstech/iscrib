@@ -98,6 +98,15 @@ class Workgroup_NewInstance(NewInstance):
         goto = super(Workgroup_NewInstance, self).action(resource, context,
                 form)
         workgroup = resource.get_resource(form['name'])
+        # Set default language
+        accept = context.accept_language
+        ws_languages = context.root.get_property('website_languages')
+        current_language = accept.select_language(ws_languages)
+        workgroup.set_property('website_languages', (current_language,))
+        # Set title in current language
+        workgroup.set_property('title', None)
+        workgroup.set_property('title', form['title'],
+                language=current_language)
         # Set neutral banner
         theme = workgroup.get_resource('theme')
         style = theme.get_resource('style')
