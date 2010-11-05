@@ -534,7 +534,7 @@ msgstr ""
 
 #: ../application_views.py:102
 msgid "Export this List"
-msgstr ""
+msgstr "Exporter cette liste"
 
 #: ../controls.py:99
 msgid "Expression"

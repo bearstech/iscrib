@@ -389,6 +389,7 @@ class Application_View(Folder_BrowseContent):
                 for column, title in self.table_columns]
         csv.add_row(header)
         results = self.get_items(resource, context)
+        context.query['batch_size'] = 0
         for item in self.sort_and_batch(resource, context, results):
             row = []
             for column, title in self.table_columns:
