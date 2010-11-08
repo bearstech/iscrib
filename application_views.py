@@ -274,13 +274,14 @@ class Application_View(Folder_BrowseContent):
                 query = AndQuery(query, state_query, OrQuery(*users_query))
         # Filter on user properties
         search_term = context.query['search_term'].strip()
+        search_term_str = search_term.encode('utf_8')
         if search_term:
             search_query = OrQuery(
                 TextQuery('firstname', search_term),
                 TextQuery('lastname', search_term),
                 TextQuery('company', search_term),
-                StartQuery('username', search_term),
-                StartQuery('email_domain', search_term))
+                StartQuery('username', search_term_str),
+                StartQuery('email_domain', search_term_str))
             users_query = get_users_query(search_query, context)
             query = AndQuery(query, OrQuery(*users_query))
         # Filter out default form
