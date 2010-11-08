@@ -173,15 +173,16 @@ button, .button {
   background-repeat: no-repeat;
   border: 1px solid #CCCCCC;
   border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+  box-shadow: 0 0 3px #CCCCCC;
+  -moz-box-shadow: 0 0 3px #CCCCCC;
+  -webkit-box-shadow: 0 0 3px #CCCCCC;
   cursor: pointer;
+  display: inline-block;
   font-size: 12px;
   margin: 3px;
   padding: 5px;
   padding-left: 24px !important;
   text-decoration: none;
-  box-shadow: 0 0 3px #CCCCCC;
-  -moz-box-shadow: 0 0 3px #CCCCCC;
-  -webkit-box-shadow: 0 0 3px #CCCCCC;
 }
 
 .button-control {
@@ -249,7 +250,9 @@ button, .button {
 #contact-form {
   border-collapse: collapse;
   background: url(images/contact-bg.png) top right repeat-y;
-  box-shadow: 5px 5px 5px 0 #777; -moz-box-shadow: 5px 5px 5px 0 #777; -webkit-box-shadow: 5px 5px 5px 0 #777;
+  box-shadow: 5px 5px 5px 0 #777;
+  -moz-box-shadow: 5px 5px 5px 0 #777;
+  -webkit-box-shadow: 5px 5px 5px 0 #777;
 }
 #contact-form h2 {
   border: 0;
@@ -289,7 +292,9 @@ button, .button {
 #already-client {
   border: 1px solid #ccc;
   border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px;
-  box-shadow: 1px 1px 10px #777; -moz-box-shadow: 1px 1px 10px #777; -webkit-box-shadow: 1px 1px 10px #777;
+  box-shadow: 1px 1px 10px #777;
+  -moz-box-shadow: 1px 1px 10px #777;
+  -webkit-box-shadow: 1px 1px 10px #777;
   margin: 10px;
   padding: 10px;
 }
