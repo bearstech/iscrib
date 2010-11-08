@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-05 16:11+CET\n"
+"POT-Creation-Date: 2010-11-08 10:11+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "\r\n"
 msgstr ""
 
-#: ../root_views.py:111
+#: ../root_views.py:112
 msgid ""
 "\r\n"
 "{body}"
@@ -358,7 +358,7 @@ msgid "Company"
 msgstr ""
 
 #: ../application_views.py:256 ../user_views.py:37 ../user_views.py:65
-#: ../root_views.py:98
+#: ../root_views.py:99
 msgid "Company/Organization"
 msgstr ""
 
@@ -524,7 +524,7 @@ msgctxt "heading"
 msgid "Form State:"
 msgstr ""
 
-#: ../root_views.py:99
+#: ../root_views.py:100
 msgid "Function"
 msgstr ""
 
@@ -692,6 +692,10 @@ msgstr ""
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
+#: ../root_views.py:98
+msgid "Name"
+msgstr ""
+
 #: ../workgroup_views.py:60
 msgid "Name of your client space"
 msgstr ""
@@ -804,7 +808,7 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
-#: ../root_views.py:100
+#: ../root_views.py:101
 msgid "Phone Number"
 msgstr ""
 
@@ -838,11 +842,11 @@ msgstr ""
 msgid "Print form"
 msgstr ""
 
-#: ../root_views.py:131
+#: ../root_views.py:132
 msgid "ReCaptcha Private Key"
 msgstr ""
 
-#: ../root_views.py:133
+#: ../root_views.py:134
 msgid "ReCaptcha Public Key"
 msgstr ""
 
@@ -882,7 +886,7 @@ msgctxt "legend"
 msgid "Search"
 msgstr ""
 
-#: ../application_views.py:210 ../application_views.py:706
+#: ../application_views.py:210 ../application_views.py:721
 msgid "Show Test Form"
 msgstr ""
 
@@ -1080,7 +1084,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr ""
 
-#: ../application_views.py:700 ../base_views.py:125
+#: ../application_views.py:702 ../base_views.py:125
 msgid "Welcome!"
 msgstr ""
 
@@ -1430,7 +1434,7 @@ msgstr ""
 msgid "{n} user(s) added. See below to send them the form URL."
 msgstr ""
 
-#: ../root_views.py:118
+#: ../root_views.py:119
 msgid ""
 "{title}: {value}\r\n"
 "{body}"

@@ -87,15 +87,16 @@ class Root_Contact(ContactForm):
 
     def get_schema(self, resource, context):
         schema = super(Root_Contact, self).get_schema(resource, context)
-        return merge_dicts(schema, company=Unicode, function=Unicode,
-                phone=Unicode(mandatory=True),
+        return merge_dicts(schema, name=Unicode, company=Unicode,
+                function=Unicode, phone=Unicode(mandatory=True),
                 captcha=RecaptchaDatatype(mandatory=is_production))
 
 
     def get_widgets(self, resource, context):
         widgets = super(Root_Contact, self).get_widgets(resource, context)
         widgets = (widgets[:2]
-                + [TextWidget('company', title=MSG(u"Company/Organization")),
+                + [TextWidget('name', title=MSG(u"Name")),
+                    TextWidget('company', title=MSG(u"Company/Organization")),
                     TextWidget('function', title=MSG(u"Function")),
                     TextWidget('phone', title=MSG(u"Phone Number"))]
                 + widgets[2:-1])
@@ -109,7 +110,7 @@ class Root_Contact(ContactForm):
 
         body = form['message_body']
         body = MSG(u"\r\n{body}").gettext(body=body)
-        for name in ('phone', 'function', 'company'):
+        for name in ('phone', 'from', 'function', 'company', 'name'):
             title = None
             for widget in self.get_widgets(resource, context):
                 if widget.name == name:

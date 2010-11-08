@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-05 16:11+CET\n"
+"POT-Creation-Date: 2010-11-08 10:11+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,7 +79,7 @@ msgstr ""
 msgid "\r\n"
 msgstr ""
 
-#: ../root_views.py:111
+#: ../root_views.py:112
 msgid ""
 "\r\n"
 "{body}"
@@ -411,7 +411,7 @@ msgid "Company"
 msgstr "Société"
 
 #: ../application_views.py:256 ../user_views.py:37 ../user_views.py:65
-#: ../root_views.py:98
+#: ../root_views.py:99
 msgid "Company/Organization"
 msgstr "Société/Organisme"
 
@@ -590,7 +590,7 @@ msgctxt "heading"
 msgid "Form State:"
 msgstr "État du formulaire :"
 
-#: ../root_views.py:99
+#: ../root_views.py:100
 msgid "Function"
 msgstr "Fonction"
 
@@ -617,8 +617,8 @@ msgstr "Feuille contrôles, ligne {line}, il manque l'expression."
 
 #: ../controls.py:40
 msgid "In controls, line {line}, syntax error in expression: {err}"
-msgstr "Feuille contrôles, ligne {line}, erreur de syntaxe dans "
-"l'expression : {err}" 
+msgstr ""
+"Feuille contrôles, ligne {line}, erreur de syntaxe dans l'expression : {err}"
 
 #: ../controls.py:37
 msgid "In controls, line {line}, title is missing."
@@ -770,6 +770,10 @@ msgstr "Champ obligatoire"
 msgid "Maximum form users (0 = unlimited)"
 msgstr "Nombre d'utilisateurs autorisés (0 = illimité)"
 
+#: ../root_views.py:98
+msgid "Name"
+msgstr "Nom"
+
 #: ../workgroup_views.py:60
 msgid "Name of your client space"
 msgstr "Nom de votre espace client"
@@ -882,7 +886,7 @@ msgstr "Mot de passe"
 msgid "Pending"
 msgstr "En cours"
 
-#: ../root_views.py:100
+#: ../root_views.py:101
 msgid "Phone Number"
 msgstr "Téléphone"
 
@@ -918,11 +922,11 @@ msgstr "Imprimer (dans une nouvelle fenêtre)"
 msgid "Print form"
 msgstr "Impression du formulaire"
 
-#: ../root_views.py:131
+#: ../root_views.py:132
 msgid "ReCaptcha Private Key"
 msgstr "Clé privée ReCaptcha"
 
-#: ../root_views.py:133
+#: ../root_views.py:134
 msgid "ReCaptcha Public Key"
 msgstr "Clé publique ReCaptcha"
 
@@ -962,7 +966,7 @@ msgctxt "legend"
 msgid "Search"
 msgstr "Rechercher"
 
-#: ../application_views.py:210 ../application_views.py:706
+#: ../application_views.py:210 ../application_views.py:721
 msgid "Show Test Form"
 msgstr "Voir le formulaire de test"
 
@@ -1174,7 +1178,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr "Bienvenue dans votre espace iScrib"
 
-#: ../application_views.py:700 ../base_views.py:125
+#: ../application_views.py:702 ../base_views.py:125
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
@@ -1546,7 +1550,7 @@ msgstr ""
 "{n} utilisateur(s) ajouté(s). Voir ci-dessous pour leur envoyer l'adresse du "
 "formulaire."
 
-#: ../root_views.py:118
+#: ../root_views.py:119
 msgid ""
 "{title}: {value}\r\n"
 "{body}"
