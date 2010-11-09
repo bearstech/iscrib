@@ -21,12 +21,10 @@ from urllib import quote
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.csv import CSVFile
 from itools.database import PhraseQuery, TextQuery, StartQuery, AndQuery
 from itools.database import OrQuery, NotQuery
 from itools.datatypes import Integer, Unicode, Email, String
 from itools.gettext import MSG
-from itools.log import log_error
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
 from itools.web import INFO, ERROR, BaseView, FormError, STLForm
@@ -49,7 +47,8 @@ from base_views import LoginView, IconsView
 from datatypes import Subscription
 from form import Form
 from formpage import FormPage
-from utils import force_encode, ODSReader, XLSReader
+from rw import ODSReader, XLSReader, ODSWriter, XLSWriter
+from utils import force_encode
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
@@ -84,14 +83,6 @@ def find_title(table):
             elif value.startswith(u"*"):
                 return value[1:].strip()
     return None
-
-
-def get_csv_format(format):
-    if format == 'xls':
-        return 'CP1252', ';', '\r\n'
-    else:
-        return 'UTF-8', ',', '\n'
-
 
 
 def get_users_query(query, context):
@@ -407,13 +398,12 @@ class Application_View(Folder_BrowseContent):
         return namespace
 
 
-    def action_export(self, resource, context, form, format='ods'):
-        encoding, separator, newline = get_csv_format(format)
+    def action_export(self, resource, context, form, writer_cls=ODSWriter):
+        name = MSG(u"{title} Users").gettext(title=resource.get_title())
+        writer = writer_cls(name)
 
-        csv = CSVFile()
-        header = [title.gettext().encode(encoding)
-                for column, title in self.table_columns]
-        csv.add_row(header)
+        header = [title.gettext() for column, title in self.table_columns]
+        writer.add_row(header, is_header=True)
         results = self.get_items(resource, context)
         context.query['batch_size'] = 0
         for item in self.sort_and_batch(resource, context, results):
@@ -433,30 +423,30 @@ class Application_View(Folder_BrowseContent):
                             column)
                 if type(value) is tuple:
                     value = value[0]
+                if type(value) is unicode:
+                    pass
                 elif type(value) is MSG:
                     value = value.gettext()
-                if type(value) is unicode:
-                    value = value.encode(encoding)
                 elif type(value) is str:
-                    pass
+                    value = unicode(value)
                 else:
                     raise NotImplementedError, str(type(value))
                 row.append(value)
-            csv.add_row(row)
+            writer.add_row(row)
 
-        csv = csv.to_str(separator=separator, newline=newline)
-        if type(csv) is not str:
-            raise TypeError, str(type(csv))
+        body = writer.to_str()
 
-        context.set_content_type('text/comma-separated-values')
+        context.set_content_type(writer_cls.mimetype)
         context.set_content_disposition('attachment',
-                filename="%s-users.csv" % (resource.name))
+                filename="{0}-users.{1}".format(resource.name,
+                    writer_cls.extension))
 
-        return csv
+        return body
 
 
     def action_export_xls(self, resource, context, form):
-        return self.action_export(resource, context, form, format='xls')
+        return self.action_export(resource, context, form,
+                writer_cls=XLSWriter)
 
 
 
@@ -475,64 +465,62 @@ class Application_Export(BaseView):
             return context.come_back(MSG_NO_DATA)
 
         format = context.query['format']
-        encoding, separator, newline = get_csv_format(format)
+        if format == 'xls':
+            writer_cls = XLSWriter
+        else:
+            writer_cls = ODSWriter
+        name = MSG(u"{title} Data").gettext(title=resource.get_title())
+        writer = writer_cls(name)
 
-        csv = CSVFile()
         handler = resource.get_resource('schema').handler
         schema, pages = handler.get_schema_pages()
         # Main header
-        header = [title.gettext().encode(encoding)
+        header = [title.gettext()
                 for title in (MSG(u"Form"), MSG(u"First Name"),
                     MSG(u"Last Name"), MSG(u"E-mail"), MSG(u"State"))]
         for name in sorted(schema):
             header.append(name)
-        csv.add_row(header)
+        writer.add_row(header, is_header=True)
         # Subheader with titles
         header = [""] * 5
         for name, datatype in sorted(schema.iteritems()):
-            header.append(datatype.title.encode(encoding))
-        csv.add_row(header)
+            header.append(datatype.title)
+        writer.add_row(header, is_header=True)
         users = resource.get_resource('/users')
 
-        try:
-            for form in resource.get_forms():
-                user = users.get_resource(form.name, soft=True)
-                if user:
-                    get_property = user.get_property
-                    email = get_property('email')
-                    firstname = get_property('firstname').encode(encoding)
-                    lastname = get_property('lastname').encode(encoding)
+        for form in resource.get_forms():
+            user = users.get_resource(form.name, soft=True)
+            if user:
+                get_property = user.get_property
+                email = get_property('email')
+                firstname = get_property('firstname')
+                lastname = get_property('lastname')
+            else:
+                email = ""
+                firstname = ""
+                lastname = form.name
+            state = WorkflowState.get_value(form.get_workflow_state())
+            state = state.gettext()
+            row = [form.name, firstname, lastname, email, state]
+            handler = form.handler
+            for name, datatype in sorted(schema.iteritems()):
+                value = handler.get_value(name, schema)
+                if datatype.multiple:
+                    value = '\n'.join(value
+                            for value in datatype.get_values(value))
                 else:
-                    email = ""
-                    firstname = ""
-                    lastname = form.name
-                state = WorkflowState.get_value(form.get_workflow_state())
-                state = state.gettext().encode(encoding)
-                row = [form.name, firstname, lastname, email, state]
-                handler = form.handler
-                for name, datatype in sorted(schema.iteritems()):
-                    value = handler.get_value(name, schema)
-                    if datatype.multiple:
-                        data = newline.join(value.encode(encoding)
-                                for value in datatype.get_values(value))
-                    else:
-                        data = force_encode(value, datatype, encoding)
-                    row.append(data)
-                csv.add_row(row)
+                    data = force_encode(value, datatype, 'utf_8')
+                    value = unicode(data, 'utf_8')
+                row.append(value)
+            writer.add_row(row)
 
-            csv = csv.to_str(separator=separator, newline=newline)
-            if type(csv) is not str:
-                raise TypeError, str(type(csv))
-        except Exception, e:
-            log_error(e)
-            return context.come_back(MSG_EXPORT_ERROR)
+        body = writer.to_str()
 
-        context.set_content_type('text/comma-separated-values',
-                charset=encoding)
+        context.set_content_type(writer.mimetype)
         context.set_content_disposition('attachment',
-                filename="%s.csv" % (resource.name))
+                filename="{0}.{1}".format(resource.name, writer.extension))
 
-        return csv
+        return body
 
 
 
