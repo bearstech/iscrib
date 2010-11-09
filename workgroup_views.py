@@ -37,6 +37,7 @@ from application import Application
 from autoform import ImagePathDataType, ImageSelectorWidget
 from autoform import RecaptchaDatatype, RecaptchaWidget
 from base_views import IconsView
+from datatypes import Nil
 from utils import is_production
 
 
@@ -47,7 +48,7 @@ MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
 class Workgroup_NewInstance(NewInstance):
     access = True
     schema = merge_dicts(NewInstance.schema,
-            already_client=String,
+            already_client=Nil,
             title=Unicode(mandatory=True))
     widgets = [ReadOnlyWidget('cls_description'),
             ReadOnlyWidget('already_client'),
