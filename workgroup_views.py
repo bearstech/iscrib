@@ -37,6 +37,7 @@ from application import Application
 from autoform import ImagePathDataType, ImageSelectorWidget
 from autoform import RecaptchaDatatype, RecaptchaWidget
 from base_views import IconsView
+from utils import is_production
 
 
 MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
@@ -47,19 +48,32 @@ class Workgroup_NewInstance(NewInstance):
     access = True
     schema = merge_dicts(NewInstance.schema,
             already_client=String,
-            title=Unicode(mandatory=True),
-            email=Email,
-            firstname=Unicode,
-            lastname=Unicode,
-            company=Unicode,
-            password=String,
-            password2=String,
-            captcha=RecaptchaDatatype)
+            title=Unicode(mandatory=True))
     widgets = [ReadOnlyWidget('cls_description'),
             ReadOnlyWidget('already_client'),
             TextWidget('title', title=MSG(u'Name of your client space'),
                 tip=MSG(u'You can type the name of your company or '
                     u'organization'))]
+
+    anonymous_schema = {
+        'email': Email(mandatory=True),
+        'firstname': Unicode,
+        'lastname': Unicode,
+        'company': Unicode,
+        'password': String(mandatory=True),
+        'password2': String(mandatory=True)}
+    anonymous_widgets = [
+        TextWidget('email', title=MSG(u"Your e-mail address")),
+        TextWidget('firstname', title=MSG(u"First Name")),
+        TextWidget('lastname', title=MSG(u"Last Name")),
+        TextWidget('company', title=MSG(u"Company")),
+        PasswordWidget('password', title=MSG(u"Password")),
+        PasswordWidget('password2', title=MSG(u"Repeat Password"))]
+
+    captcha_schema = {
+        'captcha': RecaptchaDatatype(mandatory=True)}
+    captcha_widgets = [
+        RecaptchaWidget('captcha')]
 
 
     def get_value(self, resource, context, name, datatype):
@@ -71,26 +85,21 @@ class Workgroup_NewInstance(NewInstance):
                 context, name, datatype)
 
 
-
     def get_schema(self, resource, context):
         schema = self.schema.copy()
         if context.user is None:
-            for key in ('email', 'password', 'password2', 'captcha'):
-                schema[key] = schema[key](mandatory=True)
+            schema.update(self.anonymous_schema)
+        if is_production:
+            schema.update(self.captcha_schema)
         return schema
 
 
     def get_widgets(self, resource, context):
         widgets = self.widgets[:]
         if context.user is None:
-            widgets.extend([
-                TextWidget('email', title=MSG(u"Your e-mail address")),
-                TextWidget('firstname', title=MSG(u"First Name")),
-                TextWidget('lastname', title=MSG(u"Last Name")),
-                TextWidget('company', title=MSG(u"Company")),
-                PasswordWidget('password', title=MSG(u"Password")),
-                PasswordWidget('password2', title=MSG(u"Repeat Password")),
-                RecaptchaWidget('captcha')])
+            widgets.extend(self.anonymous_widgets)
+        if is_production:
+            widgets.extend(self.captcha_widgets)
         return widgets
 
 
