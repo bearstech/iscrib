@@ -62,6 +62,8 @@ class Root_Show(FrontView):
         if isinstance(namespace, Reference):
             return namespace
 
+        namespace['size'] = self.size
+
         members = []
         guests = []
         for item in namespace['items']:

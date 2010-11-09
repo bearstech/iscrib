@@ -6,11 +6,11 @@
 
   <stl:block stl:if="members">
     <h2>Your Client Spaces</h2>
-    <table width="100%" cellpadding="5" cellspacing="5">
+    <table class="icons-view root-show">
       <tbody>
         <stl:block stl:repeat="row members">
           <tr>
-            <td align="center" valign="bottom" stl:repeat="item row">
+            <td style="width: ${size}px" stl:repeat="item row">
               <a href="${item/url}"><img alt="" src="${item/icon}"/></a><br/>
               <a href="${item/url}">${item/title}</a>
             </td>
@@ -22,11 +22,11 @@
 
   <stl:block stl:if="guests">
     <h2>Client Spaces with forms you have to fill in</h2>
-    <table width="100%" cellpadding="5" cellspacing="5">
+    <table class="icons-view root-show">
       <tbody>
         <stl:block stl:repeat="row guests">
           <tr>
-            <td align="center" valign="bottom" stl:repeat="item row">
+            <td style="width: ${size}px" stl:repeat="item row">
               <a href="${item/url}"><img alt="" src="${item/icon}"/></a><br/>
               <a href="${item/url}">${item/title}</a>
             </td>

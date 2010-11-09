@@ -195,6 +195,7 @@ class FrontView(BaseIconsView):
 class IconsView(BaseIconsView):
     template = '/ui/iscrib/base/icons_view.xml'
     item_keys = ('icon', 'title', 'description', 'url', 'onclick', 'access')
+    cols = 3
 
 
     @classmethod
@@ -209,7 +210,11 @@ class IconsView(BaseIconsView):
 
 
     def get_namespace(self, resource, context):
-        items = []
+        namespace = {}
+        namespace['batch'] = None
+        namespace['width'] = 100//self.cols
+
+        rows = [[]]
         for item in self.items:
             method_name = item['access']
             if method_name:
@@ -219,8 +224,12 @@ class IconsView(BaseIconsView):
                     item['url'] = None
                     item['onclick'] = None
                     item['icon'] = item['icon'].replace('.png', '-grey.png')
-            items.append(item)
-        return {'batch': None, 'items': items}
+            rows[-1].append(item)
+            if len(rows[-1]) == self.cols:
+                rows.append([])
+        namespace['rows'] = rows
+
+        return namespace
 
 
 

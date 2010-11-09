@@ -298,3 +298,22 @@ button, .button {
   margin: 10px;
   padding: 10px;
 }
+
+.icons-view {
+  width: 100%;
+  border: 0;
+}
+.icons-view td {
+  margin: 5px;
+  padding: 5px;
+  text-align: left;
+  vertical-align: top;
+}
+.icons-view img.icon {
+  float: left;
+}
+
+.root-show td {
+  text-align: center;
+  vertical-align: bottom;
+}

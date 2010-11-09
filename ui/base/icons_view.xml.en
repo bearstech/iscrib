@@ -7,20 +7,24 @@
   <!-- Batch -->
   ${batch}
 
-  <table stl:repeat="item items" class="new-resource-thumb">
-    <tr>
-      <td valign="top" style="width: 48px">
-        <a href="${item/url}" onclick="${item/onclick}"
-          stl:omit-tag="not item/url"><img alt="" src="${item/icon}"/></a>
-      </td>
-      <td valign="top">
-        <a href="${item/url}" onclick="${item/onclick}"
-          stl:omit-tag="not item/url">${item/title}</a>
-        <br/>
-        ${item/description}
-      </td>
-    </tr>
+  <table class="icons-view">
+    <tbody>
+      <stl:block stl:repeat="row rows">
+        <tr>
+          <stl:block stl:repeat="item row">
+            <td width="${width}%">
+              <a href="${item/url}" onclick="${item/onclick}"
+                stl:omit-tag="not item/url"><img alt=""
+                  src="${item/icon}" class="icon"/></a>
+              <a href="${item/url}" onclick="${item/onclick}"
+                stl:omit-tag="not item/url">${item/title}</a>
+              <br/>
+              ${item/description}
+            </td>
+          </stl:block>
+        </tr>
+      </stl:block>
+    </tbody>
   </table>
-  <div class="clear"></div>
 
 </stl:block>
