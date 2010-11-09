@@ -182,7 +182,7 @@ define to design your form.
     onclick="$('#choose-format').hide(); return false">X</a></span>
   <ul>
     <li>Download <a href="/gabarit/;download">ODS Version</a></li>
-    <li>Download XLS Version (soon)</li>
+    <li>Download <a href="/gabarit-xls/;download">XLS Version</a></li>
   </ul>
 </div>""", html=True),
               url='#',
@@ -207,7 +207,7 @@ class Workgroup_View(Folder_BrowseContent):
     table_columns = [
             ('form', MSG(u"Application")),
             ('subscribed', MSG(u"Subscribed Users")),
-            ('file', MSG(u"Source ODS File")),
+            ('file', MSG(u"Source File")),
             ('ctime', MSG(u"Creation Date"))]
     table_actions = []
 

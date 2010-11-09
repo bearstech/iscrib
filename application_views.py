@@ -16,13 +16,8 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
-from cStringIO import StringIO
 from email.utils import parseaddr
 from urllib import quote
-
-# Import from lpod
-from lpod import ODF_SPREADSHEET
-from lpod.document import odf_get_document
 
 # Import from itools
 from itools.core import merge_dicts
@@ -41,7 +36,7 @@ from ikaaro.access import is_admin
 from ikaaro.autoform import FileWidget, TextWidget, SelectWidget
 from ikaaro.buttons import BrowseButton
 from ikaaro.datatypes import FileDataType
-from ikaaro.file import ODS
+from ikaaro.file import ODS, MSExcel
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
@@ -54,7 +49,7 @@ from base_views import LoginView, IconsView
 from datatypes import Subscription
 from form import Form
 from formpage import FormPage
-from utils import force_encode
+from utils import force_encode, ODSReader, XLSReader
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
@@ -91,6 +86,13 @@ def find_title(table):
     return None
 
 
+def get_csv_format(format):
+    if format == 'xls':
+        return 'CP1252', ';', '\r\n'
+    else:
+        return 'UTF-8', ',', '\n'
+
+
 
 def get_users_query(query, context):
     """Filter forms from users list with same name.
@@ -102,10 +104,16 @@ def get_users_query(query, context):
 
 
 
-class ExportButton(BrowseButton):
+class ExportODSButton(BrowseButton):
     access = 'is_allowed_to_edit'
     name = 'export'
-    title = MSG(u"Export this List")
+    title = MSG(u"Export This List in ODS Format")
+
+
+
+class ExportXLSButton(ExportODSButton):
+    name = 'export_xls'
+    title = MSG(u"Export This List in XLS Format")
 
 
 
@@ -114,25 +122,27 @@ class Application_NewInstance(NewInstance):
             title=Unicode(mandatory=True),
             file=FileDataType(mandatory=True))
     widgets = (NewInstance.widgets
-            + [FileWidget('file', title=MSG(u"ODS File"))])
+            + [FileWidget('file', title=MSG(u"ODS or XLS File"))])
 
 
     def action(self, resource, context, form):
         goto = NewInstance.action(self, resource, context, form)
         child = resource.get_resource(form['name'])
         filename, mimetype, body = form['file']
-        if mimetype != ODF_SPREADSHEET:
-            context.message = ERROR(u"not an ODS file")
+        if mimetype == ODS.class_id:
+            reader = ODSReader
+            cls = ODS
+        elif mimetype == MSExcel.class_id:
+            reader = XLSReader
+            cls = MSExcel
+        else:
+            context.message = ERROR(u"Not an ODS or XLS file.")
             return
         # Save file used
-        ods = child.make_resource('parameters', ODS, body=body,
-                filename=filename, title={'en': u"Parameters"})
-        stringio = StringIO(body)
-        document = odf_get_document(stringio)
-        if document.get_mimetype() != ODF_SPREADSHEET:
-            context.message = ERROR(u"not an ODS file")
-            return
-        tables = iter(document.get_body().get_tables())
+        child.make_resource('parameters', cls, body=body, filename=filename,
+                title={'en': u"Parameters"})
+        document = reader(body)
+        tables = iter(document.get_tables())
         # Controls and Schema
         for name, title, cls in [
                 ('controls', u"Controls", child.controls_class),
@@ -200,7 +210,7 @@ class Application_Menu(IconsView):
     onclick="$('#choose-format').hide(); return false">X</a></span>
   <ul>
     <li>Download <a href=";export">ODS Version</a></li>
-    <li>Download XLS Version (soon)</li>
+    <li>Download <a href=";export?format=xls">XLS Version</a></li>
   </ul>
 </div>""", html=True),
                 url='#',
@@ -255,7 +265,7 @@ class Application_View(Folder_BrowseContent):
             ('lastname', MSG(u"Last Name")),
             ('company', MSG(u"Company/Organization")),
             ('email', MSG(u"E-mail"))]
-    table_actions = [ExportButton]
+    table_actions = [ExportODSButton, ExportXLSButton]
 
 
     def get_items(self, resource, context, *args):
@@ -310,12 +320,12 @@ class Application_View(Folder_BrowseContent):
             elif column == 'email':
                 email = user.get_property('email')
                 application_title = resource.get_title()
-                subject = MAILTO_SUBJECT.gettext().format(
+                subject = MAILTO_SUBJECT.gettext(
                         workgroup_title=resource.parent.get_title(),
                         application_title=application_title)
                 subject = quote(subject.encode('utf8'))
                 application_url = resource.get_user_url(context, email)
-                body = MAILTO_BODY.gettext().format(
+                body = MAILTO_BODY.gettext(
                         application_title=application_title,
                         application_url=application_url)
                 body = quote(body.encode('utf8'))
@@ -397,7 +407,9 @@ class Application_View(Folder_BrowseContent):
         return namespace
 
 
-    def action_export(self, resource, context, form, encoding='cp1252'):
+    def action_export(self, resource, context, form, format='ods'):
+        encoding, separator, newline = get_csv_format(format)
+
         csv = CSVFile()
         header = [title.gettext().encode(encoding)
                 for column, title in self.table_columns]
@@ -432,7 +444,7 @@ class Application_View(Folder_BrowseContent):
                 row.append(value)
             csv.add_row(row)
 
-        csv = csv.to_str(separator=';')
+        csv = csv.to_str(separator=separator, newline=newline)
         if type(csv) is not str:
             raise TypeError, str(type(csv))
 
@@ -443,19 +455,27 @@ class Application_View(Folder_BrowseContent):
         return csv
 
 
+    def action_export_xls(self, resource, context, form):
+        return self.action_export(resource, context, form, format='xls')
+
+
 
 class Application_Export(BaseView):
     access = 'is_allowed_to_edit'
     title = MSG(u"Export Collected Data")
+    query_schema = {'format': String}
 
 
-    def GET(self, resource, context, encoding='cp1252'):
+    def GET(self, resource, context):
         for form in resource.get_forms():
             state = form.get_workflow_state()
             if state != 'private':
                 break
         else:
             return context.come_back(MSG_NO_DATA)
+
+        format = context.query['format']
+        encoding, separator, newline = get_csv_format(format)
 
         csv = CSVFile()
         handler = resource.get_resource('schema').handler
@@ -493,21 +513,22 @@ class Application_Export(BaseView):
                 for name, datatype in sorted(schema.iteritems()):
                     value = handler.get_value(name, schema)
                     if datatype.multiple:
-                        data = '\n'.join(value.encode(encoding) for value in
-                                datatype.get_values(value))
+                        data = newline.join(value.encode(encoding)
+                                for value in datatype.get_values(value))
                     else:
                         data = force_encode(value, datatype, encoding)
                     row.append(data)
                 csv.add_row(row)
 
-            csv = csv.to_str(separator=';')
+            csv = csv.to_str(separator=separator, newline=newline)
             if type(csv) is not str:
                 raise TypeError, str(type(csv))
         except Exception, e:
             log_error(e)
             return context.come_back(MSG_EXPORT_ERROR)
 
-        context.set_content_type('text/comma-separated-values')
+        context.set_content_type('text/comma-separated-values',
+                charset=encoding)
         context.set_content_disposition('attachment',
                 filename="%s.csv" % (resource.name))
 

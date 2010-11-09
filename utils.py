@@ -17,9 +17,17 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
+from cStringIO import StringIO
 from socket import gethostname
 
+# Import from lpod
+from lpod.document import odf_get_document
+
+# Import from xlrd
+from xlrd import open_workbook
+
 # Import from itools
+from itools.csv import CSVFile
 
 # Import from ikaaro
 
@@ -43,6 +51,82 @@ class ProgressMeter(object):
         if percent % 10 == 0 and percent != self.last_percent:
             print "  %s %%" % percent
             self.last_percent = percent
+
+
+
+class ODSReader(object):
+    
+    def __init__(self, body):
+        self.body = body
+        self.init()
+
+
+    def init(self):
+        file = StringIO(self.body)
+        self.document = odf_get_document(file)
+
+
+    def get_tables(self):
+        return self.document.get_body().get_tables()
+
+
+
+class XLSTable(object):
+
+    def __init__(self, sheet):
+        self.sheet = sheet
+
+
+    def rstrip(self, aggressive=False):
+        pass
+
+
+    def get_name(self):
+        name = self.sheet.name
+        assert type(name) is unicode, '"{0}" is not a str'.format(repr(name))
+        return name
+
+
+    def iter_values(self):
+        sheet = self.sheet
+        for idx in range(sheet.nrows):
+            values = []
+            for value in sheet.row_values(idx):
+                if type(value) is float:
+                    if value == int(value):
+                        value = unicode(int(value))
+                    else:
+                        value = unicode(value)
+                elif type(value) is not unicode:
+                    try:
+                        value = unicode(value)
+                    except UnicodeError:
+                        try:
+                            value = unicode(value, 'cp1252')
+                        except UnicodeError:
+                            value = u""
+                values.append(value)
+            yield values
+
+
+    def to_csv(self):
+        csv = CSVFile()
+        for values in self.iter_values():
+            row = (value.encode('utf_8') for value in values)
+            csv.add_row(row)
+        return csv.to_str() 
+
+
+
+class XLSReader(ODSReader):
+
+    def init(self):
+        self.book = open_workbook(file_contents=self.body)
+
+    
+    def get_tables(self):
+        for sheet in self.book.sheets():
+            yield XLSTable(sheet)
 
 
 
