@@ -18,7 +18,7 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.database import PhraseQuery
-from itools.datatypes import Unicode, Email, String, Nil
+from itools.datatypes import Unicode, Email, String
 from itools.gettext import MSG
 from itools.stl import stl
 from itools.web import INFO, ERROR
@@ -90,6 +90,15 @@ class Workgroup_NewInstance(NewInstance):
         if is_production:
             widgets.extend(self.captcha_widgets)
         return widgets
+
+
+    def get_value(self, resource, context, name, datatype):
+        if name == 'email':
+            value = context.get_query_value(name)
+            if value:
+                return value
+        return super(Workgroup_NewInstance, self).get_value(resource, context,
+                name, datatype)
 
 
     def get_namespace(self, resource, context):
