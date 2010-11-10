@@ -26,7 +26,7 @@ from itools.web import INFO, ERROR
 # Import from ikaaro
 from ikaaro import messages
 from ikaaro.autoform import TextWidget, MultilineWidget, PasswordWidget
-from ikaaro.autoform import ReadOnlyWidget, Widget
+from ikaaro.autoform import ReadOnlyWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.theme_views import Theme_Edit
@@ -44,20 +44,11 @@ MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
 MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
 
 
-class AlreadyClientWidget(Widget):
-    template = list(MSG(u"""<p id="already-client">Already registered and you
-            want to log in your client space? <a href="/;login">Click
-            here</a>.</p>""", html=True).gettext())
-
-
-
 class Workgroup_NewInstance(NewInstance):
     access = True
     schema = merge_dicts(NewInstance.schema,
-            already_client=Nil,
             title=Unicode(mandatory=True))
     widgets = [ReadOnlyWidget('cls_description'),
-            AlreadyClientWidget('already_client'),
             TextWidget('title', title=MSG(u'Name of your client space'),
                 tip=MSG(u'You can type the name of your company or '
                     u'organization'))]
@@ -99,6 +90,15 @@ class Workgroup_NewInstance(NewInstance):
         if is_production:
             widgets.extend(self.captcha_widgets)
         return widgets
+
+
+    def get_namespace(self, resource, context):
+        namespace = super(Workgroup_NewInstance, self).get_namespace(resource,
+                context)
+        namespace['before'] = MSG(u"""<p id="already-client">Already
+            registered and you want to log in your client space? <a
+            href="/;login">Click here</a>.</p>""", html=True).gettext()
+        return namespace
 
 
     def action(self, resource, context, form):
