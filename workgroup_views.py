@@ -18,7 +18,7 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.database import PhraseQuery
-from itools.datatypes import Unicode, Email, String
+from itools.datatypes import Unicode, Email, String, Nil
 from itools.gettext import MSG
 from itools.stl import stl
 from itools.web import INFO, ERROR
@@ -37,7 +37,6 @@ from application import Application
 from autoform import ImagePathDataType, ImageSelectorWidget
 from autoform import RecaptchaDatatype, RecaptchaWidget
 from base_views import IconsView
-from datatypes import Nil
 from utils import is_production
 
 

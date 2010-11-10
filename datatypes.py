@@ -761,10 +761,3 @@ class Subscription(Enumerate):
                 'value': MSG(u"Restricted (users must be subscribed)")},
             {'name': 'open',
                 'value': MSG(u"Open (accounts are created on demand)")}]
-
-
-class Nil(DataType):
-
-    @staticmethod
-    def encode(value):
-        return value
