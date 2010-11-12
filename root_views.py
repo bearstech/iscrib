@@ -21,7 +21,7 @@ from itools.core import merge_dicts
 from itools.datatypes import String, Unicode
 from itools.gettext import MSG
 from itools.uri import Reference
-from itools.web import BaseView
+from itools.web import BaseView, STLView
 
 # Import from ikaaro
 from ikaaro.autoform import TextWidget
@@ -35,17 +35,10 @@ from utils import is_production
 from workgroup import Workgroup
 
 
-class Root_View(BaseView):
+class Root_View(STLView):
     access = True
     title = MSG(u"View")
-
-
-    def GET(self, resource, context):
-        homepage = resource.get_property('homepage')
-        if homepage is None:
-            # Avoid response abort
-            return ''
-        return homepage
+    template = "/ui/iscrib/root_view.xml"
 
 
 

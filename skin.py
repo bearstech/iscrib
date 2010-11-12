@@ -17,6 +17,7 @@
 
 # Import from itools
 from itools.core import merge_dicts
+from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.access import is_admin
@@ -74,4 +75,12 @@ class Skin(BaseSkin):
                 namespace['location'] = None
                 namespace['languages'] = None
                 namespace['menu']['items'] = None
+
+        # Home page ?
+        page_css = None
+        if type(context.resource) == type(context.root):
+            if context.view_name in (None, 'view'):
+                page_css = 'home-page'
+        namespace['page_css'] = page_css
+
         return namespace

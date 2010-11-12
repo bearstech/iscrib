@@ -11,13 +11,22 @@ div#page {
   display: table;
   width: 900px;
   max-width: 900px;
+
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
+/* HEADER */
 #header {
   background: transparent url('/images/banner/;download') top left no-repeat;
   padding: 0;
   height: 61px;
   min-height: 61px;
+  margin-bottom: 0;
 }
 
 #header #logo {
@@ -50,6 +59,64 @@ div#page {
 #header #menu li.in-path a {
   background: #49d1ff;
   color: #fff;
+}
+
+/*
+ * HOME PAGE
+ */
+#page.home-page #location {
+  position: absolute;
+  top: 61px;
+  width: 880px;
+}
+
+#page.home-page #body {
+  padding: 0;
+}
+
+#home-container {
+  width: 900px;
+  height: 340px;
+}
+
+#home-container #home-title {
+  width: 900px;
+  height: 340px;
+  position: relative;
+  background: url("/ui/iscrib/images/home-background.png") no-repeat scroll left bottom transparent;
+}
+
+#home-container #home-title .content {
+  color: #0D3967;
+  font-family: "trebuchet MS";
+  font-size: 20px;
+  line-height: 0.95em;
+  padding-left: 50px;
+  padding-right: 290px;
+  padding-top: 55px;
+  text-align: justify;
+  height: 72px;
+  /*
+  background: transparent url("/ui/iscrib/images/home-title-background.png") bottom left repeat-x;
+  */
+}
+
+#home-container #home-title #home-title-link {
+  height: 60px;
+  left: 358px;
+  position: absolute;
+  top: 118px;
+  width: 285px;
+}
+
+#home-container #home-title .etape {
+  /*
+  background: transparent url("/ui/iscrib/images/home-image-etapes.jpg") bottom left no-repeat;
+  */
+  height: 213px;
+  width: 900px;
+  position: absolute;
+  bottom: 0;
 }
 
 

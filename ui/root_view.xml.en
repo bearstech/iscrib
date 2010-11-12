@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<stl:block xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
+
+  <div id="home-container">
+    <div id="home-title">
+      <div class="content">
+        iScrib est un puissant générateur de formulaires WEB de collecte de
+        données, crée simplement avec un tableur Excel ou OpenOffice.
+      </div>
+      <a id="home-title-link" href="/;new_resource?type=Workgroup"></a>
+      <!--
+      <div class="etape">
+          <a href="#"></a>
+      </div>
+      -->
+    </div>
+
+    <div id="box-auth">
+
+    </div>
+  </div>
+
+</stl:block>

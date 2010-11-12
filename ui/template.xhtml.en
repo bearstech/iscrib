@@ -22,7 +22,7 @@
     <link rel="shortcut icon" href="${favicon_href}" type="${favicon_type}" />
   </head>
   <body>
-  <div id="page">
+   <div id="page" class="${page_css}">
 
     <!-- Header -->
     <div id="header">
