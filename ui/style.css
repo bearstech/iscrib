@@ -3,10 +3,55 @@
   width: auto;
 }
 
+body {
+  background: transparent url('/images/bkg/;download') top left repeat-x;
+}
+
 div#page {
   display: table;
   width: 900px;
+  max-width: 900px;
 }
+
+#header {
+  background: transparent url('/images/banner/;download') top left no-repeat;
+  padding: 0;
+  height: 61px;
+  min-height: 61px;
+}
+
+#header #logo {
+  bottom: 9px;
+}
+
+#header .header-toolbar {
+  right: 15px;
+  bottom: 0;
+  position: absolute;
+}
+
+#header #menu {
+  top: 0;
+}
+
+#header #menu li a {
+  -moz-border-radius: 0;
+  background: #033060;
+  color: #FFFFFF;
+  font-family: "trebuchet MS";
+  font-size: 13px;
+  font-weight: bold;
+  padding: 5px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#header #menu li a:hover,
+#header #menu li.in-path a {
+  background: #49d1ff;
+  color: #fff;
+}
+
 
 #folder-banner {
   display: table;
@@ -280,13 +325,6 @@ button, .button {
 }
 #choose-format span {
   float: right;
-}
-
-#header #logo {
-  bottom: 3px;
-}
-#header #logo-title {
-  font-size: 2em;
 }
 
 #already-client {
