@@ -4,7 +4,7 @@
 }
 
 body {
-  background: transparent url('/images/bkg/;download') top left repeat-x;
+  background: transparent url('/ui/iscrib/images/bkg.jpg') top left repeat-x;
 }
 
 div#page {
@@ -22,7 +22,7 @@ div#page {
 
 /* HEADER */
 #header {
-  background: transparent url('/images/banner/;download') top left no-repeat;
+  background: transparent url('/ui/iscrib/images/banner.png') top left no-repeat;
   padding: 0;
   height: 61px;
   min-height: 61px;
@@ -77,6 +77,7 @@ div#page {
 #home-container {
   width: 900px;
   height: 340px;
+  position: relative;
 }
 
 #home-container #home-title {
@@ -119,6 +120,61 @@ div#page {
   bottom: 0;
 }
 
+/* Box auth */
+#home-container #box-auth {
+  background: url("/ui/iscrib/images/home-box.png") no-repeat scroll left top transparent;
+  bottom: 20px;
+  height: 263px;
+  padding-left: 11px;
+  padding-right: 18px;
+  padding-top: 50px;
+  position: absolute;
+  right: 0;
+  width: 182px;
+}
+#home-container #box-auth label {
+  color: #fff;
+  /* display: block; */
+}
+#home-container #box-auth label.title.field-error {
+  color: red;
+}
+#home-container #box-auth input {
+  background: #fff;
+  width: 180px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+#home-container #box-auth #box-auth-autoform .button-create {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 84px !important;
+  height: 25px !important;
+  background: url("/ui/iscrib/images/home-bt-creer.png") no-repeat scroll left top transparent;
+
+  color: transparent;
+  border: 0;
+  /* remove border/xxx */
+  border: none;
+  /* radius */
+  -moz-border-radius: none;
+  -webkit-border-radius: none;
+  border-radius: none;
+  /* shadow */
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+#home-container #box-auth #box-auth-autoform p {
+  margin: 0;
+}
+#home-container #box-auth #box-auth-autoform p.actions {
+  text-align: right;
+}
+
+#home-container #box-auth #box-auth-forgotten {
+  color: #fff;
+}
 
 #folder-banner {
   display: table;

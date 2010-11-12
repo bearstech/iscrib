@@ -19,7 +19,32 @@
     </div>
 
     <div id="box-auth">
-
+      <form id="box-auth-autoform" name="autoform" action="${action}" method="post"
+        enctype="multipart/form-data" stl:omit-tag="not actions">
+        <div stl:repeat="widget widgets">
+          <stl:block stl:if="widget/title">
+            <label class="title" for="${widget/name}" stl:if="not widget/error">${widget/title}</label>
+            <label class="title field-error" for="${widget/name}" stl:if="widget/error">${widget/title}</label>
+            <span stl:if="widget/mandatory" class="field-is-missing"
+              title="This field is required">*</span>
+            <!-- <span stl:if="widget/tip" title="${widget/tip}">(?)</span> -->
+            <br/>
+          </stl:block>
+          <!-- <span stl:if="widget/error" class="field-error">${widget/error}<br/></span> -->
+          <p class="widget" stl:repeat="widget widget/widgets">${widget}</p>
+        </div>
+        <p stl:if="actions" class="actions">
+          <stl:block stl:repeat="action actions">
+            <button stl:if="not action/value" type="submit"
+              class="${action/class}" onclick="${action/onclick}"
+              >${action/title}</button>
+            <button stl:if="action/value" type="submit" name="action" value="${action/value}"
+              class="${action/class}" onclick="${action/onclick}"
+              >${action/title}</button>
+          </stl:block>
+        </p>
+      </form>
+      <a id="box-auth-forgotten" href="/;login">Forgotten Password ?</a>
     </div>
   </div>
 

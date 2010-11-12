@@ -43,7 +43,7 @@
       <!-- Logo -->
       <div id="logo">
         <a href="${website_href}" id="logo-image">
-            <img src="/images/logo/;download"/>
+            <img src="/ui/iscrib/images/logo.gif"/>
         </a>
       </div>
       <div class="clear" />

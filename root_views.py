@@ -18,13 +18,14 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.datatypes import String, Unicode
+from itools.datatypes import String, Unicode, Email
 from itools.gettext import MSG
-from itools.uri import Reference
+from itools.uri import encode_query, get_reference, Reference
 from itools.web import BaseView, STLView
 
 # Import from ikaaro
-from ikaaro.autoform import TextWidget
+from ikaaro.buttons import Button
+from ikaaro.autoform import AutoForm, TextWidget, PasswordWidget
 from ikaaro.control_panel import CPEditContactOptions
 from ikaaro.website_views import ContactForm
 
@@ -35,10 +36,44 @@ from utils import is_production
 from workgroup import Workgroup
 
 
-class Root_View(STLView):
+class Root_View(AutoForm):
+
     access = True
     title = MSG(u"View")
     template = "/ui/iscrib/root_view.xml"
+
+    actions = [Button(access=True, css='button-create', title=MSG(u'Create'))]
+    schema = {
+        'title': Unicode(mandatory=True),
+        'email': Email(mandatory=True),
+        'password': String(mandatory=True),
+        'password2': String(mandatory=True)}
+    widgets = [
+        TextWidget('title', title=MSG(u'Name of your client space'),
+                tip=MSG(u'You can type the name of your company or '
+                    u'organization')),
+        TextWidget('email', title=MSG(u"E-mail address")),
+        PasswordWidget('password', title=MSG(u"Password")),
+        PasswordWidget('password2', title=MSG(u"Repeat Password"))]
+
+
+    def get_namespace(self, resource, context):
+        namespace = AutoForm.get_namespace(self, resource, context)
+        # widgets
+        widgets_dict = {}
+        for widget in namespace['widgets']:
+            widgets_dict[widget['name']] = widget
+        namespace['widgets_dict'] = widgets_dict
+
+        return namespace
+
+
+    def action(self, resource, context, form):
+        goto = '/;new_resource'
+        query = {'type': 'Workgroup'}
+        for key in ('title', 'email'):#, 'password', 'password2'):
+            query[key] = str(form[key])
+        return get_reference('%s?%s' % (goto, encode_query(query)))
 
 
 
