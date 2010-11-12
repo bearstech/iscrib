@@ -42,8 +42,8 @@
       </ul>
       <!-- Logo -->
       <div id="logo">
-        <a href="${website_href}" id="logo-image">
-            <img src="/ui/iscrib/images/logo.gif"/>
+          <a href="${website_href}" stl:if="logo_href" id="logo-image">
+          <img src="${logo_href}"/>
         </a>
       </div>
       <div class="clear" />
@@ -77,25 +77,25 @@
         <h2>A propos de iScrib</h2>
         <ul class="content">
           <li><a href="http://www.itaapy.com" target="_blank">Un service Itaapy</a></li>
-          <li><a href="#">Exemples</a></li>
-          <li><a href="#">Conditions d'utilisation</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="/#">Exemples</a></li>
+          <li><a href="/#">Conditions d'utilisation</a></li>
+          <li><a href="/#">Blog</a></li>
         </ul>
       </div>
       <div class="col">
         <h2>Business</h2>
         <ul class="content">
-          <li><a href="#">News</a></li>
-          <li><a href="#">Devenir partenaire</a></li>
-          <li><a href="#">Tarifs</a></li>
-          <li><a href="#">Télécharger OpenOffice.org</a></li>
+          <li><a href="/#">News</a></li>
+          <li><a href="/#">Devenir partenaire</a></li>
+          <li><a href="/#">Tarifs</a></li>
+          <li><a href="/#">Télécharger OpenOffice.org</a></li>
         </ul>
       </div>
       <div class="col">
         <h2>Aide</h2>
         <ul class="content">
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Contactez-nous</a></li>
+          <li><a href="/#">FAQ</a></li>
+          <li><a href="/#">Contactez-nous</a></li>
         </ul>
       </div>
     </div>
