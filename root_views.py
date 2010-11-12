@@ -65,6 +65,13 @@ class Root_View(AutoForm):
             widgets_dict[widget['name']] = widget
         namespace['widgets_dict'] = widgets_dict
 
+        # home page content
+        homepage = resource.get_property('homepage')
+        if homepage is None:
+            # Avoid response abort
+            homepage = None
+        namespace['homepage_content'] = homepage
+
         return namespace
 
 

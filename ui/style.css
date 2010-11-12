@@ -192,6 +192,21 @@ div#page {
   text-align: center;
 }
 
+
+/*
+ * Content rules
+ */
+#content h2 {
+  font-size: 26px;
+  color: #0D3967;
+  font-family: "trebuchet MS";
+  border-bottom: none;
+}
+
+#content ul li {
+  list-style-image: url("/ui/iscrib/images/bullet-blue.jpg");
+}
+
 /*
  * Forms
  */
