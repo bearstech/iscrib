@@ -207,6 +207,47 @@ div#page {
   list-style-image: url("/ui/iscrib/images/bullet-blue.jpg");
 }
 
+#footer {
+  background: url("/ui/iscrib/images/footer-background.jpg") top left repeat-x;
+  height: 127px;
+  text-align: left;
+  margin-top: 0;
+  width: auto;
+}
+#footer .container {
+  width: 600px;
+  margin: auto;
+}
+#footer .col {
+  width: 190px;
+  float: left;
+}
+#footer .col h2 {
+  font-size: 12px;
+  color: #fff;
+  font-family: "trebuchet MS";
+  height: 25px;
+  width: 190px;
+  overflow: hidden;
+  margin: 0;
+}
+#footer .col .content {
+  font-size: 11px;
+  color: #fff;
+  font-family: "trebuchet MS";
+  padding-left: 0;
+  margin-left: 0;
+}
+#footer .col .content a {
+  color: #fff;
+}
+#footer .col .content li {
+  list-style: none;
+}
+#footer a {
+  margin: 0;
+}
+
 /*
  * Forms
  */

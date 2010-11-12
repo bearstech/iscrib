@@ -68,13 +68,38 @@
       </table>
     </div>
 
-    <!-- Footer -->
-    <div id="footer">
-      <a href="http://www.itaapy.com/iscrib">An Itaapy Service</a>&nbsp;|
-      <a href="/samples">Samples</a>&nbsp;|
-      <a href="/terms-and-conditions">Terms and Conditions</a>&nbsp;|
-      <a href="http://download.openoffice.org/ ">Download OpenOffice.org</a>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer">
+    <div class="container">
+      <div class="col">
+        <h2>A propos de iScrib</h2>
+        <ul class="content">
+          <li><a href="http://www.itaapy.com" target="_blank">Un service Itaapy</a></li>
+          <li><a href="#">Exemples</a></li>
+          <li><a href="#">Conditions d'utilisation</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h2>Business</h2>
+        <ul class="content">
+          <li><a href="#">News</a></li>
+          <li><a href="#">Devenir partenaire</a></li>
+          <li><a href="#">Tarifs</a></li>
+          <li><a href="#">Télécharger OpenOffice.org</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h2>Aide</h2>
+        <ul class="content">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contactez-nous</a></li>
+        </ul>
+      </div>
     </div>
+    <div class="clear" />
   </div>
 
   <!-- Google analytics -->
