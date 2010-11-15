@@ -62,6 +62,16 @@ div#page {
   color: #fff;
 }
 
+#header #links-menu-profile {
+  padding-left: 20px;
+  background: url("/ui/iscrib/images/auth.png") no-repeat scroll left top transparent;
+}
+
+#header #links-menu-logout {
+  padding-left: 20px;
+  background: url("/ui/iscrib/images/deco.png") no-repeat scroll left top transparent;
+}
+
 /*
  * HOME PAGE
  */
