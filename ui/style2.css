@@ -1,0 +1,169 @@
+/* HEADER */
+#header {
+  background: transparent url('/ui/iscrib/images/banner.png') top left no-repeat;
+  padding: 0;
+  height: 61px;
+  min-height: 61px;
+  margin-bottom: 0;
+}
+
+#header #logo {
+  bottom: 9px;
+}
+
+#header .header-toolbar {
+  right: 15px;
+  bottom: 5px;
+  position: absolute;
+}
+
+#header #menu {
+  top: 0;
+  height: 30px;
+}
+
+#header #menu li a {
+  -moz-border-radius: 0;
+  background: #033060;
+  color: #FFFFFF;
+  font-family: "trebuchet MS";
+  font-size: 13px;
+  font-weight: bold;
+  padding: 5px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#header #menu li a:hover,
+#header #menu li.in-path a {
+  background: #49d1ff;
+  color: #fff;
+}
+
+#header #links-menu-profile {
+  padding-left: 20px;
+  background: url("/ui/iscrib/images/auth.png") no-repeat scroll left top transparent;
+}
+
+#header #links-menu-logout {
+  padding-left: 20px;
+  background: url("/ui/iscrib/images/deco.png") no-repeat scroll left top transparent;
+}
+
+/*
+ * HOME PAGE
+ */
+#page.home-page #location {
+  position: absolute;
+  top: 61px;
+  width: 880px;
+}
+
+#page.home-page #body {
+  padding: 0;
+}
+
+#home-container {
+  width: 900px;
+  height: 340px;
+  position: relative;
+}
+
+#home-container #home-title {
+  width: 900px;
+  height: 340px;
+  position: relative;
+  background: url("/ui/iscrib/images/home-background.png") no-repeat scroll left bottom transparent;
+}
+
+#home-container #home-title .content {
+  color: #0D3967;
+  font-family: "trebuchet MS";
+  font-size: 20px;
+  line-height: 0.95em;
+  padding-left: 50px;
+  padding-right: 290px;
+  padding-top: 55px;
+  text-align: justify;
+  height: 72px;
+}
+
+#home-container #home-title #home-title-link {
+  height: 60px;
+  left: 358px;
+  position: absolute;
+  top: 118px;
+  width: 285px;
+}
+
+#home-container #home-title .etape {
+  height: 213px;
+  width: 900px;
+  position: absolute;
+  bottom: 0;
+}
+
+/* Box auth */
+#home-container #box-auth {
+  background: url("/ui/iscrib/images/home-box.png") no-repeat scroll left top transparent;
+  bottom: 20px;
+  height: 263px;
+  padding-left: 11px;
+  padding-right: 18px;
+  padding-top: 50px;
+  position: absolute;
+  right: 0;
+  width: 182px;
+}
+#home-container #box-auth label {
+  color: #fff;
+  /* display: block; */
+}
+#home-container #box-auth label.title.field-error {
+  color: red;
+}
+#home-container #box-auth input {
+  background: #fff;
+  width: 180px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+#home-container #box-auth #box-auth-autoform .button-create {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 84px !important;
+  height: 25px !important;
+  background: url("/ui/iscrib/images/home-bt-creer.png") no-repeat scroll left top transparent;
+
+  color: transparent;
+  border: 0;
+  /* remove border/xxx */
+  border: none;
+  /* radius */
+  -moz-border-radius: none;
+  -webkit-border-radius: none;
+  border-radius: none;
+  /* shadow */
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+#home-container #box-auth #box-auth-autoform p {
+  margin: 0;
+}
+#home-container #box-auth #box-auth-autoform p.actions {
+  text-align: right;
+}
+#home-container #box-auth #box-auth-forgotten {
+  color: #fff;
+}
+#home-container #box-auth #box-auth-already-customer-link {
+  bottom: 13px;
+  height: 21px;
+  position: absolute;
+  right: 5px;
+  width: 125px;
+}
+#home-container #box-auth #box-auth-already-customer-link span {
+  display: none;
+}

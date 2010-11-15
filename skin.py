@@ -30,12 +30,16 @@ class Skin(BaseSkin):
 
     def get_styles(self, context):
         styles = BaseSkin.get_styles(self, context)
+        site_root = context.resource.get_site_root()
         # Restore Aruni
         if '/ui/aruni/style.css' not in styles:
             styles.insert(-4, '/ui/aruni/style.css')
+        # Add specific style on root
+        if site_root is context.root:
+            wg_style = '%s/style2.css' % self.get_canonical_path()
+            styles.insert(-1, wg_style)
         # Replace root style by website style
         if styles[-1] == '/theme/style/;download':
-            site_root = context.resource.get_site_root()
             if site_root != context.root:
                 style = site_root.get_resource('theme/style')
                 ac = style.get_access_control()
