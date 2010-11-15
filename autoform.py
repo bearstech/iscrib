@@ -110,7 +110,8 @@ class RecaptchaDatatype(String):
             'recaptcha_challenge_field', type=String)
         recaptcha_response_field = context.get_form_value(
             'recaptcha_response_field', type=String)
-        if not recaptcha_response_field.strip():
+        if (recaptcha_response_field is None or not
+                recaptcha_response_field.strip()):
             # Don't bother to contact server
             return False
         # Test if captcha value is valid
