@@ -169,8 +169,8 @@ class Workgroup_NewInstance(NewInstance):
                 user.send_workgroup_registration(context, email, site_uri,
                         password)
             else:
-                # XXX existing user but new password
-                pass
+                # Existing user but new password
+                user.set_password(password)
             # Automatic login
             user.set_auth_cookie(context, password)
             context.user = user
