@@ -1,3 +1,10 @@
+div#page.homepage {
+  background: #fff;
+}
+div#page {
+  background: transparent;
+}
+
 /* HEADER */
 #header {
   background: transparent url('/ui/iscrib/images/banner.png') top left no-repeat;
@@ -166,4 +173,10 @@
 }
 #home-container #box-auth #box-auth-already-customer-link span {
   display: none;
+}
+#home-content h2 {
+  border-bottom: none;
+}
+#home-content ul li {
+  list-style-image: url("/ui/iscrib/images/bullet-blue2.jpg");
 }
