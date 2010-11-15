@@ -43,19 +43,12 @@ class Root_View(AutoForm):
 
     actions = [Button(access=True, css='button-create', title=MSG(u'Create'))]
     schema = {'title': Unicode(mandatory=True)}
-    widgets = [
-        TextWidget('title', title=MSG(u'Name of your client space'),
+    widgets = [TextWidget('title', title=MSG(u'Name of your client space'),
                 tip=MSG(u'You can type the name of your company or '
                     u'organization'))]
 
-    anonymous_schema = {
-        'email': Email(mandatory=True),
-        'password': String(mandatory=True),
-        'password2': String(mandatory=True)}
-    anonymous_widgets = [
-        TextWidget('email', title=MSG(u"E-mail address")),
-        PasswordWidget('password', title=MSG(u"Password")),
-        PasswordWidget('password2', title=MSG(u"Repeat Password"))]
+    anonymous_schema = {'email': Email(mandatory=True)}
+    anonymous_widgets = [TextWidget('email', title=MSG(u"E-mail address"))]
 
 
     def get_schema(self, resource, context):
@@ -97,7 +90,7 @@ class Root_View(AutoForm):
     def action(self, resource, context, form):
         goto = '/;new_resource'
         query = {'type': 'Workgroup'}
-        for key in ('title', 'email'):#, 'password', 'password2'):
+        for key in ('title', 'email'):
             if key in form:
                 query[key] = str(form[key])
         return get_reference('%s?%s' % (goto, encode_query(query)))
