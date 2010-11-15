@@ -21,7 +21,6 @@ from itools.core import merge_dicts
 from itools.datatypes import String, Unicode, Email
 from itools.gettext import MSG
 from itools.uri import encode_query, get_reference, Reference
-from itools.web import BaseView, STLView
 
 # Import from ikaaro
 from ikaaro.buttons import Button
@@ -40,30 +39,50 @@ class Root_View(AutoForm):
 
     access = True
     title = MSG(u"View")
-    template = "/ui/iscrib/root_view.xml"
+    template = "/ui/iscrib/root/view.xml"
 
     actions = [Button(access=True, css='button-create', title=MSG(u'Create'))]
-    schema = {
-        'title': Unicode(mandatory=True),
-        'email': Email(mandatory=True),
-        'password': String(mandatory=True),
-        'password2': String(mandatory=True)}
+    schema = {'title': Unicode(mandatory=True)}
     widgets = [
         TextWidget('title', title=MSG(u'Name of your client space'),
                 tip=MSG(u'You can type the name of your company or '
-                    u'organization')),
+                    u'organization'))]
+
+    anonymous_schema = {
+        'email': Email(mandatory=True),
+        'password': String(mandatory=True),
+        'password2': String(mandatory=True)}
+    anonymous_widgets = [
         TextWidget('email', title=MSG(u"E-mail address")),
         PasswordWidget('password', title=MSG(u"Password")),
         PasswordWidget('password2', title=MSG(u"Repeat Password"))]
 
 
+    def get_schema(self, resource, context):
+        schema = self.schema.copy()
+        if context.user is None:
+            schema.update(self.anonymous_schema)
+        return schema
+
+
+    def get_widgets(self, resource, context):
+        widgets = self.widgets[:]
+        if context.user is None:
+            widgets.extend(self.anonymous_widgets)
+        return widgets
+
+
     def get_namespace(self, resource, context):
-        namespace = AutoForm.get_namespace(self, resource, context)
+        namespace = super(Root_View, self).get_namespace(resource, context)
+
         # widgets
         widgets_dict = {}
         for widget in namespace['widgets']:
             widgets_dict[widget['name']] = widget
         namespace['widgets_dict'] = widgets_dict
+
+        # extra anonymous requirements
+        namespace['anonymous'] = context.user is None
 
         # home page content
         homepage = resource.get_property('homepage')
@@ -79,7 +98,8 @@ class Root_View(AutoForm):
         goto = '/;new_resource'
         query = {'type': 'Workgroup'}
         for key in ('title', 'email'):#, 'password', 'password2'):
-            query[key] = str(form[key])
+            if key in form:
+                query[key] = str(form[key])
         return get_reference('%s?%s' % (goto, encode_query(query)))
 
 

@@ -17,7 +17,6 @@
 
 # Import from itools
 from itools.core import merge_dicts
-from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.access import is_admin

@@ -44,7 +44,7 @@
           </stl:block>
         </p>
       </form>
-      <a id="box-auth-forgotten" href="/;login">Forgotten Password ?</a>
+      <a id="box-auth-forgotten" href="/;login" stl:if="anonymous">Forgotten Password ?</a>
       <a id="box-auth-already-customer-link" href="/;login"><span>Already customer</span></a>
     </div>
 
