@@ -22,7 +22,8 @@ from itools.fs import FileName
 from itools.gettext import MSG
 
 # Import from ikaaro
-from ikaaro.autoform import XHTMLBody, RTEWidget
+from ikaaro.autoform import XHTMLBody, RTEWidget, TextWidget
+from ikaaro.datatypes import Multilingual
 from ikaaro.file import Image
 from ikaaro.root import Root as BaseRoot
 from ikaaro.workflow import WorkflowAware
@@ -39,13 +40,16 @@ class Root(BaseRoot):
     class_schema = merge_dicts(BaseRoot.class_schema,
             homepage=XHTMLBody(source='metadata', multilingual=True,
                 parameters_schema = {'lang': String}),
+            slogan=Multilingual(source='metadata'),
             recaptcha_private_key=String(source='metadata'),
             recaptcha_public_key=String(source='metadata'))
     class_views = BaseRoot.class_views + ['show']
     class_skin = 'ui/iscrib'
 
-    edit_schema = {'homepage': XHTMLBody(multilingual=True)}
-    edit_widgets = [RTEWidget('homepage', title=MSG(u'Homepage'))]
+    edit_schema = {'homepage': XHTMLBody(multilingual=True),
+                   'slogan': Multilingual}
+    edit_widgets = [TextWidget('slogan', title=MSG(u'Slogan')),
+                    RTEWidget('homepage', title=MSG(u'Homepage'))]
 
     # Views
     view = Root_View()

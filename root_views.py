@@ -84,6 +84,9 @@ class Root_View(AutoForm):
             homepage = None
         namespace['homepage_content'] = homepage
 
+        # slogan
+        namespace['slogan'] = resource.get_property('slogan')
+
         return namespace
 
 

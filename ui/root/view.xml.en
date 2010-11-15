@@ -6,9 +6,8 @@
 
   <div id="home-container">
     <div id="home-title">
-      <div class="content">
-        iScrib est un puissant générateur de formulaires WEB de collecte de
-        données, crée simplement avec un tableur Excel ou OpenOffice.
+      <div class="content" stl:if="slogan">
+        ${slogan}
       </div>
       <a id="home-title-link" href="/;new_resource?type=Workgroup"></a>
     </div>
