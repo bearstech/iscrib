@@ -23,7 +23,9 @@
 }
 
 #header #menu li a {
+  border-radius: 0;
   -moz-border-radius: 0;
+  -webkit-border-radius: 0;
   background: #033060;
   color: #FFFFFF;
   font-family: "trebuchet MS";
@@ -54,9 +56,7 @@
  * HOME PAGE
  */
 #page.home-page #location {
-  position: absolute;
-  top: 61px;
-  width: 880px;
+  display: none;
 }
 
 #page.home-page #body {

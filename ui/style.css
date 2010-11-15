@@ -33,6 +33,10 @@ div#page {
 }
 
 
+#body {
+  font-size: 1.3em;
+}
+
 /*
  * Content rules
  */
