@@ -155,6 +155,12 @@ class XLSWriter(object):
 
     def __init__(self, name):
         self.workbook = workbook = Workbook()
+        # Taken from xlwt.Utils.valid_sheet_name
+        # Sheet name limited to 31 chars
+        if len(name) > 31:
+            name = u"{sheetname}...".format(sheetname=name[:28])
+        for c in u"'[]:\\?/*\x00":
+            name = name.replace(c, u".")
         self.sheet = workbook.add_sheet(name)
 
 
