@@ -47,7 +47,10 @@ MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
 class Workgroup_NewInstance(NewInstance):
     access = True
     schema = merge_dicts(NewInstance.schema,
-            title=Unicode(mandatory=True))
+            title=Unicode(mandatory=True),
+            firstname=Unicode,
+            lastname=Unicode,
+            company=Unicode)
     widgets = [ReadOnlyWidget('cls_description'),
             TextWidget('title', title=MSG(u'Name of your client space'),
                 tip=MSG(u'You can type the name of your company or '
@@ -55,9 +58,6 @@ class Workgroup_NewInstance(NewInstance):
 
     anonymous_schema = {
         'email': Email(mandatory=True),
-        'firstname': Unicode,
-        'lastname': Unicode,
-        'company': Unicode,
         'password': String(mandatory=True),
         'password2': String(mandatory=True)}
     anonymous_widgets = [
