@@ -19,6 +19,7 @@
 import urllib, urllib2
 
 # Import from itools
+from itools.core import thingy_lazy_property
 from itools.datatypes import String, PathDataType
 from itools.gettext import MSG
 from itools.uri import Path
@@ -72,7 +73,7 @@ class ImagePathDataType(PathDataType):
 
 # TODO merge with shop or ikaaro
 class ImageSelectorWidget(BaseImageSelectorWidget):
-    template = MSG(u"""
+    _template = MSG(u"""
     <input type="text" id="selector-${id}" size="${size}" name="${name}"
       value="${value}"/>
     <button id="selector-button-${id}" class="button-selector"
@@ -86,6 +87,11 @@ class ImageSelectorWidget(BaseImageSelectorWidget):
     <br/>
     <img src="${value}/;thumb?width=${width}&amp;height=${height}"
     stl:if="value"/>""", html=True)
+
+
+    @thingy_lazy_property
+    def template(self):
+        return list(self._template.gettext())
 
 
 
