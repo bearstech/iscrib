@@ -98,9 +98,6 @@ div#page {
   padding-top: 55px;
   text-align: justify;
   height: 72px;
-  /*
-  background: transparent url("/ui/iscrib/images/home-title-background.png") bottom left repeat-x;
-  */
 }
 
 #home-container #home-title #home-title-link {
@@ -112,9 +109,6 @@ div#page {
 }
 
 #home-container #home-title .etape {
-  /*
-  background: transparent url("/ui/iscrib/images/home-image-etapes.jpg") bottom left no-repeat;
-  */
   height: 213px;
   width: 900px;
   position: absolute;
