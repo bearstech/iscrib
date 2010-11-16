@@ -380,7 +380,10 @@ class Application_View(Folder_BrowseContent):
             if user is None:
                 value = None
             else:
-                value = user.get_property('email').lower().translate(transmap)
+                email = user.get_property('email').lower()
+                # Group by domain
+                username, domain = email.split('@')
+                value = (domain, username)
             cache[name] = value
             return value
         return key
