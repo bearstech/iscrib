@@ -19,8 +19,10 @@
             <em>e.g. "John Doe" &lt;john.doe@example.com&gt;</em>
             <textarea name="new_users" cols="50"
               rows="20">${new_users}</textarea>
-            <button type="submit" name="add_users" class="button-ok">Add
-              Users</button>
+            <p class="actions">
+              <button type="submit" name="add_users" class="button-ok">Add
+                Users</button>
+            </p>
           </form>
           <p stl:if="not allowed_users">${MSG_NO_MORE_ALLOWED}</p>
         </td>
