@@ -169,7 +169,6 @@ div#page {
   height: 25px !important;
   background: url("/ui/iscrib/images/home-bt-creer.png") no-repeat scroll left top transparent;
 
-  color: transparent;
   border: 0;
   /* remove border/xxx */
   border: none;
@@ -181,6 +180,9 @@ div#page {
   box-shadow: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
+}
+#home-container #box-auth #box-auth-autoform .button-create span {
+  visibility: hidden; /* ie x */
 }
 #home-container #box-auth #box-auth-autoform p {
   margin: 0;
