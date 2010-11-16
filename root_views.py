@@ -154,6 +154,7 @@ class Root_Contact(ContactForm):
         schema.update(self.extra_schema)
         if RecaptchaDatatype.is_required(context):
             schema.update(captcha_schema)
+        return schema
 
 
     def get_widgets(self, resource, context):

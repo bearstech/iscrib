@@ -188,6 +188,7 @@ class Application_NewInstance(NewInstance):
 
 
 class Application_Menu(IconsView):
+    cols = 4
     make_item = IconsView.make_item
     items = [make_item(icon='/ui/iscrib/images/register48.png',
                 title=MSG(u"Subscribe Users"),

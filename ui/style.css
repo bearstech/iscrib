@@ -340,7 +340,7 @@ button, .button {
 
 #contact-form {
   border-collapse: collapse;
-  background: url(images/contact-bg.png) top right repeat-y;
+  background: #fff url(images/contact-bg.png) top right repeat-y;
   box-shadow: 5px 5px 5px 0 #777;
   -moz-box-shadow: 5px 5px 5px 0 #777;
   -webkit-box-shadow: 5px 5px 5px 0 #777;
