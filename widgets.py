@@ -163,8 +163,7 @@ def textarea_widget(context, form, datatype, name, value, schema, fields,
         content = XMLContent.encode(value)
         return make_element(u"div", attributes, content)
 
-    attributes = {u"name": name, u"rows": u"15",
-            u"cols": datatype.representation}
+    attributes = {u"name": name, u"rows": u"15", u"cols": datatype.length}
     # special case for 'value'
     content = XMLContent.encode(value)
     return make_element(u"textarea", attributes, content)
@@ -189,7 +188,7 @@ def text_widget(context, form, datatype, name, value, schema, fields,
                 u"id": u"field_{name}".format(name=name),
                 u"name": name, u"value": XMLAttribute.encode(value),
                 u"size": datatype.length,
-                u"maxlength": datatype.representation}
+                u"maxlength": datatype.size}
         if tabindex:
             attributes[u"tabindex"] = tabindex
         content = u""
@@ -216,15 +215,15 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     # Always take data from the handler, we store wrong values anyway
     value = form.get_form().handler.get_value(name, schema)
     datatype = schema[name]
-    representation = datatype.representation
+    enum_repr = datatype.enum_repr
     widget = None
-    if representation == 'select':
+    if enum_repr == 'select':
         widget = select_widget(context, form, datatype, name, value, schema,
                 fields, readonly)
-    elif representation == 'radio':
+    elif enum_repr == 'radio':
         widget = radio_widget(context, form, datatype, name, value, schema,
                 fields, readonly)
-    elif representation == 'checkbox':
+    elif enum_repr == 'checkbox':
         widget = checkbox_widget(context, form, datatype, name, value,
                 schema, fields, readonly)
     # Skip instance datatypes: TypeError: issubclass() arg 1 must be a class

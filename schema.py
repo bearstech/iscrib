@@ -35,16 +35,22 @@ from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import SqlEnumerate
 
 
+ERR_WRONG_NUMBER_COLUMNS = ERROR(u'Wrong number of columns. Do you use the '
+        u'latest template?')
 ERR_EMPTY_NAME = ERROR(u'In schema, line {line}, variable name is missing.')
 ERR_DUPLICATE_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
         u'duplicated.')
 ERR_BAD_TYPE = ERROR(u'In schema, line {line}, type "{type}" is unknown.')
-ERR_BAD_REPRESENTATION = ERROR(u'In schema, line {line}, representation '
-        u'"{representation}" is unknown.')
 ERR_BAD_LENGTH = ERROR(u'In schema, line {line}, length "{length}" is '
         u'unknown.')
+ERR_BAD_ENUM_REPR = ERROR(u'In schema, line {line}, enum representation '
+        u'"{enum_repr}" is unknown.')
+ERR_BAD_DECIMALS = ERROR(u'In schema, line {line}, decimals '
+        u'"{decimals}" is unknown.')
 ERR_BAD_MANDATORY = ERROR(u'In schema, line {line}, mandatory "{mandatory}" '
         u'is unknown.')
+ERR_BAD_SIZE = ERROR(u'In schema, line {line}, size ' u'"{size}" is '
+        u'unknown.')
 ERR_BAD_FORMULA = ERROR(u'In schema, line {line}, in sum formula, variable '
         u'"{name}" is ' u'unknown.')
 ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, dependency variable '
@@ -105,50 +111,91 @@ class Type(Enumerate):
         return Enumerate.decode(data).strip().lower()
 
 
-    def get_type(cls, name, default=None):
+    @classmethod
+    def get_type(cls, name):
         for option in cls.get_options():
             if option['name'] == name:
                 return option['type']
-        return default
+        return cls.get_default()
 
 
 
-class Representation(String):
-
-    @staticmethod
-    def decode(data):
-        return String.decode(data).strip().lower()
-
-
-    @staticmethod
-    def is_valid(value):
-        if not value:
-            return True
-        if u"." in value:
-            integer, decimal = value.split(u".")
-            return integer.isdigit() and decimal.isdigit()
-        return value.isdigit() or value in ("radio", "checkbox")
-
-
-
-class Length(Integer):
+class ValidInteger(Integer):
 
     @staticmethod
     def is_valid(value):
         return value is None or type(value) is int
 
 
+    @classmethod
+    def decode(cls, data):
+        try:
+            value = Integer.decode(data)
+        except ValueError:
+            return data
+        if not value:
+            value = cls.get_default()
+        return value
 
-class Mandatory(Boolean):
+
+
+class EnumerateOptions(Unicode):
+    multiple = True
 
     @staticmethod
     def decode(data):
+        value = Unicode.decode(data)
+        return [{'name': checkid(option), 'value': option.strip()}
+                for option in value.split(u"/")]
+
+
+    @staticmethod
+    def encode(value):
+        raise NotImplementedError
+
+
+
+class EnumerateRepresentation(Enumerate):
+    options = [
+        {'name': 'radio', 'value': MSG(u"Radio")},
+        {'name': 'checkbox', 'value': MSG(u"Checkbox")}]
+
+
+    @classmethod
+    def decode(cls, data):
+        value = Enumerate.decode(data).strip().lower()
+        if not value:
+            value = cls.get_default()
+
+
+
+class Mandatory(Boolean):
+
+    @classmethod
+    def decode(cls, data):
         data = data.strip().upper()
-        if data in ('', 'O', 'OUI', '1'):
+        if data == '':
+            return cls.get_default()
+        elif data in ('O', 'OUI', '1'):
             return True
         elif data in ('N', 'NON', '0'):
             return False
         raise ValueError
+
+
+
+class Dependency(String):
+
+    @staticmethod
+    def decode(data):
+        return String.decode(data).strip().upper()
+
+
+    @staticmethod
+    def is_valid(value, known_variables):
+        if not value:
+            return True
+        return value in known_variables
 
 
 
@@ -171,34 +218,22 @@ class Formula(String):
 
 
 
-class Dependency(String):
-
-    @staticmethod
-    def decode(data):
-        return String.decode(data).strip().upper()
-
-
-    @staticmethod
-    def is_valid(value, known_variables):
-        if not value:
-            return True
-        return value in known_variables
-
-
-
 class SchemaHandler(TableFile):
     record_properties = {
-        'name': Variable(mandatory=True, title=MSG(u"Variable")),
         'title': Unicode(mandatory=True, title=MSG(u"Title")),
-        'help': Unicode(title=MSG(u"Online Help")),
+        'name': Variable(mandatory=True, title=MSG(u"Variable")),
         'type': Type(mandatory=True, title=MSG(u"Type")),
-        'representation': Representation(mandatory=True,
-            title=MSG(u"Representation")),
-        'length': Length(default=0, title=MSG(u"Length")),
-        'vocabulary': Unicode(title=MSG(u"Vocabulary")),
-        'mandatory': Mandatory(title=MSG(u"Mandatory")),
-        'formula': Formula(title=MSG(u"formula")),
-        'dependency': Dependency(title=MSG(u"Dependent Field"))}
+        'help': Unicode(title=MSG(u"Online Help")),
+        'length': ValidInteger(default=20, title=MSG(u"Length")),
+        'enum_options': EnumerateOptions(mandatory=True,
+            title=MSG(u"Enumerate Options")),
+        'enum_repr': EnumerateRepresentation(default='radio',
+            title=MSG(u"Enumerate Representation")),
+        'decimals': ValidInteger(default=2, title=MSG(u"Decimals")),
+        'mandatory': Mandatory(default=True, title=MSG(u"Mandatory")),
+        'size': ValidInteger(title=MSG(u"Input Size")),
+        'dependency': Dependency(title=MSG(u"Dependent Field")),
+        'formula': Formula(title=MSG(u"formula"))}
 
 
     def get_schema_pages(self):
@@ -209,14 +244,10 @@ class SchemaHandler(TableFile):
             # The name
             name = get_record_value(record, 'name')
             # The datatype
-            dt_name = get_record_value(record, 'type')
-            datatype = Type.get_type(dt_name)
-            if dt_name == 'enum':
-                vocabulary = get_record_value(record, 'vocabulary')
-                options = []
-                for value in vocabulary.strip().split('/'):
-                    options.append({'name': checkid(value),
-                                    'value': value.strip()})
+            type_name = get_record_value(record, 'type')
+            datatype = Type.get_type(type_name)
+            if type_name == 'enum':
+                options = get_record_value(record, 'enum_options')
                 datatype = datatype(options=options)
             # The page number (now automatic)
             page_number = Variable.get_page_number(name)
@@ -224,40 +255,45 @@ class SchemaHandler(TableFile):
             page_numbers = []
             page_numbers.append(page_number)
             # Add to the datatype
-            representation = get_record_value(record, 'representation')
-            multiple = representation == 'checkbox'
-            length = get_record_value(record, 'length') or representation
-            is_mandatory = get_record_value(record, 'mandatory')
-            formula = get_record_value(record, 'formula')
-            dependency = get_record_value(record, 'dependency')
+            enum_repr = get_record_value(record, 'enum_repr')
+            multiple = enum_repr == 'checkbox'
+            length = get_record_value(record, 'length')
+            size = get_record_value(record, 'size') or length
             schema[name] = datatype(pages=tuple(page_numbers),
-                    title=get_record_value(record, 'title'),
-                    help=get_record_value(record, 'help'),
-                    representation=representation,
-                    multiple=multiple,
-                    length=str(length),
-                    is_mandatory=is_mandatory,
-                    formula=formula,
-                    dependency=dependency)
+                title=get_record_value(record, 'title'),
+                help=get_record_value(record, 'help'),
+                enum_repr=enum_repr,
+                multiple=multiple,
+                length=length,
+                decimals = get_record_value(record, 'decimals'),
+                mandatory=get_record_value(record, 'mandatory'),
+                size=size,
+                dependency=get_record_value(record, 'dependency'),
+                formula=get_record_value(record, 'formula'))
         return schema, pages
 
 
 
 class Schema(Table):
     class_id = 'Schema'
+    class_version = '20090123' # TODO update
     class_title = MSG(u"Schema")
     class_handler = SchemaHandler
     class_icon16 = 'icons/16x16/excel.png'
     class_icon48 = 'icons/48x48/excel.png'
 
     # To import from CSV
-    columns = ['name', 'title', 'help', 'type', 'representation', 'length',
-            'vocabulary', 'mandatory', 'formula', 'dependency']
+    columns = ['title', 'name', 'type', 'help', 'length', 'enum_options',
+            'enum_repr', 'decimals', 'mandatory', 'size', 'dependency',
+            'formula']
 
 
     def _load_from_csv(self, body, columns):
         handler = self.handler
-        handler.update_from_csv(body, columns, skip_header=True)
+        try:
+            handler.update_from_csv(body, columns, skip_header=True)
+        except ValueError:
+            raise FormatError, ERR_WRONG_NUMBER_COLUMNS
         # Consistency check
         get_record_value = handler.get_record_value
         # First round on variables
@@ -271,38 +307,42 @@ class Schema(Table):
             if name in known_variables:
                 raise FormatError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
-            dt_name = get_record_value(record, 'type')
-            if not Type.is_valid(dt_name):
+            type_name = get_record_value(record, 'type')
+            if not Type.is_valid(type_name):
                 raise FormatError, ERR_BAD_TYPE(line=lineno,
-                        type=dt_name)
-            representation = get_record_value(record, 'representation')
-            if not Representation.is_valid(representation):
-                raise FormatError, ERR_BAD_REPRESENTATION(line=lineno,
-                        representation=representation)
-            try:
-                length = get_record_value(record, 'length')
-                if not Length.is_valid(length):
-                    raise ValueError
-            except ValueError:
+                        type=type_name)
+            length = get_record_value(record, 'length')
+            if not ValidInteger.is_valid(length):
                 raise FormatError, ERR_BAD_LENGTH(line=lineno, length=length)
+            enum_repr = get_record_value(record, 'enum_repr')
+            if not EnumerateRepresentation.is_valid(enum_repr):
+                raise FormatError, ERR_BAD_ENUM_REPR(line=lineno,
+                        enum_repr=enum_repr)
+            decimals = get_record_value(record, 'decimals')
+            if not ValidInteger.is_valid(decimals):
+                raise FormatError, ERR_BAD_DECIMALS(line=lineno,
+                        decimals=decimals)
             try:
                 mandatory = get_record_value(record, 'mandatory')
             except ValueError:
                 raise FormatError, ERR_BAD_MANDATORY(line=lineno,
                         mandatory=mandatory)
+            size = get_record_value(record, 'size')
+            if not ValidInteger.is_valid(size):
+                raise FormatError, ERR_BAD_SIZE(line=lineno, size=size)
             known_variables.append(name)
         # Second round on references
         for lineno, record in enumerate(handler.get_records()):
+            dependency = get_record_value(record, 'dependency')
+            if not Dependency.is_valid(dependency, known_variables):
+                raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
+                        name=dependency)
             formula = get_record_value(record, 'formula')
             try:
                 Formula.is_valid(formula, known_variables)
             except ValueError, name:
                 raise FormatError, ERR_BAD_FORMULA(line=lineno,
                         name=name)
-            dependency = get_record_value(record, 'dependency')
-            if not Dependency.is_valid(dependency, known_variables):
-                raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
-                        name=dependency)
 
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):

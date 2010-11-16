@@ -137,8 +137,8 @@ class Application_NewInstance(NewInstance):
         tables = iter(document.get_tables())
         # Controls and Schema
         for name, title, cls in [
-                ('controls', u"Controls", child.controls_class),
-                ('schema', u"Schema", child.schema_class)]:
+                ('schema', u"Schema", child.schema_class),
+                ('controls', u"Controls", child.controls_class)]:
             table = tables.next()
             table.rstrip(aggressive=True)
             try:

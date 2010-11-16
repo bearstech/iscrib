@@ -405,7 +405,7 @@ class NumDecimal(Numeric):
 
 
     def get_sql_schema(self):
-        return "decimal(%s) default 0.0" % self.representation
+        return "decimal({0.length}.{0.decimals}) default 0.0".format(self)
 
 
 
@@ -438,7 +438,7 @@ class NumInteger(Numeric):
 
 
     def get_sql_schema(self):
-        return "int(%s) default 0" % self.representation
+        return "int({0}.length) default 0".format(self)
 
 
 
@@ -599,12 +599,11 @@ class NumDigit(Numeric):
 
     # FIXME should be classmethod
     def is_valid(self, data):
-        representation = int(self.representation)
-        return data.isdigit() if len(data) == representation else data == ''
+        return data.isdigit() if len(data) == self.length else data == ''
 
 
     def get_sql_schema(self):
-        return "char(%s) default null" % self.representation
+        return "char({0}.length) default null".format(self)
 
 
     @classmethod
@@ -631,7 +630,7 @@ class Unicode(BaseUnicode):
 
     @classmethod
     def get_sql_schema(cls):
-        return "varchar(%s) default null" % cls.representation
+        return "varchar({0}.length) default null".format(cls)
 
 
     @classmethod
