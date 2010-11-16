@@ -41,6 +41,8 @@ from base_views import IconsView
 
 MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
 MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
+MSG_BAD_PASSWORD = ERROR(u'You already have an account but your password '
+        u'did not match. Try <a href="/;login">log in</a> first.', html=True)
 
 
 class Workgroup_NewInstance(NewInstance):
@@ -163,8 +165,11 @@ class Workgroup_NewInstance(NewInstance):
                 user.send_workgroup_registration(context, email, site_uri,
                         password)
             else:
-                # Existing user but new password
-                user.set_password(password)
+                # Existing user
+                if not user.authenticate(password, clear=True):
+                    context.message = MSG_BAD_PASSWORD
+                    context.commit = False
+                    return
             # Automatic login
             user.set_auth_cookie(context, password)
             context.user = user
