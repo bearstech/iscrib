@@ -331,10 +331,7 @@ class Form(File):
                 continue
             datatype = schema[name]
             value = fields[name]
-            if not datatype.multiple:
-                value = [value]
-            is_valid = all(datatype.is_valid(datatype.encode(value)
-                for value in value))
+            is_valid = datatype.is_valid(datatype.encode(value))
             is_sum_valid = True
             if datatype.formula:
                 sum = datatype.sum(datatype.formula, schema, fields)
