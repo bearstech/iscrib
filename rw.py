@@ -162,7 +162,7 @@ class XLSWriter(object):
         # XXX escape bug
         #   en.po locale/locale.pot:78:13: Séquence de contrôle invalide
         # msgmerge: 1 erreur fatale trouvée
-        for c in unicode("'[]:\\?/*\x00"):
+        for c in ur"'[]:\\?/*\x00":
             name = name.replace(c, u".")
         self.sheet = workbook.add_sheet(name)
 

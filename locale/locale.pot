@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-16 08:11+CET\n"
+"POT-Creation-Date: 2010-11-16 10:11+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,6 +72,10 @@ msgstr ""
 
 #: ../form.py:415
 msgid "'%s' = '%s'"
+msgstr ""
+
+#: ../rw.py:165
+msgid "'[]:\\?/*\x00"
 msgstr ""
 
 #: ../formpage.py:183
