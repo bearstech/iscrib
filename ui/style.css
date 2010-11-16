@@ -27,6 +27,10 @@ div#page {
   padding-left: 20px;
 }
 
+#header #logo a {
+  font-size: 2.4em;
+}
+
 #folder-banner {
   display: table;
   margin: auto;
