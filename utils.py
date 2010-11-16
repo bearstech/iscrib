@@ -18,7 +18,6 @@
 
 # Import from the Standard Library
 from cStringIO import StringIO
-from socket import gethostname
 
 # Import from lpod
 from lpod.document import odf_get_document
@@ -33,10 +32,6 @@ from itools.csv import CSVFile
 
 # Import from iscrib
 from datatypes import Numeric, Unicode
-
-
-# XXX heuristic
-is_production = (gethostname() == 'fidel')
 
 
 class ProgressMeter(object):

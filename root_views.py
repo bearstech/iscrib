@@ -24,14 +24,13 @@ from itools.uri import encode_query, get_reference, Reference
 
 # Import from ikaaro
 from ikaaro.buttons import Button
-from ikaaro.autoform import AutoForm, TextWidget, PasswordWidget
+from ikaaro.autoform import AutoForm, TextWidget, MultilineWidget
 from ikaaro.control_panel import CPEditContactOptions
 from ikaaro.website_views import ContactForm
 
 # Import from iscrib
-from autoform import RecaptchaDatatype, RecaptchaWidget
+from autoform import RecaptchaDatatype, captcha_schema, captcha_widgets
 from base_views import FrontView
-from utils import is_production
 from workgroup import Workgroup
 
 
@@ -138,23 +137,30 @@ class Root_Show(FrontView):
 class Root_Contact(ContactForm):
     template = '/ui/iscrib/root/contact.xml'
 
+    extra_schema = {
+        'name': Unicode,
+        'company': Unicode,
+        'function': Unicode,
+        'phone': Unicode(mandatory=True)}
+    extra_widgets = [
+        TextWidget('name', title=MSG(u"Name")),
+        TextWidget('company', title=MSG(u"Company/Organization")),
+        TextWidget('function', title=MSG(u"Function")),
+        TextWidget('phone', title=MSG(u"Phone Number"))]
+
+
     def get_schema(self, resource, context):
         schema = super(Root_Contact, self).get_schema(resource, context)
-        return merge_dicts(schema, name=Unicode, company=Unicode,
-                function=Unicode, phone=Unicode(mandatory=True),
-                captcha=RecaptchaDatatype(mandatory=is_production))
+        schema.update(self.extra_schema)
+        if RecaptchaDatatype.is_required(context):
+            schema.update(captcha_schema)
 
 
     def get_widgets(self, resource, context):
         widgets = super(Root_Contact, self).get_widgets(resource, context)
-        widgets = (widgets[:2]
-                + [TextWidget('name', title=MSG(u"Name")),
-                    TextWidget('company', title=MSG(u"Company/Organization")),
-                    TextWidget('function', title=MSG(u"Function")),
-                    TextWidget('phone', title=MSG(u"Phone Number"))]
-                + widgets[2:-1])
-        if is_production:
-            widgets += [RecaptchaWidget('captcha')]
+        widgets = widgets[:2] + self.extra_widgets + widgets[2:-1]
+        if RecaptchaDatatype.is_required(context):
+            widgets += captcha_widgets
         return widgets
 
 
@@ -180,11 +186,14 @@ class Root_Contact(ContactForm):
 
 class Root_EditContactOptions(CPEditContactOptions):
     recaptcha_schema = {'recaptcha_private_key': String(mandatory=True),
-            'recaptcha_public_key': String(mandatory=True)}
+            'recaptcha_public_key': String(mandatory=True),
+            'recaptcha_whitelist': String}
     recaptcha_widgets = [TextWidget('recaptcha_private_key',
             title=MSG(u"ReCaptcha Private Key")),
         TextWidget('recaptcha_public_key',
-            title=MSG(u"ReCaptcha Public Key"))]
+            title=MSG(u"ReCaptcha Public Key")),
+        MultilineWidget('recaptcha_whitelist',
+            title=MSG(u"ReCaptcha Whitelist of IPs"))]
 
 
     def _get_schema(self, resource, context):
@@ -199,3 +208,19 @@ class Root_EditContactOptions(CPEditContactOptions):
         widgets = super(Root_EditContactOptions, self)._get_widgets(resource,
                 context)[:-2]
         return widgets + self.recaptcha_widgets
+
+
+    def get_value(self, resource, context, name, datatype):
+        if name == 'recaptcha_whitelist':
+            # XXX multiple
+            return '\n'.join(resource.get_property(name))
+        return super(Root_EditContactOptions, self).get_value(resource,
+                context, name, datatype)
+
+
+    def set_value(self, resource, context, name, form):
+        if name == 'recaptcha_whitelist':
+            # XXX multiple
+            return resource.set_property(name, form[name].split())
+        return super(Root_EditContactOptions, self).set_value(resource,
+                context, name, form)

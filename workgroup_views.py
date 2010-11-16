@@ -35,9 +35,8 @@ from ikaaro.views_new import NewInstance
 # Import from iscrib
 from application import Application
 from autoform import ImagePathDataType, ImageSelectorWidget
-from autoform import RecaptchaDatatype, RecaptchaWidget
+from autoform import RecaptchaDatatype, captcha_schema, captcha_widgets
 from base_views import IconsView
-from utils import is_production
 
 
 MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
@@ -68,18 +67,13 @@ class Workgroup_NewInstance(NewInstance):
         PasswordWidget('password', title=MSG(u"Password")),
         PasswordWidget('password2', title=MSG(u"Repeat Password"))]
 
-    captcha_schema = {
-        'captcha': RecaptchaDatatype(mandatory=True)}
-    captcha_widgets = [
-        RecaptchaWidget('captcha')]
-
 
     def get_schema(self, resource, context):
         schema = self.schema.copy()
         if context.user is None:
             schema.update(self.anonymous_schema)
-        if is_production:
-            schema.update(self.captcha_schema)
+        if RecaptchaDatatype.is_required(context):
+            schema.update(captcha_schema)
         return schema
 
 
@@ -87,8 +81,8 @@ class Workgroup_NewInstance(NewInstance):
         widgets = self.widgets[:]
         if context.user is None:
             widgets.extend(self.anonymous_widgets)
-        if is_production:
-            widgets.extend(self.captcha_widgets)
+        if RecaptchaDatatype.is_required(context):
+            widgets.extend(captcha_widgets)
         return widgets
 
 

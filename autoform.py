@@ -98,8 +98,17 @@ class ImageSelectorWidget(BaseImageSelectorWidget):
 # TODO reuse shop modules
 class RecaptchaDatatype(String):
 
-    @classmethod
-    def is_valid(cls, value):
+    @staticmethod
+    def is_required(context):
+        remote_ip = context.get_remote_ip() or '127.0.0.1'
+        if remote_ip is None:
+            return True
+        whitelist = context.root.get_property('recaptcha_whitelist')
+        return remote_ip not in whitelist
+
+
+    @staticmethod
+    def is_valid(value):
         context = get_context()
         if getattr(context, 'recaptcha_return_code', None) == 'true':
             return True
@@ -134,6 +143,9 @@ class RecaptchaDatatype(String):
         return return_code == 'true'
 
 
+captcha_schema = {'captcha': RecaptchaDatatype(mandatory=True)}
+
+
 
 # TODO reuse shop modules
 class RecaptchaWidget(Widget):
@@ -166,3 +178,6 @@ class RecaptchaWidget(Widget):
     def public_key(self):
         context = get_context()
         return context.root.get_property('recaptcha_public_key')
+
+
+captcha_widgets = [RecaptchaWidget('captcha')]

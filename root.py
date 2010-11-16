@@ -42,7 +42,9 @@ class Root(BaseRoot):
                 parameters_schema = {'lang': String}),
             slogan=Multilingual(source='metadata'),
             recaptcha_private_key=String(source='metadata'),
-            recaptcha_public_key=String(source='metadata'))
+            recaptcha_public_key=String(source='metadata'),
+            recaptcha_whitelist=String(source='metadata', multiple=True,
+                default=['127.0.0.1']))
     class_views = BaseRoot.class_views + ['show']
     class_skin = 'ui/iscrib'
 
