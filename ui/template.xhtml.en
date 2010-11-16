@@ -50,7 +50,7 @@
       <div id="logo">
         <a href="${website_href}" id="logo-image">
           <img stl:if="logo_href" src="${logo_href}"/>
-          <stl:inline>${website_title}</stl:inline>
+          <stl:inline stl:if="not logo_href">${website_title}</stl:inline>
         </a>
       </div>
       <div class="clear" />
