@@ -47,7 +47,7 @@ class Root_View(AutoForm):
                     u'organization'))]
 
     anonymous_schema = {'email': Email(mandatory=True)}
-    anonymous_widgets = [TextWidget('email', title=MSG(u"E-mail address"))]
+    anonymous_widgets = [TextWidget('email', title=MSG(u"E-mail Address"))]
 
 
     def get_schema(self, resource, context):

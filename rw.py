@@ -159,7 +159,10 @@ class XLSWriter(object):
         # Sheet name limited to 31 chars
         if len(name) > 31:
             name = u"{sheetname}...".format(sheetname=name[:28])
-        for c in u"'[]:\\?/*\x00":
+        # XXX escape bug
+        #   en.po locale/locale.pot:78:13: Séquence de contrôle invalide
+        # msgmerge: 1 erreur fatale trouvée
+        for c in unicode("'[]:\\?/*\x00"):
             name = name.replace(c, u".")
         self.sheet = workbook.add_sheet(name)
 

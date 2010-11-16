@@ -83,8 +83,8 @@
         <h2>A propos de iScrib</h2>
         <ul class="content">
           <li><a href="http://www.itaapy.com" target="_blank">Un service Itaapy</a></li>
-          <li><a href="/#">Exemples</a></li>
-          <li><a href="/#">Conditions d'utilisation</a></li>
+          <li><a href="/#">Examples</a></li>
+          <li><a href="/#">Terms of Use</a></li>
           <li><a href="/#">Blog</a></li>
         </ul>
       </div>
@@ -92,16 +92,16 @@
         <h2>Business</h2>
         <ul class="content">
           <li><a href="/#">News</a></li>
-          <li><a href="/#">Devenir partenaire</a></li>
-          <li><a href="/#">Tarifs</a></li>
-          <li><a href="/#">Télécharger OpenOffice.org</a></li>
+          <li><a href="/#">Become Partner</a></li>
+          <li><a href="/#">Pricing</a></li>
+          <li><a href="/#">Download OpenOffice.org</a></li>
         </ul>
       </div>
       <div class="col">
         <h2>Aide</h2>
         <ul class="content">
           <li><a href="/#">FAQ</a></li>
-          <li><a href="/#">Contactez-nous</a></li>
+          <li><a href="/#">Contact Us</a></li>
         </ul>
       </div>
     </div>
