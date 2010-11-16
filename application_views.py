@@ -25,9 +25,10 @@ from itools.database import PhraseQuery, TextQuery, StartQuery, AndQuery
 from itools.database import OrQuery, NotQuery
 from itools.datatypes import Integer, Unicode, Email, String
 from itools.gettext import MSG
+from itools.handlers.utils import transmap
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
-from itools.web import INFO, ERROR, BaseView, FormError, STLForm
+from itools.web import INFO, ERROR, BaseView, FormError, STLForm, get_context
 
 # Import from ikaaro
 from ikaaro.access import is_admin
@@ -329,32 +330,60 @@ class Application_View(Folder_BrowseContent):
 
 
 
-    def get_key_sorted_by_name(self, resource, context, item):
-        return int(item.name)
+    def get_key_sorted_by_name(self):
+        def key(item):
+            return int(item.name)
+        return key
 
 
-    def get_key_sorted_by_state(self, resource, context, item):
-        user = context.root.get_user(item.name)
-        if user is not None and not user.get_property('password'):
-            state = NOT_REGISTERED
-        else:
-            state = item.workflow_state
-        value = WorkflowState.get_value(state)
-        return value.gettext().lower()
+    def get_key_sorted_by_state(self):
+        get_user = get_context().root.get_user
+        def key(item, cache={}):
+            name =  item.name
+            if name in cache:
+                return cache[name]
+            user = get_user(name)
+            if user is not None and not user.get_property('password'):
+                state = NOT_REGISTERED
+            else:
+                state = item.workflow_state
+            title = WorkflowState.get_value(state)
+            value = title.gettext().lower().translate(transmap)
+            cache[name] = value
+            return value
+        return key
 
 
-    def get_key_sorted_by_user(self, resource, context, item):
-        user = context.root.get_user(item.name)
-        if user is None:
-            return None
-        return user.get_title().lower()
+    def get_key_sorted_by_user(self):
+        get_user = get_context().root.get_user
+        def key(item, cache={}):
+            name = item.name
+            if name in cache:
+                return cache[name]
+            user = get_user(name)
+            if user is None:
+                value = None
+            else:
+                value = user.get_title().lower().translate(transmap)
+            cache[name] = value
+            return value
+        return key
 
 
-    def get_key_sorted_by_email(self, resource, context, item):
-        user = context.root.get_user(item.name)
-        if user is None:
-            return None
-        return user.get_property('email').lower()
+    def get_key_sorted_by_email(self):
+        get_user = get_context().root.get_user
+        def key(item, cache={}):
+            name = item.name
+            if name in cache:
+                return cache[name]
+            user = get_user(name)
+            if user is None:
+                value = None
+            else:
+                value = user.get_property('email').lower().translate(transmap)
+            cache[name] = value
+            return value
+        return key
 
 
     def get_search_namespace(self, resource, context):
