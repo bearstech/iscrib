@@ -36,7 +36,7 @@ class Skin(BaseSkin):
             styles.insert(-4, '/ui/aruni/style.css')
         # Add specific style on root
         if site_root is context.root:
-            wg_style = '%s/style2.css' % self.get_canonical_path()
+            wg_style = '%s/root/style.css' % self.get_canonical_path()
             styles.insert(-1, wg_style)
         # Replace root style by website style
         if styles[-1] == '/theme/style/;download':
