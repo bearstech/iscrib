@@ -54,10 +54,12 @@ ERR_BAD_MANDATORY = ERROR(u'In schema, line {line}, mandatory "{mandatory}" '
         u'is invalid.')
 ERR_BAD_SIZE = ERROR(u'In schema, line {line}, size ' u'"{size}" is '
         u'invalid.')
-ERR_BAD_FORMULA = ERROR(u'In schema, line {line}, in sum formula, variable '
-        u'"{name}" is ' u'invalid.')
 ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, dependency variable '
         u'name "{name}" is invalid.')
+ERR_BAD_FORMULA = ERROR(u'In schema, line {line}, in sum formula, variable '
+        u'"{name}" is ' u'invalid.')
+ERR_BAD_DEFAULT = ERROR(u'In schema, line {line}, default value "{default}" '
+        u'is invalid.')
 
 
 class FormatError(ValueError):
@@ -283,7 +285,8 @@ class SchemaHandler(TableFile):
         'mandatory': Mandatory(title=MSG(u"Mandatory")),
         'size': ValidInteger(title=MSG(u"Input Size")),
         'dependency': Dependency(title=MSG(u"Dependent Field")),
-        'formula': Formula(title=MSG(u"formula"))}
+        'formula': Formula(title=MSG(u"Formula")),
+        'default': String(default='', title=MSG(u"Default Value"))}
 
 
     def get_schema_pages(self):
@@ -310,9 +313,13 @@ class SchemaHandler(TableFile):
             page_numbers = []
             page_numbers.append(page_number)
             # Add to the datatype
+            default = get_record_value(record, 'default')
+            if multiple:
+                default = [default]
             length = get_record_value(record, 'length')
             size = get_record_value(record, 'size') or length
-            schema[name] = datatype(multiple=multiple,
+            schema[name] = datatype(default=datatype.decode(default),
+                multiple=multiple,
                 pages=tuple(page_numbers),
                 title=get_record_value(record, 'title'),
                 help=get_record_value(record, 'help'),
@@ -337,7 +344,7 @@ class Schema(Table):
     # To import from CSV
     columns = ['title', 'name', 'type', 'help', 'length', 'enum_options',
             'enum_repr', 'decimals', 'mandatory', 'size', 'dependency',
-            'formula']
+            'formula', 'default']
 
 
     def _load_from_csv(self, body, columns):
@@ -354,17 +361,20 @@ class Schema(Table):
             # Starting from 0 + header
             lineno += 2
             default_values = {}
+            # Name
             name = get_record_value(record, 'name').strip().upper()
             if not Variable.is_valid(name):
                 raise FormatError, ERR_BAD_NAME(line=lineno, name=name)
             if name in known_variables:
                 raise FormatError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
+            # Type
             type_name = get_record_value(record, 'type')
             datatype = Type.get_type(type_name)
             if datatype is None:
                 raise FormatError, ERR_BAD_TYPE(line=lineno,
                         type=type_name)
+            # Length
             length = get_record_value(record, 'length')
             if length is None:
                 # Write down default at this time
@@ -372,12 +382,14 @@ class Schema(Table):
             if not ValidInteger.is_valid(length):
                 raise FormatError, ERR_BAD_LENGTH(line=lineno, length=length)
             if issubclass(datatype, SqlEnumerate):
+                # Enumerate Options
                 enum_option = get_record_value(record, 'enum_options')[0]
                 if enum_option is None:
                     raise FormatError, ERR_MISSING_OPTIONS(line=lineno)
                 # Split on "/"
                 enum_options = EnumerateOptions.split(enum_option['value'])
                 default_values['enum_options'] = enum_options
+                # Enumerate Representation
                 enum_repr = get_record_value(record, 'enum_repr')
                 if enum_repr is None:
                     # Write down default at the time of writing
@@ -386,6 +398,7 @@ class Schema(Table):
                     raise FormatError, ERR_BAD_ENUM_REPR(line=lineno,
                             enum_repr=enum_repr)
             elif issubclass(datatype, NumDecimal):
+                # Decimals
                 decimals = get_record_value(record, 'decimals')
                 if decimals is None:
                     # Write down default at the time of writing
@@ -393,6 +406,7 @@ class Schema(Table):
                 if not ValidInteger.is_valid(decimals):
                     raise FormatError, ERR_BAD_DECIMALS(line=lineno,
                             decimals=decimals)
+            # Mandatory
             mandatory = get_record_value(record, 'mandatory')
             if mandatory is None:
                 # Write down default at the time of writing
@@ -400,12 +414,21 @@ class Schema(Table):
             if not Mandatory.is_valid(mandatory):
                 raise FormatError, ERR_BAD_MANDATORY(line=lineno,
                         mandatory=mandatory)
+            # Size
             size = get_record_value(record, 'size')
             if size is None:
                 # Write down default at the time of writing
                 default_values['size'] = size = length
             if not ValidInteger.is_valid(size):
                 raise FormatError, ERR_BAD_SIZE(line=lineno, size=size)
+            # Default value
+            default = get_record_value(record, 'default')
+            try:
+                datatype.decode(default)
+            except ValueError:
+                raise FormatError, ERR_BAD_DEFAULT(line=lineno,
+                        default=default)
+            default_values['default'] = default
             if default_values:
                 handler.update_record(record.id, **default_values)
             known_variables.append(name)
