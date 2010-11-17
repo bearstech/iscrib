@@ -207,5 +207,5 @@ div#page {
   border-bottom: none;
 }
 #home-content ul li {
-  list-style-image: url("/ui/iscrib/images/bullet-blue2.jpg");
+  background-image: url("/ui/iscrib/images/bullet-blue2.jpg");
 }

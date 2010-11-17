@@ -60,8 +60,11 @@ div#page {
 }
 
 #content ul li {
-  list-style-image: url("/ui/iscrib/images/bullet-blue.jpg");
-  list-style-position: inside; /* XXX IE7 */
+  list-style: none;
+  background-image: url("/ui/iscrib/images/bullet-blue.jpg");
+  background-repeat: no-repeat;
+  background-position: 0 0.4em;
+  padding-left: 15px;
 }
 
 #footer {
