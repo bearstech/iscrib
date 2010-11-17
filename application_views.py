@@ -49,7 +49,7 @@ from datatypes import Subscription
 from form import Form
 from formpage import FormPage
 from rw import ODSReader, XLSReader, ODSWriter, XLSWriter
-from utils import force_encode
+from utils import force_encode, is_production
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
@@ -146,6 +146,8 @@ class Application_NewInstance(NewInstance):
                         # cls va transformer le CSV en table
                         body=table.to_csv())
             except ValueError, exception:
+                if not is_production:
+                    raise
                 context.commit = False
                 context.message = ERROR(unicode(exception))
                 return
@@ -179,6 +181,8 @@ class Application_NewInstance(NewInstance):
                 child.make_resource(name, FormPage, title={'en': title},
                         body=table.to_csv())
             except ValueError, exception:
+                if not is_production:
+                    raise
                 context.commit = False
                 context.message = ERROR(unicode(exception))
                 return
