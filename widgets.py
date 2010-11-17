@@ -25,7 +25,7 @@ from itools.datatypes import XMLContent, XMLAttribute
 # Import from ikaaro
 
 # Import from iscrib
-from datatypes import Numeric, Text, EnumBoolean
+from datatypes import Numeric, Text, EnumBoolean, SqlEnumerate
 
 
 NBSP = u"\u00a0".encode('utf8')
@@ -37,7 +37,7 @@ def is_mandatory_filled(datatype, name, value, schema, fields, context):
         return True
     if context.resource.is_disabled_by_dependency(name, schema, fields):
         return True
-    if not datatype.is_mandatory:
+    if not datatype.mandatory:
         return True
     return bool(value)
 
@@ -187,8 +187,8 @@ def text_widget(context, form, datatype, name, value, schema, fields,
         attributes = {u"type": u"text",
                 u"id": u"field_{name}".format(name=name),
                 u"name": name, u"value": XMLAttribute.encode(value),
-                u"size": datatype.length,
-                u"maxlength": datatype.size}
+                u"size": str(datatype.length),
+                u"maxlength": str(datatype.size)}
         if tabindex:
             attributes[u"tabindex"] = tabindex
         content = u""
@@ -215,25 +215,27 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     # Always take data from the handler, we store wrong values anyway
     value = form.get_form().handler.get_value(name, schema)
     datatype = schema[name]
-    enum_repr = datatype.enum_repr
     widget = None
-    if enum_repr == 'select':
-        widget = select_widget(context, form, datatype, name, value, schema,
-                fields, readonly)
-    elif enum_repr == 'radio':
-        widget = radio_widget(context, form, datatype, name, value, schema,
-                fields, readonly)
-    elif enum_repr == 'checkbox':
-        widget = checkbox_widget(context, form, datatype, name, value,
-                schema, fields, readonly)
-    # Skip instance datatypes: TypeError: issubclass() arg 1 must be a class
-    elif  isinstance(datatype, Numeric):
-        pass
+    if  isinstance(datatype, Numeric):
+        widget = text_widget(context, form, datatype, name, value, schema,
+                fields, readonly, tabindex)
     elif issubclass(datatype, Text):
         widget = textarea_widget(context, form, datatype, name, value,
                 schema, fields, readonly)
-    # Basic text input
-    if widget is None:
+    elif issubclass(datatype, SqlEnumerate):
+        representation = datatype.representation
+        if representation == 'select':
+            widget = select_widget(context, form, datatype, name, value,
+                    schema, fields, readonly)
+        elif representation == 'radio':
+            widget = radio_widget(context, form, datatype, name, value,
+                    schema, fields, readonly)
+        elif representation == 'checkbox':
+            widget = checkbox_widget(context, form, datatype, name, value,
+                    schema, fields, readonly)
+        else:
+            ValueError, representation
+    else:
         widget = text_widget(context, form, datatype, name, value, schema,
                 fields, readonly, tabindex)
     if skip_print is False:

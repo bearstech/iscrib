@@ -336,7 +336,7 @@ class Form(File):
             if datatype.formula:
                 sum = datatype.sum(datatype.formula, schema, fields)
                 is_sum_valid = (sum is None or sum == value)
-            if datatype.is_mandatory:
+            if datatype.mandatory:
                 # Vérifie toujours les champs obligatoires
                 if is_valid and is_sum_valid:
                     continue

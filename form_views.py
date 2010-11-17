@@ -156,7 +156,7 @@ class Form_View(STLForm):
                         else:
                             bad_types.append(key)
                 # Mandatory
-                elif datatype.is_mandatory and not data:
+                elif datatype.mandatory and not data:
                     bad_types.append(key)
                 # Invalid (0008102 and mandatory -> and filled)
                 elif data and not datatype.is_valid(data):
@@ -216,7 +216,7 @@ class Form_Send(STLForm):
                     'href': ';page{page}#field_{name}'.format(
                         page=datatype.pages[0], name=name),
                     'debug': str(type(datatype))}
-            if datatype.is_mandatory:
+            if datatype.mandatory:
                 errors.append(info)
             else:
                 warnings.append(info)

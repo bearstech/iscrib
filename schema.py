@@ -37,24 +37,25 @@ from datatypes import SqlEnumerate
 
 ERR_WRONG_NUMBER_COLUMNS = ERROR(u'Wrong number of columns. Do you use the '
         u'latest template?')
-ERR_EMPTY_NAME = ERROR(u'In schema, line {line}, variable name is missing.')
+ERR_BAD_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
+        u'invalid.')
 ERR_DUPLICATE_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
         u'duplicated.')
-ERR_BAD_TYPE = ERROR(u'In schema, line {line}, type "{type}" is unknown.')
+ERR_BAD_TYPE = ERROR(u'In schema, line {line}, type "{type}" is invalid.')
 ERR_BAD_LENGTH = ERROR(u'In schema, line {line}, length "{length}" is '
-        u'unknown.')
+        u'invalid.')
 ERR_BAD_ENUM_REPR = ERROR(u'In schema, line {line}, enum representation '
-        u'"{enum_repr}" is unknown.')
+        u'"{enum_repr}" is invalid.')
 ERR_BAD_DECIMALS = ERROR(u'In schema, line {line}, decimals '
-        u'"{decimals}" is unknown.')
+        u'"{decimals}" are invalid.')
 ERR_BAD_MANDATORY = ERROR(u'In schema, line {line}, mandatory "{mandatory}" '
-        u'is unknown.')
+        u'is invalid.')
 ERR_BAD_SIZE = ERROR(u'In schema, line {line}, size ' u'"{size}" is '
-        u'unknown.')
+        u'invalid.')
 ERR_BAD_FORMULA = ERROR(u'In schema, line {line}, in sum formula, variable '
-        u'"{name}" is ' u'unknown.')
+        u'"{name}" is ' u'invalid.')
 ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, dependency variable '
-        u'name "{name}" is unknown.')
+        u'name "{name}" is invalid.')
 
 
 class FormatError(ValueError):
@@ -73,10 +74,18 @@ class Variable(String):
 
     @staticmethod
     def decode(data):
-        value = String.decode(data).strip().upper()
-        if value and value[0] == '#':
-            value = value[1:]
-        return value
+        data = data.strip().upper()
+        if not data:
+            # Turn it into default value at the time of writing
+            return None
+        if data[0] == '#':
+            data = data[1:]
+        return String.decode(data)
+
+
+    @staticmethod
+    def is_valid(value):
+        return bool(value)
 
 
     @staticmethod
@@ -108,7 +117,11 @@ class Type(Enumerate):
 
     @staticmethod
     def decode(data):
-        return Enumerate.decode(data).strip().lower()
+        data = data.strip().lower()
+        if not data:
+            # Turn it into default value at the time of writing
+            return None
+        return Enumerate.decode(data)
 
 
     @classmethod
@@ -116,56 +129,79 @@ class Type(Enumerate):
         for option in cls.get_options():
             if option['name'] == name:
                 return option['type']
-        return cls.get_default()
+        return None
 
 
 
 class ValidInteger(Integer):
 
-    @staticmethod
-    def is_valid(value):
-        return value is None or type(value) is int
-
-
     @classmethod
     def decode(cls, data):
+        data = data.strip()
+        if not data:
+            # Turn it into default value at the time of writing
+            return None
         try:
             value = Integer.decode(data)
         except ValueError:
-            return data
-        if not value:
-            value = cls.get_default()
+            value = data
         return value
+
+
+    @staticmethod
+    def is_valid(value):
+        return type(value) is int
 
 
 
 class EnumerateOptions(Unicode):
+    default = None
     multiple = True
+
 
     @staticmethod
     def decode(data):
+        data = data.strip()
+        if not data:
+            # Turn it into default value at the time of writing
+            return None
         value = Unicode.decode(data)
-        return [{'name': checkid(option), 'value': option.strip()}
-                for option in value.split(u"/")]
+        return {'name': checkid(value), 'value': value}
 
 
     @staticmethod
     def encode(value):
-        raise NotImplementedError
+        if value is None:
+            return None
+        return Unicode.encode(value['value'])
+
+
+    @staticmethod
+    def is_valid(value):
+        return value is not None or value['name'] is not None
+
+
+    @staticmethod
+    def split(value):
+        return [{'name': checkid(option), 'value': option.strip()}
+                for option in value.split(u"/")]
 
 
 
 class EnumerateRepresentation(Enumerate):
     options = [
+        {'name': 'select', 'value': MSG(u"Select")},
         {'name': 'radio', 'value': MSG(u"Radio")},
         {'name': 'checkbox', 'value': MSG(u"Checkbox")}]
 
 
-    @classmethod
-    def decode(cls, data):
-        value = Enumerate.decode(data).strip().lower()
-        if not value:
-            value = cls.get_default()
+    @staticmethod
+    def decode(data):
+        data = data.strip().lower()
+        if not data:
+            # Turn it into default value at the time of writing
+            return None
+        return Enumerate.decode(data)
 
 
 
@@ -174,13 +210,19 @@ class Mandatory(Boolean):
     @classmethod
     def decode(cls, data):
         data = data.strip().upper()
-        if data == '':
-            return cls.get_default()
+        if not data:
+            # Turn it into default value at the time of writing
+            return None
         elif data in ('O', 'OUI', '1'):
             return True
         elif data in ('N', 'NON', '0'):
             return False
-        raise ValueError
+        return data
+
+
+    @classmethod
+    def is_valid(cls, value):
+        return type(value) is bool
 
 
 
@@ -188,7 +230,11 @@ class Dependency(String):
 
     @staticmethod
     def decode(data):
-        return String.decode(data).strip().upper()
+        data = data.strip().upper()
+        if not data:
+            # Turn it into default value at the time of writing
+            return None
+        return String.decode(data)
 
 
     @staticmethod
@@ -203,7 +249,11 @@ class Formula(String):
 
     @staticmethod
     def decode(data):
-        value = String.decode(data).strip().upper()
+        data = data.strip().upper()
+        if not data:
+            # Turn it into default value at the time of writing
+            return None
+        value = String.decode(data)
         return ''.join(term.strip() for term in value.split('+'))
 
 
@@ -219,18 +269,20 @@ class Formula(String):
 
 
 class SchemaHandler(TableFile):
+    # Don't store default values here because any value needs to be written
+    # down in case the default value changes later.
     record_properties = {
         'title': Unicode(mandatory=True, title=MSG(u"Title")),
         'name': Variable(mandatory=True, title=MSG(u"Variable")),
         'type': Type(mandatory=True, title=MSG(u"Type")),
         'help': Unicode(title=MSG(u"Online Help")),
-        'length': ValidInteger(default=20, title=MSG(u"Length")),
+        'length': ValidInteger(title=MSG(u"Length")),
         'enum_options': EnumerateOptions(mandatory=True,
             title=MSG(u"Enumerate Options")),
-        'enum_repr': EnumerateRepresentation(default='radio',
+        'enum_repr': EnumerateRepresentation(
             title=MSG(u"Enumerate Representation")),
-        'decimals': ValidInteger(default=2, title=MSG(u"Decimals")),
-        'mandatory': Mandatory(default=True, title=MSG(u"Mandatory")),
+        'decimals': ValidInteger(title=MSG(u"Decimals")),
+        'mandatory': Mandatory(title=MSG(u"Mandatory")),
         'size': ValidInteger(title=MSG(u"Input Size")),
         'dependency': Dependency(title=MSG(u"Dependent Field")),
         'formula': Formula(title=MSG(u"formula"))}
@@ -246,24 +298,26 @@ class SchemaHandler(TableFile):
             # The datatype
             type_name = get_record_value(record, 'type')
             datatype = Type.get_type(type_name)
-            if type_name == 'enum':
+            if issubclass(datatype, SqlEnumerate):
                 options = get_record_value(record, 'enum_options')
-                datatype = datatype(options=options)
+                representation = get_record_value(record, 'enum_repr')
+                multiple = (representation == 'checkbox')
+                datatype = datatype(options=options,
+                        representation=representation)
+            else:
+                multiple = False
             # The page number (now automatic)
             page_number = Variable.get_page_number(name)
             pages.setdefault(page_number, set()).add(name)
             page_numbers = []
             page_numbers.append(page_number)
             # Add to the datatype
-            enum_repr = get_record_value(record, 'enum_repr')
-            multiple = enum_repr == 'checkbox'
             length = get_record_value(record, 'length')
             size = get_record_value(record, 'size') or length
-            schema[name] = datatype(pages=tuple(page_numbers),
+            schema[name] = datatype(multiple=multiple,
+                pages=tuple(page_numbers),
                 title=get_record_value(record, 'title'),
                 help=get_record_value(record, 'help'),
-                enum_repr=enum_repr,
-                multiple=multiple,
                 length=length,
                 decimals = get_record_value(record, 'decimals'),
                 mandatory=get_record_value(record, 'mandatory'),
@@ -296,14 +350,15 @@ class Schema(Table):
             raise FormatError, ERR_WRONG_NUMBER_COLUMNS
         # Consistency check
         get_record_value = handler.get_record_value
+        update_record = handler.update_record
         # First round on variables
         known_variables = []
         for lineno, record in enumerate(handler.get_records()):
             # Starting from 0 + header
             lineno += 2
             name = get_record_value(record, 'name').strip().upper()
-            if not name:
-                raise FormatError, ERR_EMPTY_NAME(line=lineno)
+            if not Variable.is_valid(name):
+                raise FormatError, ERR_BAD_NAME(line=lineno, name=name)
             if name in known_variables:
                 raise FormatError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
@@ -312,19 +367,39 @@ class Schema(Table):
                 raise FormatError, ERR_BAD_TYPE(line=lineno,
                         type=type_name)
             length = get_record_value(record, 'length')
+            if length is None:
+                # Write down default at this time
+                length = 20
+                update_record(record.id, length=length)
             if not ValidInteger.is_valid(length):
                 raise FormatError, ERR_BAD_LENGTH(line=lineno, length=length)
+            enum_option = get_record_value(record, 'enum_options')[0]
+            if enum_option is not None:
+                # Split on "/"
+                options = EnumerateOptions.split(enum_option['value'])
+                handler.update_record(record.id, enum_options=options)
             enum_repr = get_record_value(record, 'enum_repr')
+            if enum_repr is None:
+                # Write down default at the time of writing
+                enum_repr = 'radio'
+                update_record(record.id, enum_repr=enum_repr)
             if not EnumerateRepresentation.is_valid(enum_repr):
                 raise FormatError, ERR_BAD_ENUM_REPR(line=lineno,
                         enum_repr=enum_repr)
             decimals = get_record_value(record, 'decimals')
+            if decimals is None:
+                # Write down default at the time of writing
+                decimals = 2
+                update_record(record.id, decimals=decimals)
             if not ValidInteger.is_valid(decimals):
                 raise FormatError, ERR_BAD_DECIMALS(line=lineno,
                         decimals=decimals)
-            try:
-                mandatory = get_record_value(record, 'mandatory')
-            except ValueError:
+            mandatory = get_record_value(record, 'mandatory')
+            if mandatory is None:
+                # Write down default at the time of writing
+                mandatory = True
+                update_record(record.id, mandatory=mandatory)
+            if not Mandatory.is_valid(mandatory):
                 raise FormatError, ERR_BAD_MANDATORY(line=lineno,
                         mandatory=mandatory)
             size = get_record_value(record, 'size')
@@ -338,9 +413,7 @@ class Schema(Table):
                 raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
                         name=dependency)
             formula = get_record_value(record, 'formula')
-            try:
-                Formula.is_valid(formula, known_variables)
-            except ValueError, name:
+            if not Formula.is_valid(formula, known_variables):
                 raise FormatError, ERR_BAD_FORMULA(line=lineno,
                         name=name)
 
