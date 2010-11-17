@@ -403,6 +403,10 @@ class Schema(Table):
                 raise FormatError, ERR_BAD_MANDATORY(line=lineno,
                         mandatory=mandatory)
             size = get_record_value(record, 'size')
+            if size is None:
+                # Write down default at the time of writing
+                size = length
+                update_record(record.id, size=size)
             if not ValidInteger.is_valid(size):
                 raise FormatError, ERR_BAD_SIZE(line=lineno, size=size)
             known_variables.append(name)
