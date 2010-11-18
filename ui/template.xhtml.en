@@ -81,28 +81,28 @@
   <div id="footer">
     <div class="container">
       <div class="col">
-        <h2>A propos de iScrib</h2>
+        <h2>About iScrib</h2>
         <ul class="content">
-          <li><a href="http://www.itaapy.com" target="_blank">Un service Itaapy</a></li>
-          <li><a href="/#">Examples</a></li>
-          <li><a href="/#">Terms of Use</a></li>
-          <li><a href="/#">Blog</a></li>
+          <li><a href="http://www.itaapy.com" target="_blank">An Itaapy service</a></li>
+          <li><a href="/terms-and-conditions">Terms of Use</a></li>
+          <li><a href="http://blog.itaapy.com" target="_blank">Blog</a></li>
         </ul>
       </div>
       <div class="col">
         <h2>Business</h2>
         <ul class="content">
-          <li><a href="/#">News</a></li>
-          <li><a href="/#">Become Partner</a></li>
-          <li><a href="/#">Pricing</a></li>
-          <li><a href="/#">Download OpenOffice.org</a></li>
+          <li><a href="http://www.itaapy.com/news" target="_blank">News</a></li>
+          <li><a href="/prix#partner">Become Partner</a></li>
+          <li><a href="/prix">Pricing</a></li>
+          <li><a href="http://download.openoffice.org" target="_blank">Download OpenOffice.org</a></li>
         </ul>
       </div>
       <div class="col">
         <h2>Aide</h2>
         <ul class="content">
-          <li><a href="/#">FAQ</a></li>
-          <li><a href="/#">Contact Us</a></li>
+          <li><a href="/;contact">Contact Us</a></li>
+          <li><a href="/samples">Examples, samples</a></li>
+          <!-- <li><a href="/#">FAQ</a></li> -->
         </ul>
       </div>
     </div>
