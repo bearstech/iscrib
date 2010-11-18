@@ -21,7 +21,7 @@
 
 # Import from itools
 from itools.csv import Table as TableFile
-from itools.datatypes import Enumerate, String, Integer, Boolean
+from itools.datatypes import Enumerate, String, Integer, Boolean, Date
 from itools.gettext import MSG
 from itools.handlers import checkid
 from itools.web import ERROR
@@ -422,13 +422,29 @@ class Schema(Table):
             if not ValidInteger.is_valid(size):
                 raise FormatError, ERR_BAD_SIZE(line=lineno, size=size)
             # Default value
-            default = get_record_value(record, 'default')
-            try:
-                datatype.decode(default)
-            except ValueError:
-                raise FormatError, ERR_BAD_DEFAULT(line=lineno,
-                        default=default)
-            default_values['default'] = default
+            default = get_record_value(record, 'default').strip()
+            if default:
+                if issubclass(datatype, EnumBoolean):
+                    value = Mandatory.decode(default)
+                    default = EnumBoolean.encode(value)
+                elif issubclass(datatype, SqlEnumerate):
+                    datatype = datatype(options=enum_options)
+                    default = checkid(default)
+                elif issubclass(datatype, NumTime):
+                    # "09:00:00" -> "09:00"
+                    default = default.rsplit(":", 1)[0]
+                elif issubclass(datatype, NumDate):
+                    # "2010-11-18 00:00:00" -> "18/11/2010"
+                    default = default.split(' ')[0]
+                    value = Date.decode(default)
+                    default = NumDate.encode(value)
+                elif issubclass(datatype, NumDigit):
+                    datatype = datatype(length=length)
+                if not datatype.is_valid(default):
+                    raise FormatError, ERR_BAD_DEFAULT(line=lineno,
+                            default=unicode(default, 'utf_8'))
+                default_values['default'] = default
+            # Update values for optional columns
             if default_values:
                 handler.update_record(record.id, **default_values)
             known_variables.append(name)
