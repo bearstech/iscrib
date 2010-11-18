@@ -141,13 +141,13 @@ div#page {
 #home-container #box-auth {
   background: url("/ui/iscrib/images/home-box.png") no-repeat scroll left top transparent;
   bottom: 20px;
-  height: 263px;
+  height: 222px;
   padding-left: 11px;
   padding-right: 18px;
   padding-top: 50px;
   position: absolute;
   right: 0;
-  width: 182px;
+  width: 176px;
 }
 #home-container #box-auth label {
   color: #fff;
@@ -192,12 +192,15 @@ div#page {
 }
 #home-container #box-auth #box-auth-forgotten {
   color: #fff;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 #home-container #box-auth #box-auth-already-customer-link {
-  bottom: 13px;
+  bottom: 32px;
   height: 21px;
   position: absolute;
-  right: 5px;
+  right: 1px;
   width: 125px;
 }
 #home-container #box-auth #box-auth-already-customer-link span {
