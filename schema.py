@@ -44,6 +44,8 @@ ERR_DUPLICATE_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
 ERR_BAD_TYPE = ERROR(u'In schema, line {line}, type "{type}" is invalid.')
 ERR_BAD_LENGTH = ERROR(u'In schema, line {line}, length "{length}" is '
         u'invalid.')
+ERR_MISSING_OPTIONS = ERROR(u'In schema, line {line}, enum options are '
+        u'missing.')
 ERR_BAD_ENUM_REPR = ERROR(u'In schema, line {line}, enum representation '
         u'"{enum_repr}" is invalid.')
 ERR_BAD_DECIMALS = ERROR(u'In schema, line {line}, decimals '
@@ -295,10 +297,10 @@ class SchemaHandler(TableFile):
             type_name = get_record_value(record, 'type')
             datatype = Type.get_type(type_name)
             if issubclass(datatype, SqlEnumerate):
-                options = get_record_value(record, 'enum_options')
+                enum_options = get_record_value(record, 'enum_options')
                 representation = get_record_value(record, 'enum_repr')
                 multiple = (representation == 'checkbox')
-                datatype = datatype(options=options,
+                datatype = datatype(options=enum_options,
                         representation=representation)
             else:
                 multiple = False
@@ -344,14 +346,14 @@ class Schema(Table):
             handler.update_from_csv(body, columns, skip_header=True)
         except ValueError:
             raise FormatError, ERR_WRONG_NUMBER_COLUMNS
-        # Consistency check
         get_record_value = handler.get_record_value
-        update_record = handler.update_record
+        # Consistency check
         # First round on variables
         known_variables = []
         for lineno, record in enumerate(handler.get_records()):
             # Starting from 0 + header
             lineno += 2
+            default_values = {}
             name = get_record_value(record, 'name').strip().upper()
             if not Variable.is_valid(name):
                 raise FormatError, ERR_BAD_NAME(line=lineno, name=name)
@@ -359,52 +361,53 @@ class Schema(Table):
                 raise FormatError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
             type_name = get_record_value(record, 'type')
-            if not Type.is_valid(type_name):
+            datatype = Type.get_type(type_name)
+            if datatype is None:
                 raise FormatError, ERR_BAD_TYPE(line=lineno,
                         type=type_name)
             length = get_record_value(record, 'length')
             if length is None:
                 # Write down default at this time
-                length = 20
-                update_record(record.id, length=length)
+                default_values['length'] = length = 20
             if not ValidInteger.is_valid(length):
                 raise FormatError, ERR_BAD_LENGTH(line=lineno, length=length)
-            enum_option = get_record_value(record, 'enum_options')[0]
-            if enum_option is not None:
+            if issubclass(datatype, SqlEnumerate):
+                enum_option = get_record_value(record, 'enum_options')[0]
+                if enum_option is None:
+                    raise FormatError, ERR_MISSING_OPTIONS(line=lineno)
                 # Split on "/"
-                options = EnumerateOptions.split(enum_option['value'])
-                handler.update_record(record.id, enum_options=options)
-            enum_repr = get_record_value(record, 'enum_repr')
-            if enum_repr is None:
-                # Write down default at the time of writing
-                enum_repr = 'radio'
-                update_record(record.id, enum_repr=enum_repr)
-            if not EnumerateRepresentation.is_valid(enum_repr):
-                raise FormatError, ERR_BAD_ENUM_REPR(line=lineno,
-                        enum_repr=enum_repr)
-            decimals = get_record_value(record, 'decimals')
-            if decimals is None:
-                # Write down default at the time of writing
-                decimals = 2
-                update_record(record.id, decimals=decimals)
-            if not ValidInteger.is_valid(decimals):
-                raise FormatError, ERR_BAD_DECIMALS(line=lineno,
-                        decimals=decimals)
+                enum_options = EnumerateOptions.split(enum_option['value'])
+                default_values['enum_options'] = enum_options
+                enum_repr = get_record_value(record, 'enum_repr')
+                if enum_repr is None:
+                    # Write down default at the time of writing
+                    default_values['enum_repr'] = enum_repr = 'radio'
+                if not EnumerateRepresentation.is_valid(enum_repr):
+                    raise FormatError, ERR_BAD_ENUM_REPR(line=lineno,
+                            enum_repr=enum_repr)
+            elif issubclass(datatype, NumDecimal):
+                decimals = get_record_value(record, 'decimals')
+                if decimals is None:
+                    # Write down default at the time of writing
+                    default_values['decimals'] = decimals = 2
+                if not ValidInteger.is_valid(decimals):
+                    raise FormatError, ERR_BAD_DECIMALS(line=lineno,
+                            decimals=decimals)
             mandatory = get_record_value(record, 'mandatory')
             if mandatory is None:
                 # Write down default at the time of writing
-                mandatory = True
-                update_record(record.id, mandatory=mandatory)
+                default_values['mandatory'] = mandatory = True
             if not Mandatory.is_valid(mandatory):
                 raise FormatError, ERR_BAD_MANDATORY(line=lineno,
                         mandatory=mandatory)
             size = get_record_value(record, 'size')
             if size is None:
                 # Write down default at the time of writing
-                size = length
-                update_record(record.id, size=size)
+                default_values['size'] = size = length
             if not ValidInteger.is_valid(size):
                 raise FormatError, ERR_BAD_SIZE(line=lineno, size=size)
+            if default_values:
+                handler.update_record(record.id, **default_values)
             known_variables.append(name)
         # Second round on references
         for lineno, record in enumerate(handler.get_records()):
