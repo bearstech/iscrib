@@ -74,7 +74,41 @@ class Root_View(AutoForm):
         namespace['widgets_dict'] = widgets_dict
 
         # extra anonymous requirements
-        namespace['anonymous'] = context.user is None
+        user = context.user
+        anonymous = user is None
+        namespace['anonymous'] = anonymous
+
+        # css
+        box_type = None
+        if not anonymous:
+            workgroups = []
+            for child in resource.search_resources(cls=Workgroup):
+                ac = child.get_access_control()
+                if not ac.is_allowed_to_view(user, child):
+                    continue
+                if child.has_user_role(user.name, 'members'):
+                    workgroups.append(child)
+
+            workgroups_len = len(workgroups)
+            if not workgroups_len:
+                box_type = 'type3'
+            elif workgroups_len == 1:
+                box_type = 'type2'
+            else:
+                box_type = 'type4'
+
+        namespace['box_type'] = box_type
+
+        # Your workgroups link/title
+        your_workgroups = None
+        if box_type in ('type2', 'type4'):
+            if box_type == 'type2':
+                title = MSG(u'Your workgroup')
+            else:
+                title = MSG(u'Your workgroups')
+            your_workgroups = {'link': '/;show',
+                               'title': title}
+        namespace['your_workgroups'] = your_workgroups
 
         # home page content
         homepage = resource.get_property('homepage')

@@ -12,7 +12,7 @@
       <a id="home-title-link" href="/;new_resource?type=Workgroup"></a>
     </div>
 
-    <div id="box-auth">
+    <div id="box-auth" class="${box_type}">
       <form id="box-auth-autoform" name="autoform" action="${action}" method="post"
         enctype="multipart/form-data" stl:omit-tag="not actions">
         <div stl:repeat="widget widgets">
@@ -36,8 +36,13 @@
           </stl:block>
         </p>
       </form>
-      <a id="box-auth-forgotten" href="/;login" stl:if="anonymous">Forgotten Password?</a>
-      <a id="box-auth-already-customer-link" href="/;login"><span>Already customer</span></a>
+      <a stl:if="your_workgroups" href="${your_workgroups/link}" id="your-workgroups" title="${your_workgroups/title}">
+        <span>${your_workgroups/title}</span>
+      </a>
+      <stl:block stl:if="anonymous">
+        <a id="box-auth-forgotten" href="/;login">Forgotten Password?</a>
+        <a id="box-auth-already-customer-link" href="/;login"><span>Already customer</span></a>
+      </stl:block>
     </div>
 
   </div>

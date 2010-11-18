@@ -149,6 +149,35 @@ div#page {
   right: 0;
   width: 176px;
 }
+#home-container #box-auth.type2 {
+  background-image: url("/ui/iscrib/images/home-box2.png");
+}
+#home-container #box-auth.type2 div,
+#home-container #box-auth.type4 div {
+  padding-top: 75px;
+}
+#home-container #box-auth.type2 #your-workgroups,
+#home-container #box-auth.type4 #your-workgroups {
+  display: block;
+  height: 37px;
+  position: absolute;
+  top: 12px;
+  width: 193px;
+  text-decoration: none;
+}
+#home-container #box-auth.type2 #your-workgroups span,
+#home-container #box-auth.type4 #your-workgroups span {
+  visibility: hidden;
+}
+#home-container #box-auth.type3 {
+  background-image: url("/ui/iscrib/images/home-box3.png");
+}
+#home-container #box-auth.type3 div {
+  margin-top: 25px;
+}
+#home-container #box-auth.type4 {
+  background-image: url("/ui/iscrib/images/home-box4.png");
+}
 #home-container #box-auth label {
   color: #fff;
   /* display: block; */
