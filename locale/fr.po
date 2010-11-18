@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-17 14:11+CET\n"
+"POT-Creation-Date: 2010-11-19 09:11+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgstr ""
 "</div>\n"
 "              "
 
-#: ../datatypes.py:651
+#: ../datatypes.py:648
 msgid "\r\n"
 msgstr ""
 
@@ -87,11 +87,11 @@ msgstr ""
 "\r\n"
 "{body}"
 
-#: ../formpage.py:162 ../formpage.py:225
+#: ../formpage.py:173 ../formpage.py:236
 msgid " centered"
 msgstr ""
 
-#: ../formpage.py:187 ../formpage.py:227
+#: ../formpage.py:198 ../formpage.py:238
 msgid " num"
 msgstr ""
 
@@ -145,15 +145,15 @@ msgctxt "link"
 msgid "${url_admin}#users"
 msgstr ""
 
-#: ../formpage.py:195
+#: ../formpage.py:206
 msgid "%.1f"
 msgstr ""
 
-#: ../formpage.py:151
+#: ../formpage.py:162
 msgid "%break%"
 msgstr ""
 
-#: ../formpage.py:193
+#: ../formpage.py:204
 msgid "%d"
 msgstr ""
 
@@ -165,11 +165,11 @@ msgstr ""
 msgid "'[]:\\?/*"
 msgstr ""
 
-#: ../formpage.py:183
+#: ../formpage.py:194
 msgid "(division by 0)"
 msgstr "(division par 0)"
 
-#: ../application_views.py:84 ../formpage.py:205 ../formpage.py:207
+#: ../application_views.py:84 ../formpage.py:216 ../formpage.py:218
 msgid "*"
 msgstr ""
 
@@ -182,7 +182,7 @@ msgstr ""
 msgid "**"
 msgstr ""
 
-#: ../formpage.py:142
+#: ../formpage.py:153
 msgid "-"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgstr ""
 msgid "."
 msgstr ""
 
-#: ../formpage.py:178 ../schema.py:187
+#: ../formpage.py:189 ../schema.py:187
 msgid "/"
 msgstr ""
 
@@ -202,7 +202,7 @@ msgstr ""
 msgid "00000"
 msgstr ""
 
-#: ../formpage.py:226
+#: ../formpage.py:237
 msgid "100%"
 msgstr ""
 
@@ -368,15 +368,15 @@ msgstr ""
 
 #: ../ui/template.xhtml.en:84
 msgctxt "heading"
-msgid "A propos de iScrib"
-msgstr ""
+msgid "About iScrib"
+msgstr "À propos de iScrib"
 
 #: ../ui/application/register.xml.en:23
 msgctxt "button"
 msgid "Add Users"
 msgstr "Ajouter les utilisateurs"
 
-#: ../ui/template.xhtml.en:102
+#: ../ui/template.xhtml.en:101
 msgctxt "heading"
 msgid "Aide"
 msgstr ""
@@ -389,6 +389,11 @@ msgstr "Déjà enregistré"
 #: ../ui/root/view.xml.en:40
 msgctxt "span"
 msgid "Already customer"
+msgstr ""
+
+#: ../ui/template.xhtml.en:86
+msgctxt "link"
+msgid "An Itaapy service"
 msgstr ""
 
 #: ../workgroup_views.py:223
@@ -409,12 +414,12 @@ msgstr "Suivi de l'application"
 msgid "Bad value"
 msgstr "Mauvaise valeur"
 
-#: ../ui/template.xhtml.en:96
+#: ../ui/template.xhtml.en:95
 msgctxt "link"
 msgid "Become Partner"
 msgstr "Devenir partenaire"
 
-#: ../ui/template.xhtml.en:89
+#: ../ui/template.xhtml.en:88
 msgctxt "link"
 msgid "Blog"
 msgstr ""
@@ -423,7 +428,7 @@ msgstr ""
 msgid "Boolean"
 msgstr ""
 
-#: ../ui/template.xhtml.en:93
+#: ../ui/template.xhtml.en:92
 msgctxt "heading"
 msgid "Business"
 msgstr ""
@@ -467,7 +472,7 @@ msgstr "configurez votre application"
 msgid "Configure your client space"
 msgstr "configurez votre espace client"
 
-#: ../ui/template.xhtml.en:105
+#: ../ui/template.xhtml.en:103
 msgctxt "link"
 msgid "Contact Us"
 msgstr "Contactez-nous"
@@ -522,11 +527,15 @@ msgstr ""
 msgid "Decimals"
 msgstr ""
 
+#: ../schema.py:289
+msgid "Default Value"
+msgstr ""
+
 #: ../schema.py:287
 msgid "Dependent Field"
 msgstr ""
 
-#: ../ui/template.xhtml.en:98
+#: ../ui/template.xhtml.en:97
 msgctxt "link"
 msgid "Download OpenOffice.org"
 msgstr "Télécharger OpenOffice.org"
@@ -603,10 +612,10 @@ msgctxt "heading"
 msgid "Errors"
 msgstr "Erreurs"
 
-#: ../ui/template.xhtml.en:87
+#: ../ui/template.xhtml.en:104
 msgctxt "link"
-msgid "Examples"
-msgstr "Exemples"
+msgid "Examples, samples"
+msgstr "Exemples, échantillons"
 
 #: ../ui/form/send.xml.en:35
 msgctxt "button"
@@ -631,11 +640,6 @@ msgstr "Exporter cette liste au format XLS"
 
 #: ../controls.py:99
 msgid "Expression"
-msgstr ""
-
-#: ../ui/template.xhtml.en:104
-msgctxt "link"
-msgid "FAQ"
 msgstr ""
 
 #: ../form.py:406
@@ -675,7 +679,7 @@ msgstr "Mot de passe oublié ?"
 msgid "Form"
 msgstr "Formulaire"
 
-#: ../formpage.py:75
+#: ../formpage.py:86
 msgid "Form Page"
 msgstr "Page de formulaire"
 
@@ -683,6 +687,10 @@ msgstr "Page de formulaire"
 msgctxt "heading"
 msgid "Form State:"
 msgstr "État du formulaire :"
+
+#: ../schema.py:288
+msgid "Formula"
+msgstr "Formule"
 
 #: ../root_views.py:148
 msgid "Function"
@@ -726,10 +734,16 @@ msgstr "Feuille contrôles, ligne {line}, niveau « {level} » invalide."
 msgid "In controls, line {line}, variable is missing."
 msgstr "Feuille contrôles, ligne {line}, il manque la variable."
 
-#: ../schema.py:49
+#: ../schema.py:51
 msgid "In schema, line {line}, decimals \"{decimals}\" are invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, les décimales \"{decimals}\" sont invalides."
+
+#: ../schema.py:61
+msgid "In schema, line {line}, default value \"{default}\" is invalid."
+msgstr ""
+"Feuille schéma, ligne {line}, la valeur par défaut « {default} » est "
+"invalide."
 
 #: ../schema.py:57
 msgid "In schema, line {line}, dependency variable name \"{name}\" is invalid."
@@ -738,12 +752,16 @@ msgstr ""
 "invalide."
 
 #: ../schema.py:47
+msgid "In schema, line {line}, enum options are missing."
+msgstr "Feuille schéma, ligne {line}, il manque les valeurs de enum."
+
+#: ../schema.py:49
 msgid "In schema, line {line}, enum representation \"{enum_repr}\" is invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, la représentation « {representation} » est "
 "invalide."
 
-#: ../schema.py:55
+#: ../schema.py:59
 msgid "In schema, line {line}, in sum formula, variable \"{name}\" is invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, dans la formule de somme, la variable « {name} "
@@ -753,13 +771,13 @@ msgstr ""
 msgid "In schema, line {line}, length \"{length}\" is invalid."
 msgstr "Feuille schéma, ligne {line}, la longueur \"{type}\" est invalide."
 
-#: ../schema.py:51
+#: ../schema.py:53
 msgid "In schema, line {line}, mandatory \"{mandatory}\" is invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, la valeur obligatoire « {mandatory} » est "
 "invalide."
 
-#: ../schema.py:53
+#: ../schema.py:55
 msgid "In schema, line {line}, size \"{size}\" is invalid."
 msgstr "Feuille schéma, ligne {line}, la taille \"{size}\" est invalide."
 
@@ -895,7 +913,7 @@ msgctxt "table cell"
 msgid "New Users<g id='1'> (${allowed_users} allowed)</g>"
 msgstr "Nouveaux utilisateurs<g id='1'> (${allowed_users} autorisés)</g>"
 
-#: ../ui/template.xhtml.en:95
+#: ../ui/template.xhtml.en:94
 msgctxt "link"
 msgid "News"
 msgstr ""
@@ -941,7 +959,7 @@ msgstr "Aucun avertissement détecté."
 msgid "No {class_title} available."
 msgstr "Aucun(e) {class_title} disponible."
 
-#: ../datatypes.py:667
+#: ../datatypes.py:664
 msgid "Non"
 msgstr ""
 
@@ -974,7 +992,7 @@ msgstr ""
 msgid "Online Help"
 msgstr ""
 
-#: ../datatypes.py:762
+#: ../datatypes.py:759
 msgid "Open (accounts are created on demand)"
 msgstr "Ouvert (comptes créés à la demande)"
 
@@ -982,7 +1000,7 @@ msgstr "Ouvert (comptes créés à la demande)"
 msgid "Operation successful! Welcome."
 msgstr "Votre compte est activé. Bienvenue !"
 
-#: ../datatypes.py:666
+#: ../datatypes.py:663
 msgid "Oui"
 msgstr ""
 
@@ -1028,7 +1046,7 @@ msgctxt "emphasis"
 msgid "Please verify the consistency of these data."
 msgstr "Veuillez vérifier la cohérence des données."
 
-#: ../ui/template.xhtml.en:97
+#: ../ui/template.xhtml.en:96
 msgctxt "link"
 msgid "Pricing"
 msgstr "Tarifs"
@@ -1073,7 +1091,7 @@ msgstr "Inscription"
 msgid "Repeat Password"
 msgstr "Répéter le mot de passe"
 
-#: ../datatypes.py:760
+#: ../datatypes.py:757
 msgid "Restricted (users must be subscribed)"
 msgstr "Restreint (l'enregistrement préalable est obligatoire)"
 
@@ -1082,7 +1100,7 @@ msgctxt "button"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: ../application_views.py:140 ../schema.py:334
+#: ../application_views.py:140 ../schema.py:339
 msgid "Schema"
 msgstr "Schéma"
 
@@ -1145,7 +1163,7 @@ msgstr "Utilisateurs enregistrés"
 msgid "Subscription Mode"
 msgstr "Mode d'inscription"
 
-#: ../ui/template.xhtml.en:88
+#: ../ui/template.xhtml.en:87
 msgctxt "link"
 msgid "Terms of Use"
 msgstr "Conditions d'utilisation"
@@ -1248,11 +1266,6 @@ msgstr ""
 
 #: ../schema.py:277
 msgid "Type"
-msgstr ""
-
-#: ../ui/template.xhtml.en:86
-msgctxt "link"
-msgid "Un service Itaapy"
 msgstr ""
 
 #: ../application_views.py:624
@@ -1530,7 +1543,7 @@ msgstr ""
 msgid "false"
 msgstr ""
 
-#: ../formpage.py:147 ../formpage.py:160 ../formpage.py:223
+#: ../formpage.py:158 ../formpage.py:171 ../formpage.py:234
 msgid "field-label"
 msgstr ""
 
@@ -1538,11 +1551,7 @@ msgstr ""
 msgid "field_{name}"
 msgstr ""
 
-#: ../schema.py:288
-msgid "formula"
-msgstr ""
-
-#: ../formpage.py:212
+#: ../formpage.py:223
 msgid "h%d"
 msgstr ""
 
@@ -1574,8 +1583,8 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: ../datatypes.py:104 ../datatypes.py:613 ../datatypes.py:639
-#: ../datatypes.py:697 ../datatypes.py:714
+#: ../datatypes.py:101 ../datatypes.py:610 ../datatypes.py:636
+#: ../datatypes.py:694 ../datatypes.py:711
 msgid "null"
 msgstr ""
 
@@ -1607,11 +1616,11 @@ msgstr ""
 msgid "rows"
 msgstr ""
 
-#: ../formpage.py:221
+#: ../formpage.py:232
 msgid "rubrique-label"
 msgstr ""
 
-#: ../formpage.py:214
+#: ../formpage.py:225
 msgid "section-header"
 msgstr ""
 
@@ -1759,9 +1768,6 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 
 #~ msgid "Exported"
 #~ msgstr "Exporté"
-
-#~ msgid "In schema, line {line}, variable name is missing."
-#~ msgstr "Feuille schéma, ligne {line}, il manque le nom de variable."
 
 #~ msgid "Modified"
 #~ msgstr "Modifié"
