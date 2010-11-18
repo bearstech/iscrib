@@ -107,7 +107,7 @@ div#page {
   width: 900px;
   height: 340px;
   position: relative;
-  background: url("/ui/iscrib/images/home-background.png") no-repeat scroll left bottom transparent;
+  background: url("/ui/iscrib/images/home-background.jpg") no-repeat scroll left bottom transparent;
 }
 
 #home-container #home-title .content {
