@@ -78,12 +78,12 @@ div#page {
 
 #header #links-menu-profile {
   padding-left: 20px;
-  background: url("/ui/iscrib/images/auth.png") no-repeat scroll left top transparent;
+  background: url("/ui/iscrib/images/icon-authenticated.png") no-repeat scroll left center transparent;
 }
 
 #header #links-menu-logout {
   padding-left: 20px;
-  background: url("/ui/iscrib/images/deco.png") no-repeat scroll left top transparent;
+  background: url("/ui/iscrib/images/icon-logout.png") no-repeat scroll left center transparent;
 }
 
 /*
