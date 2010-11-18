@@ -52,12 +52,9 @@ class FormPageHandler(CSVFile):
     schema = {'null': Unicode}
 
 
-    def _load_state_from_file(self, file):
-        # Read the data, and find out the encoding
+    def _load_state_from_file(self, file, encoding='UTF-8'):
+        # Read the data, and sniff number of columns
         data = file.read()
-        self.encoding = guess_encoding(data)
-
-        # Sniff number of columns
         lines = data.splitlines(True)
         reader = read_csv(lines)
         line = reader.next()
@@ -67,6 +64,17 @@ class FormPageHandler(CSVFile):
                 guess=self.class_csv_guess, skip_header=self.skip_header,
                 encoding=self.encoding):
             self._add_row(line)
+
+
+    def to_str(self, encoding='UTF-8', separator=',', newline='\n'):
+        lines = []
+        for row in self.get_rows():
+            line = []
+            for value in row:
+                data = Unicode.encode(value, encoding=encoding)
+                line.append('"%s"' % data.replace('"', '""'))
+            lines.append(separator.join(line))
+        return newline.join(lines)
 
 
 
