@@ -53,8 +53,11 @@ class FormPageHandler(CSVFile):
 
 
     def _load_state_from_file(self, file, encoding='UTF-8'):
-        # Read the data, and sniff number of columns
+        # Read the data, and find out the encoding
         data = file.read()
+        self.encoding = guess_encoding(data)
+
+        # Sniff number of columns
         lines = data.splitlines(True)
         reader = read_csv(lines)
         line = reader.next()
