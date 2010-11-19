@@ -52,6 +52,9 @@ class DateLitterale(DataType):
 
 
 
+# The reason these datatypes are instances and not thingies is that I need to
+# call "+", "int", etc. for the formulas and controls
+
 class Numeric(object):
     """All arithmetical operations."""
     default = ''
