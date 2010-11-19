@@ -177,7 +177,8 @@ def text_widget(context, form, datatype, name, value, schema, fields,
     if not isinstance(value, basestring):
         value = datatype.encode(value)
     if isinstance(datatype, NumDecimal):
-        value = format_number(value, places=datatype.decimals)
+        if value:
+            value = format_number(value, places=datatype.decimals)
     # Reçoit des str en POST
     if not type(value) is unicode:
         value = unicode(value, 'utf8')
