@@ -61,12 +61,8 @@ ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, dependency variable '
 class FormatError(ValueError):
 
     def __init__(self, message, *args, **kw):
-        super(FormatError, self).__init__(message, *args, **kw)
-        self._message = message
-
-    def __unicode__(self):
-        # gettext already called
-        return self._message.message
+        message = message.gettext()
+        return super(FormatError, self).__init__(message, *args, **kw)
 
 
 
