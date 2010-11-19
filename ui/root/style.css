@@ -87,6 +87,15 @@ div#page {
 }
 
 /*
+ * MESSAGE
+ */
+#message {
+  position: absolute;
+  width: 900px;
+  z-index: 1000;
+}
+
+/*
  * HOME PAGE
  */
 #page.home-page #location {
