@@ -432,7 +432,8 @@ class Schema(Table):
                     default = checkid(default)
                 elif issubclass(datatype, NumTime):
                     # "09:00:00" -> "09:00"
-                    default = default.rsplit(":", 1)[0]
+                    if default.count(":") > 1:
+                        default = default.rsplit(":", 1)[0]
                 elif issubclass(datatype, NumDate):
                     # "2010-11-18 00:00:00" -> "18/11/2010"
                     default = default.split(' ')[0]
