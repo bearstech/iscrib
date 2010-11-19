@@ -26,7 +26,7 @@ from lpod.style import odf_create_style
 from lpod.table import odf_create_table, odf_create_row
 
 # Import from xlrd
-from xlrd import open_workbook
+from xlrd import open_workbook, xldate_as_tuple, XL_CELL_DATE
 from xlwt import Workbook, easyxf
 from xlwt.Style import default_style
 
@@ -73,10 +73,14 @@ class XLSTable(object):
 
     def iter_values(self):
         sheet = self.sheet
-        for idx in range(sheet.nrows):
+        for y in range(sheet.nrows):
             values = []
-            for value in sheet.row_values(idx):
-                if type(value) is float:
+            for x, cell in enumerate(sheet.row_slice(y)):
+                value = cell.value
+                if cell.ctype == XL_CELL_DATE:
+                    date = xldate_as_tuple(value, 0)
+                    value = '{0}-{1}-{2} {3}:{4}:{5}'.format(*date)
+                elif type(value) is float:
                     if value == int(value):
                         value = unicode(int(value))
                     else:

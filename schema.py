@@ -431,6 +431,8 @@ class Schema(Table):
                     datatype = datatype(options=enum_options)
                     default = checkid(default)
                 elif issubclass(datatype, NumTime):
+                    # "0-0-0 09:00:00" -> "09:00:00"
+                    default = default.split(' ')[-1]
                     # "09:00:00" -> "09:00"
                     if default.count(":") > 1:
                         default = default.rsplit(":", 1)[0]
