@@ -21,11 +21,12 @@
 
 # Import from itools
 from itools.datatypes import XMLContent, XMLAttribute
+from itools.i18n import format_number
 
 # Import from ikaaro
 
 # Import from iscrib
-from datatypes import Numeric, Text, EnumBoolean, SqlEnumerate
+from datatypes import Numeric, Text, EnumBoolean, SqlEnumerate, NumDecimal
 
 
 NBSP = u"\u00a0".encode('utf8')
@@ -175,6 +176,8 @@ def text_widget(context, form, datatype, name, value, schema, fields,
     # Reçoit des int en GET
     if not isinstance(value, basestring):
         value = datatype.encode(value)
+    if isinstance(datatype, NumDecimal):
+        value = format_number(value, places=datatype.decimals)
     # Reçoit des str en POST
     if not type(value) is unicode:
         value = unicode(value, 'utf8')

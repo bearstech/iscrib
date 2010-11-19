@@ -393,7 +393,7 @@ class NumDecimal(Numeric):
         if data.upper() == 'NC':
             return True
         try:
-            dec(str(data))
+            dec(str(data.replace(",", ".")))
         except InvalidOperation:
             return False
         return True

@@ -324,7 +324,7 @@ class SchemaHandler(TableFile):
                 title=get_record_value(record, 'title'),
                 help=get_record_value(record, 'help'),
                 length=length,
-                decimals = get_record_value(record, 'decimals'),
+                decimals=get_record_value(record, 'decimals'),
                 mandatory=get_record_value(record, 'mandatory'),
                 size=size,
                 dependency=get_record_value(record, 'dependency'),
