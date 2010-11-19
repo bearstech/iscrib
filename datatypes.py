@@ -57,14 +57,12 @@ class DateLitterale(DataType):
 
 class Numeric(object):
     """All arithmetical operations."""
-    default = ''
-
 
     ########################################################################
     # DataType API
-    @classmethod
-    def get_default(cls):
-        return cls.decode(cls.default)
+    # XXX not a classmethod
+    def get_default(self):
+        return self.default
 
 
     @classmethod
@@ -594,7 +592,7 @@ class NumDigit(Numeric):
         self.value = value
 
 
-    # FIXME should be classmethod
+    # XXX not a classmethod
     def is_valid(self, data):
         return data.isdigit() if len(data) == self.length else data == ''
 
