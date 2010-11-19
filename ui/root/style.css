@@ -238,6 +238,27 @@ div#page {
 #body #content #home-content h2 {
   border-bottom: none;
 }
+
+/*
+ * UL LI
+ */
+#content ul {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#content ul ul {
+  padding-left: 20px;
+}
+
+#content ul li {
+  list-style: none;
+  background-image: url("/ui/iscrib/images/bullet-blue.jpg");
+  background-repeat: no-repeat;
+  background-position: 0 0.4em;
+  padding-left: 15px;
+}
+
 #home-content ul li {
   background-image: url("/ui/iscrib/images/bullet-blue2.jpg");
 }
