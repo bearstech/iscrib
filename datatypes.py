@@ -26,12 +26,6 @@ from itools.datatypes.primitive import enumerate_get_namespace
 from itools.gettext import MSG
 
 
-def quote_integer(data):
-    data = unicode(data, 'utf8')
-    # FIXME restore unicode
-    return data.replace('"', '\\"').replace("'", "\\'")
-
-
 def quote_string(data):
     data = unicode(data, 'utf8')
     # FIXME restore unicode
@@ -102,7 +96,7 @@ class Numeric(object):
         if isinstance(value, cls):
             if value.value is None or value.value == '':
                 return u"null"
-        return quote_integer(cls.encode(value))
+        return quote_string(cls.encode(value))
 
 
     ########################################################################
@@ -695,7 +689,7 @@ class EnumBoolean(Enumerate):
     def encode_sql(cls, value):
         if value is None or value == '':
             return u"null"
-        return quote_integer(cls.encode(value))
+        return quote_string(cls.encode(value))
 
 
 
