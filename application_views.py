@@ -568,10 +568,6 @@ class Application_Register(STLForm):
 
     schema = {'new_users': Unicode}
 
-    table_columns = [
-            ('user', MSG(u"User")),
-            ('email', MSG(u"E-mail"))]
-
 
     def get_namespace(self, resource, context):
         namespace = super(Application_Register, self).get_namespace(resource,
