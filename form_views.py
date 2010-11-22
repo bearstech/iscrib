@@ -82,6 +82,8 @@ class Form_View(STLForm):
             menu.append({'title': formpage.get_title(),
                 'href': ';page%s' % get_page_number(formpage.name),
                 'class': 'active' if formpage.name == view_name else None})
+        if len(menu) == 1:
+            return []
         return menu
 
 

@@ -22,8 +22,8 @@
     </p>
     <div class="clear"></div>
 
-    <div id="pages-menu" stl:if="not skip_print">
-      <ul stl:if="menu">
+    <div id="pages-menu" stl:if="not skip_print" stl:if="menu">
+      <ul>
         <li stl:repeat="item menu" class="${item/class}">
           <a href="${item/href}">${item/title}</a>
         </li>
