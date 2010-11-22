@@ -407,8 +407,12 @@ class Form(File):
             elif isinstance(value, NumDecimal):
                 value = format_number(value.value)
             number = get_record_value(record, 'number')
-            yield {'number': number, 'title': title, 'level': level,
-                    'variable': variable, 'page': page,
+            yield {'number': number,
+                    'title': title,
+                    'level': level,
+                    'variable': variable,
+                    'page': page,
+                    'value': value,
                     'debug': u"'%s' = '%s'" % (expression, value)}
 
 
