@@ -24,12 +24,14 @@ from decimal import InvalidOperation
 
 # Import from itools
 from itools.datatypes import XMLContent, XMLAttribute
+from itools.gettext import MSG
 from itools.i18n import format_number
 
 # Import from ikaaro
 
 # Import from iscrib
 from datatypes import Numeric, Text, EnumBoolean, SqlEnumerate, NumDecimal
+from datatypes import NumDate, NumTime
 
 
 NBSP = u"\u00a0".encode('utf8')
@@ -250,6 +252,8 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
                 fields, readonly, tabindex)
     if skip_print is False:
         help = datatype.help
+        if not help and isinstance(datatype, (NumDate, NumTime)):
+            help = MSG(u"Format {format}").gettext(format=datatype.type)
         if help:
             widget += (u'<img src="/ui/icons/16x16/help.png" '
                     u'title="{help}" class="online-help"/>'.format(help=help))

@@ -323,7 +323,8 @@ class SchemaHandler(TableFile):
                 default = [default]
             length = get_record_value(record, 'length')
             size = get_record_value(record, 'size') or length
-            schema[name] = datatype(default=datatype.decode(default),
+            schema[name] = datatype(type=type_name,
+                default=datatype.decode(default),
                 multiple=multiple,
                 pages=tuple(page_numbers),
                 title=get_record_value(record, 'title'),

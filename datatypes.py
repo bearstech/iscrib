@@ -476,6 +476,7 @@ class NumTime(Numeric):
     def is_valid(data):
         if data == '' or data.upper() == 'NC':
             return True
+        data = data.replace('h', ':')
         if data.count(':') > 1:
             return False
         for x in data.split(':'):
