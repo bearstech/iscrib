@@ -452,7 +452,8 @@ class NumTime(Numeric):
                 value = None
             elif type(value) is int or value == '':
                 pass
-            elif ':' in value:
+            elif type(value) is str:
+                value = value.replace('h', ':')
                 hours, minutes = value.split(':')
                 value = int(hours) * 60 + int(minutes)
             else:
