@@ -41,89 +41,95 @@
     <hr/>
 
     <h2>Errors</h2>
-    <em>These errors must absolutely be corrected.</em>
-    <table width="100%" cellpadding="1" stl:if="controls/errors"
-    cellspacing="1" border="1">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Control</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr stl:repeat="control controls/errors">
-          <td>${control/number}</td>
-          <td>
-            <span>${control/title}</span>
-            <pre class="form-debug" stl:if="debug">${control/debug}</pre>
-          </td>
-          <td>
-            <a href="${control/href}">To correct</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <stl:block stl:if="controls/errors">
+      <em>These errors must absolutely be corrected.</em>
+      <table width="100%" cellpadding="1"
+      cellspacing="1" border="1">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Control</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr stl:repeat="control controls/errors">
+            <td>${control/number}</td>
+            <td>
+              <span>${control/title}</span>
+              <pre class="form-debug" stl:if="debug">${control/debug}</pre>
+            </td>
+            <td>
+              <a href="${control/href}">To correct</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </stl:block>
     <p stl:if="not controls/errors">
       No error detected.
     </p>
 
     <h2>Warnings</h2>
-    <em>Please verify the consistency of these data.</em>
-    <table width="100%" cellpadding="1" stl:if="controls/warnings"
-    cellspacing="1" border="1">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Control</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr stl:repeat="control controls/warnings">
-          <td>${control/number}</td>
-          <td>
-            <span>${control/title}</span>
-            <pre class="form-debug" stl:if="debug">${control/debug}</pre>
-          </td>
-          <td>
-            <a href="${control/href}">To correct</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <stl:block stl:if="controls/warnings">
+      <em>Please verify the consistency of these data.</em>
+      <table width="100%" cellpadding="1"
+      cellspacing="1" border="1">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Control</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr stl:repeat="control controls/warnings">
+            <td>${control/number}</td>
+            <td>
+              <span>${control/title}</span>
+              <pre class="form-debug" stl:if="debug">${control/debug}</pre>
+            </td>
+            <td>
+              <a href="${control/href}">To correct</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </stl:block>
     <p stl:if="not controls/warnings">
       No warning detected.
     </p>
 
     <h2>Information</h2>
-    <em>For your information, with the given data.</em>
-    <table width="100%" cellpadding="1" stl:if="controls/infos"
-    cellspacing="1" border="1">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Control</th>
-          <th>Value</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr stl:repeat="control controls/infos">
-          <td>${control/number}</td>
-          <td>
-            <span>${control/title}</span>
-            <pre class="form-debug" stl:if="debug">${control/debug}</pre>
-          </td>
-          <td>
-            ${control/value}
-          </td>
-          <td>
-            <a href="${control/href}">To correct</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <stl:block stl:if="controls/infos">
+      <em>For your information, with the given data.</em>
+      <table width="100%" cellpadding="1"
+      cellspacing="1" border="1">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Control</th>
+            <th>Value</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr stl:repeat="control controls/infos">
+            <td>${control/number}</td>
+            <td>
+              <span>${control/title}</span>
+              <pre class="form-debug" stl:if="debug">${control/debug}</pre>
+            </td>
+            <td>
+              ${control/value}
+            </td>
+            <td>
+              <a href="${control/href}">To correct</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </stl:block>
     <p stl:if="not controls/infos">
       No information available.
     </p>
