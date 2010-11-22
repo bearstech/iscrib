@@ -305,6 +305,9 @@ class SchemaHandler(TableFile):
                 multiple = (representation == 'checkbox')
                 datatype = datatype(options=enum_options,
                         representation=representation)
+            elif issubclass(datatype, EnumBoolean):
+                datatype = datatype(representation='radio')
+                multiple = False
             else:
                 multiple = False
             # The page number (now automatic)

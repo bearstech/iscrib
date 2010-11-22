@@ -232,7 +232,7 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     elif issubclass(datatype, Text):
         widget = textarea_widget(context, form, datatype, name, value,
                 schema, fields, readonly)
-    elif issubclass(datatype, SqlEnumerate):
+    elif issubclass(datatype, (EnumBoolean, SqlEnumerate)):
         representation = datatype.representation
         if representation == 'select':
             widget = select_widget(context, form, datatype, name, value,
