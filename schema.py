@@ -254,7 +254,7 @@ class Formula(String):
             # Turn it into default value at the time of writing
             return None
         value = String.decode(data)
-        return ''.join(term.strip() for term in value.split('+'))
+        return '+'.join(term.strip() for term in value.split('+'))
 
 
     @staticmethod
@@ -466,7 +466,9 @@ class Schema(Table):
                 raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
                         name=dependency)
             formula = get_record_value(record, 'formula')
-            if not Formula.is_valid(formula, known_variables):
+            try:
+                Formula.is_valid(formula, known_variables)
+            except ValueError, name:
                 raise FormatError, ERR_BAD_FORMULA(line=lineno,
                         name=name)
 
