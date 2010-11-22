@@ -41,7 +41,8 @@ ERR_BAD_EXPRESSION = ERROR(u'In controls, line {line}, syntax error in '
         u'expression: {err}')
 ERR_BAD_LEVEL = ERROR(u'In controls, line {line}, unexpected level '
         u'"{level}".')
-ERR_EMPTY_VARIABLE = ERROR(u'In controls, line {line}, variable is missing.')
+ERR_EMPTY_VARIABLE = ERROR(u'In controls, line {line}, main variable is '
+        u'missing.')
 
 
 class ZeroDict(dict):
@@ -59,9 +60,10 @@ class Expression(Unicode):
 
     @staticmethod
     def decode(data):
+        data = data.strip()
         # Risque d'espaces insécables autour des guillemets
         # Ni upper() ni lower() !
-        return Unicode.decode(data).replace(u' ', u' ').strip()
+        return Unicode.decode(data).replace(u' ', u' ')
 
 
     @staticmethod
@@ -88,7 +90,8 @@ class ControlLevel(Enumerate):
 
     @staticmethod
     def decode(data):
-        return Enumerate.decode(data).strip()
+        data = data.strip()
+        return Enumerate.decode(data)
 
 
 

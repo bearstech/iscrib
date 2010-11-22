@@ -37,7 +37,7 @@ from ikaaro.text import CSV
 
 # Import from iscrib
 from datatypes import NumTime
-from schema import FormatError
+from schema import FormatError, Variable
 from widgets import get_input_widget, make_element
 from workflow import FINISHED, EXPORTED
 
@@ -45,7 +45,7 @@ from workflow import FINISHED, EXPORTED
 NBSP = u"\u00a0".encode('utf8')
 FIELD_PREFIX = u"#"
 ERR_BAD_NAME = ERROR(u'In "{title}" sheet, line {line}, variable "{name}" '
-        u'is invalid.')
+        u'is unknown.')
 
 
 class FormPageHandler(CSVFile):
@@ -98,8 +98,8 @@ class FormPage(CSV):
         for lineno, row in enumerate(handler.get_rows()):
             lineno += 1
             for column in row:
-                if column.startswith(FIELD_PREFIX):
-                    name = column[1:]
+                if column.startswith(Variable.FIELD_PREFIX):
+                    name = Variable.decode(column)
                     if name not in schema:
                         raise FormatError, ERR_BAD_NAME(title=title,
                                 line=lineno, name=name)

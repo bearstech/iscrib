@@ -32,7 +32,7 @@ from ikaaro.table import Table
 # Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
-from datatypes import SqlEnumerate
+from datatypes import SqlEnumerate, Numeric
 
 
 ERR_BAD_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
@@ -69,14 +69,16 @@ class FormatError(ValueError):
 
 
 class Variable(String):
+    FIELD_PREFIX = '#'
 
-    @staticmethod
-    def decode(data):
+
+    @classmethod
+    def decode(cls, data):
         data = data.strip().upper()
         if not data:
             # Turn it into default value at the time of writing
             return None
-        if data[0] == '#':
+        if data[0] == cls.FIELD_PREFIX:
             data = data[1:]
         return String.decode(data)
 
@@ -297,7 +299,11 @@ class SchemaHandler(TableFile):
             # The datatype
             type_name = get_record_value(record, 'type')
             datatype = Type.get_type(type_name)
-            if issubclass(datatype, SqlEnumerate):
+            multiple = False
+            # TypeError: issubclass() arg 1 must be a class
+            if isinstance(datatype, Numeric):
+                pass
+            elif issubclass(datatype, SqlEnumerate):
                 enum_options = get_record_value(record, 'enum_options')
                 representation = get_record_value(record, 'enum_repr')
                 multiple = (representation == 'checkbox')
@@ -305,8 +311,6 @@ class SchemaHandler(TableFile):
                         representation=representation)
             elif issubclass(datatype, EnumBoolean):
                 datatype = datatype(representation='radio')
-                multiple = False
-            else:
                 multiple = False
             # The page number (now automatic)
             page_number = Variable.get_page_number(name)
@@ -362,6 +366,7 @@ class Schema(Table):
             # Name
             name = get_record_value(record, 'name')
             if name is None:
+                handler.del_record(record.id)
                 continue
             name = name.strip().upper()
             if not Variable.is_valid(name):
