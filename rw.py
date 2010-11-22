@@ -71,6 +71,11 @@ class XLSTable(object):
         return name
 
 
+    def get_width(self):
+        sheet = self.sheet
+        return sheet.ncols
+
+
     def iter_values(self):
         sheet = self.sheet
         for y in range(sheet.nrows):

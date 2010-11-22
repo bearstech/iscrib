@@ -55,6 +55,8 @@ from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 ERR_WRONG_NUMBER_COLUMNS = ERROR(u'In the "{name}" sheet, wrong number of '
         u'columns. Do you use the latest template?')
+MSG_ERR_FIRST_PAGE = ERROR(u'First form page must be named "A", not '
+        u'"{page}".')
 MSG_ERR_PAGE_NAME = ERROR(u'In the "{name}" sheet, page "{page}" is not '
         u'related to any variable in the schema.')
 MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
@@ -161,7 +163,7 @@ class Application_NewInstance(NewInstance):
         handler = child.get_resource('schema').handler
         schema, pages = handler.get_schema_pages()
         # Pages
-        for table in tables:
+        for i, table in enumerate(tables):
             table.rstrip(aggressive=True)
             name = table.get_name().split(None, 1)
             # Page number
@@ -170,6 +172,10 @@ class Application_NewInstance(NewInstance):
                 title = None
             else:
                 page_number, title = name
+            if i == 0 and page_number != 'A':
+                context.commit = False
+                context.message = MSG_ERR_FIRST_PAGE(page=page_number)
+                return
             if page_number not in pages:
                 context.commit = False
                 context.message = MSG_ERR_PAGE_NAME(name=name,
