@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from python
+# Import from the Standard Library
 from datetime import date
 from decimal import Decimal as dec, InvalidOperation
 
@@ -370,30 +370,36 @@ class NumDecimal(Numeric):
             elif type(value) is dec or value == '':
                 pass
             else:
-                point = value
+                test = value
                 if type(value) is str:
-                    point = value.replace(',', '.')
+                    test = self.clean(value)
+                else:
+                    test = str(value)
                 try:
-                    value = dec(str(point))
+                    value = dec(test)
                 except InvalidOperation:
                     pass
         self.value = value
 
 
-    def round(self, digits=2):
-        value = self.value
-        if value is None or type(value) is str:
-            return value
-        places = dec('10') ** -digits
-        return value.quantize(places)
-
-
     @staticmethod
-    def is_valid(data):
+    def clean(data):
+        if "," in data and "." in data:
+            if data.index(",") < data.index("."):
+                # en
+                data = data.replace(",", "")
+            else:
+                # fr
+                data = data.replace(".", "")
+        return data.replace(" ", "").replace(",", ".")
+
+
+    @classmethod
+    def is_valid(cls, data):
         if data.upper() == 'NC':
             return True
         try:
-            dec(str(data.replace(",", ".")))
+            dec(cls.clean(data))
         except InvalidOperation:
             return False
         return True

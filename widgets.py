@@ -19,6 +19,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+# Import from the Standard Library
+from decimal import InvalidOperation
+
 # Import from itools
 from itools.datatypes import XMLContent, XMLAttribute
 from itools.i18n import format_number
@@ -178,7 +181,10 @@ def text_widget(context, form, datatype, name, value, schema, fields,
         value = datatype.encode(value)
     if isinstance(datatype, NumDecimal):
         if value:
-            value = format_number(value, places=datatype.decimals)
+            try:
+                value = format_number(value, places=datatype.decimals)
+            except InvalidOperation:
+                pass
     # Reçoit des str en POST
     if not type(value) is unicode:
         value = unicode(value, 'utf8')
