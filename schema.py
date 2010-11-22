@@ -35,8 +35,6 @@ from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import SqlEnumerate
 
 
-ERR_WRONG_NUMBER_COLUMNS = ERROR(u'Wrong number of columns. Do you use the '
-        u'latest template?')
 ERR_BAD_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
         u'invalid.')
 ERR_DUPLICATE_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
@@ -352,20 +350,20 @@ class Schema(Table):
 
     def _load_from_csv(self, body, columns):
         handler = self.handler
-        try:
-            handler.update_from_csv(body, columns, skip_header=True)
-        except ValueError:
-            raise FormatError, ERR_WRONG_NUMBER_COLUMNS
+        handler.update_from_csv(body, columns, skip_header=True)
         get_record_value = handler.get_record_value
         # Consistency check
         # First round on variables
         known_variables = []
         for lineno, record in enumerate(handler.get_records()):
-            # Starting from 0 + header
+            # Starting from 1 + header
             lineno += 2
             default_values = {}
             # Name
-            name = get_record_value(record, 'name').strip().upper()
+            name = get_record_value(record, 'name')
+            if name is None:
+                continue
+            name = name.strip().upper()
             if not Variable.is_valid(name):
                 raise FormatError, ERR_BAD_NAME(line=lineno, name=name)
             if name in known_variables:
@@ -456,6 +454,8 @@ class Schema(Table):
             known_variables.append(name)
         # Second round on references
         for lineno, record in enumerate(handler.get_records()):
+            # Starting from 1 + header
+            lineno += 2
             dependency = get_record_value(record, 'dependency')
             if not Dependency.is_valid(dependency, known_variables):
                 raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,

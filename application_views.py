@@ -53,7 +53,9 @@ from utils import force_encode, is_production
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
-MSG_ERR_PAGE_NAME = ERROR(u'In the "${name}" sheet, page "${page}" is not '
+ERR_WRONG_NUMBER_COLUMNS = ERROR(u'In the "{name}" sheet, wrong number of '
+        u'columns. Do you use the latest template?')
+MSG_ERR_PAGE_NAME = ERROR(u'In the "{name}" sheet, page "{page}" is not '
         u'related to any variable in the schema.')
 MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
 MSG_NO_DATA = ERROR(u"No data to collect for now.")
@@ -141,6 +143,11 @@ class Application_NewInstance(NewInstance):
                 ('controls', u"Controls", child.controls_class)]:
             table = tables.next()
             table.rstrip(aggressive=True)
+            if table.get_width() != len(cls.columns):
+                context.commit = False
+                context.message = ERR_WRONG_NUMBER_COLUMNS(
+                        name=table.get_name())
+                return
             try:
                 child.make_resource(name, cls, title={'en': title},
                         # cls va transformer le CSV en table
@@ -175,7 +182,6 @@ class Application_NewInstance(NewInstance):
                 # Find a "*Title"
                 title = find_title(table)
                 if title is None:
-                    raise ValueError
                     title = u"Page {0}".format(page_number)
             try:
                 child.make_resource(name, FormPage, title={'en': title},

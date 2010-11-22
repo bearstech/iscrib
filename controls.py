@@ -116,10 +116,10 @@ class Controls(Table):
     def _load_from_csv(self, body, columns):
         handler = self.handler
         handler.update_from_csv(body, columns, skip_header=True)
-        # Consistency check
         get_record_value = handler.get_record_value
+        # Consistency check
         for lineno, record in enumerate(handler.get_records()):
-            # Starting from 0 + header
+            # Starting from 1 + header
             lineno += 2
             title = get_record_value(record, 'title').strip()
             if not title:
