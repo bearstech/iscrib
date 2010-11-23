@@ -169,7 +169,10 @@ def textarea_widget(context, form, datatype, name, value, schema, fields,
         content = XMLContent.encode(value)
         return make_element(u"div", attributes, content)
 
-    attributes = {u"name": name, u"rows": u"15", u"cols": datatype.length}
+    attributes = {
+        u"name": name,
+        u"rows": str(datatype.size),
+        u"cols": str(datatype.length)}
     # special case for 'value'
     content = XMLContent.encode(value)
     return make_element(u"textarea", attributes, content)
