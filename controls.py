@@ -20,7 +20,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
-from itools.csv import Table as TableFile
+from itools.csv import Table as TableFile, parse
 from itools.datatypes import Enumerate
 from itools.gettext import MSG
 from itools.web import ERROR
@@ -118,16 +118,20 @@ class Controls(Table):
 
     def _load_from_csv(self, body):
         handler = self.handler
-        handler.update_from_csv(body, self.columns, skip_header=True)
-        get_record_value = handler.get_record_value
         # Consistency check
-        for lineno, record in enumerate(handler.get_records()):
-            # Starting from 1 + header
-            lineno += 2
-            title = get_record_value(record, 'title').strip()
+        # Starting from 1
+        lineno = 1
+        for line in parse(body, self.columns, handler.record_properties,
+                skip_header=True):
+            record = {}
+            for index, key in enumerate(self.columns):
+                record[key] = line[index]
+            # Title
+            title = record['title'] = record['title'].strip()
             if not title:
                 raise FormatError, ERR_EMPTY_TITLE(line=lineno)
-            expression = get_record_value(record, 'expression')
+            # Expression
+            expression = record['expression']
             if not expression:
                 raise FormatError, ERR_EMPTY_EXPRESSION(line=lineno)
             try:
@@ -135,13 +139,16 @@ class Controls(Table):
             except Exception, err:
                 raise FormatError, ERR_BAD_EXPRESSION(line=lineno,
                         err=err)
-            level = get_record_value(record, 'level')
+            # Level
+            level = record['level']
             if not ControlLevel.is_valid(level):
                 raise FormatError, ERR_BAD_LEVEL(line=lineno,
                         level=level)
-            variable = get_record_value(record, 'variable')
+            # Variable
+            variable = record['variable']
             if not variable:
                 raise FormatError, ERR_EMPTY_VARIABLE(line=lineno)
+            handler.add_record(record)
 
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):

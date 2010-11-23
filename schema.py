@@ -20,7 +20,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
-from itools.csv import Table as TableFile
+from itools.csv import Table as TableFile, parse
 from itools.datatypes import Enumerate, String, Integer, Boolean, Date
 from itools.gettext import MSG
 from itools.handlers import checkid
@@ -355,81 +355,80 @@ class Schema(Table):
 
     def _load_from_csv(self, body):
         handler = self.handler
-        handler.update_from_csv(body, self.columns, skip_header=True)
-        get_record_value = handler.get_record_value
         # Consistency check
         # First round on variables
+        # Starting from 1 + header
+        lineno = 1
         known_variables = []
-        for lineno, record in enumerate(handler.get_records()):
-            # Starting from 1 + header
-            lineno += 2
-            default_values = {}
+        for line in parse(body, self.columns, handler.record_properties,
+                skip_header=True):
+            record = {}
+            for index, key in enumerate(self.columns):
+                record[key] = line[index]
             # Name
-            name = get_record_value(record, 'name')
+            name = record['name']
             if name is None:
-                handler.del_record(record.id)
                 continue
-            name = name.strip().upper()
             if not Variable.is_valid(name):
                 raise FormatError, ERR_BAD_NAME(line=lineno, name=name)
             if name in known_variables:
                 raise FormatError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
             # Type
-            type_name = get_record_value(record, 'type')
+            type_name = record['type']
             datatype = Type.get_type(type_name)
             if datatype is None:
                 raise FormatError, ERR_BAD_TYPE(line=lineno,
                         type=type_name)
             # Length
-            length = get_record_value(record, 'length')
+            length = record['length']
             if length is None:
                 # Write down default at this time
-                default_values['length'] = length = 20
+                record['length'] = length = 20
             if not ValidInteger.is_valid(length):
                 raise FormatError, ERR_BAD_LENGTH(line=lineno, length=length)
             if issubclass(datatype, SqlEnumerate):
                 # Enumerate Options
-                enum_option = get_record_value(record, 'enum_options')[0]
+                enum_option = record['enum_options']
                 if enum_option is None:
                     raise FormatError, ERR_MISSING_OPTIONS(line=lineno)
                 # Split on "/"
                 enum_options = EnumerateOptions.split(enum_option['value'])
-                default_values['enum_options'] = enum_options
+                record['enum_options'] = enum_options
                 # Enumerate Representation
-                enum_repr = get_record_value(record, 'enum_repr')
+                enum_repr = record['enum_repr']
                 if enum_repr is None:
                     # Write down default at the time of writing
-                    default_values['enum_repr'] = enum_repr = 'radio'
+                    record['enum_repr'] = enum_repr = 'radio'
                 if not EnumerateRepresentation.is_valid(enum_repr):
                     raise FormatError, ERR_BAD_ENUM_REPR(line=lineno,
                             enum_repr=enum_repr)
             elif issubclass(datatype, NumDecimal):
                 # Decimals
-                decimals = get_record_value(record, 'decimals')
+                decimals = record['decimals']
                 if decimals is None:
                     # Write down default at the time of writing
-                    default_values['decimals'] = decimals = 2
+                    record['decimals'] = decimals = 2
                 if not ValidInteger.is_valid(decimals):
                     raise FormatError, ERR_BAD_DECIMALS(line=lineno,
                             decimals=decimals)
             # Mandatory
-            mandatory = get_record_value(record, 'mandatory')
+            mandatory = record['mandatory']
             if mandatory is None:
                 # Write down default at the time of writing
-                default_values['mandatory'] = mandatory = True
+                record['mandatory'] = mandatory = True
             if not Mandatory.is_valid(mandatory):
                 raise FormatError, ERR_BAD_MANDATORY(line=lineno,
                         mandatory=mandatory)
             # Size
-            size = get_record_value(record, 'size')
+            size = record['size']
             if size is None:
                 # Write down default at the time of writing
-                default_values['size'] = size = length
+                record['size'] = size = length
             if not ValidInteger.is_valid(size):
                 raise FormatError, ERR_BAD_SIZE(line=lineno, size=size)
             # Default value
-            default = get_record_value(record, 'default').strip()
+            default = record['default'] = record['default'].strip()
             if default:
                 if issubclass(datatype, EnumBoolean):
                     value = Mandatory.decode(default)
@@ -453,15 +452,14 @@ class Schema(Table):
                 if not datatype.is_valid(default):
                     raise FormatError, ERR_BAD_DEFAULT(line=lineno,
                             default=unicode(default, 'utf_8'))
-                default_values['default'] = default
-            # Update values for optional columns
-            if default_values:
-                handler.update_record(record.id, **default_values)
+                record['default'] = default
+            handler.add_record(record)
             known_variables.append(name)
         # Second round on references
-        for lineno, record in enumerate(handler.get_records()):
-            # Starting from 1 + header
-            lineno += 2
+        # Starting from 1 + header
+        lineno = 1
+        get_record_value = handler.get_record_value
+        for record in handler.get_records():
             dependency = get_record_value(record, 'dependency')
             if not Dependency.is_valid(dependency, known_variables):
                 raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
