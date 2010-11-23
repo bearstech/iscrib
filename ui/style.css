@@ -136,7 +136,7 @@ div.num {
 }
 
 .iscrib-table td {
-  padding: 5px;
+  padding: 1px;
   color: #446;
   font-family: Verdana, Arial, Sans
   font-weight: bold;
@@ -148,13 +148,15 @@ div.num {
 
 .iscrib-table td.section-header {
   text-align: left;
+  padding: 5px 0 0 0;
 }
 .iscrib-table td.section-header * {
   border-bottom: 0;
   font-family: Arial, sans;
 }
 .iscrib-table td.section-header h2 {
-  margin: 5px 0;
+  margin: 0;
+  padding: 0;
   color: #fff;
   background: #339;
   font-size: 14px;
