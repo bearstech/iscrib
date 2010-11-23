@@ -19,6 +19,7 @@
 from itools.core import merge_dicts
 from itools.datatypes import String, DateTime, Integer
 from itools.gettext import MSG
+from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.folder import Folder
@@ -31,7 +32,30 @@ from application_views import Application_Register, Application_Login
 from controls import Controls
 from datatypes import Subscription
 from form import Form
+from formpage import FormPage
+from rw import get_reader_and_cls
 from schema import Schema
+from utils import is_production
+
+
+ERR_NOT_ODS_XLS = ERROR(u"Not an ODS or XLS file.")
+ERR_WRONG_NUMBER_COLUMNS = ERROR(u'In the "{name}" sheet, wrong number of '
+        u'columns. Do you use the latest template?')
+ERR_FIRST_PAGE = ERROR(u'First form page must be named "A", not '
+        u'"{page}".')
+ERR_PAGE_NAME = ERROR(u'In the "{name}" sheet, page "{page}" is not '
+        u'related to any variable in the schema.')
+
+
+def find_title(table):
+    for values in table.iter_values():
+        for value in values:
+            value = value.strip() if value is not None else u""
+            if value.startswith(u'**'):
+                continue
+            elif value.startswith(u"*"):
+                return value[1:].strip()
+    return None
 
 
 class Application(Folder):
@@ -61,6 +85,85 @@ class Application(Folder):
     register = Application_Register()
     login = Application_Login()
     show = Application_RedirectToForm()
+
+
+    def _load_from_file(self, file, context):
+        filename, mimetype, body = file
+        reader, cls = get_reader_and_cls(mimetype)
+        if reader is None:
+            context.commit = False
+            context.message = ERR_NOT_ODS_XLS
+            return True
+        # Save file used
+        self.make_resource('parameters', cls, body=body, filename=filename,
+                title={'en': u"Parameters"})
+        # Split tables
+        document = reader(body)
+        tables = iter(document.get_tables())
+        # Controls and Schema
+        for name, title, cls in [
+                ('schema', u"Schema", self.schema_class),
+                ('controls', u"Controls", self.controls_class)]:
+            table = tables.next()
+            table.rstrip(aggressive=True)
+            if table.get_width() != len(cls.columns):
+                context.commit = False
+                context.message = ERR_WRONG_NUMBER_COLUMNS(
+                        name=table.get_name())
+                return True
+            try:
+                self.make_resource(name, cls, title={'en': title},
+                        # cls va transformer le CSV en table
+                        body=table.to_csv())
+            except ValueError, exception:
+                if not is_production:
+                    raise
+                context.commit = False
+                context.message = ERROR(unicode(exception))
+                return True
+        handler = self.get_resource('schema').handler
+        schema, pages = handler.get_schema_pages()
+        # Pages
+        for i, table in enumerate(tables):
+            table.rstrip(aggressive=True)
+            name = table.get_name().split(None, 1)
+            # Page number
+            if len(name) == 1:
+                page_number = name[0]
+                title = None
+            else:
+                page_number, title = name
+            if i == 0 and page_number != 'A':
+                context.commit = False
+                context.message = ERR_FIRST_PAGE(page=page_number)
+                return
+            if page_number not in pages:
+                context.commit = False
+                context.message = ERR_PAGE_NAME(name=name,
+                        page=page_number)
+                return
+            # Name
+            name = 'page' + page_number.lower().encode()
+            # Title
+            if title is None:
+                # Find a "*Title"
+                title = find_title(table)
+                if title is None:
+                    title = u"Page {0}".format(page_number)
+            try:
+                self.make_resource(name, FormPage, title={'en': title},
+                        body=table.to_csv())
+            except ValueError, exception:
+                if not is_production:
+                    raise
+                context.commit = False
+                context.message = ERROR(unicode(exception))
+                return True
+        # Initial form
+        name = self.default_form
+        if self.get_resource(name, soft=True) is None:
+            self.make_resource(name, Form)
+        return False
 
 
     def get_logo_icon(self, size=48):

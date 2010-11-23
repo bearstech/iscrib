@@ -47,19 +47,11 @@ from base_views import LoginView, IconsView
 from datatypes import Subscription
 from form import Form
 from formpage import FormPage
-from rw import get_reader_and_cls, ODSWriter, XLSWriter
-from utils import force_encode, is_production
+from rw import ODSWriter, XLSWriter
+from utils import force_encode
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
-ERR_NOT_ODS_XLS = ERROR(u"Not an ODS or XLS file.")
-ERR_LOAD_FAILED = ERROR(u'Failed to load the file: {error}')
-ERR_WRONG_NUMBER_COLUMNS = ERROR(u'In the "{name}" sheet, wrong number of '
-        u'columns. Do you use the latest template?')
-ERR_FIRST_PAGE = ERROR(u'First form page must be named "A", not '
-        u'"{page}".')
-ERR_PAGE_NAME = ERROR(u'In the "{name}" sheet, page "{page}" is not '
-        u'related to any variable in the schema.')
 ERR_NO_DATA = ERROR(u"No data to collect for now.")
 ERR_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
         u'Contact <a href="http://www.itaapy.com/contact">Itaapy</a> for '
@@ -77,17 +69,6 @@ MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
         u'here:\r\n'
         u'<{application_url}>.\r\n')
-
-
-def find_title(table):
-    for values in table.iter_values():
-        for value in values:
-            value = value.strip() if value is not None else u""
-            if value.startswith(u'**'):
-                continue
-            elif value.startswith(u"*"):
-                return value[1:].strip()
-    return None
 
 
 def get_users_query(query, context):
@@ -124,78 +105,8 @@ class Application_NewInstance(NewInstance):
     def action(self, resource, context, form):
         goto = NewInstance.action(self, resource, context, form)
         child = resource.get_resource(form['name'])
-        filename, mimetype, body = form['file']
-        reader, cls = get_reader_and_cls(mimetype)
-        if reader is None:
-            context.message = ERR_NOT_ODS_XLS
+        if child._load_from_file(form['file'], context):
             return
-        # Save file used
-        child.make_resource('parameters', cls, body=body, filename=filename,
-                title={'en': u"Parameters"})
-        # Split tables
-        document = reader(body)
-        tables = iter(document.get_tables())
-        # Controls and Schema
-        for name, title, cls in [
-                ('schema', u"Schema", child.schema_class),
-                ('controls', u"Controls", child.controls_class)]:
-            table = tables.next()
-            table.rstrip(aggressive=True)
-            if table.get_width() != len(cls.columns):
-                context.commit = False
-                context.message = ERR_WRONG_NUMBER_COLUMNS(
-                        name=table.get_name())
-                return
-            try:
-                child.make_resource(name, cls, title={'en': title},
-                        # cls va transformer le CSV en table
-                        body=table.to_csv())
-            except ValueError, exception:
-                if not is_production:
-                    raise
-                context.commit = False
-                context.message = ERROR(unicode(exception))
-                return
-        handler = child.get_resource('schema').handler
-        schema, pages = handler.get_schema_pages()
-        # Pages
-        for i, table in enumerate(tables):
-            table.rstrip(aggressive=True)
-            name = table.get_name().split(None, 1)
-            # Page number
-            if len(name) == 1:
-                page_number = name[0]
-                title = None
-            else:
-                page_number, title = name
-            if i == 0 and page_number != 'A':
-                context.commit = False
-                context.message = ERR_FIRST_PAGE(page=page_number)
-                return
-            if page_number not in pages:
-                context.commit = False
-                context.message = ERR_PAGE_NAME(name=name,
-                        page=page_number)
-                return
-            # Name
-            name = 'page' + page_number.lower().encode()
-            # Title
-            if title is None:
-                # Find a "*Title"
-                title = find_title(table)
-                if title is None:
-                    title = u"Page {0}".format(page_number)
-            try:
-                child.make_resource(name, FormPage, title={'en': title},
-                        body=table.to_csv())
-            except ValueError, exception:
-                if not is_production:
-                    raise
-                context.commit = False
-                context.message = ERROR(unicode(exception))
-                return
-        # Initial form
-        child.make_resource(child.default_form, Form)
         return context.come_back(MSG_NEW_APPLICATION, goto)
 
 
@@ -692,94 +603,11 @@ class Application_Edit(DBResource_Edit):
             file = form['file']
             if file is None:
                 return False
-            filename, mimetype, body = file
-            reader, cls = get_reader_and_cls(mimetype)
-            if reader is None:
-                context.message = ERR_NOT_ODS_XLS
-                return True
-            # Save file used
-            parameters = resource.get_resource('parameters')
-            handler = parameters.handler
-            try:
-                handler.load_state_from_string(body)
-            except Exception, e:
-                handler.load_state()
-                context.commit = False
-                context.message = ERR_LOAD_FAILED(error=unicode(e))
-                return True
-            # Update filename
-            parameters.set_property('filename', filename)
-            # Update format
-            parameters.metadata.format = mimetype
-            # Split tables
-            document = reader(body)
-            tables = iter(document.get_tables())
-            # Controls and Schema
-            for name, title, cls in [
-                    ('schema', u"Schema", resource.schema_class),
-                    ('controls', u"Controls", resource.controls_class)]:
-                table = tables.next()
-                table.rstrip(aggressive=True)
-                if table.get_width() != len(cls.columns):
-                    context.commit = False
-                    context.message = ERR_WRONG_NUMBER_COLUMNS(
-                            name=table.get_name())
-                    return True
-                child = resource.get_resource(name)
-                # Reset existing records
-                handler = child.handler
-                handler.load_state()
-                handler.reset()
-                try:
-                    child._load_from_csv(table.to_csv())
-                except ValueError, exception:
-                    if not is_production:
-                        raise
-                    context.commit = False
-                    context.message = ERROR(unicode(exception))
-                    return True
-            handler = resource.get_resource('schema').handler
-            schema, pages = handler.get_schema_pages()
-            # Pages
-            for i, table in enumerate(tables):
-                table.rstrip(aggressive=True)
-                name = table.get_name().split(None, 1)
-                # Page number
-                if len(name) == 1:
-                    page_number = name[0]
-                    title = None
-                else:
-                    page_number, title = name
-                if i == 0 and page_number != 'A':
-                    context.commit = False
-                    context.message = ERR_FIRST_PAGE(page=page_number)
-                    return True
-                if page_number not in pages:
-                    context.commit = False
-                    context.message = ERR_PAGE_NAME(name=name,
-                            page=page_number)
-                    return True
-                # Name
-                name = 'page' + page_number.lower().encode()
-                # Title
-                if title is None:
-                    # Find a "*Title"
-                    title = find_title(table)
-                    if title is None:
-                        title = u"Page {0}".format(page_number)
-                child = resource.get_resource(name)
-                if resource is None:
-                    child = resource.make_resource(name, FormPage)
-                child.set_property('title', title, language='en')
-                try:
-                    child.handler.load_state_from_string(table.to_csv())
-                except ValueError, exception:
-                    if not is_production:
-                        raise
-                    context.commit = False
-                    context.message = ERROR(unicode(exception))
-                    return True
-            return False
+            for name in ('parameters', 'schema', 'controls'):
+                resource.del_resource(name)
+            for formpage in resource.search_resources(cls=FormPage):
+                resource.del_resource(formpage.name)
+            return resource._load_from_file(file, context)
         return super(Application_Edit, self).set_value(resource, context,
                 name, form)
 
