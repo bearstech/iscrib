@@ -32,10 +32,9 @@ from itools.web import INFO, ERROR, BaseView, FormError, STLForm, get_context
 
 # Import from ikaaro
 from ikaaro.access import is_admin
-from ikaaro.autoform import FileWidget, TextWidget, SelectWidget
+from ikaaro.autoform import FileWidget, TextWidget, SelectWidget, file_widget
 from ikaaro.buttons import BrowseButton
 from ikaaro.datatypes import FileDataType
-from ikaaro.file import ODS, MSExcel
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
@@ -48,29 +47,30 @@ from base_views import LoginView, IconsView
 from datatypes import Subscription
 from form import Form
 from formpage import FormPage
-from rw import ODSReader, XLSReader, ODSWriter, XLSWriter
+from rw import get_reader_and_cls, ODSWriter, XLSWriter
 from utils import force_encode, is_production
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
+ERR_NOT_ODS_XLS = ERROR(u"Not an ODS or XLS file.")
+ERR_LOAD_FAILED = ERROR(u'Failed to load the file: {error}')
 ERR_WRONG_NUMBER_COLUMNS = ERROR(u'In the "{name}" sheet, wrong number of '
         u'columns. Do you use the latest template?')
-MSG_ERR_FIRST_PAGE = ERROR(u'First form page must be named "A", not '
+ERR_FIRST_PAGE = ERROR(u'First form page must be named "A", not '
         u'"{page}".')
-MSG_ERR_PAGE_NAME = ERROR(u'In the "{name}" sheet, page "{page}" is not '
+ERR_PAGE_NAME = ERROR(u'In the "{name}" sheet, page "{page}" is not '
         u'related to any variable in the schema.')
-MSG_EXPORT_ERROR = ERROR(u"Export Failed. Please contact the administrator.")
-MSG_NO_DATA = ERROR(u"No data to collect for now.")
-MSG_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
+ERR_NO_DATA = ERROR(u"No data to collect for now.")
+ERR_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
         u'Contact <a href="http://www.itaapy.com/contact">Itaapy</a> for '
         u"more.", html=True)
 MSG_NEW_APPLICATION = INFO(u'Your application is created. Now register '
         u'users.')
-MSG_PASSWORD_MISSING = ERROR(u"The password is missing.")
-MSG_BAD_EMAIL = ERROR(u"The given username is not an e-mail address.")
-MSG_SUBSCRIPTION_FULL = ERROR(u"No more users are allowed to register.")
-MSG_NOT_ALLOWED = ERROR(u"You are not allowed to register.")
-MSG_ALREADY_REGISTERED = ERROR(u"You are already registered. "
+ERR_PASSWORD_MISSING = ERROR(u"The password is missing.")
+ERR_BAD_EMAIL = ERROR(u"The given username is not an e-mail address.")
+ERR_SUBSCRIPTION_FULL = ERROR(u"No more users are allowed to register.")
+ERR_NOT_ALLOWED = ERROR(u"You are not allowed to register.")
+ERR_ALREADY_REGISTERED = ERROR(u"You are already registered. "
         u"Log in using your password.")
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
@@ -125,18 +125,14 @@ class Application_NewInstance(NewInstance):
         goto = NewInstance.action(self, resource, context, form)
         child = resource.get_resource(form['name'])
         filename, mimetype, body = form['file']
-        if mimetype == ODS.class_id:
-            reader = ODSReader
-            cls = ODS
-        elif mimetype == MSExcel.class_id:
-            reader = XLSReader
-            cls = MSExcel
-        else:
-            context.message = ERROR(u"Not an ODS or XLS file.")
+        reader, cls = get_reader_and_cls(mimetype)
+        if reader is None:
+            context.message = ERR_NOT_ODS_XLS
             return
         # Save file used
         child.make_resource('parameters', cls, body=body, filename=filename,
                 title={'en': u"Parameters"})
+        # Split tables
         document = reader(body)
         tables = iter(document.get_tables())
         # Controls and Schema
@@ -174,11 +170,11 @@ class Application_NewInstance(NewInstance):
                 page_number, title = name
             if i == 0 and page_number != 'A':
                 context.commit = False
-                context.message = MSG_ERR_FIRST_PAGE(page=page_number)
+                context.message = ERR_FIRST_PAGE(page=page_number)
                 return
             if page_number not in pages:
                 context.commit = False
-                context.message = MSG_ERR_PAGE_NAME(name=name,
+                context.message = ERR_PAGE_NAME(name=name,
                         page=page_number)
                 return
             # Name
@@ -237,7 +233,7 @@ class Application_Menu(IconsView):
     def is_allowed_to_register(self, item, resource, context):
         allowed_users = resource.get_allowed_users()
         if not bool(allowed_users):
-            item['title'] = MSG_NO_MORE_ALLOWED
+            item['title'] = ERR_NO_MORE_ALLOWED
             return False
         return True
 
@@ -246,7 +242,7 @@ class Application_Menu(IconsView):
         for form in resource.get_forms():
             if form.get_workflow_state() != EMPTY:
                 return True
-        item['title'] = MSG_NO_DATA
+        item['title'] = ERR_NO_DATA
         return False
 
 
@@ -511,7 +507,7 @@ class Application_Export(BaseView):
             if state != 'private':
                 break
         else:
-            return context.come_back(MSG_NO_DATA)
+            return context.come_back(ERR_NO_DATA)
 
         format = context.query['format']
         if format == 'xls':
@@ -588,7 +584,7 @@ class Application_Register(STLForm):
         namespace['max_users'] = resource.get_property('max_users')
         namespace['n_forms'] = resource.get_n_forms()
         namespace['allowed_users'] = resource.get_allowed_users()
-        namespace['MSG_NO_MORE_ALLOWED'] = MSG_NO_MORE_ALLOWED
+        namespace['MSG_NO_MORE_ALLOWED'] = ERR_NO_MORE_ALLOWED
         namespace['new_users'] = context.get_form_value('new_users')
         namespace['registered_users'] = 0
         namespace['unconfirmed_users'] = 0
@@ -659,12 +655,14 @@ class Application_Register(STLForm):
 class Application_Edit(DBResource_Edit):
     admin_schema = {
             'max_users': Integer(mandatory=True),
-            'subscription': Subscription(mandatory=True)}
+            'subscription': Subscription(mandatory=True),
+            'file': FileDataType}
     admin_widgets = [
             TextWidget('max_users',
                 title=MSG(u"Maximum form users (0 = unlimited)")),
             SelectWidget('subscription', has_empty_option=False,
-                title=MSG(u"Subscription Mode"))]
+                title=MSG(u"Subscription Mode")),
+            file_widget]
 
 
     def _get_schema(self, resource, context):
@@ -682,6 +680,110 @@ class Application_Edit(DBResource_Edit):
         return widgets
 
 
+    def get_value(self, resource, context, name, datatype):
+        if name == 'file':
+            return None
+        return super(Application_Edit, self).get_value(resource, context,
+                name, datatype)
+
+
+    def set_value(self, resource, context, name, form):
+        if name == 'file':
+            file = form['file']
+            if file is None:
+                return False
+            filename, mimetype, body = file
+            reader, cls = get_reader_and_cls(mimetype)
+            if reader is None:
+                context.message = ERR_NOT_ODS_XLS
+                return True
+            # Save file used
+            parameters = resource.get_resource('parameters')
+            handler = parameters.handler
+            try:
+                handler.load_state_from_string(body)
+            except Exception, e:
+                handler.load_state()
+                context.commit = False
+                context.message = ERR_LOAD_FAILED(error=unicode(e))
+                return True
+            # Update filename
+            parameters.set_property('filename', filename)
+            # Update format
+            parameters.metadata.format = mimetype
+            # Split tables
+            document = reader(body)
+            tables = iter(document.get_tables())
+            # Controls and Schema
+            for name, title, cls in [
+                    ('schema', u"Schema", resource.schema_class),
+                    ('controls', u"Controls", resource.controls_class)]:
+                table = tables.next()
+                table.rstrip(aggressive=True)
+                if table.get_width() != len(cls.columns):
+                    context.commit = False
+                    context.message = ERR_WRONG_NUMBER_COLUMNS(
+                            name=table.get_name())
+                    return True
+                child = resource.get_resource(name)
+                # Reset existing records
+                handler = child.handler
+                handler.load_state()
+                handler.reset()
+                try:
+                    child._load_from_csv(table.to_csv())
+                except ValueError, exception:
+                    if not is_production:
+                        raise
+                    context.commit = False
+                    context.message = ERROR(unicode(exception))
+                    return True
+            handler = resource.get_resource('schema').handler
+            schema, pages = handler.get_schema_pages()
+            # Pages
+            for i, table in enumerate(tables):
+                table.rstrip(aggressive=True)
+                name = table.get_name().split(None, 1)
+                # Page number
+                if len(name) == 1:
+                    page_number = name[0]
+                    title = None
+                else:
+                    page_number, title = name
+                if i == 0 and page_number != 'A':
+                    context.commit = False
+                    context.message = ERR_FIRST_PAGE(page=page_number)
+                    return True
+                if page_number not in pages:
+                    context.commit = False
+                    context.message = ERR_PAGE_NAME(name=name,
+                            page=page_number)
+                    return True
+                # Name
+                name = 'page' + page_number.lower().encode()
+                # Title
+                if title is None:
+                    # Find a "*Title"
+                    title = find_title(table)
+                    if title is None:
+                        title = u"Page {0}".format(page_number)
+                child = resource.get_resource(name)
+                if resource is None:
+                    child = resource.make_resource(name, FormPage)
+                child.set_property('title', title, language='en')
+                try:
+                    child.handler.load_state_from_string(table.to_csv())
+                except ValueError, exception:
+                    if not is_production:
+                        raise
+                    context.commit = False
+                    context.message = ERROR(unicode(exception))
+                    return True
+            return False
+        return super(Application_Edit, self).set_value(resource, context,
+                name, form)
+
+
 
 class Application_Login(LoginView):
     template = '/ui/iscrib/application/login.xml'
@@ -693,14 +795,14 @@ class Application_Login(LoginView):
     def _get_form(self, resource, context):
         form = super(Application_Login, self)._get_form(resource, context)
         if not (form['password'].strip() or form['newpass'].strip()):
-            raise FormError, MSG_PASSWORD_MISSING
+            raise FormError, ERR_PASSWORD_MISSING
         return form
 
 
     def action_register(self, resource, context, form):
         email = form['username'].strip()
         if not Email.is_valid(email):
-            context.message = MSG_BAD_EMAIL
+            context.message = ERR_BAD_EMAIL
             return
 
         user = context.root.get_user_from_login(email)
@@ -711,17 +813,17 @@ class Application_Login(LoginView):
             if subscription == 'open':
                 # Create the user
                 if not resource.get_allowed_users():
-                    context.message = MSG_SUBSCRIPTION_FULL
+                    context.message = ERR_SUBSCRIPTION_FULL
                     return
                 users = context.root.get_resource('users')
                 user = users.set_user(email, None)
             else:
-                context.message = MSG_NOT_ALLOWED
+                context.message = ERR_NOT_ALLOWED
                 return
 
         # Is already registered?
         if user.get_property('password') is not None:
-            context.message = MSG_ALREADY_REGISTERED
+            context.message = ERR_ALREADY_REGISTERED
             return
 
         # Create the form if necessary

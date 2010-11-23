@@ -34,8 +34,17 @@ from xlwt.Style import default_style
 from itools.csv import CSVFile
 
 # Import from ikaaro
+from ikaaro.file import ODS, MSExcel
 
 # Import from iscrib
+
+
+def get_reader_and_cls(mimetype):
+    if mimetype == ODS.class_id:
+        return ODSReader, ODS
+    elif mimetype == MSExcel.class_id:
+        return XLSReader, MSExcel
+    return None, None
 
 
 class ODSReader(object):

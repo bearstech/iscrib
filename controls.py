@@ -116,9 +116,9 @@ class Controls(Table):
     columns = ['number', 'title', 'expression', 'level', 'variable']
 
 
-    def _load_from_csv(self, body, columns):
+    def _load_from_csv(self, body):
         handler = self.handler
-        handler.update_from_csv(body, columns, skip_header=True)
+        handler.update_from_csv(body, self.columns, skip_header=True)
         get_record_value = handler.get_record_value
         # Consistency check
         for lineno, record in enumerate(handler.get_records()):
@@ -147,4 +147,4 @@ class Controls(Table):
     def init_resource(self, body=None, filename=None, extension=None, **kw):
         super(Controls, self).init_resource(filename=filename,
                 extension=extension, **kw)
-        self._load_from_csv(body, self.columns)
+        self._load_from_csv(body)

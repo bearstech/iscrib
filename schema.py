@@ -341,7 +341,7 @@ class SchemaHandler(TableFile):
 
 class Schema(Table):
     class_id = 'Schema'
-    class_version = '20090123' # TODO update
+    class_version = '20090123'
     class_title = MSG(u"Schema")
     class_handler = SchemaHandler
     class_icon16 = 'icons/16x16/excel.png'
@@ -353,9 +353,9 @@ class Schema(Table):
             'formula', 'default']
 
 
-    def _load_from_csv(self, body, columns):
+    def _load_from_csv(self, body):
         handler = self.handler
-        handler.update_from_csv(body, columns, skip_header=True)
+        handler.update_from_csv(body, self.columns, skip_header=True)
         get_record_value = handler.get_record_value
         # Consistency check
         # First round on variables
@@ -477,7 +477,7 @@ class Schema(Table):
     def init_resource(self, body=None, filename=None, extension=None, **kw):
         super(Schema, self).init_resource(filename=filename,
                 extension=extension, **kw)
-        self._load_from_csv(body, self.columns)
+        self._load_from_csv(body)
 
 
     def update_20090123(self):
