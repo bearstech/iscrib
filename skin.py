@@ -17,6 +17,7 @@
 
 # Import from itools
 from itools.core import merge_dicts
+from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.access import is_admin
@@ -26,6 +27,12 @@ from ikaaro.skins import Skin as BaseSkin
 
 
 class Skin(BaseSkin):
+
+    def get_template(self):
+        context = get_context()
+        if context.query.get('view') == 'printable':
+            return self.get_resource('/ui/iscrib/print.xhtml')
+        return super(Skin, self).get_template()
 
 
     def get_styles(self, context):
