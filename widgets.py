@@ -68,18 +68,19 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
     html = []
 
     # True -> '1' ; False -> '2'
+    data = datatype.encode(value)
+
     if readonly:
         if datatype.multiple:
             input = u"\n".join(make_element(u"div", content=value)
                 for value in datatype.get_values(value))
         else:
             # '1' -> u"Oui" ; '2' -> u"Non"
-            data = datatype.encode(value)
             input = datatype.get_value(data, value)
             input = XMLContent.encode(input)
         html.append(make_element(u"div", content=input))
     else:
-        for option in datatype.get_namespace(value):
+        for option in datatype.get_namespace(data):
             attributes = {u"type": input_type,
                     u"id": u"field_{name}".format(name=name),
                     u"name": name, u"value": option['name']}
@@ -113,7 +114,7 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
     attributes = {}
     if name in context.bad_types:
         attributes[u"class"] = u"badtype"
-    elif not is_mandatory_filled(datatype, name, value, schema, fields,
+    elif not is_mandatory_filled(datatype, name, data, schema, fields,
             context):
         attributes[u"class"] = u"mandatory"
     return make_element(u"div", attributes, u"".join(html))
