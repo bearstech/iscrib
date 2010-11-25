@@ -203,8 +203,8 @@ def text_widget(context, form, datatype, name, value, schema, fields,
         attributes = {u"type": u"text",
                 u"id": u"field_{name}".format(name=name),
                 u"name": name, u"value": XMLAttribute.encode(value),
-                u"size": str(datatype.length),
-                u"maxlength": str(datatype.size)}
+                u"size": str(datatype.size),
+                u"maxlength": str(datatype.length)}
         if tabindex:
             attributes[u"tabindex"] = tabindex
         content = u""
