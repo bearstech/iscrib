@@ -48,7 +48,7 @@ from datatypes import Subscription
 from form import Form
 from formpage import FormPage
 from rw import ODSWriter, XLSWriter
-from utils import force_encode
+from utils import force_encode, is_production
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
@@ -105,7 +105,13 @@ class Application_NewInstance(NewInstance):
     def action(self, resource, context, form):
         goto = NewInstance.action(self, resource, context, form)
         child = resource.get_resource(form['name'])
-        if child._load_from_file(form['file'], context):
+        try:
+            child._load_from_file(form['file'], context)
+        except ValueError, exception:
+            if not is_production:
+                raise
+            context.commit = False
+            context.message = ERROR(unicode(exception))
             return
         return context.come_back(MSG_NEW_APPLICATION, goto)
 
@@ -607,7 +613,14 @@ class Application_Edit(DBResource_Edit):
                 resource.del_resource(name)
             for formpage in resource.search_resources(cls=FormPage):
                 resource.del_resource(formpage.name)
-            return resource._load_from_file(file, context)
+            try:
+                return resource._load_from_file(file, context)
+            except ValueError, exception:
+                if not is_production:
+                    raise
+                context.commit = False
+                context.message = ERROR(unicode(exception))
+                return True
         return super(Application_Edit, self).set_value(resource, context,
                 name, form)
 

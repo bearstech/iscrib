@@ -34,8 +34,7 @@ from datatypes import Subscription
 from form import Form
 from formpage import FormPage
 from rw import get_reader_and_cls
-from schema import Schema
-from utils import is_production
+from schema import Schema, FormatError
 
 
 ERR_NOT_ODS_XLS = ERROR(u"Not an ODS or XLS file.")
@@ -91,9 +90,7 @@ class Application(Folder):
         filename, mimetype, body = file
         reader, cls = get_reader_and_cls(mimetype)
         if reader is None:
-            context.commit = False
-            context.message = ERR_NOT_ODS_XLS
-            return True
+            raise FormatError, ERR_NOT_ODS_XLS
         # Save file used
         self.make_resource('parameters', cls, body=body, filename=filename,
                 title={'en': u"Parameters"})
@@ -107,20 +104,11 @@ class Application(Folder):
             table = tables.next()
             table.rstrip(aggressive=True)
             if table.get_width() != len(cls.columns):
-                context.commit = False
-                context.message = ERR_WRONG_NUMBER_COLUMNS(
+                raise FormatError, ERR_WRONG_NUMBER_COLUMNS(
                         name=table.get_name())
-                return True
-            try:
-                self.make_resource(name, cls, title={'en': title},
-                        # cls va transformer le CSV en table
-                        body=table.to_csv())
-            except ValueError, exception:
-                if not is_production:
-                    raise
-                context.commit = False
-                context.message = ERROR(unicode(exception))
-                return True
+            self.make_resource(name, cls, title={'en': title},
+                    # cls va transformer le CSV en table
+                    body=table.to_csv())
         handler = self.get_resource('schema').handler
         schema, pages = handler.get_schema_pages()
         # Pages
@@ -134,14 +122,9 @@ class Application(Folder):
             else:
                 page_number, title = name
             if i == 0 and page_number != 'A':
-                context.commit = False
-                context.message = ERR_FIRST_PAGE(page=page_number)
-                return
+                raise FormatError, ERR_FIRST_PAGE(page=page_number)
             if page_number not in pages:
-                context.commit = False
-                context.message = ERR_PAGE_NAME(name=name,
-                        page=page_number)
-                return
+                raise FormatError, ERR_PAGE_NAME(name=name, page=page_number)
             # Name
             name = 'page' + page_number.lower().encode()
             # Title
@@ -150,15 +133,8 @@ class Application(Folder):
                 title = find_title(table)
                 if title is None:
                     title = u"Page {0}".format(page_number)
-            try:
-                self.make_resource(name, FormPage, title={'en': title},
-                        body=table.to_csv())
-            except ValueError, exception:
-                if not is_production:
-                    raise
-                context.commit = False
-                context.message = ERROR(unicode(exception))
-                return True
+            self.make_resource(name, FormPage, title={'en': title},
+                    body=table.to_csv())
         # Initial form
         name = self.default_form
         if self.get_resource(name, soft=True) is None:
