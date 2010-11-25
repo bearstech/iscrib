@@ -120,7 +120,7 @@ class FormPage(CSV):
     def get_namespace(self, form, view, context, skip_print=False,
             readonly=False):
         # Force l'ordre de tabulation entre les champs
-        tabindex = None
+        tabindex = 0
         page_number = self.get_page_number()
 
         # Lecture seule ?
@@ -142,13 +142,10 @@ class FormPage(CSV):
         # Calcul du (des) tableau(x)
         tables = []
         tables.append([])
-        for i, row in enumerate(self.handler.get_rows()):
-            if tabindex:
-                tabindex = i + 1
+        for y, row in enumerate(self.handler.get_rows()):
             columns = []
-            for j, column in enumerate(row):
-                if tabindex:
-                    tabindex = j * 100 + tabindex
+            for x, column in enumerate(row):
+                tabindex = str(x * 100 + y + 1)
                 column = column.strip()
                 if column == u"-":
                     # Espace blanc insécable
@@ -226,7 +223,7 @@ class FormPage(CSV):
                             column in schema
                             # 0008569: BDP : les numéros de rubrique ne sont
                             # pas tous de la même taille
-                            or j + 1 == len(row)):
+                            or x + 1 == len(row)):
                         css_class = u"rubrique-label"
                     else:
                         css_class = u"field-label"

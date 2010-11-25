@@ -64,7 +64,7 @@ def make_element(tagname, attributes={}, content=u""):
 
 
 def _choice_widget(context, form, datatype, name, value, schema, fields,
-        readonly, input_type):
+        readonly, input_type, tabindex=None):
     html = []
 
     # True -> '1' ; False -> '2'
@@ -117,26 +117,28 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
     elif not is_mandatory_filled(datatype, name, data, schema, fields,
             context):
         attributes[u"class"] = u"mandatory"
+    if tabindex:
+        attributes[u"tabindex"] = tabindex
     return make_element(u"div", attributes, u"".join(html))
 
 
 
 def radio_widget(context, form, datatype, name, value, schema, fields,
-        readonly):
+        readonly, tabindex=None):
     return _choice_widget(context, form, datatype, name, value, schema,
-            fields, readonly, input_type=u"radio")
+            fields, readonly, input_type=u"radio", tabindex=tabindex)
 
 
 
 def checkbox_widget(context, form, datatype, name, value, schema, fields,
-        readonly):
+        readonly, tabindex=None):
     return _choice_widget(context, form, datatype, name, value, schema,
-            fields, readonly, input_type=u"checkbox")
+            fields, readonly, input_type=u"checkbox", tabindex=tabindex)
 
 
 
 def select_widget(context, form, datatype, name, value, schema, fields,
-        readonly):
+        readonly, tabindex=None):
     if readonly:
         return make_element(u"div", content=datatype.get_value(value, value))
 
@@ -159,12 +161,14 @@ def select_widget(context, form, datatype, name, value, schema, fields,
     if form.is_disabled_by_dependency(name, schema, fields):
         attributes[u"disabled"] = u"disabled"
         attributes.setdefault(u"class", []).append(u"disabled")
+    if tabindex:
+        attributes[u"tabindex"] = tabindex
     return make_element(u"select", attributes, options)
 
 
 
 def textarea_widget(context, form, datatype, name, value, schema, fields,
-        readonly):
+        readonly, tabindex=None):
     if readonly:
         attributes = {u"style": u"white-space: pre", u"class": u"readonly"}
         content = XMLContent.encode(value)
@@ -174,6 +178,8 @@ def textarea_widget(context, form, datatype, name, value, schema, fields,
         u"name": name,
         u"rows": str(datatype.size),
         u"cols": str(datatype.length)}
+    if tabindex:
+        attributes[u"tabindex"] = tabindex
     # special case for 'value'
     content = XMLContent.encode(value)
     return make_element(u"textarea", attributes, content)
@@ -233,32 +239,26 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     datatype = schema[name]
     widget = None
     if  isinstance(datatype, Numeric):
-        widget = text_widget(context, form, datatype, name, value, schema,
-                fields, readonly, tabindex)
+        widget = text_widget
     elif issubclass(datatype, Text):
-        widget = textarea_widget(context, form, datatype, name, value,
-                schema, fields, readonly)
+        widget = textarea_widget
     elif issubclass(datatype, (EnumBoolean, SqlEnumerate)):
         representation = datatype.representation
-        if representation == 'select':
-            widget = select_widget(context, form, datatype, name, value,
-                    schema, fields, readonly)
-        elif representation == 'radio':
-            widget = radio_widget(context, form, datatype, name, value,
-                    schema, fields, readonly)
-        elif representation == 'checkbox':
-            widget = checkbox_widget(context, form, datatype, name, value,
-                    schema, fields, readonly)
-        else:
-            ValueError, representation
+        widget = {
+            'select': select_widget,
+            'radio': radio_widget,
+            'checkbox': checkbox_widget}.get(representation)
+        if widget is None:
+            raise ValueError, representation
     else:
-        widget = text_widget(context, form, datatype, name, value, schema,
-                fields, readonly, tabindex)
+        widget = text_widget
+    html = widget(context, form, datatype, name, value, schema, fields,
+            readonly, tabindex)
     if skip_print is False:
         help = datatype.help
         if not help and isinstance(datatype, (NumDate, NumTime)):
             help = MSG(u"Format {format}").gettext(format=datatype.type)
         if help:
-            widget += (u'<img src="/ui/icons/16x16/help.png" '
+            html += (u'<img src="/ui/icons/16x16/help.png" '
                     u'title="{help}" class="online-help"/>'.format(help=help))
-    return widget
+    return html
