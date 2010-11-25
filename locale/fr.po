@@ -771,7 +771,7 @@ msgstr ""
 
 #: ../schema.py:43
 msgid "In schema, line {line}, length \"{length}\" is invalid."
-msgstr "Feuille schéma, ligne {line}, la longueur \"{type}\" est invalide."
+msgstr "Feuille schéma, ligne {line}, la longueur \"{length}\" est invalide."
 
 #: ../schema.py:51
 msgid "In schema, line {line}, mandatory \"{mandatory}\" is invalid."
