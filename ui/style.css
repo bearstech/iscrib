@@ -95,7 +95,9 @@ div#page {
  * Forms
  */
 .num {
+  /*
   text-align: right !important;
+  */
 }
 .mandatory {
   background-color: #ffc8c8 !important;
@@ -124,7 +126,9 @@ div.num {
   border-top: 2px solid #aca899;
 
   width: 80px;
+  /*
   text-align: right !important;
+  */
 }
 
 #form-tables {

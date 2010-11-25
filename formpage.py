@@ -169,8 +169,6 @@ class FormPage(CSV):
                 elif column.startswith(FIELD_PREFIX):
                     # Champ à remplacer par un widget
                     css_class = u"field-label"
-                    if j > 0:
-                        css_class += u" centered"
                     column = column[1:]
                     if not column:
                         # Un « # » seul pour préfixer les champs
@@ -232,8 +230,6 @@ class FormPage(CSV):
                         css_class = u"rubrique-label"
                     else:
                         css_class = u"field-label"
-                    if j > 0:
-                        css_class += u" centered"
                     if column == u"100%":
                         css_class += u" num"
                     body = XMLParser(column.encode('utf8'),
