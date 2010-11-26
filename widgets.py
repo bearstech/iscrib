@@ -103,7 +103,6 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
         for option in datatype.get_namespace(data):
             attributes = {
                 u"type": input_type,
-                u"id": u"field_{name}".format(name=name),
                 u"name": name, u"value": option['name']}
             if option['selected']:
                 attributes[u"checked"] = u"checked"
@@ -132,7 +131,7 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
                 # Une option par ligne
                 html.append(make_element(u"div", content=input))
 
-    attributes = {}
+    attributes = {u"id": u"field_{name}".format(name=name)}
     check_errors(context, form, datatype, name, data, schema, fields,
             readonly, attributes, tabindex=None)
     return make_element(u"div", attributes, u"".join(html))
