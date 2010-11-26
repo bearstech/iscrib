@@ -4,7 +4,7 @@
 }
 
 body {
-  background: transparent url('/ui/iscrib/images/bkg.jpg') top left repeat-x;
+  background: #fff url('/ui/iscrib/images/bkg.jpg') top left repeat-x;
 }
 
 div#page {
