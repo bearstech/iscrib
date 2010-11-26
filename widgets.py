@@ -52,14 +52,34 @@ def is_mandatory_filled(datatype, name, value, schema, fields, context):
 def make_element(tagname, attributes={}, content=u""):
     element = [u"<", tagname]
     for key, value in attributes.iteritems():
-        if isinstance(value, list):
+        if type(value) is list:
             value = u" ".join(value)
+        elif type(value) is MSG:
+            value = value.gettext()
         element.extend((u" ", key, u'="', value, u'"'))
     if tagname == 'input':
         element.extend((u"/>", content))
     else:
         element.extend((u">", content, u"</", tagname, u">"))
     return u"".join(element)
+
+
+
+def check_errors(context, form, datatype, name, value, schema, fields,
+        readonly, attributes, tabindex=None):
+    attributes.setdefault(u"class", [])
+    if name in context.bad_types:
+        attributes[u"title"] = MSG(u"Bad value")
+        attributes[u"class"].append(u"badtype")
+    elif not is_mandatory_filled(datatype, name, value, schema, fields,
+            context):
+        attributes[u"title"] = MSG(u"Mandatory field")
+        attributes[u"class"].append(u"mandatory")
+    if form.is_disabled_by_dependency(name, schema, fields):
+        attributes[u"disabled"] = u"disabled"
+        attributes[u"class"].append(u"disabled")
+    if tabindex:
+        attributes[u"tabindex"] = tabindex
 
 
 
@@ -81,9 +101,10 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
         html.append(make_element(u"div", content=input))
     else:
         for option in datatype.get_namespace(data):
-            attributes = {u"type": input_type,
-                    u"id": u"field_{name}".format(name=name),
-                    u"name": name, u"value": option['name']}
+            attributes = {
+                u"type": input_type,
+                u"id": u"field_{name}".format(name=name),
+                u"name": name, u"value": option['name']}
             if option['selected']:
                 attributes[u"checked"] = u"checked"
             if form.is_disabled_by_dependency(name, schema, fields):
@@ -112,13 +133,8 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
                 html.append(make_element(u"div", content=input))
 
     attributes = {}
-    if name in context.bad_types:
-        attributes[u"class"] = u"badtype"
-    elif not is_mandatory_filled(datatype, name, data, schema, fields,
-            context):
-        attributes[u"class"] = u"mandatory"
-    if tabindex:
-        attributes[u"tabindex"] = tabindex
+    check_errors(context, form, datatype, name, data, schema, fields,
+            readonly, attributes, tabindex=None)
     return make_element(u"div", attributes, u"".join(html))
 
 
@@ -151,18 +167,6 @@ def select_widget(context, form, datatype, name, value, schema, fields,
     options = u"\n".join(options)
     attributes = {u"name": name}
     # Check for "errors"
-    if name in context.bad_types:
-        attributes[u"title"] = u"Bad value"
-        attributes[u"class"] = [u"badtype"]
-    elif not is_mandatory_filled(datatype, name, value, schema, fields,
-            context):
-        attributes[u"title"] = u"Mandatory field"
-        attributes[u"class"] = [u"mandatory"]
-    if form.is_disabled_by_dependency(name, schema, fields):
-        attributes[u"disabled"] = u"disabled"
-        attributes.setdefault(u"class", []).append(u"disabled")
-    if tabindex:
-        attributes[u"tabindex"] = tabindex
     return make_element(u"select", attributes, options)
 
 
@@ -170,7 +174,9 @@ def select_widget(context, form, datatype, name, value, schema, fields,
 def textarea_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
     if readonly:
-        attributes = {u"style": u"white-space: pre", u"class": u"readonly"}
+        attributes = {
+            u"style": u"white-space: pre",
+            u"class": u"readonly"}
         content = XMLContent.encode(value)
         return make_element(u"div", attributes, content)
 
@@ -178,8 +184,9 @@ def textarea_widget(context, form, datatype, name, value, schema, fields,
         u"name": name,
         u"rows": str(datatype.size),
         u"cols": str(datatype.length)}
-    if tabindex:
-        attributes[u"tabindex"] = tabindex
+    # Check for errors
+    check_errors(context, form, datatype, name, value, schema, fields,
+            readonly, attributes, tabindex=None)
     # special case for 'value'
     content = XMLContent.encode(value)
     return make_element(u"textarea", attributes, content)
@@ -206,28 +213,19 @@ def text_widget(context, form, datatype, name, value, schema, fields,
         content = XMLContent.encode(value)
     else:
         tagname = u"input"
-        attributes = {u"type": u"text",
-                u"id": u"field_{name}".format(name=name),
-                u"name": name, u"value": XMLAttribute.encode(value),
-                u"size": str(datatype.size),
-                u"maxlength": str(datatype.length)}
-        if tabindex:
-            attributes[u"tabindex"] = tabindex
+        attributes = {
+            u"type": u"text",
+            u"id": u"field_{name}".format(name=name),
+            u"name": name, u"value": XMLAttribute.encode(value),
+            u"size": str(datatype.size),
+            u"maxlength": str(datatype.length)}
         content = u""
     # Right-align numeric fields
     if isinstance(datatype, Numeric):
-        attributes[u"class"] = [u"num"]
+        attributes.setdefault(u"class", []).append(u"num")
     # Check for errors
-    if name in context.bad_types:
-        attributes.setdefault(u"class", []).append(u"badtype")
-        attributes[u"title"] = u"Bad value"
-    elif not is_mandatory_filled(datatype, name, value, schema, fields,
-            context):
-        attributes.setdefault(u"class", []).append(u"mandatory")
-        attributes[u"title"] = u"Mandatory field"
-    if form.is_disabled_by_dependency(name, schema, fields):
-        attributes[u"disabled"] = u"disabled"
-        attributes.setdefault(u"class", []).append(u"disabled")
+    check_errors(context, form, datatype, name, value, schema, fields,
+            readonly, attributes, tabindex=None)
     return make_element(tagname, attributes, content)
 
 
