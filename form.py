@@ -337,13 +337,9 @@ class Form(File):
                 sum = datatype.sum(datatype.formula, schema, fields)
                 is_sum_valid = (sum is None or sum == value)
             if datatype.mandatory:
-                # Vérifie toujours les champs obligatoires
-                if is_valid and is_sum_valid:
+                if value and is_valid and is_sum_valid:
                     continue
             else:
-                # Vérifie seulement si quelque chose a été saisi
-                if not datatype.encode(value):
-                    continue
                 if is_valid and is_sum_valid:
                     continue
             yield name, datatype
@@ -407,13 +403,14 @@ class Form(File):
             elif isinstance(value, NumDecimal):
                 value = format_number(value.value)
             number = get_record_value(record, 'number')
-            yield {'number': number,
-                    'title': title,
-                    'level': level,
-                    'variable': variable,
-                    'page': page,
-                    'value': value,
-                    'debug': u"'%s' = '%s'" % (expression, value)}
+            yield {
+                'number': number,
+                'title': title,
+                'level': level,
+                'variable': variable,
+                'page': page,
+                'value': value,
+                'debug': u"'%s' = '%s'" % (expression, value)}
 
 
     def get_info_controls(self, pages=freeze([]), exclude=freeze([''])):
