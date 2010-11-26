@@ -180,6 +180,7 @@ def textarea_widget(context, form, datatype, name, value, schema, fields,
         return make_element(u"div", attributes, content)
 
     attributes = {
+        u"id": u"field_{name}".format(name=name),
         u"name": name,
         u"rows": str(datatype.size),
         u"cols": str(datatype.length)}
