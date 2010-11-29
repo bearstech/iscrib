@@ -142,7 +142,7 @@ div.num {
 .iscrib-table td {
   padding: 1px;
   color: #446;
-  font-family: Verdana, Arial, Sans
+  font-family: Verdana, Arial, Sans;
   font-weight: bold;
   text-align: left;
 }
@@ -182,7 +182,7 @@ div.num {
   font-size: 12px;
   color: #000;
   background: #fff;
-  font-variant: italic;
+  font-style: italic;
 }
 .iscrib-table td.field-label {
   background-color: #d3d3d3;
@@ -356,11 +356,13 @@ button, .button {
   border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
 }
 
+#spread-url,
 #choose-format {
   display: none;
   border: 1px solid #ccc;
   border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
 }
+#spread-url span,
 #choose-format span {
   float: right;
 }
@@ -391,6 +393,12 @@ button, .button {
 }
 .icons-view img.icon {
   float: left;
+}
+.icons-view a {
+  text-decoration: none;
+}
+.icons-view a.active {
+  font-weight: bold;
 }
 
 .root-show td {
