@@ -2,6 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
+  ${menu}
+
   <h2>${title}</h2>
 
   <table>
@@ -37,8 +39,6 @@
             <li>${finished_forms} finished the form.</li>
           </ul>
           <ul>
-            <li>You can send this URL to your users:<br/>
-              <a href="${url_user}">${url_user}</a></li>
             <li>You can collect data at this URL:<br/>
               <a href="${url_admin}">${url_admin}</a></li>
             <li>You can manage users at this URL:<br/>

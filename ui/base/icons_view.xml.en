@@ -16,7 +16,8 @@
               <a href="${item/url}" onclick="${item/onclick}"
                 stl:omit-tag="not item/url"><img alt=""
                   src="${item/icon}" class="icon"/></a>
-              <a href="${item/url}" onclick="${item/onclick}"
+              <a href="${item/url}" class="${item/class}"
+                onclick="${item/onclick}"
                 stl:omit-tag="not item/url">${item/title}</a>
               <br/>
               ${item/description}

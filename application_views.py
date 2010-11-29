@@ -118,15 +118,23 @@ class Application_NewInstance(NewInstance):
 
 
 class Application_Menu(IconsView):
-    cols = 4
+    cols = 5
     make_item = IconsView.make_item
-    items = [make_item(icon='/ui/iscrib/images/register48.png',
-                title=MSG(u"Subscribe Users"),
-                url=';register',
-                access='is_allowed_to_register'),
-             make_item(icon='/ui/iscrib/images/export48.png',
-                title=MSG(u"Export Collected Data"),
-                description=MSG(u"""
+    items = [
+        make_item(icon='/ui/iscrib/images/form48.png',
+           title=MSG(u"Show Test Form"),
+           url='0'),
+        make_item(icon='/ui/iscrib/images/register48.png',
+           title=MSG(u"Add Users"),
+           url=';register',
+           access='is_allowed_to_register'),
+        make_item(icon='/ui/iscrib/images/users48.png',
+            title=MSG(u"Manage Users"),
+            url=';view#users'),
+        # "Spread your Form" here
+        make_item(icon='/ui/iscrib/images/export48.png',
+           title=MSG(u"Collect Data"),
+           description=MSG(u"""
 <div id="choose-format">
   <span><a href="#" title="Close"
     onclick="$('#choose-format').hide(); return false">X</a></span>
@@ -135,16 +143,9 @@ class Application_Menu(IconsView):
     <li>Download <a href=";export?format=xls">XLS Version</a></li>
   </ul>
 </div>""", html=True),
-                url='#',
-                onclick='$("#choose-format").show(); return false',
-                access='is_allowed_to_export'),
-             make_item(icon='/ui/iscrib/images/form48.png',
-                title=MSG(u"Show Test Form"),
-                url=';show'),
-             make_item(icon='/ui/iscrib/images/edit48.png',
-                title=MSG(u"Edit Title"),
-                description=MSG(u"Configure your application"),
-                url=';edit')]
+           url='#',
+           onclick='$("#choose-format").show(); return false',
+           access='is_allowed_to_export')]
 
 
     def is_allowed_to_register(self, item, resource, context):
@@ -161,6 +162,26 @@ class Application_Menu(IconsView):
                 return True
         item['title'] = ERR_NO_DATA
         return False
+
+
+    def get_items(self, resource, context):
+        items = super(Application_Menu, self).get_items(resource, context)
+        spread_url = resource.get_user_url(context)
+        items.insert(3, self.make_item(
+            icon='/ui/iscrib/images/spread48.png',
+            title=MSG(u"Spread your Form"),
+            description=MSG(u"""
+<div id="spread-url">
+  <span><a href="#" title="Close"
+    onclick="$('#spread-url').hide(); return false">X</a></span>
+  <ul>
+    <li>You can send this URL to your users:<br/>
+      <a href="{spread_url}">{spread_url}</a></li>
+  </ul>
+</div>""", html=True).gettext(spread_url=spread_url),
+            url='#',
+            onclick='$("#spread-url").show(); return false'))
+        return items
 
 
 
@@ -188,6 +209,13 @@ class Application_View(Folder_BrowseContent):
             ('company', MSG(u"Company/Organization")),
             ('email', MSG(u"E-mail"))]
     table_actions = [ExportODSButton, ExportXLSButton]
+
+
+    def get_page_title(self, resource, context):
+        title = resource.get_page_title()
+        return MSG(u'''Title of your application: {title} <a href=";edit"
+            title="Edit"><img src="/ui/icons/16x16/edit.png"/></a>''',
+            html=True).gettext( title=title)
 
 
     def get_items(self, resource, context, *args):
@@ -494,9 +522,17 @@ class Application_Register(STLForm):
     schema = {'new_users': Unicode}
 
 
+    def get_page_title(self, resource, context):
+        title = resource.get_page_title()
+        return MSG(u'''Title of your application: {title} <a href=";edit"
+            title="Edit"><img src="/ui/icons/16x16/edit.png"/></a>''',
+            html=True).gettext( title=title)
+
+
     def get_namespace(self, resource, context):
         namespace = super(Application_Register, self).get_namespace(resource,
                 context)
+        namespace['menu'] = Application_Menu().GET(resource, context)
         namespace['title'] = self.title
         namespace['max_users'] = resource.get_property('max_users')
         namespace['n_forms'] = resource.get_n_forms()
@@ -531,7 +567,6 @@ class Application_Register(STLForm):
         new_users = form['new_users'].strip()
         users = resource.get_resource('/users')
         root = context.root
-        site_root = resource.get_site_root()
         added = []
         allowed = resource.get_allowed_users()
         for lineno, line in enumerate(new_users.splitlines()):
@@ -564,7 +599,7 @@ class Application_Register(STLForm):
 
         context.body['new_users'] = u""
 
-        message = u"{n} user(s) added. See below to send them the form URL."
+        message = u"{n} user(s) added."
         context.message = INFO(message, n=len(added))
 
 
