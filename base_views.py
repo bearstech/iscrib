@@ -209,13 +209,24 @@ class IconsView(BaseIconsView):
         return item
 
 
+    def get_items(self, resource, context):
+        return self.items[:]
+
+
     def get_namespace(self, resource, context):
         namespace = {}
         namespace['batch'] = None
-        namespace['width'] = 100//self.cols
+        namespace['width'] = 100 // self.cols
+
+        base_url = context.uri.resolve(resource.get_abspath())
 
         rows = [[]]
-        for item in self.items:
+        for item in self.get_items(resource, context):
+            url = base_url.resolve2(item['url'])
+            if url == context.uri:
+                item['class'] = 'active'
+            else:
+                item['class'] = None
             method_name = item['access']
             if method_name:
                 method = getattr(self, method_name)
