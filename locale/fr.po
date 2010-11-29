@@ -1286,6 +1286,8 @@ msgid ""
 "Title of your application: {title} <a href=\";edit\"\n"
 "            title=\"Edit\"><img src=\"/ui/icons/16x16/edit.png\"/></a>"
 msgstr ""
+"Titre de votre application: {title} <a href=\";edit\"\n"
+"            title=\"Modifier\"><img src=\"/ui/icons/16x16/edit.png\"/></a>"
 
 #: ../ui/form/send.xml.en:63 ../ui/form/send.xml.en:93
 #: ../ui/form/send.xml.en:127
