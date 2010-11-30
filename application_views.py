@@ -389,7 +389,7 @@ class Application_View(Folder_BrowseContent):
 
     def get_namespace(self, resource, context):
         namespace = {}
-        namespace['menu'] = Application_Menu().GET(resource, context)
+        namespace['menu'] = resource.menu.GET(resource, context)
         namespace['n_forms'] = resource.get_n_forms()
         namespace['max_users'] = resource.get_property('max_users')
         namespace['spread_url'] = resource.get_spread_url(context)
@@ -567,7 +567,7 @@ class Application_Register(STLForm):
     def get_namespace(self, resource, context):
         namespace = super(Application_Register, self).get_namespace(resource,
                 context)
-        namespace['menu'] = Application_Menu().GET(resource, context)
+        namespace['menu'] = resource.menu.GET(resource, context)
         namespace['title'] = self.title
         namespace['max_users'] = resource.get_property('max_users')
         namespace['n_forms'] = resource.get_n_forms()

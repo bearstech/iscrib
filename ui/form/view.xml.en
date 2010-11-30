@@ -3,6 +3,8 @@
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
+  ${application_menu}
+
   <form action=";page${page_number}" method="post">
     <input value="${page_number}" name="page_number" type="hidden"/>
     <input value="${field/value}" stl:repeat="field hidden_fields"

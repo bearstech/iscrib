@@ -58,6 +58,7 @@ class Form_View(STLForm):
     access = 'is_allowed_to_view'
     access_POST = 'is_allowed_to_edit'
     template = '/ui/iscrib/form/view.xml'
+    title = MSG(u"Start filling")
     query_schema = {'view': String}
     schema = {'page_number': String}
     hidden_fields = []
@@ -72,6 +73,13 @@ class Form_View(STLForm):
         handler = resource.get_form().handler
         return [{'name': field, 'value': handler.get_value(field, schema)}
                 for field in self.hidden_fields]
+
+
+    def get_application_menu(self, resource, context):
+        parent = resource.parent
+        if resource.name == parent.default_form:
+            return parent.menu.GET(parent, context)
+        return None
 
 
     def get_menu(self, resource, context):
@@ -94,11 +102,10 @@ class Form_View(STLForm):
     def get_namespace(self, resource, context):
         try:
             # Return from POST
-            bad_types = context.bad_types
+            context.bad_types
         except AttributeError:
             # Fresh GET: not bad yet
             context.bad_types = []
-        user = context.user
         skip_print = self.is_skip_print(resource, context)
         view = context.query['view']
         if view == 'printable':
@@ -109,6 +116,8 @@ class Form_View(STLForm):
         namespace = formpage.get_namespace(resource, self, context,
                 skip_print=skip_print, readonly=readonly)
         namespace['hidden_fields'] = self.get_hidden_fields(resource,
+                context)
+        namespace['application_menu'] = self.get_application_menu(resource,
                 context)
         namespace['menu'] = self.get_menu(resource, context)
         return namespace

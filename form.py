@@ -151,12 +151,8 @@ class Form(File):
         page_number = get_page_number(name)
         page = self.get_formpage(page_number)
         if page is None:
-            return super(Form, self).__getattr__(name)
-        view = Form_View(page_number=page.get_page_number(),
-                title=MSG(u"Start filling"))
-        # FIXME make it lazy
-        self.__dict__[name] = view
-        return view
+            raise AttributeError, name
+        return Form_View(page_number=page.get_page_number())
 
 
     ######################################################################

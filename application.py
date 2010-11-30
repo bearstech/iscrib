@@ -27,7 +27,7 @@ from ikaaro.folder import Folder
 # Import from iscrib
 from application_views import Application_Edit, Application_Export
 from application_views import Application_NewInstance, Application_View
-from application_views import Application_RedirectToForm
+from application_views import Application_RedirectToForm, Application_Menu
 from application_views import Application_Register, Application_Login
 from controls import Controls
 from datatypes import Subscription
@@ -78,6 +78,7 @@ class Application(Folder):
 
     # Views
     new_instance = Application_NewInstance()
+    menu = Application_Menu()
     view = Application_View()
     edit = Application_Edit()
     export = Application_Export()
