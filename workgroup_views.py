@@ -199,7 +199,10 @@ define to design your form.
     <li>Download <a href="/gabarit/;download">ODS Version</a></li>
     <li>Download <a href="/gabarit-xls/;download">XLS Version</a></li>
   </ul>
-</div>""", html=True),
+</div>
+<script type="text/javascript">
+  $("#choose-format").hide();
+</script>""", html=True),
               url='#',
               onclick='$("#choose-format").show(); return false'),
              make_item(icon='/ui/iscrib/images/upload48.png',

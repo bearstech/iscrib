@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 201011231\n"
-"POT-Creation-Date: 2010-11-29 14:11+CET\n"
+"POT-Creation-Date: 2010-11-30 09:11+CET\n"
 "PO-Revision-Date: 2010-11-23 11:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 "    <img src=\"${value}/;thumb?width=${width}&amp;height=${height}\"\n"
 "    stl:if=\"value\"/>"
 
-#: ../application_views.py:145
+#: ../application_views.py:148
 msgid ""
 "\n"
 "<div id=\"choose-format\">\n"
@@ -63,20 +63,25 @@ msgid ""
 "    <li>Download <a href=\";export\">ODS Version</a></li>\n"
 "    <li>Download <a href=\";export?format=xls\">XLS Version</a></li>\n"
 "  </ul>\n"
-"</div>"
+"</div>\n"
+"<script type=\"text/javascript\">\n"
+"  $(\"#choose-format\").hide();\n"
+"</script>"
 msgstr ""
 "\n"
 "<div id=\"choose-format\">\n"
 "  <span><a href=\"#\" title=\"Fermer\"\n"
-"    onclick=\"$('#choose-format').hide()\">X</a></span>\n"
+"    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n"
 "  <ul>\n"
 "    <li>Télécharger la <a href=\";export\">version ODS</a></li>\n"
 "    <li>Télécharger la <a href=\";export?format=xls\">version XLS</a></li>\n"
 "  </ul>\n"
 "</div>\n"
-"              "
+"<script type=\"text/javascript\">\n"
+"  $(\"#choose-format\").hide();\n"
+"</script>"
 
-#: ../application_views.py:181
+#: ../application_views.py:203
 msgid ""
 "\n"
 "<div id=\"spread-url\">\n"
@@ -84,9 +89,28 @@ msgid ""
 "    onclick=\"$('#spread-url').hide(); return false\">X</a></span>\n"
 "  <ul>\n"
 "    <li>You can send this URL to your users:<br/>\n"
-"      <a href=\"{spread_url}\">{spread_url}</a></li>\n"
+"      <input id=\"spread-url-text\" type=\"text\" readonly=\"readonly\"\n"
+"        value=\"{spread_url}\"/>\n"
+"      <div id=\"spread-url-copy\">\n"
+"        <a href=\"javascript:alert('You need Flash plugin to copy!');\">\n"
+"          Copy</a>\n"
+"      </div>\n"
+"    </li>\n"
 "  </ul>\n"
-"</div>"
+"</div>\n"
+"<script type=\"text/javascript\">\n"
+"  $(\"#spread-url-text\").focus(function() {{\n"
+"      this.select();\n"
+"  }});\n"
+"  path = '/ui/iscrib/zeroclipboard/ZeroClipboard.swf'\n"
+"  ZeroClipboard.setMoviePath(path);\n"
+"  var clip = new ZeroClipboard.Client();\n"
+"  clip.setHandCursor(true);\n"
+"  clip.setText(\"{spread_url}\");\n"
+"  clip.glue(\"spread-url-copy\");\n"
+"  /* Hide #spread-url after the Flash movie is positioned */\n"
+"  $(\"#spread-url\").hide();\n"
+"</script>"
 msgstr ""
 "\n"
 "<div id=\"spread-url\">\n"
@@ -94,10 +118,28 @@ msgstr ""
 "    onclick=\"$('#spread-url').hide(); return false\">X</a></span>\n"
 "  <ul>\n"
 "    <li>Vous pouvez envoyer cette adresse à vos sondés :<br/>\n"
-"      <a href=\"{spread_url}\">{spread_url}</a></li>\n"
+"      <input id=\"spread-url-text\" type=\"text\" readonly=\"readonly\"\n"
+"        value=\"{spread_url}\"/>\n"
+"      <div id=\"spread-url-copy\">\n"
+"        <a href=\"javascript:alert('You need Flash plugin to copy!');\">\n"
+"          Copier</a>\n"
+"      </div>\n"
+"    </li>\n"
 "  </ul>\n"
 "</div>\n"
-"              "
+"<script type=\"text/javascript\">\n"
+"  $(\"#spread-url-text\").focus(function() {{\n"
+"      this.select();\n"
+"  }});\n"
+"  path = '/ui/iscrib/zeroclipboard/ZeroClipboard.swf'\n"
+"  ZeroClipboard.setMoviePath(path);\n"
+"  var clip = new ZeroClipboard.Client();\n"
+"  clip.setHandCursor(true);\n"
+"  clip.setText(\"{spread_url}\");\n"
+"  clip.glue(\"spread-url-copy\");\n"
+"  /* Hide #spread-url after the Flash movie is positioned */\n"
+"  $(\"#spread-url\").hide();\n"
+"</script>"
 
 #: ../datatypes.py:654
 msgid "\r\n"
@@ -131,17 +173,17 @@ msgstr "$('[name={name}]').attr('disabled', {disabled}).{method}('disabled');"
 msgid "${batch} ${table}"
 msgstr "${batch} ${table}"
 
-#: ../ui/application/register.xml.en:37
+#: ../ui/application/register.xml.en:35
 msgctxt "li"
 msgid "${empty_forms} subscribed but did not start the form;"
 msgstr "${empty_forms} se sont inscrits mais n'ont pas commencé la saisie ;"
 
-#: ../ui/application/register.xml.en:39
+#: ../ui/application/register.xml.en:37
 msgctxt "li"
 msgid "${finished_forms} finished the form."
 msgstr "${finished_forms} ont terminé la saisie."
 
-#: ../ui/application/register.xml.en:38
+#: ../ui/application/register.xml.en:36
 msgctxt "li"
 msgid "${pending_forms} started filling the form;"
 msgstr "${pending_forms} ont commencé à remplir le formulaire ;"
@@ -155,15 +197,10 @@ msgctxt "fieldset"
 msgid "${state_widget} <x id='3'/>  <g id='4'>OK</g>"
 msgstr "${state_widget} <x id='3'/>  <g id='4'>OK</g>"
 
-#: ../ui/application/register.xml.en:36
+#: ../ui/application/register.xml.en:34
 msgctxt "li"
 msgid "${unconfirmed_users} did not subscribe;"
 msgstr "${unconfirmed_users} ne se sont pas inscrits ;"
-
-#: ../ui/application/register.xml.en:45
-msgctxt "link"
-msgid "${url_admin}#users"
-msgstr "${url_admin}#users"
 
 #: ../formpage.py:201
 msgid "%.1f"
@@ -283,7 +320,7 @@ msgid ""
 msgstr ""
 "<g id='2'>${widget/title}</g>  <g id='3'>${widget/title}</g>  <g id='4'>*</g>"
 
-#: ../ui/application/register.xml.en:20
+#: ../ui/application/register.xml.en:19
 msgctxt "emphasis"
 msgid ""
 "<g id='2'>1 user per line, format \"User Name\" &lt;e-mail></g><x id='3'/>  "
@@ -393,7 +430,7 @@ msgstr "À propos de iScrib"
 msgid "Add Users"
 msgstr "Ajouter des sondés"
 
-#: ../ui/application/register.xml.en:25
+#: ../ui/application/register.xml.en:24
 msgctxt "button"
 msgid "Add Users"
 msgstr "Ajouter les sondés"
@@ -418,7 +455,7 @@ msgctxt "link"
 msgid "An Itaapy service"
 msgstr "Un service Itaapy"
 
-#: ../workgroup_views.py:223
+#: ../workgroup_views.py:226
 msgid "Application"
 msgstr "Application"
 
@@ -450,7 +487,7 @@ msgctxt "heading"
 msgid "Business"
 msgstr "Business"
 
-#: ../workgroup_views.py:318
+#: ../workgroup_views.py:321
 msgid "CSS"
 msgstr "CSS"
 
@@ -480,12 +517,12 @@ msgstr "Revenir au formulaire"
 msgid "Company"
 msgstr "Société"
 
-#: ../application_views.py:209 ../user_views.py:37 ../user_views.py:65
+#: ../application_views.py:231 ../user_views.py:37 ../user_views.py:65
 #: ../root_views.py:181
 msgid "Company/Organization"
 msgstr "Société/Organisme"
 
-#: ../workgroup_views.py:211
+#: ../workgroup_views.py:214
 msgid "Configure your client space"
 msgstr "configurez votre espace client"
 
@@ -500,7 +537,7 @@ msgctxt "table cell"
 msgid "Control"
 msgstr "Contrôle de saisie"
 
-#: ../controls.py:110 ../application.py:103
+#: ../controls.py:110 ../application.py:104
 msgid "Controls"
 msgstr "Contrôles"
 
@@ -513,7 +550,7 @@ msgctxt "legend"
 msgid "Create Your Account"
 msgstr "Créer votre compte"
 
-#: ../workgroup_views.py:206
+#: ../workgroup_views.py:209
 msgid "Create a Data Collection Application"
 msgstr "Créer une application de collecte"
 
@@ -528,7 +565,7 @@ msgstr ""
 "Créez votre espace client où vous pourrez ajouter vos applications de "
 "collecte et les soumettre aux personnes de votre choix."
 
-#: ../workgroup_views.py:226
+#: ../workgroup_views.py:229
 msgid "Creation Date"
 msgstr "Date de création"
 
@@ -557,7 +594,7 @@ msgctxt "link"
 msgid "Download OpenOffice.org"
 msgstr "Télécharger OpenOffice.org"
 
-#: ../form_views.py:282
+#: ../form_views.py:287
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
 
@@ -565,7 +602,7 @@ msgstr "Téléchargement du formulaire"
 msgid "Download the Template"
 msgstr "Télécharger le gabarit"
 
-#: ../workgroup_views.py:202
+#: ../workgroup_views.py:205
 msgid ""
 "Download this template and use it to\n"
 "define to design your form.\n"
@@ -576,7 +613,10 @@ msgid ""
 "    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n"
 "    <li>Download <a href=\"/gabarit-xls/;download\">XLS Version</a></li>\n"
 "  </ul>\n"
-"</div>"
+"</div>\n"
+"<script type=\"text/javascript\">\n"
+"  $(\"#choose-format\").hide();\n"
+"</script>"
 msgstr ""
 "Téléchargez ce gabarit qui vous servira d'exemple pour créer votre "
 "questionnaire.\n"
@@ -589,9 +629,11 @@ msgstr ""
 "li>\n"
 "  </ul>\n"
 "</div>\n"
-"              "
+"<script type=\"text/javascript\">\n"
+"  $(\"#choose-format\").hide();\n"
+"</script>"
 
-#: ../application_views.py:210 ../application_views.py:470
+#: ../application_views.py:232 ../application_views.py:493
 msgid "E-mail"
 msgstr "Courriel"
 
@@ -599,7 +641,7 @@ msgstr "Courriel"
 msgid "E-mail Address"
 msgstr "Adresse de courriel"
 
-#: ../workgroup_views.py:210 ../workgroup_views.py:308
+#: ../workgroup_views.py:213 ../workgroup_views.py:311
 msgid "Edit Title, Logo and CSS"
 msgstr "Modifier titre, logo et CSS"
 
@@ -634,7 +676,7 @@ msgctxt "button"
 msgid "Export"
 msgstr "Exporter"
 
-#: ../application_views.py:445
+#: ../application_views.py:468
 msgid "Export Collected Data"
 msgstr "Exporter les données collectées"
 
@@ -663,7 +705,7 @@ msgstr "Terminer"
 msgid "Finished"
 msgstr "Terminé"
 
-#: ../application_views.py:207 ../application_views.py:469
+#: ../application_views.py:229 ../application_views.py:492
 #: ../workgroup_views.py:66
 msgid "First Name"
 msgstr "Prénom"
@@ -687,7 +729,7 @@ msgctxt "link"
 msgid "Forgotten Password?"
 msgstr "Mot de passe oublié ?"
 
-#: ../application_views.py:204 ../application_views.py:469 ../form.py:130
+#: ../application_views.py:226 ../application_views.py:492 ../form.py:130
 msgid "Form"
 msgstr "Formulaire"
 
@@ -835,7 +877,7 @@ msgstr "Informations"
 msgid "Informative"
 msgstr "Informatif"
 
-#: ../form_views.py:194
+#: ../form_views.py:199
 msgid "Input Control"
 msgstr "Contrôle de saisie"
 
@@ -847,11 +889,11 @@ msgstr "Taille de saisie"
 msgid "Integer"
 msgstr "Entier"
 
-#: ../application_views.py:206
+#: ../application_views.py:228
 msgid "Last Modified"
 msgstr "Dernière modification"
 
-#: ../application_views.py:208 ../application_views.py:470
+#: ../application_views.py:230 ../application_views.py:493
 #: ../workgroup_views.py:67
 msgid "Last Name"
 msgstr "Nom"
@@ -883,7 +925,7 @@ msgctxt "heading"
 msgid "Login"
 msgstr "Connexion"
 
-#: ../workgroup_views.py:317
+#: ../workgroup_views.py:320
 msgid "Logo (shown in the banner)"
 msgstr "Logo (apparaît dans la bannière)"
 
@@ -904,11 +946,11 @@ msgstr "Variable principale"
 msgid "Manage Users"
 msgstr "Gérer les sondés"
 
-#: ../application_views.py:190 ../form.py:144
+#: ../application_views.py:212 ../form.py:144
 msgid "Manage your Data Collection Application"
 msgstr "Gérer votre application de collecte de données"
 
-#: ../workgroup_views.py:219
+#: ../workgroup_views.py:222
 msgid "Manage your client space"
 msgstr "Configurer votre espace client"
 
@@ -920,7 +962,7 @@ msgstr "Obligatoire"
 msgid "Mandatory field"
 msgstr "Champ obligatoire"
 
-#: ../application_views.py:614
+#: ../application_views.py:635
 msgid "Maximum form users (0 = unlimited)"
 msgstr "Nombre de sondés autorisés (0 = illimité)"
 
@@ -972,7 +1014,7 @@ msgstr "Aucune information disponible."
 msgid "No more users are allowed to register."
 msgstr "Le quota de sondés a été atteint."
 
-#: ../application_views.py:597
+#: ../application_views.py:618
 msgid "No user added."
 msgstr "Aucun sondé ajouté."
 
@@ -1035,11 +1077,11 @@ msgstr "Votre compte est activé. Bienvenue !"
 msgid "Oui"
 msgstr "Oui"
 
-#: ../application.py:135
+#: ../application.py:136
 msgid "Page {0}"
 msgstr "Page {0}"
 
-#: ../application.py:96
+#: ../application.py:97
 msgid "Parameters"
 msgstr "Paramètres"
 
@@ -1088,7 +1130,7 @@ msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr "Imprimer (dans une nouvelle fenêtre)"
 
-#: ../form_views.py:312
+#: ../form_views.py:317
 msgid "Print form"
 msgstr "Impression du formulaire"
 
@@ -1131,7 +1173,7 @@ msgctxt "button"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: ../schema.py:345 ../application.py:102
+#: ../schema.py:345 ../application.py:103
 msgid "Schema"
 msgstr "Schéma"
 
@@ -1144,7 +1186,7 @@ msgstr "Rechercher"
 msgid "Select"
 msgstr "Boîte de sélection"
 
-#: ../application_views.py:125 ../application_views.py:754
+#: ../application_views.py:125 ../application_views.py:775
 msgid "Show Test Form"
 msgstr "Voir le formulaire de test"
 
@@ -1152,15 +1194,15 @@ msgstr "Voir le formulaire de test"
 msgid "Slogan"
 msgstr "Slogan"
 
-#: ../workgroup_views.py:298
+#: ../workgroup_views.py:301
 msgid "Source"
 msgstr "Fichier source"
 
-#: ../workgroup_views.py:225
+#: ../workgroup_views.py:228
 msgid "Source File"
 msgstr "Fichier source"
 
-#: ../application_views.py:172
+#: ../application_views.py:175
 msgid "Spread your Form"
 msgstr "Diffuser votre formulaire"
 
@@ -1168,7 +1210,7 @@ msgstr "Diffuser votre formulaire"
 msgid "Start filling"
 msgstr "Commencer la saisie"
 
-#: ../application_views.py:205 ../application_views.py:470
+#: ../application_views.py:227 ../application_views.py:493
 msgid "State"
 msgstr "État du formulaire"
 
@@ -1181,11 +1223,11 @@ msgstr "État du formulaire :"
 msgid "String"
 msgstr "Chaîne de caractères"
 
-#: ../application_views.py:519
+#: ../application_views.py:542
 msgid "Subscribe Users"
 msgstr "Ajouter des sondés"
 
-#: ../workgroup_views.py:224
+#: ../workgroup_views.py:227
 msgid "Subscribed Users"
 msgstr "Sondés enregistrés"
 
@@ -1194,7 +1236,7 @@ msgctxt "table cell"
 msgid "Subscribed Users"
 msgstr "Sondés enregistrés"
 
-#: ../application_views.py:616
+#: ../application_views.py:637
 msgid "Subscription Mode"
 msgstr "Mode d'inscription"
 
@@ -1277,16 +1319,16 @@ msgstr "Champ obligatoire"
 msgid "Title"
 msgstr "Titre"
 
-#: ../workgroup_views.py:314
+#: ../workgroup_views.py:317
 msgid "Title (shown in the banner if no logo)"
 msgstr "Titre (apparaît dans la bannière s'il n'y a pas de logo)"
 
-#: ../application_views.py:217 ../application_views.py:528
+#: ../application_views.py:239 ../application_views.py:551
 msgid ""
 "Title of your application: {title} <a href=\";edit\"\n"
 "            title=\"Edit\"><img src=\"/ui/icons/16x16/edit.png\"/></a>"
 msgstr ""
-"Titre de votre application: {title} <a href=\";edit\"\n"
+"Titre de votre application : {title} <a href=\";edit\"\n"
 "            title=\"Modifier\"><img src=\"/ui/icons/16x16/edit.png\"/></a>"
 
 #: ../ui/form/send.xml.en:63 ../ui/form/send.xml.en:93
@@ -1311,11 +1353,11 @@ msgstr "Vrai"
 msgid "Type"
 msgstr "Type"
 
-#: ../application_views.py:580
+#: ../application_views.py:601
 msgid "Unrecognized line {lineno}: {line}"
 msgstr "Ligne {lineno} incorrecte : {line}"
 
-#: ../workgroup_views.py:207
+#: ../workgroup_views.py:210
 msgid ""
 "Uploading this spreadsheet file in iScrib will generate in one click your "
 "data collection application."
@@ -1359,7 +1401,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr "Bienvenue dans votre espace iScrib"
 
-#: ../application_views.py:735 ../base_views.py:125
+#: ../application_views.py:756 ../base_views.py:125
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
@@ -1431,16 +1473,6 @@ msgstr ""
 "Vous pouvez également utiliser ce formulaire si vous avez oublié votre mot "
 "de passe."
 
-#: ../ui/application/register.xml.en:42
-msgctxt "li"
-msgid "You can collect data at this URL:"
-msgstr "Vous pouvez suivre la collecte à cette adresse :"
-
-#: ../ui/application/register.xml.en:44
-msgctxt "li"
-msgid "You can manage users at this URL:"
-msgstr "Vous pouvez gérer les sondés à cette adresse :"
-
 #: ../workgroup_views.py:57 ../root_views.py:46
 msgid "You can type the name of your company or organization"
 msgstr "Vous pouvez mettre le nom de votre société ou structure"
@@ -1462,7 +1494,7 @@ msgstr ""
 "Vous avez enregistré ${n_forms} sondés<g id='1'> sur ${max_users} autorisés</"
 "g>."
 
-#: ../ui/application/register.xml.en:33
+#: ../ui/application/register.xml.en:31
 msgctxt "paragraph"
 msgid ""
 "You have subscribed ${n_forms} users<g id='7'> out of ${max_users} allowed</"
@@ -1521,7 +1553,7 @@ msgstr "Adresse de courriel"
 msgid "Your form is finished. Your correspondent has been informed."
 msgstr "Votre saisie est terminée. Votre correspondant a été averti."
 
-#: ../form_views.py:287
+#: ../form_views.py:292
 msgid "Your form is not finished yet."
 msgstr "Votre formulaire n'est pas encore terminé."
 
@@ -1716,15 +1748,15 @@ msgstr "{application} : <em>Formulaire de test</em>"
 msgid "{application}: {form}"
 msgstr "{application} : {form}"
 
-#: ../form_views.py:215
+#: ../form_views.py:220
 msgid "{name} invalid"
 msgstr "{name} invalide"
 
-#: ../form_views.py:212
+#: ../form_views.py:217
 msgid "{name} is not equal to {formula}"
 msgstr "{name} n'est pas égal à {formula}"
 
-#: ../application_views.py:602
+#: ../application_views.py:623
 msgid "{n} user(s) added."
 msgstr "{n} sondé(s) ajouté(s)."
 
@@ -1732,11 +1764,11 @@ msgstr "{n} sondé(s) ajouté(s)."
 msgid "{sheetname}..."
 msgstr "{sheetname}..."
 
-#: ../application_views.py:462
+#: ../application_views.py:485
 msgid "{title} Data"
 msgstr "Données de {title}"
 
-#: ../application_views.py:392
+#: ../application_views.py:415
 msgid "{title} Users"
 msgstr "Sondés de {title}"
 
@@ -1754,6 +1786,10 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 
 #~ msgid " centered"
 #~ msgstr " centered"
+
+#~ msgctxt "link"
+#~ msgid "${url_admin}#users"
+#~ msgstr "${url_admin}#users"
 
 #~ msgctxt "link"
 #~ msgid ""
@@ -1873,6 +1909,14 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 
 #~ msgid "Yes"
 #~ msgstr "Oui"
+
+#~ msgctxt "li"
+#~ msgid "You can collect data at this URL:"
+#~ msgstr "Vous pouvez suivre la collecte à cette adresse :"
+
+#~ msgctxt "li"
+#~ msgid "You can manage users at this URL:"
+#~ msgstr "Vous pouvez gérer les sondés à cette adresse :"
 
 #~ msgctxt "li"
 #~ msgid "You can send this URL to your users:"

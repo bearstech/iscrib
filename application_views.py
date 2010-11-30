@@ -135,14 +135,17 @@ class Application_Menu(IconsView):
         make_item(icon='/ui/iscrib/images/export48.png',
            title=MSG(u"Collect Data"),
            description=MSG(u"""
-<div id="choose-format" class="description">
+<div id="choose-format">
   <span><a href="#" title="Close"
     onclick="$('#choose-format').hide(); return false">X</a></span>
   <ul>
     <li>Download <a href=";export">ODS Version</a></li>
     <li>Download <a href=";export?format=xls">XLS Version</a></li>
   </ul>
-</div>""", html=True),
+</div>
+<script type="text/javascript">
+  $("#choose-format").hide();
+</script>""", html=True),
            url='#',
            onclick='$("#choose-format").show(); return false',
            access='is_allowed_to_export')]
@@ -171,7 +174,7 @@ class Application_Menu(IconsView):
             icon='/ui/iscrib/images/spread48.png',
             title=MSG(u"Spread your Form"),
             description=MSG(u"""
-<div id="spread-url" class="description">
+<div id="spread-url">
   <span><a href="#" title="Close"
     onclick="$('#spread-url').hide(); return false">X</a></span>
   <ul>
@@ -179,12 +182,25 @@ class Application_Menu(IconsView):
       <input id="spread-url-text" type="text" readonly="readonly"
         value="{spread_url}"/>
       <div id="spread-url-copy">
-        <a href="javascript:alert('You need Flash plugin to copy!');">Copy to
-          Clipboard</a>
+        <a href="javascript:alert('You need Flash plugin to copy!');">
+          Copy</a>
       </div>
     </li>
   </ul>
-</div>""", html=True).gettext(spread_url=spread_url),
+</div>
+<script type="text/javascript">
+  $("#spread-url-text").focus(function() {{
+      this.select();
+  }});
+  path = '/ui/iscrib/zeroclipboard/ZeroClipboard.swf'
+  ZeroClipboard.setMoviePath(path);
+  var clip = new ZeroClipboard.Client();
+  clip.setHandCursor(true);
+  clip.setText("{spread_url}");
+  clip.glue("spread-url-copy");
+  /* Hide #spread-url after the Flash movie is positioned */
+  $("#spread-url").hide();
+</script>""", html=True).gettext(spread_url=spread_url),
             url='#',
             onclick='$("#spread-url").show(); return false'))
         return items
