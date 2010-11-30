@@ -194,7 +194,8 @@ class FrontView(BaseIconsView):
 
 class IconsView(BaseIconsView):
     template = '/ui/iscrib/base/icons_view.xml'
-    item_keys = ('icon', 'title', 'description', 'url', 'onclick', 'access')
+    item_keys = ('icon', 'title', 'description', 'url', 'onclick', 'access',
+            'extra')
     cols = 3
 
 

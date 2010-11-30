@@ -134,7 +134,7 @@ class Application_Menu(IconsView):
         # "Spread your Form" here
         make_item(icon='/ui/iscrib/images/export48.png',
            title=MSG(u"Collect Data"),
-           description=MSG(u"""
+           extra=MSG(u"""
 <div id="choose-format">
   <span><a href="#" title="Close"
     onclick="$('#choose-format').hide(); return false">X</a></span>
@@ -173,7 +173,7 @@ class Application_Menu(IconsView):
         items.insert(3, self.make_item(
             icon='/ui/iscrib/images/spread48.png',
             title=MSG(u"Spread your Form"),
-            description=MSG(u"""
+            extra=MSG(u"""
 <div id="spread-url">
   <span><a href="#" title="Close"
     onclick="return hide_spread_url()">X</a></span>

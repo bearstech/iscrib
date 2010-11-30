@@ -3,7 +3,11 @@
 <stl:block xmlns="http://www.w3.org/1999/xhtml"
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
-  ${application_menu}
+  <div id="application-menu">
+    <a id="application-menu-button" href="#"
+      onclick="$('.icons-view').toggle(); return false">Hide/show Menu</a>
+    ${application_menu}
+  </div>
 
   <form action=";page${page_number}" method="post">
     <input value="${page_number}" name="page_number" type="hidden"/>
@@ -55,6 +59,9 @@
       id = fragment.substr(0, 11);
       $(id).addClass('badtype').focus();
     }
+    $(document).ready(function() {
+      $(".icons-view").hide();
+    });
     //-->
   </script>
 

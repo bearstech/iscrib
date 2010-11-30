@@ -362,6 +362,7 @@ button, .button {
   border: 1px solid #ccc;
   border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
   position: absolute;
+  z-index: 99;
 }
 #spread-url span,
 #choose-format span {
@@ -382,9 +383,15 @@ button, .button {
   width: 40%;
 }
 
+#application-menu-button {
+  float: right;
+  margin-top: -30px;
+}
+
 .icons-view {
   width: 100%;
   border: 0;
+  border-collapse: collapse;
 }
 .icons-view td {
   margin: 5px;
@@ -395,14 +402,22 @@ button, .button {
 .icons-view img.icon {
   float: left;
 }
-.icons-view a {
+.icons-view a.item {
+  background: transparent url(images/item-background.png) top left repeat-x;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  display: block;
+  height: 60px;
+  padding: 5px 3px 0 0;
   text-decoration: none;
 }
-.icons-view a:hover {
-  text-decoration: underline;
+.icons-view a.item:hover,
+.icons-view a.item.active {
+  background: #ddd;
 }
-.icons-view a.active {
-  font-weight: bold;
+.icons-view .description {
+  color: #000;
 }
 
 .root-show td {

@@ -14,13 +14,13 @@
           <stl:block stl:repeat="item row">
             <td width="${width}%">
               <a href="${item/url}" onclick="${item/onclick}"
-                stl:omit-tag="not item/url"><img alt=""
-                  src="${item/icon}" class="icon"/></a>
-              <a href="${item/url}" class="${item/class}"
-                onclick="${item/onclick}"
-                stl:omit-tag="not item/url">${item/title}</a>
-              <br/>
-              ${item/description}
+                class="item ${item/class}"
+                stl:omit-tag="not item/url">
+                <img alt="" src="${item/icon}" class="icon"/>
+                ${item/title}<br/>
+                <span class="description">${item/description}</span>
+              </a>
+              ${item/extra}
             </td>
           </stl:block>
         </tr>

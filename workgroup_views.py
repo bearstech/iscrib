@@ -190,8 +190,9 @@ class Workgroup_Menu(IconsView):
     make_item = IconsView.make_item
     items = [make_item(icon='/ui/iscrib/images/download48.png',
               title=MSG(u"Download the Template"),
-              description=MSG(u"""Download this template and use it to
-define to design your form.
+              description=MSG(u"Download this template and use it to "
+                  u"define to design your form."),
+              extra=MSG(u"""
 <div id="choose-format">
   <span><a href="#" title="Close"
     onclick="$('#choose-format').hide(); return false">X</a></span>

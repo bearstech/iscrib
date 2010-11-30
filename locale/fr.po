@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 201011231\n"
-"POT-Creation-Date: 2010-11-30 09:11+CET\n"
+"POT-Creation-Date: 2010-11-30 15:11+CET\n"
 "PO-Revision-Date: 2010-11-23 11:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,6 +53,34 @@ msgstr ""
 "    <img src=\"${value}/;thumb?width=${width}&amp;height=${height}\"\n"
 "    stl:if=\"value\"/>"
 
+#: ../workgroup_views.py:206
+msgid ""
+"\n"
+"<div id=\"choose-format\">\n"
+"  <span><a href=\"#\" title=\"Close\"\n"
+"    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n"
+"  <ul>\n"
+"    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n"
+"    <li>Download <a href=\"/gabarit-xls/;download\">XLS Version</a></li>\n"
+"  </ul>\n"
+"</div>\n"
+"<script type=\"text/javascript\">\n"
+"  $(\"#choose-format\").hide();\n"
+"</script>"
+msgstr ""
+"\n"
+"<div id=\"choose-format\">\n"
+"  <span><a href=\"#\" title=\"Fermer\"\n"
+"    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n"
+"  <ul>\n"
+"    <li>Télécharger la <a href=\";export\">version ODS</a></li>\n"
+"    <li>Télécharger la <a href=\";export?format=xls\">version XLS</a></li>\n"
+"  </ul>\n"
+"</div>\n"
+"<script type=\"text/javascript\">\n"
+"  $(\"#choose-format\").hide();\n"
+"</script>"
+
 #: ../application_views.py:148
 msgid ""
 "\n"
@@ -81,12 +109,12 @@ msgstr ""
 "  $(\"#choose-format\").hide();\n"
 "</script>"
 
-#: ../application_views.py:203
+#: ../application_views.py:215
 msgid ""
 "\n"
 "<div id=\"spread-url\">\n"
 "  <span><a href=\"#\" title=\"Close\"\n"
-"    onclick=\"$('#spread-url').hide(); return false\">X</a></span>\n"
+"    onclick=\"return hide_spread_url()\">X</a></span>\n"
 "  <ul>\n"
 "    <li>You can send this URL to your users:<br/>\n"
 "      <input id=\"spread-url-text\" type=\"text\" readonly=\"readonly\"\n"
@@ -107,9 +135,21 @@ msgid ""
 "  var clip = new ZeroClipboard.Client();\n"
 "  clip.setHandCursor(true);\n"
 "  clip.setText(\"{spread_url}\");\n"
-"  clip.glue(\"spread-url-copy\");\n"
-"  /* Hide #spread-url after the Flash movie is positioned */\n"
-"  $(\"#spread-url\").hide();\n"
+"  function hide_spread_url() {{\n"
+"    $('#spread-url').hide();\n"
+"    clip.hide();\n"
+"    return false;\n"
+"  }}\n"
+"  function show_spread_url() {{\n"
+"    $('#spread-url').show();\n"
+"    clip.show();\n"
+"    return false;\n"
+"  }}\n"
+"  $(document).ready(function() {{\n"
+"    clip.glue(\"spread-url-copy\");\n"
+"    /* Hide #spread-url after the Flash movie is positioned */\n"
+"    hide_spread_url();\n"
+"  }});\n"
 "</script>"
 msgstr ""
 "\n"
@@ -136,9 +176,21 @@ msgstr ""
 "  var clip = new ZeroClipboard.Client();\n"
 "  clip.setHandCursor(true);\n"
 "  clip.setText(\"{spread_url}\");\n"
-"  clip.glue(\"spread-url-copy\");\n"
-"  /* Hide #spread-url after the Flash movie is positioned */\n"
-"  $(\"#spread-url\").hide();\n"
+"  function hide_spread_url() {{\n"
+"    $('#spread-url').hide();\n"
+"    clip.hide();\n"
+"    return false;\n"
+"  }}\n"
+"  function show_spread_url() {{\n"
+"    $('#spread-url').show();\n"
+"    clip.show();\n"
+"    return false;\n"
+"  }}\n"
+"  $(document).ready(function() {{\n"
+"    clip.glue(\"spread-url-copy\");\n"
+"    /* Hide #spread-url after the Flash movie is positioned */\n"
+"    hide_spread_url();\n"
+"  }});\n"
 "</script>"
 
 #: ../datatypes.py:654
@@ -214,7 +266,7 @@ msgstr "%break%"
 msgid "%d"
 msgstr "%d"
 
-#: ../form.py:413
+#: ../form.py:409
 msgid "'%s' = '%s'"
 msgstr "'%s' = '%s'"
 
@@ -271,19 +323,19 @@ msgstr "<"
 msgid "</"
 msgstr "</"
 
+#: ../ui/base/icons_view.xml.en:16
+msgctxt "link"
+msgid ""
+"<g id='1'>  <x id='2'/> ${item/title}<x id='3'/>  <g id='4'>${item/"
+"description}</g>  </g> ${item/extra}"
+msgstr ""
+"<g id='1'>  <x id='2'/> ${item/title}<x id='3'/>  <g id='4'>${item/"
+"description}</g>  </g> ${item/extra}"
+
 #: ../ui/root/contact.xml.en:22
 msgctxt "label"
 msgid "<g id='1'>${widget/title}</g>  <g id='2'>(?)</g>"
 msgstr "<g id='1'>${widget/title}</g>  <g id='2'>(?)</g>"
-
-#: ../ui/base/icons_view.xml.en:16
-msgctxt "table cell"
-msgid ""
-"<g id='1'><x id='2'/></g>  <g id='3'>${item/title}</g>  <x id='4'/> ${item/"
-"description}"
-msgstr ""
-"<g id='1'><x id='2'/></g>  <g id='3'>${item/title}</g>  <x id='4'/> ${item/"
-"description}"
 
 #: ../ui/root/show.xml.en:14
 msgctxt "table cell"
@@ -303,6 +355,11 @@ msgid ""
 msgstr ""
 "<g id='1'>Adresse de courriel</g>  <g id='2'>* </g>  <x id='3'/>  <g id='4'>"
 "${username/error}<x id='5'/></g>"
+
+#: ../ui/form/view.xml.en:7
+msgctxt "link"
+msgid "<g id='1'>Hide/show Menu</g> ${application_menu}"
+msgstr ""
 
 #: ../ui/base/login.xml.en:60
 msgctxt "label"
@@ -340,14 +397,14 @@ msgstr ""
 "<g id='21'>Mot de passe</g>  <g id='22'>* </g>  <x id='23'/>  <g id='24'>"
 "${password/error}<x id='25'/></g>"
 
-#: ../ui/form/view.xml.en:12
+#: ../ui/form/view.xml.en:18
 msgctxt "link"
 msgid ""
-"<g id='3'>Input Control</g>  <g id='4'>Print this page</g>  <g id='5'>Print "
-"Form</g>  <g id='6'>Save</g>"
+"<g id='4'>Input Control</g>  <g id='5'>Print this page</g>  <g id='6'>Print "
+"Form</g>  <g id='7'>Save</g>"
 msgstr ""
-"<g id='3'>Contrôle de saisie</g>  <g id='4'>Imprimer cette page</g>  <g "
-"id='5'>Imprimer le formulaire</g>  <g id='6'>Enregistrer</g>"
+"<g id='4'>Contrôle de saisie</g>  <g id='5'>Imprimer cette page</g>  <g "
+"id='6'>Imprimer le formulaire</g>  <g id='7'>Enregistrer</g>"
 
 #: ../ui/root/show.xml.en:30
 msgctxt "table cell"
@@ -455,7 +512,7 @@ msgctxt "link"
 msgid "An Itaapy service"
 msgstr "Un service Itaapy"
 
-#: ../workgroup_views.py:226
+#: ../workgroup_views.py:227
 msgid "Application"
 msgstr "Application"
 
@@ -487,7 +544,7 @@ msgctxt "heading"
 msgid "Business"
 msgstr "Business"
 
-#: ../workgroup_views.py:321
+#: ../workgroup_views.py:322
 msgid "CSS"
 msgstr "CSS"
 
@@ -517,12 +574,12 @@ msgstr "Revenir au formulaire"
 msgid "Company"
 msgstr "Société"
 
-#: ../application_views.py:231 ../user_views.py:37 ../user_views.py:65
+#: ../application_views.py:243 ../user_views.py:37 ../user_views.py:65
 #: ../root_views.py:181
 msgid "Company/Organization"
 msgstr "Société/Organisme"
 
-#: ../workgroup_views.py:214
+#: ../workgroup_views.py:215
 msgid "Configure your client space"
 msgstr "configurez votre espace client"
 
@@ -550,7 +607,7 @@ msgctxt "legend"
 msgid "Create Your Account"
 msgstr "Créer votre compte"
 
-#: ../workgroup_views.py:209
+#: ../workgroup_views.py:210
 msgid "Create a Data Collection Application"
 msgstr "Créer une application de collecte"
 
@@ -565,7 +622,7 @@ msgstr ""
 "Créez votre espace client où vous pourrez ajouter vos applications de "
 "collecte et les soumettre aux personnes de votre choix."
 
-#: ../workgroup_views.py:229
+#: ../workgroup_views.py:230
 msgid "Creation Date"
 msgstr "Date de création"
 
@@ -594,7 +651,7 @@ msgctxt "link"
 msgid "Download OpenOffice.org"
 msgstr "Télécharger OpenOffice.org"
 
-#: ../form_views.py:287
+#: ../form_views.py:291
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
 
@@ -602,38 +659,13 @@ msgstr "Téléchargement du formulaire"
 msgid "Download the Template"
 msgstr "Télécharger le gabarit"
 
-#: ../workgroup_views.py:205
-msgid ""
-"Download this template and use it to\n"
-"define to design your form.\n"
-"<div id=\"choose-format\">\n"
-"  <span><a href=\"#\" title=\"Close\"\n"
-"    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n"
-"  <ul>\n"
-"    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n"
-"    <li>Download <a href=\"/gabarit-xls/;download\">XLS Version</a></li>\n"
-"  </ul>\n"
-"</div>\n"
-"<script type=\"text/javascript\">\n"
-"  $(\"#choose-format\").hide();\n"
-"</script>"
+#: ../workgroup_views.py:193
+msgid "Download this template and use it to define to design your form."
 msgstr ""
 "Téléchargez ce gabarit qui vous servira d'exemple pour créer votre "
-"questionnaire.\n"
-"<div id=\"choose-format\">\n"
-"  <span><a href=\"#\" title=\"Fermer\"\n"
-"    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n"
-"  <ul>\n"
-"    <li>Télécharger la <a href=\"/gabarit/;download\">version ODS</a></li>\n"
-"    <li>Télécharger la <a href=\"/gabarit-xls/;download\">version XLS</a></"
-"li>\n"
-"  </ul>\n"
-"</div>\n"
-"<script type=\"text/javascript\">\n"
-"  $(\"#choose-format\").hide();\n"
-"</script>"
+"questionnaire."
 
-#: ../application_views.py:232 ../application_views.py:493
+#: ../application_views.py:244 ../application_views.py:505
 msgid "E-mail"
 msgstr "Courriel"
 
@@ -641,7 +673,7 @@ msgstr "Courriel"
 msgid "E-mail Address"
 msgstr "Adresse de courriel"
 
-#: ../workgroup_views.py:213 ../workgroup_views.py:311
+#: ../workgroup_views.py:214 ../workgroup_views.py:312
 msgid "Edit Title, Logo and CSS"
 msgstr "Modifier titre, logo et CSS"
 
@@ -676,7 +708,7 @@ msgctxt "button"
 msgid "Export"
 msgstr "Exporter"
 
-#: ../application_views.py:468
+#: ../application_views.py:480
 msgid "Export Collected Data"
 msgstr "Exporter les données collectées"
 
@@ -692,7 +724,7 @@ msgstr "Exporter cette liste au format XLS"
 msgid "Expression"
 msgstr "Expression"
 
-#: ../form.py:402
+#: ../form.py:398
 msgid "False"
 msgstr "Faux"
 
@@ -705,7 +737,7 @@ msgstr "Terminer"
 msgid "Finished"
 msgstr "Terminé"
 
-#: ../application_views.py:229 ../application_views.py:492
+#: ../application_views.py:241 ../application_views.py:504
 #: ../workgroup_views.py:66
 msgid "First Name"
 msgstr "Prénom"
@@ -729,7 +761,7 @@ msgctxt "link"
 msgid "Forgotten Password?"
 msgstr "Mot de passe oublié ?"
 
-#: ../application_views.py:226 ../application_views.py:492 ../form.py:130
+#: ../application_views.py:238 ../application_views.py:504 ../form.py:130
 msgid "Form"
 msgstr "Formulaire"
 
@@ -877,7 +909,7 @@ msgstr "Informations"
 msgid "Informative"
 msgstr "Informatif"
 
-#: ../form_views.py:199
+#: ../form_views.py:203
 msgid "Input Control"
 msgstr "Contrôle de saisie"
 
@@ -889,11 +921,11 @@ msgstr "Taille de saisie"
 msgid "Integer"
 msgstr "Entier"
 
-#: ../application_views.py:228
+#: ../application_views.py:240
 msgid "Last Modified"
 msgstr "Dernière modification"
 
-#: ../application_views.py:230 ../application_views.py:493
+#: ../application_views.py:242 ../application_views.py:505
 #: ../workgroup_views.py:67
 msgid "Last Name"
 msgstr "Nom"
@@ -925,7 +957,7 @@ msgctxt "heading"
 msgid "Login"
 msgstr "Connexion"
 
-#: ../workgroup_views.py:320
+#: ../workgroup_views.py:321
 msgid "Logo (shown in the banner)"
 msgstr "Logo (apparaît dans la bannière)"
 
@@ -946,11 +978,11 @@ msgstr "Variable principale"
 msgid "Manage Users"
 msgstr "Gérer les sondés"
 
-#: ../application_views.py:212 ../form.py:144
+#: ../application_views.py:224 ../form.py:144
 msgid "Manage your Data Collection Application"
 msgstr "Gérer votre application de collecte de données"
 
-#: ../workgroup_views.py:222
+#: ../workgroup_views.py:223
 msgid "Manage your client space"
 msgstr "Configurer votre espace client"
 
@@ -962,7 +994,7 @@ msgstr "Obligatoire"
 msgid "Mandatory field"
 msgstr "Champ obligatoire"
 
-#: ../application_views.py:635
+#: ../application_views.py:647
 msgid "Maximum form users (0 = unlimited)"
 msgstr "Nombre de sondés autorisés (0 = illimité)"
 
@@ -1014,7 +1046,7 @@ msgstr "Aucune information disponible."
 msgid "No more users are allowed to register."
 msgstr "Le quota de sondés a été atteint."
 
-#: ../application_views.py:618
+#: ../application_views.py:630
 msgid "No user added."
 msgstr "Aucun sondé ajouté."
 
@@ -1124,13 +1156,13 @@ msgctxt "link"
 msgid "Pricing"
 msgstr "Tarifs"
 
-#: ../ui/form/view.xml.en:14 ../ui/form/view.xml.en:17
+#: ../ui/form/view.xml.en:20 ../ui/form/view.xml.en:23
 #: ../ui/form/send.xml.en:9
 msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr "Imprimer (dans une nouvelle fenêtre)"
 
-#: ../form_views.py:317
+#: ../form_views.py:321
 msgid "Print form"
 msgstr "Impression du formulaire"
 
@@ -1168,7 +1200,7 @@ msgstr "Répéter le mot de passe"
 msgid "Restricted (users must be subscribed)"
 msgstr "Restreint (l'enregistrement préalable est obligatoire)"
 
-#: ../ui/form/view.xml.en:43
+#: ../ui/form/view.xml.en:49
 msgctxt "button"
 msgid "Save"
 msgstr "Enregistrer"
@@ -1186,7 +1218,7 @@ msgstr "Rechercher"
 msgid "Select"
 msgstr "Boîte de sélection"
 
-#: ../application_views.py:125 ../application_views.py:775
+#: ../application_views.py:125 ../application_views.py:787
 msgid "Show Test Form"
 msgstr "Voir le formulaire de test"
 
@@ -1194,11 +1226,11 @@ msgstr "Voir le formulaire de test"
 msgid "Slogan"
 msgstr "Slogan"
 
-#: ../workgroup_views.py:301
+#: ../workgroup_views.py:302
 msgid "Source"
 msgstr "Fichier source"
 
-#: ../workgroup_views.py:228
+#: ../workgroup_views.py:229
 msgid "Source File"
 msgstr "Fichier source"
 
@@ -1206,11 +1238,11 @@ msgstr "Fichier source"
 msgid "Spread your Form"
 msgstr "Diffuser votre formulaire"
 
-#: ../form.py:156
+#: ../form_views.py:61
 msgid "Start filling"
 msgstr "Commencer la saisie"
 
-#: ../application_views.py:227 ../application_views.py:493
+#: ../application_views.py:239 ../application_views.py:505
 msgid "State"
 msgstr "État du formulaire"
 
@@ -1223,11 +1255,11 @@ msgstr "État du formulaire :"
 msgid "String"
 msgstr "Chaîne de caractères"
 
-#: ../application_views.py:542
+#: ../application_views.py:554
 msgid "Subscribe Users"
 msgstr "Ajouter des sondés"
 
-#: ../workgroup_views.py:227
+#: ../workgroup_views.py:228
 msgid "Subscribed Users"
 msgstr "Sondés enregistrés"
 
@@ -1236,7 +1268,7 @@ msgctxt "table cell"
 msgid "Subscribed Users"
 msgstr "Sondés enregistrés"
 
-#: ../application_views.py:637
+#: ../application_views.py:649
 msgid "Subscription Mode"
 msgstr "Mode d'inscription"
 
@@ -1319,11 +1351,11 @@ msgstr "Champ obligatoire"
 msgid "Title"
 msgstr "Titre"
 
-#: ../workgroup_views.py:317
+#: ../workgroup_views.py:318
 msgid "Title (shown in the banner if no logo)"
 msgstr "Titre (apparaît dans la bannière s'il n'y a pas de logo)"
 
-#: ../application_views.py:239 ../application_views.py:551
+#: ../application_views.py:251 ../application_views.py:563
 msgid ""
 "Title of your application: {title} <a href=\";edit\"\n"
 "            title=\"Edit\"><img src=\"/ui/icons/16x16/edit.png\"/></a>"
@@ -1345,7 +1377,7 @@ msgstr ""
 "Pour exporter dans une base de données SQL, contactez <a href=\"http://www."
 "itaapy.com/contact\">Itaapy</a>"
 
-#: ../form.py:400
+#: ../form.py:396
 msgid "True"
 msgstr "Vrai"
 
@@ -1353,11 +1385,11 @@ msgstr "Vrai"
 msgid "Type"
 msgstr "Type"
 
-#: ../application_views.py:601
+#: ../application_views.py:613
 msgid "Unrecognized line {lineno}: {line}"
 msgstr "Ligne {lineno} incorrecte : {line}"
 
-#: ../workgroup_views.py:210
+#: ../workgroup_views.py:211
 msgid ""
 "Uploading this spreadsheet file in iScrib will generate in one click your "
 "data collection application."
@@ -1401,7 +1433,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr "Bienvenue dans votre espace iScrib"
 
-#: ../application_views.py:756 ../base_views.py:125
+#: ../application_views.py:768 ../base_views.py:125
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
@@ -1553,7 +1585,7 @@ msgstr "Adresse de courriel"
 msgid "Your form is finished. Your correspondent has been informed."
 msgstr "Votre saisie est terminée. Votre correspondant a été averti."
 
-#: ../form_views.py:292
+#: ../form_views.py:296
 msgid "Your form is not finished yet."
 msgstr "Votre formulaire n'est pas encore terminé."
 
@@ -1565,7 +1597,7 @@ msgstr "Votre espace client"
 msgid "Your workgroups"
 msgstr "Vos espaces client"
 
-#: ../utils.py:163 ../form.py:383
+#: ../utils.py:163 ../form.py:379
 msgid "["
 msgstr "["
 
@@ -1740,23 +1772,23 @@ msgstr "value"
 msgid "white-space: pre"
 msgstr "white-space: pre"
 
-#: ../form.py:264
+#: ../form.py:260
 msgid "{application}: <em>Test Form</em>"
 msgstr "{application} : <em>Formulaire de test</em>"
 
-#: ../form.py:272
+#: ../form.py:268
 msgid "{application}: {form}"
 msgstr "{application} : {form}"
 
-#: ../form_views.py:220
+#: ../form_views.py:224
 msgid "{name} invalid"
 msgstr "{name} invalide"
 
-#: ../form_views.py:217
+#: ../form_views.py:221
 msgid "{name} is not equal to {formula}"
 msgstr "{name} n'est pas égal à {formula}"
 
-#: ../application_views.py:623
+#: ../application_views.py:635
 msgid "{n} user(s) added."
 msgstr "{n} sondé(s) ajouté(s)."
 
@@ -1764,11 +1796,11 @@ msgstr "{n} sondé(s) ajouté(s)."
 msgid "{sheetname}..."
 msgstr "{sheetname}..."
 
-#: ../application_views.py:485
+#: ../application_views.py:497
 msgid "{title} Data"
 msgstr "Données de {title}"
 
-#: ../application_views.py:415
+#: ../application_views.py:427
 msgid "{title} Users"
 msgstr "Sondés de {title}"
 
@@ -1837,10 +1869,36 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 #~ msgid "Contact <g id='7'>Itaapy</g> for more."
 #~ msgstr "Veuillez contacter <g id='7'>Itaapy</g> pour en ajouter."
 
-#~ msgid "Download this template and use it to define to design your form."
+#~ msgid ""
+#~ "Download this template and use it to\n"
+#~ "define to design your form.\n"
+#~ "<div id=\"choose-format\">\n"
+#~ "  <span><a href=\"#\" title=\"Close\"\n"
+#~ "    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n"
+#~ "  <ul>\n"
+#~ "    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n"
+#~ "    <li>Download <a href=\"/gabarit-xls/;download\">XLS Version</a></li>\n"
+#~ "  </ul>\n"
+#~ "</div>\n"
+#~ "<script type=\"text/javascript\">\n"
+#~ "  $(\"#choose-format\").hide();\n"
+#~ "</script>"
 #~ msgstr ""
 #~ "Téléchargez ce gabarit qui vous servira d'exemple pour créer votre "
-#~ "questionnaire."
+#~ "questionnaire.\n"
+#~ "<div id=\"choose-format\">\n"
+#~ "  <span><a href=\"#\" title=\"Fermer\"\n"
+#~ "    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n"
+#~ "  <ul>\n"
+#~ "    <li>Télécharger la <a href=\"/gabarit/;download\">version ODS</a></"
+#~ "li>\n"
+#~ "    <li>Télécharger la <a href=\"/gabarit-xls/;download\">version XLS</"
+#~ "a></li>\n"
+#~ "  </ul>\n"
+#~ "</div>\n"
+#~ "<script type=\"text/javascript\">\n"
+#~ "  $(\"#choose-format\").hide();\n"
+#~ "</script>"
 
 #~ msgid "Edit Title"
 #~ msgstr "Modifier titre"
