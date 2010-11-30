@@ -40,9 +40,9 @@
           </ul>
           <ul>
             <li>You can collect data at this URL:<br/>
-              <a href="${url_admin}">${url_admin}</a></li>
+              <a href="${admin_url}">${admin_url}</a></li>
             <li>You can manage users at this URL:<br/>
-              <a href="${url_admin}#users">${url_admin}#users</a></li>
+              <a href="${admin_url}#users">${admin_url}#users</a></li>
           </ul>
         </td>
       </tr>

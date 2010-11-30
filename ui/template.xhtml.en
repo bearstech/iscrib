@@ -5,21 +5,21 @@
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
   <head>
     <title>${title}</title>
-    <base href="${base_uri}" />
+    <base href="${base_uri}"/>
     <!-- Meta -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta stl:repeat="meta meta_tags" name="${meta/name}" lang="${meta/lang}"
-      content="${meta/content}" />
+      content="${meta/content}"/>
     <!-- Canonical URL for search engines -->
-    <link rel="canonical" href="${canonical_uri}" />
+    <link rel="canonical" href="${canonical_uri}"/>
     <!-- CSS -->
     <link type="text/css" rel="stylesheet" stl:repeat="style styles"
-      href="${style}" />
+      href="${style}"/>
     <!-- JavaScript -->
-    <script type="text/javascript" stl:repeat="script scripts" src="${script}"
-      />
+    <script type="text/javascript" stl:repeat="script scripts"
+      src="${script}"/>
     <!-- Icon -->
-    <link rel="shortcut icon" href="${favicon_href}" type="${favicon_type}" />
+    <link rel="shortcut icon" href="${favicon_href}" type="${favicon_type}"/>
   </head>
   <body>
    <div id="page" class="${page_css}">
@@ -111,7 +111,6 @@
 
   <!-- Google analytics -->
   <script type="text/javascript">
-
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-11323965-2']);
     _gaq.push(['_trackPageview']);
@@ -121,7 +120,6 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-
   </script>
 
   </body>

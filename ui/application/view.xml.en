@@ -19,4 +19,17 @@
     No user registered.
   </p>
 
+  <script type="text/javascript">
+    $("#spread-url-text").focus(function() {
+        this.select();
+    });
+    ZeroClipboard.setMoviePath('/ui/iscrib/zeroclipboard/ZeroClipboard.swf');
+    var clip = new ZeroClipboard.Client();
+    clip.setHandCursor(true);
+    clip.setText("${spread_url}");
+    clip.glue("spread-url-copy");
+    /* Hide #spread-url after the Flash movie is positioned */
+    $(".description").hide();
+  </script>
+
 </stl:block>

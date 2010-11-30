@@ -135,7 +135,7 @@ class Application_Menu(IconsView):
         make_item(icon='/ui/iscrib/images/export48.png',
            title=MSG(u"Collect Data"),
            description=MSG(u"""
-<div id="choose-format">
+<div id="choose-format" class="description">
   <span><a href="#" title="Close"
     onclick="$('#choose-format').hide(); return false">X</a></span>
   <ul>
@@ -166,17 +166,23 @@ class Application_Menu(IconsView):
 
     def get_items(self, resource, context):
         items = super(Application_Menu, self).get_items(resource, context)
-        spread_url = resource.get_user_url(context)
+        spread_url = resource.get_spread_url(context)
         items.insert(3, self.make_item(
             icon='/ui/iscrib/images/spread48.png',
             title=MSG(u"Spread your Form"),
             description=MSG(u"""
-<div id="spread-url">
+<div id="spread-url" class="description">
   <span><a href="#" title="Close"
     onclick="$('#spread-url').hide(); return false">X</a></span>
   <ul>
     <li>You can send this URL to your users:<br/>
-      <a href="{spread_url}">{spread_url}</a></li>
+      <input id="spread-url-text" type="text" readonly="readonly"
+        value="{spread_url}"/>
+      <div id="spread-url-copy">
+        <a href="javascript:alert('You need Flash plugin to copy!');">Copy to
+          Clipboard</a>
+      </div>
+    </li>
   </ul>
 </div>""", html=True).gettext(spread_url=spread_url),
             url='#',
@@ -274,7 +280,7 @@ class Application_View(Folder_BrowseContent):
                         workgroup_title=resource.parent.get_title(),
                         application_title=application_title)
                 subject = quote(subject.encode('utf8'))
-                application_url = resource.get_user_url(context, email)
+                application_url = resource.get_spread_url(context, email)
                 body = MAILTO_BODY.gettext(
                         application_title=application_title,
                         application_url=application_url)
@@ -358,6 +364,7 @@ class Application_View(Folder_BrowseContent):
         namespace['menu'] = Application_Menu().GET(resource, context)
         namespace['n_forms'] = resource.get_n_forms()
         namespace['max_users'] = resource.get_property('max_users')
+        namespace['spread_url'] = resource.get_spread_url(context)
 
         # Search
         search_template = resource.get_resource(self.search_template)
@@ -558,8 +565,8 @@ class Application_Register(STLForm):
                     namespace['pending_forms'] += 1
                 elif state == FINISHED:
                     namespace['finished_forms'] += 1
-        namespace['url_user'] = resource.get_user_url(context)
-        namespace['url_admin'] = resource.get_admin_url(context)
+        namespace['spread_url'] = resource.get_spread_url(context)
+        namespace['admin_url'] = resource.get_admin_url(context)
         return namespace
 
 

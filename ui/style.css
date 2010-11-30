@@ -358,7 +358,6 @@ button, .button {
 
 #spread-url,
 #choose-format {
-  display: none;
   border: 1px solid #ccc;
   border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
 }
@@ -396,6 +395,9 @@ button, .button {
 }
 .icons-view a {
   text-decoration: none;
+}
+.icons-view a:hover {
+  text-decoration: underline;
 }
 .icons-view a.active {
   font-weight: bold;

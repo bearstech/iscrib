@@ -36,7 +36,7 @@ class Skin(BaseSkin):
 
 
     def get_styles(self, context):
-        styles = BaseSkin.get_styles(self, context)
+        styles = super(Skin, self).get_styles(context)
         site_root = context.resource.get_site_root()
         # Restore Aruni
         if '/ui/aruni/style.css' not in styles:
@@ -55,6 +55,12 @@ class Skin(BaseSkin):
                     styles.append('{0}/;download'.format(
                         context.get_link(style)))
         return styles
+
+
+    def get_scripts(self, context):
+        scripts = super(Skin, self).get_scripts(context)
+        scripts.append('/ui/iscrib/zeroclipboard/ZeroClipboard.js')
+        return scripts
 
 
     def build_namespace(self, context):

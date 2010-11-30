@@ -177,12 +177,12 @@ class Application(Folder):
         return base_url.resolve2(';view')
 
 
-    def get_user_url(self, context, email=None):
+    def get_spread_url(self, context, email=None):
         base_url = context.uri.resolve(self.get_abspath())
-        user_url = base_url.resolve2(';login')
+        spread_url = base_url.resolve2(';login')
         if email is not None:
-            user_url.query['username'] = email
-        return user_url
+            spread_url.query['username'] = email
+        return spread_url
 
 
     def subscribe_user(self, user):
