@@ -565,8 +565,6 @@ class Application_Register(STLForm):
                     namespace['pending_forms'] += 1
                 elif state == FINISHED:
                     namespace['finished_forms'] += 1
-        namespace['spread_url'] = resource.get_spread_url(context)
-        namespace['admin_url'] = resource.get_admin_url(context)
         return namespace
 
 
