@@ -218,12 +218,20 @@ class IconsView(BaseIconsView):
         namespace['batch'] = None
         namespace['width'] = 100 // self.cols
 
-        base_url = context.uri.resolve(resource.get_abspath())
+        here_path = context.uri.path
+        name = here_path.get_name()
+        if name and not name[0] == ';':
+            view = resource.get_default_view_name()
+            here_path = here_path.resolve2(';' + view)
+
+        base_path = resource.get_abspath()
 
         rows = [[]]
         for item in self.get_items(resource, context):
-            url = base_url.resolve2(item['url'])
-            if url == context.uri:
+            # FIXME
+            url = item['url'].split('#', 1)[0]
+            path = base_path.resolve2(url)
+            if path == here_path:
                 item['class'] = 'active'
             else:
                 item['class'] = None
