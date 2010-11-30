@@ -358,8 +358,10 @@ button, .button {
 
 #spread-url,
 #choose-format {
+  background: #fff;
   border: 1px solid #ccc;
   border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+  position: absolute;
 }
 #spread-url span,
 #choose-format span {

@@ -176,7 +176,7 @@ class Application_Menu(IconsView):
             description=MSG(u"""
 <div id="spread-url">
   <span><a href="#" title="Close"
-    onclick="$('#spread-url').hide(); return false">X</a></span>
+    onclick="return hide_spread_url()">X</a></span>
   <ul>
     <li>You can send this URL to your users:<br/>
       <input id="spread-url-text" type="text" readonly="readonly"
@@ -197,12 +197,24 @@ class Application_Menu(IconsView):
   var clip = new ZeroClipboard.Client();
   clip.setHandCursor(true);
   clip.setText("{spread_url}");
-  clip.glue("spread-url-copy");
-  /* Hide #spread-url after the Flash movie is positioned */
-  $("#spread-url").hide();
+  function hide_spread_url() {{
+    $('#spread-url').hide();
+    clip.hide();
+    return false;
+  }}
+  function show_spread_url() {{
+    $('#spread-url').show();
+    clip.show();
+    return false;
+  }}
+  $(document).ready(function() {{
+    clip.glue("spread-url-copy");
+    /* Hide #spread-url after the Flash movie is positioned */
+    hide_spread_url();
+  }});
 </script>""", html=True).gettext(spread_url=spread_url),
             url='#',
-            onclick='$("#spread-url").show(); return false'))
+            onclick='return show_spread_url()'))
         return items
 
 
