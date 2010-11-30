@@ -5,7 +5,7 @@
 
   <div id="application-menu">
     <a id="application-menu-button" href="#"
-      onclick="$('.icons-view').toggle(); return false">Hide/show Menu</a>
+      onclick="$('.icons-view').toggle(); return false">Show/Hide Menu</a>
     ${application_menu}
   </div>
 

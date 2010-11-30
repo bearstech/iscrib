@@ -222,7 +222,7 @@ class IconsView(BaseIconsView):
         here_path = context.uri.path
         name = here_path.get_name()
         if name and not name[0] == ';':
-            view = resource.get_default_view_name()
+            view = context.resource.get_default_view_name()
             here_path = here_path.resolve2(';' + view)
 
         base_path = resource.get_abspath()

@@ -123,7 +123,7 @@ class Application_Menu(IconsView):
     items = [
         make_item(icon='/ui/iscrib/images/form48.png',
            title=MSG(u"Show Test Form"),
-           url='0'),
+           url='0/;pageA'),
         make_item(icon='/ui/iscrib/images/register48.png',
            title=MSG(u"Add Users"),
            url=';register',
