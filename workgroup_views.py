@@ -39,7 +39,8 @@ from autoform import RecaptchaDatatype, captcha_schema, captcha_widgets
 from base_views import IconsView
 
 
-MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created.')
+MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created. You can '
+        u'add your logo.')
 MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
 MSG_BAD_PASSWORD = ERROR(u'You already have an account but your password '
         u'did not match. Try <a href="/;login">log in</a> first.', html=True)
