@@ -423,7 +423,10 @@ class Schema(Table):
             size = record['size']
             if size is None:
                 # Write down default at the time of writing
-                record['size'] = size = length
+                if type_name == 'text':
+                    record['size'] = size = 5
+                else:
+                    record['size'] = size = length
             if not ValidInteger.is_valid(size):
                 raise FormatError, ERR_BAD_SIZE(line=lineno, size=size)
             # Default value
