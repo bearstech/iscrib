@@ -323,7 +323,11 @@ button, .button {
   text-decoration: none;
 }
 
-#pages-menu ul li a:hover,
+#pages-menu ul li a:hover {
+  background: #ccc;
+  color: #fff;
+  border-color: #339;
+}
 #pages-menu ul li.active a {
   background: #fff;
   color: #339;
