@@ -39,7 +39,6 @@ ERR_BAD_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
         u'invalid.')
 ERR_DUPLICATE_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
         u'duplicated.')
-ERR_BAD_TYPE = ERROR(u'In schema, line {line}, type "{type}" is invalid.')
 ERR_BAD_LENGTH = ERROR(u'In schema, line {line}, length "{length}" is '
         u'invalid.')
 ERR_MISSING_OPTIONS = ERROR(u'In schema, line {line}, enum options are '
@@ -376,10 +375,10 @@ class Schema(Table):
                         name=name)
             # Type
             type_name = record['type']
+            if type_name is None:
+                # Write down default at this time
+                record['type'] = type_name = 'str'
             datatype = Type.get_type(type_name)
-            if datatype is None:
-                raise FormatError, ERR_BAD_TYPE(line=lineno,
-                        type=type_name)
             # Length
             length = record['length']
             if length is None:
