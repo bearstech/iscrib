@@ -428,3 +428,7 @@ button, .button {
   text-align: center;
   vertical-align: bottom;
 }
+
+#body h1 .application-title {
+  color: #666;
+}
