@@ -131,7 +131,13 @@ class Workgroup_NewInstance(NewInstance):
 /* Form pages menu / Menu des pages du formulaire */
 #pages-menu { border-bottom: 1px solid #339; }
 #pages-menu ul li a { background: #339; }
-#pages-menu ul li a:hover, #pages-menu ul li.active a {
+#pages-menu ul li a:hover {
+  background: #ccc;
+  color: #fff;
+  border-color: #339;
+}
+#pages-menu ul li.active a {
+  background: #fff;
   color: #339;
   border-color: #339;
 }
@@ -144,8 +150,6 @@ class Workgroup_NewInstance(NewInstance):
   background-color: #339;
 }
 """)
-        # Create the user if necessary
-        user_was_created = False
         user = context.user
         if user is None:
             email = form['email']
