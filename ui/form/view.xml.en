@@ -15,14 +15,14 @@
       name="${field/name}" type="hidden"/>
 
     <p id="form-toolbar" stl:if="not skip_print">
-      <a id="button-control" href=";send" class="button button-control">Input
-        Control</a>
-      <a onclick="return popup(this.href, 800, 600)" href="?view=printable"
+      <a id="button-control" href=";send"
+        class="button button-control">Input Control</a>
+      <a id="form-print" href="?view=print" class="button button-print"
+        title="Print (in a new window)"
+        onclick="return popup(this.href, 800, 600)">Print this page</a>
+      <a id="form-print" href=";print" href=";print"
         class="button button-print" title="Print (in a new window)"
-        id="form-print">Print this page</a>
-      <a onclick="return popup(this.href, 800, 600)" href=";print"
-        class="button button-print" title="Print (in a new window)"
-        id="form-print">Print Form</a>
+        onclick="return popup(this.href, 800, 600)">Print Form</a>
       <button id="form-submit" class="button-ok"
         stl:if="not readonly">Save</button>
     </p>

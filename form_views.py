@@ -25,7 +25,7 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from iscrib
 from datatypes import Numeric
-from utils import get_page_number, force_encode
+from utils import get_page_number, force_encode, is_print, set_print
 from widgets import is_mandatory_filled
 from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
 
@@ -59,7 +59,6 @@ class Form_View(STLForm):
     access_POST = 'is_allowed_to_edit'
     template = '/ui/iscrib/form/view.xml'
     title = MSG(u"Start filling")
-    query_schema = {'view': String}
     schema = {'page_number': String}
     hidden_fields = []
 
@@ -107,8 +106,7 @@ class Form_View(STLForm):
             # Fresh GET: not bad yet
             context.bad_types = []
         skip_print = self.is_skip_print(resource, context)
-        view = context.query['view']
-        if view == 'printable':
+        if is_print(context):
             skip_print = True
         ac = resource.get_access_control()
         readonly = not ac.is_allowed_to_edit(context.user, resource)
@@ -261,9 +259,7 @@ class Form_Send(STLForm):
         # Debug
         namespace['debug'] = context.get_form_value('debug')
         # Print
-        namespace['skip_print'] = False
-        if context.query['view'] == 'printable':
-            namespace['skip_print'] = True
+        namespace['skip_print'] = is_print(context)
         return namespace
 
 
@@ -328,7 +324,7 @@ class Form_Print(STLView):
 
 
     def get_namespace(self, resource, context):
-        context.query['view'] = 'printable'
+        set_print(context)
         context.bad_types = []
         forms = []
         for page_number in resource.get_page_numbers():

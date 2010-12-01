@@ -24,13 +24,13 @@ from ikaaro.access import is_admin
 from ikaaro.skins import Skin as BaseSkin
 
 # Import from iscrib
+from utils import is_print
 
 
 class Skin(BaseSkin):
 
     def get_template(self):
-        context = get_context()
-        if context.get_query_value('view') == 'printable':
+        if is_print(get_context()):
             return self.get_resource('/ui/iscrib/print.xhtml')
         return super(Skin, self).get_template()
 

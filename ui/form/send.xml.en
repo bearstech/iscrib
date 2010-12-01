@@ -2,16 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <stl:block xmlns="http://www.w3.org/1999/xhtml" xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
-  <stl:block stl:if="not skip_print">
-    <p id="form-toolbar">
-      <a id="form-fill" href="." class="button button-control"
+  <p id="form-toolbar" stl:if="not skip_print">
+    <a id="form-fill" href="." class="button button-control"
       title="Come back to the form">Back to Form</a>
-      <a id="form-print" href="?view=printable" class="button button-print"
+    <a id="form-print" href="?view=print" class="button button-print"
       title="Print (in a new window)"
       onclick="return popup(this.href, 800, 600)">Print this page</a>
-    </p>
-    <div class="clear"></div>
-  </stl:block>
+  </p>
 
   <h2>Form State: <span class="wf-${statename}">${form_state}</span></h2>
 

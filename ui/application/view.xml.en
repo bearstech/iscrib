@@ -33,7 +33,7 @@
           'height': 400,
           'overlayColor': '#729FCF',
           'overlayOpacity': 0.8,
-          'href': this.href + '?view=printable',
+          'href': this.href + '?view=print',
           'onCleanup': function () {
             var fancy_iframe = $("#fancybox-frame");
             var message = fancy_iframe.find("#message .info");

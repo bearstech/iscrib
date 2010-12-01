@@ -48,7 +48,7 @@ from datatypes import Subscription
 from form import Form
 from formpage import FormPage
 from rw import ODSWriter, XLSWriter
-from utils import force_encode, is_production
+from utils import force_encode, is_production, is_print
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
@@ -652,7 +652,7 @@ class Application_Edit(DBResource_Edit):
 
     def _get_schema(self, resource, context):
         schema = super(Application_Edit, self)._get_schema(resource, context)
-        if is_admin(context.user, resource):
+        if is_print(context) and is_admin(context.user, resource):
             schema = merge_dicts(schema, self.admin_schema)
         return schema
 

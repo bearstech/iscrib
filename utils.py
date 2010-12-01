@@ -39,6 +39,13 @@ from datatypes import Numeric, Unicode
 is_production = (gethostname() == 'fidel')
 
 
+def is_print(context):
+    return context.get_query_value('view') == 'print'
+
+def set_print(context):
+    context.query['view'] = 'print'
+
+
 class ProgressMeter(object):
     last_percent = 0
 
