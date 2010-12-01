@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 201011231\n"
-"POT-Creation-Date: 2010-12-01 16:12+CET\n"
+"POT-Creation-Date: 2010-12-01 18:12+CET\n"
 "PO-Revision-Date: 2010-11-23 11:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -342,7 +342,7 @@ msgctxt "table cell"
 msgid "<g id='1'><x id='2'/></g><x id='3'/>  <g id='4'>${item/title}</g>"
 msgstr "<g id='1'><x id='2'/></g><x id='3'/>  <g id='4'>${item/title}</g>"
 
-#: ../ui/form/send.xml.en:7
+#: ../ui/form/send.xml.en:6
 msgctxt "link"
 msgid "<g id='1'>Back to Form</g>  <g id='2'>Print this page</g>"
 msgstr "<g id='1'>Retour au formulaire</g>  <g id='2'>Imprimer cette page</g>"
@@ -577,7 +577,7 @@ msgstr "Collecter les données"
 msgid "Collection Application"
 msgstr "Application de collecte"
 
-#: ../ui/form/send.xml.en:7
+#: ../ui/form/send.xml.en:6
 msgctxt "title attribute"
 msgid "Come back to the form"
 msgstr "Revenir au formulaire"
@@ -600,8 +600,8 @@ msgctxt "link"
 msgid "Contact Us"
 msgstr "Contactez-nous"
 
-#: ../ui/form/send.xml.en:51 ../ui/form/send.xml.en:81
-#: ../ui/form/send.xml.en:111
+#: ../ui/form/send.xml.en:48 ../ui/form/send.xml.en:78
+#: ../ui/form/send.xml.en:108
 msgctxt "table cell"
 msgid "Control"
 msgstr "Contrôle de saisie"
@@ -668,7 +668,7 @@ msgctxt "link"
 msgid "Download OpenOffice.org"
 msgstr "Télécharger OpenOffice.org"
 
-#: ../form_views.py:291
+#: ../form_views.py:287
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
 
@@ -710,7 +710,7 @@ msgstr "Représentation"
 msgid "Error"
 msgstr "Erreur"
 
-#: ../ui/form/send.xml.en:43
+#: ../ui/form/send.xml.en:40
 msgctxt "heading"
 msgid "Errors"
 msgstr "Erreurs"
@@ -720,7 +720,7 @@ msgctxt "link"
 msgid "Examples, samples"
 msgstr "Exemples, échantillons"
 
-#: ../ui/form/send.xml.en:35
+#: ../ui/form/send.xml.en:32
 msgctxt "button"
 msgid "Export"
 msgstr "Exporter"
@@ -745,7 +745,7 @@ msgstr "Expression"
 msgid "False"
 msgstr "Faux"
 
-#: ../ui/form/send.xml.en:25
+#: ../ui/form/send.xml.en:22
 msgctxt "button"
 msgid "Finish"
 msgstr "Terminer"
@@ -763,7 +763,7 @@ msgstr "Prénom"
 msgid "First form page must be named \"A\", not \"{page}\"."
 msgstr "La première page de formulaire doit s'appeler « A », pas « {page} »."
 
-#: ../ui/form/send.xml.en:105
+#: ../ui/form/send.xml.en:102
 msgctxt "emphasis"
 msgid "For your information, with the given data."
 msgstr "Pour votre information, avec les données actuelles."
@@ -786,7 +786,7 @@ msgstr "Formulaire"
 msgid "Form Page"
 msgstr "Page de formulaire"
 
-#: ../ui/form/send.xml.en:16
+#: ../ui/form/send.xml.en:13
 msgctxt "heading"
 msgid "Form State:"
 msgstr "État du formulaire :"
@@ -917,7 +917,7 @@ msgstr ""
 "Feuille « {name} », le nombre de colonnes ne correspond pas. Utilisez-vous "
 "le dernier gabarit ?"
 
-#: ../ui/form/send.xml.en:103
+#: ../ui/form/send.xml.en:100
 msgctxt "heading"
 msgid "Information"
 msgstr "Informations"
@@ -926,7 +926,7 @@ msgstr "Informations"
 msgid "Informative"
 msgstr "Informatif"
 
-#: ../form_views.py:203
+#: ../form_views.py:201
 msgid "Input Control"
 msgstr "Contrôle de saisie"
 
@@ -1049,12 +1049,12 @@ msgstr "Aucune application de collecte créée."
 msgid "No data to collect for now."
 msgstr "Il n'y a pas de données à collecter pour l'instant."
 
-#: ../ui/form/send.xml.en:70
+#: ../ui/form/send.xml.en:67
 msgctxt "paragraph"
 msgid "No error detected."
 msgstr "Aucune erreur détectée"
 
-#: ../ui/form/send.xml.en:134
+#: ../ui/form/send.xml.en:131
 msgctxt "paragraph"
 msgid "No information available."
 msgstr "Aucune information disponible."
@@ -1072,7 +1072,7 @@ msgctxt "paragraph"
 msgid "No user registered."
 msgstr "Aucun sondé enregistré."
 
-#: ../ui/form/send.xml.en:100
+#: ../ui/form/send.xml.en:97
 msgctxt "paragraph"
 msgid "No warning detected."
 msgstr "Aucun avertissement détecté."
@@ -1163,7 +1163,7 @@ msgstr ""
 msgid "Please type the two words"
 msgstr "Veuillez saisir les deux mots"
 
-#: ../ui/form/send.xml.en:75
+#: ../ui/form/send.xml.en:72
 msgctxt "emphasis"
 msgid "Please verify the consistency of these data."
 msgstr "Veuillez vérifier la cohérence des données."
@@ -1174,12 +1174,12 @@ msgid "Pricing"
 msgstr "Tarifs"
 
 #: ../ui/form/view.xml.en:20 ../ui/form/view.xml.en:23
-#: ../ui/form/send.xml.en:9
+#: ../ui/form/send.xml.en:8
 msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr "Imprimer (dans une nouvelle fenêtre)"
 
-#: ../form_views.py:321
+#: ../form_views.py:317
 msgid "Print form"
 msgstr "Impression du formulaire"
 
@@ -1302,7 +1302,7 @@ msgstr "Texte"
 msgid "The e-mail or the password is incorrect."
 msgstr "L'adresse de courriel ou le mot de passe sont incorrects."
 
-#: ../ui/form/send.xml.en:33
+#: ../ui/form/send.xml.en:30
 msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
@@ -1325,7 +1325,7 @@ msgstr ""
 msgid "The password is missing."
 msgstr "Veuillez saisir le mot de passe."
 
-#: ../ui/form/send.xml.en:45
+#: ../ui/form/send.xml.en:42
 msgctxt "emphasis"
 msgid "These errors must absolutely be corrected."
 msgstr "Ces erreurs doivent obligatoirement être corrigées."
@@ -1372,8 +1372,8 @@ msgstr "Titre"
 msgid "Title (shown in the banner if no logo)"
 msgstr "Titre (apparaît dans la bannière s'il n'y a pas de logo)"
 
-#: ../ui/form/send.xml.en:63 ../ui/form/send.xml.en:93
-#: ../ui/form/send.xml.en:127
+#: ../ui/form/send.xml.en:60 ../ui/form/send.xml.en:90
+#: ../ui/form/send.xml.en:124
 msgctxt "link"
 msgid "To correct"
 msgstr "Pour corriger"
@@ -1411,7 +1411,7 @@ msgctxt "fieldset"
 msgid "User:"
 msgstr "Utilisateur :"
 
-#: ../ui/form/send.xml.en:112
+#: ../ui/form/send.xml.en:109
 msgctxt "table cell"
 msgid "Value"
 msgstr "Valeur"
@@ -1432,7 +1432,7 @@ msgstr "ATTENTION ! Il y a des champs manquants ou invalides."
 msgid "Warning"
 msgstr "Avertissement"
 
-#: ../ui/form/send.xml.en:73
+#: ../ui/form/send.xml.en:70
 msgctxt "heading"
 msgid "Warnings"
 msgstr "Avertissements"
@@ -1446,7 +1446,7 @@ msgstr "Bienvenue dans votre espace iScrib"
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
-#: ../ui/form/send.xml.en:22
+#: ../ui/form/send.xml.en:19
 msgctxt "paragraph"
 msgid ""
 "When you have finished filling the form, you can click the \"Finish\" button."
@@ -1544,13 +1544,13 @@ msgstr ""
 "Vous avez enregistré ${n_forms} sondés<g id='7'> sur ${max_users} autorisés</"
 "g> :"
 
-#: ../ui/form/send.xml.en:28
+#: ../ui/form/send.xml.en:25
 msgctxt "paragraph"
 msgid "You must correct all of the errors below to finish your form."
 msgstr ""
 "Vous devez corriger les erreurs suivantes pour terminer votre formulaire."
 
-#: ../ui/form/send.xml.en:18
+#: ../ui/form/send.xml.en:15
 msgctxt "paragraph"
 msgid "You must start by filling the form."
 msgstr "Vous devez commencer par remplir le formulaire."
@@ -1584,8 +1584,8 @@ msgstr "Votre application est créée. Vous devez maintenant ajouter des sondés
 
 #: ../workgroup_views.py:42
 msgid "Your client space \"{title}\" is created. You can add your logo."
-msgstr "Votre espace client « {title} » est créé. Vous pouvez mettre votre "
-"logo."
+msgstr ""
+"Votre espace client « {title} » est créé. Vous pouvez mettre votre logo."
 
 #: ../workgroup_views.py:66
 msgid "Your e-mail address"
@@ -1595,7 +1595,7 @@ msgstr "Adresse de courriel"
 msgid "Your form is finished. Your correspondent has been informed."
 msgstr "Votre saisie est terminée. Votre correspondant a été averti."
 
-#: ../form_views.py:296
+#: ../form_views.py:292
 msgid "Your form is not finished yet."
 msgstr "Votre formulaire n'est pas encore terminé."
 
@@ -1607,11 +1607,11 @@ msgstr "Votre espace client"
 msgid "Your workgroups"
 msgstr "Vos espaces client"
 
-#: ../utils.py:163 ../form.py:379
+#: ../utils.py:170 ../form.py:379
 msgid "["
 msgstr "["
 
-#: ../utils.py:166
+#: ../utils.py:173
 msgid "]"
 msgstr "]"
 
@@ -1790,11 +1790,11 @@ msgstr "{application} : <em>Formulaire de test</em>"
 msgid "{application}: {form}"
 msgstr "{application} : {form}"
 
-#: ../form_views.py:224
+#: ../form_views.py:222
 msgid "{name} invalid"
 msgstr "{name} invalide"
 
-#: ../form_views.py:221
+#: ../form_views.py:219
 msgid "{name} is not equal to {formula}"
 msgstr "{name} n'est pas égal à {formula}"
 
