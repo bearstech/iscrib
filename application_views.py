@@ -56,7 +56,7 @@ ERR_NO_DATA = ERROR(u"No data to collect for now.")
 ERR_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
         u'Contact <a href="http://www.itaapy.com/contact">Itaapy</a> for '
         u"more.", html=True)
-MSG_NEW_APPLICATION = INFO(u'Your application is created. Now register '
+INFO_NEW_APPLICATION = INFO(u'Your application is created. Now register '
         u'users.')
 ERR_PASSWORD_MISSING = ERROR(u"The password is missing.")
 ERR_BAD_EMAIL = ERROR(u"The given username is not an e-mail address.")
@@ -64,6 +64,10 @@ ERR_SUBSCRIPTION_FULL = ERROR(u"No more users are allowed to register.")
 ERR_NOT_ALLOWED = ERROR(u"You are not allowed to register.")
 ERR_ALREADY_REGISTERED = ERROR(u"You are already registered. "
         u"Log in using your password.")
+MSG_APPLICATION_TITLE = MSG(u'''<span class="application-title">Title of your
+application:</span> {title}
+<a href=";edit" title="Edit" rel="fancybox">
+  <img src="/ui/icons/16x16/edit.png"/></a>''', html=True)
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
@@ -113,7 +117,7 @@ class Application_NewInstance(NewInstance):
             context.commit = False
             context.message = ERROR(unicode(exception))
             return
-        return context.come_back(MSG_NEW_APPLICATION, goto)
+        return context.come_back(INFO_NEW_APPLICATION, goto)
 
 
 
@@ -247,9 +251,7 @@ class Application_View(Folder_BrowseContent):
 
     def get_page_title(self, resource, context):
         title = resource.get_page_title()
-        return MSG(u'''Title of your application: {title} <a href=";edit"
-            title="Edit"><img src="/ui/icons/16x16/edit.png"/></a>''',
-            html=True).gettext( title=title)
+        return MSG_APPLICATION_TITLE.gettext(title=title)
 
 
     def get_items(self, resource, context, *args):
@@ -559,9 +561,7 @@ class Application_Register(STLForm):
 
     def get_page_title(self, resource, context):
         title = resource.get_page_title()
-        return MSG(u'''Title of your application: {title} <a href=";edit"
-            title="Edit"><img src="/ui/icons/16x16/edit.png"/></a>''',
-            html=True).gettext( title=title)
+        return MSG_APPLICATION_TITLE.gettext( title=title)
 
 
     def get_namespace(self, resource, context):
