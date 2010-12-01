@@ -652,7 +652,7 @@ class Application_Edit(DBResource_Edit):
 
     def _get_schema(self, resource, context):
         schema = super(Application_Edit, self)._get_schema(resource, context)
-        if is_print(context) and is_admin(context.user, resource):
+        if not is_print(context) and is_admin(context.user, resource):
             schema = merge_dicts(schema, self.admin_schema)
         return schema
 
@@ -660,7 +660,7 @@ class Application_Edit(DBResource_Edit):
     def _get_widgets(self, resource, context):
         widgets = super(Application_Edit, self)._get_widgets(resource,
                 context)
-        if is_admin(context.user, resource):
+        if not is_print(context) and is_admin(context.user, resource):
             widgets.extend(self.admin_widgets)
         return widgets
 
