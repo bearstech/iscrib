@@ -30,7 +30,7 @@ class Skin(BaseSkin):
 
     def get_template(self):
         context = get_context()
-        if context.query.get('view') == 'printable':
+        if context.get_query_value('view') == 'printable':
             return self.get_resource('/ui/iscrib/print.xhtml')
         return super(Skin, self).get_template()
 
