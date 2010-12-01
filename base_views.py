@@ -211,7 +211,7 @@ class IconsView(BaseIconsView):
 
 
     def get_items(self, resource, context):
-        return self.items[:]
+        return [x.copy() for x in self.items]
 
 
     def get_namespace(self, resource, context):
