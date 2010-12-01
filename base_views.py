@@ -229,10 +229,10 @@ class IconsView(BaseIconsView):
 
         rows = [[]]
         for item in self.get_items(resource, context):
+            url = item['url']
+            path = str(base_path.resolve2(url))
             # Fragment not sent
-            url = item['url'].split('#', 1)[0]
-            path = base_path.resolve2(url)
-            if path == here_path:
+            if path.split('#', 1)[0] == here_path:
                 item['class'] = 'active'
             else:
                 item['class'] = None
