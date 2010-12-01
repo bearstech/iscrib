@@ -83,6 +83,7 @@
       <div class="col">
         <h2>About iScrib</h2>
         <ul class="content">
+          <li><a href="/">Create Your Form</a></li>
           <li><a href="http://www.itaapy.com" target="_blank">An Itaapy service</a></li>
           <li><a href="/terms-and-conditions">Terms of Use</a></li>
           <li><a href="http://blog.itaapy.com" target="_blank">Blog</a></li>
