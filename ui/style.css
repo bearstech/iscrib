@@ -345,7 +345,8 @@ button, .button {
 }
 
 #pages-menu ul li a:hover {
-  background: #ccc;
+  background-color: #3c638a;
+  background-position: left bottom;
   color: #fff;
 }
 #pages-menu ul li.active a {
