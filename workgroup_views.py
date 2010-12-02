@@ -130,22 +130,23 @@ class Workgroup_NewInstance(NewInstance):
 
 /* Form pages menu / Menu des pages du formulaire */
 #pages-menu { border-bottom: 1px solid #339; }
-#pages-menu ul li a { background: #339; }
-#pages-menu ul li a:hover {
-  background: #ccc;
-  color: #fff;
+#pages-menu ul li a {
+  background-color: #339;
   border-color: #339;
 }
+#pages-menu ul li a:hover {
+  background-color: #ccc;
+  color: #fff;
+}
 #pages-menu ul li.active a {
-  background: #fff;
+  background-color: #fff;
   color: #339;
-  border-color: #339;
 }
 
 /* Form titles / Titres dans les formulaires */
-.iscrib-table td.section-header h2,
-.iscrib-table td.section-header h3,
-.iscrib-table td.section-header h4 {
+td.section-header h2,
+td.section-header h3,
+td.section-header h4 {
   color: #fff;
   background-color: #339;
 }
