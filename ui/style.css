@@ -4,7 +4,7 @@
 }
 
 body {
-  background: #fff url('/ui/iscrib/images/bkg.jpg') top left repeat-x;
+  background: #fff url(/ui/iscrib/images/bkg.jpg) repeat-x left top;
 }
 
 div#page {
@@ -59,7 +59,7 @@ div#page {
 }
 
 #footer {
-  background: url("/ui/iscrib/images/footer-background.jpg") top left repeat-x;
+  background: url(/ui/iscrib/images/footer-background.jpg) repeat-x left top;
   height: 127px;
   text-align: left;
   margin-top: 0;
@@ -108,13 +108,13 @@ div#page {
   */
 }
 .mandatory {
-  background-color: #ffc8c8 !important;
+  background: #ffc8c8 !important;
 }
 .badtype {
   border: 3px solid #c00 !important;
 }
 .disabled {
-  background-color: #d3d3d3 !important;
+  background: #d3d3d3 !important;
 }
 
 /* readonly widgets */
@@ -142,61 +142,69 @@ div.num {
 #form-tables {
   text-align: center;
 }
-#form-tables table {
+
+table.iscrib-table {
   margin: auto;
   text-align: left;
+  border-collapse: collapse;
 }
-
 .iscrib-table td {
-  padding: 1px;
   color: #446;
   font-family: Verdana, Arial, Sans;
   font-weight: bold;
+  padding: 3px;
   text-align: left;
 }
-.iscrib-table td.centered {
+td.centered {
   text-align: center;
 }
 
-.iscrib-table td.section-header {
+td.section-header {
   text-align: left;
   padding: 5px 0 0 0;
 }
-.iscrib-table td.section-header * {
+td.section-header * {
   border-bottom: 0;
   font-family: Arial, sans;
 }
-.iscrib-table td.section-header h2 {
-  margin: 0;
-  padding: 0;
+td.section-header h2 {
+  background: #06090b url(/ui/iscrib/images/footer-background.jpg) repeat-x left top;
   color: #fff;
-  background: #339;
   font-size: 14px;
-}
-.iscrib-table td.section-header h3 {
   margin: 3px 0;
-  color: #fff;
-  background: #729FCF;
-  font-size: 14px;
+  padding: 3px;
 }
-.iscrib-table td.section-header h4 {
+td.section-header h3 {
+  background: #3c638a url(/ui/iscrib/images/footer-background.jpg) repeat-x left bottom;
+  color: #fff;
+  font-size: 13px;
+  margin: 3px 0;
+  padding: 3px;
+}
+td.section-header h4 {
   margin: 1px 0;
-  color: #339;
+  color: #06090b;
   background: #fff;
   font-size: 12px;
 }
-.iscrib-table td.section-header h5 {
+td.section-header h5 {
   margin: 1px 0;
-  font-size: 12px;
+  font-size: 11px;
   color: #000;
   background: #fff;
   font-style: italic;
 }
-.iscrib-table td.field-label {
-  background-color: #d3d3d3;
+td.field-label {
+  border-top: 1px solid #ccc;
 }
-.iscrib-table td.rubrique-label {
-  background-color: #d3d3d3;
+td.field-label input,
+td.field-label select,
+td.field-label textarea {
+  background: #fff url(images/fond-champs.png) repeat-x left top;
+  border: 1px solid #ccc;
+}
+td.rubrique-label {
+  border-top: 1px solid #ccc;
   font-size: 8px;
 }
 
@@ -244,7 +252,9 @@ div.num {
 .number {
   color: #FFF;
   font-size: 45px;
-  border-radius: 50px; -moz-border-radius: 50px; -webkit-border-radius: 50px;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
   text-align: center;
   width: 45px;
   display:block;
@@ -259,14 +269,14 @@ h1.title-home {
 
 /* Buttons */
 button, .button {
-  background-color: #FFF;
-  background-position: 5px 5px;
-  background-repeat: no-repeat;
-  border: 1px solid #CCCCCC;
-  border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
-  box-shadow: 0 0 3px #CCCCCC;
-  -moz-box-shadow: 0 0 3px #CCCCCC;
-  -webkit-box-shadow: 0 0 3px #CCCCCC;
+  background: #fff no-repeat 5px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  box-shadow: 0 0 3px #ccc;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
   cursor: pointer;
   display: inline-block;
   font-size: 12px;
@@ -303,7 +313,7 @@ button, .button {
 }
 
 #pages-menu {
-  border-bottom: 1px solid #339;
+  border-bottom: 1px solid #06090b;
 }
 
 #pages-menu ul {
@@ -320,8 +330,11 @@ button, .button {
 }
 
 #pages-menu ul li a {
-  background: #339;
-  border-radius: 5px 5px 0 0; -moz-border-radius: 5px 5px 0 0; -webkit-border-radius: 5px 5px 0 0;
+  background: #06090b url(/ui/iscrib/images/footer-background.jpg) repeat-x left -1px;
+  border-color: #06090b;
+  border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
   border-style: solid;
   border-width: 1px 1px 0;
   color: #fff;
@@ -334,17 +347,16 @@ button, .button {
 #pages-menu ul li a:hover {
   background: #ccc;
   color: #fff;
-  border-color: #339;
 }
 #pages-menu ul li.active a {
   background: #fff;
-  color: #339;
-  border-color: #339;
+  color: #06090b;
+  border-color: #06090b;
 }
 
 #contact-form {
   border-collapse: collapse;
-  background: #fff url(images/contact-bg.png) top right repeat-y;
+  background: #fff url(images/contact-bg.png) repeat-y right top;
   box-shadow: 5px 5px 5px 0 #777;
   -moz-box-shadow: 5px 5px 5px 0 #777;
   -webkit-box-shadow: 5px 5px 5px 0 #777;
@@ -415,7 +427,7 @@ button, .button {
   float: left;
 }
 .icons-view a.item {
-  background: transparent url(images/item-background.png) top left repeat-x;
+  background: transparent url(images/item-background.png) repeat-x left top;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
