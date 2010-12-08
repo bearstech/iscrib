@@ -333,7 +333,8 @@ class Form(File):
                 sum = datatype.sum(datatype.formula, schema, fields)
                 is_sum_valid = (sum is None or sum == value)
             if datatype.mandatory:
-                if value and is_valid and is_sum_valid:
+                # False or 0 must be valid
+                if unicode(value).strip() and is_valid and is_sum_valid:
                     continue
             else:
                 if is_valid and is_sum_valid:
