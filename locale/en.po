@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-12-01 18:12+CET\n"
+"POT-Creation-Date: 2010-12-08 10:12+CET\n"
 "PO-Revision-Date: 2010-09-07 14:15+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgid ""
 "    stl:if=\"value\"/>"
 msgstr ""
 
-#: ../workgroup_views.py:211
+#: ../workgroup_views.py:212
 msgid ""
 "\n"
 "<div id=\"choose-format\">\n"
@@ -216,7 +216,7 @@ msgstr ""
 msgid "."
 msgstr ""
 
-#: ../formpage.py:184 ../schema.py:187
+#: ../formpage.py:184 ../schema.py:186
 msgid "/"
 msgstr ""
 
@@ -224,7 +224,7 @@ msgstr ""
 msgid "/>"
 msgstr ""
 
-#: ../schema.py:107
+#: ../schema.py:106
 msgid "00000"
 msgstr ""
 
@@ -410,7 +410,7 @@ msgctxt "link"
 msgid "An Itaapy service"
 msgstr ""
 
-#: ../workgroup_views.py:232
+#: ../workgroup_views.py:233
 msgid "Application"
 msgstr ""
 
@@ -433,7 +433,7 @@ msgctxt "link"
 msgid "Blog"
 msgstr ""
 
-#: ../schema.py:105
+#: ../schema.py:104
 msgid "Boolean"
 msgstr ""
 
@@ -442,11 +442,11 @@ msgctxt "heading"
 msgid "Business"
 msgstr ""
 
-#: ../workgroup_views.py:327
+#: ../workgroup_views.py:328
 msgid "CSS"
 msgstr ""
 
-#: ../schema.py:195
+#: ../schema.py:194
 msgid "Checkbox"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgstr ""
 msgid "Company/Organization"
 msgstr ""
 
-#: ../workgroup_views.py:220
+#: ../workgroup_views.py:221
 msgid "Configure your client space"
 msgstr ""
 
@@ -510,7 +510,7 @@ msgctxt "link"
 msgid "Create Your Form"
 msgstr ""
 
-#: ../workgroup_views.py:215
+#: ../workgroup_views.py:216
 msgid "Create a Data Collection Application"
 msgstr ""
 
@@ -523,27 +523,27 @@ msgid ""
 "Create your client space to manage collection applications and submit them."
 msgstr ""
 
-#: ../workgroup_views.py:235
+#: ../workgroup_views.py:236
 msgid "Creation Date"
 msgstr ""
 
-#: ../schema.py:111
+#: ../schema.py:110
 msgid "DD/MM/YYYY"
 msgstr ""
 
-#: ../schema.py:106
+#: ../schema.py:105
 msgid "Decimal"
 msgstr ""
 
-#: ../schema.py:284
+#: ../schema.py:283
 msgid "Decimals"
 msgstr ""
 
-#: ../schema.py:289
+#: ../schema.py:288
 msgid "Default Value"
 msgstr ""
 
-#: ../schema.py:287
+#: ../schema.py:286
 msgid "Dependent Field"
 msgstr ""
 
@@ -556,11 +556,11 @@ msgstr ""
 msgid "Download form"
 msgstr ""
 
-#: ../workgroup_views.py:197
+#: ../workgroup_views.py:198
 msgid "Download the Template"
 msgstr ""
 
-#: ../workgroup_views.py:198
+#: ../workgroup_views.py:199
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 
@@ -572,7 +572,7 @@ msgstr ""
 msgid "E-mail Address"
 msgstr ""
 
-#: ../workgroup_views.py:219 ../workgroup_views.py:317
+#: ../workgroup_views.py:220 ../workgroup_views.py:318
 msgid "Edit Title, Logo and CSS"
 msgstr ""
 
@@ -580,11 +580,11 @@ msgstr ""
 msgid "Empty"
 msgstr ""
 
-#: ../schema.py:281
+#: ../schema.py:280
 msgid "Enumerate Options"
 msgstr ""
 
-#: ../schema.py:283
+#: ../schema.py:282
 msgid "Enumerate Representation"
 msgstr ""
 
@@ -677,7 +677,7 @@ msgstr ""
 msgid "Format {format}"
 msgstr ""
 
-#: ../schema.py:288
+#: ../schema.py:287
 msgid "Formula"
 msgstr ""
 
@@ -685,11 +685,11 @@ msgstr ""
 msgid "Function"
 msgstr ""
 
-#: ../schema.py:108
+#: ../schema.py:107
 msgid "HH:MM"
 msgstr ""
 
-#: ../schema.py:109
+#: ../schema.py:108
 msgid "HHH:MM"
 msgstr ""
 
@@ -721,44 +721,40 @@ msgstr ""
 msgid "In controls, line {line}, unexpected level \"{level}\"."
 msgstr ""
 
-#: ../schema.py:49
+#: ../schema.py:48
 msgid "In schema, line {line}, decimals \"{decimals}\" are invalid."
 msgstr ""
 
-#: ../schema.py:59
+#: ../schema.py:58
 msgid "In schema, line {line}, default value \"{default}\" is invalid."
 msgstr ""
 
-#: ../schema.py:55
+#: ../schema.py:54
 msgid "In schema, line {line}, dependency variable name \"{name}\" is invalid."
 msgstr ""
 
-#: ../schema.py:45
+#: ../schema.py:44
 msgid "In schema, line {line}, enum options are missing."
 msgstr ""
 
-#: ../schema.py:47
+#: ../schema.py:46
 msgid "In schema, line {line}, enum representation \"{enum_repr}\" is invalid."
 msgstr ""
 
-#: ../schema.py:57
+#: ../schema.py:56
 msgid "In schema, line {line}, in sum formula, variable \"{name}\" is invalid."
 msgstr ""
 
-#: ../schema.py:43
+#: ../schema.py:42
 msgid "In schema, line {line}, length \"{length}\" is invalid."
 msgstr ""
 
-#: ../schema.py:51
+#: ../schema.py:50
 msgid "In schema, line {line}, mandatory \"{mandatory}\" is invalid."
 msgstr ""
 
-#: ../schema.py:53
+#: ../schema.py:52
 msgid "In schema, line {line}, size \"{size}\" is invalid."
-msgstr ""
-
-#: ../schema.py:42
-msgid "In schema, line {line}, type \"{type}\" is invalid."
 msgstr ""
 
 #: ../schema.py:40
@@ -794,11 +790,11 @@ msgstr ""
 msgid "Input Control"
 msgstr ""
 
-#: ../schema.py:286
+#: ../schema.py:285
 msgid "Input Size"
 msgstr ""
 
-#: ../schema.py:110
+#: ../schema.py:109
 msgid "Integer"
 msgstr ""
 
@@ -811,7 +807,7 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: ../schema.py:279
+#: ../schema.py:278
 msgid "Length"
 msgstr ""
 
@@ -819,7 +815,7 @@ msgstr ""
 msgid "Level"
 msgstr ""
 
-#: ../schema.py:115
+#: ../schema.py:114
 msgid "List of values"
 msgstr ""
 
@@ -838,7 +834,7 @@ msgctxt "heading"
 msgid "Login"
 msgstr ""
 
-#: ../workgroup_views.py:326
+#: ../workgroup_views.py:327
 msgid "Logo (shown in the banner)"
 msgstr ""
 
@@ -847,7 +843,7 @@ msgctxt "heading"
 msgid "Lost Password"
 msgstr ""
 
-#: ../schema.py:112
+#: ../schema.py:111
 msgid "MM/YYYY"
 msgstr ""
 
@@ -863,11 +859,11 @@ msgstr ""
 msgid "Manage your Data Collection Application"
 msgstr ""
 
-#: ../workgroup_views.py:228
+#: ../workgroup_views.py:229
 msgid "Manage your client space"
 msgstr ""
 
-#: ../schema.py:285
+#: ../schema.py:284
 msgid "Mandatory"
 msgstr ""
 
@@ -900,6 +896,10 @@ msgstr ""
 #: ../ui/template.xhtml.en:95 ../ui/print.xhtml.en:57
 msgctxt "link"
 msgid "News"
+msgstr ""
+
+#: ../datatypes.py:670
+msgid "No"
 msgstr ""
 
 #: ../ui/workgroup/view.xml.en:17
@@ -943,10 +943,6 @@ msgstr ""
 msgid "No {class_title} available."
 msgstr ""
 
-#: ../datatypes.py:670
-msgid "Non"
-msgstr ""
-
 #: ../workflow.py:35
 msgid "Not Registered"
 msgstr ""
@@ -972,7 +968,7 @@ msgctxt "button"
 msgid "Ok"
 msgstr ""
 
-#: ../schema.py:278
+#: ../schema.py:277
 msgid "Online Help"
 msgstr ""
 
@@ -982,10 +978,6 @@ msgstr ""
 
 #: ../user_views.py:50
 msgid "Operation successful! Welcome."
-msgstr ""
-
-#: ../datatypes.py:669
-msgid "Oui"
 msgstr ""
 
 #: ../application.py:136
@@ -1043,7 +1035,7 @@ msgstr ""
 msgid "Print form"
 msgstr ""
 
-#: ../schema.py:194
+#: ../schema.py:193
 msgid "Radio"
 msgstr ""
 
@@ -1082,7 +1074,7 @@ msgctxt "button"
 msgid "Save"
 msgstr ""
 
-#: ../schema.py:345 ../application.py:103
+#: ../schema.py:344 ../application.py:103
 msgid "Schema"
 msgstr ""
 
@@ -1091,7 +1083,7 @@ msgctxt "legend"
 msgid "Search"
 msgstr ""
 
-#: ../schema.py:193
+#: ../schema.py:192
 msgid "Select"
 msgstr ""
 
@@ -1103,11 +1095,11 @@ msgstr ""
 msgid "Slogan"
 msgstr ""
 
-#: ../workgroup_views.py:307
+#: ../workgroup_views.py:308
 msgid "Source"
 msgstr ""
 
-#: ../workgroup_views.py:234
+#: ../workgroup_views.py:235
 msgid "Source File"
 msgstr ""
 
@@ -1128,7 +1120,7 @@ msgctxt "fieldset"
 msgid "State:"
 msgstr ""
 
-#: ../schema.py:113
+#: ../schema.py:112
 msgid "String"
 msgstr ""
 
@@ -1136,7 +1128,7 @@ msgstr ""
 msgid "Subscribe Users"
 msgstr ""
 
-#: ../workgroup_views.py:233
+#: ../workgroup_views.py:234
 msgid "Subscribed Users"
 msgstr ""
 
@@ -1154,7 +1146,7 @@ msgctxt "link"
 msgid "Terms of Use"
 msgstr ""
 
-#: ../schema.py:114
+#: ../schema.py:113
 msgid "Text"
 msgstr ""
 
@@ -1214,11 +1206,11 @@ msgctxt "title attribute"
 msgid "This field is required"
 msgstr ""
 
-#: ../schema.py:275 ../controls.py:101
+#: ../schema.py:274 ../controls.py:101
 msgid "Title"
 msgstr ""
 
-#: ../workgroup_views.py:323
+#: ../workgroup_views.py:324
 msgid "Title (shown in the banner if no logo)"
 msgstr ""
 
@@ -1238,7 +1230,7 @@ msgstr ""
 msgid "True"
 msgstr ""
 
-#: ../schema.py:277
+#: ../schema.py:276
 msgid "Type"
 msgstr ""
 
@@ -1246,7 +1238,7 @@ msgstr ""
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
-#: ../workgroup_views.py:216
+#: ../workgroup_views.py:217
 msgid ""
 "Uploading this spreadsheet file in iScrib will generate in one click your "
 "data collection application."
@@ -1262,7 +1254,7 @@ msgctxt "table cell"
 msgid "Value"
 msgstr ""
 
-#: ../schema.py:276
+#: ../schema.py:275
 msgid "Variable"
 msgstr ""
 
@@ -1296,6 +1288,10 @@ msgstr ""
 msgctxt "paragraph"
 msgid ""
 "When you have finished filling the form, you can click the \"Finish\" button."
+msgstr ""
+
+#: ../datatypes.py:669
+msgid "Yes"
 msgstr ""
 
 #: ../workgroup_views.py:45

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 201011231\n"
-"POT-Creation-Date: 2010-12-01 18:12+CET\n"
+"POT-Creation-Date: 2010-12-08 10:12+CET\n"
 "PO-Revision-Date: 2010-11-23 11:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 "    <img src=\"${value}/;thumb?width=${width}&amp;height=${height}\"\n"
 "    stl:if=\"value\"/>"
 
-#: ../workgroup_views.py:211
+#: ../workgroup_views.py:212
 msgid ""
 "\n"
 "<div id=\"choose-format\">\n"
@@ -74,7 +74,8 @@ msgstr ""
 "    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n"
 "  <ul>\n"
 "    <li>Télécharger la <a href=\"/gabarit/;download\">version ODS</a></li>\n"
-"    <li>Télécharger la <a href=\"/gabarit-xls/;download\">version XLS</a></li>\n"
+"    <li>Télécharger la <a href=\"/gabarit-xls/;download\">version XLS</a></"
+"li>\n"
 "  </ul>\n"
 "</div>\n"
 "<script type=\"text/javascript\">\n"
@@ -299,7 +300,7 @@ msgstr "-"
 msgid "."
 msgstr "."
 
-#: ../formpage.py:184 ../schema.py:187
+#: ../formpage.py:184 ../schema.py:186
 msgid "/"
 msgstr "/"
 
@@ -307,7 +308,7 @@ msgstr "/"
 msgid "/>"
 msgstr "/>"
 
-#: ../schema.py:107
+#: ../schema.py:106
 msgid "00000"
 msgstr "00000"
 
@@ -524,7 +525,7 @@ msgctxt "link"
 msgid "An Itaapy service"
 msgstr "Un service Itaapy"
 
-#: ../workgroup_views.py:232
+#: ../workgroup_views.py:233
 msgid "Application"
 msgstr "Application"
 
@@ -547,7 +548,7 @@ msgctxt "link"
 msgid "Blog"
 msgstr "Blog"
 
-#: ../schema.py:105
+#: ../schema.py:104
 msgid "Boolean"
 msgstr "Booléen"
 
@@ -556,11 +557,11 @@ msgctxt "heading"
 msgid "Business"
 msgstr "Business"
 
-#: ../workgroup_views.py:327
+#: ../workgroup_views.py:328
 msgid "CSS"
 msgstr "CSS"
 
-#: ../schema.py:195
+#: ../schema.py:194
 msgid "Checkbox"
 msgstr "Case à cocher"
 
@@ -591,7 +592,7 @@ msgstr "Société"
 msgid "Company/Organization"
 msgstr "Société/Organisme"
 
-#: ../workgroup_views.py:220
+#: ../workgroup_views.py:221
 msgid "Configure your client space"
 msgstr "configurez votre espace client"
 
@@ -624,7 +625,7 @@ msgctxt "link"
 msgid "Create Your Form"
 msgstr "Créer votre formulaire"
 
-#: ../workgroup_views.py:215
+#: ../workgroup_views.py:216
 msgid "Create a Data Collection Application"
 msgstr "Créer une application de collecte"
 
@@ -639,27 +640,27 @@ msgstr ""
 "Créez votre espace client où vous pourrez ajouter vos applications de "
 "collecte et les soumettre aux personnes de votre choix."
 
-#: ../workgroup_views.py:235
+#: ../workgroup_views.py:236
 msgid "Creation Date"
 msgstr "Date de création"
 
-#: ../schema.py:111
+#: ../schema.py:110
 msgid "DD/MM/YYYY"
 msgstr "JJ/MM/AAAA"
 
-#: ../schema.py:106
+#: ../schema.py:105
 msgid "Decimal"
 msgstr "Décimal"
 
-#: ../schema.py:284
+#: ../schema.py:283
 msgid "Decimals"
 msgstr "Décimaux"
 
-#: ../schema.py:289
+#: ../schema.py:288
 msgid "Default Value"
 msgstr "Valeur par défaut"
 
-#: ../schema.py:287
+#: ../schema.py:286
 msgid "Dependent Field"
 msgstr "Champ dépendant"
 
@@ -672,11 +673,11 @@ msgstr "Télécharger OpenOffice.org"
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
 
-#: ../workgroup_views.py:197
+#: ../workgroup_views.py:198
 msgid "Download the Template"
 msgstr "Télécharger le gabarit"
 
-#: ../workgroup_views.py:198
+#: ../workgroup_views.py:199
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 "Téléchargez ce gabarit qui vous servira d'exemple pour créer votre "
@@ -690,7 +691,7 @@ msgstr "Courriel"
 msgid "E-mail Address"
 msgstr "Adresse de courriel"
 
-#: ../workgroup_views.py:219 ../workgroup_views.py:317
+#: ../workgroup_views.py:220 ../workgroup_views.py:318
 msgid "Edit Title, Logo and CSS"
 msgstr "Modifier titre, logo et CSS"
 
@@ -698,11 +699,11 @@ msgstr "Modifier titre, logo et CSS"
 msgid "Empty"
 msgstr "Vide"
 
-#: ../schema.py:281
+#: ../schema.py:280
 msgid "Enumerate Options"
 msgstr "Valeurs de enum"
 
-#: ../schema.py:283
+#: ../schema.py:282
 msgid "Enumerate Representation"
 msgstr "Représentation"
 
@@ -795,7 +796,7 @@ msgstr "État du formulaire :"
 msgid "Format {format}"
 msgstr "Format {format}"
 
-#: ../schema.py:288
+#: ../schema.py:287
 msgid "Formula"
 msgstr "Formule"
 
@@ -803,11 +804,11 @@ msgstr "Formule"
 msgid "Function"
 msgstr "Fonction"
 
-#: ../schema.py:108
+#: ../schema.py:107
 msgid "HH:MM"
 msgstr "HH:MM"
 
-#: ../schema.py:109
+#: ../schema.py:108
 msgid "HHH:MM"
 msgstr "HHH:MM"
 
@@ -842,56 +843,52 @@ msgid "In controls, line {line}, unexpected level \"{level}\"."
 msgstr ""
 "Feuille contrôles, ligne {line}, force du contrôle « {level} » invalide."
 
-#: ../schema.py:49
+#: ../schema.py:48
 msgid "In schema, line {line}, decimals \"{decimals}\" are invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, les décimales \"{decimals}\" sont invalides."
 
-#: ../schema.py:59
+#: ../schema.py:58
 msgid "In schema, line {line}, default value \"{default}\" is invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, la valeur par défaut « {default} » est "
 "invalide."
 
-#: ../schema.py:55
+#: ../schema.py:54
 msgid "In schema, line {line}, dependency variable name \"{name}\" is invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, la variable de dépendance « {name} » est "
 "invalide."
 
-#: ../schema.py:45
+#: ../schema.py:44
 msgid "In schema, line {line}, enum options are missing."
 msgstr "Feuille schéma, ligne {line}, il manque les valeurs de enum."
 
-#: ../schema.py:47
+#: ../schema.py:46
 msgid "In schema, line {line}, enum representation \"{enum_repr}\" is invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, la représentation « {representation} » est "
 "invalide."
 
-#: ../schema.py:57
+#: ../schema.py:56
 msgid "In schema, line {line}, in sum formula, variable \"{name}\" is invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, dans la formule de somme, la variable « {name} "
 "» est invalide."
 
-#: ../schema.py:43
+#: ../schema.py:42
 msgid "In schema, line {line}, length \"{length}\" is invalid."
 msgstr "Feuille schéma, ligne {line}, la longueur \"{length}\" est invalide."
 
-#: ../schema.py:51
+#: ../schema.py:50
 msgid "In schema, line {line}, mandatory \"{mandatory}\" is invalid."
 msgstr ""
 "Feuille schéma, ligne {line}, la valeur obligatoire « {mandatory} » est "
 "invalide."
 
-#: ../schema.py:53
+#: ../schema.py:52
 msgid "In schema, line {line}, size \"{size}\" is invalid."
 msgstr "Feuille schéma, ligne {line}, la taille \"{size}\" est invalide."
-
-#: ../schema.py:42
-msgid "In schema, line {line}, type \"{type}\" is invalid."
-msgstr "Feuille schéma, ligne {line}, le type \"{type}\" est invalide."
 
 #: ../schema.py:40
 msgid "In schema, line {line}, variable \"{name}\" is duplicated."
@@ -930,11 +927,11 @@ msgstr "Informatif"
 msgid "Input Control"
 msgstr "Contrôle de saisie"
 
-#: ../schema.py:286
+#: ../schema.py:285
 msgid "Input Size"
 msgstr "Taille de saisie"
 
-#: ../schema.py:110
+#: ../schema.py:109
 msgid "Integer"
 msgstr "Entier"
 
@@ -947,7 +944,7 @@ msgstr "Dernière modification"
 msgid "Last Name"
 msgstr "Nom"
 
-#: ../schema.py:279
+#: ../schema.py:278
 msgid "Length"
 msgstr "Longueur"
 
@@ -955,7 +952,7 @@ msgstr "Longueur"
 msgid "Level"
 msgstr "Niveau"
 
-#: ../schema.py:115
+#: ../schema.py:114
 msgid "List of values"
 msgstr "Liste de valeurs"
 
@@ -974,7 +971,7 @@ msgctxt "heading"
 msgid "Login"
 msgstr "Connexion"
 
-#: ../workgroup_views.py:326
+#: ../workgroup_views.py:327
 msgid "Logo (shown in the banner)"
 msgstr "Logo (apparaît dans la bannière)"
 
@@ -983,7 +980,7 @@ msgctxt "heading"
 msgid "Lost Password"
 msgstr "Mot de passe oublié"
 
-#: ../schema.py:112
+#: ../schema.py:111
 msgid "MM/YYYY"
 msgstr "MM/AAAA"
 
@@ -999,11 +996,11 @@ msgstr "Gérer les sondés"
 msgid "Manage your Data Collection Application"
 msgstr "Gérer votre application de collecte de données"
 
-#: ../workgroup_views.py:228
+#: ../workgroup_views.py:229
 msgid "Manage your client space"
 msgstr "Configurer votre espace client"
 
-#: ../schema.py:285
+#: ../schema.py:284
 msgid "Mandatory"
 msgstr "Obligatoire"
 
@@ -1039,6 +1036,10 @@ msgstr ""
 msgctxt "link"
 msgid "News"
 msgstr "News"
+
+#: ../datatypes.py:670
+msgid "No"
+msgstr "Non"
 
 #: ../ui/workgroup/view.xml.en:17
 msgctxt "paragraph"
@@ -1081,10 +1082,6 @@ msgstr "Aucun avertissement détecté."
 msgid "No {class_title} available."
 msgstr "Aucun(e) {class_title} disponible."
 
-#: ../datatypes.py:670
-msgid "Non"
-msgstr "Non"
-
 #: ../workflow.py:35
 msgid "Not Registered"
 msgstr "Pas inscrit"
@@ -1110,7 +1107,7 @@ msgctxt "button"
 msgid "Ok"
 msgstr "Ok"
 
-#: ../schema.py:278
+#: ../schema.py:277
 msgid "Online Help"
 msgstr "Aide en ligne"
 
@@ -1121,10 +1118,6 @@ msgstr "Ouvert (comptes créés à la demande)"
 #: ../user_views.py:50
 msgid "Operation successful! Welcome."
 msgstr "Votre compte est activé. Bienvenue !"
-
-#: ../datatypes.py:669
-msgid "Oui"
-msgstr "Oui"
 
 #: ../application.py:136
 msgid "Page {0}"
@@ -1183,7 +1176,7 @@ msgstr "Imprimer (dans une nouvelle fenêtre)"
 msgid "Print form"
 msgstr "Impression du formulaire"
 
-#: ../schema.py:194
+#: ../schema.py:193
 msgid "Radio"
 msgstr "Bouton radio"
 
@@ -1222,7 +1215,7 @@ msgctxt "button"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: ../schema.py:345 ../application.py:103
+#: ../schema.py:344 ../application.py:103
 msgid "Schema"
 msgstr "Schéma"
 
@@ -1231,7 +1224,7 @@ msgctxt "legend"
 msgid "Search"
 msgstr "Rechercher"
 
-#: ../schema.py:193
+#: ../schema.py:192
 msgid "Select"
 msgstr "Boîte de sélection"
 
@@ -1243,11 +1236,11 @@ msgstr "Voir le formulaire de test"
 msgid "Slogan"
 msgstr "Slogan"
 
-#: ../workgroup_views.py:307
+#: ../workgroup_views.py:308
 msgid "Source"
 msgstr "Fichier source"
 
-#: ../workgroup_views.py:234
+#: ../workgroup_views.py:235
 msgid "Source File"
 msgstr "Fichier source"
 
@@ -1268,7 +1261,7 @@ msgctxt "fieldset"
 msgid "State:"
 msgstr "État du formulaire :"
 
-#: ../schema.py:113
+#: ../schema.py:112
 msgid "String"
 msgstr "Chaîne de caractères"
 
@@ -1276,7 +1269,7 @@ msgstr "Chaîne de caractères"
 msgid "Subscribe Users"
 msgstr "Ajouter des sondés"
 
-#: ../workgroup_views.py:233
+#: ../workgroup_views.py:234
 msgid "Subscribed Users"
 msgstr "Sondés enregistrés"
 
@@ -1294,7 +1287,7 @@ msgctxt "link"
 msgid "Terms of Use"
 msgstr "Conditions d'utilisation"
 
-#: ../schema.py:114
+#: ../schema.py:113
 msgid "Text"
 msgstr "Texte"
 
@@ -1364,11 +1357,11 @@ msgctxt "title attribute"
 msgid "This field is required"
 msgstr "Champ obligatoire"
 
-#: ../schema.py:275 ../controls.py:101
+#: ../schema.py:274 ../controls.py:101
 msgid "Title"
 msgstr "Titre"
 
-#: ../workgroup_views.py:323
+#: ../workgroup_views.py:324
 msgid "Title (shown in the banner if no logo)"
 msgstr "Titre (apparaît dans la bannière s'il n'y a pas de logo)"
 
@@ -1390,7 +1383,7 @@ msgstr ""
 msgid "True"
 msgstr "Vrai"
 
-#: ../schema.py:277
+#: ../schema.py:276
 msgid "Type"
 msgstr "Type"
 
@@ -1398,7 +1391,7 @@ msgstr "Type"
 msgid "Unrecognized line {lineno}: {line}"
 msgstr "Ligne {lineno} incorrecte : {line}"
 
-#: ../workgroup_views.py:216
+#: ../workgroup_views.py:217
 msgid ""
 "Uploading this spreadsheet file in iScrib will generate in one click your "
 "data collection application."
@@ -1416,7 +1409,7 @@ msgctxt "table cell"
 msgid "Value"
 msgstr "Valeur"
 
-#: ../schema.py:276
+#: ../schema.py:275
 msgid "Variable"
 msgstr "Variable"
 
@@ -1454,6 +1447,10 @@ msgstr ""
 "Vous pouvez cliquer sur le bouton « Terminer » pour prévenir votre "
 "correspondant que votre saisie est terminée.<br/>Vous ne pourrez alors plus "
 "modifier le formulaire."
+
+#: ../datatypes.py:669
+msgid "Yes"
+msgstr "Oui"
 
 #: ../workgroup_views.py:45
 msgid ""
@@ -1920,14 +1917,20 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 #~ msgid "Exported"
 #~ msgstr "Exporté"
 
+#~ msgid "In schema, line {line}, type \"{type}\" is invalid."
+#~ msgstr "Feuille schéma, ligne {line}, le type \"{type}\" est invalide."
+
 #~ msgid "Modified"
 #~ msgstr "Modifié"
 
 #~ msgid "Modified after export"
 #~ msgstr "Modifié après export"
 
-#~ msgid "No"
+#~ msgid "Non"
 #~ msgstr "Non"
+
+#~ msgid "Oui"
+#~ msgstr "Oui"
 
 #~ msgid "Page names must be in the form \"C Title...\""
 #~ msgstr "Les onglets de pages doivent être nommés \"C Titre...\""
@@ -1974,9 +1977,6 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 
 #~ msgid "User"
 #~ msgstr "Utilisateur"
-
-#~ msgid "Yes"
-#~ msgstr "Oui"
 
 #~ msgctxt "li"
 #~ msgid "You can collect data at this URL:"

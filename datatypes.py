@@ -666,8 +666,8 @@ class Text(Unicode):
 class EnumBoolean(Enumerate):
     default = ''
     options = [
-        {'name': '1', 'value': u"Oui"},
-        {'name': '2', 'value': u"Non"},
+        {'name': '1', 'value': MSG(u"Yes")},
+        {'name': '2', 'value': MSG(u"No")},
     ]
 
 
