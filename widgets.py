@@ -50,6 +50,8 @@ def is_mandatory_filled(datatype, name, value, schema, fields, context):
 
 
 def make_element(tagname, attributes={}, content=u""):
+    if type(content) is MSG:
+        content = content.gettext()
     element = [u"<", tagname]
     for key, value in attributes.iteritems():
         if type(value) is list:
