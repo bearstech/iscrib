@@ -66,7 +66,7 @@ ERR_ALREADY_REGISTERED = ERROR(u"You are already registered. "
         u"Log in using your password.")
 MSG_APPLICATION_TITLE = MSG(u'''<span class="application-title">Title of your
 application:</span> {title}
-<a href=";edit" title="Edit" rel="fancybox">
+<a href=";edit" title="Edit and configure application" rel="fancybox">
   <img src="/ui/icons/16x16/edit.png"/></a>''', html=True)
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
@@ -638,16 +638,18 @@ class Application_Register(STLForm):
 
 
 class Application_Edit(DBResource_Edit):
-    admin_schema = {
-            'max_users': Integer(mandatory=True),
-            'subscription': Subscription(mandatory=True),
-            'file': FileDataType}
-    admin_widgets = [
-            TextWidget('max_users',
-                title=MSG(u"Maximum form users (0 = unlimited)")),
+    schema = merge_dicts(DBResource_Edit.schema,
+            subscription=Subscription(mandatory=True),
+            file=FileDataType)
+    widgets = DBResource_Edit.widgets + [
             SelectWidget('subscription', has_empty_option=False,
                 title=MSG(u"Subscription Mode")),
             file_widget]
+    admin_schema = {
+            'max_users': Integer(mandatory=True)}
+    admin_widgets = [
+            TextWidget('max_users',
+                title=MSG(u"Maximum form users (0 = unlimited)"))]
 
 
     def _get_schema(self, resource, context):
