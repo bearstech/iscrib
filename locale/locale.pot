@@ -137,7 +137,7 @@ msgid "<p id=\"already-client\">Already\n            registered and you want to 
 msgstr ""
 
 #: ../application_views.py:70
-msgid "<span class=\"application-title\">Title of your\napplication:</span> {title}\n<a href=\";edit\" title=\"Edit\" rel=\"fancybox\">\n  <img src=\"/ui/icons/16x16/edit.png\"/></a>"
+msgid "<span class=\"application-title\">Title of your\napplication:</span> {title}\n<a href=\";edit\" title=\"Edit and configure application\" rel=\"fancybox\">\n  <img src=\"/ui/icons/16x16/edit.png\"/></a>"
 msgstr ""
 
 #: ../widgets.py:59
@@ -498,7 +498,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:647
+#: ../application_views.py:652
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -629,7 +629,7 @@ msgid "Select"
 msgstr ""
 
 #: ../application_views.py:129
-#: ../application_views.py:787
+#: ../application_views.py:789
 msgid "Show Test Form"
 msgstr ""
 
@@ -670,7 +670,7 @@ msgstr ""
 msgid "Subscribed Users"
 msgstr ""
 
-#: ../application_views.py:649
+#: ../application_views.py:646
 msgid "Subscription Mode"
 msgstr ""
 
@@ -740,7 +740,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: ../application_views.py:768
+#: ../application_views.py:770
 #: ../base_views.py:125
 msgid "Welcome!"
 msgstr ""

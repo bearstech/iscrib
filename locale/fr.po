@@ -475,12 +475,13 @@ msgstr ""
 msgid ""
 "<span class=\"application-title\">Title of your\n"
 "application:</span> {title}\n"
-"<a href=\";edit\" title=\"Edit\" rel=\"fancybox\">\n"
+"<a href=\";edit\" title=\"Edit and configure application\" rel=\"fancybox"
+"\">\n"
 "  <img src=\"/ui/icons/16x16/edit.png\"/></a>"
 msgstr ""
 "<span class=\"application-title\">Titre de votre\n"
 "application :</span> {title}\n"
-"<a href=\";edit\" title=\"Modifier\" rel=\"fancybox\">\n"
+"<a href=\";edit\" title=\"Modifier et configurer l'application\" rel=\"fancybox\">\n"
 "  <img src=\"/ui/icons/16x16/edit.png\"/></a>"
 
 #: ../widgets.py:59
@@ -1008,7 +1009,7 @@ msgstr "Obligatoire"
 msgid "Mandatory field"
 msgstr "Champ obligatoire"
 
-#: ../application_views.py:647
+#: ../application_views.py:652
 msgid "Maximum form users (0 = unlimited)"
 msgstr "Nombre de sondés autorisés (0 = illimité)"
 
@@ -1228,7 +1229,7 @@ msgstr "Rechercher"
 msgid "Select"
 msgstr "Boîte de sélection"
 
-#: ../application_views.py:129 ../application_views.py:787
+#: ../application_views.py:129 ../application_views.py:789
 msgid "Show Test Form"
 msgstr "Voir le formulaire de test"
 
@@ -1278,7 +1279,7 @@ msgctxt "table cell"
 msgid "Subscribed Users"
 msgstr "Sondés enregistrés"
 
-#: ../application_views.py:649
+#: ../application_views.py:646
 msgid "Subscription Mode"
 msgstr "Mode d'inscription"
 
@@ -1435,7 +1436,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr "Bienvenue dans votre espace iScrib"
 
-#: ../application_views.py:768 ../base_views.py:125
+#: ../application_views.py:770 ../base_views.py:125
 msgid "Welcome!"
 msgstr "Bienvenue !"
 

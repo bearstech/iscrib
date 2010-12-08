@@ -364,7 +364,8 @@ msgstr ""
 msgid ""
 "<span class=\"application-title\">Title of your\n"
 "application:</span> {title}\n"
-"<a href=\";edit\" title=\"Edit\" rel=\"fancybox\">\n"
+"<a href=\";edit\" title=\"Edit and configure application\" rel=\"fancybox"
+"\">\n"
 "  <img src=\"/ui/icons/16x16/edit.png\"/></a>"
 msgstr ""
 
@@ -871,7 +872,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:647
+#: ../application_views.py:652
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -1087,7 +1088,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: ../application_views.py:129 ../application_views.py:787
+#: ../application_views.py:129 ../application_views.py:789
 msgid "Show Test Form"
 msgstr ""
 
@@ -1137,7 +1138,7 @@ msgctxt "table cell"
 msgid "Subscribed Users"
 msgstr ""
 
-#: ../application_views.py:649
+#: ../application_views.py:646
 msgid "Subscription Mode"
 msgstr ""
 
@@ -1280,7 +1281,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr ""
 
-#: ../application_views.py:768 ../base_views.py:125
+#: ../application_views.py:770 ../base_views.py:125
 msgid "Welcome!"
 msgstr ""
 
