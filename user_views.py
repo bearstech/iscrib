@@ -39,8 +39,7 @@ class User_ConfirmRegistration(BaseUser_ConfirmRegistration):
 
 
     def action(self, resource, context, form):
-        goto = super(User_ConfirmRegistration, self).action(resource,
-                context, form)
+        super(User_ConfirmRegistration, self).action(resource, context, form)
         if isinstance(context.message, ERROR):
             return
 

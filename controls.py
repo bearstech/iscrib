@@ -74,7 +74,7 @@ class Expression(Unicode):
             eval(value, vars)
         except ZeroDivisionError:
             pass
-        except Exception, err:
+        except Exception:
             # Let error raise with message
             raise
         return True

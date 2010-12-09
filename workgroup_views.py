@@ -239,7 +239,7 @@ class Workgroup_View(Folder_BrowseContent):
 
     def get_namespace(self, resource, context):
         # Menu
-        theme = resource.get_resource('theme')
+        resource.get_resource('theme')
         menu = Workgroup_Menu().GET(resource, context)
 
         # Batch
@@ -284,7 +284,6 @@ class Workgroup_View(Folder_BrowseContent):
                 items.reverse()
 
         # Access Control (FIXME this should be done before batch)
-        user = context.user
         root = context.root
         allowed_items = []
         for item in items:
