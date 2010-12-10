@@ -172,7 +172,7 @@ td.section-header h4 {
                         password)
             else:
                 # Existing user
-                if not user.authenticate(password, clear=True):
+                if not user.authenticate(password):
                     context.message = MSG_BAD_PASSWORD
                     context.commit = False
                     return
