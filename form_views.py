@@ -137,7 +137,7 @@ class Form_View(STLForm):
             if issubclass(datatype, FileImage):
                 if context.get_form_value(key + '_delete'):
                     value = fields[key]
-                    resource.parent.del_resource(value)
+                    resource.parent.del_resource(value, ref_action='force')
                     handler.set_value(key, '', schema)
                     fields[key] = ''
             # Can't use "if not/continue" pattern here
