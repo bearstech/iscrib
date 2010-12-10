@@ -753,8 +753,7 @@ class Application_Login(LoginView):
         user.send_form_registration(context, email, site_uri, password)
 
         # Automatic login
-        user.set_auth_cookie(context, password)
-        context.user = user
+        context.login(user)
 
         # Come back
         referrer = context.get_referrer()

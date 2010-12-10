@@ -99,8 +99,7 @@ class LoginView(BaseLoginView):
             return
 
         # Set cookie & context
-        user.set_auth_cookie(context, password)
-        context.user = user
+        context.login(user)
 
         # Come back
         referrer = context.get_referrer()

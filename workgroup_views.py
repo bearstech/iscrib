@@ -177,8 +177,7 @@ td.section-header h4 {
                     context.commit = False
                     return
             # Automatic login
-            user.set_auth_cookie(context, password)
-            context.user = user
+            context.login(user)
         # Update user info
         for key in ('firstname', 'lastname', 'company'):
             if form[key]:
