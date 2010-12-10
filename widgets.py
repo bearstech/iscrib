@@ -23,15 +23,18 @@
 from decimal import InvalidOperation
 
 # Import from itools
+from itools.core import is_thingy
 from itools.datatypes import XMLContent, XMLAttribute
 from itools.gettext import MSG
 from itools.i18n import format_number
+from itools.web import get_context
 
 # Import from ikaaro
+from ikaaro.file import Image
 
 # Import from iscrib
 from datatypes import Numeric, Text, EnumBoolean, SqlEnumerate, NumDecimal
-from datatypes import NumDate, NumTime
+from datatypes import NumDate, NumTime, FileImage
 
 
 NBSP = u"\u00a0".encode('utf8')
@@ -50,16 +53,16 @@ def is_mandatory_filled(datatype, name, value, schema, fields, context):
 
 
 def make_element(tagname, attributes={}, content=u""):
-    if type(content) is MSG:
+    if is_thingy(content, MSG):
         content = content.gettext()
     element = [u"<", tagname]
     for key, value in attributes.iteritems():
         if type(value) is list:
             value = u" ".join(value)
-        elif type(value) is MSG:
+        elif is_thingy(value, MSG):
             value = value.gettext()
         element.extend((u" ", key, u'="', value, u'"'))
-    if tagname == 'input':
+    if tagname in ('input', 'img'):
         element.extend((u"/>", content))
     else:
         element.extend((u">", content, u"</", tagname, u">"))
@@ -232,6 +235,52 @@ def text_widget(context, form, datatype, name, value, schema, fields,
 
 
 
+def file_widget(context, form, datatype, name, value, schema, fields,
+        readonly, tabindex=None):
+    if readonly:
+        tagname = u"div"
+        attributes = {u"class": [u"readonly"]}
+        content = XMLContent.encode(value)
+    else:
+        tagname = u"input"
+        attributes = {
+            u"type": u"file",
+            u"id": u"field_{name}".format(name=name),
+            u"name": name, u"value": XMLAttribute.encode(value),
+            u"size": str(datatype.size),
+            u"maxlength": str(datatype.length)}
+        content = u""
+    # Check for errors
+    check_errors(context, form, datatype, name, value, schema, fields,
+            readonly, attributes, tabindex=None)
+    html = make_element(tagname, attributes, content)
+    # Preview
+    if not value:
+        return html
+    resource = form.parent.get_resource(value, soft=True)
+    if resource is None:
+        return html
+    context = get_context()
+    link = context.get_link(resource)
+    href = u"{0}/;download".format(link)
+    if isinstance(resource, Image):
+        src = u"{0}/;thumb?width=128&amp;height=128".format(link)
+    else:
+        src = u"/ui/{0}".format(resource.class_icon48)
+    preview = make_element(u"a", {u"href": href, u"target": u"_new"},
+            make_element(u"img", {u"src": src}))
+    field_id = u"field_{name}_delete".format(name=name)
+    delete = make_element(u"input", {
+        u"type": u"checkbox",
+        u"id": field_id,
+        u"name": u"{name}_delete".format(name=name),
+        u"value": u"1"},
+            make_element(u"label", {u"for": field_id}, MSG(u"Delete")))
+    html = html + preview + delete
+    return html
+
+
+
 def get_input_widget(name, form, schema, fields, context, tabindex=None,
         readonly=False, skip_print=False):
     # Always take data from the handler, we store wrong values anyway
@@ -240,6 +289,8 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     widget = None
     if  isinstance(datatype, Numeric):
         widget = text_widget
+    elif issubclass(datatype, FileImage):
+        widget = file_widget
     elif issubclass(datatype, Text):
         widget = textarea_widget
     elif issubclass(datatype, (EnumBoolean, SqlEnumerate)):

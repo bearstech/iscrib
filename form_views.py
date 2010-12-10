@@ -24,7 +24,7 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 # Import from ikaaro
 
 # Import from iscrib
-from datatypes import Numeric
+from datatypes import Numeric, FileImage
 from utils import get_page_number, force_encode, is_print, set_print
 from widgets import is_mandatory_filled
 from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
@@ -45,7 +45,7 @@ class Single(String):
 
     @classmethod
     def decode(cls, data):
-        if data:
+        if type(data) is str:
             return data.strip()
         return data
 
@@ -133,6 +133,13 @@ class Form_View(STLForm):
             # Can't use because they need to be stored
             #if datatype.readonly:
             #    continue
+            # Delete files first
+            if issubclass(datatype, FileImage):
+                if context.get_form_value(key + '_delete'):
+                    value = fields[key]
+                    resource.parent.del_resource(value)
+                    handler.set_value(key, '', schema)
+                    fields[key] = ''
             # Can't use "if not/continue" pattern here
             if context.get_form_value(key) is not None:
                 # First the raw data
@@ -170,6 +177,8 @@ class Form_View(STLForm):
                 # Invalid (0008102 and mandatory -> and filled)
                 elif data and not datatype.is_valid(data):
                     bad_types.append(key)
+                elif issubclass(datatype, FileImage):
+                    value = resource.save_file(*data)
             # First skip instance datatypes:
             #   TypeError: issubclass() arg 1 must be a class
             elif isinstance(datatype, Numeric):
@@ -179,6 +188,9 @@ class Form_View(STLForm):
                 if not is_mandatory_filled(datatype, key, value, schema,
                         fields, context):
                     bad_types.append(key)
+            elif issubclass(datatype, FileImage):
+                # Keep filename
+                value = fields[key]
             handler.set_value(key, value, schema)
             fields[key] = value
         # Reindex

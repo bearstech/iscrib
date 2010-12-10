@@ -23,6 +23,7 @@ from decimal import InvalidOperation
 
 # Import from itools
 from itools.core import merge_dicts, freeze
+from itools.fs import FileName
 from itools.gettext import MSG
 from itools.i18n import format_number
 from itools.handlers import File as FileHandler
@@ -32,9 +33,11 @@ from ikaaro.file import File
 from ikaaro.file_views import File_NewInstance
 from ikaaro.folder import Folder
 from ikaaro.folder_views import GoToSpecificDocument
+from ikaaro.registry import get_resource_class
+from ikaaro.utils import generate_name
 
 # Import from iscrib
-from datatypes import Numeric, NumDecimal, Unicode
+from datatypes import Numeric, NumDecimal, Unicode, FileImage
 from formpage import FormPage
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control
@@ -153,6 +156,20 @@ class Form(File):
         if page is None:
             raise AttributeError, name
         return Form_View(page_number=page.get_page_number())
+
+
+    def get_links(self):
+        links = super(Form, self).get_links()
+        base = self.parent.get_canonical_path()
+        schema = self.get_schema()
+        for key, datatype in schema.iteritems():
+            if isinstance(datatype, Numeric):
+                pass
+            elif issubclass(datatype, FileImage):
+                value = self.handler.get_value(key, schema)
+                if value:
+                    links.add(str(base.resolve2(value)))
+        return links
 
 
     ######################################################################
@@ -420,3 +437,17 @@ class Form(File):
         for control in self.get_controls_namespace(levels=['1', '2'],
                 pages=pages, exclude=exclude):
             yield control
+
+
+    def save_file(self, filename, mimetype, body):
+        name, extension, language = FileName.decode(filename)
+        parent = self.parent
+        used = parent.get_names()
+        name = generate_name(name, used)
+        cls = get_resource_class(mimetype)
+        metadata = {
+                'format': mimetype,
+                'filename': filename,
+                'extension': extension}
+        parent.make_resource(name, cls, body=body, **metadata)
+        return name

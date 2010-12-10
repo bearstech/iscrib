@@ -9,7 +9,8 @@
     ${application_menu}
   </div>
 
-  <form action=";page${page_number}" method="post">
+  <form enctype="multipart/form-data" action=";page${page_number}"
+    method="post">
     <input value="${page_number}" name="page_number" type="hidden"/>
     <input value="${field/value}" stl:repeat="field hidden_fields"
       name="${field/name}" type="hidden"/>

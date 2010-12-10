@@ -32,7 +32,7 @@ from ikaaro.table import Table
 # Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
-from datatypes import SqlEnumerate, Numeric
+from datatypes import SqlEnumerate, Numeric, FileImage
 
 
 ERR_BAD_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
@@ -113,7 +113,8 @@ class Type(Enumerate):
         {'name': 'mm/aaaa', 'value': u"MM/YYYY", 'type': NumShortDate},
         {'name': 'str', 'value': u"String", 'type': Unicode},
         {'name': 'text', 'value': u"Text", 'type': Text},
-        {'name': 'enum', 'value': u"List of values", 'type': SqlEnumerate}]
+        {'name': 'enum', 'value': u"List of values", 'type': SqlEnumerate},
+        {'name': 'file', 'value': u"File or Image", 'type': FileImage}]
 
 
     @staticmethod

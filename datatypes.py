@@ -25,6 +25,9 @@ from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
 from itools.datatypes.primitive import enumerate_get_namespace
 from itools.gettext import MSG
 
+# Import from ikaaro
+from ikaaro.datatypes import FileDataType
+
 
 def quote_string(data):
     data = unicode(data, 'utf8')
@@ -763,3 +766,21 @@ class Subscription(Enumerate):
                 'value': MSG(u"Restricted (users must be subscribed)")},
             {'name': 'open',
                 'value': MSG(u"Open (accounts are created on demand)")}]
+
+
+
+class FileImage(FileDataType):
+
+    @staticmethod
+    def encode(value):
+        return value
+
+
+    @staticmethod
+    def decode(data):
+        """Find out the resource class (the mimetype sent by the browser can be
+        minimalistic).
+        """
+        if type(data) is str:
+            return data
+        return FileDataType.decode(data)
