@@ -28,7 +28,7 @@ from itools.gettext import MSG
 from itools.handlers.utils import transmap
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path
-from itools.web import INFO, ERROR, BaseView, FormError, STLForm, get_context
+from itools.web import INFO, ERROR, BaseView, STLForm, get_context
 
 # Import from ikaaro
 from ikaaro.access import is_admin
@@ -36,7 +36,7 @@ from ikaaro.autoform import FileWidget, TextWidget, SelectWidget, file_widget
 from ikaaro.buttons import BrowseButton
 from ikaaro.datatypes import FileDataType
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
-from ikaaro.messages import MSG_PASSWORD_MISMATCH
+from ikaaro.messages import MSG_PASSWORD_MISMATCH, MSG_INVALID_EMAIL
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views import SearchForm
 from ikaaro.views_new import NewInstance
@@ -704,13 +704,6 @@ class Application_Login(LoginView):
             newpass2=String)
 
 
-    def _get_form(self, resource, context):
-        form = super(Application_Login, self)._get_form(resource, context)
-        if not (form['password'].strip() or form['newpass'].strip()):
-            raise FormError, ERR_PASSWORD_MISSING
-        return form
-
-
     def action_register(self, resource, context, form):
         email = form['username'].strip()
         if not Email.is_valid(email):
@@ -781,6 +774,26 @@ class Application_Login(LoginView):
                 resource.subscribe_user(user)
 
         return goto
+
+
+    def action_forgotten_password(self, resource, context, form):
+        email = form['username'].strip()
+        if not Email.is_valid(email):
+            message = u'The given username is not an e-mail address.'
+            context.message = ERROR(message)
+            return
+
+        user = context.root.get_user_from_login(email)
+        if user is None:
+            # Silently fail
+            path = '/ui/website/forgotten_password.xml'
+            handler = resource.get_resource(path)
+            return stl(handler)
+
+        user.send_forgotten_password(context, email)
+        path = '/ui/website/forgotten_password.xml'
+        handler = resource.get_resource(path)
+        return stl(handler)
 
 
 

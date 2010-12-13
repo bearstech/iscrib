@@ -67,6 +67,9 @@
               <p>
                 <button type="submit" name="action" value="login"
                   class="button-ok">Login</button>
+                <button type="submit" name="action"
+                  value="forgotten_password" class="button-ok">Forgotten
+                  Password</button>
               </p>
             </fieldset>
           </form>
