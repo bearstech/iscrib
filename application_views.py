@@ -699,7 +699,8 @@ class Application_Edit(DBResource_Edit):
 class Application_Login(LoginView):
     template = '/ui/iscrib/application/login.xml'
     schema = merge_dicts(LoginView.schema,
-            newpass=String,
+            password=String(default=''),
+            newpass=String(default=''),
             newpass2=String)
 
 
