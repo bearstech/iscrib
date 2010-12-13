@@ -116,17 +116,14 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
                 attributes.setdefault(u"class", []).append(u"disabled")
             # 0005970: Le Javascript pour (dés)activer les autres champs
             if option['name'] == '1':
-                disabled = u"false"
-                toggle_class = u"removeClass"
+                method = 'input_enabled'
             else:
-                disabled = u"true"
-                toggle_class = u"addClass"
+                method = 'input_disabled'
             dep_names = form.get_dep_names(name, schema)
             for dep_name in dep_names:
                 attributes.setdefault(u"onchange", []).append(
-                    u"$('[name={name}]').attr('disabled', {disabled})"
-                    u".{method}('disabled');".format(name=dep_name,
-                        disabled=disabled, method=toggle_class))
+                    u"{method}('{name}');".format(method=method,
+                        name=dep_name))
             # 0005970 fin
             input = make_element(u"input", attributes, option['value'])
             if issubclass(datatype, EnumBoolean):
