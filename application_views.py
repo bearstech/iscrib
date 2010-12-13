@@ -36,7 +36,7 @@ from ikaaro.autoform import FileWidget, TextWidget, SelectWidget, file_widget
 from ikaaro.buttons import BrowseButton
 from ikaaro.datatypes import FileDataType
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
-from ikaaro.messages import MSG_PASSWORD_MISMATCH, MSG_INVALID_EMAIL
+from ikaaro.messages import MSG_PASSWORD_MISMATCH
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views import SearchForm
 from ikaaro.views_new import NewInstance
