@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-12-13 10:12+CET\n"
+"POT-Creation-Date: 2010-12-13 11:12+CET\n"
 "PO-Revision-Date: 2010-09-07 14:15+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -321,6 +321,11 @@ msgid ""
 "${username/error}<x id='26'/></g>  <x id='27'/>  <x id='28'/>  <g "
 "id='29'>Password</g>  <g id='30'>* </g>  <x id='31'/>  <g id='32'>${password/"
 "error}<x id='33'/></g>"
+msgstr ""
+
+#: ../ui/application/login.xml.en:68
+msgctxt "button"
+msgid "<g id='35'>Login</g>  <g id='36'>Forgotten Password</g>"
 msgstr ""
 
 #: ../ui/form/view.xml.en:19
@@ -849,11 +854,6 @@ msgctxt "title attribute"
 msgid "Log out"
 msgstr ""
 
-#: ../ui/application/login.xml.en:69
-msgctxt "button"
-msgid "Login"
-msgstr ""
-
 #: ../ui/base/login.xml.en:7 ../ui/application/login.xml.en:6
 msgctxt "heading"
 msgid "Login"
@@ -1107,7 +1107,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: ../application_views.py:129 ../application_views.py:789
+#: ../application_views.py:129 ../application_views.py:802
 msgid "Show Test Form"
 msgstr ""
 
@@ -1179,7 +1179,7 @@ msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
 
-#: ../application_views.py:62 ../base_views.py:130
+#: ../application_views.py:62 ../application_views.py:782 ../base_views.py:130
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -1288,7 +1288,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr ""
 
-#: ../application_views.py:770 ../base_views.py:124
+#: ../application_views.py:763 ../base_views.py:124
 msgid "Welcome!"
 msgstr ""
 

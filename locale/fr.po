@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 201011231\n"
-"POT-Creation-Date: 2010-12-13 10:12+CET\n"
+"POT-Creation-Date: 2010-12-13 11:12+CET\n"
 "PO-Revision-Date: 2010-11-23 11:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -376,11 +376,11 @@ msgid ""
 "<x id='19'/></g>"
 msgstr ""
 "<g id='1'>Adresse de courriel</g>  <g id='2'>* </g>  <x id='3'/>  <g id='4'>"
-"${username/error}<x id='5'/></g>  <x id='6'/>  <x id='7'/>  <g "
-"id='8'>Mot de passe</g>  <g id='9'>* </g>  <x id='10'/>  <g id='11'>${newpass/"
-"error}<x id='12'/></g>  <x id='13'/>  <x id='14'/>  <g id='15'>Répéter "
-"le mot de passe</g>  <g id='16'>* </g>  <x id='17'/>  <g id='18'>${newpass2/error}"
-"<x id='19'/></g>"
+"${username/error}<x id='5'/></g>  <x id='6'/>  <x id='7'/>  <g id='8'>Mot de "
+"passe</g>  <g id='9'>* </g>  <x id='10'/>  <g id='11'>${newpass/error}<x "
+"id='12'/></g>  <x id='13'/>  <x id='14'/>  <g id='15'>Répéter le mot de "
+"passe</g>  <g id='16'>* </g>  <x id='17'/>  <g id='18'>${newpass2/error}<x "
+"id='19'/></g>"
 
 #: ../ui/form/view.xml.en:7
 msgctxt "link"
@@ -422,10 +422,15 @@ msgid ""
 "id='29'>Password</g>  <g id='30'>* </g>  <x id='31'/>  <g id='32'>${password/"
 "error}<x id='33'/></g>"
 msgstr ""
-"<g id='22'>Adresse de courriel</g>  <g id='23'>* </g>  <x id='24'/>  <g id='25'>"
-"${username/error}<x id='26'/></g>  <x id='27'/>  <x id='28'/>  <g "
-"id='29'>Mot de passe</g>  <g id='30'>* </g>  <x id='31'/>  <g id='32'>${password/"
-"error}<x id='33'/></g>"
+"<g id='22'>Adresse de courriel</g>  <g id='23'>* </g>  <x id='24'/>  <g "
+"id='25'>${username/error}<x id='26'/></g>  <x id='27'/>  <x id='28'/>  <g "
+"id='29'>Mot de passe</g>  <g id='30'>* </g>  <x id='31'/>  <g id='32'>"
+"${password/error}<x id='33'/></g>"
+
+#: ../ui/application/login.xml.en:68
+msgctxt "button"
+msgid "<g id='35'>Login</g>  <g id='36'>Forgotten Password</g>"
+msgstr "<g id='35'>Connexion</g>  <g id='36'>Mot de passe oublié</g>"
 
 #: ../ui/form/view.xml.en:19
 msgctxt "link"
@@ -991,11 +996,6 @@ msgctxt "title attribute"
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: ../ui/application/login.xml.en:69
-msgctxt "button"
-msgid "Login"
-msgstr "Connexion"
-
 #: ../ui/base/login.xml.en:7 ../ui/application/login.xml.en:6
 msgctxt "heading"
 msgid "Login"
@@ -1253,7 +1253,7 @@ msgstr "Rechercher"
 msgid "Select"
 msgstr "Boîte de sélection"
 
-#: ../application_views.py:129 ../application_views.py:789
+#: ../application_views.py:129 ../application_views.py:802
 msgid "Show Test Form"
 msgstr "Voir le formulaire de test"
 
@@ -1327,7 +1327,7 @@ msgstr ""
 "Le formulaire est valide, vous pouvez l'exporter dans une base de données "
 "SQL."
 
-#: ../application_views.py:62 ../base_views.py:130
+#: ../application_views.py:62 ../application_views.py:782 ../base_views.py:130
 msgid "The given username is not an e-mail address."
 msgstr "Le nom donné n'est pas une adresse de courriel valide."
 
@@ -1444,7 +1444,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr "Bienvenue dans votre espace iScrib"
 
-#: ../application_views.py:770 ../base_views.py:124
+#: ../application_views.py:763 ../base_views.py:124
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
@@ -1993,6 +1993,10 @@ msgstr "{workgroup_title}, formulaire \"{application_title}\""
 
 #~ msgid "Exported"
 #~ msgstr "Exporté"
+
+#~ msgctxt "button"
+#~ msgid "Login"
+#~ msgstr "Connexion"
 
 #~ msgid "Modified"
 #~ msgstr "Modifié"

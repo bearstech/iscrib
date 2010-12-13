@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-12-13 10:12+CET\n"
+"POT-Creation-Date: 2010-12-13 11:12+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -649,7 +649,7 @@ msgid "Select"
 msgstr ""
 
 #: ../application_views.py:129
-#: ../application_views.py:789
+#: ../application_views.py:802
 msgid "Show Test Form"
 msgstr ""
 
@@ -703,6 +703,7 @@ msgid "The e-mail or the password is incorrect."
 msgstr ""
 
 #: ../application_views.py:62
+#: ../application_views.py:782
 #: ../base_views.py:130
 msgid "The given username is not an e-mail address."
 msgstr ""
@@ -760,7 +761,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: ../application_views.py:770
+#: ../application_views.py:763
 #: ../base_views.py:124
 msgid "Welcome!"
 msgstr ""
@@ -1160,6 +1161,11 @@ msgstr ""
 msgid "{workgroup_title}, form \"{application_title}\""
 msgstr ""
 
+#: ../ui/application/login.xml.en:68
+msgctxt "button"
+msgid "<g id='35'>Login</g>  <g id='36'>Forgotten Password</g>"
+msgstr ""
+
 #: ../ui/root/contact.xml.en:42
 msgctxt "button"
 msgid "<g id='6'>${action/title}</g>  <g id='7'>${action/title}</g>"
@@ -1178,11 +1184,6 @@ msgstr ""
 #: ../ui/form/send.xml.en:22
 msgctxt "button"
 msgid "Finish"
-msgstr ""
-
-#: ../ui/application/login.xml.en:69
-msgctxt "button"
-msgid "Login"
 msgstr ""
 
 #: ../ui/base/login.xml.en:41
