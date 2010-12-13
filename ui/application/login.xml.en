@@ -4,13 +4,13 @@
 
   <div id="login-form">
     <h2>Login</h2>
-    <table>
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
       <tr>
-        <td valign="top" id="application-login-create-account">
+        <td width="50%" valign="top" id="application-login-create-account">
           <form name="loginform" method="post"
             action=";login">
             <fieldset>
-              <legend>If connect to iScrib for the first time:</legend>
+              <legend>If you connect to iScrib for the first time:</legend>
               <label for="username">E-mail Address</label>
               <span class="field-is-missing" title="This field is required">*
               </span>
@@ -19,6 +19,7 @@
                 class="field-error">${username/error}<br/></span>
               <input type="text" id="newuser" name="username"
                 value="${username/value}" size="40" />
+              <br/>
               <label for="newpass">Password</label>
               <span class="field-is-missing" title="This field is required">*
               </span>
@@ -42,7 +43,7 @@
             </fieldset>
           </form>
         </td>
-        <td valign="top" id="application-login-already-account">
+        <td width="50%" valign="top" id="application-login-already-account">
           <form name="loginform" method="post"
             action=";login">
             <fieldset>
@@ -55,6 +56,7 @@
                 class="field-error">${username/error}<br/></span>
               <input type="text" id="username" name="username"
                 value="${username/value}" size="40" />
+              <br/>
               <label for="password">Password</label>
               <span class="field-is-missing" title="This field is required">*
               </span>

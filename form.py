@@ -27,7 +27,6 @@ from itools.fs import FileName
 from itools.gettext import MSG
 from itools.i18n import format_number
 from itools.handlers import File as FileHandler
-from itools.web import get_context
 
 # Import from ikaaro
 from ikaaro.file import File
