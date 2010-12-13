@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 201011231\n"
-"POT-Creation-Date: 2010-12-13 09:12+CET\n"
+"POT-Creation-Date: 2010-12-13 10:12+CET\n"
 "PO-Revision-Date: 2010-11-23 11:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -267,7 +267,7 @@ msgstr "%break%"
 msgid "%d"
 msgstr "%d"
 
-#: ../form.py:428
+#: ../form.py:427
 msgid "'%s' = '%s'"
 msgstr "'%s' = '%s'"
 
@@ -369,16 +369,18 @@ msgstr ""
 msgctxt "label"
 msgid ""
 "<g id='1'>E-mail Address</g>  <g id='2'>* </g>  <x id='3'/>  <g id='4'>"
-"${username/error}<x id='5'/></g>  <x id='6'/>  <g id='7'>Password</g>  <g "
-"id='8'>* </g>  <x id='9'/>  <g id='10'>${newpass/error}<x id='11'/></g>  <x "
-"id='12'/>  <x id='13'/>  <g id='14'>Repeat Password</g>  <g id='15'>* </g>  "
-"<x id='16'/>  <g id='17'>${newpass2/error}<x id='18'/></g>"
+"${username/error}<x id='5'/></g>  <x id='6'/>  <x id='7'/>  <g "
+"id='8'>Password</g>  <g id='9'>* </g>  <x id='10'/>  <g id='11'>${newpass/"
+"error}<x id='12'/></g>  <x id='13'/>  <x id='14'/>  <g id='15'>Repeat "
+"Password</g>  <g id='16'>* </g>  <x id='17'/>  <g id='18'>${newpass2/error}"
+"<x id='19'/></g>"
 msgstr ""
 "<g id='1'>Adresse de courriel</g>  <g id='2'>* </g>  <x id='3'/>  <g id='4'>"
-"${username/error}<x id='5'/></g>  <x id='6'/>  <g id='7'>Mot de passe</g>  "
-"<g id='8'>* </g>  <x id='9'/>  <g id='10'>${newpass/error}<x id='11'/></g>  "
-"<x id='12'/>  <x id='13'/>  <g id='14'>Répéter le mot de passe</g>  <g "
-"id='15'>* </g>  <x id='16'/>  <g id='17'>${newpass2/error}<x id='18'/></g>"
+"${username/error}<x id='5'/></g>  <x id='6'/>  <x id='7'/>  <g "
+"id='8'>Mot de passe</g>  <g id='9'>* </g>  <x id='10'/>  <g id='11'>${newpass/"
+"error}<x id='12'/></g>  <x id='13'/>  <x id='14'/>  <g id='15'>Répéter "
+"le mot de passe</g>  <g id='16'>* </g>  <x id='17'/>  <g id='18'>${newpass2/error}"
+"<x id='19'/></g>"
 
 #: ../ui/form/view.xml.en:7
 msgctxt "link"
@@ -412,17 +414,18 @@ msgstr ""
 "id='4'>p.ex. \"Jean Dupont\" &lt;jean.dupont@example.com></g>  <g id='5'>"
 "${new_users}</g>"
 
-#: ../ui/application/login.xml.en:50
+#: ../ui/application/login.xml.en:51
 msgctxt "label"
 msgid ""
-"<g id='21'>E-mail Address</g>  <g id='22'>* </g>  <x id='23'/>  <g id='24'>"
-"${username/error}<x id='25'/></g>  <x id='26'/>  <g id='27'>Password</g>  <g "
-"id='28'>* </g>  <x id='29'/>  <g id='30'>${password/error}<x id='31'/></g>"
+"<g id='22'>E-mail Address</g>  <g id='23'>* </g>  <x id='24'/>  <g id='25'>"
+"${username/error}<x id='26'/></g>  <x id='27'/>  <x id='28'/>  <g "
+"id='29'>Password</g>  <g id='30'>* </g>  <x id='31'/>  <g id='32'>${password/"
+"error}<x id='33'/></g>"
 msgstr ""
-"<g id='21'>Adresse de courriel</g>  <g id='22'>* </g>  <x id='23'/>  <g "
-"id='24'>${username/error}<x id='25'/></g>  <x id='26'/>  <g id='27'>Mot de "
-"passe</g>  <g id='28'>* </g>  <x id='29'/>  <g id='30'>${password/error}<x "
-"id='31'/></g>"
+"<g id='22'>Adresse de courriel</g>  <g id='23'>* </g>  <x id='24'/>  <g id='25'>"
+"${username/error}<x id='26'/></g>  <x id='27'/>  <x id='28'/>  <g "
+"id='29'>Mot de passe</g>  <g id='30'>* </g>  <x id='31'/>  <g id='32'>${password/"
+"error}<x id='33'/></g>"
 
 #: ../ui/form/view.xml.en:19
 msgctxt "link"
@@ -751,7 +754,7 @@ msgstr "Exporter cette liste au format XLS"
 msgid "Expression"
 msgstr "Expression"
 
-#: ../form.py:417
+#: ../form.py:416
 msgid "False"
 msgstr "Faux"
 
@@ -792,7 +795,7 @@ msgctxt "link"
 msgid "Forgotten Password?"
 msgstr "Mot de passe oublié ?"
 
-#: ../application_views.py:242 ../application_views.py:506 ../form.py:134
+#: ../application_views.py:242 ../application_views.py:506 ../form.py:133
 msgid "Form"
 msgstr "Formulaire"
 
@@ -829,7 +832,7 @@ msgstr "HHH:MM"
 msgid "Homepage"
 msgstr "Accueil"
 
-#: ../ui/application/login.xml.en:49
+#: ../ui/application/login.xml.en:50
 msgctxt "legend"
 msgid "If you already have an iScrib account:"
 msgstr "Si vous avez déjà un compte iScrib :"
@@ -988,7 +991,7 @@ msgctxt "title attribute"
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: ../ui/application/login.xml.en:67
+#: ../ui/application/login.xml.en:69
 msgctxt "button"
 msgid "Login"
 msgstr "Connexion"
@@ -1019,7 +1022,7 @@ msgstr "Variable principale"
 msgid "Manage Users"
 msgstr "Gérer les sondés"
 
-#: ../application_views.py:228 ../form.py:148
+#: ../application_views.py:228 ../form.py:147
 msgid "Manage your Data Collection Application"
 msgstr "Gérer votre application de collecte de données"
 
@@ -1214,7 +1217,7 @@ msgstr "Clé publique ReCaptcha"
 msgid "ReCaptcha Whitelist of IPs"
 msgstr "Liste des IP exemptées de ReCaptcha"
 
-#: ../ui/application/login.xml.en:40
+#: ../ui/application/login.xml.en:41
 msgctxt "button"
 msgid "Register"
 msgstr "Inscription"
@@ -1355,9 +1358,9 @@ msgstr ""
 "Champ\n"
 "                  obligatoire"
 
-#: ../ui/application/login.xml.en:15 ../ui/application/login.xml.en:23
-#: ../ui/application/login.xml.en:32 ../ui/application/login.xml.en:51
-#: ../ui/application/login.xml.en:59 ../ui/root/view.xml.en:22
+#: ../ui/application/login.xml.en:15 ../ui/application/login.xml.en:24
+#: ../ui/application/login.xml.en:33 ../ui/application/login.xml.en:52
+#: ../ui/application/login.xml.en:61 ../ui/root/view.xml.en:22
 #: ../ui/root/contact.xml.en:32
 msgctxt "title attribute"
 msgid "This field is required"
@@ -1385,7 +1388,7 @@ msgstr ""
 "Pour exporter dans une base de données SQL, contactez <a href=\"http://www."
 "itaapy.com/contact\">Itaapy</a>"
 
-#: ../form.py:415
+#: ../form.py:414
 msgid "True"
 msgstr "Vrai"
 
@@ -1610,7 +1613,7 @@ msgstr "Votre espace client"
 msgid "Your workgroups"
 msgstr "Vos espaces client"
 
-#: ../utils.py:170 ../form.py:398
+#: ../utils.py:170 ../form.py:397
 msgid "["
 msgstr "["
 
@@ -1837,11 +1840,11 @@ msgstr ""
 msgid "{0}/;thumb?width=128&amp;height=128"
 msgstr ""
 
-#: ../form.py:278
+#: ../form.py:277
 msgid "{application}: <em>Test Form</em>"
 msgstr "{application} : <em>Formulaire de test</em>"
 
-#: ../form.py:286
+#: ../form.py:285
 msgid "{application}: {form}"
 msgstr "{application} : {form}"
 
