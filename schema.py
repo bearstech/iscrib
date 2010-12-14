@@ -168,7 +168,8 @@ class EnumerateOptions(Unicode):
             # Turn it into default value at the time of writing
             return None
         value = Unicode.decode(data)
-        return {'name': checkid(value), 'value': value}
+        name = checkid(value) or u""
+        return {'name': name, 'value': value}
 
 
     @staticmethod
