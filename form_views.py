@@ -134,7 +134,9 @@ class Form_View(STLForm):
             #if datatype.readonly:
             #    continue
             # Delete files first
-            if issubclass(datatype, FileImage):
+            if isinstance(datatype, Numeric):
+                pass
+            elif issubclass(datatype, FileImage):
                 if context.get_form_value(key + '_delete'):
                     value = fields[key]
                     resource.parent.del_resource(value, ref_action='force')
