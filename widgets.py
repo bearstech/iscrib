@@ -110,7 +110,8 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
         for option in datatype.get_namespace(data):
             attributes = {
                 u"type": input_type,
-                u"name": name, u"value": option['name']}
+                u"name": name,
+                u"value": option['name']}
             if option['selected']:
                 attributes[u"checked"] = u"checked"
             if form.is_disabled_by_dependency(name, schema, fields):
@@ -158,19 +159,47 @@ def checkbox_widget(context, form, datatype, name, value, schema, fields,
 
 def select_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
-    if readonly:
-        return make_element(u"div", content=datatype.get_value(value, value))
+    html = []
 
-    options = []
-    for option in datatype.get_namespace(value):
-        attributes = {u"value": option['name']}
-        if option['selected']:
-            attributes[u"selected"] = u"selected"
-        options.append(make_element(u"option", attributes, option['value']))
-    options = u"\n".join(options)
-    attributes = {u"name": name}
-    # Check for "errors"
-    return make_element(u"select", attributes, options)
+    # True -> '1' ; False -> '2'
+    data = datatype.encode(value)
+
+    if readonly:
+        # '1' -> u"Oui" ; '2' -> u"Non"
+        input = datatype.get_value(data, value)
+        if is_thingy(input, MSG):
+            input = input.gettext()
+        input = XMLContent.encode(input)
+        html.append(make_element(u"div", content=input))
+    else:
+        for option in datatype.get_namespace(data):
+            attributes = {
+                u"value": option['name']}
+            if option['selected']:
+                attributes[u"selected"] = u"selected"
+            if form.is_disabled_by_dependency(name, schema, fields):
+                attributes[u"disabled"] = u"disabled"
+                attributes.setdefault(u"class", []).append(u"disabled")
+            # 0005970: Le Javascript pour (dés)activer les autres champs
+            if option['name'] == '1':
+                method = 'input_enabled'
+            else:
+                method = 'input_disabled'
+            dep_names = form.get_dep_names(name, schema)
+            for dep_name in dep_names:
+                attributes.setdefault(u"onchange", []).append(
+                    u"{method}('{name}');".format(method=method,
+                        name=dep_name))
+            # 0005970 fin
+            input = make_element(u"option", attributes, option['value'])
+            html.append(input)
+
+    attributes = {
+        u"id": u"field_{name}".format(name=name),
+        u"name": name}
+    check_errors(context, form, datatype, name, data, schema, fields,
+            readonly, attributes, tabindex=None)
+    return make_element(u"select", attributes, u"".join(html))
 
 
 
