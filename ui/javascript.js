@@ -27,33 +27,31 @@ function input_disabled(name) {
  *
  */
 
-this.tooltip = function(){    
-    /* CONFIG */        
+this.tooltip = function(){
+    /* CONFIG */
     // these 2 variable determine popup's distance from the cursor
-    // you might want to adjust to get the right result        
+    // you might want to adjust to get the right result
     xOffset = 10;
-    yOffset = 20;        
-    /* END CONFIG */        
-    $("img[rel=tooltip]").hover(function(e){
-        console.log("this", this, this.title);
+    yOffset = 20;
+    /* END CONFIG */
+    $("*[rel=tooltip]").hover(function(e) {
         this.t = this.title;
         this.title = "";
         $("body").append("<p id='tooltip'>"+ this.t +"</p>");
-        var tooltip = $("#tooltip")
+        $("#tooltip")
             .css("top",(e.pageY - xOffset) + "px")
             .css("left",(e.pageX + yOffset) + "px")
-            .fadeIn("fast");        
-        console.log("tooltip", tooltip);
+            .fadeIn("fast");
     },
-    function(){
-        this.title = this.t;        
+    function() {
+        this.title = this.t;
         $("#tooltip").remove();
-    });    
-    $("img[rel=tooltip]").mousemove(function(e){
+    });
+    $("*[rel=tooltip]").mousemove(function(e){
         $("#tooltip")
             .css("top",(e.pageY - xOffset) + "px")
             .css("left",(e.pageX + yOffset) + "px");
-    });            
+    });
 };
 
 

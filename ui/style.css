@@ -453,3 +453,13 @@ button, .button {
 #body h1 .application-title {
   color: #666;
 }
+
+#tooltip {
+  background: #f7f5d1;
+  border: 1px solid #333;
+  color: #333;
+  display: none;
+  font-size: 12px;
+  padding: 2px 5px;
+  position: absolute;
+}

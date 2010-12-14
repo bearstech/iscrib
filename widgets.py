@@ -309,6 +309,6 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
         if not help and isinstance(datatype, (NumDate, NumTime)):
             help = MSG(u"Format {format}").gettext(format=datatype.type)
         if help:
-            html += (u'<img src="/ui/icons/16x16/help.png" title="{help}" '
-                    u'rel="tooltip" class="online-help"/>'.format(help=help))
+            html = make_element(u"div", {u"title": help, u"rel": u"tooltip"},
+                    html)
     return html
