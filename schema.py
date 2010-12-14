@@ -355,6 +355,10 @@ class Schema(Table):
             'enum_repr', 'decimals', 'mandatory', 'size', 'dependency',
             'formula', 'default']
 
+    # Views
+    add_record = None
+    edit = None
+
 
     def _load_from_csv(self, body):
         handler = self.handler
