@@ -164,12 +164,10 @@ class EnumerateOptions(Unicode):
     @staticmethod
     def decode(data):
         data = data.strip()
-        if not data:
-            # Turn it into default value at the time of writing
-            return None
         value = Unicode.decode(data)
-        name = checkid(value) or u""
-        return {'name': name, 'value': value}
+        return {
+            'name': checkid(value) or '',
+            'value': value}
 
 
     @staticmethod
@@ -186,7 +184,9 @@ class EnumerateOptions(Unicode):
 
     @staticmethod
     def split(value):
-        return [{'name': checkid(option), 'value': option.strip()}
+        return [{
+            'name': checkid(option) or '',
+            'value': option.strip()}
                 for option in value.split(u"/")]
 
 
@@ -447,7 +447,7 @@ class Schema(Table):
                     default = EnumBoolean.encode(value)
                 elif issubclass(datatype, SqlEnumerate):
                     datatype = datatype(options=enum_options)
-                    default = checkid(default)
+                    default = checkid(default) or ''
                 elif issubclass(datatype, NumTime):
                     # "0-0-0 09:00:00" -> "09:00:00"
                     default = default.split(' ')[-1]
