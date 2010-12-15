@@ -86,7 +86,7 @@ class ImageSelectorWidget(BaseImageSelectorWidget):
     ${workflow_state}
     <br/>
     <img src="${value}/;thumb?width=${width}&amp;height=${height}"
-    stl:if="value"/>""", html=True)
+    stl:if="value"/>""", format=False, html=True)
 
 
     @thingy_lazy_property
