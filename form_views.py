@@ -179,6 +179,8 @@ class Form_View(STLForm):
                 # Invalid (0008102 and mandatory -> and filled)
                 elif data and not datatype.is_valid(data):
                     bad_types.append(key)
+                elif isinstance(datatype, Numeric):
+                    pass
                 elif issubclass(datatype, FileImage):
                     value = resource.save_file(*data)
             # First skip instance datatypes:
