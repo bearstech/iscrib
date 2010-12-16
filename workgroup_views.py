@@ -18,7 +18,7 @@
 # Import from itools
 from itools.core import merge_dicts
 from itools.database import PhraseQuery
-from itools.datatypes import Unicode, Email, String
+from itools.datatypes import Boolean, Unicode, Email, String
 from itools.gettext import MSG
 from itools.stl import stl
 from itools.web import INFO, ERROR
@@ -26,7 +26,7 @@ from itools.web import INFO, ERROR
 # Import from ikaaro
 from ikaaro import messages
 from ikaaro.autoform import TextWidget, MultilineWidget, PasswordWidget
-from ikaaro.autoform import ReadOnlyWidget
+from ikaaro.autoform import ReadOnlyWidget, CheckboxWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.theme_views import Theme_Edit
@@ -52,7 +52,8 @@ class Workgroup_NewInstance(NewInstance):
             title=Unicode(mandatory=True),
             firstname=Unicode,
             lastname=Unicode,
-            company=Unicode)
+            company=Unicode,
+            accept_terms_of_use=Boolean(mandatory=True))
     widgets = [ReadOnlyWidget('cls_description'),
             TextWidget('title', title=MSG(u'Name of your client space'),
                 tip=MSG(u'You can type the name of your company or '
@@ -70,6 +71,11 @@ class Workgroup_NewInstance(NewInstance):
         PasswordWidget('password', title=MSG(u"Password")),
         PasswordWidget('password2', title=MSG(u"Repeat Password"))]
 
+    terms_of_use_widget = CheckboxWidget('accept_terms_of_use',
+             title=MSG(u'I have read and agree to the terms of use '
+                       u'(<a href="/terms-and-conditions" '
+                       u'title="Terms of use" target="_blank">Terms of use</a>)',
+                       html=True))
 
     def get_schema(self, resource, context):
         schema = self.schema.copy()
@@ -86,6 +92,8 @@ class Workgroup_NewInstance(NewInstance):
             widgets.extend(self.anonymous_widgets)
         if RecaptchaDatatype.is_required(context):
             widgets.extend(captcha_widgets)
+        # Terms of use widget
+        widgets.append(self.terms_of_use_widget)
         return widgets
 
 
@@ -116,6 +124,9 @@ class Workgroup_NewInstance(NewInstance):
         ws_languages = context.root.get_property('website_languages')
         current_language = accept.select_language(ws_languages)
         workgroup.set_property('website_languages', (current_language,))
+        # Accept terms and condition
+        workgroup.set_property('accept_terms_of_use',
+                               form['accept_terms_of_use'])
         # Set title in current language
         workgroup.set_property('title', None)
         workgroup.set_property('title', form['title'],
