@@ -49,6 +49,8 @@ class Root_View(AutoForm):
     anonymous_schema = {'email': Email(mandatory=True)}
     anonymous_widgets = [TextWidget('email', title=MSG(u"E-mail Address"))]
 
+    scripts = ['/ui/iscrib/js/jquery.jcarousel.min.js']
+
 
     def get_schema(self, resource, context):
         schema = self.schema.copy()

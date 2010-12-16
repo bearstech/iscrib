@@ -51,4 +51,33 @@
     ${homepage_content}
   </div>
 
+  <!-- References -->
+  <div id="references">
+    <h2>Our customers</h2>
+    <ul id="mycarousel" class="jcarousel-skin-tango">
+      <li>
+        <img src="/ui/iscrib/images/references/culture.png"/>
+      </li>
+      <li>
+        <img src="/ui/iscrib/images/references/altic.png"/>
+      </li>
+      <li>
+        <img src="/ui/iscrib/images/references/altran.png"/>
+      </li>
+      <li>
+        <img src="/ui/iscrib/images/references/emencia.png"/>
+      </li>
+      <li>
+        <img src="/ui/iscrib/images/references/silicon-sentier.png"/>
+      </li>
+    </ul>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#mycarousel').jcarousel({auto: 2, scroll: 1, wrap: 'last'});
+    });
+  </script>
+
+
 </stl:block>

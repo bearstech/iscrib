@@ -51,6 +51,65 @@ div#page {
   padding: 10px 20px;
 }
 
+/* References sur la homepage */
+
+#content #references{
+  background: url('/ui/iscrib/images/references/background.png') repeat-x;
+  border: 1px solid #E4E4E4;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  height: 134px;
+  margin: 20px 0;
+  width: 900px;
+}
+
+#body #content #references h2{
+  border: 0;
+  margin: 0 0 10px 0;
+  padding: 0 10px;
+}
+
+#content #references ul{
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 900px;
+}
+
+#content #references ul li{
+  background-image: none;
+  display: inline;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  width: 225px;
+}
+
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+  width: 900px;
+}
+
+.jcarousel-skin-tango .jcarousel-container-vertical {
+  width: 900px;
+  height: 245px;
+}
+
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+  width: 900px;
+  height: 75px;
+}
+
+.jcarousel-skin-tango .jcarousel-clip-vertical {
+  width: 900px;
+}
+
+.jcarousel-skin-tango .jcarousel-item {
+  height: 80px;
+  padding: 0;
+  text-align: center;
+  width: 225px;
+}
 /*
  * Content rules
  */
