@@ -102,7 +102,7 @@ class Application_NewInstance(NewInstance):
     schema = merge_dicts(NewInstance.schema,
             title=Unicode(mandatory=True),
             file=FileDataType(mandatory=True))
-    widgets = (NewInstance.widgets
+    widgets = (NewInstance.widgets[:2]
             + [FileWidget('file', title=MSG(u"ODS or XLS File"))])
 
 
