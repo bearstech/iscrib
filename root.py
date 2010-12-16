@@ -100,7 +100,7 @@ class Root(BaseRoot):
     def is_allowed_to_view(self, user, resource):
         abspath = resource.get_abspath()
         if abspath and abspath[0] in ('gabarit', 'gabarit-xls', 'samples',
-                'terms-and-conditions', 'theme'):
+                'terms-and-conditions', 'theme', 'prix'):
             if isinstance(resource, WorkflowAware):
                 state = resource.get_workflow_state()
             else:
