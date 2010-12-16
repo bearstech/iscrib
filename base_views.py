@@ -193,8 +193,8 @@ class FrontView(BaseIconsView):
 
 class IconsView(BaseIconsView):
     template = '/ui/iscrib/base/icons_view.xml'
-    item_keys = ('icon', 'title', 'description', 'url', 'onclick', 'access',
-            'extra')
+    item_keys = ('icon', 'title', 'description', 'url', 'description_url',
+            'rel', 'onclick', 'access', 'extra')
     cols = 3
 
 
@@ -213,6 +213,15 @@ class IconsView(BaseIconsView):
         return [x.copy() for x in self.items]
 
 
+    @staticmethod
+    def resolve_path(item, key, base_path):
+        value = item[key]
+        if value is None:
+            return
+        path = item[key] = str(base_path.resolve2(value))
+        return path
+
+
     def get_namespace(self, resource, context):
         namespace = {}
         namespace['batch'] = None
@@ -228,14 +237,13 @@ class IconsView(BaseIconsView):
 
         rows = [[]]
         for item in self.get_items(resource, context):
-            url = item['url']
-            path = str(base_path.resolve2(url))
+            path = self.resolve_path(item, 'url', base_path)
+            self.resolve_path(item, 'description_url', base_path)
             # Fragment not sent
             if path.split('#', 1)[0] == here_path:
                 item['class'] = 'active'
             else:
                 item['class'] = None
-            item['url'] = path
             method_name = item['access']
             if method_name:
                 method = getattr(self, method_name)

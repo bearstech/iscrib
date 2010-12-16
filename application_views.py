@@ -65,9 +65,7 @@ ERR_NOT_ALLOWED = ERROR(u"You are not allowed to register.")
 ERR_ALREADY_REGISTERED = ERROR(u"You are already registered. "
         u"Log in using your password.")
 MSG_APPLICATION_TITLE = MSG(u'''<span class="application-title">Title of your
-application:</span> {title}
-<a href=";edit" title="Edit and configure application" rel="fancybox">
-  <img src="/ui/icons/16x16/edit.png"/></a>''', html=True)
+application:</span> {title}''', html=True)
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
@@ -125,20 +123,23 @@ class Application_Menu(IconsView):
     cols = 5
     make_item = IconsView.make_item
     items = [
+        make_item(icon='/ui/iscrib/images/edit48.png',
+            title=MSG(u"Edit and configure application"),
+            url=';edit',
+            rel='fancybox'),
         make_item(icon='/ui/iscrib/images/form48.png',
-           title=MSG(u"Show Test Form"),
-           url='0/;pageA'),
+            title=MSG(u"Show Test Form"),
+            url='0/;pageA'),
         make_item(icon='/ui/iscrib/images/register48.png',
-           title=MSG(u"Add Users"),
-           url=';register',
-           access='is_allowed_to_register'),
-        make_item(icon='/ui/iscrib/images/users48.png',
-            title=MSG(u"Manage Users"),
-            url=';view#users'),
+            title=MSG(u"Add Users"),
+            description=MSG(u"Manage Users"),
+            url=';register',
+            description_url=';view#users',
+            access='is_allowed_to_register'),
         # "Spread your Form" here
         make_item(icon='/ui/iscrib/images/export48.png',
-           title=MSG(u"Collect Data"),
-           extra=MSG(u"""
+            title=MSG(u"Collect Data"),
+            extra=MSG(u"""
 <div id="choose-format">
   <span><a href="#" title="Close"
     onclick="$('#choose-format').hide(); return false">X</a></span>
@@ -150,9 +151,9 @@ class Application_Menu(IconsView):
 <script type="text/javascript">
   $("#choose-format").hide();
 </script>""", html=True),
-           url='#',
-           onclick='$("#choose-format").show(); return false',
-           access='is_allowed_to_export')]
+            url='#',
+            onclick='$("#choose-format").show(); return false',
+            access='is_allowed_to_export')]
 
 
     def is_allowed_to_register(self, item, resource, context):
