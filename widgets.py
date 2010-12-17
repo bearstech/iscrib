@@ -142,6 +142,8 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
 
     attributes = merge_dicts(container_attributes,
             id=u"field_{name}".format(name=name))
+    check_errors(context, form, datatype, name, data, schema, fields,
+            readonly, attributes, tabindex=None)
     return make_element(container, attributes, u"".join(html))
 
 
@@ -156,7 +158,7 @@ def radio_widget(context, form, datatype, name, value, schema, fields,
             u"name": name}
     choice_checked = u"checked"
     # Oui/Non sur une seule ligne
-    multiline = issubclass(datatype, EnumBoolean)
+    multiline = not issubclass(datatype, EnumBoolean)
     return _choice_widget(context, form, datatype, name, value, schema,
             fields, readonly, container, container_attributes, choice,
             choice_attributes, choice_checked, multiline, tabindex)
@@ -173,7 +175,7 @@ def checkbox_widget(context, form, datatype, name, value, schema, fields,
             u"name": name}
     choice_checked = u"checked"
     # Oui/Non sur une seule ligne
-    multiline = issubclass(datatype, EnumBoolean)
+    multiline = not issubclass(datatype, EnumBoolean)
     return _choice_widget(context, form, datatype, name, value, schema,
             fields, readonly, container, container_attributes, choice,
             choice_attributes, choice_checked, multiline, tabindex)
