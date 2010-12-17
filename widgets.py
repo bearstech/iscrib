@@ -57,6 +57,8 @@ def make_element(tagname, attributes={}, content=u""):
         content = content.gettext()
     element = [u"<", tagname]
     for key, value in attributes.iteritems():
+        if value is None:
+            continue
         if type(value) is list:
             value = u" ".join(value)
         elif is_thingy(value, MSG):
@@ -89,7 +91,8 @@ def check_errors(context, form, datatype, name, value, schema, fields,
 
 
 def _choice_widget(context, form, datatype, name, value, schema, fields,
-        readonly, input_type, tabindex=None):
+        readonly, container, container_name, input_type, input_name,
+        input_checked, input_subtype, multiline=False, tabindex=None):
     html = []
 
     # True -> '1' ; False -> '2'
@@ -110,10 +113,10 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
         for option in datatype.get_namespace(data):
             attributes = {
                 u"type": input_type,
-                u"name": name,
+                u"name": input_name,
                 u"value": option['name']}
             if option['selected']:
-                attributes[u"checked"] = u"checked"
+                attributes[input_checked] = input_checked
             if form.is_disabled_by_dependency(name, schema, fields):
                 attributes[u"disabled"] = u"disabled"
                 attributes.setdefault(u"class", []).append(u"disabled")
@@ -132,84 +135,49 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
             if is_thingy(value, MSG):
                 value = value.gettext()
             content = XMLContent.encode(value)
-            input = make_element(u"input", attributes, content)
-            if issubclass(datatype, EnumBoolean):
-                # Oui/Non sur une seule ligne
-                html.append(input)
-            else:
+            input = make_element(input_subtype, attributes, content)
+            if multiline is True:
                 # Une option par ligne
                 html.append(make_element(u"div", content=input))
+            else:
+                html.append(input)
 
-    attributes = {u"id": u"field_{name}".format(name=name)}
-    check_errors(context, form, datatype, name, data, schema, fields,
-            readonly, attributes, tabindex=None)
-    return make_element(u"div", attributes, u"".join(html))
+    attributes = {
+            u"id": u"field_{name}".format(name=name),
+            u"name": container_name}
+    return make_element(container, attributes, u"".join(html))
 
 
 
 def radio_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
+    # Oui/Non sur une seule ligne
+    multiline = issubclass(datatype, EnumBoolean)
     return _choice_widget(context, form, datatype, name, value, schema,
-            fields, readonly, input_type=u"radio", tabindex=tabindex)
+            fields, readonly, container=u"div", container_name=None,
+            input_type=u"radio", input_name=name, input_checked=u"checked",
+            input_subtype=u"input", multiline=multiline, tabindex=tabindex)
 
 
 
 def checkbox_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
+    # Oui/Non sur une seule ligne
+    multiline = issubclass(datatype, EnumBoolean)
     return _choice_widget(context, form, datatype, name, value, schema,
-            fields, readonly, input_type=u"checkbox", tabindex=tabindex)
+            fields, readonly, container=u"div", container_name=None,
+            input_type=u"checkbox", input_name=name,
+            input_checked=u"checked", input_subtype=u"input",
+            multiline=multiline, tabindex=tabindex)
 
 
 
 def select_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
-    """FIXME bad copy/paste of _choice_widget.
-    """
-    html = []
-
-    # True -> '1' ; False -> '2'
-    data = datatype.encode(value)
-
-    if readonly:
-        # '1' -> u"Oui" ; '2' -> u"Non"
-        input = datatype.get_value(data, value)
-        if is_thingy(input, MSG):
-            input = input.gettext()
-        content = XMLContent.encode(input)
-        html.append(make_element(u"div", content=content))
-    else:
-        for option in datatype.get_namespace(data):
-            attributes = {
-                u"value": option['name']}
-            if option['selected']:
-                attributes[u"selected"] = u"selected"
-            if form.is_disabled_by_dependency(name, schema, fields):
-                attributes[u"disabled"] = u"disabled"
-                attributes.setdefault(u"class", []).append(u"disabled")
-            # 0005970: Le Javascript pour (dés)activer les autres champs
-            if option['name'] == '1':
-                method = 'input_enabled'
-            else:
-                method = 'input_disabled'
-            dep_names = form.get_dep_names(name, schema)
-            for dep_name in dep_names:
-                attributes.setdefault(u"onchange", []).append(
-                    u"{method}('{name}');".format(method=method,
-                        name=dep_name))
-            # 0005970 fin
-            value = option['value']
-            if is_thingy(value, MSG):
-                value = value.gettext()
-            content = XMLContent.encode(value)
-            input = make_element(u"option", attributes, content)
-            html.append(input)
-
-    attributes = {
-        u"id": u"field_{name}".format(name=name),
-        u"name": name}
-    check_errors(context, form, datatype, name, data, schema, fields,
-            readonly, attributes, tabindex=None)
-    return make_element(u"select", attributes, u"".join(html))
+    return _choice_widget(context, form, datatype, name, value, schema,
+            fields, readonly, container=u"select", container_name=name,
+            input_type=None, input_name=None, input_checked=u"selected",
+            input_subtype=u"option", multiline=False, tabindex=tabindex)
 
 
 
