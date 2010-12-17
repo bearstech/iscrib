@@ -23,7 +23,7 @@
 from decimal import InvalidOperation
 
 # Import from itools
-from itools.core import is_thingy
+from itools.core import is_thingy, merge_dicts
 from itools.datatypes import XMLContent, XMLAttribute
 from itools.gettext import MSG
 from itools.i18n import format_number
@@ -91,8 +91,8 @@ def check_errors(context, form, datatype, name, value, schema, fields,
 
 
 def _choice_widget(context, form, datatype, name, value, schema, fields,
-        readonly, container, container_name, input_type, input_name,
-        input_checked, input_subtype, multiline=False, tabindex=None):
+        readonly, container, container_attributes, choice, choice_attributes,
+        choice_checked, multiline, tabindex):
     html = []
 
     # True -> '1' ; False -> '2'
@@ -111,12 +111,10 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
         html.append(make_element(u"div", content=content))
     else:
         for option in datatype.get_namespace(data):
-            attributes = {
-                u"type": input_type,
-                u"name": input_name,
-                u"value": option['name']}
+            attributes = merge_dicts(choice_attributes,
+                    value=option['name'])
             if option['selected']:
-                attributes[input_checked] = input_checked
+                attributes[choice_checked] = choice_checked
             if form.is_disabled_by_dependency(name, schema, fields):
                 attributes[u"disabled"] = u"disabled"
                 attributes.setdefault(u"class", []).append(u"disabled")
@@ -135,49 +133,65 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
             if is_thingy(value, MSG):
                 value = value.gettext()
             content = XMLContent.encode(value)
-            input = make_element(input_subtype, attributes, content)
+            input = make_element(choice, attributes, content)
             if multiline is True:
                 # Une option par ligne
                 html.append(make_element(u"div", content=input))
             else:
                 html.append(input)
 
-    attributes = {
-            u"id": u"field_{name}".format(name=name),
-            u"name": container_name}
+    attributes = merge_dicts(container_attributes,
+            id=u"field_{name}".format(name=name))
     return make_element(container, attributes, u"".join(html))
 
 
 
 def radio_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
+    container = u"div"
+    container_attributes = {}
+    choice = u"input"
+    choice_attributes = {
+            u"type": u"radio",
+            u"name": name}
+    choice_checked = u"checked"
     # Oui/Non sur une seule ligne
     multiline = issubclass(datatype, EnumBoolean)
     return _choice_widget(context, form, datatype, name, value, schema,
-            fields, readonly, container=u"div", container_name=None,
-            input_type=u"radio", input_name=name, input_checked=u"checked",
-            input_subtype=u"input", multiline=multiline, tabindex=tabindex)
+            fields, readonly, container, container_attributes, choice,
+            choice_attributes, choice_checked, multiline, tabindex)
 
 
 
 def checkbox_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
+    container = u"div"
+    container_attributes = {}
+    choice = u"input"
+    choice_attributes = {
+            u"type": u"checkbox",
+            u"name": name}
+    choice_checked = u"checked"
     # Oui/Non sur une seule ligne
     multiline = issubclass(datatype, EnumBoolean)
     return _choice_widget(context, form, datatype, name, value, schema,
-            fields, readonly, container=u"div", container_name=None,
-            input_type=u"checkbox", input_name=name,
-            input_checked=u"checked", input_subtype=u"input",
-            multiline=multiline, tabindex=tabindex)
+            fields, readonly, container, container_attributes, choice,
+            choice_attributes, choice_checked, multiline, tabindex)
 
 
 
 def select_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
+    container = u"select"
+    container_attributes = {
+            u"name": name}
+    choice = u"option"
+    choice_attributes = {}
+    choice_checked = u"selected"
+    multiline = False
     return _choice_widget(context, form, datatype, name, value, schema,
-            fields, readonly, container=u"select", container_name=name,
-            input_type=None, input_name=None, input_checked=u"selected",
-            input_subtype=u"option", multiline=False, tabindex=tabindex)
+            fields, readonly, container, container_attributes, choice,
+            choice_attributes, choice_checked, multiline, tabindex)
 
 
 
