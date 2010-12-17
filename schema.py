@@ -163,7 +163,6 @@ class EnumerateOptions(Unicode):
 
     @staticmethod
     def decode(data):
-        data = data.strip()
         value = Unicode.decode(data)
         return {
             'name': checkid(value) or '',
@@ -184,14 +183,16 @@ class EnumerateOptions(Unicode):
 
     @staticmethod
     def split(value):
-        # Allow to split from newest to oldest separator
-        for separator in (u"\r\n", u"\n", u"/"):
+        for separator in (u"\r\n", u"\n"):
             options = value.split(separator)
             if len(options) > 1:
                 break
+        else:
+            # Backwards compatibility
+            options = [option.strip() for option in value.split(u"/")]
         return [{
             'name': checkid(option) or '',
-            'value': option.strip()}
+            'value': option}
                 for option in options]
 
 
