@@ -184,10 +184,15 @@ class EnumerateOptions(Unicode):
 
     @staticmethod
     def split(value):
+        # Allow to split from newest to oldest separator
+        for separator in (u"\r\n", u"\n", u"/"):
+            options = value.split(separator)
+            if len(options) > 1:
+                break
         return [{
             'name': checkid(option) or '',
             'value': option.strip()}
-                for option in value.split(u"/")]
+                for option in options]
 
 
 
