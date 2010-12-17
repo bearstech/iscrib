@@ -98,13 +98,9 @@ class Root(BaseRoot):
 
 
     def is_allowed_to_view(self, user, resource):
-        abspath = resource.get_abspath()
-        if abspath and abspath[0] in ('gabarit', 'gabarit-xls', 'samples',
-                'terms-and-conditions', 'theme', 'prix'):
-            if isinstance(resource, WorkflowAware):
-                state = resource.get_workflow_state()
-            else:
-                state = 'public'
+        if isinstance(resource, WorkflowAware):
+            state = resource.get_workflow_state()
             if state == 'public':
                 return True
-        return super(Root, self).is_allowed_to_view(user, resource)
+            return self.is_allowed_to_edit(user, resource)
+        return True
