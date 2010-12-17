@@ -163,6 +163,8 @@ def checkbox_widget(context, form, datatype, name, value, schema, fields,
 
 def select_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
+    """FIXME bad copy/paste of _choice_widget.
+    """
     html = []
 
     # True -> '1' ; False -> '2'
@@ -195,7 +197,11 @@ def select_widget(context, form, datatype, name, value, schema, fields,
                     u"{method}('{name}');".format(method=method,
                         name=dep_name))
             # 0005970 fin
-            input = make_element(u"option", attributes, option['value'])
+            value = option['value']
+            if is_thingy(value, MSG):
+                value = value.gettext()
+            content = XMLContent.encode(value)
+            input = make_element(u"option", attributes, content)
             html.append(input)
 
     attributes = {
