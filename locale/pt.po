@@ -52,7 +52,7 @@ msgid ""
 "</script>"
 msgstr ""
 
-#: ../application_views.py:153
+#: ../application_views.py:155
 msgid ""
 "\n"
 "<div id=\"choose-format\">\n"
@@ -68,7 +68,7 @@ msgid ""
 "</script>"
 msgstr ""
 
-#: ../application_views.py:220
+#: ../application_views.py:222
 msgid ""
 "\n"
 "<div id=\"spread-url\">\n"
@@ -398,7 +398,7 @@ msgctxt "heading"
 msgid "About iScrib"
 msgstr ""
 
-#: ../application_views.py:134
+#: ../application_views.py:136
 msgid "Add Users"
 msgstr ""
 
@@ -467,7 +467,7 @@ msgctxt "heading"
 msgid "Client Spaces with forms you have to fill in"
 msgstr ""
 
-#: ../application_views.py:141
+#: ../application_views.py:143
 msgid "Collect Data"
 msgstr ""
 
@@ -484,7 +484,7 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
-#: ../application_views.py:248 ../user_views.py:37 ../user_views.py:64
+#: ../application_views.py:250 ../user_views.py:37 ../user_views.py:64
 #: ../root_views.py:183
 msgid "Company/Organization"
 msgstr ""
@@ -563,6 +563,10 @@ msgctxt "link"
 msgid "Download OpenOffice.org"
 msgstr ""
 
+#: ../application_views.py:130
+msgid "Download Source File"
+msgstr ""
+
 #: ../form_views.py:303
 msgid "Download form"
 msgstr ""
@@ -575,7 +579,7 @@ msgstr ""
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 
-#: ../application_views.py:249 ../application_views.py:508
+#: ../application_views.py:251 ../application_views.py:510
 msgid "E-mail"
 msgstr ""
 
@@ -622,7 +626,7 @@ msgctxt "button"
 msgid "Export"
 msgstr ""
 
-#: ../application_views.py:483
+#: ../application_views.py:485
 msgid "Export Collected Data"
 msgstr ""
 
@@ -655,7 +659,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: ../application_views.py:246 ../application_views.py:507
+#: ../application_views.py:248 ../application_views.py:509
 #: ../workgroup_views.py:68
 msgid "First Name"
 msgstr ""
@@ -679,7 +683,7 @@ msgctxt "link"
 msgid "Forgotten Password?"
 msgstr ""
 
-#: ../application_views.py:243 ../application_views.py:507 ../form.py:133
+#: ../application_views.py:245 ../application_views.py:509 ../form.py:133
 msgid "Form"
 msgstr ""
 
@@ -837,11 +841,11 @@ msgstr ""
 msgid "Integer"
 msgstr ""
 
-#: ../application_views.py:245
+#: ../application_views.py:247
 msgid "Last Modified"
 msgstr ""
 
-#: ../application_views.py:247 ../application_views.py:508
+#: ../application_views.py:249 ../application_views.py:510
 #: ../workgroup_views.py:69
 msgid "Last Name"
 msgstr ""
@@ -885,11 +889,11 @@ msgstr ""
 msgid "Main Variable"
 msgstr ""
 
-#: ../application_views.py:135
+#: ../application_views.py:138
 msgid "Manage Users"
 msgstr ""
 
-#: ../application_views.py:229 ../form.py:147
+#: ../application_views.py:231 ../form.py:147
 msgid "Manage your Data Collection Application"
 msgstr ""
 
@@ -905,7 +909,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:653
+#: ../application_views.py:655
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -959,7 +963,7 @@ msgstr ""
 msgid "No more users are allowed to register."
 msgstr ""
 
-#: ../application_views.py:631
+#: ../application_views.py:633
 msgid "No user added."
 msgstr ""
 
@@ -1121,7 +1125,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: ../application_views.py:131 ../application_views.py:803
+#: ../application_views.py:133 ../application_views.py:805
 msgid "Show Test Form"
 msgstr ""
 
@@ -1137,7 +1141,7 @@ msgstr ""
 msgid "Source File"
 msgstr ""
 
-#: ../application_views.py:180
+#: ../application_views.py:182
 msgid "Spread your Form"
 msgstr ""
 
@@ -1145,7 +1149,7 @@ msgstr ""
 msgid "Start filling"
 msgstr ""
 
-#: ../application_views.py:244 ../application_views.py:508
+#: ../application_views.py:246 ../application_views.py:510
 msgid "State"
 msgstr ""
 
@@ -1158,7 +1162,7 @@ msgstr ""
 msgid "String"
 msgstr ""
 
-#: ../application_views.py:557
+#: ../application_views.py:559
 msgid "Subscribe Users"
 msgstr ""
 
@@ -1171,7 +1175,7 @@ msgctxt "table cell"
 msgid "Subscribed Users"
 msgstr ""
 
-#: ../application_views.py:647
+#: ../application_views.py:649
 msgid "Subscription Mode"
 msgstr ""
 
@@ -1193,7 +1197,7 @@ msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
 
-#: ../application_views.py:62 ../application_views.py:783 ../base_views.py:130
+#: ../application_views.py:62 ../application_views.py:785 ../base_views.py:130
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -1256,7 +1260,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../application_views.py:614
+#: ../application_views.py:616
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
@@ -1302,7 +1306,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr ""
 
-#: ../application_views.py:764 ../base_views.py:124
+#: ../application_views.py:766 ../base_views.py:124
 msgid "Welcome!"
 msgstr ""
 
@@ -1696,7 +1700,7 @@ msgstr ""
 msgid "{name}_delete"
 msgstr ""
 
-#: ../application_views.py:636
+#: ../application_views.py:638
 msgid "{n} user(s) added."
 msgstr ""
 
@@ -1704,11 +1708,11 @@ msgstr ""
 msgid "{sheetname}..."
 msgstr ""
 
-#: ../application_views.py:500
+#: ../application_views.py:502
 msgid "{title} Data"
 msgstr ""
 
-#: ../application_views.py:430
+#: ../application_views.py:432
 msgid "{title} Users"
 msgstr ""
 

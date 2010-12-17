@@ -82,7 +82,7 @@ msgstr ""
 "  $(\"#choose-format\").hide();\n"
 "</script>"
 
-#: ../application_views.py:153
+#: ../application_views.py:155
 msgid ""
 "\n"
 "<div id=\"choose-format\">\n"
@@ -110,7 +110,7 @@ msgstr ""
 "  $(\"#choose-format\").hide();\n"
 "</script>"
 
-#: ../application_views.py:220
+#: ../application_views.py:222
 msgid ""
 "\n"
 "<div id=\"spread-url\">\n"
@@ -481,8 +481,8 @@ msgid ""
 "<g id='9'>Create Your Own Form</g><x id='10'/> The form you have filled in "
 "was simply created from the upload of this <g id='11'>XLS/ODS file</g>."
 msgstr ""
-"<g id='9'>Vous aussi créez une enquête</g><x id='10'/> Le formulaire "
-"que vous venez de remplir a été créé simplement par l'upload de ce <g "
+"<g id='9'>Vous aussi créez une enquête</g><x id='10'/> Le formulaire que "
+"vous venez de remplir a été créé simplement par l'upload de ce <g "
 "id='11'>fichier XLS/ODS</g>."
 
 #: ../workgroup_views.py:114
@@ -514,7 +514,7 @@ msgctxt "heading"
 msgid "About iScrib"
 msgstr "À propos de iScrib"
 
-#: ../application_views.py:134
+#: ../application_views.py:136
 msgid "Add Users"
 msgstr "Ajouter des sondés"
 
@@ -583,7 +583,7 @@ msgctxt "heading"
 msgid "Client Spaces with forms you have to fill in"
 msgstr "Espaces client où vous avez des formulaires à remplir"
 
-#: ../application_views.py:141
+#: ../application_views.py:143
 msgid "Collect Data"
 msgstr "Collecter les données"
 
@@ -600,7 +600,7 @@ msgstr "Revenir au formulaire"
 msgid "Company"
 msgstr "Société"
 
-#: ../application_views.py:248 ../user_views.py:37 ../user_views.py:64
+#: ../application_views.py:250 ../user_views.py:37 ../user_views.py:64
 #: ../root_views.py:183
 msgid "Company/Organization"
 msgstr "Société/Organisme"
@@ -681,6 +681,10 @@ msgctxt "link"
 msgid "Download OpenOffice.org"
 msgstr "Télécharger OpenOffice.org"
 
+#: ../application_views.py:130
+msgid "Download Source File"
+msgstr "Fichier source"
+
 #: ../form_views.py:303
 msgid "Download form"
 msgstr "Téléchargement du formulaire"
@@ -695,7 +699,7 @@ msgstr ""
 "Téléchargez ce gabarit qui vous servira d'exemple pour créer votre "
 "questionnaire."
 
-#: ../application_views.py:249 ../application_views.py:508
+#: ../application_views.py:251 ../application_views.py:510
 msgid "E-mail"
 msgstr "Courriel"
 
@@ -742,7 +746,7 @@ msgctxt "button"
 msgid "Export"
 msgstr "Exporter"
 
-#: ../application_views.py:483
+#: ../application_views.py:485
 msgid "Export Collected Data"
 msgstr "Exporter les données collectées"
 
@@ -775,7 +779,7 @@ msgstr "Terminer"
 msgid "Finished"
 msgstr "Terminé"
 
-#: ../application_views.py:246 ../application_views.py:507
+#: ../application_views.py:248 ../application_views.py:509
 #: ../workgroup_views.py:68
 msgid "First Name"
 msgstr "Prénom"
@@ -799,7 +803,7 @@ msgctxt "link"
 msgid "Forgotten Password?"
 msgstr "Mot de passe oublié ?"
 
-#: ../application_views.py:243 ../application_views.py:507 ../form.py:133
+#: ../application_views.py:245 ../application_views.py:509 ../form.py:133
 msgid "Form"
 msgstr "Formulaire"
 
@@ -841,8 +845,8 @@ msgid ""
 "I have read and agree to the terms of use (<a href=\"/terms-and-conditions\" "
 "title=\"Terms of use\" target=\"_blank\">Terms of use</a>)"
 msgstr ""
-"J'ai lu et j'approuve les <a href=\"/terms-and-conditions\" "
-"title=\"Terms of use\" target=\"_blank\">conditions d'utilisation</a>"
+"J'ai lu et j'approuve les <a href=\"/terms-and-conditions\" title=\"Terms of "
+"use\" target=\"_blank\">conditions d'utilisation</a>"
 
 #: ../ui/application/login.xml.en:50
 msgctxt "legend"
@@ -977,11 +981,11 @@ msgstr "Taille de saisie"
 msgid "Integer"
 msgstr "Entier"
 
-#: ../application_views.py:245
+#: ../application_views.py:247
 msgid "Last Modified"
 msgstr "Dernière modification"
 
-#: ../application_views.py:247 ../application_views.py:508
+#: ../application_views.py:249 ../application_views.py:510
 #: ../workgroup_views.py:69
 msgid "Last Name"
 msgstr "Nom"
@@ -1025,11 +1029,11 @@ msgstr "MM/AAAA"
 msgid "Main Variable"
 msgstr "Variable principale"
 
-#: ../application_views.py:135
+#: ../application_views.py:138
 msgid "Manage Users"
 msgstr "Gérer les sondés"
 
-#: ../application_views.py:229 ../form.py:147
+#: ../application_views.py:231 ../form.py:147
 msgid "Manage your Data Collection Application"
 msgstr "Gérer votre application de collecte de données"
 
@@ -1045,7 +1049,7 @@ msgstr "Obligatoire"
 msgid "Mandatory field"
 msgstr "Champ obligatoire"
 
-#: ../application_views.py:653
+#: ../application_views.py:655
 msgid "Maximum form users (0 = unlimited)"
 msgstr "Nombre de sondés autorisés (0 = illimité)"
 
@@ -1101,7 +1105,7 @@ msgstr "Aucune information disponible."
 msgid "No more users are allowed to register."
 msgstr "Le quota de sondés a été atteint."
 
-#: ../application_views.py:631
+#: ../application_views.py:633
 msgid "No user added."
 msgstr "Aucun sondé ajouté."
 
@@ -1265,7 +1269,7 @@ msgstr "Rechercher"
 msgid "Select"
 msgstr "Boîte de sélection"
 
-#: ../application_views.py:131 ../application_views.py:803
+#: ../application_views.py:133 ../application_views.py:805
 msgid "Show Test Form"
 msgstr "Voir le formulaire de test"
 
@@ -1281,7 +1285,7 @@ msgstr "Fichier source"
 msgid "Source File"
 msgstr "Fichier source"
 
-#: ../application_views.py:180
+#: ../application_views.py:182
 msgid "Spread your Form"
 msgstr "Diffuser votre formulaire"
 
@@ -1289,7 +1293,7 @@ msgstr "Diffuser votre formulaire"
 msgid "Start filling"
 msgstr "Commencer la saisie"
 
-#: ../application_views.py:244 ../application_views.py:508
+#: ../application_views.py:246 ../application_views.py:510
 msgid "State"
 msgstr "État du formulaire"
 
@@ -1302,7 +1306,7 @@ msgstr "État du formulaire :"
 msgid "String"
 msgstr "Chaîne de caractères"
 
-#: ../application_views.py:557
+#: ../application_views.py:559
 msgid "Subscribe Users"
 msgstr "Ajouter des sondés"
 
@@ -1315,7 +1319,7 @@ msgctxt "table cell"
 msgid "Subscribed Users"
 msgstr "Sondés enregistrés"
 
-#: ../application_views.py:647
+#: ../application_views.py:649
 msgid "Subscription Mode"
 msgstr "Mode d'inscription"
 
@@ -1339,7 +1343,7 @@ msgstr ""
 "Le formulaire est valide, vous pouvez l'exporter dans une base de données "
 "SQL."
 
-#: ../application_views.py:62 ../application_views.py:783 ../base_views.py:130
+#: ../application_views.py:62 ../application_views.py:785 ../base_views.py:130
 msgid "The given username is not an e-mail address."
 msgstr "Le nom donné n'est pas une adresse de courriel valide."
 
@@ -1408,7 +1412,7 @@ msgstr "Vrai"
 msgid "Type"
 msgstr "Type"
 
-#: ../application_views.py:614
+#: ../application_views.py:616
 msgid "Unrecognized line {lineno}: {line}"
 msgstr "Ligne {lineno} incorrecte : {line}"
 
@@ -1456,7 +1460,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr "Bienvenue dans votre espace iScrib"
 
-#: ../application_views.py:764 ../base_views.py:124
+#: ../application_views.py:766 ../base_views.py:124
 msgid "Welcome!"
 msgstr "Bienvenue !"
 
@@ -1871,7 +1875,7 @@ msgstr "{name} n'est pas égal à {formula}"
 msgid "{name}_delete"
 msgstr ""
 
-#: ../application_views.py:636
+#: ../application_views.py:638
 msgid "{n} user(s) added."
 msgstr "{n} sondé(s) ajouté(s)."
 
@@ -1879,11 +1883,11 @@ msgstr "{n} sondé(s) ajouté(s)."
 msgid "{sheetname}..."
 msgstr "{sheetname}..."
 
-#: ../application_views.py:500
+#: ../application_views.py:502
 msgid "{title} Data"
 msgstr "Données de {title}"
 
-#: ../application_views.py:430
+#: ../application_views.py:432
 msgid "{title} Users"
 msgstr "Sondés de {title}"
 
