@@ -104,8 +104,8 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
             input = datatype.get_value(data, value)
             if is_thingy(input, MSG):
                 input = input.gettext()
-            input = XMLContent.encode(input)
-        html.append(make_element(u"div", content=input))
+            content = XMLContent.encode(input)
+        html.append(make_element(u"div", content=content))
     else:
         for option in datatype.get_namespace(data):
             attributes = {
@@ -128,7 +128,10 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
                     u"{method}('{name}');".format(method=method,
                         name=dep_name))
             # 0005970 fin
-            content = XMLContent.encode(option['value'])
+            value = option['value']
+            if is_thingy(value, MSG):
+                value = value.gettext()
+            content = XMLContent.encode(value)
             input = make_element(u"input", attributes, content)
             if issubclass(datatype, EnumBoolean):
                 # Oui/Non sur une seule ligne
@@ -170,8 +173,8 @@ def select_widget(context, form, datatype, name, value, schema, fields,
         input = datatype.get_value(data, value)
         if is_thingy(input, MSG):
             input = input.gettext()
-        input = XMLContent.encode(input)
-        html.append(make_element(u"div", content=input))
+        content = XMLContent.encode(input)
+        html.append(make_element(u"div", content=content))
     else:
         for option in datatype.get_namespace(data):
             attributes = {
