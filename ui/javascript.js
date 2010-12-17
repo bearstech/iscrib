@@ -57,4 +57,29 @@ this.tooltip = function(){
 
 $(document).ready(function(){
     tooltip();
+    $("a[rel='fancybox']").click(function() {
+      $.fancybox({
+        'type': 'iframe',
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 600,
+        'speedOut': 200,
+        'width': 670,
+        'height': 400,
+        'overlayColor': '#729FCF',
+        'overlayOpacity': 0.8,
+        'href': this.href + '?view=print',
+        'onCleanup': function () {
+          var fancy_iframe = $("#fancybox-frame");
+          var message = fancy_iframe.find("#message .info");
+          this.reload_parent_window_on_close = message ? true : false;
+        },
+        'onClosed': function() {
+          // Reload parent if changes have been done
+           if (this.reload_parent_window_on_close)
+               window.location.reload();
+        },
+      });
+      return false;
+    });
 });
