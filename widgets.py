@@ -128,7 +128,8 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
                     u"{method}('{name}');".format(method=method,
                         name=dep_name))
             # 0005970 fin
-            input = make_element(u"input", attributes, option['value'])
+            content = XMLContent.encode(option['value'])
+            input = make_element(u"input", attributes, content)
             if issubclass(datatype, EnumBoolean):
                 # Oui/Non sur une seule ligne
                 html.append(input)
