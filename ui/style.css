@@ -522,3 +522,17 @@ button, .button {
   padding: 2px 5px;
   position: absolute;
 }
+
+#content form p#advert {
+  box-shadow: 5px 5px 5px #ccc;
+  -moz-box-shadow: 5px 5px 5px #ccc;
+  -webkit-box-shadow: 5px 5px 5px #ccc;
+  clear: none;
+  float: right;
+  padding: 5px;
+  width: 300px;
+}
+
+#content form p#form-buttons {
+  clear: none;
+}

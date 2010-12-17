@@ -94,7 +94,7 @@ class Application(Folder):
             raise FormatError, ERR_NOT_ODS_XLS
         # Save file used
         self.make_resource('parameters', cls, body=body, filename=filename,
-                title={'en': u"Parameters"})
+                title={'en': u"Parameters"}, state='public')
         # Split tables
         document = reader(body)
         tables = iter(document.get_tables())
