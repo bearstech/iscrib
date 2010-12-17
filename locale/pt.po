@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-12-16 15:12+CET\n"
+"POT-Creation-Date: 2010-12-17 09:12+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgid ""
 "    stl:if=\"value\"/>"
 msgstr ""
 
-#: ../workgroup_views.py:211
+#: ../workgroup_views.py:222
 msgid ""
 "\n"
 "<div id=\"choose-format\">\n"
@@ -289,6 +289,11 @@ msgctxt "link"
 msgid "<g id='1'>Show/Hide Menu</g> ${application_menu}"
 msgstr ""
 
+#: ../ui/form/view.xml.en:53
+msgctxt "link"
+msgid "<g id='13'>Create your form</g> within 2 minutes."
+msgstr ""
+
 #: ../ui/base/login.xml.en:60
 msgctxt "label"
 msgid ""
@@ -360,7 +365,14 @@ msgctxt "link"
 msgid "<g id='9'>${user/title}</g>  <g id='10'>Log out</g>"
 msgstr ""
 
-#: ../workgroup_views.py:106
+#: ../ui/form/view.xml.en:50
+msgctxt "emphasis"
+msgid ""
+"<g id='9'>Create Your Own Form</g><x id='10'/> The form you have filled in "
+"was simply created from the upload of this <g id='11'>XLS/ODS file</g>."
+msgstr ""
+
+#: ../workgroup_views.py:114
 msgid ""
 "<p id=\"already-client\">Already\n"
 "            registered and you want to log in your client space? <a\n"
@@ -410,7 +422,7 @@ msgctxt "link"
 msgid "An Itaapy service"
 msgstr ""
 
-#: ../workgroup_views.py:232
+#: ../workgroup_views.py:243
 msgid "Application"
 msgstr ""
 
@@ -442,7 +454,7 @@ msgctxt "heading"
 msgid "Business"
 msgstr ""
 
-#: ../workgroup_views.py:326
+#: ../workgroup_views.py:337
 msgid "CSS"
 msgstr ""
 
@@ -468,7 +480,7 @@ msgctxt "title attribute"
 msgid "Come back to the form"
 msgstr ""
 
-#: ../workgroup_views.py:69
+#: ../workgroup_views.py:70
 msgid "Company"
 msgstr ""
 
@@ -477,7 +489,7 @@ msgstr ""
 msgid "Company/Organization"
 msgstr ""
 
-#: ../workgroup_views.py:220
+#: ../workgroup_views.py:231
 msgid "Configure your client space"
 msgstr ""
 
@@ -505,7 +517,7 @@ msgctxt "link"
 msgid "Create Your Form"
 msgstr ""
 
-#: ../workgroup_views.py:215
+#: ../workgroup_views.py:226
 msgid "Create a Data Collection Application"
 msgstr ""
 
@@ -518,7 +530,7 @@ msgid ""
 "Create your client space to manage collection applications and submit them."
 msgstr ""
 
-#: ../workgroup_views.py:235
+#: ../workgroup_views.py:246
 msgid "Creation Date"
 msgstr ""
 
@@ -555,11 +567,11 @@ msgstr ""
 msgid "Download form"
 msgstr ""
 
-#: ../workgroup_views.py:197
+#: ../workgroup_views.py:208
 msgid "Download the Template"
 msgstr ""
 
-#: ../workgroup_views.py:198
+#: ../workgroup_views.py:209
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 
@@ -571,7 +583,7 @@ msgstr ""
 msgid "E-mail Address"
 msgstr ""
 
-#: ../workgroup_views.py:219 ../workgroup_views.py:316
+#: ../workgroup_views.py:230 ../workgroup_views.py:327
 msgid "Edit Title, Logo and CSS"
 msgstr ""
 
@@ -644,7 +656,7 @@ msgid "Finished"
 msgstr ""
 
 #: ../application_views.py:246 ../application_views.py:507
-#: ../workgroup_views.py:67
+#: ../workgroup_views.py:68
 msgid "First Name"
 msgstr ""
 
@@ -702,6 +714,12 @@ msgstr ""
 
 #: ../root.py:54
 msgid "Homepage"
+msgstr ""
+
+#: ../workgroup_views.py:75
+msgid ""
+"I have read and agree to the terms of use (<a href=\"/terms-and-conditions\" "
+"title=\"Terms of use\" target=\"_blank\">Terms of use</a>)"
 msgstr ""
 
 #: ../ui/application/login.xml.en:50
@@ -824,7 +842,7 @@ msgid "Last Modified"
 msgstr ""
 
 #: ../application_views.py:247 ../application_views.py:508
-#: ../workgroup_views.py:68
+#: ../workgroup_views.py:69
 msgid "Last Name"
 msgstr ""
 
@@ -850,7 +868,7 @@ msgctxt "heading"
 msgid "Login"
 msgstr ""
 
-#: ../workgroup_views.py:325
+#: ../workgroup_views.py:336
 msgid "Logo (shown in the banner)"
 msgstr ""
 
@@ -875,7 +893,7 @@ msgstr ""
 msgid "Manage your Data Collection Application"
 msgstr ""
 
-#: ../workgroup_views.py:228
+#: ../workgroup_views.py:239
 msgid "Manage your client space"
 msgstr ""
 
@@ -895,7 +913,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../workgroup_views.py:57 ../root_views.py:45
+#: ../workgroup_views.py:58 ../root_views.py:45
 msgid "Name of your client space"
 msgstr ""
 
@@ -1009,7 +1027,7 @@ msgstr ""
 msgid "Parameters"
 msgstr ""
 
-#: ../workgroup_views.py:70
+#: ../workgroup_views.py:71
 msgid "Password"
 msgstr ""
 
@@ -1077,7 +1095,7 @@ msgctxt "heading"
 msgid "Register"
 msgstr ""
 
-#: ../workgroup_views.py:71
+#: ../workgroup_views.py:72
 msgid "Repeat Password"
 msgstr ""
 
@@ -1085,7 +1103,7 @@ msgstr ""
 msgid "Restricted (users must be subscribed)"
 msgstr ""
 
-#: ../ui/form/view.xml.en:50
+#: ../ui/form/view.xml.en:57
 msgctxt "button"
 msgid "Save"
 msgstr ""
@@ -1111,11 +1129,11 @@ msgstr ""
 msgid "Slogan"
 msgstr ""
 
-#: ../workgroup_views.py:306
+#: ../workgroup_views.py:317
 msgid "Source"
 msgstr ""
 
-#: ../workgroup_views.py:234
+#: ../workgroup_views.py:245
 msgid "Source File"
 msgstr ""
 
@@ -1144,7 +1162,7 @@ msgstr ""
 msgid "Subscribe Users"
 msgstr ""
 
-#: ../workgroup_views.py:233
+#: ../workgroup_views.py:244
 msgid "Subscribed Users"
 msgstr ""
 
@@ -1214,7 +1232,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: ../workgroup_views.py:322
+#: ../workgroup_views.py:333
 msgid "Title (shown in the banner if no logo)"
 msgstr ""
 
@@ -1242,7 +1260,7 @@ msgstr ""
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
-#: ../workgroup_views.py:216
+#: ../workgroup_views.py:227
 msgid ""
 "Uploading this spreadsheet file in iScrib will generate in one click your "
 "data collection application."
@@ -1339,7 +1357,7 @@ msgctxt "emphasis"
 msgid "You can also use this form if you forgot your password."
 msgstr ""
 
-#: ../workgroup_views.py:58 ../root_views.py:46
+#: ../workgroup_views.py:59 ../root_views.py:46
 msgid "You can type the name of your company or organization"
 msgstr ""
 
@@ -1387,7 +1405,7 @@ msgctxt "heading"
 msgid "Your Client Spaces"
 msgstr ""
 
-#: ../workgroup.py:53
+#: ../workgroup.py:54
 msgid "Your Collection Applications"
 msgstr ""
 
@@ -1404,7 +1422,7 @@ msgstr ""
 msgid "Your client space \"{title}\" is created. You can add your logo."
 msgstr ""
 
-#: ../workgroup_views.py:66
+#: ../workgroup_views.py:67
 msgid "Your e-mail address"
 msgstr ""
 
