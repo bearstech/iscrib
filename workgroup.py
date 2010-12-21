@@ -117,7 +117,7 @@ class Workgroup(WebSite):
         elif isinstance(resource, Form):
             if resource.name == resource.parent.default_form:
                 return role in ('members', 'reviewers')
-            return resource.name == user.name
+            return resource.name == user.name or role == 'reviewers'
         elif resource.get_abspath()[1] == 'theme':
             return role in ('members', 'reviewers')
         return super(Workgroup, self).is_allowed_to_edit(user, resource)
