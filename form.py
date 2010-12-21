@@ -25,6 +25,7 @@ from decimal import InvalidOperation
 from itools.core import merge_dicts, freeze
 from itools.fs import FileName
 from itools.gettext import MSG
+from itools.handlers import checkid
 from itools.i18n import format_number
 from itools.handlers import File as FileHandler
 
@@ -443,6 +444,7 @@ class Form(File):
         name, extension, language = FileName.decode(filename)
         parent = self.parent
         used = parent.get_names()
+        name = checkid(name) or 'invalid'
         name = generate_name(name, used)
         cls = get_resource_class(mimetype)
         metadata = {
