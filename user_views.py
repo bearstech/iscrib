@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, is_thingy
 from itools.datatypes import Unicode
 from itools.gettext import MSG
 from itools.web import INFO, ERROR
@@ -40,7 +40,7 @@ class User_ConfirmRegistration(BaseUser_ConfirmRegistration):
 
     def action(self, resource, context, form):
         super(User_ConfirmRegistration, self).action(resource, context, form)
-        if isinstance(context.message, ERROR):
+        if is_thingy(context.message, ERROR):
             return
 
         # Company

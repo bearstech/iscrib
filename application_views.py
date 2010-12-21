@@ -771,7 +771,7 @@ class Application_Login(LoginView):
         goto = super(Application_Login, self).action_login(resource, context,
                 form)
 
-        if type(context.message) is not ERROR:
+        if not is_thingy(context.message, ERROR):
             # Create the form if necessary
             if resource.get_property('subscription') == 'open':
                 user = context.user
@@ -783,8 +783,7 @@ class Application_Login(LoginView):
     def action_forgotten_password(self, resource, context, form):
         email = form['username'].strip()
         if not Email.is_valid(email):
-            message = u'The given username is not an e-mail address.'
-            context.message = ERROR(message)
+            context.message = ERR_BAD_EMAIL
             return
 
         user = context.root.get_user_from_login(email)
