@@ -102,6 +102,7 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
         if datatype.multiple:
             input = u"\n".join(make_element(u"div", content=value)
                 for value in datatype.get_values(value))
+            content = XMLContent.encode(input)
         else:
             # '1' -> u"Oui" ; '2' -> u"Non"
             input = datatype.get_value(data, value)
