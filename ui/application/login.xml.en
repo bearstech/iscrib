@@ -58,8 +58,6 @@
                 value="${username/value}" size="40" />
               <br/>
               <label for="password">Password</label>
-              <span class="field-is-missing" title="This field is required">*
-              </span>
               <br/>
               <span stl:if="password/error"
                 class="field-error">${password/error}<br/></span>
