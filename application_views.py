@@ -20,7 +20,7 @@ from email.utils import parseaddr
 from urllib import quote
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, is_thingy
 from itools.database import PhraseQuery, TextQuery, StartQuery, AndQuery
 from itools.database import OrQuery, NotQuery
 from itools.datatypes import Integer, Unicode, Email, String
@@ -455,7 +455,7 @@ class Application_View(Folder_BrowseContent):
                     value = value[0]
                 if type(value) is unicode:
                     pass
-                elif type(value) is MSG:
+                elif is_thingy(value, MSG):
                     value = value.gettext()
                 elif type(value) is str:
                     value = unicode(value)
