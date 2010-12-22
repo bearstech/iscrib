@@ -45,10 +45,9 @@ MSG_NO_RESOURCE = ERROR(u'No {class_title} available.')
 
 
 class AutomaticEditView(DBResource_Edit):
-    base_schema = DBResource_Edit.schema
 
     def _get_schema(self, resource, context):
-        schema = merge_dicts(DBResource_Edit.schema, resource.edit_schema)
+        schema = merge_dicts(self.schema, resource.edit_schema)
         if isinstance(resource, WorkflowAware):
             schema['state'] = StateEnumerate(resource=resource,
                     context=context)
@@ -66,8 +65,8 @@ class AutomaticEditView(DBResource_Edit):
     def get_value(self, resource, context, name, datatype):
         if name == 'state':
             return resource.get_workflow_state()
-        return DBResource_Edit.get_value(self, resource, context, name,
-                datatype)
+        return super(AutomaticEditView, self).get_value(resource, context,
+                name, datatype)
 
 
     def set_value(self, resource, context, name, form):
@@ -75,7 +74,8 @@ class AutomaticEditView(DBResource_Edit):
         datatype = schema[name]
         if getattr(datatype, 'ignore', False) is True:
             return False
-        return DBResource_Edit.set_value(self, resource, context, name, form)
+        return super(AutomaticEditView, self).set_value(resource, context,
+                name, form)
 
 
 
