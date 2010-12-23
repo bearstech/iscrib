@@ -127,7 +127,8 @@ class Root_View(AutoForm):
     def action(self, resource, context, form):
         goto = '/;new_resource'
         query = {'type': 'Workgroup'}
-        for key, datatype in self.get_schema(resource, context):
+        schema = self.get_schema(resource, context)
+        for key, datatype in schema.iteritems():
             if key in form:
                 query[key] = datatype.encode(form[key])
         return get_reference('%s?%s' % (goto, encode_query(query)))
