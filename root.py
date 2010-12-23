@@ -104,3 +104,11 @@ class Root(BaseRoot):
                 return True
             return self.is_allowed_to_edit(user, resource)
         return True
+
+
+    def is_allowed_to_add(self, user, resource, class_id=None):
+        print "is_allowed_to_add", user, resource, class_id
+        # Allow anonymous to create workgroups
+        if class_id == Workgroup.class_id:
+            return True
+        return super(Root, self).is_allowed_to_add(user, resource)

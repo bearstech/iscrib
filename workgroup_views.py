@@ -77,6 +77,7 @@ class Workgroup_NewInstance(NewInstance):
                        u'title="Terms of use" target="_blank">Terms of use</a>)',
                        html=True))
 
+
     def get_schema(self, resource, context):
         schema = self.schema
         if context.user is None:
