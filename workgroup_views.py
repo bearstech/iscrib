@@ -78,22 +78,22 @@ class Workgroup_NewInstance(NewInstance):
                        html=True))
 
     def get_schema(self, resource, context):
-        schema = self.schema.copy()
+        schema = self.schema
         if context.user is None:
-            schema.update(self.anonymous_schema)
+            schema = merge_dicts(schema, self.anonymous_schema)
         if RecaptchaDatatype.is_required(context):
-            schema.update(captcha_schema)
+            schema = merge_dicts(schema, captcha_schema)
         return schema
 
 
     def get_widgets(self, resource, context):
-        widgets = self.widgets[:]
+        widgets = self.widgets
         if context.user is None:
-            widgets.extend(self.anonymous_widgets)
+            widgets = widgets + self.anonymous_widgets
         if RecaptchaDatatype.is_required(context):
-            widgets.extend(captcha_widgets)
+            widgets = widgets + captcha_widgets
         # Terms of use widget
-        widgets.append(self.terms_of_use_widget)
+        widgets = widgets + [self.terms_of_use_widget]
         return widgets
 
 

@@ -35,7 +35,6 @@ from workgroup import Workgroup
 
 
 class Root_View(AutoForm):
-
     access = True
     title = MSG(u"View")
     template = "/ui/iscrib/root/view.xml"
@@ -53,16 +52,16 @@ class Root_View(AutoForm):
 
 
     def get_schema(self, resource, context):
-        schema = self.schema.copy()
+        schema = self.schema
         if context.user is None:
-            schema.update(self.anonymous_schema)
+            schema = merge_dicts(schema, self.anonymous_schema)
         return schema
 
 
     def get_widgets(self, resource, context):
-        widgets = self.widgets[:]
+        widgets = self.widgets
         if context.user is None:
-            widgets.extend(self.anonymous_widgets)
+            widgets = widgets + self.anonymous_widgets
         return widgets
 
 
