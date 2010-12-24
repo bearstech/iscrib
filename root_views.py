@@ -187,9 +187,9 @@ class Root_Contact(ContactForm):
 
     def get_schema(self, resource, context):
         schema = super(Root_Contact, self).get_schema(resource, context)
-        schema.update(self.extra_schema)
+        schema = merge_dicts(schema, self.extra_schema)
         if RecaptchaDatatype.is_required(context):
-            schema.update(captcha_schema)
+            schema = merge_dicts(schema, captcha_schema)
         return schema
 
 
@@ -197,7 +197,7 @@ class Root_Contact(ContactForm):
         widgets = super(Root_Contact, self).get_widgets(resource, context)
         widgets = widgets[:2] + self.extra_widgets + widgets[2:-1]
         if RecaptchaDatatype.is_required(context):
-            widgets += captcha_widgets
+            widgets = widgets + captcha_widgets
         return widgets
 
 

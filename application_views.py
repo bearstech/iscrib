@@ -666,7 +666,7 @@ class Application_Edit(DBResource_Edit):
         widgets = super(Application_Edit, self)._get_widgets(resource,
                 context)
         if not is_print(context) and is_admin(context.user, resource):
-            widgets.extend(self.admin_widgets)
+            widgets = widgets + self.admin_widgets
         return widgets
 
 
