@@ -184,6 +184,7 @@ div.readonly {
   border-top: 2px solid #aca899;
 
   padding-right: 15px;
+  height: 15px;
 }
 
 div.num {
