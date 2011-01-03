@@ -1,0 +1,24 @@
+#content h2 {
+  font-size: 1.6em;
+}
+#menu, #tabs {
+  display: none;
+}
+#footer {
+  border-top: 2px solid #aaa;
+  margin-top: 25px;
+}
+#footer .container {
+  width: 900px;
+}
+#footer .container .col {
+  width: 290px;
+}
+
+/* Forms */
+table.scrib-table {
+  width: 100%;
+}
+table.scrib-table td {
+  text-align: left;
+}

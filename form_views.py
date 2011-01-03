@@ -332,6 +332,7 @@ class Form_Print(STLView):
     access = 'is_allowed_to_view'
     title=MSG(u"Print form")
     template = '/ui/iscrib/form/print.xml'
+    styles = ['/ui/iscrib/print.css']
     pages = []
 
 
