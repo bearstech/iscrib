@@ -22,3 +22,35 @@ table.scrib-table {
 table.scrib-table td {
   text-align: left;
 }
+
+#form-tables {
+  position: relative;
+  margin-bottom: 10px;
+}
+#form-tables label.title {
+  -moz-border-radius: 0 5px 0 0;
+  -webkit-border-radius: 0 5px 0 0;
+  border-radius: 0 5px 0 0;
+
+  background: url("/ui/iscrib/images/footer-background.jpg") repeat-x scroll left -1px #06090B;
+  border: 1px solid #0C335A;
+  color: #FFFFFF;
+  display: block;
+  float: left;
+  font-size: 1.6em;
+  font-weight: bold;
+  left: 0;
+  margin-left: 2px;
+  padding-left: 3px;
+  padding-right: 10px;
+  position: absolute;
+}
+#form-tables .clear.separator {
+  height: 21px;
+}
+td.section-header {
+ padding-top: 0;
+}
+#content h2 {
+  margin-top: 0;
+}

@@ -17,6 +17,7 @@
 
 # Import from itools
 from itools.csv import CSVFile
+from itools.core import merge_dicts
 from itools.datatypes import String, Enumerate
 from itools.gettext import MSG
 from itools.web import BaseView, STLView, STLForm, INFO, ERROR
@@ -347,8 +348,9 @@ class Form_Print(STLView):
         for page_number in resource.get_page_numbers():
             formpage = resource.get_formpage(page_number)
             view = getattr(resource, 'page%s' % page_number)
-            forms.append(formpage.get_namespace(resource, view, context,
-                skip_print=True))
+            ns = merge_dicts(formpage.get_namespace(resource, view, context,
+                             skip_print=True), title=formpage.get_title())
+            forms.append(ns)
         namespace = {}
         namespace['forms'] = forms
         return namespace
