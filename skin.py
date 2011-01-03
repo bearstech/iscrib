@@ -24,7 +24,9 @@ from ikaaro.access import is_admin
 from ikaaro.skins import Skin as BaseSkin
 
 # Import from iscrib
+from form import Form
 from utils import is_print
+
 
 
 class Skin(BaseSkin):
@@ -56,6 +58,12 @@ class Skin(BaseSkin):
                     del styles[-1]
                     styles.append('{0}/;download'.format(
                         context.get_link(style)))
+
+        if isinstance(context.resource, Form) and context.view_name == 'print':
+            # Disable custom CSS on print view
+            if styles[-1].endswith('/style/;download'):
+                del styles[-1]
+
         return styles
 
 

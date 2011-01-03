@@ -1,3 +1,6 @@
+#header .languages {
+  display: none;
+}
 #content h2 {
   font-size: 1.6em;
 }
@@ -16,6 +19,9 @@
 }
 
 /* Forms */
+div.form-wrapper {
+  margin-bottom: 45px;
+}
 table.scrib-table {
   width: 100%;
 }
