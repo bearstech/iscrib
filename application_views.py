@@ -56,8 +56,8 @@ ERR_NO_DATA = ERROR(u"No data to collect for now.")
 ERR_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
         u'Contact <a href="http://www.itaapy.com/contact">Itaapy</a> for '
         u"more.", format='html')
-INFO_NEW_APPLICATION = INFO(u'Your application is created. Now register '
-        u'users.')
+INFO_NEW_APPLICATION = INFO(u'Your application is created. You are now on '
+        u'the test form.')
 ERR_PASSWORD_MISSING = ERROR(u"The password is missing.")
 ERR_BAD_EMAIL = ERROR(u"The given username is not an e-mail address.")
 ERR_SUBSCRIPTION_FULL = ERROR(u"No more users are allowed to register.")
@@ -115,6 +115,7 @@ class Application_NewInstance(NewInstance):
             context.commit = False
             context.message = ERROR(unicode(exception))
             return
+        goto = goto.resolve2('0/;pageA#menu')
         return context.come_back(INFO_NEW_APPLICATION, goto)
 
 
