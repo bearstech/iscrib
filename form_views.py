@@ -35,11 +35,11 @@ from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
 MSG_SAVED_ERROR = ERROR(u"WARNING! There are missing or invalid "
         u"fields.")
 MSG_SAVED = INFO(u"The page is saved. Check your input in the "
-        u'<a href=";send">Input Control</a> tab.', html=True)
+        u'<a href=";send">Input Control</a> tab.', format='html')
 MSG_FINISHED = INFO(u"Your form is finished. "
         u"Your correspondent has been informed.")
 MSG_EXPORTED_ITAAPY = ERROR(u'To export to a SQL database, contact <a '
-        u'href="http://www.itaapy.com/contact">Itaapy</a>', html=True)
+        u'href="http://www.itaapy.com/contact">Itaapy</a>', format='html')
 
 
 class Single(String):

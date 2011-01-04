@@ -55,7 +55,7 @@ from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 ERR_NO_DATA = ERROR(u"No data to collect for now.")
 ERR_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
         u'Contact <a href="http://www.itaapy.com/contact">Itaapy</a> for '
-        u"more.", html=True)
+        u"more.", format='html')
 INFO_NEW_APPLICATION = INFO(u'Your application is created. Now register '
         u'users.')
 ERR_PASSWORD_MISSING = ERROR(u"The password is missing.")
@@ -65,7 +65,7 @@ ERR_NOT_ALLOWED = ERROR(u"You are not allowed to register.")
 ERR_ALREADY_REGISTERED = ERROR(u"You are already registered. "
         u"Log in using your password.")
 MSG_APPLICATION_TITLE = MSG(u'''<span class="application-title">Title of your
-application:</span> {title}''', html=True)
+application:</span> {title}''', format='replace_html')
 
 MAILTO_SUBJECT = MSG(u'{workgroup_title}, form "{application_title}"')
 MAILTO_BODY = MSG(u'Please fill in the form "{application_title}" available '
@@ -152,7 +152,7 @@ class Application_Menu(IconsView):
 </div>
 <script type="text/javascript">
   $("#choose-format").hide();
-</script>""", html=True),
+</script>""", format='html'),
             url='#',
             onclick='$("#choose-format").show(); return false',
             access='is_allowed_to_export')]
@@ -219,7 +219,7 @@ class Application_Menu(IconsView):
     /* Hide #spread-url after the Flash movie is positioned */
     hide_spread_url();
   }});
-</script>""", html=True).gettext(spread_url=spread_url),
+</script>""", format='replace_html', spread_url=spread_url),
             url='#',
             onclick='return show_spread_url()'))
         return items

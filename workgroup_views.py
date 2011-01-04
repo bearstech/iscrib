@@ -43,7 +43,8 @@ MSG_NEW_WORKGROUP = INFO(u'Your client space "{title}" is created. You can '
         u'add your logo.')
 MSG_ERR_NOT_IMAGE = ERROR(u'Not an image or invalid image.')
 MSG_BAD_PASSWORD = ERROR(u'You already have an account but your password '
-        u'did not match. Try <a href="/;login">log in</a> first.', html=True)
+        u'did not match. Try <a href="/;login">log in</a> first.',
+        format='html')
 
 
 class Workgroup_NewInstance(NewInstance):
@@ -75,7 +76,7 @@ class Workgroup_NewInstance(NewInstance):
              title=MSG(u'I have read and agree to the terms of use '
                        u'(<a href="/terms-and-conditions" '
                        u'title="Terms of use" target="_blank">Terms of use</a>)',
-                       html=True))
+                       format='html'))
 
 
     def get_schema(self, resource, context):
@@ -108,11 +109,11 @@ class Workgroup_NewInstance(NewInstance):
 
 
     def get_namespace(self, resource, context):
-        namespace = super(Workgroup_NewInstance, self).get_namespace(resource,
-                context)
+        namespace = super(Workgroup_NewInstance, self).get_namespace(
+                resource, context)
         namespace['before'] = MSG(u"""<p id="already-client">Already
             registered and you want to log in your client space? <a
-            href="/;login">Click here</a>.</p>""", html=True).gettext()
+            href="/;login">Click here</a>.</p>""", format='html')
         return namespace
 
 
@@ -220,7 +221,7 @@ class Workgroup_Menu(IconsView):
 </div>
 <script type="text/javascript">
   $("#choose-format").hide();
-</script>""", html=True),
+</script>""", format='html'),
               url='#',
               onclick='$("#choose-format").show(); return false'),
              make_item(icon='/ui/iscrib/images/upload48.png',
