@@ -128,7 +128,8 @@ class Numeric(object):
 
 
     def __add__(self, right):
-        if self.value is None:
+        left = self.value
+        if left is None:
             # NC + right = NC
             return self.__class__('NC')
         if isinstance(right, Numeric):
@@ -136,10 +137,11 @@ class Numeric(object):
             if right is None:
                 # left + NC = NC
                 return self.__class__('NC')
-        # 0008535 pas de "elif" pour réévaluer right.value
+        if left == '':
+            left = 0
+        left = dec(str(left))
         if right == '':
             right = 0
-        left = dec(str(self.value))
         right = dec(str(right))
         # <type> + <type>
         return self.__class__(left + right)
@@ -148,7 +150,8 @@ class Numeric(object):
 
 
     def __sub__(self, right):
-        if self.value is None:
+        left = self.value
+        if left is None:
             # NC - right = NC
             return self.__class__('NC')
         if isinstance(right, Numeric):
@@ -156,16 +159,19 @@ class Numeric(object):
             if right is None:
                 # left - NC = NC
                 return self.__class__('NC')
+        if left == '':
+            left = 0
+        left = dec(str(left))
         if right == '':
             right = 0
-        left = dec(str(self.value))
         right = dec(str(right))
         # <type> - <type>
         return self.__class__(left - right)
 
 
     def __rsub__(self, left):
-        if self.value is None:
+        right = self.value
+        if right is None:
             # left - NC = NC
             return self.__class__('NC')
         if isinstance(left, Numeric):
@@ -173,17 +179,20 @@ class Numeric(object):
             if left is None:
                 # NC - right = NC
                 return self.__class__('NC')
-        elif left == '':
+        if left == '':
             left = 0
         left = dec(str(left))
-        right = dec(str(self.value))
+        if right == '':
+            right = 0
+        right = dec(str(right))
         # <type> - <type>
         return self.__class__(left - right)
 
 
 
     def __mul__(self, right):
-        if self.value is None:
+        left = self.value
+        if left is None:
             # NC * right = NC
             return self.__class__('NC')
         if isinstance(right, Numeric):
@@ -191,9 +200,11 @@ class Numeric(object):
             if right is None:
                 # left * NC = NC
                 return self.__class__('NC')
+        if left == '':
+            left = 0
+        left = dec(str(left))
         if right == '':
             right = 0
-        left = dec(str(self.value))
         right = dec(str(right))
         # <type> * <type>
         return self.__class__(left * right)
@@ -202,7 +213,8 @@ class Numeric(object):
 
 
     def __div__(self, right):
-        if self.value is None:
+        left = self.value
+        if left is None:
             # NC / right = NC
             return self.__class__('NC')
         if isinstance(right, Numeric):
@@ -210,19 +222,25 @@ class Numeric(object):
             if right is None:
                 # left / NC = NC
                 return self.__class__('NC')
+        if left == '':
+            left = 0
+        if left == 0:
+            # Pas de division par zéro !
+            return self.__class__(0)
+        left = dec(str(left))
         if right == '':
             right = 0
         if right == 0:
             # Pas de division par zéro !
             return self.__class__(0)
-        left = dec(str(self.value))
         right = dec(str(right))
         # <type> / <type>
         return self.__class__(left / right)
 
 
     def __rdiv__(self, left):
-        if self.value is None:
+        right = self.value
+        if right is None:
             # left / NC = NC
             return self.__class__('NC')
         if isinstance(left, Numeric):
@@ -230,13 +248,18 @@ class Numeric(object):
             if left is None:
                 # NC / right = NC
                 return self.__class__('NC')
-        elif left == '':
+        if left == '':
             left = 0
         if left == 0:
             # Pas de division par zéro !
             return self.__class__(0)
         left = dec(str(left))
-        right = dec(str(self.value))
+        if right == '':
+            right = 0
+        if right == 0:
+            # Pas de division par zéro !
+            return self.__class__(0)
+        right = dec(str(right))
         # <type> / <type>
         return self.__class__(left / right)
 
