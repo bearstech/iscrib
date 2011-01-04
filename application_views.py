@@ -683,9 +683,9 @@ class Application_Edit(DBResource_Edit):
             if file is None:
                 return False
             for name in ('parameters', 'schema', 'controls'):
-                resource.del_resource(name)
+                resource.del_resource(name, ref_action='force')
             for formpage in resource.search_resources(cls=FormPage):
-                resource.del_resource(formpage.name)
+                resource.del_resource(formpage.name, ref_action='force')
             try:
                 return resource._load_from_file(file, context)
             except ValueError, exception:
