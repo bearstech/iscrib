@@ -107,7 +107,6 @@ class Root(BaseRoot):
 
 
     def is_allowed_to_add(self, user, resource, class_id=None):
-        print "is_allowed_to_add", user, resource, class_id
         # Allow anonymous to create workgroups
         if class_id == Workgroup.class_id:
             return True
