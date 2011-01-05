@@ -23,7 +23,9 @@ from itools.core import thingy_lazy_property
 from itools.datatypes import String, PathDataType
 from itools.gettext import MSG
 from itools.uri import Path
-from itools.web import get_context, INFO
+from itools.web import get_context
+from itools.web.messages import stl_namespaces
+from itools.xml import XMLParser
 
 # Import from ikaaro
 from ikaaro.autoform import ImageSelectorWidget as BaseImageSelectorWidget
@@ -73,7 +75,7 @@ class ImagePathDataType(PathDataType):
 
 # TODO merge with shop or ikaaro
 class ImageSelectorWidget(BaseImageSelectorWidget):
-    _template = INFO(u"""
+    _template = MSG(u"""
     <input type="text" id="selector-${id}" size="${size}" name="${name}"
       value="${value}"/>
     <button id="selector-button-${id}" class="button-selector"
@@ -86,12 +88,13 @@ class ImageSelectorWidget(BaseImageSelectorWidget):
     ${workflow_state}
     <br/>
     <img src="${value}/;thumb?width=${width}&amp;height=${height}"
-    stl:if="value"/>""", format='stl')
+    stl:if="value"/>""", format='none')
 
 
     @thingy_lazy_property
     def template(self):
-        return list(self._template.gettext())
+        return list(XMLParser(self._template.gettext().encode('utf_8'),
+            namespaces=stl_namespaces))
 
 
 
