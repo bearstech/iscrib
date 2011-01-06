@@ -48,7 +48,7 @@ from datatypes import Subscription
 from form import Form
 from formpage import FormPage
 from rw import ODSWriter, XLSWriter
-from utils import force_encode, is_production, is_print
+from utils import force_encode, is_debug, is_print
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
 
@@ -110,7 +110,7 @@ class Application_NewInstance(NewInstance):
         try:
             child._load_from_file(form['file'], context)
         except ValueError, exception:
-            if not is_production:
+            if is_debug(context):
                 raise
             context.commit = False
             context.message = ERROR(unicode(exception))
@@ -690,7 +690,7 @@ class Application_Edit(DBResource_Edit):
             try:
                 return resource._load_from_file(file, context)
             except ValueError, exception:
-                if not is_production:
+                if is_debug(context):
                     raise
                 context.commit = False
                 context.message = ERROR(unicode(exception))

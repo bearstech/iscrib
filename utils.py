@@ -18,7 +18,6 @@
 
 # Import from the Standard Library
 from cStringIO import StringIO
-from socket import gethostname
 
 # Import from lpod
 from lpod.document import odf_get_document
@@ -30,13 +29,20 @@ from xlrd import open_workbook
 from itools.csv import CSVFile
 
 # Import from ikaaro
+from ikaaro.config import get_config
 
 # Import from iscrib
 from datatypes import Numeric, Unicode
 
 
-# XXX heuristic (could also detect if process is detached)
-is_production = (gethostname() == 'fidel')
+_is_debug = None
+
+def is_debug(context):
+    global _is_debug
+    if _is_debug is None:
+        config = get_config(context.server.target)
+        _is_debug = config.get_value('log-level') == 'debug'
+    return _is_debug
 
 
 def is_print(context):
