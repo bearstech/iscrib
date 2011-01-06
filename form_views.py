@@ -33,7 +33,7 @@ from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
 
 # Messages
 MSG_SAVED_ERROR = ERROR(u"WARNING! There are missing or invalid "
-        u"fields.")
+        u"fields : {bad_types}", format='replace_html')
 MSG_SAVED = INFO(u"The page is saved. Check your input in the "
         u'<a href=";send">Input Control</a> tab.', format='html')
 MSG_FINISHED = INFO(u"Your form is finished. "
@@ -202,7 +202,10 @@ class Form_View(STLForm):
         context.database.change_resource(resource)
         # Transmit list of errors when returning GET
         if bad_types:
-            context.message = MSG_SAVED_ERROR
+            msg_bad_types = [u'<a href="#field_{name}">{name}</a>'.format(
+                name=name) for name in bad_types]
+            msg_bad_types = u", ".join(msg_bad_types)
+            context.message = MSG_SAVED_ERROR(bad_types=msg_bad_types)
             context.bad_types = bad_types
         else:
             context.message = MSG_SAVED
