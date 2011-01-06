@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-01-04 17:01+CET\n"
+"POT-Creation-Date: 2011-01-06 16:01+CET\n"
 "PO-Revision-Date: 2010-09-07 14:15+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../autoform.py:89
+#: ../autoform.py:91
 msgid ""
 "\n"
 "    <input type=\"text\" id=\"selector-${id}\" size=\"${size}\" name="
@@ -204,6 +204,10 @@ msgstr ""
 msgid "**"
 msgstr ""
 
+#: ../form_views.py:207
+msgid ", "
+msgstr ""
+
 #: ../formpage.py:150
 msgid "-"
 msgstr ""
@@ -244,6 +248,10 @@ msgstr ""
 msgid "</"
 msgstr ""
 
+#: ../form_views.py:205
+msgid "<a href=\"#field_{name}\">{name}</a>"
+msgstr ""
+
 #: ../ui/base/icons_view.xml.en:16
 msgctxt "link"
 msgid ""
@@ -266,22 +274,22 @@ msgctxt "link"
 msgid "<g id='1'>Back to Form</g>  <g id='2'>Print this page</g>"
 msgstr ""
 
-#: ../ui/application/login.xml.en:14
-msgctxt "label"
-msgid ""
-"<g id='1'>E-mail Address</g>  <g id='2'>* </g>  <x id='3'/>  <g id='4'>"
-"${newemail/error}<x id='5'/></g>  <x id='6'/>  <x id='7'/>  <g "
-"id='8'>Password</g>  <g id='9'>* </g>  <x id='10'/>  <g id='11'>"
-"${newpassword/error}<x id='12'/></g>  <x id='13'/>  <x id='14'/>  <g "
-"id='15'>Repeat Password</g>  <g id='16'>* </g>  <x id='17'/>  <g id='18'>"
-"${newpassword2/error}<x id='19'/></g>"
-msgstr ""
-
 #: ../ui/base/login.xml.en:14
 msgctxt "label"
 msgid ""
 "<g id='1'>E-mail Address</g>  <g id='2'>* </g>  <x id='3'/>  <g id='4'>"
 "${username/error}<x id='5'/></g>"
+msgstr ""
+
+#: ../ui/application/login.xml.en:14
+msgctxt "label"
+msgid ""
+"<g id='1'>E-mail Address</g>  <g id='2'>* </g>  <x id='3'/>  <g id='4'>"
+"${username/error}<x id='5'/></g>  <x id='6'/>  <x id='7'/>  <g "
+"id='8'>Password</g>  <g id='9'>* </g>  <x id='10'/>  <g id='11'>${newpass/"
+"error}<x id='12'/></g>  <x id='13'/>  <x id='14'/>  <g id='15'>Repeat "
+"Password</g>  <g id='16'>* </g>  <x id='17'/>  <g id='18'>${newpass2/error}"
+"<x id='19'/></g>"
 msgstr ""
 
 #: ../ui/form/view.xml.en:7
@@ -567,7 +575,7 @@ msgstr ""
 msgid "Download Source File"
 msgstr ""
 
-#: ../form_views.py:304
+#: ../form_views.py:307
 msgid "Download form"
 msgstr ""
 
@@ -829,7 +837,7 @@ msgstr ""
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:218
+#: ../form_views.py:221
 msgid "Input Control"
 msgstr ""
 
@@ -1049,7 +1057,7 @@ msgid ""
 "<{application_url}>.\r\n"
 msgstr ""
 
-#: ../autoform.py:152
+#: ../autoform.py:155
 msgid "Please type the two words"
 msgstr ""
 
@@ -1069,7 +1077,7 @@ msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr ""
 
-#: ../form_views.py:334
+#: ../form_views.py:337
 msgid "Print form"
 msgstr ""
 
@@ -1125,7 +1133,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: ../application_views.py:134 ../application_views.py:807
+#: ../application_views.py:134 ../application_views.py:806
 msgid "Show Test Form"
 msgstr ""
 
@@ -1288,7 +1296,7 @@ msgid "View"
 msgstr ""
 
 #: ../form_views.py:35
-msgid "WARNING! There are missing or invalid fields."
+msgid "WARNING! There are missing or invalid fields: {bad_types}"
 msgstr ""
 
 #: ../controls.py:87
@@ -1305,7 +1313,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr ""
 
-#: ../application_views.py:769 ../base_views.py:124
+#: ../application_views.py:768 ../base_views.py:124
 msgid "Welcome!"
 msgstr ""
 
@@ -1433,7 +1441,7 @@ msgstr ""
 msgid "Your form is finished. Your correspondent has been informed."
 msgstr ""
 
-#: ../form_views.py:309
+#: ../form_views.py:312
 msgid "Your form is not finished yet."
 msgstr ""
 
@@ -1445,11 +1453,11 @@ msgstr ""
 msgid "Your workgroups"
 msgstr ""
 
-#: ../utils.py:170 ../form.py:398
+#: ../utils.py:176 ../form.py:398
 msgid "["
 msgstr ""
 
-#: ../utils.py:173
+#: ../utils.py:179
 msgid "]"
 msgstr ""
 
@@ -1677,11 +1685,11 @@ msgstr ""
 msgid "{method}('{name}');"
 msgstr ""
 
-#: ../form_views.py:239
+#: ../form_views.py:242
 msgid "{name} invalid"
 msgstr ""
 
-#: ../form_views.py:236
+#: ../form_views.py:239
 msgid "{name} is not equal to {formula}"
 msgstr ""
 

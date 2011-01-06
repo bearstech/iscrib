@@ -33,7 +33,7 @@ from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
 
 # Messages
 MSG_SAVED_ERROR = ERROR(u"WARNING! There are missing or invalid "
-        u"fields : {bad_types}", format='replace_html')
+        u"fields: {bad_types}", format='replace_html')
 MSG_SAVED = INFO(u"The page is saved. Check your input in the "
         u'<a href=";send">Input Control</a> tab.', format='html')
 MSG_FINISHED = INFO(u"Your form is finished. "
