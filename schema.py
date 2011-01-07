@@ -246,7 +246,9 @@ class Expression(Unicode):
                 # Alternative to name variables
                 .replace(u'#', u'')
                 # Non-break spaces
-                .replace(u' ', u' '))
+                .replace(u'\u00a0', u'')
+                # Fucking replacement
+                .replace(u'«', u'"').replace(u'»', '"'))
         return value
 
 
@@ -467,15 +469,18 @@ class Schema(Table):
         get_record_value = handler.get_record_value
         for record in handler.get_records():
             dependency = get_record_value(record, 'dependency')
-            try:
-                Expression.is_valid(dependency, namespace)
-            except Exception, err:
-                raise FormatError, ERR_BAD_DEPENDENCY(line=lineno, err=err)
+            if dependency:
+                try:
+                    Expression.is_valid(dependency, namespace)
+                except Exception, err:
+                    raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
+                            err=err)
             formula = get_record_value(record, 'formula')
-            try:
-                Expression.is_valid(formula, namespace)
-            except Exception, err:
-                raise FormatError, ERR_BAD_FORMULA(line=lineno, err=err)
+            if formula:
+                try:
+                    Expression.is_valid(formula, namespace)
+                except Exception, err:
+                    raise FormatError, ERR_BAD_FORMULA(line=lineno, err=err)
             lineno += 1
 
 

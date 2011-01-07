@@ -300,20 +300,15 @@ class Form(File):
         return handler.timestamp is None
 
 
-    @staticmethod
-    def is_disabled_by_dependency(name, schema, fields):
-        dep_name = schema[name].dependency
-        if not dep_name:
+    def is_disabled_by_dependency(self, name, schema, fields):
+        dependency = schema[name].dependency
+        if not dependency:
             return False
-        if fields[dep_name] is not True:
-            return True
-        # Second level
-        dep_dep_name = schema[dep_name].dependency
-        if not dep_dep_name:
+        vars = self.get_vars(fields)
+        try:
+            return not eval(dependency, vars)
+        except (ZeroDivisionError, InvalidOperation, ValueError):
             return False
-        if fields[dep_dep_name] is not True:
-            return True
-        return False
 
 
     @staticmethod
