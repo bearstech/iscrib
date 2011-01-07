@@ -38,7 +38,7 @@ from ikaaro.registry import get_resource_class
 from ikaaro.utils import generate_name
 
 # Import from iscrib
-from datatypes import Numeric, NumDecimal, Unicode, FileImage
+from datatypes import Numeric, NumDecimal, Unicode, FileImage, SqlEnumerate
 from formpage import FormPage
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control
@@ -211,18 +211,30 @@ class Form(File):
         return fields
 
 
-    def get_vars(self, fields):
-        return merge_dicts(fields, SI=SI)
+    def get_globals(self):
+        return {'SI': SI}
 
 
-    def get_floating_vars(self, fields):
-        vars = {}
-        for name, value in fields.iteritems():
+    def get_locals(self, schema, fields):
+        locals_ = {}
+        for name, datatype in sorted(schema.iteritems()):
+            value = fields[name]
+            if isinstance(datatype, Numeric):
+                pass
+            elif issubclass(datatype, SqlEnumerate):
+                value = datatype.get_value(value)
+                if value is not None:
+                    value = value.encode('utf_8')
+            locals_[name] = value
+        return locals_
+
+
+    def get_floating_locals(self, schema, fields):
+        locals_ = self.get_locals(schema, fields)
+        for name, value in locals_.iteritems():
             if isinstance(value, Numeric):
-                vars[name] = NumDecimal(value.value)
-            else:
-                vars[name] = value
-        return vars
+                locals_[name] = NumDecimal(value.value)
+        return locals_
 
 
     def get_controls_resource(self):
@@ -304,9 +316,10 @@ class Form(File):
         dependency = schema[name].dependency
         if not dependency:
             return False
-        vars = self.get_vars(fields)
+        globals_ = self.get_globals()
+        locals_ = self.get_locals(schema, fields)
         try:
-            return not eval(dependency, vars)
+            return not eval(dependency, globals_, locals_)
         except (ZeroDivisionError, InvalidOperation, ValueError):
             return False
 
@@ -372,13 +385,14 @@ class Form(File):
             if page in exclude:
                 continue
             expression = get_record_value(record, 'expression')
+            globals_ = self.get_globals()
+            # Précision pour les informations statistiques
+            if level == '0':
+                locals_ = self.get_floating_locals(schema, fields)
+            else:
+                locals_ = self.get_locals(schema, fields)
             try:
-                # Précision pour les informations statistiques
-                if level == '0':
-                    vars = self.get_floating_vars(fields)
-                else:
-                    vars = self.get_vars(fields)
-                value = eval(expression, vars)
+                value = eval(expression, globals_, locals_)
             except ZeroDivisionError:
                 # Division par zéro toléré
                 value = None
@@ -396,12 +410,8 @@ class Form(File):
                     if not is_expr:
                         expanded.append(token)
                     else:
-                        if level == '0':
-                            vars = self.get_floating_vars(fields)
-                        else:
-                            vars = self.get_vars(fields)
                         try:
-                            value = eval(token, vars)
+                            value = eval(token, globals_, locals_)
                         except ZeroDivisionError:
                             value = None
                         expanded.append(unicode(value))

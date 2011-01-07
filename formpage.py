@@ -136,8 +136,9 @@ class FormPage(CSV):
 
         schema = form.get_schema()
         fields = form.get_fields(schema)
-        vars = form.get_vars(fields)
-        floating_vars = form.get_floating_vars(fields)
+        globals_ = form.get_globals()
+        locals_ = form.get_locals(schema, fields)
+        floating_locals = form.get_floating_locals(schema, fields)
 
         # Calcul du (des) tableau(x)
         tables = []
@@ -182,9 +183,10 @@ class FormPage(CSV):
                         column = column.replace('\n', '')
                         try:
                             if u"/" in column:
-                                column = eval(column, floating_vars)
+                                column = eval(column, globals_,
+                                        floating_locals)
                             else:
-                                column = eval(column, vars)
+                                column = eval(column, globals_, locals_)
                         except ZeroDivisionError:
                             column = u"(division by 0)"
                         except SyntaxError:
