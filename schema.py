@@ -19,6 +19,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+# Import from the Standard Library
+import re
+
 # Import from itools
 from itools.csv import Table as TableFile, parse
 from itools.datatypes import Enumerate, String, Integer, Boolean, Date
@@ -34,6 +37,9 @@ from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import SqlEnumerate, Numeric, FileImage
 from utils import SI
+
+
+single_eq = re.compile(ur"""(?<=[^!<>=])[=](?=[^=])""")
 
 
 ERR_BAD_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
@@ -242,6 +248,8 @@ class Expression(Unicode):
     def decode(data):
         # Neither upper() nor lower() to preserve enumerates
         value = Unicode.decode(data.strip())
+        # Allow single "=" as equals
+        value = single_eq.sub(ur"==", value)
         value = (value
                 # Alternative to name variables
                 .replace(u'#', u'')
@@ -253,10 +261,10 @@ class Expression(Unicode):
 
 
     @staticmethod
-    def is_valid(value, namespace):
-        namespace['SI'] = SI
+    def is_valid(value, locals_):
+        globals_ = {'SI': SI}
         try:
-            eval(value, namespace)
+            eval(value, globals_, locals_)
         except ZeroDivisionError:
             pass
         except Exception:
@@ -361,7 +369,7 @@ class Schema(Table):
         # First round on variables
         # Starting from 1 + header
         lineno = 2
-        namespace = {}
+        locals_ = {}
         for line in parse(body, self.columns, handler.record_properties,
                 skip_header=True):
             record = {}
@@ -373,7 +381,7 @@ class Schema(Table):
                 continue
             if not Variable.is_valid(name):
                 raise FormatError, ERR_BAD_NAME(line=lineno, name=name)
-            if name in namespace:
+            if name in locals_:
                 raise FormatError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
             # Type
@@ -461,7 +469,7 @@ class Schema(Table):
                             default=unicode(default, 'utf_8'))
                 record['default'] = default
             handler.add_record(record)
-            namespace[name] = 0
+            locals_[name] = 0
             lineno += 1
         # Second round on references
         # Starting from 1 + header
@@ -471,14 +479,14 @@ class Schema(Table):
             dependency = get_record_value(record, 'dependency')
             if dependency:
                 try:
-                    Expression.is_valid(dependency, namespace)
+                    Expression.is_valid(dependency, locals_)
                 except Exception, err:
                     raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
                             err=err)
             formula = get_record_value(record, 'formula')
             if formula:
                 try:
-                    Expression.is_valid(formula, namespace)
+                    Expression.is_valid(formula, locals_)
                 except Exception, err:
                     raise FormatError, ERR_BAD_FORMULA(line=lineno, err=err)
             lineno += 1
