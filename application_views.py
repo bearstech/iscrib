@@ -102,10 +102,12 @@ class Application_NewInstance(NewInstance):
             file=FileDataType(mandatory=True))
     widgets = (NewInstance.widgets[:2]
             + [FileWidget('file', title=MSG(u"ODS or XLS File"))])
+    goto_view = None
 
 
     def action(self, resource, context, form):
-        goto = NewInstance.action(self, resource, context, form)
+        goto = super(Application_NewInstance, self).action(resource, context,
+                form)
         child = resource.get_resource(form['name'])
         try:
             child._load_from_file(form['file'], context)

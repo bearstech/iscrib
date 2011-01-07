@@ -59,6 +59,7 @@ class Workgroup_NewInstance(NewInstance):
             TextWidget('title', title=MSG(u'Name of your client space'),
                 tip=MSG(u'You can type the name of your company or '
                     u'organization'))]
+    goto_view = None
 
     anonymous_schema = {
         'email': Email(mandatory=True),
