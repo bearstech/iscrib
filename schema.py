@@ -239,7 +239,7 @@ class Dependency(String):
 
     @staticmethod
     def decode(data):
-        data = data.strip().upper()
+        data = data.strip().replace('#', '').upper()
         if not data:
             # Turn it into default value at the time of writing
             return None
