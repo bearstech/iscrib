@@ -144,7 +144,9 @@ class Form_View(STLForm):
                     handler.set_value(key, '', schema)
                     fields[key] = ''
             # Can't use "if not/continue" pattern here
-            if context.get_form_value(key) is not None:
+            if resource.is_disabled_by_dependency(key, schema, fields):
+                pass
+            elif context.get_form_value(key) is not None:
                 # First the raw data
                 if datatype.multiple:
                     data = context.get_form_value(key, type=Multiple)
