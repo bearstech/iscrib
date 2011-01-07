@@ -33,6 +33,7 @@ from ikaaro.table import Table
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
 from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
 from datatypes import SqlEnumerate, Numeric, FileImage
+from utils import SI
 
 
 ERR_BAD_NAME = ERROR(u'In schema, line {line}, variable "{name}" is '
@@ -53,10 +54,10 @@ ERR_BAD_MANDATORY = ERROR(u'In schema, line {line}, mandatory "{mandatory}" '
         u'is invalid.')
 ERR_BAD_SIZE = ERROR(u'In schema, line {line}, size ' u'"{size}" is '
         u'invalid.')
-ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, dependency variable '
-        u'name "{name}" is invalid.')
-ERR_BAD_FORMULA = ERROR(u'In schema, line {line}, in sum formula, variable '
-        u'"{name}" is ' u'invalid.')
+ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, syntax error in '
+        u'dependency: {err}')
+ERR_BAD_FORMULA = ERROR(u'In schema, line {line}, syntax error in '
+        u'formula: {err}')
 ERR_BAD_DEFAULT = ERROR(u'In schema, line {line}, default value "{default}" '
         u'is invalid.')
 
@@ -235,44 +236,30 @@ class Mandatory(Boolean):
 
 
 
-class Dependency(String):
+class Expression(Unicode):
 
     @staticmethod
     def decode(data):
-        data = data.strip().replace('#', '').upper()
-        if not data:
-            # Turn it into default value at the time of writing
-            return None
-        return String.decode(data)
+        # Neither upper() nor lower() to preserve enumerates
+        value = Unicode.decode(data.strip())
+        value = (value
+                # Alternative to name variables
+                .replace(u'#', u'')
+                # Non-break spaces
+                .replace(u' ', u' '))
+        return value
 
 
     @staticmethod
-    def is_valid(value, known_variables):
-        if not value:
-            return True
-        return value in known_variables
-
-
-
-class Formula(String):
-
-    @staticmethod
-    def decode(data):
-        data = data.strip().upper()
-        if not data:
-            # Turn it into default value at the time of writing
-            return None
-        value = String.decode(data)
-        return '+'.join(term.strip() for term in value.split('+'))
-
-
-    @staticmethod
-    def is_valid(value, known_variables):
-        if not value:
-            return True
-        for name in value.split('+'):
-            if name not in known_variables:
-                raise ValueError, name
+    def is_valid(value, namespace):
+        namespace['SI'] = SI
+        try:
+            eval(value, namespace)
+        except ZeroDivisionError:
+            pass
+        except Exception:
+            # Let error raise with message
+            raise
         return True
 
 
@@ -293,8 +280,8 @@ class SchemaHandler(TableFile):
         'decimals': ValidInteger(title=MSG(u"Decimals")),
         'mandatory': Mandatory(title=MSG(u"Mandatory")),
         'size': ValidInteger(title=MSG(u"Input Size")),
-        'dependency': Dependency(title=MSG(u"Dependent Field")),
-        'formula': Formula(title=MSG(u"Formula")),
+        'dependency': Expression(title=MSG(u"Dependent Field")),
+        'formula': Expression(title=MSG(u"Formula")),
         'default': String(default='', title=MSG(u"Default Value"))}
 
 
@@ -371,8 +358,8 @@ class Schema(Table):
         # Consistency check
         # First round on variables
         # Starting from 1 + header
-        lineno = 1
-        known_variables = []
+        lineno = 2
+        namespace = {}
         for line in parse(body, self.columns, handler.record_properties,
                 skip_header=True):
             record = {}
@@ -384,7 +371,7 @@ class Schema(Table):
                 continue
             if not Variable.is_valid(name):
                 raise FormatError, ERR_BAD_NAME(line=lineno, name=name)
-            if name in known_variables:
+            if name in namespace:
                 raise FormatError, ERR_DUPLICATE_NAME(line=lineno,
                         name=name)
             # Type
@@ -472,22 +459,24 @@ class Schema(Table):
                             default=unicode(default, 'utf_8'))
                 record['default'] = default
             handler.add_record(record)
-            known_variables.append(name)
+            namespace[name] = 0
+            lineno += 1
         # Second round on references
         # Starting from 1 + header
-        lineno = 1
+        lineno = 2
         get_record_value = handler.get_record_value
         for record in handler.get_records():
             dependency = get_record_value(record, 'dependency')
-            if not Dependency.is_valid(dependency, known_variables):
-                raise FormatError, ERR_BAD_DEPENDENCY(line=lineno,
-                        name=dependency)
+            try:
+                Expression.is_valid(dependency, namespace)
+            except Exception, err:
+                raise FormatError, ERR_BAD_DEPENDENCY(line=lineno, err=err)
             formula = get_record_value(record, 'formula')
             try:
-                Formula.is_valid(formula, known_variables)
-            except ValueError, name:
-                raise FormatError, ERR_BAD_FORMULA(line=lineno,
-                        name=name)
+                Expression.is_valid(formula, namespace)
+            except Exception, err:
+                raise FormatError, ERR_BAD_FORMULA(line=lineno, err=err)
+            lineno += 1
 
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):

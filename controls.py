@@ -30,8 +30,7 @@ from ikaaro.table import Table
 
 # Import from iscrib
 from datatypes import Unicode
-from utils import SI
-from schema import FormatError, Variable
+from schema import FormatError, Variable, Expression
 
 
 ERR_EMPTY_TITLE = ERROR(u'In controls, line {line}, title is missing.')
@@ -43,42 +42,6 @@ ERR_BAD_LEVEL = ERROR(u'In controls, line {line}, unexpected level '
         u'"{level}".')
 ERR_EMPTY_VARIABLE = ERROR(u'In controls, line {line}, main variable is '
         u'missing.')
-
-
-class ZeroDict(dict):
-
-    def __getitem__(self, key):
-        try:
-            value = super(ZeroDict, self).__getitem__(key)
-        except KeyError:
-            value = 0
-        return value
-
-
-
-class Expression(Unicode):
-
-    @staticmethod
-    def decode(data):
-        data = data.strip()
-        # Risque d'espaces insécables autour des guillemets
-        # Ni upper() ni lower() !
-        return Unicode.decode(data).replace(u' ', u' ')
-
-
-    @staticmethod
-    def is_valid(value):
-        vars = ZeroDict()
-        vars['SI'] = SI
-        try:
-            eval(value, vars)
-        except ZeroDivisionError:
-            pass
-        except Exception:
-            # Let error raise with message
-            raise
-        return True
-
 
 
 class ControlLevel(Enumerate):
@@ -116,11 +79,11 @@ class Controls(Table):
     columns = ['number', 'title', 'expression', 'level', 'variable']
 
 
-    def _load_from_csv(self, body):
+    def _load_from_csv(self, body, namespace):
         handler = self.handler
         # Consistency check
         # Starting from 1
-        lineno = 1
+        lineno = 2
         for line in parse(body, self.columns, handler.record_properties,
                 skip_header=True):
             record = {}
@@ -135,7 +98,7 @@ class Controls(Table):
             if not expression:
                 raise FormatError, ERR_EMPTY_EXPRESSION(line=lineno)
             try:
-                Expression.is_valid(expression)
+                Expression.is_valid(expression, namespace)
             except Exception, err:
                 raise FormatError, ERR_BAD_EXPRESSION(line=lineno,
                         err=err)
@@ -149,9 +112,16 @@ class Controls(Table):
             if not variable:
                 raise FormatError, ERR_EMPTY_VARIABLE(line=lineno)
             handler.add_record(record)
+            lineno += 1
 
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):
         super(Controls, self).init_resource(filename=filename,
                 extension=extension, **kw)
-        self._load_from_csv(body)
+        schema_resource = self.parent.get_resource('schema')
+        schema_handler = schema_resource.handler
+        schema, pages = schema_handler.get_schema_pages()
+        namespace = {}
+        for key in schema:
+            namespace[key] = 0
+        self._load_from_csv(body, namespace=namespace)
