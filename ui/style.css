@@ -351,17 +351,14 @@ button, .button {
 
 .button-control {
   background-image: url(/ui/icons/16x16/settings.png);
-  padding-left: 16px;
 }
 
 .button-print {
   background-image: url(/ui/iscrib/images/printer16.png);
-  padding-left: 16px;
 }
 
 .button-selector {
   background-image: url(/ui/icons/16x16/image.png);
-  padding-left: 16px;
 }
 
 .wf-exported { color: #75507b; }
@@ -475,6 +472,7 @@ button, .button {
 #application-menu-button {
   float: right;
   margin-top: -30px;
+  background-image: url(/ui/icons/16x16/config.png);
 }
 
 .icons-view {

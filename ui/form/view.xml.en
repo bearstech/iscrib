@@ -4,7 +4,7 @@
   xmlns:stl="http://www.hforge.org/xml-namespaces/stl">
 
   <div id="application-menu" stl:if="application_menu">
-    <a id="application-menu-button" href="#"
+    <a id="application-menu-button" class="button" href="#"
       onclick="$('.icons-view').toggle(); return false">Show/Hide Menu</a>
     ${application_menu}
   </div>
