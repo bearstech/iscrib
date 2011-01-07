@@ -128,7 +128,7 @@ class Form_View(STLForm):
         page_number = form['page_number']
         handler = resource.get_form().handler
         bad_types = []
-        for key in pages[page_number]:
+        for key in sorted(pages[page_number]):
             value = ''
             datatype = schema[key]
             # Can't use because they need to be stored
