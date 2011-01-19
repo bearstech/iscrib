@@ -43,7 +43,7 @@ class Skin(BaseSkin):
         if '/ui/aruni/style.css' not in styles:
             styles.insert(1, '/ui/aruni/style.css')
         styles.insert(-2,
-                '/ui/common/js/fancybox/jquery.fancybox-1.3.1.css')
+                '/ui/iscrib/fancybox/jquery.fancybox-1.3.1.css')
         site_root = context.resource.get_site_root()
         # Add specific style on root
         if site_root is context.root:
@@ -71,7 +71,7 @@ class Skin(BaseSkin):
         scripts = super(Skin, self).get_scripts(context)
         scripts.append('/ui/iscrib/zeroclipboard/ZeroClipboard.js')
         scripts.append(
-                '/ui/common/js/fancybox/jquery.fancybox-1.3.1.pack.js')
+                '/ui/iscrib/fancybox/jquery.fancybox-1.3.1.pack.js')
         return scripts
 
 
