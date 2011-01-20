@@ -39,6 +39,7 @@ from ikaaro.views import IconsView as BaseIconsView
 from ikaaro.workflow import state_widget, WorkflowAware, StateEnumerate
 
 # Import from iscrib
+from datatypes import EmailOrDemo
 
 
 MSG_NO_RESOURCE = ERROR(u'No {class_title} available.')
@@ -85,7 +86,7 @@ class LoginView(BaseLoginView):
     schema = {
         'username': String,
         'password': String,
-        'email': String}
+        'email': EmailOrDemo}
 
 
     def action_login(self, resource, context, form):

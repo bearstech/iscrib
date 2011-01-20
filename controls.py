@@ -21,7 +21,7 @@
 
 # Import from itools
 from itools.csv import Table as TableFile, parse
-from itools.datatypes import Enumerate
+from itools.datatypes import Enumerate, Unicode
 from itools.gettext import MSG
 from itools.web import ERROR
 
@@ -29,7 +29,6 @@ from itools.web import ERROR
 from ikaaro.table import Table
 
 # Import from iscrib
-from datatypes import Unicode
 from schema import FormatError, Variable, Expression
 
 

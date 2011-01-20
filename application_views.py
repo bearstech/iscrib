@@ -44,7 +44,7 @@ from ikaaro.workflow import get_workflow_preview
 
 # Import from iscrib
 from base_views import LoginView, IconsView
-from datatypes import Subscription
+from datatypes import Subscription, EmailOrDemo
 from form import Form
 from formpage import FormPage
 from rw import ODSWriter, XLSWriter
@@ -614,7 +614,7 @@ class Application_Register(STLForm):
                 email = email.encode('ascii')
             except UnicodeEncodeError:
                 email = None
-            if not email or not Email.is_valid(email):
+            if not email or not EmailOrDemo.is_valid(email):
                 context.commit = False
                 message = u"Unrecognized line {lineno}: {line}"
                 context.message = ERROR(message, lineno=lineno+1, line=line)

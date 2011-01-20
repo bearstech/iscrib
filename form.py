@@ -23,6 +23,7 @@ from decimal import InvalidOperation
 
 # Import from itools
 from itools.core import merge_dicts, freeze
+from itools.datatypes import Unicode
 from itools.fs import FileName
 from itools.gettext import MSG
 from itools.handlers import checkid
@@ -38,7 +39,7 @@ from ikaaro.registry import get_resource_class
 from ikaaro.utils import generate_name
 
 # Import from iscrib
-from datatypes import Numeric, NumDecimal, Unicode, FileImage, SqlEnumerate
+from datatypes import Numeric, NumDecimal, FileImage, SqlEnumerate
 from formpage import FormPage
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control

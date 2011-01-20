@@ -32,7 +32,7 @@ from itools.csv import CSVFile
 from ikaaro.config import get_config
 
 # Import from iscrib
-from datatypes import Numeric, Unicode
+from datatypes import Numeric, UnicodeSQL
 
 
 _is_debug = None
@@ -190,7 +190,7 @@ def force_encode(value, datatype, encoding):
         # TypeError: issubclass() arg 1 must be a class
         if isinstance(datatype, Numeric):
             return datatype.encode(value)
-        elif issubclass(datatype, Unicode):
+        elif issubclass(datatype, UnicodeSQL):
             return datatype.encode(value, encoding)
         return datatype.encode(value)
     except ValueError:

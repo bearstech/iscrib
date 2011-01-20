@@ -25,6 +25,7 @@ import re
 # Import from itools
 from itools.csv import Table as TableFile, parse
 from itools.datatypes import Enumerate, String, Integer, Boolean, Date
+from itools.datatypes import Unicode
 from itools.gettext import MSG
 from itools.handlers import checkid
 from itools.web import ERROR
@@ -34,7 +35,7 @@ from ikaaro.table import Table
 
 # Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
-from datatypes import NumDate, NumShortDate, NumDigit, Unicode, EnumBoolean
+from datatypes import NumDate, NumShortDate, NumDigit, UnicodeSQL, EnumBoolean
 from datatypes import SqlEnumerate, Numeric, FileImage
 from utils import SI
 
@@ -118,7 +119,7 @@ class Type(Enumerate):
         {'name': 'int', 'value': u"Integer", 'type': NumInteger},
         {'name': 'jj/mm/aaaa', 'value': u"DD/MM/YYYY", 'type': NumDate},
         {'name': 'mm/aaaa', 'value': u"MM/YYYY", 'type': NumShortDate},
-        {'name': 'str', 'value': u"String", 'type': Unicode},
+        {'name': 'str', 'value': u"String", 'type': UnicodeSQL},
         {'name': 'text', 'value': u"Text", 'type': Text},
         {'name': 'enum', 'value': u"List of values", 'type': SqlEnumerate},
         {'name': 'file', 'value': u"File or Image", 'type': FileImage}]

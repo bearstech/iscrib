@@ -21,7 +21,7 @@ from datetime import date
 from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
-from itools.datatypes import DataType, Unicode as BaseUnicode, Enumerate
+from itools.datatypes import DataType, Unicode, Enumerate, Email
 from itools.datatypes.primitive import enumerate_get_namespace
 from itools.gettext import MSG
 
@@ -644,7 +644,7 @@ class NumDigit(Numeric):
 
 
 
-class Unicode(BaseUnicode):
+class UnicodeSQL(Unicode):
     default = ''
 
 
@@ -807,3 +807,11 @@ class FileImage(FileDataType):
         if type(data) is str:
             return data
         return FileDataType.decode(data)
+
+
+
+class EmailOrDemo(Email):
+
+    @staticmethod
+    def is_valid(value):
+        return value == 'demo' or Email.is_valid(value)
