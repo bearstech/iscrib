@@ -19,7 +19,7 @@
 import urllib, urllib2
 
 # Import from itools
-from itools.core import thingy_lazy_property
+from itools.core import thingy_lazy_property, freeze
 from itools.datatypes import String, PathDataType
 from itools.gettext import MSG
 from itools.uri import Path
@@ -146,7 +146,8 @@ class RecaptchaDatatype(String):
         return return_code == 'true'
 
 
-captcha_schema = {'captcha': RecaptchaDatatype(mandatory=True)}
+captcha_schema = freeze({
+    'captcha': RecaptchaDatatype(mandatory=True)})
 
 
 
@@ -183,4 +184,5 @@ class RecaptchaWidget(Widget):
         return context.root.get_property('recaptcha_public_key')
 
 
-captcha_widgets = [RecaptchaWidget('captcha')]
+captcha_widgets = freeze([
+    RecaptchaWidget('captcha')])

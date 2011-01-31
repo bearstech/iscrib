@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, freeze
 from itools.datatypes import Unicode, Boolean
 from itools.gettext import MSG
 
@@ -30,9 +30,10 @@ from user_views import User_ChangePasswordForgotten
 
 
 class User(BaseUser):
-    class_schema = merge_dicts(BaseUser.class_schema,
-            company=Unicode(source='metadata', indexed=True, stored=True),
-            has_password=Boolean(indexed=True))
+    class_schema = freeze(merge_dicts(
+        BaseUser.class_schema,
+        company=Unicode(source='metadata', indexed=True, stored=True),
+        has_password=Boolean(indexed=True)))
 
     # Views
     edit_account = User_EditAccount()

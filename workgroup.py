@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, freeze
 from itools.datatypes import Boolean, PathDataType
 from itools.gettext import MSG
 from itools.web import get_context
@@ -41,9 +41,10 @@ class Workgroup(WebSite):
     class_title = MSG(u"iScrib Workgroup")
     class_description = MSG(u"Create your client space to manage collection "
             u"applications and submit them.")
-    class_schema = merge_dicts(WebSite.class_schema,
-            logo=PathDataType(source='metadata', default=''),
-            accept_terms_of_use=Boolean(source='metadata'))
+    class_schema = freeze(merge_dicts(
+        WebSite.class_schema,
+        logo=PathDataType(source='metadata', default=''),
+        accept_terms_of_use=Boolean(source='metadata')))
     class_views = WebSite.class_views + ['show']
     class_skin = 'ui/iscrib'
 

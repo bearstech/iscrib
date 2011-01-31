@@ -19,7 +19,7 @@
 from operator import itemgetter
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, freeze
 from itools.datatypes import Email, String
 from itools.stl import stl
 from itools.uri import get_reference, get_uri_path, Reference
@@ -52,7 +52,7 @@ class AutomaticEditView(DBResource_Edit):
         if isinstance(resource, WorkflowAware):
             schema['state'] = StateEnumerate(resource=resource,
                     context=context)
-        return schema
+        return freeze(schema)
 
 
     def _get_widgets(self, resource, context):
@@ -60,7 +60,7 @@ class AutomaticEditView(DBResource_Edit):
         # Add state widget in bottom
         if isinstance(resource, WorkflowAware):
             widgets.append(state_widget)
-        return widgets
+        return freeze(widgets)
 
 
     def get_value(self, resource, context, name, datatype):
@@ -83,10 +83,10 @@ class AutomaticEditView(DBResource_Edit):
 # Pas d'héritage pour pas de méthode "action"
 class LoginView(BaseLoginView):
     template = '/ui/iscrib/base/login.xml'
-    schema = {
+    schema = freeze({
         'username': String,
         'password': String,
-        'email': EmailOrDemo}
+        'email': EmailOrDemo})
 
 
     def action_login(self, resource, context, form):

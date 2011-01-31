@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts, get_abspath
+from itools.core import merge_dicts, get_abspath, freeze
 from itools.datatypes import String
 from itools.fs import FileName
 from itools.gettext import MSG
@@ -37,21 +37,24 @@ from workgroup import Workgroup
 
 class Root(BaseRoot):
     class_id = 'iScrib'
-    class_schema = merge_dicts(BaseRoot.class_schema,
-            homepage=XHTMLBody(source='metadata', multilingual=True,
-                parameters_schema = {'lang': String}),
-            slogan=Multilingual(source='metadata'),
-            recaptcha_private_key=String(source='metadata'),
-            recaptcha_public_key=String(source='metadata'),
-            recaptcha_whitelist=String(source='metadata', multiple=True,
-                default=['127.0.0.1']))
+    class_schema = freeze(merge_dicts(
+        BaseRoot.class_schema,
+        homepage=XHTMLBody(source='metadata', multilingual=True,
+            parameters_schema = {'lang': String}),
+        slogan=Multilingual(source='metadata'),
+        recaptcha_private_key=String(source='metadata'),
+        recaptcha_public_key=String(source='metadata'),
+        recaptcha_whitelist=String(source='metadata', multiple=True,
+            default=['127.0.0.1'])))
     class_views = BaseRoot.class_views + ['show']
     class_skin = 'ui/iscrib'
 
-    edit_schema = {'homepage': XHTMLBody(multilingual=True),
-                   'slogan': Multilingual}
-    edit_widgets = [TextWidget('slogan', title=MSG(u'Slogan')),
-                    RTEWidget('homepage', title=MSG(u'Homepage'))]
+    edit_schema = freeze({
+        'homepage': XHTMLBody(multilingual=True),
+        'slogan': Multilingual})
+    edit_widgets = freeze([
+        TextWidget('slogan', title=MSG(u'Slogan')),
+        RTEWidget('homepage', title=MSG(u'Homepage'))])
 
     # Views
     view = Root_View()

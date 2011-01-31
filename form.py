@@ -135,8 +135,9 @@ class Form(File):
     class_title = MSG(u"Form")
     class_views = ['pageA', 'export', 'show']
     class_handler = FormHandler
-    class_schema = merge_dicts(File.class_schema,
-            form_state=Unicode(indexed=True, stored=True))
+    class_schema = freeze(merge_dicts(
+        File.class_schema,
+        form_state=Unicode(indexed=True, stored=True)))
 
     workflow = workflow
 

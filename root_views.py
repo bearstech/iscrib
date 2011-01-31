@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts,freeze
 from itools.datatypes import String, Unicode, Email
 from itools.gettext import MSG
 from itools.uri import encode_query, get_reference, Reference
@@ -40,13 +40,17 @@ class Root_View(AutoForm):
     template = "/ui/iscrib/root/view.xml"
 
     actions = [Button(access=True, css='button-create', title=MSG(u'Create'))]
-    schema = {'title': Unicode(mandatory=True)}
-    widgets = [TextWidget('title', title=MSG(u'Name of your client space'),
-                tip=MSG(u'You can type the name of your company or '
-                    u'organization'))]
+    schema = freeze({
+        'title': Unicode(mandatory=True)})
+    widgets = freeze([
+        TextWidget('title', title=MSG(u'Name of your client space'),
+            tip=MSG(u'You can type the name of your company or '
+                    u'organization'))])
 
-    anonymous_schema = {'email': Email(mandatory=True)}
-    anonymous_widgets = [TextWidget('email', title=MSG(u"E-mail Address"))]
+    anonymous_schema = freeze({
+        'email': Email(mandatory=True)})
+    anonymous_widgets = freeze([
+        TextWidget('email', title=MSG(u"E-mail Address"))])
 
     scripts = ['/ui/iscrib/js/jquery.jcarousel.min.js']
 
@@ -54,7 +58,7 @@ class Root_View(AutoForm):
     def get_schema(self, resource, context):
         schema = self.schema
         if context.user is None:
-            schema = merge_dicts(schema, self.anonymous_schema)
+            schema = freeze(merge_dicts(schema, self.anonymous_schema))
         return schema
 
 
@@ -173,16 +177,16 @@ class Root_Show(FrontView):
 class Root_Contact(ContactForm):
     template = '/ui/iscrib/root/contact.xml'
 
-    extra_schema = {
+    extra_schema = freeze({
         'name': Unicode,
         'company': Unicode,
         'function': Unicode,
-        'phone': Unicode(mandatory=True)}
-    extra_widgets = [
+        'phone': Unicode(mandatory=True)})
+    extra_widgets = freeze([
         TextWidget('name', title=MSG(u"Name")),
         TextWidget('company', title=MSG(u"Company/Organization")),
         TextWidget('function', title=MSG(u"Function")),
-        TextWidget('phone', title=MSG(u"Phone Number"))]
+        TextWidget('phone', title=MSG(u"Phone Number"))])
 
 
     def get_schema(self, resource, context):
@@ -190,7 +194,7 @@ class Root_Contact(ContactForm):
         schema = merge_dicts(schema, self.extra_schema)
         if RecaptchaDatatype.is_required(context):
             schema = merge_dicts(schema, captcha_schema)
-        return schema
+        return freeze(schema)
 
 
     def get_widgets(self, resource, context):
@@ -198,7 +202,7 @@ class Root_Contact(ContactForm):
         widgets = widgets[:2] + self.extra_widgets + widgets[2:-1]
         if RecaptchaDatatype.is_required(context):
             widgets = widgets + captcha_widgets
-        return widgets
+        return freeze(widgets)
 
 
     def _get_form(self, resource, context):
@@ -222,29 +226,31 @@ class Root_Contact(ContactForm):
 
 
 class Root_EditContactOptions(CPEditContactOptions):
-    recaptcha_schema = {'recaptcha_private_key': String(mandatory=True),
-            'recaptcha_public_key': String(mandatory=True),
-            'recaptcha_whitelist': String}
-    recaptcha_widgets = [TextWidget('recaptcha_private_key',
+    recaptcha_schema = freeze({
+        'recaptcha_private_key': String(mandatory=True),
+        'recaptcha_public_key': String(mandatory=True),
+        'recaptcha_whitelist': String})
+    recaptcha_widgets = freeze([
+        TextWidget('recaptcha_private_key',
             title=MSG(u"ReCaptcha Private Key")),
         TextWidget('recaptcha_public_key',
             title=MSG(u"ReCaptcha Public Key")),
         MultilineWidget('recaptcha_whitelist',
-            title=MSG(u"ReCaptcha Whitelist of IPs"))]
+            title=MSG(u"ReCaptcha Whitelist of IPs"))])
 
 
     def _get_schema(self, resource, context):
-        schema = super(Root_EditContactOptions, self)._get_schema(resource,
-                context)
+        proxy = super(Root_EditContactOptions, self)
+        schema = dict(proxy._get_schema(resource, context))
         del schema['captcha_question']
         del schema['captcha_answer']
-        return merge_dicts(schema, self.recaptcha_schema)
+        return freeze(merge_dicts(schema, self.recaptcha_schema))
 
 
     def _get_widgets(self, resource, context):
-        widgets = super(Root_EditContactOptions, self)._get_widgets(resource,
-                context)[:-2]
-        return widgets + self.recaptcha_widgets
+        proxy = super(Root_EditContactOptions, self)
+        widgets = proxy._get_widgets(resource, context)[:-2]
+        return freeze(widgets + self.recaptcha_widgets)
 
 
     def get_value(self, resource, context, name, datatype):

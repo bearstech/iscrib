@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, freeze
 from itools.datatypes import String, DateTime, Integer
 from itools.gettext import MSG
 from itools.web import ERROR
@@ -64,12 +64,13 @@ class Application(Folder):
     class_icon16 = 'icons/16x16/tasks.png'
     class_icon48 = 'icons/48x48/tasks.png'
     allowed_users = 10
-    class_schema = merge_dicts(Folder.class_schema,
-            author=String(source='metadata', indexed=False, stored=True),
-            ctime=DateTime(source='metadata', indexed=False, stored=True),
-            max_users=Integer(source='metadata', default=allowed_users),
-            subscription=Subscription(source='metadata',
-                default='restricted'))
+    class_schema = freeze(merge_dicts(
+        Folder.class_schema,
+        author=String(source='metadata', indexed=False, stored=True),
+        ctime=DateTime(source='metadata', indexed=False, stored=True),
+        max_users=Integer(source='metadata', default=allowed_users),
+        subscription=Subscription(source='metadata',
+            default='restricted')))
     class_views = Folder.class_views + ['show']
 
     schema_class = Schema

@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, freeze
 from itools.database import PhraseQuery
 from itools.datatypes import Boolean, Unicode, Email, String
 from itools.gettext import MSG
@@ -49,29 +49,31 @@ MSG_BAD_PASSWORD = ERROR(u'You already have an account but your password '
 
 class Workgroup_NewInstance(NewInstance):
     access = True
-    schema = merge_dicts(NewInstance.schema,
-            title=Unicode(mandatory=True),
-            firstname=Unicode,
-            lastname=Unicode,
-            company=Unicode,
-            accept_terms_of_use=Boolean(mandatory=True))
-    widgets = [ReadOnlyWidget('cls_description'),
-            TextWidget('title', title=MSG(u'Name of your client space'),
-                tip=MSG(u'You can type the name of your company or '
-                    u'organization'))]
+    schema = freeze(merge_dicts(
+        NewInstance.schema,
+        title=Unicode(mandatory=True),
+        firstname=Unicode,
+        lastname=Unicode,
+        company=Unicode,
+        accept_terms_of_use=Boolean(mandatory=True)))
+    widgets = freeze([
+        ReadOnlyWidget('cls_description'),
+        TextWidget('title', title=MSG(u'Name of your client space'),
+            tip=MSG(u'You can type the name of your company or '
+                u'organization'))])
     goto_view = None
 
-    anonymous_schema = {
+    anonymous_schema = freeze({
         'email': Email(mandatory=True),
         'password': String(mandatory=True),
-        'password2': String(mandatory=True)}
-    anonymous_widgets = [
+        'password2': String(mandatory=True)})
+    anonymous_widgets = freeze([
         TextWidget('email', title=MSG(u"Your e-mail address")),
         TextWidget('firstname', title=MSG(u"First Name")),
         TextWidget('lastname', title=MSG(u"Last Name")),
         TextWidget('company', title=MSG(u"Company")),
         PasswordWidget('password', title=MSG(u"Password")),
-        PasswordWidget('password2', title=MSG(u"Repeat Password"))]
+        PasswordWidget('password2', title=MSG(u"Repeat Password"))])
 
     terms_of_use_widget = CheckboxWidget('accept_terms_of_use',
              title=MSG(u'I have read and agree to the terms of use '
@@ -83,9 +85,9 @@ class Workgroup_NewInstance(NewInstance):
     def get_schema(self, resource, context):
         schema = self.schema
         if context.user is None:
-            schema = merge_dicts(schema, self.anonymous_schema)
+            schema = freeze(merge_dicts(schema, self.anonymous_schema))
         if RecaptchaDatatype.is_required(context):
-            schema = merge_dicts(schema, captcha_schema)
+            schema = freeze(merge_dicts(schema, captcha_schema))
         return schema
 
 
@@ -328,17 +330,19 @@ class Workgroup_View(Folder_BrowseContent):
 
 class Workgroup_Edit(Theme_Edit, DBResource_Edit):
     title = MSG(u"Edit Title, Logo and CSS")
-    schema = merge_dicts(DBResource_Edit.schema,
-            favicon=ImagePathDataType,
-            logo=ImagePathDataType,
-            style=String)
-    widgets = ([DBResource_Edit.widgets[0]]
-                + [DBResource_Edit.widgets[1](title=MSG(u"Title (shown in "
-                    u"the banner if no logo)"))]
-                + [ImageSelectorWidget('logo', action='add_logo',
-                        title=MSG(u'Logo (shown in the banner)')),
-                    MultilineWidget('style', title=MSG(u"CSS"), rows=19,
-                        cols=69)])
+    schema = freeze(merge_dicts(
+        DBResource_Edit.schema,
+        favicon=ImagePathDataType,
+        logo=ImagePathDataType,
+        style=String))
+    widgets = freeze(
+            [DBResource_Edit.widgets[0]]
+            + [DBResource_Edit.widgets[1](title=MSG(u"Title (shown in "
+                u"the banner if no logo)"))]
+            + [ImageSelectorWidget('logo', action='add_logo',
+                    title=MSG(u'Logo (shown in the banner)')),
+                MultilineWidget('style', title=MSG(u"CSS"), rows=19,
+                    cols=69)])
 
 
     def get_value(self, resource, context, name, datatype):

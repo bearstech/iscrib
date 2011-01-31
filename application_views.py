@@ -20,7 +20,7 @@ from email.utils import parseaddr
 from urllib import quote
 
 # Import from itools
-from itools.core import merge_dicts, is_thingy
+from itools.core import merge_dicts, is_thingy, freeze
 from itools.database import PhraseQuery, TextQuery, StartQuery, AndQuery
 from itools.database import OrQuery, NotQuery
 from itools.datatypes import Integer, Unicode, Email, String
@@ -97,9 +97,10 @@ class ExportXLSButton(ExportODSButton):
 
 
 class Application_NewInstance(NewInstance):
-    schema = merge_dicts(NewInstance.schema,
-            title=Unicode(mandatory=True),
-            file=FileDataType(mandatory=True))
+    schema = freeze(merge_dicts(
+        NewInstance.schema,
+        title=Unicode(mandatory=True),
+        file=FileDataType(mandatory=True)))
     widgets = (NewInstance.widgets[:2]
             + [FileWidget('file', title=MSG(u"ODS or XLS File"))])
     goto_view = None
@@ -234,12 +235,13 @@ class Application_View(Folder_BrowseContent):
     title = MSG(u"Manage your Data Collection Application")
     template = '/ui/iscrib/application/view.xml'
 
-    schema = {}
+    schema = freeze({})
 
     # Search Form
-    search_schema = merge_dicts(Folder_BrowseContent.search_schema,
-            SearchForm.search_schema,
-            search_state=String)
+    search_schema = freeze(merge_dicts(
+        Folder_BrowseContent.search_schema,
+        SearchForm.search_schema,
+        search_state=String))
     search_fields = []
     search_template = '/ui/iscrib/application/search.xml'
 
@@ -486,7 +488,8 @@ class Application_View(Folder_BrowseContent):
 class Application_Export(BaseView):
     access = 'is_allowed_to_edit'
     title = MSG(u"Export Collected Data")
-    query_schema = {'format': String}
+    query_schema = freeze({
+        'format': String})
 
 
     def GET(self, resource, context):
@@ -562,7 +565,8 @@ class Application_Register(STLForm):
     title = MSG(u"Subscribe Users")
     template = '/ui/iscrib/application/register.xml'
 
-    schema = {'new_users': Unicode}
+    schema = freeze({
+        'new_users': Unicode})
 
 
     def get_page_title(self, resource, context):
@@ -644,24 +648,26 @@ class Application_Register(STLForm):
 
 
 class Application_Edit(DBResource_Edit):
-    schema = merge_dicts(DBResource_Edit.schema,
-            subscription=Subscription(mandatory=True),
-            file=FileDataType)
-    widgets = DBResource_Edit.widgets + [
-            SelectWidget('subscription', has_empty_option=False,
-                title=MSG(u"Subscription Mode")),
-            file_widget]
-    admin_schema = {
-            'max_users': Integer(mandatory=True)}
-    admin_widgets = [
-            TextWidget('max_users',
-                title=MSG(u"Maximum form users (0 = unlimited)"))]
+    schema = freeze(merge_dicts(
+        DBResource_Edit.schema,
+        subscription=Subscription(mandatory=True),
+        file=FileDataType))
+    widgets = freeze(
+        DBResource_Edit.widgets + [
+        SelectWidget('subscription', has_empty_option=False,
+            title=MSG(u"Subscription Mode")),
+        file_widget])
+    admin_schema = freeze({
+        'max_users': Integer(mandatory=True)})
+    admin_widgets = freeze([
+        TextWidget('max_users',
+            title=MSG(u"Maximum form users (0 = unlimited)"))])
 
 
     def _get_schema(self, resource, context):
         schema = super(Application_Edit, self)._get_schema(resource, context)
         if not is_print(context) and is_admin(context.user, resource):
-            schema = merge_dicts(schema, self.admin_schema)
+            schema = freeze(merge_dicts(schema, self.admin_schema))
         return schema
 
 
@@ -704,11 +710,12 @@ class Application_Edit(DBResource_Edit):
 
 class Application_Login(LoginView):
     template = '/ui/iscrib/application/login.xml'
-    schema = merge_dicts(LoginView.schema,
-            username=String(default=''),
-            password=String(default=''),
-            newpass=String(default=''),
-            newpass2=String)
+    schema = freeze(merge_dicts(
+        LoginView.schema,
+        username=String(default=''),
+        password=String(default=''),
+        newpass=String(default=''),
+        newpass2=String))
 
 
     def action_register(self, resource, context, form):

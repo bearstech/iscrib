@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from itools
-from itools.core import merge_dicts, is_thingy
+from itools.core import merge_dicts, is_thingy, freeze
 from itools.datatypes import Unicode
 from itools.gettext import MSG
 from itools.web import INFO, ERROR
@@ -31,11 +31,13 @@ from ikaaro.user_views import (User_ChangePasswordForgotten
 
 
 class User_ConfirmRegistration(BaseUser_ConfirmRegistration):
-    schema = merge_dicts(BaseUser_ConfirmRegistration.schema,
-        company=Unicode(mandatory=True))
-    widgets = (BaseUser_ConfirmRegistration.widgets[:2]
-            + [TextWidget('company', title=MSG(u'Company/Organization'))]
-            + BaseUser_ConfirmRegistration.widgets[2:])
+    schema = freeze(merge_dicts(
+        BaseUser_ConfirmRegistration.schema,
+        company=Unicode(mandatory=True)))
+    widgets = freeze(
+        BaseUser_ConfirmRegistration.widgets[:2]
+        + [TextWidget('company', title=MSG(u'Company/Organization'))]
+        + BaseUser_ConfirmRegistration.widgets[2:])
 
 
     def action(self, resource, context, form):
@@ -58,8 +60,9 @@ class User_ChangePasswordForgotten(BaseUser_ChangePasswordForgotten,
 
 
 class User_EditAccount(BaseUser_EditAccount):
-    schema = merge_dicts(BaseUser_EditAccount.schema,
-        company=Unicode(mandatory=True))
-    widgets = (BaseUser_EditAccount.widgets[:3]
+    schema = freeze(merge_dicts(
+        BaseUser_EditAccount.schema,
+        company=Unicode(mandatory=True)))
+    widgets = freeze(BaseUser_EditAccount.widgets[:3]
         + [TextWidget('company', title=MSG(u"Company/Organization"))]
         + BaseUser_EditAccount.widgets[3:])

@@ -17,7 +17,7 @@
 
 # Import from itools
 from itools.csv import CSVFile
-from itools.core import merge_dicts
+from itools.core import merge_dicts, freeze
 from itools.datatypes import String, Enumerate
 from itools.gettext import MSG
 from itools.web import BaseView, STLView, STLForm, INFO, ERROR
@@ -60,7 +60,8 @@ class Form_View(STLForm):
     access_POST = 'is_allowed_to_edit'
     template = '/ui/iscrib/form/view.xml'
     title = MSG(u"Start filling")
-    schema = {'page_number': String}
+    schema = freeze({
+        'page_number': String})
     hidden_fields = []
 
 
@@ -221,7 +222,8 @@ class Form_Send(STLForm):
     access_POST = 'is_allowed_to_edit'
     template = '/ui/iscrib/form/send.xml'
     title = MSG(u"Input Control")
-    query_schema = {'view': String}
+    query_schema = freeze({
+        'view': String})
 
 
     def get_page_title(self, resource, context):

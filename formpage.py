@@ -23,6 +23,7 @@
 from csv import reader as read_csv
 
 # Import from itools
+from itools.core import freeze
 from itools.csv import CSVFile, parse
 from itools.datatypes import XMLAttribute, Unicode
 from itools.gettext import MSG
@@ -49,7 +50,8 @@ ERR_BAD_NAME = ERROR(u'In "{title}" sheet, line {line}, variable "{name}" '
 
 
 class FormPageHandler(CSVFile):
-    schema = {'null': Unicode}
+    schema = freeze({
+        'null': Unicode})
 
 
     def _load_state_from_file(self, file, encoding='UTF-8'):
