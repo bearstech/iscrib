@@ -119,6 +119,14 @@ class FormPage(CSV):
         return page_number.upper()
 
 
+    def get_fields(self):
+        for row in self.handler.get_rows():
+            for column in row:
+                column = column.strip()
+                if column.startswith(FIELD_PREFIX):
+                    yield column[1:]
+
+
     def get_namespace(self, form, view, context, skip_print=False,
             readonly=False):
         # Force l'ordre de tabulation entre les champs

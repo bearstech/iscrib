@@ -133,27 +133,28 @@ class Form_View(STLForm):
         fields = resource.get_fields(schema)
         page_number = form['page_number']
         handler = resource.get_form().handler
+        formpage = resource.get_formpage(page_number)
 
         # First save everything even invalid
-        for key in sorted(pages[page_number]):
-            datatype = schema[key]
-            value = fields[key]
+        for field in formpage.get_fields():
+            datatype = schema[field]
+            value = fields[field]
             # Avoid "TypeError: issubclass() arg 1 must be a class"
             if isinstance(datatype, Numeric):
                 pass
             elif issubclass(datatype, FileImage):
                 # Delete existing file
-                if context.get_form_value(key + '_delete'):
+                if context.get_form_value(field + '_delete'):
                     resource.parent.del_resource(value, ref_action='force')
-                    fields[key] = ''
-                    handler.set_value(key, '', schema)
+                    fields[field] = ''
+                    handler.set_value(field, '', schema)
             # Decode form data
-            if context.get_form_value(key) is not None:
+            if context.get_form_value(field) is not None:
                 # First the raw data
                 if datatype.multiple:
-                    data = context.get_form_value(key, type=Multiple)
+                    data = context.get_form_value(field, type=Multiple)
                 else:
-                    data = context.get_form_value(key, type=Single)
+                    data = context.get_form_value(field, type=Single)
                 # Then the decoded value
                 try:
                     value = datatype.decode(data)
@@ -166,24 +167,24 @@ class Form_View(STLForm):
                 elif issubclass(datatype, FileImage):
                     # Load file
                     value = resource.save_file(*data)
-            fields[key] = value
-            handler.set_value(key, value, schema)
+            fields[field] = value
+            handler.set_value(field, value, schema)
 
         # Then check bad types
-        invalid = set()
-        mandatory = set()
-        bad_sums = set()
-        for key in sorted(pages[page_number]):
-            if resource.is_disabled_by_dependency(key, schema, fields):
+        invalid = []
+        mandatory = []
+        bad_sums = []
+        for field in formpage.get_fields():
+            if resource.is_disabled_by_dependency(field, schema, fields):
                 continue
-            datatype = schema[key]
+            datatype = schema[field]
             # Raw data
             if datatype.multiple:
-                data = context.get_form_value(key, type=Multiple)
+                data = context.get_form_value(field, type=Multiple)
             else:
-                data = context.get_form_value(key, type=Single)
+                data = context.get_form_value(field, type=Single)
             # Decoded value
-            value = fields[key]
+            value = fields[field]
             # Compute formula and compare
             if datatype.formula:
                 expected = datatype.sum(datatype.formula, schema,
@@ -193,36 +194,46 @@ class Form_View(STLForm):
                 if data and value != expected:
                     # What we got was OK so blame the user
                     if expected is not None:
-                        bad_sums.add(key)
+                        log = "field {!r} data {!r} value {!r} bad sum"
+                        log_debug(log.format(field, data, value))
+                        if field not in bad_sums:
+                            bad_sums.append(field)
                 # Result deduced
                 else:
                     # Got it right!
                     if expected is not None:
                         value = expected
                         # Fill the form
-                        fields[key] = value
-                        handler.set_value(key, value, schema)
+                        fields[field] = value
+                        handler.set_value(field, value, schema)
                     # Got it wrong!
                     else:
-                        bad_sums.add(key)
+                        log = "field {!r} data {!r} value {!r} bad sum"
+                        log_debug(log.format(field, data, value))
+                        if field not in bad_sums:
+                            bad_sums.append(field)
             # Mandatory
             if not data and datatype.mandatory:
-                log_debug("key {!r} data {!r} value {!r} mandatory".format(
-                    key, data, value))
-                mandatory.add(key)
+                log = "field {!r} data {!r} value {!r} mandatory"
+                log_debug(log.format(field, data, value))
+                mandatory.append(field) if field not in mandatory else None
             # Invalid (0008102 and mandatory -> and filled)
             elif data and not datatype.is_valid(data):
-                invalid.add(key)
+                log = "field {!r} data {!r} value {!r} invalid"
+                log_debug(log.format(field, data, value))
+                if field not in invalid:
+                    invalid.append(field)
             # Avoid "TypeError: issubclass() arg 1 must be a class"
             if isinstance(datatype, Numeric):
                 pass
             elif issubclass(datatype, Enumerate):
                 # Detect unchecked checkboxes
-                if not is_mandatory_filled(datatype, key, value, schema,
+                if not is_mandatory_filled(datatype, field, value, schema,
                         fields, context):
-                    m = "key {!r} data {!r} value {!r} is_mandatory_filled"
-                    log_debug(m.format(key, data, value))
-                    mandatory.add(key)
+                    log = "field {!r} data {!r} value {!r} not filled"
+                    log_debug(log.format(field, data, value))
+                    if field not in mandatory:
+                        mandatory.append(field)
 
         # Reindex
         context.database.change_resource(resource)
