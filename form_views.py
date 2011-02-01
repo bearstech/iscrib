@@ -32,8 +32,12 @@ from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
 
 
 # Messages
-MSG_SAVED_ERROR = ERROR(u"WARNING! There are missing or invalid "
-        u"fields: {bad_types}", format='replace_html')
+ERR_INVALID = ERROR(u"The following fields are invalid: {fields}.",
+        format='replace_html')
+ERR_MANDATORY = ERROR(u"The following fields are mandatory: {fields}.",
+        format='replace_html')
+ERR_BAD_SUMS = ERROR(u"The following sums are invalid: {fields}.",
+        format='replace_html')
 MSG_SAVED = INFO(u"The page is saved. Check your input in the "
         u'<a href=";send">Input Control</a> tab.', format='html')
 MSG_FINISHED = INFO(u"Your form is finished. "
@@ -106,7 +110,7 @@ class Form_View(STLForm):
             context.bad_types
         except AttributeError:
             # Fresh GET: not bad yet
-            context.bad_types = []
+            context.bad_types = set()
         skip_print = self.is_skip_print(resource, context)
         if is_print(context):
             skip_print = True
@@ -218,12 +222,20 @@ class Form_View(STLForm):
         # Reindex
         context.database.change_resource(resource)
         # Transmit list of errors when returning GET
-        if bad_types:
-            msg_bad_types = [u'<a href="#field_{name}">{name}</a>'.format(
-                name=name) for name in bad_types]
-            msg_bad_types = u", ".join(msg_bad_types)
-            context.message = MSG_SAVED_ERROR(bad_types=msg_bad_types)
+        pattern = u'<a href="#field_{name}">{name}</a>'
+        messages = []
+        bad_types = set()
+        for fields, message in [
+                (invalid, ERR_INVALID),
+                (mandatory, ERR_MANDATORY),
+                (bad_sums, ERR_BAD_SUMS)]:
+            if fields:
+                bad_types.update(fields)
+                fields = [pattern.format(name=f) for f in sorted(fields)]
+                messages.append(message(fields=", ".join(fields)))
+        if messages:
             context.bad_types = bad_types
+            context.message = messages
         else:
             context.message = MSG_SAVED
         if resource.get_workflow_state() == EMPTY:
@@ -364,7 +376,7 @@ class Form_Print(STLView):
 
     def get_namespace(self, resource, context):
         set_print(context)
-        context.bad_types = []
+        context.bad_types = set()
         forms = []
         for page_number in resource.get_page_numbers():
             formpage = resource.get_formpage(page_number)
