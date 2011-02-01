@@ -48,7 +48,7 @@ def is_mandatory_filled(datatype, name, value, schema, fields, context):
         return True
     if not datatype.mandatory:
         return True
-    return bool(value)
+    return value is not None
 
 
 
