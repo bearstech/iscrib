@@ -20,6 +20,7 @@ from itools.csv import CSVFile
 from itools.core import merge_dicts, freeze
 from itools.datatypes import String, Enumerate
 from itools.gettext import MSG
+from itools.log import log_debug
 from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 
 # Import from ikaaro
@@ -206,6 +207,8 @@ class Form_View(STLForm):
                         bad_sums.add(key)
             # Mandatory
             if not data and datatype.mandatory:
+                log_debug("key {!r} data {!r} value {!r} mandatory".format(
+                    key, data, value))
                 mandatory.add(key)
             # Invalid (0008102 and mandatory -> and filled)
             elif data and not datatype.is_valid(data):
@@ -217,6 +220,8 @@ class Form_View(STLForm):
                 # Detect unchecked checkboxes
                 if not is_mandatory_filled(datatype, key, value, schema,
                         fields, context):
+                    m = "key {!r} data {!r} value {!r} is_mandatory_filled"
+                    log_debug(m.format(key, data, value))
                     mandatory.add(key)
 
         # Reindex
