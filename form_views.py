@@ -128,26 +128,22 @@ class Form_View(STLForm):
         fields = resource.get_fields(schema)
         page_number = form['page_number']
         handler = resource.get_form().handler
-        bad_types = []
+
+        # First save everything even invalid
         for key in sorted(pages[page_number]):
-            value = ''
             datatype = schema[key]
-            # Can't use because they need to be stored
-            #if datatype.readonly:
-            #    continue
-            # Delete files first
+            value = fields[key]
+            # Avoid "TypeError: issubclass() arg 1 must be a class"
             if isinstance(datatype, Numeric):
                 pass
             elif issubclass(datatype, FileImage):
+                # Delete existing file
                 if context.get_form_value(key + '_delete'):
-                    value = fields[key]
                     resource.parent.del_resource(value, ref_action='force')
-                    handler.set_value(key, '', schema)
                     fields[key] = ''
-            # Can't use "if not/continue" pattern here
-            if resource.is_disabled_by_dependency(key, schema, fields):
-                pass
-            elif context.get_form_value(key) is not None:
+                    handler.set_value(key, '', schema)
+            # Decode form data
+            if context.get_form_value(key) is not None:
                 # First the raw data
                 if datatype.multiple:
                     data = context.get_form_value(key, type=Multiple)
@@ -159,48 +155,66 @@ class Form_View(STLForm):
                 except Exception:
                     # Keep invalid values
                     value = data
-                # Compare sums
-                if datatype.formula:
-                    expected = datatype.sum(datatype.formula, schema,
-                            # Raw form, not the filtered one
-                            context.get_form())
-                    # Sum inputed
-                    if data and value != expected:
-                        # What we got was OK so blame the user
-                        if expected is not None:
-                            bad_types.append(key)
-                    # Sum deduced
-                    else:
-                        # Got it right!
-                        if expected is not None:
-                            value = expected
-                        # Got it wrong!
-                        else:
-                            bad_types.append(key)
-                # Mandatory
-                elif datatype.mandatory and not data:
-                    bad_types.append(key)
-                # Invalid (0008102 and mandatory -> and filled)
-                elif data and not datatype.is_valid(data):
-                    bad_types.append(key)
-                elif isinstance(datatype, Numeric):
+                # Avoid "TypeError: issubclass() arg 1 must be a class"
+                if isinstance(datatype, Numeric):
                     pass
                 elif issubclass(datatype, FileImage):
+                    # Load file
                     value = resource.save_file(*data)
-            # First skip instance datatypes:
-            #   TypeError: issubclass() arg 1 must be a class
-            elif isinstance(datatype, Numeric):
+            fields[key] = value
+            handler.set_value(key, value, schema)
+
+        # Then check bad types
+        invalid = set()
+        mandatory = set()
+        bad_sums = set()
+        for key in sorted(pages[page_number]):
+            if resource.is_disabled_by_dependency(key, schema, fields):
+                continue
+            datatype = schema[key]
+            # Raw data
+            if datatype.multiple:
+                data = context.get_form_value(key, type=Multiple)
+            else:
+                data = context.get_form_value(key, type=Single)
+            # Decoded value
+            value = fields[key]
+            # Compute formula and compare
+            if datatype.formula:
+                expected = datatype.sum(datatype.formula, schema,
+                        # Raw form, not the filtered one
+                        context.get_form())
+                # Result given
+                if data and value != expected:
+                    # What we got was OK so blame the user
+                    if expected is not None:
+                        bad_sums.add(key)
+                # Result deduced
+                else:
+                    # Got it right!
+                    if expected is not None:
+                        value = expected
+                        # Fill the form
+                        fields[key] = value
+                        handler.set_value(key, value, schema)
+                    # Got it wrong!
+                    else:
+                        bad_sums.add(key)
+            # Mandatory
+            if not data and datatype.mandatory:
+                mandatory.add(key)
+            # Invalid (0008102 and mandatory -> and filled)
+            elif data and not datatype.is_valid(data):
+                invalid.add(key)
+            # Avoid "TypeError: issubclass() arg 1 must be a class"
+            if isinstance(datatype, Numeric):
                 pass
-            # Now detect unchecked checkboxes
             elif issubclass(datatype, Enumerate):
+                # Detect unchecked checkboxes
                 if not is_mandatory_filled(datatype, key, value, schema,
                         fields, context):
-                    bad_types.append(key)
-            elif issubclass(datatype, FileImage):
-                # Keep filename
-                value = fields[key]
-            handler.set_value(key, value, schema)
-            fields[key] = value
+                    mandatory.add(key)
+
         # Reindex
         context.database.change_resource(resource)
         # Transmit list of errors when returning GET
