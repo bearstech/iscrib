@@ -95,7 +95,10 @@ class Workgroup(WebSite):
             return True
         role = self.get_user_role(user.name)
         if isinstance(resource, Application):
-            if role in ('members', 'reviewers'):
+            subscription = resource.get_property('subscription')
+            if subscription == 'demo':
+                return True
+            elif role in ('members', 'reviewers'):
                 return True
             return resource.show.get_form_name(user, resource) is not None
         elif isinstance(resource, Form):
