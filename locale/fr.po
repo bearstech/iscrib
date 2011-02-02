@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 201011231\n"
-"POT-Creation-Date: 2011-02-02 12:02+CET\n"
+"POT-Creation-Date: 2011-02-02 15:02+CET\n"
 "PO-Revision-Date: 2010-11-23 11:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -685,6 +685,10 @@ msgstr "Valeur par défaut"
 #: ../widgets.py:301
 msgid "Delete"
 msgstr "Supprimer"
+
+#: ../datatypes.py:793
+msgid "Demo (public demo)"
+msgstr "Démo (démo publique)"
 
 #: ../schema.py:294
 msgid "Dependent Field"

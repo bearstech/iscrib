@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-02 12:02+CET\n"
+"POT-Creation-Date: 2011-02-02 15:02+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -564,6 +564,10 @@ msgstr ""
 
 #: ../widgets.py:301
 msgid "Delete"
+msgstr ""
+
+#: ../datatypes.py:793
+msgid "Demo (public demo)"
 msgstr ""
 
 #: ../schema.py:294
