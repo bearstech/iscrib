@@ -194,7 +194,7 @@ class Form_View(STLForm):
                 if data and value != expected:
                     # What we got was OK so blame the user
                     if expected is not None:
-                        log = "field {!r} data {!r} value {!r} bad sum"
+                        log = "field {0!r} data {1!r} value {2!r} bad sum"
                         log_debug(log.format(field, data, value))
                         if field not in bad_sums:
                             bad_sums.append(field)
@@ -208,18 +208,18 @@ class Form_View(STLForm):
                         handler.set_value(field, value, schema)
                     # Got it wrong!
                     else:
-                        log = "field {!r} data {!r} value {!r} bad sum"
+                        log = "field {0!r} data {1!r} value {2!r} bad sum"
                         log_debug(log.format(field, data, value))
                         if field not in bad_sums:
                             bad_sums.append(field)
             # Mandatory
             if not data and datatype.mandatory:
-                log = "field {!r} data {!r} value {!r} mandatory"
+                log = "field {0!r} data {1!r} value {2!r} mandatory"
                 log_debug(log.format(field, data, value))
                 mandatory.append(field) if field not in mandatory else None
             # Invalid (0008102 and mandatory -> and filled)
             elif data and not datatype.is_valid(data):
-                log = "field {!r} data {!r} value {!r} invalid"
+                log = "field {0!r} data {1!r} value {2!r} invalid"
                 log_debug(log.format(field, data, value))
                 if field not in invalid:
                     invalid.append(field)
@@ -230,7 +230,7 @@ class Form_View(STLForm):
                 # Detect unchecked checkboxes
                 if not is_mandatory_filled(datatype, field, value, schema,
                         fields, context):
-                    log = "field {!r} data {!r} value {!r} not filled"
+                    log = "field {0!r} data {1!r} value {2!r} not filled"
                     log_debug(log.format(field, data, value))
                     if field not in mandatory:
                         mandatory.append(field)
