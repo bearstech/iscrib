@@ -76,7 +76,7 @@ class XLSTable(object):
 
     def get_name(self):
         name = self.sheet.name
-        assert type(name) is unicode, '"{0}" is not a str'.format(repr(name))
+        assert type(name) is unicode, '"{0!r}" is not a str'.format(name)
         return name
 
 
