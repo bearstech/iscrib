@@ -112,8 +112,8 @@ class Application(Folder):
             self.make_resource(name, cls, title={'en': title},
                     # cls va transformer le CSV en table
                     body=table.to_csv())
-        handler = self.get_resource('schema').handler
-        schema, pages = handler.get_schema_pages()
+        schema_resource = self.get_resource('schema')
+        schema, pages = schema_resource.get_schema_pages()
         # Pages
         for i, table in enumerate(tables):
             table.rstrip(aggressive=True)

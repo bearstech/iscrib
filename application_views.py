@@ -498,8 +498,8 @@ class Application_Export(BaseView):
         name = MSG(u"{title} Data").gettext(title=resource.get_title())
         writer = writer_cls(name)
 
-        handler = resource.get_resource('schema').handler
-        schema, pages = handler.get_schema_pages()
+        schema_resource = resource.get_resource('schema')
+        schema, pages = schema_resource.get_schema_pages()
         # Main header
         header = [title.gettext()
                 for title in (MSG(u"Form"), MSG(u"First Name"),

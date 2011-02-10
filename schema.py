@@ -300,54 +300,6 @@ class SchemaHandler(TableFile):
         'default': String(default='', title=MSG(u"Default Value"))}
 
 
-    def get_schema_pages(self):
-        schema = {}
-        pages = {}
-        get_record_value = self.get_record_value
-        for record in self.get_records():
-            # The name
-            name = get_record_value(record, 'name')
-            # The datatype
-            type_name = get_record_value(record, 'type')
-            datatype = Type.get_type(type_name)
-            multiple = False
-            # TypeError: issubclass() arg 1 must be a class
-            if isinstance(datatype, Numeric):
-                pass
-            elif issubclass(datatype, SqlEnumerate):
-                enum_options = get_record_value(record, 'enum_options')
-                representation = get_record_value(record, 'enum_repr')
-                multiple = (representation == 'checkbox')
-                datatype = datatype(options=enum_options,
-                        representation=representation)
-            elif issubclass(datatype, EnumBoolean):
-                datatype = datatype(representation='radio')
-                multiple = False
-            # The page number (now automatic)
-            page_number = Variable.get_page_number(name)
-            pages.setdefault(page_number, set()).add(name)
-            page_numbers = (page_number,)
-            # Add to the datatype
-            default = get_record_value(record, 'default')
-            if multiple:
-                default = [default]
-            length = get_record_value(record, 'length')
-            size = get_record_value(record, 'size') or length
-            schema[name] = datatype(type=type_name,
-                default=datatype.decode(default),
-                multiple=multiple,
-                pages=page_numbers,
-                title=get_record_value(record, 'title'),
-                help=get_record_value(record, 'help'),
-                length=length,
-                decimals=get_record_value(record, 'decimals'),
-                mandatory=get_record_value(record, 'mandatory'),
-                size=size,
-                dependency=get_record_value(record, 'dependency'),
-                formula=get_record_value(record, 'formula'))
-        return schema, pages
-
-
 
 class Schema(Table):
     class_id = 'Schema'
@@ -507,6 +459,55 @@ class Schema(Table):
         super(Schema, self).init_resource(filename=filename,
                 extension=extension, **kw)
         self._load_from_csv(body)
+
+
+    def get_schema_pages(self):
+        schema = {}
+        pages = {}
+        handler = self.handler
+        get_record_value = handler.get_record_value
+        for record in handler.get_records():
+            # The name
+            name = get_record_value(record, 'name')
+            # The datatype
+            type_name = get_record_value(record, 'type')
+            datatype = Type.get_type(type_name)
+            multiple = False
+            # TypeError: issubclass() arg 1 must be a class
+            if isinstance(datatype, Numeric):
+                pass
+            elif issubclass(datatype, SqlEnumerate):
+                enum_options = get_record_value(record, 'enum_options')
+                representation = get_record_value(record, 'enum_repr')
+                multiple = (representation == 'checkbox')
+                datatype = datatype(options=enum_options,
+                        representation=representation)
+            elif issubclass(datatype, EnumBoolean):
+                datatype = datatype(representation='radio')
+                multiple = False
+            # The page number (now automatic)
+            page_number = Variable.get_page_number(name)
+            pages.setdefault(page_number, set()).add(name)
+            page_numbers = (page_number,)
+            # Add to the datatype
+            default = get_record_value(record, 'default')
+            if multiple:
+                default = [default]
+            length = get_record_value(record, 'length')
+            size = get_record_value(record, 'size') or length
+            schema[name] = datatype(type=type_name,
+                default=datatype.decode(default),
+                multiple=multiple,
+                pages=page_numbers,
+                title=get_record_value(record, 'title'),
+                help=get_record_value(record, 'help'),
+                length=length,
+                decimals=get_record_value(record, 'decimals'),
+                mandatory=get_record_value(record, 'mandatory'),
+                size=size,
+                dependency=get_record_value(record, 'dependency'),
+                formula=get_record_value(record, 'formula'))
+        return schema, pages
 
 
     def update_20090123(self):

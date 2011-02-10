@@ -106,7 +106,7 @@ class FormPage(CSV):
         handler = self.handler
         handler.load_state_from_string(body)
         schema_resource = self.parent.get_resource('schema')
-        schema, pages = schema_resource.handler.get_schema_pages()
+        schema, pages = schema_resource.get_schema_pages()
         # Consistency check
         for lineno, row in enumerate(handler.get_rows()):
             lineno += 1

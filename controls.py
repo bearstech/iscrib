@@ -126,8 +126,7 @@ class Controls(Table):
         super(Controls, self).init_resource(filename=filename,
                 extension=extension, **kw)
         schema_resource = self.parent.get_resource('schema')
-        schema_handler = schema_resource.handler
-        schema, pages = schema_handler.get_schema_pages()
+        schema, pages = schema_resource.get_schema_pages()
         namespace = {}
         for key in schema:
             namespace[key] = 0
