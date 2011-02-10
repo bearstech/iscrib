@@ -22,7 +22,6 @@ from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
 from itools.datatypes import DataType, Unicode, Enumerate, Email
-from itools.datatypes.primitive import enumerate_get_namespace
 from itools.gettext import MSG
 
 # Import from ikaaro
@@ -31,8 +30,7 @@ from ikaaro.datatypes import FileDataType
 
 def quote_string(data):
     data = unicode(data, 'utf8')
-    # FIXME restore unicode
-    return '"%s"' % data.replace('"', '\\"').replace("'", "\\'")
+    return u'"%s"' % data.replace(u'"', u'\\"').replace(u"'", u"\\'")
 
 
 
@@ -60,16 +58,20 @@ class DateLitterale(DataType):
 
 class Numeric(object):
     """All arithmetical operations."""
+    default = ''
+
 
     ########################################################################
     # DataType API
-    # XXX not a classmethod
-    def get_default(self):
-        return self.default
+    @classmethod
+    def get_default(cls):
+        return cls.decode(cls.default)
 
 
     @classmethod
     def is_valid(cls, data):
+        # 0009003: les séparateurs de millers provoquent une erreur
+        data = ''.join(data.split())
         try:
             cls(data)
         except Exception:
@@ -83,6 +85,9 @@ class Numeric(object):
             return data
         elif data is None or str(data).upper() == 'NC':
             return cls('NC')
+        elif type(data) is str:
+            # 0009003: les séparateurs de millers provoquent une erreur
+            data = ''.join(data.split())
         return cls(data)
 
 
@@ -120,10 +125,14 @@ class Numeric(object):
 
 
     def __int__(self):
+        if self.value is None:
+            raise NotImplemented
         return int(self.value)
 
 
     def __float__(self):
+        if self.value is None:
+            raise NotImplemented
         return float(self.value)
 
 
@@ -349,12 +358,12 @@ class Numeric(object):
 
     def __cmp__(self, right):
         # Toutes les combinaisons ont été épuisées
-        raise NotImplementedError
+        raise NotImplemented
 
 
     def __bool__(self):
         # FIXME seulement dans Python 3 ?
-        raise NotImplementedError
+        raise NotImplemented
 
 
     def __nonzero__(self):
@@ -362,7 +371,7 @@ class Numeric(object):
 
 
     def __len__(self):
-        raise NotImplementedError
+        raise NotImplemented
 
 
     @classmethod
@@ -388,7 +397,7 @@ class Numeric(object):
 class NumDecimal(Numeric):
 
     def __init__(self, value=None, **kw):
-        Numeric.__init__(self, **kw)
+        super(NumDecimal, self).__init__(**kw)
         if value is not None:
             if str(value).upper() == 'NC':
                 value = None
@@ -405,6 +414,14 @@ class NumDecimal(Numeric):
                 except InvalidOperation:
                     pass
         self.value = value
+
+
+    def round(self, digits=2):
+        value = self.value
+        if value is None or type(value) is str:
+            return value
+        places = dec('10') ** -digits
+        return value.quantize(places)
 
 
     @staticmethod
@@ -438,7 +455,7 @@ class NumDecimal(Numeric):
 class NumInteger(Numeric):
 
     def __init__(self, value=None, **kw):
-        Numeric.__init__(self, **kw)
+        super(NumInteger, self).__init__(**kw)
         if value is not None:
             if str(value).upper() == 'NC':
                 value = None
@@ -456,6 +473,8 @@ class NumInteger(Numeric):
     def is_valid(data):
         if data.upper() == 'NC':
             return True
+        # 0009003: les séparateurs de millers provoquent une erreur
+        data = ''.join(data.split())
         try:
             int(data)
         except ValueError:
@@ -471,7 +490,7 @@ class NumInteger(Numeric):
 class NumTime(Numeric):
 
     def __init__(self, value=None, **kw):
-        Numeric.__init__(self, **kw)
+        super(NumTime, self).__init__(**kw)
         if value is not None:
             if str(value).upper() == 'NC':
                 value = None
@@ -479,8 +498,9 @@ class NumTime(Numeric):
                 pass
             elif type(value) is str:
                 value = value.replace('h', ':')
-                hours, minutes = value.split(':')
-                value = int(hours) * 60 + int(minutes)
+                if ':' in value:
+                    hours, minutes = value.split(':')
+                    value = int(hours) * 60 + int(minutes)
             else:
                 value = int(value)
         self.value = value
@@ -492,8 +512,8 @@ class NumTime(Numeric):
             value = value.value
         if value is None:
             return 'NC'
-        elif value == '':
-            return ''
+        elif type(value) is str:
+            return value
         return '%03d:%02d' % (value / 60, value % 60)
 
 
@@ -502,7 +522,7 @@ class NumTime(Numeric):
         if data == '' or data.upper() == 'NC':
             return True
         data = data.replace('h', ':')
-        if data.count(':') > 1:
+        if data.count(':') != 1:
             return False
         for x in data.split(':'):
             try:
@@ -521,11 +541,13 @@ class NumShortTime(NumTime):
 
     @staticmethod
     def encode(value):
-        data = NumTime.encode(value)
-        if data == '' or data == 'NC':
-            return data
-
-        return data[1:]
+        if isinstance(value, NumTime):
+            value = value.value
+        if value is None:
+            return 'NC'
+        elif type(value) is str:
+            return value
+        return '%02d:%02d' % (value / 60, value % 60)
 
 
     def get_sql_schema(self):
@@ -536,7 +558,7 @@ class NumShortTime(NumTime):
 class NumDate(Numeric):
 
     def __init__(self, value=None, **kw):
-        Numeric.__init__(self, **kw)
+        super(NumDate, self).__init__(**kw)
         if value is not None:
             if str(value).upper() == 'NC':
                 value = None
@@ -616,7 +638,7 @@ class NumShortDate(NumDate):
 class NumDigit(Numeric):
 
     def __init__(self, value=None, **kw):
-        Numeric.__init__(self, **kw)
+        super(NumDigit, self).__init__(**kw)
         if value is not None:
             if str(value).upper() == 'NC':
                 value = None
@@ -681,10 +703,9 @@ class Text(Unicode):
 
     @staticmethod
     def encode(value, encoding='UTF-8'):
-        value = Unicode.encode(value, encoding=encoding)
         # Stocke tout sur une ligne
-        # FIXME restore unicode
-        return value.replace('\r\n', '\\r\\n')
+        value = value.replace(u'\r\n', u'\\r\\n')
+        return Unicode.encode(value, encoding=encoding)
 
 
 
@@ -746,39 +767,6 @@ class SqlEnumerate(Enumerate):
     @classmethod
     def get_values(cls, value):
         return (cls.get_value(value, value) for value in value)
-
-
-
-class EnumCV(SqlEnumerate):
-    counter = 1
-
-    @classmethod
-    def get_options(cls):
-        yield {'name': str(cls.counter), 'value': unicode(cls.counter)}
-        cls.counter += 1
-        if cls.counter == 6:
-            cls.counter = 7
-
-
-    @classmethod
-    def is_valid(cls, name):
-        return name.isdigit()
-
-
-    @classmethod
-    def get_value(cls, name, default=None):
-        return unicode(name)
-
-
-    @classmethod
-    def get_namespace(cls, name):
-        options = list(cls.get_options())
-        return enumerate_get_namespace(options, name)
-
-
-    @classmethod
-    def reset(cls):
-        cls.counter = 1
 
 
 
