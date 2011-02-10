@@ -32,13 +32,13 @@ from itools.web import ERROR
 from itools.xml import XMLParser
 
 # Import from ikaaro
-from ikaaro.access import is_admin
 from ikaaro.autoform import xhtml_namespaces
 from ikaaro.text import CSV
 
 # Import from iscrib
 from datatypes import NumTime
 from schema import FormatError, Variable
+from utils import is_debug
 from widgets import get_input_widget, make_element
 from workflow import FINISHED, EXPORTED
 
@@ -47,6 +47,17 @@ NBSP = u"\u00a0".encode('utf8')
 FIELD_PREFIX = u"#"
 ERR_BAD_NAME = ERROR(u'In "{title}" sheet, line {line}, variable "{name}" '
         u'is unknown.')
+
+
+def is_disabled(row):
+    is_disabled = False
+    for column in row:
+        if u"disabled" in column['class']:
+            is_disabled = True
+        elif u"field-widget" in column['class']:
+            return False
+    return is_disabled
+
 
 
 class FormPageHandler(CSVFile):
@@ -134,11 +145,10 @@ class FormPage(CSV):
         page_number = self.get_page_number()
 
         # Lecture seule ?
-        if not skip_print and not is_admin(context.user, form):
-            state = form.get_statename()
-            if state == FINISHED:
-                readonly = True
-            elif state == EXPORTED:
+        ac = self.get_access_control()
+        if not skip_print and not ac.is_allowed_to_edit(context.user, form):
+            state = form.get_workflow_state()
+            if state in (FINISHED, EXPORTED):
                 readonly = True
         # 0005160: affiche les champs même en lecture seule
         elif skip_print:
@@ -180,7 +190,7 @@ class FormPage(CSV):
                     tables.append([])
                 elif column.startswith(FIELD_PREFIX):
                     # Champ à remplacer par un widget
-                    css_class = u"field-label"
+                    css_class = u"field-widget"
                     column = column[1:]
                     if not column:
                         # Un « # » seul pour préfixer les champs
@@ -189,9 +199,15 @@ class FormPage(CSV):
                         columns[-1]['colspan'] = colspan
                         continue
                     elif str(column) in schema:
-                        column = get_input_widget(column, form, schema,
-                                fields, context, tabindex=tabindex,
-                                readonly=readonly, skip_print=skip_print)
+                        datatype = schema[column]
+                        if form.is_disabled_by_type(column, schema,
+                                datatype):
+                            column = u""
+                            css_class = u"disabled"
+                        else:
+                            column = get_input_widget(column, form, schema,
+                                    fields, context, tabindex=tabindex,
+                                    readonly=readonly, skip_print=skip_print)
                     else:
                         # 0004922 Fiche école ne fonctionne plus
                         column = column.replace('\n', '')
@@ -268,9 +284,67 @@ class FormPage(CSV):
                         'rowspan': None,
                         'colspan': None,
                         'body': '',
-                        'class': None})
-            # La ligne calculée
-            tables[-1].append(columns)
+                        'class': u"empty"})
+            # Filtre les lignes vides
+            if not is_debug and is_disabled(columns):
+                tables[-1].append([{
+                    'rowspan': None,
+                    'colspan': len(row),
+                    'body': '',
+                    'class': u"removed"}])
+            else:
+                tables[-1].append(columns)
+
+        # Filtre en-têtes vides
+        if not is_debug:
+            for i, table in reversed(list(enumerate(tables))):
+                label_without_widget =  False
+                for j, row in reversed(list(enumerate(table))):
+                    for column in row:
+                        css_class = column['class']
+                        if u"field-widget" in css_class:
+                            break
+                        elif u"field-label" in css_class:
+                            label_without_widget = True
+                    else:
+                        if label_without_widget is True:
+                            del table[j]
+                        continue
+                    break
+                else:
+                    if label_without_widget is True:
+                        del tables[i]
+
+        # Filtre titres vides
+        if not is_debug:
+            for i, table in reversed(list(enumerate(tables))):
+                has_title = False
+                has_removed = False
+                for j, row in reversed(list(enumerate(table))):
+                    for column in row:
+                        css_class = column['class']
+                        if u"field-widget" in css_class:
+                            break
+                        elif u"section-header" in css_class:
+                            has_title = True
+                        elif u"removed" in css_class:
+                            has_removed = True
+                    else:
+                        continue
+                    break
+                else:
+                    if has_title and has_removed:
+                        del tables[i]
+
+        # Filtre lignes supprimées
+        if not is_debug:
+            for i, table in reversed(list(enumerate(tables))):
+                for j, row in reversed(list(enumerate(table))):
+                    for column in row:
+                        css_class = column['class']
+                        if u"removed" in css_class:
+                            del table[j]
+                            break
 
         namespace = {}
         namespace['form_title'] = form.get_title()
