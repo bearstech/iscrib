@@ -322,8 +322,7 @@ class SchemaHandler(TableFile):
             # The page number (now automatic)
             page_number = Variable.get_page_number(name)
             pages.setdefault(page_number, set()).add(name)
-            page_numbers = []
-            page_numbers.append(page_number)
+            page_numbers = (page_number,)
             # Add to the datatype
             default = get_record_value(record, 'default')
             if multiple:
@@ -333,7 +332,7 @@ class SchemaHandler(TableFile):
             schema[name] = datatype(type=type_name,
                 default=datatype.decode(default),
                 multiple=multiple,
-                pages=tuple(page_numbers),
+                pages=page_numbers,
                 title=get_record_value(record, 'title'),
                 help=get_record_value(record, 'help'),
                 length=length,

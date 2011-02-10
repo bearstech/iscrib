@@ -58,8 +58,8 @@ class ControlLevel(Enumerate):
 
 
 class ControlsHandler(TableFile):
-    record_properties = {'number': Unicode(mandatory=True,
-            title=MSG(u"Number")),
+    record_properties = {
+        'number': Unicode(mandatory=True, title=MSG(u"Number")),
         'title': Unicode(mandatory=True, title=MSG(u"Title")),
         'expression': Expression(mandatory=True, title=MSG(u"Expression")),
         'level': ControlLevel(mandatory=True, title=MSG(u"Level")),

@@ -189,7 +189,6 @@ class Numeric(object):
         return self.__class__(left - right)
 
 
-
     def __mul__(self, right):
         left = self.value
         if left is None:

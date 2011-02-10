@@ -164,14 +164,18 @@ class FormPage(CSV):
                         css_class = columns[-1]['class']
                     except IndexError:
                         css_class = u"field-label"
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': XMLParser(NBSP),
-                                    'class': css_class})
+                    columns.append({
+                        'rowspan': None,
+                        'colspan': None,
+                        'body': XMLParser(NBSP),
+                        'class': css_class})
                 elif column == u"%break%":
                     # Saut de page
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': XMLParser(NBSP),
-                                    'class': None})
+                    columns.append({
+                        'rowspan': None,
+                        'colspan': None,
+                        'body': XMLParser(NBSP),
+                        'class': None})
                     # Commence un nouveau tableau
                     tables.append([])
                 elif column.startswith(FIELD_PREFIX):
@@ -215,8 +219,11 @@ class FormPage(CSV):
                             column = unicode(column)
                     body = XMLParser(column.encode('utf8'),
                             namespaces=xhtml_namespaces)
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': body, 'class': css_class})
+                    columns.append({
+                        'rowspan': None,
+                        'colspan': None,
+                        'body': body,
+                        'class': css_class})
                 elif column:
                     column = XMLAttribute.encode(column)
                     # Texte simple (ou pas)
@@ -243,8 +250,11 @@ class FormPage(CSV):
                         css_class += u" num"
                     body = XMLParser(column.encode('utf8'),
                             namespaces=xhtml_namespaces)
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': body, 'class': css_class})
+                    columns.append({
+                        'rowspan': None,
+                        'colspan': None,
+                        'body': body,
+                        'class': css_class})
                 elif columns:
                     # Vide : fusionne avec la précédente
                     colspan = (columns[-1]['colspan'] or 1) + 1
@@ -252,8 +262,11 @@ class FormPage(CSV):
                     continue
                 else:
                     # Ligne vraiment vide
-                    columns.append({'rowspan': None, 'colspan': None,
-                                    'body': '', 'class': None})
+                    columns.append({
+                        'rowspan': None,
+                        'colspan': None,
+                        'body': '',
+                        'class': None})
             # La ligne calculée
             tables[-1].append(columns)
 

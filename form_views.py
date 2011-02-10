@@ -77,8 +77,11 @@ class Form_View(STLForm):
     def get_hidden_fields(self, resource, context):
         schema = resource.get_schema()
         handler = resource.get_form().handler
-        return [{'name': field, 'value': handler.get_value(field, schema)}
-                for field in self.hidden_fields]
+        return [{
+            'name': field,
+            'value': handler.get_value(field, schema)}
+                for field in self.hidden_fields
+                if field[0] == pagenum]
 
 
     def get_application_menu(self, resource, context):
@@ -93,7 +96,8 @@ class Form_View(STLForm):
         view_name = context.view_name or 'pageA'
         view_name = view_name.lower()
         for formpage in resource.get_formpages():
-            menu.append({'title': formpage.get_title(),
+            menu.append({
+                'title': formpage.get_title(),
                 'href': ';page%s' % get_page_number(formpage.name),
                 'class': 'active' if formpage.name == view_name else None})
         if len(menu) == 1:
@@ -316,7 +320,7 @@ class Form_Send(STLForm):
         is_allowed_to_export = ac.is_allowed_to_export(user, resource)
         namespace['is_allowed_to_export'] = is_allowed_to_export
         # State
-        namespace['statename'] = statename = resource.get_statename()
+        namespace['statename'] = statename = resource.get_workflow_state()
         namespace['form_state'] = WorkflowState.get_value(
                 resource.get_workflow_state())
         # Transitions
