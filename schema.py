@@ -85,7 +85,6 @@ class Variable(String):
     FIELD_PREFIX = '#'
 
 
-    @classmethod
     def decode(cls, data):
         data = data.strip().upper()
         if not data:
@@ -96,13 +95,11 @@ class Variable(String):
         return String.decode(data)
 
 
-    @staticmethod
-    def is_valid(value):
+    def is_valid(cls, value):
         return bool(value)
 
 
-    @staticmethod
-    def get_page_number(value):
+    def get_page_number(cls, value):
         page_number = ''
         for char in value:
             if char.isalpha():
@@ -129,8 +126,7 @@ class Type(Enumerate):
         {'name': 'file', 'value': u"File or Image", 'type': FileImage}]
 
 
-    @staticmethod
-    def decode(data):
+    def decode(cls, data):
         data = data.strip().lower()
         if not data:
             # Turn it into default value at the time of writing
@@ -138,7 +134,6 @@ class Type(Enumerate):
         return Enumerate.decode(data)
 
 
-    @classmethod
     def get_type(cls, name):
         for option in cls.get_options():
             if option['name'] == name:
@@ -149,7 +144,6 @@ class Type(Enumerate):
 
 class ValidInteger(Integer):
 
-    @classmethod
     def decode(cls, data):
         data = data.strip()
         if not data:
@@ -162,8 +156,7 @@ class ValidInteger(Integer):
         return value
 
 
-    @staticmethod
-    def is_valid(value):
+    def is_valid(cls, value):
         return type(value) is int
 
 
@@ -173,28 +166,24 @@ class EnumerateOptions(Unicode):
     multiple = True
 
 
-    @staticmethod
-    def decode(data):
+    def decode(cls, data):
         value = Unicode.decode(data)
         return {
             'name': checkid(value) or '',
             'value': value}
 
 
-    @staticmethod
-    def encode(value):
+    def encode(cls, value):
         if value is None:
             return None
         return Unicode.encode(value['value'])
 
 
-    @staticmethod
-    def is_valid(value):
+    def is_valid(cls, value):
         return value is not None or value['name'] is not None
 
 
-    @staticmethod
-    def split(value):
+    def split(cls, value):
         for separator in (u"\r\n", u"\n"):
             options = value.split(separator)
             if len(options) > 1:
@@ -216,8 +205,7 @@ class EnumerateRepresentation(Enumerate):
         {'name': 'checkbox', 'value': MSG(u"Checkbox")}]
 
 
-    @staticmethod
-    def decode(data):
+    def decode(cls, data):
         data = data.strip().lower()
         if not data:
             # Turn it into default value at the time of writing
@@ -228,7 +216,6 @@ class EnumerateRepresentation(Enumerate):
 
 class Mandatory(Boolean):
 
-    @classmethod
     def decode(cls, data):
         data = data.strip().upper()
         if not data:
@@ -241,7 +228,6 @@ class Mandatory(Boolean):
         return data
 
 
-    @classmethod
     def is_valid(cls, value):
         return type(value) is bool
 
@@ -249,8 +235,7 @@ class Mandatory(Boolean):
 
 class Expression(Unicode):
 
-    @staticmethod
-    def decode(data):
+    def decode(cls, data):
         # Neither upper() nor lower() to preserve enumerates
         value = Unicode.decode(data.strip())
         # Allow single "=" as equals
@@ -265,8 +250,7 @@ class Expression(Unicode):
         return value
 
 
-    @staticmethod
-    def is_valid(value, locals_):
+    def is_valid(cls, value, locals_):
         globals_ = {'SI': SI}
         try:
             eval(value, globals_, locals_)
