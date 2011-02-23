@@ -360,6 +360,7 @@ class Schema(Table):
 
     # Views
     add_record = None
+    edit_record = None
     edit = None
 
 

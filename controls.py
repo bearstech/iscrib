@@ -77,6 +77,11 @@ class Controls(Table):
     # To import from CSV
     columns = ['number', 'title', 'expression', 'level', 'variable']
 
+    # Views
+    add_record = None
+    edit_record = None
+    edit = None
+
 
     def _load_from_csv(self, body, namespace):
         handler = self.handler
