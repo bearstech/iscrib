@@ -23,6 +23,7 @@
 import re
 
 # Import from itools
+from itools.core import freeze
 from itools.csv import Table as TableFile, parse
 from itools.datatypes import Enumerate, String, Integer, Boolean, Date
 from itools.datatypes import Unicode
@@ -32,6 +33,7 @@ from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.table import Table
+from ikaaro.table_views import Table_View
 
 # Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
@@ -361,6 +363,7 @@ class Schema(Table):
             'formula', 'default']
 
     # Views
+    view = Table_View(table_actions=freeze([]))
     add_record = None
     edit_record = None
     edit = None

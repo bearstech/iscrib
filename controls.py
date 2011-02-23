@@ -20,6 +20,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # Import from itools
+from itools.core import freeze
 from itools.csv import Table as TableFile, parse
 from itools.datatypes import Enumerate, Unicode
 from itools.gettext import MSG
@@ -27,6 +28,7 @@ from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.table import Table
+from ikaaro.table_views import Table_View
 
 # Import from iscrib
 from schema import FormatError, Variable, Expression
@@ -78,6 +80,7 @@ class Controls(Table):
     columns = ['number', 'title', 'expression', 'level', 'variable']
 
     # Views
+    view = Table_View(table_actions=freeze([]))
     add_record = None
     edit_record = None
     edit = None
