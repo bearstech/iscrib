@@ -65,8 +65,10 @@ ERR_BAD_DEPENDENCY = ERROR(u'In schema, line {line}, syntax error in '
         u'dependency: {err}')
 ERR_BAD_FORMULA = ERROR(u'In schema, line {line}, syntax error in '
         u'formula: {err}')
-ERR_BAD_DEFAULT = ERROR(u'In schema, line {line}, default value "{default}" '
-        u'is invalid.')
+ERR_NO_FORMULA = ERROR(u'In schema, line {line}, type "{type}" does not '
+        u'support formulas.')
+ERR_BAD_DEFAULT = ERROR(u'In schema, line {line}, default value '
+        u'"{default}" is invalid.')
 
 
 class FormatError(ValueError):
@@ -486,6 +488,11 @@ class Schema(Table):
                             err=err)
             formula = get_record_value(record, 'formula')
             if formula:
+                try:
+                    datatype.sum
+                except AttributeError:
+                    raise FormatError, ERR_NO_FORMULA(line=lineno,
+                            type=type_name)
                 try:
                     Expression.is_valid(formula, locals_)
                 except Exception, err:
