@@ -819,15 +819,16 @@ class Application_RedirectToForm(GoToSpecificDocument):
         ac = resource.get_access_control()
         if ac.is_allowed_to_edit(user, resource):
             return resource.default_form
-        if resource.get_resource(user.name, soft=True) is not None:
-            return user.name
+        if user is not None:
+            if resource.get_resource(user.name, soft=True) is not None:
+                return user.name
         subscription = resource.get_property('subscription')
         if subscription == 'demo':
             # Create form on the fly
             resource.subscribe_user(user)
             # XXX
             get_context().commit = True
-            return user.name
+            return user.name if user else 'anonymous'
         return None
 
 

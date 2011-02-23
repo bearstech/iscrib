@@ -36,6 +36,17 @@ from workgroup_views import Workgroup_NewInstance, Workgroup_View
 from workgroup_views import Workgroup_Edit
 
 
+def is_application_demo(resource):
+    application = resource
+    while application is not None:
+        if isinstance(application, Application):
+            break
+        application = application.parent
+    else:
+        return False
+    return application.get_property('subscription') == 'demo'
+
+
 class Workgroup(WebSite):
     class_id = 'Workgroup'
     class_title = MSG(u"iScrib Workgroup")
@@ -90,6 +101,15 @@ class Workgroup(WebSite):
 
     def is_allowed_to_view(self, user, resource):
         if user is None:
+            if is_application_demo(resource):
+                if isinstance(resource, Application):
+                    return True
+                elif isinstance(resource, Form):
+                    return resource.name == 'anonymous'
+                try:
+                    return resource.get_workflow_state() == 'public'
+                except AttributeError:
+                    pass
             return False
         if is_admin(user, resource):
             return True
@@ -112,6 +132,9 @@ class Workgroup(WebSite):
 
     def is_allowed_to_edit(self, user, resource):
         if user is None:
+            if is_application_demo(resource):
+                if isinstance(resource, Form):
+                    return resource.name == 'anonymous'
             return False
         if is_admin(user, resource):
             return True
