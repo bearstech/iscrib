@@ -302,12 +302,15 @@ def file_widget(context, form, datatype, name, value, schema, fields,
     preview = make_element(u"a", {u"href": href, u"target": u"_new"},
             make_element(u"img", {u"src": src}))
     field_id = u"field_{name}_delete".format(name=name)
-    delete = make_element(u"input", {
-        u"type": u"checkbox",
-        u"id": field_id,
-        u"name": u"{name}_delete".format(name=name),
-        u"value": u"1"},
-            make_element(u"label", {u"for": field_id}, MSG(u"Delete")))
+    if readonly:
+        delete = u""
+    else:
+        delete = make_element(u"input", {
+            u"type": u"checkbox",
+            u"id": field_id,
+            u"name": u"{name}_delete".format(name=name),
+            u"value": u"1"},
+                make_element(u"label", {u"for": field_id}, MSG(u"Delete")))
     html = html + preview + delete
     return html
 
