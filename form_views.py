@@ -81,7 +81,7 @@ class Form_View(STLForm):
             'name': field,
             'value': handler.get_value(field, schema)}
                 for field in self.hidden_fields
-                if field[0] == pagenum]
+                if field[0] == self.page_number]
 
 
     def get_application_menu(self, resource, context):

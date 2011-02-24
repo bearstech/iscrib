@@ -17,16 +17,8 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # Import from the Standard Library
-from cStringIO import StringIO
-
-# Import from lpod
-from lpod.document import odf_get_document
-
-# Import from xlrd
-from xlrd import open_workbook
 
 # Import from itools
-from itools.csv import CSVFile
 
 # Import from ikaaro
 from ikaaro.config import get_config
