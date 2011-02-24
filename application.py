@@ -31,6 +31,7 @@ from application_views import Application_RedirectToForm, Application_Menu
 from application_views import Application_Register, Application_Login
 from controls import Controls
 from datatypes import Subscription
+from demo import get_demo_user
 from form import Form
 from formpage import FormPage
 from rw import get_reader_and_cls
@@ -189,6 +190,8 @@ class Application(Folder):
 
     def subscribe_user(self, user):
         site_root = self.get_site_root()
+        if user is None:
+            user = get_demo_user(self)
         username = user.name
         # Give the role "guests" to see public resources (logo, etc.)
         if (site_root.get_user_role(username) is None

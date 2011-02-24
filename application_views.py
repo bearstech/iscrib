@@ -45,6 +45,7 @@ from ikaaro.workflow import get_workflow_preview
 # Import from iscrib
 from base_views import LoginView, IconsView
 from datatypes import Subscription, EmailOrDemo
+from demo import get_demo_user
 from form import Form
 from formpage import FormPage
 from rw import ODSWriter, XLSWriter
@@ -818,6 +819,8 @@ class Application_RedirectToForm(GoToSpecificDocument):
 
 
     def get_form_name(self, user, resource):
+        if user is None:
+            user = get_demo_user(resource)
         ac = resource.get_access_control()
         if ac.is_allowed_to_edit(user, resource):
             return resource.default_form
