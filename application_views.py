@@ -312,6 +312,8 @@ class Application_View(Folder_BrowseContent):
                     return u""
                 return user.get_property(column)
             elif column == 'email':
+                if user is None:
+                    return u""
                 email = user.get_property('email')
                 application_title = resource.get_title()
                 subject = MAILTO_SUBJECT.gettext(
