@@ -21,7 +21,7 @@
       <a id="form-print" href="?view=print" class="button button-print"
         title="Print (in a new window)"
         onclick="return popup(this.href, 800, 600)">Print this page</a>
-      <a id="form-print" href=";print" href=";print"
+      <a id="form-print" href=";print?view=print"
         class="button button-print" title="Print (in a new window)"
         onclick="return popup(this.href, 800, 600)">Print Form</a>
       <button id="form-submit" class="button-ok"

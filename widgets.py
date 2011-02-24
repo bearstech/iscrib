@@ -99,20 +99,28 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
     data = datatype.encode(value)
 
     if readonly:
-        if datatype.multiple:
-            input = u"\n".join(make_element(u"div", content=value)
-                for value in datatype.get_values(value))
-            content = XMLContent.encode(input)
-        else:
-            # '1' -> u"Oui" ; '2' -> u"Non"
-            input = datatype.get_value(data, value)
-            if is_thingy(input, MSG):
-                input = input.gettext()
-            content = XMLContent.encode(input)
-        html.append(make_element(u"div", content=content))
+        for option in datatype.get_namespace(data):
+            attributes = merge_dicts(
+                    choice_attributes,
+                    value=option['name'],
+                    disabled=u"disabled")
+            attributes.setdefault(u"class", []).append(u"disabled")
+            if option['selected']:
+                attributes[choice_checked] = choice_checked
+            value = option['value']
+            if is_thingy(value, MSG):
+                value = value.gettext()
+            content = XMLContent.encode(value)
+            input = make_element(choice, attributes, content)
+            if multiline is True:
+                # Une option par ligne
+                html.append(make_element(u"div", content=input))
+            else:
+                html.append(input)
     else:
         for option in datatype.get_namespace(data):
-            attributes = merge_dicts(choice_attributes,
+            attributes = merge_dicts(
+                    choice_attributes,
                     value=option['name'])
             if option['selected']:
                 attributes[choice_checked] = choice_checked
@@ -141,7 +149,8 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
             else:
                 html.append(input)
 
-    attributes = merge_dicts(container_attributes,
+    attributes = merge_dicts(
+            container_attributes,
             id=u"field_{name}".format(name=name))
     check_errors(context, form, datatype, name, data, schema, fields,
             readonly, attributes, tabindex=None)
