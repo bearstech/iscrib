@@ -189,21 +189,16 @@ class Application(Folder):
 
     def subscribe_user(self, user):
         site_root = self.get_site_root()
-        if user is None:
-            username = 'anonymous'
-            title = u"Anonymous"
-        else:
-            username = user.name if user else 'anonymous'
-            title = user.get_title()
-            # Give the role "guests" to see public resources (logo, etc.)
-            if (site_root.get_user_role(username) is None
-                    # Except to top-level admins
-                    and not site_root.is_admin(user, self)):
-                site_root.set_user_role(username, 'guests')
+        username = user.name
+        # Give the role "guests" to see public resources (logo, etc.)
+        if (site_root.get_user_role(username) is None
+                # Except to top-level admins
+                and not site_root.is_admin(user, self)):
+            site_root.set_user_role(username, 'guests')
         # Add the form
         if self.get_resource(username, soft=True) is None:
             self.make_resource(username, Form,
-                    title={'en': title})
+                    title={'en': user.get_title()})
 
 
     def get_catalog_values(self):
