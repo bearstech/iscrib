@@ -284,6 +284,10 @@ class SchemaHandler(TableFile):
         'default': String(default='', title=MSG(u"Default Value"))}
 
 
+    def get_type(self, name):
+        return self.record_properties['type'].get_type(name)
+
+
 
 class Schema(Table):
     class_id = 'Schema'
@@ -331,7 +335,7 @@ class Schema(Table):
             if type_name is None:
                 # Write down default at this time
                 record['type'] = type_name = 'str'
-            datatype = Type.get_type(type_name)
+            datatype = handler.get_type(type_name)
             if datatype is None:
                 raise FormatError, ERR_BAD_TYPE(line=lineno, type=type_name)
             # Length
@@ -455,7 +459,7 @@ class Schema(Table):
             name = get_record_value(record, 'name')
             # The datatype
             type_name = get_record_value(record, 'type')
-            datatype = Type.get_type(type_name)
+            datatype = handler.get_type(type_name)
             multiple = False
             # TypeError: issubclass() arg 1 must be a class
             if isinstance(datatype, Numeric):
@@ -479,9 +483,9 @@ class Schema(Table):
                 default = [default]
             length = get_record_value(record, 'length')
             size = get_record_value(record, 'size') or length
-            schema[name] = datatype(type=type_name,
+            schema[name] = datatype(multiple=multiple,
+                type=type_name,
                 default=datatype.decode(default),
-                multiple=multiple,
                 pages=page_numbers,
                 title=get_record_value(record, 'title'),
                 help=get_record_value(record, 'help'),
