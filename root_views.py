@@ -70,7 +70,8 @@ class Root_View(AutoForm):
 
 
     def get_namespace(self, resource, context):
-        namespace = super(Root_View, self).get_namespace(resource, context)
+        proxy = super(Root_View, self)
+        namespace = proxy.get_namespace(resource, context)
 
         # widgets
         widgets_dict = {}
@@ -148,7 +149,8 @@ class Root_Show(FrontView):
 
 
     def get_namespace(self, resource, context):
-        namespace = super(Root_Show, self).get_namespace(resource, context)
+        proxy = super(Root_Show, self)
+        namespace = proxy.get_namespace(resource, context)
         if isinstance(namespace, Reference):
             return namespace
 
@@ -190,7 +192,8 @@ class Root_Contact(ContactForm):
 
 
     def get_schema(self, resource, context):
-        schema = super(Root_Contact, self).get_schema(resource, context)
+        proxy = super(Root_Contact, self)
+        schema = proxy.get_schema(resource, context)
         schema = merge_dicts(schema, self.extra_schema)
         if RecaptchaDatatype.is_required(context):
             schema = merge_dicts(schema, captcha_schema)
@@ -198,7 +201,8 @@ class Root_Contact(ContactForm):
 
 
     def get_widgets(self, resource, context):
-        widgets = super(Root_Contact, self).get_widgets(resource, context)
+        proxy = super(Root_Contact, self)
+        widgets = proxy.get_widgets(resource, context)
         widgets = widgets[:2] + self.extra_widgets + widgets[2:-1]
         if RecaptchaDatatype.is_required(context):
             widgets = widgets + captcha_widgets
@@ -206,8 +210,8 @@ class Root_Contact(ContactForm):
 
 
     def _get_form(self, resource, context):
-        form = super(Root_Contact, self)._get_form(resource, context)
-
+        proxy = super(Root_Contact, self)
+        form = proxy._get_form(resource, context)
         body = form['message_body']
         body = MSG(u"\r\n{body}").gettext(body=body)
         for name in ('phone', 'from', 'function', 'company', 'name'):
@@ -257,13 +261,13 @@ class Root_EditContactOptions(CPEditContactOptions):
         if name == 'recaptcha_whitelist':
             # XXX multiple
             return '\n'.join(resource.get_property(name))
-        return super(Root_EditContactOptions, self).get_value(resource,
-                context, name, datatype)
+        proxy = super(Root_EditContactOptions, self)
+        return proxy.get_value(resource, context, name, datatype)
 
 
     def set_value(self, resource, context, name, form):
         if name == 'recaptcha_whitelist':
             # XXX multiple
             return resource.set_property(name, form[name].split())
-        return super(Root_EditContactOptions, self).set_value(resource,
-                context, name, form)
+        proxy = super(Root_EditContactOptions, self)
+        return proxy.set_value(resource, context, name, form)

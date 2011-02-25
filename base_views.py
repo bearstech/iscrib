@@ -66,8 +66,8 @@ class AutomaticEditView(DBResource_Edit):
     def get_value(self, resource, context, name, datatype):
         if name == 'state':
             return resource.get_workflow_state()
-        return super(AutomaticEditView, self).get_value(resource, context,
-                name, datatype)
+        proxy = super(AutomaticEditView, self)
+        return proxy.get_value(resource, context, name, datatype)
 
 
     def set_value(self, resource, context, name, form):
@@ -75,8 +75,8 @@ class AutomaticEditView(DBResource_Edit):
         datatype = schema[name]
         if getattr(datatype, 'ignore', False) is True:
             return False
-        return super(AutomaticEditView, self).set_value(resource, context,
-                name, form)
+        proxy = super(AutomaticEditView, self)
+        return proxy.set_value(resource, context, name, form)
 
 
 
@@ -154,7 +154,8 @@ class LoginView(BaseLoginView):
 class LogoutView(BaseLogoutView):
 
     def GET(self, resource, context):
-        goto = super(LogoutView, self).GET(resource, context)
+        proxy = super(LogoutView, self)
+        goto = proxy.GET(resource, context)
         goto.path = goto.path.resolve('/')
         return goto
 

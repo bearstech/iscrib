@@ -119,8 +119,8 @@ class FormPage(CSV):
 
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):
-        super(FormPage, self).init_resource(filename=filename,
-                extension=extension, **kw)
+        proxy = super(FormPage, self)
+        proxy.init_resource(filename=filename, extension=extension, **kw)
         self._load_from_csv(body)
 
 

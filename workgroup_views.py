@@ -107,13 +107,13 @@ class Workgroup_NewInstance(NewInstance):
             value = context.get_query_value(name)
             if value:
                 return value
-        return super(Workgroup_NewInstance, self).get_value(resource, context,
-                name, datatype)
+        proxy = super(Workgroup_NewInstance, self)
+        return proxy.get_value(resource, context, name, datatype)
 
 
     def get_namespace(self, resource, context):
-        namespace = super(Workgroup_NewInstance, self).get_namespace(
-                resource, context)
+        proxy = super(Workgroup_NewInstance, self)
+        namespace = proxy.get_namespace(resource, context)
         namespace['before'] = MSG(u"""<p id="already-client">Already
             registered and you want to log in your client space? <a
             href="/;login">Click here</a>.</p>""", format='html')
@@ -121,8 +121,8 @@ class Workgroup_NewInstance(NewInstance):
 
 
     def action(self, resource, context, form):
-        goto = super(Workgroup_NewInstance, self).action(resource, context,
-                form)
+        proxy = super(Workgroup_NewInstance, self)
+        goto = proxy.action(resource, context, form)
         workgroup = resource.get_resource(form['name'])
         # Set default language
         accept = context.accept_language
@@ -281,8 +281,8 @@ class Workgroup_View(Folder_BrowseContent):
 
     def get_items(self, resource, context, *args):
         query = PhraseQuery('format', Application.class_id)
-        return super(Workgroup_View, self).get_items(resource, context,
-                query, *args)
+        proxy = super(Workgroup_View, self)
+        return proxy.get_items(resource, context, query, *args)
 
 
     def sort_and_batch(self, resource, context, results):
@@ -324,8 +324,8 @@ class Workgroup_View(Folder_BrowseContent):
                     '{0}/;download'.format(context.get_link(parameters)))
         elif column == 'ctime':
             return context.format_datetime(brain.ctime)
-        return super(Workgroup_View, self).get_item_value(resource, context,
-                item, column)
+        proxy = super(Workgroup_View, self)
+        return proxy.get_item_value(resource, context, item, column)
 
 
 
@@ -361,8 +361,8 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
             style = resource.get_resource('theme/style')
             # FIXME links
             return style.handler.to_str()
-        return super(Workgroup_Edit, self).get_value(resource, context, name,
-                datatype)
+        proxy = super(Workgroup_Edit, self)
+        return proxy.get_value(resource, context, name, datatype)
 
 
     def set_value(self, resource, context, name, form):
@@ -384,5 +384,5 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
             # FIXME links
             style.handler.load_state_from_string(form['style'])
             return False
-        return super(Workgroup_Edit, self).set_value(resource, context, name,
-                form)
+        proxy = super(Workgroup_Edit, self)
+        return proxy.set_value(resource, context, name, form)

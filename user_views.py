@@ -43,7 +43,8 @@ class User_ConfirmRegistration(BaseUser_ConfirmRegistration):
 
 
     def action(self, resource, context, form):
-        super(User_ConfirmRegistration, self).action(resource, context, form)
+        proxy = super(User_ConfirmRegistration, self)
+        proxy.action(resource, context, form)
         if is_thingy(context.message, ERROR):
             return
 

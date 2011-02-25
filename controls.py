@@ -123,8 +123,8 @@ class Controls(Table):
 
 
     def init_resource(self, body=None, filename=None, extension=None, **kw):
-        super(Controls, self).init_resource(filename=filename,
-                extension=extension, **kw)
+        proxy = super(Controls, self)
+        proxy.init_resource(filename=filename, extension=extension, **kw)
         schema_resource = self.parent.get_resource('schema')
         schema, pages = schema_resource.get_schema_pages()
         namespace = {}

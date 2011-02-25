@@ -95,8 +95,8 @@ class Application_NewInstance(NewInstance):
 
 
     def action(self, resource, context, form):
-        goto = super(Application_NewInstance, self).action(resource, context,
-                form)
+        proxy = super(Application_NewInstance, self)
+        goto = proxy.action(resource, context, form)
         child = resource.get_resource(form['name'])
         try:
             child._load_from_file(form['file'], context)
@@ -167,7 +167,8 @@ class Application_Menu(IconsView):
 
 
     def get_items(self, resource, context):
-        items = super(Application_Menu, self).get_items(resource, context)
+        proxy = super(Application_Menu, self)
+        items = proxy.get_items(resource, context)
         spread_url = resource.get_spread_url(context)
         items.insert(3, self.make_item(
             icon='/ui/iscrib/images/spread48.png',
@@ -279,8 +280,8 @@ class Application_View(Folder_BrowseContent):
         # Filter out default form
         default_form_query = PhraseQuery('name', resource.default_form)
         query = AndQuery(query, NotQuery(default_form_query))
-        return super(Application_View, self).get_items(resource, context,
-                query, *args)
+        proxy = super(Application_View, self)
+        return proxy.get_items(resource, context, query, *args)
 
 
     def get_item_value(self, resource, context, item, column):
@@ -316,8 +317,8 @@ class Application_View(Folder_BrowseContent):
                 url = 'mailto:{0}?subject={1}&body={2}'.format(email,
                         subject, body)
                 return (email, url)
-        return super(Application_View, self).get_item_value(resource,
-                context, item, column)
+        proxy = super(Application_View, self)
+        return proxy.get_item_value(resource, context, item, column)
 
 
 
@@ -573,8 +574,8 @@ class Application_Register(STLForm):
 
 
     def get_namespace(self, resource, context):
-        namespace = super(Application_Register, self).get_namespace(resource,
-                context)
+        proxy = super(Application_Register, self)
+        namespace = proxy.get_namespace(resource, context)
         namespace['menu'] = resource.menu.GET(resource, context)
         namespace['title'] = self.title
         namespace['max_users'] = resource.get_property('max_users')
@@ -664,15 +665,16 @@ class Application_Edit(DBResource_Edit):
 
 
     def _get_schema(self, resource, context):
-        schema = super(Application_Edit, self)._get_schema(resource, context)
+        proxy = super(Application_Edit, self)
+        schema = proxy._get_schema(resource, context)
         if not is_print(context) and is_admin(context.user, resource):
             schema = freeze(merge_dicts(schema, self.admin_schema))
         return schema
 
 
     def _get_widgets(self, resource, context):
-        widgets = super(Application_Edit, self)._get_widgets(resource,
-                context)
+        proxy = super(Application_Edit, self)
+        widgets = proxy._get_widgets(resource, context)
         if not is_print(context) and is_admin(context.user, resource):
             widgets = widgets + self.admin_widgets
         return widgets
@@ -681,8 +683,8 @@ class Application_Edit(DBResource_Edit):
     def get_value(self, resource, context, name, datatype):
         if name == 'file':
             return None
-        return super(Application_Edit, self).get_value(resource, context,
-                name, datatype)
+        proxy = super(Application_Edit, self)
+        return proxy.get_value(resource, context, name, datatype)
 
 
     def set_value(self, resource, context, name, form):
@@ -702,8 +704,8 @@ class Application_Edit(DBResource_Edit):
                 context.commit = False
                 context.message = ERROR(unicode(exception))
                 return True
-        return super(Application_Edit, self).set_value(resource, context,
-                name, form)
+        proxy = super(Application_Edit, self)
+        return proxy.set_value(resource, context, name, form)
 
 
 
@@ -777,8 +779,8 @@ class Application_Login(LoginView):
 
 
     def action_login(self, resource, context, form):
-        goto = super(Application_Login, self).action_login(resource, context,
-                form)
+        proxy = super(Application_Login, self)
+        goto = proxy.action_login(resource, context, form)
 
         if not is_thingy(context.message, ERROR):
             # Create the form if necessary
