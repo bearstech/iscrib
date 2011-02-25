@@ -35,13 +35,17 @@ def is_demo_application(resource):
     return application.get_property('subscription') == 'demo'
 
 
-def get_demo_user(resource):
-    results = resource.get_root().search(username='demo')
-    for brain in results.get_documents():
-        return resource.get_resource(brain.abspath)
-    # Create dummy on the fly
+def make_demo_user(resource):
     users = resource.get_resource('/users')
     return users.set_user(email='demo@itaapy.com')
+
+
+def get_demo_user(resource):
+    user = resource.get_root().get_user_from_login('demo')
+    if user is not None:
+        return user
+    # Create dummy user on the fly
+    return make_demo_user(resource)
 
 
 def is_demo_form(resource):

@@ -46,8 +46,9 @@ class Root(BaseRoot):
         recaptcha_public_key=String(source='metadata'),
         recaptcha_whitelist=String(source='metadata', multiple=True,
             default=['127.0.0.1'])))
-    class_views = BaseRoot.class_views + ['show']
     class_skin = 'ui/iscrib'
+    class_version = '20100703'
+    class_views = BaseRoot.class_views + ['show']
 
     edit_schema = freeze({
         'homepage': XHTMLBody(multilingual=True),
