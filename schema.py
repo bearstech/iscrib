@@ -135,7 +135,7 @@ class Type(Enumerate):
 
 
     def get_type(cls, name):
-        for option in cls.get_options():
+        for option in cls.options:
             if option['name'] == name:
                 return option['type']
         return None
@@ -282,10 +282,69 @@ class SchemaHandler(TableFile):
         'dependency': Expression(title=MSG(u"Dependent Field")),
         'formula': Expression(title=MSG(u"Formula")),
         'default': String(default='', title=MSG(u"Default Value"))}
+    _schema_pages = None, None
 
 
     def get_type(self, name):
         return self.record_properties['type'].get_type(name)
+
+
+    def _get_schema_pages(self):
+        schema = {}
+        pages = {}
+        get_record_value = self.get_record_value
+        for record in self.get_records():
+            # The name
+            name = get_record_value(record, 'name')
+            # The datatype
+            type_name = get_record_value(record, 'type')
+            datatype = self.get_type(type_name)
+            multiple = False
+            # TypeError: issubclass() arg 1 must be a class
+            if isinstance(datatype, Numeric):
+                pass
+            elif issubclass(datatype, SqlEnumerate):
+                enum_options = get_record_value(record, 'enum_options')
+                representation = get_record_value(record, 'enum_repr')
+                multiple = (representation == 'checkbox')
+                datatype = datatype(options=enum_options,
+                        representation=representation)
+            elif issubclass(datatype, EnumBoolean):
+                datatype = datatype(representation='radio')
+                multiple = False
+            # The page number (now automatic)
+            page_number = Variable.get_page_number(name)
+            pages.setdefault(page_number, set()).add(name)
+            page_numbers = (page_number,)
+            # Add to the datatype
+            default = get_record_value(record, 'default')
+            if multiple:
+                default = [default]
+            length = get_record_value(record, 'length')
+            size = get_record_value(record, 'size') or length
+            schema[name] = datatype(multiple=multiple,
+                type=type_name,
+                default=datatype.decode(default),
+                pages=page_numbers,
+                title=get_record_value(record, 'title'),
+                help=get_record_value(record, 'help'),
+                length=length,
+                decimals=get_record_value(record, 'decimals'),
+                mandatory=get_record_value(record, 'mandatory'),
+                size=size,
+                dependency=get_record_value(record, 'dependency'),
+                formula=get_record_value(record, 'formula'))
+        return schema, pages
+
+
+    def get_schema_pages(self):
+        """Keep the result in memory. The resource is deleted when new
+        parameters are uploaded anyway.
+        """
+        schema, pages = self._schema_pages
+        if schema is None:
+            schema, pages = self._schema_pages = self._get_schema_pages()
+        return schema, pages
 
 
 
@@ -450,52 +509,7 @@ class Schema(Table):
 
 
     def get_schema_pages(self):
-        schema = {}
-        pages = {}
-        handler = self.handler
-        get_record_value = handler.get_record_value
-        for record in handler.get_records():
-            # The name
-            name = get_record_value(record, 'name')
-            # The datatype
-            type_name = get_record_value(record, 'type')
-            datatype = handler.get_type(type_name)
-            multiple = False
-            # TypeError: issubclass() arg 1 must be a class
-            if isinstance(datatype, Numeric):
-                pass
-            elif issubclass(datatype, SqlEnumerate):
-                enum_options = get_record_value(record, 'enum_options')
-                representation = get_record_value(record, 'enum_repr')
-                multiple = (representation == 'checkbox')
-                datatype = datatype(options=enum_options,
-                        representation=representation)
-            elif issubclass(datatype, EnumBoolean):
-                datatype = datatype(representation='radio')
-                multiple = False
-            # The page number (now automatic)
-            page_number = Variable.get_page_number(name)
-            pages.setdefault(page_number, set()).add(name)
-            page_numbers = (page_number,)
-            # Add to the datatype
-            default = get_record_value(record, 'default')
-            if multiple:
-                default = [default]
-            length = get_record_value(record, 'length')
-            size = get_record_value(record, 'size') or length
-            schema[name] = datatype(multiple=multiple,
-                type=type_name,
-                default=datatype.decode(default),
-                pages=page_numbers,
-                title=get_record_value(record, 'title'),
-                help=get_record_value(record, 'help'),
-                length=length,
-                decimals=get_record_value(record, 'decimals'),
-                mandatory=get_record_value(record, 'mandatory'),
-                size=size,
-                dependency=get_record_value(record, 'dependency'),
-                formula=get_record_value(record, 'formula'))
-        return schema, pages
+        return self.handler.get_schema_pages()
 
 
     def update_20090123(self):
