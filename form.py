@@ -246,7 +246,7 @@ class Form(File):
     def get_controls(self):
         """Load the controls from the CSV.
         """
-        return self.get_controls_resource().handler
+        return self.get_controls_resource().get_controls()
 
 
     def get_formpages(self):
@@ -372,19 +372,14 @@ class Form(File):
             pages=freeze([]), exclude=freeze([''])):
         schema = self.get_schema()
         fields = self.get_fields(schema)
-        controls = self.get_controls()
-        get_record_value = controls.get_record_value
-        for record in controls.get_records():
-            level = get_record_value(record, 'level')
+        for number, title, expr, level, variable in self.get_controls():
             if level not in levels:
                 continue
-            variable = get_record_value(record, 'variable')
             page = Variable.get_page_number(variable)
             if pages and page not in pages:
                 continue
             if page in exclude:
                 continue
-            expression = get_record_value(record, 'expression')
             globals_ = self.get_globals()
             # Précision pour les informations statistiques
             if level == '0':
@@ -392,7 +387,7 @@ class Form(File):
             else:
                 locals_ = self.get_locals(schema, fields)
             try:
-                value = eval(expression, globals_, locals_)
+                value = eval(expr, globals_, locals_)
             except ZeroDivisionError:
                 # Division par zéro toléré
                 value = None
@@ -403,7 +398,6 @@ class Form(File):
             if value is True and '0' not in levels:
                 continue
             # Le titre contient des formules
-            title = get_record_value(record, 'title')
             if u'[' in title:
                 expanded = []
                 for is_expr, token in parse_control(title):
@@ -425,7 +419,6 @@ class Form(File):
                     value = context.format_number(value.value)
                 except InvalidOperation:
                     value = value.value
-            number = get_record_value(record, 'number')
             yield {
                 'number': number,
                 'title': title,
@@ -433,7 +426,7 @@ class Form(File):
                 'variable': variable,
                 'page': page,
                 'value': value,
-                'debug': u"'%s' = '%s'" % (expression, value)}
+                'debug': u"'%s' = '%s'" % (expr, value)}
 
 
     def get_info_controls(self, context, pages=freeze([]),

@@ -131,3 +131,15 @@ class Controls(Table):
         for key in schema:
             namespace[key] = 0
         self._load_from_csv(body, namespace=namespace)
+
+
+    def get_controls(self):
+        handler = self.handler
+        get_record_value = handler.get_record_value
+        for record in handler.get_records():
+            number = get_record_value('number')
+            title = get_record_value('title')
+            expr = get_record_value('expr')
+            level = get_record_value('level')
+            variable = get_record_value('variable')
+            yield (number, title, expr, level, variable)
