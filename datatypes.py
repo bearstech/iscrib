@@ -21,6 +21,7 @@ from datetime import date
 from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
+from itools.core import merge_dicts
 from itools.datatypes import DataType, Unicode, Enumerate, Email
 from itools.gettext import MSG
 
@@ -106,6 +107,11 @@ class Numeric(object):
             if value.value is None or value.value == '':
                 return u"null"
         return quote_string(cls.encode(value))
+
+
+    def __call__(self, **kw):
+        kw = merge_dicts(vars(self), kw)
+        return self.__class__(**kw)
 
 
     ########################################################################
