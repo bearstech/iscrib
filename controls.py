@@ -86,13 +86,13 @@ class Controls(Table):
     edit = None
 
 
-    def _load_from_csv(self, body, namespace):
+    def _load_from_csv(self, body, namespace, skip_header=True):
         handler = self.handler
         # Consistency check
         # Starting from 1
         lineno = 2
         for line in parse(body, self.columns, handler.record_properties,
-                skip_header=True):
+                skip_header=skip_header):
             record = {}
             for index, key in enumerate(self.columns):
                 record[key] = line[index]
@@ -122,7 +122,8 @@ class Controls(Table):
             lineno += 1
 
 
-    def init_resource(self, body=None, filename=None, extension=None, **kw):
+    def init_resource(self, body=None, filename=None, extension=None,
+            skip_header=True, **kw):
         proxy = super(Controls, self)
         proxy.init_resource(filename=filename, extension=extension, **kw)
         schema_resource = self.parent.get_resource('schema')
@@ -130,7 +131,7 @@ class Controls(Table):
         namespace = {}
         for key in schema:
             namespace[key] = 0
-        self._load_from_csv(body, namespace=namespace)
+        self._load_from_csv(body, namespace=namespace, skip_header=skip_header)
 
 
     def get_controls(self):

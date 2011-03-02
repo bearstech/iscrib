@@ -368,7 +368,7 @@ class Schema(Table):
     edit = None
 
 
-    def _load_from_csv(self, body):
+    def _load_from_csv(self, body, skip_header=True):
         handler = self.handler
         # Consistency check
         # First round on variables
@@ -376,7 +376,7 @@ class Schema(Table):
         lineno = 2
         locals_ = {}
         for line in parse(body, self.columns, handler.record_properties,
-                skip_header=True):
+                skip_header=skip_header):
             record = {}
             for index, key in enumerate(self.columns):
                 record[key] = line[index]
@@ -502,10 +502,11 @@ class Schema(Table):
             lineno += 1
 
 
-    def init_resource(self, body=None, filename=None, extension=None, **kw):
+    def init_resource(self, body=None, filename=None, extension=None,
+            skip_header=True, **kw):
         proxy = super(Schema, self)
         proxy.init_resource(filename=filename, extension=extension, **kw)
-        self._load_from_csv(body)
+        self._load_from_csv(body, skip_header=skip_header)
 
 
     def get_schema_pages(self):
