@@ -26,6 +26,8 @@ from itools.web import BaseView, STLView, STLForm, INFO, ERROR
 # Import from ikaaro
 
 # Import from iscrib
+from buttons import InputControlLink, PagePrintLink, FormPrintLink
+from buttons import SaveButton
 from datatypes import Numeric, FileImage
 from utils import get_page_number, force_encode, is_print, set_print
 from widgets import is_mandatory_filled
@@ -68,6 +70,9 @@ class Form_View(STLForm):
     schema = freeze({
         'page_number': String})
     hidden_fields = []
+    toolbar = freeze([
+        InputControlLink, PagePrintLink, FormPrintLink, SaveButton])
+    actions = freeze([SaveButton])
 
 
     def get_page_title(self, resource, context):
@@ -109,6 +114,22 @@ class Form_View(STLForm):
         return False
 
 
+    def get_toolbar_namespace(self, resource, context, readonly):
+        actions = []
+        for button in self.toolbar:
+            actions.append(button(resource=resource, context=context,
+                readonly=readonly))
+        return actions
+
+
+    def get_actions_namespace(self, resource, context, readonly):
+        actions = []
+        for button in self.actions:
+            actions.append(button(resource=resource, context=context,
+                readonly=readonly))
+        return actions
+
+
     def get_namespace(self, resource, context):
         try:
             # Return from POST
@@ -129,6 +150,10 @@ class Form_View(STLForm):
         namespace['application_menu'] = self.get_application_menu(resource,
                 context)
         namespace['menu'] = self.get_menu(resource, context)
+        namespace['toolbar'] = self.get_toolbar_namespace(resource, context,
+                readonly)
+        namespace['actions'] = self.get_actions_namespace(resource, context,
+                readonly)
         return namespace
 
 

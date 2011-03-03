@@ -43,7 +43,7 @@ from ikaaro.workflow import get_workflow_preview
 
 # Import from iscrib
 from base_views import LoginView, IconsView
-from buttons import ExportODSButton, ExportXLSButton, AddUsers
+from buttons import ExportODSButton, ExportXLSButton, AddUsersButton
 from datatypes import Subscription, EmailOrDemo
 from demo import get_demo_user
 from form import Form
@@ -558,7 +558,7 @@ class Application_Register(STLForm):
 
     schema = freeze({
         'new_users': Unicode})
-    actions = freeze([AddUsers])
+    actions = freeze([AddUsersButton])
 
 
     def get_page_title(self, resource, context):

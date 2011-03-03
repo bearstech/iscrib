@@ -16,16 +16,7 @@
       name="${field/name}" type="hidden"/>
 
     <p id="form-toolbar" stl:if="not skip_print">
-      <a id="button-control" href=";send"
-        class="button button-control">Input Control</a>
-      <a id="form-print" href="?view=print" class="button button-print"
-        title="Print (in a new window)"
-        onclick="return popup(this.href, 800, 600)">Print this page</a>
-      <a id="form-print" href=";print?view=print"
-        class="button button-print" title="Print (in a new window)"
-        onclick="return popup(this.href, 800, 600)">Print Form</a>
-      <button id="form-submit" class="button-ok"
-        stl:if="not readonly">Save</button>
+      <stl:block stl:repeat="action toolbar">${action}</stl:block>
     </p>
     <div class="clear"></div>
 
@@ -54,14 +45,14 @@
         within 2 minutes.
       </p>
       <p id="form-buttons">
-        <button class="button-ok" stl:if="not readonly">Save</button>
+        <stl:block stl:repeat="action actions">${action}</stl:block>
       </p>
     </div>
 
   </form>
 
   <script type="text/javascript">
-    //<!--
+    <!--
     var fragment = window.location.hash;
     if (fragment.substr(0, 7) == "#field_") {
       $(fragment).addClass('badtype').focus();

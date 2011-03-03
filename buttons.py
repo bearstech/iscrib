@@ -18,15 +18,17 @@
 # Import from the Standard Library
 
 # Import from itools
+from itools.core import thingy_property
 from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.buttons import BrowseButton, Button
+from ikaaro.utils import make_stl_template
 
 # Import from iscrib
 
 
-class Create(Button):
+class CreateButton(Button):
     access = True
     title = None
     css = 'button-create'
@@ -46,7 +48,58 @@ class ExportXLSButton(ExportODSButton):
 
 
 
-class AddUsers(Button):
+class AddUsersButton(Button):
     access = 'is_allowed_to_edit'
     name = "add_users"
     title = MSG(u"Add Users")
+
+
+
+class SaveButton(Button):
+    access = 'is_allowed_to_edit'
+    title = MSG(u"Save")
+    id = "form-submit"
+
+
+    @thingy_property
+    def show(cls):
+        if cls.readonly:
+            return False
+        return super(SaveButton, cls).show
+
+
+
+class Link(Button):
+    template = make_stl_template('''
+        <a id="${id}" href="${href}" class="button ${css}" title="${title}"
+            onclick="${onclick}">${content}</a>''')
+    id = None
+    href = None
+    onclick = None
+
+
+
+class InputControlLink(Link):
+    access = 'is_allowed_to_view'
+    id = "button-control"
+    css = "button-control"
+    href = ";send"
+    content = MSG(u"Input Control")
+
+
+
+class PagePrintLink(Link):
+    access = 'is_allowed_to_view'
+    id = "page-print"
+    css = "button-print"
+    href = "?view=print"
+    title = MSG(u"Print (in a new window)")
+    onclick = "return popup(this.href, 800, 600)"
+    content = MSG(u"Print this page")
+
+
+
+class FormPrintLink(PagePrintLink):
+    id = "form-print"
+    href = ";print?view=print"
+    content = MSG(u"Print Form")

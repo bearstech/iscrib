@@ -30,7 +30,7 @@ from ikaaro.website_views import ContactForm
 # Import from iscrib
 from autoform import RecaptchaDatatype, captcha_schema, captcha_widgets
 from base_views import FrontView
-from buttons import Create
+from buttons import CreateButton
 from workgroup import Workgroup
 
 
@@ -39,7 +39,7 @@ class Root_View(AutoForm):
     title = MSG(u"View")
     template = "/ui/iscrib/root/view.xml"
 
-    actions = freeze([Create])
+    actions = freeze([CreateButton])
     schema = freeze({
         'title': Unicode(mandatory=True)})
     widgets = freeze([
