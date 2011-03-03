@@ -30,8 +30,9 @@ from ikaaro.datatypes import FileDataType
 
 
 def quote_string(data):
-    data = unicode(data, 'utf8')
-    return u'"%s"' % data.replace(u'"', u'\\"').replace(u"'", u"\\'")
+    # FIXME removed u"\\" because message extraction crashes
+    data = '"{0}"'.format(data.replace('"', '\\"').replace("'", "\\'"))
+    return unicode(data, 'utf8')
 
 
 
