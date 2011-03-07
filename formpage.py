@@ -137,7 +137,7 @@ class FormPage(CSV):
                 if column.startswith(FIELD_PREFIX):
                     column = column[1:]
                     if column:
-                        yield column
+                        yield str(column)
 
 
     def get_namespace(self, form, view, context, skip_print=False,
