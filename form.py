@@ -372,7 +372,7 @@ class Form(File):
             pages=freeze([]), exclude=freeze([''])):
         schema = self.get_schema()
         fields = self.get_fields(schema)
-        for number, title, expr, level, variable in self.get_controls():
+        for number, title, expr, level, page, variable in self.get_controls():
             if level not in levels:
                 continue
             page = Variable.get_page_number(variable)

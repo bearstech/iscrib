@@ -131,16 +131,18 @@ class Controls(Table):
         namespace = {}
         for key in schema:
             namespace[key] = 0
-        self._load_from_csv(body, namespace=namespace, skip_header=skip_header)
+        self._load_from_csv(body, namespace=namespace,
+                skip_header=skip_header)
 
 
     def get_controls(self):
         handler = self.handler
         get_record_value = handler.get_record_value
         for record in handler.get_records():
-            number = get_record_value('number')
-            title = get_record_value('title')
-            expr = get_record_value('expr')
-            level = get_record_value('level')
-            variable = get_record_value('variable')
-            yield (number, title, expr, level, variable)
+            number = get_record_value(record, 'number')
+            title = get_record_value(record, 'title')
+            expr = get_record_value(record, 'expr')
+            level = get_record_value(record, 'level')
+            variable = get_record_value(record, 'variable')
+            page = variable[0]
+            yield (number, title, expr, level, page, variable)
