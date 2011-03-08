@@ -387,7 +387,7 @@ class Form(File):
             else:
                 locals_ = self.get_locals(schema, fields)
             try:
-                value = eval(expr, globals_, locals_)
+                value = eval(str(expr), globals_, locals_)
             except ZeroDivisionError:
                 # Division par zéro toléré
                 value = None
