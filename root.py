@@ -15,6 +15,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+# Import from standard library
+import traceback
+
 # Import from itools
 from itools.core import merge_dicts, get_abspath, freeze
 from itools.datatypes import String
@@ -23,6 +26,7 @@ from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.autoform import XHTMLBody, RTEWidget, TextWidget
+from ikaaro.config import get_config
 from ikaaro.datatypes import Multilingual
 from ikaaro.file import Image
 from ikaaro.root import Root as BaseRoot
@@ -32,6 +36,7 @@ from ikaaro.workflow import WorkflowAware
 from base_views import AutomaticEditView, LoginView
 from root_views import Root_View, Root_Show, Root_Contact
 from root_views import Root_EditContactOptions
+from utils import is_debug
 from workgroup import Workgroup
 
 
@@ -115,3 +120,14 @@ class Root(BaseRoot):
         if class_id == Workgroup.class_id:
             return True
         return super(Root, self).is_allowed_to_add(user, resource)
+
+
+    def internal_server_error(self, context):
+        if not is_debug(context):
+            # We send an email to administrators
+            config = get_config(context.server.target)
+            email = config.get_value('smtp-from')
+            subject = u"[iScrib] Internal server error"
+            text = u"%s\n\n%s" % (context.uri, traceback.format_exc())
+            self.send_email(email, subject, text=text)
+        return super(Root, self).internal_server_error(context)
