@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-02 15:02+CET\n"
+"POT-Creation-Date: 2011-03-02 10:03+CET\n"
 "PO-Revision-Date: 2010-09-07 14:15+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,7 +52,7 @@ msgid ""
 "</script>"
 msgstr ""
 
-#: ../application_views.py:159
+#: ../application_views.py:160
 msgid ""
 "\n"
 "<div id=\"choose-format\">\n"
@@ -68,7 +68,7 @@ msgid ""
 "</script>"
 msgstr ""
 
-#: ../application_views.py:226
+#: ../application_views.py:227
 msgid ""
 "\n"
 "<div id=\"spread-url\">\n"
@@ -112,7 +112,7 @@ msgid ""
 "</script>"
 msgstr ""
 
-#: ../datatypes.py:680
+#: ../datatypes.py:679
 msgid "\r\n"
 msgstr ""
 
@@ -122,15 +122,15 @@ msgid ""
 "{body}"
 msgstr ""
 
-#: ../formpage.py:205 ../formpage.py:243
+#: ../formpage.py:209 ../formpage.py:250
 msgid " num"
 msgstr ""
 
-#: ../schema.py:260 ../widgets.py:66
+#: ../schema.py:264 ../widgets.py:66
 msgid "\""
 msgstr ""
 
-#: ../formpage.py:47 ../widgets.py:41 ../schema.py:256
+#: ../formpage.py:47 ../widgets.py:41 ../schema.py:260
 msgid "#"
 msgstr ""
 
@@ -167,15 +167,15 @@ msgctxt "li"
 msgid "${unconfirmed_users} did not subscribe;"
 msgstr ""
 
-#: ../formpage.py:213
+#: ../formpage.py:217
 msgid "%.1f"
 msgstr ""
 
-#: ../formpage.py:170
+#: ../formpage.py:172
 msgid "%break%"
 msgstr ""
 
-#: ../formpage.py:211
+#: ../formpage.py:215
 msgid "%d"
 msgstr ""
 
@@ -187,15 +187,15 @@ msgstr ""
 msgid "'[]:\\?/*"
 msgstr ""
 
-#: ../schema.py:43
+#: ../schema.py:45
 msgid "(?<=[^!<>=])[=](?=[^=])"
 msgstr ""
 
-#: ../formpage.py:201
+#: ../formpage.py:205
 msgid "(division by 0)"
 msgstr ""
 
-#: ../formpage.py:223 ../formpage.py:225 ../application.py:55
+#: ../formpage.py:230 ../formpage.py:232 ../application.py:56
 msgid "*"
 msgstr ""
 
@@ -204,7 +204,7 @@ msgctxt "span"
 msgid "*"
 msgstr ""
 
-#: ../application.py:53
+#: ../application.py:54
 msgid "**"
 msgstr ""
 
@@ -216,7 +216,7 @@ msgstr ""
 msgid "."
 msgstr ""
 
-#: ../formpage.py:195 ../schema.py:200
+#: ../formpage.py:199 ../schema.py:204
 msgid "/"
 msgstr ""
 
@@ -224,19 +224,19 @@ msgstr ""
 msgid "/>"
 msgstr ""
 
-#: ../widgets.py:292
+#: ../widgets.py:301
 msgid "/ui/{0}"
 msgstr ""
 
-#: ../schema.py:116
+#: ../schema.py:120
 msgid "00000"
 msgstr ""
 
-#: ../widgets.py:300
+#: ../widgets.py:312
 msgid "1"
 msgstr ""
 
-#: ../formpage.py:242
+#: ../formpage.py:249
 msgid "100%"
 msgstr ""
 
@@ -248,7 +248,7 @@ msgstr ""
 msgid "</"
 msgstr ""
 
-#: ../form_views.py:241
+#: ../form_views.py:245
 msgid "<a href=\"#field_{name}\">{name}</a>"
 msgstr ""
 
@@ -387,7 +387,7 @@ msgid ""
 "            href=\"/;login\">Click here</a>.</p>"
 msgstr ""
 
-#: ../application_views.py:68
+#: ../application_views.py:69
 msgid ""
 "<span class=\"application-title\">Title of your\n"
 "application:</span> {title}"
@@ -397,7 +397,7 @@ msgstr ""
 msgid "=\""
 msgstr ""
 
-#: ../schema.py:253
+#: ../schema.py:257
 msgid "=="
 msgstr ""
 
@@ -410,7 +410,7 @@ msgctxt "heading"
 msgid "About iScrib"
 msgstr ""
 
-#: ../application_views.py:140
+#: ../application_views.py:141
 msgid "Add Users"
 msgstr ""
 
@@ -457,7 +457,7 @@ msgctxt "link"
 msgid "Blog"
 msgstr ""
 
-#: ../schema.py:114
+#: ../schema.py:118
 msgid "Boolean"
 msgstr ""
 
@@ -470,7 +470,7 @@ msgstr ""
 msgid "CSS"
 msgstr ""
 
-#: ../schema.py:212
+#: ../schema.py:216
 msgid "Checkbox"
 msgstr ""
 
@@ -479,11 +479,11 @@ msgctxt "heading"
 msgid "Client Spaces with forms you have to fill in"
 msgstr ""
 
-#: ../application_views.py:147
+#: ../application_views.py:148
 msgid "Collect Data"
 msgstr ""
 
-#: ../application.py:62
+#: ../application.py:63
 msgid "Collection Application"
 msgstr ""
 
@@ -496,7 +496,7 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
-#: ../application_views.py:255 ../user_views.py:39 ../user_views.py:67
+#: ../application_views.py:256 ../user_views.py:39 ../user_views.py:67
 #: ../root_views.py:187
 msgid "Company/Organization"
 msgstr ""
@@ -516,7 +516,7 @@ msgctxt "table cell"
 msgid "Control"
 msgstr ""
 
-#: ../controls.py:72 ../application.py:105
+#: ../controls.py:74 ../application.py:106
 msgid "Controls"
 msgstr ""
 
@@ -533,11 +533,11 @@ msgstr ""
 msgid "Create a Data Collection Application"
 msgstr ""
 
-#: ../application.py:63
+#: ../application.py:64
 msgid "Create from an OpenDocument Spreadsheet file"
 msgstr ""
 
-#: ../workgroup.py:42
+#: ../workgroup.py:43
 msgid ""
 "Create your client space to manage collection applications and submit them."
 msgstr ""
@@ -546,31 +546,31 @@ msgstr ""
 msgid "Creation Date"
 msgstr ""
 
-#: ../schema.py:120
+#: ../schema.py:124
 msgid "DD/MM/YYYY"
 msgstr ""
 
-#: ../schema.py:115
+#: ../schema.py:119
 msgid "Decimal"
 msgstr ""
 
-#: ../schema.py:291
+#: ../schema.py:295
 msgid "Decimals"
 msgstr ""
 
-#: ../schema.py:296
+#: ../schema.py:300
 msgid "Default Value"
 msgstr ""
 
-#: ../widgets.py:301
+#: ../widgets.py:313
 msgid "Delete"
 msgstr ""
 
-#: ../datatypes.py:793
+#: ../datatypes.py:792
 msgid "Demo (public demo)"
 msgstr ""
 
-#: ../schema.py:294
+#: ../schema.py:298
 msgid "Dependent Field"
 msgstr ""
 
@@ -579,11 +579,11 @@ msgctxt "link"
 msgid "Download OpenOffice.org"
 msgstr ""
 
-#: ../application_views.py:134
+#: ../application_views.py:135
 msgid "Download Source File"
 msgstr ""
 
-#: ../form_views.py:353
+#: ../form_views.py:357
 msgid "Download form"
 msgstr ""
 
@@ -595,7 +595,7 @@ msgstr ""
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 
-#: ../application_views.py:256 ../application_views.py:516
+#: ../application_views.py:257 ../application_views.py:519
 msgid "E-mail"
 msgstr ""
 
@@ -607,7 +607,7 @@ msgstr ""
 msgid "Edit Title, Logo and CSS"
 msgstr ""
 
-#: ../application_views.py:131
+#: ../application_views.py:132
 msgid "Edit and configure application"
 msgstr ""
 
@@ -615,15 +615,15 @@ msgstr ""
 msgid "Empty"
 msgstr ""
 
-#: ../schema.py:288
+#: ../schema.py:292
 msgid "Enumerate Options"
 msgstr ""
 
-#: ../schema.py:290
+#: ../schema.py:294
 msgid "Enumerate Representation"
 msgstr ""
 
-#: ../controls.py:50
+#: ../controls.py:52
 msgid "Error"
 msgstr ""
 
@@ -642,19 +642,19 @@ msgctxt "button"
 msgid "Export"
 msgstr ""
 
-#: ../application_views.py:490
+#: ../application_views.py:493
 msgid "Export Collected Data"
 msgstr ""
 
-#: ../application_views.py:89
+#: ../application_views.py:90
 msgid "Export This List in ODS Format"
 msgstr ""
 
-#: ../application_views.py:95
+#: ../application_views.py:96
 msgid "Export This List in XLS Format"
 msgstr ""
 
-#: ../controls.py:64
+#: ../controls.py:66
 msgid "Expression"
 msgstr ""
 
@@ -662,7 +662,7 @@ msgstr ""
 msgid "False"
 msgstr ""
 
-#: ../schema.py:125
+#: ../schema.py:129
 msgid "File or Image"
 msgstr ""
 
@@ -675,12 +675,12 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: ../application_views.py:253 ../application_views.py:515
+#: ../application_views.py:254 ../application_views.py:518
 #: ../workgroup_views.py:72
 msgid "First Name"
 msgstr ""
 
-#: ../application.py:43
+#: ../application.py:44
 msgid "First form page must be named \"A\", not \"{page}\"."
 msgstr ""
 
@@ -699,7 +699,7 @@ msgctxt "link"
 msgid "Forgotten Password?"
 msgstr ""
 
-#: ../application_views.py:250 ../application_views.py:515 ../form.py:135
+#: ../application_views.py:251 ../application_views.py:518 ../form.py:135
 msgid "Form"
 msgstr ""
 
@@ -712,11 +712,11 @@ msgctxt "heading"
 msgid "Form State:"
 msgstr ""
 
-#: ../widgets.py:334
+#: ../widgets.py:346
 msgid "Format {format}"
 msgstr ""
 
-#: ../schema.py:295
+#: ../schema.py:299
 msgid "Formula"
 msgstr ""
 
@@ -724,15 +724,15 @@ msgstr ""
 msgid "Function"
 msgstr ""
 
-#: ../schema.py:117
+#: ../schema.py:121
 msgid "HH:MM"
 msgstr ""
 
-#: ../schema.py:118
+#: ../schema.py:122
 msgid "HHH:MM"
 msgstr ""
 
-#: ../root.py:57
+#: ../root.py:58
 msgid "Homepage"
 msgstr ""
 
@@ -756,81 +756,85 @@ msgstr ""
 msgid "In \"{title}\" sheet, line {line}, variable \"{name}\" is unknown."
 msgstr ""
 
-#: ../controls.py:36
+#: ../controls.py:38
 msgid "In controls, line {line}, expression is missing."
 msgstr ""
 
-#: ../controls.py:42
+#: ../controls.py:44
 msgid "In controls, line {line}, main variable is missing."
 msgstr ""
 
-#: ../controls.py:38
+#: ../controls.py:40
 msgid "In controls, line {line}, syntax error in expression: {err}"
 msgstr ""
 
-#: ../controls.py:35
+#: ../controls.py:37
 msgid "In controls, line {line}, title is missing."
 msgstr ""
 
-#: ../controls.py:40
+#: ../controls.py:42
 msgid "In controls, line {line}, unexpected level \"{level}\"."
 msgstr ""
 
-#: ../schema.py:58
+#: ../schema.py:60
 msgid "In schema, line {line}, decimals \"{decimals}\" are invalid."
 msgstr ""
 
-#: ../schema.py:68
+#: ../schema.py:72
 msgid "In schema, line {line}, default value \"{default}\" is invalid."
 msgstr ""
 
-#: ../schema.py:54
+#: ../schema.py:56
 msgid "In schema, line {line}, enum options are missing."
 msgstr ""
 
-#: ../schema.py:56
+#: ../schema.py:58
 msgid "In schema, line {line}, enum representation \"{enum_repr}\" is invalid."
 msgstr ""
 
-#: ../schema.py:52
+#: ../schema.py:54
 msgid "In schema, line {line}, length \"{length}\" is invalid."
 msgstr ""
 
-#: ../schema.py:60
+#: ../schema.py:62
 msgid "In schema, line {line}, mandatory \"{mandatory}\" is invalid."
 msgstr ""
 
-#: ../schema.py:62
+#: ../schema.py:64
 msgid "In schema, line {line}, size \"{size}\" is invalid."
 msgstr ""
 
-#: ../schema.py:64
+#: ../schema.py:66
 msgid "In schema, line {line}, syntax error in dependency: {err}"
 msgstr ""
 
-#: ../schema.py:66
+#: ../schema.py:68
 msgid "In schema, line {line}, syntax error in formula: {err}"
 msgstr ""
 
-#: ../schema.py:50
+#: ../schema.py:70
+msgid "In schema, line {line}, type \"{type}\" does not support formulas."
+msgstr ""
+
+#: ../schema.py:52
 msgid "In schema, line {line}, type \"{type}\" is invalid."
 msgstr ""
 
-#: ../schema.py:48
+#: ../schema.py:50
 msgid "In schema, line {line}, variable \"{name}\" is duplicated."
 msgstr ""
 
-#: ../schema.py:46
+#: ../schema.py:48
 msgid "In schema, line {line}, variable \"{name}\" is invalid."
 msgstr ""
 
-#: ../application.py:45
+#: ../application.py:46
 msgid ""
 "In the \"{name}\" sheet, page \"{page}\" is not related to any variable in "
 "the schema."
 msgstr ""
 
-#: ../application.py:41
+#: ../application.py:42
 msgid ""
 "In the \"{name}\" sheet, wrong number of columns. Do you use the latest "
 "template?"
@@ -841,40 +845,40 @@ msgctxt "heading"
 msgid "Information"
 msgstr ""
 
-#: ../controls.py:48
+#: ../controls.py:50
 msgid "Informative"
 msgstr ""
 
-#: ../form_views.py:266
+#: ../form_views.py:270
 msgid "Input Control"
 msgstr ""
 
-#: ../schema.py:293
+#: ../schema.py:297
 msgid "Input Size"
 msgstr ""
 
-#: ../schema.py:119
+#: ../schema.py:123
 msgid "Integer"
 msgstr ""
 
-#: ../application_views.py:252
+#: ../application_views.py:253
 msgid "Last Modified"
 msgstr ""
 
-#: ../application_views.py:254 ../application_views.py:516
+#: ../application_views.py:255 ../application_views.py:519
 #: ../workgroup_views.py:73
 msgid "Last Name"
 msgstr ""
 
-#: ../schema.py:286
+#: ../schema.py:290
 msgid "Length"
 msgstr ""
 
-#: ../controls.py:65
+#: ../controls.py:67
 msgid "Level"
 msgstr ""
 
-#: ../schema.py:124
+#: ../schema.py:128
 msgid "List of values"
 msgstr ""
 
@@ -897,19 +901,19 @@ msgctxt "heading"
 msgid "Lost Password"
 msgstr ""
 
-#: ../schema.py:121
+#: ../schema.py:125
 msgid "MM/YYYY"
 msgstr ""
 
-#: ../controls.py:66
+#: ../controls.py:68
 msgid "Main Variable"
 msgstr ""
 
-#: ../application_views.py:142
+#: ../application_views.py:143
 msgid "Manage Users"
 msgstr ""
 
-#: ../application_views.py:235 ../form.py:150
+#: ../application_views.py:236 ../form.py:150
 msgid "Manage your Data Collection Application"
 msgstr ""
 
@@ -917,7 +921,7 @@ msgstr ""
 msgid "Manage your client space"
 msgstr ""
 
-#: ../schema.py:292
+#: ../schema.py:296
 msgid "Mandatory"
 msgstr ""
 
@@ -925,7 +929,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:664
+#: ../application_views.py:667
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -952,7 +956,7 @@ msgctxt "link"
 msgid "News"
 msgstr ""
 
-#: ../datatypes.py:696
+#: ../datatypes.py:695
 msgid "No"
 msgstr ""
 
@@ -961,7 +965,7 @@ msgctxt "paragraph"
 msgid "No data collection application created."
 msgstr ""
 
-#: ../application_views.py:55
+#: ../application_views.py:56
 msgid "No data to collect for now."
 msgstr ""
 
@@ -975,11 +979,11 @@ msgctxt "paragraph"
 msgid "No information available."
 msgstr ""
 
-#: ../application_views.py:63
+#: ../application_views.py:64
 msgid "No more users are allowed to register."
 msgstr ""
 
-#: ../application_views.py:640
+#: ../application_views.py:643
 msgid "No user added."
 msgstr ""
 
@@ -1001,7 +1005,7 @@ msgstr ""
 msgid "Not Registered"
 msgstr ""
 
-#: ../application.py:40
+#: ../application.py:41
 msgid "Not an ODS or XLS file."
 msgstr ""
 
@@ -1009,11 +1013,11 @@ msgstr ""
 msgid "Not an image or invalid image."
 msgstr ""
 
-#: ../controls.py:62
+#: ../controls.py:64
 msgid "Number"
 msgstr ""
 
-#: ../application_views.py:105
+#: ../application_views.py:106
 msgid "ODS or XLS File"
 msgstr ""
 
@@ -1022,11 +1026,11 @@ msgctxt "button"
 msgid "Ok"
 msgstr ""
 
-#: ../schema.py:285
+#: ../schema.py:289
 msgid "Online Help"
 msgstr ""
 
-#: ../datatypes.py:791
+#: ../datatypes.py:790
 msgid "Open (accounts are created on demand)"
 msgstr ""
 
@@ -1039,11 +1043,11 @@ msgctxt "heading"
 msgid "Our customers"
 msgstr ""
 
-#: ../application.py:137
+#: ../application.py:138
 msgid "Page {0}"
 msgstr ""
 
-#: ../application.py:98
+#: ../application.py:99
 msgid "Parameters"
 msgstr ""
 
@@ -1059,7 +1063,7 @@ msgstr ""
 msgid "Phone Number"
 msgstr ""
 
-#: ../application_views.py:71
+#: ../application_views.py:72
 msgid ""
 "Please fill in the form \"{application_title}\" available here:\r\n"
 "<{application_url}>.\r\n"
@@ -1085,11 +1089,11 @@ msgctxt "title attribute"
 msgid "Print (in a new window)"
 msgstr ""
 
-#: ../form_views.py:383
+#: ../form_views.py:387
 msgid "Print form"
 msgstr ""
 
-#: ../schema.py:211
+#: ../schema.py:215
 msgid "Radio"
 msgstr ""
 
@@ -1119,7 +1123,7 @@ msgstr ""
 msgid "Repeat Password"
 msgstr ""
 
-#: ../datatypes.py:789
+#: ../datatypes.py:788
 msgid "Restricted (users must be subscribed)"
 msgstr ""
 
@@ -1128,7 +1132,7 @@ msgctxt "button"
 msgid "Save"
 msgstr ""
 
-#: ../schema.py:352 ../application.py:104
+#: ../schema.py:355 ../application.py:105
 msgid "Schema"
 msgstr ""
 
@@ -1137,15 +1141,15 @@ msgctxt "legend"
 msgid "Search"
 msgstr ""
 
-#: ../schema.py:210
+#: ../schema.py:214
 msgid "Select"
 msgstr ""
 
-#: ../application_views.py:137 ../application_views.py:815
+#: ../application_views.py:138 ../application_views.py:818
 msgid "Show Test Form"
 msgstr ""
 
-#: ../root.py:56
+#: ../root.py:57
 msgid "Slogan"
 msgstr ""
 
@@ -1157,7 +1161,7 @@ msgstr ""
 msgid "Source File"
 msgstr ""
 
-#: ../application_views.py:186
+#: ../application_views.py:187
 msgid "Spread your Form"
 msgstr ""
 
@@ -1165,7 +1169,7 @@ msgstr ""
 msgid "Start filling"
 msgstr ""
 
-#: ../application_views.py:251 ../application_views.py:516
+#: ../application_views.py:252 ../application_views.py:519
 msgid "State"
 msgstr ""
 
@@ -1174,11 +1178,11 @@ msgctxt "fieldset"
 msgid "State:"
 msgstr ""
 
-#: ../schema.py:122
+#: ../schema.py:126
 msgid "String"
 msgstr ""
 
-#: ../application_views.py:565
+#: ../application_views.py:568
 msgid "Subscribe Users"
 msgstr ""
 
@@ -1191,7 +1195,7 @@ msgctxt "table cell"
 msgid "Subscribed Users"
 msgstr ""
 
-#: ../application_views.py:658
+#: ../application_views.py:661
 msgid "Subscription Mode"
 msgstr ""
 
@@ -1200,7 +1204,7 @@ msgctxt "link"
 msgid "Terms of Use"
 msgstr ""
 
-#: ../schema.py:123
+#: ../schema.py:127
 msgid "Text"
 msgstr ""
 
@@ -1225,7 +1229,7 @@ msgctxt "paragraph"
 msgid "The form is correct, You can export it to an SQL database."
 msgstr ""
 
-#: ../application_views.py:62 ../base_views.py:131
+#: ../application_views.py:63 ../base_views.py:131
 msgid "The given username is not an e-mail address."
 msgstr ""
 
@@ -1235,7 +1239,7 @@ msgid ""
 "a> tab."
 msgstr ""
 
-#: ../application_views.py:61
+#: ../application_views.py:62
 msgid "The password is missing."
 msgstr ""
 
@@ -1259,7 +1263,7 @@ msgctxt "title attribute"
 msgid "This field is required"
 msgstr ""
 
-#: ../schema.py:282 ../controls.py:63
+#: ../schema.py:286 ../controls.py:65
 msgid "Title"
 msgstr ""
 
@@ -1283,11 +1287,11 @@ msgstr ""
 msgid "True"
 msgstr ""
 
-#: ../schema.py:284
+#: ../schema.py:288
 msgid "Type"
 msgstr ""
 
-#: ../application_views.py:623
+#: ../application_views.py:626
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
@@ -1307,7 +1311,7 @@ msgctxt "table cell"
 msgid "Value"
 msgstr ""
 
-#: ../schema.py:283
+#: ../schema.py:287
 msgid "Variable"
 msgstr ""
 
@@ -1315,7 +1319,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../controls.py:49
+#: ../controls.py:51
 msgid "Warning"
 msgstr ""
 
@@ -1329,7 +1333,7 @@ msgctxt "heading"
 msgid "Welcome to Your iScrib Space"
 msgstr ""
 
-#: ../application_views.py:777 ../base_views.py:125
+#: ../application_views.py:780 ../base_views.py:125
 msgid "Welcome!"
 msgstr ""
 
@@ -1339,7 +1343,7 @@ msgid ""
 "When you have finished filling the form, you can click the \"Finish\" button."
 msgstr ""
 
-#: ../datatypes.py:695
+#: ../datatypes.py:694
 msgid "Yes"
 msgstr ""
 
@@ -1349,11 +1353,11 @@ msgid ""
 "login\">log in</a> first."
 msgstr ""
 
-#: ../application_views.py:65
+#: ../application_views.py:66
 msgid "You are already registered. Log in using your password."
 msgstr ""
 
-#: ../application_views.py:64 ../base_views.py:141
+#: ../application_views.py:65 ../base_views.py:141
 msgid "You are not allowed to register."
 msgstr ""
 
@@ -1388,7 +1392,7 @@ msgstr ""
 msgid "You can type the name of your company or organization"
 msgstr ""
 
-#: ../application_views.py:56
+#: ../application_views.py:57
 msgid ""
 "You have reached the maximum allowed users. Contact <a href=\"http://www."
 "itaapy.com/contact\">Itaapy</a> for more."
@@ -1432,7 +1436,7 @@ msgctxt "heading"
 msgid "Your Client Spaces"
 msgstr ""
 
-#: ../workgroup.py:55
+#: ../workgroup.py:56
 msgid "Your Collection Applications"
 msgstr ""
 
@@ -1441,7 +1445,7 @@ msgctxt "heading"
 msgid "Your Collection Applications"
 msgstr ""
 
-#: ../application_views.py:59
+#: ../application_views.py:60
 msgid "Your application is created. You are now on the test form."
 msgstr ""
 
@@ -1457,7 +1461,7 @@ msgstr ""
 msgid "Your form is finished. Your correspondent has been informed."
 msgstr ""
 
-#: ../form_views.py:358
+#: ../form_views.py:362
 msgid "Your form is not finished yet."
 msgstr ""
 
@@ -1469,19 +1473,19 @@ msgstr ""
 msgid "Your workgroups"
 msgstr ""
 
-#: ../utils.py:176 ../form.py:409
+#: ../utils.py:78 ../form.py:409
 msgid "["
 msgstr ""
 
-#: ../utils.py:179
+#: ../utils.py:81
 msgid "]"
 msgstr ""
 
-#: ../widgets.py:293
+#: ../widgets.py:302
 msgid "_new"
 msgstr ""
 
-#: ../widgets.py:293
+#: ../widgets.py:302
 msgid "a"
 msgstr ""
 
@@ -1489,84 +1493,84 @@ msgstr ""
 msgid "badtype"
 msgstr ""
 
-#: ../widgets.py:175 ../widgets.py:297
+#: ../widgets.py:184 ../widgets.py:309
 msgid "checkbox"
 msgstr ""
 
-#: ../widgets.py:160 ../widgets.py:177
+#: ../widgets.py:169 ../widgets.py:186
 msgid "checked"
 msgstr ""
 
 #: ../widgets.py:77 ../widgets.py:80 ../widgets.py:84 ../widgets.py:87
-#: ../widgets.py:121 ../widgets.py:206 ../widgets.py:240 ../widgets.py:253
-#: ../widgets.py:265
+#: ../widgets.py:107 ../widgets.py:129 ../widgets.py:215 ../widgets.py:249
+#: ../widgets.py:262 ../widgets.py:274
 msgid "class"
 msgstr ""
 
-#: ../widgets.py:214
+#: ../widgets.py:223
 msgid "cols"
 msgstr ""
 
-#: ../widgets.py:86 ../widgets.py:87 ../widgets.py:120 ../widgets.py:121
+#: ../widgets.py:86 ../widgets.py:87 ../widgets.py:106 ../widgets.py:107
+#: ../widgets.py:128 ../widgets.py:129
 msgid "disabled"
 msgstr ""
 
-#: ../widgets.py:103 ../widgets.py:112 ../widgets.py:140 ../widgets.py:154
-#: ../widgets.py:171 ../widgets.py:208 ../widgets.py:239 ../widgets.py:264
-#: ../widgets.py:336
+#: ../widgets.py:117 ../widgets.py:148 ../widgets.py:163 ../widgets.py:180
+#: ../widgets.py:217 ../widgets.py:248 ../widgets.py:273 ../widgets.py:348
 msgid "div"
 msgstr ""
 
-#: ../formpage.py:166 ../formpage.py:179 ../formpage.py:241
+#: ../formpage.py:166 ../formpage.py:183 ../formpage.py:248
 msgid "field-label"
 msgstr ""
 
-#: ../widgets.py:145 ../widgets.py:211 ../widgets.py:246 ../widgets.py:271
+#: ../widgets.py:154 ../widgets.py:220 ../widgets.py:255 ../widgets.py:280
 msgid "field_{name}"
 msgstr ""
 
-#: ../widgets.py:295
+#: ../widgets.py:304
 msgid "field_{name}_delete"
 msgstr ""
 
-#: ../widgets.py:270
+#: ../widgets.py:279
 msgid "file"
 msgstr ""
 
-#: ../widgets.py:301
+#: ../widgets.py:313
 msgid "for"
 msgstr ""
 
-#: ../formpage.py:230
+#: ../formpage.py:237
 msgid "h%d"
 msgstr ""
 
-#: ../widgets.py:293
+#: ../widgets.py:302
 msgid "href"
 msgstr ""
 
-#: ../root.py:72
+#: ../root.py:73
 msgid "iScrib"
 msgstr ""
 
-#: ../workgroup.py:41
+#: ../workgroup.py:42
 msgid "iScrib Workgroup"
 msgstr ""
 
-#: ../widgets.py:211 ../widgets.py:246 ../widgets.py:271 ../widgets.py:298
+#: ../widgets.py:220 ../widgets.py:255 ../widgets.py:280 ../widgets.py:310
 msgid "id"
 msgstr ""
 
-#: ../widgets.py:294
+#: ../widgets.py:303
 msgid "img"
 msgstr ""
 
-#: ../widgets.py:156 ../widgets.py:173 ../widgets.py:243 ../widgets.py:268
-#: ../widgets.py:296
+#: ../widgets.py:165 ../widgets.py:182 ../widgets.py:252 ../widgets.py:277
+#: ../widgets.py:308
 msgid "input"
 msgstr ""
 
-#: ../widgets.py:301
+#: ../widgets.py:313
 msgid "label"
 msgstr ""
 
@@ -1574,73 +1578,73 @@ msgstr ""
 msgid "mandatory"
 msgstr ""
 
-#: ../widgets.py:249 ../widgets.py:274
+#: ../widgets.py:258 ../widgets.py:283
 msgid "maxlength"
 msgstr ""
 
-#: ../widgets.py:159 ../widgets.py:176 ../widgets.py:190 ../widgets.py:212
-#: ../widgets.py:247 ../widgets.py:272 ../widgets.py:299
+#: ../widgets.py:168 ../widgets.py:185 ../widgets.py:199 ../widgets.py:221
+#: ../widgets.py:256 ../widgets.py:281 ../widgets.py:311
 msgid "name"
 msgstr ""
 
-#: ../datatypes.py:102 ../datatypes.py:642 ../datatypes.py:668
-#: ../datatypes.py:726 ../datatypes.py:743
+#: ../datatypes.py:102 ../datatypes.py:641 ../datatypes.py:667
+#: ../datatypes.py:725 ../datatypes.py:742
 msgid "null"
 msgstr ""
 
-#: ../widgets.py:253
+#: ../widgets.py:262
 msgid "num"
 msgstr ""
 
-#: ../widgets.py:129
+#: ../widgets.py:137
 msgid "onchange"
 msgstr ""
 
-#: ../widgets.py:191
+#: ../widgets.py:200
 msgid "option"
 msgstr ""
 
-#: ../widgets.py:158
+#: ../widgets.py:167
 msgid "radio"
 msgstr ""
 
-#: ../widgets.py:206 ../widgets.py:240 ../widgets.py:265
+#: ../widgets.py:215 ../widgets.py:249 ../widgets.py:274
 msgid "readonly"
 msgstr ""
 
-#: ../widgets.py:336
+#: ../widgets.py:348
 msgid "rel"
 msgstr ""
 
-#: ../widgets.py:213
+#: ../widgets.py:222
 msgid "rows"
 msgstr ""
 
-#: ../formpage.py:239
+#: ../formpage.py:246
 msgid "rubrique-label"
 msgstr ""
 
-#: ../formpage.py:232
+#: ../formpage.py:239
 msgid "section-header"
 msgstr ""
 
-#: ../widgets.py:188
+#: ../widgets.py:197
 msgid "select"
 msgstr ""
 
-#: ../widgets.py:193
+#: ../widgets.py:202
 msgid "selected"
 msgstr ""
 
-#: ../widgets.py:248 ../widgets.py:273
+#: ../widgets.py:257 ../widgets.py:282
 msgid "size"
 msgstr ""
 
-#: ../widgets.py:294
+#: ../widgets.py:303
 msgid "src"
 msgstr ""
 
-#: ../widgets.py:205
+#: ../widgets.py:214
 msgid "style"
 msgstr ""
 
@@ -1648,44 +1652,44 @@ msgstr ""
 msgid "tabindex"
 msgstr ""
 
-#: ../widgets.py:293
+#: ../widgets.py:302
 msgid "target"
 msgstr ""
 
-#: ../widgets.py:245
+#: ../widgets.py:254
 msgid "text"
 msgstr ""
 
-#: ../widgets.py:220
+#: ../widgets.py:229
 msgid "textarea"
 msgstr ""
 
-#: ../widgets.py:79 ../widgets.py:83 ../widgets.py:336
+#: ../widgets.py:79 ../widgets.py:83 ../widgets.py:348
 msgid "title"
 msgstr ""
 
-#: ../widgets.py:336
+#: ../widgets.py:348
 msgid "tooltip"
 msgstr ""
 
-#: ../widgets.py:158 ../widgets.py:175 ../widgets.py:245 ../widgets.py:270
-#: ../widgets.py:297
+#: ../widgets.py:167 ../widgets.py:184 ../widgets.py:254 ../widgets.py:279
+#: ../widgets.py:309
 msgid "type"
 msgstr ""
 
-#: ../widgets.py:247 ../widgets.py:272 ../widgets.py:300
+#: ../widgets.py:256 ../widgets.py:281 ../widgets.py:312
 msgid "value"
 msgstr ""
 
-#: ../widgets.py:205
+#: ../widgets.py:214
 msgid "white-space: pre"
 msgstr ""
 
-#: ../widgets.py:288
+#: ../widgets.py:297
 msgid "{0}/;download"
 msgstr ""
 
-#: ../widgets.py:290
+#: ../widgets.py:299
 msgid "{0}/;thumb?width=128&amp;height=128"
 msgstr ""
 
@@ -1697,23 +1701,23 @@ msgstr ""
 msgid "{application}: {form}"
 msgstr ""
 
-#: ../widgets.py:130
+#: ../widgets.py:138
 msgid "{method}('{name}');"
 msgstr ""
 
-#: ../form_views.py:288
+#: ../form_views.py:292
 msgid "{name} invalid"
 msgstr ""
 
-#: ../form_views.py:285
+#: ../form_views.py:289
 msgid "{name} is not equal to {formula}"
 msgstr ""
 
-#: ../widgets.py:299
+#: ../widgets.py:311
 msgid "{name}_delete"
 msgstr ""
 
-#: ../application_views.py:645
+#: ../application_views.py:648
 msgid "{n} user(s) added."
 msgstr ""
 
@@ -1721,11 +1725,11 @@ msgstr ""
 msgid "{sheetname}..."
 msgstr ""
 
-#: ../application_views.py:508
+#: ../application_views.py:511
 msgid "{title} Data"
 msgstr ""
 
-#: ../application_views.py:437
+#: ../application_views.py:440
 msgid "{title} Users"
 msgstr ""
 
@@ -1735,15 +1739,15 @@ msgid ""
 "{body}"
 msgstr ""
 
-#: ../application_views.py:70
+#: ../application_views.py:71
 msgid "{workgroup_title}, form \"{application_title}\""
 msgstr ""
 
-#: ../schema.py:260
+#: ../schema.py:264
 msgid "«"
 msgstr ""
 
-#: ../schema.py:260
+#: ../schema.py:264
 msgid "»"
 msgstr ""
 
