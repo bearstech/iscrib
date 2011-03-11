@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-03-02 10:03+CET\n"
+"POT-Creation-Date: 2011-03-11 09:03+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "\n<div id=\"choose-format\">\n  <span><a href=\"#\" title=\"Close\"\n    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n  <ul>\n    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n    <li>Download <a href=\"/gabarit-xls/;download\">XLS Version</a></li>\n  </ul>\n</div>\n<script type=\"text/javascript\">\n  $(\"#choose-format\").hide();\n</script>"
 msgstr ""
 
-#: ../application_views.py:160
+#: ../application_views.py:147
 msgid "\n<div id=\"choose-format\">\n  <span><a href=\"#\" title=\"Close\"\n    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n  <ul>\n    <li>Download <a href=\";export\">ODS Version</a></li>\n    <li>Download <a href=\";export?format=xls\">XLS Version</a></li>\n  </ul>\n</div>\n<script type=\"text/javascript\">\n  $(\"#choose-format\").hide();\n</script>"
 msgstr ""
 
-#: ../application_views.py:227
+#: ../application_views.py:214
 msgid "\n<div id=\"spread-url\">\n  <span><a href=\"#\" title=\"Close\"\n    onclick=\"return hide_spread_url()\">X</a></span>\n  <ul>\n    <li>You can send this URL to your users:<br/>\n      <input id=\"spread-url-text\" type=\"text\" readonly=\"readonly\"\n        value=\"{spread_url}\"/>\n      <div id=\"spread-url-copy\">\n        <a href=\"javascript:alert('You need Flash plugin to copy!');\">\n          Copy</a>\n      </div>\n    </li>\n  </ul>\n</div>\n<script type=\"text/javascript\">\n  $(\"#spread-url-text\").focus(function() {{\n      this.select();\n  }});\n  path = '/ui/iscrib/zeroclipboard/ZeroClipboard.swf'\n  ZeroClipboard.setMoviePath(path);\n  var clip = new ZeroClipboard.Client();\n  clip.setHandCursor(true);\n  clip.setText(\"{spread_url}\");\n  function hide_spread_url() {{\n    $('#spread-url').hide();\n    clip.hide();\n    return false;\n  }}\n  function show_spread_url() {{\n    $('#spread-url').show();\n    clip.show();\n    return false;\n  }}\n  $(document).ready(function() {{\n    clip.glue(\"spread-url-copy\");\n    /* Hide #spread-url after the Flash movie is positioned */\n    hide_spread_url();\n  }});\n</script>"
 msgstr ""
 
@@ -163,7 +163,7 @@ msgstr ""
 msgid ">"
 msgstr ""
 
-#: ../application_views.py:141
+#: ../application_views.py:128
 msgid "Add Users"
 msgstr ""
 
@@ -187,7 +187,7 @@ msgstr ""
 msgid "Checkbox"
 msgstr ""
 
-#: ../application_views.py:148
+#: ../application_views.py:135
 msgid "Collect Data"
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
-#: ../application_views.py:256
+#: ../application_views.py:243
 #: ../user_views.py:39
 #: ../user_views.py:67
 #: ../root_views.py:187
@@ -213,10 +213,6 @@ msgstr ""
 #: ../controls.py:74
 #: ../application.py:106
 msgid "Controls"
-msgstr ""
-
-#: ../root_views.py:42
-msgid "Create"
 msgstr ""
 
 #: ../workgroup_views.py:231
@@ -263,7 +259,7 @@ msgstr ""
 msgid "Dependent Field"
 msgstr ""
 
-#: ../application_views.py:135
+#: ../application_views.py:122
 msgid "Download Source File"
 msgstr ""
 
@@ -279,8 +275,8 @@ msgstr ""
 msgid "Download this template and use it to define to design your form."
 msgstr ""
 
-#: ../application_views.py:257
-#: ../application_views.py:519
+#: ../application_views.py:244
+#: ../application_views.py:506
 msgid "E-mail"
 msgstr ""
 
@@ -293,7 +289,7 @@ msgstr ""
 msgid "Edit Title, Logo and CSS"
 msgstr ""
 
-#: ../application_views.py:132
+#: ../application_views.py:119
 msgid "Edit and configure application"
 msgstr ""
 
@@ -313,16 +309,8 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ../application_views.py:493
+#: ../application_views.py:480
 msgid "Export Collected Data"
-msgstr ""
-
-#: ../application_views.py:90
-msgid "Export This List in ODS Format"
-msgstr ""
-
-#: ../application_views.py:96
-msgid "Export This List in XLS Format"
 msgstr ""
 
 #: ../controls.py:66
@@ -341,8 +329,8 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: ../application_views.py:254
-#: ../application_views.py:518
+#: ../application_views.py:241
+#: ../application_views.py:505
 #: ../workgroup_views.py:72
 msgid "First Name"
 msgstr ""
@@ -351,8 +339,8 @@ msgstr ""
 msgid "First form page must be named \"A\", not \"{page}\"."
 msgstr ""
 
-#: ../application_views.py:251
-#: ../application_views.py:518
+#: ../application_views.py:238
+#: ../application_views.py:505
 #: ../form.py:135
 msgid "Form"
 msgstr ""
@@ -489,12 +477,12 @@ msgstr ""
 msgid "Integer"
 msgstr ""
 
-#: ../application_views.py:253
+#: ../application_views.py:240
 msgid "Last Modified"
 msgstr ""
 
-#: ../application_views.py:255
-#: ../application_views.py:519
+#: ../application_views.py:242
+#: ../application_views.py:506
 #: ../workgroup_views.py:73
 msgid "Last Name"
 msgstr ""
@@ -523,11 +511,11 @@ msgstr ""
 msgid "Main Variable"
 msgstr ""
 
-#: ../application_views.py:143
+#: ../application_views.py:130
 msgid "Manage Users"
 msgstr ""
 
-#: ../application_views.py:236
+#: ../application_views.py:223
 #: ../form.py:150
 msgid "Manage your Data Collection Application"
 msgstr ""
@@ -544,7 +532,7 @@ msgstr ""
 msgid "Mandatory field"
 msgstr ""
 
-#: ../application_views.py:667
+#: ../application_views.py:663
 msgid "Maximum form users (0 = unlimited)"
 msgstr ""
 
@@ -569,7 +557,7 @@ msgstr ""
 msgid "No more users are allowed to register."
 msgstr ""
 
-#: ../application_views.py:643
+#: ../application_views.py:639
 msgid "No user added."
 msgstr ""
 
@@ -593,7 +581,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: ../application_views.py:106
+#: ../application_views.py:93
 msgid "ODS or XLS File"
 msgstr ""
 
@@ -674,8 +662,8 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: ../application_views.py:138
-#: ../application_views.py:818
+#: ../application_views.py:125
+#: ../application_views.py:814
 msgid "Show Test Form"
 msgstr ""
 
@@ -691,7 +679,7 @@ msgstr ""
 msgid "Source File"
 msgstr ""
 
-#: ../application_views.py:187
+#: ../application_views.py:174
 msgid "Spread your Form"
 msgstr ""
 
@@ -699,8 +687,8 @@ msgstr ""
 msgid "Start filling"
 msgstr ""
 
-#: ../application_views.py:252
-#: ../application_views.py:519
+#: ../application_views.py:239
+#: ../application_views.py:506
 msgid "State"
 msgstr ""
 
@@ -708,7 +696,7 @@ msgstr ""
 msgid "String"
 msgstr ""
 
-#: ../application_views.py:568
+#: ../application_views.py:555
 msgid "Subscribe Users"
 msgstr ""
 
@@ -716,7 +704,7 @@ msgstr ""
 msgid "Subscribed Users"
 msgstr ""
 
-#: ../application_views.py:661
+#: ../application_views.py:657
 msgid "Subscription Mode"
 msgstr ""
 
@@ -774,7 +762,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: ../application_views.py:626
+#: ../application_views.py:622
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
@@ -794,7 +782,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: ../application_views.py:780
+#: ../application_views.py:776
 #: ../base_views.py:125
 msgid "Welcome!"
 msgstr ""
@@ -1169,7 +1157,7 @@ msgstr ""
 msgid "{name}_delete"
 msgstr ""
 
-#: ../application_views.py:648
+#: ../application_views.py:644
 msgid "{n} user(s) added."
 msgstr ""
 
@@ -1177,11 +1165,11 @@ msgstr ""
 msgid "{sheetname}..."
 msgstr ""
 
-#: ../application_views.py:511
+#: ../application_views.py:498
 msgid "{title} Data"
 msgstr ""
 
-#: ../application_views.py:440
+#: ../application_views.py:427
 msgid "{title} Users"
 msgstr ""
 
@@ -1204,16 +1192,6 @@ msgstr ""
 #: ../ui/application/login.xml.en:66
 msgctxt "button"
 msgid "<g id='34'>Login</g>  <g id='35'>Forgotten Password</g>"
-msgstr ""
-
-#: ../ui/root/contact.xml.en:42
-msgctxt "button"
-msgid "<g id='6'>${action/title}</g>  <g id='7'>${action/title}</g>"
-msgstr ""
-
-#: ../ui/application/register.xml.en:24
-msgctxt "button"
-msgid "Add Users"
 msgstr ""
 
 #: ../ui/form/send.xml.en:32
@@ -1341,7 +1319,7 @@ msgctxt "heading"
 msgid "Lost Password"
 msgstr ""
 
-#: ../ui/root/view.xml.en:56
+#: ../ui/root/view.xml.en:49
 msgctxt "heading"
 msgid "Our customers"
 msgstr ""
@@ -1436,22 +1414,22 @@ msgctxt "legend"
 msgid "Your Account"
 msgstr ""
 
-#: ../ui/application/register.xml.en:35
+#: ../ui/application/register.xml.en:34
 msgctxt "li"
 msgid "${empty_forms} subscribed but did not start the form;"
 msgstr ""
 
-#: ../ui/application/register.xml.en:37
+#: ../ui/application/register.xml.en:36
 msgctxt "li"
 msgid "${finished_forms} finished the form."
 msgstr ""
 
-#: ../ui/application/register.xml.en:36
+#: ../ui/application/register.xml.en:35
 msgctxt "li"
 msgid "${pending_forms} started filling the form;"
 msgstr ""
 
-#: ../ui/application/register.xml.en:34
+#: ../ui/application/register.xml.en:33
 msgctxt "li"
 msgid "${unconfirmed_users} did not subscribe;"
 msgstr ""
@@ -1527,7 +1505,7 @@ msgctxt "link"
 msgid "Examples, samples"
 msgstr ""
 
-#: ../ui/root/view.xml.en:43
+#: ../ui/root/view.xml.en:36
 msgctxt "link"
 msgid "Forgotten Password?"
 msgstr ""
@@ -1597,9 +1575,9 @@ msgctxt "paragraph"
 msgid "You have subscribed ${n_forms} users<g id='1'> out of ${max_users} allowed</g>."
 msgstr ""
 
-#: ../ui/application/register.xml.en:31
+#: ../ui/application/register.xml.en:30
 msgctxt "paragraph"
-msgid "You have subscribed ${n_forms} users<g id='7'> out of ${max_users} allowed</g>:"
+msgid "You have subscribed ${n_forms} users<g id='6'> out of ${max_users} allowed</g>:"
 msgstr ""
 
 #: ../ui/form/send.xml.en:25
@@ -1617,12 +1595,7 @@ msgctxt "span"
 msgid "*"
 msgstr ""
 
-#: ../ui/root/view.xml.en:30
-msgctxt "span"
-msgid "<g id='6'><g id='7'>${action/title}</g></g>  <g id='8'><g id='9'>${action/title}</g></g>"
-msgstr ""
-
-#: ../ui/root/view.xml.en:44
+#: ../ui/root/view.xml.en:37
 msgctxt "span"
 msgid "Already customer"
 msgstr ""
