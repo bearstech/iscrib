@@ -21,8 +21,7 @@
             <textarea name="new_users" cols="50"
               rows="20">${new_users}</textarea>
             <p class="actions">
-              <button type="submit" name="add_users" class="button-ok">Add
-                Users</button>
+              <stl:block stl:repeat="action actions">${action}</stl:block>
             </p>
           </form>
           <p stl:if="not allowed_users">${MSG_NO_MORE_ALLOWED}</p>

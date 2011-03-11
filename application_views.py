@@ -33,7 +33,6 @@ from itools.web import INFO, ERROR, BaseView, STLForm, get_context
 # Import from ikaaro
 from ikaaro.access import is_admin
 from ikaaro.autoform import FileWidget, TextWidget, SelectWidget, file_widget
-from ikaaro.buttons import BrowseButton
 from ikaaro.datatypes import FileDataType
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
@@ -44,6 +43,7 @@ from ikaaro.workflow import get_workflow_preview
 
 # Import from iscrib
 from base_views import LoginView, IconsView
+from buttons import ExportODSButton, ExportXLSButton, AddUsers
 from datatypes import Subscription, EmailOrDemo
 from demo import get_demo_user
 from form import Form
@@ -81,19 +81,6 @@ def get_users_query(query, context):
     results = context.root.search(query)
     users = (brain.name for brain in results.get_documents())
     return (PhraseQuery('name', user) for user in users)
-
-
-
-class ExportODSButton(BrowseButton):
-    access = 'is_allowed_to_edit'
-    name = 'export'
-    title = MSG(u"Export This List in ODS Format")
-
-
-
-class ExportXLSButton(ExportODSButton):
-    name = 'export_xls'
-    title = MSG(u"Export This List in XLS Format")
 
 
 
@@ -247,15 +234,15 @@ class Application_View(Folder_BrowseContent):
     search_template = '/ui/iscrib/application/search.xml'
 
     # Table
-    table_columns = [
+    table_columns = freeze([
             ('name', MSG(u"Form")),
             ('state', MSG(u"State")),
             ('mtime', MSG(u"Last Modified")),
             ('firstname', MSG(u"First Name")),
             ('lastname', MSG(u"Last Name")),
             ('company', MSG(u"Company/Organization")),
-            ('email', MSG(u"E-mail"))]
-    table_actions = [ExportODSButton, ExportXLSButton]
+            ('email', MSG(u"E-mail"))])
+    table_actions = freeze([ExportODSButton, ExportXLSButton])
 
 
     def get_page_title(self, resource, context):
@@ -570,11 +557,19 @@ class Application_Register(STLForm):
 
     schema = freeze({
         'new_users': Unicode})
+    actions = freeze([AddUsers])
 
 
     def get_page_title(self, resource, context):
         title = resource.get_page_title()
         return MSG_APPLICATION_TITLE.gettext( title=title)
+
+
+    def get_actions_namespace(self, resource, context):
+        actions = []
+        for button in self.actions:
+            actions.append(button(resource=resource, context=context))
+        return actions
 
 
     def get_namespace(self, resource, context):
@@ -592,6 +587,7 @@ class Application_Register(STLForm):
         namespace['empty_forms'] = 0
         namespace['pending_forms'] = 0
         namespace['finished_forms'] = 0
+        namespace['actions'] = self.get_actions_namespace(resource, context)
         users = resource.get_resource('/users')
         for form in resource.get_forms():
             namespace['registered_users'] += 1
@@ -609,7 +605,7 @@ class Application_Register(STLForm):
         return namespace
 
 
-    def action(self, resource, context, form):
+    def action_add_users(self, resource, context, form):
         new_users = form['new_users'].strip()
         users = resource.get_resource('/users')
         root = context.root

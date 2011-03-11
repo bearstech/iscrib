@@ -26,14 +26,7 @@
           <p class="widget" stl:repeat="widget widget/widgets">${widget}</p>
         </div>
         <p stl:if="actions" class="actions">
-          <stl:block stl:repeat="action actions">
-            <button stl:if="not action/value" type="submit"
-              class="${action/class}" onclick="${action/onclick}"
-              ><span>${action/title}</span></button>
-            <button stl:if="action/value" type="submit" name="action" value="${action/value}"
-              class="${action/class}" onclick="${action/onclick}"
-              ><span>${action/title}</span></button>
-          </stl:block>
+          <stl:block stl:repeat="action actions">${action}</stl:block>
         </p>
       </form>
       <a stl:if="your_workgroups" href="${your_workgroups/link}" id="your-workgroups" title="${your_workgroups/title}">

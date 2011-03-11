@@ -244,12 +244,12 @@ class Workgroup_View(Folder_BrowseContent):
     title = MSG(u"Manage your client space")
     search_template = None
 
-    table_columns = [
+    table_columns = freeze([
             ('form', MSG(u"Application")),
             ('subscribed', MSG(u"Subscribed Users")),
             ('file', MSG(u"Source File")),
-            ('ctime', MSG(u"Creation Date"))]
-    table_actions = []
+            ('ctime', MSG(u"Creation Date"))])
+    table_actions = freeze([])
 
 
     def get_namespace(self, resource, context):
