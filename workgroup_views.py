@@ -218,8 +218,8 @@ class Workgroup_Menu(IconsView):
   <span><a href="#" title="Close"
     onclick="$('#choose-format').hide(); return false">X</a></span>
   <ul>
-    <li>Download <a href="/gabarit/;download">ODS Version</a></li>
-    <li>Download <a href="/gabarit-xls/;download">XLS Version</a></li>
+    <li>Download <a href="/template/;download">ODS Version</a></li>
+    <li>Download <a href="/template-xls/;download">XLS Version</a></li>
     <li><a href="/samples">More Examples</a></li>
   </ul>
 </div>
