@@ -207,9 +207,9 @@ div.num {
 }
 
 table.iscrib-table {
-  margin: auto;
-  text-align: left;
   border-collapse: collapse;
+  text-align: left;
+  width: 100%;
 }
 .iscrib-table td {
   color: #446;

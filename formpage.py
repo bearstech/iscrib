@@ -237,6 +237,8 @@ class FormPage(CSV):
                                 u"h%d" % (int(level) + 1),
                                 content=column.strip())
                         css_class = u"section-header"
+                        # Commence un nouveau tableau
+                        tables.append([])
                     elif (  # 0007970: CSS spécifique pour numéros de
                             # rubriques
                             column in schema
