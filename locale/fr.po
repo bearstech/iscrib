@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 201011231\n"
-"POT-Creation-Date: 2011-03-11 09:03+CET\n"
+"POT-Creation-Date: 2011-03-14 14:03+CET\n"
 "PO-Revision-Date: 2010-11-23 11:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 "    <img src=\"${value}/;thumb?width=${width}&amp;height=${height}\"\n"
 "    stl:if=\"value\"/>"
 
-#: ../workgroup_views.py:227
+#: ../workgroup_views.py:228
 msgid ""
 "\n"
 "<div id=\"choose-format\">\n"
@@ -62,6 +62,7 @@ msgid ""
 "  <ul>\n"
 "    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n"
 "    <li>Download <a href=\"/gabarit-xls/;download\">XLS Version</a></li>\n"
+"    <li><a href=\"/samples\">More Examples</a></li>\n"
 "  </ul>\n"
 "</div>\n"
 "<script type=\"text/javascript\">\n"
@@ -76,6 +77,7 @@ msgstr ""
 "    <li>Télécharger la <a href=\"/gabarit/;download\">version ODS</a></li>\n"
 "    <li>Télécharger la <a href=\"/gabarit-xls/;download\">version XLS</a></"
 "li>\n"
+"    <li><a href=\"/samples\">Plus d'exemples</a></li>\n"
 "  </ul>\n"
 "</div>\n"
 "<script type=\"text/javascript\">\n"
@@ -262,6 +264,13 @@ msgstr "%break%"
 #: ../formpage.py:215
 msgid "%d"
 msgstr "%d"
+
+#: ../root.py:131
+msgid ""
+"%s\n"
+"\n"
+"%s"
+msgstr ""
 
 #: ../form.py:435
 msgid "'%s' = '%s'"
@@ -514,7 +523,7 @@ msgctxt "heading"
 msgid "About iScrib"
 msgstr "À propos de iScrib"
 
-#: ../application_views.py:128
+#: ../application_views.py:128 ../buttons.py:52
 msgid "Add Users"
 msgstr "Ajouter des sondés"
 
@@ -533,7 +542,7 @@ msgctxt "link"
 msgid "An Itaapy service"
 msgstr "Un service Itaapy"
 
-#: ../workgroup_views.py:248
+#: ../workgroup_views.py:249
 msgid "Application"
 msgstr "Application"
 
@@ -565,7 +574,7 @@ msgctxt "heading"
 msgid "Business"
 msgstr "Business"
 
-#: ../workgroup_views.py:344
+#: ../workgroup_views.py:345
 msgid "CSS"
 msgstr "CSS"
 
@@ -600,7 +609,7 @@ msgstr "Société"
 msgid "Company/Organization"
 msgstr "Société/Organisme"
 
-#: ../workgroup_views.py:236
+#: ../workgroup_views.py:237
 msgid "Configure your client space"
 msgstr "Configurez votre espace client"
 
@@ -624,7 +633,7 @@ msgctxt "link"
 msgid "Create Your Form"
 msgstr "Créer votre formulaire"
 
-#: ../workgroup_views.py:231
+#: ../workgroup_views.py:232
 msgid "Create a Data Collection Application"
 msgstr "Créer une application de collecte"
 
@@ -639,7 +648,7 @@ msgstr ""
 "Créez votre espace client où vous pourrez ajouter vos applications de "
 "collecte et les soumettre aux personnes de votre choix."
 
-#: ../workgroup_views.py:251
+#: ../workgroup_views.py:252
 msgid "Creation Date"
 msgstr "Date de création"
 
@@ -702,7 +711,7 @@ msgstr "Courriel"
 msgid "E-mail Address"
 msgstr "Adresse de courriel"
 
-#: ../workgroup_views.py:235 ../workgroup_views.py:332
+#: ../workgroup_views.py:236 ../workgroup_views.py:333
 msgid "Edit Title, Logo and CSS"
 msgstr "Modifier titre, logo et CSS"
 
@@ -744,6 +753,14 @@ msgstr "Exporter"
 #: ../application_views.py:480
 msgid "Export Collected Data"
 msgstr "Exporter les données collectées"
+
+#: ../buttons.py:39
+msgid "Export This List in ODS Format"
+msgstr "Exporter cette liste au format ODS"
+
+#: ../buttons.py:45
+msgid "Export This List in XLS Format"
+msgstr "Exporter cette liste au format XLS"
 
 #: ../controls.py:66
 msgid "Expression"
@@ -823,7 +840,7 @@ msgstr "HH:MM"
 msgid "HHH:MM"
 msgstr "HHH:MM"
 
-#: ../root.py:58
+#: ../root.py:63
 msgid "Homepage"
 msgstr "Accueil"
 
@@ -919,7 +936,8 @@ msgstr ""
 
 #: ../schema.py:70
 msgid "In schema, line {line}, type \"{type}\" does not support formulas."
-msgstr "Feuille schéma, ligne {line}, le type \"{type}\" ne gère pas les formules."
+msgstr ""
+"Feuille schéma, ligne {line}, le type \"{type}\" ne gère pas les formules."
 
 #: ../schema.py:52
 msgid "In schema, line {line}, type \"{type}\" is invalid."
@@ -1001,7 +1019,7 @@ msgctxt "heading"
 msgid "Login"
 msgstr "Connexion"
 
-#: ../workgroup_views.py:343
+#: ../workgroup_views.py:344
 msgid "Logo (shown in the banner)"
 msgstr "Logo (apparaît dans la bannière)"
 
@@ -1026,7 +1044,7 @@ msgstr "Gérer les sondés"
 msgid "Manage your Data Collection Application"
 msgstr "Gérer votre application de collecte de données"
 
-#: ../workgroup_views.py:244
+#: ../workgroup_views.py:245
 msgid "Manage your client space"
 msgstr "Configurer votre espace client"
 
@@ -1262,15 +1280,15 @@ msgstr "Boîte de sélection"
 msgid "Show Test Form"
 msgstr "Voir le formulaire de test"
 
-#: ../root.py:57
+#: ../root.py:62
 msgid "Slogan"
 msgstr "Slogan"
 
-#: ../workgroup_views.py:322
+#: ../workgroup_views.py:323
 msgid "Source"
 msgstr "Fichier source"
 
-#: ../workgroup_views.py:250
+#: ../workgroup_views.py:251
 msgid "Source File"
 msgstr "Fichier source"
 
@@ -1299,7 +1317,7 @@ msgstr "Chaîne de caractères"
 msgid "Subscribe Users"
 msgstr "Ajouter des sondés"
 
-#: ../workgroup_views.py:249
+#: ../workgroup_views.py:250
 msgid "Subscribed Users"
 msgstr "Sondés enregistrés"
 
@@ -1386,7 +1404,7 @@ msgstr "Champ obligatoire"
 msgid "Title"
 msgstr "Titre"
 
-#: ../workgroup_views.py:340
+#: ../workgroup_views.py:341
 msgid "Title (shown in the banner if no logo)"
 msgstr "Titre (apparaît dans la bannière s'il n'y a pas de logo)"
 
@@ -1416,7 +1434,7 @@ msgstr "Type"
 msgid "Unrecognized line {lineno}: {line}"
 msgstr "Ligne {lineno} incorrecte : {line}"
 
-#: ../workgroup_views.py:232
+#: ../workgroup_views.py:233
 msgid ""
 "Uploading this spreadsheet file in iScrib will generate in one click your "
 "data collection application."
@@ -1630,6 +1648,10 @@ msgstr "Vos espaces client"
 msgid "["
 msgstr "["
 
+#: ../root.py:130
+msgid "[iScrib] Internal server error"
+msgstr ""
+
 #: ../utils.py:81
 msgid "]"
 msgstr "]"
@@ -1702,7 +1724,7 @@ msgstr "h%d"
 msgid "href"
 msgstr ""
 
-#: ../root.py:73
+#: ../root.py:78
 msgid "iScrib"
 msgstr "iScrib"
 
@@ -2045,12 +2067,6 @@ msgstr ""
 
 #~ msgid "Edit Title"
 #~ msgstr "Modifier titre"
-
-#~ msgid "Export This List in ODS Format"
-#~ msgstr "Exporter cette liste au format ODS"
-
-#~ msgid "Export This List in XLS Format"
-#~ msgstr "Exporter cette liste au format XLS"
 
 #~ msgctxt "link"
 #~ msgid "Export collected data"

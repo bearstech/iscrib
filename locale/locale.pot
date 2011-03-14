@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-03-11 09:03+CET\n"
+"POT-Creation-Date: 2011-03-14 14:03+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,8 @@ msgstr ""
 msgid "\n    <input type=\"text\" id=\"selector-${id}\" size=\"${size}\" name=\"${name}\"\n      value=\"${value}\"/>\n    <button id=\"selector-button-${id}\" class=\"button-selector\"\n      onclick=\"return popup(';${action}?target_id=selector-${id}&amp;mode=input', 640, 480);\"\n      name=\"selector_button_${name}\">Browse...</button>\n    <button id=\"erase-button-${id}\" class=\"button-delete\"\n      onclick=\"$('#selector-${id}').attr('value', ''); return false\"\n      name=\"erase_button_${name}\">Erase</button>\n    <br/>\n    ${workflow_state}\n    <br/>\n    <img src=\"${value}/;thumb?width=${width}&amp;height=${height}\"\n    stl:if=\"value\"/>"
 msgstr ""
 
-#: ../workgroup_views.py:227
-msgid "\n<div id=\"choose-format\">\n  <span><a href=\"#\" title=\"Close\"\n    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n  <ul>\n    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n    <li>Download <a href=\"/gabarit-xls/;download\">XLS Version</a></li>\n  </ul>\n</div>\n<script type=\"text/javascript\">\n  $(\"#choose-format\").hide();\n</script>"
+#: ../workgroup_views.py:228
+msgid "\n<div id=\"choose-format\">\n  <span><a href=\"#\" title=\"Close\"\n    onclick=\"$('#choose-format').hide(); return false\">X</a></span>\n  <ul>\n    <li>Download <a href=\"/gabarit/;download\">ODS Version</a></li>\n    <li>Download <a href=\"/gabarit-xls/;download\">XLS Version</a></li>\n    <li><a href=\"/samples\">More Examples</a></li>\n  </ul>\n</div>\n<script type=\"text/javascript\">\n  $(\"#choose-format\").hide();\n</script>"
 msgstr ""
 
 #: ../application_views.py:147
@@ -69,6 +69,10 @@ msgstr ""
 
 #: ../formpage.py:215
 msgid "%d"
+msgstr ""
+
+#: ../root.py:131
+msgid "%s\n\n%s"
 msgstr ""
 
 #: ../form.py:435
@@ -164,10 +168,11 @@ msgid ">"
 msgstr ""
 
 #: ../application_views.py:128
+#: ../buttons.py:52
 msgid "Add Users"
 msgstr ""
 
-#: ../workgroup_views.py:248
+#: ../workgroup_views.py:249
 msgid "Application"
 msgstr ""
 
@@ -179,7 +184,7 @@ msgstr ""
 msgid "Boolean"
 msgstr ""
 
-#: ../workgroup_views.py:344
+#: ../workgroup_views.py:345
 msgid "CSS"
 msgstr ""
 
@@ -206,7 +211,7 @@ msgstr ""
 msgid "Company/Organization"
 msgstr ""
 
-#: ../workgroup_views.py:236
+#: ../workgroup_views.py:237
 msgid "Configure your client space"
 msgstr ""
 
@@ -215,7 +220,7 @@ msgstr ""
 msgid "Controls"
 msgstr ""
 
-#: ../workgroup_views.py:231
+#: ../workgroup_views.py:232
 msgid "Create a Data Collection Application"
 msgstr ""
 
@@ -227,7 +232,7 @@ msgstr ""
 msgid "Create your client space to manage collection applications and submit them."
 msgstr ""
 
-#: ../workgroup_views.py:251
+#: ../workgroup_views.py:252
 msgid "Creation Date"
 msgstr ""
 
@@ -284,8 +289,8 @@ msgstr ""
 msgid "E-mail Address"
 msgstr ""
 
-#: ../workgroup_views.py:235
-#: ../workgroup_views.py:332
+#: ../workgroup_views.py:236
+#: ../workgroup_views.py:333
 msgid "Edit Title, Logo and CSS"
 msgstr ""
 
@@ -311,6 +316,14 @@ msgstr ""
 
 #: ../application_views.py:480
 msgid "Export Collected Data"
+msgstr ""
+
+#: ../buttons.py:39
+msgid "Export This List in ODS Format"
+msgstr ""
+
+#: ../buttons.py:45
+msgid "Export This List in XLS Format"
 msgstr ""
 
 #: ../controls.py:66
@@ -369,7 +382,7 @@ msgstr ""
 msgid "HHH:MM"
 msgstr ""
 
-#: ../root.py:58
+#: ../root.py:63
 msgid "Homepage"
 msgstr ""
 
@@ -499,7 +512,7 @@ msgstr ""
 msgid "List of values"
 msgstr ""
 
-#: ../workgroup_views.py:343
+#: ../workgroup_views.py:344
 msgid "Logo (shown in the banner)"
 msgstr ""
 
@@ -520,7 +533,7 @@ msgstr ""
 msgid "Manage your Data Collection Application"
 msgstr ""
 
-#: ../workgroup_views.py:244
+#: ../workgroup_views.py:245
 msgid "Manage your client space"
 msgstr ""
 
@@ -667,15 +680,15 @@ msgstr ""
 msgid "Show Test Form"
 msgstr ""
 
-#: ../root.py:57
+#: ../root.py:62
 msgid "Slogan"
 msgstr ""
 
-#: ../workgroup_views.py:322
+#: ../workgroup_views.py:323
 msgid "Source"
 msgstr ""
 
-#: ../workgroup_views.py:250
+#: ../workgroup_views.py:251
 msgid "Source File"
 msgstr ""
 
@@ -700,7 +713,7 @@ msgstr ""
 msgid "Subscribe Users"
 msgstr ""
 
-#: ../workgroup_views.py:249
+#: ../workgroup_views.py:250
 msgid "Subscribed Users"
 msgstr ""
 
@@ -746,7 +759,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: ../workgroup_views.py:340
+#: ../workgroup_views.py:341
 msgid "Title (shown in the banner if no logo)"
 msgstr ""
 
@@ -766,7 +779,7 @@ msgstr ""
 msgid "Unrecognized line {lineno}: {line}"
 msgstr ""
 
-#: ../workgroup_views.py:232
+#: ../workgroup_views.py:233
 msgid "Uploading this spreadsheet file in iScrib will generate in one click your data collection application."
 msgstr ""
 
@@ -860,6 +873,10 @@ msgstr ""
 #: ../utils.py:78
 #: ../form.py:409
 msgid "["
+msgstr ""
+
+#: ../root.py:130
+msgid "[iScrib] Internal server error"
 msgstr ""
 
 #: ../datatypes.py:679
@@ -964,7 +981,7 @@ msgstr ""
 msgid "href"
 msgstr ""
 
-#: ../root.py:73
+#: ../root.py:78
 msgid "iScrib"
 msgstr ""
 
