@@ -349,15 +349,15 @@ button, .button {
   text-decoration: none;
 }
 
-.button-control {
+.button.control {
   background-image: url(/ui/iscrib/images/settings16.png);
 }
 
-.button-print {
+.button.print {
   background-image: url(/ui/iscrib/images/printer16.png);
 }
 
-.button-selector {
+.button.selector {
   background-image: url(/ui/icons/16x16/image.png);
 }
 

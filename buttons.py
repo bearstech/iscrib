@@ -82,7 +82,7 @@ class Link(Button):
 class InputControlLink(Link):
     access = 'is_allowed_to_view'
     id = "button-control"
-    css = "button-control"
+    css = "control"
     href = ";send"
     content = MSG(u"Input Control")
 
@@ -90,8 +90,8 @@ class InputControlLink(Link):
 
 class PagePrintLink(Link):
     access = 'is_allowed_to_view'
-    id = "page-print"
-    css = "button-print"
+    id = "button-page-print"
+    css = "print"
     href = "?view=print"
     title = MSG(u"Print (in a new window)")
     onclick = "return popup(this.href, 800, 600)"
@@ -100,6 +100,6 @@ class PagePrintLink(Link):
 
 
 class FormPrintLink(PagePrintLink):
-    id = "form-print"
+    id = "button-form-print"
     href = ";print?view=print"
     content = MSG(u"Print Form")
