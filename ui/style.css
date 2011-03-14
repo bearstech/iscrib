@@ -453,6 +453,9 @@ button, .button {
 #choose-format span {
   float: right;
 }
+#choose-format {
+  width: 220px;
+}
 
 #already-client {
   background: #fff;
