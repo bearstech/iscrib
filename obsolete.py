@@ -21,7 +21,6 @@
 from ikaaro.registry import register_resource_class
 
 # Import from iscrib
-from demo import make_demo_user
 from root import Root
 
 
@@ -30,9 +29,11 @@ class RootUpdate(Root):
     def update_20100703(self):
         demo = self.get_user_from_login('demo')
         if demo is None:
-            make_demo_user(self)
+            users = self.get_resource('/users')
+            user = users.set_user(email='demo@itaapy.com')
+            user.set_property('username', 'demo')
         else:
-            demo.set_password('demo')
+            demo.set_password(None)
 
 
 register_resource_class(RootUpdate)

@@ -35,17 +35,11 @@ def is_demo_application(resource):
     return application.get_property('subscription') == 'demo'
 
 
-def make_demo_user(resource):
-    users = resource.get_resource('/users')
-    return users.set_user(email='demo@itaapy.com')
-
-
 def get_demo_user(resource):
     user = resource.get_root().get_user_from_login('demo')
-    if user is not None:
-        return user
-    # Create dummy user on the fly
-    return make_demo_user(resource)
+    if user is None:
+        raise ValueError, 'user "demo" was not created correctly'
+    return user
 
 
 def is_demo_form(resource):
