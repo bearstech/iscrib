@@ -349,17 +349,9 @@ button, .button {
   text-decoration: none;
 }
 
-.button.control {
-  background-image: url(/ui/iscrib/images/settings16.png);
-}
-
-.button.print {
-  background-image: url(/ui/iscrib/images/printer16.png);
-}
-
-.button.selector {
-  background-image: url(/ui/icons/16x16/image.png);
-}
+.button.control { background-image: url(/ui/iscrib/images/settings16.png); }
+.button.print { background-image: url(/ui/iscrib/images/printer16.png); }
+.button.selector { background-image: url(/ui/icons/16x16/image.png); }
 
 .wf-exported { color: #75507b; }
 .wf-modified { color: #3465a4; }
