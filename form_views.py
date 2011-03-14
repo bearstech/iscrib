@@ -118,7 +118,7 @@ class Form_View(STLForm):
         actions = []
         for button in self.toolbar:
             actions.append(button(resource=resource, context=context,
-                readonly=readonly))
+                readonly=readonly, page_number=self.page_number))
         return actions
 
 
