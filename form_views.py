@@ -300,7 +300,7 @@ class Form_Send(STLForm):
             else:
                 warnings.append(info)
         # Failed controls
-        for control in resource.get_failed_controls():
+        for control in resource.get_failed_controls(context):
             control['href'] = ';page%s#field_%s' % (control['page'],
                     control['variable'])
             if control['level'] == '2':
@@ -308,11 +308,13 @@ class Form_Send(STLForm):
             else:
                 warnings.append(control)
         # Informative controls
-        for control in resource.get_info_controls():
+        for control in resource.get_info_controls(context):
             control['href'] = ';page%s#field_%s' % (control['page'],
                     control['variable'])
             infos.append(control)
-        namespace['controls'] = {'errors': errors, 'warnings': warnings,
+        namespace['controls'] = {
+                'errors': errors,
+                'warnings': warnings,
                 'infos': infos}
         # ACLs
         user = context.user

@@ -26,7 +26,6 @@ from decimal import InvalidOperation
 from itools.core import is_thingy, merge_dicts
 from itools.datatypes import XMLContent, XMLAttribute
 from itools.gettext import MSG
-from itools.i18n import format_number
 from itools.web import get_context
 
 # Import from ikaaro
@@ -238,7 +237,7 @@ def text_widget(context, form, datatype, name, value, schema, fields,
     if isinstance(datatype, NumDecimal):
         if value:
             try:
-                value = format_number(value, places=datatype.decimals)
+                value = context.format_number(value, places=datatype.decimals)
             except InvalidOperation:
                 pass
     # Reçoit des str en POST

@@ -26,9 +26,7 @@ from itools.core import merge_dicts, freeze
 from itools.datatypes import Unicode
 from itools.fs import FileName
 from itools.gettext import MSG
-from itools.handlers import checkid
-from itools.i18n import format_number
-from itools.handlers import File as FileHandler
+from itools.handlers import checkid, File as FileHandler
 
 # Import from ikaaro
 from ikaaro.file import File
@@ -370,8 +368,8 @@ class Form(File):
             yield name, datatype
 
 
-    def get_controls_namespace(self, levels=freeze([]), pages=freeze([]),
-            exclude=freeze([''])):
+    def get_controls_namespace(self, context, levels=freeze([]),
+            pages=freeze([]), exclude=freeze([''])):
         schema = self.get_schema()
         fields = self.get_fields(schema)
         controls = self.get_controls()
@@ -423,7 +421,7 @@ class Form(File):
             elif value is False:
                 value = MSG(u"False")
             elif isinstance(value, NumDecimal):
-                value = format_number(value.value)
+                value = context.format_number(value.value)
             number = get_record_value(record, 'number')
             yield {
                 'number': number,
@@ -435,15 +433,17 @@ class Form(File):
                 'debug': u"'%s' = '%s'" % (expression, value)}
 
 
-    def get_info_controls(self, pages=freeze([]), exclude=freeze([''])):
-        for control in self.get_controls_namespace(levels=['0'], pages=pages,
-                exclude=exclude):
+    def get_info_controls(self, context, pages=freeze([]),
+            exclude=freeze([''])):
+        for control in self.get_controls_namespace(context, levels=['0'],
+                pages=pages, exclude=exclude):
             yield control
 
 
-    def get_failed_controls(self, pages=freeze([]), exclude=freeze([''])):
-        for control in self.get_controls_namespace(levels=['1', '2'],
-                pages=pages, exclude=exclude):
+    def get_failed_controls(self, context, pages=freeze([]),
+            exclude=freeze([''])):
+        for control in self.get_controls_namespace(context,
+                levels=['1', '2'], pages=pages, exclude=exclude):
             yield control
 
 
