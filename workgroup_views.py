@@ -220,6 +220,7 @@ class Workgroup_Menu(IconsView):
   <ul>
     <li>Download <a href="/gabarit/;download">ODS Version</a></li>
     <li>Download <a href="/gabarit-xls/;download">XLS Version</a></li>
+    <li><a href="/samples">More Examples</a></li>
   </ul>
 </div>
 <script type="text/javascript">
