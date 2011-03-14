@@ -234,9 +234,9 @@ class Mandatory(Boolean):
         if not data:
             # Turn it into default value at the time of writing
             return None
-        elif data in ('O', 'OUI', '1'):
+        elif data in ('O', 'OUI', 'Y', 'YES', '1'):
             return True
-        elif data in ('N', 'NON', '0'):
+        elif data in ('N', 'NON', 'N', 'NO', '0'):
             return False
         return data
 
