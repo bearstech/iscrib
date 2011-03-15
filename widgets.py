@@ -235,11 +235,10 @@ def text_widget(context, form, datatype, name, value, schema, fields,
     if not isinstance(value, basestring):
         value = datatype.encode(value)
     if isinstance(datatype, NumDecimal):
-        if value:
-            try:
-                value = context.format_number(value, places=datatype.decimals)
-            except InvalidOperation:
-                pass
+        try:
+            value = context.format_number(value, places=datatype.decimals)
+        except InvalidOperation:
+            pass
     # Reçoit des str en POST
     if not type(value) is unicode:
         value = unicode(value, 'utf8')

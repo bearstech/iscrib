@@ -421,8 +421,10 @@ class Form(File):
             elif value is False:
                 value = MSG(u"False")
             elif isinstance(value, NumDecimal):
-                if value.value:
+                try:
                     value = context.format_number(value.value)
+                except InvalidOperation:
+                    value = value.value
             number = get_record_value(record, 'number')
             yield {
                 'number': number,
