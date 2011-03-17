@@ -28,6 +28,8 @@ from ikaaro.user_views import (User_ConfirmRegistration
         as BaseUser_ConfirmRegistration)
 from ikaaro.user_views import (User_ChangePasswordForgotten
         as BaseUser_ChangePasswordForgotten)
+from ikaaro.user_views import (UserFolder_BrowseContent
+        as BaseUserFolder_BrowseContent)
 
 
 class User_ConfirmRegistration(BaseUser_ConfirmRegistration):
@@ -66,3 +68,27 @@ class User_EditAccount(BaseUser_EditAccount):
     widgets = freeze(BaseUser_EditAccount.widgets[:3]
         + [TextWidget('company', title=MSG(u"Company/Organization"))]
         + BaseUser_EditAccount.widgets[3:])
+
+
+
+class UserFolder_BrowseContent(BaseUserFolder_BrowseContent):
+    search_fields = freeze(
+            BaseUserFolder_BrowseContent.search_fields
+            + [('company', MSG(u"Company"))])
+
+    table_columns = freeze(
+            BaseUserFolder_BrowseContent.table_columns[:6]
+            + [('company', MSG(u"Company"), True)]
+            + BaseUserFolder_BrowseContent.table_columns[6:])
+
+    csvfile_schema = freeze(merge_dicts(
+        BaseUserFolder_BrowseContent.csvfile_schema,
+        # Not translated for Gmail
+        company=Unicode(title=u"Company")))
+    csvfile_columns = freeze(
+            BaseUserFolder_BrowseContent.csvfile_columns[:3]
+            + ['company'])
+
+
+    def get_key_sorted_by_company(self):
+        return self._get_key_sorted_by_unicode('company')

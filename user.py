@@ -22,16 +22,17 @@ from itools.gettext import MSG
 
 # Import from ikaaro
 from ikaaro.registry import register_resource_class
-from ikaaro.user import User as BaseUser
+from ikaaro.user import User, UserFolder
 
 # Import from iscrib
 from user_views import User_EditAccount, User_ConfirmRegistration
 from user_views import User_ChangePasswordForgotten
+from user_views import UserFolder_BrowseContent
 
 
-class User(BaseUser):
+class iScribUser(User):
     class_schema = freeze(merge_dicts(
-        BaseUser.class_schema,
+        User.class_schema,
         company=Unicode(source='metadata', indexed=True, stored=True),
         has_password=Boolean(indexed=True)))
 
@@ -58,7 +59,7 @@ Your password: {password}""")
 
 
     def get_catalog_values(self):
-        values = super(User, self).get_catalog_values()
+        values = super(iScribUser, self).get_catalog_values()
         values['has_password'] = self.get_property('password') is not None
         return values
 
@@ -81,4 +82,10 @@ Your password: {password}""")
 
 
 
-register_resource_class(User)
+class iScribUserFolder(UserFolder):
+    browse_users = UserFolder_BrowseContent()
+
+
+
+register_resource_class(iScribUser)
+register_resource_class(iScribUserFolder)
