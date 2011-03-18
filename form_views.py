@@ -15,6 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Import from the Standard Library
+from decimal import InvalidOperation
+
 # Import from itools
 from itools.csv import CSVFile
 from itools.core import merge_dicts, freeze
@@ -216,9 +219,12 @@ class Form_View(STLForm):
             value = fields[field]
             # Compute formula and compare
             if datatype.formula:
-                expected = datatype.sum(datatype.formula, schema,
-                        # Raw form, not the filtered one
-                        context.get_form())
+                try:
+                    expected = datatype.sum(datatype.formula, schema,
+                            # Raw form, not the filtered one
+                            context.get_form())
+                except InvalidOperation:
+                    expected = None
                 # Result given
                 if data and value != expected:
                     # What we got was OK so blame the user
