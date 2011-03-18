@@ -436,7 +436,7 @@ class Form(File):
                 'variable': variable,
                 'page': page,
                 'value': value,
-                'debug': u"'%s' = '%s'" % (expr, value)}
+                'debug': u'"{0}" = "{1}"'.format(expr, value)}
 
 
     def get_info_controls(self, context, pages=freeze([]),
