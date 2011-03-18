@@ -381,6 +381,20 @@ class Numeric(object):
         raise NotImplemented
 
 
+    @staticmethod
+    def clean(data):
+        # 0009003: les séparateurs de millers provoquent une erreur
+        data = ''.join(data.split())
+        if "," in data and "." in data:
+            if data.index(",") < data.index("."):
+                # en
+                data = data.replace(",", "")
+            else:
+                # fr
+                data = data.replace(".", "")
+        return data.replace(" ", "").replace(",", ".")
+
+
     @classmethod
     def sum(cls, formula, schema, fields):
         sum = cls.decode(0)
@@ -431,18 +445,6 @@ class NumDecimal(Numeric):
         return value.quantize(places)
 
 
-    @staticmethod
-    def clean(data):
-        if "," in data and "." in data:
-            if data.index(",") < data.index("."):
-                # en
-                data = data.replace(",", "")
-            else:
-                # fr
-                data = data.replace(".", "")
-        return data.replace(" ", "").replace(",", ".")
-
-
     @classmethod
     def is_valid(cls, data):
         if data.upper() == 'NC':
@@ -469,21 +471,24 @@ class NumInteger(Numeric):
             elif type(value) is int or value == '':
                 pass
             else:
+                test = value
+                if type(value) is str:
+                    test = self.clean(value)
+                else:
+                    test = str(value)
                 try:
-                    value = int(value)
+                    value = int(float(test))
                 except ValueError:
                     pass
         self.value = value
 
 
-    @staticmethod
-    def is_valid(data):
+    @classmethod
+    def is_valid(cls, data):
         if data.upper() == 'NC':
             return True
-        # 0009003: les séparateurs de millers provoquent une erreur
-        data = ''.join(data.split())
         try:
-            int(data)
+            int(float(cls.clean(data)))
         except ValueError:
             return False
         return True
