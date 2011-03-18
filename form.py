@@ -41,7 +41,6 @@ from datatypes import Numeric, NumDecimal, FileImage, SqlEnumerate
 from formpage import FormPage
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control
-from schema import Variable
 from workflow import workflow, FINISHED
 
 
@@ -312,6 +311,10 @@ class Form(File):
         return handler.timestamp is None
 
 
+    def is_disabled_by_type(self, name, schema, datatype):
+        return False
+
+
     def is_disabled_by_dependency(self, name, schema, fields):
         dependency = schema[name].dependency
         if not dependency:
@@ -349,9 +352,11 @@ class Form(File):
                 continue
             if name[0] in exclude:
                 continue
+            datatype = schema[name]
+            if self.is_disabled_by_type(name, schema, datatype):
+                continue
             if self.is_disabled_by_dependency(name, schema, fields):
                 continue
-            datatype = schema[name]
             value = fields[name]
             is_valid = datatype.is_valid(datatype.encode(value))
             is_sum_valid = True
@@ -372,14 +377,19 @@ class Form(File):
             pages=freeze([]), exclude=freeze([''])):
         schema = self.get_schema()
         fields = self.get_fields(schema)
-        for number, title, expr, level, page, variable in self.get_controls():
+        for num, title, expr, level, page, variable in self.get_controls():
+            if not expr:
+                continue
             if level not in levels:
                 continue
-            page = Variable.get_page_number(variable)
             if pages and page not in pages:
                 continue
             if page in exclude:
                 continue
+            if variable is not None:
+                datatype = schema[variable]
+                if self.is_disabled_by_type(variable, schema, datatype):
+                    continue
             globals_ = self.get_globals()
             # Précision pour les informations statistiques
             if level == '0':
@@ -420,7 +430,7 @@ class Form(File):
                 except InvalidOperation:
                     value = value.value
             yield {
-                'number': number,
+                'number': num,
                 'title': title,
                 'level': level,
                 'variable': variable,

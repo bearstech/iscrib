@@ -207,9 +207,11 @@ class Form_View(STLForm):
         mandatory = []
         bad_sums = []
         for field in formpage.get_fields():
+            datatype = schema[field]
+            if resource.is_disabled_by_type(field, schema, datatype):
+                continue
             if resource.is_disabled_by_dependency(field, schema, fields):
                 continue
-            datatype = schema[field]
             # Raw data
             if datatype.multiple:
                 data = context.get_form_value(field, type=Multiple)
