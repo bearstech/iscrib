@@ -365,7 +365,14 @@ class Form(File):
             else:
                 if is_valid and is_sum_valid:
                     continue
-            yield name, datatype
+            reason = None
+            if not is_sum_valid:
+                reason = 'sum_invalid'
+            elif not is_valid:
+                reason = 'invalid'
+            elif datatype.mandatory:
+                reason = 'mandatory'
+            yield name, datatype, reason
 
 
     def get_controls_namespace(self, context, levels=freeze([]),

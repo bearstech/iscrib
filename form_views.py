@@ -38,10 +38,10 @@ from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
 
 
 # Messages
-ERR_INVALID = ERROR(u"The following fields are invalid: {fields}.",
+ERR_INVALID_FIELDS = ERROR(u"The following fields are invalid: {fields}.",
         format='replace_html')
-ERR_MANDATORY = ERROR(u"The following fields are mandatory: {fields}.",
-        format='replace_html')
+ERR_MANDATORY_FIELDS = ERROR(u"The following fields are mandatory: "
+        u"{fields}.", format='replace_html')
 ERR_BAD_SUMS = ERROR(u"The following sums are invalid: {fields}.",
         format='replace_html')
 MSG_SAVED = INFO(u"The page is saved. Check your input in the "
@@ -50,6 +50,9 @@ MSG_FINISHED = INFO(u"Your form is finished. "
         u"Your correspondent has been informed.")
 MSG_EXPORTED_ITAAPY = ERROR(u'To export to a SQL database, contact <a '
         u'href="http://www.itaapy.com/contact">Itaapy</a>', format='html')
+ERR_INVALID_FORMULA = ERROR(u"{name} is not equal to {formula}")
+ERR_MANDATORY_FIELD = ERROR(u"{name} is mandatory")
+ERR_INVALID_FIELD = ERROR(u"{name} is invalid")
 
 
 class Single(String):
@@ -279,8 +282,8 @@ class Form_View(STLForm):
         messages = []
         bad_types = set()
         for fields, message in [
-                (invalid, ERR_INVALID),
-                (mandatory, ERR_MANDATORY),
+                (invalid, ERR_INVALID_FIELDS),
+                (mandatory, ERR_MANDATORY_FIELDS),
                 (bad_sums, ERR_BAD_SUMS)]:
             if fields:
                 bad_types.update(fields)
@@ -317,13 +320,16 @@ class Form_Send(STLForm):
         warnings = []
         infos = []
         # Invalid fields
-        for name, datatype in resource.get_invalid_fields():
-            if datatype.formula:
-                title = MSG(u"{name} is not equal to {formula}".gettext(
-                    name=name, formula=datatype.formula))
+        for name, datatype, reason in resource.get_invalid_fields():
+            if reason == 'sum_invalid':
+                title = ERR_INVALID_FORMULA(name=name,
+                        formula=datatype.formula)
+            elif reason == 'mandatory':
+                title = ERR_MANDATORY_FIELD(name=name)
             else:
-                title = MSG(u"{name} invalid").gettext(name=name)
-            info = {'number': name,
+                title = ERR_INVALID_FIELD(name=name)
+            info = {
+                    'number': name,
                     'title': title,
                     'href': ';page{page}#field_{name}'.format(
                         page=datatype.pages[0], name=name),
