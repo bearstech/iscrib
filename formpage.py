@@ -187,7 +187,7 @@ class FormPage(CSV):
                         'rowspan': None,
                         'colspan': None,
                         'body': XMLParser(NBSP),
-                        'class': None})
+                        'class': u""})
                     # Commence un nouveau tableau
                     tables.append([])
                 elif column.startswith(FIELD_PREFIX):
@@ -212,7 +212,7 @@ class FormPage(CSV):
                                     readonly=readonly, skip_print=skip_print)
                     else:
                         # 0004922 Fiche école ne fonctionne plus
-                        column = column.replace('\n', '')
+                        column = column.replace(u'\n', u'')
                         try:
                             if u"/" in column:
                                 column = eval(column, globals_,
@@ -220,7 +220,7 @@ class FormPage(CSV):
                             else:
                                 column = eval(column, globals_, locals_)
                         except ZeroDivisionError:
-                            column = u"(division by 0)"
+                            column = MSG(u"(division by 0)")
                         except SyntaxError:
                             raise SyntaxError, repr(column)
                     if not isinstance(column, basestring):
