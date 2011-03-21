@@ -319,6 +319,7 @@ def get_input_widget(name, form, schema, fields, context, tabindex=None,
     # Always take data from the handler, we store wrong values anyway
     value = form.get_form().handler.get_value(name, schema)
     datatype = schema[name]
+    readonly = readonly or datatype.readonly
     widget = None
     if  isinstance(datatype, Numeric):
         widget = text_widget
