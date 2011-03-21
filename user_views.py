@@ -23,6 +23,7 @@ from itools.web import INFO, ERROR
 
 # Import from ikaaro
 from ikaaro.autoform import TextWidget
+from ikaaro.csv_views import CSVColumn
 from ikaaro.user_views import User_EditAccount as BaseUser_EditAccount
 from ikaaro.user_views import (User_ConfirmRegistration
         as BaseUser_ConfirmRegistration)
@@ -82,13 +83,9 @@ class UserFolder_BrowseContent(BaseUserFolder_BrowseContent):
             + [('company', MSG(u"Company"), True)]
             + BaseUserFolder_BrowseContent.table_columns[6:])
 
-    csvfile_schema = freeze(merge_dicts(
-        BaseUserFolder_BrowseContent.csvfile_schema,
-        # Not translated for Gmail
-        company=Unicode(title=u"Company")))
-    csvfile_columns = freeze(
-            BaseUserFolder_BrowseContent.csvfile_columns[:3]
-            + ['company'])
+    csv_columns = freeze(
+            BaseUserFolder_BrowseContent.csv_columns[:3]
+            + [CSVColumn('company', title=u"Company")])
 
 
     def get_key_sorted_by_company(self):
