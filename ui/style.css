@@ -257,7 +257,7 @@ td.section-header h5 {
   background: #fff;
   font-style: italic;
 }
-td.field-label {
+td.field-label, td.rubrique-label, td.field-widget {
   border-bottom: 1px solid #ccc;
 }
 td.field-label input,
@@ -267,7 +267,6 @@ td.field-label textarea {
   border: 1px solid #ccc;
 }
 td.rubrique-label {
-  border-bottom: 1px solid #ccc;
   font-size: 8px;
 }
 
