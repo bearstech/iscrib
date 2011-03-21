@@ -182,8 +182,7 @@ div.readonly {
   border-right: 1px solid #f1efe2;
   border-left: 2px solid #aca899;
   border-top: 2px solid #aca899;
-
-  line-height: 1.2em;
+  height: 1.2em;
 }
 
 div.num {
@@ -191,11 +190,10 @@ div.num {
   border-right: 1px solid #f1efe2;
   border-left: 2px solid #aca899;
   border-top: 2px solid #aca899;
-
-  width: 80px;
   /*
   text-align: right !important;
   */
+  width: 80px;
 }
 
 #form-tables {
