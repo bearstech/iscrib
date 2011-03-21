@@ -183,8 +183,7 @@ div.readonly {
   border-left: 2px solid #aca899;
   border-top: 2px solid #aca899;
 
-  padding-right: 15px;
-  height: 15px;
+  line-height: 1.2em;
 }
 
 div.num {
