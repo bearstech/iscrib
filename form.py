@@ -38,7 +38,6 @@ from ikaaro.utils import generate_name
 
 # Import from iscrib
 from datatypes import Numeric, NumDecimal, FileImage, SqlEnumerate
-from formpage import FormPage
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control
 from workflow import workflow, FINISHED
@@ -248,16 +247,6 @@ class Form(File):
         return self.get_controls_resource().get_controls()
 
 
-    def get_formpages(self):
-        folder = self.get_param_folder()
-        root = self.get_root()
-        results = root.search(format=FormPage.class_id,
-                parent_path=str(folder.get_canonical_path()))
-        for brain in results.get_documents(sort_by='name'):
-            formpage = root.get_resource(brain.abspath)
-            yield formpage
-
-
     def get_page_numbers(self):
         """Return the ordered list of form page numbers.
         """
@@ -266,6 +255,12 @@ class Form(File):
             page_number = get_page_number(formpage.name)
             page_numbers.append(page_number)
         return page_numbers
+
+
+    def get_formpages(self):
+        folder = self.get_param_folder()
+        for page_number in self.get_page_numbers():
+            yield folder.get_resource('page' + page_number.lower())
 
 
     def get_formpage(self, page_number):
