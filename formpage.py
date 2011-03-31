@@ -113,7 +113,7 @@ class FormPage(CSV):
             for column in row:
                 if column.startswith(Variable.FIELD_PREFIX):
                     name = Variable.decode(column)
-                    if name not in schema:
+                    if name and name not in schema:
                         raise FormatError, ERR_BAD_NAME(title=title,
                                 line=lineno, name=name)
 
