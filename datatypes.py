@@ -45,7 +45,6 @@ class DateLitterale(DataType):
               'décembre']
 
 
-    @classmethod
     def encode(cls, value):
         if not value:
             return ''
@@ -95,7 +94,7 @@ class Numeric(object):
 
     @classmethod
     def encode(cls, value):
-        if isinstance(value, Numeric):
+        if isinstance(value, cls):
             value = value.value
         if value is None:
             return 'NC'
@@ -518,9 +517,9 @@ class NumTime(Numeric):
         self.value = value
 
 
-    @staticmethod
-    def encode(value):
-        if isinstance(value, NumTime):
+    @classmethod
+    def encode(cls, value):
+        if isinstance(value, cls):
             value = value.value
         if value is None:
             return 'NC'
@@ -551,9 +550,9 @@ class NumTime(Numeric):
 
 class NumShortTime(NumTime):
 
-    @staticmethod
-    def encode(value):
-        if isinstance(value, NumTime):
+    @classmethod
+    def encode(cls, value):
+        if isinstance(value, cls):
             value = value.value
         if value is None:
             return 'NC'
@@ -593,15 +592,14 @@ class NumDate(Numeric):
         self.value = value
 
 
-    @staticmethod
-    def encode(value):
-        if isinstance(value, NumDate):
+    @classmethod
+    def encode(cls, value):
+        if isinstance(value, cls):
             value = value.value
         if value is None:
             return 'NC'
         elif type(value) is str:
             return value
-
         return value.strftime('%d/%m/%Y')
 
 
@@ -633,12 +631,11 @@ class NumDate(Numeric):
 
 class NumShortDate(NumDate):
 
-    @staticmethod
-    def encode(value):
-        data = NumDate.encode(value)
+    @classmethod
+    def encode(cls, value):
+        data = super(NumShortDate, cls).encode(value)
         if data == '' or data == 'NC':
             return data
-
         return data[3:]
 
 
@@ -668,21 +665,12 @@ class NumDigit(Numeric):
         return "char({0}.length) default null".format(self)
 
 
-    @classmethod
-    def encode_sql(cls, value):
-        if isinstance(value, cls):
-            if value.value is None or value.value == '':
-                return u"null"
-        return quote_string(cls.encode(value))
-
-
 
 class UnicodeSQL(Unicode):
     default = ''
 
 
-    @staticmethod
-    def is_valid(data):
+    def is_valid(cls, data):
         try:
             unicode(data, 'utf8')
         except Exception:
@@ -690,12 +678,10 @@ class UnicodeSQL(Unicode):
         return True
 
 
-    @classmethod
     def get_sql_schema(cls):
         return "varchar({0}.length) default null".format(cls)
 
 
-    @classmethod
     def encode_sql(cls, value):
         if value is None:
             return u"null"
@@ -703,21 +689,18 @@ class UnicodeSQL(Unicode):
 
 
 
-class Text(Unicode):
+class Text(UnicodeSQL):
 
-    @staticmethod
-    def decode(data, encoding='UTF-8'):
-        value = Unicode.decode(data, encoding=encoding)
+    def decode(cls, data, encoding='UTF-8'):
+        value = super(Text, cls).decode(data, encoding=encoding)
         # Restaure les retours chariot
-        # FIXME restore unicode
         return value.replace(u'\\r\\n', u'\r\n')
 
 
-    @staticmethod
-    def encode(value, encoding='UTF-8'):
+    def encode(cls, value, encoding='UTF-8'):
         # Stocke tout sur une ligne
         value = value.replace(u'\r\n', u'\\r\\n')
-        return Unicode.encode(value, encoding=encoding)
+        return super(Text, cls).encode(value, encoding=encoding)
 
 
 
@@ -729,8 +712,7 @@ class EnumBoolean(Enumerate):
     ]
 
 
-    @staticmethod
-    def decode(data):
+    def decode(cls, data):
         if data == '1':
             return True
         elif data == '2':
@@ -738,8 +720,7 @@ class EnumBoolean(Enumerate):
         return data
 
 
-    @staticmethod
-    def encode(value):
+    def encode(cls, value):
         if value is True:
             return '1'
         elif value is False:
@@ -747,12 +728,10 @@ class EnumBoolean(Enumerate):
         return value
 
 
-    @classmethod
     def get_sql_schema(cls):
         return "tinyint default null"
 
 
-    @classmethod
     def encode_sql(cls, value):
         if value is None or value == '':
             return u"null"
@@ -764,19 +743,16 @@ class SqlEnumerate(Enumerate):
     default = ''
 
 
-    @classmethod
     def get_sql_schema(cls):
         return "varchar(20) default null"
 
 
-    @classmethod
     def encode_sql(cls, value):
         if value is None or value == '':
             return u"null"
         return quote_string(cls.encode(value))
 
 
-    @classmethod
     def get_values(cls, value):
         return (cls.get_value(value, value) for value in value)
 
@@ -795,24 +771,21 @@ class Subscription(Enumerate):
 
 class FileImage(FileDataType):
 
-    @staticmethod
-    def encode(value):
+    def encode(cls, value):
         return value
 
 
-    @staticmethod
-    def decode(data):
-        """Find out the resource class (the mimetype sent by the browser can be
-        minimalistic).
+    def decode(cls, data):
+        """Find out the resource class (the mimetype sent by the browser can
+        be minimalistic).
         """
         if type(data) is str:
             return data
-        return FileDataType.decode(data)
+        return super(FileImage, cls).decode(data)
 
 
 
 class EmailOrDemo(Email):
 
-    @staticmethod
-    def is_valid(value):
+    def is_valid(cls, value):
         return value == 'demo' or Email.is_valid(value)
