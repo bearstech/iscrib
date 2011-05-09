@@ -325,6 +325,8 @@ class SchemaHandler(TableFile):
             schema[name] = datatype(multiple=multiple,
                 type=type_name,
                 default=datatype.decode(default),
+                # Read only for Scrib
+                readonly=False,
                 pages=page_numbers,
                 title=get_record_value(record, 'title'),
                 help=get_record_value(record, 'help'),
