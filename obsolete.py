@@ -30,10 +30,10 @@ class RootUpdate(Root):
         demo = self.get_user_from_login('demo')
         if demo is None:
             users = self.get_resource('/users')
-            user = users.set_user(email='demo@itaapy.com')
-            user.set_property('username', 'demo')
+            demo = users.set_user(email='demo@itaapy.com')
+            demo.set_property('username', 'demo')
         else:
-            demo.set_password(None)
+            demo.del_property('password')
 
 
 register_resource_class(RootUpdate)
