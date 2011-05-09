@@ -89,7 +89,8 @@ class Skin(BaseSkin):
             if logo:
                 ac = logo.get_access_control()
                 if ac.is_allowed_to_view(user, logo):
-                    logo_href = '{0}/;thumb?height=70'.format(
+                    # XXX restore max height behaviour
+                    logo_href = '{0}/;thumb?width=475&height=70'.format(
                             context.get_link(logo))
         new_resource_allowed = is_admin(user, resource)
         namespace = merge_dicts(BaseSkin.build_namespace(self, context),
