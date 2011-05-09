@@ -251,10 +251,14 @@ class Form(File):
         """Return the ordered list of form page numbers.
         """
         page_numbers = []
-        for formpage in self.get_formpages():
-            page_number = get_page_number(formpage.name)
-            page_numbers.append(page_number)
-        return page_numbers
+        folder = self.get_param_folder()
+        for name in folder.get_names():
+            page_number = get_page_number(name)
+            if page_number is None:
+                continue
+            page_numbers.append(page_number.lower())
+        # TODO backport Scrib order
+        return sorted(page_numbers)
 
 
     def get_formpages(self):
