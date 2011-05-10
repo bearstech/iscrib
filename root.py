@@ -126,7 +126,9 @@ class Root(BaseRoot):
         if not is_debug(context):
             # We send an email to administrators
             config = get_config(context.server.target)
-            email = config.get_value('smtp-from')
+            email = config.get_value('admin-email')
+            if email is None:
+                email = config.get_value('smtp-from')
             subject = u"[iScrib] Internal server error"
             text = u"%s\n\n%s" % (context.uri, traceback.format_exc())
             self.send_email(email, subject, text=text)
