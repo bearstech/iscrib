@@ -270,3 +270,8 @@ div#page {
 #home-content ul li {
   background-image: url("/ui/iscrib/images/bullet-blue2.jpg");
 }
+
+#home-content ul li p {
+  /* disable margin */
+  margin: 0;
+}
