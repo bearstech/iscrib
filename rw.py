@@ -32,11 +32,17 @@ from xlwt.Style import default_style
 
 # Import from itools
 from itools.csv import CSVFile
+from itools.web import ERROR
 
 # Import from ikaaro
 from ikaaro.file import ODS, MSExcel
 
 # Import from iscrib
+from schema import FormatError
+
+
+ERR_XLS_LIMIT = ERROR(u"The XLS format is too limited "
+        u"to export all of the data. Try the ODS format.")
 
 
 def get_reader_and_cls(mimetype):
@@ -192,6 +198,8 @@ class XLSWriter(object):
         else:
             style = default_style
         for x, value in enumerate(values):
+            if x > 255:
+                raise FormatError, ERR_XLS_LIMIT
             sheet.write(self.y, x, value, style)
         self.y += 1
 

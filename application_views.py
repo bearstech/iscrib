@@ -49,6 +49,7 @@ from demo import get_demo_user
 from form import Form
 from formpage import FormPage
 from rw import ODSWriter, XLSWriter
+from schema import FormatError
 from utils import force_encode, is_debug, is_print
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
 
@@ -507,7 +508,10 @@ class Application_Export(BaseView):
                     MSG(u"Last Name"), MSG(u"E-mail"), MSG(u"State"))]
         for name in sorted(schema):
             header.append(name)
-        writer.add_row(header, is_header=True)
+        try:
+            writer.add_row(header, is_header=True)
+        except FormatError, exception:
+            return context.come_back(ERROR(unicode(exception)))
         # Subheader with titles
         header = [""] * 5
         for name, datatype in sorted(schema.iteritems()):
