@@ -36,6 +36,7 @@ from form import Form
 from formpage import FormPage
 from rw import get_reader_and_cls
 from schema import Schema, FormatError
+from workflow import EMPTY, PENDING, FINISHED
 
 
 ERR_NOT_ODS_XLS = ERROR(u"Not an ODS or XLS file.")
@@ -161,6 +162,31 @@ class Application(Folder):
 
     def get_n_forms(self):
         return len(list(self.get_forms()))
+
+
+    def get_stats(self):
+        stats = {}
+        stats['available_users'] = self.get_property('max_users')
+        stats['registered_users'] = 0
+        stats['unconfirmed_users'] = 0
+        stats['empty_forms'] = 0
+        stats['pending_forms'] = 0
+        stats['finished_forms'] = 0
+        users = self.get_resource('/users')
+        for form in self.get_forms():
+            stats['registered_users'] += 1
+            user = users.get_resource(form.name)
+            if user.get_property('password') is None:
+                stats['unconfirmed_users'] += 1
+            else:
+                state = form.get_workflow_state()
+                if state == EMPTY:
+                    stats['empty_forms'] += 1
+                elif state == PENDING:
+                    stats['pending_forms'] += 1
+                elif state == FINISHED:
+                    stats['finished_forms'] += 1
+        return stats
 
 
     def get_param_folder(self):

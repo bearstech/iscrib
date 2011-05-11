@@ -51,7 +51,7 @@ from formpage import FormPage
 from rw import ODSWriter, XLSWriter
 from schema import FormatError
 from utils import force_encode, is_debug, is_print
-from workflow import WorkflowState, NOT_REGISTERED, EMPTY, PENDING, FINISHED
+from workflow import WorkflowState, NOT_REGISTERED, EMPTY
 
 
 ERR_NO_DATA = ERROR(u"No data to collect for now.")
@@ -587,26 +587,8 @@ class Application_Register(STLForm):
         namespace['allowed_users'] = resource.get_allowed_users()
         namespace['MSG_NO_MORE_ALLOWED'] = ERR_NO_MORE_ALLOWED
         namespace['new_users'] = context.get_form_value('new_users')
-        namespace['registered_users'] = 0
-        namespace['unconfirmed_users'] = 0
-        namespace['empty_forms'] = 0
-        namespace['pending_forms'] = 0
-        namespace['finished_forms'] = 0
         namespace['actions'] = self.get_actions_namespace(resource, context)
-        users = resource.get_resource('/users')
-        for form in resource.get_forms():
-            namespace['registered_users'] += 1
-            user = users.get_resource(form.name)
-            if user.get_property('password') is None:
-                namespace['unconfirmed_users'] += 1
-            else:
-                state = form.get_workflow_state()
-                if state == EMPTY:
-                    namespace['empty_forms'] += 1
-                elif state == PENDING:
-                    namespace['pending_forms'] += 1
-                elif state == FINISHED:
-                    namespace['finished_forms'] += 1
+        namespace.update(resource.get_stats())
         return namespace
 
 

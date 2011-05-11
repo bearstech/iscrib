@@ -379,6 +379,35 @@ class Form_Send(STLForm):
         """
         resource.set_workflow_state(FINISHED)
 
+        # Notification e-mail
+        application = resource.parent
+        workgroup = application.parent
+        subject = MSG(u"[iScrib - {workgroup_title}] Form finished").gettext(
+                workgroup_title=workgroup.get_title())
+        stats = application.get_stats()
+        user = context.user
+        text = MSG(u"""\
+{user_title} <{user_email}> finished to fill in the "{application_title}" form.
+
+Summary of the "{application_title}" campaign:
+- {registered_users} registered users out of {available_users} available;
+- {unconfirmed_users} not registered;
+- {empty_forms} empty forms;
+- {pending_forms} pending forms;
+- {finished_forms} finished forms.""").gettext(
+                user_title=user.get_title(),
+                user_email=user.get_property('email'),
+                application_title=application.get_title(), **stats)
+
+        # Send notification to workgroup members
+        root = context.root
+        users = resource.get_resource('/users')
+        for username in workgroup.get_property('members'):
+            member = users.get_resource(username)
+            to_addr = (member.get_title(), member.get_property('email'))
+            root.send_email(to_addr, subject, text=text,
+                    subject_with_host=False)
+
         context.message = MSG_FINISHED
 
 
