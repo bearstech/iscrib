@@ -95,7 +95,7 @@ class XLSTable(object):
         sheet = self.sheet
         for y in range(sheet.nrows):
             values = []
-            for x, cell in enumerate(sheet.row_slice(y)):
+            for x, cell in enumerate(sheet.row(y)):
                 value = cell.value
                 if cell.ctype == XL_CELL_DATE:
                     date = xldate_as_tuple(value, 0)
