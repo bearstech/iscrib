@@ -476,7 +476,10 @@ class Schema(Table):
                             default=unicode(default, 'utf_8'))
                 record['default'] = default
             handler.add_record(record)
-            locals_[name] = 0
+            if record['enum_repr'] == 'checkbox':
+                locals_[name] = []
+            else:
+                locals_[name] = 0
             lineno += 1
         # Second round on references
         # Starting from 1 + header

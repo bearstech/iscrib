@@ -220,9 +220,18 @@ class Form(File):
             if isinstance(datatype, Numeric):
                 pass
             elif issubclass(datatype, SqlEnumerate):
-                value = datatype.get_value(value)
-                if value is not None:
-                    value = value.encode('utf_8')
+                if datatype.multiple:
+                    values = []
+                    for value in value:
+                        value = datatype.get_value(value)
+                        if value is not None:
+                            value = value.encode('utf_8')
+                        values.append(value)
+                    value = values
+                else:
+                    value = datatype.get_value(value)
+                    if value is not None:
+                        value = value.encode('utf_8')
             locals_[name] = value
         return locals_
 
