@@ -339,7 +339,7 @@ class Form(File):
     def get_reverse_dependency(name, schema):
         return [dep_name
                 for dep_name, dep_datatype in schema.iteritems()
-                if name == dep_datatype.dependency]
+                if name in dep_datatype.dependency]
 
 
     def get_dep_names(self, name, schema, iteration=0, max_dep_names=3):
