@@ -1,21 +1,14 @@
-function input_enabled(name) {
-    $("input[name=" + name + "]")
-        .attr("disabled", false)
-        .removeClass('disabled');
-    $("#field_" + name)
-        .attr("disabled", false)
-        .removeClass('disabled');
+function enable_disable_input(name) {
+    var item = $("input[name=" + name + "]");
+    if (item.attr("disabled")){
+        item.removeAttr("disabled");
+        item.removeClass("disabled");
+    }
+    else {
+        item.attr("disabled", "true");
+        item.addClass("disabled");
+    };
 }
-
-function input_disabled(name) {
-    $("input[name=" + name + "]")
-        .attr("disabled", true)
-        .addClass('disabled');
-    $("#field_" + name)
-        .attr("disabled", true)
-        .addClass('disabled');
-}
-
 
 /*
  * Tooltip script
