@@ -246,8 +246,14 @@ class Expression(Unicode):
                 # Non-break spaces
                 .replace(u'\u00a0', u'')
                 # Fucking replacement
-                .replace(u'«', u'"').replace(u'»', '"'))
+                .replace(u'«', u'"').replace(u'»', u'"'))
         return value
+
+
+    def is_simple(cls, value):
+        if '=' in value or 'in' in value:
+            return False
+        return True
 
 
     def is_valid(cls, value, locals_):

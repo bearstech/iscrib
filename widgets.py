@@ -26,6 +26,8 @@ from decimal import InvalidOperation
 from itools.core import is_thingy, merge_dicts
 from itools.datatypes import XMLContent, XMLAttribute
 from itools.gettext import MSG
+from itools.handlers import checkid
+from itools.log import log_warning
 from itools.web import get_context
 
 # Import from ikaaro
@@ -34,6 +36,7 @@ from ikaaro.file import Image
 # Import from iscrib
 from datatypes import Numeric, Text, EnumBoolean, SqlEnumerate, NumDecimal
 from datatypes import NumDate, NumTime, FileImage
+from schema import Expression
 
 
 NBSP = u"\u00a0".encode('utf8')
@@ -118,21 +121,48 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
                 html.append(input)
     else:
         for option in datatype.get_namespace(data):
-            attributes = merge_dicts(
-                    choice_attributes,
-                    value=option['name'])
+            js = []
+            opt_name = option['name']
+            attributes = merge_dicts(choice_attributes, value=opt_name)
             if option['selected']:
                 attributes[choice_checked] = choice_checked
             if form.is_disabled_by_dependency(name, schema, fields):
                 attributes[u"disabled"] = u"disabled"
                 attributes.setdefault(u"class", []).append(u"disabled")
+
             # 0005970: Le Javascript pour (dés)activer les autres champs
-            method = 'enable_disable_input'
             dep_names = form.get_dep_names(name, schema)
             for dep_name in dep_names:
-                attributes.setdefault(u"onchange", []).append(
-                    u"{method}('{name}');".format(method=method,
-                        name=dep_name))
+                dependency = schema[dep_name].dependency
+                if not dependency:
+                    continue
+                # Add js action on simple boolean expressions. ie: "C11"
+                if not Expression.is_simple(dependency):
+                    # Authorized operators are "==", "=" and "in"
+                    # ie:"C11=='others'", "C11='others'", "'others' in  C11"
+                    if 'in' in dependency:
+                        dep_value = dependency.split('in', 1)[0].strip()
+                    elif '==' in dependency:
+                        exclusive, dep_value = dependency.rsplit('==', 1)
+                    elif '!=' in dependency:
+                        exclusive, dep_value = dependency.rsplit('!=', 1)
+                    else:
+                        msg = 'K col operator unknown in "%s"' % dependency
+                        log_warning(msg)
+                        continue
+                    if dep_value[:1] in ("u'" , 'u"'):
+                        dep_value = dep_value[:2]
+                    dep_value = (dep_value.replace("'", '').replace('"', ''))
+                    dep_value = checkid(dep_value)
+                else:
+                    dep_value = 'false'
+
+                js_code = (
+                    '$("input[name=\\"%s\\"][value=\\"%s\\"]")'
+                    '.change(function(){switch_input($(this),"%s","%s");});'
+                    % (name, opt_name, dep_name, dep_value))
+                js.append(js_code)
+
             # 0005970 fin
             value = option['value']
             if is_thingy(value, MSG):
@@ -144,6 +174,11 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
                 html.append(make_element(u"div", content=input))
             else:
                 html.append(input)
+
+            # Append JS code
+            content = XMLContent.encode(u'\n'.join(js))
+            attributes = {u'type': "text/javascript"}
+            html.append(make_element(u'script', attributes, content))
 
     attributes = merge_dicts(
             container_attributes,

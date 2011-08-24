@@ -1,14 +1,35 @@
-function enable_disable_input(name) {
-    var item = $("input[name=" + name + "]");
-    if (item.attr("disabled")){
-        item.removeAttr("disabled");
-        item.removeClass("disabled");
+function switch_input(input, dep_name, dep_value) {
+    /* Disable/Enable text field if dep_value ON changed */
+    var item = $("input[name="+dep_name+"],textarea[name="+dep_name+"]");
+    var type = input.attr('type');
+
+    if (type == 'radio') {
+        /* RADIO : value True if 1 */
+        if (input.val() == 1){
+            item.removeAttr("disabled");
+            item.removeClass("disabled");
+            item.trigger('change');
+        }
+        else {
+            item.attr("disabled", "true");
+            item.addClass("disabled");
+        }
     }
     else {
-        item.attr("disabled", "true");
-        item.addClass("disabled");
-    };
+        /* OPTION : value ON if value == dep_value */
+        if (input.val()== dep_value){
+            if (input.attr('checked')){
+                item.removeAttr("disabled");
+                item.removeClass("disabled");
+            }
+            else {
+                item.attr("disabled", "true");
+                item.addClass("disabled");
+            }
+        }
+    }
 }
+
 
 /*
  * Tooltip script
