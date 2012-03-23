@@ -377,7 +377,7 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
                 return False
             logo = resource.get_resource(path)
             logo.set_workflow_state('public')
-            theme.set_property(name, theme.get_pathto(logo))
+            theme.set_property(name, str(theme.get_pathto(logo)))
             return False
         elif name == 'style':
             style = resource.get_resource('theme/style')
