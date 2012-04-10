@@ -253,6 +253,7 @@ class Workgroup_View(Folder_BrowseContent):
     table_columns = freeze([
             ('form', MSG(u"Application")),
             ('subscribed', MSG(u"Subscribed Users")),
+            ('max_users', MSG(u'Maximum users')),
             ('file', MSG(u"Source File")),
             ('ctime', MSG(u"Creation Date"))])
     table_actions = freeze([])
