@@ -404,7 +404,7 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
 
 class Workgroup_NewOrder(AutoForm):
 
-    access = 'is_allowed_to_view'
+    access = 'is_allowed_to_edit'
     title = MSG(u'Choose a product')
     actions = [NextButton]
 
@@ -439,7 +439,7 @@ class Workgroup_NewOrder(AutoForm):
 
 class Workgroup_ViewOrders(FieldsTableFeed_View):
 
-    access = 'is_allowed_to_view'
+    access = 'is_allowed_to_edit'
     title = MSG(u'Orders')
 
     sort_by = 'ctime'
