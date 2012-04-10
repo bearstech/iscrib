@@ -39,6 +39,10 @@ div#page {
   font-size: 2.4em;
 }
 
+#tabs{
+  display: none;
+}
+
 #folder-banner {
   display: table;
   margin: auto;
