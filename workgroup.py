@@ -17,7 +17,7 @@
 
 # Import from itools
 from itools.core import merge_dicts, freeze
-from itools.datatypes import Boolean, PathDataType
+from itools.datatypes import Boolean, Integer, PathDataType, String
 from itools.gettext import MSG
 from itools.web import get_context
 
@@ -47,12 +47,21 @@ class Workgroup_Order(Order):
     class_id = 'workgroup-order'
     class_title = MSG(u'Workgroup order')
 
+    class_schema = merge_dicts(
+        Order.class_schema,
+        nb_users=Integer(source='metadata'),
+        application_abspath=String(source='metadata'))
+
     def onenter_paid(self):
         # Super
         super(Workgroup_Order, self).onenter_paid()
         # Increase nb mails on application
-        workgroup = self.get_site_root()
-        print workgroup
+        root = self.get_root()
+        nb_users = self.get_property('nb_users')
+        application_abspath = self.get_property('application_abspath')
+        application = root.get_resource(application_abspath)
+        max_users = application.get_property('max_users')
+        application.set_property('max_users', max_users + nb_users)
 
 
 

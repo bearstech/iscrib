@@ -835,19 +835,25 @@ class Application_NewOrder(AutoForm):
     actions = [NextButton]
 
 
-    schema = {'product': Product_List(title=MSG(u'Produit'), mandatory=True)}
-    widgets = [SelectWidget('product', title=MSG(u"Abonnement(s)"),
+    schema = {'product': Product_List(mandatory=True)}
+    widgets = [SelectWidget('product', title=MSG(u"Product"),
             datatype=Product_List, multiple=False, has_empty_option=False)]
 
 
     def action(self, resource, context, form):
         from workgroup import Workgroup_Order
-        lines = [(1, resource.get_resource(form['product']))]
+        product = resource.get_resource(form['product'])
+        nb_users = product.get_property('nb_users')
+        application_abspath = str(resource.abspath)
+        lines = [(1, product)]
         # Create Order
+        workgroup = resource.get_site_root()
+        workgroup_orders = workgroup.get_resource('orders')
         orders_module = get_orders(resource)
-        order = orders_module.make_order(resource, context.user, lines,
-            cls=Workgroup_Order)
-        #order.set_property('title', title, language='fr')
+        order = orders_module.make_order(workgroup_orders,
+            context.user, lines, cls=Workgroup_Order)
+        order.set_property('nb_users', nb_users)
+        order.set_property('application_abspath', application_abspath)
         # Create payment into order
         customer = context.user
         amount = order.get_total_price()
