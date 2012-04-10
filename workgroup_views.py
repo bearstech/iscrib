@@ -22,6 +22,7 @@ from itools.datatypes import Boolean, Unicode, Email, String
 from itools.gettext import MSG
 from itools.stl import stl
 from itools.web import INFO, ERROR
+from itools.xml import XMLParser
 
 # Import from ikaaro
 from ikaaro import messages
@@ -34,7 +35,10 @@ from ikaaro.theme_views import Theme_Edit
 from ikaaro.views_new import NewInstance
 
 # Import from itws
+from itws.feed_views import FieldsTableFeed_View
 from itws.shop import get_orders, NextButton, get_payments, Product_List
+from itws.shop.order_views import OrderState_Template
+from itws.shop.workflows import OrderStateEnumerate
 
 
 # Import from iscrib
@@ -428,3 +432,63 @@ class Workgroup_NewOrder(AutoForm):
         return_message = MSG(u'Payment form')
         goto = '%s/;payment_form' % context.get_link(payment)
         return context.come_back(return_message, goto=goto)
+
+
+
+
+
+class Workgroup_ViewOrders(FieldsTableFeed_View):
+
+    access = 'is_allowed_to_view'
+    title = MSG(u'Orders')
+
+    sort_by = 'ctime'
+    reverse = True
+    batch_msg1 = MSG(u"There is 1 order")
+    batch_msg2 = MSG(u"There are {n} orders")
+    table_actions = []
+
+    styles = ['/ui/shop/style.css']
+
+    search_on_current_folder = True
+    search_on_current_folder_recursive = False
+
+    search_fields = []
+    table_fields = ['checkbox', 'name', 'workflow_state',
+                    'total_price', 'total_paid', 'ctime', 'bill']
+
+    def get_item_value(self, resource, context, item, column):
+        brain, item_resource = item
+        if column in ('total_price', 'total_paid'):
+            value = item_resource.get_property(column)
+            return item_resource.format_price(value)
+        elif column == 'name':
+            return OrderState_Template(title=brain.name,
+                link=context.get_link(item_resource), color='#BF0000')
+        elif column == 'workflow_state':
+            value = item_resource.get_statename()
+            title = OrderStateEnumerate.get_value(value)
+            return OrderState_Template(title=title,
+                link=context.get_link(item_resource), color='#BF0000')
+        elif column == 'bill':
+            bill = item_resource.get_bill()
+            if bill is None:
+                return None
+            return XMLParser("""
+                    <a href="%s/;download">
+                      <img src="/ui/icons/16x16/pdf.png"/>
+                    </a>""" % context.get_link(bill))
+        proxy = super(Workgroup_ViewOrders, self)
+        return proxy.get_item_value(resource, context, item, column)
+
+
+    @property
+    def search_cls(self):
+        from workgroup import Workgroup_Order
+        return Workgroup_Order
+
+
+    def get_items(self, resource, context, *args):
+        query = PhraseQuery('is_order', True)
+        proxy = super(Workgroup_ViewOrders, self)
+        return proxy.get_items(resource, context, query)

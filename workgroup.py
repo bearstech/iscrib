@@ -30,7 +30,6 @@ from ikaaro.website import WebSite
 
 # Import from itws
 from itws.shop import Order
-from itws.shop.order_views import OrderModule_ViewOrders
 
 # Import from iscrib
 from application import Application
@@ -40,6 +39,8 @@ from form import Form
 from workflow import FINISHED, EXPORTED, MODIFIED
 from workgroup_views import Workgroup_NewInstance, Workgroup_View
 from workgroup_views import Workgroup_Edit, Workgroup_NewOrder
+from workgroup_views import Workgroup_ViewOrders
+
 
 class Workgroup_Order(Order):
 
@@ -61,7 +62,7 @@ class Workgroup_Orders(Folder):
     class_title = MSG(u'Workgroup orders')
     class_views = ['view']
 
-    view = OrderModule_ViewOrders(access='is_allowed_to_view')
+    view = Workgroup_ViewOrders()
 
 
 class Workgroup(WebSite):
