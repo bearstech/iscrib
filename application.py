@@ -69,7 +69,8 @@ class Application(Folder):
     class_schema = freeze(merge_dicts(
         Folder.class_schema,
         author=String(source='metadata', indexed=False, stored=True),
-        ctime=DateTime(source='metadata', indexed=False, stored=True),
+        # Ctime is already indexed=False, stored=True in ITWS
+        ctime=DateTime(source='metadata'),
         max_users=Integer(source='metadata', default=allowed_users),
         subscription=Subscription(source='metadata',
             default='restricted')))

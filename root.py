@@ -32,8 +32,12 @@ from ikaaro.file import Image
 from ikaaro.root import Root as BaseRoot
 from ikaaro.workflow import WorkflowAware
 
+# Import from itws
+from itws.shop import Shop
+
 # Import from iscrib
 from base_views import AutomaticEditView, LoginView
+from products import Products
 from root_views import Root_View, Root_Show, Root_Contact
 from root_views import Root_EditContactOptions
 from utils import is_debug
@@ -54,6 +58,8 @@ class Root(BaseRoot):
     class_skin = 'ui/iscrib'
     class_version = '20100703'
     class_views = BaseRoot.class_views + ['show']
+
+    __fixed_handlers__ = BaseRoot.__fixed_handlers__ + ['shop', 'products']
 
     edit_schema = freeze({
         'homepage': XHTMLBody(multilingual=True),
@@ -88,6 +94,10 @@ class Root(BaseRoot):
         # Laisse voir le nom du website
         theme = self.get_resource('theme')
         theme.set_property('logo', None)
+        # Products
+        self.make_resource('products', Products)
+        # Shop
+        self.make_resource('shop', Shop)
         # Favicon à utiliser partout
         filename = 'itaapy-favicon.ico'
         with open(get_abspath('ui/' + filename)) as file:
