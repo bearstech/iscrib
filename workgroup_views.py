@@ -240,7 +240,11 @@ class Workgroup_Menu(IconsView):
              make_item(icon='/ui/iscrib/images/logo48.png',
               title=MSG(u"Edit Title, Logo and CSS"),
               description=MSG(u"Configure your client space"),
-              url=';edit')]
+              url=';edit'),
+             make_item(icon='/ui/shop/images/orders.png',
+              title=MSG(u"Manage my bills"),
+              description=MSG(u"Manage my bills & buy new products"),
+              url='./orders')]
 
 
 
