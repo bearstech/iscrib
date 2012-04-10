@@ -74,7 +74,7 @@ class Workgroup(WebSite):
         WebSite.class_schema,
         logo=PathDataType(source='metadata', default=''),
         accept_terms_of_use=Boolean(source='metadata')))
-    class_views = WebSite.class_views + ['show']
+    class_views = ['view', 'show']
     class_skin = 'ui/iscrib'
 
     # Views
