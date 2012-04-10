@@ -8,9 +8,11 @@
 
   <stl:block stl:if="batch">
     <p>
-      You have subscribed ${n_forms} users<stl:inline stl:if="max_users">
-      out of ${max_users} allowed</stl:inline>.
-      <a href="./;order">Buy new credits</a> if you want to add more users.
+      You have subscribed ${n_forms} users
+      <stl:inline stl:if="max_users">
+        out of ${max_users} allowed.
+        <a href="./;order">Buy new credits</a> if you want to add more than ${max_users} users.
+      </stl:inline>
     </p>
 
     ${search}
