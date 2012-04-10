@@ -33,6 +33,7 @@ from itools.web import INFO, ERROR, BaseView, STLForm, get_context
 # Import from ikaaro
 from ikaaro.access import is_admin
 from ikaaro.autoform import FileWidget, TextWidget, SelectWidget, file_widget
+from ikaaro.autoform import AutoForm
 from ikaaro.datatypes import FileDataType
 from ikaaro.folder_views import Folder_BrowseContent, GoToSpecificDocument
 from ikaaro.messages import MSG_PASSWORD_MISMATCH
@@ -40,6 +41,9 @@ from ikaaro.resource_views import DBResource_Edit
 from ikaaro.views import SearchForm
 from ikaaro.views_new import NewInstance
 from ikaaro.workflow import get_workflow_preview
+
+# Import from itws
+from itws.shop import get_orders, NextButton, get_payments, Product_List
 
 # Import from iscrib
 from base_views import LoginView, IconsView
@@ -126,10 +130,9 @@ class Application_Menu(IconsView):
             title=MSG(u"Show Test Form"),
             url='0/;pageA'),
         make_item(icon='/ui/iscrib/images/register48.png',
-            title=MSG(u"Add Users"),
-            url=';register',
-            description=MSG(u"Manage Users"),
-            description_url=';view#users',
+            title=MSG(u"Manage Users"),
+            url=';view#users',
+            description=MSG(u"List and add new users"),
             access='is_allowed_to_register'),
         # "Spread your Form" here
         make_item(icon='/ui/iscrib/images/export48.png',
@@ -822,3 +825,36 @@ class Application_RedirectToForm(GoToSpecificDocument):
 
     def get_specific_document(self, resource, context):
         return self.get_form_name(context.user, resource)
+
+
+
+class Application_NewOrder(AutoForm):
+
+    access = 'is_allowed_to_edit'
+    title = MSG(u'Choose a product')
+    actions = [NextButton]
+
+
+    schema = {'product': Product_List(title=MSG(u'Produit'), mandatory=True)}
+    widgets = [SelectWidget('product', title=MSG(u"Abonnement(s)"),
+            datatype=Product_List, multiple=False, has_empty_option=False)]
+
+
+    def action(self, resource, context, form):
+        from workgroup import Workgroup_Order
+        lines = [(1, resource.get_resource(form['product']))]
+        # Create Order
+        orders_module = get_orders(resource)
+        order = orders_module.make_order(resource, context.user, lines,
+            cls=Workgroup_Order)
+        #order.set_property('title', title, language='fr')
+        # Create payment into order
+        customer = context.user
+        amount = order.get_total_price()
+        payments_module = get_payments(resource)
+        payment = payments_module.make_payment(order, 'paybox', amount,
+                      customer, order=order)
+        # Goto payment
+        return_message = MSG(u'Payment form')
+        goto = '%s/;payment_form' % context.get_link(payment)
+        return context.come_back(return_message, goto=goto)

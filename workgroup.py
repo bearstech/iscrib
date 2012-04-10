@@ -38,7 +38,7 @@ from demo import is_demo_application, is_demo_form
 from form import Form
 from workflow import FINISHED, EXPORTED, MODIFIED
 from workgroup_views import Workgroup_NewInstance, Workgroup_View
-from workgroup_views import Workgroup_Edit, Workgroup_NewOrder
+from workgroup_views import Workgroup_Edit
 from workgroup_views import Workgroup_ViewOrders
 
 
@@ -85,7 +85,6 @@ class Workgroup(WebSite):
             cls=Application)
     add_favicon = Theme_AddFavIcon()
     add_logo = Theme_AddLogo()
-    order = Workgroup_NewOrder()
     # Security
     control_panel = ControlPanel(access='is_admin')
     unauthorized = LoginView()

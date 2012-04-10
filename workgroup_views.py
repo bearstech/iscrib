@@ -27,8 +27,7 @@ from itools.xml import XMLParser
 # Import from ikaaro
 from ikaaro import messages
 from ikaaro.autoform import TextWidget, MultilineWidget, PasswordWidget
-from ikaaro.autoform import ReadOnlyWidget, CheckboxWidget, SelectWidget
-from ikaaro.autoform import AutoForm
+from ikaaro.autoform import ReadOnlyWidget, CheckboxWidget
 from ikaaro.folder_views import Folder_BrowseContent
 from ikaaro.resource_views import DBResource_Edit
 from ikaaro.theme_views import Theme_Edit
@@ -36,7 +35,6 @@ from ikaaro.views_new import NewInstance
 
 # Import from itws
 from itws.feed_views import FieldsTableFeed_View
-from itws.shop import get_orders, NextButton, get_payments, Product_List
 from itws.shop.order_views import OrderState_Template
 from itws.shop.workflows import OrderStateEnumerate
 
@@ -400,40 +398,6 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
             return False
         proxy = super(Workgroup_Edit, self)
         return proxy.set_value(resource, context, name, form)
-
-
-class Workgroup_NewOrder(AutoForm):
-
-    access = 'is_allowed_to_edit'
-    title = MSG(u'Choose a product')
-    actions = [NextButton]
-
-
-    schema = {'product': Product_List(title=MSG(u'Produit'), mandatory=True)}
-    widgets = [SelectWidget('product', title=MSG(u"Abonnement(s)"),
-            datatype=Product_List, multiple=False, has_empty_option=False)]
-
-
-    def action(self, resource, context, form):
-        from workgroup import Workgroup_Order
-        lines = [(1, resource.get_resource(form['product']))]
-        # Create Order
-        orders_module = get_orders(resource)
-        order = orders_module.make_order(resource, context.user, lines,
-            cls=Workgroup_Order)
-        #order.set_property('title', title, language='fr')
-        # Create payment into order
-        customer = context.user
-        amount = order.get_total_price()
-        payments_module = get_payments(resource)
-        payment = payments_module.make_payment(order, 'paybox', amount,
-                      customer, order=order)
-        # Goto payment
-        return_message = MSG(u'Payment form')
-        goto = '%s/;payment_form' % context.get_link(payment)
-        return context.come_back(return_message, goto=goto)
-
-
 
 
 

@@ -29,6 +29,7 @@ from application_views import Application_Edit, Application_Export
 from application_views import Application_NewInstance, Application_View
 from application_views import Application_RedirectToForm, Application_Menu
 from application_views import Application_Register, Application_Login
+from application_views import Application_NewOrder
 from controls import Controls
 from datatypes import Subscription
 from demo import get_demo_user
@@ -89,6 +90,7 @@ class Application(Folder):
     register = Application_Register()
     login = Application_Login()
     show = Application_RedirectToForm()
+    order = Application_NewOrder()
 
 
     def _load_from_file(self, file, context):
