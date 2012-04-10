@@ -24,8 +24,13 @@ from itools.web import get_context
 # Import from ikaaro
 from ikaaro.access import is_admin
 from ikaaro.control_panel import ControlPanel
+from ikaaro.folder import Folder
 from ikaaro.theme_views import Theme_AddFavIcon, Theme_AddLogo
 from ikaaro.website import WebSite
+
+# Import from itws
+from itws.shop import Order
+from itws.shop.order_views import OrderModule_ViewOrders
 
 # Import from iscrib
 from application import Application
@@ -34,7 +39,29 @@ from demo import is_demo_application, is_demo_form
 from form import Form
 from workflow import FINISHED, EXPORTED, MODIFIED
 from workgroup_views import Workgroup_NewInstance, Workgroup_View
-from workgroup_views import Workgroup_Edit
+from workgroup_views import Workgroup_Edit, Workgroup_NewOrder
+
+class Workgroup_Order(Order):
+
+    class_id = 'workgroup-order'
+    class_title = MSG(u'Workgroup order')
+
+    def onenter_paid(self):
+        # Super
+        super(Workgroup_Order, self).onenter_paid()
+        # Increase nb mails on application
+        workgroup = self.get_site_root()
+        print workgroup
+
+
+
+class Workgroup_Orders(Folder):
+
+    class_id = 'workgroup-orders'
+    class_title = MSG(u'Workgroup orders')
+    class_views = ['view']
+
+    view = OrderModule_ViewOrders(access='is_allowed_to_view')
 
 
 class Workgroup(WebSite):
@@ -57,6 +84,7 @@ class Workgroup(WebSite):
             cls=Application)
     add_favicon = Theme_AddFavIcon()
     add_logo = Theme_AddLogo()
+    order = Workgroup_NewOrder()
     # Security
     control_panel = ControlPanel(access='is_admin')
     unauthorized = LoginView()
@@ -64,13 +92,21 @@ class Workgroup(WebSite):
 
     def init_resource(self, **kw):
         super(Workgroup, self).init_resource(**kw)
-        theme = self.get_resource('theme')
         # Laisse voir le nom du website
+        theme = self.get_resource('theme')
         theme.set_property('logo', None)
+        # Orders
+        self.make_resource('orders', Workgroup_Orders)
 
 
     def get_document_types(self):
         return super(Workgroup, self).get_document_types() + [Application]
+
+    def _get_resource(self, name):
+        if name == 'shop':
+            # XXX Hack because shop must be in the same website
+            return self.parent.get_resource('shop')
+        return super(Workgroup, self)._get_resource(name)
 
 
     def get_logo_icon(self, size=48):
