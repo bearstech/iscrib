@@ -57,7 +57,7 @@ class Root(BaseRoot):
         recaptcha_whitelist=String(source='metadata', multiple=True,
             default=['127.0.0.1'])))
     class_skin = 'ui/iscrib'
-    class_version = '20100703'
+    class_version = '20120411'
     class_views = BaseRoot.class_views + ['show']
 
     __fixed_handlers__ = BaseRoot.__fixed_handlers__ + ['shop', 'products']
@@ -146,3 +146,11 @@ class Root(BaseRoot):
             text = u"%s\n\n%s" % (context.uri, traceback.format_exc())
             self.send_email(email, subject, text=text)
         return super(Root, self).internal_server_error(context)
+
+
+    def update_20120410(self):
+        self.make_resource('shop', Shop)
+
+
+    def update_20120411(self):
+        self.make_resource('products', Products)
