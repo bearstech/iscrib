@@ -2,8 +2,9 @@ Dependencies
 =====================
 
   - itools (V 0.62)
-  - ikaaro (V 0.62)
+  - ikaaro (V 0.62) (V iscrib -> http://git.hforge.org/?p=ikaaro.git;a=shortlog;h=refs/heads/iscrib)
   - lpod-python (V master)
+  - itws (V master - itws 1.2 with shop functionnality - release to come)
 
 Installation
 =====================
