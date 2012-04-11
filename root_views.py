@@ -21,6 +21,7 @@ from itools.core import merge_dicts,freeze
 from itools.datatypes import String, Unicode, Email
 from itools.gettext import MSG
 from itools.uri import encode_query, get_reference, Reference
+from itools.web import STLView
 
 # Import from ikaaro
 from ikaaro.autoform import AutoForm, TextWidget, MultilineWidget
@@ -32,6 +33,12 @@ from autoform import RecaptchaDatatype, captcha_schema, captcha_widgets
 from base_views import FrontView
 from buttons import CreateButton
 from workgroup import Workgroup
+
+
+class Root_ViewAdmin(STLView):
+
+    access = 'is_admin'
+    template = "/ui/iscrib/root/admin_view.xml"
 
 
 class Root_View(AutoForm):

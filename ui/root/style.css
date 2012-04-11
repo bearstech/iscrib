@@ -70,6 +70,12 @@ div#page {
   text-transform: uppercase;
 }
 
+#header #menu li a.admin-link{
+  color: #F73131;
+  font-weight: bold;
+}
+
+
 #header #menu li a:hover,
 #header #menu li.in-path a {
   background: #49d1ff;

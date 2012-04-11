@@ -112,4 +112,7 @@ class Skin(BaseSkin):
                 page_css = 'home-page'
         namespace['page_css'] = page_css
 
+        # Is Admin
+        namespace['is_admin'] = is_admin(user, resource)
+
         return namespace

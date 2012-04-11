@@ -45,6 +45,12 @@
           <a href="${menu/path}" id="${menu/id}" target="${menu/target}"
              title="${menu/title}">${menu/title}</a>
         </li>
+        <li stl:if="is_admin">
+          <a href="/;view_admin" title="Administration"
+            stl:if="is_admin" class="admin-link">
+            Administration
+          </a>
+        </li>
       </ul>
       <!-- Logo -->
       <div id="logo">
