@@ -26,7 +26,7 @@
         <img src="/ui/icons/48x48/website.png"/>
       </td>
       <td>
-        <a href="/;show_all_workgroups">List client spaces</a>
+        <a href="/;show_all_workgroups">List workgroups</a>
       </td>
     </tr>
     <tr>
