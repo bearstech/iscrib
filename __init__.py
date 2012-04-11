@@ -16,9 +16,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-# Import from the Standard Library
-from sys import argv
-
 # Import from itools
 from itools.core import get_version, get_abspath
 from itools.gettext import register_domain
@@ -38,11 +35,6 @@ __version__ = get_version()
 # Give a language
 register_domain('iscrib', get_abspath('locale'))
 register_skin('iscrib', Skin(get_abspath('ui')))
-
-# Import obsolete if command is icms-update.py
-if argv[0].endswith('icms-update.py'):
-    import obsolete
-    print 'Imported', obsolete.__name__
 
 # Silent Pyflakes
 __all__ = [
