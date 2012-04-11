@@ -403,8 +403,8 @@ class Workgroup_Edit(Theme_Edit, DBResource_Edit):
 
 class Workgroup_ViewOrders(FieldsTableFeed_View):
 
-    access = 'is_allowed_to_edit'
     title = MSG(u'Orders')
+    access = 'is_allowed_to_view'
 
     sort_by = 'ctime'
     reverse = True
