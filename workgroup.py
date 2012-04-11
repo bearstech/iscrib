@@ -47,10 +47,10 @@ class Workgroup_Order(Order):
     class_id = 'workgroup-order'
     class_title = MSG(u'Workgroup order')
 
-    class_schema = merge_dicts(
+    class_schema = freeze(merge_dicts(
         Order.class_schema,
         nb_users=Integer(source='metadata'),
-        application_abspath=String(source='metadata'))
+        application_abspath=String(source='metadata')))
 
     def onenter_paid(self):
         # Super
