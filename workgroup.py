@@ -75,6 +75,7 @@ class Workgroup_Orders(Folder):
 
 
 class Workgroup(WebSite):
+
     class_id = 'Workgroup'
     class_title = MSG(u"iScrib Workgroup")
     class_description = MSG(u"Create your client space to manage collection "
@@ -83,6 +84,7 @@ class Workgroup(WebSite):
         WebSite.class_schema,
         logo=PathDataType(source='metadata', default=''),
         accept_terms_of_use=Boolean(source='metadata')))
+    class_version = '20120411'
     class_views = ['view', 'show']
     class_skin = 'ui/iscrib'
 
@@ -198,3 +200,7 @@ class Workgroup(WebSite):
             return False
         role = self.get_user_role(user.name)
         return role in ('members', 'reviewers')
+
+
+    def update_20120411(self):
+        self.make_resource('orders', Workgroup_Orders)
