@@ -7,7 +7,7 @@
   <table cellpadding="5" cellspacing="5">
     <tr>
       <td>
-        <img src="/ui/iscrib/images/upload48.png"/>
+        <img src="/ui/icons/48x48/preferences.png"/>
       </td>
       <td>
         <a href="/;edit">Configure website</a>
@@ -34,7 +34,15 @@
         <img src="/ui/shop/images/products.png"/>
       </td>
       <td>
-        <a href="/products/">Configure products</a>
+        <a href="/products/">List ISCRIB products</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="/ui/iscrib/images/upload48.png"/>
+      </td>
+      <td>
+        <a href="/products/;new_resource?type=iscrib-product">Create new ISCRIB product</a>
       </td>
     </tr>
     <tr>
@@ -42,7 +50,7 @@
         <img src="/ui/shop/images/payments.png"/>
       </td>
       <td>
-        <a href="/shop/">Configure shop</a>
+        <a href="/shop/">Configure Shop / List orders / List payments</a>
       </td>
     </tr>
   </table>
