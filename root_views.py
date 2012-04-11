@@ -25,8 +25,12 @@ from itools.web import STLView
 
 # Import from ikaaro
 from ikaaro.autoform import AutoForm, TextWidget, MultilineWidget
+from ikaaro.buttons import RemoveButton
 from ikaaro.control_panel import CPEditContactOptions
 from ikaaro.website_views import ContactForm
+
+# Import from itws
+from itws.feed_views import FieldsTableFeed_View
 
 # Import from iscrib
 from autoform import RecaptchaDatatype, captcha_schema, captcha_widgets
@@ -278,3 +282,21 @@ class Root_EditContactOptions(CPEditContactOptions):
             return resource.set_property(name, form[name].split())
         proxy = super(Root_EditContactOptions, self)
         return proxy.set_value(resource, context, name, form)
+
+
+
+class Root_ShowAllWorkgroups(FieldsTableFeed_View):
+
+    search_cls = Workgroup
+    search_class_id = 'Workgroup'
+    search_fields = []
+    table_fields = ['checkbox', 'name', 'title', 'vhosts']
+    table_actions = [RemoveButton]
+
+
+    def get_item_value(self, resource, context, item, column):
+        brain, item_resource = item
+        if column == 'vhosts':
+            return '\n'.join(item_resource.get_property(column))
+        proxy = super(Root_ShowAllWorkgroups, self)
+        return proxy.get_item_value(resource, context, item, column)
