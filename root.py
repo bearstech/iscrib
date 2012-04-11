@@ -148,9 +148,9 @@ class Root(BaseRoot):
         return super(Root, self).internal_server_error(context)
 
 
-    def update_20120410(self):
+    def update_20120409(self):
         self.make_resource('shop', Shop)
 
 
-    def update_20120411(self):
+    def update_20120410(self):
         self.make_resource('products', Products)
