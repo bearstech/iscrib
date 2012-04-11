@@ -49,6 +49,7 @@ class Products_View(FieldsTableFeed_View):
 
     search_cls = Product
     search_fields = []
+    search_class_id = 'iscrib-product'
     table_fields = ['checkbox', 'name', 'reference', 'title', 'description',
                     'nb_users', 'workflow_state']
     table_actions = [RemoveButton, PublishButton, RetireButton]
