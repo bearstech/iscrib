@@ -31,6 +31,14 @@
     </tr>
     <tr>
       <td>
+        <img src="/ui/icons/48x48/tasks.png"/>
+      </td>
+      <td>
+        <a href="/;show_all_applications">List applications</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <img src="/ui/shop/images/products.png"/>
       </td>
       <td>

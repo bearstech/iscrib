@@ -19,7 +19,6 @@
 # Import from itools
 from itools.core import merge_dicts,freeze
 from itools.datatypes import String, Unicode, Email, XMLContent
-from itools.datatypes import Integer
 from itools.gettext import MSG
 from itools.uri import encode_query, get_reference, Reference
 from itools.web import STLView
@@ -35,6 +34,7 @@ from ikaaro.website_views import ContactForm
 from itws.feed_views import FieldsTableFeed_View
 
 # Import from iscrib
+from application import Application
 from autoform import RecaptchaDatatype, captcha_schema, captcha_widgets
 from base_views import FrontView
 from buttons import CreateButton
@@ -289,6 +289,7 @@ class Root_EditContactOptions(CPEditContactOptions):
 
 class Root_ShowAllWorkgroups(FieldsTableFeed_View):
 
+    access = 'is_admin'
     search_cls = Workgroup
     search_class_id = 'Workgroup'
     search_fields = []
@@ -305,4 +306,30 @@ class Root_ShowAllWorkgroups(FieldsTableFeed_View):
             icon = XMLContent.encode(icon)
             return XMLParser('<img src="%s"/>' % icon)
         proxy = super(Root_ShowAllWorkgroups, self)
+        return proxy.get_item_value(resource, context, item, column)
+
+
+
+class Root_ShowAllApplications(FieldsTableFeed_View):
+
+    access = 'is_admin'
+    search_cls = Application
+    search_class_id = 'Application'
+    search_fields = []
+    table_fields = ['checkbox', 'title', 'max_users']
+    table_actions = [RemoveButton]
+    batch_size = 0
+
+    def get_item_value(self, resource, context, item, column):
+        brain, item_resource = item
+        if column == 'title':
+            workgroup = item_resource.parent
+            title = u"%s » %s" % (workgroup.get_title(),
+                item_resource.get_title())
+            return title, context.get_link(item_resource)
+        elif column == 'max_users':
+            subscribed = len(list(item_resource.get_forms()))
+            max_users = item_resource.get_property('max_users')
+            return u"%s/%s" % (subscribed, max_users)
+        proxy = super(Root_ShowAllApplications, self)
         return proxy.get_item_value(resource, context, item, column)

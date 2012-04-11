@@ -40,7 +40,7 @@ from base_views import AutomaticEditView, LoginView
 from products import Products
 from root_views import Root_View, Root_Show, Root_Contact
 from root_views import Root_EditContactOptions, Root_ViewAdmin
-from root_views import Root_ShowAllWorkgroups
+from root_views import Root_ShowAllWorkgroups, Root_ShowAllApplications
 from utils import is_debug
 from workgroup import Workgroup
 
@@ -75,6 +75,7 @@ class Root(BaseRoot):
     edit = AutomaticEditView()
     show = Root_Show()
     show_all_workgroups = Root_ShowAllWorkgroups()
+    show_all_applications = Root_ShowAllApplications()
     contact = Root_Contact()
     edit_contact_options = Root_EditContactOptions()
     # Security
