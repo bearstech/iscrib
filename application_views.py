@@ -55,6 +55,7 @@ from formpage import FormPage
 from rw import ODSWriter, XLSWriter
 from schema import FormatError
 from utils import force_encode, is_debug, is_print
+from widgets import Products_Widget
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY
 
 
@@ -839,7 +840,7 @@ class Application_NewOrder(AutoForm):
 
 
     schema = {'product': Product_List(mandatory=True)}
-    widgets = [SelectWidget('product', title=MSG(u"Product"),
+    widgets = [Products_Widget('product', title=MSG(u"Product"),
             datatype=Product_List, multiple=False, has_empty_option=False)]
 
 

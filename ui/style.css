@@ -534,3 +534,11 @@ button, .button {
 #content form p#form-buttons {
   clear: none;
 }
+
+.products-widget tr th{
+  background-color: #F5F5F5;
+}
+
+.products-widget td{
+  border-bottom: 1px solid gray;
+}
