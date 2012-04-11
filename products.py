@@ -20,9 +20,11 @@ from itools.datatypes import Integer
 from itools.gettext import MSG
 
 # Import from ikaaro
+from ikaaro.buttons import PublishButton, RemoveButton, RetireButton
 from ikaaro.folder import Folder
 
 # Import from itws
+from itws.feed_views import FieldsTableFeed_View
 from itws.shop import Product as BaseProduct
 from itws.views import FieldsAutomaticEditView, FieldsAdvance_NewInstance
 
@@ -43,6 +45,16 @@ class Product(BaseProduct):
     edit = FieldsAutomaticEditView(edit_fields=_fields)
 
 
+class Products_View(FieldsTableFeed_View):
+
+    search_cls = Product
+    search_fields = []
+    table_fields = ['checkbox', 'name', 'reference', 'title', 'description',
+                    'nb_users', 'workflow_state']
+    table_actions = [RemoveButton, PublishButton, RetireButton]
+
+
+
 class Products(Folder):
 
     class_id = 'iscrib-products'
@@ -50,3 +62,6 @@ class Products(Folder):
 
     def get_document_types(self):
         return [Product]
+
+    # Views
+    view  = Products_View()
