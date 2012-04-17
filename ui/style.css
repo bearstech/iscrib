@@ -353,6 +353,11 @@ button, .button {
 .button-print { background-image: url(/ui/iscrib/images/printer16.png); }
 .button-selector { background-image: url(/ui/icons/16x16/image.png); }
 
+.button-csv {
+  background-image: url(/ui/icons/16x16/excel.png);
+  padding-left: 19px;
+}
+
 .wf-exported { color: #75507b; }
 .wf-modified { color: #3465a4; }
 

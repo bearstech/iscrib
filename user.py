@@ -83,6 +83,7 @@ Your password: {password}""")
 
 
 class iScribUserFolder(UserFolder):
+    class_views = ['view', 'browse_users', 'browse_content', 'edit']
     browse_users = UserFolder_BrowseContent()
 
 
