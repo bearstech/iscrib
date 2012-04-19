@@ -74,10 +74,9 @@ class FormHandler(FileHandler):
 
 
     def to_str(self, encoding='UTF-8'):
-        lines = []
-        for key, value in self._raw_fields.iteritems():
-            lines.append('%s:%s' % (key, value))
-        return '\n'.join(lines)
+        lines = [ '%s:%s\n' % x for x in self._raw_fields.iteritems() ]
+        lines.sort()
+        return ''.join(lines)
 
 
     ######################################################################
