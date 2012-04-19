@@ -409,6 +409,8 @@ class Numeric(object):
                 value = datatype.decode(data)
             except Exception:
                 return None
+            if not datatype.is_valid(datatype.encode(value)):
+                return None
             sum += value
         return sum
 
