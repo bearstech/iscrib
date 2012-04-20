@@ -20,9 +20,10 @@ import traceback
 
 # Import from itools
 from itools.core import merge_dicts, get_abspath, freeze
-from itools.datatypes import String
+from itools.datatypes import String, XMLContent
 from itools.fs import FileName
 from itools.gettext import MSG
+from itools.html import HTMLParser
 
 # Import from ikaaro
 from ikaaro.autoform import XHTMLBody, RTEWidget, TextWidget
@@ -101,7 +102,16 @@ class Root(BaseRoot):
         # Products
         self.make_resource('products', Products)
         # Shop
-        self.make_resource('shop', Shop)
+        shop = self.make_resource('shop', Shop)
+        paybox = shop.get_resource('payments/paybox')
+        msg = u"""
+          <p>Votre règlement est en cours de validation par nos équipes.
+          Vous allez recevoir un email dès que celui-ci aura été validé.</p>
+          <a href="../">Voir ma commande</a>
+        """
+        msg = msg.encode('utf-8').strip()
+        msg = HTMLParser(XMLContent.decode(msg))
+        paybox.set_property('payment_end_msg', msg, language='fr')
         # Favicon à utiliser partout
         filename = 'itaapy-favicon.ico'
         with open(get_abspath('ui/' + filename)) as file:
@@ -150,8 +160,6 @@ class Root(BaseRoot):
 
 
     def update_20120409(self):
-        from itools.datatypes import XMLContent
-        from itools.html import HTMLParser
         shop = self.make_resource('shop', Shop)
         paybox = shop.get_resource('payments/paybox')
         msg = u"""
