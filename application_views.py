@@ -61,8 +61,8 @@ from workflow import WorkflowState, NOT_REGISTERED, EMPTY
 
 ERR_NO_DATA = ERROR(u"No data to collect for now.")
 ERR_NO_MORE_ALLOWED = ERROR(u"You have reached the maximum allowed users. "
-        u'Contact <a href="http://www.itaapy.com/contact">Itaapy</a> for '
-        u"more.", format='html')
+        u'<a href="./;order">Buy new credits</a> if you want to add more '
+        u"users.", format='html')
 INFO_NEW_APPLICATION = INFO(u'Your application is created. You are now on '
         u'the test form.')
 ERR_PASSWORD_MISSING = ERROR(u"The password is missing.")
