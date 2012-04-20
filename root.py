@@ -150,7 +150,18 @@ class Root(BaseRoot):
 
 
     def update_20120409(self):
-        self.make_resource('shop', Shop)
+        from itools.datatypes import XMLContent
+        from itools.html import HTMLParser
+        shop = self.make_resource('shop', Shop)
+        paybox = shop.get_resource('payments/paybox')
+        msg = u"""
+          <p>Votre règlement est en cours de validation par nos équipes.
+          Vous allez recevoir un email dès que celui-ci aura été validé.</p>
+          <a href="../">Voir ma commande</a>
+        """
+        msg = msg.encode('utf-8').strip()
+        msg = HTMLParser(XMLContent.decode(msg))
+        paybox.set_property('payment_end_msg', msg, language='fr')
 
 
     def update_20120410(self):
