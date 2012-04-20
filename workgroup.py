@@ -132,6 +132,16 @@ class Workgroup(WebSite):
         return super(Workgroup, self).get_class_icon(size=size)
 
 
+    def get_workgroup_administrators(self):
+        root = self.get_root()
+        administrators = []
+        for user_name in self.get_property('members'):
+            administrators.append(root.get_user(user_name))
+        # XXX Maybe we have to alert root admins ?
+        # But currently there's to many admins !
+        return administrators
+
+
     def is_allowed_to_add_form(self, user, resource):
         return is_admin(user, resource)
 
