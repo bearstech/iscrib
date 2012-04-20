@@ -293,7 +293,7 @@ class Root_ShowAllWorkgroups(FieldsTableFeed_View):
     search_cls = Workgroup
     search_class_id = 'Workgroup'
     search_fields = []
-    table_fields = ['checkbox', 'logo', 'name', 'title', 'vhosts']
+    table_fields = ['checkbox', 'logo', 'name', 'title', 'members', 'vhosts']
     table_actions = [RemoveButton]
     batch_size = 0
 
@@ -305,6 +305,10 @@ class Root_ShowAllWorkgroups(FieldsTableFeed_View):
             icon = item_resource.get_logo_icon()
             icon = XMLContent.encode(icon)
             return XMLParser('<img src="%s"/>' % icon)
+        elif column == 'members':
+            members = [context.root.get_user(x).get_title()
+                for x in item_resource.get_property('members')]
+            return u', '.join(members)
         proxy = super(Root_ShowAllWorkgroups, self)
         return proxy.get_item_value(resource, context, item, column)
 
