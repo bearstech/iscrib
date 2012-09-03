@@ -141,7 +141,7 @@ class Controls(Table):
         for record in handler.get_records():
             number = get_record_value(record, 'number')
             title = get_record_value(record, 'title')
-            expr = get_record_value(record, 'expr')
+            expr = get_record_value(record, 'expression')
             level = get_record_value(record, 'level')
             variable = get_record_value(record, 'variable')
             page = variable[0]
