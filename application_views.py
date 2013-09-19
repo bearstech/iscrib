@@ -48,7 +48,7 @@ from itws.shop import get_orders, NextButton, get_payments, Product_List
 # Import from iscrib
 from base_views import LoginView, IconsView
 from buttons import ExportODSButton, ExportXLSButton, AddUsersButton
-from datatypes import Subscription, EmailOrDemo
+from datatypes import Subscription, EmailField
 from demo import get_demo_user
 from form import Form
 from formpage import FormPage
@@ -57,6 +57,7 @@ from schema import FormatError
 from utils import force_encode, is_debug, is_print
 from widgets import Products_Widget
 from workflow import WorkflowState, NOT_REGISTERED, EMPTY
+from customization import custom_flag
 
 
 ERR_NO_DATA = ERROR(u"No data to collect for now.")
@@ -125,7 +126,8 @@ class Application_Menu(IconsView):
             title=MSG(u"Edit and configure application"),
             url=';edit',
             description=None,
-            rel='fancybox'),
+            rel='fancybox',
+            access='is_admin'),
         make_item(icon='/ui/iscrib/images/download48.png',
             title=MSG(u'Download App'),
             description=MSG(u"Get application source file"),
@@ -173,6 +175,11 @@ class Application_Menu(IconsView):
         item['title'] = ERR_NO_DATA
         return False
 
+    def is_admin(self, item, resource, context):
+        user = context.user
+        if user is None:
+            return False
+        return '/config/groups/admin' in user.get_catalog_values()['groups']
 
     def get_items(self, resource, context):
         proxy = super(Application_Menu, self)
@@ -514,7 +521,7 @@ class Application_Export(BaseView):
                 for title in (MSG(u"Form"), MSG(u"First Name"),
                     MSG(u"Last Name"), MSG(u"E-mail"), MSG(u"State"))]
         for name in sorted(schema):
-            header.append(name)
+            header.append(name.replace('_', ''))
         try:
             writer.add_row(header, is_header=True)
         except FormatError, exception:
@@ -524,8 +531,13 @@ class Application_Export(BaseView):
         for name, datatype in sorted(schema.iteritems()):
             header.append(datatype.title)
         writer.add_row(header, is_header=True)
+        # optionnaly add a header in results with iscrib type for each column:
+        if custom_flag('header_data_type'):
+            header = [""] * 5
+            for name, datatype in sorted(schema.iteritems()):
+                header.append(datatype.type)
+            writer.add_row(header, is_header=True)
         users = resource.get_resource('/users')
-
         for form in resource.get_forms():
             user = users.get_resource(form.name, soft=True)
             if user:
@@ -544,7 +556,7 @@ class Application_Export(BaseView):
             for name, datatype in sorted(schema.iteritems()):
                 value = handler.get_value(name, schema)
                 if datatype.multiple:
-                    value = '\n'.join(value
+                    value = '\n'.join(value.decode('utf-8')
                             for value in datatype.get_values(value))
                 else:
                     data = force_encode(value, datatype, 'utf_8')
@@ -608,10 +620,10 @@ class Application_Register(STLForm):
         for lineno, line in enumerate(new_users.splitlines()):
             lastname, email = parseaddr(line)
             try:
-                email = email.encode('ascii')
+                email = email.encode('utf-8')
             except UnicodeEncodeError:
                 email = None
-            if not email or not EmailOrDemo.is_valid(email):
+            if not email or not EmailField.is_valid(email):
                 context.commit = False
                 message = u"Unrecognized line {lineno}: {line}"
                 context.message = ERROR(message, lineno=lineno+1, line=line)

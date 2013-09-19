@@ -67,7 +67,7 @@ Your password: {password}""")
     def send_form_registration(self, context, email, site_uri, password):
         site_name = context.resource.get_site_root().get_title()
         text = self.form_registration_text.gettext(site_name=site_name,
-                site_uri=site_uri, email=email, password=password)
+                site_uri=site_uri, email=email, password=password.decode('utf-8'))
         context.root.send_email(email, self.registration_subject.gettext(),
                                 text=text, encoding='ISO-8859-1')
 

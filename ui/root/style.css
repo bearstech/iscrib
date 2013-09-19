@@ -34,11 +34,16 @@ div#page {
 
 /* HEADER */
 #header {
-  background: transparent url('/ui/iscrib/images/banner.png') top left no-repeat;
+  background: none repeat scroll 0 0 #FFFFFF;
+  height: 61px;
+  margin-bottom: 0;
+  min-height: 61px;
+  padding: 0;
+  /*background: transparent url('/ui/iscrib/images/banner.png') top left no-repeat;
   padding: 0;
   height: 61px;
   min-height: 61px;
-  margin-bottom: 0;
+  margin-bottom: 0;*/
 }
 
 #header #logo {

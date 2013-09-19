@@ -101,9 +101,9 @@ class Skin(BaseSkin):
         if user is not None:
             role = site_root.get_user_role(user.name)
             if role == 'guests':
-                namespace['location'] = None
+                #namespace['location'] = None
                 namespace['languages'] = None
-                namespace['menu']['items'] = None
+                #namespace['menu']['items'] = None
 
         # Home page ?
         page_css = None

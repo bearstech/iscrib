@@ -192,7 +192,7 @@ td.section-header h4 {
                 wg_path = '{0}/;login'.format(context.get_link(workgroup))
                 site_uri = context.uri.resolve(wg_path)
                 user.send_workgroup_registration(context, email, site_uri,
-                        password)
+                        password.decode('utf-8'))
             else:
                 # Existing user
                 if not user.authenticate(password):
@@ -206,8 +206,9 @@ td.section-header h4 {
             if form[key]:
                 user.set_property(key, form[key])
         # Set the user as workgroup member
+        # 10/01/13: test as admin
         username = user.name
-        workgroup.set_user_role(username, 'members')
+        workgroup.set_user_role(username, 'admins')
         # Come back
         message = MSG_NEW_WORKGROUP(title=form['title'])
         return context.come_back(message, goto)

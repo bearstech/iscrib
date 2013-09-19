@@ -37,7 +37,7 @@ from ikaaro.registry import get_resource_class
 from ikaaro.utils import generate_name
 
 # Import from iscrib
-from datatypes import Numeric, NumDecimal, FileImage, SqlEnumerate
+from datatypes import Numeric, NumDecimal, NumInteger, FileImage, SqlEnumerate
 from form_views import Form_View, Form_Send, Form_Export, Form_Print
 from utils import SI, get_page_number, parse_control
 from workflow import workflow, FINISHED
@@ -113,7 +113,7 @@ class FormHandler(FileHandler):
                     # XXX
                     data = unicode(value).encode('UTF-8')
                 datas.append(data)
-            data = ' '.join(datas)
+            data = '|'.join(datas)
         else:
             try:
                 data = datatype.encode(value)
@@ -216,8 +216,17 @@ class Form(File):
         locals_ = {}
         for name, datatype in sorted(schema.iteritems()):
             value = fields[name]
-            if isinstance(datatype, Numeric):
+            try:
+                value = float(value)
+            except:
+                try:
+                    value = float(value.replace(',', '.'))
+                except:
+                    pass
+            if issubclass(datatype, Numeric):
                 pass
+            if value is None:
+                value = 0.
             elif issubclass(datatype, SqlEnumerate):
                 if datatype.multiple:
                     values = []
@@ -372,6 +381,8 @@ class Form(File):
                 is_sum_valid = (sum is None or sum == value)
             if datatype.mandatory:
                 # False or 0 must be valid
+                if type(value) == type(""):
+                    value = value.decode('utf-8')
                 if unicode(value).strip() and is_valid and is_sum_valid:
                     continue
             else:
@@ -471,7 +482,7 @@ class Form(File):
         name, extension, language = FileName.decode(filename)
         parent = self.parent
         used = parent.get_names()
-        name = checkid(name) or 'invalid'
+        #name = checkid(name) or 'invalid'
         name = generate_name(name, used)
         cls = get_resource_class(mimetype)
         metadata = {

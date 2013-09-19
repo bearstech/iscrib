@@ -36,7 +36,7 @@ from ikaaro.file import Image
 from ikaaro.utils import make_stl_template
 
 # Import from iscrib
-from datatypes import Numeric, Text, EnumBoolean, SqlEnumerate, NumDecimal
+from datatypes import Numeric, Text, EnumBoolean, SqlEnumerate, NumDecimal, NumInteger
 from datatypes import NumDate, NumTime, FileImage
 from schema import Expression
 
@@ -122,11 +122,18 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
             else:
                 html.append(input)
     else:
-        for option in datatype.get_namespace(data):
+        if type(data) == type("") or type(data) == type(u""):
+            try:
+                data_tmp = data.decode("utf-8").split('|')
+            except:
+                data_tmp = data
+        else:
+            data_tmp = data
+        for option in datatype.get_namespace(data_tmp):
             js = []
             opt_name = option['name']
             attributes = merge_dicts(choice_attributes, value=opt_name)
-            if option['selected']:
+            if option['selected'] or data == option['name'].strip().encode('utf-8'):
                 attributes[choice_checked] = choice_checked
             if form.is_disabled_by_dependency(name, schema, fields):
                 attributes[u"disabled"] = u"disabled"
@@ -155,7 +162,7 @@ def _choice_widget(context, form, datatype, name, value, schema, fields,
                     if dep_value[:1] in ("u'" , 'u"'):
                         dep_value = dep_value[:2]
                     dep_value = (dep_value.replace("'", '').replace('"', ''))
-                    dep_value = checkid(dep_value)
+                    #dep_value = checkid(dep_value)
                 else:
                     dep_value = 'false'
 
@@ -197,6 +204,7 @@ def radio_widget(context, form, datatype, name, value, schema, fields,
     container_attributes = {}
     choice = u"input"
     choice_attributes = {
+            u"id": u"field_{name}".format(name=name),
             u"type": u"radio",
             u"name": name}
     choice_checked = u"checked"
@@ -214,11 +222,14 @@ def checkbox_widget(context, form, datatype, name, value, schema, fields,
     container_attributes = {}
     choice = u"input"
     choice_attributes = {
+            u"id": u"field_{name}".format(name=name),
             u"type": u"checkbox",
             u"name": name}
     choice_checked = u"checked"
     # Oui/Non sur une seule ligne
     multiline = not issubclass(datatype, EnumBoolean)
+    if type(value) == type([]):
+        value = " ".join(value)
     return _choice_widget(context, form, datatype, name, value, schema,
             fields, readonly, container, container_attributes, choice,
             choice_attributes, choice_checked, multiline, tabindex)
@@ -231,7 +242,8 @@ def select_widget(context, form, datatype, name, value, schema, fields,
     container_attributes = {
             u"name": name}
     choice = u"option"
-    choice_attributes = {}
+    choice_attributes = {
+	    u"name": name}
     choice_checked = u"selected"
     multiline = False
     return _choice_widget(context, form, datatype, name, value, schema,
@@ -290,8 +302,9 @@ def text_widget(context, form, datatype, name, value, schema, fields,
             u"maxlength": str(datatype.length)}
         content = u""
     # Right-align numeric fields
-    if isinstance(datatype, Numeric):
+    if issubclass(datatype, Numeric):
         attributes.setdefault(u"class", []).append(u"num")
+        attributes.setdefault(u"style", []).append(u"text-align:right")
     # Check for errors
     check_errors(context, form, datatype, name, value, schema, fields,
             readonly, attributes, tabindex=None)

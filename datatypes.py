@@ -21,7 +21,7 @@ from datetime import date
 from decimal import Decimal as dec, InvalidOperation
 
 # Import from itools
-from itools.core import merge_dicts
+from itools.core import merge_dicts, thingy
 from itools.datatypes import DataType, Unicode, Enumerate, Email
 from itools.gettext import MSG
 
@@ -57,7 +57,7 @@ class DateLitterale(DataType):
 # The reason these datatypes are instances and not thingies is that I need to
 # call "+", "int", etc. for the formulas and controls
 
-class Numeric(object):
+class Numeric(thingy):
     """All arithmetical operations."""
     default = ''
 
@@ -401,6 +401,11 @@ class Numeric(object):
             term = term.strip()
             data = fields.get(term)
             if not data:
+                try:
+                    data = schema[term].default
+                except:
+                    return None
+            if not data:
                 return None
             if str(data).upper() == 'NC':
                 return 'NC'
@@ -446,6 +451,25 @@ class NumDecimal(Numeric):
         return value.quantize(places)
 
 
+    @staticmethod
+    def decode(value):
+        if value == '':
+            return None
+        return int(value)
+
+
+    @staticmethod
+    def encode(value):
+        if value is None:
+            return ''
+        return str(value).replace(' ', '').replace(',','.')
+
+
+    @classmethod
+    def get_default(cls):
+        return cls.default
+
+
     @classmethod
     def is_valid(cls, data):
         if data.upper() == 'NC':
@@ -483,6 +507,24 @@ class NumInteger(Numeric):
                     pass
         self.value = value
 
+
+    @staticmethod
+    def decode(value):
+        if value == '':
+            return None
+        return int(value)
+
+
+    @staticmethod
+    def encode(value):
+        if value is None:
+            return ''
+        return str(value)
+
+
+    @classmethod
+    def get_default(cls):
+        return cls.default
 
     @classmethod
     def is_valid(cls, data):
@@ -573,6 +615,8 @@ class NumDate(Numeric):
     def __init__(self, value=None, **kw):
         super(NumDate, self).__init__(**kw)
         if value is not None:
+            if type(value) == type(self):
+                value = value.value
             if str(value).upper() == 'NC':
                 value = None
             elif type(value) is date:
@@ -581,6 +625,10 @@ class NumDate(Numeric):
                 pass
             else:
                 parts = value.split('/')
+                if len(parts) == 1:
+                    parts = []
+                    while len(parts) != 3:
+                        parts.insert(0, 1)
                 if len(parts) == 2:
                     # Support ShortDate
                     parts.insert(0, 1)
@@ -599,10 +647,24 @@ class NumDate(Numeric):
         if isinstance(value, cls):
             value = value.value
         if value is None:
-            return 'NC'
-        elif type(value) is str:
+            return ''
+        if not isinstance(value, date) and not isinstance(value, str):
+            value = value.value
+        if type(value) is str:
             return value
         return value.strftime('%d/%m/%Y')
+
+
+    @staticmethod
+    def decode(value):
+        if value == '':
+            return ''
+        return value
+
+
+    @classmethod
+    def get_default(cls):
+        return cls.default
 
 
     @staticmethod
@@ -628,6 +690,7 @@ class NumDate(Numeric):
 
     def get_sql_schema(self):
         return "char(10) default null"
+
 
 
 
@@ -689,6 +752,19 @@ class UnicodeSQL(Unicode):
             return u"null"
         return quote_string(cls.encode(value))
 
+    @classmethod
+    def sum(cls, formula, schema, fields):
+        sum = ""
+        for term in formula.split('+'):
+            term = term.strip()
+            data = fields.get(term)
+            if not data:
+                data = schema[term].default
+            if type(data) == type(""):
+                data = data.decode("utf-8")
+            sum += data
+        return sum
+
 
 
 class Text(UnicodeSQL):
@@ -704,6 +780,25 @@ class Text(UnicodeSQL):
         value = value.replace(u'\r\n', u'\\r\\n')
         return super(Text, cls).encode(value, encoding=encoding)
 
+    @classmethod
+    def sum(cls, formula, schema, fields):
+        sum = cls.decode("")
+        for term in formula.split('+'):
+            term = term.strip()
+            data = fields.get(term)
+            if not data:
+                return None
+            if str(data).upper() == 'NC':
+                return 'NC'
+            datatype = schema[term]
+            try:
+                value = datatype.decode(data)
+            except Exception:
+                return None
+            if not datatype.is_valid(datatype.encode(value)):
+                return None
+            sum += value
+        return sum
 
 
 class EnumBoolean(Enumerate):
@@ -787,7 +882,6 @@ class FileImage(FileDataType):
 
 
 
-class EmailOrDemo(Email):
-
+class EmailField(Email):
     def is_valid(cls, value):
-        return value == 'demo' or Email.is_valid(value)
+        return Email.is_valid(value)

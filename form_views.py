@@ -25,6 +25,7 @@ from itools.datatypes import String, Enumerate
 from itools.gettext import MSG
 from itools.log import log_debug
 from itools.web import BaseView, STLView, STLForm, INFO, ERROR
+from itools.handlers import checkid
 
 # Import from ikaaro
 
@@ -35,6 +36,7 @@ from datatypes import Numeric, FileImage
 from utils import get_page_number, force_encode, is_print, set_print
 from widgets import is_mandatory_filled
 from workflow import WorkflowState, EMPTY, PENDING, FINISHED, EXPORTED
+from customization import custom_flag
 
 
 # Messages
@@ -76,8 +78,10 @@ class Form_View(STLForm):
     schema = freeze({
         'page_number': String})
     hidden_fields = []
+    #toolbar = freeze([
+    #    InputControlLink, PagePrintLink, FormPrintLink, SaveButton])
     toolbar = freeze([
-        InputControlLink, PagePrintLink, FormPrintLink, SaveButton])
+        InputControlLink, SaveButton])
     actions = freeze([SaveButton])
 
 
@@ -162,11 +166,66 @@ class Form_View(STLForm):
                 readonly)
         return namespace
 
+    def raw_action(self, resource, context, form):
+        """ Simple version of action to quickly preload form without any check.
+        page_number is unused (should be NOPAGE)
+        """
+        schema, pages = resource.get_schema_pages()
+        fields = resource.get_fields(schema)
+        handler = resource.get_form().handler
+        # First save everything even invalid
+        for field in fields:
+            if context.get_form_value(field) is None:
+                continue
+            datatype = schema[field]
+            value = fields[field]
+            # Avoid "TypeError: issubclass() arg 1 must be a class"
+            if isinstance(datatype, Numeric):
+                pass
+            elif issubclass(datatype, FileImage):
+                # Delete existing file
+                if context.get_form_value(field + '_delete'):
+                    resource.parent.del_resource(value, ref_action='force')
+                    fields[field] = ''
+                    handler.set_value(field, '', schema)
+            # Decode form data
+            if context.get_form_value(field) is not None:
+                # First the raw data
+                if datatype.multiple:
+                    data = context.get_form_value(field, type=Multiple)
+                else:
+                    data = context.get_form_value(field, type=Single)
+                # Then the decoded value
+                try:
+                    value = datatype.decode(data)
+                except Exception:
+                    # Keep invalid values
+                    value = data
+                # Avoid "TypeError: issubclass() arg 1 must be a class"
+                if isinstance(datatype, Numeric):
+                    pass
+                elif issubclass(datatype, FileImage):
+                    # Load file
+                    value = resource.save_file(*data)
+            fields[field] = value
+            handler.set_value(field, value, schema)
+
+        # No Validity Checks Here !
+
+        # Reindex
+        context.database.change_resource(resource)
+        # Transmit list of errors when returning GET
+        context.message = MSG_SAVED
+        # if resource.get_workflow_state() == EMPTY:
+        resource.set_workflow_state(PENDING)
 
     def action(self, resource, context, form):
         schema, pages = resource.get_schema_pages()
         fields = resource.get_fields(schema)
         page_number = form['page_number']
+        # Detect special page number for raw data pre loading
+        if page_number == 'NOPAGE':
+            return self.raw_action(resource, context, form)
         handler = resource.get_form().handler
         formpage = resource.get_formpage(page_number)
 
@@ -210,6 +269,7 @@ class Form_View(STLForm):
         mandatory = []
         bad_sums = []
         for field in formpage.get_fields():
+            computed = False
             datatype = schema[field]
             if resource.is_disabled_by_type(field, schema, datatype):
                 continue
@@ -252,17 +312,27 @@ class Form_View(STLForm):
                         log_debug(log.format(field, data, value))
                         if field not in bad_sums:
                             bad_sums.append(field)
+                computed = True
             # Mandatory
-            if not data and datatype.mandatory:
+            if not data and not computed and datatype.mandatory:
                 log = "field {0!r} data {1!r} value {2!r} mandatory"
                 log_debug(log.format(field, data, value))
                 mandatory.append(field) if field not in mandatory else None
             # Invalid (0008102 and mandatory -> and filled)
-            elif data and not datatype.is_valid(data):
-                log = "field {0!r} data {1!r} value {2!r} invalid"
-                log_debug(log.format(field, data, value))
-                if field not in invalid:
-                    invalid.append(field)
+            elif data and ((type(data) == type("") and not datatype.is_valid(data))
+                           or not datatype.is_valid(data)):
+                try:
+                    test = datatype.is_valid(data.decode('utf-8'))
+                except:
+                    try:
+                        test = datatype.is_valid([x.decode('utf-8') for x in data])
+                    except:
+                        test = False
+                if not test:
+                    log = "field {0!r} data {1!r} value {2!r} invalid"
+                    log_debug(log.format(field, data, value))
+                    if field not in invalid:
+                        invalid.append(field)
             # Avoid "TypeError: issubclass() arg 1 must be a class"
             if isinstance(datatype, Numeric):
                 pass
@@ -294,8 +364,8 @@ class Form_View(STLForm):
             context.message = messages
         else:
             context.message = MSG_SAVED
-        if resource.get_workflow_state() == EMPTY:
-            resource.set_workflow_state(PENDING)
+        # if resource.get_workflow_state() == EMPTY:
+        resource.set_workflow_state(PENDING)
 
 
 
@@ -327,12 +397,23 @@ class Form_Send(STLForm):
             elif reason == 'mandatory':
                 title = ERR_MANDATORY_FIELD(name=name)
             else:
+                if custom_flag('hide_invalid_empty'):
+                    # maybe empty field
+                    if datatype.multiple:
+                        data = context.get_form_value(name, type=Multiple)
+                    else:
+                        data = context.get_form_value(name, type=Single)
+                    if not data:
+                        continue
                 title = ERR_INVALID_FIELD(name=name)
+            page = datatype.pages[0]
+            if page == '' or page == '_':
+                page = name.replace('_', '')[0]
             info = {
                     'number': name,
                     'title': title,
                     'href': ';page{page}#field_{name}'.format(
-                        page=datatype.pages[0], name=name),
+                        page=page, name=name),
                     'debug': str(type(datatype))}
             if datatype.mandatory:
                 errors.append(info)
@@ -348,6 +429,8 @@ class Form_Send(STLForm):
                 warnings.append(control)
         # Informative controls
         for control in resource.get_info_controls(context):
+            if control['page'] == '' or control['page'] == '_':
+                control['page'] = control['variable'].replace('_', '')[0]
             control['href'] = ';page%s#field_%s' % (control['page'],
                     control['variable'])
             infos.append(control)

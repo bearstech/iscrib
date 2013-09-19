@@ -154,11 +154,12 @@ try:
     from lpod.document import odf_new_document
     from lpod.style import odf_create_style
     from lpod.table import odf_create_table, odf_create_row
+    from lpod.const import ODF_SPREADSHEET
 
     class ODSWriter(object):
         name = 'ods'
         title = MSG(u"OpenDocument Spreadsheet")
-        mimetype = 'application/vnd.oasis.opendocument.spreadsheet'
+        mimetype = ODF_SPREADSHEET
         extension = 'ods'
         header_style = odf_create_style('table-cell', area='text', bold=True)
 

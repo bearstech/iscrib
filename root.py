@@ -51,7 +51,7 @@ class Root(BaseRoot):
     class_schema = freeze(merge_dicts(
         BaseRoot.class_schema,
         homepage=XHTMLBody(source='metadata', multilingual=True,
-            parameters_schema = {'lang': String}),
+                           parameters_schema = {'lang': String}),
         slogan=Multilingual(source='metadata'),
         recaptcha_private_key=String(source='metadata'),
         recaptcha_public_key=String(source='metadata'),

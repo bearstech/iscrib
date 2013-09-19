@@ -37,7 +37,7 @@ from ikaaro.table_views import Table_View
 
 # Import from iscrib
 from datatypes import NumInteger, NumDecimal, NumTime, NumShortTime, Text
-from datatypes import NumDate, NumShortDate, NumDigit, UnicodeSQL, EnumBoolean
+from datatypes import NumDate, NumShortDate, NumDigit, UnicodeSQL, EnumBoolean, Email, EmailField
 from datatypes import SqlEnumerate, Numeric, FileImage
 from utils import SI
 
@@ -123,7 +123,8 @@ class Type(Enumerate):
         {'name': 'str', 'value': u"String", 'type': UnicodeSQL},
         {'name': 'text', 'value': u"Text", 'type': Text},
         {'name': 'enum', 'value': u"List of values", 'type': SqlEnumerate},
-        {'name': 'file', 'value': u"File or Image", 'type': FileImage}]
+        {'name': 'file', 'value': u"File or Image", 'type': FileImage},
+        {'name': 'email', 'value': u"Email", 'type': EmailField}]
 
 
     def decode(cls, data):
@@ -169,7 +170,8 @@ class EnumerateOptions(Unicode):
     def decode(cls, data):
         value = Unicode.decode(data)
         return {
-            'name': checkid(value) or '',
+            #'name': checkid(value) or '',
+            'name': value,
             'value': value}
 
 
@@ -192,7 +194,8 @@ class EnumerateOptions(Unicode):
             # Backwards compatibility
             options = [option.strip() for option in value.split(u"/")]
         return [{
-            'name': checkid(option) or '',
+            #'name': checkid(option) or '',
+            'name': option,
             'value': option}
                 for option in options]
 
@@ -463,7 +466,8 @@ class Schema(Table):
                     default = EnumBoolean.encode(value)
                 elif issubclass(datatype, SqlEnumerate):
                     datatype = datatype(options=enum_options)
-                    default = checkid(default) or ''
+                    #default = checkid(default) or ''
+                    default = default
                 elif issubclass(datatype, NumTime):
                     # "0-0-0 09:00:00" -> "09:00:00"
                     default = default.split(' ')[-1]
