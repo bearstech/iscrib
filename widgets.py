@@ -88,7 +88,7 @@ def check_errors(context, form, datatype, name, value, schema, fields,
         attributes[u"class"].append(u"mandatory")
     if form.is_disabled_by_dependency(name, schema, fields):
         attributes[u"disabled"] = u"disabled"
-        attributes[u"class"].append(u"disabled")
+        #attributes[u"class"].append(u"disabled")
     if tabindex:
         attributes[u"tabindex"] = tabindex
 
@@ -240,7 +240,8 @@ def select_widget(context, form, datatype, name, value, schema, fields,
         readonly, tabindex=None):
     container = u"select"
     container_attributes = {
-            u"name": name}
+        u"name": name,
+        u"class": "chosen-select"}
     choice = u"option"
     choice_attributes = {
 	    u"name": name}

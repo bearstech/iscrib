@@ -83,6 +83,7 @@ class Form_View(STLForm):
     toolbar = freeze([
         InputControlLink, SaveButton])
     actions = freeze([SaveButton])
+    styles = ['/ui/iscrib/chosen.css']
 
 
     def get_page_title(self, resource, context):
