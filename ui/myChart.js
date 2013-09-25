@@ -3,6 +3,7 @@ function createData()
     var finished = 0;
     var pending = 0;
     var empty = 0;
+    var notregistered = 0;
 
     var browse_list = document.getElementById("browse-list");
     var trs = browse_list.getElementsByTagName("tr");
@@ -15,8 +16,10 @@ function createData()
 	    pending += 1;
 	}
 	if (td_value == "Empty") {
-	    console.error("1");
 	    empty += 1;
+	}
+	if (td_value == "Not Registered") {
+	    notregistered += 1;
 	}
     }
     var data = [
@@ -31,6 +34,10 @@ function createData()
 	{
 	    value : empty,
 	    color: "#ff0000"
+	},
+	{
+	    value: notregistered,
+	    color: "#555555"
 	}
     ];
     return data;

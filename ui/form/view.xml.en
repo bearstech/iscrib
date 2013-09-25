@@ -65,7 +65,9 @@
     //-->
   </script>
 
+  <script src="/ui/iscrib/jquery.js"></script>
   <script src="/ui/iscrib/chosen.jquery.js"></script>
+
   <script type="text/javascript">
     var config = {
       '.chosen-select'           : {},
